@@ -33,9 +33,3 @@
 
 # VS Code Configs
 *.vscode
-
-# Test and Coverage Files
-*.gcno
-*.gcda
-*.gcov
-*_q*
