@@ -1,25 +1,42 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-cd "$GITHUB_WORKSPACE" || exit
+cd $GITHUB_WORKSPACE
 
 echo "clang arguments: $CLANG_ARGUMENTS"
 echo "files modified: $FILES_MODIFIED"
 echo "files added: $FILES_ADDED"
 
-# convert to arrays
-read -r -a FILES_MODIFIED <<< "$FILES_MODIFIED"
-read -r -a FILES_ADDED <<< "$FILES_ADDED"
+read -r -a MODIFIED_FILES <<< "$FILES_MODIFIED"
+read -r -a ADDED_FILES <<< "$FILES_ADDED"
 
-# shellcheck disable=SC2206
-CLANG_TIDY_ARGUMENTS=( "${FILES_MODIFIED[@]}" "${FILES_ADDED[@]}" $CLANG_TIDY_ARGUMENTS )
+clang_arguments=""
 
-# nun clang-tidy
-if clang-tidy "${CLANG_TIDY_ARGUMENTS[@]}" -export-fixes=fixes.yml > clang_output.txt; then
+for element in "${MODIFIED_FILES[@]}"
+do
+    clang_arguments+="$element "
+done
+for element in "${ADDED_FILES[@]}"
+do
+    clang_arguments+="$element "
+done
+
+clang_arguments+=" -export-fixes=fixes.yml"
+
+clang_arguments+=" $CLANG_ARGUMENTS "
+
+
+echo "final clang arguments: $clang_arguments"
+
+# Run clang-tidy for real
+clang-tidy $clang_arguments > clang_output.txt
+
+if [ $? -eq 0 ]; then
     echo "Clang passed! Good job!"
     echo ::set-output name=clang-result::""
 else
-    CLANG_OUTPUT=$(cat clang_output.txt)
-    FIXES_OUTPUT=$(cat fixes.yml)
+    CLANG_OUTPUT=`cat clang_output.txt`
+    FIXES_OUTPUT=`cat fixes.yml`
+    LINES_OF_FIXES=$(echo $FIXES_OUTPUT | wc -l)
 
     # Cleanup the files we don't need
     rm clang_output.txt
@@ -38,11 +55,11 @@ else
     PULL_REQUEST_COMMENT+="$FIXES_OUTPUT"
     PULL_REQUEST_COMMENT+=$'\n```\n'
 
-    PULL_REQUEST_COMMENT_URL=$(jq -r .pull_request.comments_url < "$GITHUB_EVENT_PATH")
+    PULL_REQUEST_COMMENT_URL=$(cat $GITHUB_EVENT_PATH | jq -r .pull_request.comments_url)
+      
+    echo ::set-output name=clang-result::$CLANG_OUTPUT
 
-    echo ::set-output name=clang-result::"$CLANG_OUTPUT"
-
-    if [[ -n $PULL_REQUEST_COMMENT_URL && ${str:?null} != null ]]; then
+    if [ ! -z "$PULL_REQUEST_COMMENT_URL" -a "$str"!="" -a "$str"!="null" ]; then
         echo "Posting to comment URL: $PULL_REQUEST_COMMENT_URL"
 
         REQUEST_DATA=$(echo '{}' | jq --arg body "$PULL_REQUEST_COMMENT" '.body = $body')
