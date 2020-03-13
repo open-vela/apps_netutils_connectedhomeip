@@ -77,9 +77,9 @@
 
 struct LwIPInetEvent
 {
-    Inet::InetEventType Type;
-    Inet::InetLayerBasis * Target;
-    uintptr_t Arg;
+    Inet::InetEventType     Type;
+    Inet::InetLayerBasis*   Target;
+    uintptr_t                   Arg;
 };
 
 #endif // CHIP_SYSTEM_CONFIG_USE_LWIP && !INET_CONFIG_WILL_OVERRIDE_PLATFORM_EVENT_FUNCS
@@ -88,7 +88,7 @@ struct LwIPInetEvent
 namespace chip {
 namespace Inet {
 
-void InetLayer::UpdateSnapshot(chip::System::Stats::Snapshot & aSnapshot)
+void InetLayer::UpdateSnapshot(chip::System::Stats::Snapshot &aSnapshot)
 {
 #if INET_CONFIG_ENABLE_DNS_RESOLVER
     DNSResolver::sPool.GetStatistics(aSnapshot.mResourcesInUse[chip::System::Stats::kInetLayer_NumDNSResolvers],
@@ -122,8 +122,7 @@ void InetLayer::UpdateSnapshot(chip::System::Stats::Snapshot & aSnapshot)
  */
 InetLayer::InetLayer(void)
 #if INET_CONFIG_PROVIDE_OBSOLESCENT_INTERFACES
-    :
-    mImplicitSystemLayer()
+    : mImplicitSystemLayer()
 #endif // INET_CONFIG_PROVIDE_OBSOLESCENT_INTERFACES
 {
     State = kState_NotInitialized;
@@ -174,7 +173,7 @@ INET_ERROR InetLayer::InitQueueLimiter(void)
     const unsigned portBASE_TYPE initial = INET_CONFIG_MAX_DROPPABLE_EVENTS;
 
 #if (configSUPPORT_STATIC_ALLOCATION == 1)
-    mDroppableEvents                     = xSemaphoreCreateCountingStatic(maximum, initial, &mDroppableEventsObj);
+    mDroppableEvents = xSemaphoreCreateCountingStatic(maximum, initial, &mDroppableEventsObj);
 #else
     mDroppableEvents = xSemaphoreCreateCounting(maximum, initial);
 #endif
@@ -266,7 +265,7 @@ void InetLayer::DroppableEventDequeued(void)
  *  @retval   #INET_NO_ERROR                     On success.
  *
  */
-INET_ERROR InetLayer::Init(chip::System::Layer & aSystemLayer, void * aContext)
+INET_ERROR InetLayer::Init(chip::System::Layer& aSystemLayer, void *aContext)
 {
     INET_ERROR err = INET_NO_ERROR;
 
@@ -293,7 +292,7 @@ INET_ERROR InetLayer::Init(chip::System::Layer & aSystemLayer, void * aContext)
 #endif // INET_CONFIG_PROVIDE_OBSOLESCENT_INTERFACES
 
     mSystemLayer = &aSystemLayer;
-    mContext     = aContext;
+    mContext = aContext;
 
 #if CHIP_SYSTEM_CONFIG_USE_LWIP
     err = InitQueueLimiter();
@@ -313,7 +312,7 @@ INET_ERROR InetLayer::Init(chip::System::Layer & aSystemLayer, void * aContext)
 #endif // INET_CONFIG_ENABLE_DNS_RESOLVER && INET_CONFIG_ENABLE_ASYNC_DNS_SOCKETS
 #endif // CHIP_SYSTEM_CONFIG_USE_SOCKETS
 
-exit:
+ exit:
     Platform::InetLayer::DidInit(this, mContext, err);
     return err;
 }
@@ -346,7 +345,7 @@ INET_ERROR InetLayer::Shutdown(void)
         // Cancel all DNS resolution requests owned by this instance.
         for (size_t i = 0; i < DNSResolver::sPool.Size(); i++)
         {
-            DNSResolver * lResolver = DNSResolver::sPool.Get(*mSystemLayer, i);
+            DNSResolver* lResolver = DNSResolver::sPool.Get(*mSystemLayer, i);
             if ((lResolver != NULL) && lResolver->IsCreatedByInetLayer(*this))
             {
                 lResolver->Cancel();
@@ -364,7 +363,7 @@ INET_ERROR InetLayer::Shutdown(void)
         // Close all raw endpoints owned by this Inet layer instance.
         for (size_t i = 0; i < RawEndPoint::sPool.Size(); i++)
         {
-            RawEndPoint * lEndPoint = RawEndPoint::sPool.Get(*mSystemLayer, i);
+            RawEndPoint* lEndPoint = RawEndPoint::sPool.Get(*mSystemLayer, i);
             if ((lEndPoint != NULL) && lEndPoint->IsCreatedByInetLayer(*this))
             {
                 lEndPoint->Close();
@@ -376,7 +375,7 @@ INET_ERROR InetLayer::Shutdown(void)
         // Abort all TCP endpoints owned by this instance.
         for (size_t i = 0; i < TCPEndPoint::sPool.Size(); i++)
         {
-            TCPEndPoint * lEndPoint = TCPEndPoint::sPool.Get(*mSystemLayer, i);
+            TCPEndPoint* lEndPoint = TCPEndPoint::sPool.Get(*mSystemLayer, i);
             if ((lEndPoint != NULL) && lEndPoint->IsCreatedByInetLayer(*this))
             {
                 lEndPoint->Abort();
@@ -388,7 +387,7 @@ INET_ERROR InetLayer::Shutdown(void)
         // Close all UDP endpoints owned by this instance.
         for (size_t i = 0; i < UDPEndPoint::sPool.Size(); i++)
         {
-            UDPEndPoint * lEndPoint = UDPEndPoint::sPool.Get(*mSystemLayer, i);
+            UDPEndPoint* lEndPoint = UDPEndPoint::sPool.Get(*mSystemLayer, i);
             if ((lEndPoint != NULL) && lEndPoint->IsCreatedByInetLayer(*this))
             {
                 lEndPoint->Close();
@@ -403,6 +402,7 @@ INET_ERROR InetLayer::Shutdown(void)
             SuccessOrExit(err);
         }
 #endif // INET_CONFIG_PROVIDE_OBSOLESCENT_INTERFACES
+
     }
 
     State = kState_NotInitialized;
@@ -421,7 +421,7 @@ exit:
  *         otherwise, NULL.
  *
  */
-void * InetLayer::GetPlatformData(void)
+void *InetLayer::GetPlatformData(void)
 {
     return mPlatformData;
 }
@@ -433,7 +433,7 @@ void * InetLayer::GetPlatformData(void)
  * @param[in]  aPlatformData  The client-specific platform data to set.
  *
  */
-void InetLayer::SetPlatformData(void * aPlatformData)
+void InetLayer::SetPlatformData(void *aPlatformData)
 {
     mPlatformData = aPlatformData;
 }
@@ -446,7 +446,7 @@ bool InetLayer::IsIdleTimerRunning(void)
     // see if there are any TCP connections with the idle timer check in use.
     for (size_t i = 0; i < TCPEndPoint::sPool.Size(); i++)
     {
-        TCPEndPoint * lEndPoint = TCPEndPoint::sPool.Get(*mSystemLayer, i);
+        TCPEndPoint* lEndPoint = TCPEndPoint::sPool.Get(*mSystemLayer, i);
 
         if ((lEndPoint != NULL) && (lEndPoint->mIdleTimeout != 0))
         {
@@ -475,29 +475,27 @@ bool InetLayer::IsIdleTimerRunning(void)
  *  @retval    #INET_NO_ERROR                   On success.
  *
  */
-INET_ERROR InetLayer::GetLinkLocalAddr(InterfaceId link, IPAddress * llAddr)
+INET_ERROR InetLayer::GetLinkLocalAddr(InterfaceId link, IPAddress *llAddr)
 {
     INET_ERROR err = INET_NO_ERROR;
 #if CHIP_SYSTEM_CONFIG_USE_LWIP
 #if !LWIP_IPV6
     err = INET_ERROR_NOT_IMPLEMENTED;
     goto out;
-#endif //! LWIP_IPV6
-#endif // CHIP_SYSTEM_CONFIG_USE_LWIP
+#endif //!LWIP_IPV6
+#endif //CHIP_SYSTEM_CONFIG_USE_LWIP
 
-    if (llAddr == NULL)
+    if ( llAddr == NULL )
     {
         err = INET_ERROR_BAD_ARGS;
         goto out;
     }
 
 #if CHIP_SYSTEM_CONFIG_USE_LWIP
-    for (struct netif * intf = netif_list; intf != NULL; intf = intf->next)
+    for (struct netif *intf = netif_list; intf != NULL; intf = intf->next)
     {
-        if ((link != NULL) && (link != intf))
-            continue;
-        int j;
-        for (j = 0; j < LWIP_IPV6_NUM_ADDRESSES; ++j)
+        if ( (link != NULL) && (link != intf) )    continue;
+        int j; for (j = 0; j < LWIP_IPV6_NUM_ADDRESSES; ++j)
         {
             if (ip6_addr_isvalid(netif_ip6_addr_state(intf, j)) && ip6_addr_islinklocal(netif_ip6_addr(intf, j)))
             {
@@ -505,8 +503,7 @@ INET_ERROR InetLayer::GetLinkLocalAddr(InterfaceId link, IPAddress * llAddr)
                 goto out;
             }
         }
-        if (link != NULL)
-        {
+        if (link != NULL) {
             err = INET_ERROR_ADDRESS_NOT_FOUND;
             break;
         }
@@ -514,12 +511,12 @@ INET_ERROR InetLayer::GetLinkLocalAddr(InterfaceId link, IPAddress * llAddr)
 #endif // CHIP_SYSTEM_CONFIG_USE_LWIP
 
 #if CHIP_SYSTEM_CONFIG_USE_SOCKETS
-    struct ifaddrs * ifaddr;
+    struct ifaddrs *ifaddr;
     int rv;
     rv = getifaddrs(&ifaddr);
     if (rv != -1)
     {
-        struct ifaddrs * ifaddr_iter = ifaddr;
+        struct ifaddrs*ifaddr_iter = ifaddr;
         while (ifaddr_iter != NULL)
         {
 
@@ -528,10 +525,10 @@ INET_ERROR InetLayer::GetLinkLocalAddr(InterfaceId link, IPAddress * llAddr)
                 if ((ifaddr_iter->ifa_addr->sa_family == AF_INET6) &&
                     ((link == INET_NULL_INTERFACEID) || (if_nametoindex(ifaddr_iter->ifa_name) == link)))
                 {
-                    struct in6_addr * sin6_addr = &((struct sockaddr_in6 *) ifaddr_iter->ifa_addr)->sin6_addr;
-                    if (sin6_addr->s6_addr[0] == 0xfe && (sin6_addr->s6_addr[1] & 0xc0) == 0x80) // Link Local Address
+                    struct in6_addr *sin6_addr = &((struct sockaddr_in6*)ifaddr_iter->ifa_addr)->sin6_addr;
+                    if (sin6_addr->s6_addr[0] == 0xfe && (sin6_addr->s6_addr[1] & 0xc0) == 0x80)//Link Local Address
                     {
-                        (*llAddr) = IPAddress::FromIPv6(((struct sockaddr_in6 *) ifaddr_iter->ifa_addr)->sin6_addr);
+                        (*llAddr) = IPAddress::FromIPv6(((struct sockaddr_in6*)ifaddr_iter->ifa_addr)->sin6_addr);
                         break;
                     }
                 }
@@ -572,10 +569,10 @@ out:
  *  @retval  #INET_NO_ERROR               On success.
  *
  */
-INET_ERROR InetLayer::NewRawEndPoint(IPVersion ipVer, IPProtocol ipProto, RawEndPoint ** retEndPoint)
+INET_ERROR InetLayer::NewRawEndPoint(IPVersion ipVer, IPProtocol ipProto, RawEndPoint **retEndPoint)
 {
     INET_ERROR err = INET_NO_ERROR;
-    *retEndPoint   = NULL;
+    *retEndPoint = NULL;
 
     VerifyOrExit(State == kState_Initialized, err = INET_ERROR_INCORRECT_STATE);
 
@@ -614,10 +611,10 @@ exit:
  *  @retval  #INET_NO_ERROR               On success.
  *
  */
-INET_ERROR InetLayer::NewTCPEndPoint(TCPEndPoint ** retEndPoint)
+INET_ERROR InetLayer::NewTCPEndPoint(TCPEndPoint **retEndPoint)
 {
     INET_ERROR err = INET_NO_ERROR;
-    *retEndPoint   = NULL;
+    *retEndPoint = NULL;
 
     VerifyOrExit(State == kState_Initialized, err = INET_ERROR_INCORRECT_STATE);
 
@@ -656,10 +653,10 @@ exit:
  *  @retval  #INET_NO_ERROR               On success.
  *
  */
-INET_ERROR InetLayer::NewUDPEndPoint(UDPEndPoint ** retEndPoint)
+INET_ERROR InetLayer::NewUDPEndPoint(UDPEndPoint **retEndPoint)
 {
     INET_ERROR err = INET_NO_ERROR;
-    *retEndPoint   = NULL;
+    *retEndPoint = NULL;
 
     VerifyOrExit(State == kState_Initialized, err = INET_ERROR_INCORRECT_STATE);
 
@@ -698,10 +695,10 @@ exit:
  *  @retval  #INET_NO_ERROR               On success.
  *
  */
-INET_ERROR InetLayer::NewTunEndPoint(TunEndPoint ** retEndPoint)
+INET_ERROR InetLayer::NewTunEndPoint(TunEndPoint **retEndPoint)
 {
     INET_ERROR err = INET_NO_ERROR;
-    *retEndPoint   = NULL;
+    *retEndPoint = NULL;
 
     VerifyOrExit(State == kState_Initialized, err = INET_ERROR_INCORRECT_STATE);
 
@@ -763,8 +760,9 @@ exit:
  *          resolver implementation.
  *
  */
-INET_ERROR InetLayer::ResolveHostAddress(const char * hostName, uint8_t maxAddrs, IPAddress * addrArray,
-                                         DNSResolveCompleteFunct onComplete, void * appState)
+INET_ERROR InetLayer::ResolveHostAddress(const char *hostName, uint8_t maxAddrs,
+                                         IPAddress *addrArray,
+                                         DNSResolveCompleteFunct onComplete, void *appState)
 {
     return ResolveHostAddress(hostName, strlen(hostName), maxAddrs, addrArray, onComplete, appState);
 }
@@ -807,8 +805,9 @@ INET_ERROR InetLayer::ResolveHostAddress(const char * hostName, uint8_t maxAddrs
  *          resolver implementation.
  *
  */
-INET_ERROR InetLayer::ResolveHostAddress(const char * hostName, uint16_t hostNameLen, uint8_t maxAddrs, IPAddress * addrArray,
-                                         DNSResolveCompleteFunct onComplete, void * appState)
+INET_ERROR InetLayer::ResolveHostAddress(const char *hostName, uint16_t hostNameLen,
+                                         uint8_t maxAddrs, IPAddress *addrArray,
+                                         DNSResolveCompleteFunct onComplete, void *appState)
 {
     return ResolveHostAddress(hostName, hostNameLen, kDNSOption_Default, maxAddrs, addrArray, onComplete, appState);
 }
@@ -862,11 +861,13 @@ INET_ERROR InetLayer::ResolveHostAddress(const char * hostName, uint16_t hostNam
  *          resolver implementation.
  *
  */
-INET_ERROR InetLayer::ResolveHostAddress(const char * hostName, uint16_t hostNameLen, uint8_t options, uint8_t maxAddrs,
-                                         IPAddress * addrArray, DNSResolveCompleteFunct onComplete, void * appState)
+INET_ERROR InetLayer::ResolveHostAddress(const char *hostName, uint16_t hostNameLen,
+                                         uint8_t options,
+                                         uint8_t maxAddrs, IPAddress *addrArray,
+                                         DNSResolveCompleteFunct onComplete, void *appState)
 {
-    INET_ERROR err         = INET_NO_ERROR;
-    DNSResolver * resolver = NULL;
+    INET_ERROR err = INET_NO_ERROR;
+    DNSResolver *resolver = NULL;
 
     VerifyOrExit(State == kState_Initialized, err = INET_ERROR_INCORRECT_STATE);
 
@@ -898,7 +899,7 @@ INET_ERROR InetLayer::ResolveHostAddress(const char * hostName, uint16_t hostNam
 #if INET_CONFIG_ENABLE_IPV4
             || (addrTypeOption == kDNSOption_AddrFamily_IPv4Only && addrType != kIPAddressType_IPv4)
 #endif
-        )
+            )
         {
             err = INET_ERROR_INCOMPATIBLE_IP_ADDRESS_TYPE;
         }
@@ -921,8 +922,8 @@ INET_ERROR InetLayer::ResolveHostAddress(const char * hostName, uint16_t hostNam
 
 #if CHIP_SYSTEM_CONFIG_USE_SOCKETS && INET_CONFIG_ENABLE_ASYNC_DNS_SOCKETS
 
-    err =
-        mAsyncDNSResolver.PrepareDNSResolver(*resolver, hostName, hostNameLen, options, maxAddrs, addrArray, onComplete, appState);
+    err = mAsyncDNSResolver.PrepareDNSResolver(*resolver, hostName, hostNameLen, options,
+                                               maxAddrs, addrArray, onComplete, appState);
     SuccessOrExit(err);
 
     mAsyncDNSResolver.EnqueueRequest(*resolver);
@@ -953,14 +954,14 @@ exit:
  *                             to the callback function as argument.
  *
  */
-void InetLayer::CancelResolveHostAddress(DNSResolveCompleteFunct onComplete, void * appState)
+void InetLayer::CancelResolveHostAddress(DNSResolveCompleteFunct onComplete, void *appState)
 {
     if (State != kState_Initialized)
         return;
 
     for (size_t i = 0; i < DNSResolver::sPool.Size(); i++)
     {
-        DNSResolver * lResolver = DNSResolver::sPool.Get(*mSystemLayer, i);
+        DNSResolver* lResolver = DNSResolver::sPool.Get(*mSystemLayer, i);
 
         if (lResolver == NULL)
         {
@@ -997,41 +998,41 @@ void InetLayer::CancelResolveHostAddress(DNSResolveCompleteFunct onComplete, voi
 #endif // INET_CONFIG_ENABLE_DNS_RESOLVER
 
 #if INET_CONFIG_PROVIDE_OBSOLESCENT_INTERFACES
-static void SystemTimerComplete(chip::System::Layer * aLayer, void * aAppState, chip::System::Error aError)
+static void SystemTimerComplete(chip::System::Layer* aLayer, void* aAppState, chip::System::Error aError)
 {
-    chip::System::Timer & lTimer            = *reinterpret_cast<chip::System::Timer *>(aAppState);
-    InetLayer & lInetLayer                  = *lTimer.InetLayer();
+    chip::System::Timer& lTimer = *reinterpret_cast<chip::System::Timer*>(aAppState);
+    InetLayer& lInetLayer = *lTimer.InetLayer();
     InetLayer::TimerCompleteFunct lComplete = reinterpret_cast<InetLayer::TimerCompleteFunct>(lTimer.OnCompleteInetLayer());
-    void * lAppState                        = lTimer.AppStateInetLayer();
+    void* lAppState = lTimer.AppStateInetLayer();
 
     lComplete(&lInetLayer, lAppState, static_cast<INET_ERROR>(aError));
 }
 
 /**
- *  @brief
- *    This method registers a one-shot timer(to fire at a specified offset relative to the time
- *    of registration) with the underlying timer mechanism, through this InetLayer instance.
- *
- *  @note
- *    Each InetLayer instance could have its own set of timers. This might not be
- *    significant to applications, as each application usually works with one singleton
- *    InetLayer instance.
- *
- *  @param[in]    aMilliseconds  Number of milliseconds before this timer should fire.
- *
- *  @param[in]    aComplete      A pointer to a callback function to be called when this
- *                               timer fires.
- *
- *  @param[in]    aAppState      A pointer to an application state object to be passed
- *                               to the callback function as argument.
- *
- *  @retval #INET_ERROR_INCORRECT_STATE  If the InetLayer instance is not initialized.
- *  @retval #INET_ERROR_NO_MEMORY        If the InetLayer runs out of resource for this
- *                                           request for a new timer.
- *  @retval #INET_NO_ERROR               On success.
- *
- */
-INET_ERROR InetLayer::StartTimer(uint32_t aMilliseconds, TimerCompleteFunct aComplete, void * aAppState)
+*  @brief
+*    This method registers a one-shot timer(to fire at a specified offset relative to the time
+*    of registration) with the underlying timer mechanism, through this InetLayer instance.
+*
+*  @note
+*    Each InetLayer instance could have its own set of timers. This might not be
+*    significant to applications, as each application usually works with one singleton
+*    InetLayer instance.
+*
+*  @param[in]    aMilliseconds  Number of milliseconds before this timer should fire.
+*
+*  @param[in]    aComplete      A pointer to a callback function to be called when this
+*                               timer fires.
+*
+*  @param[in]    aAppState      A pointer to an application state object to be passed
+*                               to the callback function as argument.
+*
+*  @retval #INET_ERROR_INCORRECT_STATE  If the InetLayer instance is not initialized.
+*  @retval #INET_ERROR_NO_MEMORY        If the InetLayer runs out of resource for this
+*                                           request for a new timer.
+*  @retval #INET_NO_ERROR               On success.
+*
+*/
+INET_ERROR InetLayer::StartTimer(uint32_t aMilliseconds, TimerCompleteFunct aComplete, void* aAppState)
 {
     INET_ERROR lReturn;
 
@@ -1040,12 +1041,12 @@ INET_ERROR InetLayer::StartTimer(uint32_t aMilliseconds, TimerCompleteFunct aCom
         return INET_ERROR_INCORRECT_STATE;
     }
 
-    chip::System::Timer * lTimer;
+    chip::System::Timer* lTimer;
 
     lReturn = mSystemLayer->NewTimer(lTimer);
     SuccessOrExit(lReturn);
 
-    lTimer->AttachInetLayer(*this, reinterpret_cast<void *>(aComplete), aAppState);
+    lTimer->AttachInetLayer(*this, reinterpret_cast<void*>(aComplete), aAppState);
 
     lReturn = lTimer->Start(aMilliseconds, SystemTimerComplete, lTimer);
 
@@ -1057,37 +1058,33 @@ INET_ERROR InetLayer::StartTimer(uint32_t aMilliseconds, TimerCompleteFunct aCom
 exit:
     switch (lReturn)
     {
-    case CHIP_SYSTEM_ERROR_NO_MEMORY:
-        lReturn = INET_ERROR_NO_MEMORY;
-        break;
-    case CHIP_SYSTEM_NO_ERROR:
-        lReturn = INET_NO_ERROR;
-        break;
+    case CHIP_SYSTEM_ERROR_NO_MEMORY: lReturn = INET_ERROR_NO_MEMORY; break;
+    case CHIP_SYSTEM_NO_ERROR: lReturn = INET_NO_ERROR; break;
     }
 
     return lReturn;
 }
 
 /**
- *  @brief
- *    This method cancels an one-shot timer, started earlier through @p StartTimer().
- *
- *    @note
- *      The cancellation could fail silently in two different ways. If the timer
- *      specified by the combination of the callback function and application state object
- *      couldn't be found, cancellation could fail. If the timer has fired, but not yet
- *      removed from memory, cancellation could also fail.
- *
- *  @param[in]   aComplete   A pointer to the callback function used in calling @p StartTimer().
- *  @param[in]   aAppState   A pointer to the application state object used in calling
- *                            @p StartTimer().
- *
- */
-void InetLayer::CancelTimer(TimerCompleteFunct aComplete, void * aAppState)
+*  @brief
+*    This method cancels an one-shot timer, started earlier through @p StartTimer().
+*
+*    @note
+*      The cancellation could fail silently in two different ways. If the timer
+*      specified by the combination of the callback function and application state object
+*      couldn't be found, cancellation could fail. If the timer has fired, but not yet
+*      removed from memory, cancellation could also fail.
+*
+*  @param[in]   aComplete   A pointer to the callback function used in calling @p StartTimer().
+*  @param[in]   aAppState   A pointer to the application state object used in calling
+*                            @p StartTimer().
+*
+*/
+void InetLayer::CancelTimer(TimerCompleteFunct aComplete, void* aAppState)
 {
     if (State == kState_Initialized)
     {
-        mSystemLayer->CancelAllMatchingInetTimers(*this, reinterpret_cast<void *>(aComplete), aAppState);
+        mSystemLayer->CancelAllMatchingInetTimers(*this, reinterpret_cast<void*>(aComplete), aAppState);
     }
 }
 #endif // INET_CONFIG_PROVIDE_OBSOLESCENT_INTERFACES
@@ -1108,7 +1105,7 @@ void InetLayer::CancelTimer(TimerCompleteFunct aComplete, void * aAppState)
  *  @return  #INET_NO_ERROR unconditionally.
  *
  */
-INET_ERROR InetLayer::GetInterfaceFromAddr(const IPAddress & addr, InterfaceId & intfId)
+INET_ERROR InetLayer::GetInterfaceFromAddr(const IPAddress& addr, InterfaceId& intfId)
 {
     InterfaceAddressIterator addrIter;
 
@@ -1136,13 +1133,13 @@ INET_ERROR InetLayer::GetInterfaceFromAddr(const IPAddress & addr, InterfaceId &
  *  @return true if a successful match is found, otherwise false.
  *
  */
-bool InetLayer::MatchLocalIPv6Subnet(const IPAddress & addr)
+bool InetLayer::MatchLocalIPv6Subnet(const IPAddress& addr)
 {
     if (addr.IsIPv6LinkLocal())
         return true;
 
     InterfaceAddressIterator ifAddrIter;
-    for (; ifAddrIter.HasCurrent(); ifAddrIter.Next())
+    for ( ; ifAddrIter.HasCurrent(); ifAddrIter.Next())
     {
         IPPrefix addrPrefix;
         addrPrefix.IPAddr = ifAddrIter.GetAddress();
@@ -1161,23 +1158,19 @@ bool InetLayer::MatchLocalIPv6Subnet(const IPAddress & addr)
 }
 
 #if INET_CONFIG_ENABLE_TCP_ENDPOINT && INET_TCP_IDLE_CHECK_INTERVAL > 0
-void InetLayer::HandleTCPInactivityTimer(chip::System::Layer * aSystemLayer, void * aAppState, chip::System::Error aError)
+void InetLayer::HandleTCPInactivityTimer(chip::System::Layer* aSystemLayer, void* aAppState, chip::System::Error aError)
 {
-    InetLayer & lInetLayer = *reinterpret_cast<InetLayer *>(aAppState);
-    bool lTimerRequired    = lInetLayer.IsIdleTimerRunning();
+    InetLayer& lInetLayer = *reinterpret_cast<InetLayer*>(aAppState);
+    bool lTimerRequired = lInetLayer.IsIdleTimerRunning();
 
     for (size_t i = 0; i < INET_CONFIG_NUM_TCP_ENDPOINTS; i++)
     {
-        TCPEndPoint * lEndPoint = TCPEndPoint::sPool.Get(*aSystemLayer, i);
+        TCPEndPoint* lEndPoint = TCPEndPoint::sPool.Get(*aSystemLayer, i);
 
-        if (lEndPoint == NULL)
-            continue;
-        if (!lEndPoint->IsCreatedByInetLayer(lInetLayer))
-            continue;
-        if (!lEndPoint->IsConnected())
-            continue;
-        if (lEndPoint->mIdleTimeout == 0)
-            continue;
+        if (lEndPoint == NULL) continue;
+        if (!lEndPoint->IsCreatedByInetLayer(lInetLayer)) continue;
+        if (!lEndPoint->IsConnected()) continue;
+        if (lEndPoint->mIdleTimeout == 0) continue;
 
         if (lEndPoint->mRemainingIdleTime == 0)
         {
@@ -1197,11 +1190,11 @@ void InetLayer::HandleTCPInactivityTimer(chip::System::Layer * aSystemLayer, voi
 #endif // INET_CONFIG_ENABLE_TCP_ENDPOINT && INET_TCP_IDLE_CHECK_INTERVAL > 0
 
 #if CHIP_SYSTEM_CONFIG_USE_LWIP
-chip::System::Error InetLayer::HandleInetLayerEvent(chip::System::Object & aTarget, chip::System::EventType aEventType,
-                                                    uintptr_t aArgument)
+chip::System::Error InetLayer::HandleInetLayerEvent(chip::System::Object& aTarget, chip::System::EventType aEventType,
+    uintptr_t aArgument)
 {
     chip::System::Error lReturn = CHIP_SYSTEM_NO_ERROR;
-    InetLayerBasis & lBasis     = static_cast<InetLayerBasis &>(aTarget);
+    InetLayerBasis& lBasis = static_cast<InetLayerBasis&>(aTarget);
 
     VerifyOrExit(INET_IsInetEvent(aEventType), lReturn = CHIP_SYSTEM_ERROR_UNEXPECTED_EVENT);
 
@@ -1214,11 +1207,11 @@ chip::System::Error InetLayer::HandleInetLayerEvent(chip::System::Object & aTarg
         break;
 
     case kInetEvent_TCPConnectionReceived:
-        static_cast<TCPEndPoint &>(aTarget).HandleIncomingConnection(reinterpret_cast<TCPEndPoint *>(aArgument));
+        static_cast<TCPEndPoint &>(aTarget).HandleIncomingConnection(reinterpret_cast<TCPEndPoint*>(aArgument));
         break;
 
     case kInetEvent_TCPDataReceived:
-        static_cast<TCPEndPoint &>(aTarget).HandleDataReceived(reinterpret_cast<chip::System::PacketBuffer *>(aArgument));
+        static_cast<TCPEndPoint &>(aTarget).HandleDataReceived(reinterpret_cast<chip::System::PacketBuffer*>(aArgument));
         break;
 
     case kInetEvent_TCPDataSent:
@@ -1232,19 +1225,19 @@ chip::System::Error InetLayer::HandleInetLayerEvent(chip::System::Object & aTarg
 
 #if INET_CONFIG_ENABLE_RAW_ENDPOINT
     case kInetEvent_RawDataReceived:
-        static_cast<RawEndPoint &>(aTarget).HandleDataReceived(reinterpret_cast<chip::System::PacketBuffer *>(aArgument));
+        static_cast<RawEndPoint &>(aTarget).HandleDataReceived(reinterpret_cast<chip::System::PacketBuffer*>(aArgument));
         break;
 #endif // INET_CONFIG_ENABLE_RAW_ENDPOINT
 
 #if INET_CONFIG_ENABLE_UDP_ENDPOINT
     case kInetEvent_UDPDataReceived:
-        static_cast<UDPEndPoint &>(aTarget).HandleDataReceived(reinterpret_cast<chip::System::PacketBuffer *>(aArgument));
+        static_cast<UDPEndPoint &>(aTarget).HandleDataReceived(reinterpret_cast<chip::System::PacketBuffer*>(aArgument));
         break;
 #endif // INET_CONFIG_ENABLE_UDP_ENDPOINT
 
 #if INET_CONFIG_ENABLE_TUN_ENDPOINT
     case kInetEvent_TunDataReceived:
-        static_cast<TunEndPoint &>(aTarget).HandleDataReceived(reinterpret_cast<chip::System::PacketBuffer *>(aArgument));
+        static_cast<TunEndPoint &>(aTarget).HandleDataReceived(reinterpret_cast<chip::System::PacketBuffer*>(aArgument));
         break;
 #endif // INET_CONFIG_ENABLE_TUN_ENDPOINT
 
@@ -1262,7 +1255,7 @@ chip::System::Error InetLayer::HandleInetLayerEvent(chip::System::Object & aTarg
     // If the event was droppable, record the fact that it has been dequeued.
     if (IsDroppableEvent(aEventType))
     {
-        InetLayer & lInetLayer = lBasis.Layer();
+        InetLayer& lInetLayer = lBasis.Layer();
 
         lInetLayer.DroppableEventDequeued();
     }
@@ -1295,40 +1288,40 @@ exit:
  *  @retval    #INET_NO_ERROR                   On success.
  *
  */
-INET_ERROR InetLayer::PostEvent(InetLayerBasis * target, InetEventType type, uintptr_t arg)
+INET_ERROR InetLayer::PostEvent(InetLayerBasis *target, InetEventType type, uintptr_t arg)
 {
-    chip::System::Layer & lSystemLayer = *mSystemLayer;
-    INET_ERROR retval                  = INET_NO_ERROR;
+    chip::System::Layer& lSystemLayer = *mSystemLayer;
+    INET_ERROR retval = INET_NO_ERROR;
 
     VerifyOrExit(State == kState_Initialized, retval = INET_ERROR_INCORRECT_STATE);
     VerifyOrExit(target != NULL, retval = INET_ERROR_BAD_ARGS);
 
     {
-        chip::System::Layer & lTargetSystemLayer = target->SystemLayer();
+        chip::System::Layer& lTargetSystemLayer = target->SystemLayer();
 
         VerifyOrDieWithMsg(target->IsRetained(lSystemLayer), Inet, "wrong system layer! [target %p != instance %p]",
-                           &lTargetSystemLayer, &lSystemLayer);
+            &lTargetSystemLayer, &lSystemLayer);
     }
 
     // Sanity check that this instance and the target layer haven't
     // been "crossed".
 
     {
-        InetLayer & lTargetInetLayer = target->Layer();
+        InetLayer& lTargetInetLayer = target->Layer();
 
         VerifyOrDieWithMsg(this == &lTargetInetLayer, Inet, "target layer %p != instance layer %p", &lTargetInetLayer, this);
     }
 
     if (IsDroppableEvent(type) && !CanEnqueueDroppableEvent())
     {
-        chipLogProgress(Inet, "Dropping incoming packet (type %d)", (int) type);
+        chipLogProgress(Inet, "Dropping incoming packet (type %d)", (int)type);
         ExitNow(retval = INET_ERROR_NO_MEMORY);
     }
 
     retval = Platform::InetLayer::PostEvent(this, mContext, target, type, arg);
     if (retval != INET_NO_ERROR)
     {
-        chipLogError(Inet, "Failed to queue InetLayer event (type %d): %s", (int) type, ErrorStr(retval));
+        chipLogError(Inet, "Failed to queue InetLayer event (type %d): %s", (int)type, ErrorStr(retval));
     }
     SuccessOrExit(retval);
 
@@ -1355,7 +1348,7 @@ INET_ERROR InetLayer::DispatchEvents(void)
     retval = Platform::InetLayer::DispatchEvents(this, mContext);
     SuccessOrExit(retval);
 
-exit:
+ exit:
     return retval;
 }
 
@@ -1380,7 +1373,7 @@ INET_ERROR InetLayer::StartPlatformTimer(uint32_t inDurMS)
 
     retval = Platform::InetLayer::StartTimer(this, mContext, inDurMS);
 
-exit:
+ exit:
     return retval;
 }
 
@@ -1403,9 +1396,9 @@ INET_ERROR InetLayer::HandlePlatformTimer(void)
     VerifyOrExit(State == kState_Initialized, lReturn = INET_ERROR_INCORRECT_STATE);
 
     lSystemError = mSystemLayer->HandlePlatformTimer();
-    lReturn      = static_cast<INET_ERROR>(lSystemError);
+    lReturn = static_cast<INET_ERROR>(lSystemError);
 
-exit:
+ exit:
     return lReturn;
 }
 
@@ -1428,7 +1421,8 @@ exit:
  * @param[in]      sleepTimeTV A pointer to a structure specifying how long the select should sleep
  *
  */
-void InetLayer::PrepareSelect(int & nfds, fd_set * readfds, fd_set * writefds, fd_set * exceptfds, struct timeval & sleepTimeTV)
+void InetLayer::PrepareSelect(int& nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds,
+        struct timeval& sleepTimeTV)
 {
     if (State != kState_Initialized)
         return;
@@ -1436,7 +1430,7 @@ void InetLayer::PrepareSelect(int & nfds, fd_set * readfds, fd_set * writefds, f
 #if INET_CONFIG_ENABLE_RAW_ENDPOINT
     for (size_t i = 0; i < RawEndPoint::sPool.Size(); i++)
     {
-        RawEndPoint * lEndPoint = RawEndPoint::sPool.Get(*mSystemLayer, i);
+        RawEndPoint* lEndPoint = RawEndPoint::sPool.Get(*mSystemLayer, i);
         if ((lEndPoint != NULL) && lEndPoint->IsCreatedByInetLayer(*this))
             lEndPoint->PrepareIO().SetFDs(lEndPoint->mSocket, nfds, readfds, writefds, exceptfds);
     }
@@ -1445,7 +1439,7 @@ void InetLayer::PrepareSelect(int & nfds, fd_set * readfds, fd_set * writefds, f
 #if INET_CONFIG_ENABLE_TCP_ENDPOINT
     for (size_t i = 0; i < TCPEndPoint::sPool.Size(); i++)
     {
-        TCPEndPoint * lEndPoint = TCPEndPoint::sPool.Get(*mSystemLayer, i);
+        TCPEndPoint* lEndPoint = TCPEndPoint::sPool.Get(*mSystemLayer, i);
         if ((lEndPoint != NULL) && lEndPoint->IsCreatedByInetLayer(*this))
             lEndPoint->PrepareIO().SetFDs(lEndPoint->mSocket, nfds, readfds, writefds, exceptfds);
     }
@@ -1454,7 +1448,7 @@ void InetLayer::PrepareSelect(int & nfds, fd_set * readfds, fd_set * writefds, f
 #if INET_CONFIG_ENABLE_UDP_ENDPOINT
     for (size_t i = 0; i < UDPEndPoint::sPool.Size(); i++)
     {
-        UDPEndPoint * lEndPoint = UDPEndPoint::sPool.Get(*mSystemLayer, i);
+        UDPEndPoint* lEndPoint = UDPEndPoint::sPool.Get(*mSystemLayer, i);
         if ((lEndPoint != NULL) && lEndPoint->IsCreatedByInetLayer(*this))
             lEndPoint->PrepareIO().SetFDs(lEndPoint->mSocket, nfds, readfds, writefds, exceptfds);
     }
@@ -1463,7 +1457,7 @@ void InetLayer::PrepareSelect(int & nfds, fd_set * readfds, fd_set * writefds, f
 #if INET_CONFIG_ENABLE_TUN_ENDPOINT
     for (size_t i = 0; i < TunEndPoint::sPool.Size(); i++)
     {
-        TunEndPoint * lEndPoint = TunEndPoint::sPool.Get(*mSystemLayer, i);
+        TunEndPoint* lEndPoint = TunEndPoint::sPool.Get(*mSystemLayer, i);
         if ((lEndPoint != NULL) && lEndPoint->IsCreatedByInetLayer(*this))
             lEndPoint->PrepareIO().SetFDs(lEndPoint->mSocket, nfds, readfds, writefds, exceptfds);
     }
@@ -1504,7 +1498,7 @@ void InetLayer::PrepareSelect(int & nfds, fd_set * readfds, fd_set * writefds, f
  *                             errors.
  *
  */
-void InetLayer::HandleSelectResult(int selectRes, fd_set * readfds, fd_set * writefds, fd_set * exceptfds)
+void InetLayer::HandleSelectResult(int selectRes, fd_set *readfds, fd_set *writefds, fd_set *exceptfds)
 {
     if (State != kState_Initialized)
         return;
@@ -1518,7 +1512,7 @@ void InetLayer::HandleSelectResult(int selectRes, fd_set * readfds, fd_set * wri
 #if INET_CONFIG_ENABLE_RAW_ENDPOINT
         for (size_t i = 0; i < RawEndPoint::sPool.Size(); i++)
         {
-            RawEndPoint * lEndPoint = RawEndPoint::sPool.Get(*mSystemLayer, i);
+            RawEndPoint* lEndPoint = RawEndPoint::sPool.Get(*mSystemLayer, i);
             if ((lEndPoint != NULL) && lEndPoint->IsCreatedByInetLayer(*this))
             {
                 lEndPoint->mPendingIO = SocketEvents::FromFDs(lEndPoint->mSocket, readfds, writefds, exceptfds);
@@ -1529,7 +1523,7 @@ void InetLayer::HandleSelectResult(int selectRes, fd_set * readfds, fd_set * wri
 #if INET_CONFIG_ENABLE_TCP_ENDPOINT
         for (size_t i = 0; i < TCPEndPoint::sPool.Size(); i++)
         {
-            TCPEndPoint * lEndPoint = TCPEndPoint::sPool.Get(*mSystemLayer, i);
+            TCPEndPoint* lEndPoint = TCPEndPoint::sPool.Get(*mSystemLayer, i);
             if ((lEndPoint != NULL) && lEndPoint->IsCreatedByInetLayer(*this))
             {
                 lEndPoint->mPendingIO = SocketEvents::FromFDs(lEndPoint->mSocket, readfds, writefds, exceptfds);
@@ -1540,7 +1534,7 @@ void InetLayer::HandleSelectResult(int selectRes, fd_set * readfds, fd_set * wri
 #if INET_CONFIG_ENABLE_UDP_ENDPOINT
         for (size_t i = 0; i < UDPEndPoint::sPool.Size(); i++)
         {
-            UDPEndPoint * lEndPoint = UDPEndPoint::sPool.Get(*mSystemLayer, i);
+            UDPEndPoint* lEndPoint = UDPEndPoint::sPool.Get(*mSystemLayer, i);
             if ((lEndPoint != NULL) && lEndPoint->IsCreatedByInetLayer(*this))
             {
                 lEndPoint->mPendingIO = SocketEvents::FromFDs(lEndPoint->mSocket, readfds, writefds, exceptfds);
@@ -1551,7 +1545,7 @@ void InetLayer::HandleSelectResult(int selectRes, fd_set * readfds, fd_set * wri
 #if INET_CONFIG_ENABLE_TUN_ENDPOINT
         for (size_t i = 0; i < TunEndPoint::sPool.Size(); i++)
         {
-            TunEndPoint * lEndPoint = TunEndPoint::sPool.Get(*mSystemLayer, i);
+            TunEndPoint* lEndPoint = TunEndPoint::sPool.Get(*mSystemLayer, i);
             if ((lEndPoint != NULL) && lEndPoint->IsCreatedByInetLayer(*this))
             {
                 lEndPoint->mPendingIO = SocketEvents::FromFDs(lEndPoint->mSocket, readfds, writefds, exceptfds);
@@ -1563,7 +1557,7 @@ void InetLayer::HandleSelectResult(int selectRes, fd_set * readfds, fd_set * wri
 #if INET_CONFIG_ENABLE_RAW_ENDPOINT
         for (size_t i = 0; i < RawEndPoint::sPool.Size(); i++)
         {
-            RawEndPoint * lEndPoint = RawEndPoint::sPool.Get(*mSystemLayer, i);
+            RawEndPoint* lEndPoint = RawEndPoint::sPool.Get(*mSystemLayer, i);
             if ((lEndPoint != NULL) && lEndPoint->IsCreatedByInetLayer(*this))
             {
                 lEndPoint->HandlePendingIO();
@@ -1574,7 +1568,7 @@ void InetLayer::HandleSelectResult(int selectRes, fd_set * readfds, fd_set * wri
 #if INET_CONFIG_ENABLE_TCP_ENDPOINT
         for (size_t i = 0; i < TCPEndPoint::sPool.Size(); i++)
         {
-            TCPEndPoint * lEndPoint = TCPEndPoint::sPool.Get(*mSystemLayer, i);
+            TCPEndPoint* lEndPoint = TCPEndPoint::sPool.Get(*mSystemLayer, i);
             if ((lEndPoint != NULL) && lEndPoint->IsCreatedByInetLayer(*this))
             {
                 lEndPoint->HandlePendingIO();
@@ -1585,7 +1579,7 @@ void InetLayer::HandleSelectResult(int selectRes, fd_set * readfds, fd_set * wri
 #if INET_CONFIG_ENABLE_UDP_ENDPOINT
         for (size_t i = 0; i < UDPEndPoint::sPool.Size(); i++)
         {
-            UDPEndPoint * lEndPoint = UDPEndPoint::sPool.Get(*mSystemLayer, i);
+            UDPEndPoint* lEndPoint = UDPEndPoint::sPool.Get(*mSystemLayer, i);
             if ((lEndPoint != NULL) && lEndPoint->IsCreatedByInetLayer(*this))
             {
                 lEndPoint->HandlePendingIO();
@@ -1596,7 +1590,7 @@ void InetLayer::HandleSelectResult(int selectRes, fd_set * readfds, fd_set * wri
 #if INET_CONFIG_ENABLE_TUN_ENDPOINT
         for (size_t i = 0; i < TunEndPoint::sPool.Size(); i++)
         {
-            TunEndPoint * lEndPoint = TunEndPoint::sPool.Get(*mSystemLayer, i);
+            TunEndPoint* lEndPoint = TunEndPoint::sPool.Get(*mSystemLayer, i);
             if ((lEndPoint != NULL) && lEndPoint->IsCreatedByInetLayer(*this))
             {
                 lEndPoint->HandlePendingIO();
@@ -1621,12 +1615,13 @@ void InetLayer::HandleSelectResult(int selectRes, fd_set * readfds, fd_set * wri
  */
 void IPPacketInfo::Clear()
 {
-    SrcAddress  = IPAddress::Any;
+    SrcAddress = IPAddress::Any;
     DestAddress = IPAddress::Any;
-    Interface   = INET_NULL_INTERFACEID;
-    SrcPort     = 0;
-    DestPort    = 0;
+    Interface = INET_NULL_INTERFACEID;
+    SrcPort = 0;
+    DestPort = 0;
 }
+
 
 #if !INET_CONFIG_WILL_OVERRIDE_PLATFORM_XTOR_FUNCS
 
@@ -1652,10 +1647,10 @@ namespace InetLayer {
  *         status will abort initialization.
  *
  */
-DLL_EXPORT INET_ERROR WillInit(Inet::InetLayer * aLayer, void * aContext)
+DLL_EXPORT INET_ERROR WillInit(Inet::InetLayer *aLayer, void *aContext)
 {
-    (void) aLayer;
-    (void) aContext;
+    (void)aLayer;
+    (void)aContext;
 
     return INET_NO_ERROR;
 }
@@ -1675,11 +1670,11 @@ DLL_EXPORT INET_ERROR WillInit(Inet::InetLayer * aLayer, void * aContext)
  *                          InetLayer ::Init method.
  *
  */
-DLL_EXPORT void DidInit(Inet::InetLayer * aLayer, void * aContext, INET_ERROR anError)
+DLL_EXPORT void DidInit(Inet::InetLayer *aLayer, void *aContext, INET_ERROR anError)
 {
-    (void) aLayer;
-    (void) aContext;
-    (void) anError;
+    (void)aLayer;
+    (void)aContext;
+    (void)anError;
 
     return;
 }
@@ -1700,10 +1695,10 @@ DLL_EXPORT void DidInit(Inet::InetLayer * aLayer, void * aContext, INET_ERROR an
  *         status will abort shutdown.
  *
  */
-DLL_EXPORT INET_ERROR WillShutdown(Inet::InetLayer * aLayer, void * aContext)
+DLL_EXPORT INET_ERROR WillShutdown(Inet::InetLayer *aLayer, void *aContext)
 {
-    (void) aLayer;
-    (void) aContext;
+    (void)aLayer;
+    (void)aContext;
 
     return INET_NO_ERROR;
 }
@@ -1723,11 +1718,11 @@ DLL_EXPORT INET_ERROR WillShutdown(Inet::InetLayer * aLayer, void * aContext)
  *                          InetLayer ::Shutdown method.
  *
  */
-DLL_EXPORT void DidShutdown(Inet::InetLayer * aLayer, void * aContext, INET_ERROR anError)
+DLL_EXPORT void DidShutdown(Inet::InetLayer *aLayer, void *aContext, INET_ERROR anError)
 {
-    (void) aLayer;
-    (void) aContext;
-    (void) anError;
+    (void)aLayer;
+    (void)aContext;
+    (void)anError;
 
     return;
 }
@@ -1763,12 +1758,13 @@ DLL_EXPORT void DidShutdown(Inet::InetLayer * aLayer, void * aContext, INET_ERRO
  *          the reason for initialization failure.
  *
  */
-INET_ERROR PostEvent(Inet::InetLayer * aInetLayer, void * aContext, InetLayerBasis * aTarget, InetEventType aEventType,
-                     uintptr_t aArgument)
+INET_ERROR PostEvent(Inet::InetLayer* aInetLayer, void* aContext, InetLayerBasis* aTarget, InetEventType aEventType,
+    uintptr_t aArgument)
 {
-    chip::System::Layer & lSystemLayer = *aInetLayer->mSystemLayer;
-    chip::System::Object & lObject     = *aTarget;
-    chip::System::Error lReturn = chip::System::Platform::Layer::PostEvent(lSystemLayer, aContext, lObject, aEventType, aArgument);
+    chip::System::Layer& lSystemLayer = *aInetLayer->mSystemLayer;
+    chip::System::Object& lObject = *aTarget;
+    chip::System::Error lReturn = chip::System::Platform::Layer::PostEvent(lSystemLayer, aContext, lObject, aEventType,
+        aArgument);
 
     return static_cast<INET_ERROR>(lReturn);
 }
@@ -1798,10 +1794,10 @@ INET_ERROR PostEvent(Inet::InetLayer * aInetLayer, void * aContext, InetLayerBas
  *  @retval   #INET_NO_ERROR                On success.
  *
  */
-INET_ERROR DispatchEvents(Inet::InetLayer * aInetLayer, void * aContext)
+INET_ERROR DispatchEvents(Inet::InetLayer* aInetLayer, void* aContext)
 {
-    chip::System::Layer & lSystemLayer = *aInetLayer->mSystemLayer;
-    chip::System::Error lReturn        = chip::System::Platform::Layer::DispatchEvents(lSystemLayer, aContext);
+    chip::System::Layer& lSystemLayer = *aInetLayer->mSystemLayer;
+    chip::System::Error lReturn = chip::System::Platform::Layer::DispatchEvents(lSystemLayer, aContext);
 
     return static_cast<INET_ERROR>(lReturn);
 }
@@ -1835,10 +1831,10 @@ INET_ERROR DispatchEvents(Inet::InetLayer * aInetLayer, void * aContext)
  *  @retval   #INET_NO_ERROR                On success.
  *
  */
-INET_ERROR DispatchEvent(Inet::InetLayer * aInetLayer, void * aContext, InetEvent aEvent)
+INET_ERROR DispatchEvent(Inet::InetLayer* aInetLayer, void* aContext, InetEvent aEvent)
 {
-    chip::System::Layer & lSystemLayer = *aInetLayer->mSystemLayer;
-    chip::System::Error lReturn        = chip::System::Platform::Layer::DispatchEvent(lSystemLayer, aContext, aEvent);
+    chip::System::Layer& lSystemLayer = *aInetLayer->mSystemLayer;
+    chip::System::Error lReturn = chip::System::Platform::Layer::DispatchEvent(lSystemLayer, aContext, aEvent);
 
     return static_cast<INET_ERROR>(lReturn);
 }
@@ -1856,10 +1852,10 @@ INET_ERROR DispatchEvent(Inet::InetLayer * aInetLayer, void * aContext, InetEven
  *
  *  @retval   #INET_NO_ERROR    Always succeeds unless overridden.
  */
-INET_ERROR StartTimer(Inet::InetLayer * aInetLayer, void * aContext, uint32_t aMilliseconds)
+INET_ERROR StartTimer(Inet::InetLayer* aInetLayer, void* aContext, uint32_t aMilliseconds)
 {
-    chip::System::Layer & lSystemLayer = *aInetLayer->mSystemLayer;
-    chip::System::Error lReturn        = chip::System::Platform::Layer::StartTimer(lSystemLayer, aContext, aMilliseconds);
+    chip::System::Layer& lSystemLayer = *aInetLayer->mSystemLayer;
+    chip::System::Error lReturn = chip::System::Platform::Layer::StartTimer(lSystemLayer, aContext, aMilliseconds);
 
     return static_cast<INET_ERROR>(lReturn);
 }

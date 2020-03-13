@@ -1,7 +1,7 @@
 SUB_DIRS=src
 
-.PHONY: all clean check
+.PHONY: all clean run_tests
 
-all clean check:
+all clean run_tests:
 	git submodule update --init
 	$(foreach dir,$(SUB_DIRS), $(MAKE) $@ -C $(dir))

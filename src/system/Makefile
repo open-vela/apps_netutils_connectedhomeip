@@ -1,9 +1,9 @@
 TOP_DIR = ../..
 Test_Dir = tests
 
-.PHONY: all clean check
+.PHONY: all clean run_tests
 
-all: libSystemLayer.a check
+all: libSystemLayer.a run_tests
 
 include $(TOP_DIR)/.yams/cpp_rules.min
 

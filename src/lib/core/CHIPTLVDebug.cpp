@@ -54,15 +54,15 @@ namespace Debug {
  *  @param[in]     aDepth    The current depth into the TLV data.
  *
  */
-static void DumpHandler(DumpWriter aWriter, const char * aIndent, const TLVReader & aReader, size_t aDepth)
+static void DumpHandler(DumpWriter aWriter, const char *aIndent, const TLVReader &aReader, size_t aDepth)
 {
-    const TLVType type     = aReader.GetType();
-    const uint64_t tag     = aReader.GetTag();
-    const uint32_t len     = aReader.GetLength();
-    const uint8_t * strbuf = NULL;
-    CHIP_ERROR err         = CHIP_NO_ERROR;
-    TLVReader temp;
-    TLVTagControl tagControl;
+    const TLVType       type        = aReader.GetType();
+    const uint64_t      tag         = aReader.GetTag();
+    const uint32_t      len         = aReader.GetLength();
+    const uint8_t       *strbuf     = NULL;
+    CHIP_ERROR         err         = CHIP_NO_ERROR;
+    TLVReader           temp;
+    TLVTagControl       tagControl;
 
     temp.Init(aReader);
     tagControl = static_cast<TLVTagControl>(temp.GetControlByte() & kTLVTagControlMask);
@@ -76,12 +76,11 @@ static void DumpHandler(DumpWriter aWriter, const char * aIndent, const TLVReade
 
     if (IsProfileTag(tag))
     {
-        aWriter("tag[%s]: 0x%x::0x%x::0x%x, ", DecodeTagControl(tagControl), VendorIdFromTag(tag), ProfileNumFromTag(tag),
-                TagNumFromTag(tag));
+        aWriter("tag[%s]: 0x%x::0x%x::0x%x, ", DecodeTagControl(tagControl), VendorIdFromTag(tag), ProfileNumFromTag(tag), TagNumFromTag(tag));
     }
     else if (IsContextTag(tag))
     {
-        aWriter("tag[%s]: 0x%x, ", DecodeTagControl(tagControl), (uint32_t) ContextTag(tag));
+        aWriter("tag[%s]: 0x%x, ", DecodeTagControl(tagControl), (uint32_t)ContextTag(tag));
     }
     else if (IsSpecialTag(tag))
     {
@@ -95,6 +94,7 @@ static void DumpHandler(DumpWriter aWriter, const char * aIndent, const TLVReade
 
     aWriter("type: %s (0x%02x), ", DecodeType(type), type);
 
+
     if (TLVTypeIsContainer(type))
     {
         aWriter("container: ");
@@ -106,8 +106,7 @@ static void DumpHandler(DumpWriter aWriter, const char * aIndent, const TLVReade
 
         aWriter("value: ");
 
-        switch (type)
-        {
+        switch (type) {
 
         case kTLVType_SignedInteger:
             int64_t sVal;
@@ -160,6 +159,7 @@ static void DumpHandler(DumpWriter aWriter, const char * aIndent, const TLVReade
         default:
             aWriter("Error: Type is not primitive.");
             break;
+
         }
     }
 
@@ -177,9 +177,9 @@ exit:
  *           tag control on success; otherwise, NULL.
  *
  */
-const char * DecodeTagControl(const TLVTagControl aTagControl)
+const char *DecodeTagControl(const TLVTagControl aTagControl)
 {
-    const char * retval;
+    const char *retval;
 
     switch (aTagControl)
     {
@@ -219,6 +219,7 @@ const char * DecodeTagControl(const TLVTagControl aTagControl)
     default:
         retval = NULL;
         break;
+
     }
 
     return retval;
@@ -234,9 +235,9 @@ const char * DecodeTagControl(const TLVTagControl aTagControl)
  *           type on success; otherwise, NULL.
  *
  */
-const char * DecodeType(const TLVType aType)
+const char *DecodeType(const TLVType aType)
 {
-    const char * retval;
+    const char *retval;
 
     switch (aType)
     {
@@ -288,6 +289,7 @@ const char * DecodeType(const TLVType aType)
     default:
         retval = NULL;
         break;
+
     }
 
     return retval;
@@ -304,11 +306,11 @@ const char * DecodeType(const TLVType aType)
  *  @retval  #CHIP_NO_ERROR  Unconditionally.
  *
  */
-CHIP_ERROR DumpIterator(DumpWriter aWriter, const TLVReader & aReader)
+CHIP_ERROR DumpIterator(DumpWriter aWriter, const TLVReader &aReader)
 {
-    const char * tabs  = "";
-    const size_t depth = 0;
-    CHIP_ERROR retval  = CHIP_NO_ERROR;
+    const char *   tabs    = "";
+    const size_t   depth   = 0;
+    CHIP_ERROR    retval  = CHIP_NO_ERROR;
 
     DumpHandler(aWriter, tabs, aReader, depth);
 
@@ -329,11 +331,11 @@ CHIP_ERROR DumpIterator(DumpWriter aWriter, const TLVReader & aReader)
  *                                          aContext->mWriter is NULL.
  *
  */
-CHIP_ERROR DumpHandler(const TLVReader & aReader, size_t aDepth, void * aContext)
+CHIP_ERROR DumpHandler(const TLVReader &aReader, size_t aDepth, void *aContext)
 {
-    static const char indent[] = "    ";
-    CHIP_ERROR retval          = CHIP_NO_ERROR;
-    DumpContext * context;
+    static const char   indent[] = "    ";
+    CHIP_ERROR         retval = CHIP_NO_ERROR;
+    DumpContext *       context;
 
     VerifyOrExit(aContext != NULL, retval = CHIP_ERROR_INVALID_ARGUMENT);
 
@@ -341,9 +343,12 @@ CHIP_ERROR DumpHandler(const TLVReader & aReader, size_t aDepth, void * aContext
 
     VerifyOrExit(context->mWriter != NULL, retval = CHIP_ERROR_INVALID_ARGUMENT);
 
-    DumpHandler(context->mWriter, indent, aReader, aDepth);
+    DumpHandler(context->mWriter,
+                indent,
+                aReader,
+                aDepth);
 
-exit:
+ exit:
     return retval;
 }
 
@@ -359,11 +364,11 @@ exit:
  *  @retval  #CHIP_NO_ERROR        On success.
  *
  */
-CHIP_ERROR Dump(const TLVReader & aReader, DumpWriter aWriter)
+CHIP_ERROR Dump(const TLVReader &aReader, DumpWriter aWriter)
 {
-    void * context          = NULL;
-    DumpContext dumpContext = { aWriter, context };
-    CHIP_ERROR retval;
+    void *         context     = NULL;
+    DumpContext    dumpContext = { aWriter, context };
+    CHIP_ERROR    retval;
 
     retval = Utilities::Iterate(aReader, DumpHandler, &dumpContext);
 
