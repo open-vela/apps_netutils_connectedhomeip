@@ -1,4 +1,4 @@
-TOPTARGETS := all clean check
+TOPTARGETS := all clean run_tests
 
 SUBDIRS = lwip system lib/core lib/support ble inet
 

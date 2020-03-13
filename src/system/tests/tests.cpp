@@ -28,34 +28,30 @@ using namespace chip::System;
 
 namespace chip {
 namespace System {
-Error MapErrorPOSIX(int aError)
-{
-    return (aError == 0 ? CHIP_SYSTEM_NO_ERROR : aError);
+Error MapErrorPOSIX(int aError) {
+  return (aError == 0 ? CHIP_SYSTEM_NO_ERROR : aError);
 }
-} // namespace System
-} // namespace chip
+}  // namespace System
+}  // namespace chip
 
-void SystemMutex_test()
-{
-    printf("---Running Test--- %s\n", __FUNCTION__);
-    Mutex mLock;
-    Error result = Mutex::Init(mLock);
-    assert(result == CHIP_SYSTEM_NO_ERROR);
-    mLock.Lock();
-    mLock.Unlock();
+void SystemMutex_test() {
+  printf("---Running Test--- %s\n", __FUNCTION__);
+  Mutex mLock;
+  Error result = Mutex::Init(mLock);
+  assert(result == CHIP_SYSTEM_NO_ERROR);
+  mLock.Lock();
+  mLock.Unlock();
 }
 
-void SystemClock_basic_test()
-{
-    printf("---Running Test--- %s\n", __FUNCTION__);
-    uint64_t time = Platform::Layer::GetClock_Monotonic();
-    assert(time);
+void SystemClock_basic_test() {
+  printf("---Running Test--- %s\n", __FUNCTION__);
+  uint64_t time = Platform::Layer::GetClock_Monotonic();
+  assert(time);
 }
 
-int main()
-{
-    printf("---Running Test--- tests from %s\n", __FILE__);
-    SystemMutex_test();
-    SystemClock_basic_test();
-    return 0;
+int main() {
+  printf("---Running Test--- tests from %s\n", __FILE__);
+  SystemMutex_test();
+  SystemClock_basic_test();
+  return 0;
 }
