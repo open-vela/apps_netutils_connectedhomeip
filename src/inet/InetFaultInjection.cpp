@@ -29,10 +29,10 @@ namespace chip {
 namespace Inet {
 namespace FaultInjection {
 
-static nl::FaultInjection::Record sFaultRecordArray[kFault_NumItems];
-static class nl::FaultInjection::Manager sInetFaultInMgr;
-static const nl::FaultInjection::Name sManagerName  = "Inet";
-static const nl::FaultInjection::Name sFaultNames[] = {
+static FaultInjection::Record sFaultRecordArray[kFault_NumItems];
+static class FaultInjection::Manager sInetFaultInMgr;
+static const FaultInjection::Name sManagerName  = "Inet";
+static const FaultInjection::Name sFaultNames[] = {
     "DNSResolverNew",
     "Send",
     "SendNonCritical",
@@ -41,7 +41,7 @@ static const nl::FaultInjection::Name sFaultNames[] = {
 /**
  * Get the singleton FaultInjection::Manager for Inet faults
  */
-nl::FaultInjection::Manager & GetManager(void)
+FaultInjection::Manager & GetManager(void)
 {
     if (0 == sInetFaultInMgr.GetNumFaults())
     {
