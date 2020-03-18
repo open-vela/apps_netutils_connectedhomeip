@@ -1,7 +1,6 @@
 #!/bin/sh
 
 #
-#    Copyright 2020 Google LLC. All Rights Reserved.
 #    Copyright 2016 Nest Labs Inc. All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,9 +29,8 @@ nlbuild_autotools_stem="third_party/nlbuild-autotools/repo"
 
 # Establish some key directories
 
-srcdir="$(dirname "${0}")"
-abs_srcdir="$(cd "${srcdir}" && pwd)"
+srcdir=`dirname ${0}`
+abs_srcdir=`pwd`
 abs_top_srcdir="${abs_srcdir}"
 
-exec "${srcdir}/${nlbuild_autotools_stem}/scripts/bootstrap" -I "${abs_top_srcdir}/${nlbuild_autotools_stem}" "${@}"
-
+exec ${srcdir}/${nlbuild_autotools_stem}/scripts/bootstrap -I "${abs_top_srcdir}/${nlbuild_autotools_stem}" $*
