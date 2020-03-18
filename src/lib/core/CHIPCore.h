@@ -30,10 +30,10 @@
 #include <SystemLayer.h>
 
 #if CONFIG_NETWORK_LAYER_BLE
-#include <ble/BleLayer.h>
+#include <BleLayer/BleLayer.h>
 #endif // CONFIG_NETWORK_LAYER_BLE
 
-#include <inet/InetLayer.h>
+#include <InetLayer/InetLayer.h>
 */
 #define CHIP_CORE_IDENTITY           "chip-core"
 #define CHIP_CORE_PREFIX             CHIP_CORE_IDENTITY ": "
