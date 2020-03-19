@@ -35,7 +35,6 @@
 #include <string.h>
 
 #include <ble/BleConfig.h>
-
 #include <ble/BleError.h>
 #include <system/SystemPacketBuffer.h>
 #include <support/FlagUtils.hpp>
@@ -91,8 +90,8 @@ public:
 
 public:
     // Public functions:
-    CHIPoBle(void){};
-    ~CHIPoBle(void){};
+    CHIPoBle(void) { };
+    ~CHIPoBle(void) { };
 
     BLE_ERROR Init(void * an_app_state, bool expect_first_ack);
 

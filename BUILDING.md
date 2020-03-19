@@ -25,32 +25,12 @@ Tests are built into the make system.
 To take advantage of all the current capabilities of the make system, you'll want:
 
 * Bash 4.0 or greater
-* GNU make, automake, autoconf, libtool
+* GNU make
+* GNU automake
 * C and C++ compilers
 * clang-tidy
-* clang-format-9
+* clang-format
 * gcov
-
-
-#### Linux
-
-On Debian-based Linux distributions such as Ubuntu, these dependencies
-can be satisfied with the following:
-
-```
-sudo apt-get install make autoconf automake libtool
-sudo apt-get install clang-format-9
-```
-
-#### Mac OS X
-
-On Mac OS X, these dependencies can be installed and satisfied using
-[Brew](https://brew.sh/):
-
-```
-brew install make autoconf automake libtool
-brew install llvm@9
-```
 
 ### Autotools Build Preparation
 
@@ -136,4 +116,16 @@ additional packages are required and are invoked by `bootstrap`:
   * automake
   * libtool
 
-Instructions for installing these tools is in the Tool Prerequisites section above.
+#### Linux
+
+On Debian-based Linux distributions such as Ubuntu, these dependencies
+can be satisfied with the following:
+
+    % sudo apt-get install autoconf automake libtool
+
+#### Mac OS X
+
+On Mac OS X, these dependencies can be installed and satisfied using
+[Brew](https://brew.sh/):
+
+    % brew install autoconf automake libtool

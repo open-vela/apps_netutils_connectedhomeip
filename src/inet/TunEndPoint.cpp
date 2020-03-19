@@ -27,8 +27,6 @@
 #define __STDC_LIMIT_MACROS
 #endif
 
-#include <core/CHIPTunnelConfig.h>
-
 #include "TunEndPoint.h"
 #include <InetLayer.h>
 
@@ -36,6 +34,7 @@
 #include <stdio.h>
 
 #include <core/CHIPEncoding.h>
+#include <core/CHIPTunnelConfig.h>
 #include <support/CodeUtils.h>
 
 #include "arpa-inet-compatibility.h"
