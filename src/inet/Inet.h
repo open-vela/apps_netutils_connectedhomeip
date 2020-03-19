@@ -26,7 +26,6 @@
 #define INET_H
 
 #include <InetConfig.h>
-
 #include <InetError.h>
 #include <InetInterface.h>
 #include <InetLayerEvents.h>

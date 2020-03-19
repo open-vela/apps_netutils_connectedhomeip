@@ -34,7 +34,6 @@
 
 #if CONFIG_NETWORK_LAYER_BLE
 #include <core/CHIPConfig.h>
-
 #include <support/logging/CHIPLogging.h>
 #include <support/CodeUtils.h>
 #include <support/FlagUtils.hpp>

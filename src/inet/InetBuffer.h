@@ -40,9 +40,7 @@ namespace Inet {
 typedef chip::System::PacketBuffer InetBuffer;
 
 #if !CHIP_SYSTEM_CONFIG_USE_LWIP
-struct pbuf : public chip::System::pbuf
-{
-};
+struct pbuf : public chip::System::pbuf { };
 #endif // !CHIP_SYSTEM_CONFIG_USE_LWIP
 
 } // namespace Inet
