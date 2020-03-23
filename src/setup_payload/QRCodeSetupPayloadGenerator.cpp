@@ -26,78 +26,164 @@
 #include "SetupCodeUtils.h"
 
 #include <iostream>
+#include <vector>
+
 #include <stdlib.h>
 
 using namespace chip;
 using namespace std;
 
-// Populates numberOfBits starting from LSB of input into bits, which is assumed to be zero-initialized
-static void populateBits(uint8_t * bits, int & offset, uint64_t input, size_t numberOfBits)
+void QRCodeSetupPayloadGenerator::resetBitSet()
 {
-    // do nothing in the case where we've overflowed. should never happen
-    if (offset + numberOfBits > kTotalPayloadDataSizeInBits || input >= 1 << numberOfBits)
-    {
-        return;
-    }
+    mPayloadBitsIndex = kTotalPayloadDataSizeInBits;
+    mPayloadBits.reset();
+}
 
-    int index = offset;
-    offset += numberOfBits;
-    while (input != 0)
+// Populates numberOfBits starting from LSB of input into mPayloadBits
+void QRCodeSetupPayloadGenerator::populateInteger(uint64_t input, size_t numberOfBits)
+{
+    if (mPayloadBitsIndex < numberOfBits || input >= 1 << numberOfBits)
     {
-        if (input & 1)
-        {
-            bits[index / 8] |= 1 << index % 8;
-        }
-        index++;
-        input >>= 1;
+        abort();
+    }
+    mPayloadBitsIndex -= numberOfBits;
+    int currentIndex = mPayloadBitsIndex;
+
+    int endIndex = currentIndex + (numberOfBits - 1);
+
+    while (currentIndex <= endIndex)
+    {
+        input & 1 ? mPayloadBits.set(currentIndex) : mPayloadBits.reset(currentIndex);
+        currentIndex++;
+        input /= 2;
     }
 }
 
-static void generateBitSet(SetupPayload & payload, uint8_t * bits)
+void QRCodeSetupPayloadGenerator::populateVersion()
 {
-    int offset = 0;
+    populateInteger(mPayload.version, kVersionFieldLengthInBits);
+}
 
-    populateBits(bits, offset, payload.version, kVersionFieldLengthInBits);
-    populateBits(bits, offset, payload.vendorID, kVendorIDFieldLengthInBits);
-    populateBits(bits, offset, payload.productID, kProductIDFieldLengthInBits);
-    populateBits(bits, offset, payload.requiresCustomFlow, kCustomFlowRequiredFieldLengthInBits);
-    populateBits(bits, offset, payload.rendezvousInformation, kRendezvousInfoFieldLengthInBits);
-    populateBits(bits, offset, payload.discriminator, kPayloadDiscriminatorFieldLengthInBits);
-    populateBits(bits, offset, payload.setUpPINCode, kSetupPINCodeFieldLengthInBits);
-    populateBits(bits, offset, 0, kReservedFieldLengthInBits);
+void QRCodeSetupPayloadGenerator::populateVendorID()
+{
+    populateInteger(mPayload.vendorID, kVendorIDFieldLengthInBits);
+}
+
+void QRCodeSetupPayloadGenerator::populateProductID()
+{
+    populateInteger(mPayload.productID, kProductIDFieldLengthInBits);
+}
+
+void QRCodeSetupPayloadGenerator::populateCustomFlowRequiredField()
+{
+    populateInteger(mPayload.requiresCustomFlow, kCustomFlowRequiredFieldLengthInBits);
+}
+
+void QRCodeSetupPayloadGenerator::populateRendezvousInfo()
+{
+    populateInteger(mPayload.rendezvousInformation, kRendezvousInfoFieldLengthInBits);
+}
+
+void QRCodeSetupPayloadGenerator::populateDiscriminator()
+{
+    populateInteger(mPayload.discriminator, kPayloadDiscriminatorFieldLengthInBits);
+}
+
+void QRCodeSetupPayloadGenerator::populateSetupPIN()
+{
+    populateInteger(mPayload.setUpPINCode, kSetupPINCodeFieldLengthInBits);
+}
+
+void QRCodeSetupPayloadGenerator::populateReservedField()
+{
+    populateInteger(0, kReservedFieldLengthInBits);
+}
+
+void QRCodeSetupPayloadGenerator::generateBitSet()
+{
+    resetBitSet();
+    populateVersion();
+    populateVendorID();
+    populateProductID();
+    populateCustomFlowRequiredField();
+    populateRendezvousInfo();
+    populateDiscriminator();
+    populateSetupPIN();
+    populateReservedField();
 }
 
 string QRCodeSetupPayloadGenerator::payloadBinaryRepresentation()
 {
     if (mPayload.isValid())
     {
-        uint8_t bits[kTotalPayloadDataSizeInBytes] = { 0 };
-
-        generateBitSet(mPayload, bits);
-
-        string binary;
-        for (int i = sizeof(bits) / sizeof(bits[0]) - 1; i >= 0; i--)
-        {
-            for (unsigned j = 1 << 8; j != 0;)
-            {
-                j >>= 1;
-                binary += bits[i] & j ? "1" : "0";
-            }
-        }
-        return binary;
+        generateBitSet();
+        return mPayloadBits.to_string();
     }
     return string();
+}
+
+// This function assumes bits.size() % 8 == 0
+// TODO: Can this method be written in a more elegant way?
+vector<uint16_t> arrayFromBits(bitset<kTotalPayloadDataSizeInBits> bits)
+{
+    vector<uint16_t> resultVector;
+    size_t numberOfBits  = bits.size();
+    size_t numberOfBytes = numberOfBits / 8;
+    bool oddNumOfBytes   = (numberOfBytes % 2) ? true : false;
+
+    // Traversing in reverse, hence startIndex > endIndex
+    int endIndex   = 0;
+    int startIndex = bits.size() - 1;
+
+    /*
+    Every 2 bytes (16 bits) of binary source data are encoded to 3 characters of the Base-45 alphabet.
+    If an odd number of bytes are to be encoded, the remaining single byte will be encoded
+    to 2 characters of the Base-45 alphabet.
+    */
+    if (oddNumOfBytes)
+    {
+        endIndex = 8;
+    }
+
+    while (startIndex > endIndex)
+    {
+        int currentIntegerIndex = startIndex;
+        uint16_t result         = 0;
+        for (int i = currentIntegerIndex; i > currentIntegerIndex - 16; i--)
+        {
+            result = result << 1;
+            result = result | bits.test(i);
+        }
+        resultVector.push_back(result);
+        startIndex -= 16;
+    }
+
+    // If we have odd number of bytes append the last byte.
+    if (oddNumOfBytes)
+    {
+        uint16_t result = 0;
+        for (int i = 7; i >= 0; i--)
+        {
+            result = result << 1;
+            result = result & bits.test(i);
+        }
+        resultVector.push_back(result);
+    }
+    return resultVector;
 }
 
 string QRCodeSetupPayloadGenerator::payloadBase45Representation()
 {
     if (mPayload.isValid())
     {
-        uint8_t bits[kTotalPayloadDataSizeInBytes] = { 0 };
-
-        generateBitSet(mPayload, bits);
-
-        return base45Encode(bits, sizeof(bits) / sizeof(bits[0]));
+        generateBitSet();
+        vector<uint16_t> integerArray = arrayFromBits(mPayloadBits);
+        string result;
+        for (int idx = 0; idx < integerArray.size(); idx++)
+        {
+            result += base45EncodedString(integerArray[idx], 3);
+        }
+        return result;
     }
     return string();
 }
