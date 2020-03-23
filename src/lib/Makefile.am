@@ -21,7 +21,7 @@
 
 include $(abs_top_nlbuild_autotools_dir)/automake/pre.am
 
-# Pull in the sources that comprise the CHIP library.
+# Pull in the sources that comprise the Chip library.
 
 include ../system/SystemLayer.am
 include ../inet/InetLayer.am

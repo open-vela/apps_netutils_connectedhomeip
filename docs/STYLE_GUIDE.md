@@ -117,9 +117,6 @@ Instead, do this:
 
 Use backticks for `inline code`. This includes file paths and file or binary names.
 
-### Code Comments
-
-Use uppercase `CHIP` in comments, as it is an acronym.
 
 
 Supported keywords:

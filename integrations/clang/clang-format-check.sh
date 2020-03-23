@@ -6,6 +6,8 @@
 # replacements.
 #
 
+set -x
+
 die() {
     echo " *** ERROR: " $*
     exit 1
