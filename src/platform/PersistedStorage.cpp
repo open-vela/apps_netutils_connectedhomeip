@@ -17,21 +17,30 @@
 
 /**
  *    @file
- *      Utility header to encode an input into a Base45 String
+ *          Provides implementations for the CHIP persistent storage
+ *          APIs.  This implementation is common across all platforms.
  */
 
-#ifndef _SETUP_CODE_UTILS_H_
-#define _SETUP_CODE_UTILS_H_
-
-#include <string>
-#include <stdint.h>
-
-using namespace std;
+#include <platform/internal/CHIPDeviceLayerInternal.h>
+#include <platform/ConfigurationManager.h>
 
 namespace chip {
+namespace Platform {
+namespace PersistedStorage {
 
-std::string base45EncodedString(uint64_t input, size_t minLength);
+using namespace ::chip::DeviceLayer;
 
-} // namespace chip
+CHIP_ERROR Read(Key key, uint32_t & value)
+{
+    return ConfigurationMgr().ReadPersistedStorageValue(key, value);
+}
 
-#endif /* _SETUP_CODE_UTILS_H_ */
+CHIP_ERROR Write(Key key, uint32_t value)
+{
+    return ConfigurationMgr().WritePersistedStorageValue(key, value);
+}
+
+} // PersistedStorage
+} // Platform
+} // chip
+
