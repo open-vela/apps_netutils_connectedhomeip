@@ -62,7 +62,7 @@ public:
     CHIP_ERROR SetDeviceName(const char * deviceName);
     uint16_t NumConnections(void);
     void OnPlatformEvent(const ChipDeviceEvent * event);
-    chip::Ble::BleLayer * GetBleLayer(void) const;
+    ::Ble::BleLayer * GetBleLayer(void) const;
 
 protected:
 
@@ -170,7 +170,7 @@ inline void BLEManager::OnPlatformEvent(const ChipDeviceEvent * event)
     static_cast<ImplClass*>(this)->_OnPlatformEvent(event);
 }
 
-inline BleLayer * BLEManager::GetBleLayer(void) const
+inline ::Ble::BleLayer * BLEManager::GetBleLayer(void) const
 {
     return static_cast<const ImplClass*>(this)->_GetBleLayer();
 }

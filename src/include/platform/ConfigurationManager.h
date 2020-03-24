@@ -24,6 +24,8 @@
 #define CONFIGURATION_MANAGER_H
 
 #include <platform/PersistedStorage.h>
+#include <profiles/device-description/DeviceDescription.h>
+#include <profiles/network-provisioning/NetworkProvisioning.h>
 
 namespace chip {
 namespace Ble {
@@ -36,8 +38,11 @@ namespace DeviceLayer {
 
 class PlatformManagerImpl;
 class ConfigurationManagerImpl;
+class TraitManager;
 namespace Internal {
 template<class> class GenericPlatformManagerImpl;
+class DeviceControlServer;
+class NetworkProvisioningServer;
 }
 
 /**
@@ -45,6 +50,8 @@ template<class> class GenericPlatformManagerImpl;
  */
 class ConfigurationManager
 {
+    using ChipDeviceDescriptor = ::chip::Profiles::DeviceDescription::ChipDeviceDescriptor;
+
 public:
 
     // ===== Members that define the public interface of the ConfigurationManager
@@ -52,8 +59,8 @@ public:
     enum
     {
         kMaxPairingCodeLength = 15,
-        kMaxSerialNumberLength = 32,
-        kMaxFirmwareRevisionLength = 32,
+        kMaxSerialNumberLength = ChipDeviceDescriptor::kMaxSerialNumberLength,
+        kMaxFirmwareRevisionLength = ChipDeviceDescriptor::kMaxSoftwareVersionLength,
     };
 
     CHIP_ERROR GetVendorId(uint16_t & vendorId);
@@ -102,6 +109,8 @@ public:
     CHIP_ERROR StoreServiceConfig(const uint8_t * serviceConfig, size_t serviceConfigLen);
     CHIP_ERROR StorePairedAccountId(const char * accountId, size_t accountIdLen);
 
+    CHIP_ERROR GetDeviceDescriptor(ChipDeviceDescriptor & deviceDesc);
+    CHIP_ERROR GetDeviceDescriptorTLV(uint8_t * buf, size_t bufSize, size_t & encodedLen);
     CHIP_ERROR GetQRCodeString(char * buf, size_t bufSize);
 
     CHIP_ERROR GetWiFiAPSSID(char * buf, size_t bufSize);
@@ -126,14 +135,17 @@ private:
 
     friend class ::chip::DeviceLayer::PlatformManagerImpl;
     template<class> friend class ::chip::DeviceLayer::Internal::GenericPlatformManagerImpl;
+    friend class ::chip::DeviceLayer::TraitManager;
+    friend class ::chip::DeviceLayer::Internal::DeviceControlServer;
     // Parentheses used to fix clang parsing issue with these declarations
-    friend CHIP_ERROR ::chip::Platform::PersistedStorage::Read(::chip::Platform::PersistedStorage::Key key, uint32_t & value);
-    friend CHIP_ERROR ::chip::Platform::PersistedStorage::Write(::chip::Platform::PersistedStorage::Key key, uint32_t value);
+    friend CHIP_ERROR (::chip::Platform::PersistedStorage::Read(::chip::Platform::PersistedStorage::Key key, uint32_t & value));
+    friend CHIP_ERROR (::chip::Platform::PersistedStorage::Write(::chip::Platform::PersistedStorage::Key key, uint32_t value));
 
     using ImplClass = ConfigurationManagerImpl;
 
     CHIP_ERROR Init();
     CHIP_ERROR ConfigureChipStack();
+    ::chip::Profiles::Security::AppKeys::GroupKeyStoreBase * GetGroupKeyStore();
     bool CanFactoryReset();
     CHIP_ERROR GetFailSafeArmed(bool & val);
     CHIP_ERROR SetFailSafeArmed(bool val);
@@ -417,6 +429,16 @@ inline CHIP_ERROR ConfigurationManager::WritePersistedStorageValue(::chip::Platf
     return static_cast<ImplClass*>(this)->_WritePersistedStorageValue(key, value);
 }
 
+inline CHIP_ERROR ConfigurationManager::GetDeviceDescriptor(chipDeviceDescriptor & deviceDesc)
+{
+    return static_cast<ImplClass*>(this)->_GetDeviceDescriptor(deviceDesc);
+}
+
+inline CHIP_ERROR ConfigurationManager::GetDeviceDescriptorTLV(uint8_t * buf, size_t bufSize, size_t & encodedLen)
+{
+    return static_cast<ImplClass*>(this)->_GetDeviceDescriptorTLV(buf, bufSize, encodedLen);
+}
+
 inline CHIP_ERROR ConfigurationManager::GetQRCodeString(char * buf, size_t bufSize)
 {
     return static_cast<ImplClass*>(this)->_GetQRCodeString(buf, bufSize);
@@ -427,7 +449,7 @@ inline CHIP_ERROR ConfigurationManager::GetWiFiAPSSID(char * buf, size_t bufSize
     return static_cast<ImplClass*>(this)->_GetWiFiAPSSID(buf, bufSize);
 }
 
-inline CHIP_ERROR ConfigurationManager::GetBLEDeviceIdentificationInfo(Ble::ChipBLEDeviceIdentificationInfo & deviceIdInfo)
+inline CHIP_ERROR ConfigurationManager::GetBLEDeviceIdentificationInfo(Ble::chipBLEDeviceIdentificationInfo & deviceIdInfo)
 {
     return static_cast<ImplClass*>(this)->_GetBLEDeviceIdentificationInfo(deviceIdInfo);
 }
@@ -467,9 +489,14 @@ inline CHIP_ERROR ConfigurationManager::Init()
     return static_cast<ImplClass*>(this)->_Init();
 }
 
-inline CHIP_ERROR ConfigurationManager::ConfigureChipStack()
+inline CHIP_ERROR ConfigurationManager::ConfigurechipStack()
 {
-    return static_cast<ImplClass*>(this)->_ConfigureChipStack();
+    return static_cast<ImplClass*>(this)->_ConfigurechipStack();
+}
+
+inline ::chip::Profiles::Security::AppKeys::GroupKeyStoreBase * ConfigurationManager::GetGroupKeyStore()
+{
+     return static_cast<ImplClass*>(this)->_GetGroupKeyStore();
 }
 
 inline bool ConfigurationManager::CanFactoryReset()

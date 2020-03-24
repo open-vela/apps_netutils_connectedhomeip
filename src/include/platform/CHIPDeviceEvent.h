@@ -270,8 +270,6 @@ typedef void (*AsyncWorkFunct)(intptr_t arg);
 #include CHIPDEVICEPLATFORMEVENT_HEADER
 #endif
 
-#include <system/SystemPacketBuffer.h>
-
 namespace chip {
 namespace DeviceLayer {
 
@@ -355,6 +353,7 @@ struct ChipDeviceEvent final
             uint64_t PeerNodeId;
             uint16_t SessionKeyId;
             uint8_t EncType;
+            ::chip::ChipAuthMode AuthMode;
             bool IsCommissioner;
         } SessionEstablished;
         struct
@@ -368,7 +367,7 @@ struct ChipDeviceEvent final
         struct
         {
             BLE_CONNECTION_OBJECT ConId;
-            chip::System::PacketBuffer * Data;
+            PacketBuffer * Data;
         } CHIPoBLEWriteReceived;
         struct
         {

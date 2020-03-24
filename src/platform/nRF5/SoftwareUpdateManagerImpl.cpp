@@ -16,10 +16,14 @@
  */
 
 
-#include <platform/internal/CHIPDeviceLayerInternal.h>
+#include <platform/internal/CHIPpDeviceLayerInternal.h>
 
 #if CHIP_DEVICE_CONFIG_ENABLE_SOFTWARE_UPDATE_MANAGER
 
+#include <paltform/Profiles/CHIPProfiles.h>
+#include <paltform/Profiles/common/CommonProfile.h>
+
+#include <platform/internal/GenericSoftwareUpdateManagerImpl_BDX.ipp>
 #include <platform/internal/GenericSoftwareUpdateManagerImpl.ipp>
 
 namespace chip {
@@ -29,7 +33,7 @@ SoftwareUpdateManagerImpl SoftwareUpdateManagerImpl::sInstance;
 
 CHIP_ERROR SoftwareUpdateManagerImpl::_Init(void)
 {
-    //Internal::GenericSoftwareUpdateManagerImpl_BDX<SoftwareUpdateManagerImpl>::DoInit();
+    Internal::GenericSoftwareUpdateManagerImpl_BDX<SoftwareUpdateManagerImpl>::DoInit();
     Internal::GenericSoftwareUpdateManagerImpl<SoftwareUpdateManagerImpl>::DoInit();
 
     return CHIP_NO_ERROR;

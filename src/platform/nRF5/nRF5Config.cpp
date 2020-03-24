@@ -28,9 +28,6 @@
 #include <core/CHIPEncoding.h>
 #include <platform/internal/testing/ConfigUnitTest.h>
 
-#include <support/logging/CHIPLogging.h>
-#include <support/CodeUtils.h>
-
 #include "FreeRTOS.h"
 #include "semphr.h"
 
@@ -385,7 +382,7 @@ bool NRF5Config::ConfigValueExists(Key key)
     fdsRes = fds_record_find(GetFileId(key), GetRecordKey(key), &recDesc, &findToken);
 
     // Return true iff the record was found.
-    return fdsRes == NRF_SUCCESS;
+    return fdsRes == FDS_SUCCESS;
 }
 
 CHIP_ERROR NRF5Config::FactoryResetConfig(void)
@@ -412,10 +409,9 @@ exit:
     return err;
 }
 
-#define CHIP_DEVICE_CONFIG_NRF5_FDS_ERROR_MIN 10000000
 CHIP_ERROR NRF5Config::MapFDSError(ret_code_t fdsRes)
 {
-    return (fdsRes == NRF_SUCCESS) ? CHIP_NO_ERROR : CHIP_DEVICE_CONFIG_NRF5_FDS_ERROR_MIN + fdsRes;
+    return (fdsRes == FDS_SUCCESS) ? CHIP_NO_ERROR : CHIP_DEVICE_CONFIG_NRF5_FDS_ERROR_MIN + fdsRes;
 }
 
 CHIP_ERROR NRF5Config::OpenRecord(NRF5Config::Key key, fds_record_desc_t & recDesc, fds_flash_record_t & rec)
@@ -517,10 +513,10 @@ CHIP_ERROR NRF5Config::DoAsyncFDSOp(FDSAsyncOp & asyncOp)
             fds_find_token_t findToken;
             memset(&findToken, 0, sizeof(findToken));
             fdsRes = fds_record_find(asyncOp.FileId, asyncOp.RecordKey, &asyncOp.RecordDesc, &findToken);
-            VerifyOrExit(fdsRes == NRF_SUCCESS || fdsRes == FDS_ERR_NOT_FOUND, err = MapFDSError(fdsRes));
+            VerifyOrExit(fdsRes == FDS_SUCCESS || fdsRes == FDS_ERR_NOT_FOUND, err = MapFDSError(fdsRes));
 
             // Remember if we found an existing record.
-            existingRecFound = (fdsRes == NRF_SUCCESS);
+            existingRecFound = (fdsRes == FDS_SUCCESS);
         }
 
         // If adding or updating a record, prepare the FDS record structure with the record data.
@@ -577,7 +573,7 @@ CHIP_ERROR NRF5Config::DoAsyncFDSOp(FDSAsyncOp & asyncOp)
         case FDSAsyncOp::kWaitQueueSpaceAvailable:
             // In this case, arrange to wait for any operation to complete, which coincides with
             // space on the operation queue being available.
-            fdsRes = NRF_SUCCESS;
+            fdsRes = FDS_SUCCESS;
             break;
         default:
             ChipDie();
@@ -587,7 +583,7 @@ CHIP_ERROR NRF5Config::DoAsyncFDSOp(FDSAsyncOp & asyncOp)
         // If the FreeRTOS scheduler is not running, poll the completion semaphore; otherwise wait
         // indefinitely.
         //
-        if (fdsRes == NRF_SUCCESS)
+        if (fdsRes == FDS_SUCCESS)
         {
             if (xTaskGetSchedulerState() == taskSCHEDULER_NOT_STARTED)
             {
@@ -606,7 +602,7 @@ CHIP_ERROR NRF5Config::DoAsyncFDSOp(FDSAsyncOp & asyncOp)
         sActiveAsyncOp = NULL;
 
         // Return immediately if the operation completed successfully.
-        if (fdsRes == NRF_SUCCESS)
+        if (fdsRes == FDS_SUCCESS)
         {
             ExitNow(err = CHIP_NO_ERROR);
         }
