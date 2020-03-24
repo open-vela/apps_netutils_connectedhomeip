@@ -30,7 +30,7 @@
 #ifndef INETERROR_H
 #define INETERROR_H
 
-#include <inet/InetConfig.h>
+#include <InetConfig.h>
 
 #include <system/SystemError.h>
 

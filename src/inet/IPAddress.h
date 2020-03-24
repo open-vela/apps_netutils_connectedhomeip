@@ -31,9 +31,9 @@
 
 #include <support/DLLUtil.h>
 
-#include <inet/InetConfig.h>
+#include <InetConfig.h>
 
-#include "inet/IANAConstants.h"
+#include "IANAConstants.h"
 
 #if CHIP_SYSTEM_CONFIG_USE_LWIP
 #include <lwip/init.h>

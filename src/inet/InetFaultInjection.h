@@ -23,7 +23,7 @@
 #ifndef INET_FAULT_INJECTION_H_
 #define INET_FAULT_INJECTION_H_
 
-#include <inet/InetConfig.h>
+#include <InetConfig.h>
 
 #if INET_CONFIG_TEST && CHIP_WITH_NLFAULTINJECTION
 
