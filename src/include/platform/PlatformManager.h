@@ -102,10 +102,10 @@ private:
     template<class> friend class Internal::GenericThreadStackManagerImpl_OpenThread_LwIP;
     template<class> friend class Internal::GenericConfigurationManagerImpl;
     // Parentheses used to fix clang parsing issue with these declarations
-    friend ::chip::System::Error ::chip::System::Platform::Layer::PostEvent(::chip::System::Layer & aLayer, void * aContext, ::chip::System::Object & aTarget, ::chip::System::EventType aType, uintptr_t aArgument);
-    friend ::chip::System::Error ::chip::System::Platform::Layer::DispatchEvents(::chip::System::Layer & aLayer, void * aContext);
-    friend ::chip::System::Error ::chip::System::Platform::Layer::DispatchEvent(::chip::System::Layer & aLayer, void * aContext, ::chip::System::Event aEvent);
-    friend ::chip::System::Error ::chip::System::Platform::Layer::StartTimer(::chip::System::Layer & aLayer, void * aContext, uint32_t aMilliseconds);
+    friend ::chip::System::Error (::chip::System::Platform::Layer::PostEvent(::chip::System::Layer & aLayer, void * aContext, ::chip::System::Object & aTarget, ::chip::System::EventType aType, uintptr_t aArgument));
+    friend ::chip::System::Error (::chip::System::Platform::Layer::DispatchEvents(::chip::System::Layer & aLayer, void * aContext));
+    friend ::chip::System::Error (::chip::System::Platform::Layer::DispatchEvent(::chip::System::Layer & aLayer, void * aContext, ::chip::System::Event aEvent));
+    friend ::chip::System::Error (::chip::System::Platform::Layer::StartTimer(::chip::System::Layer & aLayer, void * aContext, uint32_t aMilliseconds));
 
     void PostEvent(const ChipDeviceEvent * event);
     void DispatchEvent(const ChipDeviceEvent * event);
@@ -155,9 +155,9 @@ extern PlatformManagerImpl & PlatformMgrImpl(void);
 namespace chip {
 namespace DeviceLayer {
 
-inline CHIP_ERROR PlatformManager::InitChipStack()
+inline CHIP_ERROR PlatformManager::InitchipStack()
 {
-    return static_cast<ImplClass*>(this)->_InitChipStack();
+    return static_cast<ImplClass*>(this)->_InitchipStack();
 }
 
 inline CHIP_ERROR PlatformManager::AddEventHandler(EventHandlerFunct handler, intptr_t arg)
@@ -185,34 +185,34 @@ inline CHIP_ERROR PlatformManager::StartEventLoopTask(void)
     return static_cast<ImplClass*>(this)->_StartEventLoopTask();
 }
 
-inline void PlatformManager::LockChipStack(void)
+inline void PlatformManager::LockchipStack(void)
 {
-    static_cast<ImplClass*>(this)->_LockChipStack();
+    static_cast<ImplClass*>(this)->_LockchipStack();
 }
 
-inline bool PlatformManager::TryLockChipStack(void)
+inline bool PlatformManager::TryLockchipStack(void)
 {
-    return static_cast<ImplClass*>(this)->_TryLockChipStack();
+    return static_cast<ImplClass*>(this)->_TryLockchipStack();
 }
 
-inline void PlatformManager::UnlockChipStack(void)
+inline void PlatformManager::UnlockchipStack(void)
 {
-    static_cast<ImplClass*>(this)->_UnlockChipStack();
+    static_cast<ImplClass*>(this)->_UnlockchipStack();
 }
 
-inline void PlatformManager::PostEvent(const ChipDeviceEvent * event)
+inline void PlatformManager::PostEvent(const chipDeviceEvent * event)
 {
     static_cast<ImplClass*>(this)->_PostEvent(event);
 }
 
-inline void PlatformManager::DispatchEvent(const ChipDeviceEvent * event)
+inline void PlatformManager::DispatchEvent(const chipDeviceEvent * event)
 {
     static_cast<ImplClass*>(this)->_DispatchEvent(event);
 }
 
-inline CHIP_ERROR PlatformManager::StartChipTimer(uint32_t durationMS)
+inline CHIP_ERROR PlatformManager::StartchipTimer(uint32_t durationMS)
 {
-    return static_cast<ImplClass*>(this)->_StartChipTimer(durationMS);
+    return static_cast<ImplClass*>(this)->_StartchipTimer(durationMS);
 }
 
 } // namespace DeviceLayer
