@@ -25,7 +25,7 @@
 #ifndef INETTIMER_H
 #define INETTIMER_H
 
-#include <inet/InetConfig.h>
+#include <InetConfig.h>
 
 #if !INET_CONFIG_PROVIDE_OBSOLESCENT_INTERFACES
 

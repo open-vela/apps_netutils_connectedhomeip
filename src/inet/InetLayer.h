@@ -49,48 +49,48 @@
 
 #include <stdint.h>
 
-#include <inet/InetConfig.h>
+#include <InetConfig.h>
 
 #include <system/SystemLayer.h>
 #include <system/SystemStats.h>
 
 #include <support/DLLUtil.h>
 
-#include "inet/IANAConstants.h"
-#include <inet/InetError.h>
-#include <inet/IPAddress.h>
-#include "inet/IPPrefix.h"
-#include <inet/InetInterface.h>
-#include "inet/InetLayerBasis.h"
-#include <inet/InetLayerEvents.h>
+#include "IANAConstants.h"
+#include <InetError.h>
+#include <IPAddress.h>
+#include "IPPrefix.h"
+#include <InetInterface.h>
+#include "InetLayerBasis.h"
+#include <InetLayerEvents.h>
 
 #if INET_CONFIG_ENABLE_DNS_RESOLVER
-#include <inet/DNSResolver.h>
+#include <DNSResolver.h>
 #endif // INET_CONFIG_ENABLE_DNS_RESOLVER
 
 #if INET_CONFIG_ENABLE_RAW_ENDPOINT
-#include "inet/RawEndPoint.h"
+#include "RawEndPoint.h"
 #endif // INET_CONFIG_ENABLE_RAW_ENDPOINT
 
 #if INET_CONFIG_ENABLE_TCP_ENDPOINT
-#include "inet/TCPEndPoint.h"
+#include "TCPEndPoint.h"
 #endif // INET_CONFIG_ENABLE_TCP_ENDPOINT
 
 #if INET_CONFIG_ENABLE_UDP_ENDPOINT
-#include "inet/UDPEndPoint.h"
+#include "UDPEndPoint.h"
 #endif // INET_CONFIG_ENABLE_UDP_ENDPOINT
 
 #if INET_CONFIG_ENABLE_TUN_ENDPOINT
-#include "inet/TunEndPoint.h"
+#include "TunEndPoint.h"
 #endif // INET_CONFIG_ENABLE_TUN_ENDPOINT
 
 #if INET_CONFIG_PROVIDE_OBSOLESCENT_INTERFACES
-#include "vInetBuffer.h"
+#include "InetBuffer.h"
 #endif // INET_CONFIG_PROVIDE_OBSOLESCENT_INTERFACES
 
 #if CHIP_SYSTEM_CONFIG_USE_SOCKETS
 #if INET_CONFIG_ENABLE_DNS_RESOLVER && INET_CONFIG_ENABLE_ASYNC_DNS_SOCKETS
-#include "inet/AsyncDNSResolverSockets.h"
+#include "AsyncDNSResolverSockets.h"
 #endif // INET_CONFIG_ENABLE_DNS_RESOLVER && INET_CONFIG_ENABLE_ASYNC_DNS_SOCKETS
 #endif // CHIP_SYSTEM_CONFIG_USE_SOCKETS
 

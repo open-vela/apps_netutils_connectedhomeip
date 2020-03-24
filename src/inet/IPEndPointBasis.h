@@ -26,7 +26,7 @@
 #ifndef IPENDPOINTBASIS_H
 #define IPENDPOINTBASIS_H
 
-#include <inet/EndPointBasis.h>
+#include <EndPointBasis.h>
 
 #include <system/SystemPacketBuffer.h>
 

@@ -43,7 +43,7 @@ using namespace ::chip::DeviceLayer::Internal;
 
 namespace {
 
-// Singleton instance of CHIP Group Key Store.
+// Singleton instance of chip Group Key Store.
 GroupKeyStoreImpl gGroupKeyStore;
 
 } // unnamed namespace
