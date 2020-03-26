@@ -25,8 +25,6 @@
 
 include $(abs_top_nlbuild_autotools_dir)/automake/pre.am
 
-SUBDIRS                                                                        = tests
-
 if CHIP_WITH_LWIP_INTERNAL
 
 lib_LIBRARIES                                                                  = liblwip.a
