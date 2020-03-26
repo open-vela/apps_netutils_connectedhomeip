@@ -34,6 +34,10 @@
 #include <task.h>
 #include <queue.h>
 
+// FreeRTOS includes
+#include "SEGGER_RTT.h"
+#include "SEGGER_RTT_Conf.h"
+
 // RTT Buffer size and name
 #ifndef LOG_RTT_BUFFER_INDEX
 #define LOG_RTT_BUFFER_INDEX 0
@@ -55,7 +59,7 @@
 #define LOG_EFR32 "<efr32 > "
 
 
-using namespace ::chip;
+using namespace ::chip::Chip;
 using namespace ::chip::DeviceLayer;
 using namespace ::chip::DeviceLayer::Internal;
 

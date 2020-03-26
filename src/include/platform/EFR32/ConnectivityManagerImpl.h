@@ -20,7 +20,7 @@
 
 #include <platform/ConnectivityManager.h>
 #include <platform/internal/GenericConnectivityManagerImpl.h>
-#if CHIP_DEVICE_CONFIG_ENABLE_CHIPOBLE
+#if CHIP_DEVICE_CONFIG_ENABLE_WOBLE
 #include <platform/internal/GenericConnectivityManagerImpl_BLE.h>
 #else
 #include <platform/internal/GenericConnectivityManagerImpl_NoBLE.h>
@@ -46,7 +46,7 @@ namespace DeviceLayer {
  */
 class ConnectivityManagerImpl final : public ConnectivityManager,
                                       public Internal::GenericConnectivityManagerImpl<ConnectivityManagerImpl>,
-#if CHIP_DEVICE_CONFIG_ENABLE_CHIPOBLE
+#if CHIP_DEVICE_CONFIG_ENABLE_WOBLE
                                       public Internal::GenericConnectivityManagerImpl_BLE<ConnectivityManagerImpl>,
 #else
                                       public Internal::GenericConnectivityManagerImpl_NoBLE<ConnectivityManagerImpl>,

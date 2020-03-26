@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 #
 #    Copyright 2014-2018 Nest Labs Inc. All Rights Reserved.
