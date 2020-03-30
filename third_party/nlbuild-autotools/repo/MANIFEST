@@ -1,7 +1,6 @@
 .default-version
 .gitignore
 .travis.yml
-AUTHORS.md
 CHANGES
 Common.mak
 CONTRIBUTING.md
