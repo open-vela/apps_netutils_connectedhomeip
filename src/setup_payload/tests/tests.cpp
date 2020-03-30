@@ -22,7 +22,7 @@
 #include <iostream>
 
 #include "SetupPayload.cpp"
-#include "Base45.cpp"
+#include "SetupCodeUtils.cpp"
 #include "QRCodeSetupPayloadGenerator.cpp"
 
 using namespace chip;
