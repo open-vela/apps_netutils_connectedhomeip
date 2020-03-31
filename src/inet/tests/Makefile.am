@@ -1,5 +1,5 @@
 #
-#    <COPYRIGHT>
+#    Copyright (c) 2020 Project CHIP Authors
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@
 
 #
 #    Description:
-#      This is the GNU automake file for the CHIP QR code unit
-#      and functional tests.
+#      This file is the GNU automake template for the Project CHIP unit
+#      tests.
 #
 
 include $(abs_top_nlbuild_autotools_dir)/automake/pre.am
@@ -30,28 +30,39 @@ noinst_HEADERS                                 = \
     $(NULL)
 
 #
-# Other files we do want to distribute with the package.
+# Other files we do want to distribute with the NLIO SDK.
 #
 EXTRA_DIST                                     = \
     $(NULL)
 
 if CHIP_BUILD_TESTS
-# C/C++ preprocessor option flags that will apply to all compiled
-# objects in this makefile.
+# C preprocessor option flags that will apply to all compiled objects in this
+# makefile.
 
 AM_CPPFLAGS                                    = \
+    -I$(top_srcdir)/src                          \
     -I$(top_srcdir)/src/lib                      \
-    -I$(top_srcdir)/src/system                   \
-    -I$(top_srcdir)/src/setup_payload            \
+    $(LWIP_CPPFLAGS)                             \
+    $(SOCKETS_CPPFLAGS)                          \
+    $(PTHREAD_CFLAGS)                            \
+    $(NULL)
+
+CHIP_LDADD                                     = \
+    $(top_builddir)/src/inet/libInetLayer.a      \
     $(NULL)
 
 COMMON_LDADD                                   = \
+    $(COMMON_LDFLAGS)                            \
+    $(CHIP_LDADD)                                \
+    $(LWIP_LDFLAGS) $(LWIP_LIBS)                 \
+    $(SOCKETS_LDFLAGS) $(SOCKETS_LIBS)           \
+    $(PTHREAD_CFLAGS) $(PTHREAD_LIBS)            \
     $(NULL)
 
 # Test applications that should be run when the 'check' target is run.
 
 check_PROGRAMS                                 = \
-    TestQrCode                                   \
+    TestInetAddress                              \
     $(NULL)
 
 # Test applications and scripts that should be built and run when the
@@ -69,8 +80,8 @@ TESTS_ENVIRONMENT                              = \
 
 # Source, compiler, and linker options for test programs.
 
-TestQrCode_LDADD                               = $(COMMON_LDADD)
-TestQrCode_SOURCES                             = tests.cpp
+TestInetAddress_SOURCES                        = TestInetAddress.cpp
+TestInetAddress_LDADD                          = $(COMMON_LDADD)
 
 if CHIP_BUILD_COVERAGE
 CLEANFILES                                     = $(wildcard *.gcda *.gcno)
@@ -101,5 +112,3 @@ endif # CHIP_BUILD_COVERAGE
 endif # CHIP_BUILD_TESTS
 
 include $(abs_top_nlbuild_autotools_dir)/automake/post.am
-
-
