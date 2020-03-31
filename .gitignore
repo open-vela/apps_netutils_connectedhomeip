@@ -1,7 +1,6 @@
 
 # VS Code Configs
-.vscode/*
-!.vscode/tasks.json
+*.vscode
 
 # Build System
 .deps
