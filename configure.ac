@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 #
-#    Copyright (c) 2020 Project CHIP Authors
+#    <COPYRIGHT>
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -1810,7 +1810,6 @@ src/setup_payload/tests/Makefile
 src/inet/Makefile
 src/lib/Makefile
 src/platform/Makefile
-tests/Makefile
 ])
 
 #
