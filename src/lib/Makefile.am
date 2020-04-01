@@ -23,10 +23,6 @@
 
 include $(abs_top_nlbuild_autotools_dir)/automake/pre.am
 
-SUBDIRS                             =                         \
-    support                                                   \
-    $(NULL)
-
 # Pull in the sources that comprise the CHIP library.
 
 include ../system/SystemLayer.am
@@ -34,10 +30,6 @@ include ../inet/InetLayer.am
 include ../ble/BleLayer.am
 include core/CoreLayer.am
 include support/SupportLayer.am
-
-EXTRA_DIST                          =                         \
-    $(CHIP_BUILD_CORE_LAYER_HEADER_FILES)                     \
-    $(CHIP_BUILD_SUPPORT_LAYER_HEADER_FILES)
 
 lib_LIBRARIES                       = libCHIP.a
 
@@ -61,5 +53,9 @@ libCHIP_a_SOURCES                  += $(CHIP_BUILD_SUPPORT_LAYER_SOURCE_FILES)
 if CONFIG_NETWORK_LAYER_BLE
 libCHIP_a_SOURCES                  += $(CHIP_BUILD_BLE_LAYER_SOURCE_FILES)
 endif # CONFIG_NETWORK_LAYER_BLE
+
+EXTRA_DIST                          =                         \
+    $(CHIP_BUILD_CORE_LAYER_HEADER_FILES)                     \
+    $(CHIP_BUILD_SUPPORT_LAYER_HEADER_FILES)
 
 include $(abs_top_nlbuild_autotools_dir)/automake/post.am
