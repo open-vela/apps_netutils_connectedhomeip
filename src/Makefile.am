@@ -60,19 +60,20 @@ DIST_SUBDIRS                      = \
     lwip                            \
     setup_payload                   \
     system                          \
+    crypto                          \
     $(PLATFORM_SUBDIRS)             \
     $(NULL)
 
 # Always build (e.g. for 'make all') these subdirectories.
 
 SUBDIRS                           = \
-    lib/support                     \
     $(MAYBE_BLE_SUBDIRS)            \
     inet                            \
     lib                             \
     lwip                            \
     setup_payload                   \
     system                          \
+    crypto                          \
     $(MAYBE_PLATFORM_SUBDIRS)       \
     $(NULL)
 

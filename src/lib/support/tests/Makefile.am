@@ -62,7 +62,6 @@ COMMON_LDADD                                          = \
 # Test applications that should be run when the 'check' target is run.
 
 check_PROGRAMS                                        = \
-    TestCHIPArgParser                                   \
     TestTimeUtils                                       \
     $(NULL)
 
@@ -80,9 +79,6 @@ TESTS_ENVIRONMENT                                     = \
     $(NULL)
 
 # Source, compiler, and linker options for test programs.
-
-TestCHIPArgParser_SOURCES                             = TestCHIPArgParser.cpp
-TestCHIPArgParser_LDADD                               = $(COMMON_LDADD)
 
 TestTimeUtils_SOURCES                                 = TestTimeUtils.cpp
 TestTimeUtils_LDADD                                   = $(COMMON_LDADD)
