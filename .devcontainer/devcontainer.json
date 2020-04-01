@@ -9,8 +9,7 @@
 	"extensions": [
 		"ms-vscode.cpptools",
 		"ms-azuretools.vscode-docker",
-		"xaver.clang-format",
-		"github.vscode-pull-request-github"
+		"xaver.clang-format"
 	],
 	// Use 'settings' to set *default* container specific settings.json values on container create. 
 	// You can edit these settings after create using File > Preferences > Settings > Remote.
