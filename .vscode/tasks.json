@@ -8,101 +8,49 @@
             "group": {
                 "kind": "build",
                 "isDefault": true
-            },
-            "isBackground": false,
-            "presentation": {
-                "reveal": "always",
-                "panel": "shared"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ]
+            }
         },
         {
-            "label": "Auto-enforce coding style",
-            "type": "shell",
-            "command": "make -f Makefile-Standalone pretty-check",
-            "group": "none",
-            "isBackground": false,
-            "presentation": {
-                "reveal": "always",
-                "panel": "shared"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ]
-        },
-        {
-            "label": "Verify coding style conformance",
+            "label": "Pretty",
             "type": "shell",
             "command": "make -f Makefile-Standalone pretty",
-            "group": "none",
-            "problemMatcher": [
-                "$gcc"
-            ]
+            "group": "none"
         },
         {
-            "label": "Run Unit and Functional Tests",
+            "label": "Test & Check",
             "type": "shell",
             "command": "make -f Makefile-Standalone check",
-            "group": "none",
-            "problemMatcher": [
-                "$gcc"
-            ]
+            "group": "none"
         },
         {
-            "label": "Run Distribution Generation",
+            "label": "Dist Check",
             "type": "shell",
             "command": "make -f Makefile-Standalone distcheck",
-            "group": "none",
-            "problemMatcher": [
-                "$gcc"
-            ]
+            "group": "none"
         },
         {
-            "label": "Run Code Coverage",
-            "type": "shell",
-            "command": "make -f Makefile-Standalone coverage",
-            "group": "none",
-            "problemMatcher": [
-                "$gcc"
-            ]
-        },
-        {
-            "label": "Clean build",
+            "label": "Clean",
             "type": "shell",
             "command": "make -f Makefile-Standalone clean",
-            "group": "none",
-            "problemMatcher": [
-                "$gcc"
-            ]
+            "group": "none"
         },
         {
-            "label": "Bootstrap the source tree",
+            "label": "Bootstrap",
             "type": "shell",
             "command": "./bootstrap",
-            "group": "none",
-            "problemMatcher": [
-                "$gcc"
-            ]
+            "group": "none"
         },
         {
             "label": "Clean Tree",
             "type": "shell",
             "command": "git clean -xdf",
-            "group": "none",
-            "problemMatcher": [
-                "$gcc"
-            ]
+            "group": "none"
         },
         {
             "label": "QRCode Tests",
             "type": "shell",
             "command": "make -C build/x86_64-unknown-linux-gnu/src/setup_payload/ check",
-            "group": "none",
-            "problemMatcher": [
-                "$gcc"
-            ]
+            "group": "none"
         }
     ]
 }
