@@ -1265,6 +1265,40 @@ else
     AC_DEFINE(INET_CONFIG_ENABLE_ASYNC_DNS_SOCKETS, 0, [Define to 0 for disabling ASYNC DNS])
 fi
 
+#
+# Options for the user to specify project-specific configuration files
+# for various CHIP components.
+#
+
+AC_LANG_PUSH([C++])
+
+# SystemLayer
+
+CHIP_CHECK_PROJECT_CONFIG_INCLUDES(chip-system-project-includes, SYSTEM_PROJECT_CONFIG_INCLUDE, SystemProjectConfig.h, CHIP System Layer, ${ac_abs_confdir}/build/config/standalone)
+
+# BleLayer
+
+if test ${CONFIG_NETWORK_LAYER_BLE} = 1; then
+    CHIP_CHECK_PROJECT_CONFIG_INCLUDES(chip-ble-project-includes, BLE_PROJECT_CONFIG_INCLUDE, BleProjectConfig.h, CHIP BLE Layer, ${ac_abs_confdir}/build/config/standalone)
+fi
+
+# InetLayer
+
+if test ${CONFIG_NETWORK_LAYER_INET} = 1; then
+    CHIP_CHECK_PROJECT_CONFIG_INCLUDES(chip-inet-project-includes, INET_PROJECT_CONFIG_INCLUDE, InetProjectConfig.h, CHIP Inet Layer, ${ac_abs_confdir}/build/config/standalone)
+fi
+
+# Core
+
+CHIP_CHECK_PROJECT_CONFIG_INCLUDES(chip-project-includes, CHIP_PROJECT_CONFIG_INCLUDE, CHIPProjectConfig.h, CHIP Core, ${ac_abs_confdir}/build/config/standalone)
+
+# Device Layer
+
+if test "${CONFIG_DEVICE_LAYER}" = 1; then 
+    CHIP_CHECK_PROJECT_CONFIG_INCLUDES(chip-device-project-includes, CHIP_DEVICE_PROJECT_CONFIG_INCLUDE, CHIPDeviceProjectConfig.h, CHIP Device Layer,)
+fi
+
+AC_LANG_POP([C++])
 
 #
 # Checks for libraries and packages.
@@ -1289,35 +1323,6 @@ AC_MSG_NOTICE([checking package dependencies])
 # Check if the build host has pkg-config
 
 AC_PATH_PROG([PKG_CONFIG],[pkg-config])
-
-#
-#
-# OpenSSL
-#
-
-NL_WITH_OPTIONAL_EXTERNAL_PACKAGE([OpenSSL],
-    [OPENSSL],
-    [openssl],
-    [-lcrypto],
-    [
-        # Check for required OpenSSL headers.
-
-        AC_CHECK_HEADERS([openssl/aes.h] [openssl/bn.h] [openssl/crypto.h] [openssl/ec.h] [openssl/err.h] [openssl/evp.h] [openssl/sha.h],
-            [],
-            [
-                AC_MSG_ERROR(The OpenSSL header "$ac_header" is required but cannot be found.)
-            ]
-        )
-    ]
-)
-
-AM_CONDITIONAL([CHIP_WITH_OPENSSL], [test "${nl_with_openssl}" != "no"])
-
-if test "${nl_with_openssl}" = "no"; then
-    AC_DEFINE([CHIP_WITH_OPENSSL], [0], [Define to 1 to build CHIP with OpenSSL features])
-else
-    AC_DEFINE([CHIP_WITH_OPENSSL], [1], [Define to 1 to build CHIP with OpenSSL features])
-fi
 
 #
 # LwIP
@@ -1916,10 +1921,6 @@ AC_MSG_NOTICE([
   LwIP compile flags                               : ${LWIP_CPPFLAGS:--}
   LwIP link flags                                  : ${LWIP_LDFLAGS:--}
   LwIP link libraries                              : ${LWIP_LIBS:--}
-  OpenSSL source                                   : ${nl_with_openssl}
-  OpenSSL compile flags                            : ${OPENSSL_CPPFLAGS:--}
-  OpenSSL link flags                               : ${OPENSSL_LDFLAGS:--}
-  OpenSSL link libraries                           : ${OPENSSL_LIBS:--}
   Nlunit-test source                               : ${nl_with_nlunit_test:--}
   Nlunit-test compile flags                        : ${NLUNIT_TEST_CPPFLAGS:--}
   Nlunit-test link flags                           : ${NLUNIT_TEST_LDFLAGS:--}
