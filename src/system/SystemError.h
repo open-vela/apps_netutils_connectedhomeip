@@ -33,7 +33,7 @@
 #define SYSTEMERROR_H
 
 // Include headers
-#include <system/SystemConfig.h>
+#include <SystemConfig.h>
 
 #if CHIP_SYSTEM_CONFIG_USE_LWIP
 #include <lwip/err.h>

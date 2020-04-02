@@ -35,13 +35,13 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#include <system/SystemConfig.h>
+#include <SystemConfig.h>
 
 #if !CHIP_SYSTEM_CONFIG_PLATFORM_PROVIDES_TIME
 
-#include <system/SystemClock.h>
+#include <SystemClock.h>
 #include <support/CodeUtils.h>
-#include <system/SystemError.h>
+#include <SystemError.h>
 #include "SystemLayerPrivate.h"
 
 #if CHIP_SYSTEM_CONFIG_USE_POSIX_TIME_FUNCTS

@@ -26,12 +26,12 @@
 #define SYSTEMTIME_H
 
 // Include configuration headers
-#include <system/SystemConfig.h>
+#include <SystemConfig.h>
 
 // Include dependent headers
 #include <support/DLLUtil.h>
 
-#include <system/SystemError.h>
+#include <SystemError.h>
 
 namespace chip {
 namespace System {

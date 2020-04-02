@@ -133,22 +133,19 @@ DLL_EXPORT void FormatError(char * buf, uint16_t bufSize, const char * subsys, i
 
 #else // CHIP_CONFIG_SHORT_ERROR_STR
 
-    const char * subsysSep = " ";
-    const char * descSep   = ": ";
+    int len = 0;
 
-    if (subsys == NULL)
+    if (subsys != NULL)
     {
-        subsys    = "";
-        subsysSep = "";
-    }
-    if (desc == NULL)
-    {
-        desc    = "";
-        descSep = "";
+        len = snprintf(buf, bufSize, "%s ", subsys);
     }
 
-    (void) snprintf(buf, bufSize, "%s%sError %" PRId32 " (0x%08" PRIX32 ")%s%s", subsys, subsysSep, err, (uint32_t) err, descSep,
-                    desc);
+    len += snprintf(buf + len, bufSize - len, "Error %" PRId32 " (0x%08" PRIX32 ")", err, (uint32_t) err);
+
+    if (desc != NULL)
+    {
+        (void) snprintf(buf + len, bufSize - len, ": %s", desc);
+    }
 
 #endif // CHIP_CONFIG_SHORT_ERROR_STR
 }

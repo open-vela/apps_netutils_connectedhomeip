@@ -27,7 +27,7 @@
 #include <stddef.h>
 
 // Include module header
-#include <system/SystemError.h>
+#include <SystemError.h>
 
 // Include common private header
 #include "SystemLayerPrivate.h"
