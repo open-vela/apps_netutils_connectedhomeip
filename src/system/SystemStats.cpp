@@ -26,10 +26,10 @@
 #include "SystemLayerPrivate.h"
 
 // Include local headers
-#include <system/SystemTimer.h>
+#include <SystemTimer.h>
 
 // Include module header
-#include <system/SystemStats.h>
+#include <SystemStats.h>
 
 #include <string.h>
 

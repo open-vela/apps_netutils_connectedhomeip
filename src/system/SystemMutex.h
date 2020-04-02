@@ -26,10 +26,10 @@
 #define SYSTEMMUTEX_H
 
 // Include configuration headers
-#include <system/SystemConfig.h>
+#include <SystemConfig.h>
 
 // Include dependent headers
-#include <system/SystemError.h>
+#include <SystemError.h>
 
 #include <support/DLLUtil.h>
 

@@ -27,14 +27,14 @@
 #define SYSTEMPACKETBUFFER_H
 
 // Include configuration header
-#include <system/SystemConfig.h>
+#include <SystemConfig.h>
 
 // Include dependent headers
 #include <stddef.h>
 
 #include "support/DLLUtil.h"
 
-#include <system/SystemAlignSize.h>
+#include "system/SystemAlignSize.h"
 #include <system/SystemError.h>
 
 #if CHIP_SYSTEM_CONFIG_USE_LWIP

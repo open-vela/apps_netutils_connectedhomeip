@@ -23,13 +23,13 @@
  */
 
 // Include module header
-#include <system/SystemObject.h>
+#include <SystemObject.h>
 
 // Include common private header
 #include "SystemLayerPrivate.h"
 
 // Include local headers
-#include <system/SystemLayer.h>
+#include <SystemLayer.h>
 #include <support/CodeUtils.h>
 
 // Include local headers

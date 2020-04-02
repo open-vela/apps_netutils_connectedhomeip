@@ -27,7 +27,7 @@
 #define SYSTEMLAYER_H
 
 // Include configuration headers
-#include <system/SystemConfig.h>
+#include <SystemConfig.h>
 
 // Include dependent headers
 #if CHIP_SYSTEM_CONFIG_USE_SOCKETS
@@ -40,9 +40,9 @@
 
 #include <support/DLLUtil.h>
 
-#include <system/SystemError.h>
-#include <system/SystemObject.h>
-#include <system/SystemEvent.h>
+#include <SystemError.h>
+#include <SystemObject.h>
+#include <SystemEvent.h>
 
 #if CHIP_SYSTEM_CONFIG_PROVIDE_OBSOLESCENT_INTERFACES
 

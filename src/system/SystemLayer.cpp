@@ -23,14 +23,14 @@
  */
 
 // Include module header
-#include <system/SystemLayer.h>
+#include <SystemLayer.h>
 
 // Include common private header
 #include "SystemLayerPrivate.h"
 
 // Include local headers
-#include <system/SystemClock.h>
-#include <system/SystemTimer.h>
+#include <SystemClock.h>
+#include <SystemTimer.h>
 
 // Include additional CHIP headers
 #include <support/logging/CHIPLogging.h>
