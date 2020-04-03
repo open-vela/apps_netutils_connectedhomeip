@@ -60,7 +60,6 @@ DIST_SUBDIRS                      = \
     lwip                            \
     setup_payload                   \
     system                          \
-    crypto                          \
     $(PLATFORM_SUBDIRS)             \
     $(NULL)
 
@@ -73,7 +72,6 @@ SUBDIRS                           = \
     lwip                            \
     setup_payload                   \
     system                          \
-    crypto                          \
     $(MAYBE_PLATFORM_SUBDIRS)       \
     $(NULL)
 
