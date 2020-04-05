@@ -1865,7 +1865,6 @@ Makefile
 third_party/Makefile
 third_party/lwip/Makefile
 src/Makefile
-src/include/Makefile
 src/ble/Makefile
 src/lwip/Makefile
 src/lwip/tests/Makefile
