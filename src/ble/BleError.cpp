@@ -38,14 +38,14 @@ namespace Ble {
 /**
  * Register a text error formatter for BLE Layer errors.
  */
-void RegisterLayerErrorFormatter(void)
+void RegisterBleLayerErrorFormatter(void)
 {
-    static ErrorFormatter sBleLayerErrorFormatter = { FormatLayerError, NULL };
+    static ErrorFormatter sBleLayerErrorFormatter = { FormatBleLayerError, NULL };
 
     RegisterErrorFormatter(&sBleLayerErrorFormatter);
 }
 
-bool FormatLayerError(char * buf, uint16_t bufSize, int32_t err)
+bool FormatBleLayerError(char * buf, uint16_t bufSize, int32_t err)
 {
     const char * desc = NULL;
 
@@ -132,7 +132,7 @@ bool FormatLayerError(char * buf, uint16_t bufSize, int32_t err)
     case BLE_ERROR_KEEP_ALIVE_TIMED_OUT:
         desc = "Keep-alive receipt timed out";
         break;
-    case BLE_ERROR_NO_CONNECT_COMPLETE_CALLBACK:
+    case BLE_ERRROR_NO_CONNECT_COMPLETE_CALLBACK:
         desc = "Missing required callback";
         break;
     case BLE_ERROR_INVALID_ACK:

@@ -114,7 +114,7 @@ Error Layer::Init(void * aContext)
     int lOSReturn, lFlags;
 #endif // CHIP_SYSTEM_CONFIG_USE_SOCKETS
 
-    RegisterLayerErrorFormatter();
+    RegisterSystemLayerErrorFormatter();
 #if CHIP_SYSTEM_CONFIG_USE_SOCKETS
     RegisterPOSIXErrorFormatter();
 #endif // CHIP_SYSTEM_CONFIG_USE_SOCKETS
