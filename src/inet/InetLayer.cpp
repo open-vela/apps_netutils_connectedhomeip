@@ -271,7 +271,7 @@ INET_ERROR InetLayer::Init(chip::System::Layer & aSystemLayer, void * aContext)
 {
     INET_ERROR err = INET_NO_ERROR;
 
-    Inet::RegisterLayerErrorFormatter();
+    RegisterInetLayerErrorFormatter();
 
     if (State != kState_NotInitialized)
         return INET_ERROR_INCORRECT_STATE;

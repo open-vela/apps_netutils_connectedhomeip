@@ -100,9 +100,9 @@ namespace System {
 /**
  * Register a text error formatter for System Layer errors.
  */
-void RegisterLayerErrorFormatter(void)
+void RegisterSystemLayerErrorFormatter(void)
 {
-    static ErrorFormatter sSystemLayerErrorFormatter = { FormatLayerError, NULL };
+    static ErrorFormatter sSystemLayerErrorFormatter = { FormatSystemLayerError, NULL };
 
     RegisterErrorFormatter(&sSystemLayerErrorFormatter);
 }
@@ -119,7 +119,7 @@ void RegisterLayerErrorFormatter(void)
  * @return false                    If the supplied error was not a System Layer error.
  *
  */
-bool FormatLayerError(char * buf, uint16_t bufSize, int32_t err)
+bool FormatSystemLayerError(char * buf, uint16_t bufSize, int32_t err)
 {
     const char * desc = NULL;
 

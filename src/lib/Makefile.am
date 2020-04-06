@@ -25,7 +25,6 @@ include $(abs_top_nlbuild_autotools_dir)/automake/pre.am
 
 SUBDIRS                             =                         \
     support                                                   \
-    core/tests                                                \
     $(NULL)
 
 # Pull in the sources that comprise the CHIP library.
@@ -62,7 +61,5 @@ libCHIP_a_SOURCES                  += $(CHIP_BUILD_SUPPORT_LAYER_SOURCE_FILES)
 if CONFIG_NETWORK_LAYER_BLE
 libCHIP_a_SOURCES                  += $(CHIP_BUILD_BLE_LAYER_SOURCE_FILES)
 endif # CONFIG_NETWORK_LAYER_BLE
-
-$(RECURSIVE_TARGETS): $(lib_LIBRARIES)
 
 include $(abs_top_nlbuild_autotools_dir)/automake/post.am
