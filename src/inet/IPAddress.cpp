@@ -30,15 +30,13 @@
 #ifndef __STDC_LIMIT_MACROS
 #define __STDC_LIMIT_MACROS
 #endif
-
-#include <IPAddress.h>
-
-#include <core/CHIPEncoding.h>
-
-#include "arpa-inet-compatibility.h"
-
 #include <stdint.h>
 #include <string.h>
+
+#include <core/CHIPEncoding.h>
+#include <InetLayer.h>
+
+#include "arpa-inet-compatibility.h"
 
 namespace chip {
 namespace Inet {

@@ -30,14 +30,14 @@
 #ifndef CHIP_CIRCULAR_TLV_BUFFER_H_
 #define CHIP_CIRCULAR_TLV_BUFFER_H_
 
-#include <core/CHIPError.h>
-#include <core/CHIPTLV.h>
-#include <core/CHIPTLVTags.h>
-#include <core/CHIPTLVTypes.h>
+#include <stdlib.h>
 
 #include <support/DLLUtil.h>
 
-#include <stdlib.h>
+#include <core/CHIPError.h>
+#include <core/CHIPTLVTags.h>
+#include <core/CHIPTLVTypes.h>
+#include <core/CHIPTLV.h>
 
 namespace chip {
 namespace TLV {

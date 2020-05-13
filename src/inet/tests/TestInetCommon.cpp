@@ -40,15 +40,15 @@
 #include <vector>
 
 #include <inttypes.h>
-#include <signal.h>
 #include <stdint.h>
+#include <signal.h>
 #include <sys/types.h>
 #include <unistd.h>
 
-#include <inet/InetFaultInjection.h>
-#include <support/CHIPFaultInjection.h>
-#include <system/SystemFaultInjection.h>
 #include <system/SystemTimer.h>
+#include <system/SystemFaultInjection.h>
+#include <support/CHIPFaultInjection.h>
+#include <inet/InetFaultInjection.h>
 
 #if CHIP_SYSTEM_CONFIG_USE_LWIP
 #include <lwip/dns.h>

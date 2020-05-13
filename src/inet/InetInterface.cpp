@@ -27,39 +27,38 @@
 #define __STDC_LIMIT_MACROS
 #endif
 
-#include "InetInterface.h"
-
-#include "InetLayer.h"
-#include "InetLayerEvents.h"
+#include <stdio.h>
+#include <string.h>
 
 #include <support/CodeUtils.h>
 #include <support/DLLUtil.h>
 
+#include <InetLayer.h>
+#include <InetLayerEvents.h>
+#include "IPPrefix.h"
+
 #if CHIP_SYSTEM_CONFIG_USE_LWIP
-#include <lwip/netif.h>
-#include <lwip/sys.h>
 #include <lwip/tcpip.h>
+#include <lwip/sys.h>
+#include <lwip/netif.h>
 #endif // CHIP_SYSTEM_CONFIG_USE_LWIP
 
 #if CHIP_SYSTEM_CONFIG_USE_SOCKETS
 #include <errno.h>
+#include <unistd.h>
 #include <fcntl.h>
 #include <sys/socket.h>
-#include <unistd.h>
 #ifdef HAVE_SYS_SOCKIO_H
 #include <sys/sockio.h>
 #endif /* HAVE_SYS_SOCKIO_H */
-#include <net/if.h>
 #include <sys/ioctl.h>
+#include <net/if.h>
 #ifdef __ANDROID__
 #include "ifaddrs-android.h"
 #else // !defined(__ANDROID__)
 #include <ifaddrs.h>
 #endif // !defined(__ANDROID__)
 #endif // CHIP_SYSTEM_CONFIG_USE_SOCKETS
-
-#include <stdio.h>
-#include <string.h>
 
 namespace chip {
 namespace Inet {

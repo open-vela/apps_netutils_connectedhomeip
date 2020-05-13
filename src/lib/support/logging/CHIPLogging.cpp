@@ -23,11 +23,14 @@
  *
  */
 
-#include "CHIPLogging.h"
+#include <stdarg.h>
+#include <string.h>
+#include <stdio.h>
 
+#include "support/DLLUtil.h"
 #include <core/CHIPCore.h>
-#include <support/CodeUtils.h>
-#include <support/DLLUtil.h>
+#include "support/CodeUtils.h"
+#include "CHIPLogging.h"
 
 #if CHIP_LOGGING_STYLE_ANDROID && defined(__ANDROID__)
 #include <android/log.h>
@@ -36,10 +39,6 @@
 #if HAVE_SYS_TIME_H && CHIP_LOGGING_STYLE_STDIO_WITH_TIMESTAMPS
 #include <sys/time.h>
 #endif // HAVE_SYS_TIME_H && CHIP_LOGGING_STYLE_STDIO_WITH_TIMESTAMPS
-
-#include <stdarg.h>
-#include <stdio.h>
-#include <string.h>
 
 namespace chip {
 namespace Logging {
@@ -65,7 +64,7 @@ static const char ModuleNames[] = "-\0\0" // None
                                   "TLV"   // TLV
                                   "ASN"   // ASN1
                                   "CR\0"  // Crypto
-                                  "CTL\0" // Controller
+                                  "DM\0"  // DeviceManager
                                   "AL\0"  // Alarm
                                   "BDX"   // BulkDataTransfer
                                   "DMG"   // DataManagement

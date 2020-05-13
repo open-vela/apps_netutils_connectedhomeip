@@ -28,19 +28,21 @@
  */
 
 #define __APPLE_USE_RFC_3542
-#include "UDPEndPoint.h"
 
-#include "InetFaultInjection.h"
+#include <string.h>
+
+#include "UDPEndPoint.h"
 #include <InetLayer.h>
+#include "InetFaultInjection.h"
+#include <system/SystemFaultInjection.h>
 
 #include <support/CodeUtils.h>
 #include <support/logging/CHIPLogging.h>
-#include <system/SystemFaultInjection.h>
 
 #if CHIP_SYSTEM_CONFIG_USE_LWIP
-#include <lwip/ip.h>
-#include <lwip/tcpip.h>
 #include <lwip/udp.h>
+#include <lwip/tcpip.h>
+#include <lwip/ip.h>
 #endif // CHIP_SYSTEM_CONFIG_USE_LWIP
 
 #if CHIP_SYSTEM_CONFIG_USE_SOCKETS
@@ -49,14 +51,12 @@
 #include <sys/socket.h>
 #endif // HAVE_SYS_SOCKET_H
 #include <errno.h>
+#include <unistd.h>
 #include <net/if.h>
 #include <netinet/in.h>
-#include <unistd.h>
 #endif // CHIP_SYSTEM_CONFIG_USE_SOCKETS
 
 #include "arpa-inet-compatibility.h"
-
-#include <string.h>
 
 // SOCK_CLOEXEC not defined on all platforms, e.g. iOS/MacOS:
 #ifdef SOCK_CLOEXEC
