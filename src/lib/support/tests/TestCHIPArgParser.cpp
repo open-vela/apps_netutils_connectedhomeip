@@ -21,12 +21,14 @@
 
 #include <stdarg.h>
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include <core/CHIPCore.h>
 
 #include <support/CHIPArgParser.hpp>
+
+#if CHIP_CONFIG_ENABLE_ARG_PARSER
 
 using namespace chip::ArgParser;
 
@@ -720,3 +722,10 @@ int TestCHIPArgParser(void)
 
     return (EXIT_SUCCESS);
 }
+#else  // CHIP_CONFIG_ENABLE_ARG_PARSER
+int TestCHIPArgParser(void)
+{
+    printf("No tests were run\n");
+    return (EXIT_SUCCESS);
+}
+#endif // CHIP_CONFIG_ENABLE_ARG_PARSER
