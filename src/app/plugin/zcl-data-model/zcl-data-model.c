@@ -23,8 +23,6 @@
  *
  */
 
-#include "zcl-data-model.h"
-
 #ifdef CHIP_TEST
 #include "utest.h"
 #endif
@@ -38,9 +36,9 @@
 #include CHIP_AF_API_ZCL_CORE
 
 #include "chip-zcl.h"
-
-#include "gen-attribute-type.h"
+#include "zcl-data-model.h"
 #include "gen-callbacks.h"
+#include "gen-attribute-type.h"
 #include "gen-endpoint-config.h"
 
 //------------------------------------------------------------------------------

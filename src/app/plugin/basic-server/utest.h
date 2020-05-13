@@ -31,8 +31,6 @@
 #define CHIP_AF_API_ZCL_CORE "utest.h"
 
 #include "chip-zcl.h"
-
 #include "gen-types.h"
-
 #include <stdio.h>
 #endif /*  UTEST_H */
