@@ -23,9 +23,8 @@
  *
  */
 
-#include <DNSResolver.h>
-
 #include <InetLayer.h>
+#include <DNSResolver.h>
 #include <InetLayerEvents.h>
 
 #include <support/CodeUtils.h>
@@ -33,8 +32,8 @@
 #include <string.h>
 
 #if CHIP_SYSTEM_CONFIG_USE_LWIP
-#include <lwip/dns.h>
 #include <lwip/init.h>
+#include <lwip/dns.h>
 #include <lwip/tcpip.h>
 
 #if LWIP_VERSION_MAJOR < 2
@@ -43,8 +42,8 @@
 #endif // CHIP_SYSTEM_CONFIG_USE_LWIP
 
 #if CHIP_SYSTEM_CONFIG_USE_SOCKETS
-#include <errno.h>
 #include <netdb.h>
+#include <errno.h>
 #include <stdlib.h>
 #endif // CHIP_SYSTEM_CONFIG_USE_SOCKETS
 

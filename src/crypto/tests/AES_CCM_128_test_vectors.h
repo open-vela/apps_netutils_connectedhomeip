@@ -22,8 +22,6 @@
 #ifndef _AES_CCM_128_TEST_VECTORS_H_
 #define _AES_CCM_128_TEST_VECTORS_H_
 
-#include <stddef.h>
-
 #include <core/CHIPError.h>
 
 struct ccm_128_test_vector

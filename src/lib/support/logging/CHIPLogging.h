@@ -35,9 +35,9 @@
 #ifndef CHIPLOGGING_H_
 #define CHIPLOGGING_H_
 
-#include <core/CHIPConfig.h>
-
 #include <stdint.h>
+
+#include <core/CHIPConfig.h>
 
 /**
  *   @namespace chip::Logging
@@ -86,7 +86,7 @@ enum LogModule
     kLogModule_TLV,
     kLogModule_ASN1,
     kLogModule_Crypto,
-    kLogModule_Controller,
+    kLogModule_DeviceManager,
     kLogModule_Alarm,
     kLogModule_BDX,
     kLogModule_DataManagement,

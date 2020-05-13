@@ -29,8 +29,6 @@
 #ifndef RANDUTILS_H_
 #define RANDUTILS_H_
 
-#include <stdint.h>
-
 namespace chip {
 
 /**

@@ -48,14 +48,21 @@
 #define __STDC_LIMIT_MACROS
 #endif
 
+#include <stdint.h>
+
 #include <inet/InetConfig.h>
 
-#include <inet/IANAConstants.h>
-#include <inet/IPAddress.h>
-#include <inet/IPPrefix.h>
+#include <system/SystemLayer.h>
+#include <system/SystemStats.h>
+
+#include <support/DLLUtil.h>
+
+#include "inet/IANAConstants.h"
 #include <inet/InetError.h>
+#include <inet/IPAddress.h>
+#include "inet/IPPrefix.h"
 #include <inet/InetInterface.h>
-#include <inet/InetLayerBasis.h>
+#include "inet/InetLayerBasis.h"
 #include <inet/InetLayerEvents.h>
 
 #if INET_CONFIG_ENABLE_DNS_RESOLVER
@@ -63,35 +70,30 @@
 #endif // INET_CONFIG_ENABLE_DNS_RESOLVER
 
 #if INET_CONFIG_ENABLE_RAW_ENDPOINT
-#include <inet/RawEndPoint.h>
+#include "inet/RawEndPoint.h"
 #endif // INET_CONFIG_ENABLE_RAW_ENDPOINT
 
 #if INET_CONFIG_ENABLE_TCP_ENDPOINT
-#include <inet/TCPEndPoint.h>
+#include "inet/TCPEndPoint.h"
 #endif // INET_CONFIG_ENABLE_TCP_ENDPOINT
 
 #if INET_CONFIG_ENABLE_UDP_ENDPOINT
-#include <inet/UDPEndPoint.h>
+#include "inet/UDPEndPoint.h"
 #endif // INET_CONFIG_ENABLE_UDP_ENDPOINT
 
 #if INET_CONFIG_ENABLE_TUN_ENDPOINT
-#include <inet/TunEndPoint.h>
+#include "inet/TunEndPoint.h"
 #endif // INET_CONFIG_ENABLE_TUN_ENDPOINT
 
 #if INET_CONFIG_PROVIDE_OBSOLESCENT_INTERFACES
-#include <inet/InetBuffer.h>
+#include "vInetBuffer.h"
 #endif // INET_CONFIG_PROVIDE_OBSOLESCENT_INTERFACES
 
 #if CHIP_SYSTEM_CONFIG_USE_SOCKETS
 #if INET_CONFIG_ENABLE_DNS_RESOLVER && INET_CONFIG_ENABLE_ASYNC_DNS_SOCKETS
-#include <inet/AsyncDNSResolverSockets.h>
+#include "inet/AsyncDNSResolverSockets.h"
 #endif // INET_CONFIG_ENABLE_DNS_RESOLVER && INET_CONFIG_ENABLE_ASYNC_DNS_SOCKETS
 #endif // CHIP_SYSTEM_CONFIG_USE_SOCKETS
-
-#include <system/SystemLayer.h>
-#include <system/SystemStats.h>
-
-#include <support/DLLUtil.h>
 
 #if INET_CONFIG_MAX_DROPPABLE_EVENTS
 
@@ -106,8 +108,6 @@
 #endif // CHIP_SYSTEM_CONFIG_FREERTOS_LOCKING
 
 #endif // INET_CONFIG_MAX_DROPPABLE_EVENTS
-
-#include <stdint.h>
 
 namespace chip {
 namespace Inet {

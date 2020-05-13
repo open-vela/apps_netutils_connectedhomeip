@@ -20,11 +20,11 @@
  *    @file
  *      Implementation of the fault-injection utilities for CHIP.
  */
-#include "CHIPFaultInjection.h"
-
-#include <nlassert.h>
 
 #include <string.h>
+#include <nlassert.h>
+
+#include <support/CHIPFaultInjection.h>
 
 #if CHIP_CONFIG_TEST && CHIP_WITH_NLFAULTINJECTION
 
