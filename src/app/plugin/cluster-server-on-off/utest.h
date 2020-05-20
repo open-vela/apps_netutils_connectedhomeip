@@ -17,19 +17,23 @@
 
 /**
  *    @file
- *      This file provides an API for ZCL Command message
- *      processing dispatch.
+ *      This file provides a header for the unit tests around the
+ *      CHIP ZCL Application Layer's On Off Cluster Server
  *
  */
 
-#ifndef ZCL_COMMAND_DISPATCH_H
-#define ZCL_COMMAND_DISPATCH_H
+#ifndef UTEST_H
+#define UTEST_H
+
+#define PLATFORM_HEADER "utest.h"
+#define CONFIGURATION_HEADER "utest.h"
+#define CHIP_AF_API_STACK "utest.h"
+#define CHIP_AF_API_ZCL_CORE "utest.h"
 
 #include "chip-zcl.h"
-#include "cluster-command-handler.h"
-#include "general-command-handler.h"
 
-// Main command parsing controller.
-ChipZclStatus_t chipZclCommandParse(ChipZclCommandContext_t * context);
+#include "gen-cluster-id.h"
+#include "gen-types.h"
 
-#endif // ZCL_COMMAND_DISPATCH_H
+#include <stdio.h>
+#endif /*  UTEST_H */

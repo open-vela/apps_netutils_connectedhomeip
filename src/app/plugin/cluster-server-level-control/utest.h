@@ -17,27 +17,30 @@
 
 /**
  *    @file
- *      This file provides unit testing for the CHIP ZCL Command Handling
- *      related to the on-off-server functionality. It constructs an
- *      incoming message related to on-off and passes it into the CHIP
- *      ZCL message dispatch code
+ *      This provides a header for the unit testing of the CHIP ZCL
+ *      Application Layer's level control cluster server
  *
  */
 
+#ifndef UTEST_H
+#define UTEST_H
+
+#define PLATFORM_HEADER "utest.h"
+#define CONFIGURATION_HEADER "utest.h"
+#define CHIP_AF_API_STACK "utest.h"
+#define CHIP_AF_API_ZCL_CORE "utest.h"
+#define CHIP_AF_API_BUFFER_MANAGEMENT "utest.h"
+#define CHIP_AF_API_EVENT_QUEUE "utest.h"
+#define CHIP_AF_API_HAL "utest.h"
+
+// User options for plugin Level Control Server
+#define CHIP_AF_PLUGIN_LEVEL_CONTROL_SERVER_MAXIMUM_LEVEL 255
+#define CHIP_AF_PLUGIN_LEVEL_CONTROL_SERVER_MINIMUM_LEVEL 0
+
 #include "chip-zcl.h"
-#include "cluster-command-handler.h"
 
 #include "gen-cluster-id.h"
+#include "gen-types.h"
 
 #include <stdio.h>
-
-int main()
-{
-    ChipZclCommandContext_t context;
-    context.mfgSpecific    = false;
-    context.clusterId      = CHIP_ZCL_CLUSTER_ON_OFF;
-    context.commandId      = ZCL_ON_COMMAND_ID;
-    context.direction      = ZCL_DIRECTION_CLIENT_TO_SERVER;
-    ChipZclStatus_t status = chipZclClusterCommandParse(&context);
-    printf("Success: 0x%X \n", status);
-}
+#endif /*  UTEST_H */

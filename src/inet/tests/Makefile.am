@@ -124,7 +124,7 @@ COMMON_LDADD                                          = \
 #       etc. on IPv4 and IPv6 IP end points. When that issue has been
 #       resolved, move these tests to check_PROGRAMS.
 
-if CHIP_TARGET_STYLE_UNIX
+if CHIP_LWIP_TARGET_STANDALONE
 # Build and run these test targets only on standalone device targets
 noinst_PROGRAMS                                       = \
     TestLwIPDNS                                         \
@@ -149,8 +149,7 @@ check_PROGRAMS                                        = \
 TESTS                                                 = \
     $(check_PROGRAMS)                                   \
     $(NULL)
-
-endif # CHIP_TARGET_STYLE_UNIX
+endif # CHIP_LWIP_TARGET_STANDALONE
 
 # The additional environment variables and their values that will be
 # made available to all programs and scripts in TESTS.

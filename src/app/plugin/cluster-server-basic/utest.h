@@ -14,22 +14,25 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-#ifndef CHIP_ZCL_TEST_UNIT
-#define CHIP_ZCL_TEST_UNIT
 
-#include "chip-zcl-codec.h"
+/**
+ *    @file
+ *      This file provides the unit test header for the CHIP ZCL
+ *      Application Layer basic cluster server plugin
+ *
+ */
+
+#ifndef UTEST_H
+#define UTEST_H
+
+#define PLATFORM_HEADER "utest.h"
+#define CONFIGURATION_HEADER "utest.h"
+#define CHIP_AF_API_STACK "utest.h"
+#define CHIP_AF_API_ZCL_CORE "utest.h"
+
 #include "chip-zcl.h"
-#include "gen.h"
-#include <stdint.h>
+
+#include "gen-types.h"
+
 #include <stdio.h>
-#include <stdlib.h>
-
-int testClusterServerBasic();
-int testClusterServerIdentify();
-int testClusterServerLevelControl();
-int testClusterServerOnOff();
-int testCodecSimple();
-int testCoreDataModel();
-int testCoreMessageDispatch();
-
-#endif // CHIP_ZCL_TEST_UNIT
+#endif /*  UTEST_H */
