@@ -22,7 +22,7 @@
  *
  */
 
-#include "test-unit.h"
+#include "utest.h"
 
 // -----------------------------------------------------------------------------
 // Identify cluster (0x0003).
@@ -62,7 +62,7 @@ void chipZclIdentifyServerStopIdentifyingCallback(ChipZclEndpointId_t endpointId
     chipZclCorePrintln("Identified");
 }
 
-int testClusterServerIdentify()
+int main()
 {
     ChipZclCommandContext_t context;
     context.endpointId = 1;

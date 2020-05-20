@@ -26,8 +26,7 @@
 #ifndef ZCL_LEVEL_CONTROL_SERVER_H
 #define ZCL_LEVEL_CONTROL_SERVER_H
 
-#include "chip-zcl.h"
-#include "gen.h"
+#include CHIP_AF_API_ZCL_CORE
 
 // Define Level Control plugin Scenes sub-table structure.
 // NOTE: When modifying this structure take into account NVM token space and

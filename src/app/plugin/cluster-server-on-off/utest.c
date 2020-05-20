@@ -22,7 +22,7 @@
  *
  */
 
-#include "test-unit.h"
+#include "utest.h" /* TODO pass all that stuff in -D */
 
 void chipZclClusterOnOffServerCommandOffRequestHandler(const ChipZclCommandContext_t * context,
                                                        const ChipZclClusterOnOffServerCommandOffRequest_t * request);
@@ -31,7 +31,7 @@ void chipZclClusterOnOffServerCommandOnRequestHandler(const ChipZclCommandContex
 void chipZclClusterOnOffServerCommandToggleRequestHandler(const ChipZclCommandContext_t * context,
                                                           const ChipZclClusterOnOffServerCommandToggleRequest_t * request);
 
-int testClusterServerOnOff()
+int main()
 {
     ChipZclCommandContext_t context;
     context.endpointId = 1;

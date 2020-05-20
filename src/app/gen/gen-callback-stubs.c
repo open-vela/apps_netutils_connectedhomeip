@@ -1,4 +1,5 @@
 #include "../api/chip-zcl.h"
+#include "../plugin/core-data-model/zcl-data-model.h"
 
 // Callback implementations
 

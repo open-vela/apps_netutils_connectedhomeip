@@ -22,7 +22,7 @@
  *
  */
 
-#include "test-unit.h"
+#include "utest.h"
 
 // -----------------------------------------------------------------------------
 // Level Control cluster (0x0008).
@@ -72,7 +72,7 @@ void chipZclClusterLevelControlServerCommandStepWithOnOffRequestHandler(
 void chipZclClusterLevelControlServerCommandStopWithOnOffRequestHandler(
     const ChipZclCommandContext_t * context, const ChipZclClusterLevelControlServerCommandStopWithOnOffRequest_t * request);
 
-int testClusterServerLevelControl()
+int main()
 {
     ChipZclCommandContext_t context;
     context.endpointId = 1;

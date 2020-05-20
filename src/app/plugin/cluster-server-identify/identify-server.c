@@ -22,8 +22,18 @@
  *      Layer's Identify Cluster Server
  */
 
-#include "chip-zcl.h"
-#include "gen.h"
+#ifdef CHIP_TEST
+#include "utest.h"
+#endif
+
+#include PLATFORM_HEADER
+#include CONFIGURATION_HEADER
+#include CHIP_AF_API_STACK
+#include CHIP_AF_API_HAL
+#ifdef CHIP_AF_API_DEBUG_PRINT
+#include CHIP_AF_API_DEBUG_PRINT
+#endif
+#include CHIP_AF_API_ZCL_CORE
 
 static uint16_t getIdentifyTimeS(ChipZclEndpointId_t endpointId);
 static void setIdentifyTimeS(ChipZclEndpointId_t endpointId, uint16_t identifyTimeS, bool external);

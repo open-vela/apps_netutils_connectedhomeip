@@ -22,10 +22,10 @@
  *
  */
 
-#include "chip-zcl.h"
-#include "test-unit.h"
+#include "utest.h" /* TODO pass all that stuff in -D */
+#include "zcl-data-model.h"
 
-int testCoreDataModel()
+int main()
 {
     ChipZclAttributeMetadata * metadata;
     int count;
