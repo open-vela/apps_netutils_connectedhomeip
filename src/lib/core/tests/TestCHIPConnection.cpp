@@ -18,14 +18,14 @@
 
 /**
  *    @file
- *      This file implements unit tests for the UdpTransport implementation.
+ *      This file implements unit tests for the CHIPConnection implementation.
  */
 
-#include "TestTransportLayer.h"
+#include "TestCore.h"
 
+#include <core/CHIPConnection.h>
 #include <core/CHIPCore.h>
 #include <support/CodeUtils.h>
-#include <transport/UdpTransport.h>
 
 #include <nlbyteorder.h>
 #include <nlunit-test.h>
@@ -48,7 +48,7 @@ struct TestContext sContext;
 
 static const char PAYLOAD[] = "Hello!";
 
-static void MessageReceiveHandler(UdpTransport * con, PacketBuffer * msgBuf, const IPPacketInfo * pktInfo)
+static void MessageReceiveHandler(ChipConnection * con, PacketBuffer * msgBuf, const IPPacketInfo * pktInfo)
 {
     size_t data_len = msgBuf->DataLength();
 
@@ -56,7 +56,7 @@ static void MessageReceiveHandler(UdpTransport * con, PacketBuffer * msgBuf, con
     NL_TEST_ASSERT(reinterpret_cast<nlTestSuite *>(con->AppState), compare == 0);
 };
 
-static void ReceiveErrorHandler(UdpTransport * con, CHIP_ERROR err, const IPPacketInfo * pktInfo)
+static void ReceiveErrorHandler(ChipConnection * con, CHIP_ERROR err, const IPPacketInfo * pktInfo)
 {
     NL_TEST_ASSERT(reinterpret_cast<nlTestSuite *>(con->AppState), false);
 };
@@ -121,7 +121,7 @@ void CheckSimpleInitTest(nlTestSuite * inSuite, void * inContext)
 {
     TestContext & ctx = *reinterpret_cast<TestContext *>(inContext);
 
-    UdpTransport conn;
+    ChipConnection conn;
     conn.Init(&ctx.mInetLayer);
     CHIP_ERROR err = conn.Close();
     NL_TEST_ASSERT(inSuite, err == CHIP_NO_ERROR);
@@ -135,11 +135,11 @@ void CheckSimpleConnectTest(nlTestSuite * inSuite, void * inContext)
     IPAddress::FromString("127.0.0.1", addr);
     CHIP_ERROR err = CHIP_NO_ERROR;
 
-    UdpTransport conn;
+    ChipConnection conn;
     conn.Init(&ctx.mInetLayer);
-    err = conn.Connect(addr, 0);
+    err = conn.Connect(0, addr, 0);
     NL_TEST_ASSERT(inSuite, err == CHIP_NO_ERROR);
-    err = conn.Connect(addr, 0);
+    err = conn.Connect(0, addr, 0);
     NL_TEST_ASSERT(inSuite, err == CHIP_ERROR_INCORRECT_STATE);
 
     err = conn.Close();
@@ -160,13 +160,13 @@ void CheckMessageTest(nlTestSuite * inSuite, void * inContext)
     IPAddress::FromString("127.0.0.1", addr);
     CHIP_ERROR err = CHIP_NO_ERROR;
 
-    UdpTransport conn;
+    ChipConnection conn;
     conn.Init(&ctx.mInetLayer);
     conn.AppState          = inSuite;
     conn.OnMessageReceived = MessageReceiveHandler;
     conn.OnReceiveError    = ReceiveErrorHandler;
 
-    err = conn.Connect(addr, 0);
+    err = conn.Connect(0, addr, 0);
     NL_TEST_ASSERT(inSuite, err == CHIP_NO_ERROR);
 
     // Should be able to send a message to itself by just calling send.
@@ -251,7 +251,7 @@ static int Finalize(void * aContext)
 /**
  *  Main
  */
-int TestUdpTransport()
+int TestCHIPConnection()
 {
     // Run test suit against one context
     nlTestRunner(&sSuite, &sContext);
