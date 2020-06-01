@@ -42,11 +42,6 @@
 #include "QRCodeWidget.h"
 
 #define MAX_SSID_LEN 32
-// A temporary value assigned for this example's QRCode
-// Spells CHIP on a dialer
-#define EXAMPLE_VENDOR_ID 3447
-// Used to indicate that an SSID has been added to the QRCode
-#define EXAMPLE_VENDOR_TAG 1
 
 #if CONFIG_HAVE_DISPLAY
 
@@ -81,10 +76,10 @@ string createSetupPayload()
     GetAPName(ap_ssid, sizeof(ap_ssid));
     SetupPayload payload;
     payload.version   = 1;
-    payload.vendorID  = EXAMPLE_VENDOR_ID;
-    payload.productID = 1;
+    payload.vendorID  = 2;
+    payload.productID = 3;
     uint64_t tag;
-    VendorTag(EXAMPLE_VENDOR_TAG, tag);
+    VendorTag(2, tag);
     OptionalQRCodeInfo stringInfo;
     stringInfo.tag  = tag;
     stringInfo.type = optionalQRCodeInfoTypeString;

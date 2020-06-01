@@ -43,6 +43,7 @@ lib_LIBRARIES                                         = \
 libCoreTests_a_SOURCES                                = \
     TestCHIPErrorStr.cpp                                \
     TestCHIPTLV.cpp                                     \
+    TestCHIPConnection.cpp                              \
     TestCHIPSecureChannel.cpp                           \
     $(NULL)
 
@@ -88,6 +89,7 @@ COMMON_LDADD                                          =  \
 check_PROGRAMS                                        = \
     TestCHIPErrorStr                                    \
     TestCHIPTLV                                         \
+    TestCHIPConnection                                  \
     TestCHIPSecureChannel                               \
     $(NULL)
 
@@ -111,6 +113,9 @@ TestCHIPErrorStr_LDADD                                = $(COMMON_LDADD)
 
 TestCHIPTLV_SOURCES                                   = TestCHIPTLVDriver.cpp
 TestCHIPTLV_LDADD                                     = $(COMMON_LDADD)
+
+TestCHIPConnection_SOURCES                            = TestCHIPConnectionDriver.cpp
+TestCHIPConnection_LDADD                              = $(COMMON_LDADD)
 
 TestCHIPSecureChannel_SOURCES                         = TestCHIPSecureChannelDriver.cpp
 TestCHIPSecureChannel_LDADD                           = $(COMMON_LDADD)

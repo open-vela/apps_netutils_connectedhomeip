@@ -1519,15 +1519,8 @@ if test "${with_crypto}" = "mbedtls"; then
 		[],
 		[
 		    AC_MSG_ERROR(The mbedTLS header "$ac_header" is required but cannot be found.)
-		],
-        [
-// Undefine MBEDTLS_CONFIG_FILE and MBEDTLS_USER_CONFIG_FILE to prevent
-// including these files at configure stage.  This is necessary because
-// CPPFLAGS is shell expanded during configure stage, which is not
-// compatible with the expansion of make.
-#undef MBEDTLS_CONFIG_FILE
-#undef MBEDTLS_USER_CONFIG_FILE
-		])
+		]
+	    )
 	]
     )
 fi
@@ -2099,8 +2092,6 @@ src/lib/support/tests/Makefile
 src/platform/Makefile
 src/platform/tests/Makefile
 src/qrcodetool/Makefile
-src/transport/Makefile
-src/transport/tests/Makefile
 tests/Makefile
 ])
 

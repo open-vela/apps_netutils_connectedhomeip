@@ -34,7 +34,6 @@ include ../ble/BleLayer.am
 include ../controller/DeviceController.am
 include ../inet/InetLayer.am
 include ../system/SystemLayer.am
-include ../transport/TransportLayer.am
 include core/CoreLayer.am
 include support/SupportLayer.am
 include ../app/DataModel.am
@@ -60,7 +59,6 @@ libCHIP_a_CPPFLAGS                  =                         \
     -I$(top_srcdir)/src/system                                \
     -I$(top_srcdir)/src/app/chip-zcl                          \
     -I$(top_srcdir)/src/app/gen                               \
-    -I$(top_srcdir)/src/transport                             \
     $(NLASSERT_CPPFLAGS)                                      \
     $(NLFAULTINJECTION_CPPFLAGS)                              \
     $(NLIO_CPPFLAGS)                                          \
@@ -74,7 +72,6 @@ libCHIP_a_SOURCES                  += $(CHIP_BUILD_CORE_LAYER_SOURCE_FILES)
 libCHIP_a_SOURCES                  += $(CHIP_BUILD_SUPPORT_LAYER_SOURCE_FILES)
 libCHIP_a_SOURCES                  += $(CHIP_BUILD_DEVICE_CONTROLLER_SOURCE_FILES)
 libCHIP_a_SOURCES                  += $(CHIP_BUILD_DATA_MODEL_SOURCE_FILES)
-libCHIP_a_SOURCES                  += $(CHIP_BUILD_TRANSPORT_LAYER_SOURCE_FILES)
 
 if CONFIG_NETWORK_LAYER_BLE
 libCHIP_a_SOURCES                  += $(CHIP_BUILD_BLE_LAYER_SOURCE_FILES)

@@ -22,7 +22,7 @@
  *
  */
 
-#include "TestTransportLayer.h"
+#include "TestCore.h"
 
 #include <nlunit-test.h>
 
@@ -31,5 +31,5 @@ int main(void)
     // Generate machine-readable, comma-separated value (CSV) output.
     nlTestSetOutputStyle(OUTPUT_CSV);
 
-    return (TestUdpTransport());
+    return (TestCHIPConnection());
 }
