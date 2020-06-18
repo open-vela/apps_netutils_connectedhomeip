@@ -17,25 +17,13 @@
 
 /**
  *    @file
- *      This file declares test entry points for CHIP Transport layer
- *      layer library unit tests.
+ *      This file declares test entry point for CHIP Configuration Manager code unit tests.
  *
  */
 
-#ifndef TESTTRANSPORTLAYER_H
-#define TESTTRANSPORTLAYER_H
+#ifndef TESTCONFIGURATIONMGR_H
+#define TESTCONFIGURATIONMGR_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+int TestConfigurationMgr(void);
 
-int TestMessageHeader(void);
-int TestSecureSessionMgr(void);
-int TestSecureSession(void);
-int TestUDP(void);
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif // TESTTRANSPORTLAYER_H
+#endif // TESTCONFIGURATIONMGR_H
