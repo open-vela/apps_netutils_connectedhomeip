@@ -110,7 +110,6 @@ enum LogModule
     kLogModule_Zcl,
     kLogModule_Shell,
     kLogModule_DeviceLayer,
-    kLogModule_SetupPayload,
 
     kLogModule_Max
 };
