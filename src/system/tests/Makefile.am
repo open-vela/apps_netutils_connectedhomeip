@@ -47,7 +47,6 @@ libSystemLayerTests_a_SOURCES                         = \
     TestSystemObject.cpp                                \
     TestSystemPacketBuffer.cpp                          \
     TestSystemTimer.cpp                                 \
-    TestTimeSource.cpp                                  \
     $(NULL)
 
 libSystemLayerTests_adir                              = $(includedir)/system
@@ -119,7 +118,6 @@ check_PROGRAMS                                       += \
     TestSystemObject                                    \
     TestSystemPacketBuffer                              \
     TestSystemTimer                                     \
-    TestTimeSource                                      \
     $(NULL)
 
 endif # CHIP_DEVICE_LAYER_TARGET_ESP32
@@ -145,9 +143,6 @@ TestSystemPacketBuffer_LDADD                          = $(COMMON_LDADD)
 
 TestSystemTimer_SOURCES                               = TestSystemTimerDriver.cpp
 TestSystemTimer_LDADD                                 = $(COMMON_LDADD)
-
-TestTimeSource_SOURCES                               = TestTimeSourceDriver.cpp
-TestTimeSource_LDADD                                 = $(COMMON_LDADD)
 
 #
 # Foreign make dependencies

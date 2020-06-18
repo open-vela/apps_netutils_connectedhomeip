@@ -33,7 +33,6 @@ int TestSystemErrorStr(void);
 int TestSystemObject(void);
 int TestSystemPacketBuffer(void);
 int TestSystemTimer(void);
-int TestTimeSource(void);
 
 #ifdef __cplusplus
 }
