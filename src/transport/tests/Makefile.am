@@ -42,10 +42,9 @@ lib_LIBRARIES                                         = \
 
 libTransportLayerTests_a_SOURCES                      = \
     TestMessageHeader.cpp                               \
-    TestPeerConnections.cpp                             \
-    TestSecureSession.cpp                               \
     TestSecureSessionMgr.cpp                            \
     TestUDP.cpp                                         \
+    TestSecureSession.cpp                               \
     $(NULL)
 
 libTransportLayerTests_adir                           = $(includedir)/transport
@@ -87,7 +86,6 @@ COMMON_LDADD                                          = \
 
 check_PROGRAMS             = \
     TestMessageHeader        \
-    TestPeerConnections      \
     TestSecureSessionMgr     \
     TestSecureSession        \
     TestUDP                  \
@@ -119,9 +117,6 @@ TestSecureSession_LDADD       = $(COMMON_LDADD)
 
 TestUDP_SOURCES               = TestUDPDriver.cpp
 TestUDP_LDADD                 = $(COMMON_LDADD)
-
-TestPeerConnections_SOURCES   = TestPeerConnectionsDriver.cpp
-TestPeerConnections_LDADD     = $(COMMON_LDADD)
 
 #
 # Foreign make dependencies
