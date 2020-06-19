@@ -18,13 +18,17 @@
 /**
  *    @file
  *      This file implements a standalone/native program executable
- *      test driver for the Configuration Manager code code unit tests.
+ *      test driver for the CHIP Transport Layer PeerConnections class unit
+ *      tests.
  *
  */
 
-#include "TestConfigurationMgr.h"
+#include "TestTransportLayer.h"
+
+#include <nlunit-test.h>
 
 int main(void)
 {
-    return (TestConfigurationMgr());
+    nlTestSetOutputStyle(OUTPUT_CSV);
+    return TestPeerConnections();
 }
