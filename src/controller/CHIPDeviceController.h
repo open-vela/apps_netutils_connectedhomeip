@@ -41,12 +41,11 @@ namespace DeviceController {
 class ChipDeviceController;
 
 extern "C" {
-typedef void (*NewConnectionHandler)(ChipDeviceController * deviceController, Transport::PeerConnectionState * state,
-                                     void * appReqState);
 typedef void (*CompleteHandler)(ChipDeviceController * deviceController, void * appReqState);
 typedef void (*ErrorHandler)(ChipDeviceController * deviceController, void * appReqState, CHIP_ERROR err,
                              const IPPacketInfo * pktInfo);
-typedef void (*MessageReceiveHandler)(ChipDeviceController * deviceController, void * appReqState, System::PacketBuffer * payload);
+typedef void (*MessageReceiveHandler)(ChipDeviceController * deviceController, void * appReqState, System::PacketBuffer * payload,
+                                      const IPPacketInfo * pktInfo);
 };
 
 class DLL_EXPORT ChipDeviceController
@@ -67,13 +66,12 @@ public:
      * @param[in] remoteDeviceId        The remote device Id.
      * @param[in] deviceAddr            The IPAddress of the requested Device
      * @param[in] appReqState           Application specific context to be passed back when a message is received or on error
-     * @param[in] onConnected           Callback for when the connection is established
      * @param[in] onMessageReceived     Callback for when a message is received
      * @param[in] onError               Callback for when an error occurs
      * @param[in] devicePort            [Optional] The CHIP Device's port, defaults to CHIP_PORT
      * @return CHIP_ERROR           The connection status
      */
-    CHIP_ERROR ConnectDevice(NodeId remoteDeviceId, IPAddress deviceAddr, void * appReqState, NewConnectionHandler onConnected,
+    CHIP_ERROR ConnectDevice(NodeId remoteDeviceId, IPAddress deviceAddr, void * appReqState,
                              MessageReceiveHandler onMessageReceived, ErrorHandler onError, uint16_t devicePort = CHIP_PORT);
 
     /**
@@ -82,16 +80,14 @@ public:
      *   until we have automatic key exchange in place. The function is useful only for
      *   example applications for now. It will eventually be removed.
      *
-     * @param state  Peer connection for which to establish the key
      * @param remote_public_key  A pointer to peer's public key
      * @param public_key_length  Length of remote_public_key
      * @param local_private_key  A pointer to local private key
      * @param private_key_length Length of local_private_key
      * @return CHIP_ERROR        The result of key derivation
      */
-    CHIP_ERROR ManualKeyExchange(Transport::PeerConnectionState * state, const unsigned char * remote_public_key,
-                                 const size_t public_key_length, const unsigned char * local_private_key,
-                                 const size_t private_key_length);
+    CHIP_ERROR ManualKeyExchange(const unsigned char * remote_public_key, const size_t public_key_length,
+                                 const unsigned char * local_private_key, const size_t private_key_length);
 
     /**
      * @brief
@@ -172,11 +168,7 @@ private:
 
     System::Layer * mSystemLayer;
     Inet::InetLayer * mInetLayer;
-
-    // TODO: CHIPDeviceController assumes a single device connection, where as
-    //       session manager handles multiple connections. Need to finalize design on this
-    //       as otherwise a single connection may end up processing data from other peers.
-    SecureSessionMgr * mSessionManager;
+    SecureSessionMgr * mDeviceCon;
 
     ConnectionState mConState;
     void * mAppReqState;
@@ -188,7 +180,6 @@ private:
     } mOnComplete;
 
     ErrorHandler mOnError;
-    NewConnectionHandler mOnNewConnection;
     System::PacketBuffer * mCurReqMsg;
 
     NodeId mLocalDeviceId;
@@ -200,10 +191,8 @@ private:
     void ClearRequestState();
     void ClearOpState();
 
-    static void OnNewConnection(Transport::PeerConnectionState * state, ChipDeviceController * controller);
-
-    static void OnReceiveMessage(const MessageHeader & header, Transport::PeerConnectionState * state,
-                                 System::PacketBuffer * msgBuf, ChipDeviceController * controller);
+    static void OnReceiveMessage(const MessageHeader & header, const IPPacketInfo & pktInfo, System::PacketBuffer * msgBuf,
+                                 ChipDeviceController * controller);
 };
 
 } // namespace DeviceController
