@@ -5,7 +5,7 @@
 
 PROJECT_NAME := chip-tests
 
-CXXFLAGS += -DCHIP_SUPPORT_FOREIGN_TEST_DRIVERS -Wno-deprecated-declarations
+CXXFLAGS += -DCHIP_SUPPORT_FOREIGN_TEST_DRIVERS
 
 EXTRA_COMPONENT_DIRS += $(PROJECT_PATH)/third_party/connectedhomeip/config/esp32/components
 
