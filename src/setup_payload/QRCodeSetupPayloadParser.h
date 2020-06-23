@@ -24,8 +24,6 @@
 #include "SetupPayload.h"
 
 #include <core/CHIPError.h>
-#include <core/CHIPTLV.h>
-
 #include <string>
 using namespace std;
 
@@ -43,11 +41,6 @@ private:
 public:
     QRCodeSetupPayloadParser(string base41Representation) : mBase41Representation(base41Representation){};
     CHIP_ERROR populatePayload(SetupPayload & outPayload);
-
-private:
-    CHIP_ERROR retrieveOptionalInfos(SetupPayload & outPayload, TLV::TLVReader & reader);
-    CHIP_ERROR populateTLV(SetupPayload & outPayload, const vector<uint8_t> & buf, int & index);
-    CHIP_ERROR parseTLVFields(chip::SetupPayload & outPayload, uint8_t * tlvDataStart, uint32_t tlvDataLengthInBytes);
 };
 
 }; // namespace chip
