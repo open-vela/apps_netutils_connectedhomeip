@@ -17,8 +17,6 @@
 
 #include <transport/PeerConnections.h>
 
-#include <support/CodeUtils.h>
-
 namespace chip {
 namespace Transport {
 
