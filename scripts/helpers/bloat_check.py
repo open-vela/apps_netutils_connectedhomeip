@@ -3,35 +3,13 @@
 import argparse
 import attr
 import coloredlogs
-import csv
 import github
-import io
 import logging
 import os
 import stat
 import subprocess
 
 import ci_fetch_artifacts
-
-
-class SectionChange:
-  """Describes delta changes to a specific section"""
-
-  def __init__(self, section, fileChange, vmChange):
-    self.section = section
-    self.fileChange = fileChange
-    self.vmChange = vmChange
-
-
-class ComparisonResult:
-  """Comparison results for an entire file"""
-
-  def __init__(self, name):
-    self.fileName = name
-    self.sectionChanges = []
-
-
-SECTIONS_TO_WATCH = set(['.rodata', '.text', '.flash.rodata', '.flash.text', '.bss', '.data'])
 
 
 def filesInDirectory(dirName):
@@ -45,10 +23,10 @@ def filesInDirectory(dirName):
 def writeFileBloatReport(f, baselineName, buildName):
   """Generate a bloat report diffing a baseline file with a build output file."""
   logging.info('Running bloaty diff between %s and %s', baselineName, buildName)
-  f.write('Comparing %s and %s:\n\n' % (baselineName, buildName))
+  f.write('Bloat difference between %s and %s:\n\n' % (baselineName, buildName))
 
   result = subprocess.run(
-      ['bloaty', '--csv', buildName, '--', baselineName],
+      ['bloaty', buildName, '--', baselineName],
       stdout=subprocess.PIPE,
       stderr=subprocess.STDOUT,
   )
@@ -57,23 +35,8 @@ def writeFileBloatReport(f, baselineName, buildName):
     logging.warning('Bloaty execution failed: %d', result.returncode)
     f.write('BLOAT EXECUTION FAILED WITH CODE %d:\n' % result.returncode)
 
-  content = result.stdout.decode('utf8')
-
-  f.write(content)
+  f.write(result.stdout.decode('utf8'))
   f.write('\n')
-
-  result = ComparisonResult(os.path.basename(buildName))
-  try:
-    reader = csv.reader(io.StringIO(content))
-
-    for row in reader:
-      section, vm, f = row
-      if (section in SECTIONS_TO_WATCH) or (vm not in ['0', 'vmsize']):
-        result.sectionChanges.append(SectionChange(section, int(f), int(vm)))
-  except:
-    pass
-
-  return result
 
 
 def generateBloatReport(outputFileName,
@@ -104,60 +67,27 @@ def generateBloatReport(outputFileName,
       f.write('\n    %s'.join(outputOnly))
       f.write('\n\n')
 
-    results = []
     for name in (baselineNames & outputNames):
-      results.append(
-          writeFileBloatReport(f, os.path.join(baselineDir, name),
-                               os.path.join(buildOutputDir, name)))
-    return results
+      writeFileBloatReport(f, os.path.join(baselineDir, name),
+                           os.path.join(buildOutputDir, name))
 
 
-def sendFileAsPrComment(job_name, filename, gh_token, gh_repo, gh_pr_number,
-                        compare_results):
+def sendFileAsPrComment(job_name, filename, gh_token, gh_repo, gh_pr_number):
   """Generates a PR comment conaining the specified file content."""
 
-  logging.info('Uploading report to "%s", PR %d', gh_repo, gh_pr_number)
-
-  rawText = open(filename, 'rt').read()
-
-  # a consistent title to help identify obsolete comments
-  titleHeading = 'Size increase report for "{jobName}"'.format(jobName=job_name)
+  logging.info('Uploading report to "%s", PR %d' % (gh_repo, gh_pr_number))
 
   api = github.Github(gh_token)
   repo = api.get_repo(gh_repo)
   pull = repo.get_pull(gh_pr_number)
 
-  for comment in pull.get_issue_comments():
-    if not comment.body.startswith(titleHeading):
-      continue
-    logging.info('Removing obsolete comment with heading "%s"', (titleHeading))
-
-    comment.delete()
-
-  compareTable = 'File | Section | File | VM\n---- | ---- | ----- | ---- \n'
-  for file in compare_results:
-    for change in file.sectionChanges:
-      compareTable += '{0} | {1} | {2} | {3}\n'.format(
-          file.fileName, change.section, change.fileChange, change.vmChange)
-
   # NOTE: PRs are issues with attached patches, hence the API naming
-  pull.create_issue_comment("""{title}
+  pull.create_issue_comment('''Bloat report for job "%s":
 
-  {table}
-
-<details>
-  <summary>Full report output</summary>
-
-```
-{rawReportText}
-```
-
-</details>
-""".format(
-    title=titleHeading,
-    table=compareTable,
-    jobName=job_name,
-    rawReportText=rawText))
+  ```
+  %s
+  ```
+  ''' % (job_name, open(filename, 'rt').read()))
 
 
 def main():
@@ -214,19 +144,22 @@ def main():
     ci_fetch_artifacts.fetchArtifactsForJob(args.token, args.job,
                                             args.artifact_download_dir)
   except Exception as e:
-    logging.warning('Failed to fetch artifacts: %r', e)
+    logging.warning('Failed to fetch artifacts: %r' % e)
 
-  compareResults = generateBloatReport(
+  generateBloatReport(
       args.report_file,
       args.artifact_download_dir,
       args.build_output_dir,
       title="Bloat report for job '%s'" % args.job)
 
   if args.github_api_token and args.github_repository and args.github_comment_pr_number:
-    sendFileAsPrComment(args.job, args.report_file, args.github_api_token,
-                        args.github_repository,
-                        int(args.github_comment_pr_number), compareResults)
-
+    sendFileAsPrComment(
+       args.job,
+       args.report_file,
+       args.github_api_token,
+       args.github_repository,
+       int(args.github_comment_pr_number),
+    )
 
 if __name__ == '__main__':
   # execute only if run as a script
