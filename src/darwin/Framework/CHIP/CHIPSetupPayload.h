@@ -24,11 +24,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSUInteger, OptionalQRCodeInfoType) {
-    kOptionalQRCodeInfoTypeUnknown,
-    kOptionalQRCodeInfoTypeString,
-    kOptionalQRCodeInfoTypeInt32
-};
+typedef NS_ENUM(NSUInteger, OptionalQRCodeInfoType) { kOptionalQRCodeInfoTypeString, kOptionalQRCodeInfoTypeInt };
 
 @interface CHIPOptionalQRCodeInfo : NSObject
 @property (nonatomic, strong) NSNumber * infoType;
@@ -48,7 +44,7 @@ typedef NS_ENUM(NSUInteger, OptionalQRCodeInfoType) {
 @property (nonatomic, strong) NSNumber * setUpPINCode;
 
 @property (nonatomic, strong) NSString * serialNumber;
-- (NSArray<CHIPOptionalQRCodeInfo *> *)getAllOptionalVendorData:(NSError * __autoreleasing *)error;
+- (NSArray<CHIPOptionalQRCodeInfo *> *)getAllOptionalData:(NSError * __autoreleasing *)error;
 
 #ifdef __cplusplus
 - (id)initWithSetupPayload:(chip::SetupPayload)setupPayload;

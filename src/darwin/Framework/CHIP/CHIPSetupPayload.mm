@@ -36,25 +36,15 @@
         _rendezvousInformation = [NSNumber numberWithUnsignedShort:setupPayload.rendezvousInformation];
         _discriminator = [NSNumber numberWithUnsignedShort:setupPayload.discriminator];
         _setUpPINCode = [NSNumber numberWithUnsignedLong:setupPayload.setUpPINCode];
-
-        [self getSerialNumber:setupPayload];
+        _serialNumber = [NSString stringWithUTF8String:setupPayload.serialNumber.c_str()];
     }
     return self;
 }
 
-- (void)getSerialNumber:(chip::SetupPayload)setupPayload
-{
-    std::string serialNumberC;
-    CHIP_ERROR err = setupPayload.getSerialNumber(serialNumberC);
-    if (err == CHIP_NO_ERROR) {
-        _serialNumber = [NSString stringWithUTF8String:serialNumberC.c_str()];
-    }
-}
-
-- (NSArray<CHIPOptionalQRCodeInfo *> *)getAllOptionalVendorData:(NSError * __autoreleasing *)error
+- (NSArray<CHIPOptionalQRCodeInfo *> *)getAllOptionalData:(NSError * __autoreleasing *)error
 {
     NSMutableArray<CHIPOptionalQRCodeInfo *> * allOptionalData = [NSMutableArray new];
-    vector<chip::OptionalQRCodeInfo> chipOptionalData = _chipSetupPayload.getAllOptionalVendorData();
+    vector<chip::OptionalQRCodeInfo> chipOptionalData = _chipSetupPayload.getAllOptionalData();
     for (chip::OptionalQRCodeInfo chipInfo : chipOptionalData) {
         CHIPOptionalQRCodeInfo * info = [CHIPOptionalQRCodeInfo new];
         info.tag = [NSNumber numberWithUnsignedChar:chipInfo.tag];
@@ -63,9 +53,9 @@
             info.infoType = [NSNumber numberWithInt:kOptionalQRCodeInfoTypeString];
             info.stringValue = [NSString stringWithUTF8String:chipInfo.data.c_str()];
             break;
-        case chip::optionalQRCodeInfoTypeInt32:
-            info.infoType = [NSNumber numberWithInt:kOptionalQRCodeInfoTypeInt32];
-            info.integerValue = [NSNumber numberWithInt:chipInfo.int32];
+        case chip::optionalQRCodeInfoTypeInt:
+            info.infoType = [NSNumber numberWithInt:kOptionalQRCodeInfoTypeInt];
+            info.integerValue = [NSNumber numberWithInt:chipInfo.integer];
             break;
         default:
             if (error) {

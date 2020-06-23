@@ -94,11 +94,20 @@ string createSetupPayload()
     payload.version   = 1;
     payload.vendorID  = EXAMPLE_VENDOR_ID;
     payload.productID = 1;
-    payload.addVendorOptionalData(EXAMPLE_VENDOR_TAG_SSID, ap_ssid);
+
+    OptionalQRCodeInfo ssidInfo;
+    ssidInfo.tag  = EXAMPLE_VENDOR_TAG_SSID;
+    ssidInfo.type = optionalQRCodeInfoTypeString;
+    ssidInfo.data = ap_ssid;
+    payload.addVendorOptionalData(ssidInfo);
 
     char gw_ip[INET6_ADDRSTRLEN];
     GetGatewayIP(gw_ip, sizeof(gw_ip));
-    payload.addVendorOptionalData(EXAMPLE_VENDOR_TAG_IP, gw_ip);
+    OptionalQRCodeInfo ipInfo;
+    ipInfo.tag  = EXAMPLE_VENDOR_TAG_IP;
+    ipInfo.type = optionalQRCodeInfoTypeString;
+    ipInfo.data = gw_ip;
+    payload.addVendorOptionalData(ipInfo);
 
     QRCodeSetupPayloadGenerator generator(payload);
     string result;

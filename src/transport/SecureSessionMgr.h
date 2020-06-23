@@ -32,7 +32,7 @@
 #include <core/ReferenceCounted.h>
 #include <inet/IPAddress.h>
 #include <inet/IPEndPointBasis.h>
-#include <transport/PeerConnections.h>
+#include <transport/PeerConnectionState.h>
 #include <transport/SecureSession.h>
 #include <transport/UDP.h>
 
@@ -48,8 +48,10 @@ public:
      */
     enum class State
     {
-        kNotReady,    /**< State before initialization. */
-        kInitialized, /**< State when the object is ready connect to other peers. */
+        kNotReady,        /**< State before initialization. */
+        kInitialized,     /**< State when the object is ready to connect. */
+        kConnected,       /**< State when the remte peer is connected. */
+        kSecureConnected, /**< State when the security of the connection has been established. */
     };
 
     /**
@@ -64,6 +66,21 @@ public:
      * UDP-specific and that will change.
      */
     CHIP_ERROR Init(NodeId localNodeId, Inet::InetLayer * inet, const Transport::UdpListenParameters & listenParams);
+
+    /**
+     * @brief
+     *   The keypair for the secure channel. This is a utility function that will be used
+     *   until we have automatic key exchange in place. The function is useful only for
+     *   example applications for now. It will eventually be removed.
+     *
+     * @param remote_public_key  A pointer to peer's public key
+     * @param public_key_length  Length of remote_public_key
+     * @param local_private_key  A pointer to local private key
+     * @param private_key_length Length of local_private_key
+     * @return CHIP_ERROR        The result of key derivation
+     */
+    CHIP_ERROR ManualKeyExchange(const unsigned char * remote_public_key, const size_t public_key_length,
+                                 const unsigned char * local_private_key, const size_t private_key_length);
 
     /**
      * Establishes a connection to the given peer node.
@@ -93,8 +110,7 @@ public:
      *
      */
     template <class T>
-    void SetMessageReceiveHandler(void (*handler)(const MessageHeader &, Transport::PeerConnectionState *, System::PacketBuffer *,
-                                                  T *),
+    void SetMessageReceiveHandler(void (*handler)(const MessageHeader &, const Inet::IPPacketInfo &, System::PacketBuffer *, T *),
                                   T * param)
     {
         mMessageReceivedArgument = param;
@@ -120,19 +136,36 @@ public:
      *
      */
     template <class T>
-    void SetNewConnectionHandler(void (*handler)(Transport::PeerConnectionState *, T *), T * param)
+    void SetNewConnectionHandler(void (*handler)(const MessageHeader &, const Inet::IPPacketInfo &, T *), T * param)
     {
         mNewConnectionArgument = param;
         OnNewConnection        = reinterpret_cast<NewConnectionHandler>(handler);
     }
 
+    /**
+     * TEMPORARY method for current connection until multi-session handling support
+     * is added to this class.
+     */
+    NodeId GetPeerNodeId() const { return mConnectionState.GetPeerNodeId(); };
+
 private:
-    // TODO: add support for multiple transports (TCP, BLE to be added)
+    // TODO: settings below are single-transport and single-peer. Long term
+    // intent for the class is to do session management and there will be
+    // multiple transports and multiple peers supported.
+    // Expected changes:
+    //    - Transports including UDP, TCP, BLE as needed
+    //    - Multiple peers with separate states (encryption settings and handshake state)
+    //    - Global state is only a ready/notready and connection state is deferred into
+    //      individual connections.
+
     Transport::UDP mTransport;
 
-    NodeId mLocalNodeId;                         //< Id of the current node
-    Transport::PeerConnections mPeerConnections; //< Active connections to other peers
-    State mState;                                //< Initialization state of the object
+    Transport::PeerConnectionState mConnectionState;
+    NodeId mLocalNodeId;
+    State mState;
+
+    bool StateAllowsSend(void) const { return mState != State::kNotReady; }
+    bool StateAllowsReceive(void) const { return mState == State::kSecureConnected; }
 
     /**
      * This function is the application callback that is invoked when a message is received over a
@@ -140,7 +173,7 @@ private:
      *
      * @param[in]    msgBuf        A pointer to the PacketBuffer object holding the message.
      */
-    typedef void (*MessageReceiveHandler)(const MessageHeader & header, Transport::PeerConnectionState * state,
+    typedef void (*MessageReceiveHandler)(const MessageHeader & header, const Inet::IPPacketInfo & source,
                                           System::PacketBuffer * msgBuf, void * param);
 
     MessageReceiveHandler OnMessageReceived = nullptr; ///< Callback on message receiving
@@ -150,28 +183,13 @@ private:
 
     ReceiveErrorHandler OnReceiveError = nullptr; ///< Callback on error in message receiving
 
-    typedef void (*NewConnectionHandler)(Transport::PeerConnectionState * state, void * param);
+    typedef void (*NewConnectionHandler)(const MessageHeader & header, const Inet::IPPacketInfo & source, void * param);
 
     NewConnectionHandler OnNewConnection = nullptr; ///< Callback for new connection received
     void * mNewConnectionArgument        = nullptr; ///< Argument for callback
 
-    /**
-     * Allocates a new connection for the given source.
-     *
-     * @param header The header that was received when the connection was established
-     * @param address Where the connection originated from
-     * @param state [out] the newly allocated connection state for the connection
-     */
-    CHIP_ERROR AllocateNewConnection(const MessageHeader & header, const Transport::PeerAddress & address,
-                                     Transport::PeerConnectionState ** state);
-
-    /**
-     * Handle UDP data receiving. Each transport has separate data receiving as active sessions
-     * follow data receiving channels.
-     *
-     */
-    static void HandleUdpDataReceived(const MessageHeader & header, const Inet::IPPacketInfo & source,
-                                      System::PacketBuffer * msgBuf, SecureSessionMgr * transport);
+    static void HandleDataReceived(const MessageHeader & header, const Inet::IPPacketInfo & source, System::PacketBuffer * msgBuf,
+                                   SecureSessionMgr * transport);
 };
 
 } // namespace chip
