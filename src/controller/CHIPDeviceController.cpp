@@ -51,16 +51,15 @@ using namespace chip::Encoding;
 
 ChipDeviceController::ChipDeviceController()
 {
-    mState           = kState_NotInitialized;
-    AppState         = NULL;
-    mConState        = kConnectionState_NotConnected;
-    mSessionManager  = NULL;
-    mCurReqMsg       = NULL;
-    mOnError         = NULL;
-    mOnNewConnection = NULL;
-    mDeviceAddr      = IPAddress::Any;
-    mDevicePort      = CHIP_PORT;
-    mLocalDeviceId   = 0;
+    mState         = kState_NotInitialized;
+    AppState       = NULL;
+    mConState      = kConnectionState_NotConnected;
+    mDeviceCon     = NULL;
+    mCurReqMsg     = NULL;
+    mOnError       = NULL;
+    mDeviceAddr    = IPAddress::Any;
+    mDevicePort    = CHIP_PORT;
+    mLocalDeviceId = 0;
     memset(&mOnComplete, 0, sizeof(mOnComplete));
 }
 
@@ -106,10 +105,10 @@ CHIP_ERROR ChipDeviceController::Shutdown()
     CHIP_ERROR err = CHIP_NO_ERROR;
     mState         = kState_NotInitialized;
 
-    if (mSessionManager != NULL)
+    if (mDeviceCon != NULL)
     {
-        delete mSessionManager;
-        mSessionManager = NULL;
+        delete mDeviceCon;
+        mDeviceCon = NULL;
     }
     mSystemLayer->Shutdown();
     mInetLayer->Shutdown();
@@ -120,41 +119,36 @@ CHIP_ERROR ChipDeviceController::Shutdown()
 
     mConState = kConnectionState_NotConnected;
     memset(&mOnComplete, 0, sizeof(mOnComplete));
-    mOnError         = NULL;
-    mOnNewConnection = NULL;
-    mMessageNumber   = 0;
+    mOnError       = NULL;
+    mMessageNumber = 0;
     mRemoteDeviceId.ClearValue();
 
     return err;
 }
 
 CHIP_ERROR ChipDeviceController::ConnectDevice(NodeId remoteDeviceId, IPAddress deviceAddr, void * appReqState,
-                                               NewConnectionHandler onConnected, MessageReceiveHandler onMessageReceived,
-                                               ErrorHandler onError, uint16_t devicePort)
+                                               MessageReceiveHandler onMessageReceived, ErrorHandler onError, uint16_t devicePort)
 {
     CHIP_ERROR err = CHIP_NO_ERROR;
 
-    if (mState != kState_Initialized || mSessionManager != NULL || mConState != kConnectionState_NotConnected)
+    if (mState != kState_Initialized || mDeviceCon != NULL || mConState != kConnectionState_NotConnected)
     {
         return CHIP_ERROR_INCORRECT_STATE;
     }
 
-    mRemoteDeviceId  = Optional<NodeId>::Value(remoteDeviceId);
-    mDeviceAddr      = deviceAddr;
-    mDevicePort      = devicePort;
-    mAppReqState     = appReqState;
-    mOnNewConnection = onConnected;
+    mRemoteDeviceId = Optional<NodeId>::Value(remoteDeviceId);
+    mDeviceAddr     = deviceAddr;
+    mDevicePort     = devicePort;
+    mAppReqState    = appReqState;
+    mDeviceCon      = new SecureSessionMgr();
 
-    mSessionManager = new SecureSessionMgr();
-
-    err = mSessionManager->Init(mLocalDeviceId, mInetLayer, Transport::UdpListenParameters().SetAddressType(deviceAddr.Type()));
+    err = mDeviceCon->Init(mLocalDeviceId, mInetLayer, Transport::UdpListenParameters().SetAddressType(deviceAddr.Type()));
     SuccessOrExit(err);
 
-    mSessionManager->SetMessageReceiveHandler(OnReceiveMessage, this);
-    mSessionManager->SetNewConnectionHandler(OnNewConnection, this);
-
-    err = mSessionManager->Connect(remoteDeviceId, Transport::PeerAddress::UDP(deviceAddr, devicePort));
+    err = mDeviceCon->Connect(remoteDeviceId, Transport::PeerAddress::UDP(deviceAddr, devicePort));
     SuccessOrExit(err);
+
+    mDeviceCon->SetMessageReceiveHandler(OnReceiveMessage, this);
 
     mOnComplete.Response = onMessageReceived;
     mOnError             = onError;
@@ -166,28 +160,26 @@ exit:
 
     if (err != CHIP_NO_ERROR)
     {
-        if (mSessionManager != NULL)
+        if (mDeviceCon != NULL)
         {
-            delete mSessionManager;
-            mSessionManager = NULL;
+            delete mDeviceCon;
+            mDeviceCon = NULL;
         }
     }
     return err;
 }
 
-CHIP_ERROR ChipDeviceController::ManualKeyExchange(Transport::PeerConnectionState * state, const unsigned char * remote_public_key,
-                                                   const size_t public_key_length, const unsigned char * local_private_key,
-                                                   const size_t private_key_length)
+CHIP_ERROR ChipDeviceController::ManualKeyExchange(const unsigned char * remote_public_key, const size_t public_key_length,
+                                                   const unsigned char * local_private_key, const size_t private_key_length)
 {
     CHIP_ERROR err = CHIP_NO_ERROR;
 
-    if (!IsConnected() || mSessionManager == NULL)
+    if (!IsConnected() || mDeviceCon == NULL)
     {
         return CHIP_ERROR_INCORRECT_STATE;
     }
 
-    err = state->GetSecureSession().TemporaryManualKeyExchange(remote_public_key, public_key_length, local_private_key,
-                                                               private_key_length);
+    err = mDeviceCon->ManualKeyExchange(remote_public_key, public_key_length, local_private_key, private_key_length);
     SuccessOrExit(err);
     mConState = kConnectionState_SecureConnected;
 
@@ -228,9 +220,9 @@ CHIP_ERROR ChipDeviceController::DisconnectDevice()
         return CHIP_ERROR_INCORRECT_STATE;
     }
 
-    delete mSessionManager;
-    mSessionManager = NULL;
-    mConState       = kConnectionState_NotConnected;
+    delete mDeviceCon;
+    mDeviceCon = NULL;
+    mConState  = kConnectionState_NotConnected;
     return err;
 };
 
@@ -243,7 +235,7 @@ CHIP_ERROR ChipDeviceController::SendMessage(void * appReqState, PacketBuffer * 
     mAppReqState = appReqState;
     VerifyOrExit(IsSecurelyConnected(), err = CHIP_ERROR_INCORRECT_STATE);
 
-    err = mSessionManager->SendMessage(mRemoteDeviceId.Value(), buffer);
+    err = mDeviceCon->SendMessage(mRemoteDeviceId.Value(), buffer);
 exit:
 
     return err;
@@ -330,15 +322,7 @@ void ChipDeviceController::ClearRequestState()
     }
 }
 
-void ChipDeviceController::OnNewConnection(Transport::PeerConnectionState * state, ChipDeviceController * mgr)
-{
-    if (mgr->mOnNewConnection)
-    {
-        mgr->mOnNewConnection(mgr, state, mgr->mAppReqState);
-    }
-}
-
-void ChipDeviceController::OnReceiveMessage(const MessageHeader & header, Transport::PeerConnectionState * state,
+void ChipDeviceController::OnReceiveMessage(const MessageHeader & header, const IPPacketInfo & pktInfo,
                                             System::PacketBuffer * msgBuf, ChipDeviceController * mgr)
 {
     if (header.GetSourceNodeId().HasValue())
@@ -355,7 +339,7 @@ void ChipDeviceController::OnReceiveMessage(const MessageHeader & header, Transp
     }
     if (mgr->IsSecurelyConnected() && mgr->mOnComplete.Response != NULL)
     {
-        mgr->mOnComplete.Response(mgr, mgr->mAppReqState, msgBuf);
+        mgr->mOnComplete.Response(mgr, mgr->mAppReqState, msgBuf, &pktInfo);
     }
 }
 
