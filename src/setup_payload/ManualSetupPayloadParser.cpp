@@ -197,9 +197,8 @@ CHIP_ERROR ManualSetupPayloadParser::populatePayload(SetupPayload & outPayload)
         outPayload.vendorID  = vendorID;
         outPayload.productID = productID;
     }
-    outPayload.requiresCustomFlow = isLongCode ? 1 : 0;
-    outPayload.setUpPINCode       = setUpPINCode;
-    outPayload.discriminator      = discriminator;
+    outPayload.setUpPINCode  = setUpPINCode;
+    outPayload.discriminator = discriminator;
 
     return result;
 }
