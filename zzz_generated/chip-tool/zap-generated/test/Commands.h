@@ -40819,7 +40819,7 @@ private:
         (static_cast<Test_TC_TM_2_1Suite *>(context))->OnFailureResponse_1(error);
     }
 
-    static void OnSuccessCallback_1(void * context, int16_t measuredValue)
+    static void OnSuccessCallback_1(void * context, const chip::app::DataModel::Nullable<int16_t> & measuredValue)
     {
         (static_cast<Test_TC_TM_2_1Suite *>(context))->OnSuccessResponse_1(measuredValue);
     }
@@ -40862,7 +40862,7 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_1(int16_t measuredValue)
+    void OnSuccessResponse_1(const chip::app::DataModel::Nullable<int16_t> & measuredValue)
     {
         VerifyOrReturn(CheckConstraintType("measuredValue", "", "int16"));
         NextTest();
@@ -40984,7 +40984,7 @@ private:
         (static_cast<Test_TC_TM_2_2Suite *>(context))->OnFailureResponse_1(error);
     }
 
-    static void OnSuccessCallback_1(void * context, int16_t measuredValue)
+    static void OnSuccessCallback_1(void * context, const chip::app::DataModel::Nullable<int16_t> & measuredValue)
     {
         (static_cast<Test_TC_TM_2_2Suite *>(context))->OnSuccessResponse_1(measuredValue);
     }
@@ -40994,7 +40994,7 @@ private:
         (static_cast<Test_TC_TM_2_2Suite *>(context))->OnFailureResponse_2(error);
     }
 
-    static void OnSuccessCallback_2(void * context, int16_t measuredValue)
+    static void OnSuccessCallback_2(void * context, const chip::app::DataModel::Nullable<int16_t> & measuredValue)
     {
         (static_cast<Test_TC_TM_2_2Suite *>(context))->OnSuccessResponse_2(measuredValue);
     }
@@ -41027,7 +41027,7 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_1(int16_t measuredValue)
+    void OnSuccessResponse_1(const chip::app::DataModel::Nullable<int16_t> & measuredValue)
     {
         VerifyOrReturn(CheckConstraintType("measuredValue", "", "uint16"));
         NextTest();
@@ -41051,7 +41051,7 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_2(int16_t measuredValue)
+    void OnSuccessResponse_2(const chip::app::DataModel::Nullable<int16_t> & measuredValue)
     {
         VerifyOrReturn(CheckConstraintType("measuredValue", "", "uint16"));
         NextTest();
