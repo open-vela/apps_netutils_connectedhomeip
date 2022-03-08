@@ -90621,12 +90621,24 @@ public:
             err = TestWriteInvalidBindingTable_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Write binding table\n");
-            err = TestWriteBindingTable_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Write binding table (endpoint 1)\n");
+            err = TestWriteBindingTableEndpoint1_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Read binding table\n");
-            err = TestReadBindingTable_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read binding table (endpoint 1)\n");
+            err = TestReadBindingTableEndpoint1_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Write binding table (endpoint 0)\n");
+            err = TestWriteBindingTableEndpoint0_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Read binding table (endpoint 0)\n");
+            err = TestReadBindingTableEndpoint0_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Verify endpoint 1 not changed\n");
+            err = TestVerifyEndpoint1NotChanged_8();
             break;
         }
 
@@ -90644,7 +90656,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 6;
+    const uint16_t mTestCount = 9;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -90702,6 +90714,37 @@ private:
         const chip::app::DataModel::DecodableList<chip::app::Clusters::Binding::Structs::TargetStruct::DecodableType> & binding)
     {
         (static_cast<TestBindingSuite *>(context))->OnSuccessResponse_5(binding);
+    }
+
+    static void OnFailureCallback_6(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestBindingSuite *>(context))->OnFailureResponse_6(error);
+    }
+
+    static void OnSuccessCallback_6(void * context) { (static_cast<TestBindingSuite *>(context))->OnSuccessResponse_6(); }
+
+    static void OnFailureCallback_7(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestBindingSuite *>(context))->OnFailureResponse_7(error);
+    }
+
+    static void OnSuccessCallback_7(
+        void * context,
+        const chip::app::DataModel::DecodableList<chip::app::Clusters::Binding::Structs::TargetStruct::DecodableType> & binding)
+    {
+        (static_cast<TestBindingSuite *>(context))->OnSuccessResponse_7(binding);
+    }
+
+    static void OnFailureCallback_8(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestBindingSuite *>(context))->OnFailureResponse_8(error);
+    }
+
+    static void OnSuccessCallback_8(
+        void * context,
+        const chip::app::DataModel::DecodableList<chip::app::Clusters::Binding::Structs::TargetStruct::DecodableType> & binding)
+    {
+        (static_cast<TestBindingSuite *>(context))->OnSuccessResponse_8(binding);
     }
 
     //
@@ -90809,7 +90852,7 @@ private:
 
     void OnSuccessResponse_3() { ThrowSuccessResponse(); }
 
-    CHIP_ERROR TestWriteBindingTable_4()
+    CHIP_ERROR TestWriteBindingTableEndpoint1_4()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::BindingClusterTest cluster;
@@ -90857,7 +90900,7 @@ private:
 
     void OnSuccessResponse_4() { NextTest(); }
 
-    CHIP_ERROR TestReadBindingTable_5()
+    CHIP_ERROR TestReadBindingTableEndpoint1_5()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::BindingClusterTest cluster;
@@ -90875,6 +90918,122 @@ private:
     }
 
     void OnSuccessResponse_5(
+        const chip::app::DataModel::DecodableList<chip::app::Clusters::Binding::Structs::TargetStruct::DecodableType> & binding)
+    {
+        {
+            auto iter_0 = binding.begin();
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(binding)>("binding", iter_0, 0));
+            VerifyOrReturn(CheckValue("binding[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
+            VerifyOrReturn(CheckValuePresent("binding[0].group", iter_0.GetValue().group));
+            VerifyOrReturn(CheckValue("binding[0].group.Value()", iter_0.GetValue().group.Value(), 1U));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(binding)>("binding", iter_0, 1));
+            VerifyOrReturn(CheckValue("binding[1].fabricIndex", iter_0.GetValue().fabricIndex, 1));
+            VerifyOrReturn(CheckValuePresent("binding[1].node", iter_0.GetValue().node));
+            VerifyOrReturn(CheckValue("binding[1].node.Value()", iter_0.GetValue().node.Value(), 1ULL));
+            VerifyOrReturn(CheckValuePresent("binding[1].endpoint", iter_0.GetValue().endpoint));
+            VerifyOrReturn(CheckValue("binding[1].endpoint.Value()", iter_0.GetValue().endpoint.Value(), 1U));
+            VerifyOrReturn(CheckValuePresent("binding[1].cluster", iter_0.GetValue().cluster));
+            VerifyOrReturn(CheckValue("binding[1].cluster.Value()", iter_0.GetValue().cluster.Value(), 6UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(binding)>("binding", iter_0, 2));
+            VerifyOrReturn(CheckValue("binding[2].fabricIndex", iter_0.GetValue().fabricIndex, 1));
+            VerifyOrReturn(CheckValuePresent("binding[2].node", iter_0.GetValue().node));
+            VerifyOrReturn(CheckValue("binding[2].node.Value()", iter_0.GetValue().node.Value(), 2ULL));
+            VerifyOrReturn(CheckValuePresent("binding[2].endpoint", iter_0.GetValue().endpoint));
+            VerifyOrReturn(CheckValue("binding[2].endpoint.Value()", iter_0.GetValue().endpoint.Value(), 1U));
+            VerifyOrReturn(CheckNoMoreListItems<decltype(binding)>("binding", iter_0, 3));
+        }
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestWriteBindingTableEndpoint0_6()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BindingClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ListFreer listFreer;
+        chip::app::DataModel::List<const chip::app::Clusters::Binding::Structs::TargetStruct::Type> bindingArgument;
+
+        {
+            auto * listHolder_0 = new ListHolder<chip::app::Clusters::Binding::Structs::TargetStruct::Type>(1);
+            listFreer.add(listHolder_0);
+
+            listHolder_0->mList[0].fabricIndex = 0;
+            listHolder_0->mList[0].node.Emplace();
+            listHolder_0->mList[0].node.Value() = 3ULL;
+            listHolder_0->mList[0].endpoint.Emplace();
+            listHolder_0->mList[0].endpoint.Value() = 1U;
+
+            bindingArgument =
+                chip::app::DataModel::List<chip::app::Clusters::Binding::Structs::TargetStruct::Type>(listHolder_0->mList, 1);
+        }
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Binding::Attributes::Binding::TypeInfo>(
+            bindingArgument, this, OnSuccessCallback_6, OnFailureCallback_6));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_6(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_6() { NextTest(); }
+
+    CHIP_ERROR TestReadBindingTableEndpoint0_7()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BindingClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Binding::Attributes::Binding::TypeInfo>(
+            this, OnSuccessCallback_7, OnFailureCallback_7, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_7(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_7(
+        const chip::app::DataModel::DecodableList<chip::app::Clusters::Binding::Structs::TargetStruct::DecodableType> & binding)
+    {
+        {
+            auto iter_0 = binding.begin();
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(binding)>("binding", iter_0, 0));
+            VerifyOrReturn(CheckValue("binding[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
+            VerifyOrReturn(CheckValuePresent("binding[0].node", iter_0.GetValue().node));
+            VerifyOrReturn(CheckValue("binding[0].node.Value()", iter_0.GetValue().node.Value(), 3ULL));
+            VerifyOrReturn(CheckValuePresent("binding[0].endpoint", iter_0.GetValue().endpoint));
+            VerifyOrReturn(CheckValue("binding[0].endpoint.Value()", iter_0.GetValue().endpoint.Value(), 1U));
+            VerifyOrReturn(CheckNoMoreListItems<decltype(binding)>("binding", iter_0, 1));
+        }
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestVerifyEndpoint1NotChanged_8()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::BindingClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Binding::Attributes::Binding::TypeInfo>(
+            this, OnSuccessCallback_8, OnFailureCallback_8, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_8(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_8(
         const chip::app::DataModel::DecodableList<chip::app::Clusters::Binding::Structs::TargetStruct::DecodableType> & binding)
     {
         {
