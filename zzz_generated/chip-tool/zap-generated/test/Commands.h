@@ -105230,6 +105230,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_DD_3_11Suite() {}
@@ -105268,6 +105269,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -105275,6 +105281,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -105298,6 +105305,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_DD_3_12Suite() {}
@@ -105336,6 +105344,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -105343,6 +105356,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -105366,6 +105380,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_DD_3_13Suite() {}
@@ -105404,6 +105419,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -105411,6 +105431,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -105434,6 +105455,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_DD_3_14Suite() {}
@@ -105472,6 +105494,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -105479,6 +105506,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -107721,6 +107749,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -107728,6 +107761,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -107751,6 +107785,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_DM_2_4Suite() {}
@@ -107789,6 +107824,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -107796,6 +107836,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -107819,6 +107860,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_DM_3_2Suite() {}
@@ -107857,6 +107899,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -107864,6 +107911,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -107887,6 +107935,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_DM_3_4Suite() {}
@@ -108636,6 +108685,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_GENDIAG_1_2Suite() {}
@@ -108674,6 +108724,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -108681,6 +108736,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -108704,6 +108760,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_GENDIAG_2_1Suite() {}
@@ -108742,6 +108799,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -108749,6 +108811,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -108772,6 +108835,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_I_2_2Suite() {}
@@ -108810,6 +108874,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -108817,6 +108886,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -108840,6 +108910,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_I_2_3Suite() {}
@@ -108878,6 +108949,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -108885,6 +108961,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -108908,6 +108985,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_ILL_2_1Suite() {}
@@ -108946,6 +109024,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -108953,6 +109036,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -108976,6 +109060,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_ILL_2_2Suite() {}
@@ -109014,6 +109099,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -109021,6 +109111,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -109044,6 +109135,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_IDM_1_1Suite() {}
@@ -109082,6 +109174,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -109089,6 +109186,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -109112,6 +109210,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_IDM_1_2Suite() {}
@@ -109150,6 +109249,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -109157,6 +109261,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -109180,6 +109285,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_IDM_2_1Suite() {}
@@ -109218,6 +109324,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -109225,6 +109336,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -109248,6 +109360,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_IDM_2_2Suite() {}
@@ -109286,6 +109399,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -109293,6 +109411,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -109316,6 +109435,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_IDM_3_1Suite() {}
@@ -109354,6 +109474,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -109361,6 +109486,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -109384,6 +109510,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_IDM_3_2Suite() {}
@@ -109422,6 +109549,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -109429,6 +109561,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -109452,6 +109585,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_IDM_4_1Suite() {}
@@ -109490,6 +109624,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -109497,6 +109636,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -109520,6 +109660,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_IDM_4_2Suite() {}
@@ -109558,6 +109699,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -109565,6 +109711,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -109588,6 +109735,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_IDM_5_1Suite() {}
@@ -109626,6 +109774,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -109633,6 +109786,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -109656,6 +109810,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_IDM_5_2Suite() {}
@@ -109694,6 +109849,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -109701,6 +109861,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -109724,6 +109885,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_IDM_6_1Suite() {}
@@ -109762,6 +109924,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -109769,6 +109936,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -109792,6 +109960,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_IDM_6_2Suite() {}
@@ -109830,6 +109999,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -109837,6 +110011,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -109860,6 +110035,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_IDM_6_3Suite() {}
@@ -109898,6 +110074,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -109905,6 +110086,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -109928,6 +110110,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_IDM_6_4Suite() {}
@@ -109966,6 +110149,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -109973,6 +110161,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -109996,6 +110185,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_MC_3_12Suite() {}
@@ -110034,6 +110224,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -110041,6 +110236,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -110064,6 +110260,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_MC_3_13Suite() {}
@@ -110102,6 +110299,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -110109,6 +110311,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -110132,6 +110335,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_MC_4_1Suite() {}
@@ -110170,6 +110374,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -110177,6 +110386,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -110200,6 +110410,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_MC_8_2Suite() {}
@@ -110238,6 +110449,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -110245,6 +110461,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -110268,6 +110485,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_MC_9_2Suite() {}
@@ -110306,6 +110524,11 @@ public:
         }
     }
 
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
 private:
     std::atomic_uint16_t mTestIndex;
     const uint16_t mTestCount = 0;
@@ -110313,6 +110536,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
