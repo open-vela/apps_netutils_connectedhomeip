@@ -72263,7 +72263,7 @@ private:
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         chip::ByteSpan octetStringArgument;
-        octetStringArgument = chip::ByteSpan(chip::Uint8::from_const_char("Tes\x00ti\x00nggarbage: not in length on purpose"), 9);
+        octetStringArgument = chip::ByteSpan(chip::Uint8::from_const_char("Tes\000ti\000nggarbage: not in length on purpose"), 9);
 
         ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::TestCluster::Attributes::OctetString::TypeInfo>(
             octetStringArgument, this, OnSuccessCallback_108, OnFailureCallback_108));
@@ -72298,7 +72298,7 @@ private:
     void OnSuccessResponse_109(chip::ByteSpan octetString)
     {
         VerifyOrReturn(
-            CheckValueAsString("octetString", octetString, chip::ByteSpan(chip::Uint8::from_const_char("Tes\x00ti\x00ng"), 9)));
+            CheckValueAsString("octetString", octetString, chip::ByteSpan(chip::Uint8::from_const_char("Tes\000ti\000ng"), 9)));
 
         NextTest();
     }
@@ -72311,7 +72311,7 @@ private:
 
         chip::ByteSpan octetStringArgument;
         octetStringArgument =
-            chip::ByteSpan(chip::Uint8::from_const_char("\x0d\x0a\xff\x22\xa0garbage: not in length on purpose"), 5);
+            chip::ByteSpan(chip::Uint8::from_const_char("\015\012\377\042\240garbage: not in length on purpose"), 5);
 
         ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::TestCluster::Attributes::OctetString::TypeInfo>(
             octetStringArgument, this, OnSuccessCallback_110, OnFailureCallback_110));
@@ -72346,7 +72346,7 @@ private:
     void OnSuccessResponse_111(chip::ByteSpan octetString)
     {
         VerifyOrReturn(CheckValueAsString("octetString", octetString,
-                                          chip::ByteSpan(chip::Uint8::from_const_char("\x0d\x0a\xff\x22\xa0"), 5)));
+                                          chip::ByteSpan(chip::Uint8::from_const_char("\015\012\377\042\240"), 5)));
 
         NextTest();
     }
@@ -102127,21 +102127,21 @@ private:
         request.groupKeySet.epochKey0.SetNonNull();
         request.groupKeySet.epochKey0.Value() =
             chip::ByteSpan(chip::Uint8::from_const_char(
-                               "\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xafgarbage: not in length on purpose"),
+                               "\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257garbage: not in length on purpose"),
                            16);
         request.groupKeySet.epochStartTime0.SetNonNull();
         request.groupKeySet.epochStartTime0.Value() = 1110000ULL;
         request.groupKeySet.epochKey1.SetNonNull();
         request.groupKeySet.epochKey1.Value() =
             chip::ByteSpan(chip::Uint8::from_const_char(
-                               "\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbfgarbage: not in length on purpose"),
+                               "\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277garbage: not in length on purpose"),
                            16);
         request.groupKeySet.epochStartTime1.SetNonNull();
         request.groupKeySet.epochStartTime1.Value() = 1110001ULL;
         request.groupKeySet.epochKey2.SetNonNull();
         request.groupKeySet.epochKey2.Value() =
             chip::ByteSpan(chip::Uint8::from_const_char(
-                               "\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcfgarbage: not in length on purpose"),
+                               "\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\317garbage: not in length on purpose"),
                            16);
         request.groupKeySet.epochStartTime2.SetNonNull();
         request.groupKeySet.epochStartTime2.Value() = 1110002ULL;
@@ -102179,21 +102179,21 @@ private:
         request.groupKeySet.epochKey0.SetNonNull();
         request.groupKeySet.epochKey0.Value() =
             chip::ByteSpan(chip::Uint8::from_const_char(
-                               "\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdfgarbage: not in length on purpose"),
+                               "\320\321\322\323\324\325\326\327\330\331\332\333\334\335\336\337garbage: not in length on purpose"),
                            16);
         request.groupKeySet.epochStartTime0.SetNonNull();
         request.groupKeySet.epochStartTime0.Value() = 2220000ULL;
         request.groupKeySet.epochKey1.SetNonNull();
         request.groupKeySet.epochKey1.Value() =
             chip::ByteSpan(chip::Uint8::from_const_char(
-                               "\xe0\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xefgarbage: not in length on purpose"),
+                               "\340\341\342\343\344\345\346\347\350\351\352\353\354\355\356\357garbage: not in length on purpose"),
                            16);
         request.groupKeySet.epochStartTime1.SetNonNull();
         request.groupKeySet.epochStartTime1.Value() = 2220001ULL;
         request.groupKeySet.epochKey2.SetNonNull();
         request.groupKeySet.epochKey2.Value() =
             chip::ByteSpan(chip::Uint8::from_const_char(
-                               "\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xffgarbage: not in length on purpose"),
+                               "\360\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377garbage: not in length on purpose"),
                            16);
         request.groupKeySet.epochStartTime2.SetNonNull();
         request.groupKeySet.epochStartTime2.Value() = 2220002ULL;
@@ -103652,21 +103652,21 @@ private:
         request.groupKeySet.epochKey0.SetNonNull();
         request.groupKeySet.epochKey0.Value() =
             chip::ByteSpan(chip::Uint8::from_const_char(
-                               "\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xafgarbage: not in length on purpose"),
+                               "\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257garbage: not in length on purpose"),
                            16);
         request.groupKeySet.epochStartTime0.SetNonNull();
         request.groupKeySet.epochStartTime0.Value() = 1110000ULL;
         request.groupKeySet.epochKey1.SetNonNull();
         request.groupKeySet.epochKey1.Value() =
             chip::ByteSpan(chip::Uint8::from_const_char(
-                               "\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbfgarbage: not in length on purpose"),
+                               "\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277garbage: not in length on purpose"),
                            16);
         request.groupKeySet.epochStartTime1.SetNonNull();
         request.groupKeySet.epochStartTime1.Value() = 1110001ULL;
         request.groupKeySet.epochKey2.SetNonNull();
         request.groupKeySet.epochKey2.Value() =
             chip::ByteSpan(chip::Uint8::from_const_char(
-                               "\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcfgarbage: not in length on purpose"),
+                               "\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\317garbage: not in length on purpose"),
                            16);
         request.groupKeySet.epochStartTime2.SetNonNull();
         request.groupKeySet.epochStartTime2.Value() = 1110002ULL;
@@ -103704,21 +103704,21 @@ private:
         request.groupKeySet.epochKey0.SetNonNull();
         request.groupKeySet.epochKey0.Value() =
             chip::ByteSpan(chip::Uint8::from_const_char(
-                               "\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdfgarbage: not in length on purpose"),
+                               "\320\321\322\323\324\325\326\327\330\331\332\333\334\335\336\337garbage: not in length on purpose"),
                            16);
         request.groupKeySet.epochStartTime0.SetNonNull();
         request.groupKeySet.epochStartTime0.Value() = 2110000ULL;
         request.groupKeySet.epochKey1.SetNonNull();
         request.groupKeySet.epochKey1.Value() =
             chip::ByteSpan(chip::Uint8::from_const_char(
-                               "\xe0\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xefgarbage: not in length on purpose"),
+                               "\340\341\342\343\344\345\346\347\350\351\352\353\354\355\356\357garbage: not in length on purpose"),
                            16);
         request.groupKeySet.epochStartTime1.SetNonNull();
         request.groupKeySet.epochStartTime1.Value() = 2110001ULL;
         request.groupKeySet.epochKey2.SetNonNull();
         request.groupKeySet.epochKey2.Value() =
             chip::ByteSpan(chip::Uint8::from_const_char(
-                               "\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xffgarbage: not in length on purpose"),
+                               "\360\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377garbage: not in length on purpose"),
                            16);
         request.groupKeySet.epochStartTime2.SetNonNull();
         request.groupKeySet.epochStartTime2.Value() = 2110002ULL;
@@ -106344,21 +106344,21 @@ private:
         request.groupKeySet.epochKey0.SetNonNull();
         request.groupKeySet.epochKey0.Value() =
             chip::ByteSpan(chip::Uint8::from_const_char(
-                               "\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xafgarbage: not in length on purpose"),
+                               "\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257garbage: not in length on purpose"),
                            16);
         request.groupKeySet.epochStartTime0.SetNonNull();
         request.groupKeySet.epochStartTime0.Value() = 1110000ULL;
         request.groupKeySet.epochKey1.SetNonNull();
         request.groupKeySet.epochKey1.Value() =
             chip::ByteSpan(chip::Uint8::from_const_char(
-                               "\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbfgarbage: not in length on purpose"),
+                               "\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277garbage: not in length on purpose"),
                            16);
         request.groupKeySet.epochStartTime1.SetNonNull();
         request.groupKeySet.epochStartTime1.Value() = 1110001ULL;
         request.groupKeySet.epochKey2.SetNonNull();
         request.groupKeySet.epochKey2.Value() =
             chip::ByteSpan(chip::Uint8::from_const_char(
-                               "\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcfgarbage: not in length on purpose"),
+                               "\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\317garbage: not in length on purpose"),
                            16);
         request.groupKeySet.epochStartTime2.SetNonNull();
         request.groupKeySet.epochStartTime2.Value() = 1110002ULL;
