@@ -747,9 +747,8 @@ private:
             auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(3);
             listFreer.add(listHolder_0);
 
-            listHolder_0->mList[0].fabricIndex = 0;
-            listHolder_0->mList[0].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-            listHolder_0->mList[0].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+            listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
+            listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
             listHolder_0->mList[0].subjects.SetNull();
             listHolder_0->mList[0].targets.SetNonNull();
 
@@ -776,10 +775,10 @@ private:
                 listHolder_0->mList[0].targets.Value() =
                     chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList, 3);
             }
+            listHolder_0->mList[0].fabricIndex = 0;
 
-            listHolder_0->mList[1].fabricIndex = 0;
-            listHolder_0->mList[1].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
-            listHolder_0->mList[1].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+            listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
+            listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
             listHolder_0->mList[1].subjects.SetNonNull();
 
             {
@@ -816,10 +815,10 @@ private:
                 listHolder_0->mList[1].targets.Value() =
                     chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList, 3);
             }
+            listHolder_0->mList[1].fabricIndex = 0;
 
-            listHolder_0->mList[2].fabricIndex = 0;
-            listHolder_0->mList[2].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(3);
-            listHolder_0->mList[2].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(3);
+            listHolder_0->mList[2].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(3);
+            listHolder_0->mList[2].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(3);
             listHolder_0->mList[2].subjects.SetNonNull();
 
             {
@@ -856,6 +855,7 @@ private:
                 listHolder_0->mList[2].targets.Value() =
                     chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList, 3);
             }
+            listHolder_0->mList[2].fabricIndex = 0;
 
             aclArgument = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
                 listHolder_0->mList, 3);
@@ -898,7 +898,6 @@ private:
         {
             auto iter_0 = acl.begin();
             VerifyOrReturn(CheckNextListItemDecodes<decltype(acl)>("acl", iter_0, 0));
-            VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5));
             VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2));
             VerifyOrReturn(CheckValueNull("acl[0].subjects", iter_0.GetValue().subjects));
@@ -927,8 +926,8 @@ private:
                 VerifyOrReturn(
                     CheckNoMoreListItems<decltype(iter_0.GetValue().targets.Value())>("acl[0].targets.Value()", iter_NaN, 3));
             }
+            VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNextListItemDecodes<decltype(acl)>("acl", iter_0, 1));
-            VerifyOrReturn(CheckValue("acl[1].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValue("acl[1].privilege", iter_0.GetValue().privilege, 1));
             VerifyOrReturn(CheckValue("acl[1].authMode", iter_0.GetValue().authMode, 2));
             VerifyOrReturn(CheckValueNonNull("acl[1].subjects", iter_0.GetValue().subjects));
@@ -974,8 +973,8 @@ private:
                 VerifyOrReturn(
                     CheckNoMoreListItems<decltype(iter_0.GetValue().targets.Value())>("acl[1].targets.Value()", iter_NaN, 3));
             }
+            VerifyOrReturn(CheckValue("acl[1].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNextListItemDecodes<decltype(acl)>("acl", iter_0, 2));
-            VerifyOrReturn(CheckValue("acl[2].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValue("acl[2].privilege", iter_0.GetValue().privilege, 3));
             VerifyOrReturn(CheckValue("acl[2].authMode", iter_0.GetValue().authMode, 3));
             VerifyOrReturn(CheckValueNonNull("acl[2].subjects", iter_0.GetValue().subjects));
@@ -1021,6 +1020,7 @@ private:
                 VerifyOrReturn(
                     CheckNoMoreListItems<decltype(iter_0.GetValue().targets.Value())>("acl[2].targets.Value()", iter_NaN, 3));
             }
+            VerifyOrReturn(CheckValue("acl[2].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNoMoreListItems<decltype(acl)>("acl", iter_0, 3));
         }
 
@@ -1040,15 +1040,14 @@ private:
             auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
             listFreer.add(listHolder_0);
 
-            listHolder_0->mList[0].fabricIndex = 0;
-            listHolder_0->mList[0].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-            listHolder_0->mList[0].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+            listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
+            listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
             listHolder_0->mList[0].subjects.SetNull();
             listHolder_0->mList[0].targets.SetNull();
+            listHolder_0->mList[0].fabricIndex = 0;
 
-            listHolder_0->mList[1].fabricIndex = 0;
-            listHolder_0->mList[1].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
-            listHolder_0->mList[1].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+            listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
+            listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
             listHolder_0->mList[1].subjects.SetNonNull();
 
             listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>();
@@ -1056,6 +1055,7 @@ private:
 
             listHolder_0->mList[1].targets.Value() =
                 chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>();
+            listHolder_0->mList[1].fabricIndex = 0;
 
             aclArgument = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
                 listHolder_0->mList, 2);
@@ -1098,17 +1098,17 @@ private:
         {
             auto iter_0 = acl.begin();
             VerifyOrReturn(CheckNextListItemDecodes<decltype(acl)>("acl", iter_0, 0));
-            VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5));
             VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2));
             VerifyOrReturn(CheckValueNull("acl[0].subjects", iter_0.GetValue().subjects));
             VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+            VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNextListItemDecodes<decltype(acl)>("acl", iter_0, 1));
-            VerifyOrReturn(CheckValue("acl[1].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValue("acl[1].privilege", iter_0.GetValue().privilege, 1));
             VerifyOrReturn(CheckValue("acl[1].authMode", iter_0.GetValue().authMode, 2));
             VerifyOrReturn(CheckValueNull("acl[1].subjects", iter_0.GetValue().subjects));
             VerifyOrReturn(CheckValueNull("acl[1].targets", iter_0.GetValue().targets));
+            VerifyOrReturn(CheckValue("acl[1].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNoMoreListItems<decltype(acl)>("acl", iter_0, 2));
         }
 
@@ -1128,17 +1128,17 @@ private:
             auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
             listFreer.add(listHolder_0);
 
-            listHolder_0->mList[0].fabricIndex = 0;
-            listHolder_0->mList[0].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-            listHolder_0->mList[0].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+            listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
+            listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
             listHolder_0->mList[0].subjects.SetNull();
             listHolder_0->mList[0].targets.SetNull();
+            listHolder_0->mList[0].fabricIndex = 0;
 
-            listHolder_0->mList[1].fabricIndex = 0;
-            listHolder_0->mList[1].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-            listHolder_0->mList[1].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(3);
+            listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
+            listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(3);
             listHolder_0->mList[1].subjects.SetNull();
             listHolder_0->mList[1].targets.SetNull();
+            listHolder_0->mList[1].fabricIndex = 0;
 
             aclArgument = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
                 listHolder_0->mList, 2);
@@ -1182,11 +1182,11 @@ private:
         {
             auto iter_0 = acl.begin();
             VerifyOrReturn(CheckNextListItemDecodes<decltype(acl)>("acl", iter_0, 0));
-            VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5));
             VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2));
             VerifyOrReturn(CheckValueNull("acl[0].subjects", iter_0.GetValue().subjects));
             VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+            VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNoMoreListItems<decltype(acl)>("acl", iter_0, 1));
         }
 
@@ -1206,17 +1206,17 @@ private:
             auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
             listFreer.add(listHolder_0);
 
-            listHolder_0->mList[0].fabricIndex = 0;
-            listHolder_0->mList[0].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-            listHolder_0->mList[0].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+            listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
+            listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
             listHolder_0->mList[0].subjects.SetNull();
             listHolder_0->mList[0].targets.SetNull();
+            listHolder_0->mList[0].fabricIndex = 0;
 
-            listHolder_0->mList[1].fabricIndex = 0;
-            listHolder_0->mList[1].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
-            listHolder_0->mList[1].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(1);
+            listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
+            listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(1);
             listHolder_0->mList[1].subjects.SetNull();
             listHolder_0->mList[1].targets.SetNull();
+            listHolder_0->mList[1].fabricIndex = 0;
 
             aclArgument = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
                 listHolder_0->mList, 2);
@@ -1260,11 +1260,11 @@ private:
         {
             auto iter_0 = acl.begin();
             VerifyOrReturn(CheckNextListItemDecodes<decltype(acl)>("acl", iter_0, 0));
-            VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5));
             VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2));
             VerifyOrReturn(CheckValueNull("acl[0].subjects", iter_0.GetValue().subjects));
             VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+            VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNoMoreListItems<decltype(acl)>("acl", iter_0, 1));
         }
 
@@ -1284,15 +1284,14 @@ private:
             auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
             listFreer.add(listHolder_0);
 
-            listHolder_0->mList[0].fabricIndex = 0;
-            listHolder_0->mList[0].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-            listHolder_0->mList[0].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+            listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
+            listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
             listHolder_0->mList[0].subjects.SetNull();
             listHolder_0->mList[0].targets.SetNull();
+            listHolder_0->mList[0].fabricIndex = 0;
 
-            listHolder_0->mList[1].fabricIndex = 0;
-            listHolder_0->mList[1].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
-            listHolder_0->mList[1].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+            listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
+            listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
             listHolder_0->mList[1].subjects.SetNonNull();
 
             {
@@ -1302,6 +1301,7 @@ private:
                 listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
             }
             listHolder_0->mList[1].targets.SetNull();
+            listHolder_0->mList[1].fabricIndex = 0;
 
             aclArgument = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
                 listHolder_0->mList, 2);
@@ -1345,11 +1345,11 @@ private:
         {
             auto iter_0 = acl.begin();
             VerifyOrReturn(CheckNextListItemDecodes<decltype(acl)>("acl", iter_0, 0));
-            VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5));
             VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2));
             VerifyOrReturn(CheckValueNull("acl[0].subjects", iter_0.GetValue().subjects));
             VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+            VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNoMoreListItems<decltype(acl)>("acl", iter_0, 1));
         }
 
@@ -1369,15 +1369,14 @@ private:
             auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
             listFreer.add(listHolder_0);
 
-            listHolder_0->mList[0].fabricIndex = 0;
-            listHolder_0->mList[0].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-            listHolder_0->mList[0].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+            listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
+            listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
             listHolder_0->mList[0].subjects.SetNull();
             listHolder_0->mList[0].targets.SetNull();
+            listHolder_0->mList[0].fabricIndex = 0;
 
-            listHolder_0->mList[1].fabricIndex = 0;
-            listHolder_0->mList[1].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
-            listHolder_0->mList[1].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+            listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
+            listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
             listHolder_0->mList[1].subjects.SetNull();
             listHolder_0->mList[1].targets.SetNonNull();
 
@@ -1392,6 +1391,7 @@ private:
                 listHolder_0->mList[1].targets.Value() =
                     chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList, 1);
             }
+            listHolder_0->mList[1].fabricIndex = 0;
 
             aclArgument = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
                 listHolder_0->mList, 2);
@@ -1435,11 +1435,11 @@ private:
         {
             auto iter_0 = acl.begin();
             VerifyOrReturn(CheckNextListItemDecodes<decltype(acl)>("acl", iter_0, 0));
-            VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5));
             VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2));
             VerifyOrReturn(CheckValueNull("acl[0].subjects", iter_0.GetValue().subjects));
             VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+            VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNoMoreListItems<decltype(acl)>("acl", iter_0, 1));
         }
 
@@ -1459,15 +1459,14 @@ private:
             auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
             listFreer.add(listHolder_0);
 
-            listHolder_0->mList[0].fabricIndex = 0;
-            listHolder_0->mList[0].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-            listHolder_0->mList[0].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+            listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
+            listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
             listHolder_0->mList[0].subjects.SetNull();
             listHolder_0->mList[0].targets.SetNull();
+            listHolder_0->mList[0].fabricIndex = 0;
 
-            listHolder_0->mList[1].fabricIndex = 0;
-            listHolder_0->mList[1].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
-            listHolder_0->mList[1].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+            listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
+            listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
             listHolder_0->mList[1].subjects.SetNonNull();
 
             {
@@ -1496,6 +1495,7 @@ private:
                 listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 20);
             }
             listHolder_0->mList[1].targets.SetNull();
+            listHolder_0->mList[1].fabricIndex = 0;
 
             aclArgument = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
                 listHolder_0->mList, 2);
@@ -1539,11 +1539,11 @@ private:
         {
             auto iter_0 = acl.begin();
             VerifyOrReturn(CheckNextListItemDecodes<decltype(acl)>("acl", iter_0, 0));
-            VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5));
             VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2));
             VerifyOrReturn(CheckValueNull("acl[0].subjects", iter_0.GetValue().subjects));
             VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+            VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNoMoreListItems<decltype(acl)>("acl", iter_0, 1));
         }
 
@@ -1563,15 +1563,14 @@ private:
             auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
             listFreer.add(listHolder_0);
 
-            listHolder_0->mList[0].fabricIndex = 0;
-            listHolder_0->mList[0].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-            listHolder_0->mList[0].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+            listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
+            listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
             listHolder_0->mList[0].subjects.SetNull();
             listHolder_0->mList[0].targets.SetNull();
+            listHolder_0->mList[0].fabricIndex = 0;
 
-            listHolder_0->mList[1].fabricIndex = 0;
-            listHolder_0->mList[1].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
-            listHolder_0->mList[1].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+            listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
+            listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
             listHolder_0->mList[1].subjects.SetNull();
             listHolder_0->mList[1].targets.SetNonNull();
 
@@ -1682,6 +1681,7 @@ private:
                 listHolder_0->mList[1].targets.Value() =
                     chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList, 20);
             }
+            listHolder_0->mList[1].fabricIndex = 0;
 
             aclArgument = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
                 listHolder_0->mList, 2);
@@ -1725,11 +1725,11 @@ private:
         {
             auto iter_0 = acl.begin();
             VerifyOrReturn(CheckNextListItemDecodes<decltype(acl)>("acl", iter_0, 0));
-            VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5));
             VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2));
             VerifyOrReturn(CheckValueNull("acl[0].subjects", iter_0.GetValue().subjects));
             VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+            VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNoMoreListItems<decltype(acl)>("acl", iter_0, 1));
         }
 
@@ -1749,11 +1749,11 @@ private:
             auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(1);
             listFreer.add(listHolder_0);
 
-            listHolder_0->mList[0].fabricIndex = 0;
-            listHolder_0->mList[0].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-            listHolder_0->mList[0].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+            listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
+            listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
             listHolder_0->mList[0].subjects.SetNull();
             listHolder_0->mList[0].targets.SetNull();
+            listHolder_0->mList[0].fabricIndex = 0;
 
             aclArgument = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
                 listHolder_0->mList, 1);
@@ -1796,11 +1796,11 @@ private:
         {
             auto iter_0 = acl.begin();
             VerifyOrReturn(CheckNextListItemDecodes<decltype(acl)>("acl", iter_0, 0));
-            VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5));
             VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2));
             VerifyOrReturn(CheckValueNull("acl[0].subjects", iter_0.GetValue().subjects));
             VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+            VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNoMoreListItems<decltype(acl)>("acl", iter_0, 1));
         }
 
@@ -90035,8 +90035,8 @@ private:
         {
             auto iter_0 = fabrics.begin();
             VerifyOrReturn(CheckNextListItemDecodes<decltype(fabrics)>("fabrics", iter_0, 0));
-            VerifyOrReturn(CheckValue("fabrics[0].fabricIndex", iter_0.GetValue().fabricIndex, ourFabricIndex));
             VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+            VerifyOrReturn(CheckValue("fabrics[0].fabricIndex", iter_0.GetValue().fabricIndex, ourFabricIndex));
             VerifyOrReturn(CheckNoMoreListItems<decltype(fabrics)>("fabrics", iter_0, 1));
         }
 
@@ -90105,8 +90105,8 @@ private:
         {
             auto iter_0 = fabrics.begin();
             VerifyOrReturn(CheckNextListItemDecodes<decltype(fabrics)>("fabrics", iter_0, 0));
-            VerifyOrReturn(CheckValue("fabrics[0].fabricIndex", iter_0.GetValue().fabricIndex, ourFabricIndex));
             VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("Batcave", 7)));
+            VerifyOrReturn(CheckValue("fabrics[0].fabricIndex", iter_0.GetValue().fabricIndex, ourFabricIndex));
             VerifyOrReturn(CheckNoMoreListItems<decltype(fabrics)>("fabrics", iter_0, 1));
         }
 
@@ -90896,7 +90896,6 @@ private:
 
             listHolder_0->mList[0].fabricIndex = 0;
 
-            listHolder_0->mList[1].fabricIndex = 0;
             listHolder_0->mList[1].node.Emplace();
             listHolder_0->mList[1].node.Value() = 1ULL;
             listHolder_0->mList[1].group.Emplace();
@@ -90905,6 +90904,7 @@ private:
             listHolder_0->mList[1].endpoint.Value() = 1U;
             listHolder_0->mList[1].cluster.Emplace();
             listHolder_0->mList[1].cluster.Value() = 6UL;
+            listHolder_0->mList[1].fabricIndex     = 0;
 
             bindingArgument =
                 chip::app::DataModel::List<chip::app::Clusters::Binding::Structs::TargetStruct::Type>(listHolder_0->mList, 2);
@@ -90937,23 +90937,23 @@ private:
             auto * listHolder_0 = new ListHolder<chip::app::Clusters::Binding::Structs::TargetStruct::Type>(3);
             listFreer.add(listHolder_0);
 
-            listHolder_0->mList[0].fabricIndex = 0;
             listHolder_0->mList[0].group.Emplace();
             listHolder_0->mList[0].group.Value() = 1U;
+            listHolder_0->mList[0].fabricIndex   = 0;
 
-            listHolder_0->mList[1].fabricIndex = 0;
             listHolder_0->mList[1].node.Emplace();
             listHolder_0->mList[1].node.Value() = 1ULL;
             listHolder_0->mList[1].endpoint.Emplace();
             listHolder_0->mList[1].endpoint.Value() = 1U;
             listHolder_0->mList[1].cluster.Emplace();
             listHolder_0->mList[1].cluster.Value() = 6UL;
+            listHolder_0->mList[1].fabricIndex     = 0;
 
-            listHolder_0->mList[2].fabricIndex = 0;
             listHolder_0->mList[2].node.Emplace();
             listHolder_0->mList[2].node.Value() = 2ULL;
             listHolder_0->mList[2].endpoint.Emplace();
             listHolder_0->mList[2].endpoint.Value() = 1U;
+            listHolder_0->mList[2].fabricIndex      = 0;
 
             bindingArgument =
                 chip::app::DataModel::List<chip::app::Clusters::Binding::Structs::TargetStruct::Type>(listHolder_0->mList, 3);
@@ -90995,23 +90995,23 @@ private:
         {
             auto iter_0 = binding.begin();
             VerifyOrReturn(CheckNextListItemDecodes<decltype(binding)>("binding", iter_0, 0));
-            VerifyOrReturn(CheckValue("binding[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValuePresent("binding[0].group", iter_0.GetValue().group));
             VerifyOrReturn(CheckValue("binding[0].group.Value()", iter_0.GetValue().group.Value(), 1U));
+            VerifyOrReturn(CheckValue("binding[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNextListItemDecodes<decltype(binding)>("binding", iter_0, 1));
-            VerifyOrReturn(CheckValue("binding[1].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValuePresent("binding[1].node", iter_0.GetValue().node));
             VerifyOrReturn(CheckValue("binding[1].node.Value()", iter_0.GetValue().node.Value(), 1ULL));
             VerifyOrReturn(CheckValuePresent("binding[1].endpoint", iter_0.GetValue().endpoint));
             VerifyOrReturn(CheckValue("binding[1].endpoint.Value()", iter_0.GetValue().endpoint.Value(), 1U));
             VerifyOrReturn(CheckValuePresent("binding[1].cluster", iter_0.GetValue().cluster));
             VerifyOrReturn(CheckValue("binding[1].cluster.Value()", iter_0.GetValue().cluster.Value(), 6UL));
+            VerifyOrReturn(CheckValue("binding[1].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNextListItemDecodes<decltype(binding)>("binding", iter_0, 2));
-            VerifyOrReturn(CheckValue("binding[2].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValuePresent("binding[2].node", iter_0.GetValue().node));
             VerifyOrReturn(CheckValue("binding[2].node.Value()", iter_0.GetValue().node.Value(), 2ULL));
             VerifyOrReturn(CheckValuePresent("binding[2].endpoint", iter_0.GetValue().endpoint));
             VerifyOrReturn(CheckValue("binding[2].endpoint.Value()", iter_0.GetValue().endpoint.Value(), 1U));
+            VerifyOrReturn(CheckValue("binding[2].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNoMoreListItems<decltype(binding)>("binding", iter_0, 3));
         }
 
@@ -91031,11 +91031,11 @@ private:
             auto * listHolder_0 = new ListHolder<chip::app::Clusters::Binding::Structs::TargetStruct::Type>(1);
             listFreer.add(listHolder_0);
 
-            listHolder_0->mList[0].fabricIndex = 0;
             listHolder_0->mList[0].node.Emplace();
             listHolder_0->mList[0].node.Value() = 3ULL;
             listHolder_0->mList[0].endpoint.Emplace();
             listHolder_0->mList[0].endpoint.Value() = 1U;
+            listHolder_0->mList[0].fabricIndex      = 0;
 
             bindingArgument =
                 chip::app::DataModel::List<chip::app::Clusters::Binding::Structs::TargetStruct::Type>(listHolder_0->mList, 1);
@@ -91077,11 +91077,11 @@ private:
         {
             auto iter_0 = binding.begin();
             VerifyOrReturn(CheckNextListItemDecodes<decltype(binding)>("binding", iter_0, 0));
-            VerifyOrReturn(CheckValue("binding[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValuePresent("binding[0].node", iter_0.GetValue().node));
             VerifyOrReturn(CheckValue("binding[0].node.Value()", iter_0.GetValue().node.Value(), 3ULL));
             VerifyOrReturn(CheckValuePresent("binding[0].endpoint", iter_0.GetValue().endpoint));
             VerifyOrReturn(CheckValue("binding[0].endpoint.Value()", iter_0.GetValue().endpoint.Value(), 1U));
+            VerifyOrReturn(CheckValue("binding[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNoMoreListItems<decltype(binding)>("binding", iter_0, 1));
         }
 
@@ -91111,23 +91111,23 @@ private:
         {
             auto iter_0 = binding.begin();
             VerifyOrReturn(CheckNextListItemDecodes<decltype(binding)>("binding", iter_0, 0));
-            VerifyOrReturn(CheckValue("binding[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValuePresent("binding[0].group", iter_0.GetValue().group));
             VerifyOrReturn(CheckValue("binding[0].group.Value()", iter_0.GetValue().group.Value(), 1U));
+            VerifyOrReturn(CheckValue("binding[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNextListItemDecodes<decltype(binding)>("binding", iter_0, 1));
-            VerifyOrReturn(CheckValue("binding[1].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValuePresent("binding[1].node", iter_0.GetValue().node));
             VerifyOrReturn(CheckValue("binding[1].node.Value()", iter_0.GetValue().node.Value(), 1ULL));
             VerifyOrReturn(CheckValuePresent("binding[1].endpoint", iter_0.GetValue().endpoint));
             VerifyOrReturn(CheckValue("binding[1].endpoint.Value()", iter_0.GetValue().endpoint.Value(), 1U));
             VerifyOrReturn(CheckValuePresent("binding[1].cluster", iter_0.GetValue().cluster));
             VerifyOrReturn(CheckValue("binding[1].cluster.Value()", iter_0.GetValue().cluster.Value(), 6UL));
+            VerifyOrReturn(CheckValue("binding[1].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNextListItemDecodes<decltype(binding)>("binding", iter_0, 2));
-            VerifyOrReturn(CheckValue("binding[2].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValuePresent("binding[2].node", iter_0.GetValue().node));
             VerifyOrReturn(CheckValue("binding[2].node.Value()", iter_0.GetValue().node.Value(), 2ULL));
             VerifyOrReturn(CheckValuePresent("binding[2].endpoint", iter_0.GetValue().endpoint));
             VerifyOrReturn(CheckValue("binding[2].endpoint.Value()", iter_0.GetValue().endpoint.Value(), 1U));
+            VerifyOrReturn(CheckValue("binding[2].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNoMoreListItems<decltype(binding)>("binding", iter_0, 3));
         }
 
@@ -102232,13 +102232,13 @@ private:
             auto * listHolder_0 = new ListHolder<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(2);
             listFreer.add(listHolder_0);
 
-            listHolder_0->mList[0].fabricIndex   = 1;
             listHolder_0->mList[0].groupId       = 257U;
             listHolder_0->mList[0].groupKeySetID = 417U;
+            listHolder_0->mList[0].fabricIndex   = 1;
 
-            listHolder_0->mList[1].fabricIndex   = 1;
             listHolder_0->mList[1].groupId       = 258U;
             listHolder_0->mList[1].groupKeySetID = 418U;
+            listHolder_0->mList[1].fabricIndex   = 1;
 
             groupKeyMapArgument =
                 chip::app::DataModel::List<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(
@@ -102271,17 +102271,17 @@ private:
             auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
             listFreer.add(listHolder_0);
 
-            listHolder_0->mList[0].fabricIndex = 0;
-            listHolder_0->mList[0].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-            listHolder_0->mList[0].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+            listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
+            listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
             listHolder_0->mList[0].subjects.SetNull();
             listHolder_0->mList[0].targets.SetNull();
+            listHolder_0->mList[0].fabricIndex = 0;
 
-            listHolder_0->mList[1].fabricIndex = 0;
-            listHolder_0->mList[1].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(3);
-            listHolder_0->mList[1].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(3);
+            listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(3);
+            listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(3);
             listHolder_0->mList[1].subjects.SetNull();
             listHolder_0->mList[1].targets.SetNull();
+            listHolder_0->mList[1].fabricIndex = 0;
 
             aclArgument = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
                 listHolder_0->mList, 2);
@@ -102465,11 +102465,11 @@ private:
             auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(1);
             listFreer.add(listHolder_0);
 
-            listHolder_0->mList[0].fabricIndex = 0;
-            listHolder_0->mList[0].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-            listHolder_0->mList[0].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+            listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
+            listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
             listHolder_0->mList[0].subjects.SetNull();
             listHolder_0->mList[0].targets.SetNull();
+            listHolder_0->mList[0].fabricIndex = 0;
 
             aclArgument = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
                 listHolder_0->mList, 1);
@@ -103800,13 +103800,13 @@ private:
             auto * listHolder_0 = new ListHolder<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(2);
             listFreer.add(listHolder_0);
 
-            listHolder_0->mList[0].fabricIndex   = 1;
             listHolder_0->mList[0].groupId       = 257U;
             listHolder_0->mList[0].groupKeySetID = 417U;
+            listHolder_0->mList[0].fabricIndex   = 1;
 
-            listHolder_0->mList[1].fabricIndex   = 1;
             listHolder_0->mList[1].groupId       = 258U;
             listHolder_0->mList[1].groupKeySetID = 418U;
+            listHolder_0->mList[1].fabricIndex   = 1;
 
             groupKeyMapArgument =
                 chip::app::DataModel::List<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(
@@ -103849,13 +103849,13 @@ private:
         {
             auto iter_0 = groupKeyMap.begin();
             VerifyOrReturn(CheckNextListItemDecodes<decltype(groupKeyMap)>("groupKeyMap", iter_0, 0));
-            VerifyOrReturn(CheckValue("groupKeyMap[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValue("groupKeyMap[0].groupId", iter_0.GetValue().groupId, 257U));
             VerifyOrReturn(CheckValue("groupKeyMap[0].groupKeySetID", iter_0.GetValue().groupKeySetID, 417U));
+            VerifyOrReturn(CheckValue("groupKeyMap[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNextListItemDecodes<decltype(groupKeyMap)>("groupKeyMap", iter_0, 1));
-            VerifyOrReturn(CheckValue("groupKeyMap[1].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValue("groupKeyMap[1].groupId", iter_0.GetValue().groupId, 258U));
             VerifyOrReturn(CheckValue("groupKeyMap[1].groupKeySetID", iter_0.GetValue().groupKeySetID, 418U));
+            VerifyOrReturn(CheckValue("groupKeyMap[1].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNoMoreListItems<decltype(groupKeyMap)>("groupKeyMap", iter_0, 2));
         }
 
@@ -103885,17 +103885,17 @@ private:
         {
             auto iter_0 = groupTable.begin();
             VerifyOrReturn(CheckNextListItemDecodes<decltype(groupTable)>("groupTable", iter_0, 0));
-            VerifyOrReturn(CheckValue("groupTable[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValue("groupTable[0].groupId", iter_0.GetValue().groupId, 257U));
             VerifyOrReturn(CheckValuePresent("groupTable[0].groupName", iter_0.GetValue().groupName));
             VerifyOrReturn(CheckValueAsString("groupTable[0].groupName.Value()", iter_0.GetValue().groupName.Value(),
                                               chip::CharSpan("Group #1", 8)));
+            VerifyOrReturn(CheckValue("groupTable[0].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNextListItemDecodes<decltype(groupTable)>("groupTable", iter_0, 1));
-            VerifyOrReturn(CheckValue("groupTable[1].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckValue("groupTable[1].groupId", iter_0.GetValue().groupId, 258U));
             VerifyOrReturn(CheckValuePresent("groupTable[1].groupName", iter_0.GetValue().groupName));
             VerifyOrReturn(CheckValueAsString("groupTable[1].groupName.Value()", iter_0.GetValue().groupName.Value(),
                                               chip::CharSpan("Group #2", 8)));
+            VerifyOrReturn(CheckValue("groupTable[1].fabricIndex", iter_0.GetValue().fabricIndex, 1));
             VerifyOrReturn(CheckNoMoreListItems<decltype(groupTable)>("groupTable", iter_0, 2));
         }
 
@@ -106397,9 +106397,9 @@ private:
             auto * listHolder_0 = new ListHolder<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(1);
             listFreer.add(listHolder_0);
 
-            listHolder_0->mList[0].fabricIndex   = 1;
             listHolder_0->mList[0].groupId       = 257U;
             listHolder_0->mList[0].groupKeySetID = 417U;
+            listHolder_0->mList[0].fabricIndex   = 1;
 
             groupKeyMapArgument =
                 chip::app::DataModel::List<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(
@@ -106432,15 +106432,14 @@ private:
             auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
             listFreer.add(listHolder_0);
 
-            listHolder_0->mList[0].fabricIndex = 1;
-            listHolder_0->mList[0].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-            listHolder_0->mList[0].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+            listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
+            listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
             listHolder_0->mList[0].subjects.SetNull();
             listHolder_0->mList[0].targets.SetNull();
+            listHolder_0->mList[0].fabricIndex = 1;
 
-            listHolder_0->mList[1].fabricIndex = 1;
-            listHolder_0->mList[1].privilege   = static_cast<chip::app::Clusters::AccessControl::Privilege>(3);
-            listHolder_0->mList[1].authMode    = static_cast<chip::app::Clusters::AccessControl::AuthMode>(3);
+            listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(3);
+            listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(3);
             listHolder_0->mList[1].subjects.SetNonNull();
 
             {
@@ -106450,6 +106449,7 @@ private:
                 listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
             }
             listHolder_0->mList[1].targets.SetNull();
+            listHolder_0->mList[1].fabricIndex = 1;
 
             aclArgument = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
                 listHolder_0->mList, 2);
