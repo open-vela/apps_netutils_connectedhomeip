@@ -6865,8 +6865,15 @@ private:
     void OnFailureResponse_47(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-        NextTest();
+        if (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute)
+        {
+            NextTest();
+        }
+        else
+        {
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            NextTest();
+        }
     }
 
     void OnSuccessResponse_47() { ThrowSuccessResponse(); }
@@ -7010,8 +7017,15 @@ private:
     void OnFailureResponse_53(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-        NextTest();
+        if (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute)
+        {
+            NextTest();
+        }
+        else
+        {
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            NextTest();
+        }
     }
 
     void OnSuccessResponse_53() { ThrowSuccessResponse(); }
@@ -7082,8 +7096,15 @@ private:
     void OnFailureResponse_56(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-        NextTest();
+        if (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute)
+        {
+            NextTest();
+        }
+        else
+        {
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            NextTest();
+        }
     }
 
     void OnSuccessResponse_56() { ThrowSuccessResponse(); }
@@ -7153,8 +7174,15 @@ private:
     void OnFailureResponse_59(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-        NextTest();
+        if (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute)
+        {
+            NextTest();
+        }
+        else
+        {
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            NextTest();
+        }
     }
 
     void OnSuccessResponse_59() { ThrowSuccessResponse(); }
@@ -21690,8 +21718,15 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-        NextTest();
+        if (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute)
+        {
+            NextTest();
+        }
+        else
+        {
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            NextTest();
+        }
     }
 
     void OnSuccessResponse_12() { ThrowSuccessResponse(); }
@@ -44311,8 +44346,15 @@ private:
     void OnFailureResponse_55(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-        NextTest();
+        if (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute)
+        {
+            NextTest();
+        }
+        else
+        {
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            NextTest();
+        }
     }
 
     void OnSuccessResponse_55() { ThrowSuccessResponse(); }
@@ -44383,8 +44425,15 @@ private:
     void OnFailureResponse_58(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-        NextTest();
+        if (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute)
+        {
+            NextTest();
+        }
+        else
+        {
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            NextTest();
+        }
     }
 
     void OnSuccessResponse_58() { ThrowSuccessResponse(); }
@@ -44430,8 +44479,15 @@ private:
     void OnFailureResponse_60(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-        NextTest();
+        if (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute)
+        {
+            NextTest();
+        }
+        else
+        {
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            NextTest();
+        }
     }
 
     void OnSuccessResponse_60() { ThrowSuccessResponse(); }
