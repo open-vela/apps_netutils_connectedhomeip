@@ -21967,12 +21967,12 @@ public:
             err = TestReadTheGlobalAttributeAttributeList_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: ClientGeneratedCommandList\n");
-            err = TestReadTheGlobalAttributeClientGeneratedCommandList_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: ServerGeneratedCommandList\n");
-            err = TestReadTheGlobalAttributeServerGeneratedCommandList_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_4();
             break;
         }
 
@@ -22031,9 +22031,9 @@ private:
     }
 
     static void OnSuccessCallback_3(void * context,
-                                    const chip::app::DataModel::DecodableList<chip::CommandId> & clientGeneratedCommandList)
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
     {
-        (static_cast<Test_TC_I_1_1Suite *>(context))->OnSuccessResponse_3(clientGeneratedCommandList);
+        (static_cast<Test_TC_I_1_1Suite *>(context))->OnSuccessResponse_3(acceptedCommandList);
     }
 
     static void OnFailureCallback_4(void * context, CHIP_ERROR error)
@@ -22042,9 +22042,9 @@ private:
     }
 
     static void OnSuccessCallback_4(void * context,
-                                    const chip::app::DataModel::DecodableList<chip::CommandId> & serverGeneratedCommandList)
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
     {
-        (static_cast<Test_TC_I_1_1Suite *>(context))->OnSuccessResponse_4(serverGeneratedCommandList);
+        (static_cast<Test_TC_I_1_1Suite *>(context))->OnSuccessResponse_4(generatedCommandList);
     }
 
     //
@@ -22103,13 +22103,13 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeClientGeneratedCommandList_3()
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_3()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::IdentifyClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Identify::Attributes::ClientGeneratedCommandList::TypeInfo>(
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Identify::Attributes::AcceptedCommandList::TypeInfo>(
             this, OnSuccessCallback_3, OnFailureCallback_3, true));
         return CHIP_NO_ERROR;
     }
@@ -22120,19 +22120,19 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::CommandId> & clientGeneratedCommandList)
+    void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
     {
-        VerifyOrReturn(CheckConstraintType("clientGeneratedCommandList", "", "list"));
+        VerifyOrReturn(CheckConstraintType("acceptedCommandList", "", "list"));
         NextTest();
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeServerGeneratedCommandList_4()
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_4()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::IdentifyClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Identify::Attributes::ServerGeneratedCommandList::TypeInfo>(
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Identify::Attributes::GeneratedCommandList::TypeInfo>(
             this, OnSuccessCallback_4, OnFailureCallback_4, true));
         return CHIP_NO_ERROR;
     }
@@ -22143,9 +22143,9 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & serverGeneratedCommandList)
+    void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
     {
-        VerifyOrReturn(CheckConstraintType("serverGeneratedCommandList", "", "list"));
+        VerifyOrReturn(CheckConstraintType("generatedCommandList", "", "list"));
         NextTest();
     }
 };
@@ -65760,12 +65760,12 @@ public:
             err = TestReadAttributeThatReturnsClusterSpecificStatusOnRead_477();
             break;
         case 478:
-            ChipLogProgress(chipTool, " ***** Test Step 478 : read ClientGeneratedCommandList attribute\n");
-            err = TestReadClientGeneratedCommandListAttribute_478();
+            ChipLogProgress(chipTool, " ***** Test Step 478 : read AcceptedCommandList attribute\n");
+            err = TestReadAcceptedCommandListAttribute_478();
             break;
         case 479:
-            ChipLogProgress(chipTool, " ***** Test Step 479 : read ServerGeneratedCommandList attribute\n");
-            err = TestReadServerGeneratedCommandListAttribute_479();
+            ChipLogProgress(chipTool, " ***** Test Step 479 : read GeneratedCommandList attribute\n");
+            err = TestReadGeneratedCommandListAttribute_479();
             break;
         case 480:
             ChipLogProgress(chipTool, " ***** Test Step 480 : Write struct-typed attribute\n");
@@ -69753,9 +69753,9 @@ private:
     }
 
     static void OnSuccessCallback_478(void * context,
-                                      const chip::app::DataModel::DecodableList<chip::CommandId> & clientGeneratedCommandList)
+                                      const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
     {
-        (static_cast<TestClusterSuite *>(context))->OnSuccessResponse_478(clientGeneratedCommandList);
+        (static_cast<TestClusterSuite *>(context))->OnSuccessResponse_478(acceptedCommandList);
     }
 
     static void OnFailureCallback_479(void * context, CHIP_ERROR error)
@@ -69764,9 +69764,9 @@ private:
     }
 
     static void OnSuccessCallback_479(void * context,
-                                      const chip::app::DataModel::DecodableList<chip::CommandId> & serverGeneratedCommandList)
+                                      const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
     {
-        (static_cast<TestClusterSuite *>(context))->OnSuccessResponse_479(serverGeneratedCommandList);
+        (static_cast<TestClusterSuite *>(context))->OnSuccessResponse_479(generatedCommandList);
     }
 
     static void OnFailureCallback_480(void * context, CHIP_ERROR error)
@@ -82187,15 +82187,14 @@ private:
 
     void OnSuccessResponse_477(bool clusterErrorBoolean) { ThrowSuccessResponse(); }
 
-    CHIP_ERROR TestReadClientGeneratedCommandListAttribute_478()
+    CHIP_ERROR TestReadAcceptedCommandListAttribute_478()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::TestClusterClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::TestCluster::Attributes::ClientGeneratedCommandList::TypeInfo>(
-                this, OnSuccessCallback_478, OnFailureCallback_478, true));
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::TestCluster::Attributes::AcceptedCommandList::TypeInfo>(
+            this, OnSuccessCallback_478, OnFailureCallback_478, true));
         return CHIP_NO_ERROR;
     }
 
@@ -82205,69 +82204,60 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_478(const chip::app::DataModel::DecodableList<chip::CommandId> & clientGeneratedCommandList)
+    void OnSuccessResponse_478(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
     {
         {
-            auto iter_0 = clientGeneratedCommandList.begin();
-            VerifyOrReturn(CheckNextListItemDecodes<decltype(clientGeneratedCommandList)>("clientGeneratedCommandList", iter_0, 0));
-            VerifyOrReturn(CheckValue("clientGeneratedCommandList[0]", iter_0.GetValue(), 0UL));
-            VerifyOrReturn(CheckNextListItemDecodes<decltype(clientGeneratedCommandList)>("clientGeneratedCommandList", iter_0, 1));
-            VerifyOrReturn(CheckValue("clientGeneratedCommandList[1]", iter_0.GetValue(), 1UL));
-            VerifyOrReturn(CheckNextListItemDecodes<decltype(clientGeneratedCommandList)>("clientGeneratedCommandList", iter_0, 2));
-            VerifyOrReturn(CheckValue("clientGeneratedCommandList[2]", iter_0.GetValue(), 2UL));
-            VerifyOrReturn(CheckNextListItemDecodes<decltype(clientGeneratedCommandList)>("clientGeneratedCommandList", iter_0, 3));
-            VerifyOrReturn(CheckValue("clientGeneratedCommandList[3]", iter_0.GetValue(), 4UL));
-            VerifyOrReturn(CheckNextListItemDecodes<decltype(clientGeneratedCommandList)>("clientGeneratedCommandList", iter_0, 4));
-            VerifyOrReturn(CheckValue("clientGeneratedCommandList[4]", iter_0.GetValue(), 7UL));
-            VerifyOrReturn(CheckNextListItemDecodes<decltype(clientGeneratedCommandList)>("clientGeneratedCommandList", iter_0, 5));
-            VerifyOrReturn(CheckValue("clientGeneratedCommandList[5]", iter_0.GetValue(), 8UL));
-            VerifyOrReturn(CheckNextListItemDecodes<decltype(clientGeneratedCommandList)>("clientGeneratedCommandList", iter_0, 6));
-            VerifyOrReturn(CheckValue("clientGeneratedCommandList[6]", iter_0.GetValue(), 9UL));
-            VerifyOrReturn(CheckNextListItemDecodes<decltype(clientGeneratedCommandList)>("clientGeneratedCommandList", iter_0, 7));
-            VerifyOrReturn(CheckValue("clientGeneratedCommandList[7]", iter_0.GetValue(), 10UL));
-            VerifyOrReturn(CheckNextListItemDecodes<decltype(clientGeneratedCommandList)>("clientGeneratedCommandList", iter_0, 8));
-            VerifyOrReturn(CheckValue("clientGeneratedCommandList[8]", iter_0.GetValue(), 11UL));
-            VerifyOrReturn(CheckNextListItemDecodes<decltype(clientGeneratedCommandList)>("clientGeneratedCommandList", iter_0, 9));
-            VerifyOrReturn(CheckValue("clientGeneratedCommandList[9]", iter_0.GetValue(), 12UL));
-            VerifyOrReturn(
-                CheckNextListItemDecodes<decltype(clientGeneratedCommandList)>("clientGeneratedCommandList", iter_0, 10));
-            VerifyOrReturn(CheckValue("clientGeneratedCommandList[10]", iter_0.GetValue(), 13UL));
-            VerifyOrReturn(
-                CheckNextListItemDecodes<decltype(clientGeneratedCommandList)>("clientGeneratedCommandList", iter_0, 11));
-            VerifyOrReturn(CheckValue("clientGeneratedCommandList[11]", iter_0.GetValue(), 14UL));
-            VerifyOrReturn(
-                CheckNextListItemDecodes<decltype(clientGeneratedCommandList)>("clientGeneratedCommandList", iter_0, 12));
-            VerifyOrReturn(CheckValue("clientGeneratedCommandList[12]", iter_0.GetValue(), 15UL));
-            VerifyOrReturn(
-                CheckNextListItemDecodes<decltype(clientGeneratedCommandList)>("clientGeneratedCommandList", iter_0, 13));
-            VerifyOrReturn(CheckValue("clientGeneratedCommandList[13]", iter_0.GetValue(), 17UL));
-            VerifyOrReturn(
-                CheckNextListItemDecodes<decltype(clientGeneratedCommandList)>("clientGeneratedCommandList", iter_0, 14));
-            VerifyOrReturn(CheckValue("clientGeneratedCommandList[14]", iter_0.GetValue(), 18UL));
-            VerifyOrReturn(
-                CheckNextListItemDecodes<decltype(clientGeneratedCommandList)>("clientGeneratedCommandList", iter_0, 15));
-            VerifyOrReturn(CheckValue("clientGeneratedCommandList[15]", iter_0.GetValue(), 19UL));
-            VerifyOrReturn(
-                CheckNextListItemDecodes<decltype(clientGeneratedCommandList)>("clientGeneratedCommandList", iter_0, 16));
-            VerifyOrReturn(CheckValue("clientGeneratedCommandList[16]", iter_0.GetValue(), 20UL));
-            VerifyOrReturn(
-                CheckNextListItemDecodes<decltype(clientGeneratedCommandList)>("clientGeneratedCommandList", iter_0, 17));
-            VerifyOrReturn(CheckValue("clientGeneratedCommandList[17]", iter_0.GetValue(), 21UL));
-            VerifyOrReturn(CheckNoMoreListItems<decltype(clientGeneratedCommandList)>("clientGeneratedCommandList", iter_0, 18));
+            auto iter_0 = acceptedCommandList.begin();
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(acceptedCommandList)>("acceptedCommandList", iter_0, 0));
+            VerifyOrReturn(CheckValue("acceptedCommandList[0]", iter_0.GetValue(), 0UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(acceptedCommandList)>("acceptedCommandList", iter_0, 1));
+            VerifyOrReturn(CheckValue("acceptedCommandList[1]", iter_0.GetValue(), 1UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(acceptedCommandList)>("acceptedCommandList", iter_0, 2));
+            VerifyOrReturn(CheckValue("acceptedCommandList[2]", iter_0.GetValue(), 2UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(acceptedCommandList)>("acceptedCommandList", iter_0, 3));
+            VerifyOrReturn(CheckValue("acceptedCommandList[3]", iter_0.GetValue(), 4UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(acceptedCommandList)>("acceptedCommandList", iter_0, 4));
+            VerifyOrReturn(CheckValue("acceptedCommandList[4]", iter_0.GetValue(), 7UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(acceptedCommandList)>("acceptedCommandList", iter_0, 5));
+            VerifyOrReturn(CheckValue("acceptedCommandList[5]", iter_0.GetValue(), 8UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(acceptedCommandList)>("acceptedCommandList", iter_0, 6));
+            VerifyOrReturn(CheckValue("acceptedCommandList[6]", iter_0.GetValue(), 9UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(acceptedCommandList)>("acceptedCommandList", iter_0, 7));
+            VerifyOrReturn(CheckValue("acceptedCommandList[7]", iter_0.GetValue(), 10UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(acceptedCommandList)>("acceptedCommandList", iter_0, 8));
+            VerifyOrReturn(CheckValue("acceptedCommandList[8]", iter_0.GetValue(), 11UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(acceptedCommandList)>("acceptedCommandList", iter_0, 9));
+            VerifyOrReturn(CheckValue("acceptedCommandList[9]", iter_0.GetValue(), 12UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(acceptedCommandList)>("acceptedCommandList", iter_0, 10));
+            VerifyOrReturn(CheckValue("acceptedCommandList[10]", iter_0.GetValue(), 13UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(acceptedCommandList)>("acceptedCommandList", iter_0, 11));
+            VerifyOrReturn(CheckValue("acceptedCommandList[11]", iter_0.GetValue(), 14UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(acceptedCommandList)>("acceptedCommandList", iter_0, 12));
+            VerifyOrReturn(CheckValue("acceptedCommandList[12]", iter_0.GetValue(), 15UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(acceptedCommandList)>("acceptedCommandList", iter_0, 13));
+            VerifyOrReturn(CheckValue("acceptedCommandList[13]", iter_0.GetValue(), 17UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(acceptedCommandList)>("acceptedCommandList", iter_0, 14));
+            VerifyOrReturn(CheckValue("acceptedCommandList[14]", iter_0.GetValue(), 18UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(acceptedCommandList)>("acceptedCommandList", iter_0, 15));
+            VerifyOrReturn(CheckValue("acceptedCommandList[15]", iter_0.GetValue(), 19UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(acceptedCommandList)>("acceptedCommandList", iter_0, 16));
+            VerifyOrReturn(CheckValue("acceptedCommandList[16]", iter_0.GetValue(), 20UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(acceptedCommandList)>("acceptedCommandList", iter_0, 17));
+            VerifyOrReturn(CheckValue("acceptedCommandList[17]", iter_0.GetValue(), 21UL));
+            VerifyOrReturn(CheckNoMoreListItems<decltype(acceptedCommandList)>("acceptedCommandList", iter_0, 18));
         }
 
         NextTest();
     }
 
-    CHIP_ERROR TestReadServerGeneratedCommandListAttribute_479()
+    CHIP_ERROR TestReadGeneratedCommandListAttribute_479()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::TestClusterClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::TestCluster::Attributes::ServerGeneratedCommandList::TypeInfo>(
-                this, OnSuccessCallback_479, OnFailureCallback_479, true));
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::TestCluster::Attributes::GeneratedCommandList::TypeInfo>(
+            this, OnSuccessCallback_479, OnFailureCallback_479, true));
         return CHIP_NO_ERROR;
     }
 
@@ -82277,27 +82267,27 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_479(const chip::app::DataModel::DecodableList<chip::CommandId> & serverGeneratedCommandList)
+    void OnSuccessResponse_479(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
     {
         {
-            auto iter_0 = serverGeneratedCommandList.begin();
-            VerifyOrReturn(CheckNextListItemDecodes<decltype(serverGeneratedCommandList)>("serverGeneratedCommandList", iter_0, 0));
-            VerifyOrReturn(CheckValue("serverGeneratedCommandList[0]", iter_0.GetValue(), 0UL));
-            VerifyOrReturn(CheckNextListItemDecodes<decltype(serverGeneratedCommandList)>("serverGeneratedCommandList", iter_0, 1));
-            VerifyOrReturn(CheckValue("serverGeneratedCommandList[1]", iter_0.GetValue(), 1UL));
-            VerifyOrReturn(CheckNextListItemDecodes<decltype(serverGeneratedCommandList)>("serverGeneratedCommandList", iter_0, 2));
-            VerifyOrReturn(CheckValue("serverGeneratedCommandList[2]", iter_0.GetValue(), 4UL));
-            VerifyOrReturn(CheckNextListItemDecodes<decltype(serverGeneratedCommandList)>("serverGeneratedCommandList", iter_0, 3));
-            VerifyOrReturn(CheckValue("serverGeneratedCommandList[3]", iter_0.GetValue(), 5UL));
-            VerifyOrReturn(CheckNextListItemDecodes<decltype(serverGeneratedCommandList)>("serverGeneratedCommandList", iter_0, 4));
-            VerifyOrReturn(CheckValue("serverGeneratedCommandList[4]", iter_0.GetValue(), 6UL));
-            VerifyOrReturn(CheckNextListItemDecodes<decltype(serverGeneratedCommandList)>("serverGeneratedCommandList", iter_0, 5));
-            VerifyOrReturn(CheckValue("serverGeneratedCommandList[5]", iter_0.GetValue(), 9UL));
-            VerifyOrReturn(CheckNextListItemDecodes<decltype(serverGeneratedCommandList)>("serverGeneratedCommandList", iter_0, 6));
-            VerifyOrReturn(CheckValue("serverGeneratedCommandList[6]", iter_0.GetValue(), 10UL));
-            VerifyOrReturn(CheckNextListItemDecodes<decltype(serverGeneratedCommandList)>("serverGeneratedCommandList", iter_0, 7));
-            VerifyOrReturn(CheckValue("serverGeneratedCommandList[7]", iter_0.GetValue(), 11UL));
-            VerifyOrReturn(CheckNoMoreListItems<decltype(serverGeneratedCommandList)>("serverGeneratedCommandList", iter_0, 8));
+            auto iter_0 = generatedCommandList.begin();
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(generatedCommandList)>("generatedCommandList", iter_0, 0));
+            VerifyOrReturn(CheckValue("generatedCommandList[0]", iter_0.GetValue(), 0UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(generatedCommandList)>("generatedCommandList", iter_0, 1));
+            VerifyOrReturn(CheckValue("generatedCommandList[1]", iter_0.GetValue(), 1UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(generatedCommandList)>("generatedCommandList", iter_0, 2));
+            VerifyOrReturn(CheckValue("generatedCommandList[2]", iter_0.GetValue(), 4UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(generatedCommandList)>("generatedCommandList", iter_0, 3));
+            VerifyOrReturn(CheckValue("generatedCommandList[3]", iter_0.GetValue(), 5UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(generatedCommandList)>("generatedCommandList", iter_0, 4));
+            VerifyOrReturn(CheckValue("generatedCommandList[4]", iter_0.GetValue(), 6UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(generatedCommandList)>("generatedCommandList", iter_0, 5));
+            VerifyOrReturn(CheckValue("generatedCommandList[5]", iter_0.GetValue(), 9UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(generatedCommandList)>("generatedCommandList", iter_0, 6));
+            VerifyOrReturn(CheckValue("generatedCommandList[6]", iter_0.GetValue(), 10UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(generatedCommandList)>("generatedCommandList", iter_0, 7));
+            VerifyOrReturn(CheckValue("generatedCommandList[7]", iter_0.GetValue(), 11UL));
+            VerifyOrReturn(CheckNoMoreListItems<decltype(generatedCommandList)>("generatedCommandList", iter_0, 8));
         }
 
         NextTest();
