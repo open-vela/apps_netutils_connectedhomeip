@@ -91188,6 +91188,7 @@ public:
         TestCommand("TestMultiAdmin", credsIssuerConfig), mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("nodeIdForDuplicateCommissioning", 0, UINT64_MAX, &mNodeIdForDuplicateCommissioning);
         AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
         AddArgument("nodeId3", 0, UINT64_MAX, &mNodeId3);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
@@ -91243,40 +91244,56 @@ public:
             err = TestOpenCommissioningWindowFromAlpha_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Commission from beta\n");
-            err = TestCommissionFromBeta_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Commission from alpha again\n");
+            err = TestCommissionFromAlphaAgain_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Wait for the commissioned device to be retrieved for beta\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrievedForBeta_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Check that we just have the one fabric and did not add a new one\n");
+            err = TestCheckThatWeJustHaveTheOneFabricAndDidNotAddANewOne_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Open Commissioning Window from beta\n");
-            err = TestOpenCommissioningWindowFromBeta_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Close Commissioning Window after failed commissioning\n");
+            err = TestCloseCommissioningWindowAfterFailedCommissioning_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Commission from gamma\n");
-            err = TestCommissionFromGamma_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Open Commissioning Window from alpha again\n");
+            err = TestOpenCommissioningWindowFromAlphaAgain_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Wait for the commissioned device to be retrieved for gamma\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrievedForGamma_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Commission from beta\n");
+            err = TestCommissionFromBeta_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : read the mandatory attribute: NodeLabel from alpha\n");
-            err = TestReadTheMandatoryAttributeNodeLabelFromAlpha_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Wait for the commissioned device to be retrieved for beta\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrievedForBeta_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : write the mandatory attribute NodeLabel from beta\n");
-            err = TestWriteTheMandatoryAttributeNodeLabelFromBeta_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Open Commissioning Window from beta\n");
+            err = TestOpenCommissioningWindowFromBeta_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : read the mandatory attribute: NodeLabel from gamma\n");
-            err = TestReadTheMandatoryAttributeNodeLabelFromGamma_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Commission from gamma\n");
+            err = TestCommissionFromGamma_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : write the mandatory attribute NodeLabel back to default\n");
-            err = TestWriteTheMandatoryAttributeNodeLabelBackToDefault_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Wait for the commissioned device to be retrieved for gamma\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrievedForGamma_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : read the mandatory attribute: NodeLabel from alpha\n");
+            err = TestReadTheMandatoryAttributeNodeLabelFromAlpha_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : write the mandatory attribute NodeLabel from beta\n");
+            err = TestWriteTheMandatoryAttributeNodeLabelFromBeta_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : read the mandatory attribute: NodeLabel from gamma\n");
+            err = TestReadTheMandatoryAttributeNodeLabelFromGamma_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : write the mandatory attribute NodeLabel back to default\n");
+            err = TestWriteTheMandatoryAttributeNodeLabelBackToDefault_15();
             break;
         }
 
@@ -91294,9 +91311,10 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 12;
+    const uint16_t mTestCount = 16;
 
     chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::NodeId> mNodeIdForDuplicateCommissioning;
     chip::Optional<chip::NodeId> mNodeId2;
     chip::Optional<chip::NodeId> mNodeId3;
     chip::Optional<chip::EndpointId> mEndpoint;
@@ -91315,39 +91333,52 @@ private:
         NextTest();
     }
 
-    static void OnFailureCallback_8(void * context, CHIP_ERROR error)
+    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
     {
-        (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_8(error);
+        (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_4(error);
     }
 
-    static void OnSuccessCallback_8(void * context, chip::CharSpan nodeLabel)
+    static void
+    OnSuccessCallback_4(void * context,
+                        const chip::app::DataModel::DecodableList<
+                            chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType> & fabrics)
     {
-        (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_8(nodeLabel);
+        (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_4(fabrics);
     }
 
-    static void OnFailureCallback_9(void * context, CHIP_ERROR error)
+    static void OnFailureCallback_12(void * context, CHIP_ERROR error)
     {
-        (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_9(error);
+        (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_12(error);
     }
 
-    static void OnSuccessCallback_9(void * context) { (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_9(); }
-
-    static void OnFailureCallback_10(void * context, CHIP_ERROR error)
+    static void OnSuccessCallback_12(void * context, chip::CharSpan nodeLabel)
     {
-        (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_10(error);
+        (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_12(nodeLabel);
     }
 
-    static void OnSuccessCallback_10(void * context, chip::CharSpan nodeLabel)
+    static void OnFailureCallback_13(void * context, CHIP_ERROR error)
     {
-        (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_10(nodeLabel);
+        (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_13(error);
     }
 
-    static void OnFailureCallback_11(void * context, CHIP_ERROR error)
+    static void OnSuccessCallback_13(void * context) { (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_13(); }
+
+    static void OnFailureCallback_14(void * context, CHIP_ERROR error)
     {
-        (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_11(error);
+        (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_14(error);
     }
 
-    static void OnSuccessCallback_11(void * context) { (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_11(); }
+    static void OnSuccessCallback_14(void * context, chip::CharSpan nodeLabel)
+    {
+        (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_14(nodeLabel);
+    }
+
+    static void OnFailureCallback_15(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_15(error);
+    }
+
+    static void OnSuccessCallback_15(void * context) { (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_15(); }
 
     //
     // Tests methods
@@ -91394,26 +91425,49 @@ private:
 
     void OnSuccessResponse_2() { NextTest(); }
 
-    CHIP_ERROR TestCommissionFromBeta_3()
+    CHIP_ERROR TestCommissionFromAlphaAgain_3()
     {
-        SetIdentity(kIdentityBeta);
-        return PairWithQRCode(mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL,
-                              mPayload.HasValue() ? mPayload.Value() : chip::CharSpan::fromCharString("MT:-24J0AFN00KA0648G00"));
+        SetIdentity(kIdentityAlpha);
+        return PairWithQRCode(mNodeIdForDuplicateCommissioning.HasValue() ? mNodeIdForDuplicateCommissioning.Value() : 17ULL,
+                              mPayload.HasValue() ? mPayload.Value() : chip::CharSpan::fromCharString("MT:-24J0AFN00KA0648G00"),
+                              CHIP_ERROR_FABRIC_EXISTS);
     }
 
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForBeta_4()
-    {
-        SetIdentity(kIdentityBeta);
-        return WaitForCommissionee(mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL);
-    }
-
-    CHIP_ERROR TestOpenCommissioningWindowFromBeta_5()
+    CHIP_ERROR TestCheckThatWeJustHaveTheOneFabricAndDidNotAddANewOne_4()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
-        using RequestType = chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type;
+        chip::Controller::OperationalCredentialsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::OperationalCredentials::Attributes::Fabrics::TypeInfo>(
+            this, OnSuccessCallback_4, OnFailureCallback_4, false));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_4(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<
+                             chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType> & fabrics)
+    {
+        {
+            auto iter_0 = fabrics.begin();
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(fabrics)>("fabrics", iter_0, 0));
+            VerifyOrReturn(CheckNoMoreListItems<decltype(fabrics)>("fabrics", iter_0, 1));
+        }
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestCloseCommissioningWindowAfterFailedCommissioning_5()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        using RequestType               = chip::app::Clusters::AdministratorCommissioning::Commands::RevokeCommissioning::Type;
 
         RequestType request;
-        request.commissioningTimeout = 120U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
             (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_5();
@@ -91424,7 +91478,7 @@ private:
         };
 
         ReturnErrorOnFailure(
-            chip::Controller::InvokeCommand(mDevices[kIdentityBeta], this, success, failure, endpoint, request, 10000));
+            chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request, 10000));
         return CHIP_NO_ERROR;
     }
 
@@ -91436,37 +91490,108 @@ private:
 
     void OnSuccessResponse_5() { NextTest(); }
 
-    CHIP_ERROR TestCommissionFromGamma_6()
+    CHIP_ERROR TestOpenCommissioningWindowFromAlphaAgain_6()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        using RequestType = chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type;
+
+        RequestType request;
+        request.commissioningTimeout = 120U;
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_6();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_6(error);
+        };
+
+        ReturnErrorOnFailure(
+            chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request, 10000));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_6(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_6() { NextTest(); }
+
+    CHIP_ERROR TestCommissionFromBeta_7()
+    {
+        SetIdentity(kIdentityBeta);
+        return PairWithQRCode(mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL,
+                              mPayload.HasValue() ? mPayload.Value() : chip::CharSpan::fromCharString("MT:-24J0AFN00KA0648G00"));
+    }
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForBeta_8()
+    {
+        SetIdentity(kIdentityBeta);
+        return WaitForCommissionee(mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL);
+    }
+
+    CHIP_ERROR TestOpenCommissioningWindowFromBeta_9()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        using RequestType = chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type;
+
+        RequestType request;
+        request.commissioningTimeout = 120U;
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_9();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_9(error);
+        };
+
+        ReturnErrorOnFailure(
+            chip::Controller::InvokeCommand(mDevices[kIdentityBeta], this, success, failure, endpoint, request, 10000));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_9(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_9() { NextTest(); }
+
+    CHIP_ERROR TestCommissionFromGamma_10()
     {
         SetIdentity(kIdentityGamma);
         return PairWithQRCode(mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL,
                               mPayload.HasValue() ? mPayload.Value() : chip::CharSpan::fromCharString("MT:-24J0AFN00KA0648G00"));
     }
 
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForGamma_7()
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForGamma_11()
     {
         SetIdentity(kIdentityGamma);
         return WaitForCommissionee(mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL);
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributeNodeLabelFromAlpha_8()
+    CHIP_ERROR TestReadTheMandatoryAttributeNodeLabelFromAlpha_12()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         chip::Controller::BasicClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
-            this, OnSuccessCallback_8, OnFailureCallback_8, true));
+            this, OnSuccessCallback_12, OnFailureCallback_12, true));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_8(CHIP_ERROR error)
+    void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_8(chip::CharSpan nodeLabel)
+    void OnSuccessResponse_12(chip::CharSpan nodeLabel)
     {
         VerifyOrReturn(CheckValueAsString("nodeLabel", nodeLabel, chip::CharSpan("", 0)));
 
@@ -91480,7 +91605,7 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestWriteTheMandatoryAttributeNodeLabelFromBeta_9()
+    CHIP_ERROR TestWriteTheMandatoryAttributeNodeLabelFromBeta_13()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         chip::Controller::BasicClusterTest cluster;
@@ -91490,43 +91615,43 @@ private:
         nodeLabelArgument = chip::Span<const char>("written from betagarbage: not in length on purpose", 17);
 
         ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
-            nodeLabelArgument, this, OnSuccessCallback_9, OnFailureCallback_9));
+            nodeLabelArgument, this, OnSuccessCallback_13, OnFailureCallback_13));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_9(CHIP_ERROR error)
+    void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_9() { NextTest(); }
+    void OnSuccessResponse_13() { NextTest(); }
 
-    CHIP_ERROR TestReadTheMandatoryAttributeNodeLabelFromGamma_10()
+    CHIP_ERROR TestReadTheMandatoryAttributeNodeLabelFromGamma_14()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         chip::Controller::BasicClusterTest cluster;
         cluster.Associate(mDevices[kIdentityGamma], endpoint);
 
         ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
-            this, OnSuccessCallback_10, OnFailureCallback_10, true));
+            this, OnSuccessCallback_14, OnFailureCallback_14, true));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_10(CHIP_ERROR error)
+    void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_10(chip::CharSpan nodeLabel)
+    void OnSuccessResponse_14(chip::CharSpan nodeLabel)
     {
         VerifyOrReturn(CheckConstraintNotValue("nodeLabel", nodeLabel, readFromAlpha));
 
         NextTest();
     }
 
-    CHIP_ERROR TestWriteTheMandatoryAttributeNodeLabelBackToDefault_11()
+    CHIP_ERROR TestWriteTheMandatoryAttributeNodeLabelBackToDefault_15()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         chip::Controller::BasicClusterTest cluster;
@@ -91536,17 +91661,17 @@ private:
         nodeLabelArgument = readFromAlpha;
 
         ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
-            nodeLabelArgument, this, OnSuccessCallback_11, OnFailureCallback_11));
+            nodeLabelArgument, this, OnSuccessCallback_15, OnFailureCallback_15));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_11(CHIP_ERROR error)
+    void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_11() { NextTest(); }
+    void OnSuccessResponse_15() { NextTest(); }
 };
 
 class Test_TC_SWDIAG_1_1Suite : public TestCommand
