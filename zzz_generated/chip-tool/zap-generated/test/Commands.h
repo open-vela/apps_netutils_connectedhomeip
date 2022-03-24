@@ -32571,7 +32571,9 @@ private:
         (static_cast<Test_TC_OO_2_1Suite *>(context))->OnFailureResponse_5(error);
     }
 
-    static void OnSuccessCallback_5(void * context, const chip::app::DataModel::Nullable<uint8_t> & startUpOnOff)
+    static void
+    OnSuccessCallback_5(void * context,
+                        const chip::app::DataModel::Nullable<chip::app::Clusters::OnOff::OnOffStartUpOnOff> & startUpOnOff)
     {
         (static_cast<Test_TC_OO_2_1Suite *>(context))->OnSuccessResponse_5(startUpOnOff);
     }
@@ -32695,7 +32697,7 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_5(const chip::app::DataModel::Nullable<uint8_t> & startUpOnOff)
+    void OnSuccessResponse_5(const chip::app::DataModel::Nullable<chip::app::Clusters::OnOff::OnOffStartUpOnOff> & startUpOnOff)
     {
         VerifyOrReturn(CheckConstraintType("startUpOnOff", "", "enum8"));
         NextTest();
