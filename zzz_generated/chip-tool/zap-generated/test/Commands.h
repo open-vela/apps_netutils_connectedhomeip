@@ -3050,17 +3050,16 @@ public:
             err = TestReadTheGlobalAttributeConstraintsClusterRevision_2();
             break;
         case 3:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 3 : write the default values to mandatory global attribute: ClusterRevision\n");
-            err = TestWriteTheDefaultValuesToMandatoryGlobalAttributeClusterRevision_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : reads back global attribute: ClusterRevision\n");
-            err = TestReadsBackGlobalAttributeClusterRevision_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
-            err = TestReadTheGlobalAttributeAttributeList_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_5();
             break;
         }
 
@@ -3118,16 +3117,20 @@ private:
         (static_cast<Test_TC_BOOL_1_1Suite *>(context))->OnFailureResponse_3(error);
     }
 
-    static void OnSuccessCallback_3(void * context) { (static_cast<Test_TC_BOOL_1_1Suite *>(context))->OnSuccessResponse_3(); }
+    static void OnSuccessCallback_3(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    {
+        (static_cast<Test_TC_BOOL_1_1Suite *>(context))->OnSuccessResponse_3(attributeList);
+    }
 
     static void OnFailureCallback_4(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_BOOL_1_1Suite *>(context))->OnFailureResponse_4(error);
     }
 
-    static void OnSuccessCallback_4(void * context, uint16_t clusterRevision)
+    static void OnSuccessCallback_4(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
     {
-        (static_cast<Test_TC_BOOL_1_1Suite *>(context))->OnSuccessResponse_4(clusterRevision);
+        (static_cast<Test_TC_BOOL_1_1Suite *>(context))->OnSuccessResponse_4(acceptedCommandList);
     }
 
     static void OnFailureCallback_5(void * context, CHIP_ERROR error)
@@ -3135,9 +3138,10 @@ private:
         (static_cast<Test_TC_BOOL_1_1Suite *>(context))->OnFailureResponse_5(error);
     }
 
-    static void OnSuccessCallback_5(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    static void OnSuccessCallback_5(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
     {
-        (static_cast<Test_TC_BOOL_1_1Suite *>(context))->OnSuccessResponse_5(attributeList);
+        (static_cast<Test_TC_BOOL_1_1Suite *>(context))->OnSuccessResponse_5(generatedCommandList);
     }
 
     //
@@ -3197,36 +3201,36 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryGlobalAttributeClusterRevision_3()
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_3()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::BooleanStateClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint16_t clusterRevisionArgument;
-        clusterRevisionArgument = 1U;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::BooleanState::Attributes::ClusterRevision::TypeInfo>(
-            clusterRevisionArgument, this, OnSuccessCallback_3, OnFailureCallback_3));
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::BooleanState::Attributes::AttributeList::TypeInfo>(
+            this, OnSuccessCallback_3, OnFailureCallback_3, true));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    {
+        VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
         NextTest();
     }
 
-    void OnSuccessResponse_3() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR TestReadsBackGlobalAttributeClusterRevision_4()
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_4()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::BooleanStateClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::BooleanState::Attributes::ClusterRevision::TypeInfo>(
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::BooleanState::Attributes::AcceptedCommandList::TypeInfo>(
             this, OnSuccessCallback_4, OnFailureCallback_4, true));
         return CHIP_NO_ERROR;
     }
@@ -3237,20 +3241,19 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_4(uint16_t clusterRevision)
+    void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
     {
-        VerifyOrReturn(CheckValue("clusterRevision", clusterRevision, 1U));
-
+        VerifyOrReturn(CheckConstraintType("acceptedCommandList", "", "list"));
         NextTest();
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_5()
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_5()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::BooleanStateClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::BooleanState::Attributes::AttributeList::TypeInfo>(
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::BooleanState::Attributes::GeneratedCommandList::TypeInfo>(
             this, OnSuccessCallback_5, OnFailureCallback_5, true));
         return CHIP_NO_ERROR;
     }
@@ -3261,9 +3264,9 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_5(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    void OnSuccessResponse_5(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
     {
-        VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+        VerifyOrReturn(CheckConstraintType("generatedCommandList", "", "list"));
         NextTest();
     }
 };
@@ -3319,15 +3322,6 @@ public:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read mandatory non-global attribute constraints: StateValue\n");
             err = TestReadMandatoryNonGlobalAttributeConstraintsStateValue_2();
             break;
-        case 3:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 3 : Write the default value to mandatory non-global attribute: StateValue\n");
-            err = TestWriteTheDefaultValueToMandatoryNonGlobalAttributeStateValue_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Reads back the mandatory non-global attribute: StateValue\n");
-            err = TestReadsBackTheMandatoryNonGlobalAttributeStateValue_4();
-            break;
         }
 
         if (CHIP_NO_ERROR != err)
@@ -3344,7 +3338,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 5;
+    const uint16_t mTestCount = 3;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -3377,23 +3371,6 @@ private:
     static void OnSuccessCallback_2(void * context, bool stateValue)
     {
         (static_cast<Test_TC_BOOL_2_1Suite *>(context))->OnSuccessResponse_2(stateValue);
-    }
-
-    static void OnFailureCallback_3(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_BOOL_2_1Suite *>(context))->OnFailureResponse_3(error);
-    }
-
-    static void OnSuccessCallback_3(void * context) { (static_cast<Test_TC_BOOL_2_1Suite *>(context))->OnSuccessResponse_3(); }
-
-    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_BOOL_2_1Suite *>(context))->OnFailureResponse_4(error);
-    }
-
-    static void OnSuccessCallback_4(void * context, bool stateValue)
-    {
-        (static_cast<Test_TC_BOOL_2_1Suite *>(context))->OnSuccessResponse_4(stateValue);
     }
 
     //
@@ -3452,53 +3429,6 @@ private:
         VerifyOrReturn(CheckConstraintType("stateValue", "", "bool"));
         NextTest();
     }
-
-    CHIP_ERROR TestWriteTheDefaultValueToMandatoryNonGlobalAttributeStateValue_3()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::BooleanStateClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        bool stateValueArgument;
-        stateValueArgument = 1;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::BooleanState::Attributes::StateValue::TypeInfo>(
-            stateValueArgument, this, OnSuccessCallback_3, OnFailureCallback_3));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_3(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-        NextTest();
-    }
-
-    void OnSuccessResponse_3() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR TestReadsBackTheMandatoryNonGlobalAttributeStateValue_4()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::BooleanStateClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::BooleanState::Attributes::StateValue::TypeInfo>(
-            this, OnSuccessCallback_4, OnFailureCallback_4, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_4(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_4(bool stateValue)
-    {
-        VerifyOrReturn(CheckValue("stateValue", stateValue, 0));
-
-        NextTest();
-    }
 };
 
 class Test_TC_BRAC_1_1Suite : public TestCommand
@@ -3552,6 +3482,18 @@ public:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute constraints: ClusterRevision\n");
             err = TestReadTheGlobalAttributeConstraintsClusterRevision_2();
             break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_5();
+            break;
         }
 
         if (CHIP_NO_ERROR != err)
@@ -3568,7 +3510,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 3;
+    const uint16_t mTestCount = 6;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -3601,6 +3543,38 @@ private:
     static void OnSuccessCallback_2(void * context, uint16_t clusterRevision)
     {
         (static_cast<Test_TC_BRAC_1_1Suite *>(context))->OnSuccessResponse_2(clusterRevision);
+    }
+
+    static void OnFailureCallback_3(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_BRAC_1_1Suite *>(context))->OnFailureResponse_3(error);
+    }
+
+    static void OnSuccessCallback_3(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    {
+        (static_cast<Test_TC_BRAC_1_1Suite *>(context))->OnSuccessResponse_3(attributeList);
+    }
+
+    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_BRAC_1_1Suite *>(context))->OnFailureResponse_4(error);
+    }
+
+    static void OnSuccessCallback_4(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
+    {
+        (static_cast<Test_TC_BRAC_1_1Suite *>(context))->OnSuccessResponse_4(acceptedCommandList);
+    }
+
+    static void OnFailureCallback_5(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_BRAC_1_1Suite *>(context))->OnFailureResponse_5(error);
+    }
+
+    static void OnSuccessCallback_5(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
+    {
+        (static_cast<Test_TC_BRAC_1_1Suite *>(context))->OnSuccessResponse_5(generatedCommandList);
     }
 
     //
@@ -3657,6 +3631,75 @@ private:
     void OnSuccessResponse_2(uint16_t clusterRevision)
     {
         VerifyOrReturn(CheckConstraintType("clusterRevision", "", "uint16"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::BridgedActionsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::BridgedActions::Attributes::AttributeList::TypeInfo>(
+            this, OnSuccessCallback_3, OnFailureCallback_3, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_3(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    {
+        VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_4()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::BridgedActionsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::BridgedActions::Attributes::AcceptedCommandList::TypeInfo>(
+            this, OnSuccessCallback_4, OnFailureCallback_4, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_4(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
+    {
+        VerifyOrReturn(CheckConstraintType("acceptedCommandList", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_5()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::BridgedActionsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::BridgedActions::Attributes::GeneratedCommandList::TypeInfo>(
+            this, OnSuccessCallback_5, OnFailureCallback_5, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_5(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_5(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
+    {
+        VerifyOrReturn(CheckConstraintType("generatedCommandList", "", "list"));
         NextTest();
     }
 };
@@ -22368,25 +22411,20 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : read the global attribute: ClusterRevision\n");
-            err = TestReadTheGlobalAttributeClusterRevision_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute constraints: ClusterRevision\n");
+            err = TestReadTheGlobalAttributeConstraintsClusterRevision_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute constraints: ClusterRevision\n");
-            err = TestReadTheGlobalAttributeConstraintsClusterRevision_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_2();
             break;
         case 3:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 3 : write the default values to mandatory global attribute: ClusterRevision\n");
-            err = TestWriteTheDefaultValuesToMandatoryGlobalAttributeClusterRevision_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : reads back global attribute: ClusterRevision\n");
-            err = TestReadsBackGlobalAttributeClusterRevision_4();
-            break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
-            err = TestReadTheGlobalAttributeAttributeList_5();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_4();
             break;
         }
 
@@ -22404,7 +22442,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 6;
+    const uint16_t mTestCount = 5;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -22434,9 +22472,9 @@ private:
         (static_cast<Test_TC_ILL_1_1Suite *>(context))->OnFailureResponse_2(error);
     }
 
-    static void OnSuccessCallback_2(void * context, uint16_t clusterRevision)
+    static void OnSuccessCallback_2(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
     {
-        (static_cast<Test_TC_ILL_1_1Suite *>(context))->OnSuccessResponse_2(clusterRevision);
+        (static_cast<Test_TC_ILL_1_1Suite *>(context))->OnSuccessResponse_2(attributeList);
     }
 
     static void OnFailureCallback_3(void * context, CHIP_ERROR error)
@@ -22444,26 +22482,21 @@ private:
         (static_cast<Test_TC_ILL_1_1Suite *>(context))->OnFailureResponse_3(error);
     }
 
-    static void OnSuccessCallback_3(void * context) { (static_cast<Test_TC_ILL_1_1Suite *>(context))->OnSuccessResponse_3(); }
+    static void OnSuccessCallback_3(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
+    {
+        (static_cast<Test_TC_ILL_1_1Suite *>(context))->OnSuccessResponse_3(acceptedCommandList);
+    }
 
     static void OnFailureCallback_4(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_ILL_1_1Suite *>(context))->OnFailureResponse_4(error);
     }
 
-    static void OnSuccessCallback_4(void * context, uint16_t clusterRevision)
+    static void OnSuccessCallback_4(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
     {
-        (static_cast<Test_TC_ILL_1_1Suite *>(context))->OnSuccessResponse_4(clusterRevision);
-    }
-
-    static void OnFailureCallback_5(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_ILL_1_1Suite *>(context))->OnFailureResponse_5(error);
-    }
-
-    static void OnSuccessCallback_5(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
-    {
-        (static_cast<Test_TC_ILL_1_1Suite *>(context))->OnSuccessResponse_5(attributeList);
+        (static_cast<Test_TC_ILL_1_1Suite *>(context))->OnSuccessResponse_4(generatedCommandList);
     }
 
     //
@@ -22476,7 +22509,7 @@ private:
         return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    CHIP_ERROR TestReadTheGlobalAttributeConstraintsClusterRevision_1()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::IlluminanceMeasurementClusterTest cluster;
@@ -22496,19 +22529,18 @@ private:
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
     {
-        VerifyOrReturn(CheckValue("clusterRevision", clusterRevision, 2U));
-
+        VerifyOrReturn(CheckConstraintType("clusterRevision", "", "uint16"));
         NextTest();
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeConstraintsClusterRevision_2()
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_2()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::IlluminanceMeasurementClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::IlluminanceMeasurement::Attributes::ClusterRevision::TypeInfo>(
+            cluster.ReadAttribute<chip::app::Clusters::IlluminanceMeasurement::Attributes::AttributeList::TypeInfo>(
                 this, OnSuccessCallback_2, OnFailureCallback_2, true));
         return CHIP_NO_ERROR;
     }
@@ -22519,44 +22551,44 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_2(uint16_t clusterRevision)
+    void OnSuccessResponse_2(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
     {
-        VerifyOrReturn(CheckConstraintType("clusterRevision", "", "uint16"));
+        VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
         NextTest();
     }
 
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryGlobalAttributeClusterRevision_3()
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_3()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::IlluminanceMeasurementClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint16_t clusterRevisionArgument;
-        clusterRevisionArgument = 1U;
-
         ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::IlluminanceMeasurement::Attributes::ClusterRevision::TypeInfo>(
-                clusterRevisionArgument, this, OnSuccessCallback_3, OnFailureCallback_3));
+            cluster.ReadAttribute<chip::app::Clusters::IlluminanceMeasurement::Attributes::AcceptedCommandList::TypeInfo>(
+                this, OnSuccessCallback_3, OnFailureCallback_3, true));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
+    {
+        VerifyOrReturn(CheckConstraintType("acceptedCommandList", "", "list"));
         NextTest();
     }
 
-    void OnSuccessResponse_3() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR TestReadsBackGlobalAttributeClusterRevision_4()
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_4()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::IlluminanceMeasurementClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::IlluminanceMeasurement::Attributes::ClusterRevision::TypeInfo>(
+            cluster.ReadAttribute<chip::app::Clusters::IlluminanceMeasurement::Attributes::GeneratedCommandList::TypeInfo>(
                 this, OnSuccessCallback_4, OnFailureCallback_4, true));
         return CHIP_NO_ERROR;
     }
@@ -22567,34 +22599,9 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_4(uint16_t clusterRevision)
+    void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
     {
-        VerifyOrReturn(CheckValue("clusterRevision", clusterRevision, 2U));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_5()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::IlluminanceMeasurementClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::IlluminanceMeasurement::Attributes::AttributeList::TypeInfo>(
-                this, OnSuccessCallback_5, OnFailureCallback_5, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_5(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_5(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
-    {
-        VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+        VerifyOrReturn(CheckConstraintType("generatedCommandList", "", "list"));
         NextTest();
     }
 };
@@ -22664,12 +22671,28 @@ public:
             err = TestReadTheGlobalAttributeAttributeList_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the optional global attribute : FeatureMap\n");
-            err = TestReadTheOptionalGlobalAttributeFeatureMap_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : write the default values to optional global attribute: FeatureMap\n");
-            err = TestWriteTheDefaultValuesToOptionalGlobalAttributeFeatureMap_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : read the optional global attribute: FeatureMap\n");
+            err = TestReadTheOptionalGlobalAttributeFeatureMap_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the optional global attribute : FeatureMap\n");
+            err = TestReadTheOptionalGlobalAttributeFeatureMap_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : write the default values to optional global attribute: FeatureMap\n");
+            err = TestWriteTheDefaultValuesToOptionalGlobalAttributeFeatureMap_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : reads back optional global attribute: FeatureMap\n");
+            err = TestReadsBackOptionalGlobalAttributeFeatureMap_11();
             break;
         }
 
@@ -22687,7 +22710,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 8;
+    const uint16_t mTestCount = 12;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -22754,9 +22777,10 @@ private:
         (static_cast<Test_TC_LVL_1_1Suite *>(context))->OnFailureResponse_6(error);
     }
 
-    static void OnSuccessCallback_6(void * context, uint32_t featureMap)
+    static void OnSuccessCallback_6(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
     {
-        (static_cast<Test_TC_LVL_1_1Suite *>(context))->OnSuccessResponse_6(featureMap);
+        (static_cast<Test_TC_LVL_1_1Suite *>(context))->OnSuccessResponse_6(acceptedCommandList);
     }
 
     static void OnFailureCallback_7(void * context, CHIP_ERROR error)
@@ -22764,7 +22788,48 @@ private:
         (static_cast<Test_TC_LVL_1_1Suite *>(context))->OnFailureResponse_7(error);
     }
 
-    static void OnSuccessCallback_7(void * context) { (static_cast<Test_TC_LVL_1_1Suite *>(context))->OnSuccessResponse_7(); }
+    static void OnSuccessCallback_7(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
+    {
+        (static_cast<Test_TC_LVL_1_1Suite *>(context))->OnSuccessResponse_7(generatedCommandList);
+    }
+
+    static void OnFailureCallback_8(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_LVL_1_1Suite *>(context))->OnFailureResponse_8(error);
+    }
+
+    static void OnSuccessCallback_8(void * context, uint32_t featureMap)
+    {
+        (static_cast<Test_TC_LVL_1_1Suite *>(context))->OnSuccessResponse_8(featureMap);
+    }
+
+    static void OnFailureCallback_9(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_LVL_1_1Suite *>(context))->OnFailureResponse_9(error);
+    }
+
+    static void OnSuccessCallback_9(void * context, uint32_t featureMap)
+    {
+        (static_cast<Test_TC_LVL_1_1Suite *>(context))->OnSuccessResponse_9(featureMap);
+    }
+
+    static void OnFailureCallback_10(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_LVL_1_1Suite *>(context))->OnFailureResponse_10(error);
+    }
+
+    static void OnSuccessCallback_10(void * context) { (static_cast<Test_TC_LVL_1_1Suite *>(context))->OnSuccessResponse_10(); }
+
+    static void OnFailureCallback_11(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_LVL_1_1Suite *>(context))->OnFailureResponse_11(error);
+    }
+
+    static void OnSuccessCallback_11(void * context, uint32_t featureMap)
+    {
+        (static_cast<Test_TC_LVL_1_1Suite *>(context))->OnSuccessResponse_11(featureMap);
+    }
 
     //
     // Tests methods
@@ -22893,13 +22958,13 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestReadTheOptionalGlobalAttributeFeatureMap_6()
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_6()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::LevelControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::LevelControl::Attributes::FeatureMap::TypeInfo>(
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::LevelControl::Attributes::AcceptedCommandList::TypeInfo>(
             this, OnSuccessCallback_6, OnFailureCallback_6, true));
         return CHIP_NO_ERROR;
     }
@@ -22910,13 +22975,83 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_6(uint32_t featureMap)
+    void OnSuccessResponse_6(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
+    {
+        VerifyOrReturn(CheckConstraintType("acceptedCommandList", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_7()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::LevelControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::LevelControl::Attributes::GeneratedCommandList::TypeInfo>(
+            this, OnSuccessCallback_7, OnFailureCallback_7, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_7(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_7(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
+    {
+        VerifyOrReturn(CheckConstraintType("generatedCommandList", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheOptionalGlobalAttributeFeatureMap_8()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::LevelControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::LevelControl::Attributes::FeatureMap::TypeInfo>(
+            this, OnSuccessCallback_8, OnFailureCallback_8, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_8(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_8(uint32_t featureMap)
+    {
+        VerifyOrReturn(CheckValue("featureMap", featureMap, 3UL));
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheOptionalGlobalAttributeFeatureMap_9()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::LevelControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::LevelControl::Attributes::FeatureMap::TypeInfo>(
+            this, OnSuccessCallback_9, OnFailureCallback_9, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_9(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_9(uint32_t featureMap)
     {
         VerifyOrReturn(CheckConstraintType("featureMap", "", "map32"));
         NextTest();
     }
 
-    CHIP_ERROR TestWriteTheDefaultValuesToOptionalGlobalAttributeFeatureMap_7()
+    CHIP_ERROR TestWriteTheDefaultValuesToOptionalGlobalAttributeFeatureMap_10()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::LevelControlClusterTest cluster;
@@ -22926,18 +23061,41 @@ private:
         featureMapArgument = 0UL;
 
         ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::LevelControl::Attributes::FeatureMap::TypeInfo>(
-            featureMapArgument, this, OnSuccessCallback_7, OnFailureCallback_7));
+            featureMapArgument, this, OnSuccessCallback_10, OnFailureCallback_10));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_7(CHIP_ERROR error)
+    void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
         NextTest();
     }
 
-    void OnSuccessResponse_7() { ThrowSuccessResponse(); }
+    void OnSuccessResponse_10() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR TestReadsBackOptionalGlobalAttributeFeatureMap_11()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::LevelControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::LevelControl::Attributes::FeatureMap::TypeInfo>(
+            this, OnSuccessCallback_11, OnFailureCallback_11, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_11(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_11(uint32_t featureMap)
+    {
+        VerifyOrReturn(CheckConstraintType("featureMap", "", "map32"));
+        NextTest();
+    }
 };
 
 class Test_TC_LVL_2_1Suite : public TestCommand
@@ -24262,8 +24420,8 @@ public:
             err = TestSendsAMoveToLevelCommand_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Wait a second\n");
-            err = TestWaitASecond_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Wait 11000 second\n");
+            err = TestWait11000Second_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : reads CurrentLevel attribute from DUT\n");
@@ -24278,8 +24436,8 @@ public:
             err = TestSendsAMoveToLevelCommand_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Wait 10ms\n");
-            err = TestWait10ms_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Wait 1000ms\n");
+            err = TestWait1000ms_12();
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : reads CurrentLevel attribute from DUT\n");
@@ -24423,8 +24581,7 @@ private:
 
     void OnSuccessResponse_1(uint8_t currentLevel)
     {
-        VerifyOrReturn(CheckValue("currentLevel", currentLevel, 254));
-
+        VerifyOrReturn(CheckConstraintType("currentLevel", "", "uint8"));
         NextTest();
     }
 
@@ -24447,8 +24604,7 @@ private:
 
     void OnSuccessResponse_2(uint8_t minLevel)
     {
-        VerifyOrReturn(CheckValue("minLevel", minLevel, 0));
-
+        VerifyOrReturn(CheckConstraintType("minLevel", "", "uint8"));
         NextTest();
     }
 
@@ -24471,8 +24627,7 @@ private:
 
     void OnSuccessResponse_3(uint8_t maxLevel)
     {
-        VerifyOrReturn(CheckValue("maxLevel", maxLevel, 254));
-
+        VerifyOrReturn(CheckConstraintType("maxLevel", "", "uint8"));
         NextTest();
     }
 
@@ -24483,7 +24638,7 @@ private:
 
         RequestType request;
         request.level          = 64;
-        request.transitionTime = 0U;
+        request.transitionTime = 65535U;
         request.optionMask     = 1;
         request.optionOverride = 1;
 
@@ -24543,8 +24698,8 @@ private:
         using RequestType               = chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type;
 
         RequestType request;
-        request.level          = 128;
-        request.transitionTime = 1U;
+        request.level          = 100;
+        request.transitionTime = 100U;
         request.optionMask     = 1;
         request.optionOverride = 1;
 
@@ -24568,10 +24723,10 @@ private:
 
     void OnSuccessResponse_7() { NextTest(); }
 
-    CHIP_ERROR TestWaitASecond_8()
+    CHIP_ERROR TestWait11000Second_8()
     {
         SetIdentity(kIdentityAlpha);
-        return WaitForMs(1000);
+        return WaitForMs(11000);
     }
 
     CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_9()
@@ -24593,7 +24748,7 @@ private:
 
     void OnSuccessResponse_9(uint8_t currentLevel)
     {
-        VerifyOrReturn(CheckValue("currentLevel", currentLevel, 128));
+        VerifyOrReturn(CheckValue("currentLevel", currentLevel, 100));
 
         NextTest();
     }
@@ -24617,8 +24772,7 @@ private:
 
     void OnSuccessResponse_10(uint16_t onOffTransitionTime)
     {
-        VerifyOrReturn(CheckValue("onOffTransitionTime", onOffTransitionTime, 0U));
-
+        VerifyOrReturn(CheckConstraintType("onOffTransitionTime", "", "uint16"));
         NextTest();
     }
 
@@ -24628,7 +24782,7 @@ private:
         using RequestType               = chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type;
 
         RequestType request;
-        request.level          = 254;
+        request.level          = 128;
         request.transitionTime = 65535U;
         request.optionMask     = 1;
         request.optionOverride = 1;
@@ -24653,10 +24807,10 @@ private:
 
     void OnSuccessResponse_11() { NextTest(); }
 
-    CHIP_ERROR TestWait10ms_12()
+    CHIP_ERROR TestWait1000ms_12()
     {
         SetIdentity(kIdentityAlpha);
-        return WaitForMs(100);
+        return WaitForMs(1000);
     }
 
     CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_13()
@@ -24678,7 +24832,7 @@ private:
 
     void OnSuccessResponse_13(uint8_t currentLevel)
     {
-        VerifyOrReturn(CheckValue("currentLevel", currentLevel, 254));
+        VerifyOrReturn(CheckValue("currentLevel", currentLevel, 128));
 
         NextTest();
     }
@@ -24765,16 +24919,16 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : reads CurrentLevel attribute from DUT\n");
-            err = TestReadsCurrentLevelAttributeFromDut_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : reads max level attribute from DUT\n");
+            err = TestReadsMaxLevelAttributeFromDut_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : reads max level attribute from DUT\n");
-            err = TestReadsMaxLevelAttributeFromDut_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : sends a Move up command\n");
+            err = TestSendsAMoveUpCommand_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : sends a Move up command\n");
-            err = TestSendsAMoveUpCommand_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : user prompt message\n");
+            err = TestUserPromptMessage_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Wait 3000ms\n");
@@ -24793,16 +24947,16 @@ public:
             err = TestSendsAMoveDownCommand_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Wait 3000ms\n");
-            err = TestWait3000ms_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : user prompt message\n");
+            err = TestUserPromptMessage_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : reads CurrentLevel attribute from DUT\n");
-            err = TestReadsCurrentLevelAttributeFromDut_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Wait 5000ms\n");
+            err = TestWait5000ms_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Write default move rate attribute from DUT\n");
-            err = TestWriteDefaultMoveRateAttributeFromDut_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : reads CurrentLevel attribute from DUT\n");
+            err = TestReadsCurrentLevelAttributeFromDut_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : reads default move rate attribute from DUT\n");
@@ -24821,12 +24975,16 @@ public:
             err = TestReadsCurrentLevelAttributeFromDut_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Reset level to 254\n");
-            err = TestResetLevelTo254_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : user prompt message\n");
+            err = TestUserPromptMessage_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Wait 100ms\n");
-            err = TestWait100ms_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Reset level to 254\n");
+            err = TestResetLevelTo254_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Wait 100ms\n");
+            err = TestWait100ms_17();
             break;
         }
 
@@ -24844,12 +25002,16 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 17;
+    const uint16_t mTestCount = 18;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
+
+    uint8_t MaxlevelValue;
+    uint8_t MinlevelValue;
+    chip::app::DataModel::Nullable<uint8_t> DefaultMoveRateValue;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -24864,19 +25026,9 @@ private:
         (static_cast<Test_TC_LVL_4_1Suite *>(context))->OnFailureResponse_1(error);
     }
 
-    static void OnSuccessCallback_1(void * context, uint8_t currentLevel)
+    static void OnSuccessCallback_1(void * context, uint8_t maxLevel)
     {
-        (static_cast<Test_TC_LVL_4_1Suite *>(context))->OnSuccessResponse_1(currentLevel);
-    }
-
-    static void OnFailureCallback_2(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_LVL_4_1Suite *>(context))->OnFailureResponse_2(error);
-    }
-
-    static void OnSuccessCallback_2(void * context, uint8_t maxLevel)
-    {
-        (static_cast<Test_TC_LVL_4_1Suite *>(context))->OnSuccessResponse_2(maxLevel);
+        (static_cast<Test_TC_LVL_4_1Suite *>(context))->OnSuccessResponse_1(maxLevel);
     }
 
     static void OnFailureCallback_5(void * context, CHIP_ERROR error)
@@ -24899,22 +25051,15 @@ private:
         (static_cast<Test_TC_LVL_4_1Suite *>(context))->OnSuccessResponse_6(minLevel);
     }
 
-    static void OnFailureCallback_9(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_LVL_4_1Suite *>(context))->OnFailureResponse_9(error);
-    }
-
-    static void OnSuccessCallback_9(void * context, uint8_t currentLevel)
-    {
-        (static_cast<Test_TC_LVL_4_1Suite *>(context))->OnSuccessResponse_9(currentLevel);
-    }
-
     static void OnFailureCallback_10(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_LVL_4_1Suite *>(context))->OnFailureResponse_10(error);
     }
 
-    static void OnSuccessCallback_10(void * context) { (static_cast<Test_TC_LVL_4_1Suite *>(context))->OnSuccessResponse_10(); }
+    static void OnSuccessCallback_10(void * context, uint8_t currentLevel)
+    {
+        (static_cast<Test_TC_LVL_4_1Suite *>(context))->OnSuccessResponse_10(currentLevel);
+    }
 
     static void OnFailureCallback_11(void * context, CHIP_ERROR error)
     {
@@ -24946,13 +25091,13 @@ private:
         return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
     }
 
-    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_1()
+    CHIP_ERROR TestReadsMaxLevelAttributeFromDut_1()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::LevelControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::LevelControl::Attributes::CurrentLevel::TypeInfo>(
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::LevelControl::Attributes::MaxLevel::TypeInfo>(
             this, OnSuccessCallback_1, OnFailureCallback_1, true));
         return CHIP_NO_ERROR;
     }
@@ -24963,21 +25108,33 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_1(uint8_t currentLevel)
+    void OnSuccessResponse_1(uint8_t maxLevel)
     {
-        VerifyOrReturn(CheckValue("currentLevel", currentLevel, 254));
-
+        VerifyOrReturn(CheckConstraintType("maxLevel", "", "uint8"));
+        MaxlevelValue = maxLevel;
         NextTest();
     }
 
-    CHIP_ERROR TestReadsMaxLevelAttributeFromDut_2()
+    CHIP_ERROR TestSendsAMoveUpCommand_2()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::LevelControlClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+        using RequestType               = chip::app::Clusters::LevelControl::Commands::Move::Type;
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::LevelControl::Attributes::MaxLevel::TypeInfo>(
-            this, OnSuccessCallback_2, OnFailureCallback_2, true));
+        RequestType request;
+        request.moveMode       = static_cast<chip::app::Clusters::LevelControl::MoveMode>(0);
+        request.rate           = 32;
+        request.optionMask     = 1;
+        request.optionOverride = 1;
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_LVL_4_1Suite *>(context))->OnSuccessResponse_2();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_LVL_4_1Suite *>(context))->OnFailureResponse_2(error);
+        };
+
+        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
         return CHIP_NO_ERROR;
     }
 
@@ -24987,43 +25144,14 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_2(uint8_t maxLevel)
+    void OnSuccessResponse_2() { NextTest(); }
+
+    CHIP_ERROR TestUserPromptMessage_3()
     {
-        VerifyOrReturn(CheckValue("maxLevel", maxLevel, 254));
-
-        NextTest();
+        SetIdentity(kIdentityAlpha);
+        return UserPrompt("Physically verify that the DUT moves at a rate of 32 units per second or as close as possible to this "
+                          "rate and completes moving to its maximum level");
     }
-
-    CHIP_ERROR TestSendsAMoveUpCommand_3()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        using RequestType               = chip::app::Clusters::LevelControl::Commands::Move::Type;
-
-        RequestType request;
-        request.moveMode       = static_cast<chip::app::Clusters::LevelControl::MoveMode>(0);
-        request.rate           = 200;
-        request.optionMask     = 1;
-        request.optionOverride = 1;
-
-        auto success = [](void * context, const typename RequestType::ResponseType & data) {
-            (static_cast<Test_TC_LVL_4_1Suite *>(context))->OnSuccessResponse_3();
-        };
-
-        auto failure = [](void * context, CHIP_ERROR error) {
-            (static_cast<Test_TC_LVL_4_1Suite *>(context))->OnFailureResponse_3(error);
-        };
-
-        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_3(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_3() { NextTest(); }
 
     CHIP_ERROR TestWait3000ms_4()
     {
@@ -25050,7 +25178,7 @@ private:
 
     void OnSuccessResponse_5(uint8_t currentLevel)
     {
-        VerifyOrReturn(CheckValue("currentLevel", currentLevel, 254));
+        VerifyOrReturn(CheckValue("currentLevel", currentLevel, MaxlevelValue));
 
         NextTest();
     }
@@ -25074,8 +25202,8 @@ private:
 
     void OnSuccessResponse_6(uint8_t minLevel)
     {
-        VerifyOrReturn(CheckValue("minLevel", minLevel, 0));
-
+        VerifyOrReturn(CheckConstraintType("minLevel", "", "uint8"));
+        MinlevelValue = minLevel;
         NextTest();
     }
 
@@ -25086,7 +25214,7 @@ private:
 
         RequestType request;
         request.moveMode       = static_cast<chip::app::Clusters::LevelControl::MoveMode>(1);
-        request.rate           = 250;
+        request.rate           = 64;
         request.optionMask     = 1;
         request.optionOverride = 1;
 
@@ -25110,48 +25238,27 @@ private:
 
     void OnSuccessResponse_7() { NextTest(); }
 
-    CHIP_ERROR TestWait3000ms_8()
+    CHIP_ERROR TestUserPromptMessage_8()
     {
         SetIdentity(kIdentityAlpha);
-        return WaitForMs(3000);
+        return UserPrompt("Physically verify that the DUT moves at a rate of 64 units per second or as close as possible to this "
+                          "rate and complete moving to its minimum level");
     }
 
-    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_9()
+    CHIP_ERROR TestWait5000ms_9()
+    {
+        SetIdentity(kIdentityAlpha);
+        return WaitForMs(5000);
+    }
+
+    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_10()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::LevelControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::LevelControl::Attributes::CurrentLevel::TypeInfo>(
-            this, OnSuccessCallback_9, OnFailureCallback_9, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_9(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_9(uint8_t currentLevel)
-    {
-        VerifyOrReturn(CheckConstraintMinValue("currentLevel", currentLevel, 0));
-        VerifyOrReturn(CheckConstraintMaxValue("currentLevel", currentLevel, 1));
-        NextTest();
-    }
-
-    CHIP_ERROR TestWriteDefaultMoveRateAttributeFromDut_10()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::LevelControlClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        chip::app::DataModel::Nullable<uint8_t> defaultMoveRateArgument;
-        defaultMoveRateArgument.SetNonNull();
-        defaultMoveRateArgument.Value() = 20;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::LevelControl::Attributes::DefaultMoveRate::TypeInfo>(
-            defaultMoveRateArgument, this, OnSuccessCallback_10, OnFailureCallback_10));
+            this, OnSuccessCallback_10, OnFailureCallback_10, true));
         return CHIP_NO_ERROR;
     }
 
@@ -25161,7 +25268,13 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_10() { NextTest(); }
+    void OnSuccessResponse_10(uint8_t currentLevel)
+    {
+        VerifyOrReturn(CheckValue("currentLevel", currentLevel, 1));
+        VerifyOrReturn(CheckConstraintMinValue("currentLevel", currentLevel, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("currentLevel", currentLevel, 1));
+        NextTest();
+    }
 
     CHIP_ERROR TestReadsDefaultMoveRateAttributeFromDut_11()
     {
@@ -25182,9 +25295,8 @@ private:
 
     void OnSuccessResponse_11(const chip::app::DataModel::Nullable<uint8_t> & defaultMoveRate)
     {
-        VerifyOrReturn(CheckValueNonNull("defaultMoveRate", defaultMoveRate));
-        VerifyOrReturn(CheckValue("defaultMoveRate.Value()", defaultMoveRate.Value(), 20));
-
+        VerifyOrReturn(CheckConstraintType("defaultMoveRate", "", "uint8"));
+        DefaultMoveRateValue = defaultMoveRate;
         NextTest();
     }
 
@@ -25249,7 +25361,14 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestResetLevelTo254_15()
+    CHIP_ERROR TestUserPromptMessage_15()
+    {
+        SetIdentity(kIdentityAlpha);
+        return UserPrompt(
+            "Physically verify that the device moves at the rate recorded in step 3a and completes moving to its maximum level.");
+    }
+
+    CHIP_ERROR TestResetLevelTo254_16()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         using RequestType               = chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type;
@@ -25261,26 +25380,26 @@ private:
         request.optionOverride = 1;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
-            (static_cast<Test_TC_LVL_4_1Suite *>(context))->OnSuccessResponse_15();
+            (static_cast<Test_TC_LVL_4_1Suite *>(context))->OnSuccessResponse_16();
         };
 
         auto failure = [](void * context, CHIP_ERROR error) {
-            (static_cast<Test_TC_LVL_4_1Suite *>(context))->OnFailureResponse_15(error);
+            (static_cast<Test_TC_LVL_4_1Suite *>(context))->OnFailureResponse_16(error);
         };
 
         ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_15(CHIP_ERROR error)
+    void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_15() { NextTest(); }
+    void OnSuccessResponse_16() { NextTest(); }
 
-    CHIP_ERROR TestWait100ms_16()
+    CHIP_ERROR TestWait100ms_17()
     {
         SetIdentity(kIdentityAlpha);
         return WaitForMs(100);
@@ -25335,32 +25454,32 @@ public:
             err = TestSendingOnCommand_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Precondition: DUT level is set to 0x80\n");
-            err = TestPreconditionDutLevelIsSetTo0x80_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Precondition: DUT level is set to its lowest point\n");
+            err = TestPreconditionDutLevelIsSetToItsLowestPoint_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Wait 4000ms\n");
-            err = TestWait4000ms_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Wait 3000ms\n");
+            err = TestWait3000ms_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads current level attribute from DUT\n");
             err = TestReadsCurrentLevelAttributeFromDut_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Sends step down command to DUT\n");
-            err = TestSendsStepDownCommandToDut_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Sends step up command to DUT\n");
+            err = TestSendsStepUpCommandToDut_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Wait 4000ms\n");
-            err = TestWait4000ms_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Wait 5000ms\n");
+            err = TestWait5000ms_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Reads current level attribute from DUT\n");
             err = TestReadsCurrentLevelAttributeFromDut_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Sends a Step up command\n");
-            err = TestSendsAStepUpCommand_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Sends a Step down command\n");
+            err = TestSendsAStepDownCommand_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Wait 4000ms\n");
@@ -25404,6 +25523,8 @@ private:
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
+
+    uint8_t CurrentlevelValue;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -25480,14 +25601,14 @@ private:
 
     void OnSuccessResponse_1() { NextTest(); }
 
-    CHIP_ERROR TestPreconditionDutLevelIsSetTo0x80_2()
+    CHIP_ERROR TestPreconditionDutLevelIsSetToItsLowestPoint_2()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         using RequestType               = chip::app::Clusters::LevelControl::Commands::Step::Type;
 
         RequestType request;
         request.stepMode       = static_cast<chip::app::Clusters::LevelControl::StepMode>(1);
-        request.stepSize       = 126;
+        request.stepSize       = 100;
         request.transitionTime = 20U;
         request.optionMask     = 0;
         request.optionOverride = 0;
@@ -25512,10 +25633,10 @@ private:
 
     void OnSuccessResponse_2() { NextTest(); }
 
-    CHIP_ERROR TestWait4000ms_3()
+    CHIP_ERROR TestWait3000ms_3()
     {
         SetIdentity(kIdentityAlpha);
-        return WaitForMs(4000);
+        return WaitForMs(3000);
     }
 
     CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_4()
@@ -25537,20 +25658,20 @@ private:
 
     void OnSuccessResponse_4(uint8_t currentLevel)
     {
-        VerifyOrReturn(CheckValue("currentLevel", currentLevel, 128));
-
+        VerifyOrReturn(CheckConstraintType("currentLevel", "", "uint8"));
+        CurrentlevelValue = currentLevel;
         NextTest();
     }
 
-    CHIP_ERROR TestSendsStepDownCommandToDut_5()
+    CHIP_ERROR TestSendsStepUpCommandToDut_5()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         using RequestType               = chip::app::Clusters::LevelControl::Commands::Step::Type;
 
         RequestType request;
-        request.stepMode       = static_cast<chip::app::Clusters::LevelControl::StepMode>(1);
+        request.stepMode       = static_cast<chip::app::Clusters::LevelControl::StepMode>(0);
         request.stepSize       = 64;
-        request.transitionTime = 20U;
+        request.transitionTime = 2U;
         request.optionMask     = 0;
         request.optionOverride = 0;
 
@@ -25574,10 +25695,10 @@ private:
 
     void OnSuccessResponse_5() { NextTest(); }
 
-    CHIP_ERROR TestWait4000ms_6()
+    CHIP_ERROR TestWait5000ms_6()
     {
         SetIdentity(kIdentityAlpha);
-        return WaitForMs(4000);
+        return WaitForMs(5000);
     }
 
     CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_7()
@@ -25599,20 +25720,20 @@ private:
 
     void OnSuccessResponse_7(uint8_t currentLevel)
     {
-        VerifyOrReturn(CheckValue("currentLevel", currentLevel, 64));
+        VerifyOrReturn(CheckConstraintNotValue("currentLevel", currentLevel, CurrentlevelValue));
 
         NextTest();
     }
 
-    CHIP_ERROR TestSendsAStepUpCommand_8()
+    CHIP_ERROR TestSendsAStepDownCommand_8()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         using RequestType               = chip::app::Clusters::LevelControl::Commands::Step::Type;
 
         RequestType request;
-        request.stepMode       = static_cast<chip::app::Clusters::LevelControl::StepMode>(0);
+        request.stepMode       = static_cast<chip::app::Clusters::LevelControl::StepMode>(1);
         request.stepSize       = 64;
-        request.transitionTime = 20U;
+        request.transitionTime = 2U;
         request.optionMask     = 0;
         request.optionOverride = 0;
 
@@ -25661,7 +25782,7 @@ private:
 
     void OnSuccessResponse_10(uint8_t currentLevel)
     {
-        VerifyOrReturn(CheckValue("currentLevel", currentLevel, 128));
+        VerifyOrReturn(CheckValue("currentLevel", currentLevel, CurrentlevelValue));
 
         NextTest();
     }
@@ -25841,6 +25962,8 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
+    uint8_t CurrentLevelValue;
+
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
         bool isExpectedDnssdResult = false;
@@ -25964,6 +26087,7 @@ private:
     {
         VerifyOrReturn(CheckConstraintMinValue("currentLevel", currentLevel, 0));
         VerifyOrReturn(CheckConstraintMaxValue("currentLevel", currentLevel, 1));
+        CurrentLevelValue = currentLevel;
         NextTest();
     }
 
@@ -26052,8 +26176,8 @@ private:
 
     void OnSuccessResponse_8(uint8_t currentLevel)
     {
-        VerifyOrReturn(CheckConstraintMinValue("currentLevel", currentLevel, 2));
-        VerifyOrReturn(CheckConstraintMaxValue("currentLevel", currentLevel, 3));
+        VerifyOrReturn(CheckConstraintNotValue("currentLevel", currentLevel, CurrentLevelValue));
+
         NextTest();
     }
 
@@ -31912,13 +32036,13 @@ public:
             err = TestReadsOccupancyAttributeFromDut_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads Occupancy attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads back Occupancy attribute from DUT after few seconds\n");
             if (ShouldSkip("A_OCCUPANCY"))
             {
                 NextTest();
                 return;
             }
-            err = TestReadsOccupancyAttributeFromDut_2();
+            err = TestReadsBackOccupancyAttributeFromDutAfterFewSeconds_2();
             break;
         }
 
@@ -31942,6 +32066,8 @@ private:
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
+
+    uint8_t OccupancyValue;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
     {
@@ -32000,11 +32126,13 @@ private:
 
     void OnSuccessResponse_1(uint8_t occupancy)
     {
-        VerifyOrReturn(CheckConstraintType("occupancy", "", "map8"));
+        VerifyOrReturn(CheckValue("occupancy", occupancy, 0));
+
+        OccupancyValue = occupancy;
         NextTest();
     }
 
-    CHIP_ERROR TestReadsOccupancyAttributeFromDut_2()
+    CHIP_ERROR TestReadsBackOccupancyAttributeFromDutAfterFewSeconds_2()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::OccupancySensingClusterTest cluster;
@@ -32021,11 +32149,7 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_2(uint8_t occupancy)
-    {
-        VerifyOrReturn(CheckConstraintType("occupancy", "", "map8"));
-        NextTest();
-    }
+    void OnSuccessResponse_2(uint8_t occupancy) { NextTest(); }
 };
 
 class Test_TC_OO_1_1Suite : public TestCommand
@@ -35336,21 +35460,16 @@ public:
             err = TestReadTheGlobalAttributeClusterRevision_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute constraints: ClusterRevision\n");
-            err = TestReadTheGlobalAttributeConstraintsClusterRevision_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_2();
             break;
         case 3:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 3 : write the default values to mandatory global attribute: ClusterRevision\n");
-            err = TestWriteTheDefaultValuesToMandatoryGlobalAttributeClusterRevision_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : reads back global attribute: ClusterRevision\n");
-            err = TestReadsBackGlobalAttributeClusterRevision_4();
-            break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
-            err = TestReadTheGlobalAttributeAttributeList_5();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_4();
             break;
         }
 
@@ -35368,7 +35487,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 6;
+    const uint16_t mTestCount = 5;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -35398,9 +35517,9 @@ private:
         (static_cast<Test_TC_PS_1_1Suite *>(context))->OnFailureResponse_2(error);
     }
 
-    static void OnSuccessCallback_2(void * context, uint16_t clusterRevision)
+    static void OnSuccessCallback_2(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
     {
-        (static_cast<Test_TC_PS_1_1Suite *>(context))->OnSuccessResponse_2(clusterRevision);
+        (static_cast<Test_TC_PS_1_1Suite *>(context))->OnSuccessResponse_2(attributeList);
     }
 
     static void OnFailureCallback_3(void * context, CHIP_ERROR error)
@@ -35408,26 +35527,21 @@ private:
         (static_cast<Test_TC_PS_1_1Suite *>(context))->OnFailureResponse_3(error);
     }
 
-    static void OnSuccessCallback_3(void * context) { (static_cast<Test_TC_PS_1_1Suite *>(context))->OnSuccessResponse_3(); }
+    static void OnSuccessCallback_3(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
+    {
+        (static_cast<Test_TC_PS_1_1Suite *>(context))->OnSuccessResponse_3(acceptedCommandList);
+    }
 
     static void OnFailureCallback_4(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_PS_1_1Suite *>(context))->OnFailureResponse_4(error);
     }
 
-    static void OnSuccessCallback_4(void * context, uint16_t clusterRevision)
+    static void OnSuccessCallback_4(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
     {
-        (static_cast<Test_TC_PS_1_1Suite *>(context))->OnSuccessResponse_4(clusterRevision);
-    }
-
-    static void OnFailureCallback_5(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_PS_1_1Suite *>(context))->OnFailureResponse_5(error);
-    }
-
-    static void OnSuccessCallback_5(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
-    {
-        (static_cast<Test_TC_PS_1_1Suite *>(context))->OnSuccessResponse_5(attributeList);
+        (static_cast<Test_TC_PS_1_1Suite *>(context))->OnSuccessResponse_4(generatedCommandList);
     }
 
     //
@@ -35464,13 +35578,13 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeConstraintsClusterRevision_2()
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_2()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::PowerSourceClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::PowerSource::Attributes::ClusterRevision::TypeInfo>(
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::PowerSource::Attributes::AttributeList::TypeInfo>(
             this, OnSuccessCallback_2, OnFailureCallback_2, true));
         return CHIP_NO_ERROR;
     }
@@ -35481,42 +35595,42 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_2(uint16_t clusterRevision)
+    void OnSuccessResponse_2(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
     {
-        VerifyOrReturn(CheckConstraintType("clusterRevision", "", "uint16"));
+        VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
         NextTest();
     }
 
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryGlobalAttributeClusterRevision_3()
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_3()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::PowerSourceClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint16_t clusterRevisionArgument;
-        clusterRevisionArgument = 1U;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::PowerSource::Attributes::ClusterRevision::TypeInfo>(
-            clusterRevisionArgument, this, OnSuccessCallback_3, OnFailureCallback_3));
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::PowerSource::Attributes::AcceptedCommandList::TypeInfo>(
+            this, OnSuccessCallback_3, OnFailureCallback_3, true));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
+    {
+        VerifyOrReturn(CheckConstraintType("acceptedCommandList", "", "list"));
         NextTest();
     }
 
-    void OnSuccessResponse_3() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR TestReadsBackGlobalAttributeClusterRevision_4()
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_4()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::PowerSourceClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::PowerSource::Attributes::ClusterRevision::TypeInfo>(
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::PowerSource::Attributes::GeneratedCommandList::TypeInfo>(
             this, OnSuccessCallback_4, OnFailureCallback_4, true));
         return CHIP_NO_ERROR;
     }
@@ -35527,33 +35641,9 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_4(uint16_t clusterRevision)
+    void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
     {
-        VerifyOrReturn(CheckValue("clusterRevision", clusterRevision, 1U));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_5()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::PowerSourceClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::PowerSource::Attributes::AttributeList::TypeInfo>(
-            this, OnSuccessCallback_5, OnFailureCallback_5, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_5(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_5(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
-    {
-        VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+        VerifyOrReturn(CheckConstraintType("generatedCommandList", "", "list"));
         NextTest();
     }
 };
@@ -36660,8 +36750,28 @@ public:
             err = TestReadTheGlobalAttributeAttributeList_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : read the optional global attribute: FeatureMap\n");
-            err = TestReadTheOptionalGlobalAttributeFeatureMap_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : read the optional global attribute: FeatureMap\n");
+            err = TestReadTheOptionalGlobalAttributeFeatureMap_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : read the optional global attribute: FeatureMap\n");
+            err = TestReadTheOptionalGlobalAttributeFeatureMap_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : write the default values to optional global attribute: FeatureMap\n");
+            err = TestWriteTheDefaultValuesToOptionalGlobalAttributeFeatureMap_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : reads back optional global attribute: FeatureMap\n");
+            err = TestReadsBackOptionalGlobalAttributeFeatureMap_9();
             break;
         }
 
@@ -36679,7 +36789,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 5;
+    const uint16_t mTestCount = 10;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -36726,9 +36836,58 @@ private:
         (static_cast<Test_TC_PCC_1_1Suite *>(context))->OnFailureResponse_4(error);
     }
 
-    static void OnSuccessCallback_4(void * context, uint32_t featureMap)
+    static void OnSuccessCallback_4(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
     {
-        (static_cast<Test_TC_PCC_1_1Suite *>(context))->OnSuccessResponse_4(featureMap);
+        (static_cast<Test_TC_PCC_1_1Suite *>(context))->OnSuccessResponse_4(acceptedCommandList);
+    }
+
+    static void OnFailureCallback_5(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_PCC_1_1Suite *>(context))->OnFailureResponse_5(error);
+    }
+
+    static void OnSuccessCallback_5(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
+    {
+        (static_cast<Test_TC_PCC_1_1Suite *>(context))->OnSuccessResponse_5(generatedCommandList);
+    }
+
+    static void OnFailureCallback_6(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_PCC_1_1Suite *>(context))->OnFailureResponse_6(error);
+    }
+
+    static void OnSuccessCallback_6(void * context, uint32_t featureMap)
+    {
+        (static_cast<Test_TC_PCC_1_1Suite *>(context))->OnSuccessResponse_6(featureMap);
+    }
+
+    static void OnFailureCallback_7(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_PCC_1_1Suite *>(context))->OnFailureResponse_7(error);
+    }
+
+    static void OnSuccessCallback_7(void * context, uint32_t featureMap)
+    {
+        (static_cast<Test_TC_PCC_1_1Suite *>(context))->OnSuccessResponse_7(featureMap);
+    }
+
+    static void OnFailureCallback_8(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_PCC_1_1Suite *>(context))->OnFailureResponse_8(error);
+    }
+
+    static void OnSuccessCallback_8(void * context) { (static_cast<Test_TC_PCC_1_1Suite *>(context))->OnSuccessResponse_8(); }
+
+    static void OnFailureCallback_9(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_PCC_1_1Suite *>(context))->OnFailureResponse_9(error);
+    }
+
+    static void OnSuccessCallback_9(void * context, uint32_t featureMap)
+    {
+        (static_cast<Test_TC_PCC_1_1Suite *>(context))->OnSuccessResponse_9(featureMap);
     }
 
     //
@@ -36813,14 +36972,14 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestReadTheOptionalGlobalAttributeFeatureMap_4()
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_4()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::PumpConfigurationAndControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::FeatureMap::TypeInfo>(
+            cluster.ReadAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::AcceptedCommandList::TypeInfo>(
                 this, OnSuccessCallback_4, OnFailureCallback_4, true));
         return CHIP_NO_ERROR;
     }
@@ -36831,8 +36990,130 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_4(uint32_t featureMap)
+    void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
     {
+        VerifyOrReturn(CheckConstraintType("acceptedCommandList", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_5()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::PumpConfigurationAndControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::GeneratedCommandList::TypeInfo>(
+                this, OnSuccessCallback_5, OnFailureCallback_5, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_5(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_5(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
+    {
+        VerifyOrReturn(CheckConstraintType("generatedCommandList", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheOptionalGlobalAttributeFeatureMap_6()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::PumpConfigurationAndControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::FeatureMap::TypeInfo>(
+                this, OnSuccessCallback_6, OnFailureCallback_6, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_6(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_6(uint32_t featureMap)
+    {
+        VerifyOrReturn(CheckValue("featureMap", featureMap, 0UL));
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheOptionalGlobalAttributeFeatureMap_7()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::PumpConfigurationAndControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::FeatureMap::TypeInfo>(
+                this, OnSuccessCallback_7, OnFailureCallback_7, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_7(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_7(uint32_t featureMap)
+    {
+        VerifyOrReturn(CheckConstraintType("featureMap", "", "map32"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestWriteTheDefaultValuesToOptionalGlobalAttributeFeatureMap_8()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::PumpConfigurationAndControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        uint32_t featureMapArgument;
+        featureMapArgument = 0UL;
+
+        ReturnErrorOnFailure(
+            cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::FeatureMap::TypeInfo>(
+                featureMapArgument, this, OnSuccessCallback_8, OnFailureCallback_8));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_8(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+        NextTest();
+    }
+
+    void OnSuccessResponse_8() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR TestReadsBackOptionalGlobalAttributeFeatureMap_9()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::PumpConfigurationAndControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::FeatureMap::TypeInfo>(
+                this, OnSuccessCallback_9, OnFailureCallback_9, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_9(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_9(uint32_t featureMap)
+    {
+        VerifyOrReturn(CheckValue("featureMap", featureMap, 0UL));
         VerifyOrReturn(CheckConstraintType("featureMap", "", "map32"));
         NextTest();
     }
@@ -38566,6 +38847,7 @@ private:
     {
         VerifyOrReturn(CheckConstraintType("minConstTemp", "", "int16"));
         VerifyOrReturn(CheckConstraintMinValue("minConstTemp", minConstTemp, -27315));
+        VerifyOrReturn(CheckConstraintMaxValue("minConstTemp", minConstTemp, 32767));
         NextTest();
     }
 
@@ -38591,6 +38873,7 @@ private:
     {
         VerifyOrReturn(CheckConstraintType("maxConstTemp", "", "int16"));
         VerifyOrReturn(CheckConstraintMinValue("maxConstTemp", maxConstTemp, -27315));
+        VerifyOrReturn(CheckConstraintMaxValue("maxConstTemp", maxConstTemp, 32767));
         NextTest();
     }
 
@@ -39981,13 +40264,16 @@ public:
             err = TestReadTheGlobalAttributeConstraintsClusterRevision_1();
             break;
         case 2:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 2 : write the default values to mandatory global attribute: ClusterRevision\n");
-            err = TestWriteTheDefaultValuesToMandatoryGlobalAttributeClusterRevision_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
-            err = TestReadTheGlobalAttributeAttributeList_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_4();
             break;
         }
 
@@ -40005,7 +40291,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 4;
+    const uint16_t mTestCount = 5;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -40035,16 +40321,31 @@ private:
         (static_cast<Test_TC_RH_1_1Suite *>(context))->OnFailureResponse_2(error);
     }
 
-    static void OnSuccessCallback_2(void * context) { (static_cast<Test_TC_RH_1_1Suite *>(context))->OnSuccessResponse_2(); }
+    static void OnSuccessCallback_2(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    {
+        (static_cast<Test_TC_RH_1_1Suite *>(context))->OnSuccessResponse_2(attributeList);
+    }
 
     static void OnFailureCallback_3(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_RH_1_1Suite *>(context))->OnFailureResponse_3(error);
     }
 
-    static void OnSuccessCallback_3(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    static void OnSuccessCallback_3(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
     {
-        (static_cast<Test_TC_RH_1_1Suite *>(context))->OnSuccessResponse_3(attributeList);
+        (static_cast<Test_TC_RH_1_1Suite *>(context))->OnSuccessResponse_3(acceptedCommandList);
+    }
+
+    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_RH_1_1Suite *>(context))->OnFailureResponse_4(error);
+    }
+
+    static void OnSuccessCallback_4(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
+    {
+        (static_cast<Test_TC_RH_1_1Suite *>(context))->OnSuccessResponse_4(generatedCommandList);
     }
 
     //
@@ -40081,31 +40382,7 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryGlobalAttributeClusterRevision_2()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::RelativeHumidityMeasurementClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        uint16_t clusterRevisionArgument;
-        clusterRevisionArgument = 1U;
-
-        ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::RelativeHumidityMeasurement::Attributes::ClusterRevision::TypeInfo>(
-                clusterRevisionArgument, this, OnSuccessCallback_2, OnFailureCallback_2));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_2(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-        NextTest();
-    }
-
-    void OnSuccessResponse_2() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_3()
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_2()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::RelativeHumidityMeasurementClusterTest cluster;
@@ -40113,6 +40390,30 @@ private:
 
         ReturnErrorOnFailure(
             cluster.ReadAttribute<chip::app::Clusters::RelativeHumidityMeasurement::Attributes::AttributeList::TypeInfo>(
+                this, OnSuccessCallback_2, OnFailureCallback_2, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_2(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_2(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    {
+        VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::RelativeHumidityMeasurementClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::RelativeHumidityMeasurement::Attributes::AcceptedCommandList::TypeInfo>(
                 this, OnSuccessCallback_3, OnFailureCallback_3, true));
         return CHIP_NO_ERROR;
     }
@@ -40123,9 +40424,33 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
     {
-        VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+        VerifyOrReturn(CheckConstraintType("acceptedCommandList", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_4()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::RelativeHumidityMeasurementClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::RelativeHumidityMeasurement::Attributes::GeneratedCommandList::TypeInfo>(
+                this, OnSuccessCallback_4, OnFailureCallback_4, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_4(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
+    {
+        VerifyOrReturn(CheckConstraintType("generatedCommandList", "", "list"));
         NextTest();
     }
 };
@@ -40182,12 +40507,8 @@ public:
             err = TestReadsConstraintsOfAttributeMinMeasuredValue_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Reads the optional attribute: Tolerance\n");
-            err = TestReadsTheOptionalAttributeTolerance_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Reads constraints of attribute: Tolerance\n");
-            err = TestReadsConstraintsOfAttributeTolerance_4();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Reads constraints of attribute: Tolerance\n");
+            err = TestReadsConstraintsOfAttributeTolerance_3();
             break;
         }
 
@@ -40205,7 +40526,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 5;
+    const uint16_t mTestCount = 4;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -40250,16 +40571,6 @@ private:
         (static_cast<Test_TC_RH_2_1Suite *>(context))->OnSuccessResponse_3(tolerance);
     }
 
-    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_RH_2_1Suite *>(context))->OnFailureResponse_4(error);
-    }
-
-    static void OnSuccessCallback_4(void * context, uint16_t tolerance)
-    {
-        (static_cast<Test_TC_RH_2_1Suite *>(context))->OnSuccessResponse_4(tolerance);
-    }
-
     //
     // Tests methods
     //
@@ -40290,7 +40601,9 @@ private:
 
     void OnSuccessResponse_1(uint16_t measuredValue)
     {
-        VerifyOrReturn(CheckConstraintType("measuredValue", "", "uint16"));
+        VerifyOrReturn(CheckConstraintType("measuredValue", "", "int16"));
+        VerifyOrReturn(CheckConstraintMinValue("measuredValue", measuredValue, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("measuredValue", measuredValue, 10000U));
         NextTest();
     }
 
@@ -40314,13 +40627,13 @@ private:
 
     void OnSuccessResponse_2(uint16_t minMeasuredValue)
     {
-        VerifyOrReturn(CheckConstraintType("minMeasuredValue", "", "uint16"));
+        VerifyOrReturn(CheckConstraintType("minMeasuredValue", "", "int16"));
         VerifyOrReturn(CheckConstraintMinValue("minMeasuredValue", minMeasuredValue, 0U));
         VerifyOrReturn(CheckConstraintMaxValue("minMeasuredValue", minMeasuredValue, 9999U));
         NextTest();
     }
 
-    CHIP_ERROR TestReadsTheOptionalAttributeTolerance_3()
+    CHIP_ERROR TestReadsConstraintsOfAttributeTolerance_3()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::RelativeHumidityMeasurementClusterTest cluster;
@@ -40339,31 +40652,6 @@ private:
     }
 
     void OnSuccessResponse_3(uint16_t tolerance)
-    {
-        VerifyOrReturn(CheckValue("tolerance", tolerance, 0U));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsConstraintsOfAttributeTolerance_4()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::RelativeHumidityMeasurementClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::RelativeHumidityMeasurement::Attributes::Tolerance::TypeInfo>(
-                this, OnSuccessCallback_4, OnFailureCallback_4, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_4(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_4(uint16_t tolerance)
     {
         VerifyOrReturn(CheckConstraintType("tolerance", "", "uint16"));
         VerifyOrReturn(CheckConstraintMinValue("tolerance", tolerance, 0U));
@@ -40416,22 +40704,26 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Reads MeasuredValue attribute from DUT\n");
-            if (ShouldSkip("A_RELATIVEHUMIDITY"))
-            {
-                NextTest();
-                return;
-            }
-            err = TestReadsMeasuredValueAttributeFromDut_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Reads constraints of attribute: MinMeasuredValue\n");
+            err = TestReadsConstraintsOfAttributeMinMeasuredValue_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the mandatory attribute: MeasuredValue\n");
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads MeasuredValue attribute from DUT\n");
             if (ShouldSkip("A_RELATIVEHUMIDITY"))
             {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributeMeasuredValue_2();
+            err = TestReadsMeasuredValueAttributeFromDut_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the mandatory attribute: MeasuredValue\n");
+            if (ShouldSkip("A_RELATIVEHUMIDITY"))
+            {
+                NextTest();
+                return;
+            }
+            err = TestReadTheMandatoryAttributeMeasuredValue_3();
             break;
         }
 
@@ -40449,7 +40741,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 3;
+    const uint16_t mTestCount = 4;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -40469,9 +40761,9 @@ private:
         (static_cast<Test_TC_RH_2_2Suite *>(context))->OnFailureResponse_1(error);
     }
 
-    static void OnSuccessCallback_1(void * context, uint16_t measuredValue)
+    static void OnSuccessCallback_1(void * context, uint16_t minMeasuredValue)
     {
-        (static_cast<Test_TC_RH_2_2Suite *>(context))->OnSuccessResponse_1(measuredValue);
+        (static_cast<Test_TC_RH_2_2Suite *>(context))->OnSuccessResponse_1(minMeasuredValue);
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -40484,6 +40776,16 @@ private:
         (static_cast<Test_TC_RH_2_2Suite *>(context))->OnSuccessResponse_2(measuredValue);
     }
 
+    static void OnFailureCallback_3(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_RH_2_2Suite *>(context))->OnFailureResponse_3(error);
+    }
+
+    static void OnSuccessCallback_3(void * context, uint16_t measuredValue)
+    {
+        (static_cast<Test_TC_RH_2_2Suite *>(context))->OnSuccessResponse_3(measuredValue);
+    }
+
     //
     // Tests methods
     //
@@ -40494,14 +40796,14 @@ private:
         return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
     }
 
-    CHIP_ERROR TestReadsMeasuredValueAttributeFromDut_1()
+    CHIP_ERROR TestReadsConstraintsOfAttributeMinMeasuredValue_1()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::RelativeHumidityMeasurementClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::RelativeHumidityMeasurement::Attributes::MeasuredValue::TypeInfo>(
+            cluster.ReadAttribute<chip::app::Clusters::RelativeHumidityMeasurement::Attributes::MinMeasuredValue::TypeInfo>(
                 this, OnSuccessCallback_1, OnFailureCallback_1, true));
         return CHIP_NO_ERROR;
     }
@@ -40512,13 +40814,15 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_1(uint16_t measuredValue)
+    void OnSuccessResponse_1(uint16_t minMeasuredValue)
     {
-        VerifyOrReturn(CheckConstraintType("measuredValue", "", "uint16"));
+        VerifyOrReturn(CheckConstraintType("minMeasuredValue", "", "int16"));
+        VerifyOrReturn(CheckConstraintMinValue("minMeasuredValue", minMeasuredValue, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("minMeasuredValue", minMeasuredValue, 9999U));
         NextTest();
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributeMeasuredValue_2()
+    CHIP_ERROR TestReadsMeasuredValueAttributeFromDut_2()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::RelativeHumidityMeasurementClusterTest cluster;
@@ -40537,6 +40841,32 @@ private:
     }
 
     void OnSuccessResponse_2(uint16_t measuredValue)
+    {
+        VerifyOrReturn(CheckConstraintType("measuredValue", "", "int16"));
+        VerifyOrReturn(CheckConstraintMinValue("measuredValue", measuredValue, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("measuredValue", measuredValue, 10000U));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheMandatoryAttributeMeasuredValue_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::RelativeHumidityMeasurementClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::RelativeHumidityMeasurement::Attributes::MeasuredValue::TypeInfo>(
+                this, OnSuccessCallback_3, OnFailureCallback_3, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_3(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_3(uint16_t measuredValue)
     {
         VerifyOrReturn(CheckConstraintType("measuredValue", "", "uint16"));
         NextTest();
@@ -41415,13 +41745,8 @@ public:
             err = TestReadTheGlobalAttributeConstraintsClusterRevision_1();
             break;
         case 2:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 2 : write the default values to mandatory global attribute: ClusterRevision\n");
-            err = TestWriteTheDefaultValuesToMandatoryGlobalAttributeClusterRevision_2();
-            break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
-            err = TestReadTheGlobalAttributeAttributeList_3();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_2();
             break;
         }
 
@@ -41439,7 +41764,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 4;
+    const uint16_t mTestCount = 3;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -41469,16 +41794,9 @@ private:
         (static_cast<Test_TC_TM_1_1Suite *>(context))->OnFailureResponse_2(error);
     }
 
-    static void OnSuccessCallback_2(void * context) { (static_cast<Test_TC_TM_1_1Suite *>(context))->OnSuccessResponse_2(); }
-
-    static void OnFailureCallback_3(void * context, CHIP_ERROR error)
+    static void OnSuccessCallback_2(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
     {
-        (static_cast<Test_TC_TM_1_1Suite *>(context))->OnFailureResponse_3(error);
-    }
-
-    static void OnSuccessCallback_3(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
-    {
-        (static_cast<Test_TC_TM_1_1Suite *>(context))->OnSuccessResponse_3(attributeList);
+        (static_cast<Test_TC_TM_1_1Suite *>(context))->OnSuccessResponse_2(attributeList);
     }
 
     //
@@ -41515,31 +41833,7 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryGlobalAttributeClusterRevision_2()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::TemperatureMeasurementClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        uint16_t clusterRevisionArgument;
-        clusterRevisionArgument = 4U;
-
-        ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::TemperatureMeasurement::Attributes::ClusterRevision::TypeInfo>(
-                clusterRevisionArgument, this, OnSuccessCallback_2, OnFailureCallback_2));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_2(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-        NextTest();
-    }
-
-    void OnSuccessResponse_2() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_3()
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_2()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::TemperatureMeasurementClusterTest cluster;
@@ -41547,17 +41841,17 @@ private:
 
         ReturnErrorOnFailure(
             cluster.ReadAttribute<chip::app::Clusters::TemperatureMeasurement::Attributes::AttributeList::TypeInfo>(
-                this, OnSuccessCallback_3, OnFailureCallback_3, true));
+                this, OnSuccessCallback_2, OnFailureCallback_2, true));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_3(CHIP_ERROR error)
+    void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    void OnSuccessResponse_2(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
     {
         VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
         NextTest();
@@ -41612,8 +41906,16 @@ public:
             err = TestReadTheMandatoryAttributeMeasuredValue_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : read the optional attribute: Tolerance\n");
-            err = TestReadTheOptionalAttributeTolerance_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : read the mandatory attribute: MinMeasuredValue\n");
+            err = TestReadTheMandatoryAttributeMinMeasuredValue_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : read the mandatory attribute: MaxMeasuredValue\n");
+            err = TestReadTheMandatoryAttributeMaxMeasuredValue_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : read the optional attribute: Tolerance\n");
+            err = TestReadTheOptionalAttributeTolerance_4();
             break;
         }
 
@@ -41631,7 +41933,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 3;
+    const uint16_t mTestCount = 5;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -41661,9 +41963,29 @@ private:
         (static_cast<Test_TC_TM_2_1Suite *>(context))->OnFailureResponse_2(error);
     }
 
-    static void OnSuccessCallback_2(void * context, uint16_t tolerance)
+    static void OnSuccessCallback_2(void * context, const chip::app::DataModel::Nullable<int16_t> & minMeasuredValue)
     {
-        (static_cast<Test_TC_TM_2_1Suite *>(context))->OnSuccessResponse_2(tolerance);
+        (static_cast<Test_TC_TM_2_1Suite *>(context))->OnSuccessResponse_2(minMeasuredValue);
+    }
+
+    static void OnFailureCallback_3(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_TM_2_1Suite *>(context))->OnFailureResponse_3(error);
+    }
+
+    static void OnSuccessCallback_3(void * context, const chip::app::DataModel::Nullable<int16_t> & maxMeasuredValue)
+    {
+        (static_cast<Test_TC_TM_2_1Suite *>(context))->OnSuccessResponse_3(maxMeasuredValue);
+    }
+
+    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_TM_2_1Suite *>(context))->OnFailureResponse_4(error);
+    }
+
+    static void OnSuccessCallback_4(void * context, uint16_t tolerance)
+    {
+        (static_cast<Test_TC_TM_2_1Suite *>(context))->OnSuccessResponse_4(tolerance);
     }
 
     //
@@ -41700,24 +42022,76 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeTolerance_2()
+    CHIP_ERROR TestReadTheMandatoryAttributeMinMeasuredValue_2()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::TemperatureMeasurementClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::TemperatureMeasurement::Attributes::Tolerance::TypeInfo>(
-            this, OnSuccessCallback_2, OnFailureCallback_2, true));
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::TemperatureMeasurement::Attributes::MinMeasuredValue::TypeInfo>(
+                this, OnSuccessCallback_2, OnFailureCallback_2, true));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_2(const chip::app::DataModel::Nullable<int16_t> & minMeasuredValue)
+    {
+        VerifyOrReturn(CheckConstraintType("minMeasuredValue", "", "int16"));
+        VerifyOrReturn(CheckConstraintMinValue("minMeasuredValue", minMeasuredValue, -27315));
+        VerifyOrReturn(CheckConstraintMaxValue("minMeasuredValue", minMeasuredValue, 32766));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheMandatoryAttributeMaxMeasuredValue_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::TemperatureMeasurementClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::TemperatureMeasurement::Attributes::MaxMeasuredValue::TypeInfo>(
+                this, OnSuccessCallback_3, OnFailureCallback_3, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_3(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_3(const chip::app::DataModel::Nullable<int16_t> & maxMeasuredValue)
+    {
+        VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "", "int16"));
+        VerifyOrReturn(CheckConstraintMinValue("maxMeasuredValue", maxMeasuredValue, -27314));
+        VerifyOrReturn(CheckConstraintMaxValue("maxMeasuredValue", maxMeasuredValue, 32767));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeTolerance_4()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::TemperatureMeasurementClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::TemperatureMeasurement::Attributes::Tolerance::TypeInfo>(
+            this, OnSuccessCallback_4, OnFailureCallback_4, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_4(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
         (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_2(uint16_t tolerance)
+    void OnSuccessResponse_4(uint16_t tolerance)
     {
         VerifyOrReturn(CheckConstraintType("tolerance", "", "uint16"));
         VerifyOrReturn(CheckConstraintMinValue("tolerance", tolerance, 0U));
@@ -41770,22 +42144,30 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Reads MeasuredValue attribute from DUT\n");
-            if (ShouldSkip("A_TEMPERATURE"))
-            {
-                NextTest();
-                return;
-            }
-            err = TestReadsMeasuredValueAttributeFromDut_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : read the mandatory attribute: MinMeasuredValue\n");
+            err = TestReadTheMandatoryAttributeMinMeasuredValue_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the mandatory attribute: MeasuredValue\n");
+            ChipLogProgress(chipTool, " ***** Test Step 2 : read the mandatory attribute: MaxMeasuredValue\n");
+            err = TestReadTheMandatoryAttributeMaxMeasuredValue_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Reads MeasuredValue attribute from DUT\n");
             if (ShouldSkip("A_TEMPERATURE"))
             {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributeMeasuredValue_2();
+            err = TestReadsMeasuredValueAttributeFromDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the mandatory attribute: MeasuredValue\n");
+            if (ShouldSkip("A_TEMPERATURE"))
+            {
+                NextTest();
+                return;
+            }
+            err = TestReadTheMandatoryAttributeMeasuredValue_4();
             break;
         }
 
@@ -41803,7 +42185,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 3;
+    const uint16_t mTestCount = 5;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -41823,9 +42205,9 @@ private:
         (static_cast<Test_TC_TM_2_2Suite *>(context))->OnFailureResponse_1(error);
     }
 
-    static void OnSuccessCallback_1(void * context, const chip::app::DataModel::Nullable<int16_t> & measuredValue)
+    static void OnSuccessCallback_1(void * context, const chip::app::DataModel::Nullable<int16_t> & minMeasuredValue)
     {
-        (static_cast<Test_TC_TM_2_2Suite *>(context))->OnSuccessResponse_1(measuredValue);
+        (static_cast<Test_TC_TM_2_2Suite *>(context))->OnSuccessResponse_1(minMeasuredValue);
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -41833,9 +42215,29 @@ private:
         (static_cast<Test_TC_TM_2_2Suite *>(context))->OnFailureResponse_2(error);
     }
 
-    static void OnSuccessCallback_2(void * context, const chip::app::DataModel::Nullable<int16_t> & measuredValue)
+    static void OnSuccessCallback_2(void * context, const chip::app::DataModel::Nullable<int16_t> & maxMeasuredValue)
     {
-        (static_cast<Test_TC_TM_2_2Suite *>(context))->OnSuccessResponse_2(measuredValue);
+        (static_cast<Test_TC_TM_2_2Suite *>(context))->OnSuccessResponse_2(maxMeasuredValue);
+    }
+
+    static void OnFailureCallback_3(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_TM_2_2Suite *>(context))->OnFailureResponse_3(error);
+    }
+
+    static void OnSuccessCallback_3(void * context, const chip::app::DataModel::Nullable<int16_t> & measuredValue)
+    {
+        (static_cast<Test_TC_TM_2_2Suite *>(context))->OnSuccessResponse_3(measuredValue);
+    }
+
+    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_TM_2_2Suite *>(context))->OnFailureResponse_4(error);
+    }
+
+    static void OnSuccessCallback_4(void * context, const chip::app::DataModel::Nullable<int16_t> & measuredValue)
+    {
+        (static_cast<Test_TC_TM_2_2Suite *>(context))->OnSuccessResponse_4(measuredValue);
     }
 
     //
@@ -41848,14 +42250,14 @@ private:
         return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
     }
 
-    CHIP_ERROR TestReadsMeasuredValueAttributeFromDut_1()
+    CHIP_ERROR TestReadTheMandatoryAttributeMinMeasuredValue_1()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::TemperatureMeasurementClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::TemperatureMeasurement::Attributes::MeasuredValue::TypeInfo>(
+            cluster.ReadAttribute<chip::app::Clusters::TemperatureMeasurement::Attributes::MinMeasuredValue::TypeInfo>(
                 this, OnSuccessCallback_1, OnFailureCallback_1, true));
         return CHIP_NO_ERROR;
     }
@@ -41866,20 +42268,22 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_1(const chip::app::DataModel::Nullable<int16_t> & measuredValue)
+    void OnSuccessResponse_1(const chip::app::DataModel::Nullable<int16_t> & minMeasuredValue)
     {
-        VerifyOrReturn(CheckConstraintType("measuredValue", "", "uint16"));
+        VerifyOrReturn(CheckConstraintType("minMeasuredValue", "", "int16"));
+        VerifyOrReturn(CheckConstraintMinValue("minMeasuredValue", minMeasuredValue, -27315));
+        VerifyOrReturn(CheckConstraintMaxValue("minMeasuredValue", minMeasuredValue, 32766));
         NextTest();
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributeMeasuredValue_2()
+    CHIP_ERROR TestReadTheMandatoryAttributeMaxMeasuredValue_2()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::TemperatureMeasurementClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::TemperatureMeasurement::Attributes::MeasuredValue::TypeInfo>(
+            cluster.ReadAttribute<chip::app::Clusters::TemperatureMeasurement::Attributes::MaxMeasuredValue::TypeInfo>(
                 this, OnSuccessCallback_2, OnFailureCallback_2, true));
         return CHIP_NO_ERROR;
     }
@@ -41890,7 +42294,57 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_2(const chip::app::DataModel::Nullable<int16_t> & measuredValue)
+    void OnSuccessResponse_2(const chip::app::DataModel::Nullable<int16_t> & maxMeasuredValue)
+    {
+        VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "", "int16"));
+        VerifyOrReturn(CheckConstraintMinValue("maxMeasuredValue", maxMeasuredValue, -27314));
+        VerifyOrReturn(CheckConstraintMaxValue("maxMeasuredValue", maxMeasuredValue, 32767));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadsMeasuredValueAttributeFromDut_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::TemperatureMeasurementClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::TemperatureMeasurement::Attributes::MeasuredValue::TypeInfo>(
+                this, OnSuccessCallback_3, OnFailureCallback_3, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_3(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_3(const chip::app::DataModel::Nullable<int16_t> & measuredValue)
+    {
+        VerifyOrReturn(CheckConstraintType("measuredValue", "", "uint16"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheMandatoryAttributeMeasuredValue_4()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::TemperatureMeasurementClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::TemperatureMeasurement::Attributes::MeasuredValue::TypeInfo>(
+                this, OnSuccessCallback_4, OnFailureCallback_4, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_4(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_4(const chip::app::DataModel::Nullable<int16_t> & measuredValue)
     {
         VerifyOrReturn(CheckConstraintType("measuredValue", "", "uint16"));
         NextTest();
@@ -41945,17 +42399,12 @@ public:
             err = TestReadTheGlobalAttributeConstraintsClusterRevision_1();
             break;
         case 2:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 2 : write the default values to mandatory global attribute: ClusterRevision\n");
-            err = TestWriteTheDefaultValuesToMandatoryGlobalAttributeClusterRevision_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
-            err = TestReadTheGlobalAttributeAttributeList_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the optional global attribute constraints: FeatureMap\n");
-            err = TestReadTheOptionalGlobalAttributeConstraintsFeatureMap_4();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the optional global attribute constraints: FeatureMap\n");
+            err = TestReadTheOptionalGlobalAttributeConstraintsFeatureMap_3();
             break;
         }
 
@@ -41973,7 +42422,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 5;
+    const uint16_t mTestCount = 4;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -42003,26 +42452,19 @@ private:
         (static_cast<Test_TC_TSTAT_1_1Suite *>(context))->OnFailureResponse_2(error);
     }
 
-    static void OnSuccessCallback_2(void * context) { (static_cast<Test_TC_TSTAT_1_1Suite *>(context))->OnSuccessResponse_2(); }
+    static void OnSuccessCallback_2(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    {
+        (static_cast<Test_TC_TSTAT_1_1Suite *>(context))->OnSuccessResponse_2(attributeList);
+    }
 
     static void OnFailureCallback_3(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_TSTAT_1_1Suite *>(context))->OnFailureResponse_3(error);
     }
 
-    static void OnSuccessCallback_3(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    static void OnSuccessCallback_3(void * context, uint32_t featureMap)
     {
-        (static_cast<Test_TC_TSTAT_1_1Suite *>(context))->OnSuccessResponse_3(attributeList);
-    }
-
-    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_1_1Suite *>(context))->OnFailureResponse_4(error);
-    }
-
-    static void OnSuccessCallback_4(void * context, uint32_t featureMap)
-    {
-        (static_cast<Test_TC_TSTAT_1_1Suite *>(context))->OnSuccessResponse_4(featureMap);
+        (static_cast<Test_TC_TSTAT_1_1Suite *>(context))->OnSuccessResponse_3(featureMap);
     }
 
     //
@@ -42058,36 +42500,36 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryGlobalAttributeClusterRevision_2()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        uint16_t clusterRevisionArgument;
-        clusterRevisionArgument = 5U;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Thermostat::Attributes::ClusterRevision::TypeInfo>(
-            clusterRevisionArgument, this, OnSuccessCallback_2, OnFailureCallback_2));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_2(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-        NextTest();
-    }
-
-    void OnSuccessResponse_2() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_3()
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_2()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::AttributeList::TypeInfo>(
+            this, OnSuccessCallback_2, OnFailureCallback_2, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_2(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_2(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    {
+        VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheOptionalGlobalAttributeConstraintsFeatureMap_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::ThermostatClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::FeatureMap::TypeInfo>(
             this, OnSuccessCallback_3, OnFailureCallback_3, true));
         return CHIP_NO_ERROR;
     }
@@ -42098,30 +42540,7 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
-    {
-        VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadTheOptionalGlobalAttributeConstraintsFeatureMap_4()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::FeatureMap::TypeInfo>(
-            this, OnSuccessCallback_4, OnFailureCallback_4, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_4(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_4(uint32_t featureMap)
+    void OnSuccessResponse_3(uint32_t featureMap)
     {
         VerifyOrReturn(CheckConstraintType("featureMap", "", "map32"));
         NextTest();
@@ -42177,285 +42596,82 @@ public:
             err = TestReadsConstraintsOfMandatoryAttributesFromDutLocalTemperature_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads mandatory attributes from DUT: AbsMinHeatSetpointLimit\n");
-            err = TestReadsMandatoryAttributesFromDutAbsMinHeatSetpointLimit_2();
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 2 : Reads constraints of mandatory attributes from DUT: AbsMinHeatSetpointLimit\n");
+            err = TestReadsConstraintsOfMandatoryAttributesFromDutAbsMinHeatSetpointLimit_2();
             break;
         case 3:
             ChipLogProgress(chipTool,
-                            " ***** Test Step 3 : Reads constraints of mandatory attributes from DUT: AbsMinHeatSetpointLimit\n");
-            err = TestReadsConstraintsOfMandatoryAttributesFromDutAbsMinHeatSetpointLimit_3();
+                            " ***** Test Step 3 : Reads constraints of mandatory attributes from DUT: AbsMaxHeatSetpointLimit\n");
+            err = TestReadsConstraintsOfMandatoryAttributesFromDutAbsMaxHeatSetpointLimit_3();
             break;
         case 4:
             ChipLogProgress(chipTool,
-                            " ***** Test Step 4 : Writes the respective default value to mandatory attributes to DUT: "
-                            "AbsMinHeatSetpointLimit\n");
-            err = TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutAbsMinHeatSetpointLimit_4();
+                            " ***** Test Step 4 : Reads constraints of optional attributes from DUT: AbsMinCoolSetpointLimit\n");
+            err = TestReadsConstraintsOfOptionalAttributesFromDutAbsMinCoolSetpointLimit_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Read back mandatory attributes from DUT: AbsMinHeatSetpointLimit\n");
-            err = TestReadBackMandatoryAttributesFromDutAbsMinHeatSetpointLimit_5();
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 5 : Reads constraints of optional attributes from DUT: AbsMaxCoolSetpointLimit\n");
+            err = TestReadsConstraintsOfOptionalAttributesFromDutAbsMaxCoolSetpointLimit_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Reads mandatory attributes from DUT: AbsMaxHeatSetpointLimit\n");
-            err = TestReadsMandatoryAttributesFromDutAbsMaxHeatSetpointLimit_6();
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 6 : Reads constraints of optional attributes from DUT: OccupiedCoolingSetpoint\n");
+            err = TestReadsConstraintsOfOptionalAttributesFromDutOccupiedCoolingSetpoint_6();
             break;
         case 7:
             ChipLogProgress(chipTool,
-                            " ***** Test Step 7 : Reads constraints of mandatory attributes from DUT: AbsMaxHeatSetpointLimit\n");
-            err = TestReadsConstraintsOfMandatoryAttributesFromDutAbsMaxHeatSetpointLimit_7();
+                            " ***** Test Step 7 : Reads constraints of mandatory attributes from DUT: OccupiedHeatingSetpoint\n");
+            err = TestReadsConstraintsOfMandatoryAttributesFromDutOccupiedHeatingSetpoint_7();
             break;
         case 8:
             ChipLogProgress(chipTool,
-                            " ***** Test Step 8 : Writes the respective default value to mandatory attributes to DUT: "
-                            "AbsMaxHeatSetpointLimit\n");
-            err = TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutAbsMaxHeatSetpointLimit_8();
+                            " ***** Test Step 8 : Reads constraints of mandatory attributes from DUT: MinHeatSetpointLimit\n");
+            err = TestReadsConstraintsOfMandatoryAttributesFromDutMinHeatSetpointLimit_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Read back mandatory attributes from DUT: AbsMaxHeatSetpointLimit\n");
-            err = TestReadBackMandatoryAttributesFromDutAbsMaxHeatSetpointLimit_9();
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 9 : Reads constraints of mandatory attributes from DUT: MaxHeatSetpointLimit\n");
+            err = TestReadsConstraintsOfMandatoryAttributesFromDutMaxHeatSetpointLimit_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Reads mandatory attributes from DUT: AbsMinCoolSetpointLimit\n");
-            err = TestReadsMandatoryAttributesFromDutAbsMinCoolSetpointLimit_10();
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 10 : Reads constraints of optional attributes from DUT: MinCoolSetpointLimit\n");
+            err = TestReadsConstraintsOfOptionalAttributesFromDutMinCoolSetpointLimit_10();
             break;
         case 11:
             ChipLogProgress(chipTool,
-                            " ***** Test Step 11 : Reads constraints of mandatory attributes from DUT: AbsMinCoolSetpointLimit\n");
-            err = TestReadsConstraintsOfMandatoryAttributesFromDutAbsMinCoolSetpointLimit_11();
+                            " ***** Test Step 11 : Reads constraints of optional attributes from DUT: MaxCoolSetpointLimit\n");
+            err = TestReadsConstraintsOfOptionalAttributesFromDutMaxCoolSetpointLimit_11();
             break;
         case 12:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 12 : Writes the respective default value to mandatory attributes to DUT: "
-                            "AbsMinCoolSetpointLimit\n");
-            err = TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutAbsMinCoolSetpointLimit_12();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 12 : Reads constraints of mandatory attributes from DUT: ControlSequenceOfOperation\n");
+            err = TestReadsConstraintsOfMandatoryAttributesFromDutControlSequenceOfOperation_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Read back mandatory attributes from DUT: AbsMinCoolSetpointLimit\n");
-            err = TestReadBackMandatoryAttributesFromDutAbsMinCoolSetpointLimit_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Reads constraints of mandatory attributes from DUT: SystemMode\n");
+            err = TestReadsConstraintsOfMandatoryAttributesFromDutSystemMode_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Reads mandatory attributes from DUT: AbsMaxCoolSetpointLimit\n");
-            err = TestReadsMandatoryAttributesFromDutAbsMaxCoolSetpointLimit_14();
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 14 : Reads constraints of optional attributes from DUT: MinSetpointDeadBand\n");
+            err = TestReadsConstraintsOfOptionalAttributesFromDutMinSetpointDeadBand_14();
             break;
         case 15:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 15 : Reads constraints of mandatory attributes from DUT: AbsMaxCoolSetpointLimit\n");
-            err = TestReadsConstraintsOfMandatoryAttributesFromDutAbsMaxCoolSetpointLimit_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Reads constraints of optional attributes from DUT: StartOfWeek\n");
+            err = TestReadsConstraintsOfOptionalAttributesFromDutStartOfWeek_15();
             break;
         case 16:
             ChipLogProgress(chipTool,
-                            " ***** Test Step 16 : Writes the respective default value to mandatory attributes to DUT: "
-                            "AbsMaxCoolSetpointLimit\n");
-            err = TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutAbsMaxCoolSetpointLimit_16();
+                            " ***** Test Step 16 : Reads constraints of optional attributes from DUT: NumberOfWeeklyTransitions\n");
+            err = TestReadsConstraintsOfOptionalAttributesFromDutNumberOfWeeklyTransitions_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Read back mandatory attributes from DUT: AbsMaxCoolSetpointLimit\n");
-            err = TestReadBackMandatoryAttributesFromDutAbsMaxCoolSetpointLimit_17();
-            break;
-        case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Reads mandatory attributes from DUT: OccupiedCoolingSetpoint\n");
-            err = TestReadsMandatoryAttributesFromDutOccupiedCoolingSetpoint_18();
-            break;
-        case 19:
             ChipLogProgress(chipTool,
-                            " ***** Test Step 19 : Reads constraints of mandatory attributes from DUT: OccupiedCoolingSetpoint\n");
-            err = TestReadsConstraintsOfMandatoryAttributesFromDutOccupiedCoolingSetpoint_19();
-            break;
-        case 20:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 20 : Writes the respective default value to mandatory attributes to DUT: "
-                            "OccupiedCoolingSetpoint\n");
-            err = TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutOccupiedCoolingSetpoint_20();
-            break;
-        case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : Read back mandatory attributes from DUT: OccupiedCoolingSetpoint\n");
-            err = TestReadBackMandatoryAttributesFromDutOccupiedCoolingSetpoint_21();
-            break;
-        case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : Reads mandatory attributes from DUT: OccupiedHeatingSetpoint\n");
-            err = TestReadsMandatoryAttributesFromDutOccupiedHeatingSetpoint_22();
-            break;
-        case 23:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 23 : Reads constraints of mandatory attributes from DUT: OccupiedHeatingSetpoint\n");
-            err = TestReadsConstraintsOfMandatoryAttributesFromDutOccupiedHeatingSetpoint_23();
-            break;
-        case 24:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 24 : Writes the respective default value to mandatory attributes to DUT: "
-                            "OccupiedHeatingSetpoint\n");
-            err = TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutOccupiedHeatingSetpoint_24();
-            break;
-        case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : Read back mandatory attributes from DUT: OccupiedHeatingSetpoint\n");
-            err = TestReadBackMandatoryAttributesFromDutOccupiedHeatingSetpoint_25();
-            break;
-        case 26:
-            ChipLogProgress(chipTool, " ***** Test Step 26 : Reads mandatory attributes from DUT: MinHeatSetpointLimit\n");
-            err = TestReadsMandatoryAttributesFromDutMinHeatSetpointLimit_26();
-            break;
-        case 27:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 27 : Reads constraints of mandatory attributes from DUT: MinHeatSetpointLimit\n");
-            err = TestReadsConstraintsOfMandatoryAttributesFromDutMinHeatSetpointLimit_27();
-            break;
-        case 28:
-            ChipLogProgress(
-                chipTool,
-                " ***** Test Step 28 : Writes the respective default value to mandatory attributes to DUT: MinHeatSetpointLimit\n");
-            err = TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutMinHeatSetpointLimit_28();
-            break;
-        case 29:
-            ChipLogProgress(chipTool, " ***** Test Step 29 : Read back mandatory attributes from DUT: MinHeatSetpointLimit\n");
-            err = TestReadBackMandatoryAttributesFromDutMinHeatSetpointLimit_29();
-            break;
-        case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : Reads mandatory attributes from DUT: MaxHeatSetpointLimit\n");
-            err = TestReadsMandatoryAttributesFromDutMaxHeatSetpointLimit_30();
-            break;
-        case 31:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 31 : Reads constraints of mandatory attributes from DUT: MaxHeatSetpointLimit\n");
-            err = TestReadsConstraintsOfMandatoryAttributesFromDutMaxHeatSetpointLimit_31();
-            break;
-        case 32:
-            ChipLogProgress(
-                chipTool,
-                " ***** Test Step 32 : Writes the respective default value to mandatory attributes to DUT: MaxHeatSetpointLimit\n");
-            err = TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutMaxHeatSetpointLimit_32();
-            break;
-        case 33:
-            ChipLogProgress(chipTool, " ***** Test Step 33 : Read back mandatory attributes from DUT: MaxHeatSetpointLimit\n");
-            err = TestReadBackMandatoryAttributesFromDutMaxHeatSetpointLimit_33();
-            break;
-        case 34:
-            ChipLogProgress(chipTool, " ***** Test Step 34 : Reads mandatory attributes from DUT: MinCoolSetpointLimit\n");
-            err = TestReadsMandatoryAttributesFromDutMinCoolSetpointLimit_34();
-            break;
-        case 35:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 35 : Reads constraints of mandatory attributes from DUT: MinCoolSetpointLimit\n");
-            err = TestReadsConstraintsOfMandatoryAttributesFromDutMinCoolSetpointLimit_35();
-            break;
-        case 36:
-            ChipLogProgress(
-                chipTool,
-                " ***** Test Step 36 : Writes the respective default value to mandatory attributes to DUT: MinCoolSetpointLimit\n");
-            err = TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutMinCoolSetpointLimit_36();
-            break;
-        case 37:
-            ChipLogProgress(chipTool, " ***** Test Step 37 : Read back mandatory attributes from DUT: MinCoolSetpointLimit\n");
-            err = TestReadBackMandatoryAttributesFromDutMinCoolSetpointLimit_37();
-            break;
-        case 38:
-            ChipLogProgress(chipTool, " ***** Test Step 38 : Reads mandatory attributes from DUT: MaxCoolSetpointLimit\n");
-            err = TestReadsMandatoryAttributesFromDutMaxCoolSetpointLimit_38();
-            break;
-        case 39:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 39 : Reads constraints of mandatory attributes from DUT: MaxCoolSetpointLimit\n");
-            err = TestReadsConstraintsOfMandatoryAttributesFromDutMaxCoolSetpointLimit_39();
-            break;
-        case 40:
-            ChipLogProgress(
-                chipTool,
-                " ***** Test Step 40 : Writes the respective default value to mandatory attributes to DUT: MaxCoolSetpointLimit\n");
-            err = TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutMaxCoolSetpointLimit_40();
-            break;
-        case 41:
-            ChipLogProgress(chipTool, " ***** Test Step 41 : Read back mandatory attributes from DUT: MaxCoolSetpointLimit\n");
-            err = TestReadBackMandatoryAttributesFromDutMaxCoolSetpointLimit_41();
-            break;
-        case 42:
-            ChipLogProgress(chipTool, " ***** Test Step 42 : Reads mandatory attributes from DUT: ControlSequenceOfOperation\n");
-            err = TestReadsMandatoryAttributesFromDutControlSequenceOfOperation_42();
-            break;
-        case 43:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 43 : Reads constraints of mandatory attributes from DUT: ControlSequenceOfOperation\n");
-            err = TestReadsConstraintsOfMandatoryAttributesFromDutControlSequenceOfOperation_43();
-            break;
-        case 44:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 44 : Writes the respective default value to mandatory attributes to DUT: "
-                            "ControlSequenceOfOperation\n");
-            err = TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutControlSequenceOfOperation_44();
-            break;
-        case 45:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 45 : Read back mandatory attributes from DUT: ControlSequenceOfOperation\n");
-            err = TestReadBackMandatoryAttributesFromDutControlSequenceOfOperation_45();
-            break;
-        case 46:
-            ChipLogProgress(chipTool, " ***** Test Step 46 : Reads mandatory attributes from DUT: SystemMode\n");
-            err = TestReadsMandatoryAttributesFromDutSystemMode_46();
-            break;
-        case 47:
-            ChipLogProgress(chipTool, " ***** Test Step 47 : Reads constraints of mandatory attributes from DUT: SystemMode\n");
-            err = TestReadsConstraintsOfMandatoryAttributesFromDutSystemMode_47();
-            break;
-        case 48:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 48 : Writes the respective default value to mandatory attributes to DUT: SystemMode\n");
-            err = TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutSystemMode_48();
-            break;
-        case 49:
-            ChipLogProgress(chipTool, " ***** Test Step 49 : Read back mandatory attributes from DUT: SystemMode\n");
-            err = TestReadBackMandatoryAttributesFromDutSystemMode_49();
-            break;
-        case 50:
-            ChipLogProgress(chipTool, " ***** Test Step 50 : Reads optional attributes from DUT: MinSetpointDeadBand\n");
-            err = TestReadsOptionalAttributesFromDutMinSetpointDeadBand_50();
-            break;
-        case 51:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 51 : Reads constraints of optional attributes from DUT: MinSetpointDeadBand\n");
-            err = TestReadsConstraintsOfOptionalAttributesFromDutMinSetpointDeadBand_51();
-            break;
-        case 52:
-            ChipLogProgress(
-                chipTool,
-                " ***** Test Step 52 : Writes the respective default value to optional attributes to DUT: MinSetpointDeadBand\n");
-            err = TestWritesTheRespectiveDefaultValueToOptionalAttributesToDutMinSetpointDeadBand_52();
-            break;
-        case 53:
-            ChipLogProgress(chipTool, " ***** Test Step 53 : Read back optional attributes from DUT: MinSetpointDeadBand\n");
-            err = TestReadBackOptionalAttributesFromDutMinSetpointDeadBand_53();
-            break;
-        case 54:
-            ChipLogProgress(chipTool, " ***** Test Step 54 : Reads constraints of optional attributes from DUT: StartOfWeek\n");
-            err = TestReadsConstraintsOfOptionalAttributesFromDutStartOfWeek_54();
-            break;
-        case 55:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 55 : Writes the respective default value to optional attributes to DUT: StartOfWeek\n");
-            err = TestWritesTheRespectiveDefaultValueToOptionalAttributesToDutStartOfWeek_55();
-            break;
-        case 56:
-            ChipLogProgress(chipTool, " ***** Test Step 56 : Read back optional attributes from DUT: StartOfWeek\n");
-            err = TestReadBackOptionalAttributesFromDutStartOfWeek_56();
-            break;
-        case 57:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 57 : Reads constraints of optional attributes from DUT: NumberOfWeeklyTransitions\n");
-            err = TestReadsConstraintsOfOptionalAttributesFromDutNumberOfWeeklyTransitions_57();
-            break;
-        case 58:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 58 : Writes the respective default value to optional attributes to DUT: "
-                            "NumberOfWeeklyTransitions\n");
-            err = TestWritesTheRespectiveDefaultValueToOptionalAttributesToDutNumberOfWeeklyTransitions_58();
-            break;
-        case 59:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 59 : Reads constraints of optional attributes from DUT: NumberOfDailyTransitions\n");
-            err = TestReadsConstraintsOfOptionalAttributesFromDutNumberOfDailyTransitions_59();
-            break;
-        case 60:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 60 : Writes the respective default value to optional attributes to DUT: "
-                            "NumberOfDailyTransitions\n");
-            err = TestWritesTheRespectiveDefaultValueToOptionalAttributesToDutNumberOfDailyTransitions_60();
+                            " ***** Test Step 17 : Reads constraints of optional attributes from DUT: NumberOfDailyTransitions\n");
+            err = TestReadsConstraintsOfOptionalAttributesFromDutNumberOfDailyTransitions_17();
             break;
         }
 
@@ -42473,7 +42689,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 61;
+    const uint16_t mTestCount = 18;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -42513,9 +42729,9 @@ private:
         (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_3(error);
     }
 
-    static void OnSuccessCallback_3(void * context, int16_t absMinHeatSetpointLimit)
+    static void OnSuccessCallback_3(void * context, int16_t absMaxHeatSetpointLimit)
     {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_3(absMinHeatSetpointLimit);
+        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_3(absMaxHeatSetpointLimit);
     }
 
     static void OnFailureCallback_4(void * context, CHIP_ERROR error)
@@ -42523,16 +42739,19 @@ private:
         (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_4(error);
     }
 
-    static void OnSuccessCallback_4(void * context) { (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_4(); }
+    static void OnSuccessCallback_4(void * context, int16_t absMinCoolSetpointLimit)
+    {
+        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_4(absMinCoolSetpointLimit);
+    }
 
     static void OnFailureCallback_5(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_5(error);
     }
 
-    static void OnSuccessCallback_5(void * context, int16_t absMinHeatSetpointLimit)
+    static void OnSuccessCallback_5(void * context, int16_t absMaxCoolSetpointLimit)
     {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_5(absMinHeatSetpointLimit);
+        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_5(absMaxCoolSetpointLimit);
     }
 
     static void OnFailureCallback_6(void * context, CHIP_ERROR error)
@@ -42540,9 +42759,9 @@ private:
         (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_6(error);
     }
 
-    static void OnSuccessCallback_6(void * context, int16_t absMaxHeatSetpointLimit)
+    static void OnSuccessCallback_6(void * context, int16_t occupiedCoolingSetpoint)
     {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_6(absMaxHeatSetpointLimit);
+        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_6(occupiedCoolingSetpoint);
     }
 
     static void OnFailureCallback_7(void * context, CHIP_ERROR error)
@@ -42550,9 +42769,9 @@ private:
         (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_7(error);
     }
 
-    static void OnSuccessCallback_7(void * context, int16_t absMaxHeatSetpointLimit)
+    static void OnSuccessCallback_7(void * context, int16_t occupiedHeatingSetpoint)
     {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_7(absMaxHeatSetpointLimit);
+        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_7(occupiedHeatingSetpoint);
     }
 
     static void OnFailureCallback_8(void * context, CHIP_ERROR error)
@@ -42560,16 +42779,19 @@ private:
         (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_8(error);
     }
 
-    static void OnSuccessCallback_8(void * context) { (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_8(); }
+    static void OnSuccessCallback_8(void * context, int16_t minHeatSetpointLimit)
+    {
+        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_8(minHeatSetpointLimit);
+    }
 
     static void OnFailureCallback_9(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_9(error);
     }
 
-    static void OnSuccessCallback_9(void * context, int16_t absMaxHeatSetpointLimit)
+    static void OnSuccessCallback_9(void * context, int16_t maxHeatSetpointLimit)
     {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_9(absMaxHeatSetpointLimit);
+        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_9(maxHeatSetpointLimit);
     }
 
     static void OnFailureCallback_10(void * context, CHIP_ERROR error)
@@ -42577,9 +42799,9 @@ private:
         (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_10(error);
     }
 
-    static void OnSuccessCallback_10(void * context, int16_t absMinCoolSetpointLimit)
+    static void OnSuccessCallback_10(void * context, int16_t minCoolSetpointLimit)
     {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_10(absMinCoolSetpointLimit);
+        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_10(minCoolSetpointLimit);
     }
 
     static void OnFailureCallback_11(void * context, CHIP_ERROR error)
@@ -42587,9 +42809,9 @@ private:
         (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_11(error);
     }
 
-    static void OnSuccessCallback_11(void * context, int16_t absMinCoolSetpointLimit)
+    static void OnSuccessCallback_11(void * context, int16_t maxCoolSetpointLimit)
     {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_11(absMinCoolSetpointLimit);
+        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_11(maxCoolSetpointLimit);
     }
 
     static void OnFailureCallback_12(void * context, CHIP_ERROR error)
@@ -42597,16 +42819,20 @@ private:
         (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_12(error);
     }
 
-    static void OnSuccessCallback_12(void * context) { (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_12(); }
+    static void OnSuccessCallback_12(void * context,
+                                     chip::app::Clusters::Thermostat::ThermostatControlSequence controlSequenceOfOperation)
+    {
+        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_12(controlSequenceOfOperation);
+    }
 
     static void OnFailureCallback_13(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_13(error);
     }
 
-    static void OnSuccessCallback_13(void * context, int16_t absMinCoolSetpointLimit)
+    static void OnSuccessCallback_13(void * context, uint8_t systemMode)
     {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_13(absMinCoolSetpointLimit);
+        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_13(systemMode);
     }
 
     static void OnFailureCallback_14(void * context, CHIP_ERROR error)
@@ -42614,9 +42840,9 @@ private:
         (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_14(error);
     }
 
-    static void OnSuccessCallback_14(void * context, int16_t absMaxCoolSetpointLimit)
+    static void OnSuccessCallback_14(void * context, int8_t minSetpointDeadBand)
     {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_14(absMaxCoolSetpointLimit);
+        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_14(minSetpointDeadBand);
     }
 
     static void OnFailureCallback_15(void * context, CHIP_ERROR error)
@@ -42624,9 +42850,9 @@ private:
         (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_15(error);
     }
 
-    static void OnSuccessCallback_15(void * context, int16_t absMaxCoolSetpointLimit)
+    static void OnSuccessCallback_15(void * context, uint8_t startOfWeek)
     {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_15(absMaxCoolSetpointLimit);
+        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_15(startOfWeek);
     }
 
     static void OnFailureCallback_16(void * context, CHIP_ERROR error)
@@ -42634,414 +42860,20 @@ private:
         (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_16(error);
     }
 
-    static void OnSuccessCallback_16(void * context) { (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_16(); }
+    static void OnSuccessCallback_16(void * context, uint8_t numberOfWeeklyTransitions)
+    {
+        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_16(numberOfWeeklyTransitions);
+    }
 
     static void OnFailureCallback_17(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_17(error);
     }
 
-    static void OnSuccessCallback_17(void * context, int16_t absMaxCoolSetpointLimit)
+    static void OnSuccessCallback_17(void * context, uint8_t numberOfDailyTransitions)
     {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_17(absMaxCoolSetpointLimit);
+        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_17(numberOfDailyTransitions);
     }
-
-    static void OnFailureCallback_18(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_18(error);
-    }
-
-    static void OnSuccessCallback_18(void * context, int16_t occupiedCoolingSetpoint)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_18(occupiedCoolingSetpoint);
-    }
-
-    static void OnFailureCallback_19(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_19(error);
-    }
-
-    static void OnSuccessCallback_19(void * context, int16_t occupiedCoolingSetpoint)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_19(occupiedCoolingSetpoint);
-    }
-
-    static void OnFailureCallback_20(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_20(error);
-    }
-
-    static void OnSuccessCallback_20(void * context) { (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_20(); }
-
-    static void OnFailureCallback_21(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_21(error);
-    }
-
-    static void OnSuccessCallback_21(void * context, int16_t occupiedCoolingSetpoint)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_21(occupiedCoolingSetpoint);
-    }
-
-    static void OnFailureCallback_22(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_22(error);
-    }
-
-    static void OnSuccessCallback_22(void * context, int16_t occupiedHeatingSetpoint)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_22(occupiedHeatingSetpoint);
-    }
-
-    static void OnFailureCallback_23(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_23(error);
-    }
-
-    static void OnSuccessCallback_23(void * context, int16_t occupiedHeatingSetpoint)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_23(occupiedHeatingSetpoint);
-    }
-
-    static void OnFailureCallback_24(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_24(error);
-    }
-
-    static void OnSuccessCallback_24(void * context) { (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_24(); }
-
-    static void OnFailureCallback_25(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_25(error);
-    }
-
-    static void OnSuccessCallback_25(void * context, int16_t occupiedHeatingSetpoint)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_25(occupiedHeatingSetpoint);
-    }
-
-    static void OnFailureCallback_26(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_26(error);
-    }
-
-    static void OnSuccessCallback_26(void * context, int16_t minHeatSetpointLimit)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_26(minHeatSetpointLimit);
-    }
-
-    static void OnFailureCallback_27(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_27(error);
-    }
-
-    static void OnSuccessCallback_27(void * context, int16_t minHeatSetpointLimit)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_27(minHeatSetpointLimit);
-    }
-
-    static void OnFailureCallback_28(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_28(error);
-    }
-
-    static void OnSuccessCallback_28(void * context) { (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_28(); }
-
-    static void OnFailureCallback_29(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_29(error);
-    }
-
-    static void OnSuccessCallback_29(void * context, int16_t minHeatSetpointLimit)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_29(minHeatSetpointLimit);
-    }
-
-    static void OnFailureCallback_30(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_30(error);
-    }
-
-    static void OnSuccessCallback_30(void * context, int16_t maxHeatSetpointLimit)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_30(maxHeatSetpointLimit);
-    }
-
-    static void OnFailureCallback_31(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_31(error);
-    }
-
-    static void OnSuccessCallback_31(void * context, int16_t maxHeatSetpointLimit)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_31(maxHeatSetpointLimit);
-    }
-
-    static void OnFailureCallback_32(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_32(error);
-    }
-
-    static void OnSuccessCallback_32(void * context) { (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_32(); }
-
-    static void OnFailureCallback_33(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_33(error);
-    }
-
-    static void OnSuccessCallback_33(void * context, int16_t maxHeatSetpointLimit)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_33(maxHeatSetpointLimit);
-    }
-
-    static void OnFailureCallback_34(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_34(error);
-    }
-
-    static void OnSuccessCallback_34(void * context, int16_t minCoolSetpointLimit)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_34(minCoolSetpointLimit);
-    }
-
-    static void OnFailureCallback_35(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_35(error);
-    }
-
-    static void OnSuccessCallback_35(void * context, int16_t minCoolSetpointLimit)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_35(minCoolSetpointLimit);
-    }
-
-    static void OnFailureCallback_36(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_36(error);
-    }
-
-    static void OnSuccessCallback_36(void * context) { (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_36(); }
-
-    static void OnFailureCallback_37(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_37(error);
-    }
-
-    static void OnSuccessCallback_37(void * context, int16_t minCoolSetpointLimit)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_37(minCoolSetpointLimit);
-    }
-
-    static void OnFailureCallback_38(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_38(error);
-    }
-
-    static void OnSuccessCallback_38(void * context, int16_t maxCoolSetpointLimit)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_38(maxCoolSetpointLimit);
-    }
-
-    static void OnFailureCallback_39(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_39(error);
-    }
-
-    static void OnSuccessCallback_39(void * context, int16_t maxCoolSetpointLimit)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_39(maxCoolSetpointLimit);
-    }
-
-    static void OnFailureCallback_40(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_40(error);
-    }
-
-    static void OnSuccessCallback_40(void * context) { (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_40(); }
-
-    static void OnFailureCallback_41(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_41(error);
-    }
-
-    static void OnSuccessCallback_41(void * context, int16_t maxCoolSetpointLimit)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_41(maxCoolSetpointLimit);
-    }
-
-    static void OnFailureCallback_42(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_42(error);
-    }
-
-    static void OnSuccessCallback_42(void * context,
-                                     chip::app::Clusters::Thermostat::ThermostatControlSequence controlSequenceOfOperation)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_42(controlSequenceOfOperation);
-    }
-
-    static void OnFailureCallback_43(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_43(error);
-    }
-
-    static void OnSuccessCallback_43(void * context,
-                                     chip::app::Clusters::Thermostat::ThermostatControlSequence controlSequenceOfOperation)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_43(controlSequenceOfOperation);
-    }
-
-    static void OnFailureCallback_44(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_44(error);
-    }
-
-    static void OnSuccessCallback_44(void * context) { (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_44(); }
-
-    static void OnFailureCallback_45(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_45(error);
-    }
-
-    static void OnSuccessCallback_45(void * context,
-                                     chip::app::Clusters::Thermostat::ThermostatControlSequence controlSequenceOfOperation)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_45(controlSequenceOfOperation);
-    }
-
-    static void OnFailureCallback_46(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_46(error);
-    }
-
-    static void OnSuccessCallback_46(void * context, uint8_t systemMode)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_46(systemMode);
-    }
-
-    static void OnFailureCallback_47(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_47(error);
-    }
-
-    static void OnSuccessCallback_47(void * context, uint8_t systemMode)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_47(systemMode);
-    }
-
-    static void OnFailureCallback_48(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_48(error);
-    }
-
-    static void OnSuccessCallback_48(void * context) { (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_48(); }
-
-    static void OnFailureCallback_49(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_49(error);
-    }
-
-    static void OnSuccessCallback_49(void * context, uint8_t systemMode)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_49(systemMode);
-    }
-
-    static void OnFailureCallback_50(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_50(error);
-    }
-
-    static void OnSuccessCallback_50(void * context, int8_t minSetpointDeadBand)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_50(minSetpointDeadBand);
-    }
-
-    static void OnFailureCallback_51(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_51(error);
-    }
-
-    static void OnSuccessCallback_51(void * context, int8_t minSetpointDeadBand)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_51(minSetpointDeadBand);
-    }
-
-    static void OnFailureCallback_52(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_52(error);
-    }
-
-    static void OnSuccessCallback_52(void * context) { (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_52(); }
-
-    static void OnFailureCallback_53(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_53(error);
-    }
-
-    static void OnSuccessCallback_53(void * context, int8_t minSetpointDeadBand)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_53(minSetpointDeadBand);
-    }
-
-    static void OnFailureCallback_54(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_54(error);
-    }
-
-    static void OnSuccessCallback_54(void * context, uint8_t startOfWeek)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_54(startOfWeek);
-    }
-
-    static void OnFailureCallback_55(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_55(error);
-    }
-
-    static void OnSuccessCallback_55(void * context) { (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_55(); }
-
-    static void OnFailureCallback_56(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_56(error);
-    }
-
-    static void OnSuccessCallback_56(void * context, uint8_t startOfWeek)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_56(startOfWeek);
-    }
-
-    static void OnFailureCallback_57(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_57(error);
-    }
-
-    static void OnSuccessCallback_57(void * context, uint8_t numberOfWeeklyTransitions)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_57(numberOfWeeklyTransitions);
-    }
-
-    static void OnFailureCallback_58(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_58(error);
-    }
-
-    static void OnSuccessCallback_58(void * context) { (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_58(); }
-
-    static void OnFailureCallback_59(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_59(error);
-    }
-
-    static void OnSuccessCallback_59(void * context, uint8_t numberOfDailyTransitions)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_59(numberOfDailyTransitions);
-    }
-
-    static void OnFailureCallback_60(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnFailureResponse_60(error);
-    }
-
-    static void OnSuccessCallback_60(void * context) { (static_cast<Test_TC_TSTAT_2_1Suite *>(context))->OnSuccessResponse_60(); }
 
     //
     // Tests methods
@@ -43076,7 +42908,7 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestReadsMandatoryAttributesFromDutAbsMinHeatSetpointLimit_2()
+    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutAbsMinHeatSetpointLimit_2()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatClusterTest cluster;
@@ -43095,18 +42927,19 @@ private:
 
     void OnSuccessResponse_2(int16_t absMinHeatSetpointLimit)
     {
-        VerifyOrReturn(CheckValue("absMinHeatSetpointLimit", absMinHeatSetpointLimit, 700));
-
+        VerifyOrReturn(CheckConstraintType("absMinHeatSetpointLimit", "", "int16"));
+        VerifyOrReturn(CheckConstraintMinValue("absMinHeatSetpointLimit", absMinHeatSetpointLimit, 700));
+        VerifyOrReturn(CheckConstraintMaxValue("absMinHeatSetpointLimit", absMinHeatSetpointLimit, 3000));
         NextTest();
     }
 
-    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutAbsMinHeatSetpointLimit_3()
+    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutAbsMaxHeatSetpointLimit_3()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::AbsMinHeatSetpointLimit::TypeInfo>(
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::AbsMaxHeatSetpointLimit::TypeInfo>(
             this, OnSuccessCallback_3, OnFailureCallback_3, true));
         return CHIP_NO_ERROR;
     }
@@ -43117,44 +42950,46 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_3(int16_t absMinHeatSetpointLimit)
+    void OnSuccessResponse_3(int16_t absMaxHeatSetpointLimit)
     {
-        VerifyOrReturn(CheckConstraintType("absMinHeatSetpointLimit", "", "int16"));
-        VerifyOrReturn(CheckConstraintMinValue("absMinHeatSetpointLimit", absMinHeatSetpointLimit, 700));
-        VerifyOrReturn(CheckConstraintMaxValue("absMinHeatSetpointLimit", absMinHeatSetpointLimit, 3000));
+        VerifyOrReturn(CheckConstraintType("absMaxHeatSetpointLimit", "", "int16"));
+        VerifyOrReturn(CheckConstraintMinValue("absMaxHeatSetpointLimit", absMaxHeatSetpointLimit, 700));
+        VerifyOrReturn(CheckConstraintMaxValue("absMaxHeatSetpointLimit", absMaxHeatSetpointLimit, 3000));
         NextTest();
     }
 
-    CHIP_ERROR TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutAbsMinHeatSetpointLimit_4()
+    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutAbsMinCoolSetpointLimit_4()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        int16_t absMinHeatSetpointLimitArgument;
-        absMinHeatSetpointLimitArgument = 700;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Thermostat::Attributes::AbsMinHeatSetpointLimit::TypeInfo>(
-            absMinHeatSetpointLimitArgument, this, OnSuccessCallback_4, OnFailureCallback_4));
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::AbsMinCoolSetpointLimit::TypeInfo>(
+            this, OnSuccessCallback_4, OnFailureCallback_4, true));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_4(int16_t absMinCoolSetpointLimit)
+    {
+        VerifyOrReturn(CheckConstraintType("absMinCoolSetpointLimit", "", "int16"));
+        VerifyOrReturn(CheckConstraintMinValue("absMinCoolSetpointLimit", absMinCoolSetpointLimit, 1600));
+        VerifyOrReturn(CheckConstraintMaxValue("absMinCoolSetpointLimit", absMinCoolSetpointLimit, 3200));
         NextTest();
     }
 
-    void OnSuccessResponse_4() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR TestReadBackMandatoryAttributesFromDutAbsMinHeatSetpointLimit_5()
+    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutAbsMaxCoolSetpointLimit_5()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::AbsMinHeatSetpointLimit::TypeInfo>(
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::AbsMaxCoolSetpointLimit::TypeInfo>(
             this, OnSuccessCallback_5, OnFailureCallback_5, true));
         return CHIP_NO_ERROR;
     }
@@ -43162,23 +42997,24 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_5(int16_t absMinHeatSetpointLimit)
+    void OnSuccessResponse_5(int16_t absMaxCoolSetpointLimit)
     {
-        VerifyOrReturn(CheckValue("absMinHeatSetpointLimit", absMinHeatSetpointLimit, 700));
-
+        VerifyOrReturn(CheckConstraintType("absMaxCoolSetpointLimit", "", "int16"));
+        VerifyOrReturn(CheckConstraintMinValue("absMaxCoolSetpointLimit", absMaxCoolSetpointLimit, 1600));
+        VerifyOrReturn(CheckConstraintMaxValue("absMaxCoolSetpointLimit", absMaxCoolSetpointLimit, 3200));
         NextTest();
     }
 
-    CHIP_ERROR TestReadsMandatoryAttributesFromDutAbsMaxHeatSetpointLimit_6()
+    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutOccupiedCoolingSetpoint_6()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::AbsMaxHeatSetpointLimit::TypeInfo>(
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::OccupiedCoolingSetpoint::TypeInfo>(
             this, OnSuccessCallback_6, OnFailureCallback_6, true));
         return CHIP_NO_ERROR;
     }
@@ -43186,23 +43022,24 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_6(int16_t absMaxHeatSetpointLimit)
+    void OnSuccessResponse_6(int16_t occupiedCoolingSetpoint)
     {
-        VerifyOrReturn(CheckValue("absMaxHeatSetpointLimit", absMaxHeatSetpointLimit, 3000));
-
+        VerifyOrReturn(CheckConstraintType("occupiedCoolingSetpoint", "", "int16"));
+        VerifyOrReturn(CheckConstraintMinValue("occupiedCoolingSetpoint", occupiedCoolingSetpoint, 1600));
+        VerifyOrReturn(CheckConstraintMaxValue("occupiedCoolingSetpoint", occupiedCoolingSetpoint, 2600));
         NextTest();
     }
 
-    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutAbsMaxHeatSetpointLimit_7()
+    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutOccupiedHeatingSetpoint_7()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::AbsMaxHeatSetpointLimit::TypeInfo>(
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::OccupiedHeatingSetpoint::TypeInfo>(
             this, OnSuccessCallback_7, OnFailureCallback_7, true));
         return CHIP_NO_ERROR;
     }
@@ -43213,44 +43050,46 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_7(int16_t absMaxHeatSetpointLimit)
+    void OnSuccessResponse_7(int16_t occupiedHeatingSetpoint)
     {
-        VerifyOrReturn(CheckConstraintType("absMaxHeatSetpointLimit", "", "int16"));
-        VerifyOrReturn(CheckConstraintMinValue("absMaxHeatSetpointLimit", absMaxHeatSetpointLimit, 700));
-        VerifyOrReturn(CheckConstraintMaxValue("absMaxHeatSetpointLimit", absMaxHeatSetpointLimit, 3000));
+        VerifyOrReturn(CheckConstraintType("occupiedHeatingSetpoint", "", "int16"));
+        VerifyOrReturn(CheckConstraintMinValue("occupiedHeatingSetpoint", occupiedHeatingSetpoint, 700));
+        VerifyOrReturn(CheckConstraintMaxValue("occupiedHeatingSetpoint", occupiedHeatingSetpoint, 2600));
         NextTest();
     }
 
-    CHIP_ERROR TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutAbsMaxHeatSetpointLimit_8()
+    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutMinHeatSetpointLimit_8()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        int16_t absMaxHeatSetpointLimitArgument;
-        absMaxHeatSetpointLimitArgument = 3000;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Thermostat::Attributes::AbsMaxHeatSetpointLimit::TypeInfo>(
-            absMaxHeatSetpointLimitArgument, this, OnSuccessCallback_8, OnFailureCallback_8));
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::MinHeatSetpointLimit::TypeInfo>(
+            this, OnSuccessCallback_8, OnFailureCallback_8, true));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_8(int16_t minHeatSetpointLimit)
+    {
+        VerifyOrReturn(CheckConstraintType("minHeatSetpointLimit", "", "int16"));
+        VerifyOrReturn(CheckConstraintMinValue("minHeatSetpointLimit", minHeatSetpointLimit, 700));
+        VerifyOrReturn(CheckConstraintMaxValue("minHeatSetpointLimit", minHeatSetpointLimit, 3000));
         NextTest();
     }
 
-    void OnSuccessResponse_8() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR TestReadBackMandatoryAttributesFromDutAbsMaxHeatSetpointLimit_9()
+    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutMaxHeatSetpointLimit_9()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::AbsMaxHeatSetpointLimit::TypeInfo>(
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::MaxHeatSetpointLimit::TypeInfo>(
             this, OnSuccessCallback_9, OnFailureCallback_9, true));
         return CHIP_NO_ERROR;
     }
@@ -43261,20 +43100,21 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_9(int16_t absMaxHeatSetpointLimit)
+    void OnSuccessResponse_9(int16_t maxHeatSetpointLimit)
     {
-        VerifyOrReturn(CheckValue("absMaxHeatSetpointLimit", absMaxHeatSetpointLimit, 3000));
-
+        VerifyOrReturn(CheckConstraintType("maxHeatSetpointLimit", "", "int16"));
+        VerifyOrReturn(CheckConstraintMinValue("maxHeatSetpointLimit", maxHeatSetpointLimit, 700));
+        VerifyOrReturn(CheckConstraintMaxValue("maxHeatSetpointLimit", maxHeatSetpointLimit, 3000));
         NextTest();
     }
 
-    CHIP_ERROR TestReadsMandatoryAttributesFromDutAbsMinCoolSetpointLimit_10()
+    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutMinCoolSetpointLimit_10()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::AbsMinCoolSetpointLimit::TypeInfo>(
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::MinCoolSetpointLimit::TypeInfo>(
             this, OnSuccessCallback_10, OnFailureCallback_10, true));
         return CHIP_NO_ERROR;
     }
@@ -43282,23 +43122,24 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_10(int16_t absMinCoolSetpointLimit)
+    void OnSuccessResponse_10(int16_t minCoolSetpointLimit)
     {
-        VerifyOrReturn(CheckValue("absMinCoolSetpointLimit", absMinCoolSetpointLimit, 1600));
-
+        VerifyOrReturn(CheckConstraintType("minCoolSetpointLimit", "", "int16"));
+        VerifyOrReturn(CheckConstraintMinValue("minCoolSetpointLimit", minCoolSetpointLimit, 1600));
+        VerifyOrReturn(CheckConstraintMaxValue("minCoolSetpointLimit", minCoolSetpointLimit, 3200));
         NextTest();
     }
 
-    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutAbsMinCoolSetpointLimit_11()
+    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutMaxCoolSetpointLimit_11()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::AbsMinCoolSetpointLimit::TypeInfo>(
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::MaxCoolSetpointLimit::TypeInfo>(
             this, OnSuccessCallback_11, OnFailureCallback_11, true));
         return CHIP_NO_ERROR;
     }
@@ -43306,47 +43147,50 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_11(int16_t absMinCoolSetpointLimit)
+    void OnSuccessResponse_11(int16_t maxCoolSetpointLimit)
     {
-        VerifyOrReturn(CheckConstraintType("absMinCoolSetpointLimit", "", "int16"));
-        VerifyOrReturn(CheckConstraintMinValue("absMinCoolSetpointLimit", absMinCoolSetpointLimit, 1600));
-        VerifyOrReturn(CheckConstraintMaxValue("absMinCoolSetpointLimit", absMinCoolSetpointLimit, 3200));
+        VerifyOrReturn(CheckConstraintType("maxCoolSetpointLimit", "", "int16"));
+        VerifyOrReturn(CheckConstraintMinValue("maxCoolSetpointLimit", maxCoolSetpointLimit, 1600));
+        VerifyOrReturn(CheckConstraintMaxValue("maxCoolSetpointLimit", maxCoolSetpointLimit, 3200));
         NextTest();
     }
 
-    CHIP_ERROR TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutAbsMinCoolSetpointLimit_12()
+    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutControlSequenceOfOperation_12()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        int16_t absMinCoolSetpointLimitArgument;
-        absMinCoolSetpointLimitArgument = 1600;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Thermostat::Attributes::AbsMinCoolSetpointLimit::TypeInfo>(
-            absMinCoolSetpointLimitArgument, this, OnSuccessCallback_12, OnFailureCallback_12));
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::ControlSequenceOfOperation::TypeInfo>(
+                this, OnSuccessCallback_12, OnFailureCallback_12, true));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_12(chip::app::Clusters::Thermostat::ThermostatControlSequence controlSequenceOfOperation)
+    {
+        VerifyOrReturn(CheckConstraintType("controlSequenceOfOperation", "", "enum8"));
+        VerifyOrReturn(CheckConstraintMinValue("controlSequenceOfOperation", controlSequenceOfOperation, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("controlSequenceOfOperation", controlSequenceOfOperation, 5));
         NextTest();
     }
 
-    void OnSuccessResponse_12() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR TestReadBackMandatoryAttributesFromDutAbsMinCoolSetpointLimit_13()
+    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutSystemMode_13()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::AbsMinCoolSetpointLimit::TypeInfo>(
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::SystemMode::TypeInfo>(
             this, OnSuccessCallback_13, OnFailureCallback_13, true));
         return CHIP_NO_ERROR;
     }
@@ -43357,820 +43201,7 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_13(int16_t absMinCoolSetpointLimit)
-    {
-        VerifyOrReturn(CheckValue("absMinCoolSetpointLimit", absMinCoolSetpointLimit, 1600));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsMandatoryAttributesFromDutAbsMaxCoolSetpointLimit_14()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::AbsMaxCoolSetpointLimit::TypeInfo>(
-            this, OnSuccessCallback_14, OnFailureCallback_14, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_14(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_14(int16_t absMaxCoolSetpointLimit)
-    {
-        VerifyOrReturn(CheckValue("absMaxCoolSetpointLimit", absMaxCoolSetpointLimit, 3200));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutAbsMaxCoolSetpointLimit_15()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::AbsMaxCoolSetpointLimit::TypeInfo>(
-            this, OnSuccessCallback_15, OnFailureCallback_15, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_15(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_15(int16_t absMaxCoolSetpointLimit)
-    {
-        VerifyOrReturn(CheckConstraintType("absMaxCoolSetpointLimit", "", "int16"));
-        VerifyOrReturn(CheckConstraintMinValue("absMaxCoolSetpointLimit", absMaxCoolSetpointLimit, 1600));
-        VerifyOrReturn(CheckConstraintMaxValue("absMaxCoolSetpointLimit", absMaxCoolSetpointLimit, 3200));
-        NextTest();
-    }
-
-    CHIP_ERROR TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutAbsMaxCoolSetpointLimit_16()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        int16_t absMaxCoolSetpointLimitArgument;
-        absMaxCoolSetpointLimitArgument = 3200;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Thermostat::Attributes::AbsMaxCoolSetpointLimit::TypeInfo>(
-            absMaxCoolSetpointLimitArgument, this, OnSuccessCallback_16, OnFailureCallback_16));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_16(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-        NextTest();
-    }
-
-    void OnSuccessResponse_16() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR TestReadBackMandatoryAttributesFromDutAbsMaxCoolSetpointLimit_17()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::AbsMaxCoolSetpointLimit::TypeInfo>(
-            this, OnSuccessCallback_17, OnFailureCallback_17, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_17(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_17(int16_t absMaxCoolSetpointLimit)
-    {
-        VerifyOrReturn(CheckValue("absMaxCoolSetpointLimit", absMaxCoolSetpointLimit, 3200));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsMandatoryAttributesFromDutOccupiedCoolingSetpoint_18()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::OccupiedCoolingSetpoint::TypeInfo>(
-            this, OnSuccessCallback_18, OnFailureCallback_18, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_18(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_18(int16_t occupiedCoolingSetpoint)
-    {
-        VerifyOrReturn(CheckValue("occupiedCoolingSetpoint", occupiedCoolingSetpoint, 2600));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutOccupiedCoolingSetpoint_19()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::OccupiedCoolingSetpoint::TypeInfo>(
-            this, OnSuccessCallback_19, OnFailureCallback_19, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_19(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_19(int16_t occupiedCoolingSetpoint)
-    {
-        VerifyOrReturn(CheckConstraintType("occupiedCoolingSetpoint", "", "int16"));
-        VerifyOrReturn(CheckConstraintMinValue("occupiedCoolingSetpoint", occupiedCoolingSetpoint, 1600));
-        VerifyOrReturn(CheckConstraintMaxValue("occupiedCoolingSetpoint", occupiedCoolingSetpoint, 2600));
-        NextTest();
-    }
-
-    CHIP_ERROR TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutOccupiedCoolingSetpoint_20()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        int16_t occupiedCoolingSetpointArgument;
-        occupiedCoolingSetpointArgument = 2600;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Thermostat::Attributes::OccupiedCoolingSetpoint::TypeInfo>(
-            occupiedCoolingSetpointArgument, this, OnSuccessCallback_20, OnFailureCallback_20));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_20(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_20() { NextTest(); }
-
-    CHIP_ERROR TestReadBackMandatoryAttributesFromDutOccupiedCoolingSetpoint_21()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::OccupiedCoolingSetpoint::TypeInfo>(
-            this, OnSuccessCallback_21, OnFailureCallback_21, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_21(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_21(int16_t occupiedCoolingSetpoint)
-    {
-        VerifyOrReturn(CheckValue("occupiedCoolingSetpoint", occupiedCoolingSetpoint, 2600));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsMandatoryAttributesFromDutOccupiedHeatingSetpoint_22()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::OccupiedHeatingSetpoint::TypeInfo>(
-            this, OnSuccessCallback_22, OnFailureCallback_22, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_22(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_22(int16_t occupiedHeatingSetpoint)
-    {
-        VerifyOrReturn(CheckValue("occupiedHeatingSetpoint", occupiedHeatingSetpoint, 2000));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutOccupiedHeatingSetpoint_23()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::OccupiedHeatingSetpoint::TypeInfo>(
-            this, OnSuccessCallback_23, OnFailureCallback_23, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_23(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_23(int16_t occupiedHeatingSetpoint)
-    {
-        VerifyOrReturn(CheckConstraintType("occupiedHeatingSetpoint", "", "int16"));
-        VerifyOrReturn(CheckConstraintMinValue("occupiedHeatingSetpoint", occupiedHeatingSetpoint, 700));
-        VerifyOrReturn(CheckConstraintMaxValue("occupiedHeatingSetpoint", occupiedHeatingSetpoint, 2600));
-        NextTest();
-    }
-
-    CHIP_ERROR TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutOccupiedHeatingSetpoint_24()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        int16_t occupiedHeatingSetpointArgument;
-        occupiedHeatingSetpointArgument = 2000;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Thermostat::Attributes::OccupiedHeatingSetpoint::TypeInfo>(
-            occupiedHeatingSetpointArgument, this, OnSuccessCallback_24, OnFailureCallback_24));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_24(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_24() { NextTest(); }
-
-    CHIP_ERROR TestReadBackMandatoryAttributesFromDutOccupiedHeatingSetpoint_25()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::OccupiedHeatingSetpoint::TypeInfo>(
-            this, OnSuccessCallback_25, OnFailureCallback_25, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_25(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_25(int16_t occupiedHeatingSetpoint)
-    {
-        VerifyOrReturn(CheckValue("occupiedHeatingSetpoint", occupiedHeatingSetpoint, 2000));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsMandatoryAttributesFromDutMinHeatSetpointLimit_26()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::MinHeatSetpointLimit::TypeInfo>(
-            this, OnSuccessCallback_26, OnFailureCallback_26, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_26(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_26(int16_t minHeatSetpointLimit)
-    {
-        VerifyOrReturn(CheckValue("minHeatSetpointLimit", minHeatSetpointLimit, 700));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutMinHeatSetpointLimit_27()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::MinHeatSetpointLimit::TypeInfo>(
-            this, OnSuccessCallback_27, OnFailureCallback_27, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_27(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_27(int16_t minHeatSetpointLimit)
-    {
-        VerifyOrReturn(CheckConstraintType("minHeatSetpointLimit", "", "int16"));
-        VerifyOrReturn(CheckConstraintMinValue("minHeatSetpointLimit", minHeatSetpointLimit, 700));
-        VerifyOrReturn(CheckConstraintMaxValue("minHeatSetpointLimit", minHeatSetpointLimit, 3000));
-        NextTest();
-    }
-
-    CHIP_ERROR TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutMinHeatSetpointLimit_28()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        int16_t minHeatSetpointLimitArgument;
-        minHeatSetpointLimitArgument = 700;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Thermostat::Attributes::MinHeatSetpointLimit::TypeInfo>(
-            minHeatSetpointLimitArgument, this, OnSuccessCallback_28, OnFailureCallback_28));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_28(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_28() { NextTest(); }
-
-    CHIP_ERROR TestReadBackMandatoryAttributesFromDutMinHeatSetpointLimit_29()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::MinHeatSetpointLimit::TypeInfo>(
-            this, OnSuccessCallback_29, OnFailureCallback_29, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_29(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_29(int16_t minHeatSetpointLimit)
-    {
-        VerifyOrReturn(CheckValue("minHeatSetpointLimit", minHeatSetpointLimit, 700));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsMandatoryAttributesFromDutMaxHeatSetpointLimit_30()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::MaxHeatSetpointLimit::TypeInfo>(
-            this, OnSuccessCallback_30, OnFailureCallback_30, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_30(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_30(int16_t maxHeatSetpointLimit)
-    {
-        VerifyOrReturn(CheckValue("maxHeatSetpointLimit", maxHeatSetpointLimit, 3000));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutMaxHeatSetpointLimit_31()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::MaxHeatSetpointLimit::TypeInfo>(
-            this, OnSuccessCallback_31, OnFailureCallback_31, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_31(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_31(int16_t maxHeatSetpointLimit)
-    {
-        VerifyOrReturn(CheckConstraintType("maxHeatSetpointLimit", "", "int16"));
-        VerifyOrReturn(CheckConstraintMinValue("maxHeatSetpointLimit", maxHeatSetpointLimit, 700));
-        VerifyOrReturn(CheckConstraintMaxValue("maxHeatSetpointLimit", maxHeatSetpointLimit, 3000));
-        NextTest();
-    }
-
-    CHIP_ERROR TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutMaxHeatSetpointLimit_32()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        int16_t maxHeatSetpointLimitArgument;
-        maxHeatSetpointLimitArgument = 3000;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Thermostat::Attributes::MaxHeatSetpointLimit::TypeInfo>(
-            maxHeatSetpointLimitArgument, this, OnSuccessCallback_32, OnFailureCallback_32));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_32(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_32() { NextTest(); }
-
-    CHIP_ERROR TestReadBackMandatoryAttributesFromDutMaxHeatSetpointLimit_33()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::MaxHeatSetpointLimit::TypeInfo>(
-            this, OnSuccessCallback_33, OnFailureCallback_33, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_33(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_33(int16_t maxHeatSetpointLimit)
-    {
-        VerifyOrReturn(CheckValue("maxHeatSetpointLimit", maxHeatSetpointLimit, 3000));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsMandatoryAttributesFromDutMinCoolSetpointLimit_34()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::MinCoolSetpointLimit::TypeInfo>(
-            this, OnSuccessCallback_34, OnFailureCallback_34, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_34(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_34(int16_t minCoolSetpointLimit)
-    {
-        VerifyOrReturn(CheckValue("minCoolSetpointLimit", minCoolSetpointLimit, 1600));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutMinCoolSetpointLimit_35()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::MinCoolSetpointLimit::TypeInfo>(
-            this, OnSuccessCallback_35, OnFailureCallback_35, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_35(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_35(int16_t minCoolSetpointLimit)
-    {
-        VerifyOrReturn(CheckConstraintType("minCoolSetpointLimit", "", "int16"));
-        VerifyOrReturn(CheckConstraintMinValue("minCoolSetpointLimit", minCoolSetpointLimit, 1600));
-        VerifyOrReturn(CheckConstraintMaxValue("minCoolSetpointLimit", minCoolSetpointLimit, 3200));
-        NextTest();
-    }
-
-    CHIP_ERROR TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutMinCoolSetpointLimit_36()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        int16_t minCoolSetpointLimitArgument;
-        minCoolSetpointLimitArgument = 1600;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Thermostat::Attributes::MinCoolSetpointLimit::TypeInfo>(
-            minCoolSetpointLimitArgument, this, OnSuccessCallback_36, OnFailureCallback_36));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_36(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_36() { NextTest(); }
-
-    CHIP_ERROR TestReadBackMandatoryAttributesFromDutMinCoolSetpointLimit_37()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::MinCoolSetpointLimit::TypeInfo>(
-            this, OnSuccessCallback_37, OnFailureCallback_37, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_37(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_37(int16_t minCoolSetpointLimit)
-    {
-        VerifyOrReturn(CheckValue("minCoolSetpointLimit", minCoolSetpointLimit, 1600));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsMandatoryAttributesFromDutMaxCoolSetpointLimit_38()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::MaxCoolSetpointLimit::TypeInfo>(
-            this, OnSuccessCallback_38, OnFailureCallback_38, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_38(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_38(int16_t maxCoolSetpointLimit)
-    {
-        VerifyOrReturn(CheckValue("maxCoolSetpointLimit", maxCoolSetpointLimit, 3200));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutMaxCoolSetpointLimit_39()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::MaxCoolSetpointLimit::TypeInfo>(
-            this, OnSuccessCallback_39, OnFailureCallback_39, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_39(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_39(int16_t maxCoolSetpointLimit)
-    {
-        VerifyOrReturn(CheckConstraintType("maxCoolSetpointLimit", "", "int16"));
-        VerifyOrReturn(CheckConstraintMinValue("maxCoolSetpointLimit", maxCoolSetpointLimit, 1600));
-        VerifyOrReturn(CheckConstraintMaxValue("maxCoolSetpointLimit", maxCoolSetpointLimit, 3200));
-        NextTest();
-    }
-
-    CHIP_ERROR TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutMaxCoolSetpointLimit_40()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        int16_t maxCoolSetpointLimitArgument;
-        maxCoolSetpointLimitArgument = 3200;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Thermostat::Attributes::MaxCoolSetpointLimit::TypeInfo>(
-            maxCoolSetpointLimitArgument, this, OnSuccessCallback_40, OnFailureCallback_40));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_40(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_40() { NextTest(); }
-
-    CHIP_ERROR TestReadBackMandatoryAttributesFromDutMaxCoolSetpointLimit_41()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::MaxCoolSetpointLimit::TypeInfo>(
-            this, OnSuccessCallback_41, OnFailureCallback_41, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_41(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_41(int16_t maxCoolSetpointLimit)
-    {
-        VerifyOrReturn(CheckValue("maxCoolSetpointLimit", maxCoolSetpointLimit, 3200));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsMandatoryAttributesFromDutControlSequenceOfOperation_42()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::ControlSequenceOfOperation::TypeInfo>(
-                this, OnSuccessCallback_42, OnFailureCallback_42, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_42(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_42(chip::app::Clusters::Thermostat::ThermostatControlSequence controlSequenceOfOperation)
-    {
-        VerifyOrReturn(CheckValue("controlSequenceOfOperation", controlSequenceOfOperation, 4));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutControlSequenceOfOperation_43()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::ControlSequenceOfOperation::TypeInfo>(
-                this, OnSuccessCallback_43, OnFailureCallback_43, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_43(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_43(chip::app::Clusters::Thermostat::ThermostatControlSequence controlSequenceOfOperation)
-    {
-        VerifyOrReturn(CheckConstraintType("controlSequenceOfOperation", "", "enum8"));
-        VerifyOrReturn(CheckConstraintMinValue("controlSequenceOfOperation", controlSequenceOfOperation, 0));
-        VerifyOrReturn(CheckConstraintMaxValue("controlSequenceOfOperation", controlSequenceOfOperation, 5));
-        NextTest();
-    }
-
-    CHIP_ERROR TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutControlSequenceOfOperation_44()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        chip::app::Clusters::Thermostat::ThermostatControlSequence controlSequenceOfOperationArgument;
-        controlSequenceOfOperationArgument = static_cast<chip::app::Clusters::Thermostat::ThermostatControlSequence>(4);
-
-        ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::Thermostat::Attributes::ControlSequenceOfOperation::TypeInfo>(
-                controlSequenceOfOperationArgument, this, OnSuccessCallback_44, OnFailureCallback_44));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_44(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_44() { NextTest(); }
-
-    CHIP_ERROR TestReadBackMandatoryAttributesFromDutControlSequenceOfOperation_45()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::ControlSequenceOfOperation::TypeInfo>(
-                this, OnSuccessCallback_45, OnFailureCallback_45, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_45(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_45(chip::app::Clusters::Thermostat::ThermostatControlSequence controlSequenceOfOperation)
-    {
-        VerifyOrReturn(CheckValue("controlSequenceOfOperation", controlSequenceOfOperation, 4));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsMandatoryAttributesFromDutSystemMode_46()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::SystemMode::TypeInfo>(
-            this, OnSuccessCallback_46, OnFailureCallback_46, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_46(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_46(uint8_t systemMode)
-    {
-        VerifyOrReturn(CheckValue("systemMode", systemMode, 1));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutSystemMode_47()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::SystemMode::TypeInfo>(
-            this, OnSuccessCallback_47, OnFailureCallback_47, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_47(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_47(uint8_t systemMode)
+    void OnSuccessResponse_13(uint8_t systemMode)
     {
         VerifyOrReturn(CheckConstraintType("systemMode", "", "enum8"));
         VerifyOrReturn(CheckConstraintMinValue("systemMode", systemMode, 0));
@@ -44178,94 +43209,24 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestWritesTheRespectiveDefaultValueToMandatoryAttributesToDutSystemMode_48()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        uint8_t systemModeArgument;
-        systemModeArgument = 1;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Thermostat::Attributes::SystemMode::TypeInfo>(
-            systemModeArgument, this, OnSuccessCallback_48, OnFailureCallback_48));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_48(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_48() { NextTest(); }
-
-    CHIP_ERROR TestReadBackMandatoryAttributesFromDutSystemMode_49()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::SystemMode::TypeInfo>(
-            this, OnSuccessCallback_49, OnFailureCallback_49, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_49(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_49(uint8_t systemMode)
-    {
-        VerifyOrReturn(CheckValue("systemMode", systemMode, 1));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsOptionalAttributesFromDutMinSetpointDeadBand_50()
+    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutMinSetpointDeadBand_14()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::MinSetpointDeadBand::TypeInfo>(
-            this, OnSuccessCallback_50, OnFailureCallback_50, true));
+            this, OnSuccessCallback_14, OnFailureCallback_14, true));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_50(CHIP_ERROR error)
+    void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_50(int8_t minSetpointDeadBand)
-    {
-        VerifyOrReturn(CheckValue("minSetpointDeadBand", minSetpointDeadBand, 25));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutMinSetpointDeadBand_51()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::MinSetpointDeadBand::TypeInfo>(
-            this, OnSuccessCallback_51, OnFailureCallback_51, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_51(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_51(int8_t minSetpointDeadBand)
+    void OnSuccessResponse_14(int8_t minSetpointDeadBand)
     {
         VerifyOrReturn(CheckConstraintType("minSetpointDeadBand", "", "int8"));
         VerifyOrReturn(CheckConstraintMinValue("minSetpointDeadBand", minSetpointDeadBand, 0));
@@ -44273,70 +43234,24 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestWritesTheRespectiveDefaultValueToOptionalAttributesToDutMinSetpointDeadBand_52()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        int8_t minSetpointDeadBandArgument;
-        minSetpointDeadBandArgument = 25;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Thermostat::Attributes::MinSetpointDeadBand::TypeInfo>(
-            minSetpointDeadBandArgument, this, OnSuccessCallback_52, OnFailureCallback_52));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_52(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_52() { NextTest(); }
-
-    CHIP_ERROR TestReadBackOptionalAttributesFromDutMinSetpointDeadBand_53()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::MinSetpointDeadBand::TypeInfo>(
-            this, OnSuccessCallback_53, OnFailureCallback_53, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_53(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_53(int8_t minSetpointDeadBand)
-    {
-        VerifyOrReturn(CheckValue("minSetpointDeadBand", minSetpointDeadBand, 25));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutStartOfWeek_54()
+    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutStartOfWeek_15()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::StartOfWeek::TypeInfo>(
-            this, OnSuccessCallback_54, OnFailureCallback_54, true));
+            this, OnSuccessCallback_15, OnFailureCallback_15, true));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_54(CHIP_ERROR error)
+    void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_54(uint8_t startOfWeek)
+    void OnSuccessResponse_15(uint8_t startOfWeek)
     {
         VerifyOrReturn(CheckConstraintType("startOfWeek", "", "enum8"));
         VerifyOrReturn(CheckConstraintMinValue("startOfWeek", startOfWeek, 0));
@@ -44344,61 +43259,7 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestWritesTheRespectiveDefaultValueToOptionalAttributesToDutStartOfWeek_55()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        uint8_t startOfWeekArgument;
-        startOfWeekArgument = 0;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Thermostat::Attributes::StartOfWeek::TypeInfo>(
-            startOfWeekArgument, this, OnSuccessCallback_55, OnFailureCallback_55));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_55(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        if (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute)
-        {
-            NextTest();
-        }
-        else
-        {
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            NextTest();
-        }
-    }
-
-    void OnSuccessResponse_55() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR TestReadBackOptionalAttributesFromDutStartOfWeek_56()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::StartOfWeek::TypeInfo>(
-            this, OnSuccessCallback_56, OnFailureCallback_56, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_56(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_56(uint8_t startOfWeek)
-    {
-        VerifyOrReturn(CheckValue("startOfWeek", startOfWeek, 0));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutNumberOfWeeklyTransitions_57()
+    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutNumberOfWeeklyTransitions_16()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatClusterTest cluster;
@@ -44406,106 +43267,44 @@ private:
 
         ReturnErrorOnFailure(
             cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::NumberOfWeeklyTransitions::TypeInfo>(
-                this, OnSuccessCallback_57, OnFailureCallback_57, true));
+                this, OnSuccessCallback_16, OnFailureCallback_16, true));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_57(CHIP_ERROR error)
+    void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_57(uint8_t numberOfWeeklyTransitions)
+    void OnSuccessResponse_16(uint8_t numberOfWeeklyTransitions)
     {
         VerifyOrReturn(CheckConstraintType("numberOfWeeklyTransitions", "", "uint8"));
         NextTest();
     }
 
-    CHIP_ERROR TestWritesTheRespectiveDefaultValueToOptionalAttributesToDutNumberOfWeeklyTransitions_58()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        uint8_t numberOfWeeklyTransitionsArgument;
-        numberOfWeeklyTransitionsArgument = 0;
-
-        ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::Thermostat::Attributes::NumberOfWeeklyTransitions::TypeInfo>(
-                numberOfWeeklyTransitionsArgument, this, OnSuccessCallback_58, OnFailureCallback_58));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_58(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        if (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute)
-        {
-            NextTest();
-        }
-        else
-        {
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            NextTest();
-        }
-    }
-
-    void OnSuccessResponse_58() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutNumberOfDailyTransitions_59()
+    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutNumberOfDailyTransitions_17()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Thermostat::Attributes::NumberOfDailyTransitions::TypeInfo>(
-            this, OnSuccessCallback_59, OnFailureCallback_59, true));
+            this, OnSuccessCallback_17, OnFailureCallback_17, true));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_59(CHIP_ERROR error)
+    void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_59(uint8_t numberOfDailyTransitions)
+    void OnSuccessResponse_17(uint8_t numberOfDailyTransitions)
     {
         VerifyOrReturn(CheckConstraintType("numberOfDailyTransitions", "", "uint8"));
         NextTest();
     }
-
-    CHIP_ERROR TestWritesTheRespectiveDefaultValueToOptionalAttributesToDutNumberOfDailyTransitions_60()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        uint8_t numberOfDailyTransitionsArgument;
-        numberOfDailyTransitionsArgument = 0;
-
-        ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::Thermostat::Attributes::NumberOfDailyTransitions::TypeInfo>(
-                numberOfDailyTransitionsArgument, this, OnSuccessCallback_60, OnFailureCallback_60));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_60(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        if (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute)
-        {
-            NextTest();
-        }
-        else
-        {
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            NextTest();
-        }
-    }
-
-    void OnSuccessResponse_60() { ThrowSuccessResponse(); }
 };
 
 class Test_TC_TSTAT_2_2Suite : public TestCommand
@@ -45501,7 +44300,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_1(int16_t occupiedCoolingSetpoint)
@@ -45530,7 +44329,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_2() { NextTest(); }
@@ -45549,7 +44348,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_3(int16_t occupiedCoolingSetpoint)
@@ -45576,7 +44375,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -45598,7 +44397,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -45965,7 +44764,7 @@ private:
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_21(int16_t minCoolSetpointLimit)
@@ -45994,7 +44793,7 @@ private:
     void OnFailureResponse_22(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_22() { NextTest(); }
@@ -46013,7 +44812,7 @@ private:
     void OnFailureResponse_23(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_23(int16_t minCoolSetpointLimit)
@@ -46040,7 +44839,7 @@ private:
     void OnFailureResponse_24(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_24() { NextTest(); }
@@ -46062,7 +44861,7 @@ private:
     void OnFailureResponse_25(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_25() { NextTest(); }
@@ -46081,7 +44880,7 @@ private:
     void OnFailureResponse_26(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_26(int16_t maxCoolSetpointLimit)
@@ -46110,7 +44909,7 @@ private:
     void OnFailureResponse_27(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_27() { NextTest(); }
@@ -46129,7 +44928,7 @@ private:
     void OnFailureResponse_28(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_28(int16_t maxCoolSetpointLimit)
@@ -46156,7 +44955,7 @@ private:
     void OnFailureResponse_29(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_29() { NextTest(); }
@@ -46178,7 +44977,7 @@ private:
     void OnFailureResponse_30(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_30() { NextTest(); }
@@ -46288,7 +45087,7 @@ private:
     void OnFailureResponse_35(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_35() { NextTest(); }
@@ -46310,7 +45109,7 @@ private:
     void OnFailureResponse_36(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_36() { NextTest(); }
@@ -46332,7 +45131,7 @@ private:
     void OnFailureResponse_37(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_37() { NextTest(); }
@@ -46354,7 +45153,7 @@ private:
     void OnFailureResponse_38(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_38() { NextTest(); }
@@ -46495,7 +45294,7 @@ private:
     void OnFailureResponse_44(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_44() { NextTest(); }
@@ -46517,7 +45316,7 @@ private:
     void OnFailureResponse_45(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_45() { NextTest(); }
@@ -46539,7 +45338,7 @@ private:
     void OnFailureResponse_46(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_46() { NextTest(); }
@@ -46583,7 +45382,7 @@ private:
     void OnFailureResponse_48(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
     }
 
     void OnSuccessResponse_48() { NextTest(); }
@@ -46659,13 +45458,16 @@ public:
             err = TestReadTheGlobalAttributeConstraintsClusterRevision_1();
             break;
         case 2:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 2 : write the default values to mandatory global attribute: ClusterRevision\n");
-            err = TestWriteTheDefaultValuesToMandatoryGlobalAttributeClusterRevision_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
-            err = TestReadTheGlobalAttributeAttributeList_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_4();
             break;
         }
 
@@ -46683,7 +45485,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 4;
+    const uint16_t mTestCount = 5;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -46713,16 +45515,31 @@ private:
         (static_cast<Test_TC_TSUIC_1_1Suite *>(context))->OnFailureResponse_2(error);
     }
 
-    static void OnSuccessCallback_2(void * context) { (static_cast<Test_TC_TSUIC_1_1Suite *>(context))->OnSuccessResponse_2(); }
+    static void OnSuccessCallback_2(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    {
+        (static_cast<Test_TC_TSUIC_1_1Suite *>(context))->OnSuccessResponse_2(attributeList);
+    }
 
     static void OnFailureCallback_3(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_TSUIC_1_1Suite *>(context))->OnFailureResponse_3(error);
     }
 
-    static void OnSuccessCallback_3(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    static void OnSuccessCallback_3(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
     {
-        (static_cast<Test_TC_TSUIC_1_1Suite *>(context))->OnSuccessResponse_3(attributeList);
+        (static_cast<Test_TC_TSUIC_1_1Suite *>(context))->OnSuccessResponse_3(acceptedCommandList);
+    }
+
+    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_TSUIC_1_1Suite *>(context))->OnFailureResponse_4(error);
+    }
+
+    static void OnSuccessCallback_4(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
+    {
+        (static_cast<Test_TC_TSUIC_1_1Suite *>(context))->OnSuccessResponse_4(generatedCommandList);
     }
 
     //
@@ -46759,32 +45576,7 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryGlobalAttributeClusterRevision_2()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        uint16_t clusterRevisionArgument;
-        clusterRevisionArgument = 2U;
-
-        ReturnErrorOnFailure(
-            cluster
-                .WriteAttribute<chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::ClusterRevision::TypeInfo>(
-                    clusterRevisionArgument, this, OnSuccessCallback_2, OnFailureCallback_2));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_2(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-        NextTest();
-    }
-
-    void OnSuccessResponse_2() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_3()
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_2()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
@@ -46792,7 +45584,31 @@ private:
 
         ReturnErrorOnFailure(
             cluster.ReadAttribute<chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::AttributeList::TypeInfo>(
-                this, OnSuccessCallback_3, OnFailureCallback_3, true));
+                this, OnSuccessCallback_2, OnFailureCallback_2, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_2(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_2(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    {
+        VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<
+                             chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::AcceptedCommandList::TypeInfo>(
+            this, OnSuccessCallback_3, OnFailureCallback_3, true));
         return CHIP_NO_ERROR;
     }
 
@@ -46802,9 +45618,33 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
     {
-        VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+        VerifyOrReturn(CheckConstraintType("acceptedCommandList", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_4()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<
+                             chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::GeneratedCommandList::TypeInfo>(
+            this, OnSuccessCallback_4, OnFailureCallback_4, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_4(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
+    {
+        VerifyOrReturn(CheckConstraintType("generatedCommandList", "", "list"));
         NextTest();
     }
 };
@@ -46861,56 +45701,20 @@ public:
             err = TestReadTheMandatoryAttributeTemperatureDisplayMode_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : write to the mandatory attribute: TemperatureDisplayMode\n");
-            err = TestWriteToTheMandatoryAttributeTemperatureDisplayMode_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : read the mandatory attribute: KeypadLockout\n");
+            err = TestReadTheMandatoryAttributeKeypadLockout_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : read the mandatory attribute: TemperatureDisplayMode\n");
-            err = TestReadTheMandatoryAttributeTemperatureDisplayMode_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : read the mandatory attribute: KeypadLockout\n");
+            err = TestReadTheMandatoryAttributeKeypadLockout_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : read the mandatory attribute: TemperatureDisplayMode\n");
-            err = TestReadTheMandatoryAttributeTemperatureDisplayMode_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : read the optional attribute: ScheduleProgrammingVisibility\n");
+            err = TestReadTheOptionalAttributeScheduleProgrammingVisibility_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : read the mandatory attribute: KeypadLockout\n");
-            err = TestReadTheMandatoryAttributeKeypadLockout_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : read the mandatory attribute: KeypadLockout\n");
-            err = TestReadTheMandatoryAttributeKeypadLockout_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : write to the mandatory attribute: KeypadLockout\n");
-            err = TestWriteToTheMandatoryAttributeKeypadLockout_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : read the mandatory attribute: KeypadLockout\n");
-            err = TestReadTheMandatoryAttributeKeypadLockout_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : read the mandatory attribute: KeypadLockout\n");
-            err = TestReadTheMandatoryAttributeKeypadLockout_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : read the optional attribute: ScheduleProgrammingVisibility\n");
-            err = TestReadTheOptionalAttributeScheduleProgrammingVisibility_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : read the optional attribute: ScheduleProgrammingVisibility\n");
-            err = TestReadTheOptionalAttributeScheduleProgrammingVisibility_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : write to the mandatory attribute: ScheduleProgrammingVisibility\n");
-            err = TestWriteToTheMandatoryAttributeScheduleProgrammingVisibility_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : read the optional attribute: ScheduleProgrammingVisibility\n");
-            err = TestReadTheOptionalAttributeScheduleProgrammingVisibility_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : read the optional attribute: ScheduleProgrammingVisibility\n");
-            err = TestReadTheOptionalAttributeScheduleProgrammingVisibility_15();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : read the optional attribute: ScheduleProgrammingVisibility\n");
+            err = TestReadTheOptionalAttributeScheduleProgrammingVisibility_6();
             break;
         }
 
@@ -46928,7 +45732,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 16;
+    const uint16_t mTestCount = 7;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -46968,16 +45772,19 @@ private:
         (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnFailureResponse_3(error);
     }
 
-    static void OnSuccessCallback_3(void * context) { (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnSuccessResponse_3(); }
+    static void OnSuccessCallback_3(void * context, uint8_t keypadLockout)
+    {
+        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnSuccessResponse_3(keypadLockout);
+    }
 
     static void OnFailureCallback_4(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnFailureResponse_4(error);
     }
 
-    static void OnSuccessCallback_4(void * context, uint8_t temperatureDisplayMode)
+    static void OnSuccessCallback_4(void * context, uint8_t keypadLockout)
     {
-        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnSuccessResponse_4(temperatureDisplayMode);
+        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnSuccessResponse_4(keypadLockout);
     }
 
     static void OnFailureCallback_5(void * context, CHIP_ERROR error)
@@ -46985,9 +45792,9 @@ private:
         (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnFailureResponse_5(error);
     }
 
-    static void OnSuccessCallback_5(void * context, uint8_t temperatureDisplayMode)
+    static void OnSuccessCallback_5(void * context, uint8_t scheduleProgrammingVisibility)
     {
-        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnSuccessResponse_5(temperatureDisplayMode);
+        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnSuccessResponse_5(scheduleProgrammingVisibility);
     }
 
     static void OnFailureCallback_6(void * context, CHIP_ERROR error)
@@ -46995,93 +45802,9 @@ private:
         (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnFailureResponse_6(error);
     }
 
-    static void OnSuccessCallback_6(void * context, uint8_t keypadLockout)
+    static void OnSuccessCallback_6(void * context, uint8_t scheduleProgrammingVisibility)
     {
-        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnSuccessResponse_6(keypadLockout);
-    }
-
-    static void OnFailureCallback_7(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnFailureResponse_7(error);
-    }
-
-    static void OnSuccessCallback_7(void * context, uint8_t keypadLockout)
-    {
-        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnSuccessResponse_7(keypadLockout);
-    }
-
-    static void OnFailureCallback_8(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnFailureResponse_8(error);
-    }
-
-    static void OnSuccessCallback_8(void * context) { (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnSuccessResponse_8(); }
-
-    static void OnFailureCallback_9(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnFailureResponse_9(error);
-    }
-
-    static void OnSuccessCallback_9(void * context, uint8_t keypadLockout)
-    {
-        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnSuccessResponse_9(keypadLockout);
-    }
-
-    static void OnFailureCallback_10(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnFailureResponse_10(error);
-    }
-
-    static void OnSuccessCallback_10(void * context, uint8_t keypadLockout)
-    {
-        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnSuccessResponse_10(keypadLockout);
-    }
-
-    static void OnFailureCallback_11(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnFailureResponse_11(error);
-    }
-
-    static void OnSuccessCallback_11(void * context, uint8_t scheduleProgrammingVisibility)
-    {
-        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnSuccessResponse_11(scheduleProgrammingVisibility);
-    }
-
-    static void OnFailureCallback_12(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnFailureResponse_12(error);
-    }
-
-    static void OnSuccessCallback_12(void * context, uint8_t scheduleProgrammingVisibility)
-    {
-        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnSuccessResponse_12(scheduleProgrammingVisibility);
-    }
-
-    static void OnFailureCallback_13(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnFailureResponse_13(error);
-    }
-
-    static void OnSuccessCallback_13(void * context) { (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnSuccessResponse_13(); }
-
-    static void OnFailureCallback_14(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnFailureResponse_14(error);
-    }
-
-    static void OnSuccessCallback_14(void * context, uint8_t scheduleProgrammingVisibility)
-    {
-        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnSuccessResponse_14(scheduleProgrammingVisibility);
-    }
-
-    static void OnFailureCallback_15(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnFailureResponse_15(error);
-    }
-
-    static void OnSuccessCallback_15(void * context, uint8_t scheduleProgrammingVisibility)
-    {
-        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnSuccessResponse_15(scheduleProgrammingVisibility);
+        (static_cast<Test_TC_TSUIC_2_1Suite *>(context))->OnSuccessResponse_6(scheduleProgrammingVisibility);
     }
 
     //
@@ -47142,22 +45865,20 @@ private:
     void OnSuccessResponse_2(uint8_t temperatureDisplayMode)
     {
         VerifyOrReturn(CheckConstraintType("temperatureDisplayMode", "", "enum8"));
+        VerifyOrReturn(CheckConstraintMinValue("temperatureDisplayMode", temperatureDisplayMode, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("temperatureDisplayMode", temperatureDisplayMode, 1));
         NextTest();
     }
 
-    CHIP_ERROR TestWriteToTheMandatoryAttributeTemperatureDisplayMode_3()
+    CHIP_ERROR TestReadTheMandatoryAttributeKeypadLockout_3()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t temperatureDisplayModeArgument;
-        temperatureDisplayModeArgument = 0;
-
         ReturnErrorOnFailure(
-            cluster.WriteAttribute<
-                chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::TemperatureDisplayMode::TypeInfo>(
-                temperatureDisplayModeArgument, this, OnSuccessCallback_3, OnFailureCallback_3));
+            cluster.ReadAttribute<chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::KeypadLockout::TypeInfo>(
+                this, OnSuccessCallback_3, OnFailureCallback_3, true));
         return CHIP_NO_ERROR;
     }
 
@@ -47167,17 +45888,21 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_3() { NextTest(); }
+    void OnSuccessResponse_3(uint8_t keypadLockout)
+    {
+        VerifyOrReturn(CheckValue("keypadLockout", keypadLockout, 0));
 
-    CHIP_ERROR TestReadTheMandatoryAttributeTemperatureDisplayMode_4()
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheMandatoryAttributeKeypadLockout_4()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(
-            cluster.ReadAttribute<
-                chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::TemperatureDisplayMode::TypeInfo>(
+            cluster.ReadAttribute<chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::KeypadLockout::TypeInfo>(
                 this, OnSuccessCallback_4, OnFailureCallback_4, true));
         return CHIP_NO_ERROR;
     }
@@ -47188,14 +45913,15 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_4(uint8_t temperatureDisplayMode)
+    void OnSuccessResponse_4(uint8_t keypadLockout)
     {
-        VerifyOrReturn(CheckValue("temperatureDisplayMode", temperatureDisplayMode, 0));
-
+        VerifyOrReturn(CheckConstraintType("keypadLockout", "", "enum8"));
+        VerifyOrReturn(CheckConstraintMinValue("keypadLockout", keypadLockout, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("keypadLockout", keypadLockout, 5));
         NextTest();
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributeTemperatureDisplayMode_5()
+    CHIP_ERROR TestReadTheOptionalAttributeScheduleProgrammingVisibility_5()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
@@ -47203,7 +45929,7 @@ private:
 
         ReturnErrorOnFailure(
             cluster.ReadAttribute<
-                chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::TemperatureDisplayMode::TypeInfo>(
+                chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::ScheduleProgrammingVisibility::TypeInfo>(
                 this, OnSuccessCallback_5, OnFailureCallback_5, true));
         return CHIP_NO_ERROR;
     }
@@ -47214,20 +45940,22 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_5(uint8_t temperatureDisplayMode)
+    void OnSuccessResponse_5(uint8_t scheduleProgrammingVisibility)
     {
-        VerifyOrReturn(CheckConstraintType("temperatureDisplayMode", "", "enum8"));
+        VerifyOrReturn(CheckValue("scheduleProgrammingVisibility", scheduleProgrammingVisibility, 0));
+
         NextTest();
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributeKeypadLockout_6()
+    CHIP_ERROR TestReadTheOptionalAttributeScheduleProgrammingVisibility_6()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::KeypadLockout::TypeInfo>(
+            cluster.ReadAttribute<
+                chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::ScheduleProgrammingVisibility::TypeInfo>(
                 this, OnSuccessCallback_6, OnFailureCallback_6, true));
         return CHIP_NO_ERROR;
     }
@@ -47238,232 +45966,11 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_6(uint8_t keypadLockout)
-    {
-        VerifyOrReturn(CheckValue("keypadLockout", keypadLockout, 0));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeKeypadLockout_7()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::KeypadLockout::TypeInfo>(
-                this, OnSuccessCallback_7, OnFailureCallback_7, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_7(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_7(uint8_t keypadLockout)
-    {
-        VerifyOrReturn(CheckConstraintType("keypadLockout", "", "enum8"));
-        NextTest();
-    }
-
-    CHIP_ERROR TestWriteToTheMandatoryAttributeKeypadLockout_8()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        uint8_t keypadLockoutArgument;
-        keypadLockoutArgument = 0;
-
-        ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::KeypadLockout::TypeInfo>(
-                keypadLockoutArgument, this, OnSuccessCallback_8, OnFailureCallback_8));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_8(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_8() { NextTest(); }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeKeypadLockout_9()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::KeypadLockout::TypeInfo>(
-                this, OnSuccessCallback_9, OnFailureCallback_9, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_9(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_9(uint8_t keypadLockout)
-    {
-        VerifyOrReturn(CheckValue("keypadLockout", keypadLockout, 0));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeKeypadLockout_10()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::KeypadLockout::TypeInfo>(
-                this, OnSuccessCallback_10, OnFailureCallback_10, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_10(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_10(uint8_t keypadLockout)
-    {
-        VerifyOrReturn(CheckConstraintType("keypadLockout", "", "enum8"));
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeScheduleProgrammingVisibility_11()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(
-            cluster.ReadAttribute<
-                chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::ScheduleProgrammingVisibility::TypeInfo>(
-                this, OnSuccessCallback_11, OnFailureCallback_11, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_11(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_11(uint8_t scheduleProgrammingVisibility)
-    {
-        VerifyOrReturn(CheckValue("scheduleProgrammingVisibility", scheduleProgrammingVisibility, 0));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeScheduleProgrammingVisibility_12()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(
-            cluster.ReadAttribute<
-                chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::ScheduleProgrammingVisibility::TypeInfo>(
-                this, OnSuccessCallback_12, OnFailureCallback_12, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_12(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_12(uint8_t scheduleProgrammingVisibility)
+    void OnSuccessResponse_6(uint8_t scheduleProgrammingVisibility)
     {
         VerifyOrReturn(CheckConstraintType("scheduleProgrammingVisibility", "", "enum8"));
-        NextTest();
-    }
-
-    CHIP_ERROR TestWriteToTheMandatoryAttributeScheduleProgrammingVisibility_13()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        uint8_t scheduleProgrammingVisibilityArgument;
-        scheduleProgrammingVisibilityArgument = 0;
-
-        ReturnErrorOnFailure(
-            cluster.WriteAttribute<
-                chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::ScheduleProgrammingVisibility::TypeInfo>(
-                scheduleProgrammingVisibilityArgument, this, OnSuccessCallback_13, OnFailureCallback_13));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_13(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_13() { NextTest(); }
-
-    CHIP_ERROR TestReadTheOptionalAttributeScheduleProgrammingVisibility_14()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(
-            cluster.ReadAttribute<
-                chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::ScheduleProgrammingVisibility::TypeInfo>(
-                this, OnSuccessCallback_14, OnFailureCallback_14, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_14(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_14(uint8_t scheduleProgrammingVisibility)
-    {
-        VerifyOrReturn(CheckValue("scheduleProgrammingVisibility", scheduleProgrammingVisibility, 0));
-
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeScheduleProgrammingVisibility_15()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(
-            cluster.ReadAttribute<
-                chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::ScheduleProgrammingVisibility::TypeInfo>(
-                this, OnSuccessCallback_15, OnFailureCallback_15, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_15(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_15(uint8_t scheduleProgrammingVisibility)
-    {
-        VerifyOrReturn(CheckConstraintType("scheduleProgrammingVisibility", "", "enum8"));
+        VerifyOrReturn(CheckConstraintMinValue("scheduleProgrammingVisibility", scheduleProgrammingVisibility, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("scheduleProgrammingVisibility", scheduleProgrammingVisibility, 1));
         NextTest();
     }
 };
@@ -47530,78 +46037,108 @@ public:
             err = TestWritesAValueOf1ToTemperatureDisplayModeAttributeOfDut_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Writes a value of 0 to KeypadLockout attribute of DUT\n");
-            if (ShouldSkip("A_KEYPAD_LOCKOUT"))
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 3 : Writes a value of greater than 1 to TemperatureDisplayMode attribute of DUT\n");
+            if (ShouldSkip("A_TEMPERATURE_DISPLAY_MODE"))
             {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueOf0ToKeypadLockoutAttributeOfDut_3();
+            err = TestWritesAValueOfGreaterThan1ToTemperatureDisplayModeAttributeOfDut_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Writes a value of 1 to KeypadLockout attribute of DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Writes a value of 0 to KeypadLockout attribute of DUT\n");
             if (ShouldSkip("A_KEYPAD_LOCKOUT"))
             {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueOf1ToKeypadLockoutAttributeOfDut_4();
+            err = TestWritesAValueOf0ToKeypadLockoutAttributeOfDut_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Writes a value of 2 to KeypadLockout attribute of DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Writes a value of 1 to KeypadLockout attribute of DUT\n");
             if (ShouldSkip("A_KEYPAD_LOCKOUT"))
             {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueOf2ToKeypadLockoutAttributeOfDut_5();
+            err = TestWritesAValueOf1ToKeypadLockoutAttributeOfDut_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Writes a value of 3 to KeypadLockout attribute of DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Writes a value of 2 to KeypadLockout attribute of DUT\n");
             if (ShouldSkip("A_KEYPAD_LOCKOUT"))
             {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueOf3ToKeypadLockoutAttributeOfDut_6();
+            err = TestWritesAValueOf2ToKeypadLockoutAttributeOfDut_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Writes a value of 4 to KeypadLockout attribute of DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Writes a value of 3 to KeypadLockout attribute of DUT\n");
             if (ShouldSkip("A_KEYPAD_LOCKOUT"))
             {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueOf4ToKeypadLockoutAttributeOfDut_7();
+            err = TestWritesAValueOf3ToKeypadLockoutAttributeOfDut_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Writes a value of 5 to KeypadLockout attribute of DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Writes a value of 4 to KeypadLockout attribute of DUT\n");
             if (ShouldSkip("A_KEYPAD_LOCKOUT"))
             {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueOf5ToKeypadLockoutAttributeOfDut_8();
+            err = TestWritesAValueOf4ToKeypadLockoutAttributeOfDut_8();
             break;
         case 9:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 9 : Writes a value of 0 to ScheduleProgrammingVisibility attribute of DUT\n");
-            if (ShouldSkip("A_SCHEDULE_PROGRAMMING_VISIBILITY"))
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Writes a value of 5 to KeypadLockout attribute of DUT\n");
+            if (ShouldSkip("A_KEYPAD_LOCKOUT"))
             {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueOf0ToScheduleProgrammingVisibilityAttributeOfDut_9();
+            err = TestWritesAValueOf5ToKeypadLockoutAttributeOfDut_9();
             break;
         case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Writes a value of greater than 5 to KeypadLockout attribute of DUT\n");
+            if (ShouldSkip("A_KEYPAD_LOCKOUT"))
+            {
+                NextTest();
+                return;
+            }
+            err = TestWritesAValueOfGreaterThan5ToKeypadLockoutAttributeOfDut_10();
+            break;
+        case 11:
             ChipLogProgress(chipTool,
-                            " ***** Test Step 10 : Writes a value of 1 to ScheduleProgrammingVisibility attribute of DUT\n");
+                            " ***** Test Step 11 : Writes a value of 0 to ScheduleProgrammingVisibility attribute of DUT\n");
             if (ShouldSkip("A_SCHEDULE_PROGRAMMING_VISIBILITY"))
             {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueOf1ToScheduleProgrammingVisibilityAttributeOfDut_10();
+            err = TestWritesAValueOf0ToScheduleProgrammingVisibilityAttributeOfDut_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 12 : Writes a value of 1 to ScheduleProgrammingVisibility attribute of DUT\n");
+            if (ShouldSkip("A_SCHEDULE_PROGRAMMING_VISIBILITY"))
+            {
+                NextTest();
+                return;
+            }
+            err = TestWritesAValueOf1ToScheduleProgrammingVisibilityAttributeOfDut_12();
+            break;
+        case 13:
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 13 : Writes a value of greater than 1 to ScheduleProgrammingVisibility attribute of DUT\n");
+            if (ShouldSkip("A_SCHEDULE_PROGRAMMING_VISIBILITY"))
+            {
+                NextTest();
+                return;
+            }
+            err = TestWritesAValueOfGreaterThan1ToScheduleProgrammingVisibilityAttributeOfDut_13();
             break;
         }
 
@@ -47619,7 +46156,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 11;
+    const uint16_t mTestCount = 14;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -47704,6 +46241,27 @@ private:
 
     static void OnSuccessCallback_10(void * context) { (static_cast<Test_TC_TSUIC_2_2Suite *>(context))->OnSuccessResponse_10(); }
 
+    static void OnFailureCallback_11(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_TSUIC_2_2Suite *>(context))->OnFailureResponse_11(error);
+    }
+
+    static void OnSuccessCallback_11(void * context) { (static_cast<Test_TC_TSUIC_2_2Suite *>(context))->OnSuccessResponse_11(); }
+
+    static void OnFailureCallback_12(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_TSUIC_2_2Suite *>(context))->OnFailureResponse_12(error);
+    }
+
+    static void OnSuccessCallback_12(void * context) { (static_cast<Test_TC_TSUIC_2_2Suite *>(context))->OnSuccessResponse_12(); }
+
+    static void OnFailureCallback_13(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_TSUIC_2_2Suite *>(context))->OnFailureResponse_13(error);
+    }
+
+    static void OnSuccessCallback_13(void * context) { (static_cast<Test_TC_TSUIC_2_2Suite *>(context))->OnSuccessResponse_13(); }
+
     //
     // Tests methods
     //
@@ -47762,7 +46320,32 @@ private:
 
     void OnSuccessResponse_2() { NextTest(); }
 
-    CHIP_ERROR TestWritesAValueOf0ToKeypadLockoutAttributeOfDut_3()
+    CHIP_ERROR TestWritesAValueOfGreaterThan1ToTemperatureDisplayModeAttributeOfDut_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        uint8_t temperatureDisplayModeArgument;
+        temperatureDisplayModeArgument = 2;
+
+        ReturnErrorOnFailure(
+            cluster.WriteAttribute<
+                chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::TemperatureDisplayMode::TypeInfo>(
+                temperatureDisplayModeArgument, this, OnSuccessCallback_3, OnFailureCallback_3));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_3(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+        NextTest();
+    }
+
+    void OnSuccessResponse_3() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR TestWritesAValueOf0ToKeypadLockoutAttributeOfDut_4()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
@@ -47770,29 +46353,6 @@ private:
 
         uint8_t keypadLockoutArgument;
         keypadLockoutArgument = 0;
-
-        ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::KeypadLockout::TypeInfo>(
-                keypadLockoutArgument, this, OnSuccessCallback_3, OnFailureCallback_3));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_3(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_3() { NextTest(); }
-
-    CHIP_ERROR TestWritesAValueOf1ToKeypadLockoutAttributeOfDut_4()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        uint8_t keypadLockoutArgument;
-        keypadLockoutArgument = 1;
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::KeypadLockout::TypeInfo>(
@@ -47808,14 +46368,14 @@ private:
 
     void OnSuccessResponse_4() { NextTest(); }
 
-    CHIP_ERROR TestWritesAValueOf2ToKeypadLockoutAttributeOfDut_5()
+    CHIP_ERROR TestWritesAValueOf1ToKeypadLockoutAttributeOfDut_5()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         uint8_t keypadLockoutArgument;
-        keypadLockoutArgument = 2;
+        keypadLockoutArgument = 1;
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::KeypadLockout::TypeInfo>(
@@ -47831,14 +46391,14 @@ private:
 
     void OnSuccessResponse_5() { NextTest(); }
 
-    CHIP_ERROR TestWritesAValueOf3ToKeypadLockoutAttributeOfDut_6()
+    CHIP_ERROR TestWritesAValueOf2ToKeypadLockoutAttributeOfDut_6()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         uint8_t keypadLockoutArgument;
-        keypadLockoutArgument = 3;
+        keypadLockoutArgument = 2;
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::KeypadLockout::TypeInfo>(
@@ -47854,14 +46414,14 @@ private:
 
     void OnSuccessResponse_6() { NextTest(); }
 
-    CHIP_ERROR TestWritesAValueOf4ToKeypadLockoutAttributeOfDut_7()
+    CHIP_ERROR TestWritesAValueOf3ToKeypadLockoutAttributeOfDut_7()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         uint8_t keypadLockoutArgument;
-        keypadLockoutArgument = 4;
+        keypadLockoutArgument = 3;
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::KeypadLockout::TypeInfo>(
@@ -47877,14 +46437,14 @@ private:
 
     void OnSuccessResponse_7() { NextTest(); }
 
-    CHIP_ERROR TestWritesAValueOf5ToKeypadLockoutAttributeOfDut_8()
+    CHIP_ERROR TestWritesAValueOf4ToKeypadLockoutAttributeOfDut_8()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         uint8_t keypadLockoutArgument;
-        keypadLockoutArgument = 5;
+        keypadLockoutArgument = 4;
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::KeypadLockout::TypeInfo>(
@@ -47900,19 +46460,18 @@ private:
 
     void OnSuccessResponse_8() { NextTest(); }
 
-    CHIP_ERROR TestWritesAValueOf0ToScheduleProgrammingVisibilityAttributeOfDut_9()
+    CHIP_ERROR TestWritesAValueOf5ToKeypadLockoutAttributeOfDut_9()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t scheduleProgrammingVisibilityArgument;
-        scheduleProgrammingVisibilityArgument = 0;
+        uint8_t keypadLockoutArgument;
+        keypadLockoutArgument = 5;
 
         ReturnErrorOnFailure(
-            cluster.WriteAttribute<
-                chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::ScheduleProgrammingVisibility::TypeInfo>(
-                scheduleProgrammingVisibilityArgument, this, OnSuccessCallback_9, OnFailureCallback_9));
+            cluster.WriteAttribute<chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::KeypadLockout::TypeInfo>(
+                keypadLockoutArgument, this, OnSuccessCallback_9, OnFailureCallback_9));
         return CHIP_NO_ERROR;
     }
 
@@ -47924,7 +46483,55 @@ private:
 
     void OnSuccessResponse_9() { NextTest(); }
 
-    CHIP_ERROR TestWritesAValueOf1ToScheduleProgrammingVisibilityAttributeOfDut_10()
+    CHIP_ERROR TestWritesAValueOfGreaterThan5ToKeypadLockoutAttributeOfDut_10()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        uint8_t keypadLockoutArgument;
+        keypadLockoutArgument = 6;
+
+        ReturnErrorOnFailure(
+            cluster.WriteAttribute<chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::KeypadLockout::TypeInfo>(
+                keypadLockoutArgument, this, OnSuccessCallback_10, OnFailureCallback_10));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_10(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+        NextTest();
+    }
+
+    void OnSuccessResponse_10() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR TestWritesAValueOf0ToScheduleProgrammingVisibilityAttributeOfDut_11()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        uint8_t scheduleProgrammingVisibilityArgument;
+        scheduleProgrammingVisibilityArgument = 0;
+
+        ReturnErrorOnFailure(
+            cluster.WriteAttribute<
+                chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::ScheduleProgrammingVisibility::TypeInfo>(
+                scheduleProgrammingVisibilityArgument, this, OnSuccessCallback_11, OnFailureCallback_11));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_11(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_11() { NextTest(); }
+
+    CHIP_ERROR TestWritesAValueOf1ToScheduleProgrammingVisibilityAttributeOfDut_12()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
@@ -47936,17 +46543,42 @@ private:
         ReturnErrorOnFailure(
             cluster.WriteAttribute<
                 chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::ScheduleProgrammingVisibility::TypeInfo>(
-                scheduleProgrammingVisibilityArgument, this, OnSuccessCallback_10, OnFailureCallback_10));
+                scheduleProgrammingVisibilityArgument, this, OnSuccessCallback_12, OnFailureCallback_12));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_10(CHIP_ERROR error)
+    void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_10() { NextTest(); }
+    void OnSuccessResponse_12() { NextTest(); }
+
+    CHIP_ERROR TestWritesAValueOfGreaterThan1ToScheduleProgrammingVisibilityAttributeOfDut_13()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::ThermostatUserInterfaceConfigurationClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        uint8_t scheduleProgrammingVisibilityArgument;
+        scheduleProgrammingVisibilityArgument = 2;
+
+        ReturnErrorOnFailure(
+            cluster.WriteAttribute<
+                chip::app::Clusters::ThermostatUserInterfaceConfiguration::Attributes::ScheduleProgrammingVisibility::TypeInfo>(
+                scheduleProgrammingVisibilityArgument, this, OnSuccessCallback_13, OnFailureCallback_13));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_13(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+        NextTest();
+    }
+
+    void OnSuccessResponse_13() { ThrowSuccessResponse(); }
 };
 
 class Test_TC_DIAG_TH_NW_1_1Suite : public TestCommand
@@ -52122,6 +50754,22 @@ public:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads NetworkInterface structure attribute from DUT\n");
             err = TestReadsNetworkInterfaceStructureAttributeFromDut_1();
             break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads SecurityType attribute constraints\n");
+            err = TestReadsSecurityTypeAttributeConstraints_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Reads WiFiVersion attribute constraints\n");
+            err = TestReadsWiFiVersionAttributeConstraints_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Reads ChannelNumber attribute constraints\n");
+            err = TestReadsChannelNumberAttributeConstraints_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Reads RSSI attribute constraints\n");
+            err = TestReadsRssiAttributeConstraints_5();
+            break;
         }
 
         if (CHIP_NO_ERROR != err)
@@ -52138,7 +50786,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 2;
+    const uint16_t mTestCount = 6;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -52164,6 +50812,50 @@ private:
             chip::app::Clusters::GeneralDiagnostics::Structs::NetworkInterfaceType::DecodableType> & networkInterfaces)
     {
         (static_cast<Test_TC_WIFIDIAG_1_1Suite *>(context))->OnSuccessResponse_1(networkInterfaces);
+    }
+
+    static void OnFailureCallback_2(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_WIFIDIAG_1_1Suite *>(context))->OnFailureResponse_2(error);
+    }
+
+    static void OnSuccessCallback_2(
+        void * context,
+        const chip::app::DataModel::Nullable<chip::app::Clusters::WiFiNetworkDiagnostics::SecurityType> & securityType)
+    {
+        (static_cast<Test_TC_WIFIDIAG_1_1Suite *>(context))->OnSuccessResponse_2(securityType);
+    }
+
+    static void OnFailureCallback_3(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_WIFIDIAG_1_1Suite *>(context))->OnFailureResponse_3(error);
+    }
+
+    static void OnSuccessCallback_3(
+        void * context,
+        const chip::app::DataModel::Nullable<chip::app::Clusters::WiFiNetworkDiagnostics::WiFiVersionType> & wiFiVersion)
+    {
+        (static_cast<Test_TC_WIFIDIAG_1_1Suite *>(context))->OnSuccessResponse_3(wiFiVersion);
+    }
+
+    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_WIFIDIAG_1_1Suite *>(context))->OnFailureResponse_4(error);
+    }
+
+    static void OnSuccessCallback_4(void * context, const chip::app::DataModel::Nullable<uint16_t> & channelNumber)
+    {
+        (static_cast<Test_TC_WIFIDIAG_1_1Suite *>(context))->OnSuccessResponse_4(channelNumber);
+    }
+
+    static void OnFailureCallback_5(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_WIFIDIAG_1_1Suite *>(context))->OnFailureResponse_5(error);
+    }
+
+    static void OnSuccessCallback_5(void * context, const chip::app::DataModel::Nullable<int8_t> & rssi)
+    {
+        (static_cast<Test_TC_WIFIDIAG_1_1Suite *>(context))->OnSuccessResponse_5(rssi);
     }
 
     //
@@ -52199,6 +50891,103 @@ private:
                         chip::app::Clusters::GeneralDiagnostics::Structs::NetworkInterfaceType::DecodableType> & networkInterfaces)
     {
         VerifyOrReturn(CheckConstraintType("networkInterfaces", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadsSecurityTypeAttributeConstraints_2()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::WiFiNetworkDiagnosticsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WiFiNetworkDiagnostics::Attributes::SecurityType::TypeInfo>(
+            this, OnSuccessCallback_2, OnFailureCallback_2, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_2(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_2(
+        const chip::app::DataModel::Nullable<chip::app::Clusters::WiFiNetworkDiagnostics::SecurityType> & securityType)
+    {
+        VerifyOrReturn(CheckConstraintType("securityType", "", "enum"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadsWiFiVersionAttributeConstraints_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::WiFiNetworkDiagnosticsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WiFiNetworkDiagnostics::Attributes::WiFiVersion::TypeInfo>(
+            this, OnSuccessCallback_3, OnFailureCallback_3, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_3(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_3(
+        const chip::app::DataModel::Nullable<chip::app::Clusters::WiFiNetworkDiagnostics::WiFiVersionType> & wiFiVersion)
+    {
+        VerifyOrReturn(CheckConstraintType("wiFiVersion", "", "enum"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadsChannelNumberAttributeConstraints_4()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::WiFiNetworkDiagnosticsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::WiFiNetworkDiagnostics::Attributes::ChannelNumber::TypeInfo>(
+                this, OnSuccessCallback_4, OnFailureCallback_4, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_4(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_4(const chip::app::DataModel::Nullable<uint16_t> & channelNumber)
+    {
+        VerifyOrReturn(CheckConstraintType("channelNumber", "", "uint16"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadsRssiAttributeConstraints_5()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::WiFiNetworkDiagnosticsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WiFiNetworkDiagnostics::Attributes::Rssi::TypeInfo>(
+            this, OnSuccessCallback_5, OnFailureCallback_5, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_5(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_5(const chip::app::DataModel::Nullable<int8_t> & rssi)
+    {
+        VerifyOrReturn(CheckConstraintType("rssi", "", "int8"));
+        VerifyOrReturn(CheckConstraintMinValue("rssi", rssi, -120));
+        VerifyOrReturn(CheckConstraintMaxValue("rssi", rssi, 0));
         NextTest();
     }
 };
