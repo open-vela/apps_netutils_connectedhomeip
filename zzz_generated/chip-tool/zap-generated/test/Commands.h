@@ -5818,8 +5818,9 @@ private:
 
     void OnSuccessResponse_3(uint8_t currentHue)
     {
-        VerifyOrReturn(CheckValue("currentHue", currentHue, 0));
-
+        VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
+        VerifyOrReturn(CheckConstraintMinValue("currentHue", currentHue, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("currentHue", currentHue, 254));
         NextTest();
     }
 
@@ -5890,8 +5891,9 @@ private:
 
     void OnSuccessResponse_6(uint8_t currentSaturation)
     {
-        VerifyOrReturn(CheckValue("currentSaturation", currentSaturation, 0));
-
+        VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
+        VerifyOrReturn(CheckConstraintMinValue("currentSaturation", currentSaturation, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("currentSaturation", currentSaturation, 254));
         NextTest();
     }
 
@@ -5962,8 +5964,9 @@ private:
 
     void OnSuccessResponse_9(uint16_t currentX)
     {
-        VerifyOrReturn(CheckValue("currentX", currentX, 24939U));
-
+        VerifyOrReturn(CheckConstraintType("currentX", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("currentX", currentX, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("currentX", currentX, 65279U));
         NextTest();
     }
 
@@ -6034,8 +6037,9 @@ private:
 
     void OnSuccessResponse_12(uint16_t currentY)
     {
-        VerifyOrReturn(CheckValue("currentY", currentY, 24701U));
-
+        VerifyOrReturn(CheckConstraintType("currentY", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("currentY", currentY, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("currentY", currentY, 65279U));
         NextTest();
     }
 
@@ -6223,8 +6227,7 @@ private:
 
     void OnSuccessResponse_20(uint16_t enhancedCurrentHue)
     {
-        VerifyOrReturn(CheckValue("enhancedCurrentHue", enhancedCurrentHue, 0U));
-
+        VerifyOrReturn(CheckConstraintType("enhancedCurrentHue", "", "uint16"));
         NextTest();
     }
 
@@ -6316,8 +6319,7 @@ private:
 
     void OnSuccessResponse_24(uint8_t colorLoopActive)
     {
-        VerifyOrReturn(CheckValue("colorLoopActive", colorLoopActive, 0));
-
+        VerifyOrReturn(CheckConstraintType("colorLoopActive", "", "uint8"));
         NextTest();
     }
 
@@ -6386,8 +6388,7 @@ private:
 
     void OnSuccessResponse_27(uint8_t colorLoopDirection)
     {
-        VerifyOrReturn(CheckValue("colorLoopDirection", colorLoopDirection, 0));
-
+        VerifyOrReturn(CheckConstraintType("colorLoopDirection", "", "uint8"));
         NextTest();
     }
 
@@ -6456,8 +6457,7 @@ private:
 
     void OnSuccessResponse_30(uint16_t colorLoopTime)
     {
-        VerifyOrReturn(CheckValue("colorLoopTime", colorLoopTime, 25U));
-
+        VerifyOrReturn(CheckConstraintType("colorLoopTime", "", "uint16"));
         NextTest();
     }
 
@@ -6529,8 +6529,7 @@ private:
 
     void OnSuccessResponse_33(uint16_t colorLoopStartEnhancedHue)
     {
-        VerifyOrReturn(CheckValue("colorLoopStartEnhancedHue", colorLoopStartEnhancedHue, 8960U));
-
+        VerifyOrReturn(CheckConstraintType("colorLoopStartEnhancedHue", "", "uint16"));
         NextTest();
     }
 
@@ -6602,8 +6601,7 @@ private:
 
     void OnSuccessResponse_36(uint16_t colorLoopStoredEnhancedHue)
     {
-        VerifyOrReturn(CheckValue("colorLoopStoredEnhancedHue", colorLoopStoredEnhancedHue, 0U));
-
+        VerifyOrReturn(CheckConstraintType("colorLoopStoredEnhancedHue", "", "uint16"));
         NextTest();
     }
 
@@ -6674,8 +6672,9 @@ private:
 
     void OnSuccessResponse_39(uint16_t colorCapabilities)
     {
-        VerifyOrReturn(CheckValue("colorCapabilities", colorCapabilities, 0U));
-
+        VerifyOrReturn(CheckConstraintType("colorCapabilities", "", "map16"));
+        VerifyOrReturn(CheckConstraintMinValue("colorCapabilities", colorCapabilities, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("colorCapabilities", colorCapabilities, 31U));
         NextTest();
     }
 
@@ -6746,8 +6745,9 @@ private:
 
     void OnSuccessResponse_42(uint16_t colorTempPhysicalMin)
     {
-        VerifyOrReturn(CheckValue("colorTempPhysicalMin", colorTempPhysicalMin, 0U));
-
+        VerifyOrReturn(CheckConstraintType("colorTempPhysicalMin", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("colorTempPhysicalMin", colorTempPhysicalMin, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("colorTempPhysicalMin", colorTempPhysicalMin, 65279U));
         NextTest();
     }
 
@@ -6818,8 +6818,9 @@ private:
 
     void OnSuccessResponse_45(uint16_t colorTempPhysicalMax)
     {
-        VerifyOrReturn(CheckValue("colorTempPhysicalMax", colorTempPhysicalMax, 65279U));
-
+        VerifyOrReturn(CheckConstraintType("colorTempPhysicalMax", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("colorTempPhysicalMax", colorTempPhysicalMax, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("colorTempPhysicalMax", colorTempPhysicalMax, 65279U));
         NextTest();
     }
 
@@ -6898,8 +6899,7 @@ private:
 
     void OnSuccessResponse_48(uint16_t coupleColorTempToLevelMinMireds)
     {
-        VerifyOrReturn(CheckValue("coupleColorTempToLevelMinMireds", coupleColorTempToLevelMinMireds, 0U));
-
+        VerifyOrReturn(CheckConstraintType("coupleColorTempToLevelMinMireds", "", "uint16"));
         NextTest();
     }
 
@@ -7049,8 +7049,7 @@ private:
 
     void OnSuccessResponse_54(uint16_t remainingTime)
     {
-        VerifyOrReturn(CheckValue("remainingTime", remainingTime, 0U));
-
+        VerifyOrReturn(CheckConstraintType("remainingTime", "", "uint16"));
         NextTest();
     }
 
@@ -7128,8 +7127,9 @@ private:
 
     void OnSuccessResponse_57(uint8_t driftCompensation)
     {
-        VerifyOrReturn(CheckValue("driftCompensation", driftCompensation, 0));
-
+        VerifyOrReturn(CheckConstraintType("driftCompensation", "", "enum8"));
+        VerifyOrReturn(CheckConstraintMinValue("driftCompensation", driftCompensation, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("driftCompensation", driftCompensation, 4));
         NextTest();
     }
 
@@ -7206,8 +7206,8 @@ private:
 
     void OnSuccessResponse_60(chip::CharSpan compensationText)
     {
-        VerifyOrReturn(CheckValueAsString("compensationText", compensationText, chip::CharSpan("", 0)));
-
+        VerifyOrReturn(CheckConstraintType("compensationText", "", "string"));
+        VerifyOrReturn(CheckConstraintMaxLength("compensationText", compensationText.size(), 254));
         NextTest();
     }
 
@@ -7278,8 +7278,9 @@ private:
 
     void OnSuccessResponse_63(uint8_t numberOfPrimaries)
     {
-        VerifyOrReturn(CheckValue("numberOfPrimaries", numberOfPrimaries, 0));
-
+        VerifyOrReturn(CheckConstraintType("numberOfPrimaries", "", "uint8"));
+        VerifyOrReturn(CheckConstraintMinValue("numberOfPrimaries", numberOfPrimaries, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("numberOfPrimaries", numberOfPrimaries, 6));
         NextTest();
     }
 
@@ -7350,8 +7351,9 @@ private:
 
     void OnSuccessResponse_66(uint16_t primary1X)
     {
-        VerifyOrReturn(CheckValue("primary1X", primary1X, 0U));
-
+        VerifyOrReturn(CheckConstraintType("primary1X", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("primary1X", primary1X, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("primary1X", primary1X, 65279U));
         NextTest();
     }
 
@@ -7422,8 +7424,9 @@ private:
 
     void OnSuccessResponse_69(uint16_t primary1Y)
     {
-        VerifyOrReturn(CheckValue("primary1Y", primary1Y, 0U));
-
+        VerifyOrReturn(CheckConstraintType("primary1Y", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("primary1Y", primary1Y, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("primary1Y", primary1Y, 65279U));
         NextTest();
     }
 
@@ -7517,8 +7520,9 @@ private:
 
     void OnSuccessResponse_73(uint16_t primary2X)
     {
-        VerifyOrReturn(CheckValue("primary2X", primary2X, 0U));
-
+        VerifyOrReturn(CheckConstraintType("primary2X", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("primary2X", primary2X, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("primary2X", primary2X, 65279U));
         NextTest();
     }
 
@@ -7589,8 +7593,9 @@ private:
 
     void OnSuccessResponse_76(uint16_t primary2Y)
     {
-        VerifyOrReturn(CheckValue("primary2Y", primary2Y, 0U));
-
+        VerifyOrReturn(CheckConstraintType("primary2Y", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("primary2Y", primary2Y, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("primary2Y", primary2Y, 65279U));
         NextTest();
     }
 
@@ -7684,8 +7689,9 @@ private:
 
     void OnSuccessResponse_80(uint16_t primary3X)
     {
-        VerifyOrReturn(CheckValue("primary3X", primary3X, 0U));
-
+        VerifyOrReturn(CheckConstraintType("primary3X", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("primary3X", primary3X, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("primary3X", primary3X, 65279U));
         NextTest();
     }
 
@@ -7756,8 +7762,9 @@ private:
 
     void OnSuccessResponse_83(uint16_t primary3Y)
     {
-        VerifyOrReturn(CheckValue("primary3Y", primary3Y, 0U));
-
+        VerifyOrReturn(CheckConstraintType("primary3Y", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("primary3Y", primary3Y, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("primary3Y", primary3Y, 65279U));
         NextTest();
     }
 
@@ -7851,8 +7858,9 @@ private:
 
     void OnSuccessResponse_87(uint16_t primary4X)
     {
-        VerifyOrReturn(CheckValue("primary4X", primary4X, 0U));
-
+        VerifyOrReturn(CheckConstraintType("primary4X", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("primary4X", primary4X, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("primary4X", primary4X, 65279U));
         NextTest();
     }
 
@@ -7923,8 +7931,9 @@ private:
 
     void OnSuccessResponse_90(uint16_t primary4Y)
     {
-        VerifyOrReturn(CheckValue("primary4Y", primary4Y, 0U));
-
+        VerifyOrReturn(CheckConstraintType("primary4Y", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("primary4Y", primary4Y, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("primary4Y", primary4Y, 65279U));
         NextTest();
     }
 
@@ -8018,8 +8027,9 @@ private:
 
     void OnSuccessResponse_94(uint16_t primary5X)
     {
-        VerifyOrReturn(CheckValue("primary5X", primary5X, 0U));
-
+        VerifyOrReturn(CheckConstraintType("primary5X", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("primary5X", primary5X, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("primary5X", primary5X, 65279U));
         NextTest();
     }
 
@@ -8090,8 +8100,9 @@ private:
 
     void OnSuccessResponse_97(uint16_t primary5Y)
     {
-        VerifyOrReturn(CheckValue("primary5Y", primary5Y, 0U));
-
+        VerifyOrReturn(CheckConstraintType("primary5Y", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("primary5Y", primary5Y, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("primary5Y", primary5Y, 65279U));
         NextTest();
     }
 
@@ -8185,8 +8196,9 @@ private:
 
     void OnSuccessResponse_101(uint16_t primary6X)
     {
-        VerifyOrReturn(CheckValue("primary6X", primary6X, 0U));
-
+        VerifyOrReturn(CheckConstraintType("primary6X", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("primary6X", primary6X, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("primary6X", primary6X, 65279U));
         NextTest();
     }
 
@@ -8257,8 +8269,9 @@ private:
 
     void OnSuccessResponse_104(uint16_t primary6Y)
     {
-        VerifyOrReturn(CheckValue("primary6Y", primary6Y, 0U));
-
+        VerifyOrReturn(CheckConstraintType("primary6Y", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("primary6Y", primary6Y, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("primary6Y", primary6Y, 65279U));
         NextTest();
     }
 
@@ -17669,31 +17682,31 @@ public:
             err = TestReadColorLoopStartEnhancedHueAttributeFromDut_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Color Loop Set Command - Set all Attributes\n");
-            if (ShouldSkip("CR_COLORLOOPSET"))
-            {
-                NextTest();
-                return;
-            }
-            err = TestColorLoopSetCommandSetAllAttributes_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Read ColorLoopActive attribute from DUT.\n");
-            if (ShouldSkip("A_COLORLOOPACTIVE"))
-            {
-                NextTest();
-                return;
-            }
-            err = TestReadColorLoopActiveAttributeFromDut_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Read EnhancedCurrentHue attribute from DUT.\n");
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read EnhancedCurrentHue attribute from DUT.\n");
             if (ShouldSkip("A_ENHANCEDCURRENTHUE"))
             {
                 NextTest();
                 return;
             }
-            err = TestReadEnhancedCurrentHueAttributeFromDut_10();
+            err = TestReadEnhancedCurrentHueAttributeFromDut_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Color Loop Set Command - Set all Attributes\n");
+            if (ShouldSkip("CR_COLORLOOPSET"))
+            {
+                NextTest();
+                return;
+            }
+            err = TestColorLoopSetCommandSetAllAttributes_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Read ColorLoopActive attribute from DUT.\n");
+            if (ShouldSkip("A_COLORLOOPACTIVE"))
+            {
+                NextTest();
+                return;
+            }
+            err = TestReadColorLoopActiveAttributeFromDut_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Read ColorLoopStoredEnhancedHue attribute from DUT.\n");
@@ -17850,14 +17863,14 @@ private:
         (static_cast<Test_TC_CC_9_2Suite *>(context))->OnSuccessResponse_7(colorLoopStartEnhancedHue);
     }
 
-    static void OnFailureCallback_9(void * context, CHIP_ERROR error)
+    static void OnFailureCallback_8(void * context, CHIP_ERROR error)
     {
-        (static_cast<Test_TC_CC_9_2Suite *>(context))->OnFailureResponse_9(error);
+        (static_cast<Test_TC_CC_9_2Suite *>(context))->OnFailureResponse_8(error);
     }
 
-    static void OnSuccessCallback_9(void * context, uint8_t colorLoopActive)
+    static void OnSuccessCallback_8(void * context, uint16_t enhancedCurrentHue)
     {
-        (static_cast<Test_TC_CC_9_2Suite *>(context))->OnSuccessResponse_9(colorLoopActive);
+        (static_cast<Test_TC_CC_9_2Suite *>(context))->OnSuccessResponse_8(enhancedCurrentHue);
     }
 
     static void OnFailureCallback_10(void * context, CHIP_ERROR error)
@@ -17865,9 +17878,9 @@ private:
         (static_cast<Test_TC_CC_9_2Suite *>(context))->OnFailureResponse_10(error);
     }
 
-    static void OnSuccessCallback_10(void * context, uint16_t enhancedCurrentHue)
+    static void OnSuccessCallback_10(void * context, uint8_t colorLoopActive)
     {
-        (static_cast<Test_TC_CC_9_2Suite *>(context))->OnSuccessResponse_10(enhancedCurrentHue);
+        (static_cast<Test_TC_CC_9_2Suite *>(context))->OnSuccessResponse_10(colorLoopActive);
     }
 
     static void OnFailureCallback_11(void * context, CHIP_ERROR error)
@@ -18122,7 +18135,31 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestColorLoopSetCommandSetAllAttributes_8()
+    CHIP_ERROR TestReadEnhancedCurrentHueAttributeFromDut_8()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::ColorControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::ColorControl::Attributes::EnhancedCurrentHue::TypeInfo>(
+            this, OnSuccessCallback_8, OnFailureCallback_8, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_8(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_8(uint16_t enhancedCurrentHue)
+    {
+        VerifyOrReturn(CheckConstraintType("enhancedCurrentHue", "", "uint16"));
+        EnhancedCurrentHueValue = enhancedCurrentHue;
+        NextTest();
+    }
+
+    CHIP_ERROR TestColorLoopSetCommandSetAllAttributes_9()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         using RequestType               = chip::app::Clusters::ColorControl::Commands::ColorLoopSet::Type;
@@ -18137,33 +18174,14 @@ private:
         request.optionsOverride = 0;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
-            (static_cast<Test_TC_CC_9_2Suite *>(context))->OnSuccessResponse_8();
+            (static_cast<Test_TC_CC_9_2Suite *>(context))->OnSuccessResponse_9();
         };
 
         auto failure = [](void * context, CHIP_ERROR error) {
-            (static_cast<Test_TC_CC_9_2Suite *>(context))->OnFailureResponse_8(error);
+            (static_cast<Test_TC_CC_9_2Suite *>(context))->OnFailureResponse_9(error);
         };
 
         ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_8(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_8() { NextTest(); }
-
-    CHIP_ERROR TestReadColorLoopActiveAttributeFromDut_9()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ColorControlClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::ColorControl::Attributes::ColorLoopActive::TypeInfo>(
-            this, OnSuccessCallback_9, OnFailureCallback_9, true));
         return CHIP_NO_ERROR;
     }
 
@@ -18173,20 +18191,15 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_9(uint8_t colorLoopActive)
-    {
-        VerifyOrReturn(CheckValue("colorLoopActive", colorLoopActive, 1));
+    void OnSuccessResponse_9() { NextTest(); }
 
-        NextTest();
-    }
-
-    CHIP_ERROR TestReadEnhancedCurrentHueAttributeFromDut_10()
+    CHIP_ERROR TestReadColorLoopActiveAttributeFromDut_10()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ColorControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::ColorControl::Attributes::EnhancedCurrentHue::TypeInfo>(
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::ColorControl::Attributes::ColorLoopActive::TypeInfo>(
             this, OnSuccessCallback_10, OnFailureCallback_10, true));
         return CHIP_NO_ERROR;
     }
@@ -18197,10 +18210,10 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_10(uint16_t enhancedCurrentHue)
+    void OnSuccessResponse_10(uint8_t colorLoopActive)
     {
-        VerifyOrReturn(CheckConstraintType("enhancedCurrentHue", "", "uint16"));
-        EnhancedCurrentHueValue = enhancedCurrentHue;
+        VerifyOrReturn(CheckValue("colorLoopActive", colorLoopActive, 1));
+
         NextTest();
     }
 
@@ -31101,6 +31114,7 @@ private:
     void OnSuccessResponse_2(chip::CharSpan vendorName)
     {
         VerifyOrReturn(CheckConstraintType("vendorName", "", "string"));
+        VerifyOrReturn(CheckConstraintMaxLength("vendorName", vendorName.size(), 32));
         NextTest();
     }
 
@@ -31123,7 +31137,6 @@ private:
 
     void OnSuccessResponse_3(uint16_t vendorID)
     {
-        VerifyOrReturn(CheckValue("vendorID", vendorID, 0U));
         VerifyOrReturn(CheckConstraintType("vendorID", "", "vendor-id"));
         NextTest();
     }
