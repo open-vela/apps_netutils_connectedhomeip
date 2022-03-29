@@ -102280,9 +102280,8 @@ private:
         locationArgument = chip::Span<const char>("USgarbage: not in length on purpose", 2);
 
         ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Basic::Attributes::Location::TypeInfo>(
-            groupId, mDevices[kIdentityAlpha]->GetSecureSession().Value()->GetFabricIndex(),
-            mDevices[kIdentityAlpha]->GetDeviceId(), locationArgument, this, OnSuccessCallback_7, OnFailureCallback_7,
-            OnDoneCallback_7));
+            groupId, mDevices[kIdentityAlpha]->GetSecureSession().Value()->GetFabricIndex(), locationArgument, this,
+            OnSuccessCallback_7, OnFailureCallback_7, OnDoneCallback_7));
         return CHIP_NO_ERROR;
     }
 
@@ -102329,9 +102328,8 @@ private:
         locationArgument = chip::Span<const char>("XXgarbage: not in length on purpose", 2);
 
         ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Basic::Attributes::Location::TypeInfo>(
-            groupId, mDevices[kIdentityAlpha]->GetSecureSession().Value()->GetFabricIndex(),
-            mDevices[kIdentityAlpha]->GetDeviceId(), locationArgument, this, OnSuccessCallback_9, OnFailureCallback_9,
-            OnDoneCallback_9));
+            groupId, mDevices[kIdentityAlpha]->GetSecureSession().Value()->GetFabricIndex(), locationArgument, this,
+            OnSuccessCallback_9, OnFailureCallback_9, OnDoneCallback_9));
         return CHIP_NO_ERROR;
     }
 
