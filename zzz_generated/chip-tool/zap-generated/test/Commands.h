@@ -72,9 +72,12 @@ public:
         printf("Test_TC_FLW_1_1\n");
         printf("Test_TC_FLW_2_1\n");
         printf("Test_TC_FLW_2_2\n");
+        printf("Test_TC_GC_1_1\n");
         printf("Test_TC_I_1_1\n");
         printf("Test_TC_I_2_1\n");
+        printf("Test_TC_I_2_3\n");
         printf("Test_TC_ILL_1_1\n");
+        printf("Test_TC_ILL_2_1\n");
         printf("Test_TC_LVL_1_1\n");
         printf("Test_TC_LVL_2_1\n");
         printf("Test_TC_LVL_2_2\n");
@@ -117,6 +120,9 @@ public:
         printf("Test_TC_MC_7_2\n");
         printf("Test_TC_MC_8_1\n");
         printf("Test_TC_MC_9_1\n");
+        printf("Test_TC_MC_10_1\n");
+        printf("Test_TC_MOD_1_1\n");
+        printf("Test_TC_MF_1_4\n");
         printf("Test_TC_OCC_1_1\n");
         printf("Test_TC_OCC_2_1\n");
         printf("Test_TC_OCC_2_2\n");
@@ -262,15 +268,12 @@ public:
         printf("Test_TC_DIAG_LOG_1_3\n");
         printf("Test_TC_DESC_1_1\n");
         printf("Test_TC_ETHDIAG_1_2\n");
-        printf("Test_TC_GC_1_1\n");
         printf("Test_TC_GC_1_2\n");
         printf("Test_TC_GC_1_3\n");
         printf("Test_TC_GENDIAG_1_1\n");
         printf("Test_TC_GENDIAG_1_2\n");
         printf("Test_TC_GENDIAG_2_1\n");
         printf("Test_TC_I_2_2\n");
-        printf("Test_TC_I_2_3\n");
-        printf("Test_TC_ILL_2_1\n");
         printf("Test_TC_ILL_2_2\n");
         printf("Test_TC_IDM_1_1\n");
         printf("Test_TC_IDM_1_2\n");
@@ -291,7 +294,6 @@ public:
         printf("Test_TC_MC_4_1\n");
         printf("Test_TC_MC_8_2\n");
         printf("Test_TC_MC_9_2\n");
-        printf("Test_TC_MC_10_1\n");
         printf("Test_TC_MC_10_2\n");
         printf("Test_TC_MC_10_3\n");
         printf("Test_TC_MC_10_4\n");
@@ -299,7 +301,7 @@ public:
         printf("Test_TC_MC_10_6\n");
         printf("Test_TC_MF_1_1\n");
         printf("Test_TC_MF_1_2\n");
-        printf("Test_TC_MF_1_4\n");
+        printf("Test_TC_MF_1_3\n");
         printf("Test_TC_MF_1_5\n");
         printf("Test_TC_MF_1_6\n");
         printf("Test_TC_MF_1_7\n");
@@ -324,7 +326,6 @@ public:
         printf("Test_TC_MF_1_26\n");
         printf("Test_TC_MF_1_27\n");
         printf("Test_TC_MF_1_28\n");
-        printf("Test_TC_MOD_1_1\n");
         printf("Test_TC_MOD_1_2\n");
         printf("Test_TC_MOD_2_1\n");
         printf("Test_TC_MOD_2_2\n");
@@ -21971,6 +21972,280 @@ private:
     }
 };
 
+class Test_TC_GC_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_GC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_GC_1_1", credsIssuerConfig), mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_GC_1_1Suite() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_GC_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_GC_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++)
+        {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH1 reads the BreadCrumb Attribute from the DUT\n");
+            err = TestTh1ReadsTheBreadCrumbAttributeFromTheDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH1 writes the BreadCrumb attribute as 1 to the DUT\n");
+            err = TestTh1WritesTheBreadCrumbAttributeAs1ToTheDut_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH1 reads the BreadCrumb attribute from the DUT\n");
+            err = TestTh1ReadsTheBreadCrumbAttributeFromTheDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH1 reads the RegulatoryConfig attribute from the DUT\n");
+            err = TestTh1ReadsTheRegulatoryConfigAttributeFromTheDut_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH1 reads the LocationCapability attribute from the DUT\n");
+            err = TestTh1ReadsTheLocationCapabilityAttributeFromTheDut_5();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err)
+        {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 6;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    {
+        bool isExpectedDnssdResult = false;
+
+        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
+        NextTest();
+    }
+
+    static void OnFailureCallback_1(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_GC_1_1Suite *>(context))->OnFailureResponse_1(error);
+    }
+
+    static void OnSuccessCallback_1(void * context, uint64_t breadcrumb)
+    {
+        (static_cast<Test_TC_GC_1_1Suite *>(context))->OnSuccessResponse_1(breadcrumb);
+    }
+
+    static void OnFailureCallback_2(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_GC_1_1Suite *>(context))->OnFailureResponse_2(error);
+    }
+
+    static void OnSuccessCallback_2(void * context) { (static_cast<Test_TC_GC_1_1Suite *>(context))->OnSuccessResponse_2(); }
+
+    static void OnFailureCallback_3(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_GC_1_1Suite *>(context))->OnFailureResponse_3(error);
+    }
+
+    static void OnSuccessCallback_3(void * context, uint64_t breadcrumb)
+    {
+        (static_cast<Test_TC_GC_1_1Suite *>(context))->OnSuccessResponse_3(breadcrumb);
+    }
+
+    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_GC_1_1Suite *>(context))->OnFailureResponse_4(error);
+    }
+
+    static void OnSuccessCallback_4(void * context,
+                                    chip::app::Clusters::GeneralCommissioning::RegulatoryLocationType regulatoryConfig)
+    {
+        (static_cast<Test_TC_GC_1_1Suite *>(context))->OnSuccessResponse_4(regulatoryConfig);
+    }
+
+    static void OnFailureCallback_5(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_GC_1_1Suite *>(context))->OnFailureResponse_5(error);
+    }
+
+    static void OnSuccessCallback_5(void * context,
+                                    chip::app::Clusters::GeneralCommissioning::RegulatoryLocationType locationCapability)
+    {
+        (static_cast<Test_TC_GC_1_1Suite *>(context))->OnSuccessResponse_5(locationCapability);
+    }
+
+    //
+    // Tests methods
+    //
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        SetIdentity(kIdentityAlpha);
+        return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+    }
+
+    CHIP_ERROR TestTh1ReadsTheBreadCrumbAttributeFromTheDut_1()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::GeneralCommissioningClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::GeneralCommissioning::Attributes::Breadcrumb::TypeInfo>(
+            this, OnSuccessCallback_1, OnFailureCallback_1, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_1(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_1(uint64_t breadcrumb)
+    {
+        VerifyOrReturn(CheckValue("breadcrumb", breadcrumb, 0ULL));
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestTh1WritesTheBreadCrumbAttributeAs1ToTheDut_2()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::GeneralCommissioningClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        uint64_t breadcrumbArgument;
+        breadcrumbArgument = 1ULL;
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::GeneralCommissioning::Attributes::Breadcrumb::TypeInfo>(
+            breadcrumbArgument, this, OnSuccessCallback_2, OnFailureCallback_2));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_2(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_2() { NextTest(); }
+
+    CHIP_ERROR TestTh1ReadsTheBreadCrumbAttributeFromTheDut_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::GeneralCommissioningClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::GeneralCommissioning::Attributes::Breadcrumb::TypeInfo>(
+            this, OnSuccessCallback_3, OnFailureCallback_3, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_3(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_3(uint64_t breadcrumb)
+    {
+        VerifyOrReturn(CheckValue("breadcrumb", breadcrumb, 1ULL));
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestTh1ReadsTheRegulatoryConfigAttributeFromTheDut_4()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::GeneralCommissioningClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::GeneralCommissioning::Attributes::RegulatoryConfig::TypeInfo>(
+                this, OnSuccessCallback_4, OnFailureCallback_4, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_4(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_4(chip::app::Clusters::GeneralCommissioning::RegulatoryLocationType regulatoryConfig)
+    {
+        VerifyOrReturn(CheckConstraintMinValue("regulatoryConfig", regulatoryConfig, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("regulatoryConfig", regulatoryConfig, 2));
+        NextTest();
+    }
+
+    CHIP_ERROR TestTh1ReadsTheLocationCapabilityAttributeFromTheDut_5()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::GeneralCommissioningClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::GeneralCommissioning::Attributes::LocationCapability::TypeInfo>(
+                this, OnSuccessCallback_5, OnFailureCallback_5, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_5(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_5(chip::app::Clusters::GeneralCommissioning::RegulatoryLocationType locationCapability)
+    {
+        VerifyOrReturn(CheckConstraintMinValue("locationCapability", locationCapability, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("locationCapability", locationCapability, 2));
+        NextTest();
+    }
+};
+
 class Test_TC_I_1_1Suite : public TestCommand
 {
 public:
@@ -22367,6 +22642,563 @@ private:
     }
 };
 
+class Test_TC_I_2_3Suite : public TestCommand
+{
+public:
+    Test_TC_I_2_3Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_I_2_3", credsIssuerConfig), mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_I_2_3Suite() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_I_2_3\n");
+        }
+
+        if (mTestCount == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_I_2_3\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++)
+        {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : 1.Wait for the commissioned device to be retrieved\n");
+            err = Test1WaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 1 : TH sends TriggerEffect command to DUT with the effect identifier field set to "
+                            "0x00 blink and the effect variant field set to 0x00 default\n");
+            err =
+                TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x00BlinkAndTheEffectVariantFieldSetTo0x00Default_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Manually check DUT executes a blink effect\n");
+            err = TestManuallyCheckDutExecutesABlinkEffect_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 3 : TH sends TriggerEffect command to DUT with the effect identifier field set to "
+                            "0x01 breathe and the effect variant field set to 0x00 default\n");
+            err =
+                TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x01BreatheAndTheEffectVariantFieldSetTo0x00Default_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : check DUT executes a breathe effect\n");
+            err = TestCheckDutExecutesABreatheEffect_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 5 : TH sends TriggerEffect command to DUT with the effect identifier field set to "
+                            "0x02 okay and the effect variant field set to 0x00 default\n");
+            err =
+                TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x02OkayAndTheEffectVariantFieldSetTo0x00Default_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : check DUT executes an okay effect\n");
+            err = TestCheckDutExecutesAnOkayEffect_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 7 : TH sends TriggerEffect command to DUT with the effect identifier field set to "
+                            "0x0b channel change and the effect variant field set to 0x00 default\n");
+            err =
+                TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x0bChannelChangeAndTheEffectVariantFieldSetTo0x00Default_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : check DUT executes a channel change effect\n");
+            err = TestCheckDutExecutesAChannelChangeEffect_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 9 : TH sends TriggerEffect command to DUT with the effect identifier field set to "
+                            "0x01 breathe and the effect variant field set to 0x00 default\n");
+            err =
+                TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x01BreatheAndTheEffectVariantFieldSetTo0x00Default_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : check DUT executes a breathe effect\n");
+            err = TestCheckDutExecutesABreatheEffect_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 11 : TH sends TriggerEffect command to DUT with the effect identifier field set to "
+                            "0xfe finish effect and the effect variant field set to 0x00 default\n");
+            err =
+                TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0xfeFinishEffectAndTheEffectVariantFieldSetTo0x00Default_11();
+            break;
+        case 12:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 12 : Manually check DUT stops the breathe effect after the current effect sequence\n");
+            err = TestManuallyCheckDutStopsTheBreatheEffectAfterTheCurrentEffectSequence_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 13 : TH sends TriggerEffect command to DUT with the effect identifier field set to "
+                            "0x01 breathe and the effect variant field set to 0x00 default\n");
+            err =
+                TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x01BreatheAndTheEffectVariantFieldSetTo0x00Default_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Manually check DUT executes a breathe effect\n");
+            err = TestManuallyCheckDutExecutesABreatheEffect_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 15 : TH sends TriggerEffect command to DUT with the effect identifier field set to "
+                            "0xff stop effect and the effect variant field set to 0x00 default\n");
+            err =
+                TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0xffStopEffectAndTheEffectVariantFieldSetTo0x00Default_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Check DUT stops the breathe effect as soon as possible.\n");
+            err = TestCheckDutStopsTheBreatheEffectAsSoonAsPossible_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 17 : TH sends TriggerEffect command to DUT with the effect identifier field set to "
+                            "0x00 blink and the effect variant field set to 0x42 unknown\n");
+            err =
+                TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x00BlinkAndTheEffectVariantFieldSetTo0x42Unknown_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Check DUT executes a blink effect.\n");
+            err = TestCheckDutExecutesABlinkEffect_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 19 : TH sends TriggerEffect command to DUT with the effect identifier field set to "
+                            "0xff stop effect and the effect variant field set to 0x00 default\n");
+            err =
+                TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0xffStopEffectAndTheEffectVariantFieldSetTo0x00Default_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 20 : Check DUT stops any effect that may be still running as soon as possible\n");
+            err = TestCheckDutStopsAnyEffectThatMayBeStillRunningAsSoonAsPossible_20();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err)
+        {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 21;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    {
+        bool isExpectedDnssdResult = false;
+
+        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
+        NextTest();
+    }
+
+    //
+    // Tests methods
+    //
+
+    CHIP_ERROR Test1WaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        SetIdentity(kIdentityAlpha);
+        return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+    }
+
+    CHIP_ERROR
+    TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x00BlinkAndTheEffectVariantFieldSetTo0x00Default_1()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::Identify::Commands::TriggerEffect::Type;
+
+        RequestType request;
+        request.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(0);
+        request.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(0);
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnSuccessResponse_1();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnFailureResponse_1(error);
+        };
+
+        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_1(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_1() { NextTest(); }
+
+    CHIP_ERROR TestManuallyCheckDutExecutesABlinkEffect_2()
+    {
+        SetIdentity(kIdentityAlpha);
+        return UserPrompt("DUT executes a blink effect");
+    }
+
+    CHIP_ERROR
+    TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x01BreatheAndTheEffectVariantFieldSetTo0x00Default_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::Identify::Commands::TriggerEffect::Type;
+
+        RequestType request;
+        request.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(1);
+        request.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(0);
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnSuccessResponse_3();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnFailureResponse_3(error);
+        };
+
+        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_3(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_3() { NextTest(); }
+
+    CHIP_ERROR TestCheckDutExecutesABreatheEffect_4()
+    {
+        SetIdentity(kIdentityAlpha);
+        return UserPrompt("DUT executes a breathe effect");
+    }
+
+    CHIP_ERROR
+    TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x02OkayAndTheEffectVariantFieldSetTo0x00Default_5()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::Identify::Commands::TriggerEffect::Type;
+
+        RequestType request;
+        request.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(2);
+        request.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(0);
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnSuccessResponse_5();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnFailureResponse_5(error);
+        };
+
+        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_5(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_5() { NextTest(); }
+
+    CHIP_ERROR TestCheckDutExecutesAnOkayEffect_6()
+    {
+        SetIdentity(kIdentityAlpha);
+        return UserPrompt("DUT executes an okay effect");
+    }
+
+    CHIP_ERROR
+    TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x0bChannelChangeAndTheEffectVariantFieldSetTo0x00Default_7()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::Identify::Commands::TriggerEffect::Type;
+
+        RequestType request;
+        request.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(11);
+        request.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(0);
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnSuccessResponse_7();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnFailureResponse_7(error);
+        };
+
+        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_7(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_7() { NextTest(); }
+
+    CHIP_ERROR TestCheckDutExecutesAChannelChangeEffect_8()
+    {
+        SetIdentity(kIdentityAlpha);
+        return UserPrompt("DUT executes a channel change effect");
+    }
+
+    CHIP_ERROR
+    TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x01BreatheAndTheEffectVariantFieldSetTo0x00Default_9()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::Identify::Commands::TriggerEffect::Type;
+
+        RequestType request;
+        request.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(1);
+        request.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(0);
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnSuccessResponse_9();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnFailureResponse_9(error);
+        };
+
+        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_9(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_9() { NextTest(); }
+
+    CHIP_ERROR TestCheckDutExecutesABreatheEffect_10()
+    {
+        SetIdentity(kIdentityAlpha);
+        return UserPrompt("DUT executes a breathe effect");
+    }
+
+    CHIP_ERROR
+    TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0xfeFinishEffectAndTheEffectVariantFieldSetTo0x00Default_11()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::Identify::Commands::TriggerEffect::Type;
+
+        RequestType request;
+        request.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(254);
+        request.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(0);
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnSuccessResponse_11();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnFailureResponse_11(error);
+        };
+
+        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_11(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_11() { NextTest(); }
+
+    CHIP_ERROR TestManuallyCheckDutStopsTheBreatheEffectAfterTheCurrentEffectSequence_12()
+    {
+        SetIdentity(kIdentityAlpha);
+        return UserPrompt("DUT stops the breathe effect after the current effect sequence");
+    }
+
+    CHIP_ERROR
+    TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x01BreatheAndTheEffectVariantFieldSetTo0x00Default_13()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::Identify::Commands::TriggerEffect::Type;
+
+        RequestType request;
+        request.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(1);
+        request.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(0);
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnSuccessResponse_13();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnFailureResponse_13(error);
+        };
+
+        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_13(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_13() { NextTest(); }
+
+    CHIP_ERROR TestManuallyCheckDutExecutesABreatheEffect_14()
+    {
+        SetIdentity(kIdentityAlpha);
+        return UserPrompt("DUT executes a breathe effect");
+    }
+
+    CHIP_ERROR
+    TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0xffStopEffectAndTheEffectVariantFieldSetTo0x00Default_15()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::Identify::Commands::TriggerEffect::Type;
+
+        RequestType request;
+        request.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(255);
+        request.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(0);
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnSuccessResponse_15();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnFailureResponse_15(error);
+        };
+
+        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_15(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_15() { NextTest(); }
+
+    CHIP_ERROR TestCheckDutStopsTheBreatheEffectAsSoonAsPossible_16()
+    {
+        SetIdentity(kIdentityAlpha);
+        return UserPrompt("DUT stops the breathe effect as soon as possible");
+    }
+
+    CHIP_ERROR
+    TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x00BlinkAndTheEffectVariantFieldSetTo0x42Unknown_17()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::Identify::Commands::TriggerEffect::Type;
+
+        RequestType request;
+        request.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(0);
+        request.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(66);
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnSuccessResponse_17();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnFailureResponse_17(error);
+        };
+
+        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_17(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_17() { NextTest(); }
+
+    CHIP_ERROR TestCheckDutExecutesABlinkEffect_18()
+    {
+        SetIdentity(kIdentityAlpha);
+        return UserPrompt("DUT executes a blink effect");
+    }
+
+    CHIP_ERROR
+    TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0xffStopEffectAndTheEffectVariantFieldSetTo0x00Default_19()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::Identify::Commands::TriggerEffect::Type;
+
+        RequestType request;
+        request.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(255);
+        request.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(0);
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnSuccessResponse_19();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_I_2_3Suite *>(context))->OnFailureResponse_19(error);
+        };
+
+        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_19(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_19() { NextTest(); }
+
+    CHIP_ERROR TestCheckDutStopsAnyEffectThatMayBeStillRunningAsSoonAsPossible_20()
+    {
+        SetIdentity(kIdentityAlpha);
+        return UserPrompt("DUT stops any effect that may be still running as soon as possible");
+    }
+};
+
 class Test_TC_ILL_1_1Suite : public TestCommand
 {
 public:
@@ -22602,6 +23434,248 @@ private:
     void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
     {
         VerifyOrReturn(CheckConstraintType("generatedCommandList", "", "list"));
+        NextTest();
+    }
+};
+
+class Test_TC_ILL_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_ILL_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_ILL_2_1", credsIssuerConfig), mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_ILL_2_1Suite() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ILL_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ILL_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++)
+        {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads MinMeasuredValue attribute from DUT\n");
+            err = TestThReadsMinMeasuredValueAttributeFromDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads MaxMeasuredValue attribute from DUT\n");
+            err = TestThReadsMaxMeasuredValueAttributeFromDut_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads Tolerance attribute from DUT\n");
+            err = TestThReadsToleranceAttributeFromDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads LightSensorType attribute from DUT\n");
+            err = TestThReadsLightSensorTypeAttributeFromDut_4();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err)
+        {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 5;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    {
+        bool isExpectedDnssdResult = false;
+
+        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
+        NextTest();
+    }
+
+    static void OnFailureCallback_1(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_ILL_2_1Suite *>(context))->OnFailureResponse_1(error);
+    }
+
+    static void OnSuccessCallback_1(void * context, const chip::app::DataModel::Nullable<uint16_t> & minMeasuredValue)
+    {
+        (static_cast<Test_TC_ILL_2_1Suite *>(context))->OnSuccessResponse_1(minMeasuredValue);
+    }
+
+    static void OnFailureCallback_2(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_ILL_2_1Suite *>(context))->OnFailureResponse_2(error);
+    }
+
+    static void OnSuccessCallback_2(void * context, const chip::app::DataModel::Nullable<uint16_t> & maxMeasuredValue)
+    {
+        (static_cast<Test_TC_ILL_2_1Suite *>(context))->OnSuccessResponse_2(maxMeasuredValue);
+    }
+
+    static void OnFailureCallback_3(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_ILL_2_1Suite *>(context))->OnFailureResponse_3(error);
+    }
+
+    static void OnSuccessCallback_3(void * context, uint16_t tolerance)
+    {
+        (static_cast<Test_TC_ILL_2_1Suite *>(context))->OnSuccessResponse_3(tolerance);
+    }
+
+    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_ILL_2_1Suite *>(context))->OnFailureResponse_4(error);
+    }
+
+    static void OnSuccessCallback_4(void * context, const chip::app::DataModel::Nullable<uint8_t> & lightSensorType)
+    {
+        (static_cast<Test_TC_ILL_2_1Suite *>(context))->OnSuccessResponse_4(lightSensorType);
+    }
+
+    //
+    // Tests methods
+    //
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        SetIdentity(kIdentityAlpha);
+        return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+    }
+
+    CHIP_ERROR TestThReadsMinMeasuredValueAttributeFromDut_1()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::IlluminanceMeasurementClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::IlluminanceMeasurement::Attributes::MinMeasuredValue::TypeInfo>(
+                this, OnSuccessCallback_1, OnFailureCallback_1, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_1(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_1(const chip::app::DataModel::Nullable<uint16_t> & minMeasuredValue)
+    {
+        VerifyOrReturn(CheckConstraintType("minMeasuredValue", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("minMeasuredValue", minMeasuredValue, 1U));
+        VerifyOrReturn(CheckConstraintMaxValue("minMeasuredValue", minMeasuredValue, 65533U));
+        NextTest();
+    }
+
+    CHIP_ERROR TestThReadsMaxMeasuredValueAttributeFromDut_2()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::IlluminanceMeasurementClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::IlluminanceMeasurement::Attributes::MaxMeasuredValue::TypeInfo>(
+                this, OnSuccessCallback_2, OnFailureCallback_2, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_2(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_2(const chip::app::DataModel::Nullable<uint16_t> & maxMeasuredValue)
+    {
+        VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("maxMeasuredValue", maxMeasuredValue, 2U));
+        VerifyOrReturn(CheckConstraintMaxValue("maxMeasuredValue", maxMeasuredValue, 65534U));
+        NextTest();
+    }
+
+    CHIP_ERROR TestThReadsToleranceAttributeFromDut_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::IlluminanceMeasurementClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::IlluminanceMeasurement::Attributes::Tolerance::TypeInfo>(
+            this, OnSuccessCallback_3, OnFailureCallback_3, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_3(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_3(uint16_t tolerance)
+    {
+        VerifyOrReturn(CheckConstraintType("tolerance", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("tolerance", tolerance, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("tolerance", tolerance, 2048U));
+        NextTest();
+    }
+
+    CHIP_ERROR TestThReadsLightSensorTypeAttributeFromDut_4()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::IlluminanceMeasurementClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::IlluminanceMeasurement::Attributes::LightSensorType::TypeInfo>(
+                this, OnSuccessCallback_4, OnFailureCallback_4, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_4(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_4(const chip::app::DataModel::Nullable<uint8_t> & lightSensorType)
+    {
+        VerifyOrReturn(CheckConstraintType("lightSensorType", "", "enum8"));
         NextTest();
     }
 };
@@ -31357,6 +32431,874 @@ private:
     {
         VerifyOrReturn(CheckConstraintType("applicationVersion", "", "string"));
         VerifyOrReturn(CheckConstraintMaxLength("applicationVersion", applicationVersion.size(), 32));
+        NextTest();
+    }
+};
+
+class Test_TC_MC_10_1Suite : public TestCommand
+{
+public:
+    Test_TC_MC_10_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_MC_10_1", credsIssuerConfig), mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_MC_10_1Suite() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_10_1\n");
+        }
+
+        if (mTestCount == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_10_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++)
+        {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads the AcceptHeader attribute from the DUT\n");
+            err = TestThReadsTheAcceptHeaderAttributeFromTheDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads the SupportedStreamingProtocols attribute from the DUT\n");
+            err = TestThReadsTheSupportedStreamingProtocolsAttributeFromTheDut_2();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err)
+        {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 3;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    {
+        bool isExpectedDnssdResult = false;
+
+        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
+        NextTest();
+    }
+
+    static void OnFailureCallback_1(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MC_10_1Suite *>(context))->OnFailureResponse_1(error);
+    }
+
+    static void OnSuccessCallback_1(void * context, const chip::app::DataModel::DecodableList<chip::CharSpan> & acceptHeader)
+    {
+        (static_cast<Test_TC_MC_10_1Suite *>(context))->OnSuccessResponse_1(acceptHeader);
+    }
+
+    static void OnFailureCallback_2(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MC_10_1Suite *>(context))->OnFailureResponse_2(error);
+    }
+
+    static void OnSuccessCallback_2(void * context, uint32_t supportedStreamingProtocols)
+    {
+        (static_cast<Test_TC_MC_10_1Suite *>(context))->OnSuccessResponse_2(supportedStreamingProtocols);
+    }
+
+    //
+    // Tests methods
+    //
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        SetIdentity(kIdentityAlpha);
+        return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+    }
+
+    CHIP_ERROR TestThReadsTheAcceptHeaderAttributeFromTheDut_1()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::ContentLauncherClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::ContentLauncher::Attributes::AcceptHeader::TypeInfo>(
+            this, OnSuccessCallback_1, OnFailureCallback_1, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_1(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_1(const chip::app::DataModel::DecodableList<chip::CharSpan> & acceptHeader)
+    {
+        VerifyOrReturn(CheckConstraintType("acceptHeader", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestThReadsTheSupportedStreamingProtocolsAttributeFromTheDut_2()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::ContentLauncherClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::ContentLauncher::Attributes::SupportedStreamingProtocols::TypeInfo>(
+                this, OnSuccessCallback_2, OnFailureCallback_2, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_2(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_2(uint32_t supportedStreamingProtocols)
+    {
+        VerifyOrReturn(CheckConstraintType("supportedStreamingProtocols", "", "map32"));
+        NextTest();
+    }
+};
+
+class Test_TC_MOD_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_MOD_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_MOD_1_1", credsIssuerConfig), mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_MOD_1_1Suite() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MOD_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MOD_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++)
+        {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads the ClusterRevision attribute from the DUT\n");
+            err = TestThReadsTheClusterRevisionAttributeFromTheDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads the AttributeList attribute from the DUT\n");
+            err = TestThReadsTheAttributeListAttributeFromTheDut_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_4();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err)
+        {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 5;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    {
+        bool isExpectedDnssdResult = false;
+
+        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
+        NextTest();
+    }
+
+    static void OnFailureCallback_1(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MOD_1_1Suite *>(context))->OnFailureResponse_1(error);
+    }
+
+    static void OnSuccessCallback_1(void * context, uint16_t clusterRevision)
+    {
+        (static_cast<Test_TC_MOD_1_1Suite *>(context))->OnSuccessResponse_1(clusterRevision);
+    }
+
+    static void OnFailureCallback_2(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MOD_1_1Suite *>(context))->OnFailureResponse_2(error);
+    }
+
+    static void OnSuccessCallback_2(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    {
+        (static_cast<Test_TC_MOD_1_1Suite *>(context))->OnSuccessResponse_2(attributeList);
+    }
+
+    static void OnFailureCallback_3(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MOD_1_1Suite *>(context))->OnFailureResponse_3(error);
+    }
+
+    static void OnSuccessCallback_3(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
+    {
+        (static_cast<Test_TC_MOD_1_1Suite *>(context))->OnSuccessResponse_3(acceptedCommandList);
+    }
+
+    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MOD_1_1Suite *>(context))->OnFailureResponse_4(error);
+    }
+
+    static void OnSuccessCallback_4(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
+    {
+        (static_cast<Test_TC_MOD_1_1Suite *>(context))->OnSuccessResponse_4(generatedCommandList);
+    }
+
+    //
+    // Tests methods
+    //
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        SetIdentity(kIdentityAlpha);
+        return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+    }
+
+    CHIP_ERROR TestThReadsTheClusterRevisionAttributeFromTheDut_1()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::ModeSelectClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::ModeSelect::Attributes::ClusterRevision::TypeInfo>(
+            this, OnSuccessCallback_1, OnFailureCallback_1, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_1(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_1(uint16_t clusterRevision)
+    {
+        VerifyOrReturn(CheckValue("clusterRevision", clusterRevision, 1U));
+        VerifyOrReturn(CheckConstraintType("clusterRevision", "", "uint16"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestThReadsTheAttributeListAttributeFromTheDut_2()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::ModeSelectClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::ModeSelect::Attributes::AttributeList::TypeInfo>(
+            this, OnSuccessCallback_2, OnFailureCallback_2, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_2(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_2(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    {
+        VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::ModeSelectClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::ModeSelect::Attributes::AcceptedCommandList::TypeInfo>(
+            this, OnSuccessCallback_3, OnFailureCallback_3, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_3(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
+    {
+        VerifyOrReturn(CheckConstraintType("acceptedCommandList", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_4()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::ModeSelectClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::ModeSelect::Attributes::GeneratedCommandList::TypeInfo>(
+            this, OnSuccessCallback_4, OnFailureCallback_4, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_4(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
+    {
+        VerifyOrReturn(CheckConstraintType("generatedCommandList", "", "list"));
+        NextTest();
+    }
+};
+
+class Test_TC_MF_1_4Suite : public TestCommand
+{
+public:
+    Test_TC_MF_1_4Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_MF_1_4", credsIssuerConfig), mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
+        AddArgument("payload", &mPayload);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_MF_1_4Suite() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MF_1_4\n");
+        }
+
+        if (mTestCount == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MF_1_4\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++)
+        {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Reboot target device\n");
+            err = TestRebootTargetDevice_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH_CR1 starts a commissioning process with DUT_CE\n");
+            err = TestThCr1StartsACommissioningProcessWithDutCe_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH_CR1 opens a commissioning window on DUT_CE\n");
+            err = TestThCr1OpensACommissioningWindowOnDutCe_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 3 : TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_3();
+            break;
+        case 4:
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 4 : TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Commission from beta\n");
+            err = TestCommissionFromBeta_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH_CR2 starts a commissioning process with DUT_CE\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCe_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Query fabrics list\n");
+            err = TestQueryFabricsList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Query fabrics list\n");
+            err = TestQueryFabricsList_8();
+            break;
+        case 9:
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 9 : TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_9();
+            break;
+        case 10:
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 10 : TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_10();
+            break;
+        case 11:
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 11 : TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_11();
+            break;
+        case 12:
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 12 : TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_12();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err)
+        {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 13;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::NodeId> mNodeId2;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mDiscriminator;
+    chip::Optional<chip::CharSpan> mPayload;
+    chip::Optional<uint16_t> mTimeout;
+
+    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    {
+        bool isExpectedDnssdResult = false;
+
+        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
+        NextTest();
+    }
+
+    static void OnFailureCallback_3(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_4Suite *>(context))->OnFailureResponse_3(error);
+    }
+
+    static void OnSuccessCallback_3(void * context) { (static_cast<Test_TC_MF_1_4Suite *>(context))->OnSuccessResponse_3(); }
+
+    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_4Suite *>(context))->OnFailureResponse_4(error);
+    }
+
+    static void OnSuccessCallback_4(void * context, chip::CharSpan nodeLabel)
+    {
+        (static_cast<Test_TC_MF_1_4Suite *>(context))->OnSuccessResponse_4(nodeLabel);
+    }
+
+    static void OnFailureCallback_7(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_4Suite *>(context))->OnFailureResponse_7(error);
+    }
+
+    static void
+    OnSuccessCallback_7(void * context,
+                        const chip::app::DataModel::DecodableList<
+                            chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType> & fabrics)
+    {
+        (static_cast<Test_TC_MF_1_4Suite *>(context))->OnSuccessResponse_7(fabrics);
+    }
+
+    static void OnFailureCallback_8(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_4Suite *>(context))->OnFailureResponse_8(error);
+    }
+
+    static void
+    OnSuccessCallback_8(void * context,
+                        const chip::app::DataModel::DecodableList<
+                            chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType> & fabrics)
+    {
+        (static_cast<Test_TC_MF_1_4Suite *>(context))->OnSuccessResponse_8(fabrics);
+    }
+
+    static void OnFailureCallback_9(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_4Suite *>(context))->OnFailureResponse_9(error);
+    }
+
+    static void OnSuccessCallback_9(void * context) { (static_cast<Test_TC_MF_1_4Suite *>(context))->OnSuccessResponse_9(); }
+
+    static void OnFailureCallback_10(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_4Suite *>(context))->OnFailureResponse_10(error);
+    }
+
+    static void OnSuccessCallback_10(void * context, chip::CharSpan nodeLabel)
+    {
+        (static_cast<Test_TC_MF_1_4Suite *>(context))->OnSuccessResponse_10(nodeLabel);
+    }
+
+    static void OnFailureCallback_11(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_4Suite *>(context))->OnFailureResponse_11(error);
+    }
+
+    static void OnSuccessCallback_11(void * context) { (static_cast<Test_TC_MF_1_4Suite *>(context))->OnSuccessResponse_11(); }
+
+    static void OnFailureCallback_12(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_4Suite *>(context))->OnFailureResponse_12(error);
+    }
+
+    static void OnSuccessCallback_12(void * context, chip::CharSpan nodeLabel)
+    {
+        (static_cast<Test_TC_MF_1_4Suite *>(context))->OnSuccessResponse_12(nodeLabel);
+    }
+
+    //
+    // Tests methods
+    //
+
+    CHIP_ERROR TestRebootTargetDevice_0()
+    {
+        SetIdentity(kIdentityAlpha);
+        return Reboot(mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U);
+    }
+
+    CHIP_ERROR TestThCr1StartsACommissioningProcessWithDutCe_1()
+    {
+        SetIdentity(kIdentityAlpha);
+        return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+    }
+
+    CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_2()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        using RequestType = chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type;
+
+        RequestType request;
+        request.commissioningTimeout = 120U;
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_MF_1_4Suite *>(context))->OnSuccessResponse_2();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_MF_1_4Suite *>(context))->OnFailureResponse_2(error);
+        };
+
+        ReturnErrorOnFailure(
+            chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request, 10000));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_2(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_2() { NextTest(); }
+
+    CHIP_ERROR TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        chip::CharSpan nodeLabelArgument;
+        nodeLabelArgument = chip::Span<const char>("chiptestgarbage: not in length on purpose", 8);
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            nodeLabelArgument, this, OnSuccessCallback_3, OnFailureCallback_3));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_3(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_3() { NextTest(); }
+
+    CHIP_ERROR TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_4()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            this, OnSuccessCallback_4, OnFailureCallback_4, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_4(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_4(chip::CharSpan nodeLabel)
+    {
+        VerifyOrReturn(CheckConstraintType("nodeLabel", "", "string"));
+        VerifyOrReturn(CheckConstraintMaxLength("nodeLabel", nodeLabel.size(), 32));
+        NextTest();
+    }
+
+    CHIP_ERROR TestCommissionFromBeta_5()
+    {
+        SetIdentity(kIdentityBeta);
+        return PairWithQRCode(mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL,
+                              mPayload.HasValue() ? mPayload.Value() : chip::CharSpan::fromCharString("MT:-24J0AFN00KA0648G00"));
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_6()
+    {
+        SetIdentity(kIdentityBeta);
+        return WaitForCommissionee(mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL);
+    }
+
+    CHIP_ERROR TestQueryFabricsList_7()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::OperationalCredentialsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::OperationalCredentials::Attributes::Fabrics::TypeInfo>(
+            this, OnSuccessCallback_7, OnFailureCallback_7, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_7(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_7(const chip::app::DataModel::DecodableList<
+                             chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType> & fabrics)
+    {
+        {
+            auto iter_0 = fabrics.begin();
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(fabrics)>("fabrics", iter_0, 0));
+            VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+            VerifyOrReturn(CheckNoMoreListItems<decltype(fabrics)>("fabrics", iter_0, 1));
+        }
+        VerifyOrReturn(CheckConstraintType("fabrics", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestQueryFabricsList_8()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::OperationalCredentialsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityBeta], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::OperationalCredentials::Attributes::Fabrics::TypeInfo>(
+            this, OnSuccessCallback_8, OnFailureCallback_8, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_8(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_8(const chip::app::DataModel::DecodableList<
+                             chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType> & fabrics)
+    {
+        {
+            auto iter_0 = fabrics.begin();
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(fabrics)>("fabrics", iter_0, 0));
+            VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+            VerifyOrReturn(CheckNoMoreListItems<decltype(fabrics)>("fabrics", iter_0, 1));
+        }
+        VerifyOrReturn(CheckConstraintType("fabrics", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_9()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        chip::CharSpan nodeLabelArgument;
+        nodeLabelArgument = chip::Span<const char>("chiptestgarbage: not in length on purpose", 8);
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            nodeLabelArgument, this, OnSuccessCallback_9, OnFailureCallback_9));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_9(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_9() { NextTest(); }
+
+    CHIP_ERROR TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_10()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            this, OnSuccessCallback_10, OnFailureCallback_10, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_10(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_10(chip::CharSpan nodeLabel)
+    {
+        VerifyOrReturn(CheckConstraintType("nodeLabel", "", "string"));
+        VerifyOrReturn(CheckConstraintMaxLength("nodeLabel", nodeLabel.size(), 32));
+        NextTest();
+    }
+
+    CHIP_ERROR TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_11()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityBeta], endpoint);
+
+        chip::CharSpan nodeLabelArgument;
+        nodeLabelArgument = chip::Span<const char>("chiptestgarbage: not in length on purpose", 8);
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            nodeLabelArgument, this, OnSuccessCallback_11, OnFailureCallback_11));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_11(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_11() { NextTest(); }
+
+    CHIP_ERROR TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_12()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityBeta], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            this, OnSuccessCallback_12, OnFailureCallback_12, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_12(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_12(chip::CharSpan nodeLabel)
+    {
+        VerifyOrReturn(CheckConstraintType("nodeLabel", "", "string"));
+        VerifyOrReturn(CheckConstraintMaxLength("nodeLabel", nodeLabel.size(), 32));
         NextTest();
     }
 };
@@ -108438,81 +110380,6 @@ private:
     //
 };
 
-class Test_TC_GC_1_1Suite : public TestCommand
-{
-public:
-    Test_TC_GC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_GC_1_1", credsIssuerConfig), mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_GC_1_1Suite() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex)
-        {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_GC_1_1\n");
-        }
-
-        if (mTestCount == mTestIndex)
-        {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_GC_1_1\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++)
-        {
-        }
-
-        if (CHIP_NO_ERROR != err)
-        {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 0;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
-    {
-        bool isExpectedDnssdResult = false;
-
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
-    }
-
-    //
-    // Tests methods
-    //
-};
-
 class Test_TC_GC_1_2Suite : public TestCommand
 {
 public:
@@ -108915,156 +110782,6 @@ public:
         if (mTestCount == mTestIndex)
         {
             ChipLogProgress(chipTool, " **** Test Complete: Test_TC_I_2_2\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++)
-        {
-        }
-
-        if (CHIP_NO_ERROR != err)
-        {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 0;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
-    {
-        bool isExpectedDnssdResult = false;
-
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
-    }
-
-    //
-    // Tests methods
-    //
-};
-
-class Test_TC_I_2_3Suite : public TestCommand
-{
-public:
-    Test_TC_I_2_3Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_I_2_3", credsIssuerConfig), mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_I_2_3Suite() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex)
-        {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_I_2_3\n");
-        }
-
-        if (mTestCount == mTestIndex)
-        {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_I_2_3\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++)
-        {
-        }
-
-        if (CHIP_NO_ERROR != err)
-        {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 0;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
-    {
-        bool isExpectedDnssdResult = false;
-
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
-    }
-
-    //
-    // Tests methods
-    //
-};
-
-class Test_TC_ILL_2_1Suite : public TestCommand
-{
-public:
-    Test_TC_ILL_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_ILL_2_1", credsIssuerConfig), mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_ILL_2_1Suite() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex)
-        {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ILL_2_1\n");
-        }
-
-        if (mTestCount == mTestIndex)
-        {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ILL_2_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -110613,81 +112330,6 @@ private:
     //
 };
 
-class Test_TC_MC_10_1Suite : public TestCommand
-{
-public:
-    Test_TC_MC_10_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_MC_10_1", credsIssuerConfig), mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_MC_10_1Suite() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex)
-        {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_10_1\n");
-        }
-
-        if (mTestCount == mTestIndex)
-        {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_10_1\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++)
-        {
-        }
-
-        if (CHIP_NO_ERROR != err)
-        {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 0;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
-    {
-        bool isExpectedDnssdResult = false;
-
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
-    }
-
-    //
-    // Tests methods
-    //
-};
-
 class Test_TC_MC_10_2Suite : public TestCommand
 {
 public:
@@ -111213,19 +112855,21 @@ private:
     //
 };
 
-class Test_TC_MF_1_4Suite : public TestCommand
+class Test_TC_MF_1_3Suite : public TestCommand
 {
 public:
-    Test_TC_MF_1_4Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_MF_1_4", credsIssuerConfig), mTestIndex(0)
+    Test_TC_MF_1_3Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_MF_1_3", credsIssuerConfig), mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
+        AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
+        AddArgument("payload", &mPayload);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
-    ~Test_TC_MF_1_4Suite() {}
+    ~Test_TC_MF_1_3Suite() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -111234,12 +112878,12 @@ public:
 
         if (0 == mTestIndex)
         {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MF_1_4\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MF_1_3\n");
         }
 
         if (mTestCount == mTestIndex)
         {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MF_1_4\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MF_1_3\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -111252,6 +112896,70 @@ public:
         // incorrect mTestIndex value observed when we get the response.
         switch (mTestIndex++)
         {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Reboot target device\n");
+            err = TestRebootTargetDevice_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH_CR1 starts a commissioning process with DUT_CE\n");
+            err = TestThCr1StartsACommissioningProcessWithDutCe_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Open Commissioning Window\n");
+            err = TestOpenCommissioningWindow_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 3 : TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_3();
+            break;
+        case 4:
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 4 : TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Commission from beta\n");
+            err = TestCommissionFromBeta_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH_CR2 starts a commissioning process with DUT_CE\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCe_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Query fabrics list\n");
+            err = TestQueryFabricsList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Query fabrics list\n");
+            err = TestQueryFabricsList_8();
+            break;
+        case 9:
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 9 : TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_9();
+            break;
+        case 10:
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 10 : TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_10();
+            break;
+        case 11:
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 11 : TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr2WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_11();
+            break;
+        case 12:
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 12 : TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr2ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_12();
+            break;
         }
 
         if (CHIP_NO_ERROR != err)
@@ -111268,11 +112976,13 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 0;
+    const uint16_t mTestCount = 13;
 
     chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::NodeId> mNodeId2;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mDiscriminator;
+    chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<uint16_t> mTimeout;
 
     void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
@@ -111283,9 +112993,351 @@ private:
         NextTest();
     }
 
+    static void OnFailureCallback_3(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_3(error);
+    }
+
+    static void OnSuccessCallback_3(void * context) { (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_3(); }
+
+    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_4(error);
+    }
+
+    static void OnSuccessCallback_4(void * context, chip::CharSpan nodeLabel)
+    {
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_4(nodeLabel);
+    }
+
+    static void OnFailureCallback_7(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_7(error);
+    }
+
+    static void
+    OnSuccessCallback_7(void * context,
+                        const chip::app::DataModel::DecodableList<
+                            chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType> & fabrics)
+    {
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_7(fabrics);
+    }
+
+    static void OnFailureCallback_8(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_8(error);
+    }
+
+    static void
+    OnSuccessCallback_8(void * context,
+                        const chip::app::DataModel::DecodableList<
+                            chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType> & fabrics)
+    {
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_8(fabrics);
+    }
+
+    static void OnFailureCallback_9(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_9(error);
+    }
+
+    static void OnSuccessCallback_9(void * context) { (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_9(); }
+
+    static void OnFailureCallback_10(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_10(error);
+    }
+
+    static void OnSuccessCallback_10(void * context, chip::CharSpan nodeLabel)
+    {
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_10(nodeLabel);
+    }
+
+    static void OnFailureCallback_11(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_11(error);
+    }
+
+    static void OnSuccessCallback_11(void * context) { (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_11(); }
+
+    static void OnFailureCallback_12(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_12(error);
+    }
+
+    static void OnSuccessCallback_12(void * context, chip::CharSpan nodeLabel)
+    {
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_12(nodeLabel);
+    }
+
     //
     // Tests methods
     //
+
+    CHIP_ERROR TestRebootTargetDevice_0()
+    {
+        SetIdentity(kIdentityAlpha);
+        return Reboot(mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U);
+    }
+
+    CHIP_ERROR TestThCr1StartsACommissioningProcessWithDutCe_1()
+    {
+        SetIdentity(kIdentityAlpha);
+        return WaitForCommissionee(1);
+    }
+
+    CHIP_ERROR TestOpenCommissioningWindow_2()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        using RequestType               = chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type;
+
+        RequestType request;
+        request.commissioningTimeout = 120U;
+        request.PAKEVerifier         = chip::ByteSpan(
+            chip::Uint8::from_const_char("\006\307V\337\374\327\042e4R\241-\315\224]\214T\332+\017<\275\033M\303\361\255\262#"
+                                         "\256\262k\004|\322L\226\206o\227\233\035\203\354P\342\264\2560\315\362\375\263+"
+                                         "\330\242\021\2707\334\224\355\315V\364\321Cw\031\020v\277\305\235\231\267\3350S\357\326"
+                                         "\360,D4\362\275\322z\244\371\316\247\015s\216Lgarbage: not in length on purpose"),
+            97);
+        request.discriminator = 3840U;
+        request.iterations    = 1000UL;
+        request.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_2();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_2(error);
+        };
+
+        ReturnErrorOnFailure(
+            chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request, 10000));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_2(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_2() { NextTest(); }
+
+    CHIP_ERROR TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        chip::CharSpan nodeLabelArgument;
+        nodeLabelArgument = chip::Span<const char>("chiptestgarbage: not in length on purpose", 8);
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            nodeLabelArgument, this, OnSuccessCallback_3, OnFailureCallback_3));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_3(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_3() { NextTest(); }
+
+    CHIP_ERROR TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_4()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            this, OnSuccessCallback_4, OnFailureCallback_4, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_4(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_4(chip::CharSpan nodeLabel)
+    {
+        VerifyOrReturn(CheckValueAsString("nodeLabel", nodeLabel, chip::CharSpan("chiptest", 8)));
+        VerifyOrReturn(CheckConstraintType("nodeLabel", "", "string"));
+        VerifyOrReturn(CheckConstraintMaxLength("nodeLabel", nodeLabel.size(), 32));
+        NextTest();
+    }
+
+    CHIP_ERROR TestCommissionFromBeta_5()
+    {
+        SetIdentity(kIdentityBeta);
+        return PairWithQRCode(1, mPayload.HasValue() ? mPayload.Value() : chip::CharSpan::fromCharString("MT:0000000000I31506010"));
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_6()
+    {
+        SetIdentity(kIdentityBeta);
+        return WaitForCommissionee(1);
+    }
+
+    CHIP_ERROR TestQueryFabricsList_7()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::OperationalCredentialsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::OperationalCredentials::Attributes::Fabrics::TypeInfo>(
+            this, OnSuccessCallback_7, OnFailureCallback_7, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_7(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_7(const chip::app::DataModel::DecodableList<
+                             chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType> & fabrics)
+    {
+        {
+            auto iter_0 = fabrics.begin();
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(fabrics)>("fabrics", iter_0, 0));
+            VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+            VerifyOrReturn(CheckNoMoreListItems<decltype(fabrics)>("fabrics", iter_0, 1));
+        }
+        VerifyOrReturn(CheckConstraintType("fabrics", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestQueryFabricsList_8()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::OperationalCredentialsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityBeta], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::OperationalCredentials::Attributes::Fabrics::TypeInfo>(
+            this, OnSuccessCallback_8, OnFailureCallback_8, false));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_8(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_8(const chip::app::DataModel::DecodableList<
+                             chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType> & fabrics)
+    {
+        {
+            auto iter_0 = fabrics.begin();
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(fabrics)>("fabrics", iter_0, 0));
+            VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(fabrics)>("fabrics", iter_0, 1));
+            VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+            VerifyOrReturn(CheckNoMoreListItems<decltype(fabrics)>("fabrics", iter_0, 2));
+        }
+        VerifyOrReturn(CheckConstraintType("fabrics", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_9()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        chip::CharSpan nodeLabelArgument;
+        nodeLabelArgument = chip::Span<const char>("chiptest1garbage: not in length on purpose", 9);
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            nodeLabelArgument, this, OnSuccessCallback_9, OnFailureCallback_9));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_9(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_9() { NextTest(); }
+
+    CHIP_ERROR TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_10()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            this, OnSuccessCallback_10, OnFailureCallback_10, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_10(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_10(chip::CharSpan nodeLabel)
+    {
+        VerifyOrReturn(CheckValueAsString("nodeLabel", nodeLabel, chip::CharSpan("chiptest1", 9)));
+        VerifyOrReturn(CheckConstraintType("nodeLabel", "", "string"));
+        VerifyOrReturn(CheckConstraintMaxLength("nodeLabel", nodeLabel.size(), 32));
+        NextTest();
+    }
+
+    CHIP_ERROR TestThCr2WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_11()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityBeta], endpoint);
+
+        chip::CharSpan nodeLabelArgument;
+        nodeLabelArgument = chip::Span<const char>("chiptest2garbage: not in length on purpose", 9);
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            nodeLabelArgument, this, OnSuccessCallback_11, OnFailureCallback_11));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_11(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_11() { NextTest(); }
+
+    CHIP_ERROR TestThCr2ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_12()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityBeta], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            this, OnSuccessCallback_12, OnFailureCallback_12, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_12(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_12(chip::CharSpan nodeLabel)
+    {
+        VerifyOrReturn(CheckValueAsString("nodeLabel", nodeLabel, chip::CharSpan("chiptest2", 9)));
+        VerifyOrReturn(CheckConstraintType("nodeLabel", "", "string"));
+        VerifyOrReturn(CheckConstraintMaxLength("nodeLabel", nodeLabel.size(), 32));
+        NextTest();
+    }
 };
 
 class Test_TC_MF_1_5Suite : public TestCommand
@@ -113040,81 +115092,6 @@ public:
         if (mTestCount == mTestIndex)
         {
             ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MF_1_28\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++)
-        {
-        }
-
-        if (CHIP_NO_ERROR != err)
-        {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 0;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
-    {
-        bool isExpectedDnssdResult = false;
-
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
-    }
-
-    //
-    // Tests methods
-    //
-};
-
-class Test_TC_MOD_1_1Suite : public TestCommand
-{
-public:
-    Test_TC_MOD_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_MOD_1_1", credsIssuerConfig), mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_MOD_1_1Suite() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex)
-        {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MOD_1_1\n");
-        }
-
-        if (mTestCount == mTestIndex)
-        {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MOD_1_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -116284,9 +118261,12 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_FLW_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_FLW_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_FLW_2_2Suite>(credsIssuerConfig),
+        make_unique<Test_TC_GC_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_I_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_I_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_I_2_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_ILL_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_ILL_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_LVL_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_LVL_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_LVL_2_2Suite>(credsIssuerConfig),
@@ -116329,6 +118309,9 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_MC_7_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_MC_8_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_MC_9_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_MC_10_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_MOD_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_MF_1_4Suite>(credsIssuerConfig),
         make_unique<Test_TC_OCC_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_OCC_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_OCC_2_2Suite>(credsIssuerConfig),
@@ -116463,15 +118446,12 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_DIAG_LOG_1_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_DESC_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_ETHDIAG_1_2Suite>(credsIssuerConfig),
-        make_unique<Test_TC_GC_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_GC_1_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_GC_1_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_GENDIAG_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_GENDIAG_1_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_GENDIAG_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_I_2_2Suite>(credsIssuerConfig),
-        make_unique<Test_TC_I_2_3Suite>(credsIssuerConfig),
-        make_unique<Test_TC_ILL_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_ILL_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_IDM_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_IDM_1_2Suite>(credsIssuerConfig),
@@ -116492,7 +118472,6 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_MC_4_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_MC_8_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_MC_9_2Suite>(credsIssuerConfig),
-        make_unique<Test_TC_MC_10_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_MC_10_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_MC_10_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_MC_10_4Suite>(credsIssuerConfig),
@@ -116500,7 +118479,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_MC_10_6Suite>(credsIssuerConfig),
         make_unique<Test_TC_MF_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_MF_1_2Suite>(credsIssuerConfig),
-        make_unique<Test_TC_MF_1_4Suite>(credsIssuerConfig),
+        make_unique<Test_TC_MF_1_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_MF_1_5Suite>(credsIssuerConfig),
         make_unique<Test_TC_MF_1_6Suite>(credsIssuerConfig),
         make_unique<Test_TC_MF_1_7Suite>(credsIssuerConfig),
@@ -116525,7 +118504,6 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_MF_1_26Suite>(credsIssuerConfig),
         make_unique<Test_TC_MF_1_27Suite>(credsIssuerConfig),
         make_unique<Test_TC_MF_1_28Suite>(credsIssuerConfig),
-        make_unique<Test_TC_MOD_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_MOD_1_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_MOD_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_MOD_2_2Suite>(credsIssuerConfig),
