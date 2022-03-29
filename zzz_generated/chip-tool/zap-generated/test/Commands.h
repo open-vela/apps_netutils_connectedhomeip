@@ -103359,40 +103359,44 @@ public:
             err = TestKeySetRead_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Write Group Keys\n");
-            err = TestWriteGroupKeys_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Write Group Keys (invalid)\n");
+            err = TestWriteGroupKeysInvalid_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Read Group Keys\n");
-            err = TestReadGroupKeys_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Write Group Keys\n");
+            err = TestWriteGroupKeys_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Read GroupTable\n");
-            err = TestReadGroupTable_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Read Group Keys\n");
+            err = TestReadGroupKeys_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : KeySet Remove 1\n");
-            err = TestKeySetRemove1_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Read GroupTable\n");
+            err = TestReadGroupTable_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : KeySet Read (removed)\n");
-            err = TestKeySetReadRemoved_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : KeySet Remove 1\n");
+            err = TestKeySetRemove1_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : KeySet Read (not removed)\n");
-            err = TestKeySetReadNotRemoved_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : KeySet Read (removed)\n");
+            err = TestKeySetReadRemoved_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Remove All\n");
-            err = TestRemoveAll_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : KeySet Read (not removed)\n");
+            err = TestKeySetReadNotRemoved_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : KeySet Remove 2\n");
-            err = TestKeySetRemove2_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Remove All\n");
+            err = TestRemoveAll_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : KeySet Read (also removed)\n");
-            err = TestKeySetReadAlsoRemoved_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : KeySet Remove 2\n");
+            err = TestKeySetRemove2_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : KeySet Read (also removed)\n");
+            err = TestKeySetReadAlsoRemoved_17();
             break;
         }
 
@@ -103410,7 +103414,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 17;
+    const uint16_t mTestCount = 18;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -103460,12 +103464,9 @@ private:
         (static_cast<TestGroupKeyManagementClusterSuite *>(context))->OnFailureResponse_9(error);
     }
 
-    static void
-    OnSuccessCallback_9(void * context,
-                        const chip::app::DataModel::DecodableList<
-                            chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::DecodableType> & groupKeyMap)
+    static void OnSuccessCallback_9(void * context)
     {
-        (static_cast<TestGroupKeyManagementClusterSuite *>(context))->OnSuccessResponse_9(groupKeyMap);
+        (static_cast<TestGroupKeyManagementClusterSuite *>(context))->OnSuccessResponse_9();
     }
 
     static void OnFailureCallback_10(void * context, CHIP_ERROR error)
@@ -103476,9 +103477,22 @@ private:
     static void
     OnSuccessCallback_10(void * context,
                          const chip::app::DataModel::DecodableList<
+                             chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::DecodableType> & groupKeyMap)
+    {
+        (static_cast<TestGroupKeyManagementClusterSuite *>(context))->OnSuccessResponse_10(groupKeyMap);
+    }
+
+    static void OnFailureCallback_11(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestGroupKeyManagementClusterSuite *>(context))->OnFailureResponse_11(error);
+    }
+
+    static void
+    OnSuccessCallback_11(void * context,
+                         const chip::app::DataModel::DecodableList<
                              chip::app::Clusters::GroupKeyManagement::Structs::GroupInfoMapStruct::DecodableType> & groupTable)
     {
-        (static_cast<TestGroupKeyManagementClusterSuite *>(context))->OnSuccessResponse_10(groupTable);
+        (static_cast<TestGroupKeyManagementClusterSuite *>(context))->OnSuccessResponse_11(groupTable);
     }
 
     //
@@ -103759,7 +103773,44 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestWriteGroupKeys_8()
+    CHIP_ERROR TestWriteGroupKeysInvalid_8()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::GroupKeyManagementClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ListFreer listFreer;
+        chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>
+            groupKeyMapArgument;
+
+        {
+            auto * listHolder_0 = new ListHolder<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(1);
+            listFreer.add(listHolder_0);
+
+            listHolder_0->mList[0].groupId       = 258U;
+            listHolder_0->mList[0].groupKeySetID = 0U;
+            listHolder_0->mList[0].fabricIndex   = 1;
+
+            groupKeyMapArgument =
+                chip::app::DataModel::List<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(
+                    listHolder_0->mList, 1);
+        }
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::GroupKeyManagement::Attributes::GroupKeyMap::TypeInfo>(
+            groupKeyMapArgument, this, OnSuccessCallback_8, OnFailureCallback_8));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_8(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+        NextTest();
+    }
+
+    void OnSuccessResponse_8() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR TestWriteGroupKeys_9()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         chip::Controller::GroupKeyManagementClusterTest cluster;
@@ -103787,26 +103838,7 @@ private:
         }
 
         ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::GroupKeyManagement::Attributes::GroupKeyMap::TypeInfo>(
-            groupKeyMapArgument, this, OnSuccessCallback_8, OnFailureCallback_8));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_8(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_8() { NextTest(); }
-
-    CHIP_ERROR TestReadGroupKeys_9()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
-        chip::Controller::GroupKeyManagementClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::GroupKeyManagement::Attributes::GroupKeyMap::TypeInfo>(
-            this, OnSuccessCallback_9, OnFailureCallback_9, true));
+            groupKeyMapArgument, this, OnSuccessCallback_9, OnFailureCallback_9));
         return CHIP_NO_ERROR;
     }
 
@@ -103816,8 +103848,27 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_9(const chip::app::DataModel::DecodableList<
-                             chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::DecodableType> & groupKeyMap)
+    void OnSuccessResponse_9() { NextTest(); }
+
+    CHIP_ERROR TestReadGroupKeys_10()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::GroupKeyManagementClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::GroupKeyManagement::Attributes::GroupKeyMap::TypeInfo>(
+            this, OnSuccessCallback_10, OnFailureCallback_10, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_10(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_10(const chip::app::DataModel::DecodableList<
+                              chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::DecodableType> & groupKeyMap)
     {
         {
             auto iter_0 = groupKeyMap.begin();
@@ -103835,24 +103886,24 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestReadGroupTable_10()
+    CHIP_ERROR TestReadGroupTable_11()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         chip::Controller::GroupKeyManagementClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::GroupKeyManagement::Attributes::GroupTable::TypeInfo>(
-            this, OnSuccessCallback_10, OnFailureCallback_10, true));
+            this, OnSuccessCallback_11, OnFailureCallback_11, true));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_10(CHIP_ERROR error)
+    void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_10(const chip::app::DataModel::DecodableList<
+    void OnSuccessResponse_11(const chip::app::DataModel::DecodableList<
                               chip::app::Clusters::GroupKeyManagement::Structs::GroupInfoMapStruct::DecodableType> & groupTable)
     {
         {
@@ -103875,7 +103926,7 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestKeySetRemove1_11()
+    CHIP_ERROR TestKeySetRemove1_12()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         using RequestType               = chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type;
@@ -103884,35 +103935,7 @@ private:
         request.groupKeySetID = 417U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
-            (static_cast<TestGroupKeyManagementClusterSuite *>(context))->OnSuccessResponse_11();
-        };
-
-        auto failure = [](void * context, CHIP_ERROR error) {
-            (static_cast<TestGroupKeyManagementClusterSuite *>(context))->OnFailureResponse_11(error);
-        };
-
-        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_11(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_11() { NextTest(); }
-
-    CHIP_ERROR TestKeySetReadRemoved_12()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
-        using RequestType               = chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type;
-
-        RequestType request;
-        request.groupKeySetID = 417U;
-
-        auto success = [](void * context, const typename RequestType::ResponseType & data) {
-            (static_cast<TestGroupKeyManagementClusterSuite *>(context))->OnSuccessResponse_12(data.groupKeySet);
+            (static_cast<TestGroupKeyManagementClusterSuite *>(context))->OnSuccessResponse_12();
         };
 
         auto failure = [](void * context, CHIP_ERROR error) {
@@ -103926,23 +103949,18 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
-        NextTest();
+        ThrowFailureResponse();
     }
 
-    void
-    OnSuccessResponse_12(const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeySetStruct::DecodableType & groupKeySet)
-    {
-        ThrowSuccessResponse();
-    }
+    void OnSuccessResponse_12() { NextTest(); }
 
-    CHIP_ERROR TestKeySetReadNotRemoved_13()
+    CHIP_ERROR TestKeySetReadRemoved_13()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         using RequestType               = chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type;
 
         RequestType request;
-        request.groupKeySetID = 418U;
+        request.groupKeySetID = 417U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
             (static_cast<TestGroupKeyManagementClusterSuite *>(context))->OnSuccessResponse_13(data.groupKeySet);
@@ -103959,36 +103977,26 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+        NextTest();
     }
 
     void
     OnSuccessResponse_13(const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeySetStruct::DecodableType & groupKeySet)
     {
-        VerifyOrReturn(CheckValue("groupKeySet.groupKeySetID", groupKeySet.groupKeySetID, 418U));
-        VerifyOrReturn(CheckValue("groupKeySet.groupKeySecurityPolicy", groupKeySet.groupKeySecurityPolicy, 1));
-        VerifyOrReturn(CheckValueNull("groupKeySet.epochKey0", groupKeySet.epochKey0));
-        VerifyOrReturn(CheckValueNonNull("groupKeySet.epochStartTime0", groupKeySet.epochStartTime0));
-        VerifyOrReturn(CheckValue("groupKeySet.epochStartTime0.Value()", groupKeySet.epochStartTime0.Value(), 2110000ULL));
-        VerifyOrReturn(CheckValueNull("groupKeySet.epochKey1", groupKeySet.epochKey1));
-        VerifyOrReturn(CheckValueNonNull("groupKeySet.epochStartTime1", groupKeySet.epochStartTime1));
-        VerifyOrReturn(CheckValue("groupKeySet.epochStartTime1.Value()", groupKeySet.epochStartTime1.Value(), 2110001ULL));
-        VerifyOrReturn(CheckValueNull("groupKeySet.epochKey2", groupKeySet.epochKey2));
-        VerifyOrReturn(CheckValueNonNull("groupKeySet.epochStartTime2", groupKeySet.epochStartTime2));
-        VerifyOrReturn(CheckValue("groupKeySet.epochStartTime2.Value()", groupKeySet.epochStartTime2.Value(), 2110002ULL));
-
-        NextTest();
+        ThrowSuccessResponse();
     }
 
-    CHIP_ERROR TestRemoveAll_14()
+    CHIP_ERROR TestKeySetReadNotRemoved_14()
     {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        using RequestType               = chip::app::Clusters::Groups::Commands::RemoveAllGroups::Type;
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        using RequestType               = chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type;
 
         RequestType request;
+        request.groupKeySetID = 418U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
-            (static_cast<TestGroupKeyManagementClusterSuite *>(context))->OnSuccessResponse_14();
+            (static_cast<TestGroupKeyManagementClusterSuite *>(context))->OnSuccessResponse_14(data.groupKeySet);
         };
 
         auto failure = [](void * context, CHIP_ERROR error) {
@@ -104005,15 +104013,30 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_14() { NextTest(); }
-
-    CHIP_ERROR TestKeySetRemove2_15()
+    void
+    OnSuccessResponse_14(const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeySetStruct::DecodableType & groupKeySet)
     {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
-        using RequestType               = chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type;
+        VerifyOrReturn(CheckValue("groupKeySet.groupKeySetID", groupKeySet.groupKeySetID, 418U));
+        VerifyOrReturn(CheckValue("groupKeySet.groupKeySecurityPolicy", groupKeySet.groupKeySecurityPolicy, 1));
+        VerifyOrReturn(CheckValueNull("groupKeySet.epochKey0", groupKeySet.epochKey0));
+        VerifyOrReturn(CheckValueNonNull("groupKeySet.epochStartTime0", groupKeySet.epochStartTime0));
+        VerifyOrReturn(CheckValue("groupKeySet.epochStartTime0.Value()", groupKeySet.epochStartTime0.Value(), 2110000ULL));
+        VerifyOrReturn(CheckValueNull("groupKeySet.epochKey1", groupKeySet.epochKey1));
+        VerifyOrReturn(CheckValueNonNull("groupKeySet.epochStartTime1", groupKeySet.epochStartTime1));
+        VerifyOrReturn(CheckValue("groupKeySet.epochStartTime1.Value()", groupKeySet.epochStartTime1.Value(), 2110001ULL));
+        VerifyOrReturn(CheckValueNull("groupKeySet.epochKey2", groupKeySet.epochKey2));
+        VerifyOrReturn(CheckValueNonNull("groupKeySet.epochStartTime2", groupKeySet.epochStartTime2));
+        VerifyOrReturn(CheckValue("groupKeySet.epochStartTime2.Value()", groupKeySet.epochStartTime2.Value(), 2110002ULL));
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestRemoveAll_15()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::Groups::Commands::RemoveAllGroups::Type;
 
         RequestType request;
-        request.groupKeySetID = 418U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
             (static_cast<TestGroupKeyManagementClusterSuite *>(context))->OnSuccessResponse_15();
@@ -104035,16 +104058,16 @@ private:
 
     void OnSuccessResponse_15() { NextTest(); }
 
-    CHIP_ERROR TestKeySetReadAlsoRemoved_16()
+    CHIP_ERROR TestKeySetRemove2_16()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
-        using RequestType               = chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type;
+        using RequestType               = chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type;
 
         RequestType request;
         request.groupKeySetID = 418U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
-            (static_cast<TestGroupKeyManagementClusterSuite *>(context))->OnSuccessResponse_16(data.groupKeySet);
+            (static_cast<TestGroupKeyManagementClusterSuite *>(context))->OnSuccessResponse_16();
         };
 
         auto failure = [](void * context, CHIP_ERROR error) {
@@ -104058,12 +104081,40 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_16() { NextTest(); }
+
+    CHIP_ERROR TestKeySetReadAlsoRemoved_17()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        using RequestType               = chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type;
+
+        RequestType request;
+        request.groupKeySetID = 418U;
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<TestGroupKeyManagementClusterSuite *>(context))->OnSuccessResponse_17(data.groupKeySet);
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<TestGroupKeyManagementClusterSuite *>(context))->OnFailureResponse_17(error);
+        };
+
+        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_17(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
         VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
         NextTest();
     }
 
     void
-    OnSuccessResponse_16(const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeySetStruct::DecodableType & groupKeySet)
+    OnSuccessResponse_17(const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeySetStruct::DecodableType & groupKeySet)
     {
         ThrowSuccessResponse();
     }
