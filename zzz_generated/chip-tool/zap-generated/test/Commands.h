@@ -33068,7 +33068,7 @@ private:
         using RequestType = chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type;
 
         RequestType request;
-        request.commissioningTimeout = 120U;
+        request.commissioningTimeout = 180U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
             (static_cast<Test_TC_MF_1_4Suite *>(context))->OnSuccessResponse_2();
@@ -112973,60 +112973,68 @@ public:
             err = TestThCr1StartsACommissioningProcessWithDutCe_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Open Commissioning Window\n");
-            err = TestOpenCommissioningWindow_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Open Commissioning Window with too-short timeout\n");
+            err = TestOpenCommissioningWindowWithTooShortTimeout_2();
             break;
         case 3:
-            ChipLogProgress(
-                chipTool,
-                " ***** Test Step 3 : TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
-            err = TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Open Commissioning Window with too-long timeout\n");
+            err = TestOpenCommissioningWindowWithTooLongTimeout_3();
             break;
         case 4:
-            ChipLogProgress(
-                chipTool,
-                " ***** Test Step 4 : TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
-            err = TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Open Commissioning Window\n");
+            err = TestOpenCommissioningWindow_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Commission from beta\n");
-            err = TestCommissionFromBeta_5();
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 5 : TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : TH_CR2 starts a commissioning process with DUT_CE\n");
-            err = TestThCr2StartsACommissioningProcessWithDutCe_6();
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 6 : TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Query fabrics list\n");
-            err = TestQueryFabricsList_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Commission from beta\n");
+            err = TestCommissionFromBeta_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Query fabrics list\n");
-            err = TestQueryFabricsList_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH_CR2 starts a commissioning process with DUT_CE\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCe_8();
             break;
         case 9:
-            ChipLogProgress(
-                chipTool,
-                " ***** Test Step 9 : TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
-            err = TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Query fabrics list\n");
+            err = TestQueryFabricsList_9();
             break;
         case 10:
-            ChipLogProgress(
-                chipTool,
-                " ***** Test Step 10 : TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
-            err = TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Query fabrics list\n");
+            err = TestQueryFabricsList_10();
             break;
         case 11:
             ChipLogProgress(
                 chipTool,
-                " ***** Test Step 11 : TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
-            err = TestThCr2WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_11();
+                " ***** Test Step 11 : TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_11();
             break;
         case 12:
             ChipLogProgress(
                 chipTool,
-                " ***** Test Step 12 : TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
-            err = TestThCr2ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_12();
+                " ***** Test Step 12 : TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_12();
+            break;
+        case 13:
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 13 : TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr2WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_13();
+            break;
+        case 14:
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 14 : TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr2ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_14();
             break;
         }
 
@@ -113044,7 +113052,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 13;
+    const uint16_t mTestCount = 15;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::NodeId> mNodeId2;
@@ -113061,47 +113069,21 @@ private:
         NextTest();
     }
 
-    static void OnFailureCallback_3(void * context, CHIP_ERROR error)
+    static void OnFailureCallback_5(void * context, CHIP_ERROR error)
     {
-        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_3(error);
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_5(error);
     }
 
-    static void OnSuccessCallback_3(void * context) { (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_3(); }
+    static void OnSuccessCallback_5(void * context) { (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_5(); }
 
-    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
+    static void OnFailureCallback_6(void * context, CHIP_ERROR error)
     {
-        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_4(error);
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_6(error);
     }
 
-    static void OnSuccessCallback_4(void * context, chip::CharSpan nodeLabel)
+    static void OnSuccessCallback_6(void * context, chip::CharSpan nodeLabel)
     {
-        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_4(nodeLabel);
-    }
-
-    static void OnFailureCallback_7(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_7(error);
-    }
-
-    static void
-    OnSuccessCallback_7(void * context,
-                        const chip::app::DataModel::DecodableList<
-                            chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType> & fabrics)
-    {
-        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_7(fabrics);
-    }
-
-    static void OnFailureCallback_8(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_8(error);
-    }
-
-    static void
-    OnSuccessCallback_8(void * context,
-                        const chip::app::DataModel::DecodableList<
-                            chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType> & fabrics)
-    {
-        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_8(fabrics);
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_6(nodeLabel);
     }
 
     static void OnFailureCallback_9(void * context, CHIP_ERROR error)
@@ -113109,16 +113091,25 @@ private:
         (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_9(error);
     }
 
-    static void OnSuccessCallback_9(void * context) { (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_9(); }
+    static void
+    OnSuccessCallback_9(void * context,
+                        const chip::app::DataModel::DecodableList<
+                            chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType> & fabrics)
+    {
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_9(fabrics);
+    }
 
     static void OnFailureCallback_10(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_10(error);
     }
 
-    static void OnSuccessCallback_10(void * context, chip::CharSpan nodeLabel)
+    static void
+    OnSuccessCallback_10(void * context,
+                         const chip::app::DataModel::DecodableList<
+                             chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType> & fabrics)
     {
-        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_10(nodeLabel);
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_10(fabrics);
     }
 
     static void OnFailureCallback_11(void * context, CHIP_ERROR error)
@@ -113138,6 +113129,23 @@ private:
         (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_12(nodeLabel);
     }
 
+    static void OnFailureCallback_13(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_13(error);
+    }
+
+    static void OnSuccessCallback_13(void * context) { (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_13(); }
+
+    static void OnFailureCallback_14(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_14(error);
+    }
+
+    static void OnSuccessCallback_14(void * context, chip::CharSpan nodeLabel)
+    {
+        (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_14(nodeLabel);
+    }
+
     //
     // Tests methods
     //
@@ -113154,7 +113162,7 @@ private:
         return WaitForCommissionee(1);
     }
 
-    CHIP_ERROR TestOpenCommissioningWindow_2()
+    CHIP_ERROR TestOpenCommissioningWindowWithTooShortTimeout_2()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         using RequestType               = chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type;
@@ -113187,41 +113195,78 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+        NextTest();
     }
 
-    void OnSuccessResponse_2() { NextTest(); }
+    void OnSuccessResponse_2() { ThrowSuccessResponse(); }
 
-    CHIP_ERROR TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_3()
+    CHIP_ERROR TestOpenCommissioningWindowWithTooLongTimeout_3()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
-        chip::Controller::BasicClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+        using RequestType               = chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type;
 
-        chip::CharSpan nodeLabelArgument;
-        nodeLabelArgument = chip::Span<const char>("chiptestgarbage: not in length on purpose", 8);
+        RequestType request;
+        request.commissioningTimeout = 1000U;
+        request.PAKEVerifier         = chip::ByteSpan(
+            chip::Uint8::from_const_char("\006\307V\337\374\327\042e4R\241-\315\224]\214T\332+\017<\275\033M\303\361\255\262#"
+                                         "\256\262k\004|\322L\226\206o\227\233\035\203\354P\342\264\2560\315\362\375\263+"
+                                         "\330\242\021\2707\334\224\355\315V\364\321Cw\031\020v\277\305\235\231\267\3350S\357\326"
+                                         "\360,D4\362\275\322z\244\371\316\247\015s\216Lgarbage: not in length on purpose"),
+            97);
+        request.discriminator = 3840U;
+        request.iterations    = 1000UL;
+        request.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
 
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
-            nodeLabelArgument, this, OnSuccessCallback_3, OnFailureCallback_3));
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_3();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_3(error);
+        };
+
+        ReturnErrorOnFailure(
+            chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request, 10000));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+        NextTest();
     }
 
-    void OnSuccessResponse_3() { NextTest(); }
+    void OnSuccessResponse_3() { ThrowSuccessResponse(); }
 
-    CHIP_ERROR TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_4()
+    CHIP_ERROR TestOpenCommissioningWindow_4()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
-        chip::Controller::BasicClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+        using RequestType               = chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type;
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
-            this, OnSuccessCallback_4, OnFailureCallback_4, true));
+        RequestType request;
+        request.commissioningTimeout = 180U;
+        request.PAKEVerifier         = chip::ByteSpan(
+            chip::Uint8::from_const_char("\006\307V\337\374\327\042e4R\241-\315\224]\214T\332+\017<\275\033M\303\361\255\262#"
+                                         "\256\262k\004|\322L\226\206o\227\233\035\203\354P\342\264\2560\315\362\375\263+"
+                                         "\330\242\021\2707\334\224\355\315V\364\321Cw\031\020v\277\305\235\231\267\3350S\357\326"
+                                         "\360,D4\362\275\322z\244\371\316\247\015s\216Lgarbage: not in length on purpose"),
+            97);
+        request.discriminator = 3840U;
+        request.iterations    = 1000UL;
+        request.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_MF_1_3Suite *>(context))->OnSuccessResponse_4();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_MF_1_3Suite *>(context))->OnFailureResponse_4(error);
+        };
+
+        ReturnErrorOnFailure(
+            chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request, 10000));
         return CHIP_NO_ERROR;
     }
 
@@ -113231,7 +113276,48 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_4(chip::CharSpan nodeLabel)
+    void OnSuccessResponse_4() { NextTest(); }
+
+    CHIP_ERROR TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_5()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        chip::CharSpan nodeLabelArgument;
+        nodeLabelArgument = chip::Span<const char>("chiptestgarbage: not in length on purpose", 8);
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            nodeLabelArgument, this, OnSuccessCallback_5, OnFailureCallback_5));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_5(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_5() { NextTest(); }
+
+    CHIP_ERROR TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_6()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            this, OnSuccessCallback_6, OnFailureCallback_6, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_6(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_6(chip::CharSpan nodeLabel)
     {
         VerifyOrReturn(CheckValueAsString("nodeLabel", nodeLabel, chip::CharSpan("chiptest", 8)));
         VerifyOrReturn(CheckConstraintType("nodeLabel", "", "string"));
@@ -113239,36 +113325,36 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestCommissionFromBeta_5()
+    CHIP_ERROR TestCommissionFromBeta_7()
     {
         SetIdentity(kIdentityBeta);
         return PairWithQRCode(1, mPayload.HasValue() ? mPayload.Value() : chip::CharSpan::fromCharString("MT:0000000000I31506010"));
     }
 
-    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_6()
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_8()
     {
         SetIdentity(kIdentityBeta);
         return WaitForCommissionee(1);
     }
 
-    CHIP_ERROR TestQueryFabricsList_7()
+    CHIP_ERROR TestQueryFabricsList_9()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         chip::Controller::OperationalCredentialsClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::OperationalCredentials::Attributes::Fabrics::TypeInfo>(
-            this, OnSuccessCallback_7, OnFailureCallback_7, true));
+            this, OnSuccessCallback_9, OnFailureCallback_9, true));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_7(CHIP_ERROR error)
+    void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_7(const chip::app::DataModel::DecodableList<
+    void OnSuccessResponse_9(const chip::app::DataModel::DecodableList<
                              chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType> & fabrics)
     {
         {
@@ -113281,25 +113367,25 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestQueryFabricsList_8()
+    CHIP_ERROR TestQueryFabricsList_10()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         chip::Controller::OperationalCredentialsClusterTest cluster;
         cluster.Associate(mDevices[kIdentityBeta], endpoint);
 
         ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::OperationalCredentials::Attributes::Fabrics::TypeInfo>(
-            this, OnSuccessCallback_8, OnFailureCallback_8, false));
+            this, OnSuccessCallback_10, OnFailureCallback_10, false));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_8(CHIP_ERROR error)
+    void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_8(const chip::app::DataModel::DecodableList<
-                             chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType> & fabrics)
+    void OnSuccessResponse_10(const chip::app::DataModel::DecodableList<
+                              chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType> & fabrics)
     {
         {
             auto iter_0 = fabrics.begin();
@@ -113313,7 +113399,7 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_9()
+    CHIP_ERROR TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_11()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         chip::Controller::BasicClusterTest cluster;
@@ -113321,53 +113407,6 @@ private:
 
         chip::CharSpan nodeLabelArgument;
         nodeLabelArgument = chip::Span<const char>("chiptest1garbage: not in length on purpose", 9);
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
-            nodeLabelArgument, this, OnSuccessCallback_9, OnFailureCallback_9));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_9(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_9() { NextTest(); }
-
-    CHIP_ERROR TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_10()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
-        chip::Controller::BasicClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
-            this, OnSuccessCallback_10, OnFailureCallback_10, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_10(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_10(chip::CharSpan nodeLabel)
-    {
-        VerifyOrReturn(CheckValueAsString("nodeLabel", nodeLabel, chip::CharSpan("chiptest1", 9)));
-        VerifyOrReturn(CheckConstraintType("nodeLabel", "", "string"));
-        VerifyOrReturn(CheckConstraintMaxLength("nodeLabel", nodeLabel.size(), 32));
-        NextTest();
-    }
-
-    CHIP_ERROR TestThCr2WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_11()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
-        chip::Controller::BasicClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityBeta], endpoint);
-
-        chip::CharSpan nodeLabelArgument;
-        nodeLabelArgument = chip::Span<const char>("chiptest2garbage: not in length on purpose", 9);
 
         ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
             nodeLabelArgument, this, OnSuccessCallback_11, OnFailureCallback_11));
@@ -113382,11 +113421,11 @@ private:
 
     void OnSuccessResponse_11() { NextTest(); }
 
-    CHIP_ERROR TestThCr2ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_12()
+    CHIP_ERROR TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_12()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         chip::Controller::BasicClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityBeta], endpoint);
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
             this, OnSuccessCallback_12, OnFailureCallback_12, true));
@@ -113400,6 +113439,53 @@ private:
     }
 
     void OnSuccessResponse_12(chip::CharSpan nodeLabel)
+    {
+        VerifyOrReturn(CheckValueAsString("nodeLabel", nodeLabel, chip::CharSpan("chiptest1", 9)));
+        VerifyOrReturn(CheckConstraintType("nodeLabel", "", "string"));
+        VerifyOrReturn(CheckConstraintMaxLength("nodeLabel", nodeLabel.size(), 32));
+        NextTest();
+    }
+
+    CHIP_ERROR TestThCr2WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_13()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityBeta], endpoint);
+
+        chip::CharSpan nodeLabelArgument;
+        nodeLabelArgument = chip::Span<const char>("chiptest2garbage: not in length on purpose", 9);
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            nodeLabelArgument, this, OnSuccessCallback_13, OnFailureCallback_13));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_13(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_13() { NextTest(); }
+
+    CHIP_ERROR TestThCr2ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_14()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityBeta], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            this, OnSuccessCallback_14, OnFailureCallback_14, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_14(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_14(chip::CharSpan nodeLabel)
     {
         VerifyOrReturn(CheckValueAsString("nodeLabel", nodeLabel, chip::CharSpan("chiptest2", 9)));
         VerifyOrReturn(CheckConstraintType("nodeLabel", "", "string"));
