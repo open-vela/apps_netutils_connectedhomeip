@@ -139,6 +139,7 @@ public:
         printf("Test_TC_PCC_2_2\n");
         printf("Test_TC_PCC_2_3\n");
         printf("Test_TC_PCC_2_4\n");
+        printf("Test_TC_PSCFG_1_1\n");
         printf("Test_TC_RH_1_1\n");
         printf("Test_TC_RH_2_1\n");
         printf("Test_TC_RH_2_2\n");
@@ -156,6 +157,7 @@ public:
         printf("Test_TC_TSUIC_2_2\n");
         printf("Test_TC_DIAG_TH_NW_1_1\n");
         printf("Test_TC_DIAG_TH_NW_1_2\n");
+        printf("Test_TC_LC_1_2\n");
         printf("Test_TC_WIFIDIAG_1_1\n");
         printf("Test_TC_WIFIDIAG_3_1\n");
         printf("Test_TC_WNCV_1_1\n");
@@ -207,6 +209,7 @@ public:
         printf("DL_UsersAndCredentials\n");
         printf("DL_LockUnlock\n");
         printf("DL_Schedules\n");
+        printf("Test_TC_DL_1_3\n");
         printf("TestGroupMessaging\n");
         printf("TestGroupsCluster\n");
         printf("TestGroupKeyManagementCluster\n");
@@ -346,7 +349,6 @@ public:
         printf("Test_TC_SU_3_4\n");
         printf("Test_TC_SU_4_1\n");
         printf("Test_TC_SU_4_2\n");
-        printf("Test_TC_PSCFG_1_1\n");
         printf("Test_TC_PSCFG_2_1\n");
         printf("Test_TC_PSCFG_3_1\n");
         printf("Test_TC_SC_4_5\n");
@@ -42158,6 +42160,246 @@ private:
     }
 };
 
+class Test_TC_PSCFG_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_PSCFG_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_PSCFG_1_1", credsIssuerConfig), mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_PSCFG_1_1Suite() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_PSCFG_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_PSCFG_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++)
+        {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Commission DUT to TH\n");
+            err = TestCommissionDutToTh_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads the ClusterRevision attribute from the DUT\n");
+            err = TestThReadsTheClusterRevisionAttributeFromTheDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads the AttributeList attribute from the DUT\n");
+            err = TestThReadsTheAttributeListAttributeFromTheDut_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads the AcceptedCommandList attribute from the DUT\n");
+            err = TestThReadsTheAcceptedCommandListAttributeFromTheDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads the GeneratedCommandList attribute from the DUT\n");
+            err = TestThReadsTheGeneratedCommandListAttributeFromTheDut_4();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err)
+        {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 5;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    {
+        bool isExpectedDnssdResult = false;
+
+        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
+        NextTest();
+    }
+
+    static void OnFailureCallback_1(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_PSCFG_1_1Suite *>(context))->OnFailureResponse_1(error);
+    }
+
+    static void OnSuccessCallback_1(void * context, uint16_t clusterRevision)
+    {
+        (static_cast<Test_TC_PSCFG_1_1Suite *>(context))->OnSuccessResponse_1(clusterRevision);
+    }
+
+    static void OnFailureCallback_2(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_PSCFG_1_1Suite *>(context))->OnFailureResponse_2(error);
+    }
+
+    static void OnSuccessCallback_2(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    {
+        (static_cast<Test_TC_PSCFG_1_1Suite *>(context))->OnSuccessResponse_2(attributeList);
+    }
+
+    static void OnFailureCallback_3(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_PSCFG_1_1Suite *>(context))->OnFailureResponse_3(error);
+    }
+
+    static void OnSuccessCallback_3(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
+    {
+        (static_cast<Test_TC_PSCFG_1_1Suite *>(context))->OnSuccessResponse_3(acceptedCommandList);
+    }
+
+    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_PSCFG_1_1Suite *>(context))->OnFailureResponse_4(error);
+    }
+
+    static void OnSuccessCallback_4(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
+    {
+        (static_cast<Test_TC_PSCFG_1_1Suite *>(context))->OnSuccessResponse_4(generatedCommandList);
+    }
+
+    //
+    // Tests methods
+    //
+
+    CHIP_ERROR TestCommissionDutToTh_0()
+    {
+        SetIdentity(kIdentityAlpha);
+        return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+    }
+
+    CHIP_ERROR TestThReadsTheClusterRevisionAttributeFromTheDut_1()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::PowerSourceConfigurationClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::PowerSourceConfiguration::Attributes::ClusterRevision::TypeInfo>(
+                this, OnSuccessCallback_1, OnFailureCallback_1, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_1(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_1(uint16_t clusterRevision)
+    {
+        VerifyOrReturn(CheckValue("clusterRevision", clusterRevision, 1U));
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestThReadsTheAttributeListAttributeFromTheDut_2()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::PowerSourceConfigurationClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::PowerSourceConfiguration::Attributes::AttributeList::TypeInfo>(
+                this, OnSuccessCallback_2, OnFailureCallback_2, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_2(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_2(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
+    {
+        VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestThReadsTheAcceptedCommandListAttributeFromTheDut_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::PowerSourceConfigurationClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::PowerSourceConfiguration::Attributes::AcceptedCommandList::TypeInfo>(
+                this, OnSuccessCallback_3, OnFailureCallback_3, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_3(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
+    {
+        VerifyOrReturn(CheckConstraintType("acceptedCommandList", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestThReadsTheGeneratedCommandListAttributeFromTheDut_4()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::PowerSourceConfigurationClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::PowerSourceConfiguration::Attributes::GeneratedCommandList::TypeInfo>(
+                this, OnSuccessCallback_4, OnFailureCallback_4, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_4(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
+    {
+        VerifyOrReturn(CheckConstraintType("generatedCommandList", "", "list"));
+        NextTest();
+    }
+};
+
 class Test_TC_RH_1_1Suite : public TestCommand
 {
 public:
@@ -53114,6 +53356,130 @@ private:
     void OnSuccessResponse_101(uint32_t delay)
     {
         VerifyOrReturn(CheckConstraintType("delay", "", "uint32"));
+        NextTest();
+    }
+};
+
+class Test_TC_LC_1_2Suite : public TestCommand
+{
+public:
+    Test_TC_LC_1_2Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_LC_1_2", credsIssuerConfig), mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_LC_1_2Suite() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_LC_1_2\n");
+        }
+
+        if (mTestCount == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_LC_1_2\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++)
+        {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH1 reads LabelList attribute from the DUT\n");
+            err = TestTh1ReadsLabelListAttributeFromTheDut_1();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err)
+        {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 2;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    {
+        bool isExpectedDnssdResult = false;
+
+        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
+        NextTest();
+    }
+
+    static void OnFailureCallback_1(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_LC_1_2Suite *>(context))->OnFailureResponse_1(error);
+    }
+
+    static void OnSuccessCallback_1(
+        void * context,
+        const chip::app::DataModel::DecodableList<chip::app::Clusters::UserLabel::Structs::LabelStruct::DecodableType> & labelList)
+    {
+        (static_cast<Test_TC_LC_1_2Suite *>(context))->OnSuccessResponse_1(labelList);
+    }
+
+    //
+    // Tests methods
+    //
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        SetIdentity(kIdentityAlpha);
+        return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+    }
+
+    CHIP_ERROR TestTh1ReadsLabelListAttributeFromTheDut_1()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::UserLabelClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::UserLabel::Attributes::LabelList::TypeInfo>(
+            this, OnSuccessCallback_1, OnFailureCallback_1, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_1(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_1(
+        const chip::app::DataModel::DecodableList<chip::app::Clusters::UserLabel::Structs::LabelStruct::DecodableType> & labelList)
+    {
         NextTest();
     }
 };
@@ -103817,6 +104183,371 @@ private:
     }
 };
 
+class Test_TC_DL_1_3Suite : public TestCommand
+{
+public:
+    Test_TC_DL_1_3Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_DL_1_3", credsIssuerConfig), mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_DL_1_3Suite() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DL_1_3\n");
+        }
+
+        if (mTestCount == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DL_1_3\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++)
+        {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Create new PIN credential and lock/unlock user\n");
+            err = TestCreateNewPinCredentialAndLockUnlockUser_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Precondition: Door is in locked state\n");
+            err = TestPreconditionDoorIsInLockedState_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH writes AutoRelockTime attribute value as 10 seconds on the DUT\n");
+            err = TestThWritesAutoRelockTimeAttributeValueAs10SecondsOnTheDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH sends the unlock Door command to the DUT with valid PINCode\n");
+            err = TestThSendsTheUnlockDoorCommandToTheDutWithValidPINCode_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads AutoRelockTime attribute from DUT\n");
+            err = TestThReadsAutoRelockTimeAttributeFromDut_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Wait 10000ms\n");
+            err = TestWait10000ms_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads LockState attriute\n");
+            err = TestThReadsLockStateAttriute_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Clean the created credential\n");
+            err = TestCleanTheCreatedCredential_8();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err)
+        {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 9;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    {
+        bool isExpectedDnssdResult = false;
+
+        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
+        NextTest();
+    }
+
+    static void OnFailureCallback_3(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_DL_1_3Suite *>(context))->OnFailureResponse_3(error);
+    }
+
+    static void OnSuccessCallback_3(void * context) { (static_cast<Test_TC_DL_1_3Suite *>(context))->OnSuccessResponse_3(); }
+
+    static void OnFailureCallback_5(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_DL_1_3Suite *>(context))->OnFailureResponse_5(error);
+    }
+
+    static void OnSuccessCallback_5(void * context, uint32_t autoRelockTime)
+    {
+        (static_cast<Test_TC_DL_1_3Suite *>(context))->OnSuccessResponse_5(autoRelockTime);
+    }
+
+    static void OnFailureCallback_7(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_DL_1_3Suite *>(context))->OnFailureResponse_7(error);
+    }
+
+    static void OnSuccessCallback_7(void * context,
+                                    const chip::app::DataModel::Nullable<chip::app::Clusters::DoorLock::DlLockState> & lockState)
+    {
+        (static_cast<Test_TC_DL_1_3Suite *>(context))->OnSuccessResponse_7(lockState);
+    }
+
+    //
+    // Tests methods
+    //
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        SetIdentity(kIdentityAlpha);
+        return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialAndLockUnlockUser_1()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::DoorLock::Commands::SetCredential::Type;
+
+        RequestType request;
+        request.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+
+        request.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+        request.credential.credentialIndex = 1U;
+
+        request.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+        request.userIndex.SetNull();
+        request.userStatus.SetNull();
+        request.userType.SetNull();
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_DL_1_3Suite *>(context))
+                ->OnSuccessResponse_1(data.status, data.userIndex, data.nextCredentialIndex);
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_DL_1_3Suite *>(context))->OnFailureResponse_1(error);
+        };
+
+        ReturnErrorOnFailure(
+            chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request, 10000));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_1(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_1(chip::app::Clusters::DoorLock::DlStatus status,
+                             const chip::app::DataModel::Nullable<uint16_t> & userIndex,
+                             const chip::app::DataModel::Nullable<uint16_t> & nextCredentialIndex)
+    {
+        VerifyOrReturn(CheckValue("status", status, 0));
+
+        VerifyOrReturn(CheckValueNonNull("userIndex", userIndex));
+        VerifyOrReturn(CheckValue("userIndex.Value()", userIndex.Value(), 1U));
+
+        VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", nextCredentialIndex));
+        VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", nextCredentialIndex.Value(), 2U));
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestPreconditionDoorIsInLockedState_2()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::DoorLock::Commands::LockDoor::Type;
+
+        RequestType request;
+        request.pinCode.Emplace();
+        request.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_DL_1_3Suite *>(context))->OnSuccessResponse_2();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_DL_1_3Suite *>(context))->OnFailureResponse_2(error);
+        };
+
+        ReturnErrorOnFailure(
+            chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request, 10000));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_2(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_2() { NextTest(); }
+
+    CHIP_ERROR TestThWritesAutoRelockTimeAttributeValueAs10SecondsOnTheDut_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::DoorLockClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        uint32_t autoRelockTimeArgument;
+        autoRelockTimeArgument = 10UL;
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::DoorLock::Attributes::AutoRelockTime::TypeInfo>(
+            autoRelockTimeArgument, this, OnSuccessCallback_3, OnFailureCallback_3));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_3(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_3() { NextTest(); }
+
+    CHIP_ERROR TestThSendsTheUnlockDoorCommandToTheDutWithValidPINCode_4()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type;
+
+        RequestType request;
+        request.pinCode.Emplace();
+        request.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_DL_1_3Suite *>(context))->OnSuccessResponse_4();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_DL_1_3Suite *>(context))->OnFailureResponse_4(error);
+        };
+
+        ReturnErrorOnFailure(
+            chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request, 10000));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_4(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_4() { NextTest(); }
+
+    CHIP_ERROR TestThReadsAutoRelockTimeAttributeFromDut_5()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::DoorLockClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::DoorLock::Attributes::AutoRelockTime::TypeInfo>(
+            this, OnSuccessCallback_5, OnFailureCallback_5, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_5(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_5(uint32_t autoRelockTime)
+    {
+        VerifyOrReturn(CheckValue("autoRelockTime", autoRelockTime, 10UL));
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestWait10000ms_6()
+    {
+        SetIdentity(kIdentityAlpha);
+        return WaitForMs(10000);
+    }
+
+    CHIP_ERROR TestThReadsLockStateAttriute_7()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::DoorLockClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::DoorLock::Attributes::LockState::TypeInfo>(
+            this, OnSuccessCallback_7, OnFailureCallback_7, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_7(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_7(const chip::app::DataModel::Nullable<chip::app::Clusters::DoorLock::DlLockState> & lockState)
+    {
+        VerifyOrReturn(CheckValueNonNull("lockState", lockState));
+        VerifyOrReturn(CheckValue("lockState.Value()", lockState.Value(), 1));
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestCleanTheCreatedCredential_8()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::DoorLock::Commands::ClearCredential::Type;
+
+        RequestType request;
+        request.credential.SetNonNull();
+
+        request.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+        request.credential.Value().credentialIndex = 1U;
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_DL_1_3Suite *>(context))->OnSuccessResponse_8();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_DL_1_3Suite *>(context))->OnFailureResponse_8(error);
+        };
+
+        ReturnErrorOnFailure(
+            chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request, 10000));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_8(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_8() { NextTest(); }
+};
+
 class TestGroupMessagingSuite : public TestCommand
 {
 public:
@@ -116794,81 +117525,6 @@ private:
     //
 };
 
-class Test_TC_PSCFG_1_1Suite : public TestCommand
-{
-public:
-    Test_TC_PSCFG_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_PSCFG_1_1", credsIssuerConfig), mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_PSCFG_1_1Suite() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex)
-        {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_PSCFG_1_1\n");
-        }
-
-        if (mTestCount == mTestIndex)
-        {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_PSCFG_1_1\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++)
-        {
-        }
-
-        if (CHIP_NO_ERROR != err)
-        {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 0;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
-    {
-        bool isExpectedDnssdResult = false;
-
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
-    }
-
-    //
-    // Tests methods
-    //
-};
-
 class Test_TC_PSCFG_2_1Suite : public TestCommand
 {
 public:
@@ -118482,6 +119138,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_PCC_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_PCC_2_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_PCC_2_4Suite>(credsIssuerConfig),
+        make_unique<Test_TC_PSCFG_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_RH_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_RH_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_RH_2_2Suite>(credsIssuerConfig),
@@ -118499,6 +119156,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_TSUIC_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_DIAG_TH_NW_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_DIAG_TH_NW_1_2Suite>(credsIssuerConfig),
+        make_unique<Test_TC_LC_1_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_WIFIDIAG_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_WIFIDIAG_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_WNCV_1_1Suite>(credsIssuerConfig),
@@ -118550,6 +119208,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<DL_UsersAndCredentialsSuite>(credsIssuerConfig),
         make_unique<DL_LockUnlockSuite>(credsIssuerConfig),
         make_unique<DL_SchedulesSuite>(credsIssuerConfig),
+        make_unique<Test_TC_DL_1_3Suite>(credsIssuerConfig),
         make_unique<TestGroupMessagingSuite>(credsIssuerConfig),
         make_unique<TestGroupsClusterSuite>(credsIssuerConfig),
         make_unique<TestGroupKeyManagementClusterSuite>(credsIssuerConfig),
@@ -118678,7 +119337,6 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_SU_3_4Suite>(credsIssuerConfig),
         make_unique<Test_TC_SU_4_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_SU_4_2Suite>(credsIssuerConfig),
-        make_unique<Test_TC_PSCFG_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_PSCFG_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_PSCFG_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_SC_4_5Suite>(credsIssuerConfig),
