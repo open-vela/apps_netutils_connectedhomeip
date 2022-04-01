@@ -91902,52 +91902,81 @@ public:
             err = TestVerifyCurrentModeDoesNotChangeWhenOnModeIsNull_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Change OnMode\n");
-            err = TestChangeOnMode_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Change to Unsupported OnMode\n");
+            err = TestChangeToUnsupportedOnMode_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Verify OnMode\n");
-            err = TestVerifyOnMode_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Change OnMode\n");
+            err = TestChangeOnMode_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Toggle OnOff\n");
-            err = TestToggleOnOff_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Verify OnMode\n");
+            err = TestVerifyOnMode_15();
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : Toggle OnOff\n");
             err = TestToggleOnOff_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Verify Current Mode Changes if OnMode is not null\n");
-            err = TestVerifyCurrentModeChangesIfOnModeIsNotNull_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Toggle OnOff\n");
+            err = TestToggleOnOff_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Change to Unsupported StartUp Mode\n");
-            err = TestChangeToUnsupportedStartUpMode_18();
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Verify Current Mode Changes if OnMode is not null\n");
+            err = TestVerifyCurrentModeChangesIfOnModeIsNotNull_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Change to Supported StartUp Mode\n");
-            err = TestChangeToSupportedStartUpMode_19();
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Change to Unsupported StartUp Mode\n");
+            err = TestChangeToUnsupportedStartUpMode_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Verify StartUp Mode Change\n");
-            err = TestVerifyStartUpModeChange_20();
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Change to Supported StartUp Mode\n");
+            err = TestChangeToSupportedStartUpMode_20();
             break;
         case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : Change CurrentMode to another value\n");
-            err = TestChangeCurrentModeToAnotherValue_21();
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Verify StartUp Mode Change\n");
+            err = TestVerifyStartUpModeChange_21();
             break;
         case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : Reboot target device\n");
-            err = TestRebootTargetDevice_22();
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Change CurrentMode to another value\n");
+            err = TestChangeCurrentModeToAnotherValue_22();
             break;
         case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_23();
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Change On Mode\n");
+            err = TestChangeOnMode_23();
             break;
         case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : Verify Current Mode Change based on new StartUp Mode\n");
-            err = TestVerifyCurrentModeChangeBasedOnNewStartUpMode_24();
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Set StartUpOnOff\n");
+            err = TestSetStartUpOnOff_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Reboot target device\n");
+            err = TestRebootTargetDevice_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 27 : Verify Current Mode Change based on OnMode, as it overwrites StartUpMode\n");
+            err = TestVerifyCurrentModeChangeBasedOnOnModeAsItOverwritesStartUpMode_27();
+            break;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Change On Mode to Null\n");
+            err = TestChangeOnModeToNull_28();
+            break;
+        case 29:
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Reboot target device\n");
+            err = TestRebootTargetDevice_29();
+            break;
+        case 30:
+            ChipLogProgress(chipTool, " ***** Test Step 30 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_30();
+            break;
+        case 31:
+            ChipLogProgress(chipTool, " ***** Test Step 31 : Verify Current Mode Change based on new StartUp Mode\n");
+            err = TestVerifyCurrentModeChangeBasedOnNewStartUpMode_31();
             break;
         }
 
@@ -91965,7 +91994,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 25;
+    const uint16_t mTestCount = 32;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -92082,19 +92111,19 @@ private:
         (static_cast<TestModeSelectClusterSuite *>(context))->OnFailureResponse_14(error);
     }
 
-    static void OnSuccessCallback_14(void * context, const chip::app::DataModel::Nullable<uint8_t> & onMode)
+    static void OnSuccessCallback_14(void * context)
     {
-        (static_cast<TestModeSelectClusterSuite *>(context))->OnSuccessResponse_14(onMode);
+        (static_cast<TestModeSelectClusterSuite *>(context))->OnSuccessResponse_14();
     }
 
-    static void OnFailureCallback_17(void * context, CHIP_ERROR error)
+    static void OnFailureCallback_15(void * context, CHIP_ERROR error)
     {
-        (static_cast<TestModeSelectClusterSuite *>(context))->OnFailureResponse_17(error);
+        (static_cast<TestModeSelectClusterSuite *>(context))->OnFailureResponse_15(error);
     }
 
-    static void OnSuccessCallback_17(void * context, uint8_t currentMode)
+    static void OnSuccessCallback_15(void * context, const chip::app::DataModel::Nullable<uint8_t> & onMode)
     {
-        (static_cast<TestModeSelectClusterSuite *>(context))->OnSuccessResponse_17(currentMode);
+        (static_cast<TestModeSelectClusterSuite *>(context))->OnSuccessResponse_15(onMode);
     }
 
     static void OnFailureCallback_18(void * context, CHIP_ERROR error)
@@ -92102,9 +92131,9 @@ private:
         (static_cast<TestModeSelectClusterSuite *>(context))->OnFailureResponse_18(error);
     }
 
-    static void OnSuccessCallback_18(void * context)
+    static void OnSuccessCallback_18(void * context, uint8_t currentMode)
     {
-        (static_cast<TestModeSelectClusterSuite *>(context))->OnSuccessResponse_18();
+        (static_cast<TestModeSelectClusterSuite *>(context))->OnSuccessResponse_18(currentMode);
     }
 
     static void OnFailureCallback_19(void * context, CHIP_ERROR error)
@@ -92122,9 +92151,29 @@ private:
         (static_cast<TestModeSelectClusterSuite *>(context))->OnFailureResponse_20(error);
     }
 
-    static void OnSuccessCallback_20(void * context, const chip::app::DataModel::Nullable<uint8_t> & startUpMode)
+    static void OnSuccessCallback_20(void * context)
     {
-        (static_cast<TestModeSelectClusterSuite *>(context))->OnSuccessResponse_20(startUpMode);
+        (static_cast<TestModeSelectClusterSuite *>(context))->OnSuccessResponse_20();
+    }
+
+    static void OnFailureCallback_21(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestModeSelectClusterSuite *>(context))->OnFailureResponse_21(error);
+    }
+
+    static void OnSuccessCallback_21(void * context, const chip::app::DataModel::Nullable<uint8_t> & startUpMode)
+    {
+        (static_cast<TestModeSelectClusterSuite *>(context))->OnSuccessResponse_21(startUpMode);
+    }
+
+    static void OnFailureCallback_23(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestModeSelectClusterSuite *>(context))->OnFailureResponse_23(error);
+    }
+
+    static void OnSuccessCallback_23(void * context)
+    {
+        (static_cast<TestModeSelectClusterSuite *>(context))->OnSuccessResponse_23();
     }
 
     static void OnFailureCallback_24(void * context, CHIP_ERROR error)
@@ -92132,9 +92181,39 @@ private:
         (static_cast<TestModeSelectClusterSuite *>(context))->OnFailureResponse_24(error);
     }
 
-    static void OnSuccessCallback_24(void * context, uint8_t currentMode)
+    static void OnSuccessCallback_24(void * context)
     {
-        (static_cast<TestModeSelectClusterSuite *>(context))->OnSuccessResponse_24(currentMode);
+        (static_cast<TestModeSelectClusterSuite *>(context))->OnSuccessResponse_24();
+    }
+
+    static void OnFailureCallback_27(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestModeSelectClusterSuite *>(context))->OnFailureResponse_27(error);
+    }
+
+    static void OnSuccessCallback_27(void * context, uint8_t currentMode)
+    {
+        (static_cast<TestModeSelectClusterSuite *>(context))->OnSuccessResponse_27(currentMode);
+    }
+
+    static void OnFailureCallback_28(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestModeSelectClusterSuite *>(context))->OnFailureResponse_28(error);
+    }
+
+    static void OnSuccessCallback_28(void * context)
+    {
+        (static_cast<TestModeSelectClusterSuite *>(context))->OnSuccessResponse_28();
+    }
+
+    static void OnFailureCallback_31(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestModeSelectClusterSuite *>(context))->OnFailureResponse_31(error);
+    }
+
+    static void OnSuccessCallback_31(void * context, uint8_t currentMode)
+    {
+        (static_cast<TestModeSelectClusterSuite *>(context))->OnSuccessResponse_31(currentMode);
     }
 
     //
@@ -92471,7 +92550,31 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestChangeOnMode_13()
+    CHIP_ERROR TestChangeToUnsupportedOnMode_13()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::ModeSelectClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        chip::app::DataModel::Nullable<uint8_t> onModeArgument;
+        onModeArgument.SetNonNull();
+        onModeArgument.Value() = 2;
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::ModeSelect::Attributes::OnMode::TypeInfo>(
+            onModeArgument, this, OnSuccessCallback_13, OnFailureCallback_13));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_13(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+        NextTest();
+    }
+
+    void OnSuccessResponse_13() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR TestChangeOnMode_14()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ModeSelectClusterTest cluster;
@@ -92482,26 +92585,7 @@ private:
         onModeArgument.Value() = 7;
 
         ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::ModeSelect::Attributes::OnMode::TypeInfo>(
-            onModeArgument, this, OnSuccessCallback_13, OnFailureCallback_13));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_13(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_13() { NextTest(); }
-
-    CHIP_ERROR TestVerifyOnMode_14()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ModeSelectClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::ModeSelect::Attributes::OnMode::TypeInfo>(
-            this, OnSuccessCallback_14, OnFailureCallback_14, true));
+            onModeArgument, this, OnSuccessCallback_14, OnFailureCallback_14));
         return CHIP_NO_ERROR;
     }
 
@@ -92511,31 +92595,16 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_14(const chip::app::DataModel::Nullable<uint8_t> & onMode)
-    {
-        VerifyOrReturn(CheckValueNonNull("onMode", onMode));
-        VerifyOrReturn(CheckValue("onMode.Value()", onMode.Value(), 7));
+    void OnSuccessResponse_14() { NextTest(); }
 
-        OnModeValue = onMode;
-        NextTest();
-    }
-
-    CHIP_ERROR TestToggleOnOff_15()
+    CHIP_ERROR TestVerifyOnMode_15()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        using RequestType               = chip::app::Clusters::OnOff::Commands::Off::Type;
+        chip::Controller::ModeSelectClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        RequestType request;
-
-        auto success = [](void * context, const typename RequestType::ResponseType & data) {
-            (static_cast<TestModeSelectClusterSuite *>(context))->OnSuccessResponse_15();
-        };
-
-        auto failure = [](void * context, CHIP_ERROR error) {
-            (static_cast<TestModeSelectClusterSuite *>(context))->OnFailureResponse_15(error);
-        };
-
-        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::ModeSelect::Attributes::OnMode::TypeInfo>(
+            this, OnSuccessCallback_15, OnFailureCallback_15, true));
         return CHIP_NO_ERROR;
     }
 
@@ -92545,12 +92614,19 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_15() { NextTest(); }
+    void OnSuccessResponse_15(const chip::app::DataModel::Nullable<uint8_t> & onMode)
+    {
+        VerifyOrReturn(CheckValueNonNull("onMode", onMode));
+        VerifyOrReturn(CheckValue("onMode.Value()", onMode.Value(), 7));
+
+        OnModeValue = onMode;
+        NextTest();
+    }
 
     CHIP_ERROR TestToggleOnOff_16()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        using RequestType               = chip::app::Clusters::OnOff::Commands::On::Type;
+        using RequestType               = chip::app::Clusters::OnOff::Commands::Off::Type;
 
         RequestType request;
 
@@ -92574,14 +92650,22 @@ private:
 
     void OnSuccessResponse_16() { NextTest(); }
 
-    CHIP_ERROR TestVerifyCurrentModeChangesIfOnModeIsNotNull_17()
+    CHIP_ERROR TestToggleOnOff_17()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ModeSelectClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+        using RequestType               = chip::app::Clusters::OnOff::Commands::On::Type;
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::ModeSelect::Attributes::CurrentMode::TypeInfo>(
-            this, OnSuccessCallback_17, OnFailureCallback_17, true));
+        RequestType request;
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<TestModeSelectClusterSuite *>(context))->OnSuccessResponse_17();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<TestModeSelectClusterSuite *>(context))->OnFailureResponse_17(error);
+        };
+
+        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
         return CHIP_NO_ERROR;
     }
 
@@ -92591,14 +92675,33 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_17(uint8_t currentMode)
+    void OnSuccessResponse_17() { NextTest(); }
+
+    CHIP_ERROR TestVerifyCurrentModeChangesIfOnModeIsNotNull_18()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::ModeSelectClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::ModeSelect::Attributes::CurrentMode::TypeInfo>(
+            this, OnSuccessCallback_18, OnFailureCallback_18, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_18(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_18(uint8_t currentMode)
     {
         VerifyOrReturn(CheckValue("currentMode", currentMode, OnModeValue));
 
         NextTest();
     }
 
-    CHIP_ERROR TestChangeToUnsupportedStartUpMode_18()
+    CHIP_ERROR TestChangeToUnsupportedStartUpMode_19()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ModeSelectClusterTest cluster;
@@ -92609,20 +92712,20 @@ private:
         startUpModeArgument.Value() = 2;
 
         ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::ModeSelect::Attributes::StartUpMode::TypeInfo>(
-            startUpModeArgument, this, OnSuccessCallback_18, OnFailureCallback_18));
+            startUpModeArgument, this, OnSuccessCallback_19, OnFailureCallback_19));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_18(CHIP_ERROR error)
+    void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
         NextTest();
     }
 
-    void OnSuccessResponse_18() { ThrowSuccessResponse(); }
+    void OnSuccessResponse_19() { ThrowSuccessResponse(); }
 
-    CHIP_ERROR TestChangeToSupportedStartUpMode_19()
+    CHIP_ERROR TestChangeToSupportedStartUpMode_20()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ModeSelectClusterTest cluster;
@@ -92633,26 +92736,7 @@ private:
         startUpModeArgument.Value() = 7;
 
         ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::ModeSelect::Attributes::StartUpMode::TypeInfo>(
-            startUpModeArgument, this, OnSuccessCallback_19, OnFailureCallback_19));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_19(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_19() { NextTest(); }
-
-    CHIP_ERROR TestVerifyStartUpModeChange_20()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::ModeSelectClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::ModeSelect::Attributes::StartUpMode::TypeInfo>(
-            this, OnSuccessCallback_20, OnFailureCallback_20, true));
+            startUpModeArgument, this, OnSuccessCallback_20, OnFailureCallback_20));
         return CHIP_NO_ERROR;
     }
 
@@ -92662,31 +92746,16 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_20(const chip::app::DataModel::Nullable<uint8_t> & startUpMode)
-    {
-        VerifyOrReturn(CheckValueNonNull("startUpMode", startUpMode));
-        VerifyOrReturn(CheckValue("startUpMode.Value()", startUpMode.Value(), 7));
+    void OnSuccessResponse_20() { NextTest(); }
 
-        NextTest();
-    }
-
-    CHIP_ERROR TestChangeCurrentModeToAnotherValue_21()
+    CHIP_ERROR TestVerifyStartUpModeChange_21()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        using RequestType               = chip::app::Clusters::ModeSelect::Commands::ChangeToMode::Type;
+        chip::Controller::ModeSelectClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        RequestType request;
-        request.newMode = 0;
-
-        auto success = [](void * context, const typename RequestType::ResponseType & data) {
-            (static_cast<TestModeSelectClusterSuite *>(context))->OnSuccessResponse_21();
-        };
-
-        auto failure = [](void * context, CHIP_ERROR error) {
-            (static_cast<TestModeSelectClusterSuite *>(context))->OnFailureResponse_21(error);
-        };
-
-        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::ModeSelect::Attributes::StartUpMode::TypeInfo>(
+            this, OnSuccessCallback_21, OnFailureCallback_21, true));
         return CHIP_NO_ERROR;
     }
 
@@ -92696,28 +92765,77 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_21() { NextTest(); }
-
-    CHIP_ERROR TestRebootTargetDevice_22()
+    void OnSuccessResponse_21(const chip::app::DataModel::Nullable<uint8_t> & startUpMode)
     {
-        SetIdentity(kIdentityAlpha);
-        return Reboot(mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U);
+        VerifyOrReturn(CheckValueNonNull("startUpMode", startUpMode));
+        VerifyOrReturn(CheckValue("startUpMode.Value()", startUpMode.Value(), 7));
+
+        NextTest();
     }
 
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_23()
+    CHIP_ERROR TestChangeCurrentModeToAnotherValue_22()
     {
-        SetIdentity(kIdentityAlpha);
-        return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::ModeSelect::Commands::ChangeToMode::Type;
+
+        RequestType request;
+        request.newMode = 0;
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<TestModeSelectClusterSuite *>(context))->OnSuccessResponse_22();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<TestModeSelectClusterSuite *>(context))->OnFailureResponse_22(error);
+        };
+
+        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyCurrentModeChangeBasedOnNewStartUpMode_24()
+    void OnFailureResponse_22(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_22() { NextTest(); }
+
+    CHIP_ERROR TestChangeOnMode_23()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::ModeSelectClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::ModeSelect::Attributes::CurrentMode::TypeInfo>(
-            this, OnSuccessCallback_24, OnFailureCallback_24, true));
+        chip::app::DataModel::Nullable<uint8_t> onModeArgument;
+        onModeArgument.SetNonNull();
+        onModeArgument.Value() = 4;
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::ModeSelect::Attributes::OnMode::TypeInfo>(
+            onModeArgument, this, OnSuccessCallback_23, OnFailureCallback_23));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_23(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_23() { NextTest(); }
+
+    CHIP_ERROR TestSetStartUpOnOff_24()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::OnOffClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        chip::app::DataModel::Nullable<chip::app::Clusters::OnOff::OnOffStartUpOnOff> startUpOnOffArgument;
+        startUpOnOffArgument.SetNonNull();
+        startUpOnOffArgument.Value() = static_cast<chip::app::Clusters::OnOff::OnOffStartUpOnOff>(1);
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::OnOff::Attributes::StartUpOnOff::TypeInfo>(
+            startUpOnOffArgument, this, OnSuccessCallback_24, OnFailureCallback_24));
         return CHIP_NO_ERROR;
     }
 
@@ -92727,7 +92845,96 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_24(uint8_t currentMode)
+    void OnSuccessResponse_24() { NextTest(); }
+
+    CHIP_ERROR TestRebootTargetDevice_25()
+    {
+        SetIdentity(kIdentityAlpha);
+        return Reboot(mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U);
+    }
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_26()
+    {
+        SetIdentity(kIdentityAlpha);
+        return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+    }
+
+    CHIP_ERROR TestVerifyCurrentModeChangeBasedOnOnModeAsItOverwritesStartUpMode_27()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::ModeSelectClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::ModeSelect::Attributes::CurrentMode::TypeInfo>(
+            this, OnSuccessCallback_27, OnFailureCallback_27, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_27(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_27(uint8_t currentMode)
+    {
+        VerifyOrReturn(CheckValue("currentMode", currentMode, 4));
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestChangeOnModeToNull_28()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::ModeSelectClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        chip::app::DataModel::Nullable<uint8_t> onModeArgument;
+        onModeArgument.SetNull();
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::ModeSelect::Attributes::OnMode::TypeInfo>(
+            onModeArgument, this, OnSuccessCallback_28, OnFailureCallback_28));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_28(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_28() { NextTest(); }
+
+    CHIP_ERROR TestRebootTargetDevice_29()
+    {
+        SetIdentity(kIdentityAlpha);
+        return Reboot(mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U);
+    }
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_30()
+    {
+        SetIdentity(kIdentityAlpha);
+        return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+    }
+
+    CHIP_ERROR TestVerifyCurrentModeChangeBasedOnNewStartUpMode_31()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::ModeSelectClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::ModeSelect::Attributes::CurrentMode::TypeInfo>(
+            this, OnSuccessCallback_31, OnFailureCallback_31, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_31(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_31(uint8_t currentMode)
     {
         VerifyOrReturn(CheckValue("currentMode", currentMode, 7));
 
