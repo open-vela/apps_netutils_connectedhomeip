@@ -196,6 +196,7 @@ public:
         printf("TestConfigVariables\n");
         printf("TestDescriptorCluster\n");
         printf("TestBasicInformation\n");
+        printf("TestGeneralCommissioning\n");
         printf("TestIdentifyCluster\n");
         printf("TestOperationalCredentialsCluster\n");
         printf("TestModeSelectCluster\n");
@@ -91308,6 +91309,277 @@ private:
     }
 };
 
+class TestGeneralCommissioningSuite : public TestCommand
+{
+public:
+    TestGeneralCommissioningSuite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("TestGeneralCommissioning", credsIssuerConfig), mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~TestGeneralCommissioningSuite() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Start: TestGeneralCommissioning\n");
+        }
+
+        if (mTestCount == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Complete: TestGeneralCommissioning\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++)
+        {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Write Breadcrumb (1/2)\n");
+            err = TestWriteBreadcrumb12_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read back Breadcrumb (1/2)\n");
+            err = TestReadBackBreadcrumb12_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Write Breadcrumb (2/2)\n");
+            err = TestWriteBreadcrumb22_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read back Breadcrumb (2/2)\n");
+            err = TestReadBackBreadcrumb22_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Validate presence of SupportsConcurrentConnection\n");
+            err = TestValidatePresenceOfSupportsConcurrentConnection_5();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err)
+        {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 6;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    {
+        bool isExpectedDnssdResult = false;
+
+        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
+        NextTest();
+    }
+
+    static void OnFailureCallback_1(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestGeneralCommissioningSuite *>(context))->OnFailureResponse_1(error);
+    }
+
+    static void OnSuccessCallback_1(void * context)
+    {
+        (static_cast<TestGeneralCommissioningSuite *>(context))->OnSuccessResponse_1();
+    }
+
+    static void OnFailureCallback_2(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestGeneralCommissioningSuite *>(context))->OnFailureResponse_2(error);
+    }
+
+    static void OnSuccessCallback_2(void * context, uint64_t breadcrumb)
+    {
+        (static_cast<TestGeneralCommissioningSuite *>(context))->OnSuccessResponse_2(breadcrumb);
+    }
+
+    static void OnFailureCallback_3(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestGeneralCommissioningSuite *>(context))->OnFailureResponse_3(error);
+    }
+
+    static void OnSuccessCallback_3(void * context)
+    {
+        (static_cast<TestGeneralCommissioningSuite *>(context))->OnSuccessResponse_3();
+    }
+
+    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestGeneralCommissioningSuite *>(context))->OnFailureResponse_4(error);
+    }
+
+    static void OnSuccessCallback_4(void * context, uint64_t breadcrumb)
+    {
+        (static_cast<TestGeneralCommissioningSuite *>(context))->OnSuccessResponse_4(breadcrumb);
+    }
+
+    static void OnFailureCallback_5(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestGeneralCommissioningSuite *>(context))->OnFailureResponse_5(error);
+    }
+
+    static void OnSuccessCallback_5(void * context, bool supportsConcurrentConnection)
+    {
+        (static_cast<TestGeneralCommissioningSuite *>(context))->OnSuccessResponse_5(supportsConcurrentConnection);
+    }
+
+    //
+    // Tests methods
+    //
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        SetIdentity(kIdentityAlpha);
+        return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+    }
+
+    CHIP_ERROR TestWriteBreadcrumb12_1()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::GeneralCommissioningClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        uint64_t breadcrumbArgument;
+        breadcrumbArgument = 137438953472ULL;
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::GeneralCommissioning::Attributes::Breadcrumb::TypeInfo>(
+            breadcrumbArgument, this, OnSuccessCallback_1, OnFailureCallback_1));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_1(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_1() { NextTest(); }
+
+    CHIP_ERROR TestReadBackBreadcrumb12_2()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::GeneralCommissioningClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::GeneralCommissioning::Attributes::Breadcrumb::TypeInfo>(
+            this, OnSuccessCallback_2, OnFailureCallback_2, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_2(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_2(uint64_t breadcrumb)
+    {
+        VerifyOrReturn(CheckValue("breadcrumb", breadcrumb, 137438953472ULL));
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestWriteBreadcrumb22_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::GeneralCommissioningClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        uint64_t breadcrumbArgument;
+        breadcrumbArgument = 81ULL;
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::GeneralCommissioning::Attributes::Breadcrumb::TypeInfo>(
+            breadcrumbArgument, this, OnSuccessCallback_3, OnFailureCallback_3));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_3(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_3() { NextTest(); }
+
+    CHIP_ERROR TestReadBackBreadcrumb22_4()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::GeneralCommissioningClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::GeneralCommissioning::Attributes::Breadcrumb::TypeInfo>(
+            this, OnSuccessCallback_4, OnFailureCallback_4, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_4(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_4(uint64_t breadcrumb)
+    {
+        VerifyOrReturn(CheckValue("breadcrumb", breadcrumb, 81ULL));
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestValidatePresenceOfSupportsConcurrentConnection_5()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::GeneralCommissioningClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::GeneralCommissioning::Attributes::SupportsConcurrentConnection::TypeInfo>(
+                this, OnSuccessCallback_5, OnFailureCallback_5, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_5(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_5(bool supportsConcurrentConnection)
+    {
+        VerifyOrReturn(CheckConstraintType("supportsConcurrentConnection", "", "bool"));
+        NextTest();
+    }
+};
+
 class TestIdentifyClusterSuite : public TestCommand
 {
 public:
@@ -119440,6 +119712,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<TestConfigVariablesSuite>(credsIssuerConfig),
         make_unique<TestDescriptorClusterSuite>(credsIssuerConfig),
         make_unique<TestBasicInformationSuite>(credsIssuerConfig),
+        make_unique<TestGeneralCommissioningSuite>(credsIssuerConfig),
         make_unique<TestIdentifyClusterSuite>(credsIssuerConfig),
         make_unique<TestOperationalCredentialsClusterSuite>(credsIssuerConfig),
         make_unique<TestModeSelectClusterSuite>(credsIssuerConfig),
