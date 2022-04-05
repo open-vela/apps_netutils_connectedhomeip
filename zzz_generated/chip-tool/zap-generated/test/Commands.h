@@ -56997,245 +56997,237 @@ public:
             err = Test3aWriteAValueIntoTheRoMandatoryAttributeType_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : 3b: reads back the RO mandatory attribute: Type\n");
-            err = Test3bReadsBackTheRoMandatoryAttributeType_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : 2: read the RO mandatory attribute default: ConfigStatus\n");
+            err = Test2ReadTheRoMandatoryAttributeDefaultConfigStatus_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : 2: read the RO mandatory attribute default: ConfigStatus\n");
-            err = Test2ReadTheRoMandatoryAttributeDefaultConfigStatus_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : 3a: write a value into the RO mandatory attribute: ConfigStatus\n");
+            err = Test3aWriteAValueIntoTheRoMandatoryAttributeConfigStatus_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : 3a: write a value into the RO mandatory attribute: ConfigStatus\n");
-            err = Test3aWriteAValueIntoTheRoMandatoryAttributeConfigStatus_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : 3b: reads back the RO mandatory attribute: ConfigStatus\n");
+            err = Test3bReadsBackTheRoMandatoryAttributeConfigStatus_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : 3b: reads back the RO mandatory attribute: ConfigStatus\n");
-            err = Test3bReadsBackTheRoMandatoryAttributeConfigStatus_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : 2: read the RO mandatory attribute default: OperationalStatus\n");
+            err = Test2ReadTheRoMandatoryAttributeDefaultOperationalStatus_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : 2: read the RO mandatory attribute default: OperationalStatus\n");
-            err = Test2ReadTheRoMandatoryAttributeDefaultOperationalStatus_7();
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 7 : 3a: write a value into the RO mandatory attribute: OperationalStatus\n");
+            err = Test3aWriteAValueIntoTheRoMandatoryAttributeOperationalStatus_7();
             break;
         case 8:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 8 : 3a: write a value into the RO mandatory attribute: OperationalStatus\n");
-            err = Test3aWriteAValueIntoTheRoMandatoryAttributeOperationalStatus_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : 3b: reads back the RO mandatory attribute: OperationalStatus\n");
+            err = Test3bReadsBackTheRoMandatoryAttributeOperationalStatus_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : 3b: reads back the RO mandatory attribute: OperationalStatus\n");
-            err = Test3bReadsBackTheRoMandatoryAttributeOperationalStatus_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : 2: read the RO mandatory attribute default: EndProductType\n");
+            err = Test2ReadTheRoMandatoryAttributeDefaultEndProductType_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : 2: read the RO mandatory attribute default: EndProductType\n");
-            err = Test2ReadTheRoMandatoryAttributeDefaultEndProductType_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : 3a: write a value into the RO mandatory attribute: EndProductType\n");
+            err = Test3aWriteAValueIntoTheRoMandatoryAttributeEndProductType_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : 3a: write a value into the RO mandatory attribute: EndProductType\n");
-            err = Test3aWriteAValueIntoTheRoMandatoryAttributeEndProductType_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : 2: read the RW mandatory attribute default: Mode\n");
+            err = Test2ReadTheRwMandatoryAttributeDefaultMode_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : 3b: reads back the RO mandatory attribute: EndProductType\n");
-            err = Test3bReadsBackTheRoMandatoryAttributeEndProductType_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : 3a: write a value into the RW mandatory attribute:: Mode\n");
+            err = Test3aWriteAValueIntoTheRwMandatoryAttributeMode_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : 2: read the RW mandatory attribute default: Mode\n");
-            err = Test2ReadTheRwMandatoryAttributeDefaultMode_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : 3b: reads back the RW mandatory attribute: Mode\n");
+            err = Test3bReadsBackTheRwMandatoryAttributeMode_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : 3a: write a value into the RW mandatory attribute:: Mode\n");
-            err = Test3aWriteAValueIntoTheRwMandatoryAttributeMode_14();
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 14 : 2: read the RO optional attribute default: TargetPositionLiftPercent100ths\n");
+            err = Test2ReadTheRoOptionalAttributeDefaultTargetPositionLiftPercent100ths_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : 3b: reads back the RW mandatory attribute: Mode\n");
-            err = Test3bReadsBackTheRwMandatoryAttributeMode_15();
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 15 : 3a: write a value into the RO optional attribute: TargetPositionLiftPercent100ths\n");
+            err = Test3aWriteAValueIntoTheRoOptionalAttributeTargetPositionLiftPercent100ths_15();
             break;
         case 16:
             ChipLogProgress(chipTool,
-                            " ***** Test Step 16 : 2: read the RO optional attribute default: TargetPositionLiftPercent100ths\n");
-            err = Test2ReadTheRoOptionalAttributeDefaultTargetPositionLiftPercent100ths_16();
+                            " ***** Test Step 16 : 3b: reads back the RO optional attribute: TargetPositionLiftPercent100ths\n");
+            err = Test3bReadsBackTheRoOptionalAttributeTargetPositionLiftPercent100ths_16();
             break;
         case 17:
-            ChipLogProgress(
-                chipTool,
-                " ***** Test Step 17 : 3a: write a value into the RO optional attribute: TargetPositionLiftPercent100ths\n");
-            err = Test3aWriteAValueIntoTheRoOptionalAttributeTargetPositionLiftPercent100ths_17();
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 17 : 2: read the RO optional attribute default: TargetPositionTiltPercent100ths\n");
+            err = Test2ReadTheRoOptionalAttributeDefaultTargetPositionTiltPercent100ths_17();
             break;
         case 18:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 18 : 3b: reads back the RO optional attribute: TargetPositionLiftPercent100ths\n");
-            err = Test3bReadsBackTheRoOptionalAttributeTargetPositionLiftPercent100ths_18();
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 18 : 3a: write a value into the RO optional attribute: TargetPositionTiltPercent100ths\n");
+            err = Test3aWriteAValueIntoTheRoOptionalAttributeTargetPositionTiltPercent100ths_18();
             break;
         case 19:
             ChipLogProgress(chipTool,
-                            " ***** Test Step 19 : 2: read the RO optional attribute default: TargetPositionTiltPercent100ths\n");
-            err = Test2ReadTheRoOptionalAttributeDefaultTargetPositionTiltPercent100ths_19();
+                            " ***** Test Step 19 : 3b: reads back the RO optional attribute: TargetPositionTiltPercent100ths\n");
+            err = Test3bReadsBackTheRoOptionalAttributeTargetPositionTiltPercent100ths_19();
             break;
         case 20:
-            ChipLogProgress(
-                chipTool,
-                " ***** Test Step 20 : 3a: write a value into the RO optional attribute: TargetPositionTiltPercent100ths\n");
-            err = Test3aWriteAValueIntoTheRoOptionalAttributeTargetPositionTiltPercent100ths_20();
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 20 : 2: read the RO optional attribute default: CurrentPositionLiftPercent100ths\n");
+            err = Test2ReadTheRoOptionalAttributeDefaultCurrentPositionLiftPercent100ths_20();
             break;
         case 21:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 21 : 3b: reads back the RO optional attribute: TargetPositionTiltPercent100ths\n");
-            err = Test3bReadsBackTheRoOptionalAttributeTargetPositionTiltPercent100ths_21();
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 21 : 3a: write a value into the RO optional attribute: CurrentPositionLiftPercent100ths\n");
+            err = Test3aWriteAValueIntoTheRoOptionalAttributeCurrentPositionLiftPercent100ths_21();
             break;
         case 22:
             ChipLogProgress(chipTool,
-                            " ***** Test Step 22 : 2: read the RO optional attribute default: CurrentPositionLiftPercent100ths\n");
-            err = Test2ReadTheRoOptionalAttributeDefaultCurrentPositionLiftPercent100ths_22();
+                            " ***** Test Step 22 : 3b: reads back the RO optional attribute: CurrentPositionLiftPercent100ths\n");
+            err = Test3bReadsBackTheRoOptionalAttributeCurrentPositionLiftPercent100ths_22();
             break;
         case 23:
-            ChipLogProgress(
-                chipTool,
-                " ***** Test Step 23 : 3a: write a value into the RO optional attribute: CurrentPositionLiftPercent100ths\n");
-            err = Test3aWriteAValueIntoTheRoOptionalAttributeCurrentPositionLiftPercent100ths_23();
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 23 : 2: read the RO optional attribute default: CurrentPositionTiltPercent100ths\n");
+            err = Test2ReadTheRoOptionalAttributeDefaultCurrentPositionTiltPercent100ths_23();
             break;
         case 24:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 24 : 3b: reads back the RO optional attribute: CurrentPositionLiftPercent100ths\n");
-            err = Test3bReadsBackTheRoOptionalAttributeCurrentPositionLiftPercent100ths_24();
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 24 : 3a: write a value into the RO optional attribute: CurrentPositionTiltPercent100ths\n");
+            err = Test3aWriteAValueIntoTheRoOptionalAttributeCurrentPositionTiltPercent100ths_24();
             break;
         case 25:
             ChipLogProgress(chipTool,
-                            " ***** Test Step 25 : 2: read the RO optional attribute default: CurrentPositionTiltPercent100ths\n");
-            err = Test2ReadTheRoOptionalAttributeDefaultCurrentPositionTiltPercent100ths_25();
+                            " ***** Test Step 25 : 3b: reads back the RO optional attribute: CurrentPositionTiltPercent100ths\n");
+            err = Test3bReadsBackTheRoOptionalAttributeCurrentPositionTiltPercent100ths_25();
             break;
         case 26:
-            ChipLogProgress(
-                chipTool,
-                " ***** Test Step 26 : 3a: write a value into the RO optional attribute: CurrentPositionTiltPercent100ths\n");
-            err = Test3aWriteAValueIntoTheRoOptionalAttributeCurrentPositionTiltPercent100ths_26();
+            ChipLogProgress(chipTool, " ***** Test Step 26 : 2: read the RO optional attribute default: InstalledOpenLimitLift\n");
+            err = Test2ReadTheRoOptionalAttributeDefaultInstalledOpenLimitLift_26();
             break;
         case 27:
             ChipLogProgress(chipTool,
-                            " ***** Test Step 27 : 3b: reads back the RO optional attribute: CurrentPositionTiltPercent100ths\n");
-            err = Test3bReadsBackTheRoOptionalAttributeCurrentPositionTiltPercent100ths_27();
+                            " ***** Test Step 27 : 3a: write a value into the RO optional attribute: InstalledOpenLimitLift\n");
+            err = Test3aWriteAValueIntoTheRoOptionalAttributeInstalledOpenLimitLift_27();
             break;
         case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : 2: read the RO optional attribute default: InstalledOpenLimitLift\n");
-            err = Test2ReadTheRoOptionalAttributeDefaultInstalledOpenLimitLift_28();
+            ChipLogProgress(chipTool, " ***** Test Step 28 : 3b: reads back the RO optional attribute: InstalledOpenLimitLift\n");
+            err = Test3bReadsBackTheRoOptionalAttributeInstalledOpenLimitLift_28();
             break;
         case 29:
             ChipLogProgress(chipTool,
-                            " ***** Test Step 29 : 3a: write a value into the RO optional attribute: InstalledOpenLimitLift\n");
-            err = Test3aWriteAValueIntoTheRoOptionalAttributeInstalledOpenLimitLift_29();
+                            " ***** Test Step 29 : 2: read the RO optional attribute default: InstalledClosedLimitLift\n");
+            err = Test2ReadTheRoOptionalAttributeDefaultInstalledClosedLimitLift_29();
             break;
         case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : 3b: reads back the RO optional attribute: InstalledOpenLimitLift\n");
-            err = Test3bReadsBackTheRoOptionalAttributeInstalledOpenLimitLift_30();
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 30 : 3a: write a value into the RO optional attribute: InstalledClosedLimitLift\n");
+            err = Test3aWriteAValueIntoTheRoOptionalAttributeInstalledClosedLimitLift_30();
             break;
         case 31:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 31 : 2: read the RO optional attribute default: InstalledClosedLimitLift\n");
-            err = Test2ReadTheRoOptionalAttributeDefaultInstalledClosedLimitLift_31();
+            ChipLogProgress(chipTool, " ***** Test Step 31 : 3b: reads back the RO optional attribute: InstalledClosedLimitLift\n");
+            err = Test3bReadsBackTheRoOptionalAttributeInstalledClosedLimitLift_31();
             break;
         case 32:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 32 : 3a: write a value into the RO optional attribute: InstalledClosedLimitLift\n");
-            err = Test3aWriteAValueIntoTheRoOptionalAttributeInstalledClosedLimitLift_32();
+            ChipLogProgress(chipTool, " ***** Test Step 32 : 2: read the RO optional attribute default: InstalledOpenLimitTilt\n");
+            err = Test2ReadTheRoOptionalAttributeDefaultInstalledOpenLimitTilt_32();
             break;
         case 33:
-            ChipLogProgress(chipTool, " ***** Test Step 33 : 3b: reads back the RO optional attribute: InstalledClosedLimitLift\n");
-            err = Test3bReadsBackTheRoOptionalAttributeInstalledClosedLimitLift_33();
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 33 : 3a: write a value into the RO optional attribute: InstalledOpenLimitTilt\n");
+            err = Test3aWriteAValueIntoTheRoOptionalAttributeInstalledOpenLimitTilt_33();
             break;
         case 34:
-            ChipLogProgress(chipTool, " ***** Test Step 34 : 2: read the RO optional attribute default: InstalledOpenLimitTilt\n");
-            err = Test2ReadTheRoOptionalAttributeDefaultInstalledOpenLimitTilt_34();
+            ChipLogProgress(chipTool, " ***** Test Step 34 : 3b: reads back the RO optional attribute: InstalledOpenLimitTilt\n");
+            err = Test3bReadsBackTheRoOptionalAttributeInstalledOpenLimitTilt_34();
             break;
         case 35:
             ChipLogProgress(chipTool,
-                            " ***** Test Step 35 : 3a: write a value into the RO optional attribute: InstalledOpenLimitTilt\n");
-            err = Test3aWriteAValueIntoTheRoOptionalAttributeInstalledOpenLimitTilt_35();
+                            " ***** Test Step 35 : 2: read the RO optional attribute default: InstalledClosedLimitTilt\n");
+            err = Test2ReadTheRoOptionalAttributeDefaultInstalledClosedLimitTilt_35();
             break;
         case 36:
-            ChipLogProgress(chipTool, " ***** Test Step 36 : 3b: reads back the RO optional attribute: InstalledOpenLimitTilt\n");
-            err = Test3bReadsBackTheRoOptionalAttributeInstalledOpenLimitTilt_36();
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 36 : 3a: write a value into the RO optional attribute: InstalledClosedLimitTilt\n");
+            err = Test3aWriteAValueIntoTheRoOptionalAttributeInstalledClosedLimitTilt_36();
             break;
         case 37:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 37 : 2: read the RO optional attribute default: InstalledClosedLimitTilt\n");
-            err = Test2ReadTheRoOptionalAttributeDefaultInstalledClosedLimitTilt_37();
+            ChipLogProgress(chipTool, " ***** Test Step 37 : 3b: reads back the RO optional attribute: InstalledClosedLimitTilt\n");
+            err = Test3bReadsBackTheRoOptionalAttributeInstalledClosedLimitTilt_37();
             break;
         case 38:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 38 : 3a: write a value into the RO optional attribute: InstalledClosedLimitTilt\n");
-            err = Test3aWriteAValueIntoTheRoOptionalAttributeInstalledClosedLimitTilt_38();
+            ChipLogProgress(chipTool, " ***** Test Step 38 : 4: read the RO mandatory attribute default: SafetyStatus\n");
+            err = Test4ReadTheRoMandatoryAttributeDefaultSafetyStatus_38();
             break;
         case 39:
-            ChipLogProgress(chipTool, " ***** Test Step 39 : 3b: reads back the RO optional attribute: InstalledClosedLimitTilt\n");
-            err = Test3bReadsBackTheRoOptionalAttributeInstalledClosedLimitTilt_39();
+            ChipLogProgress(chipTool, " ***** Test Step 39 : 5a: write a value into the RO mandatory attribute: SafetyStatus\n");
+            err = Test5aWriteAValueIntoTheRoMandatoryAttributeSafetyStatus_39();
             break;
         case 40:
-            ChipLogProgress(chipTool, " ***** Test Step 40 : 4: read the RO mandatory attribute default: SafetyStatus\n");
-            err = Test4ReadTheRoMandatoryAttributeDefaultSafetyStatus_40();
+            ChipLogProgress(chipTool, " ***** Test Step 40 : 5b: reads back the RO mandatory attribute: SafetyStatus\n");
+            err = Test5bReadsBackTheRoMandatoryAttributeSafetyStatus_40();
             break;
         case 41:
-            ChipLogProgress(chipTool, " ***** Test Step 41 : 5a: write a value into the RO mandatory attribute: SafetyStatus\n");
-            err = Test5aWriteAValueIntoTheRoMandatoryAttributeSafetyStatus_41();
+            ChipLogProgress(chipTool, " ***** Test Step 41 : 4: read the RO optional attribute default: CurrentPositionLift\n");
+            err = Test4ReadTheRoOptionalAttributeDefaultCurrentPositionLift_41();
             break;
         case 42:
-            ChipLogProgress(chipTool, " ***** Test Step 42 : 5b: reads back the RO mandatory attribute: SafetyStatus\n");
-            err = Test5bReadsBackTheRoMandatoryAttributeSafetyStatus_42();
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 42 : 5a: write a value into the RO optional attribute: CurrentPositionLift\n");
+            err = Test5aWriteAValueIntoTheRoOptionalAttributeCurrentPositionLift_42();
             break;
         case 43:
-            ChipLogProgress(chipTool, " ***** Test Step 43 : 4: read the RO optional attribute default: CurrentPositionLift\n");
-            err = Test4ReadTheRoOptionalAttributeDefaultCurrentPositionLift_43();
+            ChipLogProgress(chipTool, " ***** Test Step 43 : 5b: reads back the RO optional attribute: CurrentPositionLift\n");
+            err = Test5bReadsBackTheRoOptionalAttributeCurrentPositionLift_43();
             break;
         case 44:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 44 : 5a: write a value into the RO optional attribute: CurrentPositionLift\n");
-            err = Test5aWriteAValueIntoTheRoOptionalAttributeCurrentPositionLift_44();
+            ChipLogProgress(chipTool, " ***** Test Step 44 : 4: read the RO optional attribute default: CurrentPositionTilt\n");
+            err = Test4ReadTheRoOptionalAttributeDefaultCurrentPositionTilt_44();
             break;
         case 45:
-            ChipLogProgress(chipTool, " ***** Test Step 45 : 5b: reads back the RO optional attribute: CurrentPositionLift\n");
-            err = Test5bReadsBackTheRoOptionalAttributeCurrentPositionLift_45();
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 45 : 5a: write a value into the RO optional attribute: CurrentPositionTilt\n");
+            err = Test5aWriteAValueIntoTheRoOptionalAttributeCurrentPositionTilt_45();
             break;
         case 46:
-            ChipLogProgress(chipTool, " ***** Test Step 46 : 4: read the RO optional attribute default: CurrentPositionTilt\n");
-            err = Test4ReadTheRoOptionalAttributeDefaultCurrentPositionTilt_46();
+            ChipLogProgress(chipTool, " ***** Test Step 46 : 5b: reads back the RO optional attribute: CurrentPositionTilt\n");
+            err = Test5bReadsBackTheRoOptionalAttributeCurrentPositionTilt_46();
             break;
         case 47:
             ChipLogProgress(chipTool,
-                            " ***** Test Step 47 : 5a: write a value into the RO optional attribute: CurrentPositionTilt\n");
-            err = Test5aWriteAValueIntoTheRoOptionalAttributeCurrentPositionTilt_47();
+                            " ***** Test Step 47 : 4: read the RO optional attribute default: CurrentPositionLiftPercentage\n");
+            err = Test4ReadTheRoOptionalAttributeDefaultCurrentPositionLiftPercentage_47();
             break;
         case 48:
-            ChipLogProgress(chipTool, " ***** Test Step 48 : 5b: reads back the RO optional attribute: CurrentPositionTilt\n");
-            err = Test5bReadsBackTheRoOptionalAttributeCurrentPositionTilt_48();
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 48 : 5a: write a value into the RO optional attribute: CurrentPositionLiftPercentage\n");
+            err = Test5aWriteAValueIntoTheRoOptionalAttributeCurrentPositionLiftPercentage_48();
             break;
         case 49:
             ChipLogProgress(chipTool,
-                            " ***** Test Step 49 : 4: read the RO optional attribute default: CurrentPositionLiftPercentage\n");
-            err = Test4ReadTheRoOptionalAttributeDefaultCurrentPositionLiftPercentage_49();
+                            " ***** Test Step 49 : 5b: reads back the RO optional attribute: CurrentPositionLiftPercentage\n");
+            err = Test5bReadsBackTheRoOptionalAttributeCurrentPositionLiftPercentage_49();
             break;
         case 50:
-            ChipLogProgress(
-                chipTool,
-                " ***** Test Step 50 : 5a: write a value into the RO optional attribute: CurrentPositionLiftPercentage\n");
-            err = Test5aWriteAValueIntoTheRoOptionalAttributeCurrentPositionLiftPercentage_50();
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 50 : 4: read the RO optional attribute default: CurrentPositionTiltPercentage\n");
+            err = Test4ReadTheRoOptionalAttributeDefaultCurrentPositionTiltPercentage_50();
             break;
         case 51:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 51 : 5b: reads back the RO optional attribute: CurrentPositionLiftPercentage\n");
-            err = Test5bReadsBackTheRoOptionalAttributeCurrentPositionLiftPercentage_51();
+            ChipLogProgress(
+                chipTool,
+                " ***** Test Step 51 : 5a: write a value into the RO optional attribute: CurrentPositionTiltPercentage\n");
+            err = Test5aWriteAValueIntoTheRoOptionalAttributeCurrentPositionTiltPercentage_51();
             break;
         case 52:
             ChipLogProgress(chipTool,
-                            " ***** Test Step 52 : 4: read the RO optional attribute default: CurrentPositionTiltPercentage\n");
-            err = Test4ReadTheRoOptionalAttributeDefaultCurrentPositionTiltPercentage_52();
-            break;
-        case 53:
-            ChipLogProgress(
-                chipTool,
-                " ***** Test Step 53 : 5a: write a value into the RO optional attribute: CurrentPositionTiltPercentage\n");
-            err = Test5aWriteAValueIntoTheRoOptionalAttributeCurrentPositionTiltPercentage_53();
-            break;
-        case 54:
-            ChipLogProgress(chipTool,
-                            " ***** Test Step 54 : 5b: reads back the RO optional attribute: CurrentPositionTiltPercentage\n");
-            err = Test5bReadsBackTheRoOptionalAttributeCurrentPositionTiltPercentage_54();
+                            " ***** Test Step 52 : 5b: reads back the RO optional attribute: CurrentPositionTiltPercentage\n");
+            err = Test5bReadsBackTheRoOptionalAttributeCurrentPositionTiltPercentage_52();
             break;
         }
 
@@ -57253,7 +57245,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 55;
+    const uint16_t mTestCount = 53;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -57285,7 +57277,7 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_1(error);
     }
 
-    static void OnSuccessCallback_1(void * context, uint8_t type)
+    static void OnSuccessCallback_1(void * context, chip::app::Clusters::WindowCovering::Type type)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_1(type);
     }
@@ -57302,9 +57294,9 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_3(error);
     }
 
-    static void OnSuccessCallback_3(void * context, uint8_t type)
+    static void OnSuccessCallback_3(void * context, uint8_t configStatus)
     {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_3(type);
+        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_3(configStatus);
     }
 
     static void OnFailureCallback_4(void * context, CHIP_ERROR error)
@@ -57312,26 +57304,26 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_4(error);
     }
 
-    static void OnSuccessCallback_4(void * context, uint8_t configStatus)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_4(configStatus);
-    }
+    static void OnSuccessCallback_4(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_4(); }
 
     static void OnFailureCallback_5(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_5(error);
     }
 
-    static void OnSuccessCallback_5(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_5(); }
+    static void OnSuccessCallback_5(void * context, uint8_t configStatus)
+    {
+        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_5(configStatus);
+    }
 
     static void OnFailureCallback_6(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_6(error);
     }
 
-    static void OnSuccessCallback_6(void * context, uint8_t configStatus)
+    static void OnSuccessCallback_6(void * context, uint8_t operationalStatus)
     {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_6(configStatus);
+        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_6(operationalStatus);
     }
 
     static void OnFailureCallback_7(void * context, CHIP_ERROR error)
@@ -57339,26 +57331,26 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_7(error);
     }
 
-    static void OnSuccessCallback_7(void * context, uint8_t operationalStatus)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_7(operationalStatus);
-    }
+    static void OnSuccessCallback_7(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_7(); }
 
     static void OnFailureCallback_8(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_8(error);
     }
 
-    static void OnSuccessCallback_8(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_8(); }
+    static void OnSuccessCallback_8(void * context, uint8_t operationalStatus)
+    {
+        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_8(operationalStatus);
+    }
 
     static void OnFailureCallback_9(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_9(error);
     }
 
-    static void OnSuccessCallback_9(void * context, uint8_t operationalStatus)
+    static void OnSuccessCallback_9(void * context, chip::app::Clusters::WindowCovering::EndProductType endProductType)
     {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_9(operationalStatus);
+        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_9(endProductType);
     }
 
     static void OnFailureCallback_10(void * context, CHIP_ERROR error)
@@ -57366,27 +57358,24 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_10(error);
     }
 
-    static void OnSuccessCallback_10(void * context, uint8_t endProductType)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_10(endProductType);
-    }
+    static void OnSuccessCallback_10(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_10(); }
 
     static void OnFailureCallback_11(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_11(error);
     }
 
-    static void OnSuccessCallback_11(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_11(); }
+    static void OnSuccessCallback_11(void * context, uint8_t mode)
+    {
+        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_11(mode);
+    }
 
     static void OnFailureCallback_12(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_12(error);
     }
 
-    static void OnSuccessCallback_12(void * context, uint8_t endProductType)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_12(endProductType);
-    }
+    static void OnSuccessCallback_12(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_12(); }
 
     static void OnFailureCallback_13(void * context, CHIP_ERROR error)
     {
@@ -57403,17 +57392,18 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_14(error);
     }
 
-    static void OnSuccessCallback_14(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_14(); }
+    static void OnSuccessCallback_14(void * context,
+                                     const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionLiftPercent100ths)
+    {
+        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_14(targetPositionLiftPercent100ths);
+    }
 
     static void OnFailureCallback_15(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_15(error);
     }
 
-    static void OnSuccessCallback_15(void * context, uint8_t mode)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_15(mode);
-    }
+    static void OnSuccessCallback_15(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_15(); }
 
     static void OnFailureCallback_16(void * context, CHIP_ERROR error)
     {
@@ -57431,18 +57421,18 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_17(error);
     }
 
-    static void OnSuccessCallback_17(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_17(); }
+    static void OnSuccessCallback_17(void * context,
+                                     const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionTiltPercent100ths)
+    {
+        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_17(targetPositionTiltPercent100ths);
+    }
 
     static void OnFailureCallback_18(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_18(error);
     }
 
-    static void OnSuccessCallback_18(void * context,
-                                     const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionLiftPercent100ths)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_18(targetPositionLiftPercent100ths);
-    }
+    static void OnSuccessCallback_18(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_18(); }
 
     static void OnFailureCallback_19(void * context, CHIP_ERROR error)
     {
@@ -57460,18 +57450,18 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_20(error);
     }
 
-    static void OnSuccessCallback_20(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_20(); }
+    static void OnSuccessCallback_20(void * context,
+                                     const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionLiftPercent100ths)
+    {
+        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_20(currentPositionLiftPercent100ths);
+    }
 
     static void OnFailureCallback_21(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_21(error);
     }
 
-    static void OnSuccessCallback_21(void * context,
-                                     const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionTiltPercent100ths)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_21(targetPositionTiltPercent100ths);
-    }
+    static void OnSuccessCallback_21(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_21(); }
 
     static void OnFailureCallback_22(void * context, CHIP_ERROR error)
     {
@@ -57489,18 +57479,18 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_23(error);
     }
 
-    static void OnSuccessCallback_23(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_23(); }
+    static void OnSuccessCallback_23(void * context,
+                                     const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionTiltPercent100ths)
+    {
+        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_23(currentPositionTiltPercent100ths);
+    }
 
     static void OnFailureCallback_24(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_24(error);
     }
 
-    static void OnSuccessCallback_24(void * context,
-                                     const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionLiftPercent100ths)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_24(currentPositionLiftPercent100ths);
-    }
+    static void OnSuccessCallback_24(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_24(); }
 
     static void OnFailureCallback_25(void * context, CHIP_ERROR error)
     {
@@ -57518,18 +57508,17 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_26(error);
     }
 
-    static void OnSuccessCallback_26(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_26(); }
+    static void OnSuccessCallback_26(void * context, uint16_t installedOpenLimitLift)
+    {
+        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_26(installedOpenLimitLift);
+    }
 
     static void OnFailureCallback_27(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_27(error);
     }
 
-    static void OnSuccessCallback_27(void * context,
-                                     const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionTiltPercent100ths)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_27(currentPositionTiltPercent100ths);
-    }
+    static void OnSuccessCallback_27(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_27(); }
 
     static void OnFailureCallback_28(void * context, CHIP_ERROR error)
     {
@@ -57546,17 +57535,17 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_29(error);
     }
 
-    static void OnSuccessCallback_29(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_29(); }
+    static void OnSuccessCallback_29(void * context, uint16_t installedClosedLimitLift)
+    {
+        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_29(installedClosedLimitLift);
+    }
 
     static void OnFailureCallback_30(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_30(error);
     }
 
-    static void OnSuccessCallback_30(void * context, uint16_t installedOpenLimitLift)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_30(installedOpenLimitLift);
-    }
+    static void OnSuccessCallback_30(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_30(); }
 
     static void OnFailureCallback_31(void * context, CHIP_ERROR error)
     {
@@ -57573,17 +57562,17 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_32(error);
     }
 
-    static void OnSuccessCallback_32(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_32(); }
+    static void OnSuccessCallback_32(void * context, uint16_t installedOpenLimitTilt)
+    {
+        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_32(installedOpenLimitTilt);
+    }
 
     static void OnFailureCallback_33(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_33(error);
     }
 
-    static void OnSuccessCallback_33(void * context, uint16_t installedClosedLimitLift)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_33(installedClosedLimitLift);
-    }
+    static void OnSuccessCallback_33(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_33(); }
 
     static void OnFailureCallback_34(void * context, CHIP_ERROR error)
     {
@@ -57600,17 +57589,17 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_35(error);
     }
 
-    static void OnSuccessCallback_35(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_35(); }
+    static void OnSuccessCallback_35(void * context, uint16_t installedClosedLimitTilt)
+    {
+        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_35(installedClosedLimitTilt);
+    }
 
     static void OnFailureCallback_36(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_36(error);
     }
 
-    static void OnSuccessCallback_36(void * context, uint16_t installedOpenLimitTilt)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_36(installedOpenLimitTilt);
-    }
+    static void OnSuccessCallback_36(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_36(); }
 
     static void OnFailureCallback_37(void * context, CHIP_ERROR error)
     {
@@ -57627,17 +57616,17 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_38(error);
     }
 
-    static void OnSuccessCallback_38(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_38(); }
+    static void OnSuccessCallback_38(void * context, uint16_t safetyStatus)
+    {
+        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_38(safetyStatus);
+    }
 
     static void OnFailureCallback_39(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_39(error);
     }
 
-    static void OnSuccessCallback_39(void * context, uint16_t installedClosedLimitTilt)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_39(installedClosedLimitTilt);
-    }
+    static void OnSuccessCallback_39(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_39(); }
 
     static void OnFailureCallback_40(void * context, CHIP_ERROR error)
     {
@@ -57654,17 +57643,17 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_41(error);
     }
 
-    static void OnSuccessCallback_41(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_41(); }
+    static void OnSuccessCallback_41(void * context, const chip::app::DataModel::Nullable<uint16_t> & currentPositionLift)
+    {
+        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_41(currentPositionLift);
+    }
 
     static void OnFailureCallback_42(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_42(error);
     }
 
-    static void OnSuccessCallback_42(void * context, uint16_t safetyStatus)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_42(safetyStatus);
-    }
+    static void OnSuccessCallback_42(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_42(); }
 
     static void OnFailureCallback_43(void * context, CHIP_ERROR error)
     {
@@ -57681,17 +57670,17 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_44(error);
     }
 
-    static void OnSuccessCallback_44(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_44(); }
+    static void OnSuccessCallback_44(void * context, const chip::app::DataModel::Nullable<uint16_t> & currentPositionTilt)
+    {
+        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_44(currentPositionTilt);
+    }
 
     static void OnFailureCallback_45(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_45(error);
     }
 
-    static void OnSuccessCallback_45(void * context, const chip::app::DataModel::Nullable<uint16_t> & currentPositionLift)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_45(currentPositionLift);
-    }
+    static void OnSuccessCallback_45(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_45(); }
 
     static void OnFailureCallback_46(void * context, CHIP_ERROR error)
     {
@@ -57708,17 +57697,18 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_47(error);
     }
 
-    static void OnSuccessCallback_47(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_47(); }
+    static void OnSuccessCallback_47(void * context,
+                                     const chip::app::DataModel::Nullable<chip::Percent> & currentPositionLiftPercentage)
+    {
+        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_47(currentPositionLiftPercentage);
+    }
 
     static void OnFailureCallback_48(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_48(error);
     }
 
-    static void OnSuccessCallback_48(void * context, const chip::app::DataModel::Nullable<uint16_t> & currentPositionTilt)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_48(currentPositionTilt);
-    }
+    static void OnSuccessCallback_48(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_48(); }
 
     static void OnFailureCallback_49(void * context, CHIP_ERROR error)
     {
@@ -57736,18 +57726,18 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_50(error);
     }
 
-    static void OnSuccessCallback_50(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_50(); }
+    static void OnSuccessCallback_50(void * context,
+                                     const chip::app::DataModel::Nullable<chip::Percent> & currentPositionTiltPercentage)
+    {
+        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_50(currentPositionTiltPercentage);
+    }
 
     static void OnFailureCallback_51(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_51(error);
     }
 
-    static void OnSuccessCallback_51(void * context,
-                                     const chip::app::DataModel::Nullable<chip::Percent> & currentPositionLiftPercentage)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_51(currentPositionLiftPercentage);
-    }
+    static void OnSuccessCallback_51(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_51(); }
 
     static void OnFailureCallback_52(void * context, CHIP_ERROR error)
     {
@@ -57758,24 +57748,6 @@ private:
                                      const chip::app::DataModel::Nullable<chip::Percent> & currentPositionTiltPercentage)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_52(currentPositionTiltPercentage);
-    }
-
-    static void OnFailureCallback_53(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_53(error);
-    }
-
-    static void OnSuccessCallback_53(void * context) { (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_53(); }
-
-    static void OnFailureCallback_54(void * context, CHIP_ERROR error)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_54(error);
-    }
-
-    static void OnSuccessCallback_54(void * context,
-                                     const chip::app::DataModel::Nullable<chip::Percent> & currentPositionTiltPercentage)
-    {
-        (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_54(currentPositionTiltPercentage);
     }
 
     //
@@ -57805,7 +57777,7 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_1(uint8_t type)
+    void OnSuccessResponse_1(chip::app::Clusters::WindowCovering::Type type)
     {
         VerifyOrReturn(CheckConstraintType("type", "", "enum8"));
         VerifyOrReturn(CheckConstraintMinValue("type", type, 0));
@@ -57819,8 +57791,8 @@ private:
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t typeArgument;
-        typeArgument = 250;
+        chip::app::Clusters::WindowCovering::Type typeArgument;
+        typeArgument = static_cast<chip::app::Clusters::WindowCovering::Type>(250);
 
         ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::Type::TypeInfo>(
             typeArgument, this, OnSuccessCallback_2, OnFailureCallback_2));
@@ -57836,13 +57808,13 @@ private:
 
     void OnSuccessResponse_2() { ThrowSuccessResponse(); }
 
-    CHIP_ERROR Test3bReadsBackTheRoMandatoryAttributeType_3()
+    CHIP_ERROR Test2ReadTheRoMandatoryAttributeDefaultConfigStatus_3()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::Type::TypeInfo>(
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::ConfigStatus::TypeInfo>(
             this, OnSuccessCallback_3, OnFailureCallback_3, true));
         return CHIP_NO_ERROR;
     }
@@ -57853,32 +57825,7 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_3(uint8_t type)
-    {
-        VerifyOrReturn(CheckConstraintType("type", "", "enum8"));
-        VerifyOrReturn(CheckConstraintNotValue("type", type, 250));
-
-        NextTest();
-    }
-
-    CHIP_ERROR Test2ReadTheRoMandatoryAttributeDefaultConfigStatus_4()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::WindowCoveringClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::ConfigStatus::TypeInfo>(
-            this, OnSuccessCallback_4, OnFailureCallback_4, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_4(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_4(uint8_t configStatus)
+    void OnSuccessResponse_3(uint8_t configStatus)
     {
         VerifyOrReturn(CheckConstraintType("configStatus", "", "map8"));
         VerifyOrReturn(CheckConstraintMinValue("configStatus", configStatus, 0));
@@ -57886,7 +57833,7 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR Test3aWriteAValueIntoTheRoMandatoryAttributeConfigStatus_5()
+    CHIP_ERROR Test3aWriteAValueIntoTheRoMandatoryAttributeConfigStatus_4()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
@@ -57896,26 +57843,51 @@ private:
         configStatusArgument = 128;
 
         ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::ConfigStatus::TypeInfo>(
-            configStatusArgument, this, OnSuccessCallback_5, OnFailureCallback_5));
+            configStatusArgument, this, OnSuccessCallback_4, OnFailureCallback_4));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_5(CHIP_ERROR error)
+    void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
         NextTest();
     }
 
-    void OnSuccessResponse_5() { ThrowSuccessResponse(); }
+    void OnSuccessResponse_4() { ThrowSuccessResponse(); }
 
-    CHIP_ERROR Test3bReadsBackTheRoMandatoryAttributeConfigStatus_6()
+    CHIP_ERROR Test3bReadsBackTheRoMandatoryAttributeConfigStatus_5()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::ConfigStatus::TypeInfo>(
+            this, OnSuccessCallback_5, OnFailureCallback_5, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_5(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_5(uint8_t configStatus)
+    {
+        VerifyOrReturn(CheckConstraintType("configStatus", "", "map8"));
+        VerifyOrReturn(CheckConstraintNotValue("configStatus", configStatus, 128));
+
+        NextTest();
+    }
+
+    CHIP_ERROR Test2ReadTheRoMandatoryAttributeDefaultOperationalStatus_6()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::WindowCoveringClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::OperationalStatus::TypeInfo>(
             this, OnSuccessCallback_6, OnFailureCallback_6, true));
         return CHIP_NO_ERROR;
     }
@@ -57926,32 +57898,7 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_6(uint8_t configStatus)
-    {
-        VerifyOrReturn(CheckConstraintType("configStatus", "", "map8"));
-        VerifyOrReturn(CheckConstraintNotValue("configStatus", configStatus, 128));
-
-        NextTest();
-    }
-
-    CHIP_ERROR Test2ReadTheRoMandatoryAttributeDefaultOperationalStatus_7()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::WindowCoveringClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::OperationalStatus::TypeInfo>(
-            this, OnSuccessCallback_7, OnFailureCallback_7, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_7(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_7(uint8_t operationalStatus)
+    void OnSuccessResponse_6(uint8_t operationalStatus)
     {
         VerifyOrReturn(CheckConstraintType("operationalStatus", "", "map8"));
         VerifyOrReturn(CheckConstraintMinValue("operationalStatus", operationalStatus, 0));
@@ -57959,7 +57906,7 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR Test3aWriteAValueIntoTheRoMandatoryAttributeOperationalStatus_8()
+    CHIP_ERROR Test3aWriteAValueIntoTheRoMandatoryAttributeOperationalStatus_7()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
@@ -57969,26 +57916,51 @@ private:
         operationalStatusArgument = 128;
 
         ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::OperationalStatus::TypeInfo>(
-            operationalStatusArgument, this, OnSuccessCallback_8, OnFailureCallback_8));
+            operationalStatusArgument, this, OnSuccessCallback_7, OnFailureCallback_7));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_8(CHIP_ERROR error)
+    void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
         NextTest();
     }
 
-    void OnSuccessResponse_8() { ThrowSuccessResponse(); }
+    void OnSuccessResponse_7() { ThrowSuccessResponse(); }
 
-    CHIP_ERROR Test3bReadsBackTheRoMandatoryAttributeOperationalStatus_9()
+    CHIP_ERROR Test3bReadsBackTheRoMandatoryAttributeOperationalStatus_8()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::OperationalStatus::TypeInfo>(
+            this, OnSuccessCallback_8, OnFailureCallback_8, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_8(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_8(uint8_t operationalStatus)
+    {
+        VerifyOrReturn(CheckConstraintType("operationalStatus", "", "map8"));
+        VerifyOrReturn(CheckConstraintNotValue("operationalStatus", operationalStatus, 128));
+
+        NextTest();
+    }
+
+    CHIP_ERROR Test2ReadTheRoMandatoryAttributeDefaultEndProductType_9()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::WindowCoveringClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::EndProductType::TypeInfo>(
             this, OnSuccessCallback_9, OnFailureCallback_9, true));
         return CHIP_NO_ERROR;
     }
@@ -57999,32 +57971,7 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_9(uint8_t operationalStatus)
-    {
-        VerifyOrReturn(CheckConstraintType("operationalStatus", "", "map8"));
-        VerifyOrReturn(CheckConstraintNotValue("operationalStatus", operationalStatus, 128));
-
-        NextTest();
-    }
-
-    CHIP_ERROR Test2ReadTheRoMandatoryAttributeDefaultEndProductType_10()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::WindowCoveringClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::EndProductType::TypeInfo>(
-            this, OnSuccessCallback_10, OnFailureCallback_10, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_10(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_10(uint8_t endProductType)
+    void OnSuccessResponse_9(chip::app::Clusters::WindowCovering::EndProductType endProductType)
     {
         VerifyOrReturn(CheckConstraintType("endProductType", "", "enum8"));
         VerifyOrReturn(CheckConstraintMinValue("endProductType", endProductType, 0));
@@ -58032,37 +57979,65 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR Test3aWriteAValueIntoTheRoMandatoryAttributeEndProductType_11()
+    CHIP_ERROR Test3aWriteAValueIntoTheRoMandatoryAttributeEndProductType_10()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t endProductTypeArgument;
-        endProductTypeArgument = 250;
+        chip::app::Clusters::WindowCovering::EndProductType endProductTypeArgument;
+        endProductTypeArgument = static_cast<chip::app::Clusters::WindowCovering::EndProductType>(250);
 
         ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::EndProductType::TypeInfo>(
-            endProductTypeArgument, this, OnSuccessCallback_11, OnFailureCallback_11));
+            endProductTypeArgument, this, OnSuccessCallback_10, OnFailureCallback_10));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_11(CHIP_ERROR error)
+    void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
         NextTest();
     }
 
-    void OnSuccessResponse_11() { ThrowSuccessResponse(); }
+    void OnSuccessResponse_10() { ThrowSuccessResponse(); }
 
-    CHIP_ERROR Test3bReadsBackTheRoMandatoryAttributeEndProductType_12()
+    CHIP_ERROR Test2ReadTheRwMandatoryAttributeDefaultMode_11()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::EndProductType::TypeInfo>(
-            this, OnSuccessCallback_12, OnFailureCallback_12, true));
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::Mode::TypeInfo>(
+            this, OnSuccessCallback_11, OnFailureCallback_11, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_11(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_11(uint8_t mode)
+    {
+        VerifyOrReturn(CheckConstraintType("mode", "", "map8"));
+        VerifyOrReturn(CheckConstraintMinValue("mode", mode, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("mode", mode, 15));
+        NextTest();
+    }
+
+    CHIP_ERROR Test3aWriteAValueIntoTheRwMandatoryAttributeMode_12()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::WindowCoveringClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        uint8_t modeArgument;
+        modeArgument = 8;
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::Mode::TypeInfo>(
+            modeArgument, this, OnSuccessCallback_12, OnFailureCallback_12));
         return CHIP_NO_ERROR;
     }
 
@@ -58072,15 +58047,9 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_12(uint8_t endProductType)
-    {
-        VerifyOrReturn(CheckConstraintType("endProductType", "", "enum8"));
-        VerifyOrReturn(CheckConstraintNotValue("endProductType", endProductType, 250));
+    void OnSuccessResponse_12() { NextTest(); }
 
-        NextTest();
-    }
-
-    CHIP_ERROR Test2ReadTheRwMandatoryAttributeDefaultMode_13()
+    CHIP_ERROR Test3bReadsBackTheRwMandatoryAttributeMode_13()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
@@ -58099,23 +58068,20 @@ private:
 
     void OnSuccessResponse_13(uint8_t mode)
     {
-        VerifyOrReturn(CheckConstraintType("mode", "", "map8"));
-        VerifyOrReturn(CheckConstraintMinValue("mode", mode, 0));
-        VerifyOrReturn(CheckConstraintMaxValue("mode", mode, 15));
+        VerifyOrReturn(CheckValue("mode", mode, 8));
+
         NextTest();
     }
 
-    CHIP_ERROR Test3aWriteAValueIntoTheRwMandatoryAttributeMode_14()
+    CHIP_ERROR Test2ReadTheRoOptionalAttributeDefaultTargetPositionLiftPercent100ths_14()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t modeArgument;
-        modeArgument = 8;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::Mode::TypeInfo>(
-            modeArgument, this, OnSuccessCallback_14, OnFailureCallback_14));
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::TargetPositionLiftPercent100ths::TypeInfo>(
+                this, OnSuccessCallback_14, OnFailureCallback_14, true));
         return CHIP_NO_ERROR;
     }
 
@@ -58125,33 +58091,40 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_14() { NextTest(); }
+    void OnSuccessResponse_14(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionLiftPercent100ths)
+    {
+        VerifyOrReturn(CheckConstraintType("targetPositionLiftPercent100ths", "", "Percent100ths"));
+        VerifyOrReturn(CheckConstraintMinValue("targetPositionLiftPercent100ths", targetPositionLiftPercent100ths, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("targetPositionLiftPercent100ths", targetPositionLiftPercent100ths, 10000U));
+        NextTest();
+    }
 
-    CHIP_ERROR Test3bReadsBackTheRwMandatoryAttributeMode_15()
+    CHIP_ERROR Test3aWriteAValueIntoTheRoOptionalAttributeTargetPositionLiftPercent100ths_15()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::Mode::TypeInfo>(
-            this, OnSuccessCallback_15, OnFailureCallback_15, true));
+        chip::app::DataModel::Nullable<chip::Percent100ths> targetPositionLiftPercent100thsArgument;
+        targetPositionLiftPercent100thsArgument.SetNonNull();
+        targetPositionLiftPercent100thsArgument.Value() = 20000U;
+
+        ReturnErrorOnFailure(
+            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::TargetPositionLiftPercent100ths::TypeInfo>(
+                targetPositionLiftPercent100thsArgument, this, OnSuccessCallback_15, OnFailureCallback_15));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_15(uint8_t mode)
-    {
-        VerifyOrReturn(CheckValue("mode", mode, 8));
-
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
         NextTest();
     }
 
-    CHIP_ERROR Test2ReadTheRoOptionalAttributeDefaultTargetPositionLiftPercent100ths_16()
+    void OnSuccessResponse_15() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR Test3bReadsBackTheRoOptionalAttributeTargetPositionLiftPercent100ths_16()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
@@ -58172,63 +58145,63 @@ private:
     void OnSuccessResponse_16(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionLiftPercent100ths)
     {
         VerifyOrReturn(CheckConstraintType("targetPositionLiftPercent100ths", "", "Percent100ths"));
-        VerifyOrReturn(CheckConstraintMinValue("targetPositionLiftPercent100ths", targetPositionLiftPercent100ths, 0U));
-        VerifyOrReturn(CheckConstraintMaxValue("targetPositionLiftPercent100ths", targetPositionLiftPercent100ths, 10000U));
+        VerifyOrReturn(CheckConstraintNotValue("targetPositionLiftPercent100ths", targetPositionLiftPercent100ths, 20000U));
+
         NextTest();
     }
 
-    CHIP_ERROR Test3aWriteAValueIntoTheRoOptionalAttributeTargetPositionLiftPercent100ths_17()
+    CHIP_ERROR Test2ReadTheRoOptionalAttributeDefaultTargetPositionTiltPercent100ths_17()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        chip::app::DataModel::Nullable<chip::Percent100ths> targetPositionLiftPercent100thsArgument;
-        targetPositionLiftPercent100thsArgument.SetNonNull();
-        targetPositionLiftPercent100thsArgument.Value() = 20000U;
-
         ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::TargetPositionLiftPercent100ths::TypeInfo>(
-                targetPositionLiftPercent100thsArgument, this, OnSuccessCallback_17, OnFailureCallback_17));
+            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::TargetPositionTiltPercent100ths::TypeInfo>(
+                this, OnSuccessCallback_17, OnFailureCallback_17, true));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_17(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionTiltPercent100ths)
+    {
+        VerifyOrReturn(CheckConstraintType("targetPositionTiltPercent100ths", "", "Percent100ths"));
+        VerifyOrReturn(CheckConstraintMinValue("targetPositionTiltPercent100ths", targetPositionTiltPercent100ths, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("targetPositionTiltPercent100ths", targetPositionTiltPercent100ths, 10000U));
         NextTest();
     }
 
-    void OnSuccessResponse_17() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR Test3bReadsBackTheRoOptionalAttributeTargetPositionLiftPercent100ths_18()
+    CHIP_ERROR Test3aWriteAValueIntoTheRoOptionalAttributeTargetPositionTiltPercent100ths_18()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
+        chip::app::DataModel::Nullable<chip::Percent100ths> targetPositionTiltPercent100thsArgument;
+        targetPositionTiltPercent100thsArgument.SetNonNull();
+        targetPositionTiltPercent100thsArgument.Value() = 20000U;
+
         ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::TargetPositionLiftPercent100ths::TypeInfo>(
-                this, OnSuccessCallback_18, OnFailureCallback_18, true));
+            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::TargetPositionTiltPercent100ths::TypeInfo>(
+                targetPositionTiltPercent100thsArgument, this, OnSuccessCallback_18, OnFailureCallback_18));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_18(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionLiftPercent100ths)
-    {
-        VerifyOrReturn(CheckConstraintType("targetPositionLiftPercent100ths", "", "Percent100ths"));
-        VerifyOrReturn(CheckConstraintNotValue("targetPositionLiftPercent100ths", targetPositionLiftPercent100ths, 20000U));
-
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
         NextTest();
     }
 
-    CHIP_ERROR Test2ReadTheRoOptionalAttributeDefaultTargetPositionTiltPercent100ths_19()
+    void OnSuccessResponse_18() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR Test3bReadsBackTheRoOptionalAttributeTargetPositionTiltPercent100ths_19()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
@@ -58249,63 +58222,63 @@ private:
     void OnSuccessResponse_19(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionTiltPercent100ths)
     {
         VerifyOrReturn(CheckConstraintType("targetPositionTiltPercent100ths", "", "Percent100ths"));
-        VerifyOrReturn(CheckConstraintMinValue("targetPositionTiltPercent100ths", targetPositionTiltPercent100ths, 0U));
-        VerifyOrReturn(CheckConstraintMaxValue("targetPositionTiltPercent100ths", targetPositionTiltPercent100ths, 10000U));
+        VerifyOrReturn(CheckConstraintNotValue("targetPositionTiltPercent100ths", targetPositionTiltPercent100ths, 20000U));
+
         NextTest();
     }
 
-    CHIP_ERROR Test3aWriteAValueIntoTheRoOptionalAttributeTargetPositionTiltPercent100ths_20()
+    CHIP_ERROR Test2ReadTheRoOptionalAttributeDefaultCurrentPositionLiftPercent100ths_20()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        chip::app::DataModel::Nullable<chip::Percent100ths> targetPositionTiltPercent100thsArgument;
-        targetPositionTiltPercent100thsArgument.SetNonNull();
-        targetPositionTiltPercent100thsArgument.Value() = 20000U;
-
         ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::TargetPositionTiltPercent100ths::TypeInfo>(
-                targetPositionTiltPercent100thsArgument, this, OnSuccessCallback_20, OnFailureCallback_20));
+            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionLiftPercent100ths::TypeInfo>(
+                this, OnSuccessCallback_20, OnFailureCallback_20, true));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_20(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_20(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionLiftPercent100ths)
+    {
+        VerifyOrReturn(CheckConstraintType("currentPositionLiftPercent100ths", "", "Percent100ths"));
+        VerifyOrReturn(CheckConstraintMinValue("currentPositionLiftPercent100ths", currentPositionLiftPercent100ths, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("currentPositionLiftPercent100ths", currentPositionLiftPercent100ths, 10000U));
         NextTest();
     }
 
-    void OnSuccessResponse_20() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR Test3bReadsBackTheRoOptionalAttributeTargetPositionTiltPercent100ths_21()
+    CHIP_ERROR Test3aWriteAValueIntoTheRoOptionalAttributeCurrentPositionLiftPercent100ths_21()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
+        chip::app::DataModel::Nullable<chip::Percent100ths> currentPositionLiftPercent100thsArgument;
+        currentPositionLiftPercent100thsArgument.SetNonNull();
+        currentPositionLiftPercent100thsArgument.Value() = 20000U;
+
         ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::TargetPositionTiltPercent100ths::TypeInfo>(
-                this, OnSuccessCallback_21, OnFailureCallback_21, true));
+            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionLiftPercent100ths::TypeInfo>(
+                currentPositionLiftPercent100thsArgument, this, OnSuccessCallback_21, OnFailureCallback_21));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_21(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionTiltPercent100ths)
-    {
-        VerifyOrReturn(CheckConstraintType("targetPositionTiltPercent100ths", "", "Percent100ths"));
-        VerifyOrReturn(CheckConstraintNotValue("targetPositionTiltPercent100ths", targetPositionTiltPercent100ths, 20000U));
-
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
         NextTest();
     }
 
-    CHIP_ERROR Test2ReadTheRoOptionalAttributeDefaultCurrentPositionLiftPercent100ths_22()
+    void OnSuccessResponse_21() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR Test3bReadsBackTheRoOptionalAttributeCurrentPositionLiftPercent100ths_22()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
@@ -58326,63 +58299,63 @@ private:
     void OnSuccessResponse_22(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionLiftPercent100ths)
     {
         VerifyOrReturn(CheckConstraintType("currentPositionLiftPercent100ths", "", "Percent100ths"));
-        VerifyOrReturn(CheckConstraintMinValue("currentPositionLiftPercent100ths", currentPositionLiftPercent100ths, 0U));
-        VerifyOrReturn(CheckConstraintMaxValue("currentPositionLiftPercent100ths", currentPositionLiftPercent100ths, 10000U));
+        VerifyOrReturn(CheckConstraintNotValue("currentPositionLiftPercent100ths", currentPositionLiftPercent100ths, 20000U));
+
         NextTest();
     }
 
-    CHIP_ERROR Test3aWriteAValueIntoTheRoOptionalAttributeCurrentPositionLiftPercent100ths_23()
+    CHIP_ERROR Test2ReadTheRoOptionalAttributeDefaultCurrentPositionTiltPercent100ths_23()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        chip::app::DataModel::Nullable<chip::Percent100ths> currentPositionLiftPercent100thsArgument;
-        currentPositionLiftPercent100thsArgument.SetNonNull();
-        currentPositionLiftPercent100thsArgument.Value() = 20000U;
-
         ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionLiftPercent100ths::TypeInfo>(
-                currentPositionLiftPercent100thsArgument, this, OnSuccessCallback_23, OnFailureCallback_23));
+            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionTiltPercent100ths::TypeInfo>(
+                this, OnSuccessCallback_23, OnFailureCallback_23, true));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_23(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_23(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionTiltPercent100ths)
+    {
+        VerifyOrReturn(CheckConstraintType("currentPositionTiltPercent100ths", "", "Percent100ths"));
+        VerifyOrReturn(CheckConstraintMinValue("currentPositionTiltPercent100ths", currentPositionTiltPercent100ths, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("currentPositionTiltPercent100ths", currentPositionTiltPercent100ths, 10000U));
         NextTest();
     }
 
-    void OnSuccessResponse_23() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR Test3bReadsBackTheRoOptionalAttributeCurrentPositionLiftPercent100ths_24()
+    CHIP_ERROR Test3aWriteAValueIntoTheRoOptionalAttributeCurrentPositionTiltPercent100ths_24()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
+        chip::app::DataModel::Nullable<chip::Percent100ths> currentPositionTiltPercent100thsArgument;
+        currentPositionTiltPercent100thsArgument.SetNonNull();
+        currentPositionTiltPercent100thsArgument.Value() = 20000U;
+
         ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionLiftPercent100ths::TypeInfo>(
-                this, OnSuccessCallback_24, OnFailureCallback_24, true));
+            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionTiltPercent100ths::TypeInfo>(
+                currentPositionTiltPercent100thsArgument, this, OnSuccessCallback_24, OnFailureCallback_24));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_24(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_24(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionLiftPercent100ths)
-    {
-        VerifyOrReturn(CheckConstraintType("currentPositionLiftPercent100ths", "", "Percent100ths"));
-        VerifyOrReturn(CheckConstraintNotValue("currentPositionLiftPercent100ths", currentPositionLiftPercent100ths, 20000U));
-
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
         NextTest();
     }
 
-    CHIP_ERROR Test2ReadTheRoOptionalAttributeDefaultCurrentPositionTiltPercent100ths_25()
+    void OnSuccessResponse_24() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR Test3bReadsBackTheRoOptionalAttributeCurrentPositionTiltPercent100ths_25()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
@@ -58403,63 +58376,62 @@ private:
     void OnSuccessResponse_25(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionTiltPercent100ths)
     {
         VerifyOrReturn(CheckConstraintType("currentPositionTiltPercent100ths", "", "Percent100ths"));
-        VerifyOrReturn(CheckConstraintMinValue("currentPositionTiltPercent100ths", currentPositionTiltPercent100ths, 0U));
-        VerifyOrReturn(CheckConstraintMaxValue("currentPositionTiltPercent100ths", currentPositionTiltPercent100ths, 10000U));
+        VerifyOrReturn(CheckConstraintNotValue("currentPositionTiltPercent100ths", currentPositionTiltPercent100ths, 20000U));
+
         NextTest();
     }
 
-    CHIP_ERROR Test3aWriteAValueIntoTheRoOptionalAttributeCurrentPositionTiltPercent100ths_26()
+    CHIP_ERROR Test2ReadTheRoOptionalAttributeDefaultInstalledOpenLimitLift_26()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        chip::app::DataModel::Nullable<chip::Percent100ths> currentPositionTiltPercent100thsArgument;
-        currentPositionTiltPercent100thsArgument.SetNonNull();
-        currentPositionTiltPercent100thsArgument.Value() = 20000U;
-
         ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionTiltPercent100ths::TypeInfo>(
-                currentPositionTiltPercent100thsArgument, this, OnSuccessCallback_26, OnFailureCallback_26));
+            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::InstalledOpenLimitLift::TypeInfo>(
+                this, OnSuccessCallback_26, OnFailureCallback_26, true));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_26(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_26(uint16_t installedOpenLimitLift)
+    {
+        VerifyOrReturn(CheckConstraintType("installedOpenLimitLift", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("installedOpenLimitLift", installedOpenLimitLift, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("installedOpenLimitLift", installedOpenLimitLift, 65535U));
         NextTest();
     }
 
-    void OnSuccessResponse_26() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR Test3bReadsBackTheRoOptionalAttributeCurrentPositionTiltPercent100ths_27()
+    CHIP_ERROR Test3aWriteAValueIntoTheRoOptionalAttributeInstalledOpenLimitLift_27()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
+        uint16_t installedOpenLimitLiftArgument;
+        installedOpenLimitLiftArgument = 255U;
+
         ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionTiltPercent100ths::TypeInfo>(
-                this, OnSuccessCallback_27, OnFailureCallback_27, true));
+            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::InstalledOpenLimitLift::TypeInfo>(
+                installedOpenLimitLiftArgument, this, OnSuccessCallback_27, OnFailureCallback_27));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_27(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_27(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionTiltPercent100ths)
-    {
-        VerifyOrReturn(CheckConstraintType("currentPositionTiltPercent100ths", "", "Percent100ths"));
-        VerifyOrReturn(CheckConstraintNotValue("currentPositionTiltPercent100ths", currentPositionTiltPercent100ths, 20000U));
-
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
         NextTest();
     }
 
-    CHIP_ERROR Test2ReadTheRoOptionalAttributeDefaultInstalledOpenLimitLift_28()
+    void OnSuccessResponse_27() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR Test3bReadsBackTheRoOptionalAttributeInstalledOpenLimitLift_28()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
@@ -58485,57 +58457,57 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR Test3aWriteAValueIntoTheRoOptionalAttributeInstalledOpenLimitLift_29()
+    CHIP_ERROR Test2ReadTheRoOptionalAttributeDefaultInstalledClosedLimitLift_29()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint16_t installedOpenLimitLiftArgument;
-        installedOpenLimitLiftArgument = 255U;
-
         ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::InstalledOpenLimitLift::TypeInfo>(
-                installedOpenLimitLiftArgument, this, OnSuccessCallback_29, OnFailureCallback_29));
+            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::InstalledClosedLimitLift::TypeInfo>(
+                this, OnSuccessCallback_29, OnFailureCallback_29, true));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_29(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_29(uint16_t installedClosedLimitLift)
+    {
+        VerifyOrReturn(CheckConstraintType("installedClosedLimitLift", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("installedClosedLimitLift", installedClosedLimitLift, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("installedClosedLimitLift", installedClosedLimitLift, 65535U));
         NextTest();
     }
 
-    void OnSuccessResponse_29() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR Test3bReadsBackTheRoOptionalAttributeInstalledOpenLimitLift_30()
+    CHIP_ERROR Test3aWriteAValueIntoTheRoOptionalAttributeInstalledClosedLimitLift_30()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
+        uint16_t installedClosedLimitLiftArgument;
+        installedClosedLimitLiftArgument = 255U;
+
         ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::InstalledOpenLimitLift::TypeInfo>(
-                this, OnSuccessCallback_30, OnFailureCallback_30, true));
+            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::InstalledClosedLimitLift::TypeInfo>(
+                installedClosedLimitLiftArgument, this, OnSuccessCallback_30, OnFailureCallback_30));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_30(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_30(uint16_t installedOpenLimitLift)
-    {
-        VerifyOrReturn(CheckConstraintType("installedOpenLimitLift", "", "uint16"));
-        VerifyOrReturn(CheckConstraintMinValue("installedOpenLimitLift", installedOpenLimitLift, 0U));
-        VerifyOrReturn(CheckConstraintMaxValue("installedOpenLimitLift", installedOpenLimitLift, 65535U));
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
         NextTest();
     }
 
-    CHIP_ERROR Test2ReadTheRoOptionalAttributeDefaultInstalledClosedLimitLift_31()
+    void OnSuccessResponse_30() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR Test3bReadsBackTheRoOptionalAttributeInstalledClosedLimitLift_31()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
@@ -58561,57 +58533,57 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR Test3aWriteAValueIntoTheRoOptionalAttributeInstalledClosedLimitLift_32()
+    CHIP_ERROR Test2ReadTheRoOptionalAttributeDefaultInstalledOpenLimitTilt_32()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint16_t installedClosedLimitLiftArgument;
-        installedClosedLimitLiftArgument = 255U;
-
         ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::InstalledClosedLimitLift::TypeInfo>(
-                installedClosedLimitLiftArgument, this, OnSuccessCallback_32, OnFailureCallback_32));
+            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::InstalledOpenLimitTilt::TypeInfo>(
+                this, OnSuccessCallback_32, OnFailureCallback_32, true));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_32(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_32(uint16_t installedOpenLimitTilt)
+    {
+        VerifyOrReturn(CheckConstraintType("installedOpenLimitTilt", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("installedOpenLimitTilt", installedOpenLimitTilt, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("installedOpenLimitTilt", installedOpenLimitTilt, 65535U));
         NextTest();
     }
 
-    void OnSuccessResponse_32() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR Test3bReadsBackTheRoOptionalAttributeInstalledClosedLimitLift_33()
+    CHIP_ERROR Test3aWriteAValueIntoTheRoOptionalAttributeInstalledOpenLimitTilt_33()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
+        uint16_t installedOpenLimitTiltArgument;
+        installedOpenLimitTiltArgument = 255U;
+
         ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::InstalledClosedLimitLift::TypeInfo>(
-                this, OnSuccessCallback_33, OnFailureCallback_33, true));
+            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::InstalledOpenLimitTilt::TypeInfo>(
+                installedOpenLimitTiltArgument, this, OnSuccessCallback_33, OnFailureCallback_33));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_33(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_33(uint16_t installedClosedLimitLift)
-    {
-        VerifyOrReturn(CheckConstraintType("installedClosedLimitLift", "", "uint16"));
-        VerifyOrReturn(CheckConstraintMinValue("installedClosedLimitLift", installedClosedLimitLift, 0U));
-        VerifyOrReturn(CheckConstraintMaxValue("installedClosedLimitLift", installedClosedLimitLift, 65535U));
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
         NextTest();
     }
 
-    CHIP_ERROR Test2ReadTheRoOptionalAttributeDefaultInstalledOpenLimitTilt_34()
+    void OnSuccessResponse_33() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR Test3bReadsBackTheRoOptionalAttributeInstalledOpenLimitTilt_34()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
@@ -58637,57 +58609,57 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR Test3aWriteAValueIntoTheRoOptionalAttributeInstalledOpenLimitTilt_35()
+    CHIP_ERROR Test2ReadTheRoOptionalAttributeDefaultInstalledClosedLimitTilt_35()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint16_t installedOpenLimitTiltArgument;
-        installedOpenLimitTiltArgument = 255U;
-
         ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::InstalledOpenLimitTilt::TypeInfo>(
-                installedOpenLimitTiltArgument, this, OnSuccessCallback_35, OnFailureCallback_35));
+            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::InstalledClosedLimitTilt::TypeInfo>(
+                this, OnSuccessCallback_35, OnFailureCallback_35, true));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_35(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_35(uint16_t installedClosedLimitTilt)
+    {
+        VerifyOrReturn(CheckConstraintType("installedClosedLimitTilt", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("installedClosedLimitTilt", installedClosedLimitTilt, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("installedClosedLimitTilt", installedClosedLimitTilt, 65535U));
         NextTest();
     }
 
-    void OnSuccessResponse_35() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR Test3bReadsBackTheRoOptionalAttributeInstalledOpenLimitTilt_36()
+    CHIP_ERROR Test3aWriteAValueIntoTheRoOptionalAttributeInstalledClosedLimitTilt_36()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
+        uint16_t installedClosedLimitTiltArgument;
+        installedClosedLimitTiltArgument = 255U;
+
         ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::InstalledOpenLimitTilt::TypeInfo>(
-                this, OnSuccessCallback_36, OnFailureCallback_36, true));
+            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::InstalledClosedLimitTilt::TypeInfo>(
+                installedClosedLimitTiltArgument, this, OnSuccessCallback_36, OnFailureCallback_36));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_36(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_36(uint16_t installedOpenLimitTilt)
-    {
-        VerifyOrReturn(CheckConstraintType("installedOpenLimitTilt", "", "uint16"));
-        VerifyOrReturn(CheckConstraintMinValue("installedOpenLimitTilt", installedOpenLimitTilt, 0U));
-        VerifyOrReturn(CheckConstraintMaxValue("installedOpenLimitTilt", installedOpenLimitTilt, 65535U));
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
         NextTest();
     }
 
-    CHIP_ERROR Test2ReadTheRoOptionalAttributeDefaultInstalledClosedLimitTilt_37()
+    void OnSuccessResponse_36() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR Test3bReadsBackTheRoOptionalAttributeInstalledClosedLimitTilt_37()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
@@ -58713,57 +58685,55 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR Test3aWriteAValueIntoTheRoOptionalAttributeInstalledClosedLimitTilt_38()
+    CHIP_ERROR Test4ReadTheRoMandatoryAttributeDefaultSafetyStatus_38()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint16_t installedClosedLimitTiltArgument;
-        installedClosedLimitTiltArgument = 255U;
-
-        ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::InstalledClosedLimitTilt::TypeInfo>(
-                installedClosedLimitTiltArgument, this, OnSuccessCallback_38, OnFailureCallback_38));
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::SafetyStatus::TypeInfo>(
+            this, OnSuccessCallback_38, OnFailureCallback_38, true));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_38(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_38(uint16_t safetyStatus)
+    {
+        VerifyOrReturn(CheckConstraintType("safetyStatus", "", "map16"));
+        VerifyOrReturn(CheckConstraintMinValue("safetyStatus", safetyStatus, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("safetyStatus", safetyStatus, 2047U));
         NextTest();
     }
 
-    void OnSuccessResponse_38() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR Test3bReadsBackTheRoOptionalAttributeInstalledClosedLimitTilt_39()
+    CHIP_ERROR Test5aWriteAValueIntoTheRoMandatoryAttributeSafetyStatus_39()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::InstalledClosedLimitTilt::TypeInfo>(
-                this, OnSuccessCallback_39, OnFailureCallback_39, true));
+        uint16_t safetyStatusArgument;
+        safetyStatusArgument = 4096U;
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::SafetyStatus::TypeInfo>(
+            safetyStatusArgument, this, OnSuccessCallback_39, OnFailureCallback_39));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_39(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_39(uint16_t installedClosedLimitTilt)
-    {
-        VerifyOrReturn(CheckConstraintType("installedClosedLimitTilt", "", "uint16"));
-        VerifyOrReturn(CheckConstraintMinValue("installedClosedLimitTilt", installedClosedLimitTilt, 0U));
-        VerifyOrReturn(CheckConstraintMaxValue("installedClosedLimitTilt", installedClosedLimitTilt, 65535U));
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
         NextTest();
     }
 
-    CHIP_ERROR Test4ReadTheRoMandatoryAttributeDefaultSafetyStatus_40()
+    void OnSuccessResponse_39() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR Test5bReadsBackTheRoMandatoryAttributeSafetyStatus_40()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
@@ -58783,60 +58753,61 @@ private:
     void OnSuccessResponse_40(uint16_t safetyStatus)
     {
         VerifyOrReturn(CheckConstraintType("safetyStatus", "", "map16"));
-        VerifyOrReturn(CheckConstraintMinValue("safetyStatus", safetyStatus, 0U));
-        VerifyOrReturn(CheckConstraintMaxValue("safetyStatus", safetyStatus, 2047U));
+        VerifyOrReturn(CheckConstraintNotValue("safetyStatus", safetyStatus, 4096U));
+
         NextTest();
     }
 
-    CHIP_ERROR Test5aWriteAValueIntoTheRoMandatoryAttributeSafetyStatus_41()
+    CHIP_ERROR Test4ReadTheRoOptionalAttributeDefaultCurrentPositionLift_41()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint16_t safetyStatusArgument;
-        safetyStatusArgument = 4096U;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::SafetyStatus::TypeInfo>(
-            safetyStatusArgument, this, OnSuccessCallback_41, OnFailureCallback_41));
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionLift::TypeInfo>(
+            this, OnSuccessCallback_41, OnFailureCallback_41, true));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_41(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_41(const chip::app::DataModel::Nullable<uint16_t> & currentPositionLift)
+    {
+        VerifyOrReturn(CheckConstraintType("currentPositionLift", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("currentPositionLift", currentPositionLift, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("currentPositionLift", currentPositionLift, 65535U));
         NextTest();
     }
 
-    void OnSuccessResponse_41() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR Test5bReadsBackTheRoMandatoryAttributeSafetyStatus_42()
+    CHIP_ERROR Test5aWriteAValueIntoTheRoOptionalAttributeCurrentPositionLift_42()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::SafetyStatus::TypeInfo>(
-            this, OnSuccessCallback_42, OnFailureCallback_42, true));
+        chip::app::DataModel::Nullable<uint16_t> currentPositionLiftArgument;
+        currentPositionLiftArgument.SetNonNull();
+        currentPositionLiftArgument.Value() = 255U;
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionLift::TypeInfo>(
+            currentPositionLiftArgument, this, OnSuccessCallback_42, OnFailureCallback_42));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_42(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_42(uint16_t safetyStatus)
-    {
-        VerifyOrReturn(CheckConstraintType("safetyStatus", "", "map16"));
-        VerifyOrReturn(CheckConstraintNotValue("safetyStatus", safetyStatus, 4096U));
-
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
         NextTest();
     }
 
-    CHIP_ERROR Test4ReadTheRoOptionalAttributeDefaultCurrentPositionLift_43()
+    void OnSuccessResponse_42() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR Test5bReadsBackTheRoOptionalAttributeCurrentPositionLift_43()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
@@ -58861,56 +58832,56 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR Test5aWriteAValueIntoTheRoOptionalAttributeCurrentPositionLift_44()
+    CHIP_ERROR Test4ReadTheRoOptionalAttributeDefaultCurrentPositionTilt_44()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        chip::app::DataModel::Nullable<uint16_t> currentPositionLiftArgument;
-        currentPositionLiftArgument.SetNonNull();
-        currentPositionLiftArgument.Value() = 255U;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionLift::TypeInfo>(
-            currentPositionLiftArgument, this, OnSuccessCallback_44, OnFailureCallback_44));
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionTilt::TypeInfo>(
+            this, OnSuccessCallback_44, OnFailureCallback_44, true));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_44(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_44(const chip::app::DataModel::Nullable<uint16_t> & currentPositionTilt)
+    {
+        VerifyOrReturn(CheckConstraintType("currentPositionTilt", "", "uint16"));
+        VerifyOrReturn(CheckConstraintMinValue("currentPositionTilt", currentPositionTilt, 0U));
+        VerifyOrReturn(CheckConstraintMaxValue("currentPositionTilt", currentPositionTilt, 65535U));
         NextTest();
     }
 
-    void OnSuccessResponse_44() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR Test5bReadsBackTheRoOptionalAttributeCurrentPositionLift_45()
+    CHIP_ERROR Test5aWriteAValueIntoTheRoOptionalAttributeCurrentPositionTilt_45()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionLift::TypeInfo>(
-            this, OnSuccessCallback_45, OnFailureCallback_45, true));
+        chip::app::DataModel::Nullable<uint16_t> currentPositionTiltArgument;
+        currentPositionTiltArgument.SetNonNull();
+        currentPositionTiltArgument.Value() = 255U;
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionTilt::TypeInfo>(
+            currentPositionTiltArgument, this, OnSuccessCallback_45, OnFailureCallback_45));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_45(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_45(const chip::app::DataModel::Nullable<uint16_t> & currentPositionLift)
-    {
-        VerifyOrReturn(CheckConstraintType("currentPositionLift", "", "uint16"));
-        VerifyOrReturn(CheckConstraintMinValue("currentPositionLift", currentPositionLift, 0U));
-        VerifyOrReturn(CheckConstraintMaxValue("currentPositionLift", currentPositionLift, 65535U));
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
         NextTest();
     }
 
-    CHIP_ERROR Test4ReadTheRoOptionalAttributeDefaultCurrentPositionTilt_46()
+    void OnSuccessResponse_45() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR Test5bReadsBackTheRoOptionalAttributeCurrentPositionTilt_46()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
@@ -58935,56 +58906,58 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR Test5aWriteAValueIntoTheRoOptionalAttributeCurrentPositionTilt_47()
+    CHIP_ERROR Test4ReadTheRoOptionalAttributeDefaultCurrentPositionLiftPercentage_47()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        chip::app::DataModel::Nullable<uint16_t> currentPositionTiltArgument;
-        currentPositionTiltArgument.SetNonNull();
-        currentPositionTiltArgument.Value() = 255U;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionTilt::TypeInfo>(
-            currentPositionTiltArgument, this, OnSuccessCallback_47, OnFailureCallback_47));
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionLiftPercentage::TypeInfo>(
+                this, OnSuccessCallback_47, OnFailureCallback_47, true));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_47(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_47(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionLiftPercentage)
+    {
+        VerifyOrReturn(CheckConstraintType("currentPositionLiftPercentage", "", "Percent"));
+        VerifyOrReturn(CheckConstraintMinValue("currentPositionLiftPercentage", currentPositionLiftPercentage, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("currentPositionLiftPercentage", currentPositionLiftPercentage, 100));
         NextTest();
     }
 
-    void OnSuccessResponse_47() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR Test5bReadsBackTheRoOptionalAttributeCurrentPositionTilt_48()
+    CHIP_ERROR Test5aWriteAValueIntoTheRoOptionalAttributeCurrentPositionLiftPercentage_48()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionTilt::TypeInfo>(
-            this, OnSuccessCallback_48, OnFailureCallback_48, true));
+        chip::app::DataModel::Nullable<chip::Percent> currentPositionLiftPercentageArgument;
+        currentPositionLiftPercentageArgument.SetNonNull();
+        currentPositionLiftPercentageArgument.Value() = 200;
+
+        ReturnErrorOnFailure(
+            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionLiftPercentage::TypeInfo>(
+                currentPositionLiftPercentageArgument, this, OnSuccessCallback_48, OnFailureCallback_48));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_48(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_48(const chip::app::DataModel::Nullable<uint16_t> & currentPositionTilt)
-    {
-        VerifyOrReturn(CheckConstraintType("currentPositionTilt", "", "uint16"));
-        VerifyOrReturn(CheckConstraintMinValue("currentPositionTilt", currentPositionTilt, 0U));
-        VerifyOrReturn(CheckConstraintMaxValue("currentPositionTilt", currentPositionTilt, 65535U));
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
         NextTest();
     }
 
-    CHIP_ERROR Test4ReadTheRoOptionalAttributeDefaultCurrentPositionLiftPercentage_49()
+    void OnSuccessResponse_48() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR Test5bReadsBackTheRoOptionalAttributeCurrentPositionLiftPercentage_49()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
@@ -59005,63 +58978,63 @@ private:
     void OnSuccessResponse_49(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionLiftPercentage)
     {
         VerifyOrReturn(CheckConstraintType("currentPositionLiftPercentage", "", "Percent"));
-        VerifyOrReturn(CheckConstraintMinValue("currentPositionLiftPercentage", currentPositionLiftPercentage, 0));
-        VerifyOrReturn(CheckConstraintMaxValue("currentPositionLiftPercentage", currentPositionLiftPercentage, 100));
+        VerifyOrReturn(CheckConstraintNotValue("currentPositionLiftPercentage", currentPositionLiftPercentage, 200));
+
         NextTest();
     }
 
-    CHIP_ERROR Test5aWriteAValueIntoTheRoOptionalAttributeCurrentPositionLiftPercentage_50()
+    CHIP_ERROR Test4ReadTheRoOptionalAttributeDefaultCurrentPositionTiltPercentage_50()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        chip::app::DataModel::Nullable<chip::Percent> currentPositionLiftPercentageArgument;
-        currentPositionLiftPercentageArgument.SetNonNull();
-        currentPositionLiftPercentageArgument.Value() = 200;
-
         ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionLiftPercentage::TypeInfo>(
-                currentPositionLiftPercentageArgument, this, OnSuccessCallback_50, OnFailureCallback_50));
+            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionTiltPercentage::TypeInfo>(
+                this, OnSuccessCallback_50, OnFailureCallback_50, true));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_50(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_50(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionTiltPercentage)
+    {
+        VerifyOrReturn(CheckConstraintType("currentPositionTiltPercentage", "", "Percent"));
+        VerifyOrReturn(CheckConstraintMinValue("currentPositionTiltPercentage", currentPositionTiltPercentage, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("currentPositionTiltPercentage", currentPositionTiltPercentage, 100));
         NextTest();
     }
 
-    void OnSuccessResponse_50() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR Test5bReadsBackTheRoOptionalAttributeCurrentPositionLiftPercentage_51()
+    CHIP_ERROR Test5aWriteAValueIntoTheRoOptionalAttributeCurrentPositionTiltPercentage_51()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
+        chip::app::DataModel::Nullable<chip::Percent> currentPositionTiltPercentageArgument;
+        currentPositionTiltPercentageArgument.SetNonNull();
+        currentPositionTiltPercentageArgument.Value() = 200;
+
         ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionLiftPercentage::TypeInfo>(
-                this, OnSuccessCallback_51, OnFailureCallback_51, true));
+            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionTiltPercentage::TypeInfo>(
+                currentPositionTiltPercentageArgument, this, OnSuccessCallback_51, OnFailureCallback_51));
         return CHIP_NO_ERROR;
     }
 
     void OnFailureResponse_51(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_51(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionLiftPercentage)
-    {
-        VerifyOrReturn(CheckConstraintType("currentPositionLiftPercentage", "", "Percent"));
-        VerifyOrReturn(CheckConstraintNotValue("currentPositionLiftPercentage", currentPositionLiftPercentage, 200));
-
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
         NextTest();
     }
 
-    CHIP_ERROR Test4ReadTheRoOptionalAttributeDefaultCurrentPositionTiltPercentage_52()
+    void OnSuccessResponse_51() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR Test5bReadsBackTheRoOptionalAttributeCurrentPositionTiltPercentage_52()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::WindowCoveringClusterTest cluster;
@@ -59080,57 +59053,6 @@ private:
     }
 
     void OnSuccessResponse_52(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionTiltPercentage)
-    {
-        VerifyOrReturn(CheckConstraintType("currentPositionTiltPercentage", "", "Percent"));
-        VerifyOrReturn(CheckConstraintMinValue("currentPositionTiltPercentage", currentPositionTiltPercentage, 0));
-        VerifyOrReturn(CheckConstraintMaxValue("currentPositionTiltPercentage", currentPositionTiltPercentage, 100));
-        NextTest();
-    }
-
-    CHIP_ERROR Test5aWriteAValueIntoTheRoOptionalAttributeCurrentPositionTiltPercentage_53()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::WindowCoveringClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        chip::app::DataModel::Nullable<chip::Percent> currentPositionTiltPercentageArgument;
-        currentPositionTiltPercentageArgument.SetNonNull();
-        currentPositionTiltPercentageArgument.Value() = 200;
-
-        ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionTiltPercentage::TypeInfo>(
-                currentPositionTiltPercentageArgument, this, OnSuccessCallback_53, OnFailureCallback_53));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_53(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-        NextTest();
-    }
-
-    void OnSuccessResponse_53() { ThrowSuccessResponse(); }
-
-    CHIP_ERROR Test5bReadsBackTheRoOptionalAttributeCurrentPositionTiltPercentage_54()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::WindowCoveringClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::CurrentPositionTiltPercentage::TypeInfo>(
-                this, OnSuccessCallback_54, OnFailureCallback_54, true));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_54(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_54(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionTiltPercentage)
     {
         VerifyOrReturn(CheckConstraintType("currentPositionTiltPercentage", "", "Percent"));
         VerifyOrReturn(CheckConstraintNotValue("currentPositionTiltPercentage", currentPositionTiltPercentage, 200));
@@ -59345,7 +59267,7 @@ private:
         (static_cast<Test_TC_WNCV_2_4Suite *>(context))->OnFailureResponse_1(error);
     }
 
-    static void OnSuccessCallback_1(void * context, uint8_t type)
+    static void OnSuccessCallback_1(void * context, chip::app::Clusters::WindowCovering::Type type)
     {
         (static_cast<Test_TC_WNCV_2_4Suite *>(context))->OnSuccessResponse_1(type);
     }
@@ -59355,7 +59277,7 @@ private:
         (static_cast<Test_TC_WNCV_2_4Suite *>(context))->OnFailureResponse_2(error);
     }
 
-    static void OnSuccessCallback_2(void * context, uint8_t type)
+    static void OnSuccessCallback_2(void * context, chip::app::Clusters::WindowCovering::Type type)
     {
         (static_cast<Test_TC_WNCV_2_4Suite *>(context))->OnSuccessResponse_2(type);
     }
@@ -59387,7 +59309,7 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_1(uint8_t type)
+    void OnSuccessResponse_1(chip::app::Clusters::WindowCovering::Type type)
     {
         VerifyOrReturn(CheckValue("type", type, 0));
 
@@ -59411,7 +59333,7 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_2(uint8_t type)
+    void OnSuccessResponse_2(chip::app::Clusters::WindowCovering::Type type)
     {
         VerifyOrReturn(CheckConstraintType("type", "", "enum8"));
         VerifyOrReturn(CheckConstraintMinValue("type", type, 0));
@@ -59529,7 +59451,7 @@ private:
         (static_cast<Test_TC_WNCV_2_5Suite *>(context))->OnFailureResponse_1(error);
     }
 
-    static void OnSuccessCallback_1(void * context, uint8_t endProductType)
+    static void OnSuccessCallback_1(void * context, chip::app::Clusters::WindowCovering::EndProductType endProductType)
     {
         (static_cast<Test_TC_WNCV_2_5Suite *>(context))->OnSuccessResponse_1(endProductType);
     }
@@ -59539,7 +59461,7 @@ private:
         (static_cast<Test_TC_WNCV_2_5Suite *>(context))->OnFailureResponse_2(error);
     }
 
-    static void OnSuccessCallback_2(void * context, uint8_t endProductType)
+    static void OnSuccessCallback_2(void * context, chip::app::Clusters::WindowCovering::EndProductType endProductType)
     {
         (static_cast<Test_TC_WNCV_2_5Suite *>(context))->OnSuccessResponse_2(endProductType);
     }
@@ -59571,7 +59493,7 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_1(uint8_t endProductType)
+    void OnSuccessResponse_1(chip::app::Clusters::WindowCovering::EndProductType endProductType)
     {
         VerifyOrReturn(CheckValue("endProductType", endProductType, 0));
 
@@ -59595,7 +59517,7 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_2(uint8_t endProductType)
+    void OnSuccessResponse_2(chip::app::Clusters::WindowCovering::EndProductType endProductType)
     {
         VerifyOrReturn(CheckConstraintType("endProductType", "", "enum8"));
         VerifyOrReturn(CheckConstraintMinValue("endProductType", endProductType, 0));
