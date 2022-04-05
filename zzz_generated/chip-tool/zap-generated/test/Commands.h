@@ -513,12 +513,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -1899,12 +1911,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -2195,12 +2219,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -2711,12 +2747,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -3088,12 +3136,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -3349,12 +3409,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -3521,12 +3593,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -3787,12 +3871,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -4529,12 +4625,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -9223,12 +9331,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -9625,12 +9745,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -9980,12 +10112,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -10271,12 +10415,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -10549,12 +10705,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -10966,12 +11134,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -11257,12 +11437,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -11516,12 +11708,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -11779,12 +11983,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -12066,12 +12282,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -12325,12 +12553,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -12607,12 +12847,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -13071,12 +13323,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -13382,12 +13646,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -13785,12 +14061,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -14175,12 +14463,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -14466,12 +14766,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -14769,12 +15081,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -15846,12 +16170,28 @@ private:
     uint16_t EnhancedCurrentHueValue4;
     uint16_t ColorLoopStoredEnhancedHue4;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -17852,12 +18192,24 @@ private:
     uint16_t EnhancedCurrentHueValue;
     uint16_t ColorLoopStoredEnhancedHueValue;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -18726,12 +19078,24 @@ private:
     uint16_t EnhancedCurrentHueValue;
     uint16_t ColorLoopStoredEnhancedHueValue;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -19532,12 +19896,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -20271,12 +20647,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -20443,12 +20831,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -20697,12 +21097,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -20950,12 +21362,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -21035,12 +21459,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -21133,12 +21569,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -21366,12 +21814,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -21890,12 +22350,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -22061,12 +22533,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -22331,12 +22815,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -22558,12 +23054,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -22823,12 +23331,64 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -23284,12 +23844,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -23523,12 +24095,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -23794,12 +24378,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -24301,12 +24897,28 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_3(void * context, CHIP_ERROR error)
@@ -24920,12 +25532,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -25551,12 +26175,40 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -26090,12 +26742,52 @@ private:
     uint8_t MinlevelValue;
     chip::app::DataModel::Nullable<uint8_t> DefaultMoveRateValue;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -26603,12 +27295,40 @@ private:
 
     uint8_t CurrentlevelValue;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_4(void * context, CHIP_ERROR error)
@@ -27041,12 +27761,36 @@ private:
 
     uint8_t CurrentLevelValue;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_4(void * context, CHIP_ERROR error)
@@ -27401,12 +28145,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -27598,12 +28354,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -27795,12 +28563,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -27992,12 +28772,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -28189,12 +28981,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -28386,12 +29190,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -28583,12 +29399,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -28780,12 +29608,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -28977,12 +29817,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -29174,12 +30026,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -29371,12 +30235,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -29568,12 +30444,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -29757,12 +30645,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -29869,12 +30769,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -29954,12 +30866,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -30039,12 +30963,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -30124,12 +31060,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -30209,12 +31157,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -30294,12 +31254,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -30379,12 +31351,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -30464,12 +31448,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -30549,12 +31545,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -30634,12 +31642,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -30719,12 +31739,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -30808,12 +31840,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -30933,12 +31977,28 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -31028,12 +32088,28 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -31139,12 +32215,40 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_3(void * context, CHIP_ERROR error)
@@ -31314,12 +32418,52 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_3(void * context, CHIP_ERROR error)
@@ -31487,12 +32631,36 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -31626,12 +32794,48 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -31849,12 +33053,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -31934,12 +33150,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -32027,12 +33255,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -32211,12 +33451,28 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -32512,12 +33768,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -32680,12 +33948,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -32964,12 +34244,36 @@ private:
     chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_3(void * context, CHIP_ERROR error)
@@ -33385,12 +34689,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -33606,12 +34922,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -34014,12 +35342,24 @@ private:
 
     uint8_t OccupancyValue;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -34200,12 +35540,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -34600,12 +35952,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -34932,12 +36296,40 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -35928,12 +37320,36 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_3(void * context, CHIP_ERROR error)
@@ -37525,12 +38941,72 @@ private:
     chip::Optional<uint16_t> mDiscriminator;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -38112,12 +39588,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -38368,12 +39856,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -38771,12 +40271,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -38989,12 +40501,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -39414,12 +40938,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -39999,12 +41535,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -41784,12 +43332,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -42040,12 +43600,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -42449,12 +44021,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -42916,12 +44500,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -43156,12 +44752,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -43391,12 +44999,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -43606,12 +45226,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -43943,106 +45575,199 @@ private:
     char * deviceInstanceNameBeforeReboot1Buffer = nullptr;
     chip::CharSpan deviceInstanceNameBeforeReboot1;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
-        if ((mTestIndex - 1) == 3)
-        {
-            isExpectedDnssdResult = true;
+        bool shouldContinue = false;
 
-            VerifyOrReturn(CheckConstraintIsUpperCase("value.instanceName", value.instanceName, true));
-            VerifyOrReturn(CheckConstraintIsHexString("value.instanceName", value.instanceName, true));
-            VerifyOrReturn(CheckConstraintMinLength("value.instanceName", value.instanceName.size(), 16));
-            VerifyOrReturn(CheckConstraintMaxLength("value.instanceName", value.instanceName.size(), 16));
-            if (deviceInstanceNameBeforeReboot1Buffer != nullptr)
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::Platform::MemoryFree(deviceInstanceNameBeforeReboot1Buffer);
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+
+                VerifyOrReturn(CheckConstraintIsUpperCase("value.instanceName", value.instanceName, true));
+                VerifyOrReturn(CheckConstraintIsHexString("value.instanceName", value.instanceName, true));
+                VerifyOrReturn(CheckConstraintMinLength("value.instanceName", value.instanceName.size(), 16));
+                VerifyOrReturn(CheckConstraintMaxLength("value.instanceName", value.instanceName.size(), 16));
+                if (deviceInstanceNameBeforeReboot1Buffer != nullptr)
+                {
+                    chip::Platform::MemoryFree(deviceInstanceNameBeforeReboot1Buffer);
+                }
+                deviceInstanceNameBeforeReboot1Buffer = static_cast<char *>(chip::Platform::MemoryAlloc(value.instanceName.size()));
+                memcpy(deviceInstanceNameBeforeReboot1Buffer, value.instanceName.data(), value.instanceName.size());
+                deviceInstanceNameBeforeReboot1 = chip::CharSpan(deviceInstanceNameBeforeReboot1Buffer, value.instanceName.size());
             }
-            deviceInstanceNameBeforeReboot1Buffer = static_cast<char *>(chip::Platform::MemoryAlloc(value.instanceName.size()));
-            memcpy(deviceInstanceNameBeforeReboot1Buffer, value.instanceName.data(), value.instanceName.size());
-            deviceInstanceNameBeforeReboot1 = chip::CharSpan(deviceInstanceNameBeforeReboot1Buffer, value.instanceName.size());
-        }
-        if ((mTestIndex - 1) == 4)
-        {
-            isExpectedDnssdResult = true;
-        }
-        if ((mTestIndex - 1) == 5)
-        {
-            isExpectedDnssdResult = true;
-        }
-        if ((mTestIndex - 1) == 6)
-        {
-            isExpectedDnssdResult = true;
-        }
-        if ((mTestIndex - 1) == 7)
-        {
-            isExpectedDnssdResult = true;
-        }
-        if ((mTestIndex - 1) == 8)
-        {
-            isExpectedDnssdResult = true;
+            shouldContinue = true;
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
+            shouldContinue = true;
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
+            shouldContinue = true;
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
+            shouldContinue = true;
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
+            shouldContinue = true;
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
 
-            VerifyOrReturn(CheckValue("vendorId", value.vendorId, mVendorId.HasValue() ? mVendorId.Value() : 65521U));
-        }
-        if ((mTestIndex - 1) == 9)
-        {
-            isExpectedDnssdResult = true;
+                VerifyOrReturn(CheckValue("vendorId", value.vendorId, mVendorId.HasValue() ? mVendorId.Value() : 65521U));
+            }
+            shouldContinue = true;
+            break;
+        case 9:
+            if (IsUnsupported(status.mStatus))
+            {
+                shouldContinue = true;
+                return;
+            }
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
 
-            VerifyOrReturn(CheckValue("productId", value.productId, mProductId.HasValue() ? mProductId.Value() : 32769U));
-        }
-        if ((mTestIndex - 1) == 10)
-        {
-            isExpectedDnssdResult = true;
+                VerifyOrReturn(CheckValue("productId", value.productId, mProductId.HasValue() ? mProductId.Value() : 32769U));
+            }
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
 
-            VerifyOrReturn(CheckValuePresent("value.mrpRetryIntervalIdle", value.mrpRetryIntervalIdle));
-            VerifyOrReturn(
-                CheckConstraintMaxValue("value.mrpRetryIntervalIdle.Value()", value.mrpRetryIntervalIdle.Value(), 3600000UL));
-        }
-        if ((mTestIndex - 1) == 11)
-        {
-            isExpectedDnssdResult = true;
+                VerifyOrReturn(CheckValuePresent("value.mrpRetryIntervalIdle", value.mrpRetryIntervalIdle));
+                VerifyOrReturn(
+                    CheckConstraintMaxValue("value.mrpRetryIntervalIdle.Value()", value.mrpRetryIntervalIdle.Value(), 3600000UL));
+            }
+            shouldContinue = true;
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
 
-            VerifyOrReturn(CheckValuePresent("value.mrpRetryIntervalActive", value.mrpRetryIntervalActive));
-            VerifyOrReturn(
-                CheckConstraintMaxValue("value.mrpRetryIntervalActive.Value()", value.mrpRetryIntervalActive.Value(), 3600000UL));
-        }
-        if ((mTestIndex - 1) == 12)
-        {
-            isExpectedDnssdResult = true;
+                VerifyOrReturn(CheckValuePresent("value.mrpRetryIntervalActive", value.mrpRetryIntervalActive));
+                VerifyOrReturn(CheckConstraintMaxValue("value.mrpRetryIntervalActive.Value()", value.mrpRetryIntervalActive.Value(),
+                                                       3600000UL));
+            }
+            shouldContinue = true;
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
 
-            VerifyOrReturn(CheckValue("commissioningMode", value.commissioningMode, 1));
-        }
-        if ((mTestIndex - 1) == 13)
-        {
-            isExpectedDnssdResult = true;
+                VerifyOrReturn(CheckValue("commissioningMode", value.commissioningMode, 1));
+            }
+            shouldContinue = true;
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
 
-            VerifyOrReturn(CheckConstraintMaxLength("value.deviceName", value.deviceName.size(), 32));
-        }
-        if ((mTestIndex - 1) == 14)
-        {
-            isExpectedDnssdResult = true;
+                VerifyOrReturn(CheckConstraintMaxLength("value.deviceName", value.deviceName.size(), 32));
+            }
+            shouldContinue = true;
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
 
-            VerifyOrReturn(CheckConstraintMaxValue("value.rotatingIdLen", value.rotatingIdLen, 100ULL));
-        }
-        if ((mTestIndex - 1) == 15)
-        {
-            isExpectedDnssdResult = true;
-        }
-        if ((mTestIndex - 1) == 16)
-        {
-            isExpectedDnssdResult = true;
+                VerifyOrReturn(CheckConstraintMaxValue("value.rotatingIdLen", value.rotatingIdLen, 100ULL));
+            }
+            shouldContinue = true;
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
+            shouldContinue = true;
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
 
-            VerifyOrReturn(CheckConstraintMaxLength("value.pairingInstruction", value.pairingInstruction.size(), 128));
+                VerifyOrReturn(CheckConstraintMaxLength("value.pairingInstruction", value.pairingInstruction.size(), 128));
+            }
+            shouldContinue = true;
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+
+                VerifyOrReturn(CheckConstraintMinValue("value.numIPs", value.numIPs, 1));
+            }
+            shouldContinue = true;
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
-        if ((mTestIndex - 1) == 17)
+
+        if (shouldContinue)
         {
-            isExpectedDnssdResult = true;
-
-            VerifyOrReturn(CheckConstraintMinValue("value.numIPs", value.numIPs, 1));
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
         }
-
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
     }
 
     //
@@ -44290,12 +46015,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -44727,12 +46464,164 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 35:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 36:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 37:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_3(void * context, CHIP_ERROR error)
@@ -45098,12 +46987,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -45267,12 +47168,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -45519,12 +47432,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -45756,12 +47681,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -46023,12 +47960,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -47208,12 +49157,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -48819,12 +50780,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -49066,12 +51039,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -49490,12 +51475,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -49982,12 +51979,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -50534,12 +52543,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -54104,12 +56125,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -54244,12 +56277,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -54509,12 +56554,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -54624,12 +56681,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -55191,12 +57260,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -57124,12 +59205,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -57227,12 +59320,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -57399,12 +59504,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -57724,12 +59841,48 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     typedef void (*Test_Test_TC_WNCV_3_1_OperationalStatus_ReportCallback)(void * context, uint8_t value);
@@ -58666,12 +60819,48 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     typedef void (*Test_Test_TC_WNCV_3_2_OperationalStatus_ReportCallback)(void * context, uint8_t value);
@@ -59534,12 +61723,40 @@ private:
     chip::app::DataModel::Nullable<chip::Percent100ths> attrCurrentPositionLift;
     chip::app::DataModel::Nullable<chip::Percent100ths> attrCurrentPositionTilt;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     typedef void (*Test_Test_TC_WNCV_3_3_OperationalStatus_ReportCallback)(void * context, uint8_t value);
@@ -60118,12 +62335,32 @@ private:
     chip::Optional<uint16_t> mFullMotionDuration;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_5(void * context, CHIP_ERROR error)
@@ -60482,12 +62719,32 @@ private:
     chip::Optional<uint16_t> mFullMotionDuration;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_5(void * context, CHIP_ERROR error)
@@ -60855,12 +63112,44 @@ private:
     chip::Optional<uint16_t> mFullMotionDuration;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_3(void * context, CHIP_ERROR error)
@@ -61270,12 +63559,44 @@ private:
     chip::Optional<uint16_t> mFullMotionDuration;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_3(void * context, CHIP_ERROR error)
@@ -61660,12 +63981,24 @@ private:
     chip::app::DataModel::Nullable<chip::Percent100ths> attrCurrentPositionLiftPercent100ths;
     chip::app::DataModel::Nullable<chip::Percent> attrCurrentPositionLiftPercentage;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -61958,12 +64291,24 @@ private:
     chip::app::DataModel::Nullable<chip::Percent100ths> attrCurrentPositionTiltPercent100ths;
     chip::app::DataModel::Nullable<chip::Percent> attrCurrentPositionTiltPercentage;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -62219,12 +64564,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -62444,12 +64801,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -62748,12 +65117,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -63031,12 +65412,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -63161,12 +65554,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -63342,12 +65747,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -63493,12 +65910,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -63946,12 +66375,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -64819,12 +67260,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -65183,12 +67636,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -65311,12 +67776,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -65680,12 +68157,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -68053,12 +70542,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     typedef void (*Test_TestCluster_list_int8u_ReportCallback)(void * context,
@@ -84761,12 +87262,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_7(void * context, CHIP_ERROR error)
@@ -85591,12 +88104,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -86341,12 +88866,28 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -86589,125 +89130,222 @@ private:
     char * deviceInstanceNameBeforeRebootBuffer = nullptr;
     chip::CharSpan deviceInstanceNameBeforeReboot;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
-        if ((mTestIndex - 1) == 5)
-        {
-            isExpectedDnssdResult = true;
+        bool shouldContinue = false;
 
-            VerifyOrReturn(CheckConstraintIsUpperCase("value.instanceName", value.instanceName, true));
-            VerifyOrReturn(CheckConstraintIsHexString("value.instanceName", value.instanceName, true));
-            VerifyOrReturn(CheckConstraintMinLength("value.instanceName", value.instanceName.size(), 16));
-            VerifyOrReturn(CheckConstraintMaxLength("value.instanceName", value.instanceName.size(), 16));
-            if (deviceInstanceNameBeforeRebootBuffer != nullptr)
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::Platform::MemoryFree(deviceInstanceNameBeforeRebootBuffer);
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+
+                VerifyOrReturn(CheckConstraintIsUpperCase("value.instanceName", value.instanceName, true));
+                VerifyOrReturn(CheckConstraintIsHexString("value.instanceName", value.instanceName, true));
+                VerifyOrReturn(CheckConstraintMinLength("value.instanceName", value.instanceName.size(), 16));
+                VerifyOrReturn(CheckConstraintMaxLength("value.instanceName", value.instanceName.size(), 16));
+                if (deviceInstanceNameBeforeRebootBuffer != nullptr)
+                {
+                    chip::Platform::MemoryFree(deviceInstanceNameBeforeRebootBuffer);
+                }
+                deviceInstanceNameBeforeRebootBuffer = static_cast<char *>(chip::Platform::MemoryAlloc(value.instanceName.size()));
+                memcpy(deviceInstanceNameBeforeRebootBuffer, value.instanceName.data(), value.instanceName.size());
+                deviceInstanceNameBeforeReboot = chip::CharSpan(deviceInstanceNameBeforeRebootBuffer, value.instanceName.size());
             }
-            deviceInstanceNameBeforeRebootBuffer = static_cast<char *>(chip::Platform::MemoryAlloc(value.instanceName.size()));
-            memcpy(deviceInstanceNameBeforeRebootBuffer, value.instanceName.data(), value.instanceName.size());
-            deviceInstanceNameBeforeReboot = chip::CharSpan(deviceInstanceNameBeforeRebootBuffer, value.instanceName.size());
-        }
-        if ((mTestIndex - 1) == 6)
-        {
-            isExpectedDnssdResult = true;
-        }
-        if ((mTestIndex - 1) == 7)
-        {
-            isExpectedDnssdResult = true;
-        }
-        if ((mTestIndex - 1) == 8)
-        {
-            isExpectedDnssdResult = true;
-        }
-        if ((mTestIndex - 1) == 9)
-        {
-            isExpectedDnssdResult = true;
-        }
-        if ((mTestIndex - 1) == 10)
-        {
-            isExpectedDnssdResult = true;
+            shouldContinue = true;
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
+            shouldContinue = true;
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
+            shouldContinue = true;
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
+            shouldContinue = true;
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
 
-            VerifyOrReturn(CheckValue("longDiscriminator", value.longDiscriminator,
-                                      mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U));
-            VerifyOrReturn(CheckConstraintMinValue("value.longDiscriminator", value.longDiscriminator, 0U));
-            VerifyOrReturn(CheckConstraintMaxValue("value.longDiscriminator", value.longDiscriminator, 4096U));
-        }
-        if ((mTestIndex - 1) == 11)
-        {
-            isExpectedDnssdResult = true;
+                VerifyOrReturn(CheckValue("longDiscriminator", value.longDiscriminator,
+                                          mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U));
+                VerifyOrReturn(CheckConstraintMinValue("value.longDiscriminator", value.longDiscriminator, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value.longDiscriminator", value.longDiscriminator, 4096U));
+            }
+            shouldContinue = true;
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
 
-            VerifyOrReturn(CheckValue("vendorId", value.vendorId, mVendorId.HasValue() ? mVendorId.Value() : 65521U));
-        }
-        if ((mTestIndex - 1) == 12)
-        {
-            isExpectedDnssdResult = true;
+                VerifyOrReturn(CheckValue("vendorId", value.vendorId, mVendorId.HasValue() ? mVendorId.Value() : 65521U));
+            }
+            shouldContinue = true;
+            break;
+        case 12:
+            if (IsUnsupported(status.mStatus))
+            {
+                shouldContinue = true;
+                return;
+            }
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
 
-            VerifyOrReturn(CheckValue("productId", value.productId, mProductId.HasValue() ? mProductId.Value() : 32769U));
-        }
-        if ((mTestIndex - 1) == 13)
-        {
-            isExpectedDnssdResult = true;
+                VerifyOrReturn(CheckValue("productId", value.productId, mProductId.HasValue() ? mProductId.Value() : 32769U));
+            }
+            shouldContinue = true;
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
 
-            VerifyOrReturn(CheckValuePresent("value.mrpRetryIntervalIdle", value.mrpRetryIntervalIdle));
-            VerifyOrReturn(
-                CheckConstraintMaxValue("value.mrpRetryIntervalIdle.Value()", value.mrpRetryIntervalIdle.Value(), 3600000UL));
-        }
-        if ((mTestIndex - 1) == 14)
-        {
-            isExpectedDnssdResult = true;
+                VerifyOrReturn(CheckValuePresent("value.mrpRetryIntervalIdle", value.mrpRetryIntervalIdle));
+                VerifyOrReturn(
+                    CheckConstraintMaxValue("value.mrpRetryIntervalIdle.Value()", value.mrpRetryIntervalIdle.Value(), 3600000UL));
+            }
+            shouldContinue = true;
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
 
-            VerifyOrReturn(CheckValuePresent("value.mrpRetryIntervalActive", value.mrpRetryIntervalActive));
-            VerifyOrReturn(
-                CheckConstraintMaxValue("value.mrpRetryIntervalActive.Value()", value.mrpRetryIntervalActive.Value(), 3600000UL));
-        }
-        if ((mTestIndex - 1) == 15)
-        {
-            isExpectedDnssdResult = true;
+                VerifyOrReturn(CheckValuePresent("value.mrpRetryIntervalActive", value.mrpRetryIntervalActive));
+                VerifyOrReturn(CheckConstraintMaxValue("value.mrpRetryIntervalActive.Value()", value.mrpRetryIntervalActive.Value(),
+                                                       3600000UL));
+            }
+            shouldContinue = true;
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
 
-            VerifyOrReturn(CheckValue("commissioningMode", value.commissioningMode, 1));
-        }
-        if ((mTestIndex - 1) == 16)
-        {
-            isExpectedDnssdResult = true;
+                VerifyOrReturn(CheckValue("commissioningMode", value.commissioningMode, 1));
+            }
+            shouldContinue = true;
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
 
-            VerifyOrReturn(CheckConstraintMaxLength("value.deviceName", value.deviceName.size(), 32));
-        }
-        if ((mTestIndex - 1) == 17)
-        {
-            isExpectedDnssdResult = true;
+                VerifyOrReturn(CheckConstraintMaxLength("value.deviceName", value.deviceName.size(), 32));
+            }
+            shouldContinue = true;
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
 
-            VerifyOrReturn(CheckConstraintMaxValue("value.rotatingIdLen", value.rotatingIdLen, 100ULL));
-        }
-        if ((mTestIndex - 1) == 18)
-        {
-            isExpectedDnssdResult = true;
-        }
-        if ((mTestIndex - 1) == 19)
-        {
-            isExpectedDnssdResult = true;
+                VerifyOrReturn(CheckConstraintMaxValue("value.rotatingIdLen", value.rotatingIdLen, 100ULL));
+            }
+            shouldContinue = true;
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
+            shouldContinue = true;
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
 
-            VerifyOrReturn(CheckConstraintMaxLength("value.pairingInstruction", value.pairingInstruction.size(), 128));
+                VerifyOrReturn(CheckConstraintMaxLength("value.pairingInstruction", value.pairingInstruction.size(), 128));
+            }
+            shouldContinue = true;
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+
+                VerifyOrReturn(CheckConstraintMinValue("value.numIPs", value.numIPs, 1));
+            }
+            shouldContinue = true;
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+
+                VerifyOrReturn(CheckConstraintIsUpperCase("value.instanceName", value.instanceName, true));
+                VerifyOrReturn(CheckConstraintIsHexString("value.instanceName", value.instanceName, true));
+                VerifyOrReturn(CheckConstraintMinLength("value.instanceName", value.instanceName.size(), 16));
+                VerifyOrReturn(CheckConstraintMaxLength("value.instanceName", value.instanceName.size(), 16));
+                VerifyOrReturn(CheckConstraintNotValue("value.instanceName", value.instanceName, deviceInstanceNameBeforeReboot));
+            }
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
-        if ((mTestIndex - 1) == 20)
+
+        if (shouldContinue)
         {
-            isExpectedDnssdResult = true;
-
-            VerifyOrReturn(CheckConstraintMinValue("value.numIPs", value.numIPs, 1));
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
         }
-        if ((mTestIndex - 1) == 24)
-        {
-            isExpectedDnssdResult = true;
-
-            VerifyOrReturn(CheckConstraintIsUpperCase("value.instanceName", value.instanceName, true));
-            VerifyOrReturn(CheckConstraintIsHexString("value.instanceName", value.instanceName, true));
-            VerifyOrReturn(CheckConstraintMinLength("value.instanceName", value.instanceName.size(), 16));
-            VerifyOrReturn(CheckConstraintMaxLength("value.instanceName", value.instanceName.size(), 16));
-            VerifyOrReturn(CheckConstraintNotValue("value.instanceName", value.instanceName, deviceInstanceNameBeforeReboot));
-        }
-
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
     }
 
     //
@@ -87033,12 +89671,32 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -87621,12 +90279,24 @@ private:
     uint8_t * readAttributeOctetStringNotDefaultValueBuffer = nullptr;
     chip::ByteSpan readAttributeOctetStringNotDefaultValue;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_4(void * context, CHIP_ERROR error)
@@ -91269,12 +93939,24 @@ private:
 
     uint8_t TestAddArgumentDefaultValue;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -91439,12 +94121,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -91754,12 +94448,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -92068,12 +94774,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -92323,12 +95041,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -92466,12 +95196,24 @@ private:
 
     chip::FabricIndex ourFabricIndex;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -92950,12 +95692,40 @@ private:
     uint8_t currentModeBeforeToggle;
     chip::app::DataModel::Nullable<uint8_t> OnModeValue;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -93969,12 +96739,40 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -94109,12 +96907,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -94568,60 +97378,64 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrievedForAlpha_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Open Commissioning Window from alpha\n");
-            err = TestOpenCommissioningWindowFromAlpha_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Commission from alpha when the commissioning window is not opened\n");
+            err = TestCommissionFromAlphaWhenTheCommissioningWindowIsNotOpened_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Commission from alpha again\n");
-            err = TestCommissionFromAlphaAgain_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Open Commissioning Window from alpha\n");
+            err = TestOpenCommissioningWindowFromAlpha_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Check that we just have the one fabric and did not add a new one\n");
-            err = TestCheckThatWeJustHaveTheOneFabricAndDidNotAddANewOne_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Commission from alpha again\n");
+            err = TestCommissionFromAlphaAgain_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Close Commissioning Window after failed commissioning\n");
-            err = TestCloseCommissioningWindowAfterFailedCommissioning_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Check that we just have the one fabric and did not add a new one\n");
+            err = TestCheckThatWeJustHaveTheOneFabricAndDidNotAddANewOne_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Open Commissioning Window from alpha again\n");
-            err = TestOpenCommissioningWindowFromAlphaAgain_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Close Commissioning Window after failed commissioning\n");
+            err = TestCloseCommissioningWindowAfterFailedCommissioning_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Commission from beta\n");
-            err = TestCommissionFromBeta_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Open Commissioning Window from alpha again\n");
+            err = TestOpenCommissioningWindowFromAlphaAgain_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Wait for the commissioned device to be retrieved for beta\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrievedForBeta_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Commission from beta\n");
+            err = TestCommissionFromBeta_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Open Commissioning Window from beta\n");
-            err = TestOpenCommissioningWindowFromBeta_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Wait for the commissioned device to be retrieved for beta\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrievedForBeta_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Commission from gamma\n");
-            err = TestCommissionFromGamma_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Open Commissioning Window from beta\n");
+            err = TestOpenCommissioningWindowFromBeta_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Wait for the commissioned device to be retrieved for gamma\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrievedForGamma_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Commission from gamma\n");
+            err = TestCommissionFromGamma_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : read the mandatory attribute: NodeLabel from alpha\n");
-            err = TestReadTheMandatoryAttributeNodeLabelFromAlpha_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Wait for the commissioned device to be retrieved for gamma\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrievedForGamma_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : write the mandatory attribute NodeLabel from beta\n");
-            err = TestWriteTheMandatoryAttributeNodeLabelFromBeta_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : read the mandatory attribute: NodeLabel from alpha\n");
+            err = TestReadTheMandatoryAttributeNodeLabelFromAlpha_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : read the mandatory attribute: NodeLabel from gamma\n");
-            err = TestReadTheMandatoryAttributeNodeLabelFromGamma_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : write the mandatory attribute NodeLabel from beta\n");
+            err = TestWriteTheMandatoryAttributeNodeLabelFromBeta_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : write the mandatory attribute NodeLabel back to default\n");
-            err = TestWriteTheMandatoryAttributeNodeLabelBackToDefault_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : read the mandatory attribute: NodeLabel from gamma\n");
+            err = TestReadTheMandatoryAttributeNodeLabelFromGamma_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : write the mandatory attribute NodeLabel back to default\n");
+            err = TestWriteTheMandatoryAttributeNodeLabelBackToDefault_16();
             break;
         }
 
@@ -94639,7 +97453,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 16;
+    const uint16_t mTestCount = 17;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::NodeId> mNodeIdForDuplicateCommissioning;
@@ -94653,35 +97467,67 @@ private:
     char * readFromAlphaBuffer = nullptr;
     chip::CharSpan readFromAlpha;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            shouldContinue = true;
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
+            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 9));
+            shouldContinue = true;
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
-    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
+    static void OnFailureCallback_5(void * context, CHIP_ERROR error)
     {
-        (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_4(error);
+        (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_5(error);
     }
 
     static void
-    OnSuccessCallback_4(void * context,
+    OnSuccessCallback_5(void * context,
                         const chip::app::DataModel::DecodableList<
                             chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType> & fabrics)
     {
-        (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_4(fabrics);
-    }
-
-    static void OnFailureCallback_12(void * context, CHIP_ERROR error)
-    {
-        (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_12(error);
-    }
-
-    static void OnSuccessCallback_12(void * context, chip::CharSpan nodeLabel)
-    {
-        (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_12(nodeLabel);
+        (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_5(fabrics);
     }
 
     static void OnFailureCallback_13(void * context, CHIP_ERROR error)
@@ -94689,24 +97535,34 @@ private:
         (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_13(error);
     }
 
-    static void OnSuccessCallback_13(void * context) { (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_13(); }
+    static void OnSuccessCallback_13(void * context, chip::CharSpan nodeLabel)
+    {
+        (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_13(nodeLabel);
+    }
 
     static void OnFailureCallback_14(void * context, CHIP_ERROR error)
     {
         (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_14(error);
     }
 
-    static void OnSuccessCallback_14(void * context, chip::CharSpan nodeLabel)
-    {
-        (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_14(nodeLabel);
-    }
+    static void OnSuccessCallback_14(void * context) { (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_14(); }
 
     static void OnFailureCallback_15(void * context, CHIP_ERROR error)
     {
         (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_15(error);
     }
 
-    static void OnSuccessCallback_15(void * context) { (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_15(); }
+    static void OnSuccessCallback_15(void * context, chip::CharSpan nodeLabel)
+    {
+        (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_15(nodeLabel);
+    }
+
+    static void OnFailureCallback_16(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_16(error);
+    }
+
+    static void OnSuccessCallback_16(void * context) { (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_16(); }
 
     //
     // Tests methods
@@ -94724,7 +97580,14 @@ private:
         return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
     }
 
-    CHIP_ERROR TestOpenCommissioningWindowFromAlpha_2()
+    CHIP_ERROR TestCommissionFromAlphaWhenTheCommissioningWindowIsNotOpened_2()
+    {
+        SetIdentity(kIdentityAlpha);
+        return PairWithQRCode(mNodeIdForDuplicateCommissioning.HasValue() ? mNodeIdForDuplicateCommissioning.Value() : 17ULL,
+                              mPayload.HasValue() ? mPayload.Value() : chip::CharSpan::fromCharString("MT:-24J0AFN00KA0648G00"));
+    }
+
+    CHIP_ERROR TestOpenCommissioningWindowFromAlpha_3()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         using RequestType = chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type;
@@ -94733,11 +97596,11 @@ private:
         request.commissioningTimeout = 180U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
-            (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_2();
+            (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_3();
         };
 
         auto failure = [](void * context, CHIP_ERROR error) {
-            (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_2(error);
+            (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_3(error);
         };
 
         ReturnErrorOnFailure(
@@ -94745,40 +97608,39 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_2(CHIP_ERROR error)
+    void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_2() { NextTest(); }
+    void OnSuccessResponse_3() { NextTest(); }
 
-    CHIP_ERROR TestCommissionFromAlphaAgain_3()
+    CHIP_ERROR TestCommissionFromAlphaAgain_4()
     {
         SetIdentity(kIdentityAlpha);
         return PairWithQRCode(mNodeIdForDuplicateCommissioning.HasValue() ? mNodeIdForDuplicateCommissioning.Value() : 17ULL,
-                              mPayload.HasValue() ? mPayload.Value() : chip::CharSpan::fromCharString("MT:-24J0AFN00KA0648G00"),
-                              CHIP_ERROR_FABRIC_EXISTS);
+                              mPayload.HasValue() ? mPayload.Value() : chip::CharSpan::fromCharString("MT:-24J0AFN00KA0648G00"));
     }
 
-    CHIP_ERROR TestCheckThatWeJustHaveTheOneFabricAndDidNotAddANewOne_4()
+    CHIP_ERROR TestCheckThatWeJustHaveTheOneFabricAndDidNotAddANewOne_5()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         chip::Controller::OperationalCredentialsClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::OperationalCredentials::Attributes::Fabrics::TypeInfo>(
-            this, OnSuccessCallback_4, OnFailureCallback_4, false));
+            this, OnSuccessCallback_5, OnFailureCallback_5, false));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_4(CHIP_ERROR error)
+    void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<
+    void OnSuccessResponse_5(const chip::app::DataModel::DecodableList<
                              chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType> & fabrics)
     {
         {
@@ -94790,41 +97652,12 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestCloseCommissioningWindowAfterFailedCommissioning_5()
+    CHIP_ERROR TestCloseCommissioningWindowAfterFailedCommissioning_6()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         using RequestType               = chip::app::Clusters::AdministratorCommissioning::Commands::RevokeCommissioning::Type;
 
         RequestType request;
-
-        auto success = [](void * context, const typename RequestType::ResponseType & data) {
-            (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_5();
-        };
-
-        auto failure = [](void * context, CHIP_ERROR error) {
-            (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_5(error);
-        };
-
-        ReturnErrorOnFailure(
-            chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request, 10000));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_5(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_5() { NextTest(); }
-
-    CHIP_ERROR TestOpenCommissioningWindowFromAlphaAgain_6()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
-        using RequestType = chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type;
-
-        RequestType request;
-        request.commissioningTimeout = 180U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
             (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_6();
@@ -94847,20 +97680,7 @@ private:
 
     void OnSuccessResponse_6() { NextTest(); }
 
-    CHIP_ERROR TestCommissionFromBeta_7()
-    {
-        SetIdentity(kIdentityBeta);
-        return PairWithQRCode(mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL,
-                              mPayload.HasValue() ? mPayload.Value() : chip::CharSpan::fromCharString("MT:-24J0AFN00KA0648G00"));
-    }
-
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForBeta_8()
-    {
-        SetIdentity(kIdentityBeta);
-        return WaitForCommissionee(mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL);
-    }
-
-    CHIP_ERROR TestOpenCommissioningWindowFromBeta_9()
+    CHIP_ERROR TestOpenCommissioningWindowFromAlphaAgain_7()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         using RequestType = chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type;
@@ -94869,11 +97689,53 @@ private:
         request.commissioningTimeout = 180U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
-            (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_9();
+            (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_7();
         };
 
         auto failure = [](void * context, CHIP_ERROR error) {
-            (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_9(error);
+            (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_7(error);
+        };
+
+        ReturnErrorOnFailure(
+            chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request, 10000));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_7(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_7() { NextTest(); }
+
+    CHIP_ERROR TestCommissionFromBeta_8()
+    {
+        SetIdentity(kIdentityBeta);
+        return PairWithQRCode(mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL,
+                              mPayload.HasValue() ? mPayload.Value() : chip::CharSpan::fromCharString("MT:-24J0AFN00KA0648G00"));
+    }
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForBeta_9()
+    {
+        SetIdentity(kIdentityBeta);
+        return WaitForCommissionee(mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL);
+    }
+
+    CHIP_ERROR TestOpenCommissioningWindowFromBeta_10()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        using RequestType = chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type;
+
+        RequestType request;
+        request.commissioningTimeout = 180U;
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<TestMultiAdminSuite *>(context))->OnSuccessResponse_10();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<TestMultiAdminSuite *>(context))->OnFailureResponse_10(error);
         };
 
         ReturnErrorOnFailure(
@@ -94881,45 +97743,45 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_9(CHIP_ERROR error)
+    void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_9() { NextTest(); }
+    void OnSuccessResponse_10() { NextTest(); }
 
-    CHIP_ERROR TestCommissionFromGamma_10()
+    CHIP_ERROR TestCommissionFromGamma_11()
     {
         SetIdentity(kIdentityGamma);
         return PairWithQRCode(mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL,
                               mPayload.HasValue() ? mPayload.Value() : chip::CharSpan::fromCharString("MT:-24J0AFN00KA0648G00"));
     }
 
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForGamma_11()
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForGamma_12()
     {
         SetIdentity(kIdentityGamma);
         return WaitForCommissionee(mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL);
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributeNodeLabelFromAlpha_12()
+    CHIP_ERROR TestReadTheMandatoryAttributeNodeLabelFromAlpha_13()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         chip::Controller::BasicClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
-            this, OnSuccessCallback_12, OnFailureCallback_12, true));
+            this, OnSuccessCallback_13, OnFailureCallback_13, true));
         return CHIP_NO_ERROR;
     }
 
-    void OnFailureResponse_12(CHIP_ERROR error)
+    void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_12(chip::CharSpan nodeLabel)
+    void OnSuccessResponse_13(chip::CharSpan nodeLabel)
     {
         VerifyOrReturn(CheckValueAsString("nodeLabel", nodeLabel, chip::CharSpan("", 0)));
 
@@ -94933,7 +97795,7 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestWriteTheMandatoryAttributeNodeLabelFromBeta_13()
+    CHIP_ERROR TestWriteTheMandatoryAttributeNodeLabelFromBeta_14()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         chip::Controller::BasicClusterTest cluster;
@@ -94943,26 +97805,7 @@ private:
         nodeLabelArgument = chip::Span<const char>("written from betagarbage: not in length on purpose", 17);
 
         ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
-            nodeLabelArgument, this, OnSuccessCallback_13, OnFailureCallback_13));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_13(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse();
-    }
-
-    void OnSuccessResponse_13() { NextTest(); }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeNodeLabelFromGamma_14()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
-        chip::Controller::BasicClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityGamma], endpoint);
-
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
-            this, OnSuccessCallback_14, OnFailureCallback_14, true));
+            nodeLabelArgument, this, OnSuccessCallback_14, OnFailureCallback_14));
         return CHIP_NO_ERROR;
     }
 
@@ -94972,24 +97815,16 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_14(chip::CharSpan nodeLabel)
-    {
-        VerifyOrReturn(CheckConstraintNotValue("nodeLabel", nodeLabel, readFromAlpha));
+    void OnSuccessResponse_14() { NextTest(); }
 
-        NextTest();
-    }
-
-    CHIP_ERROR TestWriteTheMandatoryAttributeNodeLabelBackToDefault_15()
+    CHIP_ERROR TestReadTheMandatoryAttributeNodeLabelFromGamma_15()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         chip::Controller::BasicClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+        cluster.Associate(mDevices[kIdentityGamma], endpoint);
 
-        chip::CharSpan nodeLabelArgument;
-        nodeLabelArgument = readFromAlpha;
-
-        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
-            nodeLabelArgument, this, OnSuccessCallback_15, OnFailureCallback_15));
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            this, OnSuccessCallback_15, OnFailureCallback_15, true));
         return CHIP_NO_ERROR;
     }
 
@@ -94999,7 +97834,34 @@ private:
         ThrowFailureResponse();
     }
 
-    void OnSuccessResponse_15() { NextTest(); }
+    void OnSuccessResponse_15(chip::CharSpan nodeLabel)
+    {
+        VerifyOrReturn(CheckConstraintNotValue("nodeLabel", nodeLabel, readFromAlpha));
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestWriteTheMandatoryAttributeNodeLabelBackToDefault_16()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        chip::CharSpan nodeLabelArgument;
+        nodeLabelArgument = readFromAlpha;
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            nodeLabelArgument, this, OnSuccessCallback_16, OnFailureCallback_16));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_16(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_16() { NextTest(); }
 };
 
 class Test_TC_SWDIAG_1_1Suite : public TestCommand
@@ -95099,12 +97961,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -95318,12 +98192,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -95424,12 +98306,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -95631,12 +98525,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     typedef void (*Test_TestSubscribe_OnOff_OnOff_ReportCallback)(void * context, bool value);
@@ -96376,12 +99282,24 @@ private:
     uint16_t NumberOfPINUsersSupported;
     uint16_t NumberOfRFIDUsersSupported;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -101397,12 +104315,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_3(void * context, CHIP_ERROR error)
@@ -102171,12 +105101,24 @@ private:
     uint8_t NumberOfWeekDaySchedulesSupportedPerUser;
     uint8_t NumberOfYearDaySchedulesSupportedPerUser;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_2(void * context, CHIP_ERROR error)
@@ -105433,12 +108375,28 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_3(void * context, CHIP_ERROR error)
@@ -105823,12 +108781,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_5(void * context, CHIP_ERROR error)
@@ -106529,12 +109499,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -107350,12 +110332,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_1(void * context, CHIP_ERROR error)
@@ -108115,12 +111109,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -108209,12 +111215,32 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -108312,12 +111338,28 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -108408,12 +111450,28 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -108507,12 +111565,32 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -108601,12 +111679,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -108676,12 +111762,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -108751,12 +111845,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -108826,12 +111928,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -108901,12 +112011,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -108976,12 +112094,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -109051,12 +112177,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -109126,12 +112260,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -109201,12 +112343,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -109276,12 +112426,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -109351,12 +112509,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -109426,12 +112592,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -109501,12 +112675,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -109576,12 +112758,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -109735,12 +112925,64 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -110216,12 +113458,24 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_3(void * context, CHIP_ERROR error)
@@ -110484,12 +113738,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -110559,12 +113821,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -110634,12 +113904,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -110709,12 +113987,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -110784,12 +114070,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -110859,12 +114153,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -110934,12 +114236,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -111009,12 +114319,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -111084,12 +114402,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -111159,12 +114485,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -111233,12 +114567,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -111307,12 +114649,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -111381,12 +114731,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -111456,12 +114814,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -111531,12 +114897,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -111606,12 +114980,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -111681,12 +115063,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -111756,12 +115146,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -111831,12 +115229,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -111906,12 +115312,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -111981,12 +115395,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -112056,12 +115478,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -112131,12 +115561,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -112206,12 +115644,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -112281,12 +115727,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -112356,12 +115810,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -112431,12 +115893,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -112506,12 +115976,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -112581,12 +116059,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -112656,12 +116142,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -112731,12 +116225,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -112806,12 +116308,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -112881,12 +116391,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -112956,12 +116474,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -113031,12 +116557,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -113106,12 +116640,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -113181,12 +116723,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -113256,12 +116806,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -113331,12 +116889,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -113406,12 +116972,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -113481,12 +117055,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -113556,12 +117138,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -113631,12 +117221,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -113706,12 +117304,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -113781,12 +117387,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -113856,12 +117470,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -113931,12 +117553,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -114006,12 +117636,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -114081,12 +117719,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -114156,12 +117802,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -114231,12 +117885,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -114306,12 +117968,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -114381,12 +118051,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -114456,12 +118134,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -114531,12 +118217,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -114606,12 +118300,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -114681,12 +118383,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -114756,12 +118466,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -114831,12 +118549,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -114982,12 +118708,36 @@ private:
     chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     static void OnFailureCallback_5(void * context, CHIP_ERROR error)
@@ -115477,12 +119227,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -115552,12 +119310,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -115627,12 +119393,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -115702,12 +119476,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -115777,12 +119559,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -115852,12 +119642,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -115927,12 +119725,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -116002,12 +119808,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -116077,12 +119891,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -116152,12 +119974,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -116227,12 +120057,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -116302,12 +120140,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -116377,12 +120223,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -116452,12 +120306,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -116527,12 +120389,20 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -116602,12 +120472,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -116677,12 +120555,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -116752,12 +120638,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -116827,12 +120721,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -116902,12 +120804,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -116977,12 +120887,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -117052,12 +120970,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -117127,12 +121053,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -117202,12 +121136,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -117277,12 +121219,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -117352,12 +121302,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -117427,12 +121385,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -117502,12 +121468,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -117577,12 +121551,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -117652,12 +121634,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -117727,12 +121717,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -117802,12 +121800,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -117877,12 +121883,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -117952,12 +121966,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -118027,12 +122049,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -118102,12 +122132,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -118177,12 +122215,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -118252,12 +122298,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -118327,12 +122381,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -118402,12 +122464,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -118477,12 +122547,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -118552,12 +122630,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -118627,12 +122713,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -118702,12 +122796,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -118777,12 +122879,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -118852,12 +122962,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -118927,12 +123045,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -119002,12 +123128,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -119077,12 +123211,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -119152,12 +123294,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -119227,12 +123377,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -119302,12 +123460,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -119377,12 +123543,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -119452,12 +123626,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -119527,12 +123709,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -119602,12 +123792,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -119677,12 +123875,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -119752,12 +123958,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -119827,12 +124041,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -119902,12 +124124,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -119977,12 +124207,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -120052,12 +124290,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
@@ -120127,12 +124373,20 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    void OnDiscoveryCommandsResults(const DiscoveryCommandResult & value) override
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
     {
-        bool isExpectedDnssdResult = false;
+        bool shouldContinue = false;
 
-        VerifyOrReturn(isExpectedDnssdResult, Exit("An unexpected dnssd result has been received"));
-        NextTest();
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
     }
 
     //
