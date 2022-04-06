@@ -203,6 +203,7 @@ public:
         printf("TestModeSelectCluster\n");
         printf("TestSystemCommands\n");
         printf("TestBinding\n");
+        printf("TestUserLabelCluster\n");
         printf("TestMultiAdmin\n");
         printf("Test_TC_SWDIAG_1_1\n");
         printf("Test_TC_SWDIAG_2_1\n");
@@ -97319,6 +97320,321 @@ private:
     }
 };
 
+class TestUserLabelClusterSuite : public TestCommand
+{
+public:
+    TestUserLabelClusterSuite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("TestUserLabelCluster", credsIssuerConfig), mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~TestUserLabelClusterSuite() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Start: TestUserLabelCluster\n");
+        }
+
+        if (mTestCount == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Complete: TestUserLabelCluster\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++)
+        {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Clear User Label List\n");
+            err = TestClearUserLabelList_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read User Label List\n");
+            err = TestReadUserLabelList_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Write User Label List\n");
+            err = TestWriteUserLabelList_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Reboot target device\n");
+            err = TestRebootTargetDevice_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Verify\n");
+            err = TestVerify_6();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err)
+        {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 7;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mDiscriminator;
+    chip::Optional<uint16_t> mTimeout;
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    static void OnFailureCallback_1(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestUserLabelClusterSuite *>(context))->OnFailureResponse_1(error);
+    }
+
+    static void OnSuccessCallback_1(void * context) { (static_cast<TestUserLabelClusterSuite *>(context))->OnSuccessResponse_1(); }
+
+    static void OnFailureCallback_2(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestUserLabelClusterSuite *>(context))->OnFailureResponse_2(error);
+    }
+
+    static void OnSuccessCallback_2(
+        void * context,
+        const chip::app::DataModel::DecodableList<chip::app::Clusters::UserLabel::Structs::LabelStruct::DecodableType> & labelList)
+    {
+        (static_cast<TestUserLabelClusterSuite *>(context))->OnSuccessResponse_2(labelList);
+    }
+
+    static void OnFailureCallback_3(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestUserLabelClusterSuite *>(context))->OnFailureResponse_3(error);
+    }
+
+    static void OnSuccessCallback_3(void * context) { (static_cast<TestUserLabelClusterSuite *>(context))->OnSuccessResponse_3(); }
+
+    static void OnFailureCallback_6(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestUserLabelClusterSuite *>(context))->OnFailureResponse_6(error);
+    }
+
+    static void OnSuccessCallback_6(
+        void * context,
+        const chip::app::DataModel::DecodableList<chip::app::Clusters::UserLabel::Structs::LabelStruct::DecodableType> & labelList)
+    {
+        (static_cast<TestUserLabelClusterSuite *>(context))->OnSuccessResponse_6(labelList);
+    }
+
+    //
+    // Tests methods
+    //
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        SetIdentity(kIdentityAlpha);
+        return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+    }
+
+    CHIP_ERROR TestClearUserLabelList_1()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::UserLabelClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ListFreer listFreer;
+        chip::app::DataModel::List<const chip::app::Clusters::UserLabel::Structs::LabelStruct::Type> labelListArgument;
+
+        labelListArgument = chip::app::DataModel::List<chip::app::Clusters::UserLabel::Structs::LabelStruct::Type>();
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::UserLabel::Attributes::LabelList::TypeInfo>(
+            labelListArgument, this, OnSuccessCallback_1, OnFailureCallback_1));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_1(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_1() { NextTest(); }
+
+    CHIP_ERROR TestReadUserLabelList_2()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::UserLabelClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::UserLabel::Attributes::LabelList::TypeInfo>(
+            this, OnSuccessCallback_2, OnFailureCallback_2, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_2(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_2(
+        const chip::app::DataModel::DecodableList<chip::app::Clusters::UserLabel::Structs::LabelStruct::DecodableType> & labelList)
+    {
+        {
+            auto iter_0 = labelList.begin();
+            VerifyOrReturn(CheckNoMoreListItems<decltype(labelList)>("labelList", iter_0, 0));
+        }
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestWriteUserLabelList_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::UserLabelClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ListFreer listFreer;
+        chip::app::DataModel::List<const chip::app::Clusters::UserLabel::Structs::LabelStruct::Type> labelListArgument;
+
+        {
+            auto * listHolder_0 = new ListHolder<chip::app::Clusters::UserLabel::Structs::LabelStruct::Type>(4);
+            listFreer.add(listHolder_0);
+
+            listHolder_0->mList[0].label = chip::Span<const char>("roomgarbage: not in length on purpose", 4);
+            listHolder_0->mList[0].value = chip::Span<const char>("bedroom 2garbage: not in length on purpose", 9);
+
+            listHolder_0->mList[1].label = chip::Span<const char>("orientationgarbage: not in length on purpose", 11);
+            listHolder_0->mList[1].value = chip::Span<const char>("Northgarbage: not in length on purpose", 5);
+
+            listHolder_0->mList[2].label = chip::Span<const char>("floorgarbage: not in length on purpose", 5);
+            listHolder_0->mList[2].value = chip::Span<const char>("5garbage: not in length on purpose", 1);
+
+            listHolder_0->mList[3].label = chip::Span<const char>("directiongarbage: not in length on purpose", 9);
+            listHolder_0->mList[3].value = chip::Span<const char>("upgarbage: not in length on purpose", 2);
+
+            labelListArgument =
+                chip::app::DataModel::List<chip::app::Clusters::UserLabel::Structs::LabelStruct::Type>(listHolder_0->mList, 4);
+        }
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::UserLabel::Attributes::LabelList::TypeInfo>(
+            labelListArgument, this, OnSuccessCallback_3, OnFailureCallback_3));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_3(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_3() { NextTest(); }
+
+    CHIP_ERROR TestRebootTargetDevice_4()
+    {
+        SetIdentity(kIdentityAlpha);
+        return Reboot(mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U);
+    }
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_5()
+    {
+        SetIdentity(kIdentityAlpha);
+        return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+    }
+
+    CHIP_ERROR TestVerify_6()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::UserLabelClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::UserLabel::Attributes::LabelList::TypeInfo>(
+            this, OnSuccessCallback_6, OnFailureCallback_6, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_6(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_6(
+        const chip::app::DataModel::DecodableList<chip::app::Clusters::UserLabel::Structs::LabelStruct::DecodableType> & labelList)
+    {
+        {
+            auto iter_0 = labelList.begin();
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(labelList)>("labelList", iter_0, 0));
+            VerifyOrReturn(CheckValueAsString("labelList[0].label", iter_0.GetValue().label, chip::CharSpan("room", 4)));
+            VerifyOrReturn(CheckValueAsString("labelList[0].value", iter_0.GetValue().value, chip::CharSpan("bedroom 2", 9)));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(labelList)>("labelList", iter_0, 1));
+            VerifyOrReturn(CheckValueAsString("labelList[1].label", iter_0.GetValue().label, chip::CharSpan("orientation", 11)));
+            VerifyOrReturn(CheckValueAsString("labelList[1].value", iter_0.GetValue().value, chip::CharSpan("North", 5)));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(labelList)>("labelList", iter_0, 2));
+            VerifyOrReturn(CheckValueAsString("labelList[2].label", iter_0.GetValue().label, chip::CharSpan("floor", 5)));
+            VerifyOrReturn(CheckValueAsString("labelList[2].value", iter_0.GetValue().value, chip::CharSpan("5", 1)));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(labelList)>("labelList", iter_0, 3));
+            VerifyOrReturn(CheckValueAsString("labelList[3].label", iter_0.GetValue().label, chip::CharSpan("direction", 9)));
+            VerifyOrReturn(CheckValueAsString("labelList[3].value", iter_0.GetValue().value, chip::CharSpan("up", 2)));
+            VerifyOrReturn(CheckNoMoreListItems<decltype(labelList)>("labelList", iter_0, 4));
+        }
+
+        NextTest();
+    }
+};
+
 class TestMultiAdminSuite : public TestCommand
 {
 public:
@@ -124571,6 +124887,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<TestModeSelectClusterSuite>(credsIssuerConfig),
         make_unique<TestSystemCommandsSuite>(credsIssuerConfig),
         make_unique<TestBindingSuite>(credsIssuerConfig),
+        make_unique<TestUserLabelClusterSuite>(credsIssuerConfig),
         make_unique<TestMultiAdminSuite>(credsIssuerConfig),
         make_unique<Test_TC_SWDIAG_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_SWDIAG_2_1Suite>(credsIssuerConfig),
