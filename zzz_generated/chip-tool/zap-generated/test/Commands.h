@@ -25950,7 +25950,7 @@ private:
     void OnSuccessResponse_11(const chip::app::DataModel::Nullable<uint8_t> & defaultMoveRate)
     {
         VerifyOrReturn(CheckValueNonNull("defaultMoveRate", defaultMoveRate));
-        VerifyOrReturn(CheckValue("defaultMoveRate.Value()", defaultMoveRate.Value(), 0));
+        VerifyOrReturn(CheckValue("defaultMoveRate.Value()", defaultMoveRate.Value(), 50));
         VerifyOrReturn(CheckConstraintType("defaultMoveRate", "", "uint8"));
         NextTest();
     }
