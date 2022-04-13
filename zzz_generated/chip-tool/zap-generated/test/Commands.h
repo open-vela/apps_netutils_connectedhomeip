@@ -493,6 +493,18 @@ public:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Verify\n");
             err = TestVerify_18();
             break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Validate resource minima (SubjectsPerAccessControlEntry)\n");
+            err = TestValidateResourceMinimaSubjectsPerAccessControlEntry_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Validate resource minima (TargetsPerAccessControlEntry)\n");
+            err = TestValidateResourceMinimaTargetsPerAccessControlEntry_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Validate resource minima (AccessControlEntriesPerFabric)\n");
+            err = TestValidateResourceMinimaAccessControlEntriesPerFabric_21();
+            break;
         }
 
         if (CHIP_NO_ERROR != err)
@@ -509,7 +521,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 19;
+    const uint16_t mTestCount = 22;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -741,6 +753,36 @@ private:
             acl)
     {
         (static_cast<TestAccessControlClusterSuite *>(context))->OnSuccessResponse_18(acl);
+    }
+
+    static void OnFailureCallback_19(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestAccessControlClusterSuite *>(context))->OnFailureResponse_19(error);
+    }
+
+    static void OnSuccessCallback_19(void * context, uint16_t subjectsPerAccessControlEntry)
+    {
+        (static_cast<TestAccessControlClusterSuite *>(context))->OnSuccessResponse_19(subjectsPerAccessControlEntry);
+    }
+
+    static void OnFailureCallback_20(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestAccessControlClusterSuite *>(context))->OnFailureResponse_20(error);
+    }
+
+    static void OnSuccessCallback_20(void * context, uint16_t targetsPerAccessControlEntry)
+    {
+        (static_cast<TestAccessControlClusterSuite *>(context))->OnSuccessResponse_20(targetsPerAccessControlEntry);
+    }
+
+    static void OnFailureCallback_21(void * context, CHIP_ERROR error)
+    {
+        (static_cast<TestAccessControlClusterSuite *>(context))->OnFailureResponse_21(error);
+    }
+
+    static void OnSuccessCallback_21(void * context, uint16_t accessControlEntriesPerFabric)
+    {
+        (static_cast<TestAccessControlClusterSuite *>(context))->OnSuccessResponse_21(accessControlEntriesPerFabric);
     }
 
     //
@@ -1823,6 +1865,78 @@ private:
             VerifyOrReturn(CheckNoMoreListItems<decltype(acl)>("acl", iter_0, 1));
         }
 
+        NextTest();
+    }
+
+    CHIP_ERROR TestValidateResourceMinimaSubjectsPerAccessControlEntry_19()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::AccessControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::AccessControl::Attributes::SubjectsPerAccessControlEntry::TypeInfo>(
+                this, OnSuccessCallback_19, OnFailureCallback_19, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_19(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_19(uint16_t subjectsPerAccessControlEntry)
+    {
+        VerifyOrReturn(CheckConstraintMinValue("subjectsPerAccessControlEntry", subjectsPerAccessControlEntry, 4U));
+        NextTest();
+    }
+
+    CHIP_ERROR TestValidateResourceMinimaTargetsPerAccessControlEntry_20()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::AccessControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::AccessControl::Attributes::TargetsPerAccessControlEntry::TypeInfo>(
+                this, OnSuccessCallback_20, OnFailureCallback_20, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_20(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_20(uint16_t targetsPerAccessControlEntry)
+    {
+        VerifyOrReturn(CheckConstraintMinValue("targetsPerAccessControlEntry", targetsPerAccessControlEntry, 3U));
+        NextTest();
+    }
+
+    CHIP_ERROR TestValidateResourceMinimaAccessControlEntriesPerFabric_21()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::AccessControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::AccessControl::Attributes::AccessControlEntriesPerFabric::TypeInfo>(
+                this, OnSuccessCallback_21, OnFailureCallback_21, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_21(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse();
+    }
+
+    void OnSuccessResponse_21(uint16_t accessControlEntriesPerFabric)
+    {
+        VerifyOrReturn(CheckConstraintMinValue("accessControlEntriesPerFabric", accessControlEntriesPerFabric, 3U));
         NextTest();
     }
 };
@@ -94677,14 +94791,16 @@ private:
             VerifyOrReturn(CheckNextListItemDecodes<decltype(attributeList)>("attributeList", iter_0, 18));
             VerifyOrReturn(CheckValue("attributeList[18]", iter_0.GetValue(), 18UL));
             VerifyOrReturn(CheckNextListItemDecodes<decltype(attributeList)>("attributeList", iter_0, 19));
-            VerifyOrReturn(CheckValue("attributeList[19]", iter_0.GetValue(), 65528UL));
+            VerifyOrReturn(CheckValue("attributeList[19]", iter_0.GetValue(), 19UL));
             VerifyOrReturn(CheckNextListItemDecodes<decltype(attributeList)>("attributeList", iter_0, 20));
-            VerifyOrReturn(CheckValue("attributeList[20]", iter_0.GetValue(), 65529UL));
+            VerifyOrReturn(CheckValue("attributeList[20]", iter_0.GetValue(), 65528UL));
             VerifyOrReturn(CheckNextListItemDecodes<decltype(attributeList)>("attributeList", iter_0, 21));
-            VerifyOrReturn(CheckValue("attributeList[21]", iter_0.GetValue(), 65531UL));
+            VerifyOrReturn(CheckValue("attributeList[21]", iter_0.GetValue(), 65529UL));
             VerifyOrReturn(CheckNextListItemDecodes<decltype(attributeList)>("attributeList", iter_0, 22));
-            VerifyOrReturn(CheckValue("attributeList[22]", iter_0.GetValue(), 65533UL));
-            VerifyOrReturn(CheckNoMoreListItems<decltype(attributeList)>("attributeList", iter_0, 23));
+            VerifyOrReturn(CheckValue("attributeList[22]", iter_0.GetValue(), 65531UL));
+            VerifyOrReturn(CheckNextListItemDecodes<decltype(attributeList)>("attributeList", iter_0, 23));
+            VerifyOrReturn(CheckValue("attributeList[23]", iter_0.GetValue(), 65533UL));
+            VerifyOrReturn(CheckNoMoreListItems<decltype(attributeList)>("attributeList", iter_0, 24));
         }
 
         NextTest();
