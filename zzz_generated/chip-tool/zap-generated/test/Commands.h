@@ -930,7 +930,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -949,7 +949,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(
@@ -1130,7 +1130,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -1149,7 +1149,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(
@@ -1233,7 +1233,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(
@@ -1311,7 +1311,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(
@@ -1396,7 +1396,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(
@@ -1486,7 +1486,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(
@@ -1590,7 +1590,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14(
@@ -1776,7 +1776,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(
@@ -1828,7 +1828,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17() { NextTest(); }
@@ -1847,7 +1847,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18(
@@ -2119,7 +2119,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -2143,7 +2143,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t clusterRevision)
@@ -2189,7 +2189,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint16_t clusterRevision)
@@ -2213,7 +2213,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -2481,7 +2481,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(bool outOfService)
@@ -2505,7 +2505,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool outOfService)
@@ -2531,7 +2531,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -2550,7 +2550,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(bool outOfService)
@@ -2574,7 +2574,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(bool presentValue)
@@ -2600,7 +2600,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6() { NextTest(); }
@@ -2619,7 +2619,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(bool presentValue)
@@ -2643,7 +2643,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(uint8_t statusFlags)
@@ -2667,7 +2667,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(uint8_t statusFlags)
@@ -2715,7 +2715,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(uint8_t statusFlags)
@@ -2988,7 +2988,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(bool presentValue)
@@ -3012,7 +3012,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool outOfService)
@@ -3036,7 +3036,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint8_t statusFlags)
@@ -3060,7 +3060,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(bool presentValue)
@@ -3084,7 +3084,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(bool outOfService)
@@ -3108,7 +3108,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(uint8_t statusFlags)
@@ -3132,7 +3132,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(uint8_t statusFlags)
@@ -3156,7 +3156,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(uint8_t statusFlags)
@@ -3349,7 +3349,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -3373,7 +3373,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t clusterRevision)
@@ -3396,7 +3396,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -3419,7 +3419,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
@@ -3442,7 +3442,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
@@ -3590,7 +3590,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(bool stateValue)
@@ -3614,7 +3614,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool stateValue)
@@ -3806,7 +3806,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -3830,7 +3830,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t clusterRevision)
@@ -3853,7 +3853,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -3876,7 +3876,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
@@ -3899,7 +3899,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
@@ -4059,7 +4059,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -4105,7 +4105,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -6037,7 +6037,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint8_t currentHue)
@@ -6085,7 +6085,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint8_t currentHue)
@@ -6110,7 +6110,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint8_t currentSaturation)
@@ -6158,7 +6158,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(uint8_t currentSaturation)
@@ -6183,7 +6183,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(uint16_t currentX)
@@ -6231,7 +6231,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(uint16_t currentX)
@@ -6256,7 +6256,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(uint16_t currentY)
@@ -6304,7 +6304,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(uint16_t currentY)
@@ -6329,7 +6329,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(uint16_t colorTemperature)
@@ -6354,7 +6354,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14(uint8_t colorMode)
@@ -6379,7 +6379,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(uint8_t colorControlOptions)
@@ -6405,7 +6405,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16() { NextTest(); }
@@ -6424,7 +6424,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17(uint8_t colorControlOptions)
@@ -6448,7 +6448,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18(uint16_t enhancedCurrentHue)
@@ -6494,7 +6494,7 @@ private:
     void OnFailureResponse_20(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_20(uint16_t enhancedCurrentHue)
@@ -6517,7 +6517,7 @@ private:
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_21(uint8_t enhancedColorMode)
@@ -6540,7 +6540,7 @@ private:
     void OnFailureResponse_22(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_22(uint8_t colorLoopActive)
@@ -6586,7 +6586,7 @@ private:
     void OnFailureResponse_24(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_24(uint8_t colorLoopActive)
@@ -6609,7 +6609,7 @@ private:
     void OnFailureResponse_25(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_25(uint8_t colorLoopDirection)
@@ -6655,7 +6655,7 @@ private:
     void OnFailureResponse_27(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_27(uint8_t colorLoopDirection)
@@ -6678,7 +6678,7 @@ private:
     void OnFailureResponse_28(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_28(uint16_t colorLoopTime)
@@ -6724,7 +6724,7 @@ private:
     void OnFailureResponse_30(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_30(uint16_t colorLoopTime)
@@ -6748,7 +6748,7 @@ private:
     void OnFailureResponse_31(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_31(uint16_t colorLoopStartEnhancedHue)
@@ -6796,7 +6796,7 @@ private:
     void OnFailureResponse_33(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_33(uint16_t colorLoopStartEnhancedHue)
@@ -6820,7 +6820,7 @@ private:
     void OnFailureResponse_34(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_34(uint16_t colorLoopStoredEnhancedHue)
@@ -6868,7 +6868,7 @@ private:
     void OnFailureResponse_36(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_36(uint16_t colorLoopStoredEnhancedHue)
@@ -6891,7 +6891,7 @@ private:
     void OnFailureResponse_37(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_37(uint16_t colorCapabilities)
@@ -6939,7 +6939,7 @@ private:
     void OnFailureResponse_39(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_39(uint16_t colorCapabilities)
@@ -6964,7 +6964,7 @@ private:
     void OnFailureResponse_40(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_40(uint16_t colorTempPhysicalMin)
@@ -7012,7 +7012,7 @@ private:
     void OnFailureResponse_42(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_42(uint16_t colorTempPhysicalMin)
@@ -7037,7 +7037,7 @@ private:
     void OnFailureResponse_43(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_43(uint16_t colorTempPhysicalMax)
@@ -7085,7 +7085,7 @@ private:
     void OnFailureResponse_45(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_45(uint16_t colorTempPhysicalMax)
@@ -7111,7 +7111,8 @@ private:
     void OnFailureResponse_46(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_46(uint16_t coupleColorTempToLevelMinMireds)
@@ -7166,7 +7167,8 @@ private:
     void OnFailureResponse_48(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_48(uint16_t coupleColorTempToLevelMinMireds)
@@ -7190,7 +7192,8 @@ private:
     void OnFailureResponse_49(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_49(uint16_t startUpColorTemperatureMireds)
@@ -7219,7 +7222,8 @@ private:
     void OnFailureResponse_50(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_50() { NextTest(); }
@@ -7239,7 +7243,8 @@ private:
     void OnFailureResponse_51(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_51(uint16_t startUpColorTemperatureMireds)
@@ -7263,7 +7268,8 @@ private:
     void OnFailureResponse_52(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_52(uint16_t remainingTime)
@@ -7316,7 +7322,8 @@ private:
     void OnFailureResponse_54(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_54(uint16_t remainingTime)
@@ -7339,7 +7346,8 @@ private:
     void OnFailureResponse_55(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_55(uint8_t driftCompensation)
@@ -7394,7 +7402,8 @@ private:
     void OnFailureResponse_57(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_57(uint8_t driftCompensation)
@@ -7419,7 +7428,8 @@ private:
     void OnFailureResponse_58(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_58(chip::CharSpan compensationText)
@@ -7473,7 +7483,8 @@ private:
     void OnFailureResponse_60(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_60(chip::CharSpan compensationText)
@@ -7497,7 +7508,7 @@ private:
     void OnFailureResponse_61(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_61(uint8_t numberOfPrimaries)
@@ -7545,7 +7556,7 @@ private:
     void OnFailureResponse_63(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_63(uint8_t numberOfPrimaries)
@@ -7570,7 +7581,7 @@ private:
     void OnFailureResponse_64(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_64(uint16_t primary1X)
@@ -7618,7 +7629,7 @@ private:
     void OnFailureResponse_66(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_66(uint16_t primary1X)
@@ -7643,7 +7654,7 @@ private:
     void OnFailureResponse_67(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_67(uint16_t primary1Y)
@@ -7691,7 +7702,7 @@ private:
     void OnFailureResponse_69(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_69(uint16_t primary1Y)
@@ -7716,7 +7727,7 @@ private:
     void OnFailureResponse_70(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_70(uint8_t primary1Intensity)
@@ -7739,7 +7750,7 @@ private:
     void OnFailureResponse_71(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_71(uint16_t primary2X)
@@ -7787,7 +7798,7 @@ private:
     void OnFailureResponse_73(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_73(uint16_t primary2X)
@@ -7812,7 +7823,7 @@ private:
     void OnFailureResponse_74(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_74(uint16_t primary2Y)
@@ -7860,7 +7871,7 @@ private:
     void OnFailureResponse_76(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_76(uint16_t primary2Y)
@@ -7885,7 +7896,7 @@ private:
     void OnFailureResponse_77(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_77(uint8_t primary2Intensity)
@@ -7908,7 +7919,7 @@ private:
     void OnFailureResponse_78(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_78(uint16_t primary3X)
@@ -7956,7 +7967,7 @@ private:
     void OnFailureResponse_80(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_80(uint16_t primary3X)
@@ -7981,7 +7992,7 @@ private:
     void OnFailureResponse_81(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_81(uint16_t primary3Y)
@@ -8029,7 +8040,7 @@ private:
     void OnFailureResponse_83(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_83(uint16_t primary3Y)
@@ -8054,7 +8065,7 @@ private:
     void OnFailureResponse_84(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_84(uint8_t primary3Intensity)
@@ -8077,7 +8088,7 @@ private:
     void OnFailureResponse_85(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_85(uint16_t primary4X)
@@ -8125,7 +8136,7 @@ private:
     void OnFailureResponse_87(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_87(uint16_t primary4X)
@@ -8150,7 +8161,7 @@ private:
     void OnFailureResponse_88(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_88(uint16_t primary4Y)
@@ -8198,7 +8209,7 @@ private:
     void OnFailureResponse_90(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_90(uint16_t primary4Y)
@@ -8223,7 +8234,7 @@ private:
     void OnFailureResponse_91(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_91(uint8_t primary4Intensity)
@@ -8246,7 +8257,7 @@ private:
     void OnFailureResponse_92(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_92(uint16_t primary5X)
@@ -8294,7 +8305,7 @@ private:
     void OnFailureResponse_94(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_94(uint16_t primary5X)
@@ -8319,7 +8330,7 @@ private:
     void OnFailureResponse_95(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_95(uint16_t primary5Y)
@@ -8367,7 +8378,7 @@ private:
     void OnFailureResponse_97(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_97(uint16_t primary5Y)
@@ -8392,7 +8403,7 @@ private:
     void OnFailureResponse_98(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_98(uint8_t primary5Intensity)
@@ -8415,7 +8426,7 @@ private:
     void OnFailureResponse_99(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_99(uint16_t primary6X)
@@ -8463,7 +8474,7 @@ private:
     void OnFailureResponse_101(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_101(uint16_t primary6X)
@@ -8488,7 +8499,7 @@ private:
     void OnFailureResponse_102(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_102(uint16_t primary6Y)
@@ -8536,7 +8547,7 @@ private:
     void OnFailureResponse_104(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_104(uint16_t primary6Y)
@@ -8561,7 +8572,7 @@ private:
     void OnFailureResponse_105(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_105(uint8_t primary6Intensity)
@@ -8584,7 +8595,8 @@ private:
     void OnFailureResponse_106(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_106(uint16_t whitePointX)
@@ -8612,7 +8624,8 @@ private:
     void OnFailureResponse_107(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_107() { NextTest(); }
@@ -8631,7 +8644,8 @@ private:
     void OnFailureResponse_108(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_108(uint16_t whitePointX)
@@ -8655,7 +8669,8 @@ private:
     void OnFailureResponse_109(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_109(uint16_t whitePointY)
@@ -8683,7 +8698,8 @@ private:
     void OnFailureResponse_110(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_110() { NextTest(); }
@@ -8702,7 +8718,8 @@ private:
     void OnFailureResponse_111(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_111(uint16_t whitePointY)
@@ -8726,7 +8743,8 @@ private:
     void OnFailureResponse_112(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_112(uint16_t colorPointRX)
@@ -8754,7 +8772,8 @@ private:
     void OnFailureResponse_113(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_113() { NextTest(); }
@@ -8773,7 +8792,8 @@ private:
     void OnFailureResponse_114(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_114(uint16_t colorPointRX)
@@ -8797,7 +8817,8 @@ private:
     void OnFailureResponse_115(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_115(uint16_t colorPointRY)
@@ -8825,7 +8846,8 @@ private:
     void OnFailureResponse_116(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_116() { NextTest(); }
@@ -8844,7 +8866,8 @@ private:
     void OnFailureResponse_117(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_117(uint16_t colorPointRY)
@@ -8868,7 +8891,8 @@ private:
     void OnFailureResponse_118(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_118(uint8_t colorPointRIntensity)
@@ -8894,7 +8918,8 @@ private:
     void OnFailureResponse_119(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_119() { NextTest(); }
@@ -8913,7 +8938,8 @@ private:
     void OnFailureResponse_120(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_120(uint8_t colorPointRIntensity)
@@ -8937,7 +8963,8 @@ private:
     void OnFailureResponse_121(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_121(uint16_t colorPointGX)
@@ -8965,7 +8992,8 @@ private:
     void OnFailureResponse_122(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_122() { NextTest(); }
@@ -8984,7 +9012,8 @@ private:
     void OnFailureResponse_123(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_123(uint16_t colorPointGX)
@@ -9008,7 +9037,8 @@ private:
     void OnFailureResponse_124(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_124(uint16_t colorPointGY)
@@ -9036,7 +9066,8 @@ private:
     void OnFailureResponse_125(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_125() { NextTest(); }
@@ -9055,7 +9086,8 @@ private:
     void OnFailureResponse_126(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_126(uint16_t colorPointGY)
@@ -9079,7 +9111,8 @@ private:
     void OnFailureResponse_127(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_127(uint8_t colorPointGIntensity)
@@ -9105,7 +9138,8 @@ private:
     void OnFailureResponse_128(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_128() { NextTest(); }
@@ -9124,7 +9158,8 @@ private:
     void OnFailureResponse_129(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_129(uint8_t colorPointGIntensity)
@@ -9148,7 +9183,8 @@ private:
     void OnFailureResponse_130(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_130(uint16_t colorPointBX)
@@ -9176,7 +9212,8 @@ private:
     void OnFailureResponse_131(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_131() { NextTest(); }
@@ -9195,7 +9232,8 @@ private:
     void OnFailureResponse_132(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_132(uint16_t colorPointBX)
@@ -9219,7 +9257,8 @@ private:
     void OnFailureResponse_133(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_133(uint16_t colorPointBY)
@@ -9247,7 +9286,8 @@ private:
     void OnFailureResponse_134(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_134() { NextTest(); }
@@ -9266,7 +9306,8 @@ private:
     void OnFailureResponse_135(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_135(uint16_t colorPointBY)
@@ -9290,7 +9331,8 @@ private:
     void OnFailureResponse_136(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_136(uint8_t colorPointBIntensity)
@@ -9316,7 +9358,8 @@ private:
     void OnFailureResponse_137(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_137() { NextTest(); }
@@ -9335,7 +9378,8 @@ private:
     void OnFailureResponse_138(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_138(uint8_t colorPointBIntensity)
@@ -9530,7 +9574,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -9549,7 +9593,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -9573,7 +9617,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint8_t currentHue)
@@ -9611,7 +9655,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -9643,7 +9687,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -9675,7 +9719,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6() { NextTest(); }
@@ -9707,7 +9751,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -9734,7 +9778,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8() { NextTest(); }
@@ -9753,7 +9797,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(bool onOff)
@@ -9934,7 +9978,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -9953,7 +9997,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -9989,7 +10033,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -10020,7 +10064,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -10051,7 +10095,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -10082,7 +10126,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6() { NextTest(); }
@@ -10109,7 +10153,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -10128,7 +10172,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(bool onOff)
@@ -10301,7 +10345,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -10320,7 +10364,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -10357,7 +10401,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -10389,7 +10433,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -10416,7 +10460,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -10435,7 +10479,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(bool onOff)
@@ -10604,7 +10648,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -10623,7 +10667,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -10659,7 +10703,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -10686,7 +10730,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -10705,7 +10749,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(bool onOff)
@@ -10894,7 +10938,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -10913,7 +10957,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -10949,7 +10993,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -10980,7 +11024,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -11011,7 +11055,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -11042,7 +11086,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6() { NextTest(); }
@@ -11073,7 +11117,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -11104,7 +11148,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8() { NextTest(); }
@@ -11131,7 +11175,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -11150,7 +11194,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(bool onOff)
@@ -11323,7 +11367,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -11342,7 +11386,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -11379,7 +11423,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -11411,7 +11455,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -11438,7 +11482,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -11457,7 +11501,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(bool onOff)
@@ -11626,7 +11670,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -11645,7 +11689,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -11682,7 +11726,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -11709,7 +11753,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -11728,7 +11772,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(bool onOff)
@@ -11897,7 +11941,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -11916,7 +11960,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -11953,7 +11997,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -11980,7 +12024,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -11999,7 +12043,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(bool onOff)
@@ -12172,7 +12216,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -12191,7 +12235,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -12227,7 +12271,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -12256,7 +12300,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -12283,7 +12327,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -12302,7 +12346,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(bool onOff)
@@ -12471,7 +12515,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -12490,7 +12534,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -12527,7 +12571,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -12554,7 +12598,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -12573,7 +12617,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(bool onOff)
@@ -12742,7 +12786,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -12761,7 +12805,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -12797,7 +12841,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -12824,7 +12868,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -12843,7 +12887,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(bool onOff)
@@ -13046,7 +13090,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -13065,7 +13109,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -13089,7 +13133,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint16_t colorTemperature)
@@ -13128,7 +13172,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -13161,7 +13205,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -13194,7 +13238,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6() { NextTest(); }
@@ -13227,7 +13271,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -13260,7 +13304,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8() { NextTest(); }
@@ -13293,7 +13337,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -13320,7 +13364,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10() { NextTest(); }
@@ -13339,7 +13383,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(bool onOff)
@@ -13512,7 +13556,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -13531,7 +13575,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -13570,7 +13614,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -13604,7 +13648,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -13631,7 +13675,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -13650,7 +13694,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(bool onOff)
@@ -13835,7 +13879,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -13854,7 +13898,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -13891,7 +13935,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -13923,7 +13967,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -13955,7 +13999,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -13987,7 +14031,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6() { NextTest(); }
@@ -14019,7 +14063,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -14046,7 +14090,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8() { NextTest(); }
@@ -14065,7 +14109,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(bool onOff)
@@ -14260,7 +14304,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -14279,7 +14323,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -14303,7 +14347,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint16_t enhancedCurrentHue)
@@ -14340,7 +14384,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -14371,7 +14415,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -14402,7 +14446,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6() { NextTest(); }
@@ -14433,7 +14477,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -14460,7 +14504,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8() { NextTest(); }
@@ -14479,7 +14523,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(bool onOff)
@@ -14652,7 +14696,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -14671,7 +14715,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -14708,7 +14752,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -14740,7 +14784,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -14767,7 +14811,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -14786,7 +14830,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(bool onOff)
@@ -14955,7 +14999,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -14974,7 +15018,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -15011,7 +15055,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -15038,7 +15082,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -15057,7 +15101,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(bool onOff)
@@ -15350,7 +15394,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -15369,7 +15413,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -15408,7 +15452,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -15427,7 +15471,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint8_t colorLoopDirection)
@@ -15451,7 +15495,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(uint16_t colorLoopTime)
@@ -15476,7 +15520,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(uint16_t colorLoopStartEnhancedHue)
@@ -15500,7 +15544,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(uint8_t colorLoopActive)
@@ -15539,7 +15583,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8() { NextTest(); }
@@ -15558,7 +15602,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(uint8_t colorLoopActive)
@@ -15597,7 +15641,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10() { NextTest(); }
@@ -15616,7 +15660,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(uint8_t colorLoopDirection)
@@ -15640,7 +15684,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(uint16_t colorLoopTime)
@@ -15679,7 +15723,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13() { NextTest(); }
@@ -15698,7 +15742,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14(uint8_t colorLoopDirection)
@@ -15730,7 +15774,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15() { NextTest(); }
@@ -15749,7 +15793,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(bool onOff)
@@ -16683,7 +16727,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -16702,7 +16746,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -16741,7 +16785,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -16760,7 +16804,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint8_t colorLoopActive)
@@ -16799,7 +16843,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -16818,7 +16862,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(uint8_t colorLoopDirection)
@@ -16857,7 +16901,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -16876,7 +16920,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(uint16_t colorLoopTime)
@@ -16915,7 +16959,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -16935,7 +16979,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(uint16_t colorLoopStartEnhancedHue)
@@ -16974,7 +17018,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11() { NextTest(); }
@@ -16993,7 +17037,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(uint8_t colorLoopActive)
@@ -17017,7 +17061,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(uint16_t enhancedCurrentHue)
@@ -17042,7 +17086,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14(uint16_t colorLoopStoredEnhancedHue)
@@ -17081,7 +17125,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15() { NextTest(); }
@@ -17100,7 +17144,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(uint8_t colorLoopActive)
@@ -17125,7 +17169,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17(uint16_t colorLoopStoredEnhancedHue)
@@ -17149,7 +17193,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18(uint16_t enhancedCurrentHue)
@@ -17188,7 +17232,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19() { NextTest(); }
@@ -17207,7 +17251,7 @@ private:
     void OnFailureResponse_20(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_20(uint8_t colorLoopDirection)
@@ -17246,7 +17290,7 @@ private:
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_21() { NextTest(); }
@@ -17265,7 +17309,7 @@ private:
     void OnFailureResponse_22(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_22(uint8_t colorLoopActive)
@@ -17289,7 +17333,7 @@ private:
     void OnFailureResponse_23(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_23(uint16_t enhancedCurrentHue)
@@ -17314,7 +17358,7 @@ private:
     void OnFailureResponse_24(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_24(uint16_t colorLoopStoredEnhancedHue)
@@ -17353,7 +17397,7 @@ private:
     void OnFailureResponse_25(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_25() { NextTest(); }
@@ -17372,7 +17416,7 @@ private:
     void OnFailureResponse_26(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_26(uint8_t colorLoopActive)
@@ -17397,7 +17441,7 @@ private:
     void OnFailureResponse_27(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_27(uint16_t colorLoopStoredEnhancedHue)
@@ -17421,7 +17465,7 @@ private:
     void OnFailureResponse_28(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_28(uint16_t enhancedCurrentHue)
@@ -17458,7 +17502,7 @@ private:
     void OnFailureResponse_29(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_29() { NextTest(); }
@@ -17483,7 +17527,7 @@ private:
     void OnFailureResponse_31(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_31(uint16_t enhancedCurrentHue)
@@ -17522,7 +17566,7 @@ private:
     void OnFailureResponse_32(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_32() { NextTest(); }
@@ -17541,7 +17585,7 @@ private:
     void OnFailureResponse_33(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_33(uint8_t colorLoopDirection)
@@ -17580,7 +17624,7 @@ private:
     void OnFailureResponse_34(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_34() { NextTest(); }
@@ -17599,7 +17643,7 @@ private:
     void OnFailureResponse_35(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_35(uint8_t colorLoopActive)
@@ -17623,7 +17667,7 @@ private:
     void OnFailureResponse_36(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_36(uint16_t enhancedCurrentHue)
@@ -17648,7 +17692,7 @@ private:
     void OnFailureResponse_37(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_37(uint16_t colorLoopStoredEnhancedHue)
@@ -17687,7 +17731,7 @@ private:
     void OnFailureResponse_38(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_38() { NextTest(); }
@@ -17706,7 +17750,7 @@ private:
     void OnFailureResponse_39(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_39(uint8_t colorLoopActive)
@@ -17731,7 +17775,7 @@ private:
     void OnFailureResponse_40(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_40(uint16_t colorLoopStoredEnhancedHue)
@@ -17755,7 +17799,7 @@ private:
     void OnFailureResponse_41(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_41(uint16_t enhancedCurrentHue)
@@ -17794,7 +17838,7 @@ private:
     void OnFailureResponse_42(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_42() { NextTest(); }
@@ -17813,7 +17857,7 @@ private:
     void OnFailureResponse_43(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_43(uint8_t colorLoopDirection)
@@ -17852,7 +17896,7 @@ private:
     void OnFailureResponse_44(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_44() { NextTest(); }
@@ -17871,7 +17915,7 @@ private:
     void OnFailureResponse_45(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_45(uint8_t colorLoopActive)
@@ -17895,7 +17939,7 @@ private:
     void OnFailureResponse_46(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_46(uint16_t enhancedCurrentHue)
@@ -17920,7 +17964,7 @@ private:
     void OnFailureResponse_47(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_47(uint16_t colorLoopStoredEnhancedHue)
@@ -17959,7 +18003,7 @@ private:
     void OnFailureResponse_48(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_48() { NextTest(); }
@@ -17978,7 +18022,7 @@ private:
     void OnFailureResponse_49(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_49(uint8_t colorLoopActive)
@@ -18003,7 +18047,7 @@ private:
     void OnFailureResponse_50(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_50(uint16_t colorLoopStoredEnhancedHue)
@@ -18027,7 +18071,7 @@ private:
     void OnFailureResponse_51(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_51(uint16_t enhancedCurrentHue)
@@ -18059,7 +18103,7 @@ private:
     void OnFailureResponse_52(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_52() { NextTest(); }
@@ -18078,7 +18122,7 @@ private:
     void OnFailureResponse_53(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_53(bool onOff)
@@ -18491,7 +18535,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -18510,7 +18554,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -18549,7 +18593,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -18568,7 +18612,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint8_t colorLoopActive)
@@ -18592,7 +18636,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(uint8_t colorLoopDirection)
@@ -18616,7 +18660,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(uint16_t colorLoopTime)
@@ -18641,7 +18685,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(uint16_t colorLoopStartEnhancedHue)
@@ -18665,7 +18709,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(uint16_t enhancedCurrentHue)
@@ -18704,7 +18748,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -18723,7 +18767,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(uint8_t colorLoopActive)
@@ -18748,7 +18792,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(uint16_t colorLoopStoredEnhancedHue)
@@ -18787,7 +18831,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12() { NextTest(); }
@@ -18806,7 +18850,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(uint8_t colorLoopDirection)
@@ -18845,7 +18889,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14() { NextTest(); }
@@ -18864,7 +18908,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(uint8_t colorLoopActive)
@@ -18889,7 +18933,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(uint16_t colorLoopStoredEnhancedHue)
@@ -18913,7 +18957,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17(uint16_t enhancedCurrentHue)
@@ -18945,7 +18989,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18() { NextTest(); }
@@ -18964,7 +19008,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19(bool onOff)
@@ -19377,7 +19421,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -19396,7 +19440,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -19435,7 +19479,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -19454,7 +19498,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint8_t colorLoopActive)
@@ -19478,7 +19522,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(uint8_t colorLoopDirection)
@@ -19502,7 +19546,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(uint16_t colorLoopTime)
@@ -19527,7 +19571,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(uint16_t colorLoopStartEnhancedHue)
@@ -19566,7 +19610,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8() { NextTest(); }
@@ -19585,7 +19629,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(uint8_t colorLoopActive)
@@ -19609,7 +19653,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(uint16_t enhancedCurrentHue)
@@ -19634,7 +19678,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(uint16_t colorLoopStoredEnhancedHue)
@@ -19673,7 +19717,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12() { NextTest(); }
@@ -19692,7 +19736,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(uint16_t colorLoopTime)
@@ -19731,7 +19775,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14() { NextTest(); }
@@ -19750,7 +19794,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(uint8_t colorLoopActive)
@@ -19775,7 +19819,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(uint16_t colorLoopStoredEnhancedHue)
@@ -19799,7 +19843,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17(uint16_t enhancedCurrentHue)
@@ -19831,7 +19875,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18() { NextTest(); }
@@ -19850,7 +19894,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19(bool onOff)
@@ -20247,7 +20291,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t dataModelRevision)
@@ -20270,7 +20314,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(chip::CharSpan vendorName)
@@ -20294,7 +20338,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(chip::VendorId vendorID)
@@ -20317,7 +20361,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(chip::CharSpan productName)
@@ -20341,7 +20385,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(uint16_t productID)
@@ -20364,7 +20408,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(chip::CharSpan nodeLabel)
@@ -20388,7 +20432,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(chip::CharSpan location)
@@ -20413,7 +20457,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(uint16_t hardwareVersion)
@@ -20436,7 +20480,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(chip::CharSpan hardwareVersionString)
@@ -20461,7 +20505,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(uint32_t softwareVersion)
@@ -20484,7 +20528,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(chip::CharSpan softwareVersionString)
@@ -20510,7 +20554,8 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(chip::CharSpan manufacturingDate)
@@ -20536,7 +20581,8 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(chip::CharSpan partNumber)
@@ -20560,7 +20606,8 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14(chip::CharSpan productURL)
@@ -20585,7 +20632,8 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(chip::CharSpan productLabel)
@@ -20609,7 +20657,8 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(chip::CharSpan serialNumber)
@@ -20633,7 +20682,8 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17(bool localConfigDisabled)
@@ -20656,7 +20706,8 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18(bool reachable)
@@ -20679,7 +20730,8 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19(chip::CharSpan uniqueID)
@@ -20831,7 +20883,8 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint8_t maxNetworks)
@@ -20854,7 +20907,8 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(
@@ -21036,7 +21090,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(const chip::app::DataModel::DecodableList<
@@ -21067,7 +21121,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint8_t supportedFabrics)
@@ -21092,7 +21146,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint8_t commissionedFabrics)
@@ -21117,7 +21171,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::ByteSpan> & trustedRootCertificates)
@@ -21306,7 +21360,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -21331,7 +21385,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t clusterRevision)
@@ -21379,7 +21433,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint16_t clusterRevision)
@@ -21403,7 +21457,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -21757,7 +21811,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -21803,7 +21857,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -22093,7 +22147,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(const chip::app::DataModel::Nullable<uint16_t> & measuredValue)
@@ -22116,7 +22170,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::Nullable<uint16_t> & minMeasuredValue)
@@ -22139,7 +22193,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::Nullable<uint16_t> & maxMeasuredValue)
@@ -22234,7 +22288,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(const chip::app::DataModel::Nullable<uint16_t> & measuredValue)
@@ -22257,7 +22311,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(const chip::app::DataModel::Nullable<uint16_t> & minMeasuredValue)
@@ -22280,7 +22334,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(const chip::app::DataModel::Nullable<uint16_t> & maxMeasuredValue)
@@ -22303,7 +22357,8 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(uint16_t tolerance)
@@ -22327,7 +22382,8 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(uint16_t tolerance)
@@ -22382,7 +22438,8 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(uint16_t tolerance)
@@ -22531,7 +22588,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(const chip::app::DataModel::Nullable<uint16_t> & measuredValue)
@@ -22554,7 +22611,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::Nullable<uint16_t> & measuredValue)
@@ -22743,7 +22800,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint64_t breadcrumb)
@@ -22770,7 +22827,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2() { NextTest(); }
@@ -22789,7 +22846,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint64_t breadcrumb)
@@ -22814,7 +22871,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(chip::app::Clusters::GeneralCommissioning::RegulatoryLocationType regulatoryConfig)
@@ -22839,7 +22896,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(chip::app::Clusters::GeneralCommissioning::RegulatoryLocationType locationCapability)
@@ -23018,7 +23075,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -23041,7 +23098,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -23064,7 +23121,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
@@ -23087,7 +23144,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
@@ -23235,7 +23292,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t identifyTime)
@@ -23258,7 +23315,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint8_t identifyType)
@@ -23543,7 +23600,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -23579,7 +23636,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -23615,7 +23672,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -23651,7 +23708,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -23687,7 +23744,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -23723,7 +23780,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11() { NextTest(); }
@@ -23759,7 +23816,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13() { NextTest(); }
@@ -23795,7 +23852,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15() { NextTest(); }
@@ -23831,7 +23888,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17() { NextTest(); }
@@ -23867,7 +23924,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19() { NextTest(); }
@@ -24048,7 +24105,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -24072,7 +24129,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -24096,7 +24153,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
@@ -24120,7 +24177,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
@@ -24297,7 +24354,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(const chip::app::DataModel::Nullable<uint16_t> & minMeasuredValue)
@@ -24323,7 +24380,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::Nullable<uint16_t> & maxMeasuredValue)
@@ -24348,7 +24405,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint16_t tolerance)
@@ -24374,7 +24431,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::Nullable<uint8_t> & lightSensorType)
@@ -24645,7 +24702,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -24669,7 +24726,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t clusterRevision)
@@ -24715,7 +24772,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint16_t clusterRevision)
@@ -24739,7 +24796,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -24762,7 +24819,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
@@ -24785,7 +24842,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
@@ -24808,7 +24865,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(uint32_t featureMap)
@@ -24832,7 +24889,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(uint32_t featureMap)
@@ -24878,7 +24935,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(uint32_t featureMap)
@@ -25204,7 +25261,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -25229,7 +25286,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint8_t currentLevel)
@@ -25253,7 +25310,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint16_t remainingTime)
@@ -25277,7 +25334,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(uint8_t minLevel)
@@ -25301,7 +25358,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(uint8_t maxLevel)
@@ -25324,7 +25381,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(uint16_t currentFrequency)
@@ -25348,7 +25405,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(uint16_t minFrequency)
@@ -25372,7 +25429,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(uint16_t maxFrequency)
@@ -25396,7 +25453,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(uint16_t onOffTransitionTime)
@@ -25420,7 +25477,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(const chip::app::DataModel::Nullable<uint8_t> & onLevel)
@@ -25443,7 +25500,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(const chip::app::DataModel::Nullable<uint16_t> & onTransitionTime)
@@ -25466,7 +25523,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(const chip::app::DataModel::Nullable<uint16_t> & offTransitionTime)
@@ -25489,7 +25546,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14(const chip::app::DataModel::Nullable<uint8_t> & defaultMoveRate)
@@ -25512,7 +25569,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(uint8_t options)
@@ -25822,7 +25879,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t onOffTransitionTime)
@@ -25849,7 +25906,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2() { NextTest(); }
@@ -25868,7 +25925,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint16_t onOffTransitionTime)
@@ -25895,7 +25952,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -25918,7 +25975,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -25937,7 +25994,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(const chip::app::DataModel::Nullable<uint8_t> & onLevel)
@@ -25966,7 +26023,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -25985,7 +26042,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(const chip::app::DataModel::Nullable<uint16_t> & onTransitionTime)
@@ -26014,7 +26071,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -26033,7 +26090,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(const chip::app::DataModel::Nullable<uint16_t> & offTransitionTime)
@@ -26058,7 +26115,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(const chip::app::DataModel::Nullable<uint8_t> & defaultMoveRate)
@@ -26087,7 +26144,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12() { NextTest(); }
@@ -26106,7 +26163,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(const chip::app::DataModel::Nullable<uint8_t> & defaultMoveRate)
@@ -26135,7 +26192,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14() { NextTest(); }
@@ -26154,7 +26211,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(const chip::app::DataModel::Nullable<uint8_t> & startUpCurrentLevel)
@@ -26422,7 +26479,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint8_t currentLevel)
@@ -26445,7 +26502,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint8_t minLevel)
@@ -26468,7 +26525,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint8_t maxLevel)
@@ -26503,7 +26560,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -26528,7 +26585,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(uint8_t currentLevel)
@@ -26564,7 +26621,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -26589,7 +26646,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(uint8_t currentLevel)
@@ -26613,7 +26670,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(uint16_t onOffTransitionTime)
@@ -26648,7 +26705,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11() { NextTest(); }
@@ -26673,7 +26730,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(uint8_t currentLevel)
@@ -26709,7 +26766,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14() { NextTest(); }
@@ -26991,7 +27048,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint8_t maxLevel)
@@ -27027,7 +27084,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2() { NextTest(); }
@@ -27059,7 +27116,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(uint8_t currentLevel)
@@ -27083,7 +27140,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(uint8_t minLevel)
@@ -27119,7 +27176,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -27151,7 +27208,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(uint8_t currentLevel)
@@ -27176,7 +27233,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(const chip::app::DataModel::Nullable<uint8_t> & defaultMoveRate)
@@ -27212,7 +27269,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12() { NextTest(); }
@@ -27237,7 +27294,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14(uint8_t currentLevel)
@@ -27280,7 +27337,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16() { NextTest(); }
@@ -27510,7 +27567,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -27542,7 +27599,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2() { NextTest(); }
@@ -27567,7 +27624,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint8_t currentLevel)
@@ -27604,7 +27661,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -27629,7 +27686,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(uint8_t currentLevel)
@@ -27666,7 +27723,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8() { NextTest(); }
@@ -27691,7 +27748,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(uint8_t currentLevel)
@@ -27727,7 +27784,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11() { NextTest(); }
@@ -27760,7 +27817,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13() { NextTest(); }
@@ -27962,7 +28019,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -27993,7 +28050,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2() { NextTest(); }
@@ -28018,7 +28075,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint8_t currentLevel)
@@ -28055,7 +28112,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -28090,7 +28147,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -28109,7 +28166,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(uint8_t currentLevel)
@@ -28145,7 +28202,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -28178,7 +28235,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11() { NextTest(); }
@@ -28336,7 +28393,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -28360,7 +28417,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t clusterRevision)
@@ -28383,7 +28440,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -28545,7 +28602,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -28569,7 +28626,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t clusterRevision)
@@ -28592,7 +28649,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -28754,7 +28811,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -28778,7 +28835,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t clusterRevision)
@@ -28801,7 +28858,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -28963,7 +29020,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -28987,7 +29044,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t clusterRevision)
@@ -29010,7 +29067,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -29172,7 +29229,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -29196,7 +29253,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t clusterRevision)
@@ -29219,7 +29276,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -29381,7 +29438,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -29405,7 +29462,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t clusterRevision)
@@ -29428,7 +29485,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -29590,7 +29647,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -29614,7 +29671,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t clusterRevision)
@@ -29637,7 +29694,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -29799,7 +29856,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -29823,7 +29880,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t clusterRevision)
@@ -29846,7 +29903,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -30008,7 +30065,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -30032,7 +30089,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t clusterRevision)
@@ -30055,7 +30112,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -30217,7 +30274,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -30241,7 +30298,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t clusterRevision)
@@ -30264,7 +30321,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -30426,7 +30483,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -30450,7 +30507,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t clusterRevision)
@@ -30473,7 +30530,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -30635,7 +30692,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -30659,7 +30716,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t clusterRevision)
@@ -30682,7 +30739,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -30814,7 +30871,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -32013,7 +32070,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(
@@ -32414,7 +32471,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(chip::app::Clusters::MediaPlayback::PlaybackStateEnum currentState)
@@ -32629,7 +32686,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(chip::app::Clusters::MediaPlayback::PlaybackStateEnum currentState)
@@ -33015,7 +33072,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(float playbackSpeed)
@@ -33045,7 +33102,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(chip::app::Clusters::MediaPlayback::PlaybackStateEnum currentState)
@@ -33081,7 +33138,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(chip::app::Clusters::MediaPlayback::PlaybackStateEnum currentState)
@@ -33439,7 +33496,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint8_t currentTarget)
@@ -33462,7 +33519,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(
@@ -33682,7 +33739,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(chip::CharSpan vendorName)
@@ -33706,7 +33763,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint16_t vendorID)
@@ -33729,7 +33786,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(chip::CharSpan applicationName)
@@ -33753,7 +33810,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(uint16_t productID)
@@ -33776,7 +33833,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(chip::app::Clusters::ApplicationBasic::ApplicationStatusEnum status)
@@ -33800,7 +33857,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(chip::CharSpan applicationVersion)
@@ -33949,7 +34006,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(const chip::app::DataModel::DecodableList<chip::CharSpan> & acceptHeader)
@@ -33973,7 +34030,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint32_t supportedStreamingProtocols)
@@ -34151,7 +34208,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -34175,7 +34232,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -34198,7 +34255,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
@@ -34221,7 +34278,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
@@ -34510,7 +34567,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2() { NextTest(); }
@@ -34532,7 +34589,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -34551,7 +34608,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(chip::CharSpan nodeLabel)
@@ -34588,7 +34645,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(const chip::app::DataModel::DecodableList<
@@ -34618,7 +34675,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(const chip::app::DataModel::DecodableList<
@@ -34651,7 +34708,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -34670,7 +34727,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(chip::CharSpan nodeLabel)
@@ -34697,7 +34754,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11() { NextTest(); }
@@ -34716,7 +34773,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(chip::CharSpan nodeLabel)
@@ -34877,7 +34934,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -34923,7 +34980,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -35164,7 +35221,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint8_t occupancy)
@@ -35212,7 +35269,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint8_t occupancy)
@@ -35237,7 +35294,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint8_t occupancySensorType)
@@ -35287,7 +35344,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(uint8_t occupancySensorType)
@@ -35312,7 +35369,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(uint8_t occupancySensorTypeBitmap)
@@ -35362,7 +35419,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(uint8_t occupancySensorTypeBitmap)
@@ -35523,7 +35580,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint8_t occupancy)
@@ -35548,7 +35605,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint8_t occupancy) { NextTest(); }
@@ -35785,7 +35842,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -35809,7 +35866,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t clusterRevision)
@@ -35855,7 +35912,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint16_t clusterRevision)
@@ -35879,7 +35936,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -35902,7 +35959,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(uint32_t featureMap)
@@ -35926,7 +35983,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(uint32_t featureMap)
@@ -35972,7 +36029,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(uint32_t featureMap)
@@ -36165,7 +36222,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(bool onOff)
@@ -36188,7 +36245,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool globalSceneControl)
@@ -36211,7 +36268,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint16_t onTime)
@@ -36234,7 +36291,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint16_t offWaitTime)
@@ -36257,7 +36314,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(const chip::app::DataModel::Nullable<chip::app::Clusters::OnOff::OnOffStartUpOnOff> & startUpOnOff)
@@ -36561,7 +36618,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -36580,7 +36637,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -36612,7 +36669,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -36631,7 +36688,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(bool onOff)
@@ -36663,7 +36720,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -36682,7 +36739,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(bool onOff)
@@ -36714,7 +36771,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -36733,7 +36790,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(bool onOff)
@@ -36765,7 +36822,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -36784,7 +36841,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(bool onOff)
@@ -36816,7 +36873,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11() { NextTest(); }
@@ -36841,7 +36898,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(bool onOff)
@@ -36873,7 +36930,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14() { NextTest(); }
@@ -36898,7 +36955,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(bool onOff)
@@ -36942,7 +36999,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19() { NextTest(); }
@@ -36961,7 +37018,7 @@ private:
     void OnFailureResponse_20(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_20(bool onOff)
@@ -37831,7 +37888,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -37856,7 +37913,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(bool onOff)
@@ -37880,7 +37937,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(bool globalSceneControl)
@@ -37912,7 +37969,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -37937,7 +37994,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(bool onOff)
@@ -37961,7 +38018,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(bool globalSceneControl)
@@ -37993,7 +38050,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -38018,7 +38075,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(bool onOff)
@@ -38042,7 +38099,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(bool globalSceneControl)
@@ -38066,7 +38123,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(uint16_t onTime)
@@ -38090,7 +38147,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14(uint16_t offWaitTime)
@@ -38122,7 +38179,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15() { NextTest(); }
@@ -38141,7 +38198,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(bool onOff)
@@ -38165,7 +38222,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17(uint16_t onTime)
@@ -38189,7 +38246,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18(uint16_t offWaitTime)
@@ -38221,7 +38278,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19() { NextTest(); }
@@ -38240,7 +38297,7 @@ private:
     void OnFailureResponse_20(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_20(bool onOff)
@@ -38264,7 +38321,7 @@ private:
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_21(uint16_t onTime)
@@ -38288,7 +38345,7 @@ private:
     void OnFailureResponse_22(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_22(bool onOff)
@@ -38312,7 +38369,7 @@ private:
     void OnFailureResponse_23(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_23(uint16_t onTime)
@@ -38336,7 +38393,7 @@ private:
     void OnFailureResponse_24(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_24(uint16_t offWaitTime)
@@ -38368,7 +38425,7 @@ private:
     void OnFailureResponse_25(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_25() { NextTest(); }
@@ -38387,7 +38444,7 @@ private:
     void OnFailureResponse_26(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_26(uint16_t onTime)
@@ -38411,7 +38468,7 @@ private:
     void OnFailureResponse_27(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_27(uint16_t offWaitTime)
@@ -38443,7 +38500,7 @@ private:
     void OnFailureResponse_28(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_28() { NextTest(); }
@@ -38462,7 +38519,7 @@ private:
     void OnFailureResponse_29(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_29(bool onOff)
@@ -38486,7 +38543,7 @@ private:
     void OnFailureResponse_30(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_30(uint16_t onTime)
@@ -38510,7 +38567,7 @@ private:
     void OnFailureResponse_31(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_31(bool onOff)
@@ -38534,7 +38591,7 @@ private:
     void OnFailureResponse_32(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_32(uint16_t onTime)
@@ -38566,7 +38623,7 @@ private:
     void OnFailureResponse_33(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_33() { NextTest(); }
@@ -38585,7 +38642,7 @@ private:
     void OnFailureResponse_34(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_34(bool onOff)
@@ -38609,7 +38666,7 @@ private:
     void OnFailureResponse_35(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_35(uint16_t onTime)
@@ -38633,7 +38690,7 @@ private:
     void OnFailureResponse_36(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_36(uint16_t offWaitTime)
@@ -38665,7 +38722,7 @@ private:
     void OnFailureResponse_37(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_37() { NextTest(); }
@@ -38684,7 +38741,7 @@ private:
     void OnFailureResponse_38(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_38(bool onOff)
@@ -38708,7 +38765,7 @@ private:
     void OnFailureResponse_39(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_39(uint16_t onTime)
@@ -38732,7 +38789,7 @@ private:
     void OnFailureResponse_40(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_40(bool onOff)
@@ -38756,7 +38813,7 @@ private:
     void OnFailureResponse_41(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_41(uint16_t onTime)
@@ -38780,7 +38837,7 @@ private:
     void OnFailureResponse_42(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_42(uint16_t offWaitTime)
@@ -38804,7 +38861,7 @@ private:
     void OnFailureResponse_43(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_43(bool onOff)
@@ -38828,7 +38885,7 @@ private:
     void OnFailureResponse_44(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_44(uint16_t onTime)
@@ -38852,7 +38909,7 @@ private:
     void OnFailureResponse_45(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_45(uint16_t offWaitTime)
@@ -38884,7 +38941,7 @@ private:
     void OnFailureResponse_46(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_46() { NextTest(); }
@@ -39258,7 +39315,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -39281,7 +39338,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2() { NextTest(); }
@@ -39300,7 +39357,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::Nullable<chip::app::Clusters::OnOff::OnOffStartUpOnOff> & startUpOnOff)
@@ -39337,7 +39394,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(bool onOff)
@@ -39365,7 +39422,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -39396,7 +39453,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(bool onOff)
@@ -39424,7 +39481,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11() { NextTest(); }
@@ -39455,7 +39512,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14(bool onOff)
@@ -39491,7 +39548,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17(bool onOff)
@@ -39518,7 +39575,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18() { NextTest(); }
@@ -39549,7 +39606,7 @@ private:
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_21(bool onOff)
@@ -39581,7 +39638,7 @@ private:
     void OnFailureResponse_22(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_22() { NextTest(); }
@@ -39612,7 +39669,7 @@ private:
     void OnFailureResponse_25(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_25(bool onOff)
@@ -39791,7 +39848,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -39815,7 +39872,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -39838,7 +39895,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
@@ -39861,7 +39918,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
@@ -40107,7 +40164,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint8_t status)
@@ -40132,7 +40189,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint8_t order)
@@ -40155,7 +40212,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(chip::CharSpan description)
@@ -40178,7 +40235,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint32_t batteryVoltage)
@@ -40201,7 +40258,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(uint8_t batteryPercentRemaining)
@@ -40226,7 +40283,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(uint32_t batteryTimeRemaining)
@@ -40249,7 +40306,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(uint8_t batteryChargeLevel)
@@ -40274,7 +40331,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(const chip::app::DataModel::DecodableList<uint8_t> & activeBatteryFaults)
@@ -40297,7 +40354,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(uint8_t batteryChargeState)
@@ -40459,7 +40516,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -40506,7 +40563,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -40743,7 +40800,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(const chip::app::DataModel::Nullable<int16_t> & measuredValue)
@@ -40790,7 +40847,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::Nullable<int16_t> & measuredValue)
@@ -40816,7 +40873,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::Nullable<int16_t> & minMeasuredValue)
@@ -40865,7 +40922,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(const chip::app::DataModel::Nullable<int16_t> & minMeasuredValue)
@@ -40891,7 +40948,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(const chip::app::DataModel::Nullable<int16_t> & maxMeasuredValue)
@@ -40940,7 +40997,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(const chip::app::DataModel::Nullable<int16_t> & maxMeasuredValue)
@@ -41186,7 +41243,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -41234,7 +41291,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -41258,7 +41315,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
@@ -41282,7 +41339,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
@@ -41306,7 +41363,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(uint32_t featureMap)
@@ -41331,7 +41388,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(uint32_t featureMap)
@@ -41379,7 +41436,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(uint32_t featureMap)
@@ -42184,7 +42241,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(int16_t maxPressure)
@@ -42208,7 +42265,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t maxSpeed)
@@ -42231,7 +42288,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint16_t maxFlow)
@@ -42255,7 +42312,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint8_t effectiveOperationMode)
@@ -42279,7 +42336,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(uint8_t effectiveControlMode)
@@ -42303,7 +42360,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(int16_t capacity)
@@ -42327,7 +42384,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(int16_t maxPressure)
@@ -42351,7 +42408,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(uint16_t maxSpeed)
@@ -42374,7 +42431,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(uint16_t maxFlow)
@@ -42398,7 +42455,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(uint8_t effectiveOperationMode)
@@ -42422,7 +42479,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(uint8_t effectiveControlMode)
@@ -42446,7 +42503,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(int16_t capacity)
@@ -42470,7 +42527,8 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(int16_t minConstPressure)
@@ -42494,7 +42552,8 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14(int16_t maxConstPressure)
@@ -42518,7 +42577,8 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(int16_t minCompPressure)
@@ -42542,7 +42602,8 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(int16_t maxCompPressure)
@@ -42566,7 +42627,8 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17(uint16_t minConstSpeed)
@@ -42590,7 +42652,8 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18(uint16_t maxConstSpeed)
@@ -42614,7 +42677,8 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19(uint16_t minConstFlow)
@@ -42638,7 +42702,8 @@ private:
     void OnFailureResponse_20(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_20(uint16_t maxConstFlow)
@@ -42662,7 +42727,8 @@ private:
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_21(int16_t minConstTemp)
@@ -42687,7 +42753,8 @@ private:
     void OnFailureResponse_22(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_22(int16_t maxConstTemp)
@@ -42712,7 +42779,8 @@ private:
     void OnFailureResponse_23(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_23(uint16_t pumpStatus)
@@ -42737,7 +42805,8 @@ private:
     void OnFailureResponse_24(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_24(uint16_t pumpStatus)
@@ -42760,7 +42829,8 @@ private:
     void OnFailureResponse_25(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_25(uint16_t speed)
@@ -42784,7 +42854,8 @@ private:
     void OnFailureResponse_26(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_26(const chip::app::DataModel::Nullable<uint32_t> & lifetimeRunningHours)
@@ -42810,7 +42881,8 @@ private:
     void OnFailureResponse_27(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_27(const chip::app::DataModel::Nullable<uint32_t> & lifetimeRunningHours)
@@ -42833,7 +42905,8 @@ private:
     void OnFailureResponse_28(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_28(uint32_t power)
@@ -42857,7 +42930,8 @@ private:
     void OnFailureResponse_29(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_29(const chip::app::DataModel::Nullable<uint32_t> & lifetimeEnergyConsumed)
@@ -42883,7 +42957,8 @@ private:
     void OnFailureResponse_30(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_30(const chip::app::DataModel::Nullable<uint32_t> & lifetimeEnergyConsumed)
@@ -42911,7 +42986,8 @@ private:
     void OnFailureResponse_31(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_31() { NextTest(); }
@@ -42931,7 +43007,8 @@ private:
     void OnFailureResponse_32(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_32(int16_t minConstPressure)
@@ -42955,7 +43032,8 @@ private:
     void OnFailureResponse_33(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_33(int16_t maxConstPressure)
@@ -42979,7 +43057,8 @@ private:
     void OnFailureResponse_34(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_34(int16_t minCompPressure)
@@ -43003,7 +43082,8 @@ private:
     void OnFailureResponse_35(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_35(int16_t maxCompPressure)
@@ -43027,7 +43107,8 @@ private:
     void OnFailureResponse_36(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_36(uint16_t minConstSpeed)
@@ -43051,7 +43132,8 @@ private:
     void OnFailureResponse_37(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_37(uint16_t maxConstSpeed)
@@ -43075,7 +43157,8 @@ private:
     void OnFailureResponse_38(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_38(uint16_t minConstFlow)
@@ -43099,7 +43182,8 @@ private:
     void OnFailureResponse_39(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_39(uint16_t maxConstFlow)
@@ -43123,7 +43207,8 @@ private:
     void OnFailureResponse_40(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_40(int16_t minConstTemp)
@@ -43149,7 +43234,8 @@ private:
     void OnFailureResponse_41(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_41(int16_t maxConstTemp)
@@ -43175,7 +43261,8 @@ private:
     void OnFailureResponse_42(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_42(uint16_t pumpStatus)
@@ -43200,7 +43287,8 @@ private:
     void OnFailureResponse_43(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_43(uint16_t pumpStatus)
@@ -43223,7 +43311,8 @@ private:
     void OnFailureResponse_44(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_44(uint16_t speed)
@@ -43247,7 +43336,7 @@ private:
     void OnFailureResponse_45(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_45(const chip::app::DataModel::Nullable<uint32_t> & lifetimeRunningHours)
@@ -43273,7 +43362,8 @@ private:
     void OnFailureResponse_46(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_46(const chip::app::DataModel::Nullable<uint32_t> & lifetimeRunningHours)
@@ -43296,7 +43386,8 @@ private:
     void OnFailureResponse_47(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_47(uint32_t power)
@@ -43320,7 +43411,8 @@ private:
     void OnFailureResponse_48(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_48(const chip::app::DataModel::Nullable<uint32_t> & lifetimeEnergyConsumed)
@@ -43346,7 +43438,8 @@ private:
     void OnFailureResponse_49(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_49(const chip::app::DataModel::Nullable<uint32_t> & lifetimeEnergyConsumed)
@@ -43518,7 +43611,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -43541,7 +43634,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2() { NextTest(); }
@@ -43564,7 +43657,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -43834,7 +43927,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -43854,7 +43947,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint8_t effectiveOperationMode)
@@ -43882,7 +43975,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -43902,7 +43995,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint8_t effectiveControlMode)
@@ -43930,7 +44023,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -43953,7 +44046,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6() { NextTest(); }
@@ -43976,7 +44069,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -43999,7 +44092,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8() { NextTest(); }
@@ -44022,7 +44115,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -44279,7 +44372,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -44299,7 +44392,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::Nullable<uint32_t> & lifetimeRunningHours)
@@ -44329,7 +44422,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -44349,7 +44442,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::Nullable<uint32_t> & lifetimeRunningHours)
@@ -44379,7 +44472,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -44399,7 +44492,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(const chip::app::DataModel::Nullable<uint32_t> & lifetimeRunningHours)
@@ -44429,7 +44522,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -44453,7 +44546,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8() { NextTest(); }
@@ -44473,7 +44566,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(const chip::app::DataModel::Nullable<uint32_t> & lifetimeEnergyConsumed)
@@ -44503,7 +44596,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10() { NextTest(); }
@@ -44523,7 +44616,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(const chip::app::DataModel::Nullable<uint32_t> & lifetimeEnergyConsumed)
@@ -44704,7 +44797,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -44729,7 +44822,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -44753,7 +44846,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
@@ -44777,7 +44870,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
@@ -44956,7 +45049,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -44980,7 +45073,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -45004,7 +45097,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
@@ -45028,7 +45121,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
@@ -45191,7 +45284,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t measuredValue)
@@ -45217,7 +45310,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t minMeasuredValue)
@@ -45243,7 +45336,8 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint16_t tolerance)
@@ -45418,7 +45512,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t minMeasuredValue)
@@ -45444,7 +45538,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t measuredValue)
@@ -45470,7 +45564,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint16_t measuredValue)
@@ -45928,7 +46022,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2() { NextTest(); }
@@ -46236,7 +46330,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint8_t numberOfPositions)
@@ -46260,7 +46354,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint8_t numberOfPositions)
@@ -46284,7 +46378,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint8_t currentPosition)
@@ -46308,7 +46402,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint8_t currentPosition)
@@ -46332,7 +46426,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(uint8_t multiPressMax)
@@ -46356,7 +46450,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(uint8_t multiPressMax)
@@ -46797,7 +46891,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint8_t currentPosition)
@@ -46839,7 +46933,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(uint8_t currentPosition)
@@ -47169,7 +47263,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -47193,7 +47287,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -47370,7 +47464,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(const chip::app::DataModel::Nullable<int16_t> & measuredValue)
@@ -47394,7 +47488,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::Nullable<int16_t> & minMeasuredValue)
@@ -47420,7 +47514,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::Nullable<int16_t> & maxMeasuredValue)
@@ -47445,7 +47539,8 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint16_t tolerance)
@@ -47634,7 +47729,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(const chip::app::DataModel::Nullable<int16_t> & minMeasuredValue)
@@ -47660,7 +47755,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::Nullable<int16_t> & maxMeasuredValue)
@@ -47686,7 +47781,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::Nullable<int16_t> & measuredValue)
@@ -47710,7 +47805,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::Nullable<int16_t> & measuredValue)
@@ -47872,7 +47967,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -47895,7 +47990,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -47918,7 +48013,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint32_t featureMap)
@@ -48292,7 +48387,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(int16_t localTemperature)
@@ -48315,7 +48410,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(int16_t absMinHeatSetpointLimit)
@@ -48340,7 +48435,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(int16_t absMaxHeatSetpointLimit)
@@ -48365,7 +48460,8 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(int16_t absMinCoolSetpointLimit)
@@ -48390,7 +48486,8 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(int16_t absMaxCoolSetpointLimit)
@@ -48415,7 +48512,8 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(int16_t occupiedCoolingSetpoint)
@@ -48440,7 +48538,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(int16_t occupiedHeatingSetpoint)
@@ -48465,7 +48563,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(int16_t minHeatSetpointLimit)
@@ -48490,7 +48588,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(int16_t maxHeatSetpointLimit)
@@ -48515,7 +48613,8 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(int16_t minCoolSetpointLimit)
@@ -48540,7 +48639,8 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(int16_t maxCoolSetpointLimit)
@@ -48566,7 +48666,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(chip::app::Clusters::Thermostat::ThermostatControlSequence controlSequenceOfOperation)
@@ -48591,7 +48691,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(uint8_t systemMode)
@@ -48616,7 +48716,8 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14(int8_t minSetpointDeadBand)
@@ -48641,7 +48742,8 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(uint8_t startOfWeek)
@@ -48667,7 +48769,8 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(uint8_t numberOfWeeklyTransitions)
@@ -48690,7 +48793,8 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17(uint8_t numberOfDailyTransitions)
@@ -49705,7 +49809,8 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(int16_t occupiedCoolingSetpoint)
@@ -49734,7 +49839,8 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2() { NextTest(); }
@@ -49753,7 +49859,8 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(int16_t occupiedCoolingSetpoint)
@@ -49780,7 +49887,8 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -49802,7 +49910,8 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -49821,7 +49930,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(int16_t occupiedHeatingSetpoint)
@@ -49850,7 +49959,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -49869,7 +49978,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(int16_t occupiedHeatingSetpoint)
@@ -49896,7 +50005,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -49918,7 +50027,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10() { NextTest(); }
@@ -49937,7 +50046,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(int16_t minHeatSetpointLimit)
@@ -49966,7 +50075,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12() { NextTest(); }
@@ -49985,7 +50094,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(int16_t minHeatSetpointLimit)
@@ -50012,7 +50121,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14() { NextTest(); }
@@ -50034,7 +50143,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15() { NextTest(); }
@@ -50053,7 +50162,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(int16_t maxHeatSetpointLimit)
@@ -50082,7 +50191,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17() { NextTest(); }
@@ -50101,7 +50210,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18(int16_t maxHeatSetpointLimit)
@@ -50128,7 +50237,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19() { NextTest(); }
@@ -50150,7 +50259,7 @@ private:
     void OnFailureResponse_20(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_20() { NextTest(); }
@@ -50169,7 +50278,8 @@ private:
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_21(int16_t minCoolSetpointLimit)
@@ -50198,7 +50308,8 @@ private:
     void OnFailureResponse_22(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_22() { NextTest(); }
@@ -50217,7 +50328,8 @@ private:
     void OnFailureResponse_23(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_23(int16_t minCoolSetpointLimit)
@@ -50244,7 +50356,8 @@ private:
     void OnFailureResponse_24(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_24() { NextTest(); }
@@ -50266,7 +50379,8 @@ private:
     void OnFailureResponse_25(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_25() { NextTest(); }
@@ -50285,7 +50399,8 @@ private:
     void OnFailureResponse_26(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_26(int16_t maxCoolSetpointLimit)
@@ -50314,7 +50429,8 @@ private:
     void OnFailureResponse_27(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_27() { NextTest(); }
@@ -50333,7 +50449,8 @@ private:
     void OnFailureResponse_28(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_28(int16_t maxCoolSetpointLimit)
@@ -50360,7 +50477,8 @@ private:
     void OnFailureResponse_29(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_29() { NextTest(); }
@@ -50382,7 +50500,8 @@ private:
     void OnFailureResponse_30(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_30() { NextTest(); }
@@ -50404,7 +50523,7 @@ private:
     void OnFailureResponse_31(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_31() { NextTest(); }
@@ -50426,7 +50545,7 @@ private:
     void OnFailureResponse_32(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_32() { NextTest(); }
@@ -50448,7 +50567,7 @@ private:
     void OnFailureResponse_33(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_33() { NextTest(); }
@@ -50470,7 +50589,7 @@ private:
     void OnFailureResponse_34(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_34() { NextTest(); }
@@ -50492,7 +50611,8 @@ private:
     void OnFailureResponse_35(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_35() { NextTest(); }
@@ -50514,7 +50634,8 @@ private:
     void OnFailureResponse_36(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_36() { NextTest(); }
@@ -50536,7 +50657,8 @@ private:
     void OnFailureResponse_37(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_37() { NextTest(); }
@@ -50558,7 +50680,8 @@ private:
     void OnFailureResponse_38(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_38() { NextTest(); }
@@ -50578,7 +50701,7 @@ private:
     void OnFailureResponse_39(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_39(chip::app::Clusters::Thermostat::ThermostatControlSequence controlSequenceOfOperation)
@@ -50608,7 +50731,7 @@ private:
     void OnFailureResponse_40(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_40() { NextTest(); }
@@ -50628,7 +50751,7 @@ private:
     void OnFailureResponse_41(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_41(chip::app::Clusters::Thermostat::ThermostatControlSequence controlSequenceOfOperation)
@@ -50655,7 +50778,7 @@ private:
     void OnFailureResponse_42(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_42() { NextTest(); }
@@ -50677,7 +50800,7 @@ private:
     void OnFailureResponse_43(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_43() { NextTest(); }
@@ -50699,7 +50822,8 @@ private:
     void OnFailureResponse_44(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_44() { NextTest(); }
@@ -50721,7 +50845,8 @@ private:
     void OnFailureResponse_45(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_45() { NextTest(); }
@@ -50743,7 +50868,8 @@ private:
     void OnFailureResponse_46(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_46() { NextTest(); }
@@ -50765,7 +50891,7 @@ private:
     void OnFailureResponse_47(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_47() { NextTest(); }
@@ -50787,7 +50913,8 @@ private:
     void OnFailureResponse_48(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_48() { NextTest(); }
@@ -50809,7 +50936,7 @@ private:
     void OnFailureResponse_49(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_49() { NextTest(); }
@@ -50984,7 +51111,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -51008,7 +51135,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -51032,7 +51159,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
@@ -51056,7 +51183,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
@@ -51262,7 +51389,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint8_t temperatureDisplayMode)
@@ -51288,7 +51415,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint8_t temperatureDisplayMode)
@@ -51314,7 +51441,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint8_t keypadLockout)
@@ -51339,7 +51466,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint8_t keypadLockout)
@@ -51366,7 +51493,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(uint8_t scheduleProgrammingVisibility)
@@ -51392,7 +51519,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(uint8_t scheduleProgrammingVisibility)
@@ -51732,7 +51859,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -51756,7 +51883,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2() { NextTest(); }
@@ -51804,7 +51931,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -51827,7 +51954,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -51850,7 +51977,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6() { NextTest(); }
@@ -51873,7 +52000,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -51896,7 +52023,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8() { NextTest(); }
@@ -51919,7 +52046,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -51967,7 +52094,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11() { NextTest(); }
@@ -51991,7 +52118,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12() { NextTest(); }
@@ -52158,7 +52285,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -52178,7 +52305,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint64_t overrunCount)
@@ -53714,7 +53841,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t channel)
@@ -53738,7 +53865,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(chip::CharSpan networkName)
@@ -53762,7 +53889,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint16_t panId)
@@ -53786,7 +53913,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint64_t extendedPanId)
@@ -53810,7 +53937,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(uint64_t overrunCount)
@@ -53834,7 +53961,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(uint32_t partitionId)
@@ -53859,7 +53986,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(uint32_t partitionId)
@@ -53882,7 +54009,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(uint8_t weighting)
@@ -53906,7 +54033,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(uint8_t weighting)
@@ -53930,7 +54057,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(uint8_t dataVersion)
@@ -53955,7 +54082,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(uint8_t dataVersion)
@@ -53979,7 +54106,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(uint8_t stableDataVersion)
@@ -54004,7 +54131,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(uint8_t stableDataVersion)
@@ -54028,7 +54155,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14(uint8_t leaderRouterId)
@@ -54053,7 +54180,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(uint8_t leaderRouterId)
@@ -54077,7 +54204,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(uint16_t detachedRoleCount)
@@ -54102,7 +54229,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17(uint16_t detachedRoleCount)
@@ -54126,7 +54253,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18(uint16_t childRoleCount)
@@ -54151,7 +54278,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19(uint16_t childRoleCount)
@@ -54175,7 +54302,7 @@ private:
     void OnFailureResponse_20(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_20(uint16_t routerRoleCount)
@@ -54200,7 +54327,7 @@ private:
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_21(uint16_t routerRoleCount)
@@ -54224,7 +54351,7 @@ private:
     void OnFailureResponse_22(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_22(uint16_t leaderRoleCount)
@@ -54249,7 +54376,7 @@ private:
     void OnFailureResponse_23(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_23(uint16_t leaderRoleCount)
@@ -54273,7 +54400,7 @@ private:
     void OnFailureResponse_24(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_24(uint16_t attachAttemptCount)
@@ -54298,7 +54425,7 @@ private:
     void OnFailureResponse_25(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_25(uint16_t attachAttemptCount)
@@ -54322,7 +54449,7 @@ private:
     void OnFailureResponse_26(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_26(uint16_t partitionIdChangeCount)
@@ -54347,7 +54474,7 @@ private:
     void OnFailureResponse_27(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_27(uint16_t partitionIdChangeCount)
@@ -54372,7 +54499,7 @@ private:
     void OnFailureResponse_28(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_28(uint16_t betterPartitionAttachAttemptCount)
@@ -54398,7 +54525,7 @@ private:
     void OnFailureResponse_29(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_29(uint16_t betterPartitionAttachAttemptCount)
@@ -54422,7 +54549,7 @@ private:
     void OnFailureResponse_30(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_30(uint16_t parentChangeCount)
@@ -54447,7 +54574,7 @@ private:
     void OnFailureResponse_31(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_31(uint16_t parentChangeCount)
@@ -54471,7 +54598,7 @@ private:
     void OnFailureResponse_32(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_32(uint32_t txTotalCount)
@@ -54496,7 +54623,7 @@ private:
     void OnFailureResponse_33(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_33(uint32_t txTotalCount)
@@ -54520,7 +54647,7 @@ private:
     void OnFailureResponse_34(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_34(uint32_t txUnicastCount)
@@ -54545,7 +54672,7 @@ private:
     void OnFailureResponse_35(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_35(uint32_t txUnicastCount)
@@ -54569,7 +54696,7 @@ private:
     void OnFailureResponse_36(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_36(uint32_t txBroadcastCount)
@@ -54594,7 +54721,7 @@ private:
     void OnFailureResponse_37(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_37(uint32_t txBroadcastCount)
@@ -54618,7 +54745,7 @@ private:
     void OnFailureResponse_38(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_38(uint32_t txNoAckRequestedCount)
@@ -54643,7 +54770,7 @@ private:
     void OnFailureResponse_39(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_39(uint32_t txNoAckRequestedCount)
@@ -54667,7 +54794,7 @@ private:
     void OnFailureResponse_40(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_40(uint32_t txDataCount)
@@ -54692,7 +54819,7 @@ private:
     void OnFailureResponse_41(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_41(uint32_t txDataCount)
@@ -54716,7 +54843,7 @@ private:
     void OnFailureResponse_42(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_42(uint32_t txDataPollCount)
@@ -54741,7 +54868,7 @@ private:
     void OnFailureResponse_43(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_43(uint32_t txDataPollCount)
@@ -54765,7 +54892,7 @@ private:
     void OnFailureResponse_44(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_44(uint32_t txBeaconCount)
@@ -54790,7 +54917,7 @@ private:
     void OnFailureResponse_45(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_45(uint32_t txBeaconCount)
@@ -54814,7 +54941,7 @@ private:
     void OnFailureResponse_46(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_46(uint32_t txBeaconRequestCount)
@@ -54839,7 +54966,7 @@ private:
     void OnFailureResponse_47(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_47(uint32_t txBeaconRequestCount)
@@ -54863,7 +54990,7 @@ private:
     void OnFailureResponse_48(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_48(uint32_t txOtherCount)
@@ -54888,7 +55015,7 @@ private:
     void OnFailureResponse_49(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_49(uint32_t txOtherCount)
@@ -54912,7 +55039,7 @@ private:
     void OnFailureResponse_50(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_50(uint32_t txRetryCount)
@@ -54937,7 +55064,7 @@ private:
     void OnFailureResponse_51(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_51(uint32_t txRetryCount)
@@ -54961,7 +55088,7 @@ private:
     void OnFailureResponse_52(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_52(uint32_t txDirectMaxRetryExpiryCount)
@@ -54986,7 +55113,7 @@ private:
     void OnFailureResponse_53(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_53(uint32_t txDirectMaxRetryExpiryCount)
@@ -55011,7 +55138,7 @@ private:
     void OnFailureResponse_54(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_54(uint32_t txIndirectMaxRetryExpiryCount)
@@ -55037,7 +55164,7 @@ private:
     void OnFailureResponse_55(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_55(uint32_t txIndirectMaxRetryExpiryCount)
@@ -55061,7 +55188,7 @@ private:
     void OnFailureResponse_56(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_56(uint32_t txErrCcaCount)
@@ -55086,7 +55213,7 @@ private:
     void OnFailureResponse_57(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_57(uint32_t txErrCcaCount)
@@ -55110,7 +55237,7 @@ private:
     void OnFailureResponse_58(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_58(uint32_t txErrAbortCount)
@@ -55135,7 +55262,7 @@ private:
     void OnFailureResponse_59(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_59(uint32_t txErrAbortCount)
@@ -55159,7 +55286,7 @@ private:
     void OnFailureResponse_60(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_60(uint32_t txErrBusyChannelCount)
@@ -55184,7 +55311,7 @@ private:
     void OnFailureResponse_61(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_61(uint32_t txErrBusyChannelCount)
@@ -55208,7 +55335,7 @@ private:
     void OnFailureResponse_62(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_62(uint32_t rxTotalCount)
@@ -55233,7 +55360,7 @@ private:
     void OnFailureResponse_63(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_63(uint32_t rxTotalCount)
@@ -55257,7 +55384,7 @@ private:
     void OnFailureResponse_64(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_64(uint32_t rxUnicastCount)
@@ -55282,7 +55409,7 @@ private:
     void OnFailureResponse_65(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_65(uint32_t rxUnicastCount)
@@ -55306,7 +55433,7 @@ private:
     void OnFailureResponse_66(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_66(uint32_t rxBroadcastCount)
@@ -55331,7 +55458,7 @@ private:
     void OnFailureResponse_67(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_67(uint32_t rxBroadcastCount)
@@ -55355,7 +55482,7 @@ private:
     void OnFailureResponse_68(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_68(uint32_t rxDataCount)
@@ -55380,7 +55507,7 @@ private:
     void OnFailureResponse_69(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_69(uint32_t rxDataCount)
@@ -55404,7 +55531,7 @@ private:
     void OnFailureResponse_70(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_70(uint32_t rxDataPollCount)
@@ -55429,7 +55556,7 @@ private:
     void OnFailureResponse_71(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_71(uint32_t rxDataPollCount)
@@ -55453,7 +55580,7 @@ private:
     void OnFailureResponse_72(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_72(uint32_t rxBeaconCount)
@@ -55478,7 +55605,7 @@ private:
     void OnFailureResponse_73(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_73(uint32_t rxBeaconCount)
@@ -55502,7 +55629,7 @@ private:
     void OnFailureResponse_74(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_74(uint32_t rxBeaconRequestCount)
@@ -55527,7 +55654,7 @@ private:
     void OnFailureResponse_75(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_75(uint32_t rxBeaconRequestCount)
@@ -55551,7 +55678,7 @@ private:
     void OnFailureResponse_76(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_76(uint32_t rxOtherCount)
@@ -55576,7 +55703,7 @@ private:
     void OnFailureResponse_77(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_77(uint32_t rxOtherCount)
@@ -55600,7 +55727,7 @@ private:
     void OnFailureResponse_78(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_78(uint32_t rxAddressFilteredCount)
@@ -55625,7 +55752,7 @@ private:
     void OnFailureResponse_79(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_79(uint32_t rxAddressFilteredCount)
@@ -55649,7 +55776,7 @@ private:
     void OnFailureResponse_80(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_80(uint32_t rxDestAddrFilteredCount)
@@ -55674,7 +55801,7 @@ private:
     void OnFailureResponse_81(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_81(uint32_t rxDestAddrFilteredCount)
@@ -55698,7 +55825,7 @@ private:
     void OnFailureResponse_82(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_82(uint32_t rxDuplicatedCount)
@@ -55723,7 +55850,7 @@ private:
     void OnFailureResponse_83(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_83(uint32_t rxDuplicatedCount)
@@ -55747,7 +55874,7 @@ private:
     void OnFailureResponse_84(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_84(uint32_t rxErrNoFrameCount)
@@ -55772,7 +55899,7 @@ private:
     void OnFailureResponse_85(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_85(uint32_t rxErrNoFrameCount)
@@ -55796,7 +55923,7 @@ private:
     void OnFailureResponse_86(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_86(uint32_t rxErrUnknownNeighborCount)
@@ -55821,7 +55948,7 @@ private:
     void OnFailureResponse_87(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_87(uint32_t rxErrUnknownNeighborCount)
@@ -55845,7 +55972,7 @@ private:
     void OnFailureResponse_88(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_88(uint32_t rxErrInvalidSrcAddrCount)
@@ -55870,7 +55997,7 @@ private:
     void OnFailureResponse_89(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_89(uint32_t rxErrInvalidSrcAddrCount)
@@ -55894,7 +56021,7 @@ private:
     void OnFailureResponse_90(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_90(uint32_t rxErrSecCount)
@@ -55919,7 +56046,7 @@ private:
     void OnFailureResponse_91(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_91(uint32_t rxErrSecCount)
@@ -55943,7 +56070,7 @@ private:
     void OnFailureResponse_92(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_92(uint32_t rxErrFcsCount)
@@ -55968,7 +56095,7 @@ private:
     void OnFailureResponse_93(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_93(uint32_t rxErrFcsCount)
@@ -55992,7 +56119,7 @@ private:
     void OnFailureResponse_94(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_94(uint32_t rxErrOtherCount)
@@ -56017,7 +56144,7 @@ private:
     void OnFailureResponse_95(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_95(uint32_t rxErrOtherCount)
@@ -56041,7 +56168,7 @@ private:
     void OnFailureResponse_96(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_96(uint64_t activeTimestamp)
@@ -56066,7 +56193,7 @@ private:
     void OnFailureResponse_97(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_97(uint64_t activeTimestamp)
@@ -56090,7 +56217,7 @@ private:
     void OnFailureResponse_98(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_98(uint64_t pendingTimestamp)
@@ -56115,7 +56242,7 @@ private:
     void OnFailureResponse_99(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_99(uint64_t pendingTimestamp)
@@ -56138,7 +56265,7 @@ private:
     void OnFailureResponse_100(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_100(uint32_t delay)
@@ -56162,7 +56289,7 @@ private:
     void OnFailureResponse_101(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_101(uint32_t delay)
@@ -56298,7 +56425,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(
@@ -56496,7 +56623,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void
@@ -56521,7 +56648,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(
@@ -56545,7 +56672,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(
@@ -56570,7 +56697,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::Nullable<uint16_t> & channelNumber)
@@ -56593,7 +56720,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(const chip::app::DataModel::Nullable<int8_t> & rssi)
@@ -56906,7 +57033,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t clusterRevision)
@@ -56954,7 +57081,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint16_t clusterRevision)
@@ -56979,7 +57106,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -57002,7 +57129,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(uint32_t featureMap)
@@ -57050,7 +57177,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(uint32_t featureMap)
@@ -57919,7 +58046,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(chip::app::Clusters::WindowCovering::Type type)
@@ -57967,7 +58094,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(chip::app::Clusters::WindowCovering::Type type)
@@ -57992,7 +58119,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint8_t configStatus)
@@ -58040,7 +58167,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(uint8_t configStatus)
@@ -58065,7 +58192,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(uint8_t operationalStatus)
@@ -58113,7 +58240,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(uint8_t operationalStatus)
@@ -58138,7 +58265,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(chip::app::Clusters::WindowCovering::EndProductType endProductType)
@@ -58186,7 +58313,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(chip::app::Clusters::WindowCovering::EndProductType endProductType)
@@ -58211,7 +58338,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(uint8_t mode)
@@ -58239,7 +58366,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14() { NextTest(); }
@@ -58258,7 +58385,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(uint8_t mode)
@@ -58283,7 +58410,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionLiftPercent100ths)
@@ -58334,7 +58461,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionLiftPercent100ths)
@@ -58360,7 +58487,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionTiltPercent100ths)
@@ -58411,7 +58538,7 @@ private:
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_21(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionTiltPercent100ths)
@@ -58437,7 +58564,7 @@ private:
     void OnFailureResponse_22(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_22(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionLiftPercent100ths)
@@ -58488,7 +58615,7 @@ private:
     void OnFailureResponse_24(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_24(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionLiftPercent100ths)
@@ -58514,7 +58641,7 @@ private:
     void OnFailureResponse_25(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_25(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionTiltPercent100ths)
@@ -58565,7 +58692,7 @@ private:
     void OnFailureResponse_27(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_27(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionTiltPercent100ths)
@@ -58591,7 +58718,7 @@ private:
     void OnFailureResponse_28(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_28(uint16_t installedOpenLimitLift)
@@ -58641,7 +58768,7 @@ private:
     void OnFailureResponse_30(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_30(uint16_t installedOpenLimitLift)
@@ -58667,7 +58794,7 @@ private:
     void OnFailureResponse_31(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_31(uint16_t installedClosedLimitLift)
@@ -58717,7 +58844,7 @@ private:
     void OnFailureResponse_33(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_33(uint16_t installedClosedLimitLift)
@@ -58743,7 +58870,7 @@ private:
     void OnFailureResponse_34(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_34(uint16_t installedOpenLimitTilt)
@@ -58793,7 +58920,7 @@ private:
     void OnFailureResponse_36(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_36(uint16_t installedOpenLimitTilt)
@@ -58819,7 +58946,7 @@ private:
     void OnFailureResponse_37(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_37(uint16_t installedClosedLimitTilt)
@@ -58869,7 +58996,7 @@ private:
     void OnFailureResponse_39(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_39(uint16_t installedClosedLimitTilt)
@@ -58894,7 +59021,7 @@ private:
     void OnFailureResponse_40(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_40(uint16_t safetyStatus)
@@ -58942,7 +59069,7 @@ private:
     void OnFailureResponse_42(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_42(uint16_t safetyStatus)
@@ -58967,7 +59094,7 @@ private:
     void OnFailureResponse_43(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_43(const chip::app::DataModel::Nullable<uint16_t> & currentPositionLift)
@@ -59016,7 +59143,7 @@ private:
     void OnFailureResponse_45(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_45(const chip::app::DataModel::Nullable<uint16_t> & currentPositionLift)
@@ -59041,7 +59168,7 @@ private:
     void OnFailureResponse_46(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_46(const chip::app::DataModel::Nullable<uint16_t> & currentPositionTilt)
@@ -59090,7 +59217,7 @@ private:
     void OnFailureResponse_48(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_48(const chip::app::DataModel::Nullable<uint16_t> & currentPositionTilt)
@@ -59116,7 +59243,7 @@ private:
     void OnFailureResponse_49(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_49(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionLiftPercentage)
@@ -59167,7 +59294,7 @@ private:
     void OnFailureResponse_51(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_51(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionLiftPercentage)
@@ -59193,7 +59320,7 @@ private:
     void OnFailureResponse_52(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_52(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionTiltPercentage)
@@ -59244,7 +59371,7 @@ private:
     void OnFailureResponse_54(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_54(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionTiltPercentage)
@@ -59501,7 +59628,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(chip::app::Clusters::WindowCovering::Type type)
@@ -59525,7 +59652,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(chip::app::Clusters::WindowCovering::Type type)
@@ -59685,7 +59812,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(chip::app::Clusters::WindowCovering::EndProductType endProductType)
@@ -59709,7 +59836,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(chip::app::Clusters::WindowCovering::EndProductType endProductType)
@@ -60207,7 +60334,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -60233,7 +60360,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionLiftPercent100ths)
@@ -60259,7 +60386,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionLiftPercentage)
@@ -60285,7 +60412,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionTiltPercent100ths)
@@ -60311,7 +60438,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionTiltPercentage)
@@ -60335,7 +60462,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(uint8_t operationalStatus)
@@ -60365,7 +60492,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(uint8_t value)
@@ -60406,7 +60533,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -60432,7 +60559,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionLiftPercent100ths)
@@ -60462,7 +60589,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(uint8_t operationalStatus)
@@ -60495,7 +60622,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionLiftPercent100ths)
@@ -60521,7 +60648,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionLiftPercentage)
@@ -60547,7 +60674,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionTiltPercent100ths)
@@ -60573,7 +60700,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionTiltPercentage)
@@ -60606,7 +60733,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19() { NextTest(); }
@@ -60631,7 +60758,7 @@ private:
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_21(uint8_t operationalStatus)
@@ -60662,7 +60789,7 @@ private:
     void OnFailureResponse_23(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_23(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionLiftPercent100ths)
@@ -60688,7 +60815,7 @@ private:
     void OnFailureResponse_24(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_24(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionTiltPercent100ths)
@@ -61185,7 +61312,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -61211,7 +61338,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionLiftPercent100ths)
@@ -61237,7 +61364,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionLiftPercentage)
@@ -61263,7 +61390,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionTiltPercent100ths)
@@ -61289,7 +61416,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionTiltPercentage)
@@ -61313,7 +61440,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(uint8_t operationalStatus)
@@ -61343,7 +61470,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(uint8_t value)
@@ -61384,7 +61511,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -61410,7 +61537,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionLiftPercent100ths)
@@ -61440,7 +61567,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(uint8_t operationalStatus)
@@ -61473,7 +61600,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionLiftPercent100ths)
@@ -61499,7 +61626,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionLiftPercentage)
@@ -61525,7 +61652,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionTiltPercent100ths)
@@ -61551,7 +61678,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionTiltPercentage)
@@ -61584,7 +61711,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19() { NextTest(); }
@@ -61609,7 +61736,7 @@ private:
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_21(uint8_t operationalStatus)
@@ -61640,7 +61767,7 @@ private:
     void OnFailureResponse_23(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_23(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionLiftPercent100ths)
@@ -61666,7 +61793,7 @@ private:
     void OnFailureResponse_24(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_24(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionTiltPercent100ths)
@@ -62004,7 +62131,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -62037,7 +62164,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -62061,7 +62188,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(uint8_t operationalStatus)
@@ -62091,7 +62218,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(uint8_t value)
@@ -62132,7 +62259,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -62156,7 +62283,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(uint8_t operationalStatus)
@@ -62187,7 +62314,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(uint8_t operationalStatus)
@@ -62212,7 +62339,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionLiftPercent100ths)
@@ -62239,7 +62366,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionLiftPercent100ths)
@@ -62273,7 +62400,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionTiltPercent100ths)
@@ -62300,7 +62427,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionTiltPercent100ths)
@@ -62556,7 +62683,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -62589,7 +62716,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -62615,7 +62742,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionLiftPercent100ths)
@@ -62641,7 +62768,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionLiftPercentage)
@@ -62667,7 +62794,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionTiltPercent100ths)
@@ -62693,7 +62820,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionTiltPercentage)
@@ -62940,7 +63067,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -62973,7 +63100,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -62999,7 +63126,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionLiftPercent100ths)
@@ -63025,7 +63152,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionLiftPercentage)
@@ -63051,7 +63178,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionTiltPercent100ths)
@@ -63077,7 +63204,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionTiltPercentage)
@@ -63343,7 +63470,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -63369,7 +63496,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionLiftPercent100ths)
@@ -63403,7 +63530,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -63429,7 +63556,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionLiftPercent100ths)
@@ -63460,7 +63587,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(uint8_t operationalStatus)
@@ -63494,7 +63621,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -63525,7 +63652,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(uint8_t operationalStatus)
@@ -63790,7 +63917,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -63816,7 +63943,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionTiltPercent100ths)
@@ -63850,7 +63977,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -63876,7 +64003,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(const chip::app::DataModel::Nullable<chip::Percent100ths> & targetPositionTiltPercent100ths)
@@ -63907,7 +64034,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(uint8_t operationalStatus)
@@ -63941,7 +64068,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -63972,7 +64099,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(uint8_t operationalStatus)
@@ -64165,7 +64292,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionLiftPercent100ths)
@@ -64191,7 +64318,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionLiftPercentage)
@@ -64475,7 +64602,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(const chip::app::DataModel::Nullable<chip::Percent100ths> & currentPositionTiltPercent100ths)
@@ -64501,7 +64628,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::Nullable<chip::Percent> & currentPositionTiltPercentage)
@@ -64748,7 +64875,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(
@@ -64783,7 +64910,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint8_t currentTarget)
@@ -64818,7 +64945,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(chip::app::Clusters::TargetNavigator::StatusEnum status, const chip::Optional<chip::CharSpan> & data)
@@ -64998,7 +65125,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(
@@ -65039,7 +65166,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint8_t currentOutput)
@@ -65072,7 +65199,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -65101,7 +65228,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -65120,7 +65247,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(
@@ -65301,7 +65428,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(const chip::app::DataModel::DecodableList<uint16_t> & catalogList)
@@ -65332,7 +65459,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(
@@ -65372,7 +65499,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(chip::app::Clusters::ApplicationLauncher::StatusEnum status, chip::ByteSpan data)
@@ -65409,7 +65536,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(chip::app::Clusters::ApplicationLauncher::StatusEnum status, chip::ByteSpan data)
@@ -65446,7 +65573,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(chip::app::Clusters::ApplicationLauncher::StatusEnum status, chip::ByteSpan data)
@@ -65582,7 +65709,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(chip::app::Clusters::KeypadInput::StatusEnum status)
@@ -65725,7 +65852,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(chip::CharSpan setupPIN)
@@ -65760,7 +65887,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2() { NextTest(); }
@@ -65788,7 +65915,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -65918,7 +66045,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(chip::CharSpan MACAddress)
@@ -66153,7 +66280,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(chip::CharSpan vendorName)
@@ -66177,7 +66304,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t vendorID)
@@ -66201,7 +66328,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(chip::CharSpan applicationName)
@@ -66225,7 +66352,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint16_t productID)
@@ -66249,7 +66376,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(chip::app::Clusters::ApplicationBasic::ApplicationStatusEnum status)
@@ -66273,7 +66400,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(
@@ -66300,7 +66427,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(chip::CharSpan applicationVersion)
@@ -66324,7 +66451,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(const chip::app::DataModel::DecodableList<chip::VendorId> & allowedVendorList)
@@ -66648,7 +66775,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(chip::app::Clusters::MediaPlayback::PlaybackStateEnum currentState)
@@ -66672,7 +66799,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::Nullable<uint64_t> & startTime)
@@ -66697,7 +66824,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::Nullable<uint64_t> & duration)
@@ -66722,7 +66849,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(
@@ -66751,7 +66878,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(float playbackSpeed)
@@ -66775,7 +66902,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(const chip::app::DataModel::Nullable<uint64_t> & seekRangeEnd)
@@ -66800,7 +66927,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(const chip::app::DataModel::Nullable<uint64_t> & seekRangeStart)
@@ -66833,7 +66960,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(chip::app::Clusters::MediaPlayback::StatusEnum status, const chip::Optional<chip::CharSpan> & data)
@@ -66868,7 +66995,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(chip::app::Clusters::MediaPlayback::StatusEnum status, const chip::Optional<chip::CharSpan> & data)
@@ -66903,7 +67030,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(chip::app::Clusters::MediaPlayback::StatusEnum status, const chip::Optional<chip::CharSpan> & data)
@@ -66938,7 +67065,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(chip::app::Clusters::MediaPlayback::StatusEnum status, const chip::Optional<chip::CharSpan> & data)
@@ -66973,7 +67100,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(chip::app::Clusters::MediaPlayback::StatusEnum status, const chip::Optional<chip::CharSpan> & data)
@@ -67008,7 +67135,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(chip::app::Clusters::MediaPlayback::StatusEnum status, const chip::Optional<chip::CharSpan> & data)
@@ -67043,7 +67170,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14(chip::app::Clusters::MediaPlayback::StatusEnum status, const chip::Optional<chip::CharSpan> & data)
@@ -67078,7 +67205,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(chip::app::Clusters::MediaPlayback::StatusEnum status, const chip::Optional<chip::CharSpan> & data)
@@ -67114,7 +67241,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(chip::app::Clusters::MediaPlayback::StatusEnum status, const chip::Optional<chip::CharSpan> & data)
@@ -67141,7 +67268,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17(
@@ -67179,7 +67306,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18(chip::app::Clusters::MediaPlayback::StatusEnum status, const chip::Optional<chip::CharSpan> & data)
@@ -67206,7 +67333,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19(
@@ -67244,7 +67371,7 @@ private:
     void OnFailureResponse_20(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_20(chip::app::Clusters::MediaPlayback::StatusEnum status, const chip::Optional<chip::CharSpan> & data)
@@ -67271,7 +67398,7 @@ private:
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_21(
@@ -67457,7 +67584,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(
@@ -67533,7 +67660,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(
@@ -67567,7 +67694,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(
@@ -67612,7 +67739,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(chip::app::Clusters::Channel::StatusEnum status, const chip::Optional<chip::CharSpan> & data)
@@ -67649,7 +67776,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -67677,7 +67804,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6() { NextTest(); }
@@ -67805,7 +67932,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -67957,7 +68084,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(const chip::app::DataModel::DecodableList<chip::CharSpan> & acceptHeader)
@@ -67989,7 +68116,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint32_t supportedStreamingProtocols)
@@ -68050,7 +68177,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(chip::app::Clusters::ContentLauncher::StatusEnum status, const chip::Optional<chip::CharSpan> & data)
@@ -68166,7 +68293,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(chip::app::Clusters::ContentLauncher::StatusEnum status, const chip::Optional<chip::CharSpan> & data)
@@ -68352,7 +68479,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(
@@ -68392,7 +68519,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint8_t currentInput)
@@ -68425,7 +68552,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -68452,7 +68579,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -68479,7 +68606,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -68508,7 +68635,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6() { NextTest(); }
@@ -68527,7 +68654,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(
@@ -74692,7 +74819,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -74747,7 +74874,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint8_t returnValue)
@@ -74781,7 +74908,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint8_t returnValue)
@@ -74835,7 +74962,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(bool boolean)
@@ -74862,7 +74989,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -74881,7 +75008,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(bool boolean)
@@ -74908,7 +75035,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -74927,7 +75054,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(bool boolean)
@@ -74951,7 +75078,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap8MaskMap> bitmap8)
@@ -74978,7 +75105,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12() { NextTest(); }
@@ -74997,7 +75124,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap8MaskMap> bitmap8)
@@ -75024,7 +75151,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14() { NextTest(); }
@@ -75043,7 +75170,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap8MaskMap> bitmap8)
@@ -75067,7 +75194,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap16MaskMap> bitmap16)
@@ -75094,7 +75221,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17() { NextTest(); }
@@ -75113,7 +75240,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap16MaskMap> bitmap16)
@@ -75140,7 +75267,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19() { NextTest(); }
@@ -75159,7 +75286,7 @@ private:
     void OnFailureResponse_20(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_20(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap16MaskMap> bitmap16)
@@ -75183,7 +75310,7 @@ private:
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_21(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap32MaskMap> bitmap32)
@@ -75210,7 +75337,7 @@ private:
     void OnFailureResponse_22(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_22() { NextTest(); }
@@ -75229,7 +75356,7 @@ private:
     void OnFailureResponse_23(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_23(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap32MaskMap> bitmap32)
@@ -75256,7 +75383,7 @@ private:
     void OnFailureResponse_24(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_24() { NextTest(); }
@@ -75275,7 +75402,7 @@ private:
     void OnFailureResponse_25(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_25(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap32MaskMap> bitmap32)
@@ -75299,7 +75426,7 @@ private:
     void OnFailureResponse_26(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_26(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap64MaskMap> bitmap64)
@@ -75326,7 +75453,7 @@ private:
     void OnFailureResponse_27(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_27() { NextTest(); }
@@ -75345,7 +75472,7 @@ private:
     void OnFailureResponse_28(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_28(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap64MaskMap> bitmap64)
@@ -75372,7 +75499,7 @@ private:
     void OnFailureResponse_29(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_29() { NextTest(); }
@@ -75391,7 +75518,7 @@ private:
     void OnFailureResponse_30(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_30(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap64MaskMap> bitmap64)
@@ -75415,7 +75542,7 @@ private:
     void OnFailureResponse_31(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_31(uint8_t int8u)
@@ -75442,7 +75569,7 @@ private:
     void OnFailureResponse_32(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_32() { NextTest(); }
@@ -75461,7 +75588,7 @@ private:
     void OnFailureResponse_33(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_33(uint8_t int8u)
@@ -75488,7 +75615,7 @@ private:
     void OnFailureResponse_34(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_34() { NextTest(); }
@@ -75507,7 +75634,7 @@ private:
     void OnFailureResponse_35(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_35(uint8_t int8u)
@@ -75531,7 +75658,7 @@ private:
     void OnFailureResponse_36(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_36(uint16_t int16u)
@@ -75558,7 +75685,7 @@ private:
     void OnFailureResponse_37(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_37() { NextTest(); }
@@ -75577,7 +75704,7 @@ private:
     void OnFailureResponse_38(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_38(uint16_t int16u)
@@ -75604,7 +75731,7 @@ private:
     void OnFailureResponse_39(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_39() { NextTest(); }
@@ -75623,7 +75750,7 @@ private:
     void OnFailureResponse_40(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_40(uint16_t int16u)
@@ -75647,7 +75774,7 @@ private:
     void OnFailureResponse_41(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_41(uint32_t int32u)
@@ -75674,7 +75801,7 @@ private:
     void OnFailureResponse_42(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_42() { NextTest(); }
@@ -75693,7 +75820,7 @@ private:
     void OnFailureResponse_43(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_43(uint32_t int32u)
@@ -75720,7 +75847,7 @@ private:
     void OnFailureResponse_44(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_44() { NextTest(); }
@@ -75739,7 +75866,7 @@ private:
     void OnFailureResponse_45(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_45(uint32_t int32u)
@@ -75763,7 +75890,7 @@ private:
     void OnFailureResponse_46(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_46(uint64_t int64u)
@@ -75790,7 +75917,7 @@ private:
     void OnFailureResponse_47(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_47() { NextTest(); }
@@ -75809,7 +75936,7 @@ private:
     void OnFailureResponse_48(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_48(uint64_t int64u)
@@ -75836,7 +75963,7 @@ private:
     void OnFailureResponse_49(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_49() { NextTest(); }
@@ -75855,7 +75982,7 @@ private:
     void OnFailureResponse_50(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_50(uint64_t int64u)
@@ -75879,7 +76006,7 @@ private:
     void OnFailureResponse_51(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_51(int8_t int8s)
@@ -75906,7 +76033,7 @@ private:
     void OnFailureResponse_52(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_52() { NextTest(); }
@@ -75925,7 +76052,7 @@ private:
     void OnFailureResponse_53(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_53(int8_t int8s)
@@ -75952,7 +76079,7 @@ private:
     void OnFailureResponse_54(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_54() { NextTest(); }
@@ -75971,7 +76098,7 @@ private:
     void OnFailureResponse_55(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_55(int8_t int8s)
@@ -75998,7 +76125,7 @@ private:
     void OnFailureResponse_56(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_56() { NextTest(); }
@@ -76017,7 +76144,7 @@ private:
     void OnFailureResponse_57(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_57(int8_t int8s)
@@ -76041,7 +76168,7 @@ private:
     void OnFailureResponse_58(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_58(int16_t int16s)
@@ -76068,7 +76195,7 @@ private:
     void OnFailureResponse_59(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_59() { NextTest(); }
@@ -76087,7 +76214,7 @@ private:
     void OnFailureResponse_60(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_60(int16_t int16s)
@@ -76114,7 +76241,7 @@ private:
     void OnFailureResponse_61(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_61() { NextTest(); }
@@ -76133,7 +76260,7 @@ private:
     void OnFailureResponse_62(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_62(int16_t int16s)
@@ -76160,7 +76287,7 @@ private:
     void OnFailureResponse_63(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_63() { NextTest(); }
@@ -76179,7 +76306,7 @@ private:
     void OnFailureResponse_64(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_64(int16_t int16s)
@@ -76203,7 +76330,7 @@ private:
     void OnFailureResponse_65(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_65(int32_t int32s)
@@ -76230,7 +76357,7 @@ private:
     void OnFailureResponse_66(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_66() { NextTest(); }
@@ -76249,7 +76376,7 @@ private:
     void OnFailureResponse_67(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_67(int32_t int32s)
@@ -76276,7 +76403,7 @@ private:
     void OnFailureResponse_68(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_68() { NextTest(); }
@@ -76295,7 +76422,7 @@ private:
     void OnFailureResponse_69(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_69(int32_t int32s)
@@ -76322,7 +76449,7 @@ private:
     void OnFailureResponse_70(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_70() { NextTest(); }
@@ -76341,7 +76468,7 @@ private:
     void OnFailureResponse_71(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_71(int32_t int32s)
@@ -76365,7 +76492,7 @@ private:
     void OnFailureResponse_72(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_72(int64_t int64s)
@@ -76392,7 +76519,7 @@ private:
     void OnFailureResponse_73(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_73() { NextTest(); }
@@ -76411,7 +76538,7 @@ private:
     void OnFailureResponse_74(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_74(int64_t int64s)
@@ -76438,7 +76565,7 @@ private:
     void OnFailureResponse_75(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_75() { NextTest(); }
@@ -76457,7 +76584,7 @@ private:
     void OnFailureResponse_76(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_76(int64_t int64s)
@@ -76484,7 +76611,7 @@ private:
     void OnFailureResponse_77(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_77() { NextTest(); }
@@ -76503,7 +76630,7 @@ private:
     void OnFailureResponse_78(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_78(int64_t int64s)
@@ -76527,7 +76654,7 @@ private:
     void OnFailureResponse_79(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_79(float floatSingle)
@@ -76554,7 +76681,7 @@ private:
     void OnFailureResponse_80(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_80() { NextTest(); }
@@ -76573,7 +76700,7 @@ private:
     void OnFailureResponse_81(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_81(float floatSingle)
@@ -76600,7 +76727,7 @@ private:
     void OnFailureResponse_82(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_82() { NextTest(); }
@@ -76619,7 +76746,7 @@ private:
     void OnFailureResponse_83(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_83(float floatSingle)
@@ -76646,7 +76773,7 @@ private:
     void OnFailureResponse_84(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_84() { NextTest(); }
@@ -76665,7 +76792,7 @@ private:
     void OnFailureResponse_85(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_85(float floatSingle)
@@ -76692,7 +76819,7 @@ private:
     void OnFailureResponse_86(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_86() { NextTest(); }
@@ -76711,7 +76838,7 @@ private:
     void OnFailureResponse_87(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_87(float floatSingle)
@@ -76735,7 +76862,7 @@ private:
     void OnFailureResponse_88(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_88(double floatDouble)
@@ -76762,7 +76889,7 @@ private:
     void OnFailureResponse_89(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_89() { NextTest(); }
@@ -76781,7 +76908,7 @@ private:
     void OnFailureResponse_90(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_90(double floatDouble)
@@ -76808,7 +76935,7 @@ private:
     void OnFailureResponse_91(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_91() { NextTest(); }
@@ -76827,7 +76954,7 @@ private:
     void OnFailureResponse_92(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_92(double floatDouble)
@@ -76854,7 +76981,7 @@ private:
     void OnFailureResponse_93(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_93() { NextTest(); }
@@ -76873,7 +77000,7 @@ private:
     void OnFailureResponse_94(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_94(double floatDouble)
@@ -76900,7 +77027,7 @@ private:
     void OnFailureResponse_95(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_95() { NextTest(); }
@@ -76919,7 +77046,7 @@ private:
     void OnFailureResponse_96(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_96(double floatDouble)
@@ -76943,7 +77070,7 @@ private:
     void OnFailureResponse_97(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_97(uint8_t enum8)
@@ -76970,7 +77097,7 @@ private:
     void OnFailureResponse_98(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_98() { NextTest(); }
@@ -76989,7 +77116,7 @@ private:
     void OnFailureResponse_99(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_99(uint8_t enum8)
@@ -77016,7 +77143,7 @@ private:
     void OnFailureResponse_100(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_100() { NextTest(); }
@@ -77035,7 +77162,7 @@ private:
     void OnFailureResponse_101(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_101(uint8_t enum8)
@@ -77059,7 +77186,7 @@ private:
     void OnFailureResponse_102(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_102(uint16_t enum16)
@@ -77086,7 +77213,7 @@ private:
     void OnFailureResponse_103(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_103() { NextTest(); }
@@ -77105,7 +77232,7 @@ private:
     void OnFailureResponse_104(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_104(uint16_t enum16)
@@ -77132,7 +77259,7 @@ private:
     void OnFailureResponse_105(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_105() { NextTest(); }
@@ -77151,7 +77278,7 @@ private:
     void OnFailureResponse_106(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_106(uint16_t enum16)
@@ -77175,7 +77302,7 @@ private:
     void OnFailureResponse_107(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_107(chip::ByteSpan octetString)
@@ -77202,7 +77329,7 @@ private:
     void OnFailureResponse_108(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_108() { NextTest(); }
@@ -77221,7 +77348,7 @@ private:
     void OnFailureResponse_109(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_109(chip::ByteSpan octetString)
@@ -77250,7 +77377,7 @@ private:
     void OnFailureResponse_110(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_110() { NextTest(); }
@@ -77269,7 +77396,7 @@ private:
     void OnFailureResponse_111(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_111(chip::ByteSpan octetString)
@@ -77297,7 +77424,7 @@ private:
     void OnFailureResponse_112(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_112() { NextTest(); }
@@ -77316,7 +77443,7 @@ private:
     void OnFailureResponse_113(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_113(chip::ByteSpan octetString)
@@ -77365,7 +77492,7 @@ private:
     void OnFailureResponse_115(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_115(chip::ByteSpan octetString)
@@ -77393,7 +77520,7 @@ private:
     void OnFailureResponse_116(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_116() { NextTest(); }
@@ -77412,7 +77539,7 @@ private:
     void OnFailureResponse_117(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_117(chip::ByteSpan longOctetString)
@@ -77444,7 +77571,7 @@ private:
     void OnFailureResponse_118(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_118() { NextTest(); }
@@ -77463,7 +77590,7 @@ private:
     void OnFailureResponse_119(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_119(chip::ByteSpan longOctetString)
@@ -77497,7 +77624,7 @@ private:
     void OnFailureResponse_120(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_120() { NextTest(); }
@@ -77516,7 +77643,7 @@ private:
     void OnFailureResponse_121(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_121(chip::CharSpan charString)
@@ -77543,7 +77670,7 @@ private:
     void OnFailureResponse_122(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_122() { NextTest(); }
@@ -77562,7 +77689,7 @@ private:
     void OnFailureResponse_123(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_123(chip::CharSpan charString)
@@ -77609,7 +77736,7 @@ private:
     void OnFailureResponse_125(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_125(chip::CharSpan charString)
@@ -77636,7 +77763,7 @@ private:
     void OnFailureResponse_126(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_126() { NextTest(); }
@@ -77655,7 +77782,7 @@ private:
     void OnFailureResponse_127(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_127(chip::CharSpan longCharString)
@@ -77686,7 +77813,7 @@ private:
     void OnFailureResponse_128(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_128() { NextTest(); }
@@ -77705,7 +77832,7 @@ private:
     void OnFailureResponse_129(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_129(chip::CharSpan longCharString)
@@ -77737,7 +77864,7 @@ private:
     void OnFailureResponse_130(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_130() { NextTest(); }
@@ -77756,7 +77883,7 @@ private:
     void OnFailureResponse_131(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_131(const chip::app::DataModel::DecodableList<chip::ByteSpan> & listLongOctetString)
@@ -77876,7 +78003,7 @@ private:
     void OnFailureResponse_132(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_132() { NextTest(); }
@@ -77895,7 +78022,7 @@ private:
     void OnFailureResponse_133(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_133(const chip::app::DataModel::DecodableList<chip::ByteSpan> & listLongOctetString)
@@ -77977,7 +78104,7 @@ private:
     void OnFailureResponse_134(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_134(uint64_t epochUs)
@@ -78004,7 +78131,7 @@ private:
     void OnFailureResponse_135(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_135() { NextTest(); }
@@ -78023,7 +78150,7 @@ private:
     void OnFailureResponse_136(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_136(uint64_t epochUs)
@@ -78050,7 +78177,7 @@ private:
     void OnFailureResponse_137(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_137() { NextTest(); }
@@ -78069,7 +78196,7 @@ private:
     void OnFailureResponse_138(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_138(uint64_t epochUs)
@@ -78093,7 +78220,7 @@ private:
     void OnFailureResponse_139(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_139(uint32_t epochS)
@@ -78120,7 +78247,7 @@ private:
     void OnFailureResponse_140(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_140() { NextTest(); }
@@ -78139,7 +78266,7 @@ private:
     void OnFailureResponse_141(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_141(uint32_t epochS)
@@ -78166,7 +78293,7 @@ private:
     void OnFailureResponse_142(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_142() { NextTest(); }
@@ -78185,7 +78312,7 @@ private:
     void OnFailureResponse_143(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_143(uint32_t epochS)
@@ -78209,7 +78336,8 @@ private:
     void OnFailureResponse_144(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_144(bool unsupported)
@@ -78236,7 +78364,8 @@ private:
     void OnFailureResponse_145(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_145() { NextTest(); }
@@ -78311,7 +78440,7 @@ private:
     void OnFailureResponse_148(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_148(chip::VendorId vendorId)
@@ -78338,7 +78467,7 @@ private:
     void OnFailureResponse_149(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_149() { NextTest(); }
@@ -78357,7 +78486,7 @@ private:
     void OnFailureResponse_150(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_150(chip::VendorId vendorId)
@@ -78384,7 +78513,7 @@ private:
     void OnFailureResponse_151(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_151() { NextTest(); }
@@ -78413,7 +78542,7 @@ private:
     void OnFailureResponse_152(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_152(chip::VendorId arg1, chip::app::Clusters::TestCluster::SimpleEnum arg2)
@@ -78456,7 +78585,7 @@ private:
     void OnFailureResponse_153(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_153(bool value)
@@ -78497,7 +78626,7 @@ private:
     void OnFailureResponse_154(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_154(bool value)
@@ -78541,7 +78670,7 @@ private:
     void OnFailureResponse_155(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_155(bool value)
@@ -78585,7 +78714,7 @@ private:
     void OnFailureResponse_156(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_156(bool value)
@@ -78687,7 +78816,7 @@ private:
     void OnFailureResponse_157(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_157(bool value)
@@ -78789,7 +78918,7 @@ private:
     void OnFailureResponse_158(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_158(bool value)
@@ -78830,7 +78959,7 @@ private:
     void OnFailureResponse_159(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_159(const chip::app::Clusters::TestCluster::Structs::SimpleStruct::DecodableType & arg1)
@@ -78885,7 +79014,7 @@ private:
     void OnFailureResponse_160(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_160(bool value)
@@ -78934,7 +79063,7 @@ private:
     void OnFailureResponse_161(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_161(bool value)
@@ -78982,7 +79111,7 @@ private:
     void OnFailureResponse_162(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_162(const chip::app::DataModel::DecodableList<uint8_t> & arg1)
@@ -79038,7 +79167,7 @@ private:
     void OnFailureResponse_163(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_163(const chip::app::DataModel::DecodableList<uint8_t> & arg1)
@@ -79102,7 +79231,7 @@ private:
     void OnFailureResponse_164(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_164(bool value)
@@ -79163,7 +79292,7 @@ private:
     void OnFailureResponse_165(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_165(bool value)
@@ -79275,7 +79404,7 @@ private:
     void OnFailureResponse_166(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_166(bool value)
@@ -79387,7 +79516,7 @@ private:
     void OnFailureResponse_167(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_167(bool value)
@@ -79424,7 +79553,7 @@ private:
     void OnFailureResponse_168(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_168() { NextTest(); }
@@ -79443,7 +79572,7 @@ private:
     void OnFailureResponse_169(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_169(const chip::app::DataModel::DecodableList<uint8_t> & listInt8u)
@@ -79491,7 +79620,7 @@ private:
     void OnFailureResponse_170(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_170() { NextTest(); }
@@ -79510,7 +79639,7 @@ private:
     void OnFailureResponse_171(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_171(const chip::app::DataModel::DecodableList<chip::ByteSpan> & listOctetString)
@@ -79578,7 +79707,7 @@ private:
     void OnFailureResponse_172(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_172() { NextTest(); }
@@ -79597,7 +79726,7 @@ private:
     void OnFailureResponse_173(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_173(
@@ -79654,7 +79783,7 @@ private:
     void OnFailureResponse_174(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_174(bool wasPresent, const chip::Optional<bool> & wasNull, const chip::Optional<uint8_t> & value,
@@ -79698,7 +79827,7 @@ private:
     void OnFailureResponse_175(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_175(bool wasPresent, const chip::Optional<bool> & wasNull, const chip::Optional<uint8_t> & value,
@@ -79724,7 +79853,7 @@ private:
     void OnFailureResponse_176(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_176(const chip::app::DataModel::DecodableList<
@@ -79788,7 +79917,7 @@ private:
     void OnFailureResponse_177(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_177() { NextTest(); }
@@ -79808,7 +79937,7 @@ private:
     void OnFailureResponse_178(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_178(const chip::app::DataModel::DecodableList<
@@ -79858,7 +79987,7 @@ private:
     void OnFailureResponse_179(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_179() { NextTest(); }
@@ -79877,7 +80006,7 @@ private:
     void OnFailureResponse_180(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_180(const chip::app::DataModel::Nullable<bool> & nullableBoolean)
@@ -79905,7 +80034,7 @@ private:
     void OnFailureResponse_181(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_181() { NextTest(); }
@@ -79924,7 +80053,7 @@ private:
     void OnFailureResponse_182(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_182(const chip::app::DataModel::Nullable<bool> & nullableBoolean)
@@ -79953,7 +80082,7 @@ private:
     void OnFailureResponse_183(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_183() { NextTest(); }
@@ -79972,7 +80101,7 @@ private:
     void OnFailureResponse_184(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_184(
@@ -80022,7 +80151,7 @@ private:
     void OnFailureResponse_186(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_186(
@@ -80051,7 +80180,7 @@ private:
     void OnFailureResponse_187(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_187() { NextTest(); }
@@ -80070,7 +80199,7 @@ private:
     void OnFailureResponse_188(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_188(
@@ -80099,7 +80228,7 @@ private:
     void OnFailureResponse_189(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_189() { NextTest(); }
@@ -80118,7 +80247,7 @@ private:
     void OnFailureResponse_190(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_190(
@@ -80168,7 +80297,7 @@ private:
     void OnFailureResponse_192(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_192(
@@ -80197,7 +80326,7 @@ private:
     void OnFailureResponse_193(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_193() { NextTest(); }
@@ -80216,7 +80345,7 @@ private:
     void OnFailureResponse_194(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_194(
@@ -80246,7 +80375,7 @@ private:
     void OnFailureResponse_195(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_195() { NextTest(); }
@@ -80265,7 +80394,7 @@ private:
     void OnFailureResponse_196(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_196(
@@ -80316,7 +80445,7 @@ private:
     void OnFailureResponse_198(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_198(
@@ -80345,7 +80474,7 @@ private:
     void OnFailureResponse_199(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_199() { NextTest(); }
@@ -80364,7 +80493,7 @@ private:
     void OnFailureResponse_200(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_200(
@@ -80394,7 +80523,7 @@ private:
     void OnFailureResponse_201(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_201() { NextTest(); }
@@ -80413,7 +80542,7 @@ private:
     void OnFailureResponse_202(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_202(
@@ -80464,7 +80593,7 @@ private:
     void OnFailureResponse_204(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_204(
@@ -80493,7 +80622,7 @@ private:
     void OnFailureResponse_205(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_205() { NextTest(); }
@@ -80512,7 +80641,7 @@ private:
     void OnFailureResponse_206(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_206(
@@ -80541,7 +80670,7 @@ private:
     void OnFailureResponse_207(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_207() { NextTest(); }
@@ -80560,7 +80689,7 @@ private:
     void OnFailureResponse_208(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_208(const chip::app::DataModel::Nullable<uint8_t> & nullableInt8u)
@@ -80589,7 +80718,7 @@ private:
     void OnFailureResponse_209(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_209() { NextTest(); }
@@ -80608,7 +80737,7 @@ private:
     void OnFailureResponse_210(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_210(const chip::app::DataModel::Nullable<uint8_t> & nullableInt8u)
@@ -80657,7 +80786,7 @@ private:
     void OnFailureResponse_212(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_212(const chip::app::DataModel::Nullable<uint8_t> & nullableInt8u)
@@ -80682,7 +80811,7 @@ private:
     void OnFailureResponse_213(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_213(const chip::app::DataModel::Nullable<uint8_t> & nullableInt8u)
@@ -80709,7 +80838,7 @@ private:
     void OnFailureResponse_214(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_214() { NextTest(); }
@@ -80728,7 +80857,7 @@ private:
     void OnFailureResponse_215(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_215(const chip::app::DataModel::Nullable<uint8_t> & nullableInt8u)
@@ -80752,7 +80881,7 @@ private:
     void OnFailureResponse_216(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_216(const chip::app::DataModel::Nullable<uint8_t> & nullableInt8u)
@@ -80776,7 +80905,7 @@ private:
     void OnFailureResponse_217(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_217(const chip::app::DataModel::Nullable<uint8_t> & nullableInt8u)
@@ -80804,7 +80933,7 @@ private:
     void OnFailureResponse_218(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_218() { NextTest(); }
@@ -80823,7 +80952,7 @@ private:
     void OnFailureResponse_219(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_219(const chip::app::DataModel::Nullable<uint8_t> & nullableInt8u)
@@ -80847,7 +80976,7 @@ private:
     void OnFailureResponse_220(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_220(const chip::app::DataModel::Nullable<uint8_t> & nullableInt8u)
@@ -80875,7 +81004,7 @@ private:
     void OnFailureResponse_221(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_221() { NextTest(); }
@@ -80894,7 +81023,7 @@ private:
     void OnFailureResponse_222(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_222(const chip::app::DataModel::Nullable<uint16_t> & nullableInt16u)
@@ -80923,7 +81052,7 @@ private:
     void OnFailureResponse_223(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_223() { NextTest(); }
@@ -80942,7 +81071,7 @@ private:
     void OnFailureResponse_224(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_224(const chip::app::DataModel::Nullable<uint16_t> & nullableInt16u)
@@ -80991,7 +81120,7 @@ private:
     void OnFailureResponse_226(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_226(const chip::app::DataModel::Nullable<uint16_t> & nullableInt16u)
@@ -81019,7 +81148,7 @@ private:
     void OnFailureResponse_227(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_227() { NextTest(); }
@@ -81038,7 +81167,7 @@ private:
     void OnFailureResponse_228(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_228(const chip::app::DataModel::Nullable<uint16_t> & nullableInt16u)
@@ -81062,7 +81191,7 @@ private:
     void OnFailureResponse_229(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_229(const chip::app::DataModel::Nullable<uint16_t> & nullableInt16u)
@@ -81086,7 +81215,7 @@ private:
     void OnFailureResponse_230(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_230(const chip::app::DataModel::Nullable<uint16_t> & nullableInt16u)
@@ -81114,7 +81243,7 @@ private:
     void OnFailureResponse_231(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_231() { NextTest(); }
@@ -81133,7 +81262,7 @@ private:
     void OnFailureResponse_232(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_232(const chip::app::DataModel::Nullable<uint16_t> & nullableInt16u)
@@ -81157,7 +81286,7 @@ private:
     void OnFailureResponse_233(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_233(const chip::app::DataModel::Nullable<uint16_t> & nullableInt16u)
@@ -81185,7 +81314,7 @@ private:
     void OnFailureResponse_234(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_234() { NextTest(); }
@@ -81204,7 +81333,7 @@ private:
     void OnFailureResponse_235(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_235(const chip::app::DataModel::Nullable<uint32_t> & nullableInt32u)
@@ -81233,7 +81362,7 @@ private:
     void OnFailureResponse_236(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_236() { NextTest(); }
@@ -81252,7 +81381,7 @@ private:
     void OnFailureResponse_237(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_237(const chip::app::DataModel::Nullable<uint32_t> & nullableInt32u)
@@ -81301,7 +81430,7 @@ private:
     void OnFailureResponse_239(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_239(const chip::app::DataModel::Nullable<uint32_t> & nullableInt32u)
@@ -81329,7 +81458,7 @@ private:
     void OnFailureResponse_240(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_240() { NextTest(); }
@@ -81348,7 +81477,7 @@ private:
     void OnFailureResponse_241(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_241(const chip::app::DataModel::Nullable<uint32_t> & nullableInt32u)
@@ -81372,7 +81501,7 @@ private:
     void OnFailureResponse_242(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_242(const chip::app::DataModel::Nullable<uint32_t> & nullableInt32u)
@@ -81396,7 +81525,7 @@ private:
     void OnFailureResponse_243(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_243(const chip::app::DataModel::Nullable<uint32_t> & nullableInt32u)
@@ -81424,7 +81553,7 @@ private:
     void OnFailureResponse_244(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_244() { NextTest(); }
@@ -81443,7 +81572,7 @@ private:
     void OnFailureResponse_245(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_245(const chip::app::DataModel::Nullable<uint32_t> & nullableInt32u)
@@ -81467,7 +81596,7 @@ private:
     void OnFailureResponse_246(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_246(const chip::app::DataModel::Nullable<uint32_t> & nullableInt32u)
@@ -81495,7 +81624,7 @@ private:
     void OnFailureResponse_247(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_247() { NextTest(); }
@@ -81514,7 +81643,7 @@ private:
     void OnFailureResponse_248(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_248(const chip::app::DataModel::Nullable<uint64_t> & nullableInt64u)
@@ -81543,7 +81672,7 @@ private:
     void OnFailureResponse_249(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_249() { NextTest(); }
@@ -81562,7 +81691,7 @@ private:
     void OnFailureResponse_250(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_250(const chip::app::DataModel::Nullable<uint64_t> & nullableInt64u)
@@ -81611,7 +81740,7 @@ private:
     void OnFailureResponse_252(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_252(const chip::app::DataModel::Nullable<uint64_t> & nullableInt64u)
@@ -81639,7 +81768,7 @@ private:
     void OnFailureResponse_253(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_253() { NextTest(); }
@@ -81658,7 +81787,7 @@ private:
     void OnFailureResponse_254(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_254(const chip::app::DataModel::Nullable<uint64_t> & nullableInt64u)
@@ -81682,7 +81811,7 @@ private:
     void OnFailureResponse_255(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_255(const chip::app::DataModel::Nullable<uint64_t> & nullableInt64u)
@@ -81706,7 +81835,7 @@ private:
     void OnFailureResponse_256(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_256(const chip::app::DataModel::Nullable<uint64_t> & nullableInt64u)
@@ -81734,7 +81863,7 @@ private:
     void OnFailureResponse_257(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_257() { NextTest(); }
@@ -81753,7 +81882,7 @@ private:
     void OnFailureResponse_258(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_258(const chip::app::DataModel::Nullable<uint64_t> & nullableInt64u)
@@ -81777,7 +81906,7 @@ private:
     void OnFailureResponse_259(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_259(const chip::app::DataModel::Nullable<uint64_t> & nullableInt64u)
@@ -81805,7 +81934,7 @@ private:
     void OnFailureResponse_260(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_260() { NextTest(); }
@@ -81824,7 +81953,7 @@ private:
     void OnFailureResponse_261(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_261(const chip::app::DataModel::Nullable<int8_t> & nullableInt8s)
@@ -81873,7 +82002,7 @@ private:
     void OnFailureResponse_263(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_263(const chip::app::DataModel::Nullable<int8_t> & nullableInt8s)
@@ -81901,7 +82030,7 @@ private:
     void OnFailureResponse_264(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_264() { NextTest(); }
@@ -81920,7 +82049,7 @@ private:
     void OnFailureResponse_265(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_265(const chip::app::DataModel::Nullable<int8_t> & nullableInt8s)
@@ -81944,7 +82073,7 @@ private:
     void OnFailureResponse_266(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_266(const chip::app::DataModel::Nullable<int8_t> & nullableInt8s)
@@ -81968,7 +82097,7 @@ private:
     void OnFailureResponse_267(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_267(const chip::app::DataModel::Nullable<int8_t> & nullableInt8s)
@@ -81996,7 +82125,7 @@ private:
     void OnFailureResponse_268(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_268() { NextTest(); }
@@ -82015,7 +82144,7 @@ private:
     void OnFailureResponse_269(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_269(const chip::app::DataModel::Nullable<int8_t> & nullableInt8s)
@@ -82039,7 +82168,7 @@ private:
     void OnFailureResponse_270(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_270(const chip::app::DataModel::Nullable<int8_t> & nullableInt8s)
@@ -82067,7 +82196,7 @@ private:
     void OnFailureResponse_271(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_271() { NextTest(); }
@@ -82086,7 +82215,7 @@ private:
     void OnFailureResponse_272(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_272(const chip::app::DataModel::Nullable<int16_t> & nullableInt16s)
@@ -82135,7 +82264,7 @@ private:
     void OnFailureResponse_274(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_274(const chip::app::DataModel::Nullable<int16_t> & nullableInt16s)
@@ -82163,7 +82292,7 @@ private:
     void OnFailureResponse_275(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_275() { NextTest(); }
@@ -82182,7 +82311,7 @@ private:
     void OnFailureResponse_276(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_276(const chip::app::DataModel::Nullable<int16_t> & nullableInt16s)
@@ -82206,7 +82335,7 @@ private:
     void OnFailureResponse_277(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_277(const chip::app::DataModel::Nullable<int16_t> & nullableInt16s)
@@ -82230,7 +82359,7 @@ private:
     void OnFailureResponse_278(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_278(const chip::app::DataModel::Nullable<int16_t> & nullableInt16s)
@@ -82258,7 +82387,7 @@ private:
     void OnFailureResponse_279(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_279() { NextTest(); }
@@ -82277,7 +82406,7 @@ private:
     void OnFailureResponse_280(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_280(const chip::app::DataModel::Nullable<int16_t> & nullableInt16s)
@@ -82301,7 +82430,7 @@ private:
     void OnFailureResponse_281(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_281(const chip::app::DataModel::Nullable<int16_t> & nullableInt16s)
@@ -82329,7 +82458,7 @@ private:
     void OnFailureResponse_282(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_282() { NextTest(); }
@@ -82348,7 +82477,7 @@ private:
     void OnFailureResponse_283(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_283(const chip::app::DataModel::Nullable<int32_t> & nullableInt32s)
@@ -82397,7 +82526,7 @@ private:
     void OnFailureResponse_285(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_285(const chip::app::DataModel::Nullable<int32_t> & nullableInt32s)
@@ -82425,7 +82554,7 @@ private:
     void OnFailureResponse_286(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_286() { NextTest(); }
@@ -82444,7 +82573,7 @@ private:
     void OnFailureResponse_287(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_287(const chip::app::DataModel::Nullable<int32_t> & nullableInt32s)
@@ -82468,7 +82597,7 @@ private:
     void OnFailureResponse_288(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_288(const chip::app::DataModel::Nullable<int32_t> & nullableInt32s)
@@ -82492,7 +82621,7 @@ private:
     void OnFailureResponse_289(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_289(const chip::app::DataModel::Nullable<int32_t> & nullableInt32s)
@@ -82520,7 +82649,7 @@ private:
     void OnFailureResponse_290(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_290() { NextTest(); }
@@ -82539,7 +82668,7 @@ private:
     void OnFailureResponse_291(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_291(const chip::app::DataModel::Nullable<int32_t> & nullableInt32s)
@@ -82563,7 +82692,7 @@ private:
     void OnFailureResponse_292(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_292(const chip::app::DataModel::Nullable<int32_t> & nullableInt32s)
@@ -82591,7 +82720,7 @@ private:
     void OnFailureResponse_293(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_293() { NextTest(); }
@@ -82610,7 +82739,7 @@ private:
     void OnFailureResponse_294(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_294(const chip::app::DataModel::Nullable<int64_t> & nullableInt64s)
@@ -82659,7 +82788,7 @@ private:
     void OnFailureResponse_296(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_296(const chip::app::DataModel::Nullable<int64_t> & nullableInt64s)
@@ -82687,7 +82816,7 @@ private:
     void OnFailureResponse_297(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_297() { NextTest(); }
@@ -82706,7 +82835,7 @@ private:
     void OnFailureResponse_298(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_298(const chip::app::DataModel::Nullable<int64_t> & nullableInt64s)
@@ -82730,7 +82859,7 @@ private:
     void OnFailureResponse_299(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_299(const chip::app::DataModel::Nullable<int64_t> & nullableInt64s)
@@ -82754,7 +82883,7 @@ private:
     void OnFailureResponse_300(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_300(const chip::app::DataModel::Nullable<int64_t> & nullableInt64s)
@@ -82782,7 +82911,7 @@ private:
     void OnFailureResponse_301(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_301() { NextTest(); }
@@ -82801,7 +82930,7 @@ private:
     void OnFailureResponse_302(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_302(const chip::app::DataModel::Nullable<int64_t> & nullableInt64s)
@@ -82825,7 +82954,7 @@ private:
     void OnFailureResponse_303(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_303(const chip::app::DataModel::Nullable<int64_t> & nullableInt64s)
@@ -82853,7 +82982,7 @@ private:
     void OnFailureResponse_304(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_304() { NextTest(); }
@@ -82872,7 +83001,7 @@ private:
     void OnFailureResponse_305(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_305(const chip::app::DataModel::Nullable<float> & nullableFloatSingle)
@@ -82901,7 +83030,7 @@ private:
     void OnFailureResponse_306(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_306() { NextTest(); }
@@ -82920,7 +83049,7 @@ private:
     void OnFailureResponse_307(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_307(const chip::app::DataModel::Nullable<float> & nullableFloatSingle)
@@ -82949,7 +83078,7 @@ private:
     void OnFailureResponse_308(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_308() { NextTest(); }
@@ -82968,7 +83097,7 @@ private:
     void OnFailureResponse_309(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_309(const chip::app::DataModel::Nullable<float> & nullableFloatSingle)
@@ -82996,7 +83125,7 @@ private:
     void OnFailureResponse_310(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_310() { NextTest(); }
@@ -83015,7 +83144,7 @@ private:
     void OnFailureResponse_311(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_311(const chip::app::DataModel::Nullable<float> & nullableFloatSingle)
@@ -83043,7 +83172,7 @@ private:
     void OnFailureResponse_312(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_312() { NextTest(); }
@@ -83062,7 +83191,7 @@ private:
     void OnFailureResponse_313(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_313(const chip::app::DataModel::Nullable<float> & nullableFloatSingle)
@@ -83091,7 +83220,7 @@ private:
     void OnFailureResponse_314(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_314() { NextTest(); }
@@ -83110,7 +83239,7 @@ private:
     void OnFailureResponse_315(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_315(const chip::app::DataModel::Nullable<double> & nullableFloatDouble)
@@ -83139,7 +83268,7 @@ private:
     void OnFailureResponse_316(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_316() { NextTest(); }
@@ -83158,7 +83287,7 @@ private:
     void OnFailureResponse_317(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_317(const chip::app::DataModel::Nullable<double> & nullableFloatDouble)
@@ -83187,7 +83316,7 @@ private:
     void OnFailureResponse_318(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_318() { NextTest(); }
@@ -83206,7 +83335,7 @@ private:
     void OnFailureResponse_319(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_319(const chip::app::DataModel::Nullable<double> & nullableFloatDouble)
@@ -83234,7 +83363,7 @@ private:
     void OnFailureResponse_320(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_320() { NextTest(); }
@@ -83253,7 +83382,7 @@ private:
     void OnFailureResponse_321(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_321(const chip::app::DataModel::Nullable<double> & nullableFloatDouble)
@@ -83281,7 +83410,7 @@ private:
     void OnFailureResponse_322(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_322() { NextTest(); }
@@ -83300,7 +83429,7 @@ private:
     void OnFailureResponse_323(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_323(const chip::app::DataModel::Nullable<double> & nullableFloatDouble)
@@ -83329,7 +83458,7 @@ private:
     void OnFailureResponse_324(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_324() { NextTest(); }
@@ -83348,7 +83477,7 @@ private:
     void OnFailureResponse_325(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_325(const chip::app::DataModel::Nullable<uint8_t> & nullableEnum8)
@@ -83377,7 +83506,7 @@ private:
     void OnFailureResponse_326(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_326() { NextTest(); }
@@ -83396,7 +83525,7 @@ private:
     void OnFailureResponse_327(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_327(const chip::app::DataModel::Nullable<uint8_t> & nullableEnum8)
@@ -83445,7 +83574,7 @@ private:
     void OnFailureResponse_329(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_329(const chip::app::DataModel::Nullable<uint8_t> & nullableEnum8)
@@ -83473,7 +83602,7 @@ private:
     void OnFailureResponse_330(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_330() { NextTest(); }
@@ -83492,7 +83621,7 @@ private:
     void OnFailureResponse_331(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_331(const chip::app::DataModel::Nullable<uint8_t> & nullableEnum8)
@@ -83520,7 +83649,7 @@ private:
     void OnFailureResponse_332(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_332() { NextTest(); }
@@ -83539,7 +83668,7 @@ private:
     void OnFailureResponse_333(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_333(const chip::app::DataModel::Nullable<uint16_t> & nullableEnum16)
@@ -83568,7 +83697,7 @@ private:
     void OnFailureResponse_334(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_334() { NextTest(); }
@@ -83587,7 +83716,7 @@ private:
     void OnFailureResponse_335(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_335(const chip::app::DataModel::Nullable<uint16_t> & nullableEnum16)
@@ -83636,7 +83765,7 @@ private:
     void OnFailureResponse_337(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_337(const chip::app::DataModel::Nullable<uint16_t> & nullableEnum16)
@@ -83664,7 +83793,7 @@ private:
     void OnFailureResponse_338(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_338() { NextTest(); }
@@ -83683,7 +83812,7 @@ private:
     void OnFailureResponse_339(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_339(const chip::app::DataModel::Nullable<uint16_t> & nullableEnum16)
@@ -83711,7 +83840,7 @@ private:
     void OnFailureResponse_340(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_340() { NextTest(); }
@@ -83730,7 +83859,7 @@ private:
     void OnFailureResponse_341(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void
@@ -83760,7 +83889,7 @@ private:
     void OnFailureResponse_342(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_342() { NextTest(); }
@@ -83779,7 +83908,7 @@ private:
     void OnFailureResponse_343(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void
@@ -83829,7 +83958,7 @@ private:
     void OnFailureResponse_345(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void
@@ -83858,7 +83987,7 @@ private:
     void OnFailureResponse_346(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_346() { NextTest(); }
@@ -83877,7 +84006,7 @@ private:
     void OnFailureResponse_347(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void
@@ -83902,7 +84031,7 @@ private:
     void OnFailureResponse_348(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_348(const chip::app::DataModel::Nullable<chip::ByteSpan> & nullableOctetString)
@@ -83933,7 +84062,7 @@ private:
     void OnFailureResponse_349(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_349() { NextTest(); }
@@ -83952,7 +84081,7 @@ private:
     void OnFailureResponse_350(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_350(const chip::app::DataModel::Nullable<chip::ByteSpan> & nullableOctetString)
@@ -83981,7 +84110,7 @@ private:
     void OnFailureResponse_351(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_351() { NextTest(); }
@@ -84000,7 +84129,7 @@ private:
     void OnFailureResponse_352(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_352(const chip::app::DataModel::Nullable<chip::ByteSpan> & nullableOctetString)
@@ -84028,7 +84157,7 @@ private:
     void OnFailureResponse_353(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_353() { NextTest(); }
@@ -84047,7 +84176,7 @@ private:
     void OnFailureResponse_354(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_354(const chip::app::DataModel::Nullable<chip::ByteSpan> & nullableOctetString)
@@ -84073,7 +84202,7 @@ private:
     void OnFailureResponse_355(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_355(const chip::app::DataModel::Nullable<chip::CharSpan> & nullableCharString)
@@ -84102,7 +84231,7 @@ private:
     void OnFailureResponse_356(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_356() { NextTest(); }
@@ -84121,7 +84250,7 @@ private:
     void OnFailureResponse_357(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_357(const chip::app::DataModel::Nullable<chip::CharSpan> & nullableCharString)
@@ -84149,7 +84278,7 @@ private:
     void OnFailureResponse_358(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_358() { NextTest(); }
@@ -84168,7 +84297,7 @@ private:
     void OnFailureResponse_359(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_359(const chip::app::DataModel::Nullable<chip::CharSpan> & nullableCharString)
@@ -84196,7 +84325,7 @@ private:
     void OnFailureResponse_360(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_360() { NextTest(); }
@@ -84215,7 +84344,7 @@ private:
     void OnFailureResponse_361(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_361(const chip::app::DataModel::Nullable<chip::CharSpan> & nullableCharString)
@@ -84318,7 +84447,7 @@ private:
     void OnFailureResponse_365(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_365() { NextTest(); }
@@ -84336,7 +84465,7 @@ private:
     void OnFailureResponse_366(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_366(const chip::app::DataModel::DecodableList<uint8_t> & listInt8u)
@@ -84376,7 +84505,7 @@ private:
     void OnFailureResponse_367(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_367(const chip::app::DataModel::DecodableList<uint8_t> & value)
@@ -84422,7 +84551,7 @@ private:
     void OnFailureResponse_368(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_368() { NextTest(); }
@@ -84440,7 +84569,7 @@ private:
     void OnFailureResponse_369(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_369(const chip::app::DataModel::DecodableList<uint8_t> & listInt8u)
@@ -84476,7 +84605,7 @@ private:
     void OnFailureResponse_370(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_370(uint8_t rangeRestrictedInt8u)
@@ -84592,7 +84721,7 @@ private:
     void OnFailureResponse_375(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_375(uint8_t rangeRestrictedInt8u)
@@ -84619,7 +84748,7 @@ private:
     void OnFailureResponse_376(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_376() { NextTest(); }
@@ -84638,7 +84767,7 @@ private:
     void OnFailureResponse_377(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_377(uint8_t rangeRestrictedInt8u)
@@ -84665,7 +84794,7 @@ private:
     void OnFailureResponse_378(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_378() { NextTest(); }
@@ -84684,7 +84813,7 @@ private:
     void OnFailureResponse_379(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_379(uint8_t rangeRestrictedInt8u)
@@ -84711,7 +84840,7 @@ private:
     void OnFailureResponse_380(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_380() { NextTest(); }
@@ -84730,7 +84859,7 @@ private:
     void OnFailureResponse_381(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_381(uint8_t rangeRestrictedInt8u)
@@ -84754,7 +84883,7 @@ private:
     void OnFailureResponse_382(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_382(uint16_t rangeRestrictedInt16u)
@@ -84870,7 +84999,7 @@ private:
     void OnFailureResponse_387(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_387(uint16_t rangeRestrictedInt16u)
@@ -84897,7 +85026,7 @@ private:
     void OnFailureResponse_388(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_388() { NextTest(); }
@@ -84916,7 +85045,7 @@ private:
     void OnFailureResponse_389(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_389(uint16_t rangeRestrictedInt16u)
@@ -84943,7 +85072,7 @@ private:
     void OnFailureResponse_390(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_390() { NextTest(); }
@@ -84962,7 +85091,7 @@ private:
     void OnFailureResponse_391(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_391(uint16_t rangeRestrictedInt16u)
@@ -84989,7 +85118,7 @@ private:
     void OnFailureResponse_392(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_392() { NextTest(); }
@@ -85008,7 +85137,7 @@ private:
     void OnFailureResponse_393(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_393(uint16_t rangeRestrictedInt16u)
@@ -85032,7 +85161,7 @@ private:
     void OnFailureResponse_394(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_394(int8_t rangeRestrictedInt8s)
@@ -85148,7 +85277,7 @@ private:
     void OnFailureResponse_399(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_399(int8_t rangeRestrictedInt8s)
@@ -85175,7 +85304,7 @@ private:
     void OnFailureResponse_400(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_400() { NextTest(); }
@@ -85194,7 +85323,7 @@ private:
     void OnFailureResponse_401(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_401(int8_t rangeRestrictedInt8s)
@@ -85221,7 +85350,7 @@ private:
     void OnFailureResponse_402(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_402() { NextTest(); }
@@ -85240,7 +85369,7 @@ private:
     void OnFailureResponse_403(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_403(int8_t rangeRestrictedInt8s)
@@ -85267,7 +85396,7 @@ private:
     void OnFailureResponse_404(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_404() { NextTest(); }
@@ -85286,7 +85415,7 @@ private:
     void OnFailureResponse_405(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_405(int8_t rangeRestrictedInt8s)
@@ -85310,7 +85439,7 @@ private:
     void OnFailureResponse_406(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_406(int16_t rangeRestrictedInt16s)
@@ -85426,7 +85555,7 @@ private:
     void OnFailureResponse_411(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_411(int16_t rangeRestrictedInt16s)
@@ -85453,7 +85582,7 @@ private:
     void OnFailureResponse_412(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_412() { NextTest(); }
@@ -85472,7 +85601,7 @@ private:
     void OnFailureResponse_413(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_413(int16_t rangeRestrictedInt16s)
@@ -85499,7 +85628,7 @@ private:
     void OnFailureResponse_414(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_414() { NextTest(); }
@@ -85518,7 +85647,7 @@ private:
     void OnFailureResponse_415(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_415(int16_t rangeRestrictedInt16s)
@@ -85545,7 +85674,7 @@ private:
     void OnFailureResponse_416(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_416() { NextTest(); }
@@ -85564,7 +85693,7 @@ private:
     void OnFailureResponse_417(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_417(int16_t rangeRestrictedInt16s)
@@ -85589,7 +85718,7 @@ private:
     void OnFailureResponse_418(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_418(const chip::app::DataModel::Nullable<uint8_t> & nullableRangeRestrictedInt8u)
@@ -85715,7 +85844,7 @@ private:
     void OnFailureResponse_423(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_423(const chip::app::DataModel::Nullable<uint8_t> & nullableRangeRestrictedInt8u)
@@ -85745,7 +85874,7 @@ private:
     void OnFailureResponse_424(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_424() { NextTest(); }
@@ -85765,7 +85894,7 @@ private:
     void OnFailureResponse_425(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_425(const chip::app::DataModel::Nullable<uint8_t> & nullableRangeRestrictedInt8u)
@@ -85795,7 +85924,7 @@ private:
     void OnFailureResponse_426(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_426() { NextTest(); }
@@ -85815,7 +85944,7 @@ private:
     void OnFailureResponse_427(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_427(const chip::app::DataModel::Nullable<uint8_t> & nullableRangeRestrictedInt8u)
@@ -85845,7 +85974,7 @@ private:
     void OnFailureResponse_428(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_428() { NextTest(); }
@@ -85865,7 +85994,7 @@ private:
     void OnFailureResponse_429(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_429(const chip::app::DataModel::Nullable<uint8_t> & nullableRangeRestrictedInt8u)
@@ -85894,7 +86023,7 @@ private:
     void OnFailureResponse_430(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_430() { NextTest(); }
@@ -85914,7 +86043,7 @@ private:
     void OnFailureResponse_431(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_431(const chip::app::DataModel::Nullable<uint8_t> & nullableRangeRestrictedInt8u)
@@ -85939,7 +86068,7 @@ private:
     void OnFailureResponse_432(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_432(const chip::app::DataModel::Nullable<uint16_t> & nullableRangeRestrictedInt16u)
@@ -86065,7 +86194,7 @@ private:
     void OnFailureResponse_437(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_437(const chip::app::DataModel::Nullable<uint16_t> & nullableRangeRestrictedInt16u)
@@ -86095,7 +86224,7 @@ private:
     void OnFailureResponse_438(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_438() { NextTest(); }
@@ -86115,7 +86244,7 @@ private:
     void OnFailureResponse_439(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_439(const chip::app::DataModel::Nullable<uint16_t> & nullableRangeRestrictedInt16u)
@@ -86145,7 +86274,7 @@ private:
     void OnFailureResponse_440(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_440() { NextTest(); }
@@ -86165,7 +86294,7 @@ private:
     void OnFailureResponse_441(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_441(const chip::app::DataModel::Nullable<uint16_t> & nullableRangeRestrictedInt16u)
@@ -86195,7 +86324,7 @@ private:
     void OnFailureResponse_442(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_442() { NextTest(); }
@@ -86215,7 +86344,7 @@ private:
     void OnFailureResponse_443(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_443(const chip::app::DataModel::Nullable<uint16_t> & nullableRangeRestrictedInt16u)
@@ -86244,7 +86373,7 @@ private:
     void OnFailureResponse_444(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_444() { NextTest(); }
@@ -86264,7 +86393,7 @@ private:
     void OnFailureResponse_445(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_445(const chip::app::DataModel::Nullable<uint16_t> & nullableRangeRestrictedInt16u)
@@ -86289,7 +86418,7 @@ private:
     void OnFailureResponse_446(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_446(const chip::app::DataModel::Nullable<int8_t> & nullableRangeRestrictedInt8s)
@@ -86415,7 +86544,7 @@ private:
     void OnFailureResponse_451(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_451(const chip::app::DataModel::Nullable<int8_t> & nullableRangeRestrictedInt8s)
@@ -86445,7 +86574,7 @@ private:
     void OnFailureResponse_452(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_452() { NextTest(); }
@@ -86465,7 +86594,7 @@ private:
     void OnFailureResponse_453(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_453(const chip::app::DataModel::Nullable<int8_t> & nullableRangeRestrictedInt8s)
@@ -86495,7 +86624,7 @@ private:
     void OnFailureResponse_454(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_454() { NextTest(); }
@@ -86515,7 +86644,7 @@ private:
     void OnFailureResponse_455(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_455(const chip::app::DataModel::Nullable<int8_t> & nullableRangeRestrictedInt8s)
@@ -86545,7 +86674,7 @@ private:
     void OnFailureResponse_456(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_456() { NextTest(); }
@@ -86565,7 +86694,7 @@ private:
     void OnFailureResponse_457(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_457(const chip::app::DataModel::Nullable<int8_t> & nullableRangeRestrictedInt8s)
@@ -86594,7 +86723,7 @@ private:
     void OnFailureResponse_458(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_458() { NextTest(); }
@@ -86614,7 +86743,7 @@ private:
     void OnFailureResponse_459(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_459(const chip::app::DataModel::Nullable<int8_t> & nullableRangeRestrictedInt8s)
@@ -86639,7 +86768,7 @@ private:
     void OnFailureResponse_460(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_460(const chip::app::DataModel::Nullable<int16_t> & nullableRangeRestrictedInt16s)
@@ -86765,7 +86894,7 @@ private:
     void OnFailureResponse_465(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_465(const chip::app::DataModel::Nullable<int16_t> & nullableRangeRestrictedInt16s)
@@ -86795,7 +86924,7 @@ private:
     void OnFailureResponse_466(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_466() { NextTest(); }
@@ -86815,7 +86944,7 @@ private:
     void OnFailureResponse_467(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_467(const chip::app::DataModel::Nullable<int16_t> & nullableRangeRestrictedInt16s)
@@ -86845,7 +86974,7 @@ private:
     void OnFailureResponse_468(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_468() { NextTest(); }
@@ -86865,7 +86994,7 @@ private:
     void OnFailureResponse_469(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_469(const chip::app::DataModel::Nullable<int16_t> & nullableRangeRestrictedInt16s)
@@ -86895,7 +87024,7 @@ private:
     void OnFailureResponse_470(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_470() { NextTest(); }
@@ -86915,7 +87044,7 @@ private:
     void OnFailureResponse_471(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_471(const chip::app::DataModel::Nullable<int16_t> & nullableRangeRestrictedInt16s)
@@ -86944,7 +87073,7 @@ private:
     void OnFailureResponse_472(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_472() { NextTest(); }
@@ -86964,7 +87093,7 @@ private:
     void OnFailureResponse_473(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_473(const chip::app::DataModel::Nullable<int16_t> & nullableRangeRestrictedInt16s)
@@ -87074,7 +87203,7 @@ private:
     void OnFailureResponse_478(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_478(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
@@ -87137,7 +87266,7 @@ private:
     void OnFailureResponse_479(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_479(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
@@ -87191,7 +87320,7 @@ private:
     void OnFailureResponse_480(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_480() { NextTest(); }
@@ -87210,7 +87339,7 @@ private:
     void OnFailureResponse_481(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_481(const chip::app::Clusters::TestCluster::Structs::SimpleStruct::DecodableType & structAttr)
@@ -87574,7 +87703,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(bool wasPresent, const chip::Optional<bool> & wasNull, const chip::Optional<uint8_t> & value,
@@ -87643,7 +87772,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -87702,7 +87831,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -87752,7 +87881,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(bool timedWriteBoolean)
@@ -87799,7 +87928,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(bool timedWriteBoolean)
@@ -87848,7 +87977,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(bool timedWriteBoolean)
@@ -87875,7 +88004,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12() { NextTest(); }
@@ -87894,7 +88023,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(bool timedWriteBoolean)
@@ -87921,7 +88050,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14() { NextTest(); }
@@ -87940,7 +88069,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(bool boolean)
@@ -87989,7 +88118,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17(bool boolean)
@@ -88016,7 +88145,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18() { NextTest(); }
@@ -88035,7 +88164,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19(bool boolean)
@@ -88062,7 +88191,7 @@ private:
     void OnFailureResponse_20(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_20() { NextTest(); }
@@ -88451,7 +88580,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -88470,7 +88599,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint32_t int32u)
@@ -88493,7 +88622,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint32_t int32u)
@@ -88516,7 +88645,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint32_t int32u)
@@ -88543,7 +88672,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -88565,7 +88694,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6() { NextTest(); }
@@ -88584,7 +88713,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(chip::CharSpan charString)
@@ -88607,7 +88736,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(chip::CharSpan charString)
@@ -88630,7 +88759,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(chip::CharSpan charString)
@@ -88653,7 +88782,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(chip::CharSpan charString)
@@ -88679,7 +88808,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11() { NextTest(); }
@@ -88698,7 +88827,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(chip::CharSpan charString)
@@ -88725,7 +88854,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13() { NextTest(); }
@@ -88744,7 +88873,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14(chip::CharSpan charString)
@@ -88771,7 +88900,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15() { NextTest(); }
@@ -88790,7 +88919,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(chip::CharSpan charString)
@@ -88817,7 +88946,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17() { NextTest(); }
@@ -88836,7 +88965,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18(chip::CharSpan charString)
@@ -88862,7 +88991,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19() { NextTest(); }
@@ -88881,7 +89010,7 @@ private:
     void OnFailureResponse_20(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_20(chip::CharSpan charString)
@@ -88907,7 +89036,7 @@ private:
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_21() { NextTest(); }
@@ -89565,7 +89694,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -89702,7 +89831,7 @@ private:
     void OnFailureResponse_23(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_23() { NextTest(); }
@@ -91384,7 +91513,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint8_t returnValue)
@@ -91419,7 +91548,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint8_t returnValue)
@@ -91453,7 +91582,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint8_t returnValue)
@@ -91477,7 +91606,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(bool boolean)
@@ -91505,7 +91634,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -91524,7 +91653,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(bool boolean)
@@ -91551,7 +91680,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -91570,7 +91699,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(bool boolean)
@@ -91594,7 +91723,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap8MaskMap> bitmap8)
@@ -91622,7 +91751,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10() { NextTest(); }
@@ -91641,7 +91770,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap8MaskMap> bitmap8)
@@ -91668,7 +91797,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12() { NextTest(); }
@@ -91687,7 +91816,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap8MaskMap> bitmap8)
@@ -91711,7 +91840,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap16MaskMap> bitmap16)
@@ -91739,7 +91868,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15() { NextTest(); }
@@ -91758,7 +91887,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap16MaskMap> bitmap16)
@@ -91785,7 +91914,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17() { NextTest(); }
@@ -91804,7 +91933,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap16MaskMap> bitmap16)
@@ -91828,7 +91957,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap32MaskMap> bitmap32)
@@ -91856,7 +91985,7 @@ private:
     void OnFailureResponse_20(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_20() { NextTest(); }
@@ -91875,7 +92004,7 @@ private:
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_21(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap32MaskMap> bitmap32)
@@ -91902,7 +92031,7 @@ private:
     void OnFailureResponse_22(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_22() { NextTest(); }
@@ -91921,7 +92050,7 @@ private:
     void OnFailureResponse_23(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_23(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap32MaskMap> bitmap32)
@@ -91945,7 +92074,7 @@ private:
     void OnFailureResponse_24(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_24(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap64MaskMap> bitmap64)
@@ -91973,7 +92102,7 @@ private:
     void OnFailureResponse_25(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_25() { NextTest(); }
@@ -91992,7 +92121,7 @@ private:
     void OnFailureResponse_26(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_26(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap64MaskMap> bitmap64)
@@ -92019,7 +92148,7 @@ private:
     void OnFailureResponse_27(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_27() { NextTest(); }
@@ -92038,7 +92167,7 @@ private:
     void OnFailureResponse_28(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_28(chip::BitFlags<chip::app::Clusters::TestCluster::Bitmap64MaskMap> bitmap64)
@@ -92062,7 +92191,7 @@ private:
     void OnFailureResponse_29(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_29(uint8_t int8u)
@@ -92090,7 +92219,7 @@ private:
     void OnFailureResponse_30(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_30() { NextTest(); }
@@ -92109,7 +92238,7 @@ private:
     void OnFailureResponse_31(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_31(uint8_t int8u)
@@ -92136,7 +92265,7 @@ private:
     void OnFailureResponse_32(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_32() { NextTest(); }
@@ -92155,7 +92284,7 @@ private:
     void OnFailureResponse_33(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_33(uint8_t int8u)
@@ -92179,7 +92308,7 @@ private:
     void OnFailureResponse_34(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_34(uint16_t int16u)
@@ -92207,7 +92336,7 @@ private:
     void OnFailureResponse_35(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_35() { NextTest(); }
@@ -92226,7 +92355,7 @@ private:
     void OnFailureResponse_36(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_36(uint16_t int16u)
@@ -92253,7 +92382,7 @@ private:
     void OnFailureResponse_37(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_37() { NextTest(); }
@@ -92272,7 +92401,7 @@ private:
     void OnFailureResponse_38(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_38(uint16_t int16u)
@@ -92296,7 +92425,7 @@ private:
     void OnFailureResponse_39(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_39(uint32_t int32u)
@@ -92324,7 +92453,7 @@ private:
     void OnFailureResponse_40(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_40() { NextTest(); }
@@ -92343,7 +92472,7 @@ private:
     void OnFailureResponse_41(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_41(uint32_t int32u)
@@ -92370,7 +92499,7 @@ private:
     void OnFailureResponse_42(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_42() { NextTest(); }
@@ -92389,7 +92518,7 @@ private:
     void OnFailureResponse_43(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_43(uint32_t int32u)
@@ -92413,7 +92542,7 @@ private:
     void OnFailureResponse_44(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_44(uint64_t int64u)
@@ -92441,7 +92570,7 @@ private:
     void OnFailureResponse_45(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_45() { NextTest(); }
@@ -92460,7 +92589,7 @@ private:
     void OnFailureResponse_46(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_46(uint64_t int64u)
@@ -92487,7 +92616,7 @@ private:
     void OnFailureResponse_47(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_47() { NextTest(); }
@@ -92506,7 +92635,7 @@ private:
     void OnFailureResponse_48(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_48(uint64_t int64u)
@@ -92530,7 +92659,7 @@ private:
     void OnFailureResponse_49(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_49(int8_t int8s)
@@ -92558,7 +92687,7 @@ private:
     void OnFailureResponse_50(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_50() { NextTest(); }
@@ -92577,7 +92706,7 @@ private:
     void OnFailureResponse_51(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_51(int8_t int8s)
@@ -92604,7 +92733,7 @@ private:
     void OnFailureResponse_52(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_52() { NextTest(); }
@@ -92623,7 +92752,7 @@ private:
     void OnFailureResponse_53(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_53(int8_t int8s)
@@ -92647,7 +92776,7 @@ private:
     void OnFailureResponse_54(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_54(int16_t int16s)
@@ -92675,7 +92804,7 @@ private:
     void OnFailureResponse_55(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_55() { NextTest(); }
@@ -92694,7 +92823,7 @@ private:
     void OnFailureResponse_56(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_56(int16_t int16s)
@@ -92721,7 +92850,7 @@ private:
     void OnFailureResponse_57(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_57() { NextTest(); }
@@ -92740,7 +92869,7 @@ private:
     void OnFailureResponse_58(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_58(int16_t int16s)
@@ -92764,7 +92893,7 @@ private:
     void OnFailureResponse_59(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_59(int32_t int32s)
@@ -92792,7 +92921,7 @@ private:
     void OnFailureResponse_60(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_60() { NextTest(); }
@@ -92811,7 +92940,7 @@ private:
     void OnFailureResponse_61(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_61(int32_t int32s)
@@ -92838,7 +92967,7 @@ private:
     void OnFailureResponse_62(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_62() { NextTest(); }
@@ -92857,7 +92986,7 @@ private:
     void OnFailureResponse_63(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_63(int32_t int32s)
@@ -92881,7 +93010,7 @@ private:
     void OnFailureResponse_64(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_64(int64_t int64s)
@@ -92909,7 +93038,7 @@ private:
     void OnFailureResponse_65(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_65() { NextTest(); }
@@ -92928,7 +93057,7 @@ private:
     void OnFailureResponse_66(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_66(int64_t int64s)
@@ -92955,7 +93084,7 @@ private:
     void OnFailureResponse_67(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_67() { NextTest(); }
@@ -92974,7 +93103,7 @@ private:
     void OnFailureResponse_68(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_68(int64_t int64s)
@@ -92998,7 +93127,7 @@ private:
     void OnFailureResponse_69(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_69(uint8_t enum8)
@@ -93026,7 +93155,7 @@ private:
     void OnFailureResponse_70(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_70() { NextTest(); }
@@ -93045,7 +93174,7 @@ private:
     void OnFailureResponse_71(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_71(uint8_t enum8)
@@ -93072,7 +93201,7 @@ private:
     void OnFailureResponse_72(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_72() { NextTest(); }
@@ -93091,7 +93220,7 @@ private:
     void OnFailureResponse_73(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_73(uint8_t enum8)
@@ -93115,7 +93244,7 @@ private:
     void OnFailureResponse_74(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_74(uint16_t enum16)
@@ -93143,7 +93272,7 @@ private:
     void OnFailureResponse_75(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_75() { NextTest(); }
@@ -93162,7 +93291,7 @@ private:
     void OnFailureResponse_76(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_76(uint16_t enum16)
@@ -93189,7 +93318,7 @@ private:
     void OnFailureResponse_77(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_77() { NextTest(); }
@@ -93208,7 +93337,7 @@ private:
     void OnFailureResponse_78(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_78(uint16_t enum16)
@@ -93232,7 +93361,7 @@ private:
     void OnFailureResponse_79(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_79(uint64_t epochUs)
@@ -93260,7 +93389,7 @@ private:
     void OnFailureResponse_80(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_80() { NextTest(); }
@@ -93279,7 +93408,7 @@ private:
     void OnFailureResponse_81(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_81(uint64_t epochUs)
@@ -93306,7 +93435,7 @@ private:
     void OnFailureResponse_82(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_82() { NextTest(); }
@@ -93325,7 +93454,7 @@ private:
     void OnFailureResponse_83(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_83(uint64_t epochUs)
@@ -93349,7 +93478,7 @@ private:
     void OnFailureResponse_84(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_84(uint32_t epochS)
@@ -93377,7 +93506,7 @@ private:
     void OnFailureResponse_85(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_85() { NextTest(); }
@@ -93396,7 +93525,7 @@ private:
     void OnFailureResponse_86(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_86(uint32_t epochS)
@@ -93423,7 +93552,7 @@ private:
     void OnFailureResponse_87(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_87() { NextTest(); }
@@ -93442,7 +93571,7 @@ private:
     void OnFailureResponse_88(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_88(uint32_t epochS)
@@ -93466,7 +93595,7 @@ private:
     void OnFailureResponse_89(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_89(chip::VendorId vendorId)
@@ -93494,7 +93623,7 @@ private:
     void OnFailureResponse_90(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_90() { NextTest(); }
@@ -93513,7 +93642,7 @@ private:
     void OnFailureResponse_91(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_91(chip::VendorId vendorId)
@@ -93540,7 +93669,7 @@ private:
     void OnFailureResponse_92(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_92() { NextTest(); }
@@ -93559,7 +93688,7 @@ private:
     void OnFailureResponse_93(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_93(chip::VendorId vendorId)
@@ -93583,7 +93712,7 @@ private:
     void OnFailureResponse_94(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_94(chip::CharSpan charString)
@@ -93614,7 +93743,7 @@ private:
     void OnFailureResponse_95(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_95(chip::CharSpan charString)
@@ -93641,7 +93770,7 @@ private:
     void OnFailureResponse_96(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_96() { NextTest(); }
@@ -93660,7 +93789,7 @@ private:
     void OnFailureResponse_97(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_97(chip::CharSpan charString)
@@ -93692,7 +93821,7 @@ private:
     void OnFailureResponse_98(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_98(chip::CharSpan charString)
@@ -93720,7 +93849,7 @@ private:
     void OnFailureResponse_99(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_99() { NextTest(); }
@@ -93739,7 +93868,7 @@ private:
     void OnFailureResponse_100(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_100(chip::CharSpan charString)
@@ -93766,7 +93895,7 @@ private:
     void OnFailureResponse_101(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_101() { NextTest(); }
@@ -93785,7 +93914,7 @@ private:
     void OnFailureResponse_102(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_102(chip::ByteSpan octetString)
@@ -93816,7 +93945,7 @@ private:
     void OnFailureResponse_103(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_103(chip::ByteSpan octetString)
@@ -93843,7 +93972,7 @@ private:
     void OnFailureResponse_104(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_104() { NextTest(); }
@@ -93862,7 +93991,7 @@ private:
     void OnFailureResponse_105(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_105(chip::ByteSpan octetString)
@@ -93895,7 +94024,7 @@ private:
     void OnFailureResponse_106(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_106(chip::ByteSpan octetString)
@@ -93923,7 +94052,7 @@ private:
     void OnFailureResponse_107(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_107() { NextTest(); }
@@ -93942,7 +94071,7 @@ private:
     void OnFailureResponse_108(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_108(chip::ByteSpan octetString)
@@ -93970,7 +94099,7 @@ private:
     void OnFailureResponse_109(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_109() { NextTest(); }
@@ -94110,7 +94239,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint8_t returnValue)
@@ -94145,7 +94274,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint8_t returnValue)
@@ -94324,7 +94453,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(
@@ -94355,7 +94484,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::DecodableList<chip::ClusterId> & serverList)
@@ -94432,7 +94561,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::DecodableList<chip::ClusterId> & clientList)
@@ -94461,7 +94590,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(const chip::app::DataModel::DecodableList<chip::EndpointId> & partsList)
@@ -94653,7 +94782,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(chip::CharSpan location)
@@ -94680,7 +94809,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2() { NextTest(); }
@@ -94699,7 +94828,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(chip::CharSpan location)
@@ -94726,7 +94855,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -94745,7 +94874,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
@@ -94990,7 +95119,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -95009,7 +95138,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint64_t breadcrumb)
@@ -95036,7 +95165,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -95055,7 +95184,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint64_t breadcrumb)
@@ -95080,7 +95209,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(bool supportsConcurrentConnection)
@@ -95213,7 +95342,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -95416,7 +95545,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint8_t supportedFabrics)
@@ -95441,7 +95570,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint8_t commissionedFabrics)
@@ -95466,7 +95595,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(chip::FabricIndex currentFabricIndex)
@@ -95501,7 +95630,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(chip::app::Clusters::OperationalCredentials::OperationalCertStatus statusCode,
@@ -95527,7 +95656,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(const chip::app::DataModel::DecodableList<
@@ -95568,7 +95697,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(chip::app::Clusters::OperationalCredentials::OperationalCertStatus statusCode,
@@ -95597,7 +95726,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(const chip::app::DataModel::DecodableList<
@@ -96074,7 +96203,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(chip::CharSpan description)
@@ -96098,7 +96227,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(const chip::app::DataModel::Nullable<uint16_t> & standardNamespace)
@@ -96123,7 +96252,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(
@@ -96165,7 +96294,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint8_t currentMode)
@@ -96189,7 +96318,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(const chip::app::DataModel::Nullable<uint8_t> & startUpMode)
@@ -96214,7 +96343,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(const chip::app::DataModel::Nullable<uint8_t> & onMode)
@@ -96247,7 +96376,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -96266,7 +96395,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(uint8_t currentMode)
@@ -96328,7 +96457,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10() { NextTest(); }
@@ -96355,7 +96484,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11() { NextTest(); }
@@ -96374,7 +96503,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(uint8_t currentMode)
@@ -96426,7 +96555,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14() { NextTest(); }
@@ -96445,7 +96574,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(const chip::app::DataModel::Nullable<uint8_t> & onMode)
@@ -96479,7 +96608,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16() { NextTest(); }
@@ -96506,7 +96635,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17() { NextTest(); }
@@ -96525,7 +96654,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18(uint8_t currentMode)
@@ -96577,7 +96706,7 @@ private:
     void OnFailureResponse_20(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_20() { NextTest(); }
@@ -96596,7 +96725,7 @@ private:
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_21(const chip::app::DataModel::Nullable<uint8_t> & startUpMode)
@@ -96630,7 +96759,7 @@ private:
     void OnFailureResponse_22(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_22() { NextTest(); }
@@ -96653,7 +96782,7 @@ private:
     void OnFailureResponse_23(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_23() { NextTest(); }
@@ -96676,7 +96805,7 @@ private:
     void OnFailureResponse_24(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_24() { NextTest(); }
@@ -96707,7 +96836,7 @@ private:
     void OnFailureResponse_27(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_27(uint8_t currentMode)
@@ -96734,7 +96863,7 @@ private:
     void OnFailureResponse_28(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_28() { NextTest(); }
@@ -96765,7 +96894,7 @@ private:
     void OnFailureResponse_31(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_31(uint8_t currentMode)
@@ -97151,7 +97280,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -97170,7 +97299,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(
@@ -97270,7 +97399,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -97289,7 +97418,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(
@@ -97352,7 +97481,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6() { NextTest(); }
@@ -97371,7 +97500,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(
@@ -97405,7 +97534,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(
@@ -97625,7 +97754,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -97644,7 +97773,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(
@@ -97695,7 +97824,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -97726,7 +97855,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(
@@ -98045,7 +98174,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -98071,7 +98200,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(const chip::app::DataModel::DecodableList<
@@ -98109,7 +98238,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6() { NextTest(); }
@@ -98138,7 +98267,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -98180,7 +98309,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10() { NextTest(); }
@@ -98212,7 +98341,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(chip::CharSpan nodeLabel)
@@ -98246,7 +98375,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14() { NextTest(); }
@@ -98265,7 +98394,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(chip::CharSpan nodeLabel)
@@ -98292,7 +98421,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16() { NextTest(); }
@@ -98482,7 +98611,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(
@@ -98507,7 +98636,8 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint64_t currentHeapFree)
@@ -98530,7 +98660,8 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint64_t currentHeapUsed)
@@ -98554,7 +98685,8 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint64_t currentHeapHighWatermark)
@@ -98812,7 +98944,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -98831,7 +98963,8 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint64_t currentHeapUsed)
@@ -98855,7 +98988,8 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest() : ThrowFailureResponse();
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint64_t currentHeapHighWatermark)
@@ -99065,7 +99199,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -99083,7 +99217,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool onOff)
@@ -99112,7 +99246,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(bool value)
@@ -99153,7 +99287,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -99171,7 +99305,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(bool onOff)
@@ -99204,7 +99338,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6() { NextTest(); }
@@ -99222,7 +99356,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(bool onOff)
@@ -99802,7 +99936,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(
@@ -99856,7 +99990,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t numberOfTotalUsersSupported)
@@ -99987,7 +100121,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -100018,7 +100152,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(
@@ -100130,7 +100264,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8() { NextTest(); }
@@ -100161,7 +100295,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(
@@ -100237,7 +100371,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10() { NextTest(); }
@@ -100268,7 +100402,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(
@@ -100345,7 +100479,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12() { NextTest(); }
@@ -100376,7 +100510,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(
@@ -100453,7 +100587,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14() { NextTest(); }
@@ -100484,7 +100618,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(
@@ -100561,7 +100695,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16() { NextTest(); }
@@ -100592,7 +100726,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17(
@@ -100673,7 +100807,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18() { NextTest(); }
@@ -100704,7 +100838,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19(
@@ -100785,7 +100919,7 @@ private:
     void OnFailureResponse_20(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_20() { NextTest(); }
@@ -100816,7 +100950,7 @@ private:
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_21(
@@ -100893,7 +101027,7 @@ private:
     void OnFailureResponse_22(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_22() { NextTest(); }
@@ -100924,7 +101058,7 @@ private:
     void OnFailureResponse_23(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_23(
@@ -101064,7 +101198,7 @@ private:
     void OnFailureResponse_26(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_26() { NextTest(); }
@@ -101095,7 +101229,7 @@ private:
     void OnFailureResponse_27(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_27(
@@ -101164,7 +101298,7 @@ private:
     void OnFailureResponse_28(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_28() { NextTest(); }
@@ -101195,7 +101329,7 @@ private:
     void OnFailureResponse_29(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_29(
@@ -101324,7 +101458,7 @@ private:
     void OnFailureResponse_32(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_32() { NextTest(); }
@@ -101355,7 +101489,7 @@ private:
     void OnFailureResponse_33(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_33(
@@ -101420,7 +101554,7 @@ private:
     void OnFailureResponse_34(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_34(
@@ -101472,7 +101606,7 @@ private:
     void OnFailureResponse_35(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_35(uint16_t numberOfPINUsersSupported)
@@ -101509,7 +101643,7 @@ private:
     void OnFailureResponse_36(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_36(bool credentialExists, const chip::app::DataModel::Nullable<uint16_t> & userIndex,
@@ -101630,7 +101764,7 @@ private:
     void OnFailureResponse_39(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_39(chip::app::Clusters::DoorLock::DlStatus status,
@@ -101674,7 +101808,7 @@ private:
     void OnFailureResponse_40(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_40(
@@ -101752,7 +101886,7 @@ private:
     void OnFailureResponse_41(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_41(bool credentialExists, const chip::app::DataModel::Nullable<uint16_t> & userIndex,
@@ -101802,7 +101936,7 @@ private:
     void OnFailureResponse_42(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_42(chip::app::Clusters::DoorLock::DlStatus status,
@@ -101852,7 +101986,7 @@ private:
     void OnFailureResponse_43(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_43(chip::app::Clusters::DoorLock::DlStatus status,
@@ -101882,7 +102016,7 @@ private:
     void OnFailureResponse_44(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_44(uint16_t numberOfRFIDUsersSupported)
@@ -101991,7 +102125,7 @@ private:
     void OnFailureResponse_47(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_47(bool credentialExists, const chip::app::DataModel::Nullable<uint16_t> & userIndex,
@@ -102042,7 +102176,7 @@ private:
     void OnFailureResponse_48(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_48(chip::app::Clusters::DoorLock::DlStatus status,
@@ -102085,7 +102219,7 @@ private:
     void OnFailureResponse_49(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_49(
@@ -102166,7 +102300,7 @@ private:
     void OnFailureResponse_50(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_50(bool credentialExists, const chip::app::DataModel::Nullable<uint16_t> & userIndex,
@@ -102217,7 +102351,7 @@ private:
     void OnFailureResponse_51(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_51(chip::app::Clusters::DoorLock::DlStatus status,
@@ -102268,7 +102402,7 @@ private:
     void OnFailureResponse_52(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_52(chip::app::Clusters::DoorLock::DlStatus status,
@@ -102318,7 +102452,7 @@ private:
     void OnFailureResponse_53(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_53(chip::app::Clusters::DoorLock::DlStatus status,
@@ -102369,7 +102503,7 @@ private:
     void OnFailureResponse_54(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_54(chip::app::Clusters::DoorLock::DlStatus status,
@@ -102420,7 +102554,7 @@ private:
     void OnFailureResponse_55(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_55(chip::app::Clusters::DoorLock::DlStatus status,
@@ -102471,7 +102605,7 @@ private:
     void OnFailureResponse_56(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_56(chip::app::Clusters::DoorLock::DlStatus status,
@@ -102522,7 +102656,7 @@ private:
     void OnFailureResponse_57(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_57(chip::app::Clusters::DoorLock::DlStatus status,
@@ -102573,7 +102707,7 @@ private:
     void OnFailureResponse_58(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_58(chip::app::Clusters::DoorLock::DlStatus status,
@@ -102625,7 +102759,7 @@ private:
     void OnFailureResponse_59(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_59(chip::app::Clusters::DoorLock::DlStatus status,
@@ -102677,7 +102811,7 @@ private:
     void OnFailureResponse_60(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_60(chip::app::Clusters::DoorLock::DlStatus status,
@@ -102727,7 +102861,7 @@ private:
     void OnFailureResponse_61(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_61(chip::app::Clusters::DoorLock::DlStatus status,
@@ -102778,7 +102912,7 @@ private:
     void OnFailureResponse_62(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_62(chip::app::Clusters::DoorLock::DlStatus status,
@@ -102829,7 +102963,7 @@ private:
     void OnFailureResponse_63(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_63(chip::app::Clusters::DoorLock::DlStatus status,
@@ -102879,7 +103013,7 @@ private:
     void OnFailureResponse_64(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_64(chip::app::Clusters::DoorLock::DlStatus status,
@@ -102930,7 +103064,7 @@ private:
     void OnFailureResponse_65(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_65(chip::app::Clusters::DoorLock::DlStatus status,
@@ -102974,7 +103108,7 @@ private:
     void OnFailureResponse_66(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_66() { NextTest(); }
@@ -103005,7 +103139,7 @@ private:
     void OnFailureResponse_67(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_67(bool credentialExists, const chip::app::DataModel::Nullable<uint16_t> & userIndex,
@@ -103047,7 +103181,7 @@ private:
     void OnFailureResponse_68(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_68(
@@ -103126,7 +103260,7 @@ private:
     void OnFailureResponse_69(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_69() { NextTest(); }
@@ -103157,7 +103291,7 @@ private:
     void OnFailureResponse_70(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_70(bool credentialExists, const chip::app::DataModel::Nullable<uint16_t> & userIndex,
@@ -103199,7 +103333,7 @@ private:
     void OnFailureResponse_71(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_71(
@@ -103272,7 +103406,7 @@ private:
     void OnFailureResponse_72(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_72(chip::app::Clusters::DoorLock::DlStatus status,
@@ -103317,7 +103451,7 @@ private:
     void OnFailureResponse_73(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_73() { NextTest(); }
@@ -103348,7 +103482,7 @@ private:
     void OnFailureResponse_74(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_74(bool credentialExists, const chip::app::DataModel::Nullable<uint16_t> & userIndex,
@@ -103390,7 +103524,7 @@ private:
     void OnFailureResponse_75(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_75(bool credentialExists, const chip::app::DataModel::Nullable<uint16_t> & userIndex,
@@ -103432,7 +103566,7 @@ private:
     void OnFailureResponse_76(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_76(
@@ -103497,7 +103631,7 @@ private:
     void OnFailureResponse_77(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_77(
@@ -103569,7 +103703,7 @@ private:
     void OnFailureResponse_78(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_78(chip::app::Clusters::DoorLock::DlStatus status,
@@ -103621,7 +103755,7 @@ private:
     void OnFailureResponse_79(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_79(chip::app::Clusters::DoorLock::DlStatus status,
@@ -103673,7 +103807,7 @@ private:
     void OnFailureResponse_80(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_80(chip::app::Clusters::DoorLock::DlStatus status,
@@ -103715,7 +103849,7 @@ private:
     void OnFailureResponse_81(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_81() { NextTest(); }
@@ -103746,7 +103880,7 @@ private:
     void OnFailureResponse_82(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_82(bool credentialExists, const chip::app::DataModel::Nullable<uint16_t> & userIndex,
@@ -103788,7 +103922,7 @@ private:
     void OnFailureResponse_83(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_83(bool credentialExists, const chip::app::DataModel::Nullable<uint16_t> & userIndex,
@@ -103830,7 +103964,7 @@ private:
     void OnFailureResponse_84(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_84(bool credentialExists, const chip::app::DataModel::Nullable<uint16_t> & userIndex,
@@ -103872,7 +104006,7 @@ private:
     void OnFailureResponse_85(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_85(
@@ -103937,7 +104071,7 @@ private:
     void OnFailureResponse_86(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_86(
@@ -104002,7 +104136,7 @@ private:
     void OnFailureResponse_87(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_87(
@@ -104074,7 +104208,7 @@ private:
     void OnFailureResponse_88(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_88(chip::app::Clusters::DoorLock::DlStatus status,
@@ -104123,7 +104257,7 @@ private:
     void OnFailureResponse_89(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_89(chip::app::Clusters::DoorLock::DlStatus status,
@@ -104166,7 +104300,7 @@ private:
     void OnFailureResponse_90(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_90(
@@ -104244,7 +104378,7 @@ private:
     void OnFailureResponse_91(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_91(bool credentialExists, const chip::app::DataModel::Nullable<uint16_t> & userIndex,
@@ -104293,7 +104427,7 @@ private:
     void OnFailureResponse_92(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_92(chip::app::Clusters::DoorLock::DlStatus status,
@@ -104531,7 +104665,7 @@ private:
     void OnFailureResponse_99(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_99() { NextTest(); }
@@ -104562,7 +104696,7 @@ private:
     void OnFailureResponse_100(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_100(
@@ -104627,7 +104761,7 @@ private:
     void OnFailureResponse_101(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_101(bool credentialExists, const chip::app::DataModel::Nullable<uint16_t> & userIndex,
@@ -104856,7 +104990,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(chip::app::Clusters::DoorLock::DlStatus status,
@@ -104919,7 +105053,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(const chip::app::DataModel::Nullable<chip::app::Clusters::DoorLock::DlLockState> & lockState)
@@ -104955,7 +105089,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -104974,7 +105108,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(const chip::app::DataModel::Nullable<chip::app::Clusters::DoorLock::DlLockState> & lockState)
@@ -105030,7 +105164,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(const chip::app::DataModel::Nullable<chip::app::Clusters::DoorLock::DlLockState> & lockState)
@@ -105066,7 +105200,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8() { NextTest(); }
@@ -105085,7 +105219,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(const chip::app::DataModel::Nullable<chip::app::Clusters::DoorLock::DlLockState> & lockState)
@@ -105123,7 +105257,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10() { NextTest(); }
@@ -105627,7 +105761,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(chip::app::Clusters::DoorLock::DlStatus status,
@@ -105660,7 +105794,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t numberOfTotalUsersSupported)
@@ -105686,7 +105820,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint8_t numberOfWeekDaySchedulesSupportedPerUser)
@@ -105712,7 +105846,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint8_t numberOfYearDaySchedulesSupportedPerUser)
@@ -106239,7 +106373,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19(uint8_t weekDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -106282,7 +106416,7 @@ private:
     void OnFailureResponse_20(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_20(uint8_t weekDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -106325,7 +106459,7 @@ private:
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_21(uint8_t weekDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -106369,7 +106503,7 @@ private:
     void OnFailureResponse_22(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_22(uint8_t weekDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -106412,7 +106546,7 @@ private:
     void OnFailureResponse_23(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_23(uint8_t weekDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -106455,7 +106589,7 @@ private:
     void OnFailureResponse_24(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_24(uint8_t weekDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -106689,7 +106823,7 @@ private:
     void OnFailureResponse_31(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_31(uint8_t yearDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -106729,7 +106863,7 @@ private:
     void OnFailureResponse_32(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_32(uint8_t yearDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -106769,7 +106903,7 @@ private:
     void OnFailureResponse_33(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_33(uint8_t yearDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -106810,7 +106944,7 @@ private:
     void OnFailureResponse_34(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_34(uint8_t yearDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -106850,7 +106984,7 @@ private:
     void OnFailureResponse_35(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_35(uint8_t yearDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -106890,7 +107024,7 @@ private:
     void OnFailureResponse_36(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_36(uint8_t yearDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -106934,7 +107068,7 @@ private:
     void OnFailureResponse_37(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_37() { NextTest(); }
@@ -106965,7 +107099,7 @@ private:
     void OnFailureResponse_38(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_38(uint8_t weekDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -107023,7 +107157,7 @@ private:
     void OnFailureResponse_39(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_39() { NextTest(); }
@@ -107053,7 +107187,7 @@ private:
     void OnFailureResponse_40(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_40(uint8_t yearDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -107400,7 +107534,7 @@ private:
     void OnFailureResponse_51(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_51(uint8_t weekDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -107457,7 +107591,7 @@ private:
     void OnFailureResponse_52(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_52(uint8_t yearDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -107507,7 +107641,7 @@ private:
     void OnFailureResponse_53(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_53() { NextTest(); }
@@ -107538,7 +107672,7 @@ private:
     void OnFailureResponse_54(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_54(uint8_t weekDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -107596,7 +107730,7 @@ private:
     void OnFailureResponse_55(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_55() { NextTest(); }
@@ -107626,7 +107760,7 @@ private:
     void OnFailureResponse_56(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_56(uint8_t yearDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -107671,7 +107805,7 @@ private:
     void OnFailureResponse_57(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_57() { NextTest(); }
@@ -107702,7 +107836,7 @@ private:
     void OnFailureResponse_58(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_58(uint8_t weekDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -107743,7 +107877,7 @@ private:
     void OnFailureResponse_59(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_59() { NextTest(); }
@@ -107774,7 +107908,7 @@ private:
     void OnFailureResponse_60(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_60(uint8_t weekDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -107816,7 +107950,7 @@ private:
     void OnFailureResponse_61(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_61(uint8_t yearDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -107862,7 +107996,7 @@ private:
     void OnFailureResponse_62(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_62(uint8_t yearDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -107912,7 +108046,7 @@ private:
     void OnFailureResponse_63(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_63() { NextTest(); }
@@ -107941,7 +108075,7 @@ private:
     void OnFailureResponse_64(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_64() { NextTest(); }
@@ -107971,7 +108105,7 @@ private:
     void OnFailureResponse_65(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_65(uint8_t yearDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -108010,7 +108144,7 @@ private:
     void OnFailureResponse_66(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_66() { NextTest(); }
@@ -108040,7 +108174,7 @@ private:
     void OnFailureResponse_67(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_67(uint8_t yearDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -108081,7 +108215,7 @@ private:
     void OnFailureResponse_68(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_68(uint8_t weekDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -108137,7 +108271,7 @@ private:
     void OnFailureResponse_69(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_69() { NextTest(); }
@@ -108172,7 +108306,7 @@ private:
     void OnFailureResponse_70(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_70() { NextTest(); }
@@ -108206,7 +108340,7 @@ private:
     void OnFailureResponse_71(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_71() { NextTest(); }
@@ -108237,7 +108371,7 @@ private:
     void OnFailureResponse_72(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_72(uint8_t weekDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -108295,7 +108429,7 @@ private:
     void OnFailureResponse_73(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_73() { NextTest(); }
@@ -108325,7 +108459,7 @@ private:
     void OnFailureResponse_74(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_74(uint8_t yearDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -108375,7 +108509,7 @@ private:
     void OnFailureResponse_75(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_75() { NextTest(); }
@@ -108406,7 +108540,7 @@ private:
     void OnFailureResponse_76(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_76(uint8_t weekDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -108464,7 +108598,7 @@ private:
     void OnFailureResponse_77(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_77() { NextTest(); }
@@ -108494,7 +108628,7 @@ private:
     void OnFailureResponse_78(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_78(uint8_t yearDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -108539,7 +108673,7 @@ private:
     void OnFailureResponse_79(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_79() { NextTest(); }
@@ -108570,7 +108704,7 @@ private:
     void OnFailureResponse_80(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_80(uint8_t weekDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -108612,7 +108746,7 @@ private:
     void OnFailureResponse_81(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_81(uint8_t yearDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -108653,7 +108787,7 @@ private:
     void OnFailureResponse_82(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_82(uint8_t weekDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -108695,7 +108829,7 @@ private:
     void OnFailureResponse_83(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_83(uint8_t yearDayIndex, uint16_t userIndex, chip::app::Clusters::DoorLock::DlStatus status,
@@ -108904,7 +109038,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(chip::app::Clusters::DoorLock::DlStatus status,
@@ -108947,7 +109081,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2() { NextTest(); }
@@ -108969,7 +109103,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -108999,7 +109133,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -109018,7 +109152,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(uint32_t autoRelockTime)
@@ -109048,7 +109182,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(const chip::app::DataModel::Nullable<chip::app::Clusters::DoorLock::DlLockState> & lockState)
@@ -109086,7 +109220,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8() { NextTest(); }
@@ -109348,7 +109482,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint8_t status, chip::GroupId groupId)
@@ -109384,7 +109518,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint8_t status, chip::GroupId groupId)
@@ -109443,7 +109577,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -109495,7 +109629,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -109535,7 +109669,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -109577,7 +109711,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6() { NextTest(); }
@@ -109596,7 +109730,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(chip::CharSpan nodeLabel)
@@ -109623,7 +109757,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8() { NextTest(); }
@@ -109644,7 +109778,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(chip::CharSpan nodeLabel)
@@ -109671,7 +109805,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10() { NextTest(); }
@@ -109692,7 +109826,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(chip::CharSpan nodeLabel)
@@ -109727,7 +109861,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12() { NextTest(); }
@@ -109748,7 +109882,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(bool onOff)
@@ -109789,7 +109923,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14() { NextTest(); }
@@ -109986,7 +110120,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint8_t status, chip::GroupId groupId, chip::CharSpan groupName)
@@ -110021,7 +110155,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint8_t status, chip::GroupId groupId, chip::CharSpan groupName)
@@ -110057,7 +110191,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint8_t status, chip::GroupId groupId)
@@ -110092,7 +110226,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint8_t status, chip::GroupId groupId, chip::CharSpan groupName)
@@ -110129,7 +110263,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(uint8_t status, chip::GroupId groupId, chip::CharSpan groupName)
@@ -110166,7 +110300,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(const chip::app::DataModel::Nullable<uint8_t> & capacity,
@@ -110207,7 +110341,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(uint8_t status, chip::GroupId groupId, chip::CharSpan groupName)
@@ -110242,7 +110376,7 @@ private:
     void OnFailureResponse_8(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_8(uint8_t status, chip::GroupId groupId, chip::CharSpan groupName)
@@ -110279,7 +110413,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(uint8_t status, chip::GroupId groupId)
@@ -110314,7 +110448,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(uint8_t status, chip::GroupId groupId)
@@ -110349,7 +110483,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(uint8_t status, chip::GroupId groupId, chip::CharSpan groupName)
@@ -110386,7 +110520,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(uint8_t status, chip::GroupId groupId, chip::CharSpan groupName)
@@ -110431,7 +110565,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13(const chip::app::DataModel::Nullable<uint8_t> & capacity,
@@ -110471,7 +110605,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14() { NextTest(); }
@@ -110499,7 +110633,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15(uint8_t status, chip::GroupId groupId, chip::CharSpan groupName)
@@ -110534,7 +110668,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16(uint8_t status, chip::GroupId groupId, chip::CharSpan groupName)
@@ -110569,7 +110703,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17(uint8_t status, chip::GroupId groupId, chip::CharSpan groupName)
@@ -110615,7 +110749,7 @@ private:
     void OnFailureResponse_18(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_18(const chip::app::DataModel::Nullable<uint8_t> & capacity,
@@ -110877,7 +111011,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint16_t maxGroupsPerFabric)
@@ -110901,7 +111035,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(uint16_t maxGroupKeysPerFabric)
@@ -110935,7 +111069,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint8_t status, chip::GroupId groupId)
@@ -110971,7 +111105,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint8_t status, chip::GroupId groupId)
@@ -111030,7 +111164,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -111082,7 +111216,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6() { NextTest(); }
@@ -111110,7 +111244,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7(const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeySetStruct::DecodableType & groupKeySet)
@@ -111202,7 +111336,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -111221,7 +111355,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(const chip::app::DataModel::DecodableList<
@@ -111257,7 +111391,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11(const chip::app::DataModel::DecodableList<
@@ -111306,7 +111440,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12() { NextTest(); }
@@ -111367,7 +111501,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void
@@ -111410,7 +111544,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15() { NextTest(); }
@@ -111438,7 +111572,7 @@ private:
     void OnFailureResponse_16(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_16() { NextTest(); }
@@ -113454,7 +113588,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1() { NextTest(); }
@@ -113492,7 +113626,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -113530,7 +113664,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -113568,7 +113702,7 @@ private:
     void OnFailureResponse_7(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_7() { NextTest(); }
@@ -113606,7 +113740,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9() { NextTest(); }
@@ -113644,7 +113778,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11() { NextTest(); }
@@ -113682,7 +113816,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13() { NextTest(); }
@@ -113720,7 +113854,7 @@ private:
     void OnFailureResponse_15(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_15() { NextTest(); }
@@ -113758,7 +113892,7 @@ private:
     void OnFailureResponse_17(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_17() { NextTest(); }
@@ -113796,7 +113930,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19() { NextTest(); }
@@ -113960,7 +114094,7 @@ private:
     void OnFailureResponse_1(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_1(uint8_t status, chip::GroupId groupId)
@@ -114019,7 +114153,7 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2() { NextTest(); }
@@ -114055,7 +114189,7 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3() { NextTest(); }
@@ -114104,7 +114238,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -119378,7 +119512,7 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4() { NextTest(); }
@@ -119400,7 +119534,7 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5() { NextTest(); }
@@ -119419,7 +119553,7 @@ private:
     void OnFailureResponse_6(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_6(chip::CharSpan nodeLabel)
@@ -119456,7 +119590,7 @@ private:
     void OnFailureResponse_9(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_9(const chip::app::DataModel::DecodableList<
@@ -119486,7 +119620,7 @@ private:
     void OnFailureResponse_10(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_10(const chip::app::DataModel::DecodableList<
@@ -119521,7 +119655,7 @@ private:
     void OnFailureResponse_11(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_11() { NextTest(); }
@@ -119540,7 +119674,7 @@ private:
     void OnFailureResponse_12(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_12(chip::CharSpan nodeLabel)
@@ -119568,7 +119702,7 @@ private:
     void OnFailureResponse_13(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_13() { NextTest(); }
@@ -119587,7 +119721,7 @@ private:
     void OnFailureResponse_14(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_14(chip::CharSpan nodeLabel)
