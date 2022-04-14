@@ -1883,7 +1883,7 @@ private:
     void OnFailureResponse_19(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_19(uint16_t subjectsPerAccessControlEntry)
@@ -1907,7 +1907,7 @@ private:
     void OnFailureResponse_20(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_20(uint16_t targetsPerAccessControlEntry)
@@ -1931,7 +1931,7 @@ private:
     void OnFailureResponse_21(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse();
+        ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_21(uint16_t accessControlEntriesPerFabric)
