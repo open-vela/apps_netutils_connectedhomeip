@@ -125,6 +125,7 @@ public:
         printf("Test_TC_MC_10_1\n");
         printf("Test_TC_MOD_1_1\n");
         printf("Test_TC_MF_1_4\n");
+        printf("Test_TC_MF_1_6\n");
         printf("Test_TC_OCC_1_1\n");
         printf("Test_TC_OCC_2_1\n");
         printf("Test_TC_OCC_2_2\n");
@@ -311,7 +312,6 @@ public:
         printf("Test_TC_MF_1_2\n");
         printf("Test_TC_MF_1_3\n");
         printf("Test_TC_MF_1_5\n");
-        printf("Test_TC_MF_1_6\n");
         printf("Test_TC_MF_1_7\n");
         printf("Test_TC_MF_1_8\n");
         printf("Test_TC_MF_1_9\n");
@@ -2005,6 +2005,14 @@ public:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
             err = TestReadTheGlobalAttributeAttributeList_5();
             break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_7();
+            break;
         }
 
         if (CHIP_NO_ERROR != err)
@@ -2021,7 +2029,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 6;
+    const uint16_t mTestCount = 8;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -2093,6 +2101,28 @@ private:
     static void OnSuccessCallback_5(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
     {
         (static_cast<Test_TC_BI_1_1Suite *>(context))->OnSuccessResponse_5(attributeList);
+    }
+
+    static void OnFailureCallback_6(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_BI_1_1Suite *>(context))->OnFailureResponse_6(error);
+    }
+
+    static void OnSuccessCallback_6(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
+    {
+        (static_cast<Test_TC_BI_1_1Suite *>(context))->OnSuccessResponse_6(acceptedCommandList);
+    }
+
+    static void OnFailureCallback_7(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_BI_1_1Suite *>(context))->OnFailureResponse_7(error);
+    }
+
+    static void OnSuccessCallback_7(void * context,
+                                    const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
+    {
+        (static_cast<Test_TC_BI_1_1Suite *>(context))->OnSuccessResponse_7(generatedCommandList);
     }
 
     //
@@ -2219,6 +2249,54 @@ private:
     void OnSuccessResponse_5(const chip::app::DataModel::DecodableList<chip::AttributeId> & attributeList)
     {
         VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_6()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::BinaryInputBasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::BinaryInputBasic::Attributes::AcceptedCommandList::TypeInfo>(
+                this, OnSuccessCallback_6, OnFailureCallback_6, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_6(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_6(const chip::app::DataModel::DecodableList<chip::CommandId> & acceptedCommandList)
+    {
+        VerifyOrReturn(CheckConstraintType("acceptedCommandList", "", "list"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_7()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::BinaryInputBasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::BinaryInputBasic::Attributes::GeneratedCommandList::TypeInfo>(
+                this, OnSuccessCallback_7, OnFailureCallback_7, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_7(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_7(const chip::app::DataModel::DecodableList<chip::CommandId> & generatedCommandList)
+    {
+        VerifyOrReturn(CheckConstraintType("generatedCommandList", "", "list"));
         NextTest();
     }
 };
@@ -21510,6 +21588,42 @@ public:
             ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read PHYRate attribute constraints\n");
+            err = TestReadPHYRateAttributeConstraints_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read FullDuplex attribute constraints\n");
+            err = TestReadFullDuplexAttributeConstraints_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read PacketRxCount attribute constraints\n");
+            err = TestReadPacketRxCountAttributeConstraints_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read PacketTxCount attribute constraints\n");
+            err = TestReadPacketTxCountAttributeConstraints_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read TxErrCount attribute constraints\n");
+            err = TestReadTxErrCountAttributeConstraints_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read CollisionCount attribute constraints\n");
+            err = TestReadCollisionCountAttributeConstraints_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Read OverrunCount attribute constraints\n");
+            err = TestReadOverrunCountAttributeConstraints_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read CarrierDetect attribute constraints\n");
+            err = TestReadCarrierDetectAttributeConstraints_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read TimeSinceReset attribute constraints\n");
+            err = TestReadTimeSinceResetAttributeConstraints_9();
+            break;
         }
 
         if (CHIP_NO_ERROR != err)
@@ -21526,7 +21640,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 1;
+    const uint16_t mTestCount = 10;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -21553,6 +21667,98 @@ private:
         }
     }
 
+    static void OnFailureCallback_1(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_ETHDIAG_1_1Suite *>(context))->OnFailureResponse_1(error);
+    }
+
+    static void OnSuccessCallback_1(
+        void * context,
+        const chip::app::DataModel::Nullable<chip::app::Clusters::EthernetNetworkDiagnostics::PHYRateType> & PHYRate)
+    {
+        (static_cast<Test_TC_ETHDIAG_1_1Suite *>(context))->OnSuccessResponse_1(PHYRate);
+    }
+
+    static void OnFailureCallback_2(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_ETHDIAG_1_1Suite *>(context))->OnFailureResponse_2(error);
+    }
+
+    static void OnSuccessCallback_2(void * context, const chip::app::DataModel::Nullable<bool> & fullDuplex)
+    {
+        (static_cast<Test_TC_ETHDIAG_1_1Suite *>(context))->OnSuccessResponse_2(fullDuplex);
+    }
+
+    static void OnFailureCallback_3(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_ETHDIAG_1_1Suite *>(context))->OnFailureResponse_3(error);
+    }
+
+    static void OnSuccessCallback_3(void * context, uint64_t packetRxCount)
+    {
+        (static_cast<Test_TC_ETHDIAG_1_1Suite *>(context))->OnSuccessResponse_3(packetRxCount);
+    }
+
+    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_ETHDIAG_1_1Suite *>(context))->OnFailureResponse_4(error);
+    }
+
+    static void OnSuccessCallback_4(void * context, uint64_t packetTxCount)
+    {
+        (static_cast<Test_TC_ETHDIAG_1_1Suite *>(context))->OnSuccessResponse_4(packetTxCount);
+    }
+
+    static void OnFailureCallback_5(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_ETHDIAG_1_1Suite *>(context))->OnFailureResponse_5(error);
+    }
+
+    static void OnSuccessCallback_5(void * context, uint64_t txErrCount)
+    {
+        (static_cast<Test_TC_ETHDIAG_1_1Suite *>(context))->OnSuccessResponse_5(txErrCount);
+    }
+
+    static void OnFailureCallback_6(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_ETHDIAG_1_1Suite *>(context))->OnFailureResponse_6(error);
+    }
+
+    static void OnSuccessCallback_6(void * context, uint64_t collisionCount)
+    {
+        (static_cast<Test_TC_ETHDIAG_1_1Suite *>(context))->OnSuccessResponse_6(collisionCount);
+    }
+
+    static void OnFailureCallback_7(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_ETHDIAG_1_1Suite *>(context))->OnFailureResponse_7(error);
+    }
+
+    static void OnSuccessCallback_7(void * context, uint64_t overrunCount)
+    {
+        (static_cast<Test_TC_ETHDIAG_1_1Suite *>(context))->OnSuccessResponse_7(overrunCount);
+    }
+
+    static void OnFailureCallback_8(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_ETHDIAG_1_1Suite *>(context))->OnFailureResponse_8(error);
+    }
+
+    static void OnSuccessCallback_8(void * context, const chip::app::DataModel::Nullable<bool> & carrierDetect)
+    {
+        (static_cast<Test_TC_ETHDIAG_1_1Suite *>(context))->OnSuccessResponse_8(carrierDetect);
+    }
+
+    static void OnFailureCallback_9(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_ETHDIAG_1_1Suite *>(context))->OnFailureResponse_9(error);
+    }
+
+    static void OnSuccessCallback_9(void * context, uint64_t timeSinceReset)
+    {
+        (static_cast<Test_TC_ETHDIAG_1_1Suite *>(context))->OnSuccessResponse_9(timeSinceReset);
+    }
+
     //
     // Tests methods
     //
@@ -21561,6 +21767,224 @@ private:
     {
         SetIdentity(kIdentityAlpha);
         return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+    }
+
+    CHIP_ERROR TestReadPHYRateAttributeConstraints_1()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::EthernetNetworkDiagnosticsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::EthernetNetworkDiagnostics::Attributes::PHYRate::TypeInfo>(
+            this, OnSuccessCallback_1, OnFailureCallback_1, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_1(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_1(
+        const chip::app::DataModel::Nullable<chip::app::Clusters::EthernetNetworkDiagnostics::PHYRateType> & PHYRate)
+    {
+        VerifyOrReturn(CheckConstraintType("PHYRate", "", "enum8"));
+        VerifyOrReturn(CheckConstraintMinValue("PHYRate", PHYRate, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("PHYRate", PHYRate, 9));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadFullDuplexAttributeConstraints_2()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::EthernetNetworkDiagnosticsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::EthernetNetworkDiagnostics::Attributes::FullDuplex::TypeInfo>(
+                this, OnSuccessCallback_2, OnFailureCallback_2, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_2(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_2(const chip::app::DataModel::Nullable<bool> & fullDuplex)
+    {
+        VerifyOrReturn(CheckConstraintType("fullDuplex", "", "bool"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadPacketRxCountAttributeConstraints_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::EthernetNetworkDiagnosticsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::EthernetNetworkDiagnostics::Attributes::PacketRxCount::TypeInfo>(
+                this, OnSuccessCallback_3, OnFailureCallback_3, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_3(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_3(uint64_t packetRxCount)
+    {
+        VerifyOrReturn(CheckConstraintType("packetRxCount", "", "uint64"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadPacketTxCountAttributeConstraints_4()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::EthernetNetworkDiagnosticsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::EthernetNetworkDiagnostics::Attributes::PacketTxCount::TypeInfo>(
+                this, OnSuccessCallback_4, OnFailureCallback_4, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_4(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_4(uint64_t packetTxCount)
+    {
+        VerifyOrReturn(CheckConstraintType("packetTxCount", "", "uint64"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTxErrCountAttributeConstraints_5()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::EthernetNetworkDiagnosticsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::EthernetNetworkDiagnostics::Attributes::TxErrCount::TypeInfo>(
+                this, OnSuccessCallback_5, OnFailureCallback_5, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_5(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_5(uint64_t txErrCount)
+    {
+        VerifyOrReturn(CheckConstraintType("txErrCount", "", "uint64"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadCollisionCountAttributeConstraints_6()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::EthernetNetworkDiagnosticsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::EthernetNetworkDiagnostics::Attributes::CollisionCount::TypeInfo>(
+                this, OnSuccessCallback_6, OnFailureCallback_6, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_6(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_6(uint64_t collisionCount)
+    {
+        VerifyOrReturn(CheckConstraintType("collisionCount", "", "uint64"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadOverrunCountAttributeConstraints_7()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::EthernetNetworkDiagnosticsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::EthernetNetworkDiagnostics::Attributes::OverrunCount::TypeInfo>(
+                this, OnSuccessCallback_7, OnFailureCallback_7, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_7(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_7(uint64_t overrunCount)
+    {
+        VerifyOrReturn(CheckConstraintType("overrunCount", "", "uint64"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadCarrierDetectAttributeConstraints_8()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::EthernetNetworkDiagnosticsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::EthernetNetworkDiagnostics::Attributes::CarrierDetect::TypeInfo>(
+                this, OnSuccessCallback_8, OnFailureCallback_8, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_8(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_8(const chip::app::DataModel::Nullable<bool> & carrierDetect)
+    {
+        VerifyOrReturn(CheckConstraintType("carrierDetect", "", "bool"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadTimeSinceResetAttributeConstraints_9()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::EthernetNetworkDiagnosticsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::EthernetNetworkDiagnostics::Attributes::TimeSinceReset::TypeInfo>(
+                this, OnSuccessCallback_9, OnFailureCallback_9, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_9(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_9(uint64_t timeSinceReset)
+    {
+        VerifyOrReturn(CheckConstraintType("timeSinceReset", "", "uint64"));
+        NextTest();
     }
 };
 
@@ -34784,6 +35208,413 @@ private:
     }
 };
 
+class Test_TC_MF_1_6Suite : public TestCommand
+{
+public:
+    Test_TC_MF_1_6Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_MF_1_6", credsIssuerConfig), mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("nodeIdForDuplicateCommissioning", 0, UINT64_MAX, &mNodeIdForDuplicateCommissioning);
+        AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
+        AddArgument("nodeId3", 0, UINT64_MAX, &mNodeId3);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
+        AddArgument("payload", &mPayload);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_MF_1_6Suite() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MF_1_6\n");
+        }
+
+        if (mTestCount == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MF_1_6\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++)
+        {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Reboot target device\n");
+            err = TestRebootTargetDevice_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH_CR1 starts a commissioning process with DUT_CE\n");
+            err = TestThCr1StartsACommissioningProcessWithDutCe_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH_CR1 opens a commissioning window on DUT_CE\n");
+            err = TestThCr1OpensACommissioningWindowOnDutCe_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Commission from beta\n");
+            err = TestCommissionFromBeta_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH_CR2 starts a commissioning process on DUT_CE\n");
+            err = TestThCr2StartsACommissioningProcessOnDutCe_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Open Commissioning Window from alpha\n");
+            err = TestOpenCommissioningWindowFromAlpha_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH_CR1 revokes the commissioning window on DUT_CE\n");
+            err = TestThCr1RevokesTheCommissioningWindowOnDutCe_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH_CR2 starts a commissioning process on DUT_CE\n");
+            err = TestThCr2StartsACommissioningProcessOnDutCe_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH_CR1 writes the mandatory attribute NodeLabel of DUT_CE\n");
+            err = TestThCr1WritesTheMandatoryAttributeNodeLabelOfDutCe_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH_CR1 read the mandatory attribute NodeLabel of DUT_CE\n");
+            err = TestThCr1ReadTheMandatoryAttributeNodeLabelOfDutCe_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH_CR1 opens a commissioning window on DUT_CE\n");
+            err = TestThCr1OpensACommissioningWindowOnDutCe_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH_CR2 starts a commissioning process on DUT_CE\n");
+            err = TestThCr2StartsACommissioningProcessOnDutCe_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH_CR3 starts a commissioning process with DUT_CE\n");
+            err = TestThCr3StartsACommissioningProcessWithDutCe_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Wait for the commissioned device to be retrieved for gamma\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrievedForGamma_13();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err)
+        {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 14;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::NodeId> mNodeIdForDuplicateCommissioning;
+    chip::Optional<chip::NodeId> mNodeId2;
+    chip::Optional<chip::NodeId> mNodeId3;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mDiscriminator;
+    chip::Optional<chip::CharSpan> mPayload;
+    chip::Optional<uint16_t> mTimeout;
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    static void OnFailureCallback_8(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_6Suite *>(context))->OnFailureResponse_8(error);
+    }
+
+    static void OnSuccessCallback_8(void * context) { (static_cast<Test_TC_MF_1_6Suite *>(context))->OnSuccessResponse_8(); }
+
+    static void OnFailureCallback_9(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_MF_1_6Suite *>(context))->OnFailureResponse_9(error);
+    }
+
+    static void OnSuccessCallback_9(void * context, chip::CharSpan nodeLabel)
+    {
+        (static_cast<Test_TC_MF_1_6Suite *>(context))->OnSuccessResponse_9(nodeLabel);
+    }
+
+    //
+    // Tests methods
+    //
+
+    CHIP_ERROR TestRebootTargetDevice_0()
+    {
+        SetIdentity(kIdentityAlpha);
+        return Reboot(mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U);
+    }
+
+    CHIP_ERROR TestThCr1StartsACommissioningProcessWithDutCe_1()
+    {
+        SetIdentity(kIdentityAlpha);
+        return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+    }
+
+    CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_2()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        using RequestType = chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type;
+
+        RequestType request;
+        request.commissioningTimeout = 180U;
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_MF_1_6Suite *>(context))->OnSuccessResponse_2();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_MF_1_6Suite *>(context))->OnFailureResponse_2(error);
+        };
+
+        ReturnErrorOnFailure(
+            chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request, 10000));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_2(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_2() { NextTest(); }
+
+    CHIP_ERROR TestCommissionFromBeta_3()
+    {
+        SetIdentity(kIdentityBeta);
+        return PairWithQRCode(mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL,
+                              mPayload.HasValue() ? mPayload.Value() : chip::CharSpan::fromCharString("MT:-24J0AFN00KA0648G00"));
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessOnDutCe_4()
+    {
+        SetIdentity(kIdentityBeta);
+        return WaitForCommissionee(mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL);
+    }
+
+    CHIP_ERROR TestOpenCommissioningWindowFromAlpha_5()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        using RequestType = chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type;
+
+        RequestType request;
+        request.commissioningTimeout = 180U;
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_MF_1_6Suite *>(context))->OnSuccessResponse_5();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_MF_1_6Suite *>(context))->OnFailureResponse_5(error);
+        };
+
+        ReturnErrorOnFailure(
+            chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request, 10000));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_5(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_5() { NextTest(); }
+
+    CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_6()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        using RequestType               = chip::app::Clusters::AdministratorCommissioning::Commands::RevokeCommissioning::Type;
+
+        RequestType request;
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_MF_1_6Suite *>(context))->OnSuccessResponse_6();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_MF_1_6Suite *>(context))->OnFailureResponse_6(error);
+        };
+
+        ReturnErrorOnFailure(
+            chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request, 10000));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_6(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_6() { NextTest(); }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessOnDutCe_7()
+    {
+        SetIdentity(kIdentityBeta);
+        return WaitForCommissionee(mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL);
+    }
+
+    CHIP_ERROR TestThCr1WritesTheMandatoryAttributeNodeLabelOfDutCe_8()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        chip::CharSpan nodeLabelArgument;
+        nodeLabelArgument = chip::Span<const char>("chiptestgarbage: not in length on purpose", 8);
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            nodeLabelArgument, this, OnSuccessCallback_8, OnFailureCallback_8));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_8(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_8() { NextTest(); }
+
+    CHIP_ERROR TestThCr1ReadTheMandatoryAttributeNodeLabelOfDutCe_9()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::BasicClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::Basic::Attributes::NodeLabel::TypeInfo>(
+            this, OnSuccessCallback_9, OnFailureCallback_9, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_9(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_9(chip::CharSpan nodeLabel)
+    {
+        VerifyOrReturn(CheckValueAsString("nodeLabel", nodeLabel, chip::CharSpan("chiptest", 8)));
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_10()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        using RequestType = chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type;
+
+        RequestType request;
+        request.commissioningTimeout = 180U;
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_MF_1_6Suite *>(context))->OnSuccessResponse_10();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_MF_1_6Suite *>(context))->OnFailureResponse_10(error);
+        };
+
+        ReturnErrorOnFailure(
+            chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request, 10000));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_10(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_10() { NextTest(); }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessOnDutCe_11()
+    {
+        SetIdentity(kIdentityBeta);
+        return WaitForCommissionee(mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL);
+    }
+
+    CHIP_ERROR TestThCr3StartsACommissioningProcessWithDutCe_12()
+    {
+        SetIdentity(kIdentityGamma);
+        return PairWithQRCode(mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL,
+                              mPayload.HasValue() ? mPayload.Value() : chip::CharSpan::fromCharString("MT:-24J0AFN00KA0648G00"));
+    }
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForGamma_13()
+    {
+        SetIdentity(kIdentityGamma);
+        return WaitForCommissionee(mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL);
+    }
+};
+
 class Test_TC_OCC_1_1Suite : public TestCommand
 {
 public:
@@ -36245,7 +37076,8 @@ private:
     void OnFailureResponse_2(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse(error);
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_2(bool globalSceneControl)
@@ -36268,7 +37100,8 @@ private:
     void OnFailureResponse_3(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse(error);
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_3(uint16_t onTime)
@@ -36291,7 +37124,8 @@ private:
     void OnFailureResponse_4(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse(error);
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_4(uint16_t offWaitTime)
@@ -36314,7 +37148,8 @@ private:
     void OnFailureResponse_5(CHIP_ERROR error)
     {
         chip::app::StatusIB status(error);
-        ThrowFailureResponse(error);
+        (status.mStatus == chip::Protocols::InteractionModel::Status::UnsupportedAttribute) ? NextTest()
+                                                                                            : ThrowFailureResponse(error);
     }
 
     void OnSuccessResponse_5(const chip::app::DataModel::Nullable<chip::app::Clusters::OnOff::OnOffStartUpOnOff> & startUpOnOff)
@@ -43502,22 +44337,49 @@ public:
             err = TestWrite1ToTheOperationModeAttributeToDutOperationMode_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Write 2 to the OperationMode attribute to DUT: OperationMode\n");
-            if (ShouldSkip("A_OPERATIONMODE"))
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the attribute: EffectiveOperationMode\n");
+            if (ShouldSkip("A_EFFECTIVEOPERATIONMODE"))
             {
                 NextTest();
                 return;
             }
-            err = TestWrite2ToTheOperationModeAttributeToDutOperationMode_2();
+            err = TestReadsTheAttributeEffectiveOperationMode_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Write 3 to the OperationMode attribute to DUT: OperationMode\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Write 2 to the OperationMode attribute to DUT: OperationMode\n");
             if (ShouldSkip("A_OPERATIONMODE"))
             {
                 NextTest();
                 return;
             }
-            err = TestWrite3ToTheOperationModeAttributeToDutOperationMode_3();
+            err = TestWrite2ToTheOperationModeAttributeToDutOperationMode_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the attribute: EffectiveOperationMode\n");
+            if (ShouldSkip("A_EFFECTIVEOPERATIONMODE"))
+            {
+                NextTest();
+                return;
+            }
+            err = TestReadsTheAttributeEffectiveOperationMode_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Write 3 to the OperationMode attribute to DUT: OperationMode\n");
+            if (ShouldSkip("A_OPERATIONMODE"))
+            {
+                NextTest();
+                return;
+            }
+            err = TestWrite3ToTheOperationModeAttributeToDutOperationMode_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the attribute: EffectiveOperationMode\n");
+            if (ShouldSkip("A_EFFECTIVEOPERATIONMODE"))
+            {
+                NextTest();
+                return;
+            }
+            err = TestReadsTheAttributeEffectiveOperationMode_6();
             break;
         }
 
@@ -43535,7 +44397,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 4;
+    const uint16_t mTestCount = 7;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -43574,7 +44436,10 @@ private:
         (static_cast<Test_TC_PCC_2_2Suite *>(context))->OnFailureResponse_2(error);
     }
 
-    static void OnSuccessCallback_2(void * context) { (static_cast<Test_TC_PCC_2_2Suite *>(context))->OnSuccessResponse_2(); }
+    static void OnSuccessCallback_2(void * context, uint8_t effectiveOperationMode)
+    {
+        (static_cast<Test_TC_PCC_2_2Suite *>(context))->OnSuccessResponse_2(effectiveOperationMode);
+    }
 
     static void OnFailureCallback_3(void * context, CHIP_ERROR error)
     {
@@ -43582,6 +44447,33 @@ private:
     }
 
     static void OnSuccessCallback_3(void * context) { (static_cast<Test_TC_PCC_2_2Suite *>(context))->OnSuccessResponse_3(); }
+
+    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_PCC_2_2Suite *>(context))->OnFailureResponse_4(error);
+    }
+
+    static void OnSuccessCallback_4(void * context, uint8_t effectiveOperationMode)
+    {
+        (static_cast<Test_TC_PCC_2_2Suite *>(context))->OnSuccessResponse_4(effectiveOperationMode);
+    }
+
+    static void OnFailureCallback_5(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_PCC_2_2Suite *>(context))->OnFailureResponse_5(error);
+    }
+
+    static void OnSuccessCallback_5(void * context) { (static_cast<Test_TC_PCC_2_2Suite *>(context))->OnSuccessResponse_5(); }
+
+    static void OnFailureCallback_6(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_PCC_2_2Suite *>(context))->OnFailureResponse_6(error);
+    }
+
+    static void OnSuccessCallback_6(void * context, uint8_t effectiveOperationMode)
+    {
+        (static_cast<Test_TC_PCC_2_2Suite *>(context))->OnSuccessResponse_6(effectiveOperationMode);
+    }
 
     //
     // Tests methods
@@ -43616,18 +44508,15 @@ private:
 
     void OnSuccessResponse_1() { NextTest(); }
 
-    CHIP_ERROR TestWrite2ToTheOperationModeAttributeToDutOperationMode_2()
+    CHIP_ERROR TestReadsTheAttributeEffectiveOperationMode_2()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::PumpConfigurationAndControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t operationModeArgument;
-        operationModeArgument = 2;
-
         ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::OperationMode::TypeInfo>(
-                operationModeArgument, this, OnSuccessCallback_2, OnFailureCallback_2));
+            cluster.ReadAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::EffectiveOperationMode::TypeInfo>(
+                this, OnSuccessCallback_2, OnFailureCallback_2, true));
         return CHIP_NO_ERROR;
     }
 
@@ -43637,16 +44526,21 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_2() { NextTest(); }
+    void OnSuccessResponse_2(uint8_t effectiveOperationMode)
+    {
+        VerifyOrReturn(CheckValue("effectiveOperationMode", effectiveOperationMode, 1));
 
-    CHIP_ERROR TestWrite3ToTheOperationModeAttributeToDutOperationMode_3()
+        NextTest();
+    }
+
+    CHIP_ERROR TestWrite2ToTheOperationModeAttributeToDutOperationMode_3()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::PumpConfigurationAndControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         uint8_t operationModeArgument;
-        operationModeArgument = 3;
+        operationModeArgument = 2;
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::OperationMode::TypeInfo>(
@@ -43661,6 +44555,79 @@ private:
     }
 
     void OnSuccessResponse_3() { NextTest(); }
+
+    CHIP_ERROR TestReadsTheAttributeEffectiveOperationMode_4()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::PumpConfigurationAndControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::EffectiveOperationMode::TypeInfo>(
+                this, OnSuccessCallback_4, OnFailureCallback_4, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_4(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_4(uint8_t effectiveOperationMode)
+    {
+        VerifyOrReturn(CheckValue("effectiveOperationMode", effectiveOperationMode, 2));
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestWrite3ToTheOperationModeAttributeToDutOperationMode_5()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::PumpConfigurationAndControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        uint8_t operationModeArgument;
+        operationModeArgument = 3;
+
+        ReturnErrorOnFailure(
+            cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::OperationMode::TypeInfo>(
+                operationModeArgument, this, OnSuccessCallback_5, OnFailureCallback_5));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_5(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_5() { NextTest(); }
+
+    CHIP_ERROR TestReadsTheAttributeEffectiveOperationMode_6()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::PumpConfigurationAndControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::EffectiveOperationMode::TypeInfo>(
+                this, OnSuccessCallback_6, OnFailureCallback_6, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_6(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_6(uint8_t effectiveOperationMode)
+    {
+        VerifyOrReturn(CheckValue("effectiveOperationMode", effectiveOperationMode, 3));
+
+        NextTest();
+    }
 };
 
 class Test_TC_PCC_2_3Suite : public TestCommand
@@ -43752,40 +44719,85 @@ public:
             err = TestWrite1ToTheControlModeAttributeToDut_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Write 2 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("A_CONTROLMODE"))
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the attribute: EffectiveControlMode\n");
+            if (ShouldSkip("A_EFFECTIVECONTROLMODE"))
             {
                 NextTest();
                 return;
             }
-            err = TestWrite2ToTheControlModeAttributeToDut_6();
+            err = TestReadsTheAttributeEffectiveControlMode_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Write 3 to the ControlMode attribute to DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Write 2 to the ControlMode attribute to DUT\n");
             if (ShouldSkip("A_CONTROLMODE"))
             {
                 NextTest();
                 return;
             }
-            err = TestWrite3ToTheControlModeAttributeToDut_7();
+            err = TestWrite2ToTheControlModeAttributeToDut_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Write 5 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("A_CONTROLMODE"))
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Reads the attribute: EffectiveControlMode\n");
+            if (ShouldSkip("A_EFFECTIVECONTROLMODE"))
             {
                 NextTest();
                 return;
             }
-            err = TestWrite5ToTheControlModeAttributeToDut_8();
+            err = TestReadsTheAttributeEffectiveControlMode_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Write 7 to the ControlMode attribute to DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Write 3 to the ControlMode attribute to DUT\n");
             if (ShouldSkip("A_CONTROLMODE"))
             {
                 NextTest();
                 return;
             }
-            err = TestWrite7ToTheControlModeAttributeToDut_9();
+            err = TestWrite3ToTheControlModeAttributeToDut_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Reads the attribute: EffectiveControlMode\n");
+            if (ShouldSkip("A_EFFECTIVECONTROLMODE"))
+            {
+                NextTest();
+                return;
+            }
+            err = TestReadsTheAttributeEffectiveControlMode_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Write 5 to the ControlMode attribute to DUT\n");
+            if (ShouldSkip("A_CONTROLMODE"))
+            {
+                NextTest();
+                return;
+            }
+            err = TestWrite5ToTheControlModeAttributeToDut_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Reads the attribute: EffectiveControlMode\n");
+            if (ShouldSkip("A_EFFECTIVECONTROLMODE"))
+            {
+                NextTest();
+                return;
+            }
+            err = TestReadsTheAttributeEffectiveControlMode_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Write 7 to the ControlMode attribute to DUT\n");
+            if (ShouldSkip("A_CONTROLMODE"))
+            {
+                NextTest();
+                return;
+            }
+            err = TestWrite7ToTheControlModeAttributeToDut_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Reads the attribute: EffectiveControlMode\n");
+            if (ShouldSkip("A_EFFECTIVECONTROLMODE"))
+            {
+                NextTest();
+                return;
+            }
+            err = TestReadsTheAttributeEffectiveControlMode_14();
             break;
         }
 
@@ -43803,7 +44815,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 10;
+    const uint16_t mTestCount = 15;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -43876,7 +44888,10 @@ private:
         (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnFailureResponse_6(error);
     }
 
-    static void OnSuccessCallback_6(void * context) { (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnSuccessResponse_6(); }
+    static void OnSuccessCallback_6(void * context, uint8_t effectiveControlMode)
+    {
+        (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnSuccessResponse_6(effectiveControlMode);
+    }
 
     static void OnFailureCallback_7(void * context, CHIP_ERROR error)
     {
@@ -43890,7 +44905,10 @@ private:
         (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnFailureResponse_8(error);
     }
 
-    static void OnSuccessCallback_8(void * context) { (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnSuccessResponse_8(); }
+    static void OnSuccessCallback_8(void * context, uint8_t effectiveControlMode)
+    {
+        (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnSuccessResponse_8(effectiveControlMode);
+    }
 
     static void OnFailureCallback_9(void * context, CHIP_ERROR error)
     {
@@ -43898,6 +44916,50 @@ private:
     }
 
     static void OnSuccessCallback_9(void * context) { (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnSuccessResponse_9(); }
+
+    static void OnFailureCallback_10(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnFailureResponse_10(error);
+    }
+
+    static void OnSuccessCallback_10(void * context, uint8_t effectiveControlMode)
+    {
+        (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnSuccessResponse_10(effectiveControlMode);
+    }
+
+    static void OnFailureCallback_11(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnFailureResponse_11(error);
+    }
+
+    static void OnSuccessCallback_11(void * context) { (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnSuccessResponse_11(); }
+
+    static void OnFailureCallback_12(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnFailureResponse_12(error);
+    }
+
+    static void OnSuccessCallback_12(void * context, uint8_t effectiveControlMode)
+    {
+        (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnSuccessResponse_12(effectiveControlMode);
+    }
+
+    static void OnFailureCallback_13(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnFailureResponse_13(error);
+    }
+
+    static void OnSuccessCallback_13(void * context) { (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnSuccessResponse_13(); }
+
+    static void OnFailureCallback_14(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnFailureResponse_14(error);
+    }
+
+    static void OnSuccessCallback_14(void * context, uint8_t effectiveControlMode)
+    {
+        (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnSuccessResponse_14(effectiveControlMode);
+    }
 
     //
     // Tests methods
@@ -44028,18 +45090,15 @@ private:
 
     void OnSuccessResponse_5() { NextTest(); }
 
-    CHIP_ERROR TestWrite2ToTheControlModeAttributeToDut_6()
+    CHIP_ERROR TestReadsTheAttributeEffectiveControlMode_6()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::PumpConfigurationAndControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t controlModeArgument;
-        controlModeArgument = 2;
-
         ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::ControlMode::TypeInfo>(
-                controlModeArgument, this, OnSuccessCallback_6, OnFailureCallback_6));
+            cluster.ReadAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::EffectiveControlMode::TypeInfo>(
+                this, OnSuccessCallback_6, OnFailureCallback_6, true));
         return CHIP_NO_ERROR;
     }
 
@@ -44049,16 +45108,21 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_6() { NextTest(); }
+    void OnSuccessResponse_6(uint8_t effectiveControlMode)
+    {
+        VerifyOrReturn(CheckValue("effectiveControlMode", effectiveControlMode, 1));
 
-    CHIP_ERROR TestWrite3ToTheControlModeAttributeToDut_7()
+        NextTest();
+    }
+
+    CHIP_ERROR TestWrite2ToTheControlModeAttributeToDut_7()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::PumpConfigurationAndControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         uint8_t controlModeArgument;
-        controlModeArgument = 3;
+        controlModeArgument = 2;
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::ControlMode::TypeInfo>(
@@ -44074,18 +45138,15 @@ private:
 
     void OnSuccessResponse_7() { NextTest(); }
 
-    CHIP_ERROR TestWrite5ToTheControlModeAttributeToDut_8()
+    CHIP_ERROR TestReadsTheAttributeEffectiveControlMode_8()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::PumpConfigurationAndControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t controlModeArgument;
-        controlModeArgument = 5;
-
         ReturnErrorOnFailure(
-            cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::ControlMode::TypeInfo>(
-                controlModeArgument, this, OnSuccessCallback_8, OnFailureCallback_8));
+            cluster.ReadAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::EffectiveControlMode::TypeInfo>(
+                this, OnSuccessCallback_8, OnFailureCallback_8, true));
         return CHIP_NO_ERROR;
     }
 
@@ -44095,16 +45156,21 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_8() { NextTest(); }
+    void OnSuccessResponse_8(uint8_t effectiveControlMode)
+    {
+        VerifyOrReturn(CheckValue("effectiveControlMode", effectiveControlMode, 2));
 
-    CHIP_ERROR TestWrite7ToTheControlModeAttributeToDut_9()
+        NextTest();
+    }
+
+    CHIP_ERROR TestWrite3ToTheControlModeAttributeToDut_9()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::PumpConfigurationAndControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
         uint8_t controlModeArgument;
-        controlModeArgument = 7;
+        controlModeArgument = 3;
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::ControlMode::TypeInfo>(
@@ -44119,6 +45185,127 @@ private:
     }
 
     void OnSuccessResponse_9() { NextTest(); }
+
+    CHIP_ERROR TestReadsTheAttributeEffectiveControlMode_10()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::PumpConfigurationAndControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::EffectiveControlMode::TypeInfo>(
+                this, OnSuccessCallback_10, OnFailureCallback_10, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_10(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_10(uint8_t effectiveControlMode)
+    {
+        VerifyOrReturn(CheckValue("effectiveControlMode", effectiveControlMode, 3));
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestWrite5ToTheControlModeAttributeToDut_11()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::PumpConfigurationAndControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        uint8_t controlModeArgument;
+        controlModeArgument = 5;
+
+        ReturnErrorOnFailure(
+            cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::ControlMode::TypeInfo>(
+                controlModeArgument, this, OnSuccessCallback_11, OnFailureCallback_11));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_11(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_11() { NextTest(); }
+
+    CHIP_ERROR TestReadsTheAttributeEffectiveControlMode_12()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::PumpConfigurationAndControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::EffectiveControlMode::TypeInfo>(
+                this, OnSuccessCallback_12, OnFailureCallback_12, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_12(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_12(uint8_t effectiveControlMode)
+    {
+        VerifyOrReturn(CheckValue("effectiveControlMode", effectiveControlMode, 5));
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestWrite7ToTheControlModeAttributeToDut_13()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::PumpConfigurationAndControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        uint8_t controlModeArgument;
+        controlModeArgument = 7;
+
+        ReturnErrorOnFailure(
+            cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::ControlMode::TypeInfo>(
+                controlModeArgument, this, OnSuccessCallback_13, OnFailureCallback_13));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_13(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_13() { NextTest(); }
+
+    CHIP_ERROR TestReadsTheAttributeEffectiveControlMode_14()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::PumpConfigurationAndControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::EffectiveControlMode::TypeInfo>(
+                this, OnSuccessCallback_14, OnFailureCallback_14, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_14(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_14(uint8_t effectiveControlMode)
+    {
+        VerifyOrReturn(CheckValue("effectiveControlMode", effectiveControlMode, 7));
+
+        NextTest();
+    }
 };
 
 class Test_TC_PCC_2_4Suite : public TestCommand
@@ -44193,20 +45380,24 @@ public:
             err = TestWrite1ToTheLifetimeEnergyConsumedAttributeToDut_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Write 2 to the LifetimeEnergyConsumed attribute to DUT\n");
-            err = TestWrite2ToTheLifetimeEnergyConsumedAttributeToDut_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Reads the attribute: LifetimeEnergyConsumed\n");
+            err = TestReadsTheAttributeLifetimeEnergyConsumed_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Reads the attribute: LifetimeEnergyConsumed\n");
-            err = TestReadsTheAttributeLifetimeEnergyConsumed_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Write 2 to the LifetimeEnergyConsumed attribute to DUT\n");
+            err = TestWrite2ToTheLifetimeEnergyConsumedAttributeToDut_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Write 3 to the LifetimeEnergyConsumed attribute to DUT\n");
-            err = TestWrite3ToTheLifetimeEnergyConsumedAttributeToDut_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Reads the attribute: LifetimeEnergyConsumed\n");
+            err = TestReadsTheAttributeLifetimeEnergyConsumed_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Reads the attribute: LifetimeEnergyConsumed\n");
-            err = TestReadsTheAttributeLifetimeEnergyConsumed_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Write 3 to the LifetimeEnergyConsumed attribute to DUT\n");
+            err = TestWrite3ToTheLifetimeEnergyConsumedAttributeToDut_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Reads the attribute: LifetimeEnergyConsumed\n");
+            err = TestReadsTheAttributeLifetimeEnergyConsumed_12();
             break;
         }
 
@@ -44224,7 +45415,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 12;
+    const uint16_t mTestCount = 13;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -44314,33 +45505,43 @@ private:
         (static_cast<Test_TC_PCC_2_4Suite *>(context))->OnFailureResponse_8(error);
     }
 
-    static void OnSuccessCallback_8(void * context) { (static_cast<Test_TC_PCC_2_4Suite *>(context))->OnSuccessResponse_8(); }
+    static void OnSuccessCallback_8(void * context, const chip::app::DataModel::Nullable<uint32_t> & lifetimeEnergyConsumed)
+    {
+        (static_cast<Test_TC_PCC_2_4Suite *>(context))->OnSuccessResponse_8(lifetimeEnergyConsumed);
+    }
 
     static void OnFailureCallback_9(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_PCC_2_4Suite *>(context))->OnFailureResponse_9(error);
     }
 
-    static void OnSuccessCallback_9(void * context, const chip::app::DataModel::Nullable<uint32_t> & lifetimeEnergyConsumed)
-    {
-        (static_cast<Test_TC_PCC_2_4Suite *>(context))->OnSuccessResponse_9(lifetimeEnergyConsumed);
-    }
+    static void OnSuccessCallback_9(void * context) { (static_cast<Test_TC_PCC_2_4Suite *>(context))->OnSuccessResponse_9(); }
 
     static void OnFailureCallback_10(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_PCC_2_4Suite *>(context))->OnFailureResponse_10(error);
     }
 
-    static void OnSuccessCallback_10(void * context) { (static_cast<Test_TC_PCC_2_4Suite *>(context))->OnSuccessResponse_10(); }
+    static void OnSuccessCallback_10(void * context, const chip::app::DataModel::Nullable<uint32_t> & lifetimeEnergyConsumed)
+    {
+        (static_cast<Test_TC_PCC_2_4Suite *>(context))->OnSuccessResponse_10(lifetimeEnergyConsumed);
+    }
 
     static void OnFailureCallback_11(void * context, CHIP_ERROR error)
     {
         (static_cast<Test_TC_PCC_2_4Suite *>(context))->OnFailureResponse_11(error);
     }
 
-    static void OnSuccessCallback_11(void * context, const chip::app::DataModel::Nullable<uint32_t> & lifetimeEnergyConsumed)
+    static void OnSuccessCallback_11(void * context) { (static_cast<Test_TC_PCC_2_4Suite *>(context))->OnSuccessResponse_11(); }
+
+    static void OnFailureCallback_12(void * context, CHIP_ERROR error)
     {
-        (static_cast<Test_TC_PCC_2_4Suite *>(context))->OnSuccessResponse_11(lifetimeEnergyConsumed);
+        (static_cast<Test_TC_PCC_2_4Suite *>(context))->OnFailureResponse_12(error);
+    }
+
+    static void OnSuccessCallback_12(void * context, const chip::app::DataModel::Nullable<uint32_t> & lifetimeEnergyConsumed)
+    {
+        (static_cast<Test_TC_PCC_2_4Suite *>(context))->OnSuccessResponse_12(lifetimeEnergyConsumed);
     }
 
     //
@@ -44527,7 +45728,33 @@ private:
 
     void OnSuccessResponse_7() { NextTest(); }
 
-    CHIP_ERROR TestWrite2ToTheLifetimeEnergyConsumedAttributeToDut_8()
+    CHIP_ERROR TestReadsTheAttributeLifetimeEnergyConsumed_8()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::PumpConfigurationAndControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::LifetimeEnergyConsumed::TypeInfo>(
+                this, OnSuccessCallback_8, OnFailureCallback_8, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_8(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_8(const chip::app::DataModel::Nullable<uint32_t> & lifetimeEnergyConsumed)
+    {
+        VerifyOrReturn(CheckValueNonNull("lifetimeEnergyConsumed", lifetimeEnergyConsumed));
+        VerifyOrReturn(CheckValue("lifetimeEnergyConsumed.Value()", lifetimeEnergyConsumed.Value(), 1UL));
+
+        NextTest();
+    }
+
+    CHIP_ERROR TestWrite2ToTheLifetimeEnergyConsumedAttributeToDut_9()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::PumpConfigurationAndControlClusterTest cluster;
@@ -44539,27 +45766,7 @@ private:
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::LifetimeEnergyConsumed::TypeInfo>(
-                lifetimeEnergyConsumedArgument, this, OnSuccessCallback_8, OnFailureCallback_8));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_8(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse(error);
-    }
-
-    void OnSuccessResponse_8() { NextTest(); }
-
-    CHIP_ERROR TestReadsTheAttributeLifetimeEnergyConsumed_9()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::PumpConfigurationAndControlClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::LifetimeEnergyConsumed::TypeInfo>(
-                this, OnSuccessCallback_9, OnFailureCallback_9, true));
+                lifetimeEnergyConsumedArgument, this, OnSuccessCallback_9, OnFailureCallback_9));
         return CHIP_NO_ERROR;
     }
 
@@ -44569,7 +45776,27 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_9(const chip::app::DataModel::Nullable<uint32_t> & lifetimeEnergyConsumed)
+    void OnSuccessResponse_9() { NextTest(); }
+
+    CHIP_ERROR TestReadsTheAttributeLifetimeEnergyConsumed_10()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::PumpConfigurationAndControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::LifetimeEnergyConsumed::TypeInfo>(
+                this, OnSuccessCallback_10, OnFailureCallback_10, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_10(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_10(const chip::app::DataModel::Nullable<uint32_t> & lifetimeEnergyConsumed)
     {
         VerifyOrReturn(CheckValueNonNull("lifetimeEnergyConsumed", lifetimeEnergyConsumed));
         VerifyOrReturn(CheckValue("lifetimeEnergyConsumed.Value()", lifetimeEnergyConsumed.Value(), 2UL));
@@ -44577,7 +45804,7 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestWrite3ToTheLifetimeEnergyConsumedAttributeToDut_10()
+    CHIP_ERROR TestWrite3ToTheLifetimeEnergyConsumedAttributeToDut_11()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
         chip::Controller::PumpConfigurationAndControlClusterTest cluster;
@@ -44589,27 +45816,7 @@ private:
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::LifetimeEnergyConsumed::TypeInfo>(
-                lifetimeEnergyConsumedArgument, this, OnSuccessCallback_10, OnFailureCallback_10));
-        return CHIP_NO_ERROR;
-    }
-
-    void OnFailureResponse_10(CHIP_ERROR error)
-    {
-        chip::app::StatusIB status(error);
-        ThrowFailureResponse(error);
-    }
-
-    void OnSuccessResponse_10() { NextTest(); }
-
-    CHIP_ERROR TestReadsTheAttributeLifetimeEnergyConsumed_11()
-    {
-        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
-        chip::Controller::PumpConfigurationAndControlClusterTest cluster;
-        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
-
-        ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::LifetimeEnergyConsumed::TypeInfo>(
-                this, OnSuccessCallback_11, OnFailureCallback_11, true));
+                lifetimeEnergyConsumedArgument, this, OnSuccessCallback_11, OnFailureCallback_11));
         return CHIP_NO_ERROR;
     }
 
@@ -44619,7 +45826,27 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_11(const chip::app::DataModel::Nullable<uint32_t> & lifetimeEnergyConsumed)
+    void OnSuccessResponse_11() { NextTest(); }
+
+    CHIP_ERROR TestReadsTheAttributeLifetimeEnergyConsumed_12()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::PumpConfigurationAndControlClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::LifetimeEnergyConsumed::TypeInfo>(
+                this, OnSuccessCallback_12, OnFailureCallback_12, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_12(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_12(const chip::app::DataModel::Nullable<uint32_t> & lifetimeEnergyConsumed)
     {
         VerifyOrReturn(CheckValueNonNull("lifetimeEnergyConsumed", lifetimeEnergyConsumed));
         VerifyOrReturn(CheckValue("lifetimeEnergyConsumed.Value()", lifetimeEnergyConsumed.Value(), 3UL));
@@ -56483,20 +57710,24 @@ public:
             err = TestReadsNetworkInterfaceStructureAttributeFromDut_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads SecurityType attribute constraints\n");
-            err = TestReadsSecurityTypeAttributeConstraints_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads SecurityType attribute from DUT\n");
+            err = TestReadsSecurityTypeAttributeFromDut_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Reads WiFiVersion attribute constraints\n");
-            err = TestReadsWiFiVersionAttributeConstraints_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Reads SecurityType attribute constraints\n");
+            err = TestReadsSecurityTypeAttributeConstraints_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Reads ChannelNumber attribute constraints\n");
-            err = TestReadsChannelNumberAttributeConstraints_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Reads WiFiVersion attribute constraints\n");
+            err = TestReadsWiFiVersionAttributeConstraints_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Reads RSSI attribute constraints\n");
-            err = TestReadsRssiAttributeConstraints_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Reads ChannelNumber attribute constraints\n");
+            err = TestReadsChannelNumberAttributeConstraints_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Reads RSSI attribute constraints\n");
+            err = TestReadsRssiAttributeConstraints_6();
             break;
         }
 
@@ -56514,7 +57745,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 6;
+    const uint16_t mTestCount = 7;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -56573,9 +57804,9 @@ private:
 
     static void OnSuccessCallback_3(
         void * context,
-        const chip::app::DataModel::Nullable<chip::app::Clusters::WiFiNetworkDiagnostics::WiFiVersionType> & wiFiVersion)
+        const chip::app::DataModel::Nullable<chip::app::Clusters::WiFiNetworkDiagnostics::SecurityType> & securityType)
     {
-        (static_cast<Test_TC_WIFIDIAG_1_1Suite *>(context))->OnSuccessResponse_3(wiFiVersion);
+        (static_cast<Test_TC_WIFIDIAG_1_1Suite *>(context))->OnSuccessResponse_3(securityType);
     }
 
     static void OnFailureCallback_4(void * context, CHIP_ERROR error)
@@ -56583,9 +57814,11 @@ private:
         (static_cast<Test_TC_WIFIDIAG_1_1Suite *>(context))->OnFailureResponse_4(error);
     }
 
-    static void OnSuccessCallback_4(void * context, const chip::app::DataModel::Nullable<uint16_t> & channelNumber)
+    static void OnSuccessCallback_4(
+        void * context,
+        const chip::app::DataModel::Nullable<chip::app::Clusters::WiFiNetworkDiagnostics::WiFiVersionType> & wiFiVersion)
     {
-        (static_cast<Test_TC_WIFIDIAG_1_1Suite *>(context))->OnSuccessResponse_4(channelNumber);
+        (static_cast<Test_TC_WIFIDIAG_1_1Suite *>(context))->OnSuccessResponse_4(wiFiVersion);
     }
 
     static void OnFailureCallback_5(void * context, CHIP_ERROR error)
@@ -56593,9 +57826,19 @@ private:
         (static_cast<Test_TC_WIFIDIAG_1_1Suite *>(context))->OnFailureResponse_5(error);
     }
 
-    static void OnSuccessCallback_5(void * context, const chip::app::DataModel::Nullable<int8_t> & rssi)
+    static void OnSuccessCallback_5(void * context, const chip::app::DataModel::Nullable<uint16_t> & channelNumber)
     {
-        (static_cast<Test_TC_WIFIDIAG_1_1Suite *>(context))->OnSuccessResponse_5(rssi);
+        (static_cast<Test_TC_WIFIDIAG_1_1Suite *>(context))->OnSuccessResponse_5(channelNumber);
+    }
+
+    static void OnFailureCallback_6(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_WIFIDIAG_1_1Suite *>(context))->OnFailureResponse_6(error);
+    }
+
+    static void OnSuccessCallback_6(void * context, const chip::app::DataModel::Nullable<int8_t> & rssi)
+    {
+        (static_cast<Test_TC_WIFIDIAG_1_1Suite *>(context))->OnSuccessResponse_6(rssi);
     }
 
     //
@@ -56634,7 +57877,7 @@ private:
         NextTest();
     }
 
-    CHIP_ERROR TestReadsSecurityTypeAttributeConstraints_2()
+    CHIP_ERROR TestReadsSecurityTypeAttributeFromDut_2()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         chip::Controller::WiFiNetworkDiagnosticsClusterTest cluster;
@@ -56654,17 +57897,18 @@ private:
     void OnSuccessResponse_2(
         const chip::app::DataModel::Nullable<chip::app::Clusters::WiFiNetworkDiagnostics::SecurityType> & securityType)
     {
-        VerifyOrReturn(CheckConstraintType("securityType", "", "enum"));
+        VerifyOrReturn(CheckValueNull("securityType", securityType));
+
         NextTest();
     }
 
-    CHIP_ERROR TestReadsWiFiVersionAttributeConstraints_3()
+    CHIP_ERROR TestReadsSecurityTypeAttributeConstraints_3()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         chip::Controller::WiFiNetworkDiagnosticsClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WiFiNetworkDiagnostics::Attributes::WiFiVersion::TypeInfo>(
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WiFiNetworkDiagnostics::Attributes::SecurityType::TypeInfo>(
             this, OnSuccessCallback_3, OnFailureCallback_3, true));
         return CHIP_NO_ERROR;
     }
@@ -56676,21 +57920,20 @@ private:
     }
 
     void OnSuccessResponse_3(
-        const chip::app::DataModel::Nullable<chip::app::Clusters::WiFiNetworkDiagnostics::WiFiVersionType> & wiFiVersion)
+        const chip::app::DataModel::Nullable<chip::app::Clusters::WiFiNetworkDiagnostics::SecurityType> & securityType)
     {
-        VerifyOrReturn(CheckConstraintType("wiFiVersion", "", "enum"));
+        VerifyOrReturn(CheckConstraintType("securityType", "", "enum"));
         NextTest();
     }
 
-    CHIP_ERROR TestReadsChannelNumberAttributeConstraints_4()
+    CHIP_ERROR TestReadsWiFiVersionAttributeConstraints_4()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         chip::Controller::WiFiNetworkDiagnosticsClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(
-            cluster.ReadAttribute<chip::app::Clusters::WiFiNetworkDiagnostics::Attributes::ChannelNumber::TypeInfo>(
-                this, OnSuccessCallback_4, OnFailureCallback_4, true));
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WiFiNetworkDiagnostics::Attributes::WiFiVersion::TypeInfo>(
+            this, OnSuccessCallback_4, OnFailureCallback_4, true));
         return CHIP_NO_ERROR;
     }
 
@@ -56700,20 +57943,24 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_4(const chip::app::DataModel::Nullable<uint16_t> & channelNumber)
+    void OnSuccessResponse_4(
+        const chip::app::DataModel::Nullable<chip::app::Clusters::WiFiNetworkDiagnostics::WiFiVersionType> & wiFiVersion)
     {
-        VerifyOrReturn(CheckConstraintType("channelNumber", "", "uint16"));
+        VerifyOrReturn(CheckConstraintType("wiFiVersion", "", "enum"));
+        VerifyOrReturn(CheckConstraintMinValue("wiFiVersion", wiFiVersion, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("wiFiVersion", wiFiVersion, 5));
         NextTest();
     }
 
-    CHIP_ERROR TestReadsRssiAttributeConstraints_5()
+    CHIP_ERROR TestReadsChannelNumberAttributeConstraints_5()
     {
         const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
         chip::Controller::WiFiNetworkDiagnosticsClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WiFiNetworkDiagnostics::Attributes::Rssi::TypeInfo>(
-            this, OnSuccessCallback_5, OnFailureCallback_5, true));
+        ReturnErrorOnFailure(
+            cluster.ReadAttribute<chip::app::Clusters::WiFiNetworkDiagnostics::Attributes::ChannelNumber::TypeInfo>(
+                this, OnSuccessCallback_5, OnFailureCallback_5, true));
         return CHIP_NO_ERROR;
     }
 
@@ -56723,7 +57970,30 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_5(const chip::app::DataModel::Nullable<int8_t> & rssi)
+    void OnSuccessResponse_5(const chip::app::DataModel::Nullable<uint16_t> & channelNumber)
+    {
+        VerifyOrReturn(CheckConstraintType("channelNumber", "", "uint16"));
+        NextTest();
+    }
+
+    CHIP_ERROR TestReadsRssiAttributeConstraints_6()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 0;
+        chip::Controller::WiFiNetworkDiagnosticsClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WiFiNetworkDiagnostics::Attributes::Rssi::TypeInfo>(
+            this, OnSuccessCallback_6, OnFailureCallback_6, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_6(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_6(const chip::app::DataModel::Nullable<int8_t> & rssi)
     {
         VerifyOrReturn(CheckConstraintType("rssi", "", "int8"));
         VerifyOrReturn(CheckConstraintMinValue("rssi", rssi, -120));
@@ -119816,89 +121086,6 @@ private:
     //
 };
 
-class Test_TC_MF_1_6Suite : public TestCommand
-{
-public:
-    Test_TC_MF_1_6Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_MF_1_6", credsIssuerConfig), mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_MF_1_6Suite() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex)
-        {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MF_1_6\n");
-        }
-
-        if (mTestCount == mTestIndex)
-        {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MF_1_6\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++)
-        {
-        }
-
-        if (CHIP_NO_ERROR != err)
-        {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 0;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    //
-    // Tests methods
-    //
-};
-
 class Test_TC_MF_1_7Suite : public TestCommand
 {
 public:
@@ -125062,6 +126249,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_MC_10_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_MOD_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_MF_1_4Suite>(credsIssuerConfig),
+        make_unique<Test_TC_MF_1_6Suite>(credsIssuerConfig),
         make_unique<Test_TC_OCC_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_OCC_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_OCC_2_2Suite>(credsIssuerConfig),
@@ -125237,7 +126425,6 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_MF_1_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_MF_1_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_MF_1_5Suite>(credsIssuerConfig),
-        make_unique<Test_TC_MF_1_6Suite>(credsIssuerConfig),
         make_unique<Test_TC_MF_1_7Suite>(credsIssuerConfig),
         make_unique<Test_TC_MF_1_8Suite>(credsIssuerConfig),
         make_unique<Test_TC_MF_1_9Suite>(credsIssuerConfig),
