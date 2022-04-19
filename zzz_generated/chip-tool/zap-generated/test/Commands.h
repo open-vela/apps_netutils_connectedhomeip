@@ -167,6 +167,7 @@ public:
         printf("Test_TC_WNCV_1_1\n");
         printf("Test_TC_WNCV_2_1\n");
         printf("Test_TC_WNCV_2_2\n");
+        printf("Test_TC_WNCV_2_3\n");
         printf("Test_TC_WNCV_2_4\n");
         printf("Test_TC_WNCV_2_5\n");
         printf("Test_TC_WNCV_3_1\n");
@@ -364,7 +365,6 @@ public:
         printf("Test_TC_SWDIAG_1_2\n");
         printf("Test_TC_WIFIDIAG_1_2\n");
         printf("Test_TC_WIFIDIAG_2_1\n");
-        printf("Test_TC_WNCV_2_3\n");
         printf("Test_TC_WNCV_6_1\n");
         printf("Test_TC_FLW_3_1\n");
         printf("Test_TC_OCC_2_3\n");
@@ -58826,7 +58826,7 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_4(error);
     }
 
-    static void OnSuccessCallback_4(void * context, uint8_t configStatus)
+    static void OnSuccessCallback_4(void * context, chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus> configStatus)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_4(configStatus);
     }
@@ -58843,7 +58843,7 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_6(error);
     }
 
-    static void OnSuccessCallback_6(void * context, uint8_t configStatus)
+    static void OnSuccessCallback_6(void * context, chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus> configStatus)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_6(configStatus);
     }
@@ -58907,7 +58907,7 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_13(error);
     }
 
-    static void OnSuccessCallback_13(void * context, uint8_t mode)
+    static void OnSuccessCallback_13(void * context, chip::BitFlags<chip::app::Clusters::WindowCovering::Mode> mode)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_13(mode);
     }
@@ -58924,7 +58924,7 @@ private:
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnFailureResponse_15(error);
     }
 
-    static void OnSuccessCallback_15(void * context, uint8_t mode)
+    static void OnSuccessCallback_15(void * context, chip::BitFlags<chip::app::Clusters::WindowCovering::Mode> mode)
     {
         (static_cast<Test_TC_WNCV_2_1Suite *>(context))->OnSuccessResponse_15(mode);
     }
@@ -59392,7 +59392,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_4(uint8_t configStatus)
+    void OnSuccessResponse_4(chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus> configStatus)
     {
         VerifyOrReturn(CheckConstraintType("configStatus", "", "map8"));
         VerifyOrReturn(CheckConstraintMinValue("configStatus", configStatus, 0));
@@ -59406,8 +59406,8 @@ private:
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t configStatusArgument;
-        configStatusArgument = 128;
+        chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus> configStatusArgument;
+        configStatusArgument = static_cast<chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus>>(128);
 
         ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::ConfigStatus::TypeInfo>(
             configStatusArgument, this, OnSuccessCallback_5, OnFailureCallback_5));
@@ -59440,7 +59440,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_6(uint8_t configStatus)
+    void OnSuccessResponse_6(chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus> configStatus)
     {
         VerifyOrReturn(CheckConstraintType("configStatus", "", "map8"));
         VerifyOrReturn(CheckConstraintNotValue("configStatus", configStatus, 128));
@@ -59611,7 +59611,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_13(uint8_t mode)
+    void OnSuccessResponse_13(chip::BitFlags<chip::app::Clusters::WindowCovering::Mode> mode)
     {
         VerifyOrReturn(CheckConstraintType("mode", "", "map8"));
         VerifyOrReturn(CheckConstraintMinValue("mode", mode, 0));
@@ -59625,8 +59625,8 @@ private:
         chip::Controller::WindowCoveringClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t modeArgument;
-        modeArgument = 8;
+        chip::BitFlags<chip::app::Clusters::WindowCovering::Mode> modeArgument;
+        modeArgument = static_cast<chip::BitFlags<chip::app::Clusters::WindowCovering::Mode>>(8);
 
         ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::Mode::TypeInfo>(
             modeArgument, this, OnSuccessCallback_14, OnFailureCallback_14));
@@ -59658,7 +59658,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_15(uint8_t mode)
+    void OnSuccessResponse_15(chip::BitFlags<chip::app::Clusters::WindowCovering::Mode> mode)
     {
         VerifyOrReturn(CheckValue("mode", mode, 8));
 
@@ -60748,6 +60748,827 @@ private:
         SetIdentity(kIdentityAlpha);
         return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
     }
+};
+
+class Test_TC_WNCV_2_3Suite : public TestCommand
+{
+public:
+    Test_TC_WNCV_2_3Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_WNCV_2_3", credsIssuerConfig), mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_WNCV_2_3Suite() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_WNCV_2_3\n");
+        }
+
+        if (mTestCount == mTestIndex)
+        {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_WNCV_2_3\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++)
+        {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : 1a: TH set the Mode Attribute bit0 of the DUT\n");
+            if (ShouldSkip("WNCV_REVERSAL"))
+            {
+                NextTest();
+                return;
+            }
+            err = Test1aThSetTheModeAttributeBit0OfTheDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : 1b: TH reads ConfigStatus attribute from DUT\n");
+            if (ShouldSkip("WNCV_REVERSAL"))
+            {
+                NextTest();
+                return;
+            }
+            err = Test1bThReadsConfigStatusAttributeFromDut_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : 1c: TH clear the Mode Attribute bit0 of the DUT\n");
+            if (ShouldSkip("WNCV_REVERSAL"))
+            {
+                NextTest();
+                return;
+            }
+            err = Test1cThClearTheModeAttributeBit0OfTheDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : 1d: TH reads ConfigStatus attribute from DUT\n");
+            if (ShouldSkip("WNCV_REVERSAL"))
+            {
+                NextTest();
+                return;
+            }
+            err = Test1dThReadsConfigStatusAttributeFromDut_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : 2a: TH set the Mode Attribute bit1 of the DUT\n");
+            if (ShouldSkip("WNCV_CALIBRATION"))
+            {
+                NextTest();
+                return;
+            }
+            err = Test2aThSetTheModeAttributeBit1OfTheDut_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : 2b: TH reads ConfigStatus attribute from DUT\n");
+            if (ShouldSkip("WNCV_CALIBRATION"))
+            {
+                NextTest();
+                return;
+            }
+            err = Test2bThReadsConfigStatusAttributeFromDut_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 7 : 2c: If (ConfigStatus bit0 == 0) TH send DownOrClose command to the DUT\n");
+            if (ShouldSkip("WNCV_CALIBRATION"))
+            {
+                NextTest();
+                return;
+            }
+            err = Test2cIfConfigStatusBit00ThSendDownOrCloseCommandToTheDut_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : 2d: TH clear the Mode Attribute bit1 of the DUT\n");
+            if (ShouldSkip("WNCV_CALIBRATION"))
+            {
+                NextTest();
+                return;
+            }
+            err = Test2dThClearTheModeAttributeBit1OfTheDut_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : 2e: TH reads ConfigStatus attribute from DUT\n");
+            if (ShouldSkip("WNCV_CALIBRATION"))
+            {
+                NextTest();
+                return;
+            }
+            err = Test2eThReadsConfigStatusAttributeFromDut_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : 2f: TH reads the Mode Attribute from the DUT\n");
+            if (ShouldSkip("WNCV_CALIBRATION"))
+            {
+                NextTest();
+                return;
+            }
+            err = Test2fThReadsTheModeAttributeFromTheDut_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : 2g: TH send DownOrClose command to the DUT\n");
+            if (ShouldSkip("WNCV_CALIBRATION"))
+            {
+                NextTest();
+                return;
+            }
+            err = Test2gThSendDownOrCloseCommandToTheDut_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : 3a: TH set the Mode Attribute bit2 of the DUT\n");
+            if (ShouldSkip("WNCV_MAINTENANCE"))
+            {
+                NextTest();
+                return;
+            }
+            err = Test3aThSetTheModeAttributeBit2OfTheDut_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : 3c: TH reads ConfigStatus attribute from DUT\n");
+            if (ShouldSkip("WNCV_MAINTENANCE"))
+            {
+                NextTest();
+                return;
+            }
+            err = Test3cThReadsConfigStatusAttributeFromDut_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : 3c: TH send DownOrClose command to the DUT\n");
+            if (ShouldSkip("WNCV_MAINTENANCE"))
+            {
+                NextTest();
+                return;
+            }
+            err = Test3cThSendDownOrCloseCommandToTheDut_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : 3d: TH clear the Mode Attribute bit2 of the DUT\n");
+            if (ShouldSkip("WNCV_MAINTENANCE"))
+            {
+                NextTest();
+                return;
+            }
+            err = Test3dThClearTheModeAttributeBit2OfTheDut_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : 3e: TH reads ConfigStatus attribute from DUT\n");
+            if (ShouldSkip("WNCV_MAINTENANCE"))
+            {
+                NextTest();
+                return;
+            }
+            err = Test3eThReadsConfigStatusAttributeFromDut_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : 3f: TH reads the Mode Attribute from the DUT\n");
+            if (ShouldSkip("WNCV_MAINTENANCE"))
+            {
+                NextTest();
+                return;
+            }
+            err = Test3fThReadsTheModeAttributeFromTheDut_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : 3g: TH send DownOrClose command to the DUT\n");
+            if (ShouldSkip("WNCV_MAINTENANCE"))
+            {
+                NextTest();
+                return;
+            }
+            err = Test3gThSendDownOrCloseCommandToTheDut_18();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err)
+        {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 19;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus> configStatusValA;
+    chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus> configStatusValB;
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    static void OnFailureCallback_1(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnFailureResponse_1(error);
+    }
+
+    static void OnSuccessCallback_1(void * context) { (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnSuccessResponse_1(); }
+
+    static void OnFailureCallback_2(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnFailureResponse_2(error);
+    }
+
+    static void OnSuccessCallback_2(void * context, chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus> configStatus)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnSuccessResponse_2(configStatus);
+    }
+
+    static void OnFailureCallback_3(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnFailureResponse_3(error);
+    }
+
+    static void OnSuccessCallback_3(void * context) { (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnSuccessResponse_3(); }
+
+    static void OnFailureCallback_4(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnFailureResponse_4(error);
+    }
+
+    static void OnSuccessCallback_4(void * context, chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus> configStatus)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnSuccessResponse_4(configStatus);
+    }
+
+    static void OnFailureCallback_5(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnFailureResponse_5(error);
+    }
+
+    static void OnSuccessCallback_5(void * context) { (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnSuccessResponse_5(); }
+
+    static void OnFailureCallback_6(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnFailureResponse_6(error);
+    }
+
+    static void OnSuccessCallback_6(void * context, chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus> configStatus)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnSuccessResponse_6(configStatus);
+    }
+
+    static void OnFailureCallback_8(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnFailureResponse_8(error);
+    }
+
+    static void OnSuccessCallback_8(void * context) { (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnSuccessResponse_8(); }
+
+    static void OnFailureCallback_9(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnFailureResponse_9(error);
+    }
+
+    static void OnSuccessCallback_9(void * context, chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus> configStatus)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnSuccessResponse_9(configStatus);
+    }
+
+    static void OnFailureCallback_10(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnFailureResponse_10(error);
+    }
+
+    static void OnSuccessCallback_10(void * context, chip::BitFlags<chip::app::Clusters::WindowCovering::Mode> mode)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnSuccessResponse_10(mode);
+    }
+
+    static void OnFailureCallback_12(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnFailureResponse_12(error);
+    }
+
+    static void OnSuccessCallback_12(void * context) { (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnSuccessResponse_12(); }
+
+    static void OnFailureCallback_13(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnFailureResponse_13(error);
+    }
+
+    static void OnSuccessCallback_13(void * context, chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus> configStatus)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnSuccessResponse_13(configStatus);
+    }
+
+    static void OnFailureCallback_15(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnFailureResponse_15(error);
+    }
+
+    static void OnSuccessCallback_15(void * context) { (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnSuccessResponse_15(); }
+
+    static void OnFailureCallback_16(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnFailureResponse_16(error);
+    }
+
+    static void OnSuccessCallback_16(void * context, chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus> configStatus)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnSuccessResponse_16(configStatus);
+    }
+
+    static void OnFailureCallback_17(void * context, CHIP_ERROR error)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnFailureResponse_17(error);
+    }
+
+    static void OnSuccessCallback_17(void * context, chip::BitFlags<chip::app::Clusters::WindowCovering::Mode> mode)
+    {
+        (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnSuccessResponse_17(mode);
+    }
+
+    //
+    // Tests methods
+    //
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        SetIdentity(kIdentityAlpha);
+        return WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+    }
+
+    CHIP_ERROR Test1aThSetTheModeAttributeBit0OfTheDut_1()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::WindowCoveringClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        chip::BitFlags<chip::app::Clusters::WindowCovering::Mode> modeArgument;
+        modeArgument = static_cast<chip::BitFlags<chip::app::Clusters::WindowCovering::Mode>>(1);
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::Mode::TypeInfo>(
+            modeArgument, this, OnSuccessCallback_1, OnFailureCallback_1));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_1(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_1() { NextTest(); }
+
+    CHIP_ERROR Test1bThReadsConfigStatusAttributeFromDut_2()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::WindowCoveringClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::ConfigStatus::TypeInfo>(
+            this, OnSuccessCallback_2, OnFailureCallback_2, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_2(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_2(chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus> configStatus)
+    {
+        VerifyOrReturn(CheckConstraintMinValue("configStatus", configStatus, 4));
+        VerifyOrReturn(CheckConstraintMaxValue("configStatus", configStatus, 127));
+        NextTest();
+    }
+
+    CHIP_ERROR Test1cThClearTheModeAttributeBit0OfTheDut_3()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::WindowCoveringClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        chip::BitFlags<chip::app::Clusters::WindowCovering::Mode> modeArgument;
+        modeArgument = static_cast<chip::BitFlags<chip::app::Clusters::WindowCovering::Mode>>(0);
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::Mode::TypeInfo>(
+            modeArgument, this, OnSuccessCallback_3, OnFailureCallback_3));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_3(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_3() { NextTest(); }
+
+    CHIP_ERROR Test1dThReadsConfigStatusAttributeFromDut_4()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::WindowCoveringClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::ConfigStatus::TypeInfo>(
+            this, OnSuccessCallback_4, OnFailureCallback_4, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_4(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_4(chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus> configStatus)
+    {
+        VerifyOrReturn(CheckConstraintMinValue("configStatus", configStatus, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("configStatus", configStatus, 127));
+        NextTest();
+    }
+
+    CHIP_ERROR Test2aThSetTheModeAttributeBit1OfTheDut_5()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::WindowCoveringClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        chip::BitFlags<chip::app::Clusters::WindowCovering::Mode> modeArgument;
+        modeArgument = static_cast<chip::BitFlags<chip::app::Clusters::WindowCovering::Mode>>(2);
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::Mode::TypeInfo>(
+            modeArgument, this, OnSuccessCallback_5, OnFailureCallback_5));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_5(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_5() { NextTest(); }
+
+    CHIP_ERROR Test2bThReadsConfigStatusAttributeFromDut_6()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::WindowCoveringClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::ConfigStatus::TypeInfo>(
+            this, OnSuccessCallback_6, OnFailureCallback_6, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_6(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_6(chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus> configStatus)
+    {
+        VerifyOrReturn(CheckConstraintMinValue("configStatus", configStatus, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("configStatus", configStatus, 127));
+        configStatusValA = configStatus;
+        NextTest();
+    }
+
+    CHIP_ERROR Test2cIfConfigStatusBit00ThSendDownOrCloseCommandToTheDut_7()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::WindowCovering::Commands::DownOrClose::Type;
+
+        RequestType request;
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnSuccessResponse_7();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnFailureResponse_7(error);
+        };
+
+        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_7(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+        NextTest();
+    }
+
+    void OnSuccessResponse_7() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR Test2dThClearTheModeAttributeBit1OfTheDut_8()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::WindowCoveringClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        chip::BitFlags<chip::app::Clusters::WindowCovering::Mode> modeArgument;
+        modeArgument = static_cast<chip::BitFlags<chip::app::Clusters::WindowCovering::Mode>>(0);
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::Mode::TypeInfo>(
+            modeArgument, this, OnSuccessCallback_8, OnFailureCallback_8));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_8(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_8() { NextTest(); }
+
+    CHIP_ERROR Test2eThReadsConfigStatusAttributeFromDut_9()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::WindowCoveringClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::ConfigStatus::TypeInfo>(
+            this, OnSuccessCallback_9, OnFailureCallback_9, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_9(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_9(chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus> configStatus)
+    {
+        VerifyOrReturn(CheckConstraintMinValue("configStatus", configStatus, 1));
+        VerifyOrReturn(CheckConstraintMaxValue("configStatus", configStatus, 127));
+        NextTest();
+    }
+
+    CHIP_ERROR Test2fThReadsTheModeAttributeFromTheDut_10()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::WindowCoveringClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::Mode::TypeInfo>(
+            this, OnSuccessCallback_10, OnFailureCallback_10, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_10(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_10(chip::BitFlags<chip::app::Clusters::WindowCovering::Mode> mode)
+    {
+        VerifyOrReturn(CheckConstraintMinValue("mode", mode, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("mode", mode, 127));
+        NextTest();
+    }
+
+    CHIP_ERROR Test2gThSendDownOrCloseCommandToTheDut_11()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::WindowCovering::Commands::DownOrClose::Type;
+
+        RequestType request;
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnSuccessResponse_11();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnFailureResponse_11(error);
+        };
+
+        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_11(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_11() { NextTest(); }
+
+    CHIP_ERROR Test3aThSetTheModeAttributeBit2OfTheDut_12()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::WindowCoveringClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        chip::BitFlags<chip::app::Clusters::WindowCovering::Mode> modeArgument;
+        modeArgument = static_cast<chip::BitFlags<chip::app::Clusters::WindowCovering::Mode>>(4);
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::Mode::TypeInfo>(
+            modeArgument, this, OnSuccessCallback_12, OnFailureCallback_12));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_12(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_12() { NextTest(); }
+
+    CHIP_ERROR Test3cThReadsConfigStatusAttributeFromDut_13()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::WindowCoveringClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::ConfigStatus::TypeInfo>(
+            this, OnSuccessCallback_13, OnFailureCallback_13, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_13(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_13(chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus> configStatus)
+    {
+        VerifyOrReturn(CheckConstraintMinValue("configStatus", configStatus, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("configStatus", configStatus, 127));
+        configStatusValB = configStatus;
+        NextTest();
+    }
+
+    CHIP_ERROR Test3cThSendDownOrCloseCommandToTheDut_14()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::WindowCovering::Commands::DownOrClose::Type;
+
+        RequestType request;
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnSuccessResponse_14();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnFailureResponse_14(error);
+        };
+
+        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_14(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_BUSY));
+        NextTest();
+    }
+
+    void OnSuccessResponse_14() { ThrowSuccessResponse(); }
+
+    CHIP_ERROR Test3dThClearTheModeAttributeBit2OfTheDut_15()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::WindowCoveringClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        chip::BitFlags<chip::app::Clusters::WindowCovering::Mode> modeArgument;
+        modeArgument = static_cast<chip::BitFlags<chip::app::Clusters::WindowCovering::Mode>>(0);
+
+        ReturnErrorOnFailure(cluster.WriteAttribute<chip::app::Clusters::WindowCovering::Attributes::Mode::TypeInfo>(
+            modeArgument, this, OnSuccessCallback_15, OnFailureCallback_15));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_15(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_15() { NextTest(); }
+
+    CHIP_ERROR Test3eThReadsConfigStatusAttributeFromDut_16()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::WindowCoveringClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::ConfigStatus::TypeInfo>(
+            this, OnSuccessCallback_16, OnFailureCallback_16, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_16(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_16(chip::BitFlags<chip::app::Clusters::WindowCovering::ConfigStatus> configStatus)
+    {
+        VerifyOrReturn(CheckConstraintMinValue("configStatus", configStatus, 1));
+        VerifyOrReturn(CheckConstraintMaxValue("configStatus", configStatus, 127));
+        NextTest();
+    }
+
+    CHIP_ERROR Test3fThReadsTheModeAttributeFromTheDut_17()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        chip::Controller::WindowCoveringClusterTest cluster;
+        cluster.Associate(mDevices[kIdentityAlpha], endpoint);
+
+        ReturnErrorOnFailure(cluster.ReadAttribute<chip::app::Clusters::WindowCovering::Attributes::Mode::TypeInfo>(
+            this, OnSuccessCallback_17, OnFailureCallback_17, true));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_17(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_17(chip::BitFlags<chip::app::Clusters::WindowCovering::Mode> mode)
+    {
+        VerifyOrReturn(CheckConstraintMinValue("mode", mode, 0));
+        VerifyOrReturn(CheckConstraintMaxValue("mode", mode, 127));
+        NextTest();
+    }
+
+    CHIP_ERROR Test3gThSendDownOrCloseCommandToTheDut_18()
+    {
+        const chip::EndpointId endpoint = mEndpoint.HasValue() ? mEndpoint.Value() : 1;
+        using RequestType               = chip::app::Clusters::WindowCovering::Commands::DownOrClose::Type;
+
+        RequestType request;
+
+        auto success = [](void * context, const typename RequestType::ResponseType & data) {
+            (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnSuccessResponse_18();
+        };
+
+        auto failure = [](void * context, CHIP_ERROR error) {
+            (static_cast<Test_TC_WNCV_2_3Suite *>(context))->OnFailureResponse_18(error);
+        };
+
+        ReturnErrorOnFailure(chip::Controller::InvokeCommand(mDevices[kIdentityAlpha], this, success, failure, endpoint, request));
+        return CHIP_NO_ERROR;
+    }
+
+    void OnFailureResponse_18(CHIP_ERROR error)
+    {
+        chip::app::StatusIB status(error);
+        ThrowFailureResponse(error);
+    }
+
+    void OnSuccessResponse_18() { NextTest(); }
 };
 
 class Test_TC_WNCV_2_4Suite : public TestCommand
@@ -64552,7 +65373,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : 2a: TH sends GoToLiftPercentage command with 25 percent to DUT\n");
-            if (ShouldSkip("WNCV_LF && PICS_CR_GOTOLIFTPERCENTAGE"))
+            if (ShouldSkip("WNCV_LF && CR_GOTOLIFTPERCENTAGE"))
             {
                 NextTest();
                 return;
@@ -64583,7 +65404,7 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : 4a: TH sends GoToLiftPercentage command with 75.20 percent to DUT\n");
-            if (ShouldSkip("WNCV_LF && PICS_CR_GOTOLIFTPERCENTAGE"))
+            if (ShouldSkip("WNCV_LF && CR_GOTOLIFTPERCENTAGE"))
             {
                 NextTest();
                 return;
@@ -64782,8 +65603,9 @@ private:
         using RequestType               = chip::app::Clusters::WindowCovering::Commands::GoToLiftPercentage::Type;
 
         RequestType request;
-        request.liftPercentageValue    = 25;
-        request.liftPercent100thsValue = 2500U;
+        request.liftPercentageValue = 25;
+        request.liftPercent100thsValue.Emplace();
+        request.liftPercent100thsValue.Value() = 2500U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
             (static_cast<Test_TC_WNCV_4_1Suite *>(context))->OnSuccessResponse_4();
@@ -64873,8 +65695,9 @@ private:
         using RequestType               = chip::app::Clusters::WindowCovering::Commands::GoToLiftPercentage::Type;
 
         RequestType request;
-        request.liftPercentageValue    = 75;
-        request.liftPercent100thsValue = 7520U;
+        request.liftPercentageValue = 75;
+        request.liftPercent100thsValue.Emplace();
+        request.liftPercent100thsValue.Value() = 7520U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
             (static_cast<Test_TC_WNCV_4_1Suite *>(context))->OnSuccessResponse_9();
@@ -64999,7 +65822,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : 2a: TH sends GoToTiltPercentage command with 30 percent to DUT\n");
-            if (ShouldSkip("WNCV_TL && PICS_CR_GOTOTILTPERCENTAGE"))
+            if (ShouldSkip("WNCV_TL && CR_GOTOTILTPERCENTAGE"))
             {
                 NextTest();
                 return;
@@ -65030,7 +65853,7 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : 4a: TH sends GoToTiltPercentage command with 60.20 percent to DUT\n");
-            if (ShouldSkip("WNCV_TL && PICS_CR_GOTOTILTPERCENTAGE"))
+            if (ShouldSkip("WNCV_TL && CR_GOTOTILTPERCENTAGE"))
             {
                 NextTest();
                 return;
@@ -65229,8 +66052,9 @@ private:
         using RequestType               = chip::app::Clusters::WindowCovering::Commands::GoToTiltPercentage::Type;
 
         RequestType request;
-        request.tiltPercentageValue    = 30;
-        request.tiltPercent100thsValue = 3000U;
+        request.tiltPercentageValue = 30;
+        request.tiltPercent100thsValue.Emplace();
+        request.tiltPercent100thsValue.Value() = 3000U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
             (static_cast<Test_TC_WNCV_4_2Suite *>(context))->OnSuccessResponse_4();
@@ -65320,8 +66144,9 @@ private:
         using RequestType               = chip::app::Clusters::WindowCovering::Commands::GoToTiltPercentage::Type;
 
         RequestType request;
-        request.tiltPercentageValue    = 60;
-        request.tiltPercent100thsValue = 6005U;
+        request.tiltPercentageValue = 60;
+        request.tiltPercent100thsValue.Emplace();
+        request.tiltPercent100thsValue.Value() = 6005U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
             (static_cast<Test_TC_WNCV_4_2Suite *>(context))->OnSuccessResponse_9();
@@ -65444,7 +66269,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : 2b: TH sends GoToLiftPercentage command with BadParam to DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF || WNCV_LF && PICS_CR_GOTOLIFTPERCENTAGE"))
+            if (ShouldSkip("WNCV_LF && WNCV_PA_LF || WNCV_LF && CR_GOTOLIFTPERCENTAGE"))
             {
                 NextTest();
                 return;
@@ -65453,7 +66278,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : 3a: TH sends GoToLiftPercentage command with 10001 to DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF || WNCV_LF && PICS_CR_GOTOLIFTPERCENTAGE"))
+            if (ShouldSkip("WNCV_LF && WNCV_PA_LF || WNCV_LF && CR_GOTOLIFTPERCENTAGE"))
             {
                 NextTest();
                 return;
@@ -65462,7 +66287,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : 4a: TH sends GoToLiftPercentage command with 0xFFFF to DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF || WNCV_LF && PICS_CR_GOTOLIFTPERCENTAGE"))
+            if (ShouldSkip("WNCV_LF && WNCV_PA_LF || WNCV_LF && CR_GOTOLIFTPERCENTAGE"))
             {
                 NextTest();
                 return;
@@ -65605,8 +66430,9 @@ private:
         using RequestType               = chip::app::Clusters::WindowCovering::Commands::GoToLiftPercentage::Type;
 
         RequestType request;
-        request.liftPercentageValue    = 63;
-        request.liftPercent100thsValue = 12288U;
+        request.liftPercentageValue = 63;
+        request.liftPercent100thsValue.Emplace();
+        request.liftPercent100thsValue.Value() = 12288U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
             (static_cast<Test_TC_WNCV_4_3Suite *>(context))->OnSuccessResponse_3();
@@ -65635,8 +66461,9 @@ private:
         using RequestType               = chip::app::Clusters::WindowCovering::Commands::GoToLiftPercentage::Type;
 
         RequestType request;
-        request.liftPercentageValue    = 100;
-        request.liftPercent100thsValue = 10001U;
+        request.liftPercentageValue = 100;
+        request.liftPercent100thsValue.Emplace();
+        request.liftPercent100thsValue.Value() = 10001U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
             (static_cast<Test_TC_WNCV_4_3Suite *>(context))->OnSuccessResponse_4();
@@ -65665,8 +66492,9 @@ private:
         using RequestType               = chip::app::Clusters::WindowCovering::Commands::GoToLiftPercentage::Type;
 
         RequestType request;
-        request.liftPercentageValue    = 255;
-        request.liftPercent100thsValue = 65535U;
+        request.liftPercentageValue = 255;
+        request.liftPercent100thsValue.Emplace();
+        request.liftPercent100thsValue.Value() = 65535U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
             (static_cast<Test_TC_WNCV_4_3Suite *>(context))->OnSuccessResponse_5();
@@ -65754,7 +66582,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : 2b: TH sends GoToTiltPercentage command with BadParam to DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL || WNCV_TL && PICS_CR_GOTOTILTPERCENTAGE"))
+            if (ShouldSkip("WNCV_TL && WNCV_PA_TL || WNCV_TL && CR_GOTOTILTPERCENTAGE"))
             {
                 NextTest();
                 return;
@@ -65763,7 +66591,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : 3a: TH sends GoToTiltPercentage command with 10001 to DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL || WNCV_TL && PICS_CR_GOTOTILTPERCENTAGE"))
+            if (ShouldSkip("WNCV_TL && WNCV_PA_TL || WNCV_TL && CR_GOTOTILTPERCENTAGE"))
             {
                 NextTest();
                 return;
@@ -65772,7 +66600,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : 4a: TH sends GoToTiltPercentage command with 0xFFFF to DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL || WNCV_TL && PICS_CR_GOTOTILTPERCENTAGE"))
+            if (ShouldSkip("WNCV_TL && WNCV_PA_TL || WNCV_TL && CR_GOTOTILTPERCENTAGE"))
             {
                 NextTest();
                 return;
@@ -65915,8 +66743,9 @@ private:
         using RequestType               = chip::app::Clusters::WindowCovering::Commands::GoToTiltPercentage::Type;
 
         RequestType request;
-        request.tiltPercentageValue    = 63;
-        request.tiltPercent100thsValue = 12288U;
+        request.tiltPercentageValue = 63;
+        request.tiltPercent100thsValue.Emplace();
+        request.tiltPercent100thsValue.Value() = 12288U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
             (static_cast<Test_TC_WNCV_4_4Suite *>(context))->OnSuccessResponse_3();
@@ -65945,8 +66774,9 @@ private:
         using RequestType               = chip::app::Clusters::WindowCovering::Commands::GoToTiltPercentage::Type;
 
         RequestType request;
-        request.tiltPercentageValue    = 100;
-        request.tiltPercent100thsValue = 10001U;
+        request.tiltPercentageValue = 100;
+        request.tiltPercent100thsValue.Emplace();
+        request.tiltPercent100thsValue.Value() = 10001U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
             (static_cast<Test_TC_WNCV_4_4Suite *>(context))->OnSuccessResponse_4();
@@ -65975,8 +66805,9 @@ private:
         using RequestType               = chip::app::Clusters::WindowCovering::Commands::GoToTiltPercentage::Type;
 
         RequestType request;
-        request.tiltPercentageValue    = 255;
-        request.tiltPercent100thsValue = 65535U;
+        request.tiltPercentageValue = 255;
+        request.tiltPercent100thsValue.Emplace();
+        request.tiltPercent100thsValue.Value() = 65535U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
             (static_cast<Test_TC_WNCV_4_4Suite *>(context))->OnSuccessResponse_5();
@@ -125402,89 +126233,6 @@ private:
     //
 };
 
-class Test_TC_WNCV_2_3Suite : public TestCommand
-{
-public:
-    Test_TC_WNCV_2_3Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_WNCV_2_3", credsIssuerConfig), mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_WNCV_2_3Suite() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex)
-        {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_WNCV_2_3\n");
-        }
-
-        if (mTestCount == mTestIndex)
-        {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_WNCV_2_3\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++)
-        {
-        }
-
-        if (CHIP_NO_ERROR != err)
-        {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 0;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    //
-    // Tests methods
-    //
-};
-
 class Test_TC_WNCV_6_1Suite : public TestCommand
 {
 public:
@@ -126291,6 +127039,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_WNCV_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_WNCV_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_WNCV_2_2Suite>(credsIssuerConfig),
+        make_unique<Test_TC_WNCV_2_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_WNCV_2_4Suite>(credsIssuerConfig),
         make_unique<Test_TC_WNCV_2_5Suite>(credsIssuerConfig),
         make_unique<Test_TC_WNCV_3_1Suite>(credsIssuerConfig),
@@ -126477,7 +127226,6 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_SWDIAG_1_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_WIFIDIAG_1_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_WIFIDIAG_2_1Suite>(credsIssuerConfig),
-        make_unique<Test_TC_WNCV_2_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_WNCV_6_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_FLW_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_OCC_2_3Suite>(credsIssuerConfig),
