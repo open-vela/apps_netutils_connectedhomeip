@@ -67126,8 +67126,9 @@ private:
         using RequestType               = chip::app::Clusters::WindowCovering::Commands::GoToLiftPercentage::Type;
 
         RequestType request;
-        request.liftPercentageValue    = 90;
-        request.liftPercent100thsValue = 9000U;
+        request.liftPercentageValue = 90;
+        request.liftPercent100thsValue.Emplace();
+        request.liftPercent100thsValue.Value() = 9000U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
             (static_cast<Test_TC_WNCV_4_5Suite *>(context))->OnSuccessResponse_2();
@@ -67194,8 +67195,9 @@ private:
         using RequestType               = chip::app::Clusters::WindowCovering::Commands::GoToTiltPercentage::Type;
 
         RequestType request;
-        request.tiltPercentageValue    = 90;
-        request.tiltPercent100thsValue = 9000U;
+        request.tiltPercentageValue = 90;
+        request.tiltPercent100thsValue.Emplace();
+        request.tiltPercent100thsValue.Value() = 9000U;
 
         auto success = [](void * context, const typename RequestType::ResponseType & data) {
             (static_cast<Test_TC_WNCV_4_5Suite *>(context))->OnSuccessResponse_6();
