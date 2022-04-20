@@ -42570,7 +42570,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_1(error);
     }
 
-    static void OnSuccessCallback_1(void * context, int16_t maxPressure)
+    static void OnSuccessCallback_1(void * context, const chip::app::DataModel::Nullable<int16_t> & maxPressure)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_1(maxPressure);
     }
@@ -42580,7 +42580,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_2(error);
     }
 
-    static void OnSuccessCallback_2(void * context, uint16_t maxSpeed)
+    static void OnSuccessCallback_2(void * context, const chip::app::DataModel::Nullable<uint16_t> & maxSpeed)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_2(maxSpeed);
     }
@@ -42590,7 +42590,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_3(error);
     }
 
-    static void OnSuccessCallback_3(void * context, uint16_t maxFlow)
+    static void OnSuccessCallback_3(void * context, const chip::app::DataModel::Nullable<uint16_t> & maxFlow)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_3(maxFlow);
     }
@@ -42600,7 +42600,8 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_4(error);
     }
 
-    static void OnSuccessCallback_4(void * context, uint8_t effectiveOperationMode)
+    static void OnSuccessCallback_4(void * context,
+                                    chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode effectiveOperationMode)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_4(effectiveOperationMode);
     }
@@ -42610,7 +42611,8 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_5(error);
     }
 
-    static void OnSuccessCallback_5(void * context, uint8_t effectiveControlMode)
+    static void OnSuccessCallback_5(void * context,
+                                    chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode effectiveControlMode)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_5(effectiveControlMode);
     }
@@ -42620,7 +42622,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_6(error);
     }
 
-    static void OnSuccessCallback_6(void * context, int16_t capacity)
+    static void OnSuccessCallback_6(void * context, const chip::app::DataModel::Nullable<int16_t> & capacity)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_6(capacity);
     }
@@ -42630,7 +42632,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_7(error);
     }
 
-    static void OnSuccessCallback_7(void * context, int16_t maxPressure)
+    static void OnSuccessCallback_7(void * context, const chip::app::DataModel::Nullable<int16_t> & maxPressure)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_7(maxPressure);
     }
@@ -42640,7 +42642,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_8(error);
     }
 
-    static void OnSuccessCallback_8(void * context, uint16_t maxSpeed)
+    static void OnSuccessCallback_8(void * context, const chip::app::DataModel::Nullable<uint16_t> & maxSpeed)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_8(maxSpeed);
     }
@@ -42650,7 +42652,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_9(error);
     }
 
-    static void OnSuccessCallback_9(void * context, uint16_t maxFlow)
+    static void OnSuccessCallback_9(void * context, const chip::app::DataModel::Nullable<uint16_t> & maxFlow)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_9(maxFlow);
     }
@@ -42660,7 +42662,8 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_10(error);
     }
 
-    static void OnSuccessCallback_10(void * context, uint8_t effectiveOperationMode)
+    static void OnSuccessCallback_10(void * context,
+                                     chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode effectiveOperationMode)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_10(effectiveOperationMode);
     }
@@ -42670,7 +42673,8 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_11(error);
     }
 
-    static void OnSuccessCallback_11(void * context, uint8_t effectiveControlMode)
+    static void OnSuccessCallback_11(void * context,
+                                     chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode effectiveControlMode)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_11(effectiveControlMode);
     }
@@ -42680,7 +42684,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_12(error);
     }
 
-    static void OnSuccessCallback_12(void * context, int16_t capacity)
+    static void OnSuccessCallback_12(void * context, const chip::app::DataModel::Nullable<int16_t> & capacity)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_12(capacity);
     }
@@ -42690,7 +42694,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_13(error);
     }
 
-    static void OnSuccessCallback_13(void * context, int16_t minConstPressure)
+    static void OnSuccessCallback_13(void * context, const chip::app::DataModel::Nullable<int16_t> & minConstPressure)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_13(minConstPressure);
     }
@@ -42700,7 +42704,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_14(error);
     }
 
-    static void OnSuccessCallback_14(void * context, int16_t maxConstPressure)
+    static void OnSuccessCallback_14(void * context, const chip::app::DataModel::Nullable<int16_t> & maxConstPressure)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_14(maxConstPressure);
     }
@@ -42710,7 +42714,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_15(error);
     }
 
-    static void OnSuccessCallback_15(void * context, int16_t minCompPressure)
+    static void OnSuccessCallback_15(void * context, const chip::app::DataModel::Nullable<int16_t> & minCompPressure)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_15(minCompPressure);
     }
@@ -42720,7 +42724,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_16(error);
     }
 
-    static void OnSuccessCallback_16(void * context, int16_t maxCompPressure)
+    static void OnSuccessCallback_16(void * context, const chip::app::DataModel::Nullable<int16_t> & maxCompPressure)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_16(maxCompPressure);
     }
@@ -42730,7 +42734,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_17(error);
     }
 
-    static void OnSuccessCallback_17(void * context, uint16_t minConstSpeed)
+    static void OnSuccessCallback_17(void * context, const chip::app::DataModel::Nullable<uint16_t> & minConstSpeed)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_17(minConstSpeed);
     }
@@ -42740,7 +42744,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_18(error);
     }
 
-    static void OnSuccessCallback_18(void * context, uint16_t maxConstSpeed)
+    static void OnSuccessCallback_18(void * context, const chip::app::DataModel::Nullable<uint16_t> & maxConstSpeed)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_18(maxConstSpeed);
     }
@@ -42750,7 +42754,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_19(error);
     }
 
-    static void OnSuccessCallback_19(void * context, uint16_t minConstFlow)
+    static void OnSuccessCallback_19(void * context, const chip::app::DataModel::Nullable<uint16_t> & minConstFlow)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_19(minConstFlow);
     }
@@ -42760,7 +42764,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_20(error);
     }
 
-    static void OnSuccessCallback_20(void * context, uint16_t maxConstFlow)
+    static void OnSuccessCallback_20(void * context, const chip::app::DataModel::Nullable<uint16_t> & maxConstFlow)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_20(maxConstFlow);
     }
@@ -42770,7 +42774,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_21(error);
     }
 
-    static void OnSuccessCallback_21(void * context, int16_t minConstTemp)
+    static void OnSuccessCallback_21(void * context, const chip::app::DataModel::Nullable<int16_t> & minConstTemp)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_21(minConstTemp);
     }
@@ -42780,7 +42784,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_22(error);
     }
 
-    static void OnSuccessCallback_22(void * context, int16_t maxConstTemp)
+    static void OnSuccessCallback_22(void * context, const chip::app::DataModel::Nullable<int16_t> & maxConstTemp)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_22(maxConstTemp);
     }
@@ -42810,7 +42814,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_25(error);
     }
 
-    static void OnSuccessCallback_25(void * context, uint16_t speed)
+    static void OnSuccessCallback_25(void * context, const chip::app::DataModel::Nullable<uint16_t> & speed)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_25(speed);
     }
@@ -42840,7 +42844,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_28(error);
     }
 
-    static void OnSuccessCallback_28(void * context, uint32_t power)
+    static void OnSuccessCallback_28(void * context, const chip::app::DataModel::Nullable<uint32_t> & power)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_28(power);
     }
@@ -42877,7 +42881,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_32(error);
     }
 
-    static void OnSuccessCallback_32(void * context, int16_t minConstPressure)
+    static void OnSuccessCallback_32(void * context, const chip::app::DataModel::Nullable<int16_t> & minConstPressure)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_32(minConstPressure);
     }
@@ -42887,7 +42891,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_33(error);
     }
 
-    static void OnSuccessCallback_33(void * context, int16_t maxConstPressure)
+    static void OnSuccessCallback_33(void * context, const chip::app::DataModel::Nullable<int16_t> & maxConstPressure)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_33(maxConstPressure);
     }
@@ -42897,7 +42901,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_34(error);
     }
 
-    static void OnSuccessCallback_34(void * context, int16_t minCompPressure)
+    static void OnSuccessCallback_34(void * context, const chip::app::DataModel::Nullable<int16_t> & minCompPressure)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_34(minCompPressure);
     }
@@ -42907,7 +42911,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_35(error);
     }
 
-    static void OnSuccessCallback_35(void * context, int16_t maxCompPressure)
+    static void OnSuccessCallback_35(void * context, const chip::app::DataModel::Nullable<int16_t> & maxCompPressure)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_35(maxCompPressure);
     }
@@ -42917,7 +42921,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_36(error);
     }
 
-    static void OnSuccessCallback_36(void * context, uint16_t minConstSpeed)
+    static void OnSuccessCallback_36(void * context, const chip::app::DataModel::Nullable<uint16_t> & minConstSpeed)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_36(minConstSpeed);
     }
@@ -42927,7 +42931,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_37(error);
     }
 
-    static void OnSuccessCallback_37(void * context, uint16_t maxConstSpeed)
+    static void OnSuccessCallback_37(void * context, const chip::app::DataModel::Nullable<uint16_t> & maxConstSpeed)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_37(maxConstSpeed);
     }
@@ -42937,7 +42941,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_38(error);
     }
 
-    static void OnSuccessCallback_38(void * context, uint16_t minConstFlow)
+    static void OnSuccessCallback_38(void * context, const chip::app::DataModel::Nullable<uint16_t> & minConstFlow)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_38(minConstFlow);
     }
@@ -42947,7 +42951,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_39(error);
     }
 
-    static void OnSuccessCallback_39(void * context, uint16_t maxConstFlow)
+    static void OnSuccessCallback_39(void * context, const chip::app::DataModel::Nullable<uint16_t> & maxConstFlow)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_39(maxConstFlow);
     }
@@ -42957,7 +42961,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_40(error);
     }
 
-    static void OnSuccessCallback_40(void * context, int16_t minConstTemp)
+    static void OnSuccessCallback_40(void * context, const chip::app::DataModel::Nullable<int16_t> & minConstTemp)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_40(minConstTemp);
     }
@@ -42967,7 +42971,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_41(error);
     }
 
-    static void OnSuccessCallback_41(void * context, int16_t maxConstTemp)
+    static void OnSuccessCallback_41(void * context, const chip::app::DataModel::Nullable<int16_t> & maxConstTemp)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_41(maxConstTemp);
     }
@@ -42997,7 +43001,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_44(error);
     }
 
-    static void OnSuccessCallback_44(void * context, uint16_t speed)
+    static void OnSuccessCallback_44(void * context, const chip::app::DataModel::Nullable<uint16_t> & speed)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_44(speed);
     }
@@ -43027,7 +43031,7 @@ private:
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnFailureResponse_47(error);
     }
 
-    static void OnSuccessCallback_47(void * context, uint32_t power)
+    static void OnSuccessCallback_47(void * context, const chip::app::DataModel::Nullable<uint32_t> & power)
     {
         (static_cast<Test_TC_PCC_2_1Suite *>(context))->OnSuccessResponse_47(power);
     }
@@ -43080,7 +43084,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_1(int16_t maxPressure)
+    void OnSuccessResponse_1(const chip::app::DataModel::Nullable<int16_t> & maxPressure)
     {
         VerifyOrReturn(CheckConstraintType("maxPressure", "", "int16"));
         NextTest();
@@ -43104,7 +43108,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_2(uint16_t maxSpeed)
+    void OnSuccessResponse_2(const chip::app::DataModel::Nullable<uint16_t> & maxSpeed)
     {
         VerifyOrReturn(CheckConstraintType("maxSpeed", "", "uint16"));
         NextTest();
@@ -43127,7 +43131,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_3(uint16_t maxFlow)
+    void OnSuccessResponse_3(const chip::app::DataModel::Nullable<uint16_t> & maxFlow)
     {
         VerifyOrReturn(CheckConstraintType("maxFlow", "", "uint16"));
         NextTest();
@@ -43151,7 +43155,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_4(uint8_t effectiveOperationMode)
+    void OnSuccessResponse_4(chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode effectiveOperationMode)
     {
         VerifyOrReturn(CheckConstraintType("effectiveOperationMode", "", "enum8"));
         NextTest();
@@ -43175,7 +43179,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_5(uint8_t effectiveControlMode)
+    void OnSuccessResponse_5(chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode effectiveControlMode)
     {
         VerifyOrReturn(CheckConstraintType("effectiveControlMode", "", "enum8"));
         NextTest();
@@ -43199,7 +43203,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_6(int16_t capacity)
+    void OnSuccessResponse_6(const chip::app::DataModel::Nullable<int16_t> & capacity)
     {
         VerifyOrReturn(CheckConstraintType("capacity", "", "int16"));
         NextTest();
@@ -43223,7 +43227,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_7(int16_t maxPressure)
+    void OnSuccessResponse_7(const chip::app::DataModel::Nullable<int16_t> & maxPressure)
     {
         VerifyOrReturn(CheckConstraintType("maxPressure", "", "int16"));
         NextTest();
@@ -43247,7 +43251,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_8(uint16_t maxSpeed)
+    void OnSuccessResponse_8(const chip::app::DataModel::Nullable<uint16_t> & maxSpeed)
     {
         VerifyOrReturn(CheckConstraintType("maxSpeed", "", "uint16"));
         NextTest();
@@ -43270,7 +43274,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_9(uint16_t maxFlow)
+    void OnSuccessResponse_9(const chip::app::DataModel::Nullable<uint16_t> & maxFlow)
     {
         VerifyOrReturn(CheckConstraintType("maxFlow", "", "uint16"));
         NextTest();
@@ -43294,7 +43298,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_10(uint8_t effectiveOperationMode)
+    void OnSuccessResponse_10(chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode effectiveOperationMode)
     {
         VerifyOrReturn(CheckConstraintType("effectiveOperationMode", "", "enum8"));
         NextTest();
@@ -43318,7 +43322,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_11(uint8_t effectiveControlMode)
+    void OnSuccessResponse_11(chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode effectiveControlMode)
     {
         VerifyOrReturn(CheckConstraintType("effectiveControlMode", "", "enum8"));
         NextTest();
@@ -43342,7 +43346,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_12(int16_t capacity)
+    void OnSuccessResponse_12(const chip::app::DataModel::Nullable<int16_t> & capacity)
     {
         VerifyOrReturn(CheckConstraintType("capacity", "", "int16"));
         NextTest();
@@ -43367,7 +43371,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_13(int16_t minConstPressure)
+    void OnSuccessResponse_13(const chip::app::DataModel::Nullable<int16_t> & minConstPressure)
     {
         VerifyOrReturn(CheckConstraintType("minConstPressure", "", "int16"));
         NextTest();
@@ -43392,7 +43396,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_14(int16_t maxConstPressure)
+    void OnSuccessResponse_14(const chip::app::DataModel::Nullable<int16_t> & maxConstPressure)
     {
         VerifyOrReturn(CheckConstraintType("maxConstPressure", "", "int16"));
         NextTest();
@@ -43417,7 +43421,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_15(int16_t minCompPressure)
+    void OnSuccessResponse_15(const chip::app::DataModel::Nullable<int16_t> & minCompPressure)
     {
         VerifyOrReturn(CheckConstraintType("minCompPressure", "", "int16"));
         NextTest();
@@ -43442,7 +43446,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_16(int16_t maxCompPressure)
+    void OnSuccessResponse_16(const chip::app::DataModel::Nullable<int16_t> & maxCompPressure)
     {
         VerifyOrReturn(CheckConstraintType("maxCompPressure", "", "int16"));
         NextTest();
@@ -43467,7 +43471,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_17(uint16_t minConstSpeed)
+    void OnSuccessResponse_17(const chip::app::DataModel::Nullable<uint16_t> & minConstSpeed)
     {
         VerifyOrReturn(CheckConstraintType("minConstSpeed", "", "uint16"));
         NextTest();
@@ -43492,7 +43496,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_18(uint16_t maxConstSpeed)
+    void OnSuccessResponse_18(const chip::app::DataModel::Nullable<uint16_t> & maxConstSpeed)
     {
         VerifyOrReturn(CheckConstraintType("maxConstSpeed", "", "uint16"));
         NextTest();
@@ -43517,7 +43521,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_19(uint16_t minConstFlow)
+    void OnSuccessResponse_19(const chip::app::DataModel::Nullable<uint16_t> & minConstFlow)
     {
         VerifyOrReturn(CheckConstraintType("minConstFlow", "", "uint16"));
         NextTest();
@@ -43542,7 +43546,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_20(uint16_t maxConstFlow)
+    void OnSuccessResponse_20(const chip::app::DataModel::Nullable<uint16_t> & maxConstFlow)
     {
         VerifyOrReturn(CheckConstraintType("maxConstFlow", "", "uint16"));
         NextTest();
@@ -43567,7 +43571,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_21(int16_t minConstTemp)
+    void OnSuccessResponse_21(const chip::app::DataModel::Nullable<int16_t> & minConstTemp)
     {
         VerifyOrReturn(CheckConstraintType("minConstTemp", "", "int16"));
         VerifyOrReturn(CheckConstraintMinValue("minConstTemp", minConstTemp, -27315));
@@ -43593,7 +43597,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_22(int16_t maxConstTemp)
+    void OnSuccessResponse_22(const chip::app::DataModel::Nullable<int16_t> & maxConstTemp)
     {
         VerifyOrReturn(CheckConstraintType("maxConstTemp", "", "int16"));
         VerifyOrReturn(CheckConstraintMinValue("maxConstTemp", maxConstTemp, -27315));
@@ -43669,7 +43673,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_25(uint16_t speed)
+    void OnSuccessResponse_25(const chip::app::DataModel::Nullable<uint16_t> & speed)
     {
         VerifyOrReturn(CheckConstraintType("speed", "", "uint16"));
         NextTest();
@@ -43745,7 +43749,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_28(uint32_t power)
+    void OnSuccessResponse_28(const chip::app::DataModel::Nullable<uint32_t> & power)
     {
         VerifyOrReturn(CheckConstraintType("power", "", "uint24"));
         NextTest();
@@ -43847,7 +43851,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_32(int16_t minConstPressure)
+    void OnSuccessResponse_32(const chip::app::DataModel::Nullable<int16_t> & minConstPressure)
     {
         VerifyOrReturn(CheckConstraintType("minConstPressure", "", "int16"));
         NextTest();
@@ -43872,7 +43876,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_33(int16_t maxConstPressure)
+    void OnSuccessResponse_33(const chip::app::DataModel::Nullable<int16_t> & maxConstPressure)
     {
         VerifyOrReturn(CheckConstraintType("maxConstPressure", "", "int16"));
         NextTest();
@@ -43897,7 +43901,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_34(int16_t minCompPressure)
+    void OnSuccessResponse_34(const chip::app::DataModel::Nullable<int16_t> & minCompPressure)
     {
         VerifyOrReturn(CheckConstraintType("minCompPressure", "", "int16"));
         NextTest();
@@ -43922,7 +43926,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_35(int16_t maxCompPressure)
+    void OnSuccessResponse_35(const chip::app::DataModel::Nullable<int16_t> & maxCompPressure)
     {
         VerifyOrReturn(CheckConstraintType("maxCompPressure", "", "int16"));
         NextTest();
@@ -43947,7 +43951,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_36(uint16_t minConstSpeed)
+    void OnSuccessResponse_36(const chip::app::DataModel::Nullable<uint16_t> & minConstSpeed)
     {
         VerifyOrReturn(CheckConstraintType("minConstSpeed", "", "uint16"));
         NextTest();
@@ -43972,7 +43976,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_37(uint16_t maxConstSpeed)
+    void OnSuccessResponse_37(const chip::app::DataModel::Nullable<uint16_t> & maxConstSpeed)
     {
         VerifyOrReturn(CheckConstraintType("maxConstSpeed", "", "uint16"));
         NextTest();
@@ -43997,7 +44001,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_38(uint16_t minConstFlow)
+    void OnSuccessResponse_38(const chip::app::DataModel::Nullable<uint16_t> & minConstFlow)
     {
         VerifyOrReturn(CheckConstraintType("minConstFlow", "", "uint16"));
         NextTest();
@@ -44022,7 +44026,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_39(uint16_t maxConstFlow)
+    void OnSuccessResponse_39(const chip::app::DataModel::Nullable<uint16_t> & maxConstFlow)
     {
         VerifyOrReturn(CheckConstraintType("maxConstFlow", "", "uint16"));
         NextTest();
@@ -44047,7 +44051,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_40(int16_t minConstTemp)
+    void OnSuccessResponse_40(const chip::app::DataModel::Nullable<int16_t> & minConstTemp)
     {
         VerifyOrReturn(CheckConstraintType("minConstTemp", "", "int16"));
         VerifyOrReturn(CheckConstraintMinValue("minConstTemp", minConstTemp, -27315));
@@ -44074,7 +44078,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_41(int16_t maxConstTemp)
+    void OnSuccessResponse_41(const chip::app::DataModel::Nullable<int16_t> & maxConstTemp)
     {
         VerifyOrReturn(CheckConstraintType("maxConstTemp", "", "int16"));
         VerifyOrReturn(CheckConstraintMinValue("maxConstTemp", maxConstTemp, -27315));
@@ -44151,7 +44155,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_44(uint16_t speed)
+    void OnSuccessResponse_44(const chip::app::DataModel::Nullable<uint16_t> & speed)
     {
         VerifyOrReturn(CheckConstraintType("speed", "", "uint16"));
         NextTest();
@@ -44226,7 +44230,7 @@ private:
                                                                                             : ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_47(uint32_t power)
+    void OnSuccessResponse_47(const chip::app::DataModel::Nullable<uint32_t> & power)
     {
         VerifyOrReturn(CheckConstraintType("power", "", "uint24"));
         NextTest();
@@ -44437,7 +44441,8 @@ private:
         (static_cast<Test_TC_PCC_2_2Suite *>(context))->OnFailureResponse_2(error);
     }
 
-    static void OnSuccessCallback_2(void * context, uint8_t effectiveOperationMode)
+    static void OnSuccessCallback_2(void * context,
+                                    chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode effectiveOperationMode)
     {
         (static_cast<Test_TC_PCC_2_2Suite *>(context))->OnSuccessResponse_2(effectiveOperationMode);
     }
@@ -44454,7 +44459,8 @@ private:
         (static_cast<Test_TC_PCC_2_2Suite *>(context))->OnFailureResponse_4(error);
     }
 
-    static void OnSuccessCallback_4(void * context, uint8_t effectiveOperationMode)
+    static void OnSuccessCallback_4(void * context,
+                                    chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode effectiveOperationMode)
     {
         (static_cast<Test_TC_PCC_2_2Suite *>(context))->OnSuccessResponse_4(effectiveOperationMode);
     }
@@ -44471,7 +44477,8 @@ private:
         (static_cast<Test_TC_PCC_2_2Suite *>(context))->OnFailureResponse_6(error);
     }
 
-    static void OnSuccessCallback_6(void * context, uint8_t effectiveOperationMode)
+    static void OnSuccessCallback_6(void * context,
+                                    chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode effectiveOperationMode)
     {
         (static_cast<Test_TC_PCC_2_2Suite *>(context))->OnSuccessResponse_6(effectiveOperationMode);
     }
@@ -44492,8 +44499,8 @@ private:
         chip::Controller::PumpConfigurationAndControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t operationModeArgument;
-        operationModeArgument = 1;
+        chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode operationModeArgument;
+        operationModeArgument = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode>(1);
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::OperationMode::TypeInfo>(
@@ -44527,7 +44534,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_2(uint8_t effectiveOperationMode)
+    void OnSuccessResponse_2(chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode effectiveOperationMode)
     {
         VerifyOrReturn(CheckValue("effectiveOperationMode", effectiveOperationMode, 1));
 
@@ -44540,8 +44547,8 @@ private:
         chip::Controller::PumpConfigurationAndControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t operationModeArgument;
-        operationModeArgument = 2;
+        chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode operationModeArgument;
+        operationModeArgument = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode>(2);
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::OperationMode::TypeInfo>(
@@ -44575,7 +44582,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_4(uint8_t effectiveOperationMode)
+    void OnSuccessResponse_4(chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode effectiveOperationMode)
     {
         VerifyOrReturn(CheckValue("effectiveOperationMode", effectiveOperationMode, 2));
 
@@ -44588,8 +44595,8 @@ private:
         chip::Controller::PumpConfigurationAndControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t operationModeArgument;
-        operationModeArgument = 3;
+        chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode operationModeArgument;
+        operationModeArgument = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode>(3);
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::OperationMode::TypeInfo>(
@@ -44623,7 +44630,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_6(uint8_t effectiveOperationMode)
+    void OnSuccessResponse_6(chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode effectiveOperationMode)
     {
         VerifyOrReturn(CheckValue("effectiveOperationMode", effectiveOperationMode, 3));
 
@@ -44855,7 +44862,8 @@ private:
         (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnFailureResponse_2(error);
     }
 
-    static void OnSuccessCallback_2(void * context, uint8_t effectiveOperationMode)
+    static void OnSuccessCallback_2(void * context,
+                                    chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode effectiveOperationMode)
     {
         (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnSuccessResponse_2(effectiveOperationMode);
     }
@@ -44872,7 +44880,8 @@ private:
         (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnFailureResponse_4(error);
     }
 
-    static void OnSuccessCallback_4(void * context, uint8_t effectiveControlMode)
+    static void OnSuccessCallback_4(void * context,
+                                    chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode effectiveControlMode)
     {
         (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnSuccessResponse_4(effectiveControlMode);
     }
@@ -44889,7 +44898,8 @@ private:
         (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnFailureResponse_6(error);
     }
 
-    static void OnSuccessCallback_6(void * context, uint8_t effectiveControlMode)
+    static void OnSuccessCallback_6(void * context,
+                                    chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode effectiveControlMode)
     {
         (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnSuccessResponse_6(effectiveControlMode);
     }
@@ -44906,7 +44916,8 @@ private:
         (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnFailureResponse_8(error);
     }
 
-    static void OnSuccessCallback_8(void * context, uint8_t effectiveControlMode)
+    static void OnSuccessCallback_8(void * context,
+                                    chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode effectiveControlMode)
     {
         (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnSuccessResponse_8(effectiveControlMode);
     }
@@ -44923,7 +44934,8 @@ private:
         (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnFailureResponse_10(error);
     }
 
-    static void OnSuccessCallback_10(void * context, uint8_t effectiveControlMode)
+    static void OnSuccessCallback_10(void * context,
+                                     chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode effectiveControlMode)
     {
         (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnSuccessResponse_10(effectiveControlMode);
     }
@@ -44940,7 +44952,8 @@ private:
         (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnFailureResponse_12(error);
     }
 
-    static void OnSuccessCallback_12(void * context, uint8_t effectiveControlMode)
+    static void OnSuccessCallback_12(void * context,
+                                     chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode effectiveControlMode)
     {
         (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnSuccessResponse_12(effectiveControlMode);
     }
@@ -44957,7 +44970,8 @@ private:
         (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnFailureResponse_14(error);
     }
 
-    static void OnSuccessCallback_14(void * context, uint8_t effectiveControlMode)
+    static void OnSuccessCallback_14(void * context,
+                                     chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode effectiveControlMode)
     {
         (static_cast<Test_TC_PCC_2_3Suite *>(context))->OnSuccessResponse_14(effectiveControlMode);
     }
@@ -44978,8 +44992,8 @@ private:
         chip::Controller::PumpConfigurationAndControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t operationModeArgument;
-        operationModeArgument = 0;
+        chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode operationModeArgument;
+        operationModeArgument = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode>(0);
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::OperationMode::TypeInfo>(
@@ -45013,7 +45027,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_2(uint8_t effectiveOperationMode)
+    void OnSuccessResponse_2(chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode effectiveOperationMode)
     {
         VerifyOrReturn(CheckValue("effectiveOperationMode", effectiveOperationMode, 0));
 
@@ -45026,8 +45040,8 @@ private:
         chip::Controller::PumpConfigurationAndControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t controlModeArgument;
-        controlModeArgument = 0;
+        chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode controlModeArgument;
+        controlModeArgument = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode>(0);
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::ControlMode::TypeInfo>(
@@ -45061,7 +45075,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_4(uint8_t effectiveControlMode)
+    void OnSuccessResponse_4(chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode effectiveControlMode)
     {
         VerifyOrReturn(CheckValue("effectiveControlMode", effectiveControlMode, 0));
 
@@ -45074,8 +45088,8 @@ private:
         chip::Controller::PumpConfigurationAndControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t controlModeArgument;
-        controlModeArgument = 1;
+        chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode controlModeArgument;
+        controlModeArgument = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode>(1);
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::ControlMode::TypeInfo>(
@@ -45109,7 +45123,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_6(uint8_t effectiveControlMode)
+    void OnSuccessResponse_6(chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode effectiveControlMode)
     {
         VerifyOrReturn(CheckValue("effectiveControlMode", effectiveControlMode, 1));
 
@@ -45122,8 +45136,8 @@ private:
         chip::Controller::PumpConfigurationAndControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t controlModeArgument;
-        controlModeArgument = 2;
+        chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode controlModeArgument;
+        controlModeArgument = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode>(2);
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::ControlMode::TypeInfo>(
@@ -45157,7 +45171,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_8(uint8_t effectiveControlMode)
+    void OnSuccessResponse_8(chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode effectiveControlMode)
     {
         VerifyOrReturn(CheckValue("effectiveControlMode", effectiveControlMode, 2));
 
@@ -45170,8 +45184,8 @@ private:
         chip::Controller::PumpConfigurationAndControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t controlModeArgument;
-        controlModeArgument = 3;
+        chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode controlModeArgument;
+        controlModeArgument = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode>(3);
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::ControlMode::TypeInfo>(
@@ -45205,7 +45219,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_10(uint8_t effectiveControlMode)
+    void OnSuccessResponse_10(chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode effectiveControlMode)
     {
         VerifyOrReturn(CheckValue("effectiveControlMode", effectiveControlMode, 3));
 
@@ -45218,8 +45232,8 @@ private:
         chip::Controller::PumpConfigurationAndControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t controlModeArgument;
-        controlModeArgument = 5;
+        chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode controlModeArgument;
+        controlModeArgument = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode>(5);
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::ControlMode::TypeInfo>(
@@ -45253,7 +45267,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_12(uint8_t effectiveControlMode)
+    void OnSuccessResponse_12(chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode effectiveControlMode)
     {
         VerifyOrReturn(CheckValue("effectiveControlMode", effectiveControlMode, 5));
 
@@ -45266,8 +45280,8 @@ private:
         chip::Controller::PumpConfigurationAndControlClusterTest cluster;
         cluster.Associate(mDevices[kIdentityAlpha], endpoint);
 
-        uint8_t controlModeArgument;
-        controlModeArgument = 7;
+        chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode controlModeArgument;
+        controlModeArgument = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode>(7);
 
         ReturnErrorOnFailure(
             cluster.WriteAttribute<chip::app::Clusters::PumpConfigurationAndControl::Attributes::ControlMode::TypeInfo>(
@@ -45301,7 +45315,7 @@ private:
         ThrowFailureResponse(error);
     }
 
-    void OnSuccessResponse_14(uint8_t effectiveControlMode)
+    void OnSuccessResponse_14(chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode effectiveControlMode)
     {
         VerifyOrReturn(CheckValue("effectiveControlMode", effectiveControlMode, 7));
 
