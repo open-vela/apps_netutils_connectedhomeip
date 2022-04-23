@@ -99629,16 +99629,53 @@ public:
             err = TestStopTheAccessory_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Start the accessory with a given discriminator\n");
-            err = TestStartTheAccessoryWithAGivenDiscriminator_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Start the accessory with no command line options\n");
+            err = TestStartTheAccessoryWithNoCommandLineOptions_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Reboot the accessory with an other given discriminator\n");
-            err = TestRebootTheAccessoryWithAnOtherGivenDiscriminator_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Stop the accessory\n");
+            err = TestStopTheAccessory_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Factory Reset the accessory\n");
-            err = TestFactoryResetTheAccessory_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Start the accessory with only discriminator command line option\n");
+            err = TestStartTheAccessoryWithOnlyDiscriminatorCommandLineOption_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Stop the accessory\n");
+            err = TestStopTheAccessory_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Start the accessory with discriminator and port command line option\n");
+            err = TestStartTheAccessoryWithDiscriminatorAndPortCommandLineOption_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Stop the accessory\n");
+            err = TestStopTheAccessory_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Start the accessory with all command line options\n");
+            err = TestStartTheAccessoryWithAllCommandLineOptions_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Reboot the accessory with no command line options\n");
+            err = TestRebootTheAccessoryWithNoCommandLineOptions_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Reboot the accessory with only discriminator command line option\n");
+            err = TestRebootTheAccessoryWithOnlyDiscriminatorCommandLineOption_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool,
+                            " ***** Test Step 11 : Reboot the accessory with discriminator and port command line option\n");
+            err = TestRebootTheAccessoryWithDiscriminatorAndPortCommandLineOption_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Reboot the accessory with all command line options\n");
+            err = TestRebootTheAccessoryWithAllCommandLineOptions_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Factory Reset the accessory\n");
+            err = TestFactoryResetTheAccessory_13();
             break;
         }
 
@@ -99656,7 +99693,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 5;
+    const uint16_t mTestCount = 14;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -99689,6 +99726,42 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -99715,19 +99788,73 @@ private:
         return Stop();
     }
 
-    CHIP_ERROR TestStartTheAccessoryWithAGivenDiscriminator_2()
+    CHIP_ERROR TestStartTheAccessoryWithNoCommandLineOptions_2()
+    {
+        SetIdentity(kIdentityAlpha);
+        return Start();
+    }
+
+    CHIP_ERROR TestStopTheAccessory_3()
+    {
+        SetIdentity(kIdentityAlpha);
+        return Stop();
+    }
+
+    CHIP_ERROR TestStartTheAccessoryWithOnlyDiscriminatorCommandLineOption_4()
     {
         SetIdentity(kIdentityAlpha);
         return Start(1111);
     }
 
-    CHIP_ERROR TestRebootTheAccessoryWithAnOtherGivenDiscriminator_3()
+    CHIP_ERROR TestStopTheAccessory_5()
+    {
+        SetIdentity(kIdentityAlpha);
+        return Stop();
+    }
+
+    CHIP_ERROR TestStartTheAccessoryWithDiscriminatorAndPortCommandLineOption_6()
+    {
+        SetIdentity(kIdentityAlpha);
+        return Start(1111, 5560);
+    }
+
+    CHIP_ERROR TestStopTheAccessory_7()
+    {
+        SetIdentity(kIdentityAlpha);
+        return Stop();
+    }
+
+    CHIP_ERROR TestStartTheAccessoryWithAllCommandLineOptions_8()
+    {
+        SetIdentity(kIdentityAlpha);
+        return Start(1111, 5560, "/tmp/chip_kvs_test");
+    }
+
+    CHIP_ERROR TestRebootTheAccessoryWithNoCommandLineOptions_9()
+    {
+        SetIdentity(kIdentityAlpha);
+        return Reboot();
+    }
+
+    CHIP_ERROR TestRebootTheAccessoryWithOnlyDiscriminatorCommandLineOption_10()
     {
         SetIdentity(kIdentityAlpha);
         return Reboot(2222);
     }
 
-    CHIP_ERROR TestFactoryResetTheAccessory_4()
+    CHIP_ERROR TestRebootTheAccessoryWithDiscriminatorAndPortCommandLineOption_11()
+    {
+        SetIdentity(kIdentityAlpha);
+        return Reboot(2222, 5565);
+    }
+
+    CHIP_ERROR TestRebootTheAccessoryWithAllCommandLineOptions_12()
+    {
+        SetIdentity(kIdentityAlpha);
+        return Reboot(2222, 5565, "/tmp/chip_kvs_test");
+    }
+
+    CHIP_ERROR TestFactoryResetTheAccessory_13()
     {
         SetIdentity(kIdentityAlpha);
         return FactoryReset();
