@@ -47179,6 +47179,8 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+
+                VerifyOrReturn(CheckConstraintNotValue("value.pairingHint", value.pairingHint, 0U));
             }
             shouldContinue = true;
             break;
@@ -92215,6 +92217,8 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+
+                VerifyOrReturn(CheckConstraintNotValue("value.pairingHint", value.pairingHint, 0U));
             }
             shouldContinue = true;
             break;
