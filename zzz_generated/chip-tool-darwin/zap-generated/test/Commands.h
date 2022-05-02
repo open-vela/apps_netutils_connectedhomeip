@@ -213,7 +213,9 @@ public:
         printf("Test_TC_SWDIAG_2_1\n");
         printf("Test_TC_SWDIAG_3_1\n");
         printf("TestSubscribe_OnOff\n");
+        printf("DL_UsersAndCredentials\n");
         printf("DL_LockUnlock\n");
+        printf("DL_Schedules\n");
         printf("Test_TC_DL_1_3\n");
         printf("TestGroupsCluster\n");
         printf("TestGroupKeyManagementCluster\n");
@@ -75178,7 +75180,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableInt64sArgument;
-        nullableInt64sArgument = [NSNumber numberWithLongLong:-9223372036854775807LL - 1];
+        nullableInt64sArgument = [NSNumber numberWithLongLong:-9223372036854775807LL - 1LL];
         [cluster writeAttributeNullableInt64sWithValue:nullableInt64sArgument
                                      completionHandler:^(NSError * _Nullable err) {
                                          NSLog(@"Write attribute NULLABLE_INT64S Invalid Value Error: %@", err);
@@ -89230,6 +89232,5357 @@ private:
     }
 };
 
+class DL_UsersAndCredentials : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    DL_UsersAndCredentials()
+        : TestCommandBridge("DL_UsersAndCredentials")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~DL_UsersAndCredentials() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: DL_UsersAndCredentials\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: DL_UsersAndCredentials\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read available user slot and verify response fields\n");
+            err = TestReadAvailableUserSlotAndVerifyResponseFields_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Get number of supported users and verify default value\n");
+            err = TestGetNumberOfSupportedUsersAndVerifyDefaultValue_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read fails for user with index 0\n");
+            err = TestReadFailsForUserWithIndex0_3();
+            break;
+        case 4:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 4 : Read fails for user with index greater than Number Of Users Supported\n");
+            err = TestReadFailsForUserWithIndexGreaterThanNumberOfUsersSupported_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Create new user with default parameters\n");
+            err = TestCreateNewUserWithDefaultParameters_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the user back and verify its fields\n");
+            err = TestReadTheUserBackAndVerifyItsFields_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Set user at the occupied index fails with appropriate response\n");
+            err = TestSetUserAtTheOccupiedIndexFailsWithAppropriateResponse_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Modify userName for existing user\n");
+            err = TestModifyUserNameForExistingUser_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the modified user back and verify its fields\n");
+            err = TestReadTheModifiedUserBackAndVerifyItsFields_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Modify userUniqueId for existing user\n");
+            err = TestModifyUserUniqueIdForExistingUser_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Read the modified user back and verify its fields\n");
+            err = TestReadTheModifiedUserBackAndVerifyItsFields_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Modify userStatus for existing user\n");
+            err = TestModifyUserStatusForExistingUser_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Read the modified user back and verify its fields\n");
+            err = TestReadTheModifiedUserBackAndVerifyItsFields_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Modify userType for existing user\n");
+            err = TestModifyUserTypeForExistingUser_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Read the modified user back and verify its fields\n");
+            err = TestReadTheModifiedUserBackAndVerifyItsFields_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Modify credentialRule for existing user\n");
+            err = TestModifyCredentialRuleForExistingUser_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Read the modified user back and verify its fields\n");
+            err = TestReadTheModifiedUserBackAndVerifyItsFields_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Modify all fields for existing user\n");
+            err = TestModifyAllFieldsForExistingUser_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Read the modified user back and verify its fields\n");
+            err = TestReadTheModifiedUserBackAndVerifyItsFields_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Add another user with non-default fields\n");
+            err = TestAddAnotherUserWithNonDefaultFields_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Read the new user back and verify its fields\n");
+            err = TestReadTheNewUserBackAndVerifyItsFields_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Create user in the last slot\n");
+            err = TestCreateUserInTheLastSlot_22();
+            break;
+        case 23:
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Read the last user back and verify its fields\n");
+            err = TestReadTheLastUserBackAndVerifyItsFields_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool, " ***** Test Step 24 : User creation in the 0 slot fails\n");
+            err = TestUserCreationInThe0SlotFails_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : User creation in the out-of-bounds slot fails\n");
+            err = TestUserCreationInTheOutOfBoundsSlotFails_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Clear first user\n");
+            err = TestClearFirstUser_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Read cleared user and verify it is available\n");
+            err = TestReadClearedUserAndVerifyItIsAvailable_27();
+            break;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Create new user in the cleared slot\n");
+            err = TestCreateNewUserInTheClearedSlot_28();
+            break;
+        case 29:
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Read the user in the previously cleared slot and verify its fields\n");
+            err = TestReadTheUserInThePreviouslyClearedSlotAndVerifyItsFields_29();
+            break;
+        case 30:
+            ChipLogProgress(chipTool, " ***** Test Step 30 : Clear user with index 0 fails\n");
+            err = TestClearUserWithIndex0Fails_30();
+            break;
+        case 31:
+            ChipLogProgress(chipTool, " ***** Test Step 31 : Clear user with out-of-bounds index fails\n");
+            err = TestClearUserWithOutOfBoundsIndexFails_31();
+            break;
+        case 32:
+            ChipLogProgress(chipTool, " ***** Test Step 32 : Clear all users\n");
+            err = TestClearAllUsers_32();
+            break;
+        case 33:
+            ChipLogProgress(chipTool, " ***** Test Step 33 : Read first cleared user and verify it is available\n");
+            err = TestReadFirstClearedUserAndVerifyItIsAvailable_33();
+            break;
+        case 34:
+            ChipLogProgress(chipTool, " ***** Test Step 34 : Read last cleared user and verify it is available\n");
+            err = TestReadLastClearedUserAndVerifyItIsAvailable_34();
+            break;
+        case 35:
+            ChipLogProgress(chipTool, " ***** Test Step 35 : Get number of supported PIN credentials and verify default value\n");
+            err = TestGetNumberOfSupportedPinCredentialsAndVerifyDefaultValue_35();
+            break;
+        case 36:
+            ChipLogProgress(chipTool, " ***** Test Step 36 : Check that PIN credential does not exist\n");
+            err = TestCheckThatPinCredentialDoesNotExist_36();
+            break;
+        case 37:
+            ChipLogProgress(chipTool, " ***** Test Step 37 : Reading PIN credential with index 0 fails\n");
+            err = TestReadingPinCredentialWithIndex0Fails_37();
+            break;
+        case 38:
+            ChipLogProgress(chipTool, " ***** Test Step 38 : Reading PIN credential with out-of-bounds index fails\n");
+            err = TestReadingPinCredentialWithOutOfBoundsIndexFails_38();
+            break;
+        case 39:
+            ChipLogProgress(chipTool, " ***** Test Step 39 : Create new PIN credential and user\n");
+            err = TestCreateNewPinCredentialAndUser_39();
+            break;
+        case 40:
+            ChipLogProgress(chipTool, " ***** Test Step 40 : Verify created user\n");
+            err = TestVerifyCreatedUser_40();
+            break;
+        case 41:
+            ChipLogProgress(chipTool, " ***** Test Step 41 : Verify created PIN credential\n");
+            err = TestVerifyCreatedPinCredential_41();
+            break;
+        case 42:
+            ChipLogProgress(chipTool, " ***** Test Step 42 : Create new PIN credential and user with index 0 fails\n");
+            err = TestCreateNewPinCredentialAndUserWithIndex0Fails_42();
+            break;
+        case 43:
+            ChipLogProgress(chipTool, " ***** Test Step 43 : Create new PIN credential and user with out-of-bounds index fails\n");
+            err = TestCreateNewPinCredentialAndUserWithOutOfBoundsIndexFails_43();
+            break;
+        case 44:
+            ChipLogProgress(chipTool, " ***** Test Step 44 : Get number of supported RFID credentials and verify default value\n");
+            err = TestGetNumberOfSupportedRfidCredentialsAndVerifyDefaultValue_44();
+            break;
+        case 45:
+            ChipLogProgress(chipTool, " ***** Test Step 45 : Reading RFID credential with index 0 fails\n");
+            err = TestReadingRfidCredentialWithIndex0Fails_45();
+            break;
+        case 46:
+            ChipLogProgress(chipTool, " ***** Test Step 46 : Reading RFID credential with out-of-bounds index fails\n");
+            err = TestReadingRfidCredentialWithOutOfBoundsIndexFails_46();
+            break;
+        case 47:
+            ChipLogProgress(chipTool, " ***** Test Step 47 : Check that RFID credential does not exist\n");
+            err = TestCheckThatRfidCredentialDoesNotExist_47();
+            break;
+        case 48:
+            ChipLogProgress(chipTool, " ***** Test Step 48 : Create new RFID credential and add it to existing user\n");
+            err = TestCreateNewRfidCredentialAndAddItToExistingUser_48();
+            break;
+        case 49:
+            ChipLogProgress(chipTool, " ***** Test Step 49 : Verify modified user\n");
+            err = TestVerifyModifiedUser_49();
+            break;
+        case 50:
+            ChipLogProgress(chipTool, " ***** Test Step 50 : Verify created credential\n");
+            err = TestVerifyCreatedCredential_50();
+            break;
+        case 51:
+            ChipLogProgress(chipTool, " ***** Test Step 51 : Create new RFID credential and user with index 0 fails\n");
+            err = TestCreateNewRfidCredentialAndUserWithIndex0Fails_51();
+            break;
+        case 52:
+            ChipLogProgress(chipTool, " ***** Test Step 52 : Create new RFID credential and user with out-of-bounds index fails\n");
+            err = TestCreateNewRfidCredentialAndUserWithOutOfBoundsIndexFails_52();
+            break;
+        case 53:
+            ChipLogProgress(chipTool, " ***** Test Step 53 : Create new PIN credential and try to add it to existing user\n");
+            err = TestCreateNewPinCredentialAndTryToAddItToExistingUser_53();
+            break;
+        case 54:
+            ChipLogProgress(chipTool, " ***** Test Step 54 : Create new credential and try to add it to 0 user\n");
+            err = TestCreateNewCredentialAndTryToAddItTo0User_54();
+            break;
+        case 55:
+            ChipLogProgress(chipTool, " ***** Test Step 55 : Create new credential and try to add it to out-of-bounds user\n");
+            err = TestCreateNewCredentialAndTryToAddItToOutOfBoundsUser_55();
+            break;
+        case 56:
+            ChipLogProgress(chipTool, " ***** Test Step 56 : Create new PIN with too short data\n");
+            err = TestCreateNewPinWithTooShortData_56();
+            break;
+        case 57:
+            ChipLogProgress(chipTool, " ***** Test Step 57 : Create new PIN with too long data\n");
+            err = TestCreateNewPinWithTooLongData_57();
+            break;
+        case 58:
+            ChipLogProgress(chipTool, " ***** Test Step 58 : Create new RFID with too short data\n");
+            err = TestCreateNewRfidWithTooShortData_58();
+            break;
+        case 59:
+            ChipLogProgress(chipTool, " ***** Test Step 59 : Create new PIN with Programming user type fails\n");
+            err = TestCreateNewPinWithProgrammingUserTypeFails_59();
+            break;
+        case 60:
+            ChipLogProgress(chipTool, " ***** Test Step 60 : Create new RFID with too short data\n");
+            err = TestCreateNewRfidWithTooShortData_60();
+            break;
+        case 61:
+            ChipLogProgress(chipTool, " ***** Test Step 61 : Create new PIN credential with data the would cause duplicate\n");
+            err = TestCreateNewPinCredentialWithDataTheWouldCauseDuplicate_61();
+            break;
+        case 62:
+            ChipLogProgress(chipTool, " ***** Test Step 62 : Create new RFID credential with data the would cause duplicate\n");
+            err = TestCreateNewRfidCredentialWithDataTheWouldCauseDuplicate_62();
+            break;
+        case 63:
+            ChipLogProgress(chipTool, " ***** Test Step 63 : Modify credentialData of existing PIN credential\n");
+            err = TestModifyCredentialDataOfExistingPinCredential_63();
+            break;
+        case 64:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 64 : Verify that credential was changed by creating new credential with old data\n");
+            err = TestVerifyThatCredentialWasChangedByCreatingNewCredentialWithOldData_64();
+            break;
+        case 65:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 65 : Verify that credential was changed by creating new credential with new data\n");
+            err = TestVerifyThatCredentialWasChangedByCreatingNewCredentialWithNewData_65();
+            break;
+        case 66:
+            ChipLogProgress(chipTool, " ***** Test Step 66 : Clear first PIN credential\n");
+            err = TestClearFirstPinCredential_66();
+            break;
+        case 67:
+            ChipLogProgress(chipTool, " ***** Test Step 67 : Read back the credential and make sure it is deleted\n");
+            err = TestReadBackTheCredentialAndMakeSureItIsDeleted_67();
+            break;
+        case 68:
+            ChipLogProgress(chipTool, " ***** Test Step 68 : Read the user back and make sure PIN credential is deleted\n");
+            err = TestReadTheUserBackAndMakeSurePinCredentialIsDeleted_68();
+            break;
+        case 69:
+            ChipLogProgress(chipTool, " ***** Test Step 69 : Clear the second PIN credential\n");
+            err = TestClearTheSecondPinCredential_69();
+            break;
+        case 70:
+            ChipLogProgress(chipTool, " ***** Test Step 70 : Read back the credential and make sure it is deleted\n");
+            err = TestReadBackTheCredentialAndMakeSureItIsDeleted_70();
+            break;
+        case 71:
+            ChipLogProgress(chipTool, " ***** Test Step 71 : Read the user back and make sure related user is deleted\n");
+            err = TestReadTheUserBackAndMakeSureRelatedUserIsDeleted_71();
+            break;
+        case 72:
+            ChipLogProgress(chipTool, " ***** Test Step 72 : Create new RFID credential with user\n");
+            err = TestCreateNewRfidCredentialWithUser_72();
+            break;
+        case 73:
+            ChipLogProgress(chipTool, " ***** Test Step 73 : Clear all the RFID credentials\n");
+            err = TestClearAllTheRfidCredentials_73();
+            break;
+        case 74:
+            ChipLogProgress(chipTool, " ***** Test Step 74 : Read back the fist RFID credential and make sure it is deleted\n");
+            err = TestReadBackTheFistRfidCredentialAndMakeSureItIsDeleted_74();
+            break;
+        case 75:
+            ChipLogProgress(chipTool, " ***** Test Step 75 : Read back the second RFID credential and make sure it is deleted\n");
+            err = TestReadBackTheSecondRfidCredentialAndMakeSureItIsDeleted_75();
+            break;
+        case 76:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 76 : Read the user related with first RFID back and make sure it is deleted\n");
+            err = TestReadTheUserRelatedWithFirstRfidBackAndMakeSureItIsDeleted_76();
+            break;
+        case 77:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 77 : Read the user related with second RFID back and make sure it is deleted\n");
+            err = TestReadTheUserRelatedWithSecondRfidBackAndMakeSureItIsDeleted_77();
+            break;
+        case 78:
+            ChipLogProgress(chipTool, " ***** Test Step 78 : Create new PIN credential with user\n");
+            err = TestCreateNewPinCredentialWithUser_78();
+            break;
+        case 79:
+            ChipLogProgress(chipTool, " ***** Test Step 79 : Create new RFID credential with user\n");
+            err = TestCreateNewRfidCredentialWithUser_79();
+            break;
+        case 80:
+            ChipLogProgress(chipTool, " ***** Test Step 80 : Create another RFID credential with user\n");
+            err = TestCreateAnotherRfidCredentialWithUser_80();
+            break;
+        case 81:
+            ChipLogProgress(chipTool, " ***** Test Step 81 : Clear all the credentials\n");
+            err = TestClearAllTheCredentials_81();
+            break;
+        case 82:
+            ChipLogProgress(chipTool, " ***** Test Step 82 : Read back the first PIN credential and make sure it is deleted\n");
+            err = TestReadBackTheFirstPinCredentialAndMakeSureItIsDeleted_82();
+            break;
+        case 83:
+            ChipLogProgress(chipTool, " ***** Test Step 83 : Read back the first RFID credential and make sure it is deleted\n");
+            err = TestReadBackTheFirstRfidCredentialAndMakeSureItIsDeleted_83();
+            break;
+        case 84:
+            ChipLogProgress(chipTool, " ***** Test Step 84 : Read back the second PIN credential and make sure it is deleted\n");
+            err = TestReadBackTheSecondPinCredentialAndMakeSureItIsDeleted_84();
+            break;
+        case 85:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 85 : Read the user related with first PIN back and make sure it is deleted\n");
+            err = TestReadTheUserRelatedWithFirstPinBackAndMakeSureItIsDeleted_85();
+            break;
+        case 86:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 86 : Read the user related with first RFID back and make sure it is deleted\n");
+            err = TestReadTheUserRelatedWithFirstRfidBackAndMakeSureItIsDeleted_86();
+            break;
+        case 87:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 87 : Read the user related with second PIN back and make sure it is deleted\n");
+            err = TestReadTheUserRelatedWithSecondPinBackAndMakeSureItIsDeleted_87();
+            break;
+        case 88:
+            ChipLogProgress(chipTool, " ***** Test Step 88 : Create new Programming PIN credential with invalid index\n");
+            err = TestCreateNewProgrammingPinCredentialWithInvalidIndex_88();
+            break;
+        case 89:
+            ChipLogProgress(chipTool, " ***** Test Step 89 : Create new Programming PIN credential with valid index\n");
+            err = TestCreateNewProgrammingPinCredentialWithValidIndex_89();
+            break;
+        case 90:
+            ChipLogProgress(chipTool, " ***** Test Step 90 : Verify created user\n");
+            err = TestVerifyCreatedUser_90();
+            break;
+        case 91:
+            ChipLogProgress(chipTool, " ***** Test Step 91 : Verify created programming PIN credential\n");
+            err = TestVerifyCreatedProgrammingPinCredential_91();
+            break;
+        case 92:
+            ChipLogProgress(chipTool, " ***** Test Step 92 : Modify the Programming PIN credential\n");
+            err = TestModifyTheProgrammingPinCredential_92();
+            break;
+        case 93:
+            ChipLogProgress(chipTool, " ***** Test Step 93 : Clearing Programming PIN fails\n");
+            err = TestClearingProgrammingPinFails_93();
+            break;
+        case 94:
+            ChipLogProgress(chipTool, " ***** Test Step 94 : Clearing Programming PIN with invalid index fails\n");
+            err = TestClearingProgrammingPinWithInvalidIndexFails_94();
+            break;
+        case 95:
+            ChipLogProgress(chipTool, " ***** Test Step 95 : Clearing PIN credential with zero index fails\n");
+            err = TestClearingPinCredentialWithZeroIndexFails_95();
+            break;
+        case 96:
+            ChipLogProgress(chipTool, " ***** Test Step 96 : Clearing PIN credential with out-of-bound index fails\n");
+            err = TestClearingPinCredentialWithOutOfBoundIndexFails_96();
+            break;
+        case 97:
+            ChipLogProgress(chipTool, " ***** Test Step 97 : Clearing RFID credential with zero index fails\n");
+            err = TestClearingRfidCredentialWithZeroIndexFails_97();
+            break;
+        case 98:
+            ChipLogProgress(chipTool, " ***** Test Step 98 : Clearing RFID credential with out-of-bound index fails\n");
+            err = TestClearingRfidCredentialWithOutOfBoundIndexFails_98();
+            break;
+        case 99:
+            ChipLogProgress(chipTool, " ***** Test Step 99 : Clear the Programming PIN user\n");
+            err = TestClearTheProgrammingPinUser_99();
+            break;
+        case 100:
+            ChipLogProgress(chipTool, " ***** Test Step 100 : Make sure Programming PIN user is deleted\n");
+            err = TestMakeSureProgrammingPinUserIsDeleted_100();
+            break;
+        case 101:
+            ChipLogProgress(chipTool, " ***** Test Step 101 : Make sure programming PIN credential is deleted\n");
+            err = TestMakeSureProgrammingPinCredentialIsDeleted_101();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 1));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 35:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 36:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 37:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 38:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 39:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 40:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 41:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 42:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 43:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 44:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 45:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 46:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 47:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 48:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 49:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 50:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 51:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 52:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 53:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 54:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 55:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 56:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 57:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 58:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 59:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 60:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 61:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 62:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 63:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 64:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 65:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 66:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 67:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 68:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 69:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 70:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 71:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 72:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 73:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 74:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 75:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 76:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 77:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 78:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 79:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 80:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 81:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 82:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 83:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 84:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 85:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 86:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 87:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 88:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 89:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 90:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 91:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 92:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 93:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 94:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 95:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 96:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 97:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 98:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 99:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 100:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 101:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        WaitForMs(0);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 102;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        SetIdentity("alpha");
+        WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAvailableUserSlotAndVerifyResponseFields_1()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read available user slot and verify response fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nonnull NumberOfTotalUsersSupported;
+
+    CHIP_ERROR TestGetNumberOfSupportedUsersAndVerifyDefaultValue_2()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeNumberOfTotalUsersSupportedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Get number of supported users and verify default value Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err, 0));
+
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("NumberOfTotalUsersSupported", actualValue, 10U));
+                }
+                {
+                    NumberOfTotalUsersSupported = value;
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadFailsForUserWithIndex0_3()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read fails for user with index 0 Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadFailsForUserWithIndexGreaterThanNumberOfUsersSupported_4()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read fails for user with index greater than Number Of Users Supported Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewUserWithDefaultParameters_5()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = nil;
+        params.userUniqueId = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Create new user with default parameters Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserBackAndVerifyItsFields_6()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSetUserAtTheOccupiedIndexFailsWithAppropriateResponse_7()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = nil;
+        params.userUniqueId = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Set user at the occupied index fails with appropriate response Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 1));
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestModifyUserNameForExistingUser_8()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = @"new_user";
+        params.userUniqueId = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Modify userName for existing user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheModifiedUserBackAndVerifyItsFields_9()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the modified user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"new_user"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestModifyUserUniqueIdForExistingUser_10()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = nil;
+        params.userUniqueId = [NSNumber numberWithUnsignedInt:305441741UL];
+        params.userStatus = nil;
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Modify userUniqueId for existing user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheModifiedUserBackAndVerifyItsFields_11()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the modified user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"new_user"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
+                         VerifyOrReturn(CheckValue("userUniqueId", actualValue, 305441741UL));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestModifyUserStatusForExistingUser_12()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = nil;
+        params.userUniqueId = nil;
+        params.userStatus = [NSNumber numberWithUnsignedChar:3];
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Modify userStatus for existing user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheModifiedUserBackAndVerifyItsFields_13()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the modified user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"new_user"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
+                         VerifyOrReturn(CheckValue("userUniqueId", actualValue, 305441741UL));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 3));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestModifyUserTypeForExistingUser_14()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = nil;
+        params.userUniqueId = nil;
+        params.userStatus = nil;
+        params.userType = [NSNumber numberWithUnsignedChar:6];
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Modify userType for existing user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheModifiedUserBackAndVerifyItsFields_15()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the modified user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"new_user"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
+                         VerifyOrReturn(CheckValue("userUniqueId", actualValue, 305441741UL));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 3));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 6));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestModifyCredentialRuleForExistingUser_16()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = nil;
+        params.userUniqueId = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        params.credentialRule = [NSNumber numberWithUnsignedChar:2];
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Modify credentialRule for existing user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheModifiedUserBackAndVerifyItsFields_17()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the modified user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"new_user"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
+                         VerifyOrReturn(CheckValue("userUniqueId", actualValue, 305441741UL));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 3));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 6));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 2));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestModifyAllFieldsForExistingUser_18()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = @"test_user";
+        params.userUniqueId = [NSNumber numberWithUnsignedInt:466460832UL];
+        params.userStatus = [NSNumber numberWithUnsignedChar:1];
+        params.userType = [NSNumber numberWithUnsignedChar:0];
+        params.credentialRule = [NSNumber numberWithUnsignedChar:1];
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Modify all fields for existing user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheModifiedUserBackAndVerifyItsFields_19()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the modified user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"test_user"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
+                         VerifyOrReturn(CheckValue("userUniqueId", actualValue, 466460832UL));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestAddAnotherUserWithNonDefaultFields_20()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.userName = @"test_user2";
+        params.userUniqueId = [NSNumber numberWithUnsignedInt:12648430UL];
+        params.userStatus = [NSNumber numberWithUnsignedChar:1];
+        params.userType = [NSNumber numberWithUnsignedChar:1];
+        params.credentialRule = [NSNumber numberWithUnsignedChar:2];
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Add another user with non-default fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheNewUserBackAndVerifyItsFields_21()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the new user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"test_user2"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
+                         VerifyOrReturn(CheckValue("userUniqueId", actualValue, 12648430UL));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 2));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 3U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateUserInTheLastSlot_22()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.userIndex = [NumberOfTotalUsersSupported copy];
+        params.userName = @"last_user";
+        params.userUniqueId = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Create user in the last slot Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheLastUserBackAndVerifyItsFields_23()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NumberOfTotalUsersSupported copy];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the last user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, NumberOfTotalUsersSupported));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"last_user"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestUserCreationInThe0SlotFails_24()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.userName = nil;
+        params.userUniqueId = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"User creation in the 0 slot fails Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestUserCreationInTheOutOfBoundsSlotFails_25()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        params.userName = nil;
+        params.userUniqueId = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"User creation in the out-of-bounds slot fails Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearFirstUser_26()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearUserWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"Clear first user Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status", err, 0));
+
+                       NextTest();
+                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadClearedUserAndVerifyItIsAvailable_27()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read cleared user and verify it is available Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 3U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewUserInTheClearedSlot_28()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = nil;
+        params.userUniqueId = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Create new user in the cleared slot Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserInThePreviouslyClearedSlotAndVerifyItsFields_29()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user in the previously cleared slot and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 3U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearUserWithIndex0Fails_30()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        [cluster clearUserWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"Clear user with index 0 fails Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                       NextTest();
+                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearUserWithOutOfBoundsIndexFails_31()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        [cluster clearUserWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"Clear user with out-of-bounds index fails Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                       NextTest();
+                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearAllUsers_32()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:65534U];
+        [cluster clearUserWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"Clear all users Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status", err, 0));
+
+                       NextTest();
+                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadFirstClearedUserAndVerifyItIsAvailable_33()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read first cleared user and verify it is available Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 3U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadLastClearedUserAndVerifyItIsAvailable_34()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NumberOfTotalUsersSupported copy];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read last cleared user and verify it is available Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, NumberOfTotalUsersSupported));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nonnull NumberOfPINUsersSupported;
+
+    CHIP_ERROR TestGetNumberOfSupportedPinCredentialsAndVerifyDefaultValue_35()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeNumberOfPINUsersSupportedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Get number of supported PIN credentials and verify default value Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err, 0));
+
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("NumberOfPINUsersSupported", actualValue, 10U));
+                }
+                {
+                    NumberOfPINUsersSupported = value;
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatPinCredentialDoesNotExist_36()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 CHIPDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Check that PIN credential does not exist Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadingPinCredentialWithIndex0Fails_37()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 CHIPDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Reading PIN credential with index 0 fails Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadingPinCredentialWithOutOfBoundsIndexFails_38()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex =
+            [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupported unsignedShortValue] + 1U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 CHIPDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Reading PIN credential with out-of-bounds index fails Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialAndUser_39()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"000000" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential and user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedUser_40()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Verify created user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
+                         VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(1)));
+                         VerifyOrReturn(
+                             CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1));
+                         VerifyOrReturn(CheckValue(
+                             "CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 1U));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedPinCredential_41()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 CHIPDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Verify created PIN credential Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, true));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialAndUserWithIndex0Fails_42()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential and user with index 0 fails Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialAndUserWithOutOfBoundsIndexFails_43()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex =
+            [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupported unsignedShortValue] + 1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential and user with out-of-bounds index fails Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nonnull NumberOfRFIDUsersSupported;
+
+    CHIP_ERROR TestGetNumberOfSupportedRfidCredentialsAndVerifyDefaultValue_44()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeNumberOfRFIDUsersSupportedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Get number of supported RFID credentials and verify default value Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err, 0));
+
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("NumberOfRFIDUsersSupported", actualValue, 10U));
+                }
+                {
+                    NumberOfRFIDUsersSupported = value;
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadingRfidCredentialWithIndex0Fails_45()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 CHIPDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Reading RFID credential with index 0 fails Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadingRfidCredentialWithOutOfBoundsIndexFails_46()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex =
+            [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupported unsignedShortValue] + 1U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 CHIPDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Reading RFID credential with out-of-bounds index fails Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatRfidCredentialDoesNotExist_47()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 CHIPDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Check that RFID credential does not exist Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidCredentialAndAddItToExistingUser_48()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_123456" length:16];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new RFID credential and add it to existing user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyModifiedUser_49()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Verify modified user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
+                         VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(2)));
+                         VerifyOrReturn(
+                             CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1));
+                         VerifyOrReturn(CheckValue(
+                             "CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 1U));
+                         VerifyOrReturn(
+                             CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[1]).credentialType, 2));
+                         VerifyOrReturn(CheckValue(
+                             "CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[1]).credentialIndex, 2U));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedCredential_50()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 CHIPDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Verify created credential Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, true));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidCredentialAndUserWithIndex0Fails_51()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"new_rfid_data_field" length:19];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new RFID credential and user with index 0 fails Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidCredentialAndUserWithOutOfBoundsIndexFails_52()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex =
+            [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupported unsignedShortValue] + 1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"new_rfid_data_field" length:19];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new RFID credential and user with out-of-bounds index fails Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialAndTryToAddItToExistingUser_53()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123465" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential and try to add it to existing user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 3));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewCredentialAndTryToAddItTo0User_54()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123465" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new credential and try to add it to 0 user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewCredentialAndTryToAddItToOutOfBoundsUser_55()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123465" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new credential and try to add it to out-of-bounds user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinWithTooShortData_56()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"12345" length:5];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN with too short data Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinWithTooLongData_57()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456789" length:9];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN with too long data Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidWithTooShortData_58()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"rfid_data" length:9];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new RFID with too short data Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinWithProgrammingUserTypeFails_59()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.userStatus = nil;
+        params.userType = [NSNumber numberWithUnsignedChar:3];
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN with Programming user type fails Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidWithTooShortData_60()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"very_long_rfid_data_to_test_boundaries" length:38];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new RFID with too short data Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialWithDataTheWouldCauseDuplicate_61()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"000000" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential with data the would cause duplicate Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 2));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidCredentialWithDataTheWouldCauseDuplicate_62()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_123456" length:16];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new RFID credential with data the would cause duplicate Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 2));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestModifyCredentialDataOfExistingPinCredential_63()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Modify credentialData of existing PIN credential Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatCredentialWasChangedByCreatingNewCredentialWithOldData_64()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"000000" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Verify that credential was changed by creating new credential with old data Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatCredentialWasChangedByCreatingNewCredentialWithNewData_65()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Verify that credential was changed by creating new credential with new data Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 2));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearFirstPinCredential_66()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        [cluster clearCredentialWithParams:params
+                         completionHandler:^(NSError * _Nullable err) {
+                             NSLog(@"Clear first PIN credential Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err, 0));
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackTheCredentialAndMakeSureItIsDeleted_67()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 CHIPDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Read back the credential and make sure it is deleted Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserBackAndMakeSurePinCredentialIsDeleted_68()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user back and make sure PIN credential is deleted Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
+                         VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(1)));
+                         VerifyOrReturn(
+                             CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialType, 2));
+                         VerifyOrReturn(CheckValue(
+                             "CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 2U));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 3U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearTheSecondPinCredential_69()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        [cluster clearCredentialWithParams:params
+                         completionHandler:^(NSError * _Nullable err) {
+                             NSLog(@"Clear the second PIN credential Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err, 0));
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackTheCredentialAndMakeSureItIsDeleted_70()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 CHIPDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Read back the credential and make sure it is deleted Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserBackAndMakeSureRelatedUserIsDeleted_71()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user back and make sure related user is deleted Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 3U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidCredentialWithUser_72()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_12345" length:15];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new RFID credential with user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearAllTheRfidCredentials_73()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:65534U];
+
+        [cluster clearCredentialWithParams:params
+                         completionHandler:^(NSError * _Nullable err) {
+                             NSLog(@"Clear all the RFID credentials Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err, 0));
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackTheFistRfidCredentialAndMakeSureItIsDeleted_74()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 CHIPDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Read back the fist RFID credential and make sure it is deleted Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackTheSecondRfidCredentialAndMakeSureItIsDeleted_75()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 CHIPDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Read back the second RFID credential and make sure it is deleted Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserRelatedWithFirstRfidBackAndMakeSureItIsDeleted_76()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user related with first RFID back and make sure it is deleted Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserRelatedWithSecondRfidBackAndMakeSureItIsDeleted_77()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user related with second RFID back and make sure it is deleted Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 3U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialWithUser_78()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential with user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidCredentialWithUser_79()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_1234" length:14];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new RFID credential with user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateAnotherRfidCredentialWithUser_80()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:6U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_9876" length:14];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create another RFID credential with user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 3U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 7U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearAllTheCredentials_81()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = nil;
+        [cluster clearCredentialWithParams:params
+                         completionHandler:^(NSError * _Nullable err) {
+                             NSLog(@"Clear all the credentials Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err, 0));
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackTheFirstPinCredentialAndMakeSureItIsDeleted_82()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 CHIPDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Read back the first PIN credential and make sure it is deleted Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackTheFirstRfidCredentialAndMakeSureItIsDeleted_83()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 CHIPDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Read back the first RFID credential and make sure it is deleted Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackTheSecondPinCredentialAndMakeSureItIsDeleted_84()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:6U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 CHIPDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Read back the second PIN credential and make sure it is deleted Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 7U));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserRelatedWithFirstPinBackAndMakeSureItIsDeleted_85()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user related with first PIN back and make sure it is deleted Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserRelatedWithFirstRfidBackAndMakeSureItIsDeleted_86()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user related with first RFID back and make sure it is deleted Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 3U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserRelatedWithSecondPinBackAndMakeSureItIsDeleted_87()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:3U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user related with second PIN back and make sure it is deleted Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 3U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 4U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewProgrammingPinCredentialWithInvalidIndex_88()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new Programming PIN credential with invalid index Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewProgrammingPinCredentialWithValidIndex_89()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new Programming PIN credential with valid index Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedUser_90()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Verify created user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
+                         VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(1)));
+                         VerifyOrReturn(
+                             CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialType, 0));
+                         VerifyOrReturn(CheckValue(
+                             "CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 0U));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedProgrammingPinCredential_91()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 CHIPDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Verify created programming PIN credential Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, true));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestModifyTheProgrammingPinCredential_92()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"654321" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Modify the Programming PIN credential Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearingProgrammingPinFails_93()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        [cluster clearCredentialWithParams:params
+                         completionHandler:^(NSError * _Nullable err) {
+                             NSLog(@"Clearing Programming PIN fails Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearingProgrammingPinWithInvalidIndexFails_94()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        [cluster clearCredentialWithParams:params
+                         completionHandler:^(NSError * _Nullable err) {
+                             NSLog(@"Clearing Programming PIN with invalid index fails Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearingPinCredentialWithZeroIndexFails_95()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        [cluster clearCredentialWithParams:params
+                         completionHandler:^(NSError * _Nullable err) {
+                             NSLog(@"Clearing PIN credential with zero index fails Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearingPinCredentialWithOutOfBoundIndexFails_96()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex =
+            [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupported unsignedShortValue] + 1U];
+
+        [cluster clearCredentialWithParams:params
+                         completionHandler:^(NSError * _Nullable err) {
+                             NSLog(@"Clearing PIN credential with out-of-bound index fails Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearingRfidCredentialWithZeroIndexFails_97()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        [cluster clearCredentialWithParams:params
+                         completionHandler:^(NSError * _Nullable err) {
+                             NSLog(@"Clearing RFID credential with zero index fails Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearingRfidCredentialWithOutOfBoundIndexFails_98()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex =
+            [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupported unsignedShortValue] + 1U];
+
+        [cluster clearCredentialWithParams:params
+                         completionHandler:^(NSError * _Nullable err) {
+                             NSLog(@"Clearing RFID credential with out-of-bound index fails Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearTheProgrammingPinUser_99()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearUserWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"Clear the Programming PIN user Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status", err, 0));
+
+                       NextTest();
+                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureProgrammingPinUserIsDeleted_100()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Make sure Programming PIN user is deleted Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureProgrammingPinCredentialIsDeleted_101()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 CHIPDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Make sure programming PIN credential is deleted Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
 class DL_LockUnlock : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -89628,6 +94981,3387 @@ private:
 
                              NextTest();
                          }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class DL_Schedules : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    DL_Schedules()
+        : TestCommandBridge("DL_Schedules")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~DL_Schedules() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: DL_Schedules\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: DL_Schedules\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Create new PIN credential and schedule user\n");
+            err = TestCreateNewPinCredentialAndScheduleUser_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Get number of supported users\n");
+            err = TestGetNumberOfSupportedUsers_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Get Max number of Week Day schedules for user and verify default value\n");
+            err = TestGetMaxNumberOfWeekDaySchedulesForUserAndVerifyDefaultValue_3();
+            break;
+        case 4:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 4 : Get Max number of Year Day schedules for user and verify default value\n");
+            err = TestGetMaxNumberOfYearDaySchedulesForUserAndVerifyDefaultValue_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Create Week Day schedule with 0 index\n");
+            err = TestCreateWeekDayScheduleWith0Index_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Create Week Day schedule with out-of-bounds index\n");
+            err = TestCreateWeekDayScheduleWithOutOfBoundsIndex_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Create Week Day schedule with 0 user index\n");
+            err = TestCreateWeekDayScheduleWith0UserIndex_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Create Week Day schedule with out-of-bounds user index\n");
+            err = TestCreateWeekDayScheduleWithOutOfBoundsUserIndex_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Create Week Day schedule for non-existing user\n");
+            err = TestCreateWeekDayScheduleForNonExistingUser_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Create Week Day schedule with 0 days mask\n");
+            err = TestCreateWeekDayScheduleWith0DaysMask_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Create Week Day schedule for Sunday and Monday\n");
+            err = TestCreateWeekDayScheduleForSundayAndMonday_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Create Week Day schedule for Sunday Wednesday and Saturday\n");
+            err = TestCreateWeekDayScheduleForSundayWednesdayAndSaturday_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Create Week Day schedule with invalid start hour\n");
+            err = TestCreateWeekDayScheduleWithInvalidStartHour_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Create Week Day schedule with invalid start minute\n");
+            err = TestCreateWeekDayScheduleWithInvalidStartMinute_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Create Week Day schedule with invalid end hour\n");
+            err = TestCreateWeekDayScheduleWithInvalidEndHour_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Create Week Day schedule with invalid end minute\n");
+            err = TestCreateWeekDayScheduleWithInvalidEndMinute_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Create Week Day schedule with start hour later that end hour\n");
+            err = TestCreateWeekDayScheduleWithStartHourLaterThatEndHour_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 18 : Create Week Day schedule with start minute later that end minute when hours are equal\n");
+            err = TestCreateWeekDayScheduleWithStartMinuteLaterThatEndMinuteWhenHoursAreEqual_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Make sure that previous operations did not create a schedule\n");
+            err = TestMakeSureThatPreviousOperationsDidNotCreateASchedule_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Get Week Day schedule with 0 index\n");
+            err = TestGetWeekDayScheduleWith0Index_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Get Week Day schedule with out-of-bounds index\n");
+            err = TestGetWeekDayScheduleWithOutOfBoundsIndex_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Get Week Day schedule with 0 user index\n");
+            err = TestGetWeekDayScheduleWith0UserIndex_22();
+            break;
+        case 23:
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Get Week Day schedule with out-of-bounds user index\n");
+            err = TestGetWeekDayScheduleWithOutOfBoundsUserIndex_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Get Week Day schedule with non-existing user index\n");
+            err = TestGetWeekDayScheduleWithNonExistingUserIndex_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Create Year Day schedule with 0 index\n");
+            err = TestCreateYearDayScheduleWith0Index_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Create Year Day schedule with out-of-bounds index\n");
+            err = TestCreateYearDayScheduleWithOutOfBoundsIndex_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Create Year Day schedule with 0 user index\n");
+            err = TestCreateYearDayScheduleWith0UserIndex_27();
+            break;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Create Year Day schedule with out-of-bounds user index\n");
+            err = TestCreateYearDayScheduleWithOutOfBoundsUserIndex_28();
+            break;
+        case 29:
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Create Year Day schedule for non-existing user\n");
+            err = TestCreateYearDayScheduleForNonExistingUser_29();
+            break;
+        case 30:
+            ChipLogProgress(chipTool, " ***** Test Step 30 : Create Year Day schedule with start hour later that end hour\n");
+            err = TestCreateYearDayScheduleWithStartHourLaterThatEndHour_30();
+            break;
+        case 31:
+            ChipLogProgress(chipTool, " ***** Test Step 31 : Make sure that previous operations did not create a schedule\n");
+            err = TestMakeSureThatPreviousOperationsDidNotCreateASchedule_31();
+            break;
+        case 32:
+            ChipLogProgress(chipTool, " ***** Test Step 32 : Get Year Day schedule with 0 index\n");
+            err = TestGetYearDayScheduleWith0Index_32();
+            break;
+        case 33:
+            ChipLogProgress(chipTool, " ***** Test Step 33 : Get Year Day schedule with out-of-bounds index\n");
+            err = TestGetYearDayScheduleWithOutOfBoundsIndex_33();
+            break;
+        case 34:
+            ChipLogProgress(chipTool, " ***** Test Step 34 : Get Year Day schedule with 0 user index\n");
+            err = TestGetYearDayScheduleWith0UserIndex_34();
+            break;
+        case 35:
+            ChipLogProgress(chipTool, " ***** Test Step 35 : Get Year Day schedule with out-of-bounds user index\n");
+            err = TestGetYearDayScheduleWithOutOfBoundsUserIndex_35();
+            break;
+        case 36:
+            ChipLogProgress(chipTool, " ***** Test Step 36 : Get Year Day schedule with non-existing user index\n");
+            err = TestGetYearDayScheduleWithNonExistingUserIndex_36();
+            break;
+        case 37:
+            ChipLogProgress(chipTool, " ***** Test Step 37 : Create Week Day schedule with valid parameters\n");
+            err = TestCreateWeekDayScheduleWithValidParameters_37();
+            break;
+        case 38:
+            ChipLogProgress(chipTool, " ***** Test Step 38 : Verify created schedule\n");
+            err = TestVerifyCreatedSchedule_38();
+            break;
+        case 39:
+            ChipLogProgress(chipTool, " ***** Test Step 39 : Create Year Day schedule with valid parameters\n");
+            err = TestCreateYearDayScheduleWithValidParameters_39();
+            break;
+        case 40:
+            ChipLogProgress(chipTool, " ***** Test Step 40 : Verify created schedule\n");
+            err = TestVerifyCreatedSchedule_40();
+            break;
+        case 41:
+            ChipLogProgress(chipTool, " ***** Test Step 41 : Clear Week Day schedule with 0 index\n");
+            err = TestClearWeekDayScheduleWith0Index_41();
+            break;
+        case 42:
+            ChipLogProgress(chipTool, " ***** Test Step 42 : Clear Week Day schedule with out-of-bounds index\n");
+            err = TestClearWeekDayScheduleWithOutOfBoundsIndex_42();
+            break;
+        case 43:
+            ChipLogProgress(chipTool, " ***** Test Step 43 : Clear Week Day schedule with 0 user index\n");
+            err = TestClearWeekDayScheduleWith0UserIndex_43();
+            break;
+        case 44:
+            ChipLogProgress(chipTool, " ***** Test Step 44 : Clear Week Day schedule with out-of-bounds user index\n");
+            err = TestClearWeekDayScheduleWithOutOfBoundsUserIndex_44();
+            break;
+        case 45:
+            ChipLogProgress(chipTool, " ***** Test Step 45 : Clear Week Day schedule with non-existing user\n");
+            err = TestClearWeekDayScheduleWithNonExistingUser_45();
+            break;
+        case 46:
+            ChipLogProgress(chipTool, " ***** Test Step 46 : Clear Year Day schedule with 0 index\n");
+            err = TestClearYearDayScheduleWith0Index_46();
+            break;
+        case 47:
+            ChipLogProgress(chipTool, " ***** Test Step 47 : Clear Year Day schedule with out-of-bounds index\n");
+            err = TestClearYearDayScheduleWithOutOfBoundsIndex_47();
+            break;
+        case 48:
+            ChipLogProgress(chipTool, " ***** Test Step 48 : Clear Year Day schedule with 0 user index\n");
+            err = TestClearYearDayScheduleWith0UserIndex_48();
+            break;
+        case 49:
+            ChipLogProgress(chipTool, " ***** Test Step 49 : Clear Year Day schedule with out-of-bounds user index\n");
+            err = TestClearYearDayScheduleWithOutOfBoundsUserIndex_49();
+            break;
+        case 50:
+            ChipLogProgress(chipTool, " ***** Test Step 50 : Clear Year Day schedule with non-existing user\n");
+            err = TestClearYearDayScheduleWithNonExistingUser_50();
+            break;
+        case 51:
+            ChipLogProgress(chipTool, " ***** Test Step 51 : Make sure that week day schedule was not deleted\n");
+            err = TestMakeSureThatWeekDayScheduleWasNotDeleted_51();
+            break;
+        case 52:
+            ChipLogProgress(chipTool, " ***** Test Step 52 : Make sure that year day schedule was not deleted\n");
+            err = TestMakeSureThatYearDayScheduleWasNotDeleted_52();
+            break;
+        case 53:
+            ChipLogProgress(chipTool, " ***** Test Step 53 : Create another Week Day schedule with valid parameters\n");
+            err = TestCreateAnotherWeekDayScheduleWithValidParameters_53();
+            break;
+        case 54:
+            ChipLogProgress(chipTool, " ***** Test Step 54 : Verify created week day schedule\n");
+            err = TestVerifyCreatedWeekDaySchedule_54();
+            break;
+        case 55:
+            ChipLogProgress(chipTool, " ***** Test Step 55 : Create another Year Day schedule with valid parameters\n");
+            err = TestCreateAnotherYearDayScheduleWithValidParameters_55();
+            break;
+        case 56:
+            ChipLogProgress(chipTool, " ***** Test Step 56 : Verify created year day schedule\n");
+            err = TestVerifyCreatedYearDaySchedule_56();
+            break;
+        case 57:
+            ChipLogProgress(chipTool, " ***** Test Step 57 : Clear a single week day schedule for the first user\n");
+            err = TestClearASingleWeekDayScheduleForTheFirstUser_57();
+            break;
+        case 58:
+            ChipLogProgress(chipTool, " ***** Test Step 58 : Verify cleared week day schedule\n");
+            err = TestVerifyClearedWeekDaySchedule_58();
+            break;
+        case 59:
+            ChipLogProgress(chipTool, " ***** Test Step 59 : Clear all remaining week day schedules for the first user\n");
+            err = TestClearAllRemainingWeekDaySchedulesForTheFirstUser_59();
+            break;
+        case 60:
+            ChipLogProgress(chipTool, " ***** Test Step 60 : Verify cleared week schedule\n");
+            err = TestVerifyClearedWeekSchedule_60();
+            break;
+        case 61:
+            ChipLogProgress(chipTool, " ***** Test Step 61 : Make sure that first year day schedule was not deleted\n");
+            err = TestMakeSureThatFirstYearDayScheduleWasNotDeleted_61();
+            break;
+        case 62:
+            ChipLogProgress(chipTool, " ***** Test Step 62 : Make sure that second year day schedule was not deleted\n");
+            err = TestMakeSureThatSecondYearDayScheduleWasNotDeleted_62();
+            break;
+        case 63:
+            ChipLogProgress(chipTool, " ***** Test Step 63 : Create another Week Day schedule with valid parameters\n");
+            err = TestCreateAnotherWeekDayScheduleWithValidParameters_63();
+            break;
+        case 64:
+            ChipLogProgress(chipTool, " ***** Test Step 64 : Clear a single year day schedule for the first user\n");
+            err = TestClearASingleYearDayScheduleForTheFirstUser_64();
+            break;
+        case 65:
+            ChipLogProgress(chipTool, " ***** Test Step 65 : Verify cleared year day schedule\n");
+            err = TestVerifyClearedYearDaySchedule_65();
+            break;
+        case 66:
+            ChipLogProgress(chipTool, " ***** Test Step 66 : Clear all remaining year schedules for the first user\n");
+            err = TestClearAllRemainingYearSchedulesForTheFirstUser_66();
+            break;
+        case 67:
+            ChipLogProgress(chipTool, " ***** Test Step 67 : Verify that second year day schedule was cleared\n");
+            err = TestVerifyThatSecondYearDayScheduleWasCleared_67();
+            break;
+        case 68:
+            ChipLogProgress(chipTool, " ***** Test Step 68 : Verify created week day schedule\n");
+            err = TestVerifyCreatedWeekDaySchedule_68();
+            break;
+        case 69:
+            ChipLogProgress(chipTool, " ***** Test Step 69 : Clear all remaining week day schedules for the first user\n");
+            err = TestClearAllRemainingWeekDaySchedulesForTheFirstUser_69();
+            break;
+        case 70:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 70 : Create new user without credential so we can add more schedules to it\n");
+            err = TestCreateNewUserWithoutCredentialSoWeCanAddMoreSchedulesToIt_70();
+            break;
+        case 71:
+            ChipLogProgress(chipTool, " ***** Test Step 71 : Create Week Day schedule with valid parameters for first user\n");
+            err = TestCreateWeekDayScheduleWithValidParametersForFirstUser_71();
+            break;
+        case 72:
+            ChipLogProgress(chipTool, " ***** Test Step 72 : Verify created week day schedule for first user\n");
+            err = TestVerifyCreatedWeekDayScheduleForFirstUser_72();
+            break;
+        case 73:
+            ChipLogProgress(chipTool, " ***** Test Step 73 : Create Year Day schedule for first user\n");
+            err = TestCreateYearDayScheduleForFirstUser_73();
+            break;
+        case 74:
+            ChipLogProgress(chipTool, " ***** Test Step 74 : Verify created year day schedule for first\n");
+            err = TestVerifyCreatedYearDayScheduleForFirst_74();
+            break;
+        case 75:
+            ChipLogProgress(chipTool, " ***** Test Step 75 : Create Week Day schedule with valid parameters for second user\n");
+            err = TestCreateWeekDayScheduleWithValidParametersForSecondUser_75();
+            break;
+        case 76:
+            ChipLogProgress(chipTool, " ***** Test Step 76 : Verify created week day schedule for first user\n");
+            err = TestVerifyCreatedWeekDayScheduleForFirstUser_76();
+            break;
+        case 77:
+            ChipLogProgress(chipTool, " ***** Test Step 77 : Create Year Day schedule for second user\n");
+            err = TestCreateYearDayScheduleForSecondUser_77();
+            break;
+        case 78:
+            ChipLogProgress(chipTool, " ***** Test Step 78 : Verify created year day schedule for first\n");
+            err = TestVerifyCreatedYearDayScheduleForFirst_78();
+            break;
+        case 79:
+            ChipLogProgress(chipTool, " ***** Test Step 79 : Cleanup\n");
+            err = TestCleanup_79();
+            break;
+        case 80:
+            ChipLogProgress(chipTool, " ***** Test Step 80 : Make sure clearing first user also cleared week day schedules\n");
+            err = TestMakeSureClearingFirstUserAlsoClearedWeekDaySchedules_80();
+            break;
+        case 81:
+            ChipLogProgress(chipTool, " ***** Test Step 81 : Make sure clearing first user also cleared year day schedules\n");
+            err = TestMakeSureClearingFirstUserAlsoClearedYearDaySchedules_81();
+            break;
+        case 82:
+            ChipLogProgress(chipTool, " ***** Test Step 82 : Make sure clearing second user also cleared week day schedules\n");
+            err = TestMakeSureClearingSecondUserAlsoClearedWeekDaySchedules_82();
+            break;
+        case 83:
+            ChipLogProgress(chipTool, " ***** Test Step 83 : Make sure clearing second user also cleared year day schedules\n");
+            err = TestMakeSureClearingSecondUserAlsoClearedYearDaySchedules_83();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 35:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 36:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 37:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 38:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 39:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 40:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 41:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 42:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 43:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 44:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 45:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            break;
+        case 46:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 47:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 48:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 49:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            break;
+        case 50:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            break;
+        case 51:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 52:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 53:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 54:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 55:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 56:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 57:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 58:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 59:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 60:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 61:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 62:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 63:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 64:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 65:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 66:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 67:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 68:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 69:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 70:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 71:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 72:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 73:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 74:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 75:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 76:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 77:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 78:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 79:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 80:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 81:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 82:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 83:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        WaitForMs(0);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 84;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        SetIdentity("alpha");
+        WaitForCommissionee(mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialAndScheduleUser_1()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential and schedule user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nonnull NumberOfTotalUsersSupported;
+
+    CHIP_ERROR TestGetNumberOfSupportedUsers_2()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeNumberOfTotalUsersSupportedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Get number of supported users Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err, 0));
+
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("NumberOfTotalUsersSupported", actualValue, 10U));
+                }
+                {
+                    NumberOfTotalUsersSupported = value;
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nonnull NumberOfWeekDaySchedulesSupportedPerUser;
+
+    CHIP_ERROR TestGetMaxNumberOfWeekDaySchedulesForUserAndVerifyDefaultValue_3()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeNumberOfWeekDaySchedulesSupportedPerUserWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Get Max number of Week Day schedules for user and verify default value Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("NumberOfWeekDaySchedulesSupportedPerUser", actualValue, 10));
+            }
+            {
+                NumberOfWeekDaySchedulesSupportedPerUser = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nonnull NumberOfYearDaySchedulesSupportedPerUser;
+
+    CHIP_ERROR TestGetMaxNumberOfYearDaySchedulesForUserAndVerifyDefaultValue_4()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeNumberOfYearDaySchedulesSupportedPerUserWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Get Max number of Year Day schedules for user and verify default value Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("NumberOfYearDaySchedulesSupportedPerUser", actualValue, 10));
+            }
+            {
+                NumberOfYearDaySchedulesSupportedPerUser = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleWith0Index_5()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1];
+        params.startHour = [NSNumber numberWithUnsignedChar:15];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16];
+        params.endHour = [NSNumber numberWithUnsignedChar:18];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Week Day schedule with 0 index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleWithOutOfBoundsIndex_6()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfWeekDaySchedulesSupportedPerUser unsignedCharValue] + 1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1];
+        params.startHour = [NSNumber numberWithUnsignedChar:15];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16];
+        params.endHour = [NSNumber numberWithUnsignedChar:18];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Week Day schedule with out-of-bounds index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleWith0UserIndex_7()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1];
+        params.startHour = [NSNumber numberWithUnsignedChar:15];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16];
+        params.endHour = [NSNumber numberWithUnsignedChar:18];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Week Day schedule with 0 user index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleWithOutOfBoundsUserIndex_8()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1];
+        params.startHour = [NSNumber numberWithUnsignedChar:15];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16];
+        params.endHour = [NSNumber numberWithUnsignedChar:18];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Week Day schedule with out-of-bounds user index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleForNonExistingUser_9()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1];
+        params.startHour = [NSNumber numberWithUnsignedChar:15];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16];
+        params.endHour = [NSNumber numberWithUnsignedChar:18];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Week Day schedule for non-existing user Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_NOT_FOUND));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleWith0DaysMask_10()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:0];
+        params.startHour = [NSNumber numberWithUnsignedChar:15];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16];
+        params.endHour = [NSNumber numberWithUnsignedChar:18];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Week Day schedule with 0 days mask Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleForSundayAndMonday_11()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:3];
+        params.startHour = [NSNumber numberWithUnsignedChar:15];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16];
+        params.endHour = [NSNumber numberWithUnsignedChar:18];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Week Day schedule for Sunday and Monday Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleForSundayWednesdayAndSaturday_12()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:73];
+        params.startHour = [NSNumber numberWithUnsignedChar:15];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16];
+        params.endHour = [NSNumber numberWithUnsignedChar:18];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Week Day schedule for Sunday Wednesday and Saturday Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleWithInvalidStartHour_13()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1];
+        params.startHour = [NSNumber numberWithUnsignedChar:24];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16];
+        params.endHour = [NSNumber numberWithUnsignedChar:18];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Week Day schedule with invalid start hour Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleWithInvalidStartMinute_14()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1];
+        params.startHour = [NSNumber numberWithUnsignedChar:15];
+        params.startMinute = [NSNumber numberWithUnsignedChar:60];
+        params.endHour = [NSNumber numberWithUnsignedChar:18];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Week Day schedule with invalid start minute Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleWithInvalidEndHour_15()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1];
+        params.startHour = [NSNumber numberWithUnsignedChar:15];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16];
+        params.endHour = [NSNumber numberWithUnsignedChar:24];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Week Day schedule with invalid end hour Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleWithInvalidEndMinute_16()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1];
+        params.startHour = [NSNumber numberWithUnsignedChar:15];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16];
+        params.endHour = [NSNumber numberWithUnsignedChar:18];
+        params.endMinute = [NSNumber numberWithUnsignedChar:60];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Week Day schedule with invalid end minute Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleWithStartHourLaterThatEndHour_17()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1];
+        params.startHour = [NSNumber numberWithUnsignedChar:19];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16];
+        params.endHour = [NSNumber numberWithUnsignedChar:18];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Week Day schedule with start hour later that end hour Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleWithStartMinuteLaterThatEndMinuteWhenHoursAreEqual_18()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1];
+        params.startHour = [NSNumber numberWithUnsignedChar:15];
+        params.startMinute = [NSNumber numberWithUnsignedChar:50];
+        params.endHour = [NSNumber numberWithUnsignedChar:15];
+        params.endMinute = [NSNumber numberWithUnsignedChar:49];
+        [cluster
+            setWeekDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Week Day schedule with start minute later that end minute when hours are equal Error: %@",
+                               err);
+
+                           VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatPreviousOperationsDidNotCreateASchedule_19()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that previous operations did not create a schedule Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGetWeekDayScheduleWith0Index_20()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Get Week Day schedule with 0 index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGetWeekDayScheduleWithOutOfBoundsIndex_21()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfWeekDaySchedulesSupportedPerUser unsignedCharValue] + 1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Get Week Day schedule with out-of-bounds index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue,
+                                        [NumberOfWeekDaySchedulesSupportedPerUser unsignedCharValue] + 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGetWeekDayScheduleWith0UserIndex_22()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Get Week Day schedule with 0 user index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 0U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGetWeekDayScheduleWithOutOfBoundsUserIndex_23()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Get Week Day schedule with out-of-bounds user index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue(
+                                        "userIndex", actualValue, [NumberOfTotalUsersSupported unsignedShortValue] + 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGetWeekDayScheduleWithNonExistingUserIndex_24()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Get Week Day schedule with non-existing user index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateYearDayScheduleWith0Index_25()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
+        [cluster setYearDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Year Day schedule with 0 index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateYearDayScheduleWithOutOfBoundsIndex_26()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
+        [cluster setYearDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Year Day schedule with out-of-bounds index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateYearDayScheduleWith0UserIndex_27()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
+        [cluster setYearDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Year Day schedule with 0 user index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateYearDayScheduleWithOutOfBoundsUserIndex_28()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
+        [cluster setYearDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Year Day schedule with out-of-bounds user index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateYearDayScheduleForNonExistingUser_29()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
+        [cluster setYearDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Year Day schedule for non-existing user Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_NOT_FOUND));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateYearDayScheduleWithStartHourLaterThatEndHour_30()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:12345689UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:12345688UL];
+        [cluster setYearDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Year Day schedule with start hour later that end hour Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatPreviousOperationsDidNotCreateASchedule_31()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that previous operations did not create a schedule Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGetYearDayScheduleWith0Index_32()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Get Year Day schedule with 0 index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGetYearDayScheduleWithOutOfBoundsIndex_33()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Get Year Day schedule with out-of-bounds index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue,
+                                        [NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGetYearDayScheduleWith0UserIndex_34()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Get Year Day schedule with 0 user index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 0U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGetYearDayScheduleWithOutOfBoundsUserIndex_35()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Get Year Day schedule with out-of-bounds user index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue(
+                                        "userIndex", actualValue, [NumberOfTotalUsersSupported unsignedShortValue] + 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGetYearDayScheduleWithNonExistingUserIndex_36()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Get Year Day schedule with non-existing user index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleWithValidParameters_37()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1];
+        params.startHour = [NSNumber numberWithUnsignedChar:15];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16];
+        params.endHour = [NSNumber numberWithUnsignedChar:18];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Week Day schedule with valid parameters Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedSchedule_38()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Verify created schedule Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.daysMask;
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.startHour;
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 15));
+                                }
+
+                                {
+                                    id actualValue = values.startMinute;
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 16));
+                                }
+
+                                {
+                                    id actualValue = values.endHour;
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 18));
+                                }
+
+                                {
+                                    id actualValue = values.endMinute;
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 0));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateYearDayScheduleWithValidParameters_39()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
+        [cluster setYearDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Year Day schedule with valid parameters Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedSchedule_40()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Verify created schedule Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearWeekDayScheduleWith0Index_41()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearWeekDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear Week Day schedule with 0 index Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearWeekDayScheduleWithOutOfBoundsIndex_42()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfWeekDaySchedulesSupportedPerUser unsignedCharValue] + 1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearWeekDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear Week Day schedule with out-of-bounds index Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearWeekDayScheduleWith0UserIndex_43()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        [cluster clearWeekDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear Week Day schedule with 0 user index Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearWeekDayScheduleWithOutOfBoundsUserIndex_44()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        [cluster clearWeekDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear Week Day schedule with out-of-bounds user index Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearWeekDayScheduleWithNonExistingUser_45()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster clearWeekDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear Week Day schedule with non-existing user Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_NOT_FOUND));
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearYearDayScheduleWith0Index_46()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearYearDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear Year Day schedule with 0 index Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearYearDayScheduleWithOutOfBoundsIndex_47()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearYearDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear Year Day schedule with out-of-bounds index Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearYearDayScheduleWith0UserIndex_48()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        [cluster clearYearDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear Year Day schedule with 0 user index Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearYearDayScheduleWithOutOfBoundsUserIndex_49()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        [cluster clearYearDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear Year Day schedule with out-of-bounds user index Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearYearDayScheduleWithNonExistingUser_50()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster clearYearDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear Year Day schedule with non-existing user Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err, EMBER_ZCL_STATUS_NOT_FOUND));
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatWeekDayScheduleWasNotDeleted_51()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that week day schedule was not deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.daysMask;
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.startHour;
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 15));
+                                }
+
+                                {
+                                    id actualValue = values.startMinute;
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 16));
+                                }
+
+                                {
+                                    id actualValue = values.endHour;
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 18));
+                                }
+
+                                {
+                                    id actualValue = values.endMinute;
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 0));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatYearDayScheduleWasNotDeleted_52()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that year day schedule was not deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateAnotherWeekDayScheduleWithValidParameters_53()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:2];
+        params.startHour = [NSNumber numberWithUnsignedChar:0];
+        params.startMinute = [NSNumber numberWithUnsignedChar:0];
+        params.endHour = [NSNumber numberWithUnsignedChar:23];
+        params.endMinute = [NSNumber numberWithUnsignedChar:59];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create another Week Day schedule with valid parameters Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedWeekDaySchedule_54()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Verify created week day schedule Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 2));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.daysMask;
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 2));
+                                }
+
+                                {
+                                    id actualValue = values.startHour;
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.startMinute;
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.endHour;
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 23));
+                                }
+
+                                {
+                                    id actualValue = values.endMinute;
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 59));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateAnotherYearDayScheduleWithValidParameters_55()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:9000UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:888888888UL];
+        [cluster setYearDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create another Year Day schedule with valid parameters Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedYearDaySchedule_56()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Verify created year day schedule Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 9000UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 888888888UL));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearASingleWeekDayScheduleForTheFirstUser_57()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearWeekDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear a single week day schedule for the first user Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err, 0));
+
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyClearedWeekDaySchedule_58()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Verify cleared week day schedule Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearAllRemainingWeekDaySchedulesForTheFirstUser_59()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:254];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearWeekDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear all remaining week day schedules for the first user Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err, 0));
+
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyClearedWeekSchedule_60()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Verify cleared week schedule Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 2));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatFirstYearDayScheduleWasNotDeleted_61()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that first year day schedule was not deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatSecondYearDayScheduleWasNotDeleted_62()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that second year day schedule was not deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 9000UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 888888888UL));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateAnotherWeekDayScheduleWithValidParameters_63()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:2];
+        params.startHour = [NSNumber numberWithUnsignedChar:0];
+        params.startMinute = [NSNumber numberWithUnsignedChar:0];
+        params.endHour = [NSNumber numberWithUnsignedChar:23];
+        params.endMinute = [NSNumber numberWithUnsignedChar:59];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create another Week Day schedule with valid parameters Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearASingleYearDayScheduleForTheFirstUser_64()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearYearDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear a single year day schedule for the first user Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err, 0));
+
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyClearedYearDaySchedule_65()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Verify cleared year day schedule Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearAllRemainingYearSchedulesForTheFirstUser_66()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:254];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearYearDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear all remaining year schedules for the first user Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err, 0));
+
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatSecondYearDayScheduleWasCleared_67()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Verify that second year day schedule was cleared Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedWeekDaySchedule_68()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Verify created week day schedule Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.daysMask;
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 2));
+                                }
+
+                                {
+                                    id actualValue = values.startHour;
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.startMinute;
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.endHour;
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 23));
+                                }
+
+                                {
+                                    id actualValue = values.endMinute;
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 59));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearAllRemainingWeekDaySchedulesForTheFirstUser_69()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:254];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearWeekDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear all remaining week day schedules for the first user Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err, 0));
+
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewUserWithoutCredentialSoWeCanAddMoreSchedulesToIt_70()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.userName = nil;
+        params.userUniqueId = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Create new user without credential so we can add more schedules to it Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleWithValidParametersForFirstUser_71()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1];
+        params.startHour = [NSNumber numberWithUnsignedChar:0];
+        params.startMinute = [NSNumber numberWithUnsignedChar:0];
+        params.endHour = [NSNumber numberWithUnsignedChar:23];
+        params.endMinute = [NSNumber numberWithUnsignedChar:59];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Week Day schedule with valid parameters for first user Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedWeekDayScheduleForFirstUser_72()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Verify created week day schedule for first user Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.daysMask;
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.startHour;
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.startMinute;
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.endHour;
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 23));
+                                }
+
+                                {
+                                    id actualValue = values.endMinute;
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 59));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateYearDayScheduleForFirstUser_73()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:4];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:9000UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:888888888UL];
+        [cluster setYearDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Year Day schedule for first user Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedYearDayScheduleForFirst_74()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:4];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Verify created year day schedule for first Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 4));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 9000UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 888888888UL));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleWithValidParametersForSecondUser_75()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:4];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:64];
+        params.startHour = [NSNumber numberWithUnsignedChar:23];
+        params.startMinute = [NSNumber numberWithUnsignedChar:0];
+        params.endHour = [NSNumber numberWithUnsignedChar:23];
+        params.endMinute = [NSNumber numberWithUnsignedChar:59];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Week Day schedule with valid parameters for second user Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedWeekDayScheduleForFirstUser_76()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:4];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Verify created week day schedule for first user Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 4));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.daysMask;
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 64));
+                                }
+
+                                {
+                                    id actualValue = values.startHour;
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 23));
+                                }
+
+                                {
+                                    id actualValue = values.startMinute;
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.endHour;
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 23));
+                                }
+
+                                {
+                                    id actualValue = values.endMinute;
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 59));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateYearDayScheduleForSecondUser_77()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:55555UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:7777777UL];
+        [cluster setYearDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Year Day schedule for second user Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedYearDayScheduleForFirst_78()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Verify created year day schedule for first Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 55555UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 7777777UL));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCleanup_79()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:65534U];
+        [cluster clearUserWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"Cleanup Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status", err, 0));
+
+                       NextTest();
+                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureClearingFirstUserAlsoClearedWeekDaySchedules_80()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure clearing first user also cleared week day schedules Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureClearingFirstUserAlsoClearedYearDaySchedules_81()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:4];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure clearing first user also cleared year day schedules Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 4));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureClearingSecondUserAlsoClearedWeekDaySchedules_82()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:4];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure clearing second user also cleared week day schedules Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 4));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureClearingSecondUserAlsoClearedYearDaySchedules_83()
+    {
+        SetIdentity("alpha");
+        CHIPDevice * device = GetConnectedDevice();
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure clearing second user also cleared year day schedules Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
 
         return CHIP_NO_ERROR;
     }
@@ -91701,7 +100435,9 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_SWDIAG_2_1>(),
         make_unique<Test_TC_SWDIAG_3_1>(),
         make_unique<TestSubscribe_OnOff>(),
+        make_unique<DL_UsersAndCredentials>(),
         make_unique<DL_LockUnlock>(),
+        make_unique<DL_Schedules>(),
         make_unique<Test_TC_DL_1_3>(),
         make_unique<TestGroupsCluster>(),
         make_unique<TestGroupKeyManagementCluster>(),
