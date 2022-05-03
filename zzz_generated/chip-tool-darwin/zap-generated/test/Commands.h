@@ -59917,36 +59917,28 @@ public:
             err = Test1aIfPaLfLfThReadsCurrentPositionLiftPercent100thsFromDut_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : 1b: If (PA_LF & LF) TH reads CurrentPositionLiftPercentage from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF && A_CURRENTPOSITIONLIFTPERCENTAGE")) {
+            ChipLogProgress(chipTool, " ***** Test Step 2 : 2b: TH sends GoToLiftPercentage command with BadParam to DUT\n");
+            if (ShouldSkip("WNCV_LF && WNCV_PA_LF || WNCV_LF && CR_GOTOLIFTPERCENTAGE")) {
                 NextTest();
                 return;
             }
-            err = Test1bIfPaLfLfThReadsCurrentPositionLiftPercentageFromDut_2();
+            err = Test2bThSendsGoToLiftPercentageCommandWithBadParamToDut_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : 2b: TH sends GoToLiftPercentage command with BadParam to DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : 3a: TH sends GoToLiftPercentage command with 10001 to DUT\n");
             if (ShouldSkip("WNCV_LF && WNCV_PA_LF || WNCV_LF && CR_GOTOLIFTPERCENTAGE")) {
                 NextTest();
                 return;
             }
-            err = Test2bThSendsGoToLiftPercentageCommandWithBadParamToDut_3();
+            err = Test3aThSendsGoToLiftPercentageCommandWith10001ToDut_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : 3a: TH sends GoToLiftPercentage command with 10001 to DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : 4a: TH sends GoToLiftPercentage command with 0xFFFF to DUT\n");
             if (ShouldSkip("WNCV_LF && WNCV_PA_LF || WNCV_LF && CR_GOTOLIFTPERCENTAGE")) {
                 NextTest();
                 return;
             }
-            err = Test3aThSendsGoToLiftPercentageCommandWith10001ToDut_4();
-            break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : 4a: TH sends GoToLiftPercentage command with 0xFFFF to DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF || WNCV_LF && CR_GOTOLIFTPERCENTAGE")) {
-                NextTest();
-                return;
-            }
-            err = Test4aThSendsGoToLiftPercentageCommandWith0xFFFFToDut_5();
+            err = Test4aThSendsGoToLiftPercentageCommandWith0xFFFFToDut_4();
             break;
         }
 
@@ -59966,15 +59958,12 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-            break;
-        case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         }
@@ -59990,7 +59979,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 6;
+    const uint16_t mTestCount = 5;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -60035,40 +60024,8 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nullable attrCurrentPositionLiftPercentage;
 
-    CHIP_ERROR Test1bIfPaLfLfThReadsCurrentPositionLiftPercentageFromDut_2()
-    {
-        SetIdentity("alpha");
-        CHIPDevice * device = GetConnectedDevice();
-        CHIPTestWindowCovering * cluster = [[CHIPTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster
-            readAttributeCurrentPositionLiftPercentageWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"1b: If (PA_LF & LF) TH reads CurrentPositionLiftPercentage from DUT Error: %@", err);
-
-                VerifyOrReturn(CheckValue("status", err, 0));
-
-                if (value != nil) {
-                    VerifyOrReturn(
-                        CheckConstraintMinValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 0));
-                }
-                if (value != nil) {
-                    VerifyOrReturn(
-                        CheckConstraintMaxValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 100));
-                }
-                {
-                    attrCurrentPositionLiftPercentage = value;
-                }
-
-                NextTest();
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR Test2bThSendsGoToLiftPercentageCommandWithBadParamToDut_3()
+    CHIP_ERROR Test2bThSendsGoToLiftPercentageCommandWithBadParamToDut_2()
     {
         SetIdentity("alpha");
         CHIPDevice * device = GetConnectedDevice();
@@ -60089,7 +60046,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3aThSendsGoToLiftPercentageCommandWith10001ToDut_4()
+    CHIP_ERROR Test3aThSendsGoToLiftPercentageCommandWith10001ToDut_3()
     {
         SetIdentity("alpha");
         CHIPDevice * device = GetConnectedDevice();
@@ -60110,7 +60067,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test4aThSendsGoToLiftPercentageCommandWith0xFFFFToDut_5()
+    CHIP_ERROR Test4aThSendsGoToLiftPercentageCommandWith0xFFFFToDut_4()
     {
         SetIdentity("alpha");
         CHIPDevice * device = GetConnectedDevice();
