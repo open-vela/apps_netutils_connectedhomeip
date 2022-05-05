@@ -38651,21 +38651,18 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(14)));
+                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(11)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 1UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 2UL));
-                VerifyOrReturn(CheckValue("", actualValue[3], 5UL));
-                VerifyOrReturn(CheckValue("", actualValue[4], 11UL));
-                VerifyOrReturn(CheckValue("", actualValue[5], 12UL));
-                VerifyOrReturn(CheckValue("", actualValue[6], 13UL));
-                VerifyOrReturn(CheckValue("", actualValue[7], 14UL));
-                VerifyOrReturn(CheckValue("", actualValue[8], 15UL));
-                VerifyOrReturn(CheckValue("", actualValue[9], 16UL));
-                VerifyOrReturn(CheckValue("", actualValue[10], 19UL));
-                VerifyOrReturn(CheckValue("", actualValue[11], 26UL));
-                VerifyOrReturn(CheckValue("", actualValue[12], 28UL));
-                VerifyOrReturn(CheckValue("", actualValue[13], 25UL));
+                VerifyOrReturn(CheckValue("", actualValue[3], 14UL));
+                VerifyOrReturn(CheckValue("", actualValue[4], 15UL));
+                VerifyOrReturn(CheckValue("", actualValue[5], 16UL));
+                VerifyOrReturn(CheckValue("", actualValue[6], 65528UL));
+                VerifyOrReturn(CheckValue("", actualValue[7], 65529UL));
+                VerifyOrReturn(CheckValue("", actualValue[8], 65531UL));
+                VerifyOrReturn(CheckValue("", actualValue[9], 65532UL));
+                VerifyOrReturn(CheckValue("", actualValue[10], 65533UL));
             }
 
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
@@ -38744,7 +38741,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 2UL));
             }
 
             NextTest();
@@ -38809,28 +38806,8 @@ public:
             err = TestTestHarnessClientReadsDescriptionAttributeFromServerDut_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Test Harness Client reads BatVoltage from Server DUT\n");
-            err = TestTestHarnessClientReadsBatVoltageFromServerDut_4();
-            break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Test Harness Client reads BatPercentRemaining from Server DUT\n");
-            err = TestTestHarnessClientReadsBatPercentRemainingFromServerDut_5();
-            break;
-        case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Test Harness Client reads BatTimeRemaining from Server DUT\n");
-            err = TestTestHarnessClientReadsBatTimeRemainingFromServerDut_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Test Harness Client reads BatChargeLevel from Server DUT\n");
-            err = TestTestHarnessClientReadsBatChargeLevelFromServerDut_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Test Harness Client reads ActiveBatFaults from Server DUT\n");
-            err = TestTestHarnessClientReadsActiveBatFaultsFromServerDut_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Test Harness Client reads BatChargeState from Server DUT\n");
-            err = TestTestHarnessClientReadsBatChargeStateFromServerDut_9();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Test Harness Client reads BatChargeLevel from Server DUT\n");
+            err = TestTestHarnessClientReadsBatChargeLevelFromServerDut_4();
             break;
         }
 
@@ -38858,21 +38835,6 @@ public:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -38886,7 +38848,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 10;
+    const uint16_t mTestCount = 5;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -38964,71 +38926,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTestHarnessClientReadsBatVoltageFromServerDut_4()
-    {
-        SetIdentity("alpha");
-        CHIPDevice * device = GetConnectedDevice();
-        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeBatteryVoltageWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Test Harness Client reads BatVoltage from Server DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err, 0));
-
-            VerifyOrReturn(CheckConstraintType("batteryVoltage", "", "uint32"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestTestHarnessClientReadsBatPercentRemainingFromServerDut_5()
-    {
-        SetIdentity("alpha");
-        CHIPDevice * device = GetConnectedDevice();
-        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeBatteryPercentRemainingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Test Harness Client reads BatPercentRemaining from Server DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err, 0));
-
-            VerifyOrReturn(CheckConstraintType("batteryPercentRemaining", "", "uint8"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("batteryPercentRemaining", [value unsignedCharValue], 0));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batteryPercentRemaining", [value unsignedCharValue], 200));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestTestHarnessClientReadsBatTimeRemainingFromServerDut_6()
-    {
-        SetIdentity("alpha");
-        CHIPDevice * device = GetConnectedDevice();
-        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeBatteryTimeRemainingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Test Harness Client reads BatTimeRemaining from Server DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err, 0));
-
-            VerifyOrReturn(CheckConstraintType("batteryTimeRemaining", "", "uint32"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestTestHarnessClientReadsBatChargeLevelFromServerDut_7()
+    CHIP_ERROR TestTestHarnessClientReadsBatChargeLevelFromServerDut_4()
     {
         SetIdentity("alpha");
         CHIPDevice * device = GetConnectedDevice();
@@ -39046,51 +38944,6 @@ private:
             }
             if (value != nil) {
                 VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batteryChargeLevel", [value unsignedCharValue], 2));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestTestHarnessClientReadsActiveBatFaultsFromServerDut_8()
-    {
-        SetIdentity("alpha");
-        CHIPDevice * device = GetConnectedDevice();
-        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeActiveBatteryFaultsWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Test Harness Client reads ActiveBatFaults from Server DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err, 0));
-
-            VerifyOrReturn(CheckConstraintType("activeBatteryFaults", "", "list"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestTestHarnessClientReadsBatChargeStateFromServerDut_9()
-    {
-        SetIdentity("alpha");
-        CHIPDevice * device = GetConnectedDevice();
-        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeBatteryChargeStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Test Harness Client reads BatChargeState from Server DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err, 0));
-
-            VerifyOrReturn(CheckConstraintType("batteryChargeState", "", "enum8"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("batteryChargeState", [value unsignedCharValue], 0));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batteryChargeState", [value unsignedCharValue], 3));
             }
 
             NextTest();
@@ -83888,7 +83741,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("server list", [actualValue count], static_cast<uint32_t>(25)));
+                VerifyOrReturn(CheckValue("server list", [actualValue count], static_cast<uint32_t>(26)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 3UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 4UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 29UL));
@@ -83900,20 +83753,21 @@ private:
                 VerifyOrReturn(CheckValue("", actualValue[8], 44UL));
                 VerifyOrReturn(CheckValue("", actualValue[9], 45UL));
                 VerifyOrReturn(CheckValue("", actualValue[10], 46UL));
-                VerifyOrReturn(CheckValue("", actualValue[11], 48UL));
-                VerifyOrReturn(CheckValue("", actualValue[12], 49UL));
-                VerifyOrReturn(CheckValue("", actualValue[13], 50UL));
-                VerifyOrReturn(CheckValue("", actualValue[14], 51UL));
-                VerifyOrReturn(CheckValue("", actualValue[15], 52UL));
-                VerifyOrReturn(CheckValue("", actualValue[16], 53UL));
-                VerifyOrReturn(CheckValue("", actualValue[17], 54UL));
-                VerifyOrReturn(CheckValue("", actualValue[18], 55UL));
-                VerifyOrReturn(CheckValue("", actualValue[19], 60UL));
-                VerifyOrReturn(CheckValue("", actualValue[20], 62UL));
-                VerifyOrReturn(CheckValue("", actualValue[21], 63UL));
-                VerifyOrReturn(CheckValue("", actualValue[22], 64UL));
-                VerifyOrReturn(CheckValue("", actualValue[23], 65UL));
-                VerifyOrReturn(CheckValue("", actualValue[24], 1029UL));
+                VerifyOrReturn(CheckValue("", actualValue[11], 47UL));
+                VerifyOrReturn(CheckValue("", actualValue[12], 48UL));
+                VerifyOrReturn(CheckValue("", actualValue[13], 49UL));
+                VerifyOrReturn(CheckValue("", actualValue[14], 50UL));
+                VerifyOrReturn(CheckValue("", actualValue[15], 51UL));
+                VerifyOrReturn(CheckValue("", actualValue[16], 52UL));
+                VerifyOrReturn(CheckValue("", actualValue[17], 53UL));
+                VerifyOrReturn(CheckValue("", actualValue[18], 54UL));
+                VerifyOrReturn(CheckValue("", actualValue[19], 55UL));
+                VerifyOrReturn(CheckValue("", actualValue[20], 60UL));
+                VerifyOrReturn(CheckValue("", actualValue[21], 62UL));
+                VerifyOrReturn(CheckValue("", actualValue[22], 63UL));
+                VerifyOrReturn(CheckValue("", actualValue[23], 64UL));
+                VerifyOrReturn(CheckValue("", actualValue[24], 65UL));
+                VerifyOrReturn(CheckValue("", actualValue[25], 1029UL));
             }
 
             NextTest();
