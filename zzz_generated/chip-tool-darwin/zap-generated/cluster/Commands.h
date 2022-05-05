@@ -203,7 +203,9 @@ public:
                               NSLog(@"AccessControl.Acl response %@", [value description]);
                               err = [CHIPError errorToCHIPErrorCode:error];
 
-                              ChipLogError(chipTool, "AccessControl Acl Error: %s", chip::ErrorStr(err));
+                              if (error != nil) {
+                                  ChipLogError(chipTool, "AccessControl Acl read Error: %s", chip::ErrorStr(err));
+                              }
                               SetCommandExitStatus(err);
                           }];
         return err;
@@ -295,7 +297,9 @@ public:
                                      params:params
                           completionHandler:^(NSError * _Nullable error) {
                               chipError = [CHIPError errorToCHIPErrorCode:error];
-                              ChipLogError(chipTool, "AccessControl Acl Error: %s", chip::ErrorStr(chipError));
+                              if (error != nil) {
+                                  ChipLogError(chipTool, "AccessControl Acl write Error: %s", chip::ErrorStr(chipError));
+                              }
                               SetCommandExitStatus(chipError);
                           }];
         return chipError;
@@ -385,7 +389,9 @@ public:
                                     NSLog(@"AccessControl.Extension response %@", [value description]);
                                     err = [CHIPError errorToCHIPErrorCode:error];
 
-                                    ChipLogError(chipTool, "AccessControl Extension Error: %s", chip::ErrorStr(err));
+                                    if (error != nil) {
+                                        ChipLogError(chipTool, "AccessControl Extension read Error: %s", chip::ErrorStr(err));
+                                    }
                                     SetCommandExitStatus(err);
                                 }];
         return err;
@@ -431,13 +437,16 @@ public:
             value = array_0;
         }
 
-        [cluster writeAttributeExtensionWithValue:value
-                                           params:params
-                                completionHandler:^(NSError * _Nullable error) {
-                                    chipError = [CHIPError errorToCHIPErrorCode:error];
-                                    ChipLogError(chipTool, "AccessControl Extension Error: %s", chip::ErrorStr(chipError));
-                                    SetCommandExitStatus(chipError);
-                                }];
+        [cluster
+            writeAttributeExtensionWithValue:value
+                                      params:params
+                           completionHandler:^(NSError * _Nullable error) {
+                               chipError = [CHIPError errorToCHIPErrorCode:error];
+                               if (error != nil) {
+                                   ChipLogError(chipTool, "AccessControl Extension write Error: %s", chip::ErrorStr(chipError));
+                               }
+                               SetCommandExitStatus(chipError);
+                           }];
         return chipError;
     }
 
@@ -523,7 +532,9 @@ public:
             NSLog(@"AccessControl.SubjectsPerAccessControlEntry response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AccessControl SubjectsPerAccessControlEntry Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AccessControl SubjectsPerAccessControlEntry read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -611,7 +622,9 @@ public:
             NSLog(@"AccessControl.TargetsPerAccessControlEntry response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AccessControl TargetsPerAccessControlEntry Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AccessControl TargetsPerAccessControlEntry read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -698,7 +711,9 @@ public:
             NSLog(@"AccessControl.AccessControlEntriesPerFabric response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AccessControl AccessControlEntriesPerFabric Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AccessControl AccessControlEntriesPerFabric read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -785,7 +800,9 @@ public:
             NSLog(@"AccessControl.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AccessControl GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AccessControl GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -870,7 +887,9 @@ public:
             NSLog(@"AccessControl.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AccessControl AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AccessControl AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -955,7 +974,9 @@ public:
             NSLog(@"AccessControl.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AccessControl AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AccessControl AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -1039,7 +1060,9 @@ public:
             NSLog(@"AccessControl.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AccessControl ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AccessControl ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -1146,7 +1169,9 @@ public:
                          CHIPAccountLoginClusterGetSetupPINResponseParams * _Nullable values, NSError * _Nullable error) {
                          NSLog(@"Values: %@", values);
                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         if (error != nil) {
+                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         }
                          SetCommandExitStatus(chipError);
                      }];
         return chipError;
@@ -1188,7 +1213,9 @@ public:
         [cluster loginWithParams:params
                completionHandler:^(NSError * _Nullable error) {
                    chipError = [CHIPError errorToCHIPErrorCode:error];
-                   ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                   if (error != nil) {
+                       ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                   }
                    SetCommandExitStatus(chipError);
                }];
         return chipError;
@@ -1224,7 +1251,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster logoutWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -1260,7 +1289,9 @@ public:
             NSLog(@"AccountLogin.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AccountLogin GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AccountLogin GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -1345,7 +1376,9 @@ public:
             NSLog(@"AccountLogin.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AccountLogin AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AccountLogin AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -1430,7 +1463,9 @@ public:
             NSLog(@"AccountLogin.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AccountLogin AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AccountLogin AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -1514,7 +1549,9 @@ public:
             NSLog(@"AccountLogin.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AccountLogin ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AccountLogin ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -1622,7 +1659,9 @@ public:
         [cluster openBasicCommissioningWindowWithParams:params
                                       completionHandler:^(NSError * _Nullable error) {
                                           chipError = [CHIPError errorToCHIPErrorCode:error];
-                                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                          if (error != nil) {
+                                              ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                          }
                                           SetCommandExitStatus(chipError);
                                       }];
         return chipError;
@@ -1670,7 +1709,9 @@ public:
         [cluster openCommissioningWindowWithParams:params
                                  completionHandler:^(NSError * _Nullable error) {
                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                     ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                     if (error != nil) {
+                                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                     }
                                      SetCommandExitStatus(chipError);
                                  }];
         return chipError;
@@ -1711,7 +1752,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster revokeCommissioningWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -1749,7 +1792,9 @@ public:
             NSLog(@"AdministratorCommissioning.WindowStatus response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AdministratorCommissioning WindowStatus Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AdministratorCommissioning WindowStatus read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -1838,7 +1883,9 @@ public:
             NSLog(@"AdministratorCommissioning.AdminFabricIndex response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AdministratorCommissioning AdminFabricIndex Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AdministratorCommissioning AdminFabricIndex read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -1927,7 +1974,9 @@ public:
             NSLog(@"AdministratorCommissioning.AdminVendorId response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AdministratorCommissioning AdminVendorId Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AdministratorCommissioning AdminVendorId read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -2016,7 +2065,9 @@ public:
             NSLog(@"AdministratorCommissioning.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AdministratorCommissioning GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AdministratorCommissioning GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -2105,7 +2156,9 @@ public:
             NSLog(@"AdministratorCommissioning.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AdministratorCommissioning AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AdministratorCommissioning AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -2194,7 +2247,9 @@ public:
             NSLog(@"AdministratorCommissioning.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AdministratorCommissioning AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AdministratorCommissioning AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -2283,7 +2338,9 @@ public:
             NSLog(@"AdministratorCommissioning.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AdministratorCommissioning ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AdministratorCommissioning ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -2395,7 +2452,9 @@ public:
             NSLog(@"ApplicationBasic.VendorName response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ApplicationBasic VendorName Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ApplicationBasic VendorName read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -2483,7 +2542,9 @@ public:
             NSLog(@"ApplicationBasic.VendorID response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ApplicationBasic VendorID Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ApplicationBasic VendorID read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -2571,7 +2632,9 @@ public:
             NSLog(@"ApplicationBasic.ApplicationName response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ApplicationBasic ApplicationName Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ApplicationBasic ApplicationName read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -2659,7 +2722,9 @@ public:
             NSLog(@"ApplicationBasic.ProductID response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ApplicationBasic ProductID Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ApplicationBasic ProductID read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -2748,7 +2813,9 @@ public:
             NSLog(@"ApplicationBasic.Application response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ApplicationBasic Application Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ApplicationBasic Application read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -2838,7 +2905,9 @@ public:
             NSLog(@"ApplicationBasic.Status response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ApplicationBasic Status Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ApplicationBasic Status read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -2926,7 +2995,9 @@ public:
             NSLog(@"ApplicationBasic.ApplicationVersion response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ApplicationBasic ApplicationVersion Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ApplicationBasic ApplicationVersion read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -3015,7 +3086,9 @@ public:
             NSLog(@"ApplicationBasic.AllowedVendorList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ApplicationBasic AllowedVendorList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ApplicationBasic AllowedVendorList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -3104,7 +3177,9 @@ public:
             NSLog(@"ApplicationBasic.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ApplicationBasic GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ApplicationBasic GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -3193,7 +3268,9 @@ public:
             NSLog(@"ApplicationBasic.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ApplicationBasic AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ApplicationBasic AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -3282,7 +3359,9 @@ public:
             NSLog(@"ApplicationBasic.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ApplicationBasic AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ApplicationBasic AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -3370,7 +3449,9 @@ public:
             NSLog(@"ApplicationBasic.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ApplicationBasic ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ApplicationBasic ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -3486,7 +3567,9 @@ public:
                      CHIPApplicationLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable error) {
                      NSLog(@"Values: %@", values);
                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                     ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                     if (error != nil) {
+                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                     }
                      SetCommandExitStatus(chipError);
                  }];
         return chipError;
@@ -3536,7 +3619,9 @@ public:
                        CHIPApplicationLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable error) {
                        NSLog(@"Values: %@", values);
                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                       ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                       if (error != nil) {
+                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                       }
                        SetCommandExitStatus(chipError);
                    }];
         return chipError;
@@ -3585,7 +3670,9 @@ public:
                      CHIPApplicationLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable error) {
                      NSLog(@"Values: %@", values);
                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                     ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                     if (error != nil) {
+                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                     }
                      SetCommandExitStatus(chipError);
                  }];
         return chipError;
@@ -3625,7 +3712,9 @@ public:
             NSLog(@"ApplicationLauncher.CatalogList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ApplicationLauncher CatalogList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ApplicationLauncher CatalogList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -3714,7 +3803,9 @@ public:
             NSLog(@"ApplicationLauncher.CurrentApp response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ApplicationLauncher CurrentApp Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ApplicationLauncher CurrentApp read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -3770,7 +3861,10 @@ public:
                                             params:params
                                  completionHandler:^(NSError * _Nullable error) {
                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                     ChipLogError(chipTool, "ApplicationLauncher CurrentApp Error: %s", chip::ErrorStr(chipError));
+                                     if (error != nil) {
+                                         ChipLogError(
+                                             chipTool, "ApplicationLauncher CurrentApp write Error: %s", chip::ErrorStr(chipError));
+                                     }
                                      SetCommandExitStatus(chipError);
                                  }];
         return chipError;
@@ -3862,7 +3956,9 @@ public:
             NSLog(@"ApplicationLauncher.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ApplicationLauncher GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ApplicationLauncher GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -3951,7 +4047,9 @@ public:
             NSLog(@"ApplicationLauncher.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ApplicationLauncher AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ApplicationLauncher AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -4040,7 +4138,9 @@ public:
             NSLog(@"ApplicationLauncher.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ApplicationLauncher AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ApplicationLauncher AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -4128,7 +4228,9 @@ public:
             NSLog(@"ApplicationLauncher.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ApplicationLauncher ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ApplicationLauncher ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -4237,7 +4339,9 @@ public:
         [cluster renameOutputWithParams:params
                       completionHandler:^(NSError * _Nullable error) {
                           chipError = [CHIPError errorToCHIPErrorCode:error];
-                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          if (error != nil) {
+                              ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          }
                           SetCommandExitStatus(chipError);
                       }];
         return chipError;
@@ -4276,7 +4380,9 @@ public:
         [cluster selectOutputWithParams:params
                       completionHandler:^(NSError * _Nullable error) {
                           chipError = [CHIPError errorToCHIPErrorCode:error];
-                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          if (error != nil) {
+                              ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          }
                           SetCommandExitStatus(chipError);
                       }];
         return chipError;
@@ -4313,7 +4419,9 @@ public:
             NSLog(@"AudioOutput.OutputList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AudioOutput OutputList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AudioOutput OutputList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -4397,7 +4505,9 @@ public:
             NSLog(@"AudioOutput.CurrentOutput response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AudioOutput CurrentOutput Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AudioOutput CurrentOutput read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -4481,7 +4591,9 @@ public:
             NSLog(@"AudioOutput.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AudioOutput GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AudioOutput GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -4566,7 +4678,9 @@ public:
             NSLog(@"AudioOutput.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AudioOutput AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AudioOutput AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -4651,7 +4765,9 @@ public:
             NSLog(@"AudioOutput.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AudioOutput AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AudioOutput AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -4735,7 +4851,9 @@ public:
             NSLog(@"AudioOutput.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "AudioOutput ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "AudioOutput ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -4847,7 +4965,9 @@ public:
         [cluster barrierControlGoToPercentWithParams:params
                                    completionHandler:^(NSError * _Nullable error) {
                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                       ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                       if (error != nil) {
+                                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                       }
                                        SetCommandExitStatus(chipError);
                                    }];
         return chipError;
@@ -4882,7 +5002,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster barrierControlStopWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -4918,7 +5040,9 @@ public:
             NSLog(@"BarrierControl.BarrierMovingState response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BarrierControl BarrierMovingState Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BarrierControl BarrierMovingState read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -5003,7 +5127,9 @@ public:
             NSLog(@"BarrierControl.BarrierSafetyStatus response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BarrierControl BarrierSafetyStatus Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BarrierControl BarrierSafetyStatus read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -5088,7 +5214,9 @@ public:
             NSLog(@"BarrierControl.BarrierCapabilities response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BarrierControl BarrierCapabilities Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BarrierControl BarrierCapabilities read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -5173,7 +5301,9 @@ public:
             NSLog(@"BarrierControl.BarrierPosition response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BarrierControl BarrierPosition Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BarrierControl BarrierPosition read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -5257,7 +5387,9 @@ public:
             NSLog(@"BarrierControl.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BarrierControl GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BarrierControl GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -5342,7 +5474,9 @@ public:
             NSLog(@"BarrierControl.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BarrierControl AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BarrierControl AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -5427,7 +5561,9 @@ public:
             NSLog(@"BarrierControl.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BarrierControl AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BarrierControl AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -5511,7 +5647,9 @@ public:
             NSLog(@"BarrierControl.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BarrierControl ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BarrierControl ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -5635,7 +5773,9 @@ public:
             NSLog(@"Basic.DataModelRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic DataModelRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic DataModelRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -5719,7 +5859,9 @@ public:
             NSLog(@"Basic.VendorName response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic VendorName Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic VendorName read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -5803,7 +5945,9 @@ public:
             NSLog(@"Basic.VendorID response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic VendorID Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic VendorID read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -5887,7 +6031,9 @@ public:
             NSLog(@"Basic.ProductName response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic ProductName Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic ProductName read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -5971,7 +6117,9 @@ public:
             NSLog(@"Basic.ProductID response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic ProductID Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic ProductID read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -6055,7 +6203,9 @@ public:
             NSLog(@"Basic.NodeLabel response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic NodeLabel Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic NodeLabel read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -6095,7 +6245,9 @@ public:
                                            params:params
                                 completionHandler:^(NSError * _Nullable error) {
                                     chipError = [CHIPError errorToCHIPErrorCode:error];
-                                    ChipLogError(chipTool, "Basic NodeLabel Error: %s", chip::ErrorStr(chipError));
+                                    if (error != nil) {
+                                        ChipLogError(chipTool, "Basic NodeLabel write Error: %s", chip::ErrorStr(chipError));
+                                    }
                                     SetCommandExitStatus(chipError);
                                 }];
         return chipError;
@@ -6180,7 +6332,9 @@ public:
             NSLog(@"Basic.Location response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic Location Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic Location read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -6220,7 +6374,9 @@ public:
                                           params:params
                                completionHandler:^(NSError * _Nullable error) {
                                    chipError = [CHIPError errorToCHIPErrorCode:error];
-                                   ChipLogError(chipTool, "Basic Location Error: %s", chip::ErrorStr(chipError));
+                                   if (error != nil) {
+                                       ChipLogError(chipTool, "Basic Location write Error: %s", chip::ErrorStr(chipError));
+                                   }
                                    SetCommandExitStatus(chipError);
                                }];
         return chipError;
@@ -6305,7 +6461,9 @@ public:
             NSLog(@"Basic.HardwareVersion response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic HardwareVersion Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic HardwareVersion read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -6389,7 +6547,9 @@ public:
             NSLog(@"Basic.HardwareVersionString response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic HardwareVersionString Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic HardwareVersionString read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -6474,7 +6634,9 @@ public:
             NSLog(@"Basic.SoftwareVersion response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic SoftwareVersion Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic SoftwareVersion read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -6558,7 +6720,9 @@ public:
             NSLog(@"Basic.SoftwareVersionString response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic SoftwareVersionString Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic SoftwareVersionString read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -6643,7 +6807,9 @@ public:
             NSLog(@"Basic.ManufacturingDate response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic ManufacturingDate Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic ManufacturingDate read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -6727,7 +6893,9 @@ public:
             NSLog(@"Basic.PartNumber response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic PartNumber Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic PartNumber read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -6811,7 +6979,9 @@ public:
             NSLog(@"Basic.ProductURL response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic ProductURL Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic ProductURL read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -6895,7 +7065,9 @@ public:
             NSLog(@"Basic.ProductLabel response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic ProductLabel Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic ProductLabel read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -6979,7 +7151,9 @@ public:
             NSLog(@"Basic.SerialNumber response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic SerialNumber Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic SerialNumber read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -7063,7 +7237,9 @@ public:
             NSLog(@"Basic.LocalConfigDisabled response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic LocalConfigDisabled Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic LocalConfigDisabled read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -7097,14 +7273,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithBool:mValue];
 
-        [cluster
-            writeAttributeLocalConfigDisabledWithValue:value
-                                                params:params
-                                     completionHandler:^(NSError * _Nullable error) {
-                                         chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "Basic LocalConfigDisabled Error: %s", chip::ErrorStr(chipError));
-                                         SetCommandExitStatus(chipError);
-                                     }];
+        [cluster writeAttributeLocalConfigDisabledWithValue:value
+                                                     params:params
+                                          completionHandler:^(NSError * _Nullable error) {
+                                              chipError = [CHIPError errorToCHIPErrorCode:error];
+                                              if (error != nil) {
+                                                  ChipLogError(chipTool, "Basic LocalConfigDisabled write Error: %s",
+                                                      chip::ErrorStr(chipError));
+                                              }
+                                              SetCommandExitStatus(chipError);
+                                          }];
         return chipError;
     }
 
@@ -7187,7 +7365,9 @@ public:
             NSLog(@"Basic.Reachable response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic Reachable Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic Reachable read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -7271,7 +7451,9 @@ public:
             NSLog(@"Basic.UniqueID response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic UniqueID Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic UniqueID read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -7356,7 +7538,9 @@ public:
             NSLog(@"Basic.CapabilityMinima response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic CapabilityMinima Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic CapabilityMinima read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -7441,7 +7625,9 @@ public:
             NSLog(@"Basic.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -7525,7 +7711,9 @@ public:
             NSLog(@"Basic.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -7609,7 +7797,9 @@ public:
             NSLog(@"Basic.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -7693,7 +7883,9 @@ public:
             NSLog(@"Basic.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Basic ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Basic ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -7803,7 +7995,9 @@ public:
             NSLog(@"BinaryInputBasic.OutOfService response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BinaryInputBasic OutOfService Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BinaryInputBasic OutOfService read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -7843,7 +8037,10 @@ public:
                                               params:params
                                    completionHandler:^(NSError * _Nullable error) {
                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                       ChipLogError(chipTool, "BinaryInputBasic OutOfService Error: %s", chip::ErrorStr(chipError));
+                                       if (error != nil) {
+                                           ChipLogError(chipTool, "BinaryInputBasic OutOfService write Error: %s",
+                                               chip::ErrorStr(chipError));
+                                       }
                                        SetCommandExitStatus(chipError);
                                    }];
         return chipError;
@@ -7932,7 +8129,9 @@ public:
             NSLog(@"BinaryInputBasic.PresentValue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BinaryInputBasic PresentValue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BinaryInputBasic PresentValue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -7972,7 +8171,10 @@ public:
                                               params:params
                                    completionHandler:^(NSError * _Nullable error) {
                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                       ChipLogError(chipTool, "BinaryInputBasic PresentValue Error: %s", chip::ErrorStr(chipError));
+                                       if (error != nil) {
+                                           ChipLogError(chipTool, "BinaryInputBasic PresentValue write Error: %s",
+                                               chip::ErrorStr(chipError));
+                                       }
                                        SetCommandExitStatus(chipError);
                                    }];
         return chipError;
@@ -8061,7 +8263,9 @@ public:
             NSLog(@"BinaryInputBasic.StatusFlags response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BinaryInputBasic StatusFlags Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BinaryInputBasic StatusFlags read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -8149,7 +8353,9 @@ public:
             NSLog(@"BinaryInputBasic.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BinaryInputBasic GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BinaryInputBasic GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -8238,7 +8444,9 @@ public:
             NSLog(@"BinaryInputBasic.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BinaryInputBasic AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BinaryInputBasic AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -8327,7 +8535,9 @@ public:
             NSLog(@"BinaryInputBasic.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BinaryInputBasic AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BinaryInputBasic AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -8415,7 +8625,9 @@ public:
             NSLog(@"BinaryInputBasic.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BinaryInputBasic ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BinaryInputBasic ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -8520,7 +8732,9 @@ public:
                                   NSLog(@"Binding.Binding response %@", [value description]);
                                   err = [CHIPError errorToCHIPErrorCode:error];
 
-                                  ChipLogError(chipTool, "Binding Binding Error: %s", chip::ErrorStr(err));
+                                  if (error != nil) {
+                                      ChipLogError(chipTool, "Binding Binding read Error: %s", chip::ErrorStr(err));
+                                  }
                                   SetCommandExitStatus(err);
                               }];
         return err;
@@ -8589,7 +8803,9 @@ public:
                                          params:params
                               completionHandler:^(NSError * _Nullable error) {
                                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                                  ChipLogError(chipTool, "Binding Binding Error: %s", chip::ErrorStr(chipError));
+                                  if (error != nil) {
+                                      ChipLogError(chipTool, "Binding Binding write Error: %s", chip::ErrorStr(chipError));
+                                  }
                                   SetCommandExitStatus(chipError);
                               }];
         return chipError;
@@ -8675,7 +8891,9 @@ public:
             NSLog(@"Binding.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Binding GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Binding GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -8760,7 +8978,9 @@ public:
             NSLog(@"Binding.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Binding AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Binding AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -8844,7 +9064,9 @@ public:
             NSLog(@"Binding.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Binding AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Binding AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -8928,7 +9150,9 @@ public:
             NSLog(@"Binding.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Binding ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Binding ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -9029,7 +9253,9 @@ public:
             NSLog(@"BooleanState.StateValue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BooleanState StateValue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BooleanState StateValue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -9113,7 +9339,9 @@ public:
             NSLog(@"BooleanState.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BooleanState GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BooleanState GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -9198,7 +9426,9 @@ public:
             NSLog(@"BooleanState.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BooleanState AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BooleanState AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -9283,7 +9513,9 @@ public:
             NSLog(@"BooleanState.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BooleanState AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BooleanState AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -9367,7 +9599,9 @@ public:
             NSLog(@"BooleanState.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BooleanState ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BooleanState ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -9486,7 +9720,9 @@ public:
         [cluster disableActionWithParams:params
                        completionHandler:^(NSError * _Nullable error) {
                            chipError = [CHIPError errorToCHIPErrorCode:error];
-                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           if (error != nil) {
+                               ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           }
                            SetCommandExitStatus(chipError);
                        }];
         return chipError;
@@ -9529,7 +9765,9 @@ public:
         [cluster disableActionWithDurationWithParams:params
                                    completionHandler:^(NSError * _Nullable error) {
                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                       ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                       if (error != nil) {
+                                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                       }
                                        SetCommandExitStatus(chipError);
                                    }];
         return chipError;
@@ -9571,7 +9809,9 @@ public:
         [cluster enableActionWithParams:params
                       completionHandler:^(NSError * _Nullable error) {
                           chipError = [CHIPError errorToCHIPErrorCode:error];
-                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          if (error != nil) {
+                              ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          }
                           SetCommandExitStatus(chipError);
                       }];
         return chipError;
@@ -9614,7 +9854,9 @@ public:
         [cluster enableActionWithDurationWithParams:params
                                   completionHandler:^(NSError * _Nullable error) {
                                       chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                      if (error != nil) {
+                                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                      }
                                       SetCommandExitStatus(chipError);
                                   }];
         return chipError;
@@ -9656,7 +9898,9 @@ public:
         [cluster instantActionWithParams:params
                        completionHandler:^(NSError * _Nullable error) {
                            chipError = [CHIPError errorToCHIPErrorCode:error];
-                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           if (error != nil) {
+                               ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           }
                            SetCommandExitStatus(chipError);
                        }];
         return chipError;
@@ -9699,7 +9943,9 @@ public:
         [cluster instantActionWithTransitionWithParams:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -9741,7 +9987,9 @@ public:
         [cluster pauseActionWithParams:params
                      completionHandler:^(NSError * _Nullable error) {
                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         if (error != nil) {
+                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         }
                          SetCommandExitStatus(chipError);
                      }];
         return chipError;
@@ -9784,7 +10032,9 @@ public:
         [cluster pauseActionWithDurationWithParams:params
                                  completionHandler:^(NSError * _Nullable error) {
                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                     ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                     if (error != nil) {
+                                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                     }
                                      SetCommandExitStatus(chipError);
                                  }];
         return chipError;
@@ -9826,7 +10076,9 @@ public:
         [cluster resumeActionWithParams:params
                       completionHandler:^(NSError * _Nullable error) {
                           chipError = [CHIPError errorToCHIPErrorCode:error];
-                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          if (error != nil) {
+                              ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          }
                           SetCommandExitStatus(chipError);
                       }];
         return chipError;
@@ -9867,7 +10119,9 @@ public:
         [cluster startActionWithParams:params
                      completionHandler:^(NSError * _Nullable error) {
                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         if (error != nil) {
+                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         }
                          SetCommandExitStatus(chipError);
                      }];
         return chipError;
@@ -9910,7 +10164,9 @@ public:
         [cluster startActionWithDurationWithParams:params
                                  completionHandler:^(NSError * _Nullable error) {
                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                     ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                     if (error != nil) {
+                                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                     }
                                      SetCommandExitStatus(chipError);
                                  }];
         return chipError;
@@ -9952,7 +10208,9 @@ public:
         [cluster stopActionWithParams:params
                     completionHandler:^(NSError * _Nullable error) {
                         chipError = [CHIPError errorToCHIPErrorCode:error];
-                        ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                        if (error != nil) {
+                            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                        }
                         SetCommandExitStatus(chipError);
                     }];
         return chipError;
@@ -9990,7 +10248,9 @@ public:
             NSLog(@"BridgedActions.ActionList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedActions ActionList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedActions ActionList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -10074,7 +10334,9 @@ public:
             NSLog(@"BridgedActions.EndpointList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedActions EndpointList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedActions EndpointList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -10158,7 +10420,9 @@ public:
             NSLog(@"BridgedActions.SetupUrl response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedActions SetupUrl Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedActions SetupUrl read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -10242,7 +10506,9 @@ public:
             NSLog(@"BridgedActions.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedActions GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedActions GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -10327,7 +10593,9 @@ public:
             NSLog(@"BridgedActions.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedActions AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedActions AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -10412,7 +10680,9 @@ public:
             NSLog(@"BridgedActions.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedActions AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedActions AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -10496,7 +10766,9 @@ public:
             NSLog(@"BridgedActions.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedActions ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedActions ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -10616,7 +10888,9 @@ public:
             NSLog(@"BridgedDeviceBasic.VendorName response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedDeviceBasic VendorName Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedDeviceBasic VendorName read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -10704,7 +10978,9 @@ public:
             NSLog(@"BridgedDeviceBasic.VendorID response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedDeviceBasic VendorID Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedDeviceBasic VendorID read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -10792,7 +11068,9 @@ public:
             NSLog(@"BridgedDeviceBasic.ProductName response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedDeviceBasic ProductName Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedDeviceBasic ProductName read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -10880,7 +11158,9 @@ public:
             NSLog(@"BridgedDeviceBasic.NodeLabel response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedDeviceBasic NodeLabel Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedDeviceBasic NodeLabel read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -10922,7 +11202,10 @@ public:
                                            params:params
                                 completionHandler:^(NSError * _Nullable error) {
                                     chipError = [CHIPError errorToCHIPErrorCode:error];
-                                    ChipLogError(chipTool, "BridgedDeviceBasic NodeLabel Error: %s", chip::ErrorStr(chipError));
+                                    if (error != nil) {
+                                        ChipLogError(
+                                            chipTool, "BridgedDeviceBasic NodeLabel write Error: %s", chip::ErrorStr(chipError));
+                                    }
                                     SetCommandExitStatus(chipError);
                                 }];
         return chipError;
@@ -11011,7 +11294,9 @@ public:
             NSLog(@"BridgedDeviceBasic.HardwareVersion response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedDeviceBasic HardwareVersion Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedDeviceBasic HardwareVersion read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -11100,7 +11385,9 @@ public:
             NSLog(@"BridgedDeviceBasic.HardwareVersionString response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedDeviceBasic HardwareVersionString Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedDeviceBasic HardwareVersionString read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -11189,7 +11476,9 @@ public:
             NSLog(@"BridgedDeviceBasic.SoftwareVersion response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedDeviceBasic SoftwareVersion Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedDeviceBasic SoftwareVersion read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -11278,7 +11567,9 @@ public:
             NSLog(@"BridgedDeviceBasic.SoftwareVersionString response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedDeviceBasic SoftwareVersionString Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedDeviceBasic SoftwareVersionString read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -11367,7 +11658,9 @@ public:
             NSLog(@"BridgedDeviceBasic.ManufacturingDate response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedDeviceBasic ManufacturingDate Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedDeviceBasic ManufacturingDate read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -11456,7 +11749,9 @@ public:
             NSLog(@"BridgedDeviceBasic.PartNumber response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedDeviceBasic PartNumber Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedDeviceBasic PartNumber read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -11544,7 +11839,9 @@ public:
             NSLog(@"BridgedDeviceBasic.ProductURL response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedDeviceBasic ProductURL Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedDeviceBasic ProductURL read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -11632,7 +11929,9 @@ public:
             NSLog(@"BridgedDeviceBasic.ProductLabel response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedDeviceBasic ProductLabel Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedDeviceBasic ProductLabel read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -11720,7 +12019,9 @@ public:
             NSLog(@"BridgedDeviceBasic.SerialNumber response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedDeviceBasic SerialNumber Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedDeviceBasic SerialNumber read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -11808,7 +12109,9 @@ public:
             NSLog(@"BridgedDeviceBasic.Reachable response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedDeviceBasic Reachable Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedDeviceBasic Reachable read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -11896,7 +12199,9 @@ public:
             NSLog(@"BridgedDeviceBasic.UniqueID response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedDeviceBasic UniqueID Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedDeviceBasic UniqueID read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -11984,7 +12289,9 @@ public:
             NSLog(@"BridgedDeviceBasic.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedDeviceBasic GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedDeviceBasic GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -12073,7 +12380,9 @@ public:
             NSLog(@"BridgedDeviceBasic.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedDeviceBasic AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedDeviceBasic AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -12162,7 +12471,9 @@ public:
             NSLog(@"BridgedDeviceBasic.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedDeviceBasic AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedDeviceBasic AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -12250,7 +12561,9 @@ public:
             NSLog(@"BridgedDeviceBasic.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "BridgedDeviceBasic ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "BridgedDeviceBasic ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -12361,7 +12674,9 @@ public:
                   completionHandler:^(CHIPChannelClusterChangeChannelResponseParams * _Nullable values, NSError * _Nullable error) {
                       NSLog(@"Values: %@", values);
                       chipError = [CHIPError errorToCHIPErrorCode:error];
-                      ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                      if (error != nil) {
+                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                      }
                       SetCommandExitStatus(chipError);
                   }];
         return chipError;
@@ -12401,7 +12716,9 @@ public:
         [cluster changeChannelByNumberWithParams:params
                                completionHandler:^(NSError * _Nullable error) {
                                    chipError = [CHIPError errorToCHIPErrorCode:error];
-                                   ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                   if (error != nil) {
+                                       ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                   }
                                    SetCommandExitStatus(chipError);
                                }];
         return chipError;
@@ -12440,7 +12757,9 @@ public:
         [cluster skipChannelWithParams:params
                      completionHandler:^(NSError * _Nullable error) {
                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         if (error != nil) {
+                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         }
                          SetCommandExitStatus(chipError);
                      }];
         return chipError;
@@ -12477,7 +12796,9 @@ public:
             NSLog(@"Channel.ChannelList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Channel ChannelList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Channel ChannelList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -12562,7 +12883,9 @@ public:
                 NSLog(@"Channel.Lineup response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "Channel Lineup Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "Channel Lineup read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -12648,7 +12971,9 @@ public:
             NSLog(@"Channel.CurrentChannel response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Channel CurrentChannel Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Channel CurrentChannel read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -12733,7 +13058,9 @@ public:
             NSLog(@"Channel.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Channel GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Channel GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -12818,7 +13145,9 @@ public:
             NSLog(@"Channel.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Channel AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Channel AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -12902,7 +13231,9 @@ public:
             NSLog(@"Channel.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Channel AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Channel AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -12986,7 +13317,9 @@ public:
             NSLog(@"Channel.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Channel ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Channel ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -13169,7 +13502,9 @@ public:
         [cluster colorLoopSetWithParams:params
                       completionHandler:^(NSError * _Nullable error) {
                           chipError = [CHIPError errorToCHIPErrorCode:error];
-                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          if (error != nil) {
+                              ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          }
                           SetCommandExitStatus(chipError);
                       }];
         return chipError;
@@ -13219,7 +13554,9 @@ public:
         [cluster enhancedMoveHueWithParams:params
                          completionHandler:^(NSError * _Nullable error) {
                              chipError = [CHIPError errorToCHIPErrorCode:error];
-                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                             if (error != nil) {
+                                 ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                             }
                              SetCommandExitStatus(chipError);
                          }];
         return chipError;
@@ -13268,7 +13605,9 @@ public:
         [cluster enhancedMoveToHueWithParams:params
                            completionHandler:^(NSError * _Nullable error) {
                                chipError = [CHIPError errorToCHIPErrorCode:error];
-                               ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                               if (error != nil) {
+                                   ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                               }
                                SetCommandExitStatus(chipError);
                            }];
         return chipError;
@@ -13318,7 +13657,9 @@ public:
         [cluster enhancedMoveToHueAndSaturationWithParams:params
                                         completionHandler:^(NSError * _Nullable error) {
                                             chipError = [CHIPError errorToCHIPErrorCode:error];
-                                            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                            if (error != nil) {
+                                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                            }
                                             SetCommandExitStatus(chipError);
                                         }];
         return chipError;
@@ -13368,7 +13709,9 @@ public:
         [cluster enhancedStepHueWithParams:params
                          completionHandler:^(NSError * _Nullable error) {
                              chipError = [CHIPError errorToCHIPErrorCode:error];
-                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                             if (error != nil) {
+                                 ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                             }
                              SetCommandExitStatus(chipError);
                          }];
         return chipError;
@@ -13416,7 +13759,9 @@ public:
         [cluster moveColorWithParams:params
                    completionHandler:^(NSError * _Nullable error) {
                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                       ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                       if (error != nil) {
+                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                       }
                        SetCommandExitStatus(chipError);
                    }];
         return chipError;
@@ -13467,7 +13812,9 @@ public:
         [cluster moveColorTemperatureWithParams:params
                               completionHandler:^(NSError * _Nullable error) {
                                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                                  ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                  if (error != nil) {
+                                      ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                  }
                                   SetCommandExitStatus(chipError);
                               }];
         return chipError;
@@ -13516,7 +13863,9 @@ public:
         [cluster moveHueWithParams:params
                  completionHandler:^(NSError * _Nullable error) {
                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                     ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                     if (error != nil) {
+                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                     }
                      SetCommandExitStatus(chipError);
                  }];
         return chipError;
@@ -13563,7 +13912,9 @@ public:
         [cluster moveSaturationWithParams:params
                         completionHandler:^(NSError * _Nullable error) {
                             chipError = [CHIPError errorToCHIPErrorCode:error];
-                            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                            if (error != nil) {
+                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                            }
                             SetCommandExitStatus(chipError);
                         }];
         return chipError;
@@ -13612,7 +13963,9 @@ public:
         [cluster moveToColorWithParams:params
                      completionHandler:^(NSError * _Nullable error) {
                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         if (error != nil) {
+                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         }
                          SetCommandExitStatus(chipError);
                      }];
         return chipError;
@@ -13660,7 +14013,9 @@ public:
         [cluster moveToColorTemperatureWithParams:params
                                 completionHandler:^(NSError * _Nullable error) {
                                     chipError = [CHIPError errorToCHIPErrorCode:error];
-                                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                    if (error != nil) {
+                                        ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                    }
                                     SetCommandExitStatus(chipError);
                                 }];
         return chipError;
@@ -13709,7 +14064,9 @@ public:
         [cluster moveToHueWithParams:params
                    completionHandler:^(NSError * _Nullable error) {
                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                       ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                       if (error != nil) {
+                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                       }
                        SetCommandExitStatus(chipError);
                    }];
         return chipError;
@@ -13759,7 +14116,9 @@ public:
         [cluster moveToHueAndSaturationWithParams:params
                                 completionHandler:^(NSError * _Nullable error) {
                                     chipError = [CHIPError errorToCHIPErrorCode:error];
-                                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                    if (error != nil) {
+                                        ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                    }
                                     SetCommandExitStatus(chipError);
                                 }];
         return chipError;
@@ -13807,7 +14166,9 @@ public:
         [cluster moveToSaturationWithParams:params
                           completionHandler:^(NSError * _Nullable error) {
                               chipError = [CHIPError errorToCHIPErrorCode:error];
-                              ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                              if (error != nil) {
+                                  ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                              }
                               SetCommandExitStatus(chipError);
                           }];
         return chipError;
@@ -13856,7 +14217,9 @@ public:
         [cluster stepColorWithParams:params
                    completionHandler:^(NSError * _Nullable error) {
                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                       ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                       if (error != nil) {
+                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                       }
                        SetCommandExitStatus(chipError);
                    }];
         return chipError;
@@ -13910,7 +14273,9 @@ public:
         [cluster stepColorTemperatureWithParams:params
                               completionHandler:^(NSError * _Nullable error) {
                                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                                  ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                  if (error != nil) {
+                                      ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                  }
                                   SetCommandExitStatus(chipError);
                               }];
         return chipError;
@@ -13962,7 +14327,9 @@ public:
         [cluster stepHueWithParams:params
                  completionHandler:^(NSError * _Nullable error) {
                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                     ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                     if (error != nil) {
+                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                     }
                      SetCommandExitStatus(chipError);
                  }];
         return chipError;
@@ -14012,7 +14379,9 @@ public:
         [cluster stepSaturationWithParams:params
                         completionHandler:^(NSError * _Nullable error) {
                             chipError = [CHIPError errorToCHIPErrorCode:error];
-                            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                            if (error != nil) {
+                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                            }
                             SetCommandExitStatus(chipError);
                         }];
         return chipError;
@@ -14056,7 +14425,9 @@ public:
         [cluster stopMoveStepWithParams:params
                       completionHandler:^(NSError * _Nullable error) {
                           chipError = [CHIPError errorToCHIPErrorCode:error];
-                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          if (error != nil) {
+                              ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          }
                           SetCommandExitStatus(chipError);
                       }];
         return chipError;
@@ -14094,7 +14465,9 @@ public:
             NSLog(@"ColorControl.CurrentHue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl CurrentHue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl CurrentHue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -14178,7 +14551,9 @@ public:
             NSLog(@"ColorControl.CurrentSaturation response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl CurrentSaturation Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl CurrentSaturation read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -14262,7 +14637,9 @@ public:
             NSLog(@"ColorControl.RemainingTime response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl RemainingTime Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl RemainingTime read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -14346,7 +14723,9 @@ public:
             NSLog(@"ColorControl.CurrentX response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl CurrentX Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl CurrentX read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -14430,7 +14809,9 @@ public:
             NSLog(@"ColorControl.CurrentY response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl CurrentY Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl CurrentY read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -14514,7 +14895,9 @@ public:
             NSLog(@"ColorControl.DriftCompensation response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl DriftCompensation Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl DriftCompensation read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -14598,7 +14981,9 @@ public:
             NSLog(@"ColorControl.CompensationText response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl CompensationText Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl CompensationText read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -14682,7 +15067,9 @@ public:
             NSLog(@"ColorControl.ColorTemperature response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl ColorTemperature Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl ColorTemperature read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -14766,7 +15153,9 @@ public:
             NSLog(@"ColorControl.ColorMode response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl ColorMode Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl ColorMode read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -14850,7 +15239,9 @@ public:
             NSLog(@"ColorControl.ColorControlOptions response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl ColorControlOptions Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl ColorControlOptions read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -14888,8 +15279,10 @@ public:
                                                      params:params
                                           completionHandler:^(NSError * _Nullable error) {
                                               chipError = [CHIPError errorToCHIPErrorCode:error];
-                                              ChipLogError(chipTool, "ColorControl ColorControlOptions Error: %s",
-                                                  chip::ErrorStr(chipError));
+                                              if (error != nil) {
+                                                  ChipLogError(chipTool, "ColorControl ColorControlOptions write Error: %s",
+                                                      chip::ErrorStr(chipError));
+                                              }
                                               SetCommandExitStatus(chipError);
                                           }];
         return chipError;
@@ -14975,7 +15368,9 @@ public:
             NSLog(@"ColorControl.NumberOfPrimaries response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl NumberOfPrimaries Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl NumberOfPrimaries read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -15059,7 +15454,9 @@ public:
             NSLog(@"ColorControl.Primary1X response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl Primary1X Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl Primary1X read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -15143,7 +15540,9 @@ public:
             NSLog(@"ColorControl.Primary1Y response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl Primary1Y Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl Primary1Y read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -15227,7 +15626,9 @@ public:
             NSLog(@"ColorControl.Primary1Intensity response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl Primary1Intensity Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl Primary1Intensity read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -15311,7 +15712,9 @@ public:
             NSLog(@"ColorControl.Primary2X response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl Primary2X Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl Primary2X read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -15395,7 +15798,9 @@ public:
             NSLog(@"ColorControl.Primary2Y response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl Primary2Y Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl Primary2Y read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -15479,7 +15884,9 @@ public:
             NSLog(@"ColorControl.Primary2Intensity response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl Primary2Intensity Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl Primary2Intensity read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -15563,7 +15970,9 @@ public:
             NSLog(@"ColorControl.Primary3X response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl Primary3X Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl Primary3X read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -15647,7 +16056,9 @@ public:
             NSLog(@"ColorControl.Primary3Y response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl Primary3Y Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl Primary3Y read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -15731,7 +16142,9 @@ public:
             NSLog(@"ColorControl.Primary3Intensity response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl Primary3Intensity Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl Primary3Intensity read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -15815,7 +16228,9 @@ public:
             NSLog(@"ColorControl.Primary4X response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl Primary4X Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl Primary4X read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -15899,7 +16314,9 @@ public:
             NSLog(@"ColorControl.Primary4Y response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl Primary4Y Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl Primary4Y read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -15983,7 +16400,9 @@ public:
             NSLog(@"ColorControl.Primary4Intensity response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl Primary4Intensity Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl Primary4Intensity read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -16067,7 +16486,9 @@ public:
             NSLog(@"ColorControl.Primary5X response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl Primary5X Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl Primary5X read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -16151,7 +16572,9 @@ public:
             NSLog(@"ColorControl.Primary5Y response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl Primary5Y Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl Primary5Y read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -16235,7 +16658,9 @@ public:
             NSLog(@"ColorControl.Primary5Intensity response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl Primary5Intensity Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl Primary5Intensity read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -16319,7 +16744,9 @@ public:
             NSLog(@"ColorControl.Primary6X response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl Primary6X Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl Primary6X read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -16403,7 +16830,9 @@ public:
             NSLog(@"ColorControl.Primary6Y response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl Primary6Y Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl Primary6Y read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -16487,7 +16916,9 @@ public:
             NSLog(@"ColorControl.Primary6Intensity response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl Primary6Intensity Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl Primary6Intensity read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -16571,7 +17002,9 @@ public:
             NSLog(@"ColorControl.WhitePointX response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl WhitePointX Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl WhitePointX read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -16605,13 +17038,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
-        [cluster writeAttributeWhitePointXWithValue:value
-                                             params:params
-                                  completionHandler:^(NSError * _Nullable error) {
-                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogError(chipTool, "ColorControl WhitePointX Error: %s", chip::ErrorStr(chipError));
-                                      SetCommandExitStatus(chipError);
-                                  }];
+        [cluster
+            writeAttributeWhitePointXWithValue:value
+                                        params:params
+                             completionHandler:^(NSError * _Nullable error) {
+                                 chipError = [CHIPError errorToCHIPErrorCode:error];
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "ColorControl WhitePointX write Error: %s", chip::ErrorStr(chipError));
+                                 }
+                                 SetCommandExitStatus(chipError);
+                             }];
         return chipError;
     }
 
@@ -16694,7 +17130,9 @@ public:
             NSLog(@"ColorControl.WhitePointY response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl WhitePointY Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl WhitePointY read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -16728,13 +17166,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
-        [cluster writeAttributeWhitePointYWithValue:value
-                                             params:params
-                                  completionHandler:^(NSError * _Nullable error) {
-                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogError(chipTool, "ColorControl WhitePointY Error: %s", chip::ErrorStr(chipError));
-                                      SetCommandExitStatus(chipError);
-                                  }];
+        [cluster
+            writeAttributeWhitePointYWithValue:value
+                                        params:params
+                             completionHandler:^(NSError * _Nullable error) {
+                                 chipError = [CHIPError errorToCHIPErrorCode:error];
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "ColorControl WhitePointY write Error: %s", chip::ErrorStr(chipError));
+                                 }
+                                 SetCommandExitStatus(chipError);
+                             }];
         return chipError;
     }
 
@@ -16817,7 +17258,9 @@ public:
             NSLog(@"ColorControl.ColorPointRX response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl ColorPointRX Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl ColorPointRX read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -16855,7 +17298,10 @@ public:
                                               params:params
                                    completionHandler:^(NSError * _Nullable error) {
                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                       ChipLogError(chipTool, "ColorControl ColorPointRX Error: %s", chip::ErrorStr(chipError));
+                                       if (error != nil) {
+                                           ChipLogError(
+                                               chipTool, "ColorControl ColorPointRX write Error: %s", chip::ErrorStr(chipError));
+                                       }
                                        SetCommandExitStatus(chipError);
                                    }];
         return chipError;
@@ -16940,7 +17386,9 @@ public:
             NSLog(@"ColorControl.ColorPointRY response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl ColorPointRY Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl ColorPointRY read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -16978,7 +17426,10 @@ public:
                                               params:params
                                    completionHandler:^(NSError * _Nullable error) {
                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                       ChipLogError(chipTool, "ColorControl ColorPointRY Error: %s", chip::ErrorStr(chipError));
+                                       if (error != nil) {
+                                           ChipLogError(
+                                               chipTool, "ColorControl ColorPointRY write Error: %s", chip::ErrorStr(chipError));
+                                       }
                                        SetCommandExitStatus(chipError);
                                    }];
         return chipError;
@@ -17063,7 +17514,9 @@ public:
             NSLog(@"ColorControl.ColorPointRIntensity response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl ColorPointRIntensity Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl ColorPointRIntensity read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -17101,8 +17554,10 @@ public:
                                                       params:params
                                            completionHandler:^(NSError * _Nullable error) {
                                                chipError = [CHIPError errorToCHIPErrorCode:error];
-                                               ChipLogError(chipTool, "ColorControl ColorPointRIntensity Error: %s",
-                                                   chip::ErrorStr(chipError));
+                                               if (error != nil) {
+                                                   ChipLogError(chipTool, "ColorControl ColorPointRIntensity write Error: %s",
+                                                       chip::ErrorStr(chipError));
+                                               }
                                                SetCommandExitStatus(chipError);
                                            }];
         return chipError;
@@ -17188,7 +17643,9 @@ public:
             NSLog(@"ColorControl.ColorPointGX response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl ColorPointGX Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl ColorPointGX read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -17226,7 +17683,10 @@ public:
                                               params:params
                                    completionHandler:^(NSError * _Nullable error) {
                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                       ChipLogError(chipTool, "ColorControl ColorPointGX Error: %s", chip::ErrorStr(chipError));
+                                       if (error != nil) {
+                                           ChipLogError(
+                                               chipTool, "ColorControl ColorPointGX write Error: %s", chip::ErrorStr(chipError));
+                                       }
                                        SetCommandExitStatus(chipError);
                                    }];
         return chipError;
@@ -17311,7 +17771,9 @@ public:
             NSLog(@"ColorControl.ColorPointGY response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl ColorPointGY Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl ColorPointGY read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -17349,7 +17811,10 @@ public:
                                               params:params
                                    completionHandler:^(NSError * _Nullable error) {
                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                       ChipLogError(chipTool, "ColorControl ColorPointGY Error: %s", chip::ErrorStr(chipError));
+                                       if (error != nil) {
+                                           ChipLogError(
+                                               chipTool, "ColorControl ColorPointGY write Error: %s", chip::ErrorStr(chipError));
+                                       }
                                        SetCommandExitStatus(chipError);
                                    }];
         return chipError;
@@ -17434,7 +17899,9 @@ public:
             NSLog(@"ColorControl.ColorPointGIntensity response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl ColorPointGIntensity Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl ColorPointGIntensity read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -17472,8 +17939,10 @@ public:
                                                       params:params
                                            completionHandler:^(NSError * _Nullable error) {
                                                chipError = [CHIPError errorToCHIPErrorCode:error];
-                                               ChipLogError(chipTool, "ColorControl ColorPointGIntensity Error: %s",
-                                                   chip::ErrorStr(chipError));
+                                               if (error != nil) {
+                                                   ChipLogError(chipTool, "ColorControl ColorPointGIntensity write Error: %s",
+                                                       chip::ErrorStr(chipError));
+                                               }
                                                SetCommandExitStatus(chipError);
                                            }];
         return chipError;
@@ -17559,7 +18028,9 @@ public:
             NSLog(@"ColorControl.ColorPointBX response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl ColorPointBX Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl ColorPointBX read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -17597,7 +18068,10 @@ public:
                                               params:params
                                    completionHandler:^(NSError * _Nullable error) {
                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                       ChipLogError(chipTool, "ColorControl ColorPointBX Error: %s", chip::ErrorStr(chipError));
+                                       if (error != nil) {
+                                           ChipLogError(
+                                               chipTool, "ColorControl ColorPointBX write Error: %s", chip::ErrorStr(chipError));
+                                       }
                                        SetCommandExitStatus(chipError);
                                    }];
         return chipError;
@@ -17682,7 +18156,9 @@ public:
             NSLog(@"ColorControl.ColorPointBY response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl ColorPointBY Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl ColorPointBY read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -17720,7 +18196,10 @@ public:
                                               params:params
                                    completionHandler:^(NSError * _Nullable error) {
                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                       ChipLogError(chipTool, "ColorControl ColorPointBY Error: %s", chip::ErrorStr(chipError));
+                                       if (error != nil) {
+                                           ChipLogError(
+                                               chipTool, "ColorControl ColorPointBY write Error: %s", chip::ErrorStr(chipError));
+                                       }
                                        SetCommandExitStatus(chipError);
                                    }];
         return chipError;
@@ -17805,7 +18284,9 @@ public:
             NSLog(@"ColorControl.ColorPointBIntensity response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl ColorPointBIntensity Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl ColorPointBIntensity read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -17843,8 +18324,10 @@ public:
                                                       params:params
                                            completionHandler:^(NSError * _Nullable error) {
                                                chipError = [CHIPError errorToCHIPErrorCode:error];
-                                               ChipLogError(chipTool, "ColorControl ColorPointBIntensity Error: %s",
-                                                   chip::ErrorStr(chipError));
+                                               if (error != nil) {
+                                                   ChipLogError(chipTool, "ColorControl ColorPointBIntensity write Error: %s",
+                                                       chip::ErrorStr(chipError));
+                                               }
                                                SetCommandExitStatus(chipError);
                                            }];
         return chipError;
@@ -17930,7 +18413,9 @@ public:
             NSLog(@"ColorControl.EnhancedCurrentHue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl EnhancedCurrentHue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl EnhancedCurrentHue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -18015,7 +18500,9 @@ public:
             NSLog(@"ColorControl.EnhancedColorMode response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl EnhancedColorMode Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl EnhancedColorMode read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -18099,7 +18586,9 @@ public:
             NSLog(@"ColorControl.ColorLoopActive response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl ColorLoopActive Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl ColorLoopActive read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -18183,7 +18672,9 @@ public:
             NSLog(@"ColorControl.ColorLoopDirection response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl ColorLoopDirection Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl ColorLoopDirection read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -18268,7 +18759,9 @@ public:
             NSLog(@"ColorControl.ColorLoopTime response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl ColorLoopTime Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl ColorLoopTime read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -18353,7 +18846,9 @@ public:
                 NSLog(@"ColorControl.ColorLoopStartEnhancedHue response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "ColorControl ColorLoopStartEnhancedHue Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "ColorControl ColorLoopStartEnhancedHue read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -18440,7 +18935,9 @@ public:
                 NSLog(@"ColorControl.ColorLoopStoredEnhancedHue response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "ColorControl ColorLoopStoredEnhancedHue Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "ColorControl ColorLoopStoredEnhancedHue read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -18526,7 +19023,9 @@ public:
             NSLog(@"ColorControl.ColorCapabilities response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl ColorCapabilities Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl ColorCapabilities read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -18610,7 +19109,9 @@ public:
             NSLog(@"ColorControl.ColorTempPhysicalMin response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl ColorTempPhysicalMin Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl ColorTempPhysicalMin read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -18695,7 +19196,9 @@ public:
             NSLog(@"ColorControl.ColorTempPhysicalMax response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl ColorTempPhysicalMax Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl ColorTempPhysicalMax read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -18781,7 +19284,9 @@ public:
             NSLog(@"ColorControl.CoupleColorTempToLevelMinMireds response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl CoupleColorTempToLevelMinMireds Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl CoupleColorTempToLevelMinMireds read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -18870,7 +19375,9 @@ public:
             NSLog(@"ColorControl.StartUpColorTemperatureMireds response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl StartUpColorTemperatureMireds Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl StartUpColorTemperatureMireds read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -18904,15 +19411,17 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
-        [cluster
-            writeAttributeStartUpColorTemperatureMiredsWithValue:value
-                                                          params:params
-                                               completionHandler:^(NSError * _Nullable error) {
-                                                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                   ChipLogError(chipTool, "ColorControl StartUpColorTemperatureMireds Error: %s",
-                                                       chip::ErrorStr(chipError));
-                                                   SetCommandExitStatus(chipError);
-                                               }];
+        [cluster writeAttributeStartUpColorTemperatureMiredsWithValue:value
+                                                               params:params
+                                                    completionHandler:^(NSError * _Nullable error) {
+                                                        chipError = [CHIPError errorToCHIPErrorCode:error];
+                                                        if (error != nil) {
+                                                            ChipLogError(chipTool,
+                                                                "ColorControl StartUpColorTemperatureMireds write Error: %s",
+                                                                chip::ErrorStr(chipError));
+                                                        }
+                                                        SetCommandExitStatus(chipError);
+                                                    }];
         return chipError;
     }
 
@@ -18998,7 +19507,9 @@ public:
             NSLog(@"ColorControl.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -19083,7 +19594,9 @@ public:
             NSLog(@"ColorControl.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -19168,7 +19681,9 @@ public:
             NSLog(@"ColorControl.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -19252,7 +19767,9 @@ public:
             NSLog(@"ColorControl.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ColorControl ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ColorControl ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -19395,7 +19912,9 @@ public:
                            CHIPContentLauncherClusterLaunchResponseParams * _Nullable values, NSError * _Nullable error) {
                            NSLog(@"Values: %@", values);
                            chipError = [CHIPError errorToCHIPErrorCode:error];
-                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           if (error != nil) {
+                               ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           }
                            SetCommandExitStatus(chipError);
                        }];
         return chipError;
@@ -19620,7 +20139,9 @@ public:
               completionHandler:^(CHIPContentLauncherClusterLaunchResponseParams * _Nullable values, NSError * _Nullable error) {
                   NSLog(@"Values: %@", values);
                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                  ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                  if (error != nil) {
+                      ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                  }
                   SetCommandExitStatus(chipError);
               }];
         return chipError;
@@ -19661,7 +20182,9 @@ public:
             NSLog(@"ContentLauncher.AcceptHeader response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ContentLauncher AcceptHeader Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ContentLauncher AcceptHeader read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -19746,7 +20269,9 @@ public:
                 NSLog(@"ContentLauncher.SupportedStreamingProtocols response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "ContentLauncher SupportedStreamingProtocols Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "ContentLauncher SupportedStreamingProtocols read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -19780,15 +20305,17 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedInt:mValue];
 
-        [cluster
-            writeAttributeSupportedStreamingProtocolsWithValue:value
-                                                        params:params
-                                             completionHandler:^(NSError * _Nullable error) {
-                                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                 ChipLogError(chipTool, "ContentLauncher SupportedStreamingProtocols Error: %s",
-                                                     chip::ErrorStr(chipError));
-                                                 SetCommandExitStatus(chipError);
-                                             }];
+        [cluster writeAttributeSupportedStreamingProtocolsWithValue:value
+                                                             params:params
+                                                  completionHandler:^(NSError * _Nullable error) {
+                                                      chipError = [CHIPError errorToCHIPErrorCode:error];
+                                                      if (error != nil) {
+                                                          ChipLogError(chipTool,
+                                                              "ContentLauncher SupportedStreamingProtocols write Error: %s",
+                                                              chip::ErrorStr(chipError));
+                                                      }
+                                                      SetCommandExitStatus(chipError);
+                                                  }];
         return chipError;
     }
 
@@ -19873,7 +20400,9 @@ public:
             NSLog(@"ContentLauncher.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ContentLauncher GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ContentLauncher GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -19958,7 +20487,9 @@ public:
             NSLog(@"ContentLauncher.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ContentLauncher AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ContentLauncher AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -20043,7 +20574,9 @@ public:
             NSLog(@"ContentLauncher.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ContentLauncher AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ContentLauncher AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -20127,7 +20660,9 @@ public:
             NSLog(@"ContentLauncher.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ContentLauncher ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ContentLauncher ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -20230,7 +20765,9 @@ public:
             NSLog(@"Descriptor.DeviceList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Descriptor DeviceList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Descriptor DeviceList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -20314,7 +20851,9 @@ public:
             NSLog(@"Descriptor.ServerList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Descriptor ServerList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Descriptor ServerList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -20398,7 +20937,9 @@ public:
             NSLog(@"Descriptor.ClientList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Descriptor ClientList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Descriptor ClientList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -20482,7 +21023,9 @@ public:
             NSLog(@"Descriptor.PartsList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Descriptor PartsList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Descriptor PartsList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -20566,7 +21109,9 @@ public:
             NSLog(@"Descriptor.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Descriptor GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Descriptor GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -20651,7 +21196,9 @@ public:
             NSLog(@"Descriptor.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Descriptor AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Descriptor AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -20736,7 +21283,9 @@ public:
             NSLog(@"Descriptor.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Descriptor AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Descriptor AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -20820,7 +21369,9 @@ public:
             NSLog(@"Descriptor.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Descriptor ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Descriptor ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -20928,7 +21479,9 @@ public:
                                  NSError * _Nullable error) {
                                  NSLog(@"Values: %@", values);
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -20967,7 +21520,9 @@ public:
             NSLog(@"DiagnosticLogs.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DiagnosticLogs GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DiagnosticLogs GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -21052,7 +21607,9 @@ public:
             NSLog(@"DiagnosticLogs.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DiagnosticLogs AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DiagnosticLogs AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -21137,7 +21694,9 @@ public:
             NSLog(@"DiagnosticLogs.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DiagnosticLogs AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DiagnosticLogs AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -21326,7 +21885,9 @@ public:
         [cluster clearCredentialWithParams:params
                          completionHandler:^(NSError * _Nullable error) {
                              chipError = [CHIPError errorToCHIPErrorCode:error];
-                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                             if (error != nil) {
+                                 ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                             }
                              SetCommandExitStatus(chipError);
                          }];
         return chipError;
@@ -21366,7 +21927,9 @@ public:
         [cluster clearHolidayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable error) {
                                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                                  ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                  if (error != nil) {
+                                      ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                  }
                                   SetCommandExitStatus(chipError);
                               }];
         return chipError;
@@ -21404,7 +21967,9 @@ public:
         [cluster clearUserWithParams:params
                    completionHandler:^(NSError * _Nullable error) {
                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                       ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                       if (error != nil) {
+                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                       }
                        SetCommandExitStatus(chipError);
                    }];
         return chipError;
@@ -21444,7 +22009,9 @@ public:
         [cluster clearWeekDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable error) {
                                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                                  ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                  if (error != nil) {
+                                      ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                  }
                                   SetCommandExitStatus(chipError);
                               }];
         return chipError;
@@ -21485,7 +22052,9 @@ public:
         [cluster clearYearDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable error) {
                                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                                  ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                  if (error != nil) {
+                                      ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                  }
                                   SetCommandExitStatus(chipError);
                               }];
         return chipError;
@@ -21530,7 +22099,9 @@ public:
                                  NSError * _Nullable error) {
                                  NSLog(@"Values: %@", values);
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -21571,7 +22142,9 @@ public:
                                 CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable error) {
                                 NSLog(@"Values: %@", values);
                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                if (error != nil) {
+                                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                }
                                 SetCommandExitStatus(chipError);
                             }];
         return chipError;
@@ -21610,7 +22183,9 @@ public:
                  completionHandler:^(CHIPDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable error) {
                      NSLog(@"Values: %@", values);
                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                     ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                     if (error != nil) {
+                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                     }
                      SetCommandExitStatus(chipError);
                  }];
         return chipError;
@@ -21652,7 +22227,9 @@ public:
                                 CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable error) {
                                 NSLog(@"Values: %@", values);
                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                if (error != nil) {
+                                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                }
                                 SetCommandExitStatus(chipError);
                             }];
         return chipError;
@@ -21695,7 +22272,9 @@ public:
                                 CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable error) {
                                 NSLog(@"Values: %@", values);
                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                if (error != nil) {
+                                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                }
                                 SetCommandExitStatus(chipError);
                             }];
         return chipError;
@@ -21734,7 +22313,9 @@ public:
         [cluster lockDoorWithParams:params
                   completionHandler:^(NSError * _Nullable error) {
                       chipError = [CHIPError errorToCHIPErrorCode:error];
-                      ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                      if (error != nil) {
+                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                      }
                       SetCommandExitStatus(chipError);
                   }];
         return chipError;
@@ -21788,7 +22369,9 @@ public:
                            CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable error) {
                            NSLog(@"Values: %@", values);
                            chipError = [CHIPError errorToCHIPErrorCode:error];
-                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           if (error != nil) {
+                               ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           }
                            SetCommandExitStatus(chipError);
                        }];
         return chipError;
@@ -21838,7 +22421,9 @@ public:
         [cluster setHolidayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable error) {
                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                if (error != nil) {
+                                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                }
                                 SetCommandExitStatus(chipError);
                             }];
         return chipError;
@@ -21891,7 +22476,9 @@ public:
         [cluster setUserWithParams:params
                  completionHandler:^(NSError * _Nullable error) {
                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                     ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                     if (error != nil) {
+                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                     }
                      SetCommandExitStatus(chipError);
                  }];
         return chipError;
@@ -21947,7 +22534,9 @@ public:
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable error) {
                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                if (error != nil) {
+                                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                }
                                 SetCommandExitStatus(chipError);
                             }];
         return chipError;
@@ -21997,7 +22586,9 @@ public:
         [cluster setYearDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable error) {
                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                if (error != nil) {
+                                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                }
                                 SetCommandExitStatus(chipError);
                             }];
         return chipError;
@@ -22038,7 +22629,9 @@ public:
         [cluster unlockDoorWithParams:params
                     completionHandler:^(NSError * _Nullable error) {
                         chipError = [CHIPError errorToCHIPErrorCode:error];
-                        ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                        if (error != nil) {
+                            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                        }
                         SetCommandExitStatus(chipError);
                     }];
         return chipError;
@@ -22078,7 +22671,9 @@ public:
         [cluster unlockWithTimeoutWithParams:params
                            completionHandler:^(NSError * _Nullable error) {
                                chipError = [CHIPError errorToCHIPErrorCode:error];
-                               ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                               if (error != nil) {
+                                   ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                               }
                                SetCommandExitStatus(chipError);
                            }];
         return chipError;
@@ -22116,7 +22711,9 @@ public:
             NSLog(@"DoorLock.LockState response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock LockState Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock LockState read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -22200,7 +22797,9 @@ public:
             NSLog(@"DoorLock.LockType response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock LockType Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock LockType read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -22284,7 +22883,9 @@ public:
             NSLog(@"DoorLock.ActuatorEnabled response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock ActuatorEnabled Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock ActuatorEnabled read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -22368,7 +22969,9 @@ public:
             NSLog(@"DoorLock.DoorState response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock DoorState Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock DoorState read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -22453,7 +23056,9 @@ public:
                 NSLog(@"DoorLock.NumberOfTotalUsersSupported response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "DoorLock NumberOfTotalUsersSupported Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "DoorLock NumberOfTotalUsersSupported read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -22540,7 +23145,9 @@ public:
                 NSLog(@"DoorLock.NumberOfPINUsersSupported response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "DoorLock NumberOfPINUsersSupported Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "DoorLock NumberOfPINUsersSupported read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -22627,7 +23234,9 @@ public:
                 NSLog(@"DoorLock.NumberOfRFIDUsersSupported response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "DoorLock NumberOfRFIDUsersSupported Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "DoorLock NumberOfRFIDUsersSupported read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -22714,7 +23323,9 @@ public:
             NSLog(@"DoorLock.NumberOfWeekDaySchedulesSupportedPerUser response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock NumberOfWeekDaySchedulesSupportedPerUser Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock NumberOfWeekDaySchedulesSupportedPerUser read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -22805,7 +23416,9 @@ public:
             NSLog(@"DoorLock.NumberOfYearDaySchedulesSupportedPerUser response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock NumberOfYearDaySchedulesSupportedPerUser Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock NumberOfYearDaySchedulesSupportedPerUser read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -22896,7 +23509,9 @@ public:
             NSLog(@"DoorLock.NumberOfHolidaySchedulesSupported response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock NumberOfHolidaySchedulesSupported Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock NumberOfHolidaySchedulesSupported read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -22985,7 +23600,9 @@ public:
             NSLog(@"DoorLock.MaxPINCodeLength response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock MaxPINCodeLength Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock MaxPINCodeLength read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -23069,7 +23686,9 @@ public:
             NSLog(@"DoorLock.MinPINCodeLength response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock MinPINCodeLength Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock MinPINCodeLength read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -23153,7 +23772,9 @@ public:
             NSLog(@"DoorLock.MaxRFIDCodeLength response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock MaxRFIDCodeLength Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock MaxRFIDCodeLength read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -23237,7 +23858,9 @@ public:
             NSLog(@"DoorLock.MinRFIDCodeLength response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock MinRFIDCodeLength Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock MinRFIDCodeLength read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -23321,7 +23944,9 @@ public:
             NSLog(@"DoorLock.Language response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock Language Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock Language read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -23361,7 +23986,9 @@ public:
                                           params:params
                                completionHandler:^(NSError * _Nullable error) {
                                    chipError = [CHIPError errorToCHIPErrorCode:error];
-                                   ChipLogError(chipTool, "DoorLock Language Error: %s", chip::ErrorStr(chipError));
+                                   if (error != nil) {
+                                       ChipLogError(chipTool, "DoorLock Language write Error: %s", chip::ErrorStr(chipError));
+                                   }
                                    SetCommandExitStatus(chipError);
                                }];
         return chipError;
@@ -23446,7 +24073,9 @@ public:
             NSLog(@"DoorLock.AutoRelockTime response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock AutoRelockTime Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock AutoRelockTime read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -23484,7 +24113,10 @@ public:
                                                 params:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "DoorLock AutoRelockTime Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogError(
+                                                 chipTool, "DoorLock AutoRelockTime write Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -23569,7 +24201,9 @@ public:
             NSLog(@"DoorLock.SoundVolume response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock SoundVolume Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock SoundVolume read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -23607,7 +24241,9 @@ public:
                                              params:params
                                   completionHandler:^(NSError * _Nullable error) {
                                       chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogError(chipTool, "DoorLock SoundVolume Error: %s", chip::ErrorStr(chipError));
+                                      if (error != nil) {
+                                          ChipLogError(chipTool, "DoorLock SoundVolume write Error: %s", chip::ErrorStr(chipError));
+                                      }
                                       SetCommandExitStatus(chipError);
                                   }];
         return chipError;
@@ -23692,7 +24328,9 @@ public:
             NSLog(@"DoorLock.OperatingMode response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock OperatingMode Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock OperatingMode read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -23726,13 +24364,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
-        [cluster writeAttributeOperatingModeWithValue:value
-                                               params:params
-                                    completionHandler:^(NSError * _Nullable error) {
-                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                        ChipLogError(chipTool, "DoorLock OperatingMode Error: %s", chip::ErrorStr(chipError));
-                                        SetCommandExitStatus(chipError);
-                                    }];
+        [cluster
+            writeAttributeOperatingModeWithValue:value
+                                          params:params
+                               completionHandler:^(NSError * _Nullable error) {
+                                   chipError = [CHIPError errorToCHIPErrorCode:error];
+                                   if (error != nil) {
+                                       ChipLogError(chipTool, "DoorLock OperatingMode write Error: %s", chip::ErrorStr(chipError));
+                                   }
+                                   SetCommandExitStatus(chipError);
+                               }];
         return chipError;
     }
 
@@ -23816,7 +24457,9 @@ public:
                 NSLog(@"DoorLock.SupportedOperatingModes response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "DoorLock SupportedOperatingModes Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "DoorLock SupportedOperatingModes read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -23901,7 +24544,9 @@ public:
             NSLog(@"DoorLock.EnableOneTouchLocking response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock EnableOneTouchLocking Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock EnableOneTouchLocking read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -23939,8 +24584,10 @@ public:
                                                        params:params
                                             completionHandler:^(NSError * _Nullable error) {
                                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                ChipLogError(chipTool, "DoorLock EnableOneTouchLocking Error: %s",
-                                                    chip::ErrorStr(chipError));
+                                                if (error != nil) {
+                                                    ChipLogError(chipTool, "DoorLock EnableOneTouchLocking write Error: %s",
+                                                        chip::ErrorStr(chipError));
+                                                }
                                                 SetCommandExitStatus(chipError);
                                             }];
         return chipError;
@@ -24027,7 +24674,9 @@ public:
                 NSLog(@"DoorLock.EnablePrivacyModeButton response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "DoorLock EnablePrivacyModeButton Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "DoorLock EnablePrivacyModeButton read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -24065,8 +24714,10 @@ public:
                                                          params:params
                                               completionHandler:^(NSError * _Nullable error) {
                                                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                  ChipLogError(chipTool, "DoorLock EnablePrivacyModeButton Error: %s",
-                                                      chip::ErrorStr(chipError));
+                                                  if (error != nil) {
+                                                      ChipLogError(chipTool, "DoorLock EnablePrivacyModeButton write Error: %s",
+                                                          chip::ErrorStr(chipError));
+                                                  }
                                                   SetCommandExitStatus(chipError);
                                               }];
         return chipError;
@@ -24152,7 +24803,9 @@ public:
             NSLog(@"DoorLock.WrongCodeEntryLimit response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock WrongCodeEntryLimit Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock WrongCodeEntryLimit read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -24190,8 +24843,10 @@ public:
                                                      params:params
                                           completionHandler:^(NSError * _Nullable error) {
                                               chipError = [CHIPError errorToCHIPErrorCode:error];
-                                              ChipLogError(
-                                                  chipTool, "DoorLock WrongCodeEntryLimit Error: %s", chip::ErrorStr(chipError));
+                                              if (error != nil) {
+                                                  ChipLogError(chipTool, "DoorLock WrongCodeEntryLimit write Error: %s",
+                                                      chip::ErrorStr(chipError));
+                                              }
                                               SetCommandExitStatus(chipError);
                                           }];
         return chipError;
@@ -24277,7 +24932,9 @@ public:
             NSLog(@"DoorLock.UserCodeTemporaryDisableTime response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock UserCodeTemporaryDisableTime Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock UserCodeTemporaryDisableTime read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -24315,8 +24972,11 @@ public:
                                                               params:params
                                                    completionHandler:^(NSError * _Nullable error) {
                                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                       ChipLogError(chipTool, "DoorLock UserCodeTemporaryDisableTime Error: %s",
-                                                           chip::ErrorStr(chipError));
+                                                       if (error != nil) {
+                                                           ChipLogError(chipTool,
+                                                               "DoorLock UserCodeTemporaryDisableTime write Error: %s",
+                                                               chip::ErrorStr(chipError));
+                                                       }
                                                        SetCommandExitStatus(chipError);
                                                    }];
         return chipError;
@@ -24404,7 +25064,9 @@ public:
             NSLog(@"DoorLock.RequirePINforRemoteOperation response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock RequirePINforRemoteOperation Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock RequirePINforRemoteOperation read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -24442,8 +25104,11 @@ public:
                                                               params:params
                                                    completionHandler:^(NSError * _Nullable error) {
                                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                       ChipLogError(chipTool, "DoorLock RequirePINforRemoteOperation Error: %s",
-                                                           chip::ErrorStr(chipError));
+                                                       if (error != nil) {
+                                                           ChipLogError(chipTool,
+                                                               "DoorLock RequirePINforRemoteOperation write Error: %s",
+                                                               chip::ErrorStr(chipError));
+                                                       }
                                                        SetCommandExitStatus(chipError);
                                                    }];
         return chipError;
@@ -24480,7 +25145,9 @@ public:
             NSLog(@"DoorLock.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -24565,7 +25232,9 @@ public:
             NSLog(@"DoorLock.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -24649,7 +25318,9 @@ public:
             NSLog(@"DoorLock.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -24733,7 +25404,9 @@ public:
             NSLog(@"DoorLock.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "DoorLock ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -24964,7 +25637,9 @@ public:
             NSLog(@"ElectricalMeasurement.MeasurementType response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ElectricalMeasurement MeasurementType Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ElectricalMeasurement MeasurementType read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -25053,7 +25728,9 @@ public:
             NSLog(@"ElectricalMeasurement.TotalActivePower response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ElectricalMeasurement TotalActivePower Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ElectricalMeasurement TotalActivePower read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -25142,7 +25819,9 @@ public:
             NSLog(@"ElectricalMeasurement.RmsVoltage response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ElectricalMeasurement RmsVoltage Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ElectricalMeasurement RmsVoltage read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -25230,7 +25909,9 @@ public:
             NSLog(@"ElectricalMeasurement.RmsVoltageMin response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ElectricalMeasurement RmsVoltageMin Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ElectricalMeasurement RmsVoltageMin read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -25319,7 +26000,9 @@ public:
             NSLog(@"ElectricalMeasurement.RmsVoltageMax response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ElectricalMeasurement RmsVoltageMax Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ElectricalMeasurement RmsVoltageMax read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -25408,7 +26091,9 @@ public:
             NSLog(@"ElectricalMeasurement.RmsCurrent response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ElectricalMeasurement RmsCurrent Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ElectricalMeasurement RmsCurrent read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -25496,7 +26181,9 @@ public:
             NSLog(@"ElectricalMeasurement.RmsCurrentMin response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ElectricalMeasurement RmsCurrentMin Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ElectricalMeasurement RmsCurrentMin read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -25585,7 +26272,9 @@ public:
             NSLog(@"ElectricalMeasurement.RmsCurrentMax response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ElectricalMeasurement RmsCurrentMax Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ElectricalMeasurement RmsCurrentMax read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -25674,7 +26363,9 @@ public:
             NSLog(@"ElectricalMeasurement.ActivePower response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ElectricalMeasurement ActivePower Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ElectricalMeasurement ActivePower read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -25762,7 +26453,9 @@ public:
             NSLog(@"ElectricalMeasurement.ActivePowerMin response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ElectricalMeasurement ActivePowerMin Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ElectricalMeasurement ActivePowerMin read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -25851,7 +26544,9 @@ public:
             NSLog(@"ElectricalMeasurement.ActivePowerMax response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ElectricalMeasurement ActivePowerMax Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ElectricalMeasurement ActivePowerMax read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -25940,7 +26635,9 @@ public:
             NSLog(@"ElectricalMeasurement.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ElectricalMeasurement GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ElectricalMeasurement GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -26029,7 +26726,9 @@ public:
             NSLog(@"ElectricalMeasurement.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ElectricalMeasurement AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ElectricalMeasurement AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -26118,7 +26817,9 @@ public:
             NSLog(@"ElectricalMeasurement.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ElectricalMeasurement AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ElectricalMeasurement AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -26207,7 +26908,9 @@ public:
             NSLog(@"ElectricalMeasurement.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ElectricalMeasurement ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ElectricalMeasurement ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -26319,7 +27022,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster resetCountsWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -26357,7 +27062,9 @@ public:
             NSLog(@"EthernetNetworkDiagnostics.PHYRate response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "EthernetNetworkDiagnostics PHYRate Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "EthernetNetworkDiagnostics PHYRate read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -26445,7 +27152,9 @@ public:
             NSLog(@"EthernetNetworkDiagnostics.FullDuplex response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "EthernetNetworkDiagnostics FullDuplex Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "EthernetNetworkDiagnostics FullDuplex read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -26533,7 +27242,9 @@ public:
             NSLog(@"EthernetNetworkDiagnostics.PacketRxCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "EthernetNetworkDiagnostics PacketRxCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "EthernetNetworkDiagnostics PacketRxCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -26622,7 +27333,9 @@ public:
             NSLog(@"EthernetNetworkDiagnostics.PacketTxCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "EthernetNetworkDiagnostics PacketTxCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "EthernetNetworkDiagnostics PacketTxCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -26711,7 +27424,9 @@ public:
             NSLog(@"EthernetNetworkDiagnostics.TxErrCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "EthernetNetworkDiagnostics TxErrCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "EthernetNetworkDiagnostics TxErrCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -26799,7 +27514,9 @@ public:
             NSLog(@"EthernetNetworkDiagnostics.CollisionCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "EthernetNetworkDiagnostics CollisionCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "EthernetNetworkDiagnostics CollisionCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -26888,7 +27605,9 @@ public:
             NSLog(@"EthernetNetworkDiagnostics.OverrunCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "EthernetNetworkDiagnostics OverrunCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "EthernetNetworkDiagnostics OverrunCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -26977,7 +27696,9 @@ public:
             NSLog(@"EthernetNetworkDiagnostics.CarrierDetect response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "EthernetNetworkDiagnostics CarrierDetect Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "EthernetNetworkDiagnostics CarrierDetect read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -27066,7 +27787,9 @@ public:
             NSLog(@"EthernetNetworkDiagnostics.TimeSinceReset response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "EthernetNetworkDiagnostics TimeSinceReset Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "EthernetNetworkDiagnostics TimeSinceReset read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -27155,7 +27878,9 @@ public:
             NSLog(@"EthernetNetworkDiagnostics.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "EthernetNetworkDiagnostics GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "EthernetNetworkDiagnostics GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -27244,7 +27969,9 @@ public:
             NSLog(@"EthernetNetworkDiagnostics.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "EthernetNetworkDiagnostics AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "EthernetNetworkDiagnostics AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -27333,7 +28060,9 @@ public:
             NSLog(@"EthernetNetworkDiagnostics.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "EthernetNetworkDiagnostics AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "EthernetNetworkDiagnostics AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -27422,7 +28151,9 @@ public:
             NSLog(@"EthernetNetworkDiagnostics.FeatureMap response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "EthernetNetworkDiagnostics FeatureMap Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "EthernetNetworkDiagnostics FeatureMap read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -27510,7 +28241,9 @@ public:
             NSLog(@"EthernetNetworkDiagnostics.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "EthernetNetworkDiagnostics ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "EthernetNetworkDiagnostics ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -27623,7 +28356,9 @@ public:
             NSLog(@"FanControl.FanMode response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FanControl FanMode Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FanControl FanMode read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -27661,7 +28396,9 @@ public:
                                          params:params
                               completionHandler:^(NSError * _Nullable error) {
                                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                                  ChipLogError(chipTool, "FanControl FanMode Error: %s", chip::ErrorStr(chipError));
+                                  if (error != nil) {
+                                      ChipLogError(chipTool, "FanControl FanMode write Error: %s", chip::ErrorStr(chipError));
+                                  }
                                   SetCommandExitStatus(chipError);
                               }];
         return chipError;
@@ -27746,7 +28483,9 @@ public:
             NSLog(@"FanControl.FanModeSequence response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FanControl FanModeSequence Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FanControl FanModeSequence read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -27784,7 +28523,10 @@ public:
                                                  params:params
                                       completionHandler:^(NSError * _Nullable error) {
                                           chipError = [CHIPError errorToCHIPErrorCode:error];
-                                          ChipLogError(chipTool, "FanControl FanModeSequence Error: %s", chip::ErrorStr(chipError));
+                                          if (error != nil) {
+                                              ChipLogError(chipTool, "FanControl FanModeSequence write Error: %s",
+                                                  chip::ErrorStr(chipError));
+                                          }
                                           SetCommandExitStatus(chipError);
                                       }];
         return chipError;
@@ -27869,7 +28611,9 @@ public:
             NSLog(@"FanControl.PercentSetting response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FanControl PercentSetting Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FanControl PercentSetting read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -27907,7 +28651,10 @@ public:
                                                 params:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "FanControl PercentSetting Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogError(
+                                                 chipTool, "FanControl PercentSetting write Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -27992,7 +28739,9 @@ public:
             NSLog(@"FanControl.PercentCurrent response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FanControl PercentCurrent Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FanControl PercentCurrent read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -28076,7 +28825,9 @@ public:
             NSLog(@"FanControl.SpeedMax response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FanControl SpeedMax Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FanControl SpeedMax read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -28160,7 +28911,9 @@ public:
             NSLog(@"FanControl.SpeedSetting response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FanControl SpeedSetting Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FanControl SpeedSetting read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -28194,13 +28947,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
-        [cluster writeAttributeSpeedSettingWithValue:value
-                                              params:params
-                                   completionHandler:^(NSError * _Nullable error) {
-                                       chipError = [CHIPError errorToCHIPErrorCode:error];
-                                       ChipLogError(chipTool, "FanControl SpeedSetting Error: %s", chip::ErrorStr(chipError));
-                                       SetCommandExitStatus(chipError);
-                                   }];
+        [cluster
+            writeAttributeSpeedSettingWithValue:value
+                                         params:params
+                              completionHandler:^(NSError * _Nullable error) {
+                                  chipError = [CHIPError errorToCHIPErrorCode:error];
+                                  if (error != nil) {
+                                      ChipLogError(chipTool, "FanControl SpeedSetting write Error: %s", chip::ErrorStr(chipError));
+                                  }
+                                  SetCommandExitStatus(chipError);
+                              }];
         return chipError;
     }
 
@@ -28283,7 +29039,9 @@ public:
             NSLog(@"FanControl.SpeedCurrent response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FanControl SpeedCurrent Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FanControl SpeedCurrent read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -28367,7 +29125,9 @@ public:
             NSLog(@"FanControl.RockSupport response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FanControl RockSupport Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FanControl RockSupport read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -28451,7 +29211,9 @@ public:
             NSLog(@"FanControl.RockSetting response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FanControl RockSetting Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FanControl RockSetting read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -28485,13 +29247,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
-        [cluster writeAttributeRockSettingWithValue:value
-                                             params:params
-                                  completionHandler:^(NSError * _Nullable error) {
-                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogError(chipTool, "FanControl RockSetting Error: %s", chip::ErrorStr(chipError));
-                                      SetCommandExitStatus(chipError);
-                                  }];
+        [cluster
+            writeAttributeRockSettingWithValue:value
+                                        params:params
+                             completionHandler:^(NSError * _Nullable error) {
+                                 chipError = [CHIPError errorToCHIPErrorCode:error];
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "FanControl RockSetting write Error: %s", chip::ErrorStr(chipError));
+                                 }
+                                 SetCommandExitStatus(chipError);
+                             }];
         return chipError;
     }
 
@@ -28574,7 +29339,9 @@ public:
             NSLog(@"FanControl.WindSupport response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FanControl WindSupport Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FanControl WindSupport read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -28658,7 +29425,9 @@ public:
             NSLog(@"FanControl.WindSetting response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FanControl WindSetting Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FanControl WindSetting read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -28692,13 +29461,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
-        [cluster writeAttributeWindSettingWithValue:value
-                                             params:params
-                                  completionHandler:^(NSError * _Nullable error) {
-                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogError(chipTool, "FanControl WindSetting Error: %s", chip::ErrorStr(chipError));
-                                      SetCommandExitStatus(chipError);
-                                  }];
+        [cluster
+            writeAttributeWindSettingWithValue:value
+                                        params:params
+                             completionHandler:^(NSError * _Nullable error) {
+                                 chipError = [CHIPError errorToCHIPErrorCode:error];
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "FanControl WindSetting write Error: %s", chip::ErrorStr(chipError));
+                                 }
+                                 SetCommandExitStatus(chipError);
+                             }];
         return chipError;
     }
 
@@ -28781,7 +29553,9 @@ public:
             NSLog(@"FanControl.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FanControl GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FanControl GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -28866,7 +29640,9 @@ public:
             NSLog(@"FanControl.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FanControl AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FanControl AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -28951,7 +29727,9 @@ public:
             NSLog(@"FanControl.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FanControl AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FanControl AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -29035,7 +29813,9 @@ public:
             NSLog(@"FanControl.FeatureMap response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FanControl FeatureMap Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FanControl FeatureMap read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -29119,7 +29899,9 @@ public:
             NSLog(@"FanControl.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FanControl ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FanControl ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -29219,7 +30001,9 @@ public:
             NSLog(@"FixedLabel.LabelList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FixedLabel LabelList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FixedLabel LabelList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -29303,7 +30087,9 @@ public:
             NSLog(@"FixedLabel.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FixedLabel GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FixedLabel GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -29388,7 +30174,9 @@ public:
             NSLog(@"FixedLabel.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FixedLabel AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FixedLabel AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -29473,7 +30261,9 @@ public:
             NSLog(@"FixedLabel.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FixedLabel AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FixedLabel AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -29557,7 +30347,9 @@ public:
             NSLog(@"FixedLabel.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FixedLabel ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FixedLabel ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -29660,7 +30452,9 @@ public:
             NSLog(@"FlowMeasurement.MeasuredValue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FlowMeasurement MeasuredValue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FlowMeasurement MeasuredValue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -29744,7 +30538,9 @@ public:
             NSLog(@"FlowMeasurement.MinMeasuredValue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FlowMeasurement MinMeasuredValue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FlowMeasurement MinMeasuredValue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -29829,7 +30625,9 @@ public:
             NSLog(@"FlowMeasurement.MaxMeasuredValue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FlowMeasurement MaxMeasuredValue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FlowMeasurement MaxMeasuredValue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -29914,7 +30712,9 @@ public:
             NSLog(@"FlowMeasurement.Tolerance response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FlowMeasurement Tolerance Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FlowMeasurement Tolerance read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -29998,7 +30798,9 @@ public:
             NSLog(@"FlowMeasurement.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FlowMeasurement GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FlowMeasurement GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -30083,7 +30885,9 @@ public:
             NSLog(@"FlowMeasurement.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FlowMeasurement AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FlowMeasurement AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -30168,7 +30972,9 @@ public:
             NSLog(@"FlowMeasurement.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FlowMeasurement AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FlowMeasurement AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -30252,7 +31058,9 @@ public:
             NSLog(@"FlowMeasurement.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "FlowMeasurement ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "FlowMeasurement ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -30366,7 +31174,9 @@ public:
                          CHIPGeneralCommissioningClusterArmFailSafeResponseParams * _Nullable values, NSError * _Nullable error) {
                          NSLog(@"Values: %@", values);
                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         if (error != nil) {
+                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         }
                          SetCommandExitStatus(chipError);
                      }];
         return chipError;
@@ -30406,7 +31216,9 @@ public:
             CHIPGeneralCommissioningClusterCommissioningCompleteResponseParams * _Nullable values, NSError * _Nullable error) {
             NSLog(@"Values: %@", values);
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -30454,7 +31266,9 @@ public:
                             NSError * _Nullable error) {
                             NSLog(@"Values: %@", values);
                             chipError = [CHIPError errorToCHIPErrorCode:error];
-                            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                            if (error != nil) {
+                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                            }
                             SetCommandExitStatus(chipError);
                         }];
         return chipError;
@@ -30495,7 +31309,9 @@ public:
             NSLog(@"GeneralCommissioning.Breadcrumb response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralCommissioning Breadcrumb Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralCommissioning Breadcrumb read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -30535,7 +31351,10 @@ public:
                                             params:params
                                  completionHandler:^(NSError * _Nullable error) {
                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                     ChipLogError(chipTool, "GeneralCommissioning Breadcrumb Error: %s", chip::ErrorStr(chipError));
+                                     if (error != nil) {
+                                         ChipLogError(chipTool, "GeneralCommissioning Breadcrumb write Error: %s",
+                                             chip::ErrorStr(chipError));
+                                     }
                                      SetCommandExitStatus(chipError);
                                  }];
         return chipError;
@@ -30625,7 +31444,9 @@ public:
             NSLog(@"GeneralCommissioning.BasicCommissioningInfo response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralCommissioning BasicCommissioningInfo Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralCommissioning BasicCommissioningInfo read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -30717,7 +31538,9 @@ public:
             NSLog(@"GeneralCommissioning.RegulatoryConfig response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralCommissioning RegulatoryConfig Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralCommissioning RegulatoryConfig read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -30806,7 +31629,9 @@ public:
             NSLog(@"GeneralCommissioning.LocationCapability response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralCommissioning LocationCapability Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralCommissioning LocationCapability read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -30896,7 +31721,9 @@ public:
             NSLog(@"GeneralCommissioning.SupportsConcurrentConnection response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralCommissioning SupportsConcurrentConnection Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralCommissioning SupportsConcurrentConnection read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -30987,7 +31814,9 @@ public:
             NSLog(@"GeneralCommissioning.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralCommissioning GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralCommissioning GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -31076,7 +31905,9 @@ public:
             NSLog(@"GeneralCommissioning.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralCommissioning AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralCommissioning AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -31165,7 +31996,9 @@ public:
             NSLog(@"GeneralCommissioning.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralCommissioning AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralCommissioning AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -31253,7 +32086,9 @@ public:
             NSLog(@"GeneralCommissioning.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralCommissioning ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralCommissioning ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -31369,7 +32204,9 @@ public:
             NSLog(@"GeneralDiagnostics.NetworkInterfaces response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralDiagnostics NetworkInterfaces Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralDiagnostics NetworkInterfaces read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -31458,7 +32295,9 @@ public:
             NSLog(@"GeneralDiagnostics.RebootCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralDiagnostics RebootCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralDiagnostics RebootCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -31546,7 +32385,9 @@ public:
             NSLog(@"GeneralDiagnostics.UpTime response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralDiagnostics UpTime Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralDiagnostics UpTime read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -31634,7 +32475,9 @@ public:
             NSLog(@"GeneralDiagnostics.TotalOperationalHours response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralDiagnostics TotalOperationalHours Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralDiagnostics TotalOperationalHours read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -31723,7 +32566,9 @@ public:
             NSLog(@"GeneralDiagnostics.BootReasons response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralDiagnostics BootReasons Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralDiagnostics BootReasons read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -31811,7 +32656,9 @@ public:
             NSLog(@"GeneralDiagnostics.ActiveHardwareFaults response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralDiagnostics ActiveHardwareFaults Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralDiagnostics ActiveHardwareFaults read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -31900,7 +32747,9 @@ public:
             NSLog(@"GeneralDiagnostics.ActiveRadioFaults response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralDiagnostics ActiveRadioFaults Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralDiagnostics ActiveRadioFaults read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -31989,7 +32838,9 @@ public:
             NSLog(@"GeneralDiagnostics.ActiveNetworkFaults response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralDiagnostics ActiveNetworkFaults Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralDiagnostics ActiveNetworkFaults read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -32078,7 +32929,9 @@ public:
             NSLog(@"GeneralDiagnostics.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralDiagnostics GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralDiagnostics GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -32167,7 +33020,9 @@ public:
             NSLog(@"GeneralDiagnostics.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralDiagnostics AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralDiagnostics AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -32256,7 +33111,9 @@ public:
             NSLog(@"GeneralDiagnostics.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralDiagnostics AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralDiagnostics AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -32344,7 +33201,9 @@ public:
             NSLog(@"GeneralDiagnostics.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GeneralDiagnostics ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GeneralDiagnostics ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -32459,7 +33318,9 @@ public:
                         CHIPGroupKeyManagementClusterKeySetReadResponseParams * _Nullable values, NSError * _Nullable error) {
                         NSLog(@"Values: %@", values);
                         chipError = [CHIPError errorToCHIPErrorCode:error];
-                        ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                        if (error != nil) {
+                            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                        }
                         SetCommandExitStatus(chipError);
                     }];
         return chipError;
@@ -32511,7 +33372,9 @@ public:
                              NSError * _Nullable error) {
                              NSLog(@"Values: %@", values);
                              chipError = [CHIPError errorToCHIPErrorCode:error];
-                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                             if (error != nil) {
+                                 ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                             }
                              SetCommandExitStatus(chipError);
                          }];
         return chipError;
@@ -32552,7 +33415,9 @@ public:
         [cluster keySetRemoveWithParams:params
                       completionHandler:^(NSError * _Nullable error) {
                           chipError = [CHIPError errorToCHIPErrorCode:error];
-                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          if (error != nil) {
+                              ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          }
                           SetCommandExitStatus(chipError);
                       }];
         return chipError;
@@ -32629,7 +33494,9 @@ public:
         [cluster keySetWriteWithParams:params
                      completionHandler:^(NSError * _Nullable error) {
                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         if (error != nil) {
+                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         }
                          SetCommandExitStatus(chipError);
                      }];
         return chipError;
@@ -32667,14 +33534,17 @@ public:
         CHIP_ERROR __block err = CHIP_NO_ERROR;
         CHIPReadParams * params = [[CHIPReadParams alloc] init];
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster readAttributeGroupKeyMapWithParams:params
-                                  completionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                                      NSLog(@"GroupKeyManagement.GroupKeyMap response %@", [value description]);
-                                      err = [CHIPError errorToCHIPErrorCode:error];
+        [cluster
+            readAttributeGroupKeyMapWithParams:params
+                             completionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                                 NSLog(@"GroupKeyManagement.GroupKeyMap response %@", [value description]);
+                                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                                      ChipLogError(chipTool, "GroupKeyManagement GroupKeyMap Error: %s", chip::ErrorStr(err));
-                                      SetCommandExitStatus(err);
-                                  }];
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "GroupKeyManagement GroupKeyMap read Error: %s", chip::ErrorStr(err));
+                                 }
+                                 SetCommandExitStatus(err);
+                             }];
         return err;
     }
 
@@ -32725,7 +33595,10 @@ public:
                                              params:params
                                   completionHandler:^(NSError * _Nullable error) {
                                       chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogError(chipTool, "GroupKeyManagement GroupKeyMap Error: %s", chip::ErrorStr(chipError));
+                                      if (error != nil) {
+                                          ChipLogError(chipTool, "GroupKeyManagement GroupKeyMap write Error: %s",
+                                              chip::ErrorStr(chipError));
+                                      }
                                       SetCommandExitStatus(chipError);
                                   }];
         return chipError;
@@ -32815,14 +33688,17 @@ public:
         CHIP_ERROR __block err = CHIP_NO_ERROR;
         CHIPReadParams * params = [[CHIPReadParams alloc] init];
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster readAttributeGroupTableWithParams:params
-                                 completionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                                     NSLog(@"GroupKeyManagement.GroupTable response %@", [value description]);
-                                     err = [CHIPError errorToCHIPErrorCode:error];
+        [cluster
+            readAttributeGroupTableWithParams:params
+                            completionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                                NSLog(@"GroupKeyManagement.GroupTable response %@", [value description]);
+                                err = [CHIPError errorToCHIPErrorCode:error];
 
-                                     ChipLogError(chipTool, "GroupKeyManagement GroupTable Error: %s", chip::ErrorStr(err));
-                                     SetCommandExitStatus(err);
-                                 }];
+                                if (error != nil) {
+                                    ChipLogError(chipTool, "GroupKeyManagement GroupTable read Error: %s", chip::ErrorStr(err));
+                                }
+                                SetCommandExitStatus(err);
+                            }];
         return err;
     }
 
@@ -32908,7 +33784,9 @@ public:
             NSLog(@"GroupKeyManagement.MaxGroupsPerFabric response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GroupKeyManagement MaxGroupsPerFabric Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GroupKeyManagement MaxGroupsPerFabric read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -32997,7 +33875,9 @@ public:
             NSLog(@"GroupKeyManagement.MaxGroupKeysPerFabric response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GroupKeyManagement MaxGroupKeysPerFabric Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GroupKeyManagement MaxGroupKeysPerFabric read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -33086,7 +33966,9 @@ public:
             NSLog(@"GroupKeyManagement.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GroupKeyManagement GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GroupKeyManagement GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -33175,7 +34057,9 @@ public:
             NSLog(@"GroupKeyManagement.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GroupKeyManagement AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GroupKeyManagement AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -33264,7 +34148,9 @@ public:
             NSLog(@"GroupKeyManagement.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GroupKeyManagement AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GroupKeyManagement AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -33352,7 +34238,9 @@ public:
             NSLog(@"GroupKeyManagement.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "GroupKeyManagement ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "GroupKeyManagement ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -33467,7 +34355,9 @@ public:
                   completionHandler:^(CHIPGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable error) {
                       NSLog(@"Values: %@", values);
                       chipError = [CHIPError errorToCHIPErrorCode:error];
-                      ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                      if (error != nil) {
+                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                      }
                       SetCommandExitStatus(chipError);
                   }];
         return chipError;
@@ -33510,7 +34400,9 @@ public:
         [cluster addGroupIfIdentifyingWithParams:params
                                completionHandler:^(NSError * _Nullable error) {
                                    chipError = [CHIPError errorToCHIPErrorCode:error];
-                                   ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                   if (error != nil) {
+                                       ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                   }
                                    SetCommandExitStatus(chipError);
                                }];
         return chipError;
@@ -33560,7 +34452,9 @@ public:
                                 CHIPGroupsClusterGetGroupMembershipResponseParams * _Nullable values, NSError * _Nullable error) {
                                 NSLog(@"Values: %@", values);
                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                if (error != nil) {
+                                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                }
                                 SetCommandExitStatus(chipError);
                             }];
         return chipError;
@@ -33596,7 +34490,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster removeAllGroupsWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -33634,7 +34530,9 @@ public:
                      completionHandler:^(CHIPGroupsClusterRemoveGroupResponseParams * _Nullable values, NSError * _Nullable error) {
                          NSLog(@"Values: %@", values);
                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         if (error != nil) {
+                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         }
                          SetCommandExitStatus(chipError);
                      }];
         return chipError;
@@ -33673,7 +34571,9 @@ public:
                    completionHandler:^(CHIPGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable error) {
                        NSLog(@"Values: %@", values);
                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                       ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                       if (error != nil) {
+                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                       }
                        SetCommandExitStatus(chipError);
                    }];
         return chipError;
@@ -33710,7 +34610,9 @@ public:
             NSLog(@"Groups.NameSupport response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Groups NameSupport Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Groups NameSupport read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -33794,7 +34696,9 @@ public:
             NSLog(@"Groups.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Groups GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Groups GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -33878,7 +34782,9 @@ public:
             NSLog(@"Groups.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Groups AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Groups AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -33962,7 +34868,9 @@ public:
             NSLog(@"Groups.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Groups AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Groups AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -34046,7 +34954,9 @@ public:
             NSLog(@"Groups.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Groups ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Groups ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -34151,7 +35061,9 @@ public:
         [cluster identifyWithParams:params
                   completionHandler:^(NSError * _Nullable error) {
                       chipError = [CHIPError errorToCHIPErrorCode:error];
-                      ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                      if (error != nil) {
+                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                      }
                       SetCommandExitStatus(chipError);
                   }];
         return chipError;
@@ -34188,7 +35100,9 @@ public:
             CHIPIdentifyClusterIdentifyQueryResponseParams * _Nullable values, NSError * _Nullable error) {
             NSLog(@"Values: %@", values);
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -34227,7 +35141,9 @@ public:
         [cluster triggerEffectWithParams:params
                        completionHandler:^(NSError * _Nullable error) {
                            chipError = [CHIPError errorToCHIPErrorCode:error];
-                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           if (error != nil) {
+                               ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           }
                            SetCommandExitStatus(chipError);
                        }];
         return chipError;
@@ -34265,7 +35181,9 @@ public:
             NSLog(@"Identify.IdentifyTime response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Identify IdentifyTime Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Identify IdentifyTime read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -34299,13 +35217,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
-        [cluster writeAttributeIdentifyTimeWithValue:value
-                                              params:params
-                                   completionHandler:^(NSError * _Nullable error) {
-                                       chipError = [CHIPError errorToCHIPErrorCode:error];
-                                       ChipLogError(chipTool, "Identify IdentifyTime Error: %s", chip::ErrorStr(chipError));
-                                       SetCommandExitStatus(chipError);
-                                   }];
+        [cluster
+            writeAttributeIdentifyTimeWithValue:value
+                                         params:params
+                              completionHandler:^(NSError * _Nullable error) {
+                                  chipError = [CHIPError errorToCHIPErrorCode:error];
+                                  if (error != nil) {
+                                      ChipLogError(chipTool, "Identify IdentifyTime write Error: %s", chip::ErrorStr(chipError));
+                                  }
+                                  SetCommandExitStatus(chipError);
+                              }];
         return chipError;
     }
 
@@ -34388,7 +35309,9 @@ public:
             NSLog(@"Identify.IdentifyType response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Identify IdentifyType Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Identify IdentifyType read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -34472,7 +35395,9 @@ public:
             NSLog(@"Identify.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Identify GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Identify GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -34557,7 +35482,9 @@ public:
             NSLog(@"Identify.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Identify AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Identify AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -34641,7 +35568,9 @@ public:
             NSLog(@"Identify.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Identify AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Identify AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -34725,7 +35654,9 @@ public:
             NSLog(@"Identify.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Identify ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Identify ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -34831,7 +35762,9 @@ public:
             NSLog(@"IlluminanceMeasurement.MeasuredValue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "IlluminanceMeasurement MeasuredValue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "IlluminanceMeasurement MeasuredValue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -34920,7 +35853,9 @@ public:
             NSLog(@"IlluminanceMeasurement.MinMeasuredValue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "IlluminanceMeasurement MinMeasuredValue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "IlluminanceMeasurement MinMeasuredValue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -35009,7 +35944,9 @@ public:
             NSLog(@"IlluminanceMeasurement.MaxMeasuredValue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "IlluminanceMeasurement MaxMeasuredValue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "IlluminanceMeasurement MaxMeasuredValue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -35098,7 +36035,9 @@ public:
             NSLog(@"IlluminanceMeasurement.Tolerance response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "IlluminanceMeasurement Tolerance Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "IlluminanceMeasurement Tolerance read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -35186,7 +36125,9 @@ public:
             NSLog(@"IlluminanceMeasurement.LightSensorType response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "IlluminanceMeasurement LightSensorType Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "IlluminanceMeasurement LightSensorType read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -35275,7 +36216,9 @@ public:
             NSLog(@"IlluminanceMeasurement.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "IlluminanceMeasurement GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "IlluminanceMeasurement GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -35364,7 +36307,9 @@ public:
             NSLog(@"IlluminanceMeasurement.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "IlluminanceMeasurement AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "IlluminanceMeasurement AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -35453,7 +36398,9 @@ public:
             NSLog(@"IlluminanceMeasurement.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "IlluminanceMeasurement AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "IlluminanceMeasurement AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -35542,7 +36489,9 @@ public:
             NSLog(@"IlluminanceMeasurement.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "IlluminanceMeasurement ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "IlluminanceMeasurement ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -35647,7 +36596,9 @@ public:
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable error) {
                      NSLog(@"Values: %@", values);
                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                     ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                     if (error != nil) {
+                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                     }
                      SetCommandExitStatus(chipError);
                  }];
         return chipError;
@@ -35684,7 +36635,9 @@ public:
             NSLog(@"KeypadInput.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "KeypadInput GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "KeypadInput GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -35769,7 +36722,9 @@ public:
             NSLog(@"KeypadInput.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "KeypadInput AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "KeypadInput AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -35854,7 +36809,9 @@ public:
             NSLog(@"KeypadInput.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "KeypadInput AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "KeypadInput AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -35938,7 +36895,9 @@ public:
             NSLog(@"KeypadInput.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "KeypadInput ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "KeypadInput ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -36066,7 +37025,9 @@ public:
         [cluster moveWithParams:params
               completionHandler:^(NSError * _Nullable error) {
                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                  ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                  if (error != nil) {
+                      ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                  }
                   SetCommandExitStatus(chipError);
               }];
         return chipError;
@@ -36113,7 +37074,9 @@ public:
         [cluster moveToLevelWithParams:params
                      completionHandler:^(NSError * _Nullable error) {
                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         if (error != nil) {
+                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         }
                          SetCommandExitStatus(chipError);
                      }];
         return chipError;
@@ -36156,7 +37119,9 @@ public:
         [cluster moveToLevelWithOnOffWithParams:params
                               completionHandler:^(NSError * _Nullable error) {
                                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                                  ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                  if (error != nil) {
+                                      ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                  }
                                   SetCommandExitStatus(chipError);
                               }];
         return chipError;
@@ -36197,7 +37162,9 @@ public:
         [cluster moveWithOnOffWithParams:params
                        completionHandler:^(NSError * _Nullable error) {
                            chipError = [CHIPError errorToCHIPErrorCode:error];
-                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           if (error != nil) {
+                               ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           }
                            SetCommandExitStatus(chipError);
                        }];
         return chipError;
@@ -36244,7 +37211,9 @@ public:
         [cluster stepWithParams:params
               completionHandler:^(NSError * _Nullable error) {
                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                  ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                  if (error != nil) {
+                      ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                  }
                   SetCommandExitStatus(chipError);
               }];
         return chipError;
@@ -36290,7 +37259,9 @@ public:
         [cluster stepWithOnOffWithParams:params
                        completionHandler:^(NSError * _Nullable error) {
                            chipError = [CHIPError errorToCHIPErrorCode:error];
-                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           if (error != nil) {
+                               ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           }
                            SetCommandExitStatus(chipError);
                        }];
         return chipError;
@@ -36332,7 +37303,9 @@ public:
         [cluster stopWithParams:params
               completionHandler:^(NSError * _Nullable error) {
                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                  ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                  if (error != nil) {
+                      ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                  }
                   SetCommandExitStatus(chipError);
               }];
         return chipError;
@@ -36368,7 +37341,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster stopWithOnOffWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -36404,7 +37379,9 @@ public:
             NSLog(@"LevelControl.CurrentLevel response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LevelControl CurrentLevel Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LevelControl CurrentLevel read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -36488,7 +37465,9 @@ public:
             NSLog(@"LevelControl.RemainingTime response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LevelControl RemainingTime Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LevelControl RemainingTime read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -36572,7 +37551,9 @@ public:
             NSLog(@"LevelControl.MinLevel response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LevelControl MinLevel Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LevelControl MinLevel read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -36656,7 +37637,9 @@ public:
             NSLog(@"LevelControl.MaxLevel response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LevelControl MaxLevel Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LevelControl MaxLevel read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -36740,7 +37723,9 @@ public:
             NSLog(@"LevelControl.CurrentFrequency response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LevelControl CurrentFrequency Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LevelControl CurrentFrequency read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -36824,7 +37809,9 @@ public:
             NSLog(@"LevelControl.MinFrequency response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LevelControl MinFrequency Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LevelControl MinFrequency read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -36908,7 +37895,9 @@ public:
             NSLog(@"LevelControl.MaxFrequency response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LevelControl MaxFrequency Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LevelControl MaxFrequency read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -36992,7 +37981,9 @@ public:
             NSLog(@"LevelControl.Options response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LevelControl Options Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LevelControl Options read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -37030,7 +38021,9 @@ public:
                                          params:params
                               completionHandler:^(NSError * _Nullable error) {
                                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                                  ChipLogError(chipTool, "LevelControl Options Error: %s", chip::ErrorStr(chipError));
+                                  if (error != nil) {
+                                      ChipLogError(chipTool, "LevelControl Options write Error: %s", chip::ErrorStr(chipError));
+                                  }
                                   SetCommandExitStatus(chipError);
                               }];
         return chipError;
@@ -37115,7 +38108,9 @@ public:
             NSLog(@"LevelControl.OnOffTransitionTime response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LevelControl OnOffTransitionTime Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LevelControl OnOffTransitionTime read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -37153,8 +38148,10 @@ public:
                                                      params:params
                                           completionHandler:^(NSError * _Nullable error) {
                                               chipError = [CHIPError errorToCHIPErrorCode:error];
-                                              ChipLogError(chipTool, "LevelControl OnOffTransitionTime Error: %s",
-                                                  chip::ErrorStr(chipError));
+                                              if (error != nil) {
+                                                  ChipLogError(chipTool, "LevelControl OnOffTransitionTime write Error: %s",
+                                                      chip::ErrorStr(chipError));
+                                              }
                                               SetCommandExitStatus(chipError);
                                           }];
         return chipError;
@@ -37240,7 +38237,9 @@ public:
             NSLog(@"LevelControl.OnLevel response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LevelControl OnLevel Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LevelControl OnLevel read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -37278,7 +38277,9 @@ public:
                                          params:params
                               completionHandler:^(NSError * _Nullable error) {
                                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                                  ChipLogError(chipTool, "LevelControl OnLevel Error: %s", chip::ErrorStr(chipError));
+                                  if (error != nil) {
+                                      ChipLogError(chipTool, "LevelControl OnLevel write Error: %s", chip::ErrorStr(chipError));
+                                  }
                                   SetCommandExitStatus(chipError);
                               }];
         return chipError;
@@ -37363,7 +38364,9 @@ public:
             NSLog(@"LevelControl.OnTransitionTime response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LevelControl OnTransitionTime Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LevelControl OnTransitionTime read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -37397,14 +38400,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedShort:mValue];
 
-        [cluster
-            writeAttributeOnTransitionTimeWithValue:value
-                                             params:params
-                                  completionHandler:^(NSError * _Nullable error) {
-                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogError(chipTool, "LevelControl OnTransitionTime Error: %s", chip::ErrorStr(chipError));
-                                      SetCommandExitStatus(chipError);
-                                  }];
+        [cluster writeAttributeOnTransitionTimeWithValue:value
+                                                  params:params
+                                       completionHandler:^(NSError * _Nullable error) {
+                                           chipError = [CHIPError errorToCHIPErrorCode:error];
+                                           if (error != nil) {
+                                               ChipLogError(chipTool, "LevelControl OnTransitionTime write Error: %s",
+                                                   chip::ErrorStr(chipError));
+                                           }
+                                           SetCommandExitStatus(chipError);
+                                       }];
         return chipError;
     }
 
@@ -37487,7 +38492,9 @@ public:
             NSLog(@"LevelControl.OffTransitionTime response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LevelControl OffTransitionTime Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LevelControl OffTransitionTime read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -37525,8 +38532,10 @@ public:
                                                    params:params
                                         completionHandler:^(NSError * _Nullable error) {
                                             chipError = [CHIPError errorToCHIPErrorCode:error];
-                                            ChipLogError(
-                                                chipTool, "LevelControl OffTransitionTime Error: %s", chip::ErrorStr(chipError));
+                                            if (error != nil) {
+                                                ChipLogError(chipTool, "LevelControl OffTransitionTime write Error: %s",
+                                                    chip::ErrorStr(chipError));
+                                            }
                                             SetCommandExitStatus(chipError);
                                         }];
         return chipError;
@@ -37611,7 +38620,9 @@ public:
             NSLog(@"LevelControl.DefaultMoveRate response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LevelControl DefaultMoveRate Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LevelControl DefaultMoveRate read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -37645,14 +38656,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
-        [cluster
-            writeAttributeDefaultMoveRateWithValue:value
-                                            params:params
-                                 completionHandler:^(NSError * _Nullable error) {
-                                     chipError = [CHIPError errorToCHIPErrorCode:error];
-                                     ChipLogError(chipTool, "LevelControl DefaultMoveRate Error: %s", chip::ErrorStr(chipError));
-                                     SetCommandExitStatus(chipError);
-                                 }];
+        [cluster writeAttributeDefaultMoveRateWithValue:value
+                                                 params:params
+                                      completionHandler:^(NSError * _Nullable error) {
+                                          chipError = [CHIPError errorToCHIPErrorCode:error];
+                                          if (error != nil) {
+                                              ChipLogError(chipTool, "LevelControl DefaultMoveRate write Error: %s",
+                                                  chip::ErrorStr(chipError));
+                                          }
+                                          SetCommandExitStatus(chipError);
+                                      }];
         return chipError;
     }
 
@@ -37735,7 +38748,9 @@ public:
             NSLog(@"LevelControl.StartUpCurrentLevel response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LevelControl StartUpCurrentLevel Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LevelControl StartUpCurrentLevel read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -37773,8 +38788,10 @@ public:
                                                      params:params
                                           completionHandler:^(NSError * _Nullable error) {
                                               chipError = [CHIPError errorToCHIPErrorCode:error];
-                                              ChipLogError(chipTool, "LevelControl StartUpCurrentLevel Error: %s",
-                                                  chip::ErrorStr(chipError));
+                                              if (error != nil) {
+                                                  ChipLogError(chipTool, "LevelControl StartUpCurrentLevel write Error: %s",
+                                                      chip::ErrorStr(chipError));
+                                              }
                                               SetCommandExitStatus(chipError);
                                           }];
         return chipError;
@@ -37860,7 +38877,9 @@ public:
             NSLog(@"LevelControl.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LevelControl GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LevelControl GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -37945,7 +38964,9 @@ public:
             NSLog(@"LevelControl.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LevelControl AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LevelControl AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -38030,7 +39051,9 @@ public:
             NSLog(@"LevelControl.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LevelControl AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LevelControl AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -38114,7 +39137,9 @@ public:
             NSLog(@"LevelControl.FeatureMap response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LevelControl FeatureMap Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LevelControl FeatureMap read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -38198,7 +39223,9 @@ public:
             NSLog(@"LevelControl.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LevelControl ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LevelControl ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -38301,7 +39328,9 @@ public:
             NSLog(@"LocalizationConfiguration.ActiveLocale response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LocalizationConfiguration ActiveLocale Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LocalizationConfiguration ActiveLocale read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -38343,8 +39372,10 @@ public:
                                               params:params
                                    completionHandler:^(NSError * _Nullable error) {
                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                       ChipLogError(
-                                           chipTool, "LocalizationConfiguration ActiveLocale Error: %s", chip::ErrorStr(chipError));
+                                       if (error != nil) {
+                                           ChipLogError(chipTool, "LocalizationConfiguration ActiveLocale write Error: %s",
+                                               chip::ErrorStr(chipError));
+                                       }
                                        SetCommandExitStatus(chipError);
                                    }];
         return chipError;
@@ -38434,7 +39465,9 @@ public:
             NSLog(@"LocalizationConfiguration.SupportedLocales response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LocalizationConfiguration SupportedLocales Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LocalizationConfiguration SupportedLocales read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -38523,7 +39556,9 @@ public:
             NSLog(@"LocalizationConfiguration.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LocalizationConfiguration GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LocalizationConfiguration GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -38612,7 +39647,9 @@ public:
             NSLog(@"LocalizationConfiguration.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LocalizationConfiguration AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LocalizationConfiguration AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -38701,7 +39738,9 @@ public:
             NSLog(@"LocalizationConfiguration.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LocalizationConfiguration ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LocalizationConfiguration ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -38802,7 +39841,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster sleepWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -38838,7 +39879,9 @@ public:
             NSLog(@"LowPower.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LowPower GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LowPower GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -38923,7 +39966,9 @@ public:
             NSLog(@"LowPower.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LowPower AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LowPower AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -39007,7 +40052,9 @@ public:
             NSLog(@"LowPower.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LowPower AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LowPower AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -39091,7 +40138,9 @@ public:
             NSLog(@"LowPower.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "LowPower ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "LowPower ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -39194,7 +40243,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster hideInputStatusWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -39233,7 +40284,9 @@ public:
         [cluster renameInputWithParams:params
                      completionHandler:^(NSError * _Nullable error) {
                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         if (error != nil) {
+                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         }
                          SetCommandExitStatus(chipError);
                      }];
         return chipError;
@@ -39272,7 +40325,9 @@ public:
         [cluster selectInputWithParams:params
                      completionHandler:^(NSError * _Nullable error) {
                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         if (error != nil) {
+                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         }
                          SetCommandExitStatus(chipError);
                      }];
         return chipError;
@@ -39307,7 +40362,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster showInputStatusWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -39343,7 +40400,9 @@ public:
             NSLog(@"MediaInput.InputList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "MediaInput InputList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "MediaInput InputList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -39427,7 +40486,9 @@ public:
             NSLog(@"MediaInput.CurrentInput response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "MediaInput CurrentInput Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "MediaInput CurrentInput read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -39511,7 +40572,9 @@ public:
             NSLog(@"MediaInput.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "MediaInput GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "MediaInput GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -39596,7 +40659,9 @@ public:
             NSLog(@"MediaInput.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "MediaInput AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "MediaInput AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -39681,7 +40746,9 @@ public:
             NSLog(@"MediaInput.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "MediaInput AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "MediaInput AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -39765,7 +40832,9 @@ public:
             NSLog(@"MediaInput.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "MediaInput ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "MediaInput ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -39882,7 +40951,9 @@ public:
             CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
             NSLog(@"Values: %@", values);
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -39918,7 +40989,9 @@ public:
             CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
             NSLog(@"Values: %@", values);
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -39954,7 +41027,9 @@ public:
             CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
             NSLog(@"Values: %@", values);
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -39990,7 +41065,9 @@ public:
             CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
             NSLog(@"Values: %@", values);
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -40026,7 +41103,9 @@ public:
             CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
             NSLog(@"Values: %@", values);
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -40062,7 +41141,9 @@ public:
             CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
             NSLog(@"Values: %@", values);
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -40100,7 +41181,9 @@ public:
               completionHandler:^(CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
                   NSLog(@"Values: %@", values);
                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                  ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                  if (error != nil) {
+                      ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                  }
                   SetCommandExitStatus(chipError);
               }];
         return chipError;
@@ -40140,7 +41223,9 @@ public:
                  completionHandler:^(CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
                      NSLog(@"Values: %@", values);
                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                     ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                     if (error != nil) {
+                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                     }
                      SetCommandExitStatus(chipError);
                  }];
         return chipError;
@@ -40180,7 +41265,9 @@ public:
                 completionHandler:^(CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
                     NSLog(@"Values: %@", values);
                     chipError = [CHIPError errorToCHIPErrorCode:error];
-                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                    if (error != nil) {
+                        ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                    }
                     SetCommandExitStatus(chipError);
                 }];
         return chipError;
@@ -40217,7 +41304,9 @@ public:
             CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
             NSLog(@"Values: %@", values);
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -40253,7 +41342,9 @@ public:
             CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
             NSLog(@"Values: %@", values);
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -40289,7 +41380,9 @@ public:
             NSLog(@"MediaPlayback.CurrentState response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "MediaPlayback CurrentState Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "MediaPlayback CurrentState read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -40373,7 +41466,9 @@ public:
             NSLog(@"MediaPlayback.StartTime response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "MediaPlayback StartTime Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "MediaPlayback StartTime read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -40457,7 +41552,9 @@ public:
             NSLog(@"MediaPlayback.Duration response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "MediaPlayback Duration Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "MediaPlayback Duration read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -40542,7 +41639,9 @@ public:
             NSLog(@"MediaPlayback.SampledPosition response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "MediaPlayback SampledPosition Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "MediaPlayback SampledPosition read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -40627,7 +41726,9 @@ public:
             NSLog(@"MediaPlayback.PlaybackSpeed response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "MediaPlayback PlaybackSpeed Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "MediaPlayback PlaybackSpeed read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -40711,7 +41812,9 @@ public:
             NSLog(@"MediaPlayback.SeekRangeEnd response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "MediaPlayback SeekRangeEnd Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "MediaPlayback SeekRangeEnd read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -40795,7 +41898,9 @@ public:
             NSLog(@"MediaPlayback.SeekRangeStart response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "MediaPlayback SeekRangeStart Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "MediaPlayback SeekRangeStart read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -40879,7 +41984,9 @@ public:
             NSLog(@"MediaPlayback.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "MediaPlayback GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "MediaPlayback GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -40964,7 +42071,9 @@ public:
             NSLog(@"MediaPlayback.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "MediaPlayback AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "MediaPlayback AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -41049,7 +42158,9 @@ public:
             NSLog(@"MediaPlayback.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "MediaPlayback AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "MediaPlayback AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -41133,7 +42244,9 @@ public:
             NSLog(@"MediaPlayback.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "MediaPlayback ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "MediaPlayback ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -41240,7 +42353,9 @@ public:
         [cluster changeToModeWithParams:params
                       completionHandler:^(NSError * _Nullable error) {
                           chipError = [CHIPError errorToCHIPErrorCode:error];
-                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          if (error != nil) {
+                              ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          }
                           SetCommandExitStatus(chipError);
                       }];
         return chipError;
@@ -41277,7 +42392,9 @@ public:
             NSLog(@"ModeSelect.Description response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ModeSelect Description Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ModeSelect Description read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -41361,7 +42478,9 @@ public:
             NSLog(@"ModeSelect.StandardNamespace response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ModeSelect StandardNamespace Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ModeSelect StandardNamespace read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -41445,7 +42564,9 @@ public:
             NSLog(@"ModeSelect.SupportedModes response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ModeSelect SupportedModes Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ModeSelect SupportedModes read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -41529,7 +42650,9 @@ public:
             NSLog(@"ModeSelect.CurrentMode response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ModeSelect CurrentMode Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ModeSelect CurrentMode read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -41613,7 +42736,9 @@ public:
             NSLog(@"ModeSelect.StartUpMode response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ModeSelect StartUpMode Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ModeSelect StartUpMode read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -41647,13 +42772,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
-        [cluster writeAttributeStartUpModeWithValue:value
-                                             params:params
-                                  completionHandler:^(NSError * _Nullable error) {
-                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogError(chipTool, "ModeSelect StartUpMode Error: %s", chip::ErrorStr(chipError));
-                                      SetCommandExitStatus(chipError);
-                                  }];
+        [cluster
+            writeAttributeStartUpModeWithValue:value
+                                        params:params
+                             completionHandler:^(NSError * _Nullable error) {
+                                 chipError = [CHIPError errorToCHIPErrorCode:error];
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "ModeSelect StartUpMode write Error: %s", chip::ErrorStr(chipError));
+                                 }
+                                 SetCommandExitStatus(chipError);
+                             }];
         return chipError;
     }
 
@@ -41736,7 +42864,9 @@ public:
             NSLog(@"ModeSelect.OnMode response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ModeSelect OnMode Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ModeSelect OnMode read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -41774,7 +42904,9 @@ public:
                                         params:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogError(chipTool, "ModeSelect OnMode Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "ModeSelect OnMode write Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -41859,7 +42991,9 @@ public:
             NSLog(@"ModeSelect.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ModeSelect GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ModeSelect GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -41944,7 +43078,9 @@ public:
             NSLog(@"ModeSelect.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ModeSelect AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ModeSelect AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -42029,7 +43165,9 @@ public:
             NSLog(@"ModeSelect.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ModeSelect AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ModeSelect AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -42113,7 +43251,9 @@ public:
             NSLog(@"ModeSelect.FeatureMap response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ModeSelect FeatureMap Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ModeSelect FeatureMap read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -42197,7 +43337,9 @@ public:
             NSLog(@"ModeSelect.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ModeSelect ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ModeSelect ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -42317,7 +43459,9 @@ public:
                                       NSError * _Nullable error) {
                                       NSLog(@"Values: %@", values);
                                       chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                      if (error != nil) {
+                                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                      }
                                       SetCommandExitStatus(chipError);
                                   }];
         return chipError;
@@ -42364,7 +43508,9 @@ public:
                                     NSError * _Nullable error) {
                                     NSLog(@"Values: %@", values);
                                     chipError = [CHIPError errorToCHIPErrorCode:error];
-                                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                    if (error != nil) {
+                                        ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                    }
                                     SetCommandExitStatus(chipError);
                                 }];
         return chipError;
@@ -42410,7 +43556,9 @@ public:
                             NSError * _Nullable error) {
                             NSLog(@"Values: %@", values);
                             chipError = [CHIPError errorToCHIPErrorCode:error];
-                            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                            if (error != nil) {
+                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                            }
                             SetCommandExitStatus(chipError);
                         }];
         return chipError;
@@ -42455,7 +43603,9 @@ public:
                            NSError * _Nullable error) {
                            NSLog(@"Values: %@", values);
                            chipError = [CHIPError errorToCHIPErrorCode:error];
-                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           if (error != nil) {
+                               ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           }
                            SetCommandExitStatus(chipError);
                        }];
         return chipError;
@@ -42502,7 +43652,9 @@ public:
                             NSError * _Nullable error) {
                             NSLog(@"Values: %@", values);
                             chipError = [CHIPError errorToCHIPErrorCode:error];
-                            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                            if (error != nil) {
+                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                            }
                             SetCommandExitStatus(chipError);
                         }];
         return chipError;
@@ -42548,7 +43700,9 @@ public:
                           CHIPNetworkCommissioningClusterScanNetworksResponseParams * _Nullable values, NSError * _Nullable error) {
                           NSLog(@"Values: %@", values);
                           chipError = [CHIPError errorToCHIPErrorCode:error];
-                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          if (error != nil) {
+                              ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          }
                           SetCommandExitStatus(chipError);
                       }];
         return chipError;
@@ -42588,7 +43742,9 @@ public:
             NSLog(@"NetworkCommissioning.MaxNetworks response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "NetworkCommissioning MaxNetworks Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "NetworkCommissioning MaxNetworks read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -42676,7 +43832,9 @@ public:
             NSLog(@"NetworkCommissioning.Networks response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "NetworkCommissioning Networks Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "NetworkCommissioning Networks read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -42764,7 +43922,9 @@ public:
             NSLog(@"NetworkCommissioning.ScanMaxTimeSeconds response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "NetworkCommissioning ScanMaxTimeSeconds Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "NetworkCommissioning ScanMaxTimeSeconds read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -42853,7 +44013,9 @@ public:
             NSLog(@"NetworkCommissioning.ConnectMaxTimeSeconds response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "NetworkCommissioning ConnectMaxTimeSeconds Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "NetworkCommissioning ConnectMaxTimeSeconds read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -42942,7 +44104,9 @@ public:
             NSLog(@"NetworkCommissioning.InterfaceEnabled response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "NetworkCommissioning InterfaceEnabled Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "NetworkCommissioning InterfaceEnabled read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -42982,8 +44146,10 @@ public:
                                                   params:params
                                        completionHandler:^(NSError * _Nullable error) {
                                            chipError = [CHIPError errorToCHIPErrorCode:error];
-                                           ChipLogError(chipTool, "NetworkCommissioning InterfaceEnabled Error: %s",
-                                               chip::ErrorStr(chipError));
+                                           if (error != nil) {
+                                               ChipLogError(chipTool, "NetworkCommissioning InterfaceEnabled write Error: %s",
+                                                   chip::ErrorStr(chipError));
+                                           }
                                            SetCommandExitStatus(chipError);
                                        }];
         return chipError;
@@ -43073,7 +44239,9 @@ public:
             NSLog(@"NetworkCommissioning.LastNetworkingStatus response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "NetworkCommissioning LastNetworkingStatus Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "NetworkCommissioning LastNetworkingStatus read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -43162,7 +44330,9 @@ public:
             NSLog(@"NetworkCommissioning.LastNetworkID response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "NetworkCommissioning LastNetworkID Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "NetworkCommissioning LastNetworkID read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -43250,7 +44420,9 @@ public:
             NSLog(@"NetworkCommissioning.LastConnectErrorValue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "NetworkCommissioning LastConnectErrorValue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "NetworkCommissioning LastConnectErrorValue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -43339,7 +44511,9 @@ public:
             NSLog(@"NetworkCommissioning.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "NetworkCommissioning GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "NetworkCommissioning GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -43428,7 +44602,9 @@ public:
             NSLog(@"NetworkCommissioning.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "NetworkCommissioning AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "NetworkCommissioning AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -43517,7 +44693,9 @@ public:
             NSLog(@"NetworkCommissioning.FeatureMap response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "NetworkCommissioning FeatureMap Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "NetworkCommissioning FeatureMap read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -43605,7 +44783,9 @@ public:
             NSLog(@"NetworkCommissioning.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "NetworkCommissioning ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "NetworkCommissioning ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -43717,7 +44897,9 @@ public:
                                 NSError * _Nullable error) {
                                 NSLog(@"Values: %@", values);
                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                if (error != nil) {
+                                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                }
                                 SetCommandExitStatus(chipError);
                             }];
         return chipError;
@@ -43760,7 +44942,9 @@ public:
         [cluster notifyUpdateAppliedWithParams:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -43826,7 +45010,9 @@ public:
                         NSError * _Nullable error) {
                         NSLog(@"Values: %@", values);
                         chipError = [CHIPError errorToCHIPErrorCode:error];
-                        ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                        if (error != nil) {
+                            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                        }
                         SetCommandExitStatus(chipError);
                     }];
         return chipError;
@@ -43874,7 +45060,9 @@ public:
             NSLog(@"OtaSoftwareUpdateProvider.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OtaSoftwareUpdateProvider AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OtaSoftwareUpdateProvider AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -43963,7 +45151,9 @@ public:
             NSLog(@"OtaSoftwareUpdateProvider.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OtaSoftwareUpdateProvider ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OtaSoftwareUpdateProvider ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -44084,7 +45274,9 @@ public:
         [cluster announceOtaProviderWithParams:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -44131,8 +45323,10 @@ public:
                                          NSLog(@"OtaSoftwareUpdateRequestor.DefaultOtaProviders response %@", [value description]);
                                          err = [CHIPError errorToCHIPErrorCode:error];
 
-                                         ChipLogError(chipTool, "OtaSoftwareUpdateRequestor DefaultOtaProviders Error: %s",
-                                             chip::ErrorStr(err));
+                                         if (error != nil) {
+                                             ChipLogError(chipTool, "OtaSoftwareUpdateRequestor DefaultOtaProviders read Error: %s",
+                                                 chip::ErrorStr(err));
+                                         }
                                          SetCommandExitStatus(err);
                                      }];
         return err;
@@ -44185,8 +45379,11 @@ public:
                                                      params:params
                                           completionHandler:^(NSError * _Nullable error) {
                                               chipError = [CHIPError errorToCHIPErrorCode:error];
-                                              ChipLogError(chipTool, "OtaSoftwareUpdateRequestor DefaultOtaProviders Error: %s",
-                                                  chip::ErrorStr(chipError));
+                                              if (error != nil) {
+                                                  ChipLogError(chipTool,
+                                                      "OtaSoftwareUpdateRequestor DefaultOtaProviders write Error: %s",
+                                                      chip::ErrorStr(chipError));
+                                              }
                                               SetCommandExitStatus(chipError);
                                           }];
         return chipError;
@@ -44279,7 +45476,9 @@ public:
             NSLog(@"OtaSoftwareUpdateRequestor.UpdatePossible response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OtaSoftwareUpdateRequestor UpdatePossible Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OtaSoftwareUpdateRequestor UpdatePossible read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -44368,7 +45567,9 @@ public:
             NSLog(@"OtaSoftwareUpdateRequestor.UpdateState response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OtaSoftwareUpdateRequestor UpdateState Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OtaSoftwareUpdateRequestor UpdateState read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -44457,7 +45658,9 @@ public:
             NSLog(@"OtaSoftwareUpdateRequestor.UpdateStateProgress response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OtaSoftwareUpdateRequestor UpdateStateProgress Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OtaSoftwareUpdateRequestor UpdateStateProgress read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -44546,7 +45749,9 @@ public:
             NSLog(@"OtaSoftwareUpdateRequestor.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OtaSoftwareUpdateRequestor AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OtaSoftwareUpdateRequestor AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -44635,7 +45840,9 @@ public:
             NSLog(@"OtaSoftwareUpdateRequestor.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OtaSoftwareUpdateRequestor ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OtaSoftwareUpdateRequestor ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -44751,7 +45958,9 @@ public:
             NSLog(@"OccupancySensing.Occupancy response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OccupancySensing Occupancy Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OccupancySensing Occupancy read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -44839,7 +46048,9 @@ public:
             NSLog(@"OccupancySensing.OccupancySensorType response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OccupancySensing OccupancySensorType Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OccupancySensing OccupancySensorType read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -44929,7 +46140,9 @@ public:
                 NSLog(@"OccupancySensing.OccupancySensorTypeBitmap response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "OccupancySensing OccupancySensorTypeBitmap Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "OccupancySensing OccupancySensorTypeBitmap read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -45019,7 +46232,9 @@ public:
             NSLog(@"OccupancySensing.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OccupancySensing GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OccupancySensing GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -45108,7 +46323,9 @@ public:
             NSLog(@"OccupancySensing.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OccupancySensing AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OccupancySensing AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -45197,7 +46414,9 @@ public:
             NSLog(@"OccupancySensing.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OccupancySensing AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OccupancySensing AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -45285,7 +46504,9 @@ public:
             NSLog(@"OccupancySensing.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OccupancySensing ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OccupancySensing ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -45395,7 +46616,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster offWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -45434,7 +46657,9 @@ public:
         [cluster offWithEffectWithParams:params
                        completionHandler:^(NSError * _Nullable error) {
                            chipError = [CHIPError errorToCHIPErrorCode:error];
-                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           if (error != nil) {
+                               ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           }
                            SetCommandExitStatus(chipError);
                        }];
         return chipError;
@@ -45470,7 +46695,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster onWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -45504,7 +46731,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster onWithRecallGlobalSceneWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -45545,7 +46774,9 @@ public:
         [cluster onWithTimedOffWithParams:params
                         completionHandler:^(NSError * _Nullable error) {
                             chipError = [CHIPError errorToCHIPErrorCode:error];
-                            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                            if (error != nil) {
+                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                            }
                             SetCommandExitStatus(chipError);
                         }];
         return chipError;
@@ -45582,7 +46813,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster toggleWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -45618,7 +46851,9 @@ public:
             NSLog(@"OnOff.OnOff response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OnOff OnOff Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OnOff OnOff read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -45702,7 +46937,9 @@ public:
             NSLog(@"OnOff.GlobalSceneControl response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OnOff GlobalSceneControl Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OnOff GlobalSceneControl read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -45786,7 +47023,9 @@ public:
             NSLog(@"OnOff.OnTime response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OnOff OnTime Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OnOff OnTime read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -45824,7 +47063,9 @@ public:
                                         params:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogError(chipTool, "OnOff OnTime Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "OnOff OnTime write Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -45909,7 +47150,9 @@ public:
             NSLog(@"OnOff.OffWaitTime response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OnOff OffWaitTime Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OnOff OffWaitTime read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -45947,7 +47190,9 @@ public:
                                              params:params
                                   completionHandler:^(NSError * _Nullable error) {
                                       chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogError(chipTool, "OnOff OffWaitTime Error: %s", chip::ErrorStr(chipError));
+                                      if (error != nil) {
+                                          ChipLogError(chipTool, "OnOff OffWaitTime write Error: %s", chip::ErrorStr(chipError));
+                                      }
                                       SetCommandExitStatus(chipError);
                                   }];
         return chipError;
@@ -46032,7 +47277,9 @@ public:
             NSLog(@"OnOff.StartUpOnOff response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OnOff StartUpOnOff Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OnOff StartUpOnOff read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -46070,7 +47317,9 @@ public:
                                               params:params
                                    completionHandler:^(NSError * _Nullable error) {
                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                       ChipLogError(chipTool, "OnOff StartUpOnOff Error: %s", chip::ErrorStr(chipError));
+                                       if (error != nil) {
+                                           ChipLogError(chipTool, "OnOff StartUpOnOff write Error: %s", chip::ErrorStr(chipError));
+                                       }
                                        SetCommandExitStatus(chipError);
                                    }];
         return chipError;
@@ -46155,7 +47404,9 @@ public:
             NSLog(@"OnOff.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OnOff GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OnOff GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -46239,7 +47490,9 @@ public:
             NSLog(@"OnOff.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OnOff AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OnOff AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -46323,7 +47576,9 @@ public:
             NSLog(@"OnOff.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OnOff AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OnOff AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -46407,7 +47662,9 @@ public:
             NSLog(@"OnOff.FeatureMap response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OnOff FeatureMap Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OnOff FeatureMap read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -46491,7 +47748,9 @@ public:
             NSLog(@"OnOff.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OnOff ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OnOff ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -46594,7 +47853,9 @@ public:
             NSLog(@"OnOffSwitchConfiguration.SwitchType response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OnOffSwitchConfiguration SwitchType Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OnOffSwitchConfiguration SwitchType read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -46682,7 +47943,9 @@ public:
             NSLog(@"OnOffSwitchConfiguration.SwitchActions response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OnOffSwitchConfiguration SwitchActions Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OnOffSwitchConfiguration SwitchActions read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -46722,8 +47985,10 @@ public:
                                                params:params
                                     completionHandler:^(NSError * _Nullable error) {
                                         chipError = [CHIPError errorToCHIPErrorCode:error];
-                                        ChipLogError(chipTool, "OnOffSwitchConfiguration SwitchActions Error: %s",
-                                            chip::ErrorStr(chipError));
+                                        if (error != nil) {
+                                            ChipLogError(chipTool, "OnOffSwitchConfiguration SwitchActions write Error: %s",
+                                                chip::ErrorStr(chipError));
+                                        }
                                         SetCommandExitStatus(chipError);
                                     }];
         return chipError;
@@ -46813,7 +48078,9 @@ public:
             NSLog(@"OnOffSwitchConfiguration.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OnOffSwitchConfiguration GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OnOffSwitchConfiguration GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -46902,7 +48169,9 @@ public:
             NSLog(@"OnOffSwitchConfiguration.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OnOffSwitchConfiguration AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OnOffSwitchConfiguration AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -46991,7 +48260,9 @@ public:
             NSLog(@"OnOffSwitchConfiguration.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OnOffSwitchConfiguration AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OnOffSwitchConfiguration AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -47080,7 +48351,9 @@ public:
             NSLog(@"OnOffSwitchConfiguration.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OnOffSwitchConfiguration ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OnOffSwitchConfiguration ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -47210,7 +48483,9 @@ public:
             completionHandler:^(CHIPOperationalCredentialsClusterNOCResponseParams * _Nullable values, NSError * _Nullable error) {
                 NSLog(@"Values: %@", values);
                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                if (error != nil) {
+                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                }
                 SetCommandExitStatus(chipError);
             }];
         return chipError;
@@ -47254,7 +48529,9 @@ public:
         [cluster addTrustedRootCertificateWithParams:params
                                    completionHandler:^(NSError * _Nullable error) {
                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                       ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                       if (error != nil) {
+                                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                       }
                                        SetCommandExitStatus(chipError);
                                    }];
         return chipError;
@@ -47296,7 +48573,9 @@ public:
                                 NSError * _Nullable error) {
                                 NSLog(@"Values: %@", values);
                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                if (error != nil) {
+                                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                }
                                 SetCommandExitStatus(chipError);
                             }];
         return chipError;
@@ -47338,7 +48617,9 @@ public:
                         CHIPOperationalCredentialsClusterCSRResponseParams * _Nullable values, NSError * _Nullable error) {
                         NSLog(@"Values: %@", values);
                         chipError = [CHIPError errorToCHIPErrorCode:error];
-                        ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                        if (error != nil) {
+                            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                        }
                         SetCommandExitStatus(chipError);
                     }];
         return chipError;
@@ -47381,7 +48662,9 @@ public:
                                 NSError * _Nullable error) {
                                 NSLog(@"Values: %@", values);
                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                if (error != nil) {
+                                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                }
                                 SetCommandExitStatus(chipError);
                             }];
         return chipError;
@@ -47423,7 +48706,9 @@ public:
                           CHIPOperationalCredentialsClusterNOCResponseParams * _Nullable values, NSError * _Nullable error) {
                           NSLog(@"Values: %@", values);
                           chipError = [CHIPError errorToCHIPErrorCode:error];
-                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          if (error != nil) {
+                              ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                          }
                           SetCommandExitStatus(chipError);
                       }];
         return chipError;
@@ -47464,7 +48749,9 @@ public:
         [cluster removeTrustedRootCertificateWithParams:params
                                       completionHandler:^(NSError * _Nullable error) {
                                           chipError = [CHIPError errorToCHIPErrorCode:error];
-                                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                          if (error != nil) {
+                                              ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                          }
                                           SetCommandExitStatus(chipError);
                                       }];
         return chipError;
@@ -47506,7 +48793,9 @@ public:
                                CHIPOperationalCredentialsClusterNOCResponseParams * _Nullable values, NSError * _Nullable error) {
                                NSLog(@"Values: %@", values);
                                chipError = [CHIPError errorToCHIPErrorCode:error];
-                               ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                               if (error != nil) {
+                                   ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                               }
                                SetCommandExitStatus(chipError);
                            }];
         return chipError;
@@ -47550,7 +48839,9 @@ public:
                        CHIPOperationalCredentialsClusterNOCResponseParams * _Nullable values, NSError * _Nullable error) {
                        NSLog(@"Values: %@", values);
                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                       ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                       if (error != nil) {
+                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                       }
                        SetCommandExitStatus(chipError);
                    }];
         return chipError;
@@ -47593,7 +48884,9 @@ public:
                                NSLog(@"OperationalCredentials.NOCs response %@", [value description]);
                                err = [CHIPError errorToCHIPErrorCode:error];
 
-                               ChipLogError(chipTool, "OperationalCredentials NOCs Error: %s", chip::ErrorStr(err));
+                               if (error != nil) {
+                                   ChipLogError(chipTool, "OperationalCredentials NOCs read Error: %s", chip::ErrorStr(err));
+                               }
                                SetCommandExitStatus(err);
                            }];
         return err;
@@ -47684,7 +48977,9 @@ public:
                                   NSLog(@"OperationalCredentials.Fabrics response %@", [value description]);
                                   err = [CHIPError errorToCHIPErrorCode:error];
 
-                                  ChipLogError(chipTool, "OperationalCredentials Fabrics Error: %s", chip::ErrorStr(err));
+                                  if (error != nil) {
+                                      ChipLogError(chipTool, "OperationalCredentials Fabrics read Error: %s", chip::ErrorStr(err));
+                                  }
                                   SetCommandExitStatus(err);
                               }];
         return err;
@@ -47772,7 +49067,9 @@ public:
             NSLog(@"OperationalCredentials.SupportedFabrics response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OperationalCredentials SupportedFabrics Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OperationalCredentials SupportedFabrics read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -47861,7 +49158,9 @@ public:
             NSLog(@"OperationalCredentials.CommissionedFabrics response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OperationalCredentials CommissionedFabrics Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OperationalCredentials CommissionedFabrics read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -47950,7 +49249,9 @@ public:
             NSLog(@"OperationalCredentials.TrustedRootCertificates response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OperationalCredentials TrustedRootCertificates Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OperationalCredentials TrustedRootCertificates read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -48039,7 +49340,9 @@ public:
             NSLog(@"OperationalCredentials.CurrentFabricIndex response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OperationalCredentials CurrentFabricIndex Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OperationalCredentials CurrentFabricIndex read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -48128,7 +49431,9 @@ public:
             NSLog(@"OperationalCredentials.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OperationalCredentials GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OperationalCredentials GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -48217,7 +49522,9 @@ public:
             NSLog(@"OperationalCredentials.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OperationalCredentials AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OperationalCredentials AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -48306,7 +49613,9 @@ public:
             NSLog(@"OperationalCredentials.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OperationalCredentials AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OperationalCredentials AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -48395,7 +49704,9 @@ public:
             NSLog(@"OperationalCredentials.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "OperationalCredentials ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "OperationalCredentials ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -48528,7 +49839,9 @@ public:
             NSLog(@"PowerSource.Status response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PowerSource Status Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PowerSource Status read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -48612,7 +49925,9 @@ public:
             NSLog(@"PowerSource.Order response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PowerSource Order Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PowerSource Order read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -48696,7 +50011,9 @@ public:
             NSLog(@"PowerSource.Description response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PowerSource Description Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PowerSource Description read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -48780,7 +50097,9 @@ public:
             NSLog(@"PowerSource.BatteryVoltage response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PowerSource BatteryVoltage Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PowerSource BatteryVoltage read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -48865,7 +50184,9 @@ public:
                 NSLog(@"PowerSource.BatteryPercentRemaining response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "PowerSource BatteryPercentRemaining Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "PowerSource BatteryPercentRemaining read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -48950,7 +50271,9 @@ public:
             NSLog(@"PowerSource.BatteryTimeRemaining response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PowerSource BatteryTimeRemaining Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PowerSource BatteryTimeRemaining read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -49035,7 +50358,9 @@ public:
             NSLog(@"PowerSource.BatteryChargeLevel response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PowerSource BatteryChargeLevel Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PowerSource BatteryChargeLevel read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -49120,7 +50445,9 @@ public:
             NSLog(@"PowerSource.ActiveBatteryFaults response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PowerSource ActiveBatteryFaults Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PowerSource ActiveBatteryFaults read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -49205,7 +50532,9 @@ public:
             NSLog(@"PowerSource.BatteryChargeState response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PowerSource BatteryChargeState Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PowerSource BatteryChargeState read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -49290,7 +50619,9 @@ public:
             NSLog(@"PowerSource.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PowerSource GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PowerSource GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -49375,7 +50706,9 @@ public:
             NSLog(@"PowerSource.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PowerSource AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PowerSource AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -49460,7 +50793,9 @@ public:
             NSLog(@"PowerSource.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PowerSource AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PowerSource AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -49544,7 +50879,9 @@ public:
             NSLog(@"PowerSource.FeatureMap response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PowerSource FeatureMap Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PowerSource FeatureMap read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -49628,7 +50965,9 @@ public:
             NSLog(@"PowerSource.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PowerSource ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PowerSource ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -49730,7 +51069,9 @@ public:
             NSLog(@"PowerSourceConfiguration.Sources response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PowerSourceConfiguration Sources Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PowerSourceConfiguration Sources read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -49818,7 +51159,9 @@ public:
             NSLog(@"PowerSourceConfiguration.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PowerSourceConfiguration GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PowerSourceConfiguration GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -49907,7 +51250,9 @@ public:
             NSLog(@"PowerSourceConfiguration.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PowerSourceConfiguration AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PowerSourceConfiguration AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -49996,7 +51341,9 @@ public:
             NSLog(@"PowerSourceConfiguration.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PowerSourceConfiguration AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PowerSourceConfiguration AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -50085,7 +51432,9 @@ public:
             NSLog(@"PowerSourceConfiguration.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PowerSourceConfiguration ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PowerSourceConfiguration ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -50198,7 +51547,9 @@ public:
             NSLog(@"PressureMeasurement.MeasuredValue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PressureMeasurement MeasuredValue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PressureMeasurement MeasuredValue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -50286,7 +51637,9 @@ public:
             NSLog(@"PressureMeasurement.MinMeasuredValue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PressureMeasurement MinMeasuredValue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PressureMeasurement MinMeasuredValue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -50375,7 +51728,9 @@ public:
             NSLog(@"PressureMeasurement.MaxMeasuredValue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PressureMeasurement MaxMeasuredValue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PressureMeasurement MaxMeasuredValue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -50464,7 +51819,9 @@ public:
             NSLog(@"PressureMeasurement.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PressureMeasurement AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PressureMeasurement AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -50552,7 +51909,9 @@ public:
             NSLog(@"PressureMeasurement.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PressureMeasurement ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PressureMeasurement ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -50697,7 +52056,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.MaxPressure response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl MaxPressure Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl MaxPressure read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -50786,7 +52147,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.MaxSpeed response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl MaxSpeed Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl MaxSpeed read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -50874,7 +52237,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.MaxFlow response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl MaxFlow Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl MaxFlow read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -50962,7 +52327,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.MinConstPressure response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl MinConstPressure Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl MinConstPressure read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -51051,7 +52418,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.MaxConstPressure response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl MaxConstPressure Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl MaxConstPressure read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -51140,7 +52509,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.MinCompPressure response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl MinCompPressure Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl MinCompPressure read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -51229,7 +52600,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.MaxCompPressure response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl MaxCompPressure Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl MaxCompPressure read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -51318,7 +52691,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.MinConstSpeed response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl MinConstSpeed Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl MinConstSpeed read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -51407,7 +52782,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.MaxConstSpeed response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl MaxConstSpeed Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl MaxConstSpeed read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -51496,7 +52873,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.MinConstFlow response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl MinConstFlow Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl MinConstFlow read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -51585,7 +52964,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.MaxConstFlow response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl MaxConstFlow Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl MaxConstFlow read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -51674,7 +53055,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.MinConstTemp response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl MinConstTemp Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl MinConstTemp read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -51763,7 +53146,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.MaxConstTemp response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl MaxConstTemp Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl MaxConstTemp read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -51852,7 +53237,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.PumpStatus response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl PumpStatus Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl PumpStatus read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -51941,7 +53328,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.EffectiveOperationMode response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl EffectiveOperationMode Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl EffectiveOperationMode read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -52031,7 +53420,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.EffectiveControlMode response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl EffectiveControlMode Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl EffectiveControlMode read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -52120,7 +53511,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.Capacity response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl Capacity Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl Capacity read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -52208,7 +53601,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.Speed response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl Speed Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl Speed read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -52296,7 +53691,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.LifetimeRunningHours response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl LifetimeRunningHours Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl LifetimeRunningHours read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -52336,8 +53733,11 @@ public:
                                                       params:params
                                            completionHandler:^(NSError * _Nullable error) {
                                                chipError = [CHIPError errorToCHIPErrorCode:error];
-                                               ChipLogError(chipTool, "PumpConfigurationAndControl LifetimeRunningHours Error: %s",
-                                                   chip::ErrorStr(chipError));
+                                               if (error != nil) {
+                                                   ChipLogError(chipTool,
+                                                       "PumpConfigurationAndControl LifetimeRunningHours write Error: %s",
+                                                       chip::ErrorStr(chipError));
+                                               }
                                                SetCommandExitStatus(chipError);
                                            }];
         return chipError;
@@ -52427,7 +53827,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.Power response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl Power Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl Power read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -52515,7 +53917,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.LifetimeEnergyConsumed response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl LifetimeEnergyConsumed Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl LifetimeEnergyConsumed read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -52551,15 +53955,17 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedInt:mValue];
 
-        [cluster
-            writeAttributeLifetimeEnergyConsumedWithValue:value
-                                                   params:params
-                                        completionHandler:^(NSError * _Nullable error) {
-                                            chipError = [CHIPError errorToCHIPErrorCode:error];
-                                            ChipLogError(chipTool, "PumpConfigurationAndControl LifetimeEnergyConsumed Error: %s",
-                                                chip::ErrorStr(chipError));
-                                            SetCommandExitStatus(chipError);
-                                        }];
+        [cluster writeAttributeLifetimeEnergyConsumedWithValue:value
+                                                        params:params
+                                             completionHandler:^(NSError * _Nullable error) {
+                                                 chipError = [CHIPError errorToCHIPErrorCode:error];
+                                                 if (error != nil) {
+                                                     ChipLogError(chipTool,
+                                                         "PumpConfigurationAndControl LifetimeEnergyConsumed write Error: %s",
+                                                         chip::ErrorStr(chipError));
+                                                 }
+                                                 SetCommandExitStatus(chipError);
+                                             }];
         return chipError;
     }
 
@@ -52648,7 +54054,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.OperationMode response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl OperationMode Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl OperationMode read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -52688,8 +54096,10 @@ public:
                                                params:params
                                     completionHandler:^(NSError * _Nullable error) {
                                         chipError = [CHIPError errorToCHIPErrorCode:error];
-                                        ChipLogError(chipTool, "PumpConfigurationAndControl OperationMode Error: %s",
-                                            chip::ErrorStr(chipError));
+                                        if (error != nil) {
+                                            ChipLogError(chipTool, "PumpConfigurationAndControl OperationMode write Error: %s",
+                                                chip::ErrorStr(chipError));
+                                        }
                                         SetCommandExitStatus(chipError);
                                     }];
         return chipError;
@@ -52779,7 +54189,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.ControlMode response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl ControlMode Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl ControlMode read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -52819,8 +54231,10 @@ public:
                                              params:params
                                   completionHandler:^(NSError * _Nullable error) {
                                       chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogError(
-                                          chipTool, "PumpConfigurationAndControl ControlMode Error: %s", chip::ErrorStr(chipError));
+                                      if (error != nil) {
+                                          ChipLogError(chipTool, "PumpConfigurationAndControl ControlMode write Error: %s",
+                                              chip::ErrorStr(chipError));
+                                      }
                                       SetCommandExitStatus(chipError);
                                   }];
         return chipError;
@@ -52910,7 +54324,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.AlarmMask response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl AlarmMask Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl AlarmMask read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -52998,7 +54414,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -53087,7 +54505,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -53176,7 +54596,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -53265,7 +54687,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.FeatureMap response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl FeatureMap Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl FeatureMap read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -53354,7 +54778,9 @@ public:
             NSLog(@"PumpConfigurationAndControl.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "PumpConfigurationAndControl ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "PumpConfigurationAndControl ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -53462,7 +54888,9 @@ public:
             NSLog(@"RelativeHumidityMeasurement.MeasuredValue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "RelativeHumidityMeasurement MeasuredValue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "RelativeHumidityMeasurement MeasuredValue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -53551,7 +54979,9 @@ public:
             NSLog(@"RelativeHumidityMeasurement.MinMeasuredValue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "RelativeHumidityMeasurement MinMeasuredValue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "RelativeHumidityMeasurement MinMeasuredValue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -53640,7 +55070,9 @@ public:
             NSLog(@"RelativeHumidityMeasurement.MaxMeasuredValue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "RelativeHumidityMeasurement MaxMeasuredValue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "RelativeHumidityMeasurement MaxMeasuredValue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -53729,7 +55161,9 @@ public:
             NSLog(@"RelativeHumidityMeasurement.Tolerance response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "RelativeHumidityMeasurement Tolerance Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "RelativeHumidityMeasurement Tolerance read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -53817,7 +55251,9 @@ public:
             NSLog(@"RelativeHumidityMeasurement.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "RelativeHumidityMeasurement GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "RelativeHumidityMeasurement GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -53906,7 +55342,9 @@ public:
             NSLog(@"RelativeHumidityMeasurement.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "RelativeHumidityMeasurement AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "RelativeHumidityMeasurement AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -53995,7 +55433,9 @@ public:
             NSLog(@"RelativeHumidityMeasurement.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "RelativeHumidityMeasurement AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "RelativeHumidityMeasurement AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -54084,7 +55524,9 @@ public:
             NSLog(@"RelativeHumidityMeasurement.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "RelativeHumidityMeasurement ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "RelativeHumidityMeasurement ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -54226,7 +55668,9 @@ public:
                   completionHandler:^(CHIPScenesClusterAddSceneResponseParams * _Nullable values, NSError * _Nullable error) {
                       NSLog(@"Values: %@", values);
                       chipError = [CHIPError errorToCHIPErrorCode:error];
-                      ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                      if (error != nil) {
+                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                      }
                       SetCommandExitStatus(chipError);
                   }];
         return chipError;
@@ -54272,7 +55716,9 @@ public:
                                 CHIPScenesClusterGetSceneMembershipResponseParams * _Nullable values, NSError * _Nullable error) {
                                 NSLog(@"Values: %@", values);
                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                if (error != nil) {
+                                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                }
                                 SetCommandExitStatus(chipError);
                             }];
         return chipError;
@@ -54314,7 +55760,9 @@ public:
         [cluster recallSceneWithParams:params
                      completionHandler:^(NSError * _Nullable error) {
                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         if (error != nil) {
+                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         }
                          SetCommandExitStatus(chipError);
                      }];
         return chipError;
@@ -54356,7 +55804,9 @@ public:
                              CHIPScenesClusterRemoveAllScenesResponseParams * _Nullable values, NSError * _Nullable error) {
                              NSLog(@"Values: %@", values);
                              chipError = [CHIPError errorToCHIPErrorCode:error];
-                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                             if (error != nil) {
+                                 ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                             }
                              SetCommandExitStatus(chipError);
                          }];
         return chipError;
@@ -54397,7 +55847,9 @@ public:
                      completionHandler:^(CHIPScenesClusterRemoveSceneResponseParams * _Nullable values, NSError * _Nullable error) {
                          NSLog(@"Values: %@", values);
                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         if (error != nil) {
+                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                         }
                          SetCommandExitStatus(chipError);
                      }];
         return chipError;
@@ -54439,7 +55891,9 @@ public:
                     completionHandler:^(CHIPScenesClusterStoreSceneResponseParams * _Nullable values, NSError * _Nullable error) {
                         NSLog(@"Values: %@", values);
                         chipError = [CHIPError errorToCHIPErrorCode:error];
-                        ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                        if (error != nil) {
+                            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                        }
                         SetCommandExitStatus(chipError);
                     }];
         return chipError;
@@ -54481,7 +55935,9 @@ public:
                    completionHandler:^(CHIPScenesClusterViewSceneResponseParams * _Nullable values, NSError * _Nullable error) {
                        NSLog(@"Values: %@", values);
                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                       ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                       if (error != nil) {
+                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                       }
                        SetCommandExitStatus(chipError);
                    }];
         return chipError;
@@ -54519,7 +55975,9 @@ public:
             NSLog(@"Scenes.SceneCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Scenes SceneCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Scenes SceneCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -54603,7 +56061,9 @@ public:
             NSLog(@"Scenes.CurrentScene response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Scenes CurrentScene Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Scenes CurrentScene read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -54687,7 +56147,9 @@ public:
             NSLog(@"Scenes.CurrentGroup response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Scenes CurrentGroup Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Scenes CurrentGroup read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -54771,7 +56233,9 @@ public:
             NSLog(@"Scenes.SceneValid response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Scenes SceneValid Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Scenes SceneValid read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -54855,7 +56319,9 @@ public:
             NSLog(@"Scenes.NameSupport response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Scenes NameSupport Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Scenes NameSupport read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -54939,7 +56405,9 @@ public:
             NSLog(@"Scenes.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Scenes GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Scenes GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -55023,7 +56491,9 @@ public:
             NSLog(@"Scenes.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Scenes AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Scenes AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -55107,7 +56577,9 @@ public:
             NSLog(@"Scenes.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Scenes AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Scenes AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -55191,7 +56663,9 @@ public:
             NSLog(@"Scenes.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Scenes ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Scenes ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -55296,7 +56770,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster resetWatermarksWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -55334,7 +56810,9 @@ public:
             NSLog(@"SoftwareDiagnostics.ThreadMetrics response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "SoftwareDiagnostics ThreadMetrics Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "SoftwareDiagnostics ThreadMetrics read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -55422,7 +56900,9 @@ public:
             NSLog(@"SoftwareDiagnostics.CurrentHeapFree response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "SoftwareDiagnostics CurrentHeapFree Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "SoftwareDiagnostics CurrentHeapFree read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -55511,7 +56991,9 @@ public:
             NSLog(@"SoftwareDiagnostics.CurrentHeapUsed response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "SoftwareDiagnostics CurrentHeapUsed Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "SoftwareDiagnostics CurrentHeapUsed read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -55601,7 +57083,9 @@ public:
                 NSLog(@"SoftwareDiagnostics.CurrentHeapHighWatermark response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "SoftwareDiagnostics CurrentHeapHighWatermark Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "SoftwareDiagnostics CurrentHeapHighWatermark read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -55691,7 +57175,9 @@ public:
             NSLog(@"SoftwareDiagnostics.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "SoftwareDiagnostics GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "SoftwareDiagnostics GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -55780,7 +57266,9 @@ public:
             NSLog(@"SoftwareDiagnostics.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "SoftwareDiagnostics AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "SoftwareDiagnostics AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -55869,7 +57357,9 @@ public:
             NSLog(@"SoftwareDiagnostics.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "SoftwareDiagnostics AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "SoftwareDiagnostics AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -55957,7 +57447,9 @@ public:
             NSLog(@"SoftwareDiagnostics.FeatureMap response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "SoftwareDiagnostics FeatureMap Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "SoftwareDiagnostics FeatureMap read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -56045,7 +57537,9 @@ public:
             NSLog(@"SoftwareDiagnostics.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "SoftwareDiagnostics ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "SoftwareDiagnostics ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -56157,7 +57651,9 @@ public:
             NSLog(@"Switch.NumberOfPositions response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Switch NumberOfPositions Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Switch NumberOfPositions read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -56241,7 +57737,9 @@ public:
             NSLog(@"Switch.CurrentPosition response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Switch CurrentPosition Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Switch CurrentPosition read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -56325,7 +57823,9 @@ public:
             NSLog(@"Switch.MultiPressMax response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Switch MultiPressMax Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Switch MultiPressMax read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -56409,7 +57909,9 @@ public:
             NSLog(@"Switch.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Switch GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Switch GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -56493,7 +57995,9 @@ public:
             NSLog(@"Switch.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Switch AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Switch AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -56577,7 +58081,9 @@ public:
             NSLog(@"Switch.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Switch AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Switch AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -56661,7 +58167,9 @@ public:
             NSLog(@"Switch.FeatureMap response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Switch FeatureMap Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Switch FeatureMap read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -56745,7 +58253,9 @@ public:
             NSLog(@"Switch.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Switch ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Switch ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -56852,7 +58362,9 @@ public:
                             CHIPTargetNavigatorClusterNavigateTargetResponseParams * _Nullable values, NSError * _Nullable error) {
                             NSLog(@"Values: %@", values);
                             chipError = [CHIPError errorToCHIPErrorCode:error];
-                            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                            if (error != nil) {
+                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                            }
                             SetCommandExitStatus(chipError);
                         }];
         return chipError;
@@ -56890,7 +58402,9 @@ public:
             NSLog(@"TargetNavigator.TargetList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TargetNavigator TargetList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TargetNavigator TargetList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -56974,7 +58488,9 @@ public:
             NSLog(@"TargetNavigator.CurrentTarget response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TargetNavigator CurrentTarget Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TargetNavigator CurrentTarget read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -57058,7 +58574,9 @@ public:
             NSLog(@"TargetNavigator.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TargetNavigator GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TargetNavigator GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -57143,7 +58661,9 @@ public:
             NSLog(@"TargetNavigator.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TargetNavigator AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TargetNavigator AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -57228,7 +58748,9 @@ public:
             NSLog(@"TargetNavigator.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TargetNavigator AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TargetNavigator AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -57312,7 +58834,9 @@ public:
             NSLog(@"TargetNavigator.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TargetNavigator ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TargetNavigator ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -57417,7 +58941,9 @@ public:
             NSLog(@"TemperatureMeasurement.MeasuredValue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TemperatureMeasurement MeasuredValue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TemperatureMeasurement MeasuredValue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -57506,7 +59032,9 @@ public:
             NSLog(@"TemperatureMeasurement.MinMeasuredValue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TemperatureMeasurement MinMeasuredValue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TemperatureMeasurement MinMeasuredValue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -57595,7 +59123,9 @@ public:
             NSLog(@"TemperatureMeasurement.MaxMeasuredValue response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TemperatureMeasurement MaxMeasuredValue Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TemperatureMeasurement MaxMeasuredValue read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -57684,7 +59214,9 @@ public:
             NSLog(@"TemperatureMeasurement.Tolerance response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TemperatureMeasurement Tolerance Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TemperatureMeasurement Tolerance read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -57772,7 +59304,9 @@ public:
             NSLog(@"TemperatureMeasurement.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TemperatureMeasurement AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TemperatureMeasurement AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -57861,7 +59395,9 @@ public:
             NSLog(@"TemperatureMeasurement.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TemperatureMeasurement ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TemperatureMeasurement ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -58082,7 +59618,9 @@ public:
                                      NSError * _Nullable error) {
                                      NSLog(@"Values: %@", values);
                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                     ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                     if (error != nil) {
+                                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                     }
                                      SetCommandExitStatus(chipError);
                                  }];
         return chipError;
@@ -58118,7 +59656,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster testWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -58159,7 +59699,9 @@ public:
                               CHIPTestClusterClusterTestAddArgumentsResponseParams * _Nullable values, NSError * _Nullable error) {
                               NSLog(@"Values: %@", values);
                               chipError = [CHIPError errorToCHIPErrorCode:error];
-                              ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                              if (error != nil) {
+                                  ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                              }
                               SetCommandExitStatus(chipError);
                           }];
         return chipError;
@@ -58204,7 +59746,9 @@ public:
                                       NSError * _Nullable error) {
                                       NSLog(@"Values: %@", values);
                                       chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                      if (error != nil) {
+                                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                      }
                                       SetCommandExitStatus(chipError);
                                   }];
         return chipError;
@@ -58248,7 +59792,9 @@ public:
                               CHIPTestClusterClusterTestEnumsResponseParams * _Nullable values, NSError * _Nullable error) {
                               NSLog(@"Values: %@", values);
                               chipError = [CHIPError errorToCHIPErrorCode:error];
-                              ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                              if (error != nil) {
+                                  ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                              }
                               SetCommandExitStatus(chipError);
                           }];
         return chipError;
@@ -58298,7 +59844,9 @@ public:
                                           NSError * _Nullable error) {
                                           NSLog(@"Values: %@", values);
                                           chipError = [CHIPError errorToCHIPErrorCode:error];
-                                          ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                          if (error != nil) {
+                                              ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                          }
                                           SetCommandExitStatus(chipError);
                                       }];
         return chipError;
@@ -58349,7 +59897,9 @@ public:
                                     NSError * _Nullable error) {
                                     NSLog(@"Values: %@", values);
                                     chipError = [CHIPError errorToCHIPErrorCode:error];
-                                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                    if (error != nil) {
+                                        ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                    }
                                     SetCommandExitStatus(chipError);
                                 }];
         return chipError;
@@ -58458,7 +60008,9 @@ public:
                                                      NSError * _Nullable error) {
                                                      NSLog(@"Values: %@", values);
                                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                     ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                                     if (error != nil) {
+                                                         ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                                     }
                                                      SetCommandExitStatus(chipError);
                                                  }];
         return chipError;
@@ -58519,7 +60071,9 @@ public:
                                            NSError * _Nullable error) {
                                            NSLog(@"Values: %@", values);
                                            chipError = [CHIPError errorToCHIPErrorCode:error];
-                                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                           if (error != nil) {
+                                               ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                           }
                                            SetCommandExitStatus(chipError);
                                        }];
         return chipError;
@@ -58575,7 +60129,9 @@ public:
                                              NSError * _Nullable error) {
                                              NSLog(@"Values: %@", values);
                                              chipError = [CHIPError errorToCHIPErrorCode:error];
-                                             ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                             if (error != nil) {
+                                                 ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                             }
                                              SetCommandExitStatus(chipError);
                                          }];
         return chipError;
@@ -58676,7 +60232,9 @@ public:
                                                  NSError * _Nullable error) {
                                                  NSLog(@"Values: %@", values);
                                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                 ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                                 if (error != nil) {
+                                                     ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                                 }
                                                  SetCommandExitStatus(chipError);
                                              }];
         return chipError;
@@ -58712,7 +60270,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster testNotHandledWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -58752,7 +60312,9 @@ public:
                                     NSError * _Nullable error) {
                                     NSLog(@"Values: %@", values);
                                     chipError = [CHIPError errorToCHIPErrorCode:error];
-                                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                    if (error != nil) {
+                                        ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                    }
                                     SetCommandExitStatus(chipError);
                                 }];
         return chipError;
@@ -58790,7 +60352,9 @@ public:
         [cluster testSimpleOptionalArgumentRequestWithParams:params
                                            completionHandler:^(NSError * _Nullable error) {
                                                chipError = [CHIPError errorToCHIPErrorCode:error];
-                                               ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                               if (error != nil) {
+                                                   ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                               }
                                                SetCommandExitStatus(chipError);
                                            }];
         return chipError;
@@ -58827,7 +60391,9 @@ public:
             CHIPTestClusterClusterTestSpecificResponseParams * _Nullable values, NSError * _Nullable error) {
             NSLog(@"Values: %@", values);
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -58877,7 +60443,9 @@ public:
                                        CHIPTestClusterClusterBooleanResponseParams * _Nullable values, NSError * _Nullable error) {
                                        NSLog(@"Values: %@", values);
                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                       ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                       if (error != nil) {
+                                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                       }
                                        SetCommandExitStatus(chipError);
                                    }];
         return chipError;
@@ -58913,7 +60481,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster testUnknownCommandWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -58947,7 +60517,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster timedInvokeRequestWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -58983,7 +60555,9 @@ public:
             NSLog(@"TestCluster.Boolean response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Boolean Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Boolean read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -59021,7 +60595,9 @@ public:
                                          params:params
                               completionHandler:^(NSError * _Nullable error) {
                                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                                  ChipLogError(chipTool, "TestCluster Boolean Error: %s", chip::ErrorStr(chipError));
+                                  if (error != nil) {
+                                      ChipLogError(chipTool, "TestCluster Boolean write Error: %s", chip::ErrorStr(chipError));
+                                  }
                                   SetCommandExitStatus(chipError);
                               }];
         return chipError;
@@ -59106,7 +60682,9 @@ public:
             NSLog(@"TestCluster.Bitmap8 response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Bitmap8 Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Bitmap8 read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -59144,7 +60722,9 @@ public:
                                          params:params
                               completionHandler:^(NSError * _Nullable error) {
                                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                                  ChipLogError(chipTool, "TestCluster Bitmap8 Error: %s", chip::ErrorStr(chipError));
+                                  if (error != nil) {
+                                      ChipLogError(chipTool, "TestCluster Bitmap8 write Error: %s", chip::ErrorStr(chipError));
+                                  }
                                   SetCommandExitStatus(chipError);
                               }];
         return chipError;
@@ -59229,7 +60809,9 @@ public:
             NSLog(@"TestCluster.Bitmap16 response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Bitmap16 Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Bitmap16 read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -59267,7 +60849,9 @@ public:
                                           params:params
                                completionHandler:^(NSError * _Nullable error) {
                                    chipError = [CHIPError errorToCHIPErrorCode:error];
-                                   ChipLogError(chipTool, "TestCluster Bitmap16 Error: %s", chip::ErrorStr(chipError));
+                                   if (error != nil) {
+                                       ChipLogError(chipTool, "TestCluster Bitmap16 write Error: %s", chip::ErrorStr(chipError));
+                                   }
                                    SetCommandExitStatus(chipError);
                                }];
         return chipError;
@@ -59352,7 +60936,9 @@ public:
             NSLog(@"TestCluster.Bitmap32 response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Bitmap32 Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Bitmap32 read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -59390,7 +60976,9 @@ public:
                                           params:params
                                completionHandler:^(NSError * _Nullable error) {
                                    chipError = [CHIPError errorToCHIPErrorCode:error];
-                                   ChipLogError(chipTool, "TestCluster Bitmap32 Error: %s", chip::ErrorStr(chipError));
+                                   if (error != nil) {
+                                       ChipLogError(chipTool, "TestCluster Bitmap32 write Error: %s", chip::ErrorStr(chipError));
+                                   }
                                    SetCommandExitStatus(chipError);
                                }];
         return chipError;
@@ -59475,7 +61063,9 @@ public:
             NSLog(@"TestCluster.Bitmap64 response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Bitmap64 Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Bitmap64 read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -59513,7 +61103,9 @@ public:
                                           params:params
                                completionHandler:^(NSError * _Nullable error) {
                                    chipError = [CHIPError errorToCHIPErrorCode:error];
-                                   ChipLogError(chipTool, "TestCluster Bitmap64 Error: %s", chip::ErrorStr(chipError));
+                                   if (error != nil) {
+                                       ChipLogError(chipTool, "TestCluster Bitmap64 write Error: %s", chip::ErrorStr(chipError));
+                                   }
                                    SetCommandExitStatus(chipError);
                                }];
         return chipError;
@@ -59598,7 +61190,9 @@ public:
             NSLog(@"TestCluster.Int8u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Int8u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Int8u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -59636,7 +61230,9 @@ public:
                                        params:params
                             completionHandler:^(NSError * _Nullable error) {
                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                ChipLogError(chipTool, "TestCluster Int8u Error: %s", chip::ErrorStr(chipError));
+                                if (error != nil) {
+                                    ChipLogError(chipTool, "TestCluster Int8u write Error: %s", chip::ErrorStr(chipError));
+                                }
                                 SetCommandExitStatus(chipError);
                             }];
         return chipError;
@@ -59721,7 +61317,9 @@ public:
             NSLog(@"TestCluster.Int16u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Int16u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Int16u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -59759,7 +61357,9 @@ public:
                                         params:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogError(chipTool, "TestCluster Int16u Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster Int16u write Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -59844,7 +61444,9 @@ public:
             NSLog(@"TestCluster.Int24u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Int24u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Int24u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -59882,7 +61484,9 @@ public:
                                         params:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogError(chipTool, "TestCluster Int24u Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster Int24u write Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -59967,7 +61571,9 @@ public:
             NSLog(@"TestCluster.Int32u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Int32u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Int32u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -60005,7 +61611,9 @@ public:
                                         params:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogError(chipTool, "TestCluster Int32u Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster Int32u write Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -60090,7 +61698,9 @@ public:
             NSLog(@"TestCluster.Int40u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Int40u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Int40u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -60128,7 +61738,9 @@ public:
                                         params:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogError(chipTool, "TestCluster Int40u Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster Int40u write Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -60213,7 +61825,9 @@ public:
             NSLog(@"TestCluster.Int48u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Int48u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Int48u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -60251,7 +61865,9 @@ public:
                                         params:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogError(chipTool, "TestCluster Int48u Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster Int48u write Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -60336,7 +61952,9 @@ public:
             NSLog(@"TestCluster.Int56u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Int56u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Int56u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -60374,7 +61992,9 @@ public:
                                         params:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogError(chipTool, "TestCluster Int56u Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster Int56u write Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -60459,7 +62079,9 @@ public:
             NSLog(@"TestCluster.Int64u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Int64u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Int64u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -60497,7 +62119,9 @@ public:
                                         params:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogError(chipTool, "TestCluster Int64u Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster Int64u write Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -60582,7 +62206,9 @@ public:
             NSLog(@"TestCluster.Int8s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Int8s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Int8s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -60620,7 +62246,9 @@ public:
                                        params:params
                             completionHandler:^(NSError * _Nullable error) {
                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                ChipLogError(chipTool, "TestCluster Int8s Error: %s", chip::ErrorStr(chipError));
+                                if (error != nil) {
+                                    ChipLogError(chipTool, "TestCluster Int8s write Error: %s", chip::ErrorStr(chipError));
+                                }
                                 SetCommandExitStatus(chipError);
                             }];
         return chipError;
@@ -60705,7 +62333,9 @@ public:
             NSLog(@"TestCluster.Int16s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Int16s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Int16s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -60743,7 +62373,9 @@ public:
                                         params:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogError(chipTool, "TestCluster Int16s Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster Int16s write Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -60828,7 +62460,9 @@ public:
             NSLog(@"TestCluster.Int24s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Int24s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Int24s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -60866,7 +62500,9 @@ public:
                                         params:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogError(chipTool, "TestCluster Int24s Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster Int24s write Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -60951,7 +62587,9 @@ public:
             NSLog(@"TestCluster.Int32s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Int32s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Int32s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -60989,7 +62627,9 @@ public:
                                         params:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogError(chipTool, "TestCluster Int32s Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster Int32s write Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -61074,7 +62714,9 @@ public:
             NSLog(@"TestCluster.Int40s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Int40s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Int40s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -61112,7 +62754,9 @@ public:
                                         params:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogError(chipTool, "TestCluster Int40s Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster Int40s write Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -61197,7 +62841,9 @@ public:
             NSLog(@"TestCluster.Int48s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Int48s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Int48s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -61235,7 +62881,9 @@ public:
                                         params:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogError(chipTool, "TestCluster Int48s Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster Int48s write Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -61320,7 +62968,9 @@ public:
             NSLog(@"TestCluster.Int56s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Int56s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Int56s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -61358,7 +63008,9 @@ public:
                                         params:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogError(chipTool, "TestCluster Int56s Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster Int56s write Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -61443,7 +63095,9 @@ public:
             NSLog(@"TestCluster.Int64s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Int64s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Int64s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -61481,7 +63135,9 @@ public:
                                         params:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogError(chipTool, "TestCluster Int64s Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster Int64s write Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -61566,7 +63222,9 @@ public:
             NSLog(@"TestCluster.Enum8 response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Enum8 Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Enum8 read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -61604,7 +63262,9 @@ public:
                                        params:params
                             completionHandler:^(NSError * _Nullable error) {
                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                ChipLogError(chipTool, "TestCluster Enum8 Error: %s", chip::ErrorStr(chipError));
+                                if (error != nil) {
+                                    ChipLogError(chipTool, "TestCluster Enum8 write Error: %s", chip::ErrorStr(chipError));
+                                }
                                 SetCommandExitStatus(chipError);
                             }];
         return chipError;
@@ -61689,7 +63349,9 @@ public:
             NSLog(@"TestCluster.Enum16 response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Enum16 Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Enum16 read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -61727,7 +63389,9 @@ public:
                                         params:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogError(chipTool, "TestCluster Enum16 Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster Enum16 write Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -61812,7 +63476,9 @@ public:
             NSLog(@"TestCluster.FloatSingle response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster FloatSingle Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster FloatSingle read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -61846,13 +63512,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithFloat:mValue];
 
-        [cluster writeAttributeFloatSingleWithValue:value
-                                             params:params
-                                  completionHandler:^(NSError * _Nullable error) {
-                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogError(chipTool, "TestCluster FloatSingle Error: %s", chip::ErrorStr(chipError));
-                                      SetCommandExitStatus(chipError);
-                                  }];
+        [cluster
+            writeAttributeFloatSingleWithValue:value
+                                        params:params
+                             completionHandler:^(NSError * _Nullable error) {
+                                 chipError = [CHIPError errorToCHIPErrorCode:error];
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster FloatSingle write Error: %s", chip::ErrorStr(chipError));
+                                 }
+                                 SetCommandExitStatus(chipError);
+                             }];
         return chipError;
     }
 
@@ -61935,7 +63604,9 @@ public:
             NSLog(@"TestCluster.FloatDouble response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster FloatDouble Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster FloatDouble read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -61969,13 +63640,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithDouble:mValue];
 
-        [cluster writeAttributeFloatDoubleWithValue:value
-                                             params:params
-                                  completionHandler:^(NSError * _Nullable error) {
-                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogError(chipTool, "TestCluster FloatDouble Error: %s", chip::ErrorStr(chipError));
-                                      SetCommandExitStatus(chipError);
-                                  }];
+        [cluster
+            writeAttributeFloatDoubleWithValue:value
+                                        params:params
+                             completionHandler:^(NSError * _Nullable error) {
+                                 chipError = [CHIPError errorToCHIPErrorCode:error];
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster FloatDouble write Error: %s", chip::ErrorStr(chipError));
+                                 }
+                                 SetCommandExitStatus(chipError);
+                             }];
         return chipError;
     }
 
@@ -62058,7 +63732,9 @@ public:
             NSLog(@"TestCluster.OctetString response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster OctetString Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster OctetString read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -62092,13 +63768,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSData * _Nonnull value = [[NSData alloc] initWithBytes:mValue.data() length:mValue.size()];
 
-        [cluster writeAttributeOctetStringWithValue:value
-                                             params:params
-                                  completionHandler:^(NSError * _Nullable error) {
-                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogError(chipTool, "TestCluster OctetString Error: %s", chip::ErrorStr(chipError));
-                                      SetCommandExitStatus(chipError);
-                                  }];
+        [cluster
+            writeAttributeOctetStringWithValue:value
+                                        params:params
+                             completionHandler:^(NSError * _Nullable error) {
+                                 chipError = [CHIPError errorToCHIPErrorCode:error];
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster OctetString write Error: %s", chip::ErrorStr(chipError));
+                                 }
+                                 SetCommandExitStatus(chipError);
+                             }];
         return chipError;
     }
 
@@ -62181,7 +63860,9 @@ public:
             NSLog(@"TestCluster.ListInt8u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster ListInt8u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster ListInt8u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -62229,7 +63910,9 @@ public:
                                            params:params
                                 completionHandler:^(NSError * _Nullable error) {
                                     chipError = [CHIPError errorToCHIPErrorCode:error];
-                                    ChipLogError(chipTool, "TestCluster ListInt8u Error: %s", chip::ErrorStr(chipError));
+                                    if (error != nil) {
+                                        ChipLogError(chipTool, "TestCluster ListInt8u write Error: %s", chip::ErrorStr(chipError));
+                                    }
                                     SetCommandExitStatus(chipError);
                                 }];
         return chipError;
@@ -62315,7 +63998,9 @@ public:
             NSLog(@"TestCluster.ListOctetString response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster ListOctetString Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster ListOctetString read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -62359,14 +64044,16 @@ public:
             value = array_0;
         }
 
-        [cluster
-            writeAttributeListOctetStringWithValue:value
-                                            params:params
-                                 completionHandler:^(NSError * _Nullable error) {
-                                     chipError = [CHIPError errorToCHIPErrorCode:error];
-                                     ChipLogError(chipTool, "TestCluster ListOctetString Error: %s", chip::ErrorStr(chipError));
-                                     SetCommandExitStatus(chipError);
-                                 }];
+        [cluster writeAttributeListOctetStringWithValue:value
+                                                 params:params
+                                      completionHandler:^(NSError * _Nullable error) {
+                                          chipError = [CHIPError errorToCHIPErrorCode:error];
+                                          if (error != nil) {
+                                              ChipLogError(chipTool, "TestCluster ListOctetString write Error: %s",
+                                                  chip::ErrorStr(chipError));
+                                          }
+                                          SetCommandExitStatus(chipError);
+                                      }];
         return chipError;
     }
 
@@ -62450,7 +64137,9 @@ public:
             NSLog(@"TestCluster.ListStructOctetString response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster ListStructOctetString Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster ListStructOctetString read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -62501,8 +64190,10 @@ public:
                                                        params:params
                                             completionHandler:^(NSError * _Nullable error) {
                                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                ChipLogError(chipTool, "TestCluster ListStructOctetString Error: %s",
-                                                    chip::ErrorStr(chipError));
+                                                if (error != nil) {
+                                                    ChipLogError(chipTool, "TestCluster ListStructOctetString write Error: %s",
+                                                        chip::ErrorStr(chipError));
+                                                }
                                                 SetCommandExitStatus(chipError);
                                             }];
         return chipError;
@@ -62590,7 +64281,9 @@ public:
             NSLog(@"TestCluster.LongOctetString response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster LongOctetString Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster LongOctetString read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -62624,14 +64317,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSData * _Nonnull value = [[NSData alloc] initWithBytes:mValue.data() length:mValue.size()];
 
-        [cluster
-            writeAttributeLongOctetStringWithValue:value
-                                            params:params
-                                 completionHandler:^(NSError * _Nullable error) {
-                                     chipError = [CHIPError errorToCHIPErrorCode:error];
-                                     ChipLogError(chipTool, "TestCluster LongOctetString Error: %s", chip::ErrorStr(chipError));
-                                     SetCommandExitStatus(chipError);
-                                 }];
+        [cluster writeAttributeLongOctetStringWithValue:value
+                                                 params:params
+                                      completionHandler:^(NSError * _Nullable error) {
+                                          chipError = [CHIPError errorToCHIPErrorCode:error];
+                                          if (error != nil) {
+                                              ChipLogError(chipTool, "TestCluster LongOctetString write Error: %s",
+                                                  chip::ErrorStr(chipError));
+                                          }
+                                          SetCommandExitStatus(chipError);
+                                      }];
         return chipError;
     }
 
@@ -62714,7 +64409,9 @@ public:
             NSLog(@"TestCluster.CharString response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster CharString Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster CharString read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -62750,13 +64447,16 @@ public:
                                                              length:mValue.size()
                                                            encoding:NSUTF8StringEncoding];
 
-        [cluster writeAttributeCharStringWithValue:value
-                                            params:params
-                                 completionHandler:^(NSError * _Nullable error) {
-                                     chipError = [CHIPError errorToCHIPErrorCode:error];
-                                     ChipLogError(chipTool, "TestCluster CharString Error: %s", chip::ErrorStr(chipError));
-                                     SetCommandExitStatus(chipError);
-                                 }];
+        [cluster
+            writeAttributeCharStringWithValue:value
+                                       params:params
+                            completionHandler:^(NSError * _Nullable error) {
+                                chipError = [CHIPError errorToCHIPErrorCode:error];
+                                if (error != nil) {
+                                    ChipLogError(chipTool, "TestCluster CharString write Error: %s", chip::ErrorStr(chipError));
+                                }
+                                SetCommandExitStatus(chipError);
+                            }];
         return chipError;
     }
 
@@ -62839,7 +64539,9 @@ public:
             NSLog(@"TestCluster.LongCharString response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster LongCharString Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster LongCharString read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -62879,7 +64581,10 @@ public:
                                                 params:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "TestCluster LongCharString Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogError(
+                                                 chipTool, "TestCluster LongCharString write Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -62964,7 +64669,9 @@ public:
             NSLog(@"TestCluster.EpochUs response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster EpochUs Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster EpochUs read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -63002,7 +64709,9 @@ public:
                                          params:params
                               completionHandler:^(NSError * _Nullable error) {
                                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                                  ChipLogError(chipTool, "TestCluster EpochUs Error: %s", chip::ErrorStr(chipError));
+                                  if (error != nil) {
+                                      ChipLogError(chipTool, "TestCluster EpochUs write Error: %s", chip::ErrorStr(chipError));
+                                  }
                                   SetCommandExitStatus(chipError);
                               }];
         return chipError;
@@ -63087,7 +64796,9 @@ public:
             NSLog(@"TestCluster.EpochS response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster EpochS Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster EpochS read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -63125,7 +64836,9 @@ public:
                                         params:params
                              completionHandler:^(NSError * _Nullable error) {
                                  chipError = [CHIPError errorToCHIPErrorCode:error];
-                                 ChipLogError(chipTool, "TestCluster EpochS Error: %s", chip::ErrorStr(chipError));
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster EpochS write Error: %s", chip::ErrorStr(chipError));
+                                 }
                                  SetCommandExitStatus(chipError);
                              }];
         return chipError;
@@ -63210,7 +64923,9 @@ public:
             NSLog(@"TestCluster.VendorId response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster VendorId Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster VendorId read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -63248,7 +64963,9 @@ public:
                                           params:params
                                completionHandler:^(NSError * _Nullable error) {
                                    chipError = [CHIPError errorToCHIPErrorCode:error];
-                                   ChipLogError(chipTool, "TestCluster VendorId Error: %s", chip::ErrorStr(chipError));
+                                   if (error != nil) {
+                                       ChipLogError(chipTool, "TestCluster VendorId write Error: %s", chip::ErrorStr(chipError));
+                                   }
                                    SetCommandExitStatus(chipError);
                                }];
         return chipError;
@@ -63334,7 +65051,9 @@ public:
             NSLog(@"TestCluster.ListNullablesAndOptionalsStruct response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster ListNullablesAndOptionalsStruct Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster ListNullablesAndOptionalsStruct read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -63529,15 +65248,17 @@ public:
             value = array_0;
         }
 
-        [cluster
-            writeAttributeListNullablesAndOptionalsStructWithValue:value
-                                                            params:params
-                                                 completionHandler:^(NSError * _Nullable error) {
-                                                     chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                     ChipLogError(chipTool, "TestCluster ListNullablesAndOptionalsStruct Error: %s",
-                                                         chip::ErrorStr(chipError));
-                                                     SetCommandExitStatus(chipError);
-                                                 }];
+        [cluster writeAttributeListNullablesAndOptionalsStructWithValue:value
+                                                                 params:params
+                                                      completionHandler:^(NSError * _Nullable error) {
+                                                          chipError = [CHIPError errorToCHIPErrorCode:error];
+                                                          if (error != nil) {
+                                                              ChipLogError(chipTool,
+                                                                  "TestCluster ListNullablesAndOptionalsStruct write Error: %s",
+                                                                  chip::ErrorStr(chipError));
+                                                          }
+                                                          SetCommandExitStatus(chipError);
+                                                      }];
         return chipError;
     }
 
@@ -63626,7 +65347,9 @@ public:
             NSLog(@"TestCluster.EnumAttr response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster EnumAttr Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster EnumAttr read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -63664,7 +65387,9 @@ public:
                                           params:params
                                completionHandler:^(NSError * _Nullable error) {
                                    chipError = [CHIPError errorToCHIPErrorCode:error];
-                                   ChipLogError(chipTool, "TestCluster EnumAttr Error: %s", chip::ErrorStr(chipError));
+                                   if (error != nil) {
+                                       ChipLogError(chipTool, "TestCluster EnumAttr write Error: %s", chip::ErrorStr(chipError));
+                                   }
                                    SetCommandExitStatus(chipError);
                                }];
         return chipError;
@@ -63750,7 +65475,9 @@ public:
             NSLog(@"TestCluster.StructAttr response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster StructAttr Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster StructAttr read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -63794,13 +65521,16 @@ public:
         value.g = [NSNumber numberWithFloat:mValue.g];
         value.h = [NSNumber numberWithDouble:mValue.h];
 
-        [cluster writeAttributeStructAttrWithValue:value
-                                            params:params
-                                 completionHandler:^(NSError * _Nullable error) {
-                                     chipError = [CHIPError errorToCHIPErrorCode:error];
-                                     ChipLogError(chipTool, "TestCluster StructAttr Error: %s", chip::ErrorStr(chipError));
-                                     SetCommandExitStatus(chipError);
-                                 }];
+        [cluster
+            writeAttributeStructAttrWithValue:value
+                                       params:params
+                            completionHandler:^(NSError * _Nullable error) {
+                                chipError = [CHIPError errorToCHIPErrorCode:error];
+                                if (error != nil) {
+                                    ChipLogError(chipTool, "TestCluster StructAttr write Error: %s", chip::ErrorStr(chipError));
+                                }
+                                SetCommandExitStatus(chipError);
+                            }];
         return chipError;
     }
 
@@ -63885,7 +65615,9 @@ public:
             NSLog(@"TestCluster.RangeRestrictedInt8u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster RangeRestrictedInt8u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster RangeRestrictedInt8u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -63923,8 +65655,10 @@ public:
                                                       params:params
                                            completionHandler:^(NSError * _Nullable error) {
                                                chipError = [CHIPError errorToCHIPErrorCode:error];
-                                               ChipLogError(chipTool, "TestCluster RangeRestrictedInt8u Error: %s",
-                                                   chip::ErrorStr(chipError));
+                                               if (error != nil) {
+                                                   ChipLogError(chipTool, "TestCluster RangeRestrictedInt8u write Error: %s",
+                                                       chip::ErrorStr(chipError));
+                                               }
                                                SetCommandExitStatus(chipError);
                                            }];
         return chipError;
@@ -64010,7 +65744,9 @@ public:
             NSLog(@"TestCluster.RangeRestrictedInt8s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster RangeRestrictedInt8s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster RangeRestrictedInt8s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -64048,8 +65784,10 @@ public:
                                                       params:params
                                            completionHandler:^(NSError * _Nullable error) {
                                                chipError = [CHIPError errorToCHIPErrorCode:error];
-                                               ChipLogError(chipTool, "TestCluster RangeRestrictedInt8s Error: %s",
-                                                   chip::ErrorStr(chipError));
+                                               if (error != nil) {
+                                                   ChipLogError(chipTool, "TestCluster RangeRestrictedInt8s write Error: %s",
+                                                       chip::ErrorStr(chipError));
+                                               }
                                                SetCommandExitStatus(chipError);
                                            }];
         return chipError;
@@ -64135,7 +65873,9 @@ public:
             NSLog(@"TestCluster.RangeRestrictedInt16u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster RangeRestrictedInt16u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster RangeRestrictedInt16u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -64173,8 +65913,10 @@ public:
                                                        params:params
                                             completionHandler:^(NSError * _Nullable error) {
                                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                ChipLogError(chipTool, "TestCluster RangeRestrictedInt16u Error: %s",
-                                                    chip::ErrorStr(chipError));
+                                                if (error != nil) {
+                                                    ChipLogError(chipTool, "TestCluster RangeRestrictedInt16u write Error: %s",
+                                                        chip::ErrorStr(chipError));
+                                                }
                                                 SetCommandExitStatus(chipError);
                                             }];
         return chipError;
@@ -64260,7 +66002,9 @@ public:
             NSLog(@"TestCluster.RangeRestrictedInt16s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster RangeRestrictedInt16s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster RangeRestrictedInt16s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -64298,8 +66042,10 @@ public:
                                                        params:params
                                             completionHandler:^(NSError * _Nullable error) {
                                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                ChipLogError(chipTool, "TestCluster RangeRestrictedInt16s Error: %s",
-                                                    chip::ErrorStr(chipError));
+                                                if (error != nil) {
+                                                    ChipLogError(chipTool, "TestCluster RangeRestrictedInt16s write Error: %s",
+                                                        chip::ErrorStr(chipError));
+                                                }
                                                 SetCommandExitStatus(chipError);
                                             }];
         return chipError;
@@ -64385,7 +66131,9 @@ public:
             NSLog(@"TestCluster.ListLongOctetString response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster ListLongOctetString Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster ListLongOctetString read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -64433,8 +66181,10 @@ public:
                                                      params:params
                                           completionHandler:^(NSError * _Nullable error) {
                                               chipError = [CHIPError errorToCHIPErrorCode:error];
-                                              ChipLogError(
-                                                  chipTool, "TestCluster ListLongOctetString Error: %s", chip::ErrorStr(chipError));
+                                              if (error != nil) {
+                                                  ChipLogError(chipTool, "TestCluster ListLongOctetString write Error: %s",
+                                                      chip::ErrorStr(chipError));
+                                              }
                                               SetCommandExitStatus(chipError);
                                           }];
         return chipError;
@@ -64524,7 +66274,10 @@ public:
                                            NSLog(@"TestCluster.ListFabricScoped response %@", [value description]);
                                            err = [CHIPError errorToCHIPErrorCode:error];
 
-                                           ChipLogError(chipTool, "TestCluster ListFabricScoped Error: %s", chip::ErrorStr(err));
+                                           if (error != nil) {
+                                               ChipLogError(
+                                                   chipTool, "TestCluster ListFabricScoped read Error: %s", chip::ErrorStr(err));
+                                           }
                                            SetCommandExitStatus(err);
                                        }];
         return err;
@@ -64617,14 +66370,16 @@ public:
             value = array_0;
         }
 
-        [cluster
-            writeAttributeListFabricScopedWithValue:value
-                                             params:params
-                                  completionHandler:^(NSError * _Nullable error) {
-                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogError(chipTool, "TestCluster ListFabricScoped Error: %s", chip::ErrorStr(chipError));
-                                      SetCommandExitStatus(chipError);
-                                  }];
+        [cluster writeAttributeListFabricScopedWithValue:value
+                                                  params:params
+                                       completionHandler:^(NSError * _Nullable error) {
+                                           chipError = [CHIPError errorToCHIPErrorCode:error];
+                                           if (error != nil) {
+                                               ChipLogError(chipTool, "TestCluster ListFabricScoped write Error: %s",
+                                                   chip::ErrorStr(chipError));
+                                           }
+                                           SetCommandExitStatus(chipError);
+                                       }];
         return chipError;
     }
 
@@ -64709,7 +66464,9 @@ public:
             NSLog(@"TestCluster.TimedWriteBoolean response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster TimedWriteBoolean Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster TimedWriteBoolean read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -64743,14 +66500,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithBool:mValue];
 
-        [cluster
-            writeAttributeTimedWriteBooleanWithValue:value
-                                              params:params
-                                   completionHandler:^(NSError * _Nullable error) {
-                                       chipError = [CHIPError errorToCHIPErrorCode:error];
-                                       ChipLogError(chipTool, "TestCluster TimedWriteBoolean Error: %s", chip::ErrorStr(chipError));
-                                       SetCommandExitStatus(chipError);
-                                   }];
+        [cluster writeAttributeTimedWriteBooleanWithValue:value
+                                                   params:params
+                                        completionHandler:^(NSError * _Nullable error) {
+                                            chipError = [CHIPError errorToCHIPErrorCode:error];
+                                            if (error != nil) {
+                                                ChipLogError(chipTool, "TestCluster TimedWriteBoolean write Error: %s",
+                                                    chip::ErrorStr(chipError));
+                                            }
+                                            SetCommandExitStatus(chipError);
+                                        }];
         return chipError;
     }
 
@@ -64833,7 +66592,9 @@ public:
             NSLog(@"TestCluster.GeneralErrorBoolean response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster GeneralErrorBoolean Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster GeneralErrorBoolean read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -64871,8 +66632,10 @@ public:
                                                      params:params
                                           completionHandler:^(NSError * _Nullable error) {
                                               chipError = [CHIPError errorToCHIPErrorCode:error];
-                                              ChipLogError(
-                                                  chipTool, "TestCluster GeneralErrorBoolean Error: %s", chip::ErrorStr(chipError));
+                                              if (error != nil) {
+                                                  ChipLogError(chipTool, "TestCluster GeneralErrorBoolean write Error: %s",
+                                                      chip::ErrorStr(chipError));
+                                              }
                                               SetCommandExitStatus(chipError);
                                           }];
         return chipError;
@@ -64958,7 +66721,9 @@ public:
             NSLog(@"TestCluster.ClusterErrorBoolean response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster ClusterErrorBoolean Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster ClusterErrorBoolean read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -64996,8 +66761,10 @@ public:
                                                      params:params
                                           completionHandler:^(NSError * _Nullable error) {
                                               chipError = [CHIPError errorToCHIPErrorCode:error];
-                                              ChipLogError(
-                                                  chipTool, "TestCluster ClusterErrorBoolean Error: %s", chip::ErrorStr(chipError));
+                                              if (error != nil) {
+                                                  ChipLogError(chipTool, "TestCluster ClusterErrorBoolean write Error: %s",
+                                                      chip::ErrorStr(chipError));
+                                              }
                                               SetCommandExitStatus(chipError);
                                           }];
         return chipError;
@@ -65083,7 +66850,9 @@ public:
             NSLog(@"TestCluster.Unsupported response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster Unsupported Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster Unsupported read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -65117,13 +66886,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithBool:mValue];
 
-        [cluster writeAttributeUnsupportedWithValue:value
-                                             params:params
-                                  completionHandler:^(NSError * _Nullable error) {
-                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogError(chipTool, "TestCluster Unsupported Error: %s", chip::ErrorStr(chipError));
-                                      SetCommandExitStatus(chipError);
-                                  }];
+        [cluster
+            writeAttributeUnsupportedWithValue:value
+                                        params:params
+                             completionHandler:^(NSError * _Nullable error) {
+                                 chipError = [CHIPError errorToCHIPErrorCode:error];
+                                 if (error != nil) {
+                                     ChipLogError(chipTool, "TestCluster Unsupported write Error: %s", chip::ErrorStr(chipError));
+                                 }
+                                 SetCommandExitStatus(chipError);
+                             }];
         return chipError;
     }
 
@@ -65206,7 +66978,9 @@ public:
             NSLog(@"TestCluster.NullableBoolean response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableBoolean Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableBoolean read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -65240,14 +67014,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithBool:mValue];
 
-        [cluster
-            writeAttributeNullableBooleanWithValue:value
-                                            params:params
-                                 completionHandler:^(NSError * _Nullable error) {
-                                     chipError = [CHIPError errorToCHIPErrorCode:error];
-                                     ChipLogError(chipTool, "TestCluster NullableBoolean Error: %s", chip::ErrorStr(chipError));
-                                     SetCommandExitStatus(chipError);
-                                 }];
+        [cluster writeAttributeNullableBooleanWithValue:value
+                                                 params:params
+                                      completionHandler:^(NSError * _Nullable error) {
+                                          chipError = [CHIPError errorToCHIPErrorCode:error];
+                                          if (error != nil) {
+                                              ChipLogError(chipTool, "TestCluster NullableBoolean write Error: %s",
+                                                  chip::ErrorStr(chipError));
+                                          }
+                                          SetCommandExitStatus(chipError);
+                                      }];
         return chipError;
     }
 
@@ -65330,7 +67106,9 @@ public:
             NSLog(@"TestCluster.NullableBitmap8 response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableBitmap8 Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableBitmap8 read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -65364,14 +67142,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
-        [cluster
-            writeAttributeNullableBitmap8WithValue:value
-                                            params:params
-                                 completionHandler:^(NSError * _Nullable error) {
-                                     chipError = [CHIPError errorToCHIPErrorCode:error];
-                                     ChipLogError(chipTool, "TestCluster NullableBitmap8 Error: %s", chip::ErrorStr(chipError));
-                                     SetCommandExitStatus(chipError);
-                                 }];
+        [cluster writeAttributeNullableBitmap8WithValue:value
+                                                 params:params
+                                      completionHandler:^(NSError * _Nullable error) {
+                                          chipError = [CHIPError errorToCHIPErrorCode:error];
+                                          if (error != nil) {
+                                              ChipLogError(chipTool, "TestCluster NullableBitmap8 write Error: %s",
+                                                  chip::ErrorStr(chipError));
+                                          }
+                                          SetCommandExitStatus(chipError);
+                                      }];
         return chipError;
     }
 
@@ -65454,7 +67234,9 @@ public:
             NSLog(@"TestCluster.NullableBitmap16 response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableBitmap16 Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableBitmap16 read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -65488,14 +67270,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedShort:mValue];
 
-        [cluster
-            writeAttributeNullableBitmap16WithValue:value
-                                             params:params
-                                  completionHandler:^(NSError * _Nullable error) {
-                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogError(chipTool, "TestCluster NullableBitmap16 Error: %s", chip::ErrorStr(chipError));
-                                      SetCommandExitStatus(chipError);
-                                  }];
+        [cluster writeAttributeNullableBitmap16WithValue:value
+                                                  params:params
+                                       completionHandler:^(NSError * _Nullable error) {
+                                           chipError = [CHIPError errorToCHIPErrorCode:error];
+                                           if (error != nil) {
+                                               ChipLogError(chipTool, "TestCluster NullableBitmap16 write Error: %s",
+                                                   chip::ErrorStr(chipError));
+                                           }
+                                           SetCommandExitStatus(chipError);
+                                       }];
         return chipError;
     }
 
@@ -65578,7 +67362,9 @@ public:
             NSLog(@"TestCluster.NullableBitmap32 response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableBitmap32 Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableBitmap32 read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -65612,14 +67398,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedInt:mValue];
 
-        [cluster
-            writeAttributeNullableBitmap32WithValue:value
-                                             params:params
-                                  completionHandler:^(NSError * _Nullable error) {
-                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogError(chipTool, "TestCluster NullableBitmap32 Error: %s", chip::ErrorStr(chipError));
-                                      SetCommandExitStatus(chipError);
-                                  }];
+        [cluster writeAttributeNullableBitmap32WithValue:value
+                                                  params:params
+                                       completionHandler:^(NSError * _Nullable error) {
+                                           chipError = [CHIPError errorToCHIPErrorCode:error];
+                                           if (error != nil) {
+                                               ChipLogError(chipTool, "TestCluster NullableBitmap32 write Error: %s",
+                                                   chip::ErrorStr(chipError));
+                                           }
+                                           SetCommandExitStatus(chipError);
+                                       }];
         return chipError;
     }
 
@@ -65702,7 +67490,9 @@ public:
             NSLog(@"TestCluster.NullableBitmap64 response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableBitmap64 Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableBitmap64 read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -65736,14 +67526,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedLongLong:mValue];
 
-        [cluster
-            writeAttributeNullableBitmap64WithValue:value
-                                             params:params
-                                  completionHandler:^(NSError * _Nullable error) {
-                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogError(chipTool, "TestCluster NullableBitmap64 Error: %s", chip::ErrorStr(chipError));
-                                      SetCommandExitStatus(chipError);
-                                  }];
+        [cluster writeAttributeNullableBitmap64WithValue:value
+                                                  params:params
+                                       completionHandler:^(NSError * _Nullable error) {
+                                           chipError = [CHIPError errorToCHIPErrorCode:error];
+                                           if (error != nil) {
+                                               ChipLogError(chipTool, "TestCluster NullableBitmap64 write Error: %s",
+                                                   chip::ErrorStr(chipError));
+                                           }
+                                           SetCommandExitStatus(chipError);
+                                       }];
         return chipError;
     }
 
@@ -65826,7 +67618,9 @@ public:
             NSLog(@"TestCluster.NullableInt8u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableInt8u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableInt8u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -65864,7 +67658,10 @@ public:
                                                params:params
                                     completionHandler:^(NSError * _Nullable error) {
                                         chipError = [CHIPError errorToCHIPErrorCode:error];
-                                        ChipLogError(chipTool, "TestCluster NullableInt8u Error: %s", chip::ErrorStr(chipError));
+                                        if (error != nil) {
+                                            ChipLogError(
+                                                chipTool, "TestCluster NullableInt8u write Error: %s", chip::ErrorStr(chipError));
+                                        }
                                         SetCommandExitStatus(chipError);
                                     }];
         return chipError;
@@ -65949,7 +67746,9 @@ public:
             NSLog(@"TestCluster.NullableInt16u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableInt16u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableInt16u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -65987,7 +67786,10 @@ public:
                                                 params:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "TestCluster NullableInt16u Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogError(
+                                                 chipTool, "TestCluster NullableInt16u write Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -66072,7 +67874,9 @@ public:
             NSLog(@"TestCluster.NullableInt24u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableInt24u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableInt24u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -66110,7 +67914,10 @@ public:
                                                 params:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "TestCluster NullableInt24u Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogError(
+                                                 chipTool, "TestCluster NullableInt24u write Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -66195,7 +68002,9 @@ public:
             NSLog(@"TestCluster.NullableInt32u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableInt32u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableInt32u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -66233,7 +68042,10 @@ public:
                                                 params:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "TestCluster NullableInt32u Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogError(
+                                                 chipTool, "TestCluster NullableInt32u write Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -66318,7 +68130,9 @@ public:
             NSLog(@"TestCluster.NullableInt40u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableInt40u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableInt40u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -66356,7 +68170,10 @@ public:
                                                 params:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "TestCluster NullableInt40u Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogError(
+                                                 chipTool, "TestCluster NullableInt40u write Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -66441,7 +68258,9 @@ public:
             NSLog(@"TestCluster.NullableInt48u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableInt48u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableInt48u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -66479,7 +68298,10 @@ public:
                                                 params:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "TestCluster NullableInt48u Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogError(
+                                                 chipTool, "TestCluster NullableInt48u write Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -66564,7 +68386,9 @@ public:
             NSLog(@"TestCluster.NullableInt56u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableInt56u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableInt56u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -66602,7 +68426,10 @@ public:
                                                 params:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "TestCluster NullableInt56u Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogError(
+                                                 chipTool, "TestCluster NullableInt56u write Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -66687,7 +68514,9 @@ public:
             NSLog(@"TestCluster.NullableInt64u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableInt64u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableInt64u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -66725,7 +68554,10 @@ public:
                                                 params:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "TestCluster NullableInt64u Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogError(
+                                                 chipTool, "TestCluster NullableInt64u write Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -66810,7 +68642,9 @@ public:
             NSLog(@"TestCluster.NullableInt8s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableInt8s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableInt8s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -66848,7 +68682,10 @@ public:
                                                params:params
                                     completionHandler:^(NSError * _Nullable error) {
                                         chipError = [CHIPError errorToCHIPErrorCode:error];
-                                        ChipLogError(chipTool, "TestCluster NullableInt8s Error: %s", chip::ErrorStr(chipError));
+                                        if (error != nil) {
+                                            ChipLogError(
+                                                chipTool, "TestCluster NullableInt8s write Error: %s", chip::ErrorStr(chipError));
+                                        }
                                         SetCommandExitStatus(chipError);
                                     }];
         return chipError;
@@ -66933,7 +68770,9 @@ public:
             NSLog(@"TestCluster.NullableInt16s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableInt16s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableInt16s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -66971,7 +68810,10 @@ public:
                                                 params:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "TestCluster NullableInt16s Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogError(
+                                                 chipTool, "TestCluster NullableInt16s write Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -67056,7 +68898,9 @@ public:
             NSLog(@"TestCluster.NullableInt24s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableInt24s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableInt24s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -67094,7 +68938,10 @@ public:
                                                 params:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "TestCluster NullableInt24s Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogError(
+                                                 chipTool, "TestCluster NullableInt24s write Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -67179,7 +69026,9 @@ public:
             NSLog(@"TestCluster.NullableInt32s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableInt32s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableInt32s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -67217,7 +69066,10 @@ public:
                                                 params:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "TestCluster NullableInt32s Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogError(
+                                                 chipTool, "TestCluster NullableInt32s write Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -67302,7 +69154,9 @@ public:
             NSLog(@"TestCluster.NullableInt40s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableInt40s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableInt40s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -67340,7 +69194,10 @@ public:
                                                 params:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "TestCluster NullableInt40s Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogError(
+                                                 chipTool, "TestCluster NullableInt40s write Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -67425,7 +69282,9 @@ public:
             NSLog(@"TestCluster.NullableInt48s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableInt48s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableInt48s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -67463,7 +69322,10 @@ public:
                                                 params:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "TestCluster NullableInt48s Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogError(
+                                                 chipTool, "TestCluster NullableInt48s write Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -67548,7 +69410,9 @@ public:
             NSLog(@"TestCluster.NullableInt56s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableInt56s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableInt56s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -67586,7 +69450,10 @@ public:
                                                 params:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "TestCluster NullableInt56s Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogError(
+                                                 chipTool, "TestCluster NullableInt56s write Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -67671,7 +69538,9 @@ public:
             NSLog(@"TestCluster.NullableInt64s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableInt64s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableInt64s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -67709,7 +69578,10 @@ public:
                                                 params:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "TestCluster NullableInt64s Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogError(
+                                                 chipTool, "TestCluster NullableInt64s write Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -67794,7 +69666,9 @@ public:
             NSLog(@"TestCluster.NullableEnum8 response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableEnum8 Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableEnum8 read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -67832,7 +69706,10 @@ public:
                                                params:params
                                     completionHandler:^(NSError * _Nullable error) {
                                         chipError = [CHIPError errorToCHIPErrorCode:error];
-                                        ChipLogError(chipTool, "TestCluster NullableEnum8 Error: %s", chip::ErrorStr(chipError));
+                                        if (error != nil) {
+                                            ChipLogError(
+                                                chipTool, "TestCluster NullableEnum8 write Error: %s", chip::ErrorStr(chipError));
+                                        }
                                         SetCommandExitStatus(chipError);
                                     }];
         return chipError;
@@ -67917,7 +69794,9 @@ public:
             NSLog(@"TestCluster.NullableEnum16 response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableEnum16 Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableEnum16 read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -67955,7 +69834,10 @@ public:
                                                 params:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "TestCluster NullableEnum16 Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogError(
+                                                 chipTool, "TestCluster NullableEnum16 write Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -68040,7 +69922,9 @@ public:
             NSLog(@"TestCluster.NullableFloatSingle response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableFloatSingle Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableFloatSingle read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -68078,8 +69962,10 @@ public:
                                                      params:params
                                           completionHandler:^(NSError * _Nullable error) {
                                               chipError = [CHIPError errorToCHIPErrorCode:error];
-                                              ChipLogError(
-                                                  chipTool, "TestCluster NullableFloatSingle Error: %s", chip::ErrorStr(chipError));
+                                              if (error != nil) {
+                                                  ChipLogError(chipTool, "TestCluster NullableFloatSingle write Error: %s",
+                                                      chip::ErrorStr(chipError));
+                                              }
                                               SetCommandExitStatus(chipError);
                                           }];
         return chipError;
@@ -68165,7 +70051,9 @@ public:
             NSLog(@"TestCluster.NullableFloatDouble response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableFloatDouble Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableFloatDouble read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -68203,8 +70091,10 @@ public:
                                                      params:params
                                           completionHandler:^(NSError * _Nullable error) {
                                               chipError = [CHIPError errorToCHIPErrorCode:error];
-                                              ChipLogError(
-                                                  chipTool, "TestCluster NullableFloatDouble Error: %s", chip::ErrorStr(chipError));
+                                              if (error != nil) {
+                                                  ChipLogError(chipTool, "TestCluster NullableFloatDouble write Error: %s",
+                                                      chip::ErrorStr(chipError));
+                                              }
                                               SetCommandExitStatus(chipError);
                                           }];
         return chipError;
@@ -68290,7 +70180,9 @@ public:
             NSLog(@"TestCluster.NullableOctetString response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableOctetString Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableOctetString read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -68328,8 +70220,10 @@ public:
                                                      params:params
                                           completionHandler:^(NSError * _Nullable error) {
                                               chipError = [CHIPError errorToCHIPErrorCode:error];
-                                              ChipLogError(
-                                                  chipTool, "TestCluster NullableOctetString Error: %s", chip::ErrorStr(chipError));
+                                              if (error != nil) {
+                                                  ChipLogError(chipTool, "TestCluster NullableOctetString write Error: %s",
+                                                      chip::ErrorStr(chipError));
+                                              }
                                               SetCommandExitStatus(chipError);
                                           }];
         return chipError;
@@ -68415,7 +70309,9 @@ public:
             NSLog(@"TestCluster.NullableCharString response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableCharString Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableCharString read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -68455,8 +70351,10 @@ public:
                                                     params:params
                                          completionHandler:^(NSError * _Nullable error) {
                                              chipError = [CHIPError errorToCHIPErrorCode:error];
-                                             ChipLogError(
-                                                 chipTool, "TestCluster NullableCharString Error: %s", chip::ErrorStr(chipError));
+                                             if (error != nil) {
+                                                 ChipLogError(chipTool, "TestCluster NullableCharString write Error: %s",
+                                                     chip::ErrorStr(chipError));
+                                             }
                                              SetCommandExitStatus(chipError);
                                          }];
         return chipError;
@@ -68542,7 +70440,9 @@ public:
             NSLog(@"TestCluster.NullableEnumAttr response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableEnumAttr Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableEnumAttr read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -68576,14 +70476,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
-        [cluster
-            writeAttributeNullableEnumAttrWithValue:value
-                                             params:params
-                                  completionHandler:^(NSError * _Nullable error) {
-                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                      ChipLogError(chipTool, "TestCluster NullableEnumAttr Error: %s", chip::ErrorStr(chipError));
-                                      SetCommandExitStatus(chipError);
-                                  }];
+        [cluster writeAttributeNullableEnumAttrWithValue:value
+                                                  params:params
+                                       completionHandler:^(NSError * _Nullable error) {
+                                           chipError = [CHIPError errorToCHIPErrorCode:error];
+                                           if (error != nil) {
+                                               ChipLogError(chipTool, "TestCluster NullableEnumAttr write Error: %s",
+                                                   chip::ErrorStr(chipError));
+                                           }
+                                           SetCommandExitStatus(chipError);
+                                       }];
         return chipError;
     }
 
@@ -68667,7 +70569,9 @@ public:
             NSLog(@"TestCluster.NullableStruct response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableStruct Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableStruct read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -68721,7 +70625,10 @@ public:
                                                 params:params
                                      completionHandler:^(NSError * _Nullable error) {
                                          chipError = [CHIPError errorToCHIPErrorCode:error];
-                                         ChipLogError(chipTool, "TestCluster NullableStruct Error: %s", chip::ErrorStr(chipError));
+                                         if (error != nil) {
+                                             ChipLogError(
+                                                 chipTool, "TestCluster NullableStruct write Error: %s", chip::ErrorStr(chipError));
+                                         }
                                          SetCommandExitStatus(chipError);
                                      }];
         return chipError;
@@ -68809,7 +70716,9 @@ public:
             NSLog(@"TestCluster.NullableRangeRestrictedInt8u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableRangeRestrictedInt8u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableRangeRestrictedInt8u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -68847,8 +70756,11 @@ public:
                                                               params:params
                                                    completionHandler:^(NSError * _Nullable error) {
                                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                       ChipLogError(chipTool, "TestCluster NullableRangeRestrictedInt8u Error: %s",
-                                                           chip::ErrorStr(chipError));
+                                                       if (error != nil) {
+                                                           ChipLogError(chipTool,
+                                                               "TestCluster NullableRangeRestrictedInt8u write Error: %s",
+                                                               chip::ErrorStr(chipError));
+                                                       }
                                                        SetCommandExitStatus(chipError);
                                                    }];
         return chipError;
@@ -68936,7 +70848,9 @@ public:
             NSLog(@"TestCluster.NullableRangeRestrictedInt8s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableRangeRestrictedInt8s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableRangeRestrictedInt8s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -68974,8 +70888,11 @@ public:
                                                               params:params
                                                    completionHandler:^(NSError * _Nullable error) {
                                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                       ChipLogError(chipTool, "TestCluster NullableRangeRestrictedInt8s Error: %s",
-                                                           chip::ErrorStr(chipError));
+                                                       if (error != nil) {
+                                                           ChipLogError(chipTool,
+                                                               "TestCluster NullableRangeRestrictedInt8s write Error: %s",
+                                                               chip::ErrorStr(chipError));
+                                                       }
                                                        SetCommandExitStatus(chipError);
                                                    }];
         return chipError;
@@ -69063,7 +70980,9 @@ public:
             NSLog(@"TestCluster.NullableRangeRestrictedInt16u response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableRangeRestrictedInt16u Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableRangeRestrictedInt16u read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -69097,15 +71016,17 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedShort:mValue];
 
-        [cluster
-            writeAttributeNullableRangeRestrictedInt16uWithValue:value
-                                                          params:params
-                                               completionHandler:^(NSError * _Nullable error) {
-                                                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                   ChipLogError(chipTool, "TestCluster NullableRangeRestrictedInt16u Error: %s",
-                                                       chip::ErrorStr(chipError));
-                                                   SetCommandExitStatus(chipError);
-                                               }];
+        [cluster writeAttributeNullableRangeRestrictedInt16uWithValue:value
+                                                               params:params
+                                                    completionHandler:^(NSError * _Nullable error) {
+                                                        chipError = [CHIPError errorToCHIPErrorCode:error];
+                                                        if (error != nil) {
+                                                            ChipLogError(chipTool,
+                                                                "TestCluster NullableRangeRestrictedInt16u write Error: %s",
+                                                                chip::ErrorStr(chipError));
+                                                        }
+                                                        SetCommandExitStatus(chipError);
+                                                    }];
         return chipError;
     }
 
@@ -69192,7 +71113,9 @@ public:
             NSLog(@"TestCluster.NullableRangeRestrictedInt16s response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster NullableRangeRestrictedInt16s Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster NullableRangeRestrictedInt16s read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -69226,15 +71149,17 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithShort:mValue];
 
-        [cluster
-            writeAttributeNullableRangeRestrictedInt16sWithValue:value
-                                                          params:params
-                                               completionHandler:^(NSError * _Nullable error) {
-                                                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                   ChipLogError(chipTool, "TestCluster NullableRangeRestrictedInt16s Error: %s",
-                                                       chip::ErrorStr(chipError));
-                                                   SetCommandExitStatus(chipError);
-                                               }];
+        [cluster writeAttributeNullableRangeRestrictedInt16sWithValue:value
+                                                               params:params
+                                                    completionHandler:^(NSError * _Nullable error) {
+                                                        chipError = [CHIPError errorToCHIPErrorCode:error];
+                                                        if (error != nil) {
+                                                            ChipLogError(chipTool,
+                                                                "TestCluster NullableRangeRestrictedInt16s write Error: %s",
+                                                                chip::ErrorStr(chipError));
+                                                        }
+                                                        SetCommandExitStatus(chipError);
+                                                    }];
         return chipError;
     }
 
@@ -69320,7 +71245,9 @@ public:
             NSLog(@"TestCluster.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -69405,7 +71332,9 @@ public:
             NSLog(@"TestCluster.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -69490,7 +71419,9 @@ public:
             NSLog(@"TestCluster.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -69574,7 +71505,9 @@ public:
             NSLog(@"TestCluster.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TestCluster ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TestCluster ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -69719,7 +71652,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster clearWeeklyScheduleWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -69755,7 +71690,9 @@ public:
             CHIPThermostatClusterGetRelayStatusLogResponseParams * _Nullable values, NSError * _Nullable error) {
             NSLog(@"Values: %@", values);
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -69796,7 +71733,9 @@ public:
                                CHIPThermostatClusterGetWeeklyScheduleResponseParams * _Nullable values, NSError * _Nullable error) {
                                NSLog(@"Values: %@", values);
                                chipError = [CHIPError errorToCHIPErrorCode:error];
-                               ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                               if (error != nil) {
+                                   ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                               }
                                SetCommandExitStatus(chipError);
                            }];
         return chipError;
@@ -69850,7 +71789,9 @@ public:
         [cluster setWeeklyScheduleWithParams:params
                            completionHandler:^(NSError * _Nullable error) {
                                chipError = [CHIPError errorToCHIPErrorCode:error];
-                               ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                               if (error != nil) {
+                                   ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                               }
                                SetCommandExitStatus(chipError);
                            }];
         return chipError;
@@ -69894,7 +71835,9 @@ public:
         [cluster setpointRaiseLowerWithParams:params
                             completionHandler:^(NSError * _Nullable error) {
                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                if (error != nil) {
+                                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                }
                                 SetCommandExitStatus(chipError);
                             }];
         return chipError;
@@ -69932,7 +71875,9 @@ public:
             NSLog(@"Thermostat.LocalTemperature response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Thermostat LocalTemperature Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Thermostat LocalTemperature read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -70017,7 +71962,9 @@ public:
                 NSLog(@"Thermostat.AbsMinHeatSetpointLimit response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "Thermostat AbsMinHeatSetpointLimit Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "Thermostat AbsMinHeatSetpointLimit read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -70103,7 +72050,9 @@ public:
                 NSLog(@"Thermostat.AbsMaxHeatSetpointLimit response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "Thermostat AbsMaxHeatSetpointLimit Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "Thermostat AbsMaxHeatSetpointLimit read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -70189,7 +72138,9 @@ public:
                 NSLog(@"Thermostat.AbsMinCoolSetpointLimit response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "Thermostat AbsMinCoolSetpointLimit Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "Thermostat AbsMinCoolSetpointLimit read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -70275,7 +72226,9 @@ public:
                 NSLog(@"Thermostat.AbsMaxCoolSetpointLimit response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "Thermostat AbsMaxCoolSetpointLimit Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "Thermostat AbsMaxCoolSetpointLimit read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -70361,7 +72314,9 @@ public:
                 NSLog(@"Thermostat.OccupiedCoolingSetpoint response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "Thermostat OccupiedCoolingSetpoint Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "Thermostat OccupiedCoolingSetpoint read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -70399,8 +72354,10 @@ public:
                                                          params:params
                                               completionHandler:^(NSError * _Nullable error) {
                                                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                  ChipLogError(chipTool, "Thermostat OccupiedCoolingSetpoint Error: %s",
-                                                      chip::ErrorStr(chipError));
+                                                  if (error != nil) {
+                                                      ChipLogError(chipTool, "Thermostat OccupiedCoolingSetpoint write Error: %s",
+                                                          chip::ErrorStr(chipError));
+                                                  }
                                                   SetCommandExitStatus(chipError);
                                               }];
         return chipError;
@@ -70487,7 +72444,9 @@ public:
                 NSLog(@"Thermostat.OccupiedHeatingSetpoint response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "Thermostat OccupiedHeatingSetpoint Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "Thermostat OccupiedHeatingSetpoint read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -70525,8 +72484,10 @@ public:
                                                          params:params
                                               completionHandler:^(NSError * _Nullable error) {
                                                   chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                  ChipLogError(chipTool, "Thermostat OccupiedHeatingSetpoint Error: %s",
-                                                      chip::ErrorStr(chipError));
+                                                  if (error != nil) {
+                                                      ChipLogError(chipTool, "Thermostat OccupiedHeatingSetpoint write Error: %s",
+                                                          chip::ErrorStr(chipError));
+                                                  }
                                                   SetCommandExitStatus(chipError);
                                               }];
         return chipError;
@@ -70612,7 +72573,9 @@ public:
             NSLog(@"Thermostat.MinHeatSetpointLimit response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Thermostat MinHeatSetpointLimit Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Thermostat MinHeatSetpointLimit read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -70650,8 +72613,10 @@ public:
                                                       params:params
                                            completionHandler:^(NSError * _Nullable error) {
                                                chipError = [CHIPError errorToCHIPErrorCode:error];
-                                               ChipLogError(chipTool, "Thermostat MinHeatSetpointLimit Error: %s",
-                                                   chip::ErrorStr(chipError));
+                                               if (error != nil) {
+                                                   ChipLogError(chipTool, "Thermostat MinHeatSetpointLimit write Error: %s",
+                                                       chip::ErrorStr(chipError));
+                                               }
                                                SetCommandExitStatus(chipError);
                                            }];
         return chipError;
@@ -70737,7 +72702,9 @@ public:
             NSLog(@"Thermostat.MaxHeatSetpointLimit response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Thermostat MaxHeatSetpointLimit Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Thermostat MaxHeatSetpointLimit read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -70775,8 +72742,10 @@ public:
                                                       params:params
                                            completionHandler:^(NSError * _Nullable error) {
                                                chipError = [CHIPError errorToCHIPErrorCode:error];
-                                               ChipLogError(chipTool, "Thermostat MaxHeatSetpointLimit Error: %s",
-                                                   chip::ErrorStr(chipError));
+                                               if (error != nil) {
+                                                   ChipLogError(chipTool, "Thermostat MaxHeatSetpointLimit write Error: %s",
+                                                       chip::ErrorStr(chipError));
+                                               }
                                                SetCommandExitStatus(chipError);
                                            }];
         return chipError;
@@ -70862,7 +72831,9 @@ public:
             NSLog(@"Thermostat.MinCoolSetpointLimit response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Thermostat MinCoolSetpointLimit Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Thermostat MinCoolSetpointLimit read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -70900,8 +72871,10 @@ public:
                                                       params:params
                                            completionHandler:^(NSError * _Nullable error) {
                                                chipError = [CHIPError errorToCHIPErrorCode:error];
-                                               ChipLogError(chipTool, "Thermostat MinCoolSetpointLimit Error: %s",
-                                                   chip::ErrorStr(chipError));
+                                               if (error != nil) {
+                                                   ChipLogError(chipTool, "Thermostat MinCoolSetpointLimit write Error: %s",
+                                                       chip::ErrorStr(chipError));
+                                               }
                                                SetCommandExitStatus(chipError);
                                            }];
         return chipError;
@@ -70987,7 +72960,9 @@ public:
             NSLog(@"Thermostat.MaxCoolSetpointLimit response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Thermostat MaxCoolSetpointLimit Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Thermostat MaxCoolSetpointLimit read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -71025,8 +73000,10 @@ public:
                                                       params:params
                                            completionHandler:^(NSError * _Nullable error) {
                                                chipError = [CHIPError errorToCHIPErrorCode:error];
-                                               ChipLogError(chipTool, "Thermostat MaxCoolSetpointLimit Error: %s",
-                                                   chip::ErrorStr(chipError));
+                                               if (error != nil) {
+                                                   ChipLogError(chipTool, "Thermostat MaxCoolSetpointLimit write Error: %s",
+                                                       chip::ErrorStr(chipError));
+                                               }
                                                SetCommandExitStatus(chipError);
                                            }];
         return chipError;
@@ -71112,7 +73089,9 @@ public:
             NSLog(@"Thermostat.MinSetpointDeadBand response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Thermostat MinSetpointDeadBand Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Thermostat MinSetpointDeadBand read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -71150,8 +73129,10 @@ public:
                                                      params:params
                                           completionHandler:^(NSError * _Nullable error) {
                                               chipError = [CHIPError errorToCHIPErrorCode:error];
-                                              ChipLogError(
-                                                  chipTool, "Thermostat MinSetpointDeadBand Error: %s", chip::ErrorStr(chipError));
+                                              if (error != nil) {
+                                                  ChipLogError(chipTool, "Thermostat MinSetpointDeadBand write Error: %s",
+                                                      chip::ErrorStr(chipError));
+                                              }
                                               SetCommandExitStatus(chipError);
                                           }];
         return chipError;
@@ -71238,7 +73219,9 @@ public:
                 NSLog(@"Thermostat.ControlSequenceOfOperation response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "Thermostat ControlSequenceOfOperation Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "Thermostat ControlSequenceOfOperation read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -71272,14 +73255,17 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
-        [cluster writeAttributeControlSequenceOfOperationWithValue:value
-                                                            params:params
-                                                 completionHandler:^(NSError * _Nullable error) {
-                                                     chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                     ChipLogError(chipTool, "Thermostat ControlSequenceOfOperation Error: %s",
-                                                         chip::ErrorStr(chipError));
-                                                     SetCommandExitStatus(chipError);
-                                                 }];
+        [cluster
+            writeAttributeControlSequenceOfOperationWithValue:value
+                                                       params:params
+                                            completionHandler:^(NSError * _Nullable error) {
+                                                chipError = [CHIPError errorToCHIPErrorCode:error];
+                                                if (error != nil) {
+                                                    ChipLogError(chipTool, "Thermostat ControlSequenceOfOperation write Error: %s",
+                                                        chip::ErrorStr(chipError));
+                                                }
+                                                SetCommandExitStatus(chipError);
+                                            }];
         return chipError;
     }
 
@@ -71364,7 +73350,9 @@ public:
             NSLog(@"Thermostat.SystemMode response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Thermostat SystemMode Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Thermostat SystemMode read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -71402,7 +73390,9 @@ public:
                                             params:params
                                  completionHandler:^(NSError * _Nullable error) {
                                      chipError = [CHIPError errorToCHIPErrorCode:error];
-                                     ChipLogError(chipTool, "Thermostat SystemMode Error: %s", chip::ErrorStr(chipError));
+                                     if (error != nil) {
+                                         ChipLogError(chipTool, "Thermostat SystemMode write Error: %s", chip::ErrorStr(chipError));
+                                     }
                                      SetCommandExitStatus(chipError);
                                  }];
         return chipError;
@@ -71487,7 +73477,9 @@ public:
             NSLog(@"Thermostat.StartOfWeek response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Thermostat StartOfWeek Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Thermostat StartOfWeek read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -71572,7 +73564,9 @@ public:
                 NSLog(@"Thermostat.NumberOfWeeklyTransitions response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "Thermostat NumberOfWeeklyTransitions Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "Thermostat NumberOfWeeklyTransitions read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -71659,7 +73653,9 @@ public:
                 NSLog(@"Thermostat.NumberOfDailyTransitions response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "Thermostat NumberOfDailyTransitions Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "Thermostat NumberOfDailyTransitions read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -71745,7 +73741,9 @@ public:
             NSLog(@"Thermostat.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Thermostat AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Thermostat AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -71829,7 +73827,9 @@ public:
             NSLog(@"Thermostat.FeatureMap response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Thermostat FeatureMap Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Thermostat FeatureMap read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -71913,7 +73913,9 @@ public:
             NSLog(@"Thermostat.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "Thermostat ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "Thermostat ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -72016,7 +74018,10 @@ public:
             NSLog(@"ThermostatUserInterfaceConfiguration.TemperatureDisplayMode response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThermostatUserInterfaceConfiguration TemperatureDisplayMode Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(
+                    chipTool, "ThermostatUserInterfaceConfiguration TemperatureDisplayMode read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -72051,15 +74056,18 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
-        [cluster writeAttributeTemperatureDisplayModeWithValue:value
-                                                        params:params
-                                             completionHandler:^(NSError * _Nullable error) {
-                                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                 ChipLogError(chipTool,
-                                                     "ThermostatUserInterfaceConfiguration TemperatureDisplayMode Error: %s",
-                                                     chip::ErrorStr(chipError));
-                                                 SetCommandExitStatus(chipError);
-                                             }];
+        [cluster
+            writeAttributeTemperatureDisplayModeWithValue:value
+                                                   params:params
+                                        completionHandler:^(NSError * _Nullable error) {
+                                            chipError = [CHIPError errorToCHIPErrorCode:error];
+                                            if (error != nil) {
+                                                ChipLogError(chipTool,
+                                                    "ThermostatUserInterfaceConfiguration TemperatureDisplayMode write Error: %s",
+                                                    chip::ErrorStr(chipError));
+                                            }
+                                            SetCommandExitStatus(chipError);
+                                        }];
         return chipError;
     }
 
@@ -72146,7 +74154,9 @@ public:
             NSLog(@"ThermostatUserInterfaceConfiguration.KeypadLockout response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThermostatUserInterfaceConfiguration KeypadLockout Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThermostatUserInterfaceConfiguration KeypadLockout read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -72181,14 +74191,17 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
-        [cluster writeAttributeKeypadLockoutWithValue:value
-                                               params:params
-                                    completionHandler:^(NSError * _Nullable error) {
-                                        chipError = [CHIPError errorToCHIPErrorCode:error];
-                                        ChipLogError(chipTool, "ThermostatUserInterfaceConfiguration KeypadLockout Error: %s",
-                                            chip::ErrorStr(chipError));
-                                        SetCommandExitStatus(chipError);
-                                    }];
+        [cluster
+            writeAttributeKeypadLockoutWithValue:value
+                                          params:params
+                               completionHandler:^(NSError * _Nullable error) {
+                                   chipError = [CHIPError errorToCHIPErrorCode:error];
+                                   if (error != nil) {
+                                       ChipLogError(chipTool, "ThermostatUserInterfaceConfiguration KeypadLockout write Error: %s",
+                                           chip::ErrorStr(chipError));
+                                   }
+                                   SetCommandExitStatus(chipError);
+                               }];
         return chipError;
     }
 
@@ -72275,8 +74288,10 @@ public:
             NSLog(@"ThermostatUserInterfaceConfiguration.ScheduleProgrammingVisibility response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(
-                chipTool, "ThermostatUserInterfaceConfiguration ScheduleProgrammingVisibility Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThermostatUserInterfaceConfiguration ScheduleProgrammingVisibility read Error: %s",
+                    chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -72315,10 +74330,12 @@ public:
                                                                params:params
                                                     completionHandler:^(NSError * _Nullable error) {
                                                         chipError = [CHIPError errorToCHIPErrorCode:error];
-                                                        ChipLogError(chipTool,
-                                                            "ThermostatUserInterfaceConfiguration ScheduleProgrammingVisibility "
-                                                            "Error: %s",
-                                                            chip::ErrorStr(chipError));
+                                                        if (error != nil) {
+                                                            ChipLogError(chipTool,
+                                                                "ThermostatUserInterfaceConfiguration "
+                                                                "ScheduleProgrammingVisibility write Error: %s",
+                                                                chip::ErrorStr(chipError));
+                                                        }
                                                         SetCommandExitStatus(chipError);
                                                     }];
         return chipError;
@@ -72409,7 +74426,10 @@ public:
             NSLog(@"ThermostatUserInterfaceConfiguration.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThermostatUserInterfaceConfiguration GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(
+                    chipTool, "ThermostatUserInterfaceConfiguration GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -72497,7 +74517,10 @@ public:
             NSLog(@"ThermostatUserInterfaceConfiguration.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThermostatUserInterfaceConfiguration AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(
+                    chipTool, "ThermostatUserInterfaceConfiguration AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -72586,7 +74609,9 @@ public:
             NSLog(@"ThermostatUserInterfaceConfiguration.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThermostatUserInterfaceConfiguration AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThermostatUserInterfaceConfiguration AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -72673,7 +74698,9 @@ public:
             NSLog(@"ThermostatUserInterfaceConfiguration.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThermostatUserInterfaceConfiguration ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThermostatUserInterfaceConfiguration ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -72839,7 +74866,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster resetCountsWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -72877,7 +74906,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.Channel response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics Channel Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics Channel read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -72965,7 +74996,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.RoutingRole response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics RoutingRole Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics RoutingRole read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -73053,7 +75086,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.NetworkName response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics NetworkName Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics NetworkName read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -73141,7 +75176,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.PanId response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics PanId Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics PanId read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -73229,7 +75266,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.ExtendedPanId response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics ExtendedPanId Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics ExtendedPanId read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -73318,7 +75357,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.MeshLocalPrefix response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics MeshLocalPrefix Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics MeshLocalPrefix read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -73407,7 +75448,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.OverrunCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics OverrunCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics OverrunCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -73496,7 +75539,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.NeighborTableList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics NeighborTableList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics NeighborTableList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -73585,7 +75630,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.RouteTableList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics RouteTableList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics RouteTableList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -73674,7 +75721,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.PartitionId response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics PartitionId Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics PartitionId read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -73762,7 +75811,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.Weighting response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics Weighting Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics Weighting read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -73850,7 +75901,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.DataVersion response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics DataVersion Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics DataVersion read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -73938,7 +75991,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.StableDataVersion response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics StableDataVersion Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics StableDataVersion read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -74027,7 +76082,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.LeaderRouterId response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics LeaderRouterId Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics LeaderRouterId read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -74116,7 +76173,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.DetachedRoleCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics DetachedRoleCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics DetachedRoleCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -74205,7 +76264,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.ChildRoleCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics ChildRoleCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics ChildRoleCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -74294,7 +76355,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.RouterRoleCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics RouterRoleCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics RouterRoleCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -74383,7 +76446,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.LeaderRoleCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics LeaderRoleCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics LeaderRoleCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -74472,7 +76537,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.AttachAttemptCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics AttachAttemptCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics AttachAttemptCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -74561,7 +76628,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.PartitionIdChangeCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics PartitionIdChangeCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics PartitionIdChangeCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -74651,7 +76720,10 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.BetterPartitionAttachAttemptCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics BetterPartitionAttachAttemptCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(
+                    chipTool, "ThreadNetworkDiagnostics BetterPartitionAttachAttemptCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -74743,7 +76815,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.ParentChangeCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics ParentChangeCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics ParentChangeCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -74832,7 +76906,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.TxTotalCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics TxTotalCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics TxTotalCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -74921,7 +76997,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.TxUnicastCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics TxUnicastCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics TxUnicastCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -75010,7 +77088,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.TxBroadcastCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics TxBroadcastCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics TxBroadcastCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -75099,7 +77179,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.TxAckRequestedCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics TxAckRequestedCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics TxAckRequestedCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -75188,7 +77270,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.TxAckedCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics TxAckedCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics TxAckedCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -75277,7 +77361,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.TxNoAckRequestedCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics TxNoAckRequestedCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics TxNoAckRequestedCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -75366,7 +77452,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.TxDataCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics TxDataCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics TxDataCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -75454,7 +77542,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.TxDataPollCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics TxDataPollCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics TxDataPollCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -75543,7 +77633,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.TxBeaconCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics TxBeaconCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics TxBeaconCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -75632,7 +77724,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.TxBeaconRequestCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics TxBeaconRequestCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics TxBeaconRequestCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -75721,7 +77815,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.TxOtherCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics TxOtherCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics TxOtherCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -75810,7 +77906,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.TxRetryCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics TxRetryCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics TxRetryCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -75895,14 +77993,16 @@ public:
                                                                                              endpoint:endpointId
                                                                                                 queue:callbackQueue];
         CHIP_ERROR __block err = CHIP_NO_ERROR;
-        [cluster
-            readAttributeTxDirectMaxRetryExpiryCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"ThreadNetworkDiagnostics.TxDirectMaxRetryExpiryCount response %@", [value description]);
-                err = [CHIPError errorToCHIPErrorCode:error];
+        [cluster readAttributeTxDirectMaxRetryExpiryCountWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ThreadNetworkDiagnostics.TxDirectMaxRetryExpiryCount response %@", [value description]);
+            err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "ThreadNetworkDiagnostics TxDirectMaxRetryExpiryCount Error: %s", chip::ErrorStr(err));
-                SetCommandExitStatus(err);
-            }];
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics TxDirectMaxRetryExpiryCount read Error: %s", chip::ErrorStr(err));
+            }
+            SetCommandExitStatus(err);
+        }];
         return err;
     }
 
@@ -75992,7 +78092,10 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.TxIndirectMaxRetryExpiryCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics TxIndirectMaxRetryExpiryCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(
+                    chipTool, "ThreadNetworkDiagnostics TxIndirectMaxRetryExpiryCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -76084,7 +78187,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.TxErrCcaCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics TxErrCcaCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics TxErrCcaCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -76173,7 +78278,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.TxErrAbortCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics TxErrAbortCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics TxErrAbortCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -76262,7 +78369,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.TxErrBusyChannelCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics TxErrBusyChannelCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics TxErrBusyChannelCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -76351,7 +78460,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.RxTotalCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics RxTotalCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics RxTotalCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -76440,7 +78551,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.RxUnicastCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics RxUnicastCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics RxUnicastCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -76529,7 +78642,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.RxBroadcastCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics RxBroadcastCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics RxBroadcastCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -76618,7 +78733,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.RxDataCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics RxDataCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics RxDataCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -76706,7 +78823,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.RxDataPollCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics RxDataPollCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics RxDataPollCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -76795,7 +78914,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.RxBeaconCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics RxBeaconCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics RxBeaconCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -76884,7 +79005,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.RxBeaconRequestCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics RxBeaconRequestCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics RxBeaconRequestCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -76973,7 +79096,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.RxOtherCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics RxOtherCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics RxOtherCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -77062,7 +79187,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.RxAddressFilteredCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics RxAddressFilteredCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics RxAddressFilteredCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -77152,7 +79279,9 @@ public:
                 NSLog(@"ThreadNetworkDiagnostics.RxDestAddrFilteredCount response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "ThreadNetworkDiagnostics RxDestAddrFilteredCount Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "ThreadNetworkDiagnostics RxDestAddrFilteredCount read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -77242,7 +79371,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.RxDuplicatedCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics RxDuplicatedCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics RxDuplicatedCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -77331,7 +79462,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.RxErrNoFrameCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics RxErrNoFrameCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics RxErrNoFrameCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -77416,14 +79549,16 @@ public:
                                                                                              endpoint:endpointId
                                                                                                 queue:callbackQueue];
         CHIP_ERROR __block err = CHIP_NO_ERROR;
-        [cluster
-            readAttributeRxErrUnknownNeighborCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"ThreadNetworkDiagnostics.RxErrUnknownNeighborCount response %@", [value description]);
-                err = [CHIPError errorToCHIPErrorCode:error];
+        [cluster readAttributeRxErrUnknownNeighborCountWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ThreadNetworkDiagnostics.RxErrUnknownNeighborCount response %@", [value description]);
+            err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "ThreadNetworkDiagnostics RxErrUnknownNeighborCount Error: %s", chip::ErrorStr(err));
-                SetCommandExitStatus(err);
-            }];
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics RxErrUnknownNeighborCount read Error: %s", chip::ErrorStr(err));
+            }
+            SetCommandExitStatus(err);
+        }];
         return err;
     }
 
@@ -77513,7 +79648,9 @@ public:
                 NSLog(@"ThreadNetworkDiagnostics.RxErrInvalidSrcAddrCount response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "ThreadNetworkDiagnostics RxErrInvalidSrcAddrCount Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "ThreadNetworkDiagnostics RxErrInvalidSrcAddrCount read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -77603,7 +79740,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.RxErrSecCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics RxErrSecCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics RxErrSecCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -77692,7 +79831,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.RxErrFcsCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics RxErrFcsCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics RxErrFcsCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -77781,7 +79922,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.RxErrOtherCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics RxErrOtherCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics RxErrOtherCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -77870,7 +80013,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.ActiveTimestamp response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics ActiveTimestamp Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics ActiveTimestamp read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -77959,7 +80104,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.PendingTimestamp response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics PendingTimestamp Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics PendingTimestamp read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -78048,7 +80195,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.Delay response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics Delay Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics Delay read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -78136,7 +80285,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.SecurityPolicy response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics SecurityPolicy Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics SecurityPolicy read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -78225,7 +80376,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.ChannelMask response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics ChannelMask Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics ChannelMask read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -78309,14 +80462,16 @@ public:
                                                                                              endpoint:endpointId
                                                                                                 queue:callbackQueue];
         CHIP_ERROR __block err = CHIP_NO_ERROR;
-        [cluster
-            readAttributeOperationalDatasetComponentsWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"ThreadNetworkDiagnostics.OperationalDatasetComponents response %@", [value description]);
-                err = [CHIPError errorToCHIPErrorCode:error];
+        [cluster readAttributeOperationalDatasetComponentsWithCompletionHandler:^(
+            NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ThreadNetworkDiagnostics.OperationalDatasetComponents response %@", [value description]);
+            err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "ThreadNetworkDiagnostics OperationalDatasetComponents Error: %s", chip::ErrorStr(err));
-                SetCommandExitStatus(err);
-            }];
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics OperationalDatasetComponents read Error: %s", chip::ErrorStr(err));
+            }
+            SetCommandExitStatus(err);
+        }];
         return err;
     }
 
@@ -78405,7 +80560,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.ActiveNetworkFaultsList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics ActiveNetworkFaultsList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics ActiveNetworkFaultsList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -78495,7 +80652,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -78584,7 +80743,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -78673,7 +80834,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -78762,7 +80925,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.FeatureMap response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics FeatureMap Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics FeatureMap read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -78850,7 +81015,9 @@ public:
             NSLog(@"ThreadNetworkDiagnostics.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "ThreadNetworkDiagnostics ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "ThreadNetworkDiagnostics ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -78957,7 +81124,9 @@ public:
             NSLog(@"TimeFormatLocalization.HourFormat response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TimeFormatLocalization HourFormat Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TimeFormatLocalization HourFormat read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -78993,14 +81162,16 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
-        [cluster
-            writeAttributeHourFormatWithValue:value
-                                       params:params
-                            completionHandler:^(NSError * _Nullable error) {
-                                chipError = [CHIPError errorToCHIPErrorCode:error];
-                                ChipLogError(chipTool, "TimeFormatLocalization HourFormat Error: %s", chip::ErrorStr(chipError));
-                                SetCommandExitStatus(chipError);
-                            }];
+        [cluster writeAttributeHourFormatWithValue:value
+                                            params:params
+                                 completionHandler:^(NSError * _Nullable error) {
+                                     chipError = [CHIPError errorToCHIPErrorCode:error];
+                                     if (error != nil) {
+                                         ChipLogError(chipTool, "TimeFormatLocalization HourFormat write Error: %s",
+                                             chip::ErrorStr(chipError));
+                                     }
+                                     SetCommandExitStatus(chipError);
+                                 }];
         return chipError;
     }
 
@@ -79087,7 +81258,9 @@ public:
             NSLog(@"TimeFormatLocalization.ActiveCalendarType response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TimeFormatLocalization ActiveCalendarType Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TimeFormatLocalization ActiveCalendarType read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -79127,8 +81300,10 @@ public:
                                                     params:params
                                          completionHandler:^(NSError * _Nullable error) {
                                              chipError = [CHIPError errorToCHIPErrorCode:error];
-                                             ChipLogError(chipTool, "TimeFormatLocalization ActiveCalendarType Error: %s",
-                                                 chip::ErrorStr(chipError));
+                                             if (error != nil) {
+                                                 ChipLogError(chipTool, "TimeFormatLocalization ActiveCalendarType write Error: %s",
+                                                     chip::ErrorStr(chipError));
+                                             }
                                              SetCommandExitStatus(chipError);
                                          }];
         return chipError;
@@ -79218,7 +81393,9 @@ public:
             NSLog(@"TimeFormatLocalization.SupportedCalendarTypes response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TimeFormatLocalization SupportedCalendarTypes Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TimeFormatLocalization SupportedCalendarTypes read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -79307,7 +81484,9 @@ public:
             NSLog(@"TimeFormatLocalization.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TimeFormatLocalization GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TimeFormatLocalization GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -79396,7 +81575,9 @@ public:
             NSLog(@"TimeFormatLocalization.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TimeFormatLocalization AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TimeFormatLocalization AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -79485,7 +81666,9 @@ public:
             NSLog(@"TimeFormatLocalization.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "TimeFormatLocalization ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "TimeFormatLocalization ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -79590,7 +81773,9 @@ public:
             NSLog(@"UnitLocalization.TemperatureUnit response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "UnitLocalization TemperatureUnit Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "UnitLocalization TemperatureUnit read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -79630,8 +81815,10 @@ public:
                                                  params:params
                                       completionHandler:^(NSError * _Nullable error) {
                                           chipError = [CHIPError errorToCHIPErrorCode:error];
-                                          ChipLogError(
-                                              chipTool, "UnitLocalization TemperatureUnit Error: %s", chip::ErrorStr(chipError));
+                                          if (error != nil) {
+                                              ChipLogError(chipTool, "UnitLocalization TemperatureUnit write Error: %s",
+                                                  chip::ErrorStr(chipError));
+                                          }
                                           SetCommandExitStatus(chipError);
                                       }];
         return chipError;
@@ -79720,7 +81907,9 @@ public:
             NSLog(@"UnitLocalization.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "UnitLocalization AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "UnitLocalization AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -79808,7 +81997,9 @@ public:
             NSLog(@"UnitLocalization.FeatureMap response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "UnitLocalization FeatureMap Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "UnitLocalization FeatureMap read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -79896,7 +82087,9 @@ public:
             NSLog(@"UnitLocalization.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "UnitLocalization ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "UnitLocalization ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -79998,7 +82191,9 @@ public:
             NSLog(@"UserLabel.LabelList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "UserLabel LabelList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "UserLabel LabelList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -80052,7 +82247,9 @@ public:
                                            params:params
                                 completionHandler:^(NSError * _Nullable error) {
                                     chipError = [CHIPError errorToCHIPErrorCode:error];
-                                    ChipLogError(chipTool, "UserLabel LabelList Error: %s", chip::ErrorStr(chipError));
+                                    if (error != nil) {
+                                        ChipLogError(chipTool, "UserLabel LabelList write Error: %s", chip::ErrorStr(chipError));
+                                    }
                                     SetCommandExitStatus(chipError);
                                 }];
         return chipError;
@@ -80138,7 +82335,9 @@ public:
             NSLog(@"UserLabel.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "UserLabel GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "UserLabel GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -80223,7 +82422,9 @@ public:
             NSLog(@"UserLabel.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "UserLabel AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "UserLabel AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -80308,7 +82509,9 @@ public:
             NSLog(@"UserLabel.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "UserLabel ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "UserLabel ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -80408,7 +82611,9 @@ public:
             NSLog(@"WakeOnLan.MACAddress response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WakeOnLan MACAddress Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WakeOnLan MACAddress read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -80492,7 +82697,9 @@ public:
             NSLog(@"WakeOnLan.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WakeOnLan GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WakeOnLan GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -80577,7 +82784,9 @@ public:
             NSLog(@"WakeOnLan.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WakeOnLan AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WakeOnLan AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -80662,7 +82871,9 @@ public:
             NSLog(@"WakeOnLan.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WakeOnLan AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WakeOnLan AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -80746,7 +82957,9 @@ public:
             NSLog(@"WakeOnLan.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WakeOnLan ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WakeOnLan ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -80862,7 +83075,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster resetCountsWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -80900,7 +83115,9 @@ public:
             NSLog(@"WiFiNetworkDiagnostics.Bssid response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WiFiNetworkDiagnostics Bssid Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WiFiNetworkDiagnostics Bssid read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -80988,7 +83205,9 @@ public:
             NSLog(@"WiFiNetworkDiagnostics.SecurityType response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WiFiNetworkDiagnostics SecurityType Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WiFiNetworkDiagnostics SecurityType read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -81076,7 +83295,9 @@ public:
             NSLog(@"WiFiNetworkDiagnostics.WiFiVersion response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WiFiNetworkDiagnostics WiFiVersion Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WiFiNetworkDiagnostics WiFiVersion read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -81164,7 +83385,9 @@ public:
             NSLog(@"WiFiNetworkDiagnostics.ChannelNumber response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WiFiNetworkDiagnostics ChannelNumber Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WiFiNetworkDiagnostics ChannelNumber read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -81253,7 +83476,9 @@ public:
             NSLog(@"WiFiNetworkDiagnostics.Rssi response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WiFiNetworkDiagnostics Rssi Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WiFiNetworkDiagnostics Rssi read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -81341,7 +83566,9 @@ public:
             NSLog(@"WiFiNetworkDiagnostics.BeaconLostCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WiFiNetworkDiagnostics BeaconLostCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WiFiNetworkDiagnostics BeaconLostCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -81430,7 +83657,9 @@ public:
             NSLog(@"WiFiNetworkDiagnostics.BeaconRxCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WiFiNetworkDiagnostics BeaconRxCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WiFiNetworkDiagnostics BeaconRxCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -81519,7 +83748,9 @@ public:
             NSLog(@"WiFiNetworkDiagnostics.PacketMulticastRxCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WiFiNetworkDiagnostics PacketMulticastRxCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WiFiNetworkDiagnostics PacketMulticastRxCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -81608,7 +83839,9 @@ public:
             NSLog(@"WiFiNetworkDiagnostics.PacketMulticastTxCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WiFiNetworkDiagnostics PacketMulticastTxCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WiFiNetworkDiagnostics PacketMulticastTxCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -81697,7 +83930,9 @@ public:
             NSLog(@"WiFiNetworkDiagnostics.PacketUnicastRxCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WiFiNetworkDiagnostics PacketUnicastRxCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WiFiNetworkDiagnostics PacketUnicastRxCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -81786,7 +84021,9 @@ public:
             NSLog(@"WiFiNetworkDiagnostics.PacketUnicastTxCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WiFiNetworkDiagnostics PacketUnicastTxCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WiFiNetworkDiagnostics PacketUnicastTxCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -81875,7 +84112,9 @@ public:
             NSLog(@"WiFiNetworkDiagnostics.CurrentMaxRate response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WiFiNetworkDiagnostics CurrentMaxRate Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WiFiNetworkDiagnostics CurrentMaxRate read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -81964,7 +84203,9 @@ public:
             NSLog(@"WiFiNetworkDiagnostics.OverrunCount response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WiFiNetworkDiagnostics OverrunCount Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WiFiNetworkDiagnostics OverrunCount read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -82052,7 +84293,9 @@ public:
             NSLog(@"WiFiNetworkDiagnostics.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WiFiNetworkDiagnostics GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WiFiNetworkDiagnostics GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -82141,7 +84384,9 @@ public:
             NSLog(@"WiFiNetworkDiagnostics.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WiFiNetworkDiagnostics AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WiFiNetworkDiagnostics AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -82230,7 +84475,9 @@ public:
             NSLog(@"WiFiNetworkDiagnostics.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WiFiNetworkDiagnostics AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WiFiNetworkDiagnostics AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -82319,7 +84566,9 @@ public:
             NSLog(@"WiFiNetworkDiagnostics.FeatureMap response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WiFiNetworkDiagnostics FeatureMap Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WiFiNetworkDiagnostics FeatureMap read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -82407,7 +84656,9 @@ public:
             NSLog(@"WiFiNetworkDiagnostics.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WiFiNetworkDiagnostics ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WiFiNetworkDiagnostics ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -82536,7 +84787,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster downOrCloseWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -82575,7 +84828,9 @@ public:
         [cluster goToLiftPercentageWithParams:params
                             completionHandler:^(NSError * _Nullable error) {
                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                if (error != nil) {
+                                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                }
                                 SetCommandExitStatus(chipError);
                             }];
         return chipError;
@@ -82614,7 +84869,9 @@ public:
         [cluster goToLiftValueWithParams:params
                        completionHandler:^(NSError * _Nullable error) {
                            chipError = [CHIPError errorToCHIPErrorCode:error];
-                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           if (error != nil) {
+                               ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           }
                            SetCommandExitStatus(chipError);
                        }];
         return chipError;
@@ -82654,7 +84911,9 @@ public:
         [cluster goToTiltPercentageWithParams:params
                             completionHandler:^(NSError * _Nullable error) {
                                 chipError = [CHIPError errorToCHIPErrorCode:error];
-                                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                if (error != nil) {
+                                    ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                                }
                                 SetCommandExitStatus(chipError);
                             }];
         return chipError;
@@ -82693,7 +84952,9 @@ public:
         [cluster goToTiltValueWithParams:params
                        completionHandler:^(NSError * _Nullable error) {
                            chipError = [CHIPError errorToCHIPErrorCode:error];
-                           ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           if (error != nil) {
+                               ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+                           }
                            SetCommandExitStatus(chipError);
                        }];
         return chipError;
@@ -82728,7 +84989,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster stopMotionWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -82762,7 +85025,9 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         [cluster upOrOpenWithCompletionHandler:^(NSError * _Nullable error) {
             chipError = [CHIPError errorToCHIPErrorCode:error];
-            ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            if (error != nil) {
+                ChipLogProgress(chipTool, "Error: %s", chip::ErrorStr(chipError));
+            }
             SetCommandExitStatus(chipError);
         }];
         return chipError;
@@ -82798,7 +85063,9 @@ public:
             NSLog(@"WindowCovering.Type response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering Type Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering Type read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -82882,7 +85149,9 @@ public:
             NSLog(@"WindowCovering.CurrentPositionLift response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering CurrentPositionLift Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering CurrentPositionLift read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -82967,7 +85236,9 @@ public:
             NSLog(@"WindowCovering.CurrentPositionTilt response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering CurrentPositionTilt Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering CurrentPositionTilt read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -83052,7 +85323,9 @@ public:
             NSLog(@"WindowCovering.ConfigStatus response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering ConfigStatus Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering ConfigStatus read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -83137,7 +85410,9 @@ public:
             NSLog(@"WindowCovering.CurrentPositionLiftPercentage response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering CurrentPositionLiftPercentage Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering CurrentPositionLiftPercentage read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -83225,7 +85500,9 @@ public:
             NSLog(@"WindowCovering.CurrentPositionTiltPercentage response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering CurrentPositionTiltPercentage Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering CurrentPositionTiltPercentage read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -83312,7 +85589,9 @@ public:
             NSLog(@"WindowCovering.OperationalStatus response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering OperationalStatus Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering OperationalStatus read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -83398,7 +85677,9 @@ public:
             NSLog(@"WindowCovering.TargetPositionLiftPercent100ths response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering TargetPositionLiftPercent100ths Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering TargetPositionLiftPercent100ths read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -83487,7 +85768,9 @@ public:
             NSLog(@"WindowCovering.TargetPositionTiltPercent100ths response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering TargetPositionTiltPercent100ths Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering TargetPositionTiltPercent100ths read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -83575,7 +85858,9 @@ public:
             NSLog(@"WindowCovering.EndProductType response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering EndProductType Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering EndProductType read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -83660,7 +85945,9 @@ public:
             NSLog(@"WindowCovering.CurrentPositionLiftPercent100ths response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering CurrentPositionLiftPercent100ths Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering CurrentPositionLiftPercent100ths read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -83749,7 +86036,9 @@ public:
             NSLog(@"WindowCovering.CurrentPositionTiltPercent100ths response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering CurrentPositionTiltPercent100ths Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering CurrentPositionTiltPercent100ths read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -83837,7 +86126,9 @@ public:
             NSLog(@"WindowCovering.InstalledOpenLimitLift response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering InstalledOpenLimitLift Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering InstalledOpenLimitLift read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -83923,7 +86214,9 @@ public:
                 NSLog(@"WindowCovering.InstalledClosedLimitLift response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "WindowCovering InstalledClosedLimitLift Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "WindowCovering InstalledClosedLimitLift read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -84009,7 +86302,9 @@ public:
             NSLog(@"WindowCovering.InstalledOpenLimitTilt response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering InstalledOpenLimitTilt Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering InstalledOpenLimitTilt read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -84095,7 +86390,9 @@ public:
                 NSLog(@"WindowCovering.InstalledClosedLimitTilt response %@", [value description]);
                 err = [CHIPError errorToCHIPErrorCode:error];
 
-                ChipLogError(chipTool, "WindowCovering InstalledClosedLimitTilt Error: %s", chip::ErrorStr(err));
+                if (error != nil) {
+                    ChipLogError(chipTool, "WindowCovering InstalledClosedLimitTilt read Error: %s", chip::ErrorStr(err));
+                }
                 SetCommandExitStatus(err);
             }];
         return err;
@@ -84181,7 +86478,9 @@ public:
             NSLog(@"WindowCovering.Mode response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering Mode Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering Mode read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -84219,7 +86518,9 @@ public:
                                       params:params
                            completionHandler:^(NSError * _Nullable error) {
                                chipError = [CHIPError errorToCHIPErrorCode:error];
-                               ChipLogError(chipTool, "WindowCovering Mode Error: %s", chip::ErrorStr(chipError));
+                               if (error != nil) {
+                                   ChipLogError(chipTool, "WindowCovering Mode write Error: %s", chip::ErrorStr(chipError));
+                               }
                                SetCommandExitStatus(chipError);
                            }];
         return chipError;
@@ -84304,7 +86605,9 @@ public:
             NSLog(@"WindowCovering.SafetyStatus response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering SafetyStatus Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering SafetyStatus read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -84388,7 +86691,9 @@ public:
             NSLog(@"WindowCovering.GeneratedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering GeneratedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering GeneratedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -84473,7 +86778,9 @@ public:
             NSLog(@"WindowCovering.AcceptedCommandList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering AcceptedCommandList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering AcceptedCommandList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -84558,7 +86865,9 @@ public:
             NSLog(@"WindowCovering.AttributeList response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering AttributeList Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering AttributeList read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -84642,7 +86951,9 @@ public:
             NSLog(@"WindowCovering.FeatureMap response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering FeatureMap Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering FeatureMap read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
@@ -84726,7 +87037,9 @@ public:
             NSLog(@"WindowCovering.ClusterRevision response %@", [value description]);
             err = [CHIPError errorToCHIPErrorCode:error];
 
-            ChipLogError(chipTool, "WindowCovering ClusterRevision Error: %s", chip::ErrorStr(err));
+            if (error != nil) {
+                ChipLogError(chipTool, "WindowCovering ClusterRevision read Error: %s", chip::ErrorStr(err));
+            }
             SetCommandExitStatus(err);
         }];
         return err;
