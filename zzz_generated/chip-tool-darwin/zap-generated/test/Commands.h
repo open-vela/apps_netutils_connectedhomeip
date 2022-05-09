@@ -205,6 +205,7 @@ public:
         printf("TestOperationalCredentialsCluster\n");
         printf("TestModeSelectCluster\n");
         printf("TestSelfFabricRemoval\n");
+        printf("TestSystemCommands\n");
         printf("TestBinding\n");
         printf("TestUserLabelCluster\n");
         printf("TestArmFailSafe\n");
@@ -91246,6 +91247,437 @@ private:
     }
 };
 
+class TestSystemCommands : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    TestSystemCommands()
+        : TestCommandBridge("TestSystemCommands")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("payload", &mPayload);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~TestSystemCommands() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: TestSystemCommands\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: TestSystemCommands\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Stop the default accessory\n");
+            err = TestStopTheDefaultAccessory_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Start the default accessory with no command line options\n");
+            err = TestStartTheDefaultAccessoryWithNoCommandLineOptions_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Stop the default accessory by key\n");
+            err = TestStopTheDefaultAccessoryByKey_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Start the default accessory with discriminator command line option\n");
+            err = TestStartTheDefaultAccessoryWithDiscriminatorCommandLineOption_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Stop the default accessory\n");
+            err = TestStopTheDefaultAccessory_5();
+            break;
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : Start the default accessory with discriminator and port command line options\n");
+            err = TestStartTheDefaultAccessoryWithDiscriminatorAndPortCommandLineOptions_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Stop the default accessory\n");
+            err = TestStopTheDefaultAccessory_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Start the default accessory with minCommissioningTimeout only\n");
+            err = TestStartTheDefaultAccessoryWithMinCommissioningTimeoutOnly_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Stop the default accessory\n");
+            err = TestStopTheDefaultAccessory_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Start the default accessory by key with all command line options\n");
+            err = TestStartTheDefaultAccessoryByKeyWithAllCommandLineOptions_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Start a second accessory with all command line options\n");
+            err = TestStartASecondAccessoryWithAllCommandLineOptions_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Commission second accessory from alpha\n");
+            err = TestCommissionSecondAccessoryFromAlpha_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Wait for the second commissioned device to be retrieved for alpha\n");
+            err = TestWaitForTheSecondCommissionedDeviceToBeRetrievedForAlpha_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Stop the second accessory\n");
+            err = TestStopTheSecondAccessory_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Start a second accessory with different KVS\n");
+            err = TestStartASecondAccessoryWithDifferentKvs_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Reboot the default accessory\n");
+            err = TestRebootTheDefaultAccessory_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Reboot the default accessory by key\n");
+            err = TestRebootTheDefaultAccessoryByKey_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Reboot the second accessory\n");
+            err = TestRebootTheSecondAccessory_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Factory Reset the default accessory\n");
+            err = TestFactoryResetTheDefaultAccessory_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Factory Reset the default accessory by key\n");
+            err = TestFactoryResetTheDefaultAccessoryByKey_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Factory Reset the second accessory\n");
+            err = TestFactoryResetTheSecondAccessory_21();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        WaitForMs(0);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 22;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<chip::CharSpan> mPayload;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        WaitForCommissionee("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStopTheDefaultAccessory_1()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
+        Stop("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStartTheDefaultAccessoryWithNoCommandLineOptions_2()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Start::Type value;
+        Start("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStopTheDefaultAccessoryByKey_3()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
+        value.registerKey.Emplace();
+        value.registerKey.Value() = chip::Span<const char>("defaultgarbage: not in length on purpose", 7);
+        Stop("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStartTheDefaultAccessoryWithDiscriminatorCommandLineOption_4()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Start::Type value;
+        value.discriminator.Emplace();
+        value.discriminator.Value() = 1111U;
+        Start("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStopTheDefaultAccessory_5()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
+        Stop("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStartTheDefaultAccessoryWithDiscriminatorAndPortCommandLineOptions_6()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Start::Type value;
+        value.discriminator.Emplace();
+        value.discriminator.Value() = 1111U;
+        value.port.Emplace();
+        value.port.Value() = 5560U;
+        Start("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStopTheDefaultAccessory_7()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
+        Stop("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStartTheDefaultAccessoryWithMinCommissioningTimeoutOnly_8()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Start::Type value;
+        value.minCommissioningTimeout.Emplace();
+        value.minCommissioningTimeout.Value() = 10U;
+        Start("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStopTheDefaultAccessory_9()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
+        Stop("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStartTheDefaultAccessoryByKeyWithAllCommandLineOptions_10()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Start::Type value;
+        value.discriminator.Emplace();
+        value.discriminator.Value() = 1111U;
+        value.port.Emplace();
+        value.port.Value() = 5560U;
+        value.kvs.Emplace();
+        value.kvs.Value() = chip::Span<const char>("/tmp/chip_kvs_defaultgarbage: not in length on purpose", 21);
+        value.minCommissioningTimeout.Emplace();
+        value.minCommissioningTimeout.Value() = 10U;
+        value.registerKey.Emplace();
+        value.registerKey.Value() = chip::Span<const char>("defaultgarbage: not in length on purpose", 7);
+        Start("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStartASecondAccessoryWithAllCommandLineOptions_11()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Start::Type value;
+        value.discriminator.Emplace();
+        value.discriminator.Value() = 50U;
+        value.port.Emplace();
+        value.port.Value() = 5561U;
+        value.kvs.Emplace();
+        value.kvs.Value() = chip::Span<const char>("/tmp/chip_kvs_lockgarbage: not in length on purpose", 18);
+        value.registerKey.Emplace();
+        value.registerKey.Value() = chip::Span<const char>("chip-lock-appgarbage: not in length on purpose", 13);
+        Start("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCommissionSecondAccessoryFromAlpha_12()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        value.nodeId = 3735928559ULL;
+        value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0IX4122-.548G00", 22);
+        PairWithQRCode("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWaitForTheSecondCommissionedDeviceToBeRetrievedForAlpha_13()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = 3735928559ULL;
+        WaitForCommissionee("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStopTheSecondAccessory_14()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
+        value.registerKey.Emplace();
+        value.registerKey.Value() = chip::Span<const char>("chip-lock-appgarbage: not in length on purpose", 13);
+        Stop("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStartASecondAccessoryWithDifferentKvs_15()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Start::Type value;
+        value.discriminator.Emplace();
+        value.discriminator.Value() = 50U;
+        value.port.Emplace();
+        value.port.Value() = 5561U;
+        value.kvs.Emplace();
+        value.kvs.Value() = chip::Span<const char>("/tmp/chip_kvs_lock2garbage: not in length on purpose", 19);
+        value.registerKey.Emplace();
+        value.registerKey.Value() = chip::Span<const char>("chip-lock-appgarbage: not in length on purpose", 13);
+        Start("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestRebootTheDefaultAccessory_16()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
+        Reboot("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestRebootTheDefaultAccessoryByKey_17()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
+        value.registerKey.Emplace();
+        value.registerKey.Value() = chip::Span<const char>("defaultgarbage: not in length on purpose", 7);
+        Reboot("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestRebootTheSecondAccessory_18()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
+        value.registerKey.Emplace();
+        value.registerKey.Value() = chip::Span<const char>("chip-lock-appgarbage: not in length on purpose", 13);
+        Reboot("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestFactoryResetTheDefaultAccessory_19()
+    {
+        chip::app::Clusters::SystemCommands::Commands::FactoryReset::Type value;
+        FactoryReset("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestFactoryResetTheDefaultAccessoryByKey_20()
+    {
+        chip::app::Clusters::SystemCommands::Commands::FactoryReset::Type value;
+        value.registerKey.Emplace();
+        value.registerKey.Value() = chip::Span<const char>("defaultgarbage: not in length on purpose", 7);
+        FactoryReset("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestFactoryResetTheSecondAccessory_21()
+    {
+        chip::app::Clusters::SystemCommands::Commands::FactoryReset::Type value;
+        value.registerKey.Emplace();
+        value.registerKey.Value() = chip::Span<const char>("chip-lock-appgarbage: not in length on purpose", 13);
+        FactoryReset("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+};
+
 class TestBinding : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -104314,6 +104746,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<TestOperationalCredentialsCluster>(),
         make_unique<TestModeSelectCluster>(),
         make_unique<TestSelfFabricRemoval>(),
+        make_unique<TestSystemCommands>(),
         make_unique<TestBinding>(),
         make_unique<TestUserLabelCluster>(),
         make_unique<TestArmFailSafe>(),
