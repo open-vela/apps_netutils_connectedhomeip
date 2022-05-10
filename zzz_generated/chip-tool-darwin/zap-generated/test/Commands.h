@@ -83729,15 +83729,16 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(8)));
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(9)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 1UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 4UL));
                 VerifyOrReturn(CheckValue("", actualValue[3], 5UL));
                 VerifyOrReturn(CheckValue("", actualValue[4], 6UL));
-                VerifyOrReturn(CheckValue("", actualValue[5], 9UL));
-                VerifyOrReturn(CheckValue("", actualValue[6], 10UL));
-                VerifyOrReturn(CheckValue("", actualValue[7], 11UL));
+                VerifyOrReturn(CheckValue("", actualValue[5], 8UL));
+                VerifyOrReturn(CheckValue("", actualValue[6], 9UL));
+                VerifyOrReturn(CheckValue("", actualValue[7], 10UL));
+                VerifyOrReturn(CheckValue("", actualValue[8], 11UL));
             }
 
             NextTest();
