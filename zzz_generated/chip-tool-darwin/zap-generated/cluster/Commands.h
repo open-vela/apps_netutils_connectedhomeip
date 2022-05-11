@@ -234,6 +234,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSArray * _Nonnull value;
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
@@ -402,6 +403,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSArray * _Nonnull value;
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
@@ -3663,6 +3665,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         CHIPApplicationLauncherClusterApplicationEP * _Nullable value;
         if (mValue.IsNull()) {
             value = nil;
@@ -5108,6 +5111,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeBarrierOpenEventsWithValue:value
@@ -5219,6 +5223,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeBarrierCloseEventsWithValue:value
@@ -5331,6 +5336,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster
@@ -5445,6 +5451,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeBarrierCommandCloseEventsWithValue:value
@@ -5558,6 +5565,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeBarrierOpenPeriodWithValue:value
@@ -5669,6 +5677,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeBarrierClosePeriodWithValue:value
@@ -6636,6 +6645,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSString * _Nonnull value = [[NSString alloc] initWithBytes:mValue.data()
                                                              length:mValue.size()
                                                            encoding:NSUTF8StringEncoding];
@@ -6747,6 +6757,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSString * _Nonnull value = [[NSString alloc] initWithBytes:mValue.data()
                                                              length:mValue.size()
                                                            encoding:NSUTF8StringEncoding];
@@ -7490,6 +7501,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithBool:mValue];
 
         [cluster writeAttributeLocalConfigDisabledWithValue:value
@@ -8190,6 +8202,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSString * _Nonnull value = [[NSString alloc] initWithBytes:mValue.data()
                                                              length:mValue.size()
                                                            encoding:NSUTF8StringEncoding];
@@ -8308,6 +8321,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSString * _Nonnull value = [[NSString alloc] initWithBytes:mValue.data()
                                                              length:mValue.size()
                                                            encoding:NSUTF8StringEncoding];
@@ -8426,6 +8440,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSString * _Nonnull value = [[NSString alloc] initWithBytes:mValue.data()
                                                              length:mValue.size()
                                                            encoding:NSUTF8StringEncoding];
@@ -8544,6 +8559,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithBool:mValue];
 
         [cluster writeAttributeOutOfServiceWithValue:value
@@ -8734,6 +8750,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithBool:mValue];
 
         [cluster writeAttributePresentValueWithValue:value
@@ -8850,6 +8867,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeReliabilityWithValue:value
@@ -9502,6 +9520,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSArray * _Nonnull value;
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
@@ -11937,6 +11956,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSString * _Nonnull value = [[NSString alloc] initWithBytes:mValue.data()
                                                              length:mValue.size()
                                                            encoding:NSUTF8StringEncoding];
@@ -15822,6 +15842,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeColorControlOptionsWithValue:value
@@ -17263,6 +17284,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster
@@ -17373,6 +17395,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster
@@ -17483,6 +17506,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeColorPointRXWithValue:value
@@ -17593,6 +17617,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeColorPointRYWithValue:value
@@ -17703,6 +17728,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeColorPointRIntensityWithValue:value
@@ -17814,6 +17840,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeColorPointGXWithValue:value
@@ -17924,6 +17951,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeColorPointGYWithValue:value
@@ -18034,6 +18062,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeColorPointGIntensityWithValue:value
@@ -18145,6 +18174,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeColorPointBXWithValue:value
@@ -18255,6 +18285,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeColorPointBYWithValue:value
@@ -18365,6 +18396,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeColorPointBIntensityWithValue:value
@@ -19262,6 +19294,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeStartUpColorTemperatureMiredsWithValue:value
@@ -20148,6 +20181,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedInt:mValue];
 
         [cluster writeAttributeSupportedStreamingProtocolsWithValue:value
@@ -23837,6 +23871,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedInt:mValue];
 
         [cluster writeAttributeDoorOpenEventsWithValue:value
@@ -23947,6 +23982,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedInt:mValue];
 
         [cluster writeAttributeDoorClosedEventsWithValue:value
@@ -24057,6 +24093,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeOpenPeriodWithValue:value
@@ -25039,6 +25076,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithBool:mValue];
 
         [cluster
@@ -25149,6 +25187,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSString * _Nonnull value = [[NSString alloc] initWithBytes:mValue.data()
                                                              length:mValue.size()
                                                            encoding:NSUTF8StringEncoding];
@@ -25260,6 +25299,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeLEDSettingsWithValue:value
@@ -25369,6 +25409,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedInt:mValue];
 
         [cluster writeAttributeAutoRelockTimeWithValue:value
@@ -25479,6 +25520,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeSoundVolumeWithValue:value
@@ -25588,6 +25630,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster
@@ -25843,6 +25886,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithBool:mValue];
 
         [cluster writeAttributeEnableLocalProgrammingWithValue:value
@@ -25954,6 +25998,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithBool:mValue];
 
         [cluster writeAttributeEnableOneTouchLockingWithValue:value
@@ -26065,6 +26110,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithBool:mValue];
 
         [cluster writeAttributeEnableInsideStatusLEDWithValue:value
@@ -26177,6 +26223,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithBool:mValue];
 
         [cluster writeAttributeEnablePrivacyModeButtonWithValue:value
@@ -26289,6 +26336,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeLocalProgrammingFeaturesWithValue:value
@@ -26401,6 +26449,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeWrongCodeEntryLimitWithValue:value
@@ -26512,6 +26561,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeUserCodeTemporaryDisableTimeWithValue:value
@@ -26625,6 +26675,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithBool:mValue];
 
         [cluster writeAttributeSendPINOverTheAirWithValue:value
@@ -26736,6 +26787,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithBool:mValue];
 
         [cluster writeAttributeRequirePINforRemoteOperationWithValue:value
@@ -26849,6 +26901,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeExpiringUserTimeoutWithValue:value
@@ -26959,6 +27012,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeAlarmMaskWithValue:value
@@ -27069,6 +27123,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeKeypadOperationEventMaskWithValue:value
@@ -27182,6 +27237,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeRemoteOperationEventMaskWithValue:value
@@ -27295,6 +27351,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeManualOperationEventMaskWithValue:value
@@ -27407,6 +27464,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeRFIDOperationEventMaskWithValue:value
@@ -27519,6 +27577,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster
@@ -27633,6 +27692,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster
@@ -27747,6 +27807,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeRFIDProgrammingEventMaskWithValue:value
@@ -32849,6 +32910,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeAverageRmsVoltageMeasurementPeriodWithValue:value
@@ -32972,6 +33034,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster
@@ -33095,6 +33158,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeRmsExtremeOverVoltagePeriodWithValue:value
@@ -33216,6 +33280,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeRmsExtremeUnderVoltagePeriodWithValue:value
@@ -33336,6 +33401,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster
@@ -33454,6 +33520,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster
@@ -34022,6 +34089,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeOverloadAlarmsMaskWithValue:value
@@ -34289,6 +34357,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster
@@ -40037,6 +40106,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeFanModeWithValue:value
@@ -40146,6 +40216,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeFanModeSequenceWithValue:value
@@ -40256,6 +40327,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributePercentSettingWithValue:value
@@ -40506,6 +40578,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster
@@ -40756,6 +40829,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster
@@ -40936,6 +41010,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster
@@ -42680,6 +42755,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedLongLong:mValue];
 
         [cluster writeAttributeBreadcrumbWithValue:value
@@ -44752,6 +44828,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSArray * _Nonnull value;
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
@@ -46396,6 +46473,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster
@@ -49065,6 +49143,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeOptionsWithValue:value
@@ -49174,6 +49253,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeOnOffTransitionTimeWithValue:value
@@ -49285,6 +49365,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeOnLevelWithValue:value
@@ -49394,6 +49475,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeOnTransitionTimeWithValue:value
@@ -49504,6 +49586,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeOffTransitionTimeWithValue:value
@@ -49614,6 +49697,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeDefaultMoveRateWithValue:value
@@ -49724,6 +49808,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeStartUpCurrentLevelWithValue:value
@@ -50208,6 +50293,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSString * _Nonnull value = [[NSString alloc] initWithBytes:mValue.data()
                                                              length:mValue.size()
                                                            encoding:NSUTF8StringEncoding];
@@ -53628,6 +53714,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster
@@ -53738,6 +53825,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeOnModeWithValue:value
@@ -54882,6 +54970,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithBool:mValue];
 
         [cluster writeAttributeInterfaceEnabledWithValue:value
@@ -56285,6 +56374,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSArray * _Nonnull value;
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
@@ -57271,6 +57361,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributePirOccupiedToUnoccupiedDelayWithValue:value
@@ -57391,6 +57482,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributePirUnoccupiedToOccupiedDelayWithValue:value
@@ -57511,6 +57603,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster
@@ -57634,6 +57727,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeUltrasonicOccupiedToUnoccupiedDelayWithValue:value
@@ -57758,6 +57852,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeUltrasonicUnoccupiedToOccupiedDelayWithValue:value
@@ -57883,6 +57978,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValue:value
@@ -58009,6 +58105,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster
@@ -58136,6 +58233,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster
@@ -58263,6 +58361,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValue:value
@@ -59205,6 +59304,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeOnTimeWithValue:value
@@ -59314,6 +59414,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeOffWaitTimeWithValue:value
@@ -59423,6 +59524,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeStartUpOnOffWithValue:value
@@ -59977,6 +60079,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeSwitchActionsWithValue:value
@@ -67355,6 +67458,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedInt:mValue];
 
         [cluster writeAttributeLifetimeRunningHoursWithValue:value
@@ -67547,6 +67651,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedInt:mValue];
 
         [cluster writeAttributeLifetimeEnergyConsumedWithValue:value
@@ -67666,6 +67771,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeOperationModeWithValue:value
@@ -67783,6 +67889,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeControlModeWithValue:value
@@ -74697,6 +74804,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithBool:mValue];
 
         [cluster writeAttributeBooleanWithValue:value
@@ -74806,6 +74914,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeBitmap8WithValue:value
@@ -74915,6 +75024,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeBitmap16WithValue:value
@@ -75024,6 +75134,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedInt:mValue];
 
         [cluster writeAttributeBitmap32WithValue:value
@@ -75133,6 +75244,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedLongLong:mValue];
 
         [cluster writeAttributeBitmap64WithValue:value
@@ -75242,6 +75354,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeInt8uWithValue:value
@@ -75351,6 +75464,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeInt16uWithValue:value
@@ -75460,6 +75574,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedInt:mValue];
 
         [cluster writeAttributeInt24uWithValue:value
@@ -75569,6 +75684,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedInt:mValue];
 
         [cluster writeAttributeInt32uWithValue:value
@@ -75678,6 +75794,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedLongLong:mValue];
 
         [cluster writeAttributeInt40uWithValue:value
@@ -75787,6 +75904,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedLongLong:mValue];
 
         [cluster writeAttributeInt48uWithValue:value
@@ -75896,6 +76014,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedLongLong:mValue];
 
         [cluster writeAttributeInt56uWithValue:value
@@ -76005,6 +76124,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedLongLong:mValue];
 
         [cluster writeAttributeInt64uWithValue:value
@@ -76114,6 +76234,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithChar:mValue];
 
         [cluster writeAttributeInt8sWithValue:value
@@ -76223,6 +76344,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithShort:mValue];
 
         [cluster writeAttributeInt16sWithValue:value
@@ -76332,6 +76454,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithInt:mValue];
 
         [cluster writeAttributeInt24sWithValue:value
@@ -76441,6 +76564,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithInt:mValue];
 
         [cluster writeAttributeInt32sWithValue:value
@@ -76550,6 +76674,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithLongLong:mValue];
 
         [cluster writeAttributeInt40sWithValue:value
@@ -76659,6 +76784,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithLongLong:mValue];
 
         [cluster writeAttributeInt48sWithValue:value
@@ -76768,6 +76894,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithLongLong:mValue];
 
         [cluster writeAttributeInt56sWithValue:value
@@ -76877,6 +77004,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithLongLong:mValue];
 
         [cluster writeAttributeInt64sWithValue:value
@@ -76986,6 +77114,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeEnum8WithValue:value
@@ -77095,6 +77224,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeEnum16WithValue:value
@@ -77204,6 +77334,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithFloat:mValue];
 
         [cluster
@@ -77314,6 +77445,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithDouble:mValue];
 
         [cluster
@@ -77424,6 +77556,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSData * _Nonnull value = [[NSData alloc] initWithBytes:mValue.data() length:mValue.size()];
 
         [cluster
@@ -77535,6 +77668,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSArray * _Nonnull value;
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
@@ -77655,6 +77789,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSArray * _Nonnull value;
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
@@ -77776,6 +77911,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSArray * _Nonnull value;
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
@@ -77901,6 +78037,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSData * _Nonnull value = [[NSData alloc] initWithBytes:mValue.data() length:mValue.size()];
 
         [cluster writeAttributeLongOctetStringWithValue:value
@@ -78011,6 +78148,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSString * _Nonnull value = [[NSString alloc] initWithBytes:mValue.data()
                                                              length:mValue.size()
                                                            encoding:NSUTF8StringEncoding];
@@ -78123,6 +78261,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSString * _Nonnull value = [[NSString alloc] initWithBytes:mValue.data()
                                                              length:mValue.size()
                                                            encoding:NSUTF8StringEncoding];
@@ -78235,6 +78374,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedLongLong:mValue];
 
         [cluster writeAttributeEpochUsWithValue:value
@@ -78344,6 +78484,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedInt:mValue];
 
         [cluster writeAttributeEpochSWithValue:value
@@ -78453,6 +78594,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeVendorIdWithValue:value
@@ -78564,6 +78706,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSArray * _Nonnull value;
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
@@ -78841,6 +78984,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeEnumAttrWithValue:value
@@ -78952,6 +79096,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         CHIPTestClusterClusterSimpleStruct * _Nonnull value;
         value = [CHIPTestClusterClusterSimpleStruct new];
         value.a = [NSNumber numberWithUnsignedChar:mValue.a];
@@ -79073,6 +79218,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeRangeRestrictedInt8uWithValue:value
@@ -79184,6 +79330,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithChar:mValue];
 
         [cluster writeAttributeRangeRestrictedInt8sWithValue:value
@@ -79295,6 +79442,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeRangeRestrictedInt16uWithValue:value
@@ -79406,6 +79554,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithShort:mValue];
 
         [cluster writeAttributeRangeRestrictedInt16sWithValue:value
@@ -79518,6 +79667,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSArray * _Nonnull value;
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
@@ -79644,6 +79794,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSArray * _Nonnull value;
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
@@ -79814,6 +79965,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithBool:mValue];
 
         [cluster writeAttributeTimedWriteBooleanWithValue:value
@@ -79924,6 +80076,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithBool:mValue];
 
         [cluster writeAttributeGeneralErrorBooleanWithValue:value
@@ -80035,6 +80188,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithBool:mValue];
 
         [cluster writeAttributeClusterErrorBooleanWithValue:value
@@ -80146,6 +80300,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithBool:mValue];
 
         [cluster
@@ -80256,6 +80411,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithBool:mValue];
 
         [cluster writeAttributeNullableBooleanWithValue:value
@@ -80366,6 +80522,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeNullableBitmap8WithValue:value
@@ -80476,6 +80633,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeNullableBitmap16WithValue:value
@@ -80586,6 +80744,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedInt:mValue];
 
         [cluster writeAttributeNullableBitmap32WithValue:value
@@ -80696,6 +80855,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedLongLong:mValue];
 
         [cluster writeAttributeNullableBitmap64WithValue:value
@@ -80806,6 +80966,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeNullableInt8uWithValue:value
@@ -80916,6 +81077,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeNullableInt16uWithValue:value
@@ -81026,6 +81188,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedInt:mValue];
 
         [cluster writeAttributeNullableInt24uWithValue:value
@@ -81136,6 +81299,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedInt:mValue];
 
         [cluster writeAttributeNullableInt32uWithValue:value
@@ -81246,6 +81410,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedLongLong:mValue];
 
         [cluster writeAttributeNullableInt40uWithValue:value
@@ -81356,6 +81521,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedLongLong:mValue];
 
         [cluster writeAttributeNullableInt48uWithValue:value
@@ -81466,6 +81632,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedLongLong:mValue];
 
         [cluster writeAttributeNullableInt56uWithValue:value
@@ -81576,6 +81743,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedLongLong:mValue];
 
         [cluster writeAttributeNullableInt64uWithValue:value
@@ -81686,6 +81854,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithChar:mValue];
 
         [cluster writeAttributeNullableInt8sWithValue:value
@@ -81796,6 +81965,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithShort:mValue];
 
         [cluster writeAttributeNullableInt16sWithValue:value
@@ -81906,6 +82076,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithInt:mValue];
 
         [cluster writeAttributeNullableInt24sWithValue:value
@@ -82016,6 +82187,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithInt:mValue];
 
         [cluster writeAttributeNullableInt32sWithValue:value
@@ -82126,6 +82298,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithLongLong:mValue];
 
         [cluster writeAttributeNullableInt40sWithValue:value
@@ -82236,6 +82409,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithLongLong:mValue];
 
         [cluster writeAttributeNullableInt48sWithValue:value
@@ -82346,6 +82520,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithLongLong:mValue];
 
         [cluster writeAttributeNullableInt56sWithValue:value
@@ -82456,6 +82631,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithLongLong:mValue];
 
         [cluster writeAttributeNullableInt64sWithValue:value
@@ -82566,6 +82742,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeNullableEnum8WithValue:value
@@ -82676,6 +82853,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeNullableEnum16WithValue:value
@@ -82786,6 +82964,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithFloat:mValue];
 
         [cluster writeAttributeNullableFloatSingleWithValue:value
@@ -82897,6 +83076,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithDouble:mValue];
 
         [cluster writeAttributeNullableFloatDoubleWithValue:value
@@ -83008,6 +83188,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSData * _Nullable value = [[NSData alloc] initWithBytes:mValue.data() length:mValue.size()];
 
         [cluster writeAttributeNullableOctetStringWithValue:value
@@ -83119,6 +83300,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSString * _Nullable value = [[NSString alloc] initWithBytes:mValue.data()
                                                               length:mValue.size()
                                                             encoding:NSUTF8StringEncoding];
@@ -83232,6 +83414,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeNullableEnumAttrWithValue:value
@@ -83344,6 +83527,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         CHIPTestClusterClusterSimpleStruct * _Nullable value;
         if (mValue.IsNull()) {
             value = nil;
@@ -83472,6 +83656,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeNullableRangeRestrictedInt8uWithValue:value
@@ -83586,6 +83771,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithChar:mValue];
 
         [cluster writeAttributeNullableRangeRestrictedInt8sWithValue:value
@@ -83700,6 +83886,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeNullableRangeRestrictedInt16uWithValue:value
@@ -83815,6 +84002,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nullable value = [NSNumber numberWithShort:mValue];
 
         [cluster writeAttributeNullableRangeRestrictedInt16sWithValue:value
@@ -85243,6 +85431,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeHvacSystemTypeConfigurationWithValue:value
@@ -85357,6 +85546,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithChar:mValue];
 
         [cluster writeAttributeLocalTemperatureCalibrationWithValue:value
@@ -85471,6 +85661,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithShort:mValue];
 
         [cluster writeAttributeOccupiedCoolingSetpointWithValue:value
@@ -85583,6 +85774,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithShort:mValue];
 
         [cluster writeAttributeOccupiedHeatingSetpointWithValue:value
@@ -85695,6 +85887,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithShort:mValue];
 
         [cluster
@@ -85809,6 +86002,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithShort:mValue];
 
         [cluster
@@ -85922,6 +86116,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithShort:mValue];
 
         [cluster writeAttributeMinHeatSetpointLimitWithValue:value
@@ -86033,6 +86228,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithShort:mValue];
 
         [cluster writeAttributeMaxHeatSetpointLimitWithValue:value
@@ -86144,6 +86340,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithShort:mValue];
 
         [cluster writeAttributeMinCoolSetpointLimitWithValue:value
@@ -86255,6 +86452,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithShort:mValue];
 
         [cluster writeAttributeMaxCoolSetpointLimitWithValue:value
@@ -86366,6 +86564,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithChar:mValue];
 
         [cluster writeAttributeMinSetpointDeadBandWithValue:value
@@ -86477,6 +86676,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeRemoteSensingWithValue:value
@@ -86588,6 +86788,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster
@@ -86701,6 +86902,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeSystemModeWithValue:value
@@ -87168,6 +87370,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeTemperatureSetpointHoldWithValue:value
@@ -87280,6 +87483,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeTemperatureSetpointHoldDurationWithValue:value
@@ -87395,6 +87599,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster
@@ -87798,6 +88003,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeAcTypeWithValue:value
@@ -87907,6 +88113,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeAcCapacityWithValue:value
@@ -88016,6 +88223,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeAcRefrigerantTypeWithValue:value
@@ -88126,6 +88334,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeAcCompressorTypeWithValue:value
@@ -88236,6 +88445,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedInt:mValue];
 
         [cluster
@@ -88346,6 +88556,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeAcLouverPositionWithValue:value
@@ -88526,6 +88737,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeAcCapacityFormatWithValue:value
@@ -89009,6 +89221,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster
@@ -89126,6 +89339,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster
@@ -89243,6 +89457,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeScheduleProgrammingVisibilityWithValue:value
@@ -94990,6 +95205,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeHourFormatWithValue:value
@@ -95106,6 +95322,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeActiveCalendarTypeWithValue:value
@@ -95688,6 +95905,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeTemperatureUnitWithValue:value
@@ -96189,6 +96407,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSArray * _Nonnull value;
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
@@ -100349,6 +100568,7 @@ public:
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeModeWithValue:value
