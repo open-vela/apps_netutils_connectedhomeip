@@ -198,6 +198,7 @@ public:
         printf("TestDelayCommands\n");
         printf("TestLogCommands\n");
         printf("TestSaveAs\n");
+        printf("TestConfigVariables\n");
         printf("TestDescriptorCluster\n");
         printf("TestBasicInformation\n");
         printf("TestGeneralCommissioning\n");
@@ -37978,7 +37979,8 @@ private:
                                           "\330\242\021\2707\334\224\355\315V\364\321Cw\031\020v\277\305\235\231\267\3350S\357\326"
                                           "\360,D4\362\275\322z\244\371\316\247\015s\216L"
                                    length:97];
-        params.discriminator = [NSNumber numberWithUnsignedShort:3840U];
+        params.discriminator = mDiscriminator.HasValue() ? [NSNumber numberWithUnsignedShort:mDiscriminator.Value()]
+                                                         : [NSNumber numberWithUnsignedShort:3840U];
         params.iterations = [NSNumber numberWithUnsignedInt:1000UL];
         params.salt = [[NSData alloc] initWithBytes:"SPAKE2P Key Salt" length:16];
         [cluster openCommissioningWindowWithParams:params
@@ -88353,6 +88355,168 @@ private:
     }
 };
 
+class TestConfigVariables : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    TestConfigVariables()
+        : TestCommandBridge("TestConfigVariables")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("arg1", 0, UINT8_MAX, &mArg1);
+        AddArgument("returnValueWithArg1", 0, UINT8_MAX, &mReturnValueWithArg1);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~TestConfigVariables() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: TestConfigVariables\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: TestConfigVariables\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Send Test Add Arguments Command\n");
+            err = TestSendTestAddArgumentsCommand_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Send Test Add Arguments Command\n");
+            err = TestSendTestAddArgumentsCommand_2();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        WaitForMs(0);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 3;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint8_t> mArg1;
+    chip::Optional<uint8_t> mReturnValueWithArg1;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        WaitForCommissionee("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nonnull TestAddArgumentDefaultValue;
+
+    CHIP_ERROR TestSendTestAddArgumentsCommand_1()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPTestClusterClusterTestAddArgumentsParams alloc] init];
+        params.arg1 = [NSNumber numberWithUnsignedChar:3];
+        params.arg2 = [NSNumber numberWithUnsignedChar:17];
+        [cluster testAddArgumentsWithParams:params
+                          completionHandler:^(
+                              CHIPTestClusterClusterTestAddArgumentsResponseParams * _Nullable values, NSError * _Nullable err) {
+                              NSLog(@"Send Test Add Arguments Command Error: %@", err);
+
+                              VerifyOrReturn(CheckValue("status", err, 0));
+
+                              {
+                                  id actualValue = values.returnValue;
+                                  VerifyOrReturn(CheckValue("returnValue", actualValue, 20));
+                              }
+                              {
+                                  TestAddArgumentDefaultValue = values.returnValue;
+                              }
+
+                              NextTest();
+                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendTestAddArgumentsCommand_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPTestClusterClusterTestAddArgumentsParams alloc] init];
+        params.arg1 = mArg1.HasValue() ? [NSNumber numberWithUnsignedChar:mArg1.Value()] : [NSNumber numberWithUnsignedChar:5];
+        params.arg2 = [TestAddArgumentDefaultValue copy];
+        [cluster testAddArgumentsWithParams:params
+                          completionHandler:^(
+                              CHIPTestClusterClusterTestAddArgumentsResponseParams * _Nullable values, NSError * _Nullable err) {
+                              NSLog(@"Send Test Add Arguments Command Error: %@", err);
+
+                              VerifyOrReturn(CheckValue("status", err, 0));
+
+                              {
+                                  id actualValue = values.returnValue;
+                                  VerifyOrReturn(CheckValue("returnValue", actualValue,
+                                      mReturnValueWithArg1.HasValue() ? mReturnValueWithArg1.Value() : 25));
+                              }
+
+                              NextTest();
+                          }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
 class TestDescriptorCluster : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -105152,6 +105316,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<TestDelayCommands>(),
         make_unique<TestLogCommands>(),
         make_unique<TestSaveAs>(),
+        make_unique<TestConfigVariables>(),
         make_unique<TestDescriptorCluster>(),
         make_unique<TestBasicInformation>(),
         make_unique<TestGeneralCommissioning>(),
