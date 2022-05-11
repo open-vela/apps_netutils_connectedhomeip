@@ -48515,7 +48515,8 @@ using namespace chip::app::Clusters;
     }
     request.IPKValue = [self asByteSpan:params.ipkValue];
     request.caseAdminNode = params.caseAdminNode.unsignedLongLongValue;
-    request.adminVendorId = params.adminVendorId.unsignedShortValue;
+    request.adminVendorId
+        = static_cast<std::remove_reference_t<decltype(request.adminVendorId)>>(params.adminVendorId.unsignedShortValue);
 
     new CHIPOperationalCredentialsClusterNOCResponseCallbackBridge(
         self.callbackQueue, completionHandler, ^(Cancelable * success, Cancelable * failure) {

@@ -60661,7 +60661,7 @@ private:
     chip::Optional<chip::ByteSpan> mICACValue;
     chip::ByteSpan mIPKValue;
     chip::NodeId mCaseAdminNode;
-    uint16_t mAdminVendorId;
+    chip::VendorId mAdminVendorId;
 };
 
 /*
