@@ -1073,8 +1073,7 @@ public:
     AccountLoginGetSetupPIN()
         : ClusterCommand("get-setup-pin")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("TempAccountIdentifier", &mTempAccountIdentifier);
+        AddArgument("TempAccountIdentifier", &mRequest.tempAccountIdentifier);
         ClusterCommand::AddArguments();
     }
 
@@ -1088,8 +1087,8 @@ public:
         __auto_type * params = [[CHIPAccountLoginClusterGetSetupPINParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.tempAccountIdentifier = [[NSString alloc] initWithBytes:mTempAccountIdentifier.data()
-                                                                length:mTempAccountIdentifier.size()
+        params.tempAccountIdentifier = [[NSString alloc] initWithBytes:mRequest.tempAccountIdentifier.data()
+                                                                length:mRequest.tempAccountIdentifier.size()
                                                               encoding:NSUTF8StringEncoding];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -1114,7 +1113,6 @@ public:
 
 private:
     chip::app::Clusters::AccountLogin::Commands::GetSetupPIN::Type mRequest;
-    chip::ByteSpan mTempAccountIdentifier;
 };
 
 /*
@@ -1125,9 +1123,8 @@ public:
     AccountLoginLogin()
         : ClusterCommand("login")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("TempAccountIdentifier", &mTempAccountIdentifier);
-        AddArgument("SetupPIN", &mSetupPIN);
+        AddArgument("TempAccountIdentifier", &mRequest.tempAccountIdentifier);
+        AddArgument("SetupPIN", &mRequest.setupPIN);
         ClusterCommand::AddArguments();
     }
 
@@ -1141,10 +1138,12 @@ public:
         __auto_type * params = [[CHIPAccountLoginClusterLoginParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.tempAccountIdentifier = [[NSString alloc] initWithBytes:mTempAccountIdentifier.data()
-                                                                length:mTempAccountIdentifier.size()
+        params.tempAccountIdentifier = [[NSString alloc] initWithBytes:mRequest.tempAccountIdentifier.data()
+                                                                length:mRequest.tempAccountIdentifier.size()
                                                               encoding:NSUTF8StringEncoding];
-        params.setupPIN = [[NSString alloc] initWithBytes:mSetupPIN.data() length:mSetupPIN.size() encoding:NSUTF8StringEncoding];
+        params.setupPIN = [[NSString alloc] initWithBytes:mRequest.setupPIN.data()
+                                                   length:mRequest.setupPIN.size()
+                                                 encoding:NSUTF8StringEncoding];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -1166,8 +1165,6 @@ public:
 
 private:
     chip::app::Clusters::AccountLogin::Commands::Login::Type mRequest;
-    chip::ByteSpan mTempAccountIdentifier;
-    chip::ByteSpan mSetupPIN;
 };
 
 /*
@@ -1178,7 +1175,6 @@ public:
     AccountLoginLogout()
         : ClusterCommand("logout")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -1211,7 +1207,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::AccountLogin::Commands::Logout::Type mRequest;
 };
 
 /*
@@ -1595,12 +1590,11 @@ public:
     AdministratorCommissioningOpenCommissioningWindow()
         : ClusterCommand("open-commissioning-window")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("CommissioningTimeout", 0, UINT16_MAX, &mCommissioningTimeout);
-        AddArgument("PAKEVerifier", &mPAKEVerifier);
-        AddArgument("Discriminator", 0, UINT16_MAX, &mDiscriminator);
-        AddArgument("Iterations", 0, UINT32_MAX, &mIterations);
-        AddArgument("Salt", &mSalt);
+        AddArgument("CommissioningTimeout", 0, UINT16_MAX, &mRequest.commissioningTimeout);
+        AddArgument("PAKEVerifier", &mRequest.PAKEVerifier);
+        AddArgument("Discriminator", 0, UINT16_MAX, &mRequest.discriminator);
+        AddArgument("Iterations", 0, UINT32_MAX, &mRequest.iterations);
+        AddArgument("Salt", &mRequest.salt);
         ClusterCommand::AddArguments();
     }
 
@@ -1616,11 +1610,11 @@ public:
         __auto_type * params = [[CHIPAdministratorCommissioningClusterOpenCommissioningWindowParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.commissioningTimeout = [NSNumber numberWithUnsignedShort:mCommissioningTimeout];
-        params.pakeVerifier = [[NSData alloc] initWithBytes:mPAKEVerifier.data() length:mPAKEVerifier.size()];
-        params.discriminator = [NSNumber numberWithUnsignedShort:mDiscriminator];
-        params.iterations = [NSNumber numberWithUnsignedInt:mIterations];
-        params.salt = [[NSData alloc] initWithBytes:mSalt.data() length:mSalt.size()];
+        params.commissioningTimeout = [NSNumber numberWithUnsignedShort:mRequest.commissioningTimeout];
+        params.pakeVerifier = [NSData dataWithBytes:mRequest.PAKEVerifier.data() length:mRequest.PAKEVerifier.size()];
+        params.discriminator = [NSNumber numberWithUnsignedShort:mRequest.discriminator];
+        params.iterations = [NSNumber numberWithUnsignedInt:mRequest.iterations];
+        params.salt = [NSData dataWithBytes:mRequest.salt.data() length:mRequest.salt.size()];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -1642,11 +1636,6 @@ public:
 
 private:
     chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type mRequest;
-    uint16_t mCommissioningTimeout;
-    chip::ByteSpan mPAKEVerifier;
-    uint16_t mDiscriminator;
-    uint32_t mIterations;
-    chip::ByteSpan mSalt;
 };
 
 /*
@@ -1657,8 +1646,7 @@ public:
     AdministratorCommissioningOpenBasicCommissioningWindow()
         : ClusterCommand("open-basic-commissioning-window")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("CommissioningTimeout", 0, UINT16_MAX, &mCommissioningTimeout);
+        AddArgument("CommissioningTimeout", 0, UINT16_MAX, &mRequest.commissioningTimeout);
         ClusterCommand::AddArguments();
     }
 
@@ -1674,7 +1662,7 @@ public:
         __auto_type * params = [[CHIPAdministratorCommissioningClusterOpenBasicCommissioningWindowParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.commissioningTimeout = [NSNumber numberWithUnsignedShort:mCommissioningTimeout];
+        params.commissioningTimeout = [NSNumber numberWithUnsignedShort:mRequest.commissioningTimeout];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -1696,7 +1684,6 @@ public:
 
 private:
     chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type mRequest;
-    uint16_t mCommissioningTimeout;
 };
 
 /*
@@ -1707,7 +1694,6 @@ public:
     AdministratorCommissioningRevokeCommissioning()
         : ClusterCommand("revoke-commissioning")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -1742,7 +1728,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::AdministratorCommissioning::Commands::RevokeCommissioning::Type mRequest;
 };
 
 /*
@@ -3365,9 +3350,8 @@ public:
         : ClusterCommand("launch-app")
         , mComplex_Application(&mRequest.application)
     {
-        (void) mRequest; // Might not be used if we have no complex args
         AddArgument("Application", &mComplex_Application);
-        AddArgument("Data", &mData);
+        AddArgument("Data", &mRequest.data);
         ClusterCommand::AddArguments();
     }
 
@@ -3388,8 +3372,10 @@ public:
         params.application.applicationId = [[NSString alloc] initWithBytes:mRequest.application.applicationId.data()
                                                                     length:mRequest.application.applicationId.size()
                                                                   encoding:NSUTF8StringEncoding];
-        if (mData.HasValue()) {
-            params.data = [[NSData alloc] initWithBytes:mData.Value().data() length:mData.Value().size()];
+        if (mRequest.data.HasValue()) {
+            params.data = [NSData dataWithBytes:mRequest.data.Value().data() length:mRequest.data.Value().size()];
+        } else {
+            params.data = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -3415,7 +3401,6 @@ public:
 private:
     chip::app::Clusters::ApplicationLauncher::Commands::LaunchApp::Type mRequest;
     TypedComplexArgument<chip::app::Clusters::ApplicationLauncher::Structs::Application::Type> mComplex_Application;
-    chip::Optional<chip::ByteSpan> mData;
 };
 
 /*
@@ -3427,7 +3412,6 @@ public:
         : ClusterCommand("stop-app")
         , mComplex_Application(&mRequest.application)
     {
-        (void) mRequest; // Might not be used if we have no complex args
         AddArgument("Application", &mComplex_Application);
         ClusterCommand::AddArguments();
     }
@@ -3484,7 +3468,6 @@ public:
         : ClusterCommand("hide-app")
         , mComplex_Application(&mRequest.application)
     {
-        (void) mRequest; // Might not be used if we have no complex args
         AddArgument("Application", &mComplex_Application);
         ClusterCommand::AddArguments();
     }
@@ -4143,8 +4126,7 @@ public:
     AudioOutputSelectOutput()
         : ClusterCommand("select-output")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Index", 0, UINT8_MAX, &mIndex);
+        AddArgument("Index", 0, UINT8_MAX, &mRequest.index);
         ClusterCommand::AddArguments();
     }
 
@@ -4158,7 +4140,7 @@ public:
         __auto_type * params = [[CHIPAudioOutputClusterSelectOutputParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.index = [NSNumber numberWithUnsignedChar:mIndex];
+        params.index = [NSNumber numberWithUnsignedChar:mRequest.index];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -4180,7 +4162,6 @@ public:
 
 private:
     chip::app::Clusters::AudioOutput::Commands::SelectOutput::Type mRequest;
-    uint8_t mIndex;
 };
 
 /*
@@ -4191,9 +4172,8 @@ public:
     AudioOutputRenameOutput()
         : ClusterCommand("rename-output")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Index", 0, UINT8_MAX, &mIndex);
-        AddArgument("Name", &mName);
+        AddArgument("Index", 0, UINT8_MAX, &mRequest.index);
+        AddArgument("Name", &mRequest.name);
         ClusterCommand::AddArguments();
     }
 
@@ -4207,8 +4187,10 @@ public:
         __auto_type * params = [[CHIPAudioOutputClusterRenameOutputParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.index = [NSNumber numberWithUnsignedChar:mIndex];
-        params.name = [[NSString alloc] initWithBytes:mName.data() length:mName.size() encoding:NSUTF8StringEncoding];
+        params.index = [NSNumber numberWithUnsignedChar:mRequest.index];
+        params.name = [[NSString alloc] initWithBytes:mRequest.name.data()
+                                               length:mRequest.name.size()
+                                             encoding:NSUTF8StringEncoding];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -4230,8 +4212,6 @@ public:
 
 private:
     chip::app::Clusters::AudioOutput::Commands::RenameOutput::Type mRequest;
-    uint8_t mIndex;
-    chip::ByteSpan mName;
 };
 
 /*
@@ -4761,8 +4741,7 @@ public:
     BarrierControlBarrierControlGoToPercent()
         : ClusterCommand("barrier-control-go-to-percent")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("PercentOpen", 0, UINT8_MAX, &mPercentOpen);
+        AddArgument("PercentOpen", 0, UINT8_MAX, &mRequest.percentOpen);
         ClusterCommand::AddArguments();
     }
 
@@ -4776,7 +4755,7 @@ public:
         __auto_type * params = [[CHIPBarrierControlClusterBarrierControlGoToPercentParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.percentOpen = [NSNumber numberWithUnsignedChar:mPercentOpen];
+        params.percentOpen = [NSNumber numberWithUnsignedChar:mRequest.percentOpen];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -4798,7 +4777,6 @@ public:
 
 private:
     chip::app::Clusters::BarrierControl::Commands::BarrierControlGoToPercent::Type mRequest;
-    uint8_t mPercentOpen;
 };
 
 /*
@@ -4809,7 +4787,6 @@ public:
     BarrierControlBarrierControlStop()
         : ClusterCommand("barrier-control-stop")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -4842,7 +4819,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::BarrierControl::Commands::BarrierControlStop::Type mRequest;
 };
 
 /*
@@ -6206,7 +6182,6 @@ public:
     BasicMfgSpecificPing()
         : ClusterCommand("mfg-specific-ping")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -6239,7 +6214,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::Basic::Commands::MfgSpecificPing::Type mRequest;
 };
 
 /*
@@ -10438,9 +10412,8 @@ public:
     BridgedActionsInstantAction()
         : ClusterCommand("instant-action")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("ActionID", 0, UINT16_MAX, &mActionID);
-        AddArgument("InvokeID", 0, UINT32_MAX, &mInvokeID);
+        AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
+        AddArgument("InvokeID", 0, UINT32_MAX, &mRequest.invokeID);
         ClusterCommand::AddArguments();
     }
 
@@ -10454,9 +10427,11 @@ public:
         __auto_type * params = [[CHIPBridgedActionsClusterInstantActionParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.actionID = [NSNumber numberWithUnsignedShort:mActionID];
-        if (mInvokeID.HasValue()) {
-            params.invokeID = [NSNumber numberWithUnsignedInt:mInvokeID.Value()];
+        params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
+        if (mRequest.invokeID.HasValue()) {
+            params.invokeID = [NSNumber numberWithUnsignedInt:mRequest.invokeID.Value()];
+        } else {
+            params.invokeID = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -10479,8 +10454,6 @@ public:
 
 private:
     chip::app::Clusters::BridgedActions::Commands::InstantAction::Type mRequest;
-    uint16_t mActionID;
-    chip::Optional<uint32_t> mInvokeID;
 };
 
 /*
@@ -10491,10 +10464,9 @@ public:
     BridgedActionsInstantActionWithTransition()
         : ClusterCommand("instant-action-with-transition")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("ActionID", 0, UINT16_MAX, &mActionID);
-        AddArgument("InvokeID", 0, UINT32_MAX, &mInvokeID);
-        AddArgument("TransitionTime", 0, UINT16_MAX, &mTransitionTime);
+        AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
+        AddArgument("InvokeID", 0, UINT32_MAX, &mRequest.invokeID);
+        AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
         ClusterCommand::AddArguments();
     }
 
@@ -10508,11 +10480,13 @@ public:
         __auto_type * params = [[CHIPBridgedActionsClusterInstantActionWithTransitionParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.actionID = [NSNumber numberWithUnsignedShort:mActionID];
-        if (mInvokeID.HasValue()) {
-            params.invokeID = [NSNumber numberWithUnsignedInt:mInvokeID.Value()];
+        params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
+        if (mRequest.invokeID.HasValue()) {
+            params.invokeID = [NSNumber numberWithUnsignedInt:mRequest.invokeID.Value()];
+        } else {
+            params.invokeID = nil;
         }
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mTransitionTime];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -10534,9 +10508,6 @@ public:
 
 private:
     chip::app::Clusters::BridgedActions::Commands::InstantActionWithTransition::Type mRequest;
-    uint16_t mActionID;
-    chip::Optional<uint32_t> mInvokeID;
-    uint16_t mTransitionTime;
 };
 
 /*
@@ -10547,9 +10518,8 @@ public:
     BridgedActionsStartAction()
         : ClusterCommand("start-action")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("ActionID", 0, UINT16_MAX, &mActionID);
-        AddArgument("InvokeID", 0, UINT32_MAX, &mInvokeID);
+        AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
+        AddArgument("InvokeID", 0, UINT32_MAX, &mRequest.invokeID);
         ClusterCommand::AddArguments();
     }
 
@@ -10563,9 +10533,11 @@ public:
         __auto_type * params = [[CHIPBridgedActionsClusterStartActionParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.actionID = [NSNumber numberWithUnsignedShort:mActionID];
-        if (mInvokeID.HasValue()) {
-            params.invokeID = [NSNumber numberWithUnsignedInt:mInvokeID.Value()];
+        params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
+        if (mRequest.invokeID.HasValue()) {
+            params.invokeID = [NSNumber numberWithUnsignedInt:mRequest.invokeID.Value()];
+        } else {
+            params.invokeID = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -10588,8 +10560,6 @@ public:
 
 private:
     chip::app::Clusters::BridgedActions::Commands::StartAction::Type mRequest;
-    uint16_t mActionID;
-    chip::Optional<uint32_t> mInvokeID;
 };
 
 /*
@@ -10600,10 +10570,9 @@ public:
     BridgedActionsStartActionWithDuration()
         : ClusterCommand("start-action-with-duration")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("ActionID", 0, UINT16_MAX, &mActionID);
-        AddArgument("InvokeID", 0, UINT32_MAX, &mInvokeID);
-        AddArgument("Duration", 0, UINT32_MAX, &mDuration);
+        AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
+        AddArgument("InvokeID", 0, UINT32_MAX, &mRequest.invokeID);
+        AddArgument("Duration", 0, UINT32_MAX, &mRequest.duration);
         ClusterCommand::AddArguments();
     }
 
@@ -10617,11 +10586,13 @@ public:
         __auto_type * params = [[CHIPBridgedActionsClusterStartActionWithDurationParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.actionID = [NSNumber numberWithUnsignedShort:mActionID];
-        if (mInvokeID.HasValue()) {
-            params.invokeID = [NSNumber numberWithUnsignedInt:mInvokeID.Value()];
+        params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
+        if (mRequest.invokeID.HasValue()) {
+            params.invokeID = [NSNumber numberWithUnsignedInt:mRequest.invokeID.Value()];
+        } else {
+            params.invokeID = nil;
         }
-        params.duration = [NSNumber numberWithUnsignedInt:mDuration];
+        params.duration = [NSNumber numberWithUnsignedInt:mRequest.duration];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -10643,9 +10614,6 @@ public:
 
 private:
     chip::app::Clusters::BridgedActions::Commands::StartActionWithDuration::Type mRequest;
-    uint16_t mActionID;
-    chip::Optional<uint32_t> mInvokeID;
-    uint32_t mDuration;
 };
 
 /*
@@ -10656,9 +10624,8 @@ public:
     BridgedActionsStopAction()
         : ClusterCommand("stop-action")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("ActionID", 0, UINT16_MAX, &mActionID);
-        AddArgument("InvokeID", 0, UINT32_MAX, &mInvokeID);
+        AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
+        AddArgument("InvokeID", 0, UINT32_MAX, &mRequest.invokeID);
         ClusterCommand::AddArguments();
     }
 
@@ -10672,9 +10639,11 @@ public:
         __auto_type * params = [[CHIPBridgedActionsClusterStopActionParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.actionID = [NSNumber numberWithUnsignedShort:mActionID];
-        if (mInvokeID.HasValue()) {
-            params.invokeID = [NSNumber numberWithUnsignedInt:mInvokeID.Value()];
+        params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
+        if (mRequest.invokeID.HasValue()) {
+            params.invokeID = [NSNumber numberWithUnsignedInt:mRequest.invokeID.Value()];
+        } else {
+            params.invokeID = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -10697,8 +10666,6 @@ public:
 
 private:
     chip::app::Clusters::BridgedActions::Commands::StopAction::Type mRequest;
-    uint16_t mActionID;
-    chip::Optional<uint32_t> mInvokeID;
 };
 
 /*
@@ -10709,9 +10676,8 @@ public:
     BridgedActionsPauseAction()
         : ClusterCommand("pause-action")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("ActionID", 0, UINT16_MAX, &mActionID);
-        AddArgument("InvokeID", 0, UINT32_MAX, &mInvokeID);
+        AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
+        AddArgument("InvokeID", 0, UINT32_MAX, &mRequest.invokeID);
         ClusterCommand::AddArguments();
     }
 
@@ -10725,9 +10691,11 @@ public:
         __auto_type * params = [[CHIPBridgedActionsClusterPauseActionParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.actionID = [NSNumber numberWithUnsignedShort:mActionID];
-        if (mInvokeID.HasValue()) {
-            params.invokeID = [NSNumber numberWithUnsignedInt:mInvokeID.Value()];
+        params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
+        if (mRequest.invokeID.HasValue()) {
+            params.invokeID = [NSNumber numberWithUnsignedInt:mRequest.invokeID.Value()];
+        } else {
+            params.invokeID = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -10750,8 +10718,6 @@ public:
 
 private:
     chip::app::Clusters::BridgedActions::Commands::PauseAction::Type mRequest;
-    uint16_t mActionID;
-    chip::Optional<uint32_t> mInvokeID;
 };
 
 /*
@@ -10762,10 +10728,9 @@ public:
     BridgedActionsPauseActionWithDuration()
         : ClusterCommand("pause-action-with-duration")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("ActionID", 0, UINT16_MAX, &mActionID);
-        AddArgument("InvokeID", 0, UINT32_MAX, &mInvokeID);
-        AddArgument("Duration", 0, UINT32_MAX, &mDuration);
+        AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
+        AddArgument("InvokeID", 0, UINT32_MAX, &mRequest.invokeID);
+        AddArgument("Duration", 0, UINT32_MAX, &mRequest.duration);
         ClusterCommand::AddArguments();
     }
 
@@ -10779,11 +10744,13 @@ public:
         __auto_type * params = [[CHIPBridgedActionsClusterPauseActionWithDurationParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.actionID = [NSNumber numberWithUnsignedShort:mActionID];
-        if (mInvokeID.HasValue()) {
-            params.invokeID = [NSNumber numberWithUnsignedInt:mInvokeID.Value()];
+        params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
+        if (mRequest.invokeID.HasValue()) {
+            params.invokeID = [NSNumber numberWithUnsignedInt:mRequest.invokeID.Value()];
+        } else {
+            params.invokeID = nil;
         }
-        params.duration = [NSNumber numberWithUnsignedInt:mDuration];
+        params.duration = [NSNumber numberWithUnsignedInt:mRequest.duration];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -10805,9 +10772,6 @@ public:
 
 private:
     chip::app::Clusters::BridgedActions::Commands::PauseActionWithDuration::Type mRequest;
-    uint16_t mActionID;
-    chip::Optional<uint32_t> mInvokeID;
-    uint32_t mDuration;
 };
 
 /*
@@ -10818,9 +10782,8 @@ public:
     BridgedActionsResumeAction()
         : ClusterCommand("resume-action")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("ActionID", 0, UINT16_MAX, &mActionID);
-        AddArgument("InvokeID", 0, UINT32_MAX, &mInvokeID);
+        AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
+        AddArgument("InvokeID", 0, UINT32_MAX, &mRequest.invokeID);
         ClusterCommand::AddArguments();
     }
 
@@ -10834,9 +10797,11 @@ public:
         __auto_type * params = [[CHIPBridgedActionsClusterResumeActionParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.actionID = [NSNumber numberWithUnsignedShort:mActionID];
-        if (mInvokeID.HasValue()) {
-            params.invokeID = [NSNumber numberWithUnsignedInt:mInvokeID.Value()];
+        params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
+        if (mRequest.invokeID.HasValue()) {
+            params.invokeID = [NSNumber numberWithUnsignedInt:mRequest.invokeID.Value()];
+        } else {
+            params.invokeID = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -10859,8 +10824,6 @@ public:
 
 private:
     chip::app::Clusters::BridgedActions::Commands::ResumeAction::Type mRequest;
-    uint16_t mActionID;
-    chip::Optional<uint32_t> mInvokeID;
 };
 
 /*
@@ -10871,9 +10834,8 @@ public:
     BridgedActionsEnableAction()
         : ClusterCommand("enable-action")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("ActionID", 0, UINT16_MAX, &mActionID);
-        AddArgument("InvokeID", 0, UINT32_MAX, &mInvokeID);
+        AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
+        AddArgument("InvokeID", 0, UINT32_MAX, &mRequest.invokeID);
         ClusterCommand::AddArguments();
     }
 
@@ -10887,9 +10849,11 @@ public:
         __auto_type * params = [[CHIPBridgedActionsClusterEnableActionParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.actionID = [NSNumber numberWithUnsignedShort:mActionID];
-        if (mInvokeID.HasValue()) {
-            params.invokeID = [NSNumber numberWithUnsignedInt:mInvokeID.Value()];
+        params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
+        if (mRequest.invokeID.HasValue()) {
+            params.invokeID = [NSNumber numberWithUnsignedInt:mRequest.invokeID.Value()];
+        } else {
+            params.invokeID = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -10912,8 +10876,6 @@ public:
 
 private:
     chip::app::Clusters::BridgedActions::Commands::EnableAction::Type mRequest;
-    uint16_t mActionID;
-    chip::Optional<uint32_t> mInvokeID;
 };
 
 /*
@@ -10924,10 +10886,9 @@ public:
     BridgedActionsEnableActionWithDuration()
         : ClusterCommand("enable-action-with-duration")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("ActionID", 0, UINT16_MAX, &mActionID);
-        AddArgument("InvokeID", 0, UINT32_MAX, &mInvokeID);
-        AddArgument("Duration", 0, UINT32_MAX, &mDuration);
+        AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
+        AddArgument("InvokeID", 0, UINT32_MAX, &mRequest.invokeID);
+        AddArgument("Duration", 0, UINT32_MAX, &mRequest.duration);
         ClusterCommand::AddArguments();
     }
 
@@ -10941,11 +10902,13 @@ public:
         __auto_type * params = [[CHIPBridgedActionsClusterEnableActionWithDurationParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.actionID = [NSNumber numberWithUnsignedShort:mActionID];
-        if (mInvokeID.HasValue()) {
-            params.invokeID = [NSNumber numberWithUnsignedInt:mInvokeID.Value()];
+        params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
+        if (mRequest.invokeID.HasValue()) {
+            params.invokeID = [NSNumber numberWithUnsignedInt:mRequest.invokeID.Value()];
+        } else {
+            params.invokeID = nil;
         }
-        params.duration = [NSNumber numberWithUnsignedInt:mDuration];
+        params.duration = [NSNumber numberWithUnsignedInt:mRequest.duration];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -10967,9 +10930,6 @@ public:
 
 private:
     chip::app::Clusters::BridgedActions::Commands::EnableActionWithDuration::Type mRequest;
-    uint16_t mActionID;
-    chip::Optional<uint32_t> mInvokeID;
-    uint32_t mDuration;
 };
 
 /*
@@ -10980,9 +10940,8 @@ public:
     BridgedActionsDisableAction()
         : ClusterCommand("disable-action")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("ActionID", 0, UINT16_MAX, &mActionID);
-        AddArgument("InvokeID", 0, UINT32_MAX, &mInvokeID);
+        AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
+        AddArgument("InvokeID", 0, UINT32_MAX, &mRequest.invokeID);
         ClusterCommand::AddArguments();
     }
 
@@ -10996,9 +10955,11 @@ public:
         __auto_type * params = [[CHIPBridgedActionsClusterDisableActionParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.actionID = [NSNumber numberWithUnsignedShort:mActionID];
-        if (mInvokeID.HasValue()) {
-            params.invokeID = [NSNumber numberWithUnsignedInt:mInvokeID.Value()];
+        params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
+        if (mRequest.invokeID.HasValue()) {
+            params.invokeID = [NSNumber numberWithUnsignedInt:mRequest.invokeID.Value()];
+        } else {
+            params.invokeID = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -11021,8 +10982,6 @@ public:
 
 private:
     chip::app::Clusters::BridgedActions::Commands::DisableAction::Type mRequest;
-    uint16_t mActionID;
-    chip::Optional<uint32_t> mInvokeID;
 };
 
 /*
@@ -11033,10 +10992,9 @@ public:
     BridgedActionsDisableActionWithDuration()
         : ClusterCommand("disable-action-with-duration")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("ActionID", 0, UINT16_MAX, &mActionID);
-        AddArgument("InvokeID", 0, UINT32_MAX, &mInvokeID);
-        AddArgument("Duration", 0, UINT32_MAX, &mDuration);
+        AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
+        AddArgument("InvokeID", 0, UINT32_MAX, &mRequest.invokeID);
+        AddArgument("Duration", 0, UINT32_MAX, &mRequest.duration);
         ClusterCommand::AddArguments();
     }
 
@@ -11050,11 +11008,13 @@ public:
         __auto_type * params = [[CHIPBridgedActionsClusterDisableActionWithDurationParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.actionID = [NSNumber numberWithUnsignedShort:mActionID];
-        if (mInvokeID.HasValue()) {
-            params.invokeID = [NSNumber numberWithUnsignedInt:mInvokeID.Value()];
+        params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
+        if (mRequest.invokeID.HasValue()) {
+            params.invokeID = [NSNumber numberWithUnsignedInt:mRequest.invokeID.Value()];
+        } else {
+            params.invokeID = nil;
         }
-        params.duration = [NSNumber numberWithUnsignedInt:mDuration];
+        params.duration = [NSNumber numberWithUnsignedInt:mRequest.duration];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -11076,9 +11036,6 @@ public:
 
 private:
     chip::app::Clusters::BridgedActions::Commands::DisableActionWithDuration::Type mRequest;
-    uint16_t mActionID;
-    chip::Optional<uint32_t> mInvokeID;
-    uint32_t mDuration;
 };
 
 /*
@@ -13239,8 +13196,7 @@ public:
     ChannelChangeChannel()
         : ClusterCommand("change-channel")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Match", &mMatch);
+        AddArgument("Match", &mRequest.match);
         ClusterCommand::AddArguments();
     }
 
@@ -13254,7 +13210,9 @@ public:
         __auto_type * params = [[CHIPChannelClusterChangeChannelParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.match = [[NSString alloc] initWithBytes:mMatch.data() length:mMatch.size() encoding:NSUTF8StringEncoding];
+        params.match = [[NSString alloc] initWithBytes:mRequest.match.data()
+                                                length:mRequest.match.size()
+                                              encoding:NSUTF8StringEncoding];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -13278,7 +13236,6 @@ public:
 
 private:
     chip::app::Clusters::Channel::Commands::ChangeChannel::Type mRequest;
-    chip::ByteSpan mMatch;
 };
 
 /*
@@ -13289,9 +13246,8 @@ public:
     ChannelChangeChannelByNumber()
         : ClusterCommand("change-channel-by-number")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("MajorNumber", 0, UINT16_MAX, &mMajorNumber);
-        AddArgument("MinorNumber", 0, UINT16_MAX, &mMinorNumber);
+        AddArgument("MajorNumber", 0, UINT16_MAX, &mRequest.majorNumber);
+        AddArgument("MinorNumber", 0, UINT16_MAX, &mRequest.minorNumber);
         ClusterCommand::AddArguments();
     }
 
@@ -13305,8 +13261,8 @@ public:
         __auto_type * params = [[CHIPChannelClusterChangeChannelByNumberParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.majorNumber = [NSNumber numberWithUnsignedShort:mMajorNumber];
-        params.minorNumber = [NSNumber numberWithUnsignedShort:mMinorNumber];
+        params.majorNumber = [NSNumber numberWithUnsignedShort:mRequest.majorNumber];
+        params.minorNumber = [NSNumber numberWithUnsignedShort:mRequest.minorNumber];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -13328,8 +13284,6 @@ public:
 
 private:
     chip::app::Clusters::Channel::Commands::ChangeChannelByNumber::Type mRequest;
-    uint16_t mMajorNumber;
-    uint16_t mMinorNumber;
 };
 
 /*
@@ -13340,8 +13294,7 @@ public:
     ChannelSkipChannel()
         : ClusterCommand("skip-channel")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Count", 0, UINT16_MAX, &mCount);
+        AddArgument("Count", 0, UINT16_MAX, &mRequest.count);
         ClusterCommand::AddArguments();
     }
 
@@ -13355,7 +13308,7 @@ public:
         __auto_type * params = [[CHIPChannelClusterSkipChannelParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.count = [NSNumber numberWithUnsignedShort:mCount];
+        params.count = [NSNumber numberWithUnsignedShort:mRequest.count];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -13377,7 +13330,6 @@ public:
 
 private:
     chip::app::Clusters::Channel::Commands::SkipChannel::Type mRequest;
-    uint16_t mCount;
 };
 
 /*
@@ -14039,12 +13991,11 @@ public:
     ColorControlMoveToHue()
         : ClusterCommand("move-to-hue")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Hue", 0, UINT8_MAX, &mHue);
-        AddArgument("Direction", 0, UINT8_MAX, &mDirection);
-        AddArgument("TransitionTime", 0, UINT16_MAX, &mTransitionTime);
-        AddArgument("OptionsMask", 0, UINT8_MAX, &mOptionsMask);
-        AddArgument("OptionsOverride", 0, UINT8_MAX, &mOptionsOverride);
+        AddArgument("Hue", 0, UINT8_MAX, &mRequest.hue);
+        AddArgument("Direction", 0, UINT8_MAX, &mRequest.direction);
+        AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -14058,11 +14009,11 @@ public:
         __auto_type * params = [[CHIPColorControlClusterMoveToHueParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.hue = [NSNumber numberWithUnsignedChar:mHue];
-        params.direction = [NSNumber numberWithUnsignedChar:mDirection];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mTransitionTime];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mOptionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mOptionsOverride];
+        params.hue = [NSNumber numberWithUnsignedChar:mRequest.hue];
+        params.direction = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.direction)];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -14084,11 +14035,6 @@ public:
 
 private:
     chip::app::Clusters::ColorControl::Commands::MoveToHue::Type mRequest;
-    uint8_t mHue;
-    uint8_t mDirection;
-    uint16_t mTransitionTime;
-    uint8_t mOptionsMask;
-    uint8_t mOptionsOverride;
 };
 
 /*
@@ -14099,11 +14045,10 @@ public:
     ColorControlMoveHue()
         : ClusterCommand("move-hue")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("MoveMode", 0, UINT8_MAX, &mMoveMode);
-        AddArgument("Rate", 0, UINT8_MAX, &mRate);
-        AddArgument("OptionsMask", 0, UINT8_MAX, &mOptionsMask);
-        AddArgument("OptionsOverride", 0, UINT8_MAX, &mOptionsOverride);
+        AddArgument("MoveMode", 0, UINT8_MAX, &mRequest.moveMode);
+        AddArgument("Rate", 0, UINT8_MAX, &mRequest.rate);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -14117,10 +14062,10 @@ public:
         __auto_type * params = [[CHIPColorControlClusterMoveHueParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.moveMode = [NSNumber numberWithUnsignedChar:mMoveMode];
-        params.rate = [NSNumber numberWithUnsignedChar:mRate];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mOptionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mOptionsOverride];
+        params.moveMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.moveMode)];
+        params.rate = [NSNumber numberWithUnsignedChar:mRequest.rate];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -14142,10 +14087,6 @@ public:
 
 private:
     chip::app::Clusters::ColorControl::Commands::MoveHue::Type mRequest;
-    uint8_t mMoveMode;
-    uint8_t mRate;
-    uint8_t mOptionsMask;
-    uint8_t mOptionsOverride;
 };
 
 /*
@@ -14156,12 +14097,11 @@ public:
     ColorControlStepHue()
         : ClusterCommand("step-hue")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("StepMode", 0, UINT8_MAX, &mStepMode);
-        AddArgument("StepSize", 0, UINT8_MAX, &mStepSize);
-        AddArgument("TransitionTime", 0, UINT8_MAX, &mTransitionTime);
-        AddArgument("OptionsMask", 0, UINT8_MAX, &mOptionsMask);
-        AddArgument("OptionsOverride", 0, UINT8_MAX, &mOptionsOverride);
+        AddArgument("StepMode", 0, UINT8_MAX, &mRequest.stepMode);
+        AddArgument("StepSize", 0, UINT8_MAX, &mRequest.stepSize);
+        AddArgument("TransitionTime", 0, UINT8_MAX, &mRequest.transitionTime);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -14175,11 +14115,11 @@ public:
         __auto_type * params = [[CHIPColorControlClusterStepHueParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.stepMode = [NSNumber numberWithUnsignedChar:mStepMode];
-        params.stepSize = [NSNumber numberWithUnsignedChar:mStepSize];
-        params.transitionTime = [NSNumber numberWithUnsignedChar:mTransitionTime];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mOptionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mOptionsOverride];
+        params.stepMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.stepMode)];
+        params.stepSize = [NSNumber numberWithUnsignedChar:mRequest.stepSize];
+        params.transitionTime = [NSNumber numberWithUnsignedChar:mRequest.transitionTime];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -14201,11 +14141,6 @@ public:
 
 private:
     chip::app::Clusters::ColorControl::Commands::StepHue::Type mRequest;
-    uint8_t mStepMode;
-    uint8_t mStepSize;
-    uint8_t mTransitionTime;
-    uint8_t mOptionsMask;
-    uint8_t mOptionsOverride;
 };
 
 /*
@@ -14216,11 +14151,10 @@ public:
     ColorControlMoveToSaturation()
         : ClusterCommand("move-to-saturation")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Saturation", 0, UINT8_MAX, &mSaturation);
-        AddArgument("TransitionTime", 0, UINT16_MAX, &mTransitionTime);
-        AddArgument("OptionsMask", 0, UINT8_MAX, &mOptionsMask);
-        AddArgument("OptionsOverride", 0, UINT8_MAX, &mOptionsOverride);
+        AddArgument("Saturation", 0, UINT8_MAX, &mRequest.saturation);
+        AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -14234,10 +14168,10 @@ public:
         __auto_type * params = [[CHIPColorControlClusterMoveToSaturationParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.saturation = [NSNumber numberWithUnsignedChar:mSaturation];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mTransitionTime];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mOptionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mOptionsOverride];
+        params.saturation = [NSNumber numberWithUnsignedChar:mRequest.saturation];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -14259,10 +14193,6 @@ public:
 
 private:
     chip::app::Clusters::ColorControl::Commands::MoveToSaturation::Type mRequest;
-    uint8_t mSaturation;
-    uint16_t mTransitionTime;
-    uint8_t mOptionsMask;
-    uint8_t mOptionsOverride;
 };
 
 /*
@@ -14273,11 +14203,10 @@ public:
     ColorControlMoveSaturation()
         : ClusterCommand("move-saturation")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("MoveMode", 0, UINT8_MAX, &mMoveMode);
-        AddArgument("Rate", 0, UINT8_MAX, &mRate);
-        AddArgument("OptionsMask", 0, UINT8_MAX, &mOptionsMask);
-        AddArgument("OptionsOverride", 0, UINT8_MAX, &mOptionsOverride);
+        AddArgument("MoveMode", 0, UINT8_MAX, &mRequest.moveMode);
+        AddArgument("Rate", 0, UINT8_MAX, &mRequest.rate);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -14291,10 +14220,10 @@ public:
         __auto_type * params = [[CHIPColorControlClusterMoveSaturationParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.moveMode = [NSNumber numberWithUnsignedChar:mMoveMode];
-        params.rate = [NSNumber numberWithUnsignedChar:mRate];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mOptionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mOptionsOverride];
+        params.moveMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.moveMode)];
+        params.rate = [NSNumber numberWithUnsignedChar:mRequest.rate];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -14316,10 +14245,6 @@ public:
 
 private:
     chip::app::Clusters::ColorControl::Commands::MoveSaturation::Type mRequest;
-    uint8_t mMoveMode;
-    uint8_t mRate;
-    uint8_t mOptionsMask;
-    uint8_t mOptionsOverride;
 };
 
 /*
@@ -14330,12 +14255,11 @@ public:
     ColorControlStepSaturation()
         : ClusterCommand("step-saturation")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("StepMode", 0, UINT8_MAX, &mStepMode);
-        AddArgument("StepSize", 0, UINT8_MAX, &mStepSize);
-        AddArgument("TransitionTime", 0, UINT8_MAX, &mTransitionTime);
-        AddArgument("OptionsMask", 0, UINT8_MAX, &mOptionsMask);
-        AddArgument("OptionsOverride", 0, UINT8_MAX, &mOptionsOverride);
+        AddArgument("StepMode", 0, UINT8_MAX, &mRequest.stepMode);
+        AddArgument("StepSize", 0, UINT8_MAX, &mRequest.stepSize);
+        AddArgument("TransitionTime", 0, UINT8_MAX, &mRequest.transitionTime);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -14349,11 +14273,11 @@ public:
         __auto_type * params = [[CHIPColorControlClusterStepSaturationParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.stepMode = [NSNumber numberWithUnsignedChar:mStepMode];
-        params.stepSize = [NSNumber numberWithUnsignedChar:mStepSize];
-        params.transitionTime = [NSNumber numberWithUnsignedChar:mTransitionTime];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mOptionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mOptionsOverride];
+        params.stepMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.stepMode)];
+        params.stepSize = [NSNumber numberWithUnsignedChar:mRequest.stepSize];
+        params.transitionTime = [NSNumber numberWithUnsignedChar:mRequest.transitionTime];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -14375,11 +14299,6 @@ public:
 
 private:
     chip::app::Clusters::ColorControl::Commands::StepSaturation::Type mRequest;
-    uint8_t mStepMode;
-    uint8_t mStepSize;
-    uint8_t mTransitionTime;
-    uint8_t mOptionsMask;
-    uint8_t mOptionsOverride;
 };
 
 /*
@@ -14390,12 +14309,11 @@ public:
     ColorControlMoveToHueAndSaturation()
         : ClusterCommand("move-to-hue-and-saturation")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Hue", 0, UINT8_MAX, &mHue);
-        AddArgument("Saturation", 0, UINT8_MAX, &mSaturation);
-        AddArgument("TransitionTime", 0, UINT16_MAX, &mTransitionTime);
-        AddArgument("OptionsMask", 0, UINT8_MAX, &mOptionsMask);
-        AddArgument("OptionsOverride", 0, UINT8_MAX, &mOptionsOverride);
+        AddArgument("Hue", 0, UINT8_MAX, &mRequest.hue);
+        AddArgument("Saturation", 0, UINT8_MAX, &mRequest.saturation);
+        AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -14409,11 +14327,11 @@ public:
         __auto_type * params = [[CHIPColorControlClusterMoveToHueAndSaturationParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.hue = [NSNumber numberWithUnsignedChar:mHue];
-        params.saturation = [NSNumber numberWithUnsignedChar:mSaturation];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mTransitionTime];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mOptionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mOptionsOverride];
+        params.hue = [NSNumber numberWithUnsignedChar:mRequest.hue];
+        params.saturation = [NSNumber numberWithUnsignedChar:mRequest.saturation];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -14435,11 +14353,6 @@ public:
 
 private:
     chip::app::Clusters::ColorControl::Commands::MoveToHueAndSaturation::Type mRequest;
-    uint8_t mHue;
-    uint8_t mSaturation;
-    uint16_t mTransitionTime;
-    uint8_t mOptionsMask;
-    uint8_t mOptionsOverride;
 };
 
 /*
@@ -14450,12 +14363,11 @@ public:
     ColorControlMoveToColor()
         : ClusterCommand("move-to-color")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("ColorX", 0, UINT16_MAX, &mColorX);
-        AddArgument("ColorY", 0, UINT16_MAX, &mColorY);
-        AddArgument("TransitionTime", 0, UINT16_MAX, &mTransitionTime);
-        AddArgument("OptionsMask", 0, UINT8_MAX, &mOptionsMask);
-        AddArgument("OptionsOverride", 0, UINT8_MAX, &mOptionsOverride);
+        AddArgument("ColorX", 0, UINT16_MAX, &mRequest.colorX);
+        AddArgument("ColorY", 0, UINT16_MAX, &mRequest.colorY);
+        AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -14469,11 +14381,11 @@ public:
         __auto_type * params = [[CHIPColorControlClusterMoveToColorParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.colorX = [NSNumber numberWithUnsignedShort:mColorX];
-        params.colorY = [NSNumber numberWithUnsignedShort:mColorY];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mTransitionTime];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mOptionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mOptionsOverride];
+        params.colorX = [NSNumber numberWithUnsignedShort:mRequest.colorX];
+        params.colorY = [NSNumber numberWithUnsignedShort:mRequest.colorY];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -14495,11 +14407,6 @@ public:
 
 private:
     chip::app::Clusters::ColorControl::Commands::MoveToColor::Type mRequest;
-    uint16_t mColorX;
-    uint16_t mColorY;
-    uint16_t mTransitionTime;
-    uint8_t mOptionsMask;
-    uint8_t mOptionsOverride;
 };
 
 /*
@@ -14510,11 +14417,10 @@ public:
     ColorControlMoveColor()
         : ClusterCommand("move-color")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("RateX", INT16_MIN, INT16_MAX, &mRateX);
-        AddArgument("RateY", INT16_MIN, INT16_MAX, &mRateY);
-        AddArgument("OptionsMask", 0, UINT8_MAX, &mOptionsMask);
-        AddArgument("OptionsOverride", 0, UINT8_MAX, &mOptionsOverride);
+        AddArgument("RateX", INT16_MIN, INT16_MAX, &mRequest.rateX);
+        AddArgument("RateY", INT16_MIN, INT16_MAX, &mRequest.rateY);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -14528,10 +14434,10 @@ public:
         __auto_type * params = [[CHIPColorControlClusterMoveColorParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.rateX = [NSNumber numberWithShort:mRateX];
-        params.rateY = [NSNumber numberWithShort:mRateY];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mOptionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mOptionsOverride];
+        params.rateX = [NSNumber numberWithShort:mRequest.rateX];
+        params.rateY = [NSNumber numberWithShort:mRequest.rateY];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -14553,10 +14459,6 @@ public:
 
 private:
     chip::app::Clusters::ColorControl::Commands::MoveColor::Type mRequest;
-    int16_t mRateX;
-    int16_t mRateY;
-    uint8_t mOptionsMask;
-    uint8_t mOptionsOverride;
 };
 
 /*
@@ -14567,12 +14469,11 @@ public:
     ColorControlStepColor()
         : ClusterCommand("step-color")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("StepX", INT16_MIN, INT16_MAX, &mStepX);
-        AddArgument("StepY", INT16_MIN, INT16_MAX, &mStepY);
-        AddArgument("TransitionTime", 0, UINT16_MAX, &mTransitionTime);
-        AddArgument("OptionsMask", 0, UINT8_MAX, &mOptionsMask);
-        AddArgument("OptionsOverride", 0, UINT8_MAX, &mOptionsOverride);
+        AddArgument("StepX", INT16_MIN, INT16_MAX, &mRequest.stepX);
+        AddArgument("StepY", INT16_MIN, INT16_MAX, &mRequest.stepY);
+        AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -14586,11 +14487,11 @@ public:
         __auto_type * params = [[CHIPColorControlClusterStepColorParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.stepX = [NSNumber numberWithShort:mStepX];
-        params.stepY = [NSNumber numberWithShort:mStepY];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mTransitionTime];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mOptionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mOptionsOverride];
+        params.stepX = [NSNumber numberWithShort:mRequest.stepX];
+        params.stepY = [NSNumber numberWithShort:mRequest.stepY];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -14612,11 +14513,6 @@ public:
 
 private:
     chip::app::Clusters::ColorControl::Commands::StepColor::Type mRequest;
-    int16_t mStepX;
-    int16_t mStepY;
-    uint16_t mTransitionTime;
-    uint8_t mOptionsMask;
-    uint8_t mOptionsOverride;
 };
 
 /*
@@ -14627,11 +14523,10 @@ public:
     ColorControlMoveToColorTemperature()
         : ClusterCommand("move-to-color-temperature")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("ColorTemperature", 0, UINT16_MAX, &mColorTemperature);
-        AddArgument("TransitionTime", 0, UINT16_MAX, &mTransitionTime);
-        AddArgument("OptionsMask", 0, UINT8_MAX, &mOptionsMask);
-        AddArgument("OptionsOverride", 0, UINT8_MAX, &mOptionsOverride);
+        AddArgument("ColorTemperature", 0, UINT16_MAX, &mRequest.colorTemperature);
+        AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -14645,10 +14540,10 @@ public:
         __auto_type * params = [[CHIPColorControlClusterMoveToColorTemperatureParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.colorTemperature = [NSNumber numberWithUnsignedShort:mColorTemperature];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mTransitionTime];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mOptionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mOptionsOverride];
+        params.colorTemperature = [NSNumber numberWithUnsignedShort:mRequest.colorTemperature];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -14670,10 +14565,6 @@ public:
 
 private:
     chip::app::Clusters::ColorControl::Commands::MoveToColorTemperature::Type mRequest;
-    uint16_t mColorTemperature;
-    uint16_t mTransitionTime;
-    uint8_t mOptionsMask;
-    uint8_t mOptionsOverride;
 };
 
 /*
@@ -14684,12 +14575,11 @@ public:
     ColorControlEnhancedMoveToHue()
         : ClusterCommand("enhanced-move-to-hue")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("EnhancedHue", 0, UINT16_MAX, &mEnhancedHue);
-        AddArgument("Direction", 0, UINT8_MAX, &mDirection);
-        AddArgument("TransitionTime", 0, UINT16_MAX, &mTransitionTime);
-        AddArgument("OptionsMask", 0, UINT8_MAX, &mOptionsMask);
-        AddArgument("OptionsOverride", 0, UINT8_MAX, &mOptionsOverride);
+        AddArgument("EnhancedHue", 0, UINT16_MAX, &mRequest.enhancedHue);
+        AddArgument("Direction", 0, UINT8_MAX, &mRequest.direction);
+        AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -14703,11 +14593,11 @@ public:
         __auto_type * params = [[CHIPColorControlClusterEnhancedMoveToHueParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.enhancedHue = [NSNumber numberWithUnsignedShort:mEnhancedHue];
-        params.direction = [NSNumber numberWithUnsignedChar:mDirection];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mTransitionTime];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mOptionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mOptionsOverride];
+        params.enhancedHue = [NSNumber numberWithUnsignedShort:mRequest.enhancedHue];
+        params.direction = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.direction)];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -14729,11 +14619,6 @@ public:
 
 private:
     chip::app::Clusters::ColorControl::Commands::EnhancedMoveToHue::Type mRequest;
-    uint16_t mEnhancedHue;
-    uint8_t mDirection;
-    uint16_t mTransitionTime;
-    uint8_t mOptionsMask;
-    uint8_t mOptionsOverride;
 };
 
 /*
@@ -14744,11 +14629,10 @@ public:
     ColorControlEnhancedMoveHue()
         : ClusterCommand("enhanced-move-hue")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("MoveMode", 0, UINT8_MAX, &mMoveMode);
-        AddArgument("Rate", 0, UINT16_MAX, &mRate);
-        AddArgument("OptionsMask", 0, UINT8_MAX, &mOptionsMask);
-        AddArgument("OptionsOverride", 0, UINT8_MAX, &mOptionsOverride);
+        AddArgument("MoveMode", 0, UINT8_MAX, &mRequest.moveMode);
+        AddArgument("Rate", 0, UINT16_MAX, &mRequest.rate);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -14762,10 +14646,10 @@ public:
         __auto_type * params = [[CHIPColorControlClusterEnhancedMoveHueParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.moveMode = [NSNumber numberWithUnsignedChar:mMoveMode];
-        params.rate = [NSNumber numberWithUnsignedShort:mRate];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mOptionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mOptionsOverride];
+        params.moveMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.moveMode)];
+        params.rate = [NSNumber numberWithUnsignedShort:mRequest.rate];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -14787,10 +14671,6 @@ public:
 
 private:
     chip::app::Clusters::ColorControl::Commands::EnhancedMoveHue::Type mRequest;
-    uint8_t mMoveMode;
-    uint16_t mRate;
-    uint8_t mOptionsMask;
-    uint8_t mOptionsOverride;
 };
 
 /*
@@ -14801,12 +14681,11 @@ public:
     ColorControlEnhancedStepHue()
         : ClusterCommand("enhanced-step-hue")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("StepMode", 0, UINT8_MAX, &mStepMode);
-        AddArgument("StepSize", 0, UINT16_MAX, &mStepSize);
-        AddArgument("TransitionTime", 0, UINT16_MAX, &mTransitionTime);
-        AddArgument("OptionsMask", 0, UINT8_MAX, &mOptionsMask);
-        AddArgument("OptionsOverride", 0, UINT8_MAX, &mOptionsOverride);
+        AddArgument("StepMode", 0, UINT8_MAX, &mRequest.stepMode);
+        AddArgument("StepSize", 0, UINT16_MAX, &mRequest.stepSize);
+        AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -14820,11 +14699,11 @@ public:
         __auto_type * params = [[CHIPColorControlClusterEnhancedStepHueParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.stepMode = [NSNumber numberWithUnsignedChar:mStepMode];
-        params.stepSize = [NSNumber numberWithUnsignedShort:mStepSize];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mTransitionTime];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mOptionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mOptionsOverride];
+        params.stepMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.stepMode)];
+        params.stepSize = [NSNumber numberWithUnsignedShort:mRequest.stepSize];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -14846,11 +14725,6 @@ public:
 
 private:
     chip::app::Clusters::ColorControl::Commands::EnhancedStepHue::Type mRequest;
-    uint8_t mStepMode;
-    uint16_t mStepSize;
-    uint16_t mTransitionTime;
-    uint8_t mOptionsMask;
-    uint8_t mOptionsOverride;
 };
 
 /*
@@ -14861,12 +14735,11 @@ public:
     ColorControlEnhancedMoveToHueAndSaturation()
         : ClusterCommand("enhanced-move-to-hue-and-saturation")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("EnhancedHue", 0, UINT16_MAX, &mEnhancedHue);
-        AddArgument("Saturation", 0, UINT8_MAX, &mSaturation);
-        AddArgument("TransitionTime", 0, UINT16_MAX, &mTransitionTime);
-        AddArgument("OptionsMask", 0, UINT8_MAX, &mOptionsMask);
-        AddArgument("OptionsOverride", 0, UINT8_MAX, &mOptionsOverride);
+        AddArgument("EnhancedHue", 0, UINT16_MAX, &mRequest.enhancedHue);
+        AddArgument("Saturation", 0, UINT8_MAX, &mRequest.saturation);
+        AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -14880,11 +14753,11 @@ public:
         __auto_type * params = [[CHIPColorControlClusterEnhancedMoveToHueAndSaturationParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.enhancedHue = [NSNumber numberWithUnsignedShort:mEnhancedHue];
-        params.saturation = [NSNumber numberWithUnsignedChar:mSaturation];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mTransitionTime];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mOptionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mOptionsOverride];
+        params.enhancedHue = [NSNumber numberWithUnsignedShort:mRequest.enhancedHue];
+        params.saturation = [NSNumber numberWithUnsignedChar:mRequest.saturation];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -14906,11 +14779,6 @@ public:
 
 private:
     chip::app::Clusters::ColorControl::Commands::EnhancedMoveToHueAndSaturation::Type mRequest;
-    uint16_t mEnhancedHue;
-    uint8_t mSaturation;
-    uint16_t mTransitionTime;
-    uint8_t mOptionsMask;
-    uint8_t mOptionsOverride;
 };
 
 /*
@@ -14921,14 +14789,13 @@ public:
     ColorControlColorLoopSet()
         : ClusterCommand("color-loop-set")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("UpdateFlags", 0, UINT8_MAX, &mUpdateFlags);
-        AddArgument("Action", 0, UINT8_MAX, &mAction);
-        AddArgument("Direction", 0, UINT8_MAX, &mDirection);
-        AddArgument("Time", 0, UINT16_MAX, &mTime);
-        AddArgument("StartHue", 0, UINT16_MAX, &mStartHue);
-        AddArgument("OptionsMask", 0, UINT8_MAX, &mOptionsMask);
-        AddArgument("OptionsOverride", 0, UINT8_MAX, &mOptionsOverride);
+        AddArgument("UpdateFlags", 0, UINT8_MAX, &mRequest.updateFlags);
+        AddArgument("Action", 0, UINT8_MAX, &mRequest.action);
+        AddArgument("Direction", 0, UINT8_MAX, &mRequest.direction);
+        AddArgument("Time", 0, UINT16_MAX, &mRequest.time);
+        AddArgument("StartHue", 0, UINT16_MAX, &mRequest.startHue);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -14942,13 +14809,13 @@ public:
         __auto_type * params = [[CHIPColorControlClusterColorLoopSetParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.updateFlags = [NSNumber numberWithUnsignedChar:mUpdateFlags];
-        params.action = [NSNumber numberWithUnsignedChar:mAction];
-        params.direction = [NSNumber numberWithUnsignedChar:mDirection];
-        params.time = [NSNumber numberWithUnsignedShort:mTime];
-        params.startHue = [NSNumber numberWithUnsignedShort:mStartHue];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mOptionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mOptionsOverride];
+        params.updateFlags = [NSNumber numberWithUnsignedChar:mRequest.updateFlags.Raw()];
+        params.action = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.action)];
+        params.direction = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.direction)];
+        params.time = [NSNumber numberWithUnsignedShort:mRequest.time];
+        params.startHue = [NSNumber numberWithUnsignedShort:mRequest.startHue];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -14970,13 +14837,6 @@ public:
 
 private:
     chip::app::Clusters::ColorControl::Commands::ColorLoopSet::Type mRequest;
-    uint8_t mUpdateFlags;
-    uint8_t mAction;
-    uint8_t mDirection;
-    uint16_t mTime;
-    uint16_t mStartHue;
-    uint8_t mOptionsMask;
-    uint8_t mOptionsOverride;
 };
 
 /*
@@ -14987,9 +14847,8 @@ public:
     ColorControlStopMoveStep()
         : ClusterCommand("stop-move-step")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("OptionsMask", 0, UINT8_MAX, &mOptionsMask);
-        AddArgument("OptionsOverride", 0, UINT8_MAX, &mOptionsOverride);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -15003,8 +14862,8 @@ public:
         __auto_type * params = [[CHIPColorControlClusterStopMoveStepParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mOptionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mOptionsOverride];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -15026,8 +14885,6 @@ public:
 
 private:
     chip::app::Clusters::ColorControl::Commands::StopMoveStep::Type mRequest;
-    uint8_t mOptionsMask;
-    uint8_t mOptionsOverride;
 };
 
 /*
@@ -15038,13 +14895,12 @@ public:
     ColorControlMoveColorTemperature()
         : ClusterCommand("move-color-temperature")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("MoveMode", 0, UINT8_MAX, &mMoveMode);
-        AddArgument("Rate", 0, UINT16_MAX, &mRate);
-        AddArgument("ColorTemperatureMinimum", 0, UINT16_MAX, &mColorTemperatureMinimum);
-        AddArgument("ColorTemperatureMaximum", 0, UINT16_MAX, &mColorTemperatureMaximum);
-        AddArgument("OptionsMask", 0, UINT8_MAX, &mOptionsMask);
-        AddArgument("OptionsOverride", 0, UINT8_MAX, &mOptionsOverride);
+        AddArgument("MoveMode", 0, UINT8_MAX, &mRequest.moveMode);
+        AddArgument("Rate", 0, UINT16_MAX, &mRequest.rate);
+        AddArgument("ColorTemperatureMinimum", 0, UINT16_MAX, &mRequest.colorTemperatureMinimum);
+        AddArgument("ColorTemperatureMaximum", 0, UINT16_MAX, &mRequest.colorTemperatureMaximum);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -15058,12 +14914,12 @@ public:
         __auto_type * params = [[CHIPColorControlClusterMoveColorTemperatureParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.moveMode = [NSNumber numberWithUnsignedChar:mMoveMode];
-        params.rate = [NSNumber numberWithUnsignedShort:mRate];
-        params.colorTemperatureMinimum = [NSNumber numberWithUnsignedShort:mColorTemperatureMinimum];
-        params.colorTemperatureMaximum = [NSNumber numberWithUnsignedShort:mColorTemperatureMaximum];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mOptionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mOptionsOverride];
+        params.moveMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.moveMode)];
+        params.rate = [NSNumber numberWithUnsignedShort:mRequest.rate];
+        params.colorTemperatureMinimum = [NSNumber numberWithUnsignedShort:mRequest.colorTemperatureMinimum];
+        params.colorTemperatureMaximum = [NSNumber numberWithUnsignedShort:mRequest.colorTemperatureMaximum];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -15085,12 +14941,6 @@ public:
 
 private:
     chip::app::Clusters::ColorControl::Commands::MoveColorTemperature::Type mRequest;
-    uint8_t mMoveMode;
-    uint16_t mRate;
-    uint16_t mColorTemperatureMinimum;
-    uint16_t mColorTemperatureMaximum;
-    uint8_t mOptionsMask;
-    uint8_t mOptionsOverride;
 };
 
 /*
@@ -15101,14 +14951,13 @@ public:
     ColorControlStepColorTemperature()
         : ClusterCommand("step-color-temperature")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("StepMode", 0, UINT8_MAX, &mStepMode);
-        AddArgument("StepSize", 0, UINT16_MAX, &mStepSize);
-        AddArgument("TransitionTime", 0, UINT16_MAX, &mTransitionTime);
-        AddArgument("ColorTemperatureMinimum", 0, UINT16_MAX, &mColorTemperatureMinimum);
-        AddArgument("ColorTemperatureMaximum", 0, UINT16_MAX, &mColorTemperatureMaximum);
-        AddArgument("OptionsMask", 0, UINT8_MAX, &mOptionsMask);
-        AddArgument("OptionsOverride", 0, UINT8_MAX, &mOptionsOverride);
+        AddArgument("StepMode", 0, UINT8_MAX, &mRequest.stepMode);
+        AddArgument("StepSize", 0, UINT16_MAX, &mRequest.stepSize);
+        AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
+        AddArgument("ColorTemperatureMinimum", 0, UINT16_MAX, &mRequest.colorTemperatureMinimum);
+        AddArgument("ColorTemperatureMaximum", 0, UINT16_MAX, &mRequest.colorTemperatureMaximum);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -15122,13 +14971,13 @@ public:
         __auto_type * params = [[CHIPColorControlClusterStepColorTemperatureParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.stepMode = [NSNumber numberWithUnsignedChar:mStepMode];
-        params.stepSize = [NSNumber numberWithUnsignedShort:mStepSize];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mTransitionTime];
-        params.colorTemperatureMinimum = [NSNumber numberWithUnsignedShort:mColorTemperatureMinimum];
-        params.colorTemperatureMaximum = [NSNumber numberWithUnsignedShort:mColorTemperatureMaximum];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mOptionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mOptionsOverride];
+        params.stepMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.stepMode)];
+        params.stepSize = [NSNumber numberWithUnsignedShort:mRequest.stepSize];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        params.colorTemperatureMinimum = [NSNumber numberWithUnsignedShort:mRequest.colorTemperatureMinimum];
+        params.colorTemperatureMaximum = [NSNumber numberWithUnsignedShort:mRequest.colorTemperatureMaximum];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -15150,13 +14999,6 @@ public:
 
 private:
     chip::app::Clusters::ColorControl::Commands::StepColorTemperature::Type mRequest;
-    uint8_t mStepMode;
-    uint16_t mStepSize;
-    uint16_t mTransitionTime;
-    uint16_t mColorTemperatureMinimum;
-    uint16_t mColorTemperatureMaximum;
-    uint8_t mOptionsMask;
-    uint8_t mOptionsOverride;
 };
 
 /*
@@ -19736,10 +19578,9 @@ public:
         : ClusterCommand("launch-content")
         , mComplex_Search(&mRequest.search)
     {
-        (void) mRequest; // Might not be used if we have no complex args
         AddArgument("Search", &mComplex_Search);
-        AddArgument("AutoPlay", 0, 1, &mAutoPlay);
-        AddArgument("Data", &mData);
+        AddArgument("AutoPlay", 0, 1, &mRequest.autoPlay);
+        AddArgument("Data", &mRequest.data);
         ClusterCommand::AddArguments();
     }
 
@@ -19786,11 +19627,13 @@ public:
             }
             params.search.parameterList = array_1;
         }
-        params.autoPlay = [NSNumber numberWithBool:mAutoPlay];
-        if (mData.HasValue()) {
-            params.data = [[NSString alloc] initWithBytes:mData.Value().data()
-                                                   length:mData.Value().size()
+        params.autoPlay = [NSNumber numberWithBool:mRequest.autoPlay];
+        if (mRequest.data.HasValue()) {
+            params.data = [[NSString alloc] initWithBytes:mRequest.data.Value().data()
+                                                   length:mRequest.data.Value().size()
                                                  encoding:NSUTF8StringEncoding];
+        } else {
+            params.data = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -19816,8 +19659,6 @@ public:
 private:
     chip::app::Clusters::ContentLauncher::Commands::LaunchContent::Type mRequest;
     TypedComplexArgument<chip::app::Clusters::ContentLauncher::Structs::ContentSearch::Type> mComplex_Search;
-    bool mAutoPlay;
-    chip::Optional<chip::ByteSpan> mData;
 };
 
 /*
@@ -19829,9 +19670,8 @@ public:
         : ClusterCommand("launch-url")
         , mComplex_BrandingInformation(&mRequest.brandingInformation)
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("ContentURL", &mContentURL);
-        AddArgument("DisplayString", &mDisplayString);
+        AddArgument("ContentURL", &mRequest.contentURL);
+        AddArgument("DisplayString", &mRequest.displayString);
         AddArgument("BrandingInformation", &mComplex_BrandingInformation);
         ClusterCommand::AddArguments();
     }
@@ -19846,13 +19686,15 @@ public:
         __auto_type * params = [[CHIPContentLauncherClusterLaunchURLParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.contentURL = [[NSString alloc] initWithBytes:mContentURL.data()
-                                                     length:mContentURL.size()
+        params.contentURL = [[NSString alloc] initWithBytes:mRequest.contentURL.data()
+                                                     length:mRequest.contentURL.size()
                                                    encoding:NSUTF8StringEncoding];
-        if (mDisplayString.HasValue()) {
-            params.displayString = [[NSString alloc] initWithBytes:mDisplayString.Value().data()
-                                                            length:mDisplayString.Value().size()
+        if (mRequest.displayString.HasValue()) {
+            params.displayString = [[NSString alloc] initWithBytes:mRequest.displayString.Value().data()
+                                                            length:mRequest.displayString.Value().size()
                                                           encoding:NSUTF8StringEncoding];
+        } else {
+            params.displayString = nil;
         }
         if (mRequest.brandingInformation.HasValue()) {
             params.brandingInformation = [CHIPContentLauncherClusterBrandingInformation new];
@@ -20051,8 +19893,6 @@ public:
 
 private:
     chip::app::Clusters::ContentLauncher::Commands::LaunchURL::Type mRequest;
-    chip::ByteSpan mContentURL;
-    chip::Optional<chip::ByteSpan> mDisplayString;
     TypedComplexArgument<chip::Optional<chip::app::Clusters::ContentLauncher::Structs::BrandingInformation::Type>>
         mComplex_BrandingInformation;
 };
@@ -21269,10 +21109,9 @@ public:
     DiagnosticLogsRetrieveLogsRequest()
         : ClusterCommand("retrieve-logs-request")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Intent", 0, UINT8_MAX, &mIntent);
-        AddArgument("RequestedProtocol", 0, UINT8_MAX, &mRequestedProtocol);
-        AddArgument("TransferFileDesignator", &mTransferFileDesignator);
+        AddArgument("Intent", 0, UINT8_MAX, &mRequest.intent);
+        AddArgument("RequestedProtocol", 0, UINT8_MAX, &mRequest.requestedProtocol);
+        AddArgument("TransferFileDesignator", &mRequest.transferFileDesignator);
         ClusterCommand::AddArguments();
     }
 
@@ -21286,10 +21125,10 @@ public:
         __auto_type * params = [[CHIPDiagnosticLogsClusterRetrieveLogsRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.intent = [NSNumber numberWithUnsignedChar:mIntent];
-        params.requestedProtocol = [NSNumber numberWithUnsignedChar:mRequestedProtocol];
-        params.transferFileDesignator = [[NSData alloc] initWithBytes:mTransferFileDesignator.data()
-                                                               length:mTransferFileDesignator.size()];
+        params.intent = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.intent)];
+        params.requestedProtocol = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.requestedProtocol)];
+        params.transferFileDesignator = [NSData dataWithBytes:mRequest.transferFileDesignator.data()
+                                                       length:mRequest.transferFileDesignator.size()];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -21313,9 +21152,6 @@ public:
 
 private:
     chip::app::Clusters::DiagnosticLogs::Commands::RetrieveLogsRequest::Type mRequest;
-    uint8_t mIntent;
-    uint8_t mRequestedProtocol;
-    chip::ByteSpan mTransferFileDesignator;
 };
 
 /*
@@ -21774,8 +21610,7 @@ public:
     DoorLockLockDoor()
         : ClusterCommand("lock-door")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("PinCode", &mPinCode);
+        AddArgument("PinCode", &mRequest.pinCode);
         ClusterCommand::AddArguments();
     }
 
@@ -21789,8 +21624,10 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterLockDoorParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        if (mPinCode.HasValue()) {
-            params.pinCode = [[NSData alloc] initWithBytes:mPinCode.Value().data() length:mPinCode.Value().size()];
+        if (mRequest.pinCode.HasValue()) {
+            params.pinCode = [NSData dataWithBytes:mRequest.pinCode.Value().data() length:mRequest.pinCode.Value().size()];
+        } else {
+            params.pinCode = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -21813,7 +21650,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::LockDoor::Type mRequest;
-    chip::Optional<chip::ByteSpan> mPinCode;
 };
 
 /*
@@ -21824,8 +21660,7 @@ public:
     DoorLockUnlockDoor()
         : ClusterCommand("unlock-door")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("PinCode", &mPinCode);
+        AddArgument("PinCode", &mRequest.pinCode);
         ClusterCommand::AddArguments();
     }
 
@@ -21839,8 +21674,10 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterUnlockDoorParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        if (mPinCode.HasValue()) {
-            params.pinCode = [[NSData alloc] initWithBytes:mPinCode.Value().data() length:mPinCode.Value().size()];
+        if (mRequest.pinCode.HasValue()) {
+            params.pinCode = [NSData dataWithBytes:mRequest.pinCode.Value().data() length:mRequest.pinCode.Value().size()];
+        } else {
+            params.pinCode = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -21863,7 +21700,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type mRequest;
-    chip::Optional<chip::ByteSpan> mPinCode;
 };
 
 /*
@@ -21874,9 +21710,8 @@ public:
     DoorLockUnlockWithTimeout()
         : ClusterCommand("unlock-with-timeout")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Timeout", 0, UINT16_MAX, &mTimeout);
-        AddArgument("PinCode", &mPinCode);
+        AddArgument("Timeout", 0, UINT16_MAX, &mRequest.timeout);
+        AddArgument("PinCode", &mRequest.pinCode);
         ClusterCommand::AddArguments();
     }
 
@@ -21890,9 +21725,11 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterUnlockWithTimeoutParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.timeout = [NSNumber numberWithUnsignedShort:mTimeout];
-        if (mPinCode.HasValue()) {
-            params.pinCode = [[NSData alloc] initWithBytes:mPinCode.Value().data() length:mPinCode.Value().size()];
+        params.timeout = [NSNumber numberWithUnsignedShort:mRequest.timeout];
+        if (mRequest.pinCode.HasValue()) {
+            params.pinCode = [NSData dataWithBytes:mRequest.pinCode.Value().data() length:mRequest.pinCode.Value().size()];
+        } else {
+            params.pinCode = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -21915,8 +21752,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::UnlockWithTimeout::Type mRequest;
-    uint16_t mTimeout;
-    chip::Optional<chip::ByteSpan> mPinCode;
 };
 
 /*
@@ -21927,8 +21762,7 @@ public:
     DoorLockGetLogRecord()
         : ClusterCommand("get-log-record")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("LogIndex", 0, UINT16_MAX, &mLogIndex);
+        AddArgument("LogIndex", 0, UINT16_MAX, &mRequest.logIndex);
         ClusterCommand::AddArguments();
     }
 
@@ -21942,7 +21776,7 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterGetLogRecordParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.logIndex = [NSNumber numberWithUnsignedShort:mLogIndex];
+        params.logIndex = [NSNumber numberWithUnsignedShort:mRequest.logIndex];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -21966,7 +21800,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::GetLogRecord::Type mRequest;
-    uint16_t mLogIndex;
 };
 
 /*
@@ -21977,11 +21810,10 @@ public:
     DoorLockSetPINCode()
         : ClusterCommand("set-pincode")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("UserId", 0, UINT16_MAX, &mUserId);
-        AddArgument("UserStatus", 0, UINT8_MAX, &mUserStatus);
-        AddArgument("UserType", 0, UINT8_MAX, &mUserType);
-        AddArgument("Pin", &mPin);
+        AddArgument("UserId", 0, UINT16_MAX, &mRequest.userId);
+        AddArgument("UserStatus", 0, UINT8_MAX, &mRequest.userStatus);
+        AddArgument("UserType", 0, UINT8_MAX, &mRequest.userType);
+        AddArgument("Pin", &mRequest.pin);
         ClusterCommand::AddArguments();
     }
 
@@ -21995,10 +21827,18 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterSetPINCodeParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.userId = [NSNumber numberWithUnsignedShort:mUserId];
-        params.userStatus = [NSNumber numberWithUnsignedChar:mUserStatus];
-        params.userType = [NSNumber numberWithUnsignedChar:mUserType];
-        params.pin = [[NSData alloc] initWithBytes:mPin.data() length:mPin.size()];
+        params.userId = [NSNumber numberWithUnsignedShort:mRequest.userId];
+        if (mRequest.userStatus.IsNull()) {
+            params.userStatus = nil;
+        } else {
+            params.userStatus = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.userStatus.Value())];
+        }
+        if (mRequest.userType.IsNull()) {
+            params.userType = nil;
+        } else {
+            params.userType = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.userType.Value())];
+        }
+        params.pin = [NSData dataWithBytes:mRequest.pin.data() length:mRequest.pin.size()];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -22020,10 +21860,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::SetPINCode::Type mRequest;
-    uint16_t mUserId;
-    uint8_t mUserStatus;
-    uint8_t mUserType;
-    chip::ByteSpan mPin;
 };
 
 /*
@@ -22034,8 +21870,7 @@ public:
     DoorLockGetPINCode()
         : ClusterCommand("get-pincode")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("UserId", 0, UINT16_MAX, &mUserId);
+        AddArgument("UserId", 0, UINT16_MAX, &mRequest.userId);
         ClusterCommand::AddArguments();
     }
 
@@ -22049,7 +21884,7 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterGetPINCodeParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.userId = [NSNumber numberWithUnsignedShort:mUserId];
+        params.userId = [NSNumber numberWithUnsignedShort:mRequest.userId];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -22073,7 +21908,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::GetPINCode::Type mRequest;
-    uint16_t mUserId;
 };
 
 /*
@@ -22084,8 +21918,7 @@ public:
     DoorLockClearPINCode()
         : ClusterCommand("clear-pincode")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("PinSlotIndex", 0, UINT16_MAX, &mPinSlotIndex);
+        AddArgument("PinSlotIndex", 0, UINT16_MAX, &mRequest.pinSlotIndex);
         ClusterCommand::AddArguments();
     }
 
@@ -22099,7 +21932,7 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterClearPINCodeParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.pinSlotIndex = [NSNumber numberWithUnsignedShort:mPinSlotIndex];
+        params.pinSlotIndex = [NSNumber numberWithUnsignedShort:mRequest.pinSlotIndex];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -22121,7 +21954,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::ClearPINCode::Type mRequest;
-    uint16_t mPinSlotIndex;
 };
 
 /*
@@ -22132,7 +21964,6 @@ public:
     DoorLockClearAllPINCodes()
         : ClusterCommand("clear-all-pincodes")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -22165,7 +21996,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::DoorLock::Commands::ClearAllPINCodes::Type mRequest;
 };
 
 /*
@@ -22176,9 +22006,8 @@ public:
     DoorLockSetUserStatus()
         : ClusterCommand("set-user-status")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("UserId", 0, UINT16_MAX, &mUserId);
-        AddArgument("UserStatus", 0, UINT8_MAX, &mUserStatus);
+        AddArgument("UserId", 0, UINT16_MAX, &mRequest.userId);
+        AddArgument("UserStatus", 0, UINT8_MAX, &mRequest.userStatus);
         ClusterCommand::AddArguments();
     }
 
@@ -22192,8 +22021,8 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterSetUserStatusParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.userId = [NSNumber numberWithUnsignedShort:mUserId];
-        params.userStatus = [NSNumber numberWithUnsignedChar:mUserStatus];
+        params.userId = [NSNumber numberWithUnsignedShort:mRequest.userId];
+        params.userStatus = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.userStatus)];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -22215,8 +22044,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::SetUserStatus::Type mRequest;
-    uint16_t mUserId;
-    uint8_t mUserStatus;
 };
 
 /*
@@ -22227,8 +22054,7 @@ public:
     DoorLockGetUserStatus()
         : ClusterCommand("get-user-status")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("UserId", 0, UINT16_MAX, &mUserId);
+        AddArgument("UserId", 0, UINT16_MAX, &mRequest.userId);
         ClusterCommand::AddArguments();
     }
 
@@ -22242,7 +22068,7 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterGetUserStatusParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.userId = [NSNumber numberWithUnsignedShort:mUserId];
+        params.userId = [NSNumber numberWithUnsignedShort:mRequest.userId];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -22266,7 +22092,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::GetUserStatus::Type mRequest;
-    uint16_t mUserId;
 };
 
 /*
@@ -22277,14 +22102,13 @@ public:
     DoorLockSetWeekDaySchedule()
         : ClusterCommand("set-week-day-schedule")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("WeekDayIndex", 0, UINT8_MAX, &mWeekDayIndex);
-        AddArgument("UserIndex", 0, UINT16_MAX, &mUserIndex);
-        AddArgument("DaysMask", 0, UINT8_MAX, &mDaysMask);
-        AddArgument("StartHour", 0, UINT8_MAX, &mStartHour);
-        AddArgument("StartMinute", 0, UINT8_MAX, &mStartMinute);
-        AddArgument("EndHour", 0, UINT8_MAX, &mEndHour);
-        AddArgument("EndMinute", 0, UINT8_MAX, &mEndMinute);
+        AddArgument("WeekDayIndex", 0, UINT8_MAX, &mRequest.weekDayIndex);
+        AddArgument("UserIndex", 0, UINT16_MAX, &mRequest.userIndex);
+        AddArgument("DaysMask", 0, UINT8_MAX, &mRequest.daysMask);
+        AddArgument("StartHour", 0, UINT8_MAX, &mRequest.startHour);
+        AddArgument("StartMinute", 0, UINT8_MAX, &mRequest.startMinute);
+        AddArgument("EndHour", 0, UINT8_MAX, &mRequest.endHour);
+        AddArgument("EndMinute", 0, UINT8_MAX, &mRequest.endMinute);
         ClusterCommand::AddArguments();
     }
 
@@ -22298,13 +22122,13 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:mWeekDayIndex];
-        params.userIndex = [NSNumber numberWithUnsignedShort:mUserIndex];
-        params.daysMask = [NSNumber numberWithUnsignedChar:mDaysMask];
-        params.startHour = [NSNumber numberWithUnsignedChar:mStartHour];
-        params.startMinute = [NSNumber numberWithUnsignedChar:mStartMinute];
-        params.endHour = [NSNumber numberWithUnsignedChar:mEndHour];
-        params.endMinute = [NSNumber numberWithUnsignedChar:mEndMinute];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:mRequest.weekDayIndex];
+        params.userIndex = [NSNumber numberWithUnsignedShort:mRequest.userIndex];
+        params.daysMask = [NSNumber numberWithUnsignedChar:mRequest.daysMask.Raw()];
+        params.startHour = [NSNumber numberWithUnsignedChar:mRequest.startHour];
+        params.startMinute = [NSNumber numberWithUnsignedChar:mRequest.startMinute];
+        params.endHour = [NSNumber numberWithUnsignedChar:mRequest.endHour];
+        params.endMinute = [NSNumber numberWithUnsignedChar:mRequest.endMinute];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -22326,13 +22150,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type mRequest;
-    uint8_t mWeekDayIndex;
-    uint16_t mUserIndex;
-    uint8_t mDaysMask;
-    uint8_t mStartHour;
-    uint8_t mStartMinute;
-    uint8_t mEndHour;
-    uint8_t mEndMinute;
 };
 
 /*
@@ -22343,9 +22160,8 @@ public:
     DoorLockGetWeekDaySchedule()
         : ClusterCommand("get-week-day-schedule")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("WeekDayIndex", 0, UINT8_MAX, &mWeekDayIndex);
-        AddArgument("UserIndex", 0, UINT16_MAX, &mUserIndex);
+        AddArgument("WeekDayIndex", 0, UINT8_MAX, &mRequest.weekDayIndex);
+        AddArgument("UserIndex", 0, UINT16_MAX, &mRequest.userIndex);
         ClusterCommand::AddArguments();
     }
 
@@ -22359,8 +22175,8 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:mWeekDayIndex];
-        params.userIndex = [NSNumber numberWithUnsignedShort:mUserIndex];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:mRequest.weekDayIndex];
+        params.userIndex = [NSNumber numberWithUnsignedShort:mRequest.userIndex];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -22384,8 +22200,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::GetWeekDaySchedule::Type mRequest;
-    uint8_t mWeekDayIndex;
-    uint16_t mUserIndex;
 };
 
 /*
@@ -22396,9 +22210,8 @@ public:
     DoorLockClearWeekDaySchedule()
         : ClusterCommand("clear-week-day-schedule")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("WeekDayIndex", 0, UINT8_MAX, &mWeekDayIndex);
-        AddArgument("UserIndex", 0, UINT16_MAX, &mUserIndex);
+        AddArgument("WeekDayIndex", 0, UINT8_MAX, &mRequest.weekDayIndex);
+        AddArgument("UserIndex", 0, UINT16_MAX, &mRequest.userIndex);
         ClusterCommand::AddArguments();
     }
 
@@ -22412,8 +22225,8 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterClearWeekDayScheduleParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:mWeekDayIndex];
-        params.userIndex = [NSNumber numberWithUnsignedShort:mUserIndex];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:mRequest.weekDayIndex];
+        params.userIndex = [NSNumber numberWithUnsignedShort:mRequest.userIndex];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -22435,8 +22248,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::ClearWeekDaySchedule::Type mRequest;
-    uint8_t mWeekDayIndex;
-    uint16_t mUserIndex;
 };
 
 /*
@@ -22447,11 +22258,10 @@ public:
     DoorLockSetYearDaySchedule()
         : ClusterCommand("set-year-day-schedule")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("YearDayIndex", 0, UINT8_MAX, &mYearDayIndex);
-        AddArgument("UserIndex", 0, UINT16_MAX, &mUserIndex);
-        AddArgument("LocalStartTime", 0, UINT32_MAX, &mLocalStartTime);
-        AddArgument("LocalEndTime", 0, UINT32_MAX, &mLocalEndTime);
+        AddArgument("YearDayIndex", 0, UINT8_MAX, &mRequest.yearDayIndex);
+        AddArgument("UserIndex", 0, UINT16_MAX, &mRequest.userIndex);
+        AddArgument("LocalStartTime", 0, UINT32_MAX, &mRequest.localStartTime);
+        AddArgument("LocalEndTime", 0, UINT32_MAX, &mRequest.localEndTime);
         ClusterCommand::AddArguments();
     }
 
@@ -22465,10 +22275,10 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:mYearDayIndex];
-        params.userIndex = [NSNumber numberWithUnsignedShort:mUserIndex];
-        params.localStartTime = [NSNumber numberWithUnsignedInt:mLocalStartTime];
-        params.localEndTime = [NSNumber numberWithUnsignedInt:mLocalEndTime];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:mRequest.yearDayIndex];
+        params.userIndex = [NSNumber numberWithUnsignedShort:mRequest.userIndex];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:mRequest.localStartTime];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:mRequest.localEndTime];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -22490,10 +22300,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::SetYearDaySchedule::Type mRequest;
-    uint8_t mYearDayIndex;
-    uint16_t mUserIndex;
-    uint32_t mLocalStartTime;
-    uint32_t mLocalEndTime;
 };
 
 /*
@@ -22504,9 +22310,8 @@ public:
     DoorLockGetYearDaySchedule()
         : ClusterCommand("get-year-day-schedule")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("YearDayIndex", 0, UINT8_MAX, &mYearDayIndex);
-        AddArgument("UserIndex", 0, UINT16_MAX, &mUserIndex);
+        AddArgument("YearDayIndex", 0, UINT8_MAX, &mRequest.yearDayIndex);
+        AddArgument("UserIndex", 0, UINT16_MAX, &mRequest.userIndex);
         ClusterCommand::AddArguments();
     }
 
@@ -22520,8 +22325,8 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:mYearDayIndex];
-        params.userIndex = [NSNumber numberWithUnsignedShort:mUserIndex];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:mRequest.yearDayIndex];
+        params.userIndex = [NSNumber numberWithUnsignedShort:mRequest.userIndex];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -22545,8 +22350,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::GetYearDaySchedule::Type mRequest;
-    uint8_t mYearDayIndex;
-    uint16_t mUserIndex;
 };
 
 /*
@@ -22557,9 +22360,8 @@ public:
     DoorLockClearYearDaySchedule()
         : ClusterCommand("clear-year-day-schedule")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("YearDayIndex", 0, UINT8_MAX, &mYearDayIndex);
-        AddArgument("UserIndex", 0, UINT16_MAX, &mUserIndex);
+        AddArgument("YearDayIndex", 0, UINT8_MAX, &mRequest.yearDayIndex);
+        AddArgument("UserIndex", 0, UINT16_MAX, &mRequest.userIndex);
         ClusterCommand::AddArguments();
     }
 
@@ -22573,8 +22375,8 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:mYearDayIndex];
-        params.userIndex = [NSNumber numberWithUnsignedShort:mUserIndex];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:mRequest.yearDayIndex];
+        params.userIndex = [NSNumber numberWithUnsignedShort:mRequest.userIndex];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -22596,8 +22398,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::ClearYearDaySchedule::Type mRequest;
-    uint8_t mYearDayIndex;
-    uint16_t mUserIndex;
 };
 
 /*
@@ -22608,11 +22408,10 @@ public:
     DoorLockSetHolidaySchedule()
         : ClusterCommand("set-holiday-schedule")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("HolidayIndex", 0, UINT8_MAX, &mHolidayIndex);
-        AddArgument("LocalStartTime", 0, UINT32_MAX, &mLocalStartTime);
-        AddArgument("LocalEndTime", 0, UINT32_MAX, &mLocalEndTime);
-        AddArgument("OperatingMode", 0, UINT8_MAX, &mOperatingMode);
+        AddArgument("HolidayIndex", 0, UINT8_MAX, &mRequest.holidayIndex);
+        AddArgument("LocalStartTime", 0, UINT32_MAX, &mRequest.localStartTime);
+        AddArgument("LocalEndTime", 0, UINT32_MAX, &mRequest.localEndTime);
+        AddArgument("OperatingMode", 0, UINT8_MAX, &mRequest.operatingMode);
         ClusterCommand::AddArguments();
     }
 
@@ -22626,10 +22425,10 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterSetHolidayScheduleParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:mHolidayIndex];
-        params.localStartTime = [NSNumber numberWithUnsignedInt:mLocalStartTime];
-        params.localEndTime = [NSNumber numberWithUnsignedInt:mLocalEndTime];
-        params.operatingMode = [NSNumber numberWithUnsignedChar:mOperatingMode];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:mRequest.holidayIndex];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:mRequest.localStartTime];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:mRequest.localEndTime];
+        params.operatingMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.operatingMode)];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -22651,10 +22450,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::SetHolidaySchedule::Type mRequest;
-    uint8_t mHolidayIndex;
-    uint32_t mLocalStartTime;
-    uint32_t mLocalEndTime;
-    uint8_t mOperatingMode;
 };
 
 /*
@@ -22665,8 +22460,7 @@ public:
     DoorLockGetHolidaySchedule()
         : ClusterCommand("get-holiday-schedule")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("HolidayIndex", 0, UINT8_MAX, &mHolidayIndex);
+        AddArgument("HolidayIndex", 0, UINT8_MAX, &mRequest.holidayIndex);
         ClusterCommand::AddArguments();
     }
 
@@ -22680,7 +22474,7 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:mHolidayIndex];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:mRequest.holidayIndex];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -22704,7 +22498,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::GetHolidaySchedule::Type mRequest;
-    uint8_t mHolidayIndex;
 };
 
 /*
@@ -22715,8 +22508,7 @@ public:
     DoorLockClearHolidaySchedule()
         : ClusterCommand("clear-holiday-schedule")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("HolidayIndex", 0, UINT8_MAX, &mHolidayIndex);
+        AddArgument("HolidayIndex", 0, UINT8_MAX, &mRequest.holidayIndex);
         ClusterCommand::AddArguments();
     }
 
@@ -22730,7 +22522,7 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterClearHolidayScheduleParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:mHolidayIndex];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:mRequest.holidayIndex];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -22752,7 +22544,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::ClearHolidaySchedule::Type mRequest;
-    uint8_t mHolidayIndex;
 };
 
 /*
@@ -22763,9 +22554,8 @@ public:
     DoorLockSetUserType()
         : ClusterCommand("set-user-type")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("UserId", 0, UINT16_MAX, &mUserId);
-        AddArgument("UserType", 0, UINT8_MAX, &mUserType);
+        AddArgument("UserId", 0, UINT16_MAX, &mRequest.userId);
+        AddArgument("UserType", 0, UINT8_MAX, &mRequest.userType);
         ClusterCommand::AddArguments();
     }
 
@@ -22779,8 +22569,8 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterSetUserTypeParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.userId = [NSNumber numberWithUnsignedShort:mUserId];
-        params.userType = [NSNumber numberWithUnsignedChar:mUserType];
+        params.userId = [NSNumber numberWithUnsignedShort:mRequest.userId];
+        params.userType = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.userType)];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -22802,8 +22592,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::SetUserType::Type mRequest;
-    uint16_t mUserId;
-    uint8_t mUserType;
 };
 
 /*
@@ -22814,8 +22602,7 @@ public:
     DoorLockGetUserType()
         : ClusterCommand("get-user-type")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("UserId", 0, UINT16_MAX, &mUserId);
+        AddArgument("UserId", 0, UINT16_MAX, &mRequest.userId);
         ClusterCommand::AddArguments();
     }
 
@@ -22829,7 +22616,7 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterGetUserTypeParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.userId = [NSNumber numberWithUnsignedShort:mUserId];
+        params.userId = [NSNumber numberWithUnsignedShort:mRequest.userId];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -22853,7 +22640,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::GetUserType::Type mRequest;
-    uint16_t mUserId;
 };
 
 /*
@@ -22864,11 +22650,10 @@ public:
     DoorLockSetRFIDCode()
         : ClusterCommand("set-rfidcode")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("UserId", 0, UINT16_MAX, &mUserId);
-        AddArgument("UserStatus", 0, UINT8_MAX, &mUserStatus);
-        AddArgument("UserType", 0, UINT8_MAX, &mUserType);
-        AddArgument("RfidCode", &mRfidCode);
+        AddArgument("UserId", 0, UINT16_MAX, &mRequest.userId);
+        AddArgument("UserStatus", 0, UINT8_MAX, &mRequest.userStatus);
+        AddArgument("UserType", 0, UINT8_MAX, &mRequest.userType);
+        AddArgument("RfidCode", &mRequest.rfidCode);
         ClusterCommand::AddArguments();
     }
 
@@ -22882,10 +22667,18 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterSetRFIDCodeParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.userId = [NSNumber numberWithUnsignedShort:mUserId];
-        params.userStatus = [NSNumber numberWithUnsignedChar:mUserStatus];
-        params.userType = [NSNumber numberWithUnsignedChar:mUserType];
-        params.rfidCode = [[NSData alloc] initWithBytes:mRfidCode.data() length:mRfidCode.size()];
+        params.userId = [NSNumber numberWithUnsignedShort:mRequest.userId];
+        if (mRequest.userStatus.IsNull()) {
+            params.userStatus = nil;
+        } else {
+            params.userStatus = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.userStatus.Value())];
+        }
+        if (mRequest.userType.IsNull()) {
+            params.userType = nil;
+        } else {
+            params.userType = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.userType.Value())];
+        }
+        params.rfidCode = [NSData dataWithBytes:mRequest.rfidCode.data() length:mRequest.rfidCode.size()];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -22907,10 +22700,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::SetRFIDCode::Type mRequest;
-    uint16_t mUserId;
-    uint8_t mUserStatus;
-    uint8_t mUserType;
-    chip::ByteSpan mRfidCode;
 };
 
 /*
@@ -22921,8 +22710,7 @@ public:
     DoorLockGetRFIDCode()
         : ClusterCommand("get-rfidcode")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("UserId", 0, UINT16_MAX, &mUserId);
+        AddArgument("UserId", 0, UINT16_MAX, &mRequest.userId);
         ClusterCommand::AddArguments();
     }
 
@@ -22936,7 +22724,7 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterGetRFIDCodeParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.userId = [NSNumber numberWithUnsignedShort:mUserId];
+        params.userId = [NSNumber numberWithUnsignedShort:mRequest.userId];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -22960,7 +22748,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::GetRFIDCode::Type mRequest;
-    uint16_t mUserId;
 };
 
 /*
@@ -22971,8 +22758,7 @@ public:
     DoorLockClearRFIDCode()
         : ClusterCommand("clear-rfidcode")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("RfidSlotIndex", 0, UINT16_MAX, &mRfidSlotIndex);
+        AddArgument("RfidSlotIndex", 0, UINT16_MAX, &mRequest.rfidSlotIndex);
         ClusterCommand::AddArguments();
     }
 
@@ -22986,7 +22772,7 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterClearRFIDCodeParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.rfidSlotIndex = [NSNumber numberWithUnsignedShort:mRfidSlotIndex];
+        params.rfidSlotIndex = [NSNumber numberWithUnsignedShort:mRequest.rfidSlotIndex];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -23008,7 +22794,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::ClearRFIDCode::Type mRequest;
-    uint16_t mRfidSlotIndex;
 };
 
 /*
@@ -23019,7 +22804,6 @@ public:
     DoorLockClearAllRFIDCodes()
         : ClusterCommand("clear-all-rfidcodes")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -23052,7 +22836,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::DoorLock::Commands::ClearAllRFIDCodes::Type mRequest;
 };
 
 /*
@@ -23063,14 +22846,13 @@ public:
     DoorLockSetUser()
         : ClusterCommand("set-user")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("OperationType", 0, UINT8_MAX, &mOperationType);
-        AddArgument("UserIndex", 0, UINT16_MAX, &mUserIndex);
-        AddArgument("UserName", &mUserName);
-        AddArgument("UserUniqueId", 0, UINT32_MAX, &mUserUniqueId);
-        AddArgument("UserStatus", 0, UINT8_MAX, &mUserStatus);
-        AddArgument("UserType", 0, UINT8_MAX, &mUserType);
-        AddArgument("CredentialRule", 0, UINT8_MAX, &mCredentialRule);
+        AddArgument("OperationType", 0, UINT8_MAX, &mRequest.operationType);
+        AddArgument("UserIndex", 0, UINT16_MAX, &mRequest.userIndex);
+        AddArgument("UserName", &mRequest.userName);
+        AddArgument("UserUniqueId", 0, UINT32_MAX, &mRequest.userUniqueId);
+        AddArgument("UserStatus", 0, UINT8_MAX, &mRequest.userStatus);
+        AddArgument("UserType", 0, UINT8_MAX, &mRequest.userType);
+        AddArgument("CredentialRule", 0, UINT8_MAX, &mRequest.credentialRule);
         ClusterCommand::AddArguments();
     }
 
@@ -23084,13 +22866,35 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.operationType = [NSNumber numberWithUnsignedChar:mOperationType];
-        params.userIndex = [NSNumber numberWithUnsignedShort:mUserIndex];
-        params.userName = [[NSString alloc] initWithBytes:mUserName.data() length:mUserName.size() encoding:NSUTF8StringEncoding];
-        params.userUniqueId = [NSNumber numberWithUnsignedInt:mUserUniqueId];
-        params.userStatus = [NSNumber numberWithUnsignedChar:mUserStatus];
-        params.userType = [NSNumber numberWithUnsignedChar:mUserType];
-        params.credentialRule = [NSNumber numberWithUnsignedChar:mCredentialRule];
+        params.operationType = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.operationType)];
+        params.userIndex = [NSNumber numberWithUnsignedShort:mRequest.userIndex];
+        if (mRequest.userName.IsNull()) {
+            params.userName = nil;
+        } else {
+            params.userName = [[NSString alloc] initWithBytes:mRequest.userName.Value().data()
+                                                       length:mRequest.userName.Value().size()
+                                                     encoding:NSUTF8StringEncoding];
+        }
+        if (mRequest.userUniqueId.IsNull()) {
+            params.userUniqueId = nil;
+        } else {
+            params.userUniqueId = [NSNumber numberWithUnsignedInt:mRequest.userUniqueId.Value()];
+        }
+        if (mRequest.userStatus.IsNull()) {
+            params.userStatus = nil;
+        } else {
+            params.userStatus = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.userStatus.Value())];
+        }
+        if (mRequest.userType.IsNull()) {
+            params.userType = nil;
+        } else {
+            params.userType = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.userType.Value())];
+        }
+        if (mRequest.credentialRule.IsNull()) {
+            params.credentialRule = nil;
+        } else {
+            params.credentialRule = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.credentialRule.Value())];
+        }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -23112,13 +22916,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::SetUser::Type mRequest;
-    uint8_t mOperationType;
-    uint16_t mUserIndex;
-    chip::ByteSpan mUserName;
-    uint32_t mUserUniqueId;
-    uint8_t mUserStatus;
-    uint8_t mUserType;
-    uint8_t mCredentialRule;
 };
 
 /*
@@ -23129,8 +22926,7 @@ public:
     DoorLockGetUser()
         : ClusterCommand("get-user")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("UserIndex", 0, UINT16_MAX, &mUserIndex);
+        AddArgument("UserIndex", 0, UINT16_MAX, &mRequest.userIndex);
         ClusterCommand::AddArguments();
     }
 
@@ -23144,7 +22940,7 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterGetUserParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.userIndex = [NSNumber numberWithUnsignedShort:mUserIndex];
+        params.userIndex = [NSNumber numberWithUnsignedShort:mRequest.userIndex];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -23167,7 +22963,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::GetUser::Type mRequest;
-    uint16_t mUserIndex;
 };
 
 /*
@@ -23178,8 +22973,7 @@ public:
     DoorLockClearUser()
         : ClusterCommand("clear-user")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("UserIndex", 0, UINT16_MAX, &mUserIndex);
+        AddArgument("UserIndex", 0, UINT16_MAX, &mRequest.userIndex);
         ClusterCommand::AddArguments();
     }
 
@@ -23193,7 +22987,7 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterClearUserParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.userIndex = [NSNumber numberWithUnsignedShort:mUserIndex];
+        params.userIndex = [NSNumber numberWithUnsignedShort:mRequest.userIndex];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -23215,7 +23009,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::ClearUser::Type mRequest;
-    uint16_t mUserIndex;
 };
 
 /*
@@ -23227,13 +23020,12 @@ public:
         : ClusterCommand("set-credential")
         , mComplex_Credential(&mRequest.credential)
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("OperationType", 0, UINT8_MAX, &mOperationType);
+        AddArgument("OperationType", 0, UINT8_MAX, &mRequest.operationType);
         AddArgument("Credential", &mComplex_Credential);
-        AddArgument("CredentialData", &mCredentialData);
-        AddArgument("UserIndex", 0, UINT16_MAX, &mUserIndex);
-        AddArgument("UserStatus", 0, UINT8_MAX, &mUserStatus);
-        AddArgument("UserType", 0, UINT8_MAX, &mUserType);
+        AddArgument("CredentialData", &mRequest.credentialData);
+        AddArgument("UserIndex", 0, UINT16_MAX, &mRequest.userIndex);
+        AddArgument("UserStatus", 0, UINT8_MAX, &mRequest.userStatus);
+        AddArgument("UserType", 0, UINT8_MAX, &mRequest.userType);
         ClusterCommand::AddArguments();
     }
 
@@ -23247,15 +23039,27 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.operationType = [NSNumber numberWithUnsignedChar:mOperationType];
+        params.operationType = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.operationType)];
         params.credential = [CHIPDoorLockClusterDlCredential new];
         params.credential.credentialType =
             [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.credential.credentialType)];
         params.credential.credentialIndex = [NSNumber numberWithUnsignedShort:mRequest.credential.credentialIndex];
-        params.credentialData = [[NSData alloc] initWithBytes:mCredentialData.data() length:mCredentialData.size()];
-        params.userIndex = [NSNumber numberWithUnsignedShort:mUserIndex];
-        params.userStatus = [NSNumber numberWithUnsignedChar:mUserStatus];
-        params.userType = [NSNumber numberWithUnsignedChar:mUserType];
+        params.credentialData = [NSData dataWithBytes:mRequest.credentialData.data() length:mRequest.credentialData.size()];
+        if (mRequest.userIndex.IsNull()) {
+            params.userIndex = nil;
+        } else {
+            params.userIndex = [NSNumber numberWithUnsignedShort:mRequest.userIndex.Value()];
+        }
+        if (mRequest.userStatus.IsNull()) {
+            params.userStatus = nil;
+        } else {
+            params.userStatus = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.userStatus.Value())];
+        }
+        if (mRequest.userType.IsNull()) {
+            params.userType = nil;
+        } else {
+            params.userType = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.userType.Value())];
+        }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -23279,12 +23083,7 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::SetCredential::Type mRequest;
-    uint8_t mOperationType;
     TypedComplexArgument<chip::app::Clusters::DoorLock::Structs::DlCredential::Type> mComplex_Credential;
-    chip::ByteSpan mCredentialData;
-    uint16_t mUserIndex;
-    uint8_t mUserStatus;
-    uint8_t mUserType;
 };
 
 /*
@@ -23296,7 +23095,6 @@ public:
         : ClusterCommand("get-credential-status")
         , mComplex_Credential(&mRequest.credential)
     {
-        (void) mRequest; // Might not be used if we have no complex args
         AddArgument("Credential", &mComplex_Credential);
         ClusterCommand::AddArguments();
     }
@@ -23350,7 +23148,6 @@ public:
         : ClusterCommand("clear-credential")
         , mComplex_Credential(&mRequest.credential)
     {
-        (void) mRequest; // Might not be used if we have no complex args
         AddArgument("Credential", &mComplex_Credential);
         ClusterCommand::AddArguments();
     }
@@ -23406,13 +23203,12 @@ public:
     DoorLockOperatingEventNotification()
         : ClusterCommand("operating-event-notification")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("OperationEventSource", 0, UINT8_MAX, &mOperationEventSource);
-        AddArgument("OperationEventCode", 0, UINT8_MAX, &mOperationEventCode);
-        AddArgument("UserId", 0, UINT16_MAX, &mUserId);
-        AddArgument("Pin", &mPin);
-        AddArgument("LocalTime", 0, UINT32_MAX, &mLocalTime);
-        AddArgument("Data", &mData);
+        AddArgument("OperationEventSource", 0, UINT8_MAX, &mRequest.operationEventSource);
+        AddArgument("OperationEventCode", 0, UINT8_MAX, &mRequest.operationEventCode);
+        AddArgument("UserId", 0, UINT16_MAX, &mRequest.userId);
+        AddArgument("Pin", &mRequest.pin);
+        AddArgument("LocalTime", 0, UINT32_MAX, &mRequest.localTime);
+        AddArgument("Data", &mRequest.data);
         ClusterCommand::AddArguments();
     }
 
@@ -23426,15 +23222,17 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterOperatingEventNotificationParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.operationEventSource = [NSNumber numberWithUnsignedChar:mOperationEventSource];
-        params.operationEventCode = [NSNumber numberWithUnsignedChar:mOperationEventCode];
-        params.userId = [NSNumber numberWithUnsignedShort:mUserId];
-        params.pin = [[NSData alloc] initWithBytes:mPin.data() length:mPin.size()];
-        params.localTime = [NSNumber numberWithUnsignedInt:mLocalTime];
-        if (mData.HasValue()) {
-            params.data = [[NSString alloc] initWithBytes:mData.Value().data()
-                                                   length:mData.Value().size()
+        params.operationEventSource = [NSNumber numberWithUnsignedChar:mRequest.operationEventSource];
+        params.operationEventCode = [NSNumber numberWithUnsignedChar:mRequest.operationEventCode];
+        params.userId = [NSNumber numberWithUnsignedShort:mRequest.userId];
+        params.pin = [NSData dataWithBytes:mRequest.pin.data() length:mRequest.pin.size()];
+        params.localTime = [NSNumber numberWithUnsignedInt:mRequest.localTime];
+        if (mRequest.data.HasValue()) {
+            params.data = [[NSString alloc] initWithBytes:mRequest.data.Value().data()
+                                                   length:mRequest.data.Value().size()
                                                  encoding:NSUTF8StringEncoding];
+        } else {
+            params.data = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -23457,12 +23255,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::OperatingEventNotification::Type mRequest;
-    uint8_t mOperationEventSource;
-    uint8_t mOperationEventCode;
-    uint16_t mUserId;
-    chip::ByteSpan mPin;
-    uint32_t mLocalTime;
-    chip::Optional<chip::ByteSpan> mData;
 };
 
 /*
@@ -23473,15 +23265,14 @@ public:
     DoorLockProgrammingEventNotification()
         : ClusterCommand("programming-event-notification")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("ProgramEventSource", 0, UINT8_MAX, &mProgramEventSource);
-        AddArgument("ProgramEventCode", 0, UINT8_MAX, &mProgramEventCode);
-        AddArgument("UserId", 0, UINT16_MAX, &mUserId);
-        AddArgument("Pin", &mPin);
-        AddArgument("UserType", 0, UINT8_MAX, &mUserType);
-        AddArgument("UserStatus", 0, UINT8_MAX, &mUserStatus);
-        AddArgument("LocalTime", 0, UINT32_MAX, &mLocalTime);
-        AddArgument("Data", &mData);
+        AddArgument("ProgramEventSource", 0, UINT8_MAX, &mRequest.programEventSource);
+        AddArgument("ProgramEventCode", 0, UINT8_MAX, &mRequest.programEventCode);
+        AddArgument("UserId", 0, UINT16_MAX, &mRequest.userId);
+        AddArgument("Pin", &mRequest.pin);
+        AddArgument("UserType", 0, UINT8_MAX, &mRequest.userType);
+        AddArgument("UserStatus", 0, UINT8_MAX, &mRequest.userStatus);
+        AddArgument("LocalTime", 0, UINT32_MAX, &mRequest.localTime);
+        AddArgument("Data", &mRequest.data);
         ClusterCommand::AddArguments();
     }
 
@@ -23495,17 +23286,19 @@ public:
         __auto_type * params = [[CHIPDoorLockClusterProgrammingEventNotificationParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.programEventSource = [NSNumber numberWithUnsignedChar:mProgramEventSource];
-        params.programEventCode = [NSNumber numberWithUnsignedChar:mProgramEventCode];
-        params.userId = [NSNumber numberWithUnsignedShort:mUserId];
-        params.pin = [[NSData alloc] initWithBytes:mPin.data() length:mPin.size()];
-        params.userType = [NSNumber numberWithUnsignedChar:mUserType];
-        params.userStatus = [NSNumber numberWithUnsignedChar:mUserStatus];
-        params.localTime = [NSNumber numberWithUnsignedInt:mLocalTime];
-        if (mData.HasValue()) {
-            params.data = [[NSString alloc] initWithBytes:mData.Value().data()
-                                                   length:mData.Value().size()
+        params.programEventSource = [NSNumber numberWithUnsignedChar:mRequest.programEventSource];
+        params.programEventCode = [NSNumber numberWithUnsignedChar:mRequest.programEventCode];
+        params.userId = [NSNumber numberWithUnsignedShort:mRequest.userId];
+        params.pin = [NSData dataWithBytes:mRequest.pin.data() length:mRequest.pin.size()];
+        params.userType = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.userType)];
+        params.userStatus = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.userStatus)];
+        params.localTime = [NSNumber numberWithUnsignedInt:mRequest.localTime];
+        if (mRequest.data.HasValue()) {
+            params.data = [[NSString alloc] initWithBytes:mRequest.data.Value().data()
+                                                   length:mRequest.data.Value().size()
                                                  encoding:NSUTF8StringEncoding];
+        } else {
+            params.data = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -23528,14 +23321,6 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::ProgrammingEventNotification::Type mRequest;
-    uint8_t mProgramEventSource;
-    uint8_t mProgramEventCode;
-    uint16_t mUserId;
-    chip::ByteSpan mPin;
-    uint8_t mUserType;
-    uint8_t mUserStatus;
-    uint32_t mLocalTime;
-    chip::Optional<chip::ByteSpan> mData;
 };
 
 /*
@@ -28371,7 +28156,6 @@ public:
     ElectricalMeasurementGetProfileInfoCommand()
         : ClusterCommand("get-profile-info-command")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -28406,7 +28190,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::ElectricalMeasurement::Commands::GetProfileInfoCommand::Type mRequest;
 };
 
 /*
@@ -28417,10 +28200,9 @@ public:
     ElectricalMeasurementGetMeasurementProfileCommand()
         : ClusterCommand("get-measurement-profile-command")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("AttributeId", 0, UINT16_MAX, &mAttributeId);
-        AddArgument("StartTime", 0, UINT32_MAX, &mStartTime);
-        AddArgument("NumberOfIntervals", 0, UINT8_MAX, &mNumberOfIntervals);
+        AddArgument("AttributeId", 0, UINT16_MAX, &mRequest.attributeId);
+        AddArgument("StartTime", 0, UINT32_MAX, &mRequest.startTime);
+        AddArgument("NumberOfIntervals", 0, UINT8_MAX, &mRequest.numberOfIntervals);
         ClusterCommand::AddArguments();
     }
 
@@ -28436,9 +28218,9 @@ public:
         __auto_type * params = [[CHIPElectricalMeasurementClusterGetMeasurementProfileCommandParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.attributeId = [NSNumber numberWithUnsignedShort:mAttributeId];
-        params.startTime = [NSNumber numberWithUnsignedInt:mStartTime];
-        params.numberOfIntervals = [NSNumber numberWithUnsignedChar:mNumberOfIntervals];
+        params.attributeId = [NSNumber numberWithUnsignedShort:mRequest.attributeId];
+        params.startTime = [NSNumber numberWithUnsignedInt:mRequest.startTime];
+        params.numberOfIntervals = [NSNumber numberWithUnsignedChar:mRequest.numberOfIntervals];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -28460,9 +28242,6 @@ public:
 
 private:
     chip::app::Clusters::ElectricalMeasurement::Commands::GetMeasurementProfileCommand::Type mRequest;
-    uint16_t mAttributeId;
-    uint32_t mStartTime;
-    uint8_t mNumberOfIntervals;
 };
 
 /*
@@ -38943,7 +38722,6 @@ public:
     EthernetNetworkDiagnosticsResetCounts()
         : ClusterCommand("reset-counts")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -38978,7 +38756,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::EthernetNetworkDiagnostics::Commands::ResetCounts::Type mRequest;
 };
 
 /*
@@ -42542,9 +42319,8 @@ public:
     GeneralCommissioningArmFailSafe()
         : ClusterCommand("arm-fail-safe")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("ExpiryLengthSeconds", 0, UINT16_MAX, &mExpiryLengthSeconds);
-        AddArgument("Breadcrumb", 0, UINT64_MAX, &mBreadcrumb);
+        AddArgument("ExpiryLengthSeconds", 0, UINT16_MAX, &mRequest.expiryLengthSeconds);
+        AddArgument("Breadcrumb", 0, UINT64_MAX, &mRequest.breadcrumb);
         ClusterCommand::AddArguments();
     }
 
@@ -42560,8 +42336,8 @@ public:
         __auto_type * params = [[CHIPGeneralCommissioningClusterArmFailSafeParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.expiryLengthSeconds = [NSNumber numberWithUnsignedShort:mExpiryLengthSeconds];
-        params.breadcrumb = [NSNumber numberWithUnsignedLongLong:mBreadcrumb];
+        params.expiryLengthSeconds = [NSNumber numberWithUnsignedShort:mRequest.expiryLengthSeconds];
+        params.breadcrumb = [NSNumber numberWithUnsignedLongLong:mRequest.breadcrumb];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -42585,8 +42361,6 @@ public:
 
 private:
     chip::app::Clusters::GeneralCommissioning::Commands::ArmFailSafe::Type mRequest;
-    uint16_t mExpiryLengthSeconds;
-    uint64_t mBreadcrumb;
 };
 
 /*
@@ -42597,10 +42371,9 @@ public:
     GeneralCommissioningSetRegulatoryConfig()
         : ClusterCommand("set-regulatory-config")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("NewRegulatoryConfig", 0, UINT8_MAX, &mNewRegulatoryConfig);
-        AddArgument("CountryCode", &mCountryCode);
-        AddArgument("Breadcrumb", 0, UINT64_MAX, &mBreadcrumb);
+        AddArgument("NewRegulatoryConfig", 0, UINT8_MAX, &mRequest.newRegulatoryConfig);
+        AddArgument("CountryCode", &mRequest.countryCode);
+        AddArgument("Breadcrumb", 0, UINT64_MAX, &mRequest.breadcrumb);
         ClusterCommand::AddArguments();
     }
 
@@ -42616,11 +42389,11 @@ public:
         __auto_type * params = [[CHIPGeneralCommissioningClusterSetRegulatoryConfigParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.newRegulatoryConfig = [NSNumber numberWithUnsignedChar:mNewRegulatoryConfig];
-        params.countryCode = [[NSString alloc] initWithBytes:mCountryCode.data()
-                                                      length:mCountryCode.size()
+        params.newRegulatoryConfig = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.newRegulatoryConfig)];
+        params.countryCode = [[NSString alloc] initWithBytes:mRequest.countryCode.data()
+                                                      length:mRequest.countryCode.size()
                                                     encoding:NSUTF8StringEncoding];
-        params.breadcrumb = [NSNumber numberWithUnsignedLongLong:mBreadcrumb];
+        params.breadcrumb = [NSNumber numberWithUnsignedLongLong:mRequest.breadcrumb];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -42645,9 +42418,6 @@ public:
 
 private:
     chip::app::Clusters::GeneralCommissioning::Commands::SetRegulatoryConfig::Type mRequest;
-    uint8_t mNewRegulatoryConfig;
-    chip::ByteSpan mCountryCode;
-    uint64_t mBreadcrumb;
 };
 
 /*
@@ -42658,7 +42428,6 @@ public:
     GeneralCommissioningCommissioningComplete()
         : ClusterCommand("commissioning-complete")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -42695,7 +42464,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::GeneralCommissioning::Commands::CommissioningComplete::Type mRequest;
 };
 
 /*
@@ -44524,7 +44292,6 @@ public:
         : ClusterCommand("key-set-write")
         , mComplex_GroupKeySet(&mRequest.groupKeySet)
     {
-        (void) mRequest; // Might not be used if we have no complex args
         AddArgument("GroupKeySet", &mComplex_GroupKeySet);
         ClusterCommand::AddArguments();
     }
@@ -44610,8 +44377,7 @@ public:
     GroupKeyManagementKeySetRead()
         : ClusterCommand("key-set-read")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("GroupKeySetID", 0, UINT16_MAX, &mGroupKeySetID);
+        AddArgument("GroupKeySetID", 0, UINT16_MAX, &mRequest.groupKeySetID);
         ClusterCommand::AddArguments();
     }
 
@@ -44627,7 +44393,7 @@ public:
         __auto_type * params = [[CHIPGroupKeyManagementClusterKeySetReadParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupKeySetID = [NSNumber numberWithUnsignedShort:mGroupKeySetID];
+        params.groupKeySetID = [NSNumber numberWithUnsignedShort:mRequest.groupKeySetID];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -44651,7 +44417,6 @@ public:
 
 private:
     chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type mRequest;
-    uint16_t mGroupKeySetID;
 };
 
 /*
@@ -44662,8 +44427,7 @@ public:
     GroupKeyManagementKeySetRemove()
         : ClusterCommand("key-set-remove")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("GroupKeySetID", 0, UINT16_MAX, &mGroupKeySetID);
+        AddArgument("GroupKeySetID", 0, UINT16_MAX, &mRequest.groupKeySetID);
         ClusterCommand::AddArguments();
     }
 
@@ -44679,7 +44443,7 @@ public:
         __auto_type * params = [[CHIPGroupKeyManagementClusterKeySetRemoveParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupKeySetID = [NSNumber numberWithUnsignedShort:mGroupKeySetID];
+        params.groupKeySetID = [NSNumber numberWithUnsignedShort:mRequest.groupKeySetID];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -44701,7 +44465,6 @@ public:
 
 private:
     chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type mRequest;
-    uint16_t mGroupKeySetID;
 };
 
 /*
@@ -44713,7 +44476,6 @@ public:
         : ClusterCommand("key-set-read-all-indices")
         , mComplex_GroupKeySetIDs(&mRequest.groupKeySetIDs)
     {
-        (void) mRequest; // Might not be used if we have no complex args
         AddArgument("GroupKeySetIDs", &mComplex_GroupKeySetIDs);
         ClusterCommand::AddArguments();
     }
@@ -45534,9 +45296,8 @@ public:
     GroupsAddGroup()
         : ClusterCommand("add-group")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("GroupId", 0, UINT16_MAX, &mGroupId);
-        AddArgument("GroupName", &mGroupName);
+        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
+        AddArgument("GroupName", &mRequest.groupName);
         ClusterCommand::AddArguments();
     }
 
@@ -45550,9 +45311,9 @@ public:
         __auto_type * params = [[CHIPGroupsClusterAddGroupParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mGroupId];
-        params.groupName = [[NSString alloc] initWithBytes:mGroupName.data()
-                                                    length:mGroupName.size()
+        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
+        params.groupName = [[NSString alloc] initWithBytes:mRequest.groupName.data()
+                                                    length:mRequest.groupName.size()
                                                   encoding:NSUTF8StringEncoding];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -45576,8 +45337,6 @@ public:
 
 private:
     chip::app::Clusters::Groups::Commands::AddGroup::Type mRequest;
-    chip::GroupId mGroupId;
-    chip::ByteSpan mGroupName;
 };
 
 /*
@@ -45588,8 +45347,7 @@ public:
     GroupsViewGroup()
         : ClusterCommand("view-group")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("GroupId", 0, UINT16_MAX, &mGroupId);
+        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
         ClusterCommand::AddArguments();
     }
 
@@ -45603,7 +45361,7 @@ public:
         __auto_type * params = [[CHIPGroupsClusterViewGroupParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mGroupId];
+        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -45626,7 +45384,6 @@ public:
 
 private:
     chip::app::Clusters::Groups::Commands::ViewGroup::Type mRequest;
-    chip::GroupId mGroupId;
 };
 
 /*
@@ -45638,7 +45395,6 @@ public:
         : ClusterCommand("get-group-membership")
         , mComplex_GroupList(&mRequest.groupList)
     {
-        (void) mRequest; // Might not be used if we have no complex args
         AddArgument("GroupList", &mComplex_GroupList);
         ClusterCommand::AddArguments();
     }
@@ -45696,8 +45452,7 @@ public:
     GroupsRemoveGroup()
         : ClusterCommand("remove-group")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("GroupId", 0, UINT16_MAX, &mGroupId);
+        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
         ClusterCommand::AddArguments();
     }
 
@@ -45711,7 +45466,7 @@ public:
         __auto_type * params = [[CHIPGroupsClusterRemoveGroupParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mGroupId];
+        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -45735,7 +45490,6 @@ public:
 
 private:
     chip::app::Clusters::Groups::Commands::RemoveGroup::Type mRequest;
-    chip::GroupId mGroupId;
 };
 
 /*
@@ -45746,7 +45500,6 @@ public:
     GroupsRemoveAllGroups()
         : ClusterCommand("remove-all-groups")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -45779,7 +45532,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::Groups::Commands::RemoveAllGroups::Type mRequest;
 };
 
 /*
@@ -45790,9 +45542,8 @@ public:
     GroupsAddGroupIfIdentifying()
         : ClusterCommand("add-group-if-identifying")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("GroupId", 0, UINT16_MAX, &mGroupId);
-        AddArgument("GroupName", &mGroupName);
+        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
+        AddArgument("GroupName", &mRequest.groupName);
         ClusterCommand::AddArguments();
     }
 
@@ -45806,9 +45557,9 @@ public:
         __auto_type * params = [[CHIPGroupsClusterAddGroupIfIdentifyingParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mGroupId];
-        params.groupName = [[NSString alloc] initWithBytes:mGroupName.data()
-                                                    length:mGroupName.size()
+        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
+        params.groupName = [[NSString alloc] initWithBytes:mRequest.groupName.data()
+                                                    length:mRequest.groupName.size()
                                                   encoding:NSUTF8StringEncoding];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -45831,8 +45582,6 @@ public:
 
 private:
     chip::app::Clusters::Groups::Commands::AddGroupIfIdentifying::Type mRequest;
-    chip::GroupId mGroupId;
-    chip::ByteSpan mGroupName;
 };
 
 /*
@@ -46283,8 +46032,7 @@ public:
     IdentifyIdentify()
         : ClusterCommand("identify")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("IdentifyTime", 0, UINT16_MAX, &mIdentifyTime);
+        AddArgument("IdentifyTime", 0, UINT16_MAX, &mRequest.identifyTime);
         ClusterCommand::AddArguments();
     }
 
@@ -46298,7 +46046,7 @@ public:
         __auto_type * params = [[CHIPIdentifyClusterIdentifyParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.identifyTime = [NSNumber numberWithUnsignedShort:mIdentifyTime];
+        params.identifyTime = [NSNumber numberWithUnsignedShort:mRequest.identifyTime];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -46320,7 +46068,6 @@ public:
 
 private:
     chip::app::Clusters::Identify::Commands::Identify::Type mRequest;
-    uint16_t mIdentifyTime;
 };
 
 /*
@@ -46331,7 +46078,6 @@ public:
     IdentifyIdentifyQuery()
         : ClusterCommand("identify-query")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -46366,7 +46112,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::Identify::Commands::IdentifyQuery::Type mRequest;
 };
 
 /*
@@ -46377,9 +46122,8 @@ public:
     IdentifyTriggerEffect()
         : ClusterCommand("trigger-effect")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("EffectIdentifier", 0, UINT8_MAX, &mEffectIdentifier);
-        AddArgument("EffectVariant", 0, UINT8_MAX, &mEffectVariant);
+        AddArgument("EffectIdentifier", 0, UINT8_MAX, &mRequest.effectIdentifier);
+        AddArgument("EffectVariant", 0, UINT8_MAX, &mRequest.effectVariant);
         ClusterCommand::AddArguments();
     }
 
@@ -46393,8 +46137,8 @@ public:
         __auto_type * params = [[CHIPIdentifyClusterTriggerEffectParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.effectIdentifier = [NSNumber numberWithUnsignedChar:mEffectIdentifier];
-        params.effectVariant = [NSNumber numberWithUnsignedChar:mEffectVariant];
+        params.effectIdentifier = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.effectIdentifier)];
+        params.effectVariant = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.effectVariant)];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -46416,8 +46160,6 @@ public:
 
 private:
     chip::app::Clusters::Identify::Commands::TriggerEffect::Type mRequest;
-    uint8_t mEffectIdentifier;
-    uint8_t mEffectVariant;
 };
 
 /*
@@ -47744,8 +47486,7 @@ public:
     KeypadInputSendKey()
         : ClusterCommand("send-key")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("KeyCode", 0, UINT8_MAX, &mKeyCode);
+        AddArgument("KeyCode", 0, UINT8_MAX, &mRequest.keyCode);
         ClusterCommand::AddArguments();
     }
 
@@ -47759,7 +47500,7 @@ public:
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.keyCode = [NSNumber numberWithUnsignedChar:mKeyCode];
+        params.keyCode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.keyCode)];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -47783,7 +47524,6 @@ public:
 
 private:
     chip::app::Clusters::KeypadInput::Commands::SendKey::Type mRequest;
-    uint8_t mKeyCode;
 };
 
 /*
@@ -48183,11 +47923,10 @@ public:
     LevelControlMoveToLevel()
         : ClusterCommand("move-to-level")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Level", 0, UINT8_MAX, &mLevel);
-        AddArgument("TransitionTime", 0, UINT16_MAX, &mTransitionTime);
-        AddArgument("OptionMask", 0, UINT8_MAX, &mOptionMask);
-        AddArgument("OptionOverride", 0, UINT8_MAX, &mOptionOverride);
+        AddArgument("Level", 0, UINT8_MAX, &mRequest.level);
+        AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
+        AddArgument("OptionMask", 0, UINT8_MAX, &mRequest.optionMask);
+        AddArgument("OptionOverride", 0, UINT8_MAX, &mRequest.optionOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -48201,10 +47940,10 @@ public:
         __auto_type * params = [[CHIPLevelControlClusterMoveToLevelParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.level = [NSNumber numberWithUnsignedChar:mLevel];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mTransitionTime];
-        params.optionMask = [NSNumber numberWithUnsignedChar:mOptionMask];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:mOptionOverride];
+        params.level = [NSNumber numberWithUnsignedChar:mRequest.level];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        params.optionMask = [NSNumber numberWithUnsignedChar:mRequest.optionMask];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:mRequest.optionOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -48226,10 +47965,6 @@ public:
 
 private:
     chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type mRequest;
-    uint8_t mLevel;
-    uint16_t mTransitionTime;
-    uint8_t mOptionMask;
-    uint8_t mOptionOverride;
 };
 
 /*
@@ -48240,11 +47975,10 @@ public:
     LevelControlMove()
         : ClusterCommand("move")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("MoveMode", 0, UINT8_MAX, &mMoveMode);
-        AddArgument("Rate", 0, UINT8_MAX, &mRate);
-        AddArgument("OptionMask", 0, UINT8_MAX, &mOptionMask);
-        AddArgument("OptionOverride", 0, UINT8_MAX, &mOptionOverride);
+        AddArgument("MoveMode", 0, UINT8_MAX, &mRequest.moveMode);
+        AddArgument("Rate", 0, UINT8_MAX, &mRequest.rate);
+        AddArgument("OptionMask", 0, UINT8_MAX, &mRequest.optionMask);
+        AddArgument("OptionOverride", 0, UINT8_MAX, &mRequest.optionOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -48258,10 +47992,10 @@ public:
         __auto_type * params = [[CHIPLevelControlClusterMoveParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.moveMode = [NSNumber numberWithUnsignedChar:mMoveMode];
-        params.rate = [NSNumber numberWithUnsignedChar:mRate];
-        params.optionMask = [NSNumber numberWithUnsignedChar:mOptionMask];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:mOptionOverride];
+        params.moveMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.moveMode)];
+        params.rate = [NSNumber numberWithUnsignedChar:mRequest.rate];
+        params.optionMask = [NSNumber numberWithUnsignedChar:mRequest.optionMask];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:mRequest.optionOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -48283,10 +48017,6 @@ public:
 
 private:
     chip::app::Clusters::LevelControl::Commands::Move::Type mRequest;
-    uint8_t mMoveMode;
-    uint8_t mRate;
-    uint8_t mOptionMask;
-    uint8_t mOptionOverride;
 };
 
 /*
@@ -48297,12 +48027,11 @@ public:
     LevelControlStep()
         : ClusterCommand("step")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("StepMode", 0, UINT8_MAX, &mStepMode);
-        AddArgument("StepSize", 0, UINT8_MAX, &mStepSize);
-        AddArgument("TransitionTime", 0, UINT16_MAX, &mTransitionTime);
-        AddArgument("OptionMask", 0, UINT8_MAX, &mOptionMask);
-        AddArgument("OptionOverride", 0, UINT8_MAX, &mOptionOverride);
+        AddArgument("StepMode", 0, UINT8_MAX, &mRequest.stepMode);
+        AddArgument("StepSize", 0, UINT8_MAX, &mRequest.stepSize);
+        AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
+        AddArgument("OptionMask", 0, UINT8_MAX, &mRequest.optionMask);
+        AddArgument("OptionOverride", 0, UINT8_MAX, &mRequest.optionOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -48316,11 +48045,11 @@ public:
         __auto_type * params = [[CHIPLevelControlClusterStepParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.stepMode = [NSNumber numberWithUnsignedChar:mStepMode];
-        params.stepSize = [NSNumber numberWithUnsignedChar:mStepSize];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mTransitionTime];
-        params.optionMask = [NSNumber numberWithUnsignedChar:mOptionMask];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:mOptionOverride];
+        params.stepMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.stepMode)];
+        params.stepSize = [NSNumber numberWithUnsignedChar:mRequest.stepSize];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        params.optionMask = [NSNumber numberWithUnsignedChar:mRequest.optionMask];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:mRequest.optionOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -48342,11 +48071,6 @@ public:
 
 private:
     chip::app::Clusters::LevelControl::Commands::Step::Type mRequest;
-    uint8_t mStepMode;
-    uint8_t mStepSize;
-    uint16_t mTransitionTime;
-    uint8_t mOptionMask;
-    uint8_t mOptionOverride;
 };
 
 /*
@@ -48357,9 +48081,8 @@ public:
     LevelControlStop()
         : ClusterCommand("stop")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("OptionMask", 0, UINT8_MAX, &mOptionMask);
-        AddArgument("OptionOverride", 0, UINT8_MAX, &mOptionOverride);
+        AddArgument("OptionMask", 0, UINT8_MAX, &mRequest.optionMask);
+        AddArgument("OptionOverride", 0, UINT8_MAX, &mRequest.optionOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -48373,8 +48096,8 @@ public:
         __auto_type * params = [[CHIPLevelControlClusterStopParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.optionMask = [NSNumber numberWithUnsignedChar:mOptionMask];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:mOptionOverride];
+        params.optionMask = [NSNumber numberWithUnsignedChar:mRequest.optionMask];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:mRequest.optionOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -48396,8 +48119,6 @@ public:
 
 private:
     chip::app::Clusters::LevelControl::Commands::Stop::Type mRequest;
-    uint8_t mOptionMask;
-    uint8_t mOptionOverride;
 };
 
 /*
@@ -48408,9 +48129,8 @@ public:
     LevelControlMoveToLevelWithOnOff()
         : ClusterCommand("move-to-level-with-on-off")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Level", 0, UINT8_MAX, &mLevel);
-        AddArgument("TransitionTime", 0, UINT16_MAX, &mTransitionTime);
+        AddArgument("Level", 0, UINT8_MAX, &mRequest.level);
+        AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
         ClusterCommand::AddArguments();
     }
 
@@ -48424,8 +48144,8 @@ public:
         __auto_type * params = [[CHIPLevelControlClusterMoveToLevelWithOnOffParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.level = [NSNumber numberWithUnsignedChar:mLevel];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mTransitionTime];
+        params.level = [NSNumber numberWithUnsignedChar:mRequest.level];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -48447,8 +48167,6 @@ public:
 
 private:
     chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type mRequest;
-    uint8_t mLevel;
-    uint16_t mTransitionTime;
 };
 
 /*
@@ -48459,9 +48177,8 @@ public:
     LevelControlMoveWithOnOff()
         : ClusterCommand("move-with-on-off")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("MoveMode", 0, UINT8_MAX, &mMoveMode);
-        AddArgument("Rate", 0, UINT8_MAX, &mRate);
+        AddArgument("MoveMode", 0, UINT8_MAX, &mRequest.moveMode);
+        AddArgument("Rate", 0, UINT8_MAX, &mRequest.rate);
         ClusterCommand::AddArguments();
     }
 
@@ -48475,8 +48192,8 @@ public:
         __auto_type * params = [[CHIPLevelControlClusterMoveWithOnOffParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.moveMode = [NSNumber numberWithUnsignedChar:mMoveMode];
-        params.rate = [NSNumber numberWithUnsignedChar:mRate];
+        params.moveMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.moveMode)];
+        params.rate = [NSNumber numberWithUnsignedChar:mRequest.rate];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -48498,8 +48215,6 @@ public:
 
 private:
     chip::app::Clusters::LevelControl::Commands::MoveWithOnOff::Type mRequest;
-    uint8_t mMoveMode;
-    uint8_t mRate;
 };
 
 /*
@@ -48510,10 +48225,9 @@ public:
     LevelControlStepWithOnOff()
         : ClusterCommand("step-with-on-off")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("StepMode", 0, UINT8_MAX, &mStepMode);
-        AddArgument("StepSize", 0, UINT8_MAX, &mStepSize);
-        AddArgument("TransitionTime", 0, UINT16_MAX, &mTransitionTime);
+        AddArgument("StepMode", 0, UINT8_MAX, &mRequest.stepMode);
+        AddArgument("StepSize", 0, UINT8_MAX, &mRequest.stepSize);
+        AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
         ClusterCommand::AddArguments();
     }
 
@@ -48527,9 +48241,9 @@ public:
         __auto_type * params = [[CHIPLevelControlClusterStepWithOnOffParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.stepMode = [NSNumber numberWithUnsignedChar:mStepMode];
-        params.stepSize = [NSNumber numberWithUnsignedChar:mStepSize];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mTransitionTime];
+        params.stepMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.stepMode)];
+        params.stepSize = [NSNumber numberWithUnsignedChar:mRequest.stepSize];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -48551,9 +48265,6 @@ public:
 
 private:
     chip::app::Clusters::LevelControl::Commands::StepWithOnOff::Type mRequest;
-    uint8_t mStepMode;
-    uint8_t mStepSize;
-    uint16_t mTransitionTime;
 };
 
 /*
@@ -48564,7 +48275,6 @@ public:
     LevelControlStopWithOnOff()
         : ClusterCommand("stop-with-on-off")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -48597,7 +48307,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::LevelControl::Commands::StopWithOnOff::Type mRequest;
 };
 
 /*
@@ -50829,7 +50538,6 @@ public:
     LowPowerSleep()
         : ClusterCommand("sleep")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -50862,7 +50570,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::LowPower::Commands::Sleep::Type mRequest;
 };
 
 /*
@@ -51245,8 +50952,7 @@ public:
     MediaInputSelectInput()
         : ClusterCommand("select-input")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Index", 0, UINT8_MAX, &mIndex);
+        AddArgument("Index", 0, UINT8_MAX, &mRequest.index);
         ClusterCommand::AddArguments();
     }
 
@@ -51260,7 +50966,7 @@ public:
         __auto_type * params = [[CHIPMediaInputClusterSelectInputParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.index = [NSNumber numberWithUnsignedChar:mIndex];
+        params.index = [NSNumber numberWithUnsignedChar:mRequest.index];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -51282,7 +50988,6 @@ public:
 
 private:
     chip::app::Clusters::MediaInput::Commands::SelectInput::Type mRequest;
-    uint8_t mIndex;
 };
 
 /*
@@ -51293,7 +50998,6 @@ public:
     MediaInputShowInputStatus()
         : ClusterCommand("show-input-status")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -51326,7 +51030,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::MediaInput::Commands::ShowInputStatus::Type mRequest;
 };
 
 /*
@@ -51337,7 +51040,6 @@ public:
     MediaInputHideInputStatus()
         : ClusterCommand("hide-input-status")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -51370,7 +51072,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::MediaInput::Commands::HideInputStatus::Type mRequest;
 };
 
 /*
@@ -51381,9 +51082,8 @@ public:
     MediaInputRenameInput()
         : ClusterCommand("rename-input")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Index", 0, UINT8_MAX, &mIndex);
-        AddArgument("Name", &mName);
+        AddArgument("Index", 0, UINT8_MAX, &mRequest.index);
+        AddArgument("Name", &mRequest.name);
         ClusterCommand::AddArguments();
     }
 
@@ -51397,8 +51097,10 @@ public:
         __auto_type * params = [[CHIPMediaInputClusterRenameInputParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.index = [NSNumber numberWithUnsignedChar:mIndex];
-        params.name = [[NSString alloc] initWithBytes:mName.data() length:mName.size() encoding:NSUTF8StringEncoding];
+        params.index = [NSNumber numberWithUnsignedChar:mRequest.index];
+        params.name = [[NSString alloc] initWithBytes:mRequest.name.data()
+                                               length:mRequest.name.size()
+                                             encoding:NSUTF8StringEncoding];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -51420,8 +51122,6 @@ public:
 
 private:
     chip::app::Clusters::MediaInput::Commands::RenameInput::Type mRequest;
-    uint8_t mIndex;
-    chip::ByteSpan mName;
 };
 
 /*
@@ -51957,7 +51657,6 @@ public:
     MediaPlaybackPlay()
         : ClusterCommand("play")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -51992,7 +51691,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::MediaPlayback::Commands::Play::Type mRequest;
 };
 
 /*
@@ -52003,7 +51701,6 @@ public:
     MediaPlaybackPause()
         : ClusterCommand("pause")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -52038,7 +51735,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::MediaPlayback::Commands::Pause::Type mRequest;
 };
 
 /*
@@ -52049,7 +51745,6 @@ public:
     MediaPlaybackStopPlayback()
         : ClusterCommand("stop-playback")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -52084,7 +51779,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::MediaPlayback::Commands::StopPlayback::Type mRequest;
 };
 
 /*
@@ -52095,7 +51789,6 @@ public:
     MediaPlaybackStartOver()
         : ClusterCommand("start-over")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -52130,7 +51823,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::MediaPlayback::Commands::StartOver::Type mRequest;
 };
 
 /*
@@ -52141,7 +51833,6 @@ public:
     MediaPlaybackPrevious()
         : ClusterCommand("previous")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -52176,7 +51867,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::MediaPlayback::Commands::Previous::Type mRequest;
 };
 
 /*
@@ -52187,7 +51877,6 @@ public:
     MediaPlaybackNext()
         : ClusterCommand("next")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -52222,7 +51911,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::MediaPlayback::Commands::Next::Type mRequest;
 };
 
 /*
@@ -52233,7 +51921,6 @@ public:
     MediaPlaybackRewind()
         : ClusterCommand("rewind")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -52268,7 +51955,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::MediaPlayback::Commands::Rewind::Type mRequest;
 };
 
 /*
@@ -52279,7 +51965,6 @@ public:
     MediaPlaybackFastForward()
         : ClusterCommand("fast-forward")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -52314,7 +51999,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::MediaPlayback::Commands::FastForward::Type mRequest;
 };
 
 /*
@@ -52325,8 +52009,7 @@ public:
     MediaPlaybackSkipForward()
         : ClusterCommand("skip-forward")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("DeltaPositionMilliseconds", 0, UINT64_MAX, &mDeltaPositionMilliseconds);
+        AddArgument("DeltaPositionMilliseconds", 0, UINT64_MAX, &mRequest.deltaPositionMilliseconds);
         ClusterCommand::AddArguments();
     }
 
@@ -52340,7 +52023,7 @@ public:
         __auto_type * params = [[CHIPMediaPlaybackClusterSkipForwardParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.deltaPositionMilliseconds = [NSNumber numberWithUnsignedLongLong:mDeltaPositionMilliseconds];
+        params.deltaPositionMilliseconds = [NSNumber numberWithUnsignedLongLong:mRequest.deltaPositionMilliseconds];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -52364,7 +52047,6 @@ public:
 
 private:
     chip::app::Clusters::MediaPlayback::Commands::SkipForward::Type mRequest;
-    uint64_t mDeltaPositionMilliseconds;
 };
 
 /*
@@ -52375,8 +52057,7 @@ public:
     MediaPlaybackSkipBackward()
         : ClusterCommand("skip-backward")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("DeltaPositionMilliseconds", 0, UINT64_MAX, &mDeltaPositionMilliseconds);
+        AddArgument("DeltaPositionMilliseconds", 0, UINT64_MAX, &mRequest.deltaPositionMilliseconds);
         ClusterCommand::AddArguments();
     }
 
@@ -52390,7 +52071,7 @@ public:
         __auto_type * params = [[CHIPMediaPlaybackClusterSkipBackwardParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.deltaPositionMilliseconds = [NSNumber numberWithUnsignedLongLong:mDeltaPositionMilliseconds];
+        params.deltaPositionMilliseconds = [NSNumber numberWithUnsignedLongLong:mRequest.deltaPositionMilliseconds];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -52414,7 +52095,6 @@ public:
 
 private:
     chip::app::Clusters::MediaPlayback::Commands::SkipBackward::Type mRequest;
-    uint64_t mDeltaPositionMilliseconds;
 };
 
 /*
@@ -52425,8 +52105,7 @@ public:
     MediaPlaybackSeek()
         : ClusterCommand("seek")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Position", 0, UINT64_MAX, &mPosition);
+        AddArgument("Position", 0, UINT64_MAX, &mRequest.position);
         ClusterCommand::AddArguments();
     }
 
@@ -52440,7 +52119,7 @@ public:
         __auto_type * params = [[CHIPMediaPlaybackClusterSeekParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.position = [NSNumber numberWithUnsignedLongLong:mPosition];
+        params.position = [NSNumber numberWithUnsignedLongLong:mRequest.position];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -52464,7 +52143,6 @@ public:
 
 private:
     chip::app::Clusters::MediaPlayback::Commands::Seek::Type mRequest;
-    uint64_t mPosition;
 };
 
 /*
@@ -53341,8 +53019,7 @@ public:
     ModeSelectChangeToMode()
         : ClusterCommand("change-to-mode")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("NewMode", 0, UINT8_MAX, &mNewMode);
+        AddArgument("NewMode", 0, UINT8_MAX, &mRequest.newMode);
         ClusterCommand::AddArguments();
     }
 
@@ -53356,7 +53033,7 @@ public:
         __auto_type * params = [[CHIPModeSelectClusterChangeToModeParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.newMode = [NSNumber numberWithUnsignedChar:mNewMode];
+        params.newMode = [NSNumber numberWithUnsignedChar:mRequest.newMode];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -53378,7 +53055,6 @@ public:
 
 private:
     chip::app::Clusters::ModeSelect::Commands::ChangeToMode::Type mRequest;
-    uint8_t mNewMode;
 };
 
 /*
@@ -54271,9 +53947,8 @@ public:
     NetworkCommissioningScanNetworks()
         : ClusterCommand("scan-networks")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Ssid", &mSsid);
-        AddArgument("Breadcrumb", 0, UINT64_MAX, &mBreadcrumb);
+        AddArgument("Ssid", &mRequest.ssid);
+        AddArgument("Breadcrumb", 0, UINT64_MAX, &mRequest.breadcrumb);
         ClusterCommand::AddArguments();
     }
 
@@ -54289,11 +53964,20 @@ public:
         __auto_type * params = [[CHIPNetworkCommissioningClusterScanNetworksParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        if (mSsid.HasValue()) {
-            params.ssid = [[NSData alloc] initWithBytes:mSsid.Value().data() length:mSsid.Value().size()];
+        if (mRequest.ssid.HasValue()) {
+            if (mRequest.ssid.Value().IsNull()) {
+                params.ssid = nil;
+            } else {
+                params.ssid = [NSData dataWithBytes:mRequest.ssid.Value().Value().data()
+                                             length:mRequest.ssid.Value().Value().size()];
+            }
+        } else {
+            params.ssid = nil;
         }
-        if (mBreadcrumb.HasValue()) {
-            params.breadcrumb = [NSNumber numberWithUnsignedLongLong:mBreadcrumb.Value()];
+        if (mRequest.breadcrumb.HasValue()) {
+            params.breadcrumb = [NSNumber numberWithUnsignedLongLong:mRequest.breadcrumb.Value()];
+        } else {
+            params.breadcrumb = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -54318,8 +54002,6 @@ public:
 
 private:
     chip::app::Clusters::NetworkCommissioning::Commands::ScanNetworks::Type mRequest;
-    chip::Optional<chip::ByteSpan> mSsid;
-    chip::Optional<uint64_t> mBreadcrumb;
 };
 
 /*
@@ -54330,10 +54012,9 @@ public:
     NetworkCommissioningAddOrUpdateWiFiNetwork()
         : ClusterCommand("add-or-update-wi-fi-network")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Ssid", &mSsid);
-        AddArgument("Credentials", &mCredentials);
-        AddArgument("Breadcrumb", 0, UINT64_MAX, &mBreadcrumb);
+        AddArgument("Ssid", &mRequest.ssid);
+        AddArgument("Credentials", &mRequest.credentials);
+        AddArgument("Breadcrumb", 0, UINT64_MAX, &mRequest.breadcrumb);
         ClusterCommand::AddArguments();
     }
 
@@ -54349,10 +54030,12 @@ public:
         __auto_type * params = [[CHIPNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.ssid = [[NSData alloc] initWithBytes:mSsid.data() length:mSsid.size()];
-        params.credentials = [[NSData alloc] initWithBytes:mCredentials.data() length:mCredentials.size()];
-        if (mBreadcrumb.HasValue()) {
-            params.breadcrumb = [NSNumber numberWithUnsignedLongLong:mBreadcrumb.Value()];
+        params.ssid = [NSData dataWithBytes:mRequest.ssid.data() length:mRequest.ssid.size()];
+        params.credentials = [NSData dataWithBytes:mRequest.credentials.data() length:mRequest.credentials.size()];
+        if (mRequest.breadcrumb.HasValue()) {
+            params.breadcrumb = [NSNumber numberWithUnsignedLongLong:mRequest.breadcrumb.Value()];
+        } else {
+            params.breadcrumb = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -54378,9 +54061,6 @@ public:
 
 private:
     chip::app::Clusters::NetworkCommissioning::Commands::AddOrUpdateWiFiNetwork::Type mRequest;
-    chip::ByteSpan mSsid;
-    chip::ByteSpan mCredentials;
-    chip::Optional<uint64_t> mBreadcrumb;
 };
 
 /*
@@ -54391,9 +54071,8 @@ public:
     NetworkCommissioningAddOrUpdateThreadNetwork()
         : ClusterCommand("add-or-update-thread-network")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("OperationalDataset", &mOperationalDataset);
-        AddArgument("Breadcrumb", 0, UINT64_MAX, &mBreadcrumb);
+        AddArgument("OperationalDataset", &mRequest.operationalDataset);
+        AddArgument("Breadcrumb", 0, UINT64_MAX, &mRequest.breadcrumb);
         ClusterCommand::AddArguments();
     }
 
@@ -54409,9 +54088,12 @@ public:
         __auto_type * params = [[CHIPNetworkCommissioningClusterAddOrUpdateThreadNetworkParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.operationalDataset = [[NSData alloc] initWithBytes:mOperationalDataset.data() length:mOperationalDataset.size()];
-        if (mBreadcrumb.HasValue()) {
-            params.breadcrumb = [NSNumber numberWithUnsignedLongLong:mBreadcrumb.Value()];
+        params.operationalDataset = [NSData dataWithBytes:mRequest.operationalDataset.data()
+                                                   length:mRequest.operationalDataset.size()];
+        if (mRequest.breadcrumb.HasValue()) {
+            params.breadcrumb = [NSNumber numberWithUnsignedLongLong:mRequest.breadcrumb.Value()];
+        } else {
+            params.breadcrumb = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -54437,8 +54119,6 @@ public:
 
 private:
     chip::app::Clusters::NetworkCommissioning::Commands::AddOrUpdateThreadNetwork::Type mRequest;
-    chip::ByteSpan mOperationalDataset;
-    chip::Optional<uint64_t> mBreadcrumb;
 };
 
 /*
@@ -54449,9 +54129,8 @@ public:
     NetworkCommissioningRemoveNetwork()
         : ClusterCommand("remove-network")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("NetworkID", &mNetworkID);
-        AddArgument("Breadcrumb", 0, UINT64_MAX, &mBreadcrumb);
+        AddArgument("NetworkID", &mRequest.networkID);
+        AddArgument("Breadcrumb", 0, UINT64_MAX, &mRequest.breadcrumb);
         ClusterCommand::AddArguments();
     }
 
@@ -54467,9 +54146,11 @@ public:
         __auto_type * params = [[CHIPNetworkCommissioningClusterRemoveNetworkParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.networkID = [[NSData alloc] initWithBytes:mNetworkID.data() length:mNetworkID.size()];
-        if (mBreadcrumb.HasValue()) {
-            params.breadcrumb = [NSNumber numberWithUnsignedLongLong:mBreadcrumb.Value()];
+        params.networkID = [NSData dataWithBytes:mRequest.networkID.data() length:mRequest.networkID.size()];
+        if (mRequest.breadcrumb.HasValue()) {
+            params.breadcrumb = [NSNumber numberWithUnsignedLongLong:mRequest.breadcrumb.Value()];
+        } else {
+            params.breadcrumb = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -54494,8 +54175,6 @@ public:
 
 private:
     chip::app::Clusters::NetworkCommissioning::Commands::RemoveNetwork::Type mRequest;
-    chip::ByteSpan mNetworkID;
-    chip::Optional<uint64_t> mBreadcrumb;
 };
 
 /*
@@ -54506,9 +54185,8 @@ public:
     NetworkCommissioningConnectNetwork()
         : ClusterCommand("connect-network")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("NetworkID", &mNetworkID);
-        AddArgument("Breadcrumb", 0, UINT64_MAX, &mBreadcrumb);
+        AddArgument("NetworkID", &mRequest.networkID);
+        AddArgument("Breadcrumb", 0, UINT64_MAX, &mRequest.breadcrumb);
         ClusterCommand::AddArguments();
     }
 
@@ -54524,9 +54202,11 @@ public:
         __auto_type * params = [[CHIPNetworkCommissioningClusterConnectNetworkParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.networkID = [[NSData alloc] initWithBytes:mNetworkID.data() length:mNetworkID.size()];
-        if (mBreadcrumb.HasValue()) {
-            params.breadcrumb = [NSNumber numberWithUnsignedLongLong:mBreadcrumb.Value()];
+        params.networkID = [NSData dataWithBytes:mRequest.networkID.data() length:mRequest.networkID.size()];
+        if (mRequest.breadcrumb.HasValue()) {
+            params.breadcrumb = [NSNumber numberWithUnsignedLongLong:mRequest.breadcrumb.Value()];
+        } else {
+            params.breadcrumb = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -54551,8 +54231,6 @@ public:
 
 private:
     chip::app::Clusters::NetworkCommissioning::Commands::ConnectNetwork::Type mRequest;
-    chip::ByteSpan mNetworkID;
-    chip::Optional<uint64_t> mBreadcrumb;
 };
 
 /*
@@ -54563,10 +54241,9 @@ public:
     NetworkCommissioningReorderNetwork()
         : ClusterCommand("reorder-network")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("NetworkID", &mNetworkID);
-        AddArgument("NetworkIndex", 0, UINT8_MAX, &mNetworkIndex);
-        AddArgument("Breadcrumb", 0, UINT64_MAX, &mBreadcrumb);
+        AddArgument("NetworkID", &mRequest.networkID);
+        AddArgument("NetworkIndex", 0, UINT8_MAX, &mRequest.networkIndex);
+        AddArgument("Breadcrumb", 0, UINT64_MAX, &mRequest.breadcrumb);
         ClusterCommand::AddArguments();
     }
 
@@ -54582,10 +54259,12 @@ public:
         __auto_type * params = [[CHIPNetworkCommissioningClusterReorderNetworkParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.networkID = [[NSData alloc] initWithBytes:mNetworkID.data() length:mNetworkID.size()];
-        params.networkIndex = [NSNumber numberWithUnsignedChar:mNetworkIndex];
-        if (mBreadcrumb.HasValue()) {
-            params.breadcrumb = [NSNumber numberWithUnsignedLongLong:mBreadcrumb.Value()];
+        params.networkID = [NSData dataWithBytes:mRequest.networkID.data() length:mRequest.networkID.size()];
+        params.networkIndex = [NSNumber numberWithUnsignedChar:mRequest.networkIndex];
+        if (mRequest.breadcrumb.HasValue()) {
+            params.breadcrumb = [NSNumber numberWithUnsignedLongLong:mRequest.breadcrumb.Value()];
+        } else {
+            params.breadcrumb = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -54610,9 +54289,6 @@ public:
 
 private:
     chip::app::Clusters::NetworkCommissioning::Commands::ReorderNetwork::Type mRequest;
-    chip::ByteSpan mNetworkID;
-    uint8_t mNetworkIndex;
-    chip::Optional<uint64_t> mBreadcrumb;
 };
 
 /*
@@ -55655,15 +55331,14 @@ public:
         : ClusterCommand("query-image")
         , mComplex_ProtocolsSupported(&mRequest.protocolsSupported)
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("VendorId", 0, UINT16_MAX, &mVendorId);
-        AddArgument("ProductId", 0, UINT16_MAX, &mProductId);
-        AddArgument("SoftwareVersion", 0, UINT32_MAX, &mSoftwareVersion);
+        AddArgument("VendorId", 0, UINT16_MAX, &mRequest.vendorId);
+        AddArgument("ProductId", 0, UINT16_MAX, &mRequest.productId);
+        AddArgument("SoftwareVersion", 0, UINT32_MAX, &mRequest.softwareVersion);
         AddArgument("ProtocolsSupported", &mComplex_ProtocolsSupported);
-        AddArgument("HardwareVersion", 0, UINT16_MAX, &mHardwareVersion);
-        AddArgument("Location", &mLocation);
-        AddArgument("RequestorCanConsent", 0, 1, &mRequestorCanConsent);
-        AddArgument("MetadataForProvider", &mMetadataForProvider);
+        AddArgument("HardwareVersion", 0, UINT16_MAX, &mRequest.hardwareVersion);
+        AddArgument("Location", &mRequest.location);
+        AddArgument("RequestorCanConsent", 0, 1, &mRequest.requestorCanConsent);
+        AddArgument("MetadataForProvider", &mRequest.metadataForProvider);
         ClusterCommand::AddArguments();
     }
 
@@ -55679,9 +55354,9 @@ public:
         __auto_type * params = [[CHIPOtaSoftwareUpdateProviderClusterQueryImageParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.vendorId = [NSNumber numberWithUnsignedShort:mVendorId];
-        params.productId = [NSNumber numberWithUnsignedShort:mProductId];
-        params.softwareVersion = [NSNumber numberWithUnsignedInt:mSoftwareVersion];
+        params.vendorId = [NSNumber numberWithUnsignedShort:chip::to_underlying(mRequest.vendorId)];
+        params.productId = [NSNumber numberWithUnsignedShort:mRequest.productId];
+        params.softwareVersion = [NSNumber numberWithUnsignedInt:mRequest.softwareVersion];
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
             for (auto & entry_0 : mRequest.protocolsSupported) {
@@ -55691,20 +55366,28 @@ public:
             }
             params.protocolsSupported = array_0;
         }
-        if (mHardwareVersion.HasValue()) {
-            params.hardwareVersion = [NSNumber numberWithUnsignedShort:mHardwareVersion.Value()];
+        if (mRequest.hardwareVersion.HasValue()) {
+            params.hardwareVersion = [NSNumber numberWithUnsignedShort:mRequest.hardwareVersion.Value()];
+        } else {
+            params.hardwareVersion = nil;
         }
-        if (mLocation.HasValue()) {
-            params.location = [[NSString alloc] initWithBytes:mLocation.Value().data()
-                                                       length:mLocation.Value().size()
+        if (mRequest.location.HasValue()) {
+            params.location = [[NSString alloc] initWithBytes:mRequest.location.Value().data()
+                                                       length:mRequest.location.Value().size()
                                                      encoding:NSUTF8StringEncoding];
+        } else {
+            params.location = nil;
         }
-        if (mRequestorCanConsent.HasValue()) {
-            params.requestorCanConsent = [NSNumber numberWithBool:mRequestorCanConsent.Value()];
+        if (mRequest.requestorCanConsent.HasValue()) {
+            params.requestorCanConsent = [NSNumber numberWithBool:mRequest.requestorCanConsent.Value()];
+        } else {
+            params.requestorCanConsent = nil;
         }
-        if (mMetadataForProvider.HasValue()) {
-            params.metadataForProvider = [[NSData alloc] initWithBytes:mMetadataForProvider.Value().data()
-                                                                length:mMetadataForProvider.Value().size()];
+        if (mRequest.metadataForProvider.HasValue()) {
+            params.metadataForProvider = [NSData dataWithBytes:mRequest.metadataForProvider.Value().data()
+                                                        length:mRequest.metadataForProvider.Value().size()];
+        } else {
+            params.metadataForProvider = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -55729,15 +55412,8 @@ public:
 
 private:
     chip::app::Clusters::OtaSoftwareUpdateProvider::Commands::QueryImage::Type mRequest;
-    chip::VendorId mVendorId;
-    uint16_t mProductId;
-    uint32_t mSoftwareVersion;
     TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::OtaSoftwareUpdateProvider::OTADownloadProtocol>>
         mComplex_ProtocolsSupported;
-    chip::Optional<uint16_t> mHardwareVersion;
-    chip::Optional<chip::ByteSpan> mLocation;
-    chip::Optional<bool> mRequestorCanConsent;
-    chip::Optional<chip::ByteSpan> mMetadataForProvider;
 };
 
 /*
@@ -55748,9 +55424,8 @@ public:
     OtaSoftwareUpdateProviderApplyUpdateRequest()
         : ClusterCommand("apply-update-request")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("UpdateToken", &mUpdateToken);
-        AddArgument("NewVersion", 0, UINT32_MAX, &mNewVersion);
+        AddArgument("UpdateToken", &mRequest.updateToken);
+        AddArgument("NewVersion", 0, UINT32_MAX, &mRequest.newVersion);
         ClusterCommand::AddArguments();
     }
 
@@ -55766,8 +55441,8 @@ public:
         __auto_type * params = [[CHIPOtaSoftwareUpdateProviderClusterApplyUpdateRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.updateToken = [[NSData alloc] initWithBytes:mUpdateToken.data() length:mUpdateToken.size()];
-        params.newVersion = [NSNumber numberWithUnsignedInt:mNewVersion];
+        params.updateToken = [NSData dataWithBytes:mRequest.updateToken.data() length:mRequest.updateToken.size()];
+        params.newVersion = [NSNumber numberWithUnsignedInt:mRequest.newVersion];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -55792,8 +55467,6 @@ public:
 
 private:
     chip::app::Clusters::OtaSoftwareUpdateProvider::Commands::ApplyUpdateRequest::Type mRequest;
-    chip::ByteSpan mUpdateToken;
-    uint32_t mNewVersion;
 };
 
 /*
@@ -55804,9 +55477,8 @@ public:
     OtaSoftwareUpdateProviderNotifyUpdateApplied()
         : ClusterCommand("notify-update-applied")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("UpdateToken", &mUpdateToken);
-        AddArgument("SoftwareVersion", 0, UINT32_MAX, &mSoftwareVersion);
+        AddArgument("UpdateToken", &mRequest.updateToken);
+        AddArgument("SoftwareVersion", 0, UINT32_MAX, &mRequest.softwareVersion);
         ClusterCommand::AddArguments();
     }
 
@@ -55822,8 +55494,8 @@ public:
         __auto_type * params = [[CHIPOtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.updateToken = [[NSData alloc] initWithBytes:mUpdateToken.data() length:mUpdateToken.size()];
-        params.softwareVersion = [NSNumber numberWithUnsignedInt:mSoftwareVersion];
+        params.updateToken = [NSData dataWithBytes:mRequest.updateToken.data() length:mRequest.updateToken.size()];
+        params.softwareVersion = [NSNumber numberWithUnsignedInt:mRequest.softwareVersion];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -55845,8 +55517,6 @@ public:
 
 private:
     chip::app::Clusters::OtaSoftwareUpdateProvider::Commands::NotifyUpdateApplied::Type mRequest;
-    chip::ByteSpan mUpdateToken;
-    uint32_t mSoftwareVersion;
 };
 
 /*
@@ -56254,12 +55924,11 @@ public:
     OtaSoftwareUpdateRequestorAnnounceOtaProvider()
         : ClusterCommand("announce-ota-provider")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("ProviderNodeId", 0, UINT64_MAX, &mProviderNodeId);
-        AddArgument("VendorId", 0, UINT16_MAX, &mVendorId);
-        AddArgument("AnnouncementReason", 0, UINT8_MAX, &mAnnouncementReason);
-        AddArgument("MetadataForNode", &mMetadataForNode);
-        AddArgument("Endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("ProviderNodeId", 0, UINT64_MAX, &mRequest.providerNodeId);
+        AddArgument("VendorId", 0, UINT16_MAX, &mRequest.vendorId);
+        AddArgument("AnnouncementReason", 0, UINT8_MAX, &mRequest.announcementReason);
+        AddArgument("MetadataForNode", &mRequest.metadataForNode);
+        AddArgument("Endpoint", 0, UINT16_MAX, &mRequest.endpoint);
         ClusterCommand::AddArguments();
     }
 
@@ -56275,14 +55944,16 @@ public:
         __auto_type * params = [[CHIPOtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.providerNodeId = [NSNumber numberWithUnsignedLongLong:mProviderNodeId];
-        params.vendorId = [NSNumber numberWithUnsignedShort:mVendorId];
-        params.announcementReason = [NSNumber numberWithUnsignedChar:mAnnouncementReason];
-        if (mMetadataForNode.HasValue()) {
-            params.metadataForNode = [[NSData alloc] initWithBytes:mMetadataForNode.Value().data()
-                                                            length:mMetadataForNode.Value().size()];
+        params.providerNodeId = [NSNumber numberWithUnsignedLongLong:mRequest.providerNodeId];
+        params.vendorId = [NSNumber numberWithUnsignedShort:chip::to_underlying(mRequest.vendorId)];
+        params.announcementReason = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.announcementReason)];
+        if (mRequest.metadataForNode.HasValue()) {
+            params.metadataForNode = [NSData dataWithBytes:mRequest.metadataForNode.Value().data()
+                                                    length:mRequest.metadataForNode.Value().size()];
+        } else {
+            params.metadataForNode = nil;
         }
-        params.endpoint = [NSNumber numberWithUnsignedShort:mEndpoint];
+        params.endpoint = [NSNumber numberWithUnsignedShort:mRequest.endpoint];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -56304,11 +55975,6 @@ public:
 
 private:
     chip::app::Clusters::OtaSoftwareUpdateRequestor::Commands::AnnounceOtaProvider::Type mRequest;
-    chip::NodeId mProviderNodeId;
-    chip::VendorId mVendorId;
-    uint8_t mAnnouncementReason;
-    chip::Optional<chip::ByteSpan> mMetadataForNode;
-    chip::EndpointId mEndpoint;
 };
 
 /*
@@ -58838,7 +58504,6 @@ public:
     OnOffOff()
         : ClusterCommand("off")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -58871,7 +58536,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::OnOff::Commands::Off::Type mRequest;
 };
 
 /*
@@ -58882,7 +58546,6 @@ public:
     OnOffOn()
         : ClusterCommand("on")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -58915,7 +58578,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::OnOff::Commands::On::Type mRequest;
 };
 
 /*
@@ -58926,7 +58588,6 @@ public:
     OnOffToggle()
         : ClusterCommand("toggle")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -58959,7 +58620,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::OnOff::Commands::Toggle::Type mRequest;
 };
 
 /*
@@ -58970,9 +58630,8 @@ public:
     OnOffOffWithEffect()
         : ClusterCommand("off-with-effect")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("EffectId", 0, UINT8_MAX, &mEffectId);
-        AddArgument("EffectVariant", 0, UINT8_MAX, &mEffectVariant);
+        AddArgument("EffectId", 0, UINT8_MAX, &mRequest.effectId);
+        AddArgument("EffectVariant", 0, UINT8_MAX, &mRequest.effectVariant);
         ClusterCommand::AddArguments();
     }
 
@@ -58986,8 +58645,8 @@ public:
         __auto_type * params = [[CHIPOnOffClusterOffWithEffectParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.effectId = [NSNumber numberWithUnsignedChar:mEffectId];
-        params.effectVariant = [NSNumber numberWithUnsignedChar:mEffectVariant];
+        params.effectId = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.effectId)];
+        params.effectVariant = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.effectVariant)];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -59009,8 +58668,6 @@ public:
 
 private:
     chip::app::Clusters::OnOff::Commands::OffWithEffect::Type mRequest;
-    uint8_t mEffectId;
-    uint8_t mEffectVariant;
 };
 
 /*
@@ -59021,7 +58678,6 @@ public:
     OnOffOnWithRecallGlobalScene()
         : ClusterCommand("on-with-recall-global-scene")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -59054,7 +58710,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::OnOff::Commands::OnWithRecallGlobalScene::Type mRequest;
 };
 
 /*
@@ -59065,10 +58720,9 @@ public:
     OnOffOnWithTimedOff()
         : ClusterCommand("on-with-timed-off")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("OnOffControl", 0, UINT8_MAX, &mOnOffControl);
-        AddArgument("OnTime", 0, UINT16_MAX, &mOnTime);
-        AddArgument("OffWaitTime", 0, UINT16_MAX, &mOffWaitTime);
+        AddArgument("OnOffControl", 0, UINT8_MAX, &mRequest.onOffControl);
+        AddArgument("OnTime", 0, UINT16_MAX, &mRequest.onTime);
+        AddArgument("OffWaitTime", 0, UINT16_MAX, &mRequest.offWaitTime);
         ClusterCommand::AddArguments();
     }
 
@@ -59082,9 +58736,9 @@ public:
         __auto_type * params = [[CHIPOnOffClusterOnWithTimedOffParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.onOffControl = [NSNumber numberWithUnsignedChar:mOnOffControl];
-        params.onTime = [NSNumber numberWithUnsignedShort:mOnTime];
-        params.offWaitTime = [NSNumber numberWithUnsignedShort:mOffWaitTime];
+        params.onOffControl = [NSNumber numberWithUnsignedChar:mRequest.onOffControl.Raw()];
+        params.onTime = [NSNumber numberWithUnsignedShort:mRequest.onTime];
+        params.offWaitTime = [NSNumber numberWithUnsignedShort:mRequest.offWaitTime];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -59106,9 +58760,6 @@ public:
 
 private:
     chip::app::Clusters::OnOff::Commands::OnWithTimedOff::Type mRequest;
-    uint8_t mOnOffControl;
-    uint16_t mOnTime;
-    uint16_t mOffWaitTime;
 };
 
 /*
@@ -60552,8 +60203,7 @@ public:
     OperationalCredentialsAttestationRequest()
         : ClusterCommand("attestation-request")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("AttestationNonce", &mAttestationNonce);
+        AddArgument("AttestationNonce", &mRequest.attestationNonce);
         ClusterCommand::AddArguments();
     }
 
@@ -60569,7 +60219,7 @@ public:
         __auto_type * params = [[CHIPOperationalCredentialsClusterAttestationRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.attestationNonce = [[NSData alloc] initWithBytes:mAttestationNonce.data() length:mAttestationNonce.size()];
+        params.attestationNonce = [NSData dataWithBytes:mRequest.attestationNonce.data() length:mRequest.attestationNonce.size()];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -60593,7 +60243,6 @@ public:
 
 private:
     chip::app::Clusters::OperationalCredentials::Commands::AttestationRequest::Type mRequest;
-    chip::ByteSpan mAttestationNonce;
 };
 
 /*
@@ -60604,8 +60253,7 @@ public:
     OperationalCredentialsCertificateChainRequest()
         : ClusterCommand("certificate-chain-request")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("CertificateType", 0, UINT8_MAX, &mCertificateType);
+        AddArgument("CertificateType", 0, UINT8_MAX, &mRequest.certificateType);
         ClusterCommand::AddArguments();
     }
 
@@ -60621,7 +60269,7 @@ public:
         __auto_type * params = [[CHIPOperationalCredentialsClusterCertificateChainRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.certificateType = [NSNumber numberWithUnsignedChar:mCertificateType];
+        params.certificateType = [NSNumber numberWithUnsignedChar:mRequest.certificateType];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -60646,7 +60294,6 @@ public:
 
 private:
     chip::app::Clusters::OperationalCredentials::Commands::CertificateChainRequest::Type mRequest;
-    uint8_t mCertificateType;
 };
 
 /*
@@ -60657,8 +60304,7 @@ public:
     OperationalCredentialsCSRRequest()
         : ClusterCommand("csrrequest")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("CSRNonce", &mCSRNonce);
+        AddArgument("CSRNonce", &mRequest.CSRNonce);
         ClusterCommand::AddArguments();
     }
 
@@ -60674,7 +60320,7 @@ public:
         __auto_type * params = [[CHIPOperationalCredentialsClusterCSRRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.csrNonce = [[NSData alloc] initWithBytes:mCSRNonce.data() length:mCSRNonce.size()];
+        params.csrNonce = [NSData dataWithBytes:mRequest.CSRNonce.data() length:mRequest.CSRNonce.size()];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -60698,7 +60344,6 @@ public:
 
 private:
     chip::app::Clusters::OperationalCredentials::Commands::CSRRequest::Type mRequest;
-    chip::ByteSpan mCSRNonce;
 };
 
 /*
@@ -60709,12 +60354,11 @@ public:
     OperationalCredentialsAddNOC()
         : ClusterCommand("add-noc")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("NOCValue", &mNOCValue);
-        AddArgument("ICACValue", &mICACValue);
-        AddArgument("IPKValue", &mIPKValue);
-        AddArgument("CaseAdminNode", 0, UINT64_MAX, &mCaseAdminNode);
-        AddArgument("AdminVendorId", 0, UINT16_MAX, &mAdminVendorId);
+        AddArgument("NOCValue", &mRequest.NOCValue);
+        AddArgument("ICACValue", &mRequest.ICACValue);
+        AddArgument("IPKValue", &mRequest.IPKValue);
+        AddArgument("CaseAdminNode", 0, UINT64_MAX, &mRequest.caseAdminNode);
+        AddArgument("AdminVendorId", 0, UINT16_MAX, &mRequest.adminVendorId);
         ClusterCommand::AddArguments();
     }
 
@@ -60730,13 +60374,15 @@ public:
         __auto_type * params = [[CHIPOperationalCredentialsClusterAddNOCParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.nocValue = [[NSData alloc] initWithBytes:mNOCValue.data() length:mNOCValue.size()];
-        if (mICACValue.HasValue()) {
-            params.icacValue = [[NSData alloc] initWithBytes:mICACValue.Value().data() length:mICACValue.Value().size()];
+        params.nocValue = [NSData dataWithBytes:mRequest.NOCValue.data() length:mRequest.NOCValue.size()];
+        if (mRequest.ICACValue.HasValue()) {
+            params.icacValue = [NSData dataWithBytes:mRequest.ICACValue.Value().data() length:mRequest.ICACValue.Value().size()];
+        } else {
+            params.icacValue = nil;
         }
-        params.ipkValue = [[NSData alloc] initWithBytes:mIPKValue.data() length:mIPKValue.size()];
-        params.caseAdminNode = [NSNumber numberWithUnsignedLongLong:mCaseAdminNode];
-        params.adminVendorId = [NSNumber numberWithUnsignedShort:mAdminVendorId];
+        params.ipkValue = [NSData dataWithBytes:mRequest.IPKValue.data() length:mRequest.IPKValue.size()];
+        params.caseAdminNode = [NSNumber numberWithUnsignedLongLong:mRequest.caseAdminNode];
+        params.adminVendorId = [NSNumber numberWithUnsignedShort:chip::to_underlying(mRequest.adminVendorId)];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -60760,11 +60406,6 @@ public:
 
 private:
     chip::app::Clusters::OperationalCredentials::Commands::AddNOC::Type mRequest;
-    chip::ByteSpan mNOCValue;
-    chip::Optional<chip::ByteSpan> mICACValue;
-    chip::ByteSpan mIPKValue;
-    chip::NodeId mCaseAdminNode;
-    chip::VendorId mAdminVendorId;
 };
 
 /*
@@ -60775,9 +60416,8 @@ public:
     OperationalCredentialsUpdateNOC()
         : ClusterCommand("update-noc")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("NOCValue", &mNOCValue);
-        AddArgument("ICACValue", &mICACValue);
+        AddArgument("NOCValue", &mRequest.NOCValue);
+        AddArgument("ICACValue", &mRequest.ICACValue);
         ClusterCommand::AddArguments();
     }
 
@@ -60793,9 +60433,11 @@ public:
         __auto_type * params = [[CHIPOperationalCredentialsClusterUpdateNOCParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.nocValue = [[NSData alloc] initWithBytes:mNOCValue.data() length:mNOCValue.size()];
-        if (mICACValue.HasValue()) {
-            params.icacValue = [[NSData alloc] initWithBytes:mICACValue.Value().data() length:mICACValue.Value().size()];
+        params.nocValue = [NSData dataWithBytes:mRequest.NOCValue.data() length:mRequest.NOCValue.size()];
+        if (mRequest.ICACValue.HasValue()) {
+            params.icacValue = [NSData dataWithBytes:mRequest.ICACValue.Value().data() length:mRequest.ICACValue.Value().size()];
+        } else {
+            params.icacValue = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -60820,8 +60462,6 @@ public:
 
 private:
     chip::app::Clusters::OperationalCredentials::Commands::UpdateNOC::Type mRequest;
-    chip::ByteSpan mNOCValue;
-    chip::Optional<chip::ByteSpan> mICACValue;
 };
 
 /*
@@ -60832,8 +60472,7 @@ public:
     OperationalCredentialsUpdateFabricLabel()
         : ClusterCommand("update-fabric-label")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Label", &mLabel);
+        AddArgument("Label", &mRequest.label);
         ClusterCommand::AddArguments();
     }
 
@@ -60849,7 +60488,9 @@ public:
         __auto_type * params = [[CHIPOperationalCredentialsClusterUpdateFabricLabelParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.label = [[NSString alloc] initWithBytes:mLabel.data() length:mLabel.size() encoding:NSUTF8StringEncoding];
+        params.label = [[NSString alloc] initWithBytes:mRequest.label.data()
+                                                length:mRequest.label.size()
+                                              encoding:NSUTF8StringEncoding];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -60873,7 +60514,6 @@ public:
 
 private:
     chip::app::Clusters::OperationalCredentials::Commands::UpdateFabricLabel::Type mRequest;
-    chip::ByteSpan mLabel;
 };
 
 /*
@@ -60884,8 +60524,7 @@ public:
     OperationalCredentialsRemoveFabric()
         : ClusterCommand("remove-fabric")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("FabricIndex", 0, UINT8_MAX, &mFabricIndex);
+        AddArgument("FabricIndex", 0, UINT8_MAX, &mRequest.fabricIndex);
         ClusterCommand::AddArguments();
     }
 
@@ -60901,7 +60540,7 @@ public:
         __auto_type * params = [[CHIPOperationalCredentialsClusterRemoveFabricParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.fabricIndex = [NSNumber numberWithUnsignedChar:mFabricIndex];
+        params.fabricIndex = [NSNumber numberWithUnsignedChar:mRequest.fabricIndex];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -60925,7 +60564,6 @@ public:
 
 private:
     chip::app::Clusters::OperationalCredentials::Commands::RemoveFabric::Type mRequest;
-    chip::FabricIndex mFabricIndex;
 };
 
 /*
@@ -60936,8 +60574,7 @@ public:
     OperationalCredentialsAddTrustedRootCertificate()
         : ClusterCommand("add-trusted-root-certificate")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("RootCertificate", &mRootCertificate);
+        AddArgument("RootCertificate", &mRequest.rootCertificate);
         ClusterCommand::AddArguments();
     }
 
@@ -60953,7 +60590,7 @@ public:
         __auto_type * params = [[CHIPOperationalCredentialsClusterAddTrustedRootCertificateParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.rootCertificate = [[NSData alloc] initWithBytes:mRootCertificate.data() length:mRootCertificate.size()];
+        params.rootCertificate = [NSData dataWithBytes:mRequest.rootCertificate.data() length:mRequest.rootCertificate.size()];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -60975,7 +60612,6 @@ public:
 
 private:
     chip::app::Clusters::OperationalCredentials::Commands::AddTrustedRootCertificate::Type mRequest;
-    chip::ByteSpan mRootCertificate;
 };
 
 /*
@@ -60986,8 +60622,7 @@ public:
     OperationalCredentialsRemoveTrustedRootCertificate()
         : ClusterCommand("remove-trusted-root-certificate")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("TrustedRootIdentifier", &mTrustedRootIdentifier);
+        AddArgument("TrustedRootIdentifier", &mRequest.trustedRootIdentifier);
         ClusterCommand::AddArguments();
     }
 
@@ -61003,8 +60638,8 @@ public:
         __auto_type * params = [[CHIPOperationalCredentialsClusterRemoveTrustedRootCertificateParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.trustedRootIdentifier = [[NSData alloc] initWithBytes:mTrustedRootIdentifier.data()
-                                                              length:mTrustedRootIdentifier.size()];
+        params.trustedRootIdentifier = [NSData dataWithBytes:mRequest.trustedRootIdentifier.data()
+                                                      length:mRequest.trustedRootIdentifier.size()];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -61026,7 +60661,6 @@ public:
 
 private:
     chip::app::Clusters::OperationalCredentials::Commands::RemoveTrustedRootCertificate::Type mRequest;
-    chip::ByteSpan mTrustedRootIdentifier;
 };
 
 /*
@@ -69132,11 +68766,10 @@ public:
         : ClusterCommand("add-scene")
         , mComplex_ExtensionFieldSets(&mRequest.extensionFieldSets)
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("GroupId", 0, UINT16_MAX, &mGroupId);
-        AddArgument("SceneId", 0, UINT8_MAX, &mSceneId);
-        AddArgument("TransitionTime", 0, UINT16_MAX, &mTransitionTime);
-        AddArgument("SceneName", &mSceneName);
+        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
+        AddArgument("SceneId", 0, UINT8_MAX, &mRequest.sceneId);
+        AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
+        AddArgument("SceneName", &mRequest.sceneName);
         AddArgument("ExtensionFieldSets", &mComplex_ExtensionFieldSets);
         ClusterCommand::AddArguments();
     }
@@ -69151,11 +68784,11 @@ public:
         __auto_type * params = [[CHIPScenesClusterAddSceneParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mGroupId];
-        params.sceneId = [NSNumber numberWithUnsignedChar:mSceneId];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mTransitionTime];
-        params.sceneName = [[NSString alloc] initWithBytes:mSceneName.data()
-                                                    length:mSceneName.size()
+        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
+        params.sceneId = [NSNumber numberWithUnsignedChar:mRequest.sceneId];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        params.sceneName = [[NSString alloc] initWithBytes:mRequest.sceneName.data()
+                                                    length:mRequest.sceneName.size()
                                                   encoding:NSUTF8StringEncoding];
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
@@ -69191,10 +68824,6 @@ public:
 
 private:
     chip::app::Clusters::Scenes::Commands::AddScene::Type mRequest;
-    uint16_t mGroupId;
-    uint8_t mSceneId;
-    uint16_t mTransitionTime;
-    chip::ByteSpan mSceneName;
     TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::Scenes::Structs::SceneExtensionFieldSet::Type>>
         mComplex_ExtensionFieldSets;
 };
@@ -69207,9 +68836,8 @@ public:
     ScenesViewScene()
         : ClusterCommand("view-scene")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("GroupId", 0, UINT16_MAX, &mGroupId);
-        AddArgument("SceneId", 0, UINT8_MAX, &mSceneId);
+        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
+        AddArgument("SceneId", 0, UINT8_MAX, &mRequest.sceneId);
         ClusterCommand::AddArguments();
     }
 
@@ -69223,8 +68851,8 @@ public:
         __auto_type * params = [[CHIPScenesClusterViewSceneParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mGroupId];
-        params.sceneId = [NSNumber numberWithUnsignedChar:mSceneId];
+        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
+        params.sceneId = [NSNumber numberWithUnsignedChar:mRequest.sceneId];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -69247,8 +68875,6 @@ public:
 
 private:
     chip::app::Clusters::Scenes::Commands::ViewScene::Type mRequest;
-    uint16_t mGroupId;
-    uint8_t mSceneId;
 };
 
 /*
@@ -69259,9 +68885,8 @@ public:
     ScenesRemoveScene()
         : ClusterCommand("remove-scene")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("GroupId", 0, UINT16_MAX, &mGroupId);
-        AddArgument("SceneId", 0, UINT8_MAX, &mSceneId);
+        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
+        AddArgument("SceneId", 0, UINT8_MAX, &mRequest.sceneId);
         ClusterCommand::AddArguments();
     }
 
@@ -69275,8 +68900,8 @@ public:
         __auto_type * params = [[CHIPScenesClusterRemoveSceneParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mGroupId];
-        params.sceneId = [NSNumber numberWithUnsignedChar:mSceneId];
+        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
+        params.sceneId = [NSNumber numberWithUnsignedChar:mRequest.sceneId];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -69300,8 +68925,6 @@ public:
 
 private:
     chip::app::Clusters::Scenes::Commands::RemoveScene::Type mRequest;
-    uint16_t mGroupId;
-    uint8_t mSceneId;
 };
 
 /*
@@ -69312,8 +68935,7 @@ public:
     ScenesRemoveAllScenes()
         : ClusterCommand("remove-all-scenes")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("GroupId", 0, UINT16_MAX, &mGroupId);
+        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
         ClusterCommand::AddArguments();
     }
 
@@ -69327,7 +68949,7 @@ public:
         __auto_type * params = [[CHIPScenesClusterRemoveAllScenesParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mGroupId];
+        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -69351,7 +68973,6 @@ public:
 
 private:
     chip::app::Clusters::Scenes::Commands::RemoveAllScenes::Type mRequest;
-    uint16_t mGroupId;
 };
 
 /*
@@ -69362,9 +68983,8 @@ public:
     ScenesStoreScene()
         : ClusterCommand("store-scene")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("GroupId", 0, UINT16_MAX, &mGroupId);
-        AddArgument("SceneId", 0, UINT8_MAX, &mSceneId);
+        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
+        AddArgument("SceneId", 0, UINT8_MAX, &mRequest.sceneId);
         ClusterCommand::AddArguments();
     }
 
@@ -69378,8 +68998,8 @@ public:
         __auto_type * params = [[CHIPScenesClusterStoreSceneParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mGroupId];
-        params.sceneId = [NSNumber numberWithUnsignedChar:mSceneId];
+        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
+        params.sceneId = [NSNumber numberWithUnsignedChar:mRequest.sceneId];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -69403,8 +69023,6 @@ public:
 
 private:
     chip::app::Clusters::Scenes::Commands::StoreScene::Type mRequest;
-    uint16_t mGroupId;
-    uint8_t mSceneId;
 };
 
 /*
@@ -69415,10 +69033,9 @@ public:
     ScenesRecallScene()
         : ClusterCommand("recall-scene")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("GroupId", 0, UINT16_MAX, &mGroupId);
-        AddArgument("SceneId", 0, UINT8_MAX, &mSceneId);
-        AddArgument("TransitionTime", 0, UINT16_MAX, &mTransitionTime);
+        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
+        AddArgument("SceneId", 0, UINT8_MAX, &mRequest.sceneId);
+        AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
         ClusterCommand::AddArguments();
     }
 
@@ -69432,9 +69049,9 @@ public:
         __auto_type * params = [[CHIPScenesClusterRecallSceneParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mGroupId];
-        params.sceneId = [NSNumber numberWithUnsignedChar:mSceneId];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mTransitionTime];
+        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
+        params.sceneId = [NSNumber numberWithUnsignedChar:mRequest.sceneId];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -69456,9 +69073,6 @@ public:
 
 private:
     chip::app::Clusters::Scenes::Commands::RecallScene::Type mRequest;
-    uint16_t mGroupId;
-    uint8_t mSceneId;
-    uint16_t mTransitionTime;
 };
 
 /*
@@ -69469,8 +69083,7 @@ public:
     ScenesGetSceneMembership()
         : ClusterCommand("get-scene-membership")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("GroupId", 0, UINT16_MAX, &mGroupId);
+        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
         ClusterCommand::AddArguments();
     }
 
@@ -69484,7 +69097,7 @@ public:
         __auto_type * params = [[CHIPScenesClusterGetSceneMembershipParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mGroupId];
+        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -69508,7 +69121,6 @@ public:
 
 private:
     chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type mRequest;
-    uint16_t mGroupId;
 };
 
 /*
@@ -69520,11 +69132,10 @@ public:
         : ClusterCommand("enhanced-add-scene")
         , mComplex_ExtensionFieldSets(&mRequest.extensionFieldSets)
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("GroupId", 0, UINT16_MAX, &mGroupId);
-        AddArgument("SceneId", 0, UINT8_MAX, &mSceneId);
-        AddArgument("TransitionTime", 0, UINT16_MAX, &mTransitionTime);
-        AddArgument("SceneName", &mSceneName);
+        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
+        AddArgument("SceneId", 0, UINT8_MAX, &mRequest.sceneId);
+        AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
+        AddArgument("SceneName", &mRequest.sceneName);
         AddArgument("ExtensionFieldSets", &mComplex_ExtensionFieldSets);
         ClusterCommand::AddArguments();
     }
@@ -69539,11 +69150,11 @@ public:
         __auto_type * params = [[CHIPScenesClusterEnhancedAddSceneParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mGroupId];
-        params.sceneId = [NSNumber numberWithUnsignedChar:mSceneId];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mTransitionTime];
-        params.sceneName = [[NSString alloc] initWithBytes:mSceneName.data()
-                                                    length:mSceneName.size()
+        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
+        params.sceneId = [NSNumber numberWithUnsignedChar:mRequest.sceneId];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        params.sceneName = [[NSString alloc] initWithBytes:mRequest.sceneName.data()
+                                                    length:mRequest.sceneName.size()
                                                   encoding:NSUTF8StringEncoding];
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
@@ -69580,10 +69191,6 @@ public:
 
 private:
     chip::app::Clusters::Scenes::Commands::EnhancedAddScene::Type mRequest;
-    uint16_t mGroupId;
-    uint8_t mSceneId;
-    uint16_t mTransitionTime;
-    chip::ByteSpan mSceneName;
     TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::Scenes::Structs::SceneExtensionFieldSet::Type>>
         mComplex_ExtensionFieldSets;
 };
@@ -69596,9 +69203,8 @@ public:
     ScenesEnhancedViewScene()
         : ClusterCommand("enhanced-view-scene")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("GroupId", 0, UINT16_MAX, &mGroupId);
-        AddArgument("SceneId", 0, UINT8_MAX, &mSceneId);
+        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
+        AddArgument("SceneId", 0, UINT8_MAX, &mRequest.sceneId);
         ClusterCommand::AddArguments();
     }
 
@@ -69612,8 +69218,8 @@ public:
         __auto_type * params = [[CHIPScenesClusterEnhancedViewSceneParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mGroupId];
-        params.sceneId = [NSNumber numberWithUnsignedChar:mSceneId];
+        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
+        params.sceneId = [NSNumber numberWithUnsignedChar:mRequest.sceneId];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -69637,8 +69243,6 @@ public:
 
 private:
     chip::app::Clusters::Scenes::Commands::EnhancedViewScene::Type mRequest;
-    uint16_t mGroupId;
-    uint8_t mSceneId;
 };
 
 /*
@@ -69649,12 +69253,11 @@ public:
     ScenesCopyScene()
         : ClusterCommand("copy-scene")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Mode", 0, UINT8_MAX, &mMode);
-        AddArgument("GroupIdFrom", 0, UINT16_MAX, &mGroupIdFrom);
-        AddArgument("SceneIdFrom", 0, UINT8_MAX, &mSceneIdFrom);
-        AddArgument("GroupIdTo", 0, UINT16_MAX, &mGroupIdTo);
-        AddArgument("SceneIdTo", 0, UINT8_MAX, &mSceneIdTo);
+        AddArgument("Mode", 0, UINT8_MAX, &mRequest.mode);
+        AddArgument("GroupIdFrom", 0, UINT16_MAX, &mRequest.groupIdFrom);
+        AddArgument("SceneIdFrom", 0, UINT8_MAX, &mRequest.sceneIdFrom);
+        AddArgument("GroupIdTo", 0, UINT16_MAX, &mRequest.groupIdTo);
+        AddArgument("SceneIdTo", 0, UINT8_MAX, &mRequest.sceneIdTo);
         ClusterCommand::AddArguments();
     }
 
@@ -69668,11 +69271,11 @@ public:
         __auto_type * params = [[CHIPScenesClusterCopySceneParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.mode = [NSNumber numberWithUnsignedChar:mMode];
-        params.groupIdFrom = [NSNumber numberWithUnsignedShort:mGroupIdFrom];
-        params.sceneIdFrom = [NSNumber numberWithUnsignedChar:mSceneIdFrom];
-        params.groupIdTo = [NSNumber numberWithUnsignedShort:mGroupIdTo];
-        params.sceneIdTo = [NSNumber numberWithUnsignedChar:mSceneIdTo];
+        params.mode = [NSNumber numberWithUnsignedChar:mRequest.mode.Raw()];
+        params.groupIdFrom = [NSNumber numberWithUnsignedShort:mRequest.groupIdFrom];
+        params.sceneIdFrom = [NSNumber numberWithUnsignedChar:mRequest.sceneIdFrom];
+        params.groupIdTo = [NSNumber numberWithUnsignedShort:mRequest.groupIdTo];
+        params.sceneIdTo = [NSNumber numberWithUnsignedChar:mRequest.sceneIdTo];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -69695,11 +69298,6 @@ public:
 
 private:
     chip::app::Clusters::Scenes::Commands::CopyScene::Type mRequest;
-    uint8_t mMode;
-    uint16_t mGroupIdFrom;
-    uint8_t mSceneIdFrom;
-    uint16_t mGroupIdTo;
-    uint8_t mSceneIdTo;
 };
 
 /*
@@ -70501,7 +70099,6 @@ public:
     SoftwareDiagnosticsResetWatermarks()
         : ClusterCommand("reset-watermarks")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -70536,7 +70133,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::SoftwareDiagnostics::Commands::ResetWatermarks::Type mRequest;
 };
 
 /*
@@ -71824,9 +71420,8 @@ public:
     TargetNavigatorNavigateTarget()
         : ClusterCommand("navigate-target")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Target", 0, UINT8_MAX, &mTarget);
-        AddArgument("Data", &mData);
+        AddArgument("Target", 0, UINT8_MAX, &mRequest.target);
+        AddArgument("Data", &mRequest.data);
         ClusterCommand::AddArguments();
     }
 
@@ -71840,11 +71435,13 @@ public:
         __auto_type * params = [[CHIPTargetNavigatorClusterNavigateTargetParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.target = [NSNumber numberWithUnsignedChar:mTarget];
-        if (mData.HasValue()) {
-            params.data = [[NSString alloc] initWithBytes:mData.Value().data()
-                                                   length:mData.Value().size()
+        params.target = [NSNumber numberWithUnsignedChar:mRequest.target];
+        if (mRequest.data.HasValue()) {
+            params.data = [[NSString alloc] initWithBytes:mRequest.data.Value().data()
+                                                   length:mRequest.data.Value().size()
                                                  encoding:NSUTF8StringEncoding];
+        } else {
+            params.data = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -71869,8 +71466,6 @@ public:
 
 private:
     chip::app::Clusters::TargetNavigator::Commands::NavigateTarget::Type mRequest;
-    uint8_t mTarget;
-    chip::Optional<chip::ByteSpan> mData;
 };
 
 /*
@@ -73185,7 +72780,6 @@ public:
     TestClusterTest()
         : ClusterCommand("test")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -73218,7 +72812,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::Test::Type mRequest;
 };
 
 /*
@@ -73229,7 +72822,6 @@ public:
     TestClusterTestNotHandled()
         : ClusterCommand("test-not-handled")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -73262,7 +72854,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TestNotHandled::Type mRequest;
 };
 
 /*
@@ -73273,7 +72864,6 @@ public:
     TestClusterTestSpecific()
         : ClusterCommand("test-specific")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -73308,7 +72898,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TestSpecific::Type mRequest;
 };
 
 /*
@@ -73319,7 +72908,6 @@ public:
     TestClusterTestUnknownCommand()
         : ClusterCommand("test-unknown-command")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -73352,7 +72940,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TestUnknownCommand::Type mRequest;
 };
 
 /*
@@ -73363,9 +72950,8 @@ public:
     TestClusterTestAddArguments()
         : ClusterCommand("test-add-arguments")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Arg1", 0, UINT8_MAX, &mArg1);
-        AddArgument("Arg2", 0, UINT8_MAX, &mArg2);
+        AddArgument("Arg1", 0, UINT8_MAX, &mRequest.arg1);
+        AddArgument("Arg2", 0, UINT8_MAX, &mRequest.arg2);
         ClusterCommand::AddArguments();
     }
 
@@ -73379,8 +72965,8 @@ public:
         __auto_type * params = [[CHIPTestClusterClusterTestAddArgumentsParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.arg1 = [NSNumber numberWithUnsignedChar:mArg1];
-        params.arg2 = [NSNumber numberWithUnsignedChar:mArg2];
+        params.arg1 = [NSNumber numberWithUnsignedChar:mRequest.arg1];
+        params.arg2 = [NSNumber numberWithUnsignedChar:mRequest.arg2];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -73404,8 +72990,6 @@ public:
 
 private:
     chip::app::Clusters::TestCluster::Commands::TestAddArguments::Type mRequest;
-    uint8_t mArg1;
-    uint8_t mArg2;
 };
 
 /*
@@ -73416,8 +73000,7 @@ public:
     TestClusterTestSimpleArgumentRequest()
         : ClusterCommand("test-simple-argument-request")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Arg1", 0, 1, &mArg1);
+        AddArgument("Arg1", 0, 1, &mRequest.arg1);
         ClusterCommand::AddArguments();
     }
 
@@ -73431,7 +73014,7 @@ public:
         __auto_type * params = [[CHIPTestClusterClusterTestSimpleArgumentRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.arg1 = [NSNumber numberWithBool:mArg1];
+        params.arg1 = [NSNumber numberWithBool:mRequest.arg1];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -73456,7 +73039,6 @@ public:
 
 private:
     chip::app::Clusters::TestCluster::Commands::TestSimpleArgumentRequest::Type mRequest;
-    bool mArg1;
 };
 
 /*
@@ -73471,13 +73053,12 @@ public:
         , mComplex_Arg3(&mRequest.arg3)
         , mComplex_Arg4(&mRequest.arg4)
     {
-        (void) mRequest; // Might not be used if we have no complex args
         AddArgument("Arg1", &mComplex_Arg1);
         AddArgument("Arg2", &mComplex_Arg2);
         AddArgument("Arg3", &mComplex_Arg3);
         AddArgument("Arg4", &mComplex_Arg4);
-        AddArgument("Arg5", 0, UINT8_MAX, &mArg5);
-        AddArgument("Arg6", 0, 1, &mArg6);
+        AddArgument("Arg5", 0, UINT8_MAX, &mRequest.arg5);
+        AddArgument("Arg6", 0, 1, &mRequest.arg6);
         ClusterCommand::AddArguments();
     }
 
@@ -73596,8 +73177,8 @@ public:
             }
             params.arg4 = array_0;
         }
-        params.arg5 = [NSNumber numberWithUnsignedChar:mArg5];
-        params.arg6 = [NSNumber numberWithBool:mArg6];
+        params.arg5 = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.arg5)];
+        params.arg6 = [NSNumber numberWithBool:mRequest.arg6];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -73628,8 +73209,6 @@ private:
         mComplex_Arg2;
     TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::TestCluster::SimpleEnum>> mComplex_Arg3;
     TypedComplexArgument<chip::app::DataModel::List<const bool>> mComplex_Arg4;
-    uint8_t mArg5;
-    bool mArg6;
 };
 
 /*
@@ -73641,7 +73220,6 @@ public:
         : ClusterCommand("test-struct-argument-request")
         , mComplex_Arg1(&mRequest.arg1)
     {
-        (void) mRequest; // Might not be used if we have no complex args
         AddArgument("Arg1", &mComplex_Arg1);
         ClusterCommand::AddArguments();
     }
@@ -73702,7 +73280,6 @@ public:
         : ClusterCommand("test-nested-struct-argument-request")
         , mComplex_Arg1(&mRequest.arg1)
     {
-        (void) mRequest; // Might not be used if we have no complex args
         AddArgument("Arg1", &mComplex_Arg1);
         ClusterCommand::AddArguments();
     }
@@ -73766,7 +73343,6 @@ public:
         : ClusterCommand("test-list-struct-argument-request")
         , mComplex_Arg1(&mRequest.arg1)
     {
-        (void) mRequest; // Might not be used if we have no complex args
         AddArgument("Arg1", &mComplex_Arg1);
         ClusterCommand::AddArguments();
     }
@@ -73836,7 +73412,6 @@ public:
         : ClusterCommand("test-list-int8uargument-request")
         , mComplex_Arg1(&mRequest.arg1)
     {
-        (void) mRequest; // Might not be used if we have no complex args
         AddArgument("Arg1", &mComplex_Arg1);
         ClusterCommand::AddArguments();
     }
@@ -73895,7 +73470,6 @@ public:
         : ClusterCommand("test-nested-struct-list-argument-request")
         , mComplex_Arg1(&mRequest.arg1)
     {
-        (void) mRequest; // Might not be used if we have no complex args
         AddArgument("Arg1", &mComplex_Arg1);
         ClusterCommand::AddArguments();
     }
@@ -74005,7 +73579,6 @@ public:
         : ClusterCommand("test-list-nested-struct-list-argument-request")
         , mComplex_Arg1(&mRequest.arg1)
     {
-        (void) mRequest; // Might not be used if we have no complex args
         AddArgument("Arg1", &mComplex_Arg1);
         ClusterCommand::AddArguments();
     }
@@ -74125,7 +73698,6 @@ public:
         : ClusterCommand("test-list-int8ureverse-request")
         , mComplex_Arg1(&mRequest.arg1)
     {
-        (void) mRequest; // Might not be used if we have no complex args
         AddArgument("Arg1", &mComplex_Arg1);
         ClusterCommand::AddArguments();
     }
@@ -74184,9 +73756,8 @@ public:
     TestClusterTestEnumsRequest()
         : ClusterCommand("test-enums-request")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Arg1", 0, UINT16_MAX, &mArg1);
-        AddArgument("Arg2", 0, UINT8_MAX, &mArg2);
+        AddArgument("Arg1", 0, UINT16_MAX, &mRequest.arg1);
+        AddArgument("Arg2", 0, UINT8_MAX, &mRequest.arg2);
         ClusterCommand::AddArguments();
     }
 
@@ -74200,8 +73771,8 @@ public:
         __auto_type * params = [[CHIPTestClusterClusterTestEnumsRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.arg1 = [NSNumber numberWithUnsignedShort:mArg1];
-        params.arg2 = [NSNumber numberWithUnsignedChar:mArg2];
+        params.arg1 = [NSNumber numberWithUnsignedShort:chip::to_underlying(mRequest.arg1)];
+        params.arg2 = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.arg2)];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -74225,8 +73796,6 @@ public:
 
 private:
     chip::app::Clusters::TestCluster::Commands::TestEnumsRequest::Type mRequest;
-    chip::VendorId mArg1;
-    uint8_t mArg2;
 };
 
 /*
@@ -74237,8 +73806,7 @@ public:
     TestClusterTestNullableOptionalRequest()
         : ClusterCommand("test-nullable-optional-request")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Arg1", 0, UINT8_MAX, &mArg1);
+        AddArgument("Arg1", 0, UINT8_MAX, &mRequest.arg1);
         ClusterCommand::AddArguments();
     }
 
@@ -74252,8 +73820,14 @@ public:
         __auto_type * params = [[CHIPTestClusterClusterTestNullableOptionalRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        if (mArg1.HasValue()) {
-            params.arg1 = [NSNumber numberWithUnsignedChar:mArg1.Value()];
+        if (mRequest.arg1.HasValue()) {
+            if (mRequest.arg1.Value().IsNull()) {
+                params.arg1 = nil;
+            } else {
+                params.arg1 = [NSNumber numberWithUnsignedChar:mRequest.arg1.Value().Value()];
+            }
+        } else {
+            params.arg1 = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -74279,7 +73853,6 @@ public:
 
 private:
     chip::app::Clusters::TestCluster::Commands::TestNullableOptionalRequest::Type mRequest;
-    chip::Optional<uint8_t> mArg1;
 };
 
 /*
@@ -74296,13 +73869,12 @@ public:
         , mComplex_OptionalList(&mRequest.optionalList)
         , mComplex_NullableOptionalList(&mRequest.nullableOptionalList)
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("NullableInt", 0, UINT16_MAX, &mNullableInt);
-        AddArgument("OptionalInt", 0, UINT16_MAX, &mOptionalInt);
-        AddArgument("NullableOptionalInt", 0, UINT16_MAX, &mNullableOptionalInt);
-        AddArgument("NullableString", &mNullableString);
-        AddArgument("OptionalString", &mOptionalString);
-        AddArgument("NullableOptionalString", &mNullableOptionalString);
+        AddArgument("NullableInt", 0, UINT16_MAX, &mRequest.nullableInt);
+        AddArgument("OptionalInt", 0, UINT16_MAX, &mRequest.optionalInt);
+        AddArgument("NullableOptionalInt", 0, UINT16_MAX, &mRequest.nullableOptionalInt);
+        AddArgument("NullableString", &mRequest.nullableString);
+        AddArgument("OptionalString", &mRequest.optionalString);
+        AddArgument("NullableOptionalString", &mRequest.nullableOptionalString);
         AddArgument("NullableStruct", &mComplex_NullableStruct);
         AddArgument("OptionalStruct", &mComplex_OptionalStruct);
         AddArgument("NullableOptionalStruct", &mComplex_NullableOptionalStruct);
@@ -74322,25 +73894,50 @@ public:
         __auto_type * params = [[CHIPTestClusterClusterTestComplexNullableOptionalRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.nullableInt = [NSNumber numberWithUnsignedShort:mNullableInt];
-        if (mOptionalInt.HasValue()) {
-            params.optionalInt = [NSNumber numberWithUnsignedShort:mOptionalInt.Value()];
+        if (mRequest.nullableInt.IsNull()) {
+            params.nullableInt = nil;
+        } else {
+            params.nullableInt = [NSNumber numberWithUnsignedShort:mRequest.nullableInt.Value()];
         }
-        if (mNullableOptionalInt.HasValue()) {
-            params.nullableOptionalInt = [NSNumber numberWithUnsignedShort:mNullableOptionalInt.Value()];
+        if (mRequest.optionalInt.HasValue()) {
+            params.optionalInt = [NSNumber numberWithUnsignedShort:mRequest.optionalInt.Value()];
+        } else {
+            params.optionalInt = nil;
         }
-        params.nullableString = [[NSString alloc] initWithBytes:mNullableString.data()
-                                                         length:mNullableString.size()
-                                                       encoding:NSUTF8StringEncoding];
-        if (mOptionalString.HasValue()) {
-            params.optionalString = [[NSString alloc] initWithBytes:mOptionalString.Value().data()
-                                                             length:mOptionalString.Value().size()
+        if (mRequest.nullableOptionalInt.HasValue()) {
+            if (mRequest.nullableOptionalInt.Value().IsNull()) {
+                params.nullableOptionalInt = nil;
+            } else {
+                params.nullableOptionalInt = [NSNumber numberWithUnsignedShort:mRequest.nullableOptionalInt.Value().Value()];
+            }
+        } else {
+            params.nullableOptionalInt = nil;
+        }
+        if (mRequest.nullableString.IsNull()) {
+            params.nullableString = nil;
+        } else {
+            params.nullableString = [[NSString alloc] initWithBytes:mRequest.nullableString.Value().data()
+                                                             length:mRequest.nullableString.Value().size()
                                                            encoding:NSUTF8StringEncoding];
         }
-        if (mNullableOptionalString.HasValue()) {
-            params.nullableOptionalString = [[NSString alloc] initWithBytes:mNullableOptionalString.Value().data()
-                                                                     length:mNullableOptionalString.Value().size()
-                                                                   encoding:NSUTF8StringEncoding];
+        if (mRequest.optionalString.HasValue()) {
+            params.optionalString = [[NSString alloc] initWithBytes:mRequest.optionalString.Value().data()
+                                                             length:mRequest.optionalString.Value().size()
+                                                           encoding:NSUTF8StringEncoding];
+        } else {
+            params.optionalString = nil;
+        }
+        if (mRequest.nullableOptionalString.HasValue()) {
+            if (mRequest.nullableOptionalString.Value().IsNull()) {
+                params.nullableOptionalString = nil;
+            } else {
+                params.nullableOptionalString =
+                    [[NSString alloc] initWithBytes:mRequest.nullableOptionalString.Value().Value().data()
+                                             length:mRequest.nullableOptionalString.Value().Value().size()
+                                           encoding:NSUTF8StringEncoding];
+            }
+        } else {
+            params.nullableOptionalString = nil;
         }
         if (mRequest.nullableStruct.IsNull()) {
             params.nullableStruct = nil;
@@ -74466,12 +74063,6 @@ public:
 
 private:
     chip::app::Clusters::TestCluster::Commands::TestComplexNullableOptionalRequest::Type mRequest;
-    uint16_t mNullableInt;
-    chip::Optional<uint16_t> mOptionalInt;
-    chip::Optional<uint16_t> mNullableOptionalInt;
-    chip::ByteSpan mNullableString;
-    chip::Optional<chip::ByteSpan> mOptionalString;
-    chip::Optional<chip::ByteSpan> mNullableOptionalString;
     TypedComplexArgument<chip::app::DataModel::Nullable<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>>
         mComplex_NullableStruct;
     TypedComplexArgument<chip::Optional<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>> mComplex_OptionalStruct;
@@ -74497,7 +74088,6 @@ public:
         : ClusterCommand("simple-struct-echo-request")
         , mComplex_Arg1(&mRequest.arg1)
     {
-        (void) mRequest; // Might not be used if we have no complex args
         AddArgument("Arg1", &mComplex_Arg1);
         ClusterCommand::AddArguments();
     }
@@ -74557,7 +74147,6 @@ public:
     TestClusterTimedInvokeRequest()
         : ClusterCommand("timed-invoke-request")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -74590,7 +74179,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TimedInvokeRequest::Type mRequest;
 };
 
 /*
@@ -74601,8 +74189,7 @@ public:
     TestClusterTestSimpleOptionalArgumentRequest()
         : ClusterCommand("test-simple-optional-argument-request")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Arg1", 0, 1, &mArg1);
+        AddArgument("Arg1", 0, 1, &mRequest.arg1);
         ClusterCommand::AddArguments();
     }
 
@@ -74616,8 +74203,10 @@ public:
         __auto_type * params = [[CHIPTestClusterClusterTestSimpleOptionalArgumentRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        if (mArg1.HasValue()) {
-            params.arg1 = [NSNumber numberWithBool:mArg1.Value()];
+        if (mRequest.arg1.HasValue()) {
+            params.arg1 = [NSNumber numberWithBool:mRequest.arg1.Value()];
+        } else {
+            params.arg1 = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -74640,7 +74229,6 @@ public:
 
 private:
     chip::app::Clusters::TestCluster::Commands::TestSimpleOptionalArgumentRequest::Type mRequest;
-    chip::Optional<bool> mArg1;
 };
 
 /*
@@ -74651,10 +74239,9 @@ public:
     TestClusterTestEmitTestEventRequest()
         : ClusterCommand("test-emit-test-event-request")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Arg1", 0, UINT8_MAX, &mArg1);
-        AddArgument("Arg2", 0, UINT8_MAX, &mArg2);
-        AddArgument("Arg3", 0, 1, &mArg3);
+        AddArgument("Arg1", 0, UINT8_MAX, &mRequest.arg1);
+        AddArgument("Arg2", 0, UINT8_MAX, &mRequest.arg2);
+        AddArgument("Arg3", 0, 1, &mRequest.arg3);
         ClusterCommand::AddArguments();
     }
 
@@ -74668,9 +74255,9 @@ public:
         __auto_type * params = [[CHIPTestClusterClusterTestEmitTestEventRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.arg1 = [NSNumber numberWithUnsignedChar:mArg1];
-        params.arg2 = [NSNumber numberWithUnsignedChar:mArg2];
-        params.arg3 = [NSNumber numberWithBool:mArg3];
+        params.arg1 = [NSNumber numberWithUnsignedChar:mRequest.arg1];
+        params.arg2 = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.arg2)];
+        params.arg3 = [NSNumber numberWithBool:mRequest.arg3];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -74694,9 +74281,6 @@ public:
 
 private:
     chip::app::Clusters::TestCluster::Commands::TestEmitTestEventRequest::Type mRequest;
-    uint8_t mArg1;
-    uint8_t mArg2;
-    bool mArg3;
 };
 
 /*
@@ -74707,8 +74291,7 @@ public:
     TestClusterTestEmitTestFabricScopedEventRequest()
         : ClusterCommand("test-emit-test-fabric-scoped-event-request")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Arg1", 0, UINT8_MAX, &mArg1);
+        AddArgument("Arg1", 0, UINT8_MAX, &mRequest.arg1);
         ClusterCommand::AddArguments();
     }
 
@@ -74722,7 +74305,7 @@ public:
         __auto_type * params = [[CHIPTestClusterClusterTestEmitTestFabricScopedEventRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.arg1 = [NSNumber numberWithUnsignedChar:mArg1];
+        params.arg1 = [NSNumber numberWithUnsignedChar:mRequest.arg1];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -74748,7 +74331,6 @@ public:
 
 private:
     chip::app::Clusters::TestCluster::Commands::TestEmitTestFabricScopedEventRequest::Type mRequest;
-    uint8_t mArg1;
 };
 
 /*
@@ -84487,9 +84069,8 @@ public:
     ThermostatSetpointRaiseLower()
         : ClusterCommand("setpoint-raise-lower")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("Mode", 0, UINT8_MAX, &mMode);
-        AddArgument("Amount", INT8_MIN, INT8_MAX, &mAmount);
+        AddArgument("Mode", 0, UINT8_MAX, &mRequest.mode);
+        AddArgument("Amount", INT8_MIN, INT8_MAX, &mRequest.amount);
         ClusterCommand::AddArguments();
     }
 
@@ -84503,8 +84084,8 @@ public:
         __auto_type * params = [[CHIPThermostatClusterSetpointRaiseLowerParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.mode = [NSNumber numberWithUnsignedChar:mMode];
-        params.amount = [NSNumber numberWithChar:mAmount];
+        params.mode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.mode)];
+        params.amount = [NSNumber numberWithChar:mRequest.amount];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -84526,8 +84107,6 @@ public:
 
 private:
     chip::app::Clusters::Thermostat::Commands::SetpointRaiseLower::Type mRequest;
-    uint8_t mMode;
-    int8_t mAmount;
 };
 
 /*
@@ -84539,10 +84118,9 @@ public:
         : ClusterCommand("set-weekly-schedule")
         , mComplex_Payload(&mRequest.payload)
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("NumberOfTransitionsForSequence", 0, UINT8_MAX, &mNumberOfTransitionsForSequence);
-        AddArgument("DayOfWeekForSequence", 0, UINT8_MAX, &mDayOfWeekForSequence);
-        AddArgument("ModeForSequence", 0, UINT8_MAX, &mModeForSequence);
+        AddArgument("NumberOfTransitionsForSequence", 0, UINT8_MAX, &mRequest.numberOfTransitionsForSequence);
+        AddArgument("DayOfWeekForSequence", 0, UINT8_MAX, &mRequest.dayOfWeekForSequence);
+        AddArgument("ModeForSequence", 0, UINT8_MAX, &mRequest.modeForSequence);
         AddArgument("Payload", &mComplex_Payload);
         ClusterCommand::AddArguments();
     }
@@ -84557,9 +84135,9 @@ public:
         __auto_type * params = [[CHIPThermostatClusterSetWeeklyScheduleParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.numberOfTransitionsForSequence = [NSNumber numberWithUnsignedChar:mNumberOfTransitionsForSequence];
-        params.dayOfWeekForSequence = [NSNumber numberWithUnsignedChar:mDayOfWeekForSequence];
-        params.modeForSequence = [NSNumber numberWithUnsignedChar:mModeForSequence];
+        params.numberOfTransitionsForSequence = [NSNumber numberWithUnsignedChar:mRequest.numberOfTransitionsForSequence];
+        params.dayOfWeekForSequence = [NSNumber numberWithUnsignedChar:mRequest.dayOfWeekForSequence.Raw()];
+        params.modeForSequence = [NSNumber numberWithUnsignedChar:mRequest.modeForSequence.Raw()];
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
             for (auto & entry_0 : mRequest.payload) {
@@ -84590,9 +84168,6 @@ public:
 
 private:
     chip::app::Clusters::Thermostat::Commands::SetWeeklySchedule::Type mRequest;
-    uint8_t mNumberOfTransitionsForSequence;
-    uint8_t mDayOfWeekForSequence;
-    uint8_t mModeForSequence;
     TypedComplexArgument<chip::app::DataModel::List<const uint8_t>> mComplex_Payload;
 };
 
@@ -84604,9 +84179,8 @@ public:
     ThermostatGetWeeklySchedule()
         : ClusterCommand("get-weekly-schedule")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("DaysToReturn", 0, UINT8_MAX, &mDaysToReturn);
-        AddArgument("ModeToReturn", 0, UINT8_MAX, &mModeToReturn);
+        AddArgument("DaysToReturn", 0, UINT8_MAX, &mRequest.daysToReturn);
+        AddArgument("ModeToReturn", 0, UINT8_MAX, &mRequest.modeToReturn);
         ClusterCommand::AddArguments();
     }
 
@@ -84620,8 +84194,8 @@ public:
         __auto_type * params = [[CHIPThermostatClusterGetWeeklyScheduleParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.daysToReturn = [NSNumber numberWithUnsignedChar:mDaysToReturn];
-        params.modeToReturn = [NSNumber numberWithUnsignedChar:mModeToReturn];
+        params.daysToReturn = [NSNumber numberWithUnsignedChar:mRequest.daysToReturn.Raw()];
+        params.modeToReturn = [NSNumber numberWithUnsignedChar:mRequest.modeToReturn.Raw()];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -84645,8 +84219,6 @@ public:
 
 private:
     chip::app::Clusters::Thermostat::Commands::GetWeeklySchedule::Type mRequest;
-    uint8_t mDaysToReturn;
-    uint8_t mModeToReturn;
 };
 
 /*
@@ -84657,7 +84229,6 @@ public:
     ThermostatClearWeeklySchedule()
         : ClusterCommand("clear-weekly-schedule")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -84690,7 +84261,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::Thermostat::Commands::ClearWeeklySchedule::Type mRequest;
 };
 
 /*
@@ -84701,7 +84271,6 @@ public:
     ThermostatGetRelayStatusLog()
         : ClusterCommand("get-relay-status-log")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -84736,7 +84305,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::Thermostat::Commands::GetRelayStatusLog::Type mRequest;
 };
 
 /*
@@ -89980,7 +89548,6 @@ public:
     ThreadNetworkDiagnosticsResetCounts()
         : ClusterCommand("reset-counts")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -90015,7 +89582,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::ThreadNetworkDiagnostics::Commands::ResetCounts::Type mRequest;
 };
 
 /*
@@ -97310,7 +96876,6 @@ public:
     WiFiNetworkDiagnosticsResetCounts()
         : ClusterCommand("reset-counts")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -97345,7 +96910,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::WiFiNetworkDiagnostics::Commands::ResetCounts::Type mRequest;
 };
 
 /*
@@ -98744,7 +98308,6 @@ public:
     WindowCoveringUpOrOpen()
         : ClusterCommand("up-or-open")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -98777,7 +98340,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::WindowCovering::Commands::UpOrOpen::Type mRequest;
 };
 
 /*
@@ -98788,7 +98350,6 @@ public:
     WindowCoveringDownOrClose()
         : ClusterCommand("down-or-close")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -98821,7 +98382,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::WindowCovering::Commands::DownOrClose::Type mRequest;
 };
 
 /*
@@ -98832,7 +98392,6 @@ public:
     WindowCoveringStopMotion()
         : ClusterCommand("stop-motion")
     {
-        (void) mRequest; // Might not be used if we have no complex args
         ClusterCommand::AddArguments();
     }
 
@@ -98865,7 +98424,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::WindowCovering::Commands::StopMotion::Type mRequest;
 };
 
 /*
@@ -98876,8 +98434,7 @@ public:
     WindowCoveringGoToLiftValue()
         : ClusterCommand("go-to-lift-value")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("LiftValue", 0, UINT16_MAX, &mLiftValue);
+        AddArgument("LiftValue", 0, UINT16_MAX, &mRequest.liftValue);
         ClusterCommand::AddArguments();
     }
 
@@ -98891,7 +98448,7 @@ public:
         __auto_type * params = [[CHIPWindowCoveringClusterGoToLiftValueParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.liftValue = [NSNumber numberWithUnsignedShort:mLiftValue];
+        params.liftValue = [NSNumber numberWithUnsignedShort:mRequest.liftValue];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -98913,7 +98470,6 @@ public:
 
 private:
     chip::app::Clusters::WindowCovering::Commands::GoToLiftValue::Type mRequest;
-    uint16_t mLiftValue;
 };
 
 /*
@@ -98924,9 +98480,8 @@ public:
     WindowCoveringGoToLiftPercentage()
         : ClusterCommand("go-to-lift-percentage")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("LiftPercentageValue", 0, UINT8_MAX, &mLiftPercentageValue);
-        AddArgument("LiftPercent100thsValue", 0, UINT16_MAX, &mLiftPercent100thsValue);
+        AddArgument("LiftPercentageValue", 0, UINT8_MAX, &mRequest.liftPercentageValue);
+        AddArgument("LiftPercent100thsValue", 0, UINT16_MAX, &mRequest.liftPercent100thsValue);
         ClusterCommand::AddArguments();
     }
 
@@ -98940,9 +98495,11 @@ public:
         __auto_type * params = [[CHIPWindowCoveringClusterGoToLiftPercentageParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.liftPercentageValue = [NSNumber numberWithUnsignedChar:mLiftPercentageValue];
-        if (mLiftPercent100thsValue.HasValue()) {
-            params.liftPercent100thsValue = [NSNumber numberWithUnsignedShort:mLiftPercent100thsValue.Value()];
+        params.liftPercentageValue = [NSNumber numberWithUnsignedChar:mRequest.liftPercentageValue];
+        if (mRequest.liftPercent100thsValue.HasValue()) {
+            params.liftPercent100thsValue = [NSNumber numberWithUnsignedShort:mRequest.liftPercent100thsValue.Value()];
+        } else {
+            params.liftPercent100thsValue = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -98965,8 +98522,6 @@ public:
 
 private:
     chip::app::Clusters::WindowCovering::Commands::GoToLiftPercentage::Type mRequest;
-    chip::Percent mLiftPercentageValue;
-    chip::Optional<chip::Percent100ths> mLiftPercent100thsValue;
 };
 
 /*
@@ -98977,8 +98532,7 @@ public:
     WindowCoveringGoToTiltValue()
         : ClusterCommand("go-to-tilt-value")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("TiltValue", 0, UINT16_MAX, &mTiltValue);
+        AddArgument("TiltValue", 0, UINT16_MAX, &mRequest.tiltValue);
         ClusterCommand::AddArguments();
     }
 
@@ -98992,7 +98546,7 @@ public:
         __auto_type * params = [[CHIPWindowCoveringClusterGoToTiltValueParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.tiltValue = [NSNumber numberWithUnsignedShort:mTiltValue];
+        params.tiltValue = [NSNumber numberWithUnsignedShort:mRequest.tiltValue];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -99014,7 +98568,6 @@ public:
 
 private:
     chip::app::Clusters::WindowCovering::Commands::GoToTiltValue::Type mRequest;
-    uint16_t mTiltValue;
 };
 
 /*
@@ -99025,9 +98578,8 @@ public:
     WindowCoveringGoToTiltPercentage()
         : ClusterCommand("go-to-tilt-percentage")
     {
-        (void) mRequest; // Might not be used if we have no complex args
-        AddArgument("TiltPercentageValue", 0, UINT8_MAX, &mTiltPercentageValue);
-        AddArgument("TiltPercent100thsValue", 0, UINT16_MAX, &mTiltPercent100thsValue);
+        AddArgument("TiltPercentageValue", 0, UINT8_MAX, &mRequest.tiltPercentageValue);
+        AddArgument("TiltPercent100thsValue", 0, UINT16_MAX, &mRequest.tiltPercent100thsValue);
         ClusterCommand::AddArguments();
     }
 
@@ -99041,9 +98593,11 @@ public:
         __auto_type * params = [[CHIPWindowCoveringClusterGoToTiltPercentageParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.tiltPercentageValue = [NSNumber numberWithUnsignedChar:mTiltPercentageValue];
-        if (mTiltPercent100thsValue.HasValue()) {
-            params.tiltPercent100thsValue = [NSNumber numberWithUnsignedShort:mTiltPercent100thsValue.Value()];
+        params.tiltPercentageValue = [NSNumber numberWithUnsignedChar:mRequest.tiltPercentageValue];
+        if (mRequest.tiltPercent100thsValue.HasValue()) {
+            params.tiltPercent100thsValue = [NSNumber numberWithUnsignedShort:mRequest.tiltPercent100thsValue.Value()];
+        } else {
+            params.tiltPercent100thsValue = nil;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -99066,8 +98620,6 @@ public:
 
 private:
     chip::app::Clusters::WindowCovering::Commands::GoToTiltPercentage::Type mRequest;
-    chip::Percent mTiltPercentageValue;
-    chip::Optional<chip::Percent100ths> mTiltPercent100thsValue;
 };
 
 /*
