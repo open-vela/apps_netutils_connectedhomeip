@@ -452,7 +452,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -2135,7 +2135,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -2451,7 +2451,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -2879,7 +2879,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -3217,7 +3217,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -3450,7 +3450,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -3610,7 +3610,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -3865,7 +3865,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -5081,7 +5081,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -8652,7 +8652,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -9575,7 +9575,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -10328,7 +10328,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -10717,7 +10717,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -11375,7 +11375,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -12372,7 +12372,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -12746,7 +12746,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -13113,7 +13113,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -13503,7 +13503,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -13940,7 +13940,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -14291,7 +14291,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -14780,7 +14780,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -15647,7 +15647,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -16336,7 +16336,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -17209,7 +17209,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -17814,7 +17814,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -18173,7 +18173,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -18684,7 +18684,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -20122,7 +20122,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -21621,7 +21621,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -22328,7 +22328,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -22983,7 +22983,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -23483,7 +23483,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -23646,7 +23646,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -23867,7 +23867,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -24126,7 +24126,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -24398,7 +24398,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -24559,7 +24559,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -24892,7 +24892,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -25267,7 +25267,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -25423,7 +25423,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -25691,7 +25691,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -25929,7 +25929,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -26219,7 +26219,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -26688,7 +26688,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -26949,7 +26949,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -27187,7 +27187,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -27517,7 +27517,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -28012,7 +28012,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -28532,7 +28532,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -28998,7 +28998,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -29471,7 +29471,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -29860,7 +29860,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -30196,7 +30196,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -30467,7 +30467,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -30761,7 +30761,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -31062,7 +31062,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -31352,7 +31352,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -31646,7 +31646,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -31920,7 +31920,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -32222,7 +32222,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -32515,7 +32515,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -32811,7 +32811,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -33125,7 +33125,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -33416,7 +33416,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -33645,7 +33645,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -33912,7 +33912,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -34318,7 +34318,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -34542,7 +34542,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -34917,7 +34917,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -35209,7 +35209,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -35314,7 +35314,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -35399,7 +35399,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -35484,7 +35484,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -35569,7 +35569,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -35654,7 +35654,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -35739,7 +35739,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -35831,7 +35831,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -35941,7 +35941,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -36042,7 +36042,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -36171,7 +36171,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -36366,7 +36366,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -36555,7 +36555,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -36729,7 +36729,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -36932,7 +36932,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -37017,7 +37017,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -37116,7 +37116,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -37286,7 +37286,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -37520,7 +37520,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -37670,7 +37670,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -37932,7 +37932,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -38384,7 +38384,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -38818,7 +38818,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(300)); }
@@ -39273,7 +39273,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(300)); }
@@ -39761,7 +39761,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(500)); }
@@ -40313,7 +40313,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -40635,7 +40635,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -40966,7 +40966,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -41158,7 +41158,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -41414,7 +41414,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -41749,7 +41749,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -42674,7 +42674,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -43854,7 +43854,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -44357,7 +44357,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -44622,7 +44622,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -44878,7 +44878,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -45177,7 +45177,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -45527,7 +45527,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -46148,7 +46148,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -47511,7 +47511,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -47888,7 +47888,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -48379,7 +48379,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -48774,7 +48774,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -49006,7 +49006,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -49232,7 +49232,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -49459,7 +49459,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -49660,7 +49660,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -50136,7 +50136,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -50618,7 +50618,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -50802,7 +50802,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -51029,7 +51029,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -51229,7 +51229,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -51502,7 +51502,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -52623,7 +52623,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -54000,7 +54000,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -54223,7 +54223,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -54604,7 +54604,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -54985,7 +54985,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -55821,7 +55821,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -58134,7 +58134,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -58278,7 +58278,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -58501,7 +58501,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -58637,7 +58637,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -59279,7 +59279,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -60634,7 +60634,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -60918,7 +60918,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -61411,7 +61411,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -61565,7 +61565,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -61924,7 +61924,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -62738,7 +62738,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -63456,7 +63456,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -63925,7 +63925,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -64239,7 +64239,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -64576,7 +64576,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -64955,7 +64955,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -65275,7 +65275,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -65507,7 +65507,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -65845,7 +65845,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -66201,7 +66201,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -66403,7 +66403,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -66649,7 +66649,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -66904,7 +66904,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -67035,7 +67035,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -67191,7 +67191,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -67354,7 +67354,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -67784,7 +67784,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -68468,7 +68468,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -68743,7 +68743,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -68873,7 +68873,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -69317,7 +69317,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -73075,7 +73075,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -84686,7 +84686,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -85186,7 +85186,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -85293,7 +85293,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -86163,7 +86163,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -88685,7 +88685,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -88859,7 +88859,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -89182,7 +89182,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -89839,7 +89839,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -90604,7 +90604,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -90758,7 +90758,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -91263,7 +91263,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -91977,7 +91977,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -92287,7 +92287,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -92625,7 +92625,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -93011,7 +93011,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -93255,7 +93255,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -93553,7 +93553,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -93949,7 +93949,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -94122,7 +94122,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -94232,7 +94232,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -94435,7 +94435,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -95386,7 +95386,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -99992,7 +99992,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -100901,7 +100901,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -103671,7 +103671,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -104064,7 +104064,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -104834,7 +104834,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
