@@ -161,6 +161,8 @@ public:
         printf("Test_TC_TSUIC_2_2\n");
         printf("Test_TC_DIAG_TH_NW_1_1\n");
         printf("Test_TC_DIAG_TH_NW_1_2\n");
+        printf("Test_TC_DIAG_TH_NW_2_2\n");
+        printf("Test_TC_DIAG_TH_NW_2_3\n");
         printf("Test_TC_LC_1_2\n");
         printf("Test_TC_WIFIDIAG_1_1\n");
         printf("Test_TC_WIFIDIAG_3_1\n");
@@ -217,7 +219,9 @@ public:
         printf("DL_UsersAndCredentials\n");
         printf("DL_LockUnlock\n");
         printf("DL_Schedules\n");
-        printf("Test_TC_DL_1_3\n");
+        printf("Test_TC_DL_2_2\n");
+        printf("Test_TC_DL_2_3\n");
+        printf("Test_TC_DL_2_4\n");
         printf("TestGroupsCluster\n");
         printf("TestGroupKeyManagementCluster\n");
 
@@ -57644,6 +57648,1092 @@ private:
     }
 };
 
+class Test_TC_DIAG_TH_NW_2_2 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_DIAG_TH_NW_2_2()
+        : TestCommandBridge("Test_TC_DIAG_TH_NW_2_2")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_DIAG_TH_NW_2_2() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DIAG_TH_NW_2_2\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DIAG_TH_NW_2_2\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads TxTotalCount attribute value from DUT\n");
+            err = TestThReadsTxTotalCountAttributeValueFromDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads TxUnicastCount attribute value from DUT\n");
+            err = TestThReadsTxUnicastCountAttributeValueFromDut_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads TxBroadcastCount attribute value from DUT\n");
+            err = TestThReadsTxBroadcastCountAttributeValueFromDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads TxAckRequestedCount attribute value from DUT\n");
+            err = TestThReadsTxAckRequestedCountAttributeValueFromDut_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads TxAckedCount attribute value from DUT\n");
+            err = TestThReadsTxAckedCountAttributeValueFromDut_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads TxNoAckRequestedCount attribute value from DUT\n");
+            err = TestThReadsTxNoAckRequestedCountAttributeValueFromDut_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads TxDataCount attribute value from DUT\n");
+            err = TestThReadsTxDataCountAttributeValueFromDut_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads TxDataPollCount attribute value from DUT\n");
+            err = TestThReadsTxDataPollCountAttributeValueFromDut_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads TxBeaconCount attribute value from DUT\n");
+            err = TestThReadsTxBeaconCountAttributeValueFromDut_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads TxBeaconRequestCount attribute value from DUT\n");
+            err = TestThReadsTxBeaconRequestCountAttributeValueFromDut_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads TxOtherCount attribute value from DUT\n");
+            err = TestThReadsTxOtherCountAttributeValueFromDut_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH reads TxRetryCount attribute value from DUT\n");
+            err = TestThReadsTxRetryCountAttributeValueFromDut_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH reads TxDirectMaxRetryExpiryCount attribute value from DUT\n");
+            err = TestThReadsTxDirectMaxRetryExpiryCountAttributeValueFromDut_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : TH reads TxIndirectMaxRetryExpiryCount attribute value from DUT\n");
+            err = TestThReadsTxIndirectMaxRetryExpiryCountAttributeValueFromDut_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH reads TxErrCcaCount attribute value from DUT\n");
+            err = TestThReadsTxErrCcaCountAttributeValueFromDut_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : TH reads TxErrAbortCount attribute value from DUT\n");
+            err = TestThReadsTxErrAbortCountAttributeValueFromDut_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : TH reads TxErrBusyChannelCount attribute value from DUT\n");
+            err = TestThReadsTxErrBusyChannelCountAttributeValueFromDut_17();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        WaitForMs(0);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 18;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        WaitForCommissionee("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTxTotalCountAttributeValueFromDut_1()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeTxTotalCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads TxTotalCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("txTotalCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTxUnicastCountAttributeValueFromDut_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeTxUnicastCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads TxUnicastCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("txUnicastCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTxBroadcastCountAttributeValueFromDut_3()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeTxBroadcastCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads TxBroadcastCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("txBroadcastCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTxAckRequestedCountAttributeValueFromDut_4()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeTxAckRequestedCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads TxAckRequestedCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("txAckRequestedCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTxAckedCountAttributeValueFromDut_5()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeTxAckedCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads TxAckedCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("txAckedCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTxNoAckRequestedCountAttributeValueFromDut_6()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeTxNoAckRequestedCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads TxNoAckRequestedCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("txNoAckRequestedCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTxDataCountAttributeValueFromDut_7()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeTxDataCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads TxDataCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("txDataCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTxDataPollCountAttributeValueFromDut_8()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeTxDataPollCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads TxDataPollCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("txDataPollCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTxBeaconCountAttributeValueFromDut_9()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeTxBeaconCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads TxBeaconCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("txBeaconCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTxBeaconRequestCountAttributeValueFromDut_10()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeTxBeaconRequestCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads TxBeaconRequestCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("txBeaconRequestCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTxOtherCountAttributeValueFromDut_11()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeTxOtherCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads TxOtherCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("txOtherCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTxRetryCountAttributeValueFromDut_12()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeTxRetryCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads TxRetryCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("txRetryCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTxDirectMaxRetryExpiryCountAttributeValueFromDut_13()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeTxDirectMaxRetryExpiryCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"TH reads TxDirectMaxRetryExpiryCount attribute value from DUT Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                VerifyOrReturn(CheckConstraintType("txDirectMaxRetryExpiryCount", "", "uint32"));
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTxIndirectMaxRetryExpiryCountAttributeValueFromDut_14()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeTxIndirectMaxRetryExpiryCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"TH reads TxIndirectMaxRetryExpiryCount attribute value from DUT Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                VerifyOrReturn(CheckConstraintType("txIndirectMaxRetryExpiryCount", "", "uint32"));
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTxErrCcaCountAttributeValueFromDut_15()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeTxErrCcaCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads TxErrCcaCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("txErrCcaCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTxErrAbortCountAttributeValueFromDut_16()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeTxErrAbortCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads TxErrAbortCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("txErrAbortCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTxErrBusyChannelCountAttributeValueFromDut_17()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeTxErrBusyChannelCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads TxErrBusyChannelCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("txErrBusyChannelCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_DIAG_TH_NW_2_3 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_DIAG_TH_NW_2_3()
+        : TestCommandBridge("Test_TC_DIAG_TH_NW_2_3")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_DIAG_TH_NW_2_3() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DIAG_TH_NW_2_3\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DIAG_TH_NW_2_3\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads RxTotalCount attribute value from DUT\n");
+            err = TestThReadsRxTotalCountAttributeValueFromDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads RxUnicastCount attribute value from DUT\n");
+            err = TestThReadsRxUnicastCountAttributeValueFromDut_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads RxBroadcastCount attribute value from DUT\n");
+            err = TestThReadsRxBroadcastCountAttributeValueFromDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads RxDataCount attribute value from DUT\n");
+            err = TestThReadsRxDataCountAttributeValueFromDut_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads RxDataPollCount attribute value from DUT\n");
+            err = TestThReadsRxDataPollCountAttributeValueFromDut_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads RxBeaconCount attribute value from DUT\n");
+            err = TestThReadsRxBeaconCountAttributeValueFromDut_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads RxBeaconRequestCount attribute value from DUT\n");
+            err = TestThReadsRxBeaconRequestCountAttributeValueFromDut_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads RxOtherCount attribute value from DUT\n");
+            err = TestThReadsRxOtherCountAttributeValueFromDut_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads RxAddressFilteredCount attribute value from DUT\n");
+            err = TestThReadsRxAddressFilteredCountAttributeValueFromDut_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads RxDestAddrFilteredCount attribute value from DUT\n");
+            err = TestThReadsRxDestAddrFilteredCountAttributeValueFromDut_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads RxDuplicatedCount attribute value from DUT\n");
+            err = TestThReadsRxDuplicatedCountAttributeValueFromDut_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH reads RxErrNoFrameCount attribute value from DUT\n");
+            err = TestThReadsRxErrNoFrameCountAttributeValueFromDut_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH reads RxErrUnknownNeighborCount attribute value from DUT\n");
+            err = TestThReadsRxErrUnknownNeighborCountAttributeValueFromDut_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 14 : TH reads RxErrInvalidScrAddrCount attribute value from DUT and verify data type\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsRxErrInvalidScrAddrCountAttributeValueFromDutAndVerifyDataType_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH reads RxErrSecCount attribute value from DUT\n");
+            err = TestThReadsRxErrSecCountAttributeValueFromDut_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : TH reads RxErrFcsCount attribute value from DUT\n");
+            err = TestThReadsRxErrFcsCountAttributeValueFromDut_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : TH reads RxErrOtherCount attribute value from DUT\n");
+            err = TestThReadsRxErrOtherCountAttributeValueFromDut_17();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        WaitForMs(0);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 18;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        WaitForCommissionee("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsRxTotalCountAttributeValueFromDut_1()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeRxTotalCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads RxTotalCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("rxTotalCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsRxUnicastCountAttributeValueFromDut_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeRxUnicastCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads RxUnicastCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("rxUnicastCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsRxBroadcastCountAttributeValueFromDut_3()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeRxBroadcastCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads RxBroadcastCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("rxBroadcastCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsRxDataCountAttributeValueFromDut_4()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeRxDataCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads RxDataCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("rxDataCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsRxDataPollCountAttributeValueFromDut_5()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeRxDataPollCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads RxDataPollCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("rxDataPollCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsRxBeaconCountAttributeValueFromDut_6()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeRxBeaconCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads RxBeaconCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("rxBeaconCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsRxBeaconRequestCountAttributeValueFromDut_7()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeRxBeaconRequestCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads RxBeaconRequestCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("rxBeaconRequestCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsRxOtherCountAttributeValueFromDut_8()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeRxOtherCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads RxOtherCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("rxOtherCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsRxAddressFilteredCountAttributeValueFromDut_9()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeRxAddressFilteredCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads RxAddressFilteredCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("rxAddressFilteredCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsRxDestAddrFilteredCountAttributeValueFromDut_10()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeRxDestAddrFilteredCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads RxDestAddrFilteredCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("rxDestAddrFilteredCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsRxDuplicatedCountAttributeValueFromDut_11()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeRxDuplicatedCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads RxDuplicatedCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("rxDuplicatedCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsRxErrNoFrameCountAttributeValueFromDut_12()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeRxErrNoFrameCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads RxErrNoFrameCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("rxErrNoFrameCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsRxErrUnknownNeighborCountAttributeValueFromDut_13()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeRxErrUnknownNeighborCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"TH reads RxErrUnknownNeighborCount attribute value from DUT Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                VerifyOrReturn(CheckConstraintType("rxErrUnknownNeighborCount", "", "uint32"));
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsRxErrInvalidScrAddrCountAttributeValueFromDutAndVerifyDataType_14()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        UserPrompt("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsRxErrSecCountAttributeValueFromDut_15()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeRxErrSecCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads RxErrSecCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("rxErrSecCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsRxErrFcsCountAttributeValueFromDut_16()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeRxErrFcsCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads RxErrFcsCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("rxErrFcsCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsRxErrOtherCountAttributeValueFromDut_17()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThreadNetworkDiagnostics * cluster = [[CHIPTestThreadNetworkDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeRxErrOtherCountWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads RxErrOtherCount attribute value from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("rxErrOtherCount", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_LC_1_2 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -102996,11 +104086,11 @@ private:
     }
 };
 
-class Test_TC_DL_1_3 : public TestCommandBridge {
+class Test_TC_DL_2_2 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_DL_1_3()
-        : TestCommandBridge("Test_TC_DL_1_3")
+    Test_TC_DL_2_2()
+        : TestCommandBridge("Test_TC_DL_2_2")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -103010,7 +104100,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_DL_1_3() {}
+    ~Test_TC_DL_2_2() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -103018,11 +104108,537 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DL_1_3\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DL_2_2\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DL_1_3\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DL_2_2\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 1 : TH writes the RequirePINforRemoteOperation attribute value as False on the DUT\n");
+            err = TestThWritesTheRequirePINforRemoteOperationAttributeValueAsFalseOnTheDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends Lock Door Command to the DUT without PINCode\n");
+            err = TestThSendsLockDoorCommandToTheDutWithoutPINCode_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : TH writes the RequirePINforRemoteOperation attribute value as True on the DUT\n");
+            err = TestThWritesTheRequirePINforRemoteOperationAttributeValueAsTrueOnTheDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Create new PIN credential and lock/unlock user\n");
+            err = TestCreateNewPinCredentialAndLockUnlockUser_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH sends Lock Door Command to the DUT with valid PINCode\n");
+            err = TestThSendsLockDoorCommandToTheDutWithValidPINCode_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH sends Lock Door Command to the DUT without any argument PINCode\n");
+            err = TestThSendsLockDoorCommandToTheDutWithoutAnyArgumentPINCode_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH writes WrongCodeEntryLimit attribute value as 3 on the DUT\n");
+            err = TestThWritesWrongCodeEntryLimitAttributeValueAs3OnTheDut_7();
+            break;
+        case 8:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 8 : TH writes UserCodeTemporaryDisableTime attribute value as 5 seconds on the DUT\n");
+            err = TestThWritesUserCodeTemporaryDisableTimeAttributeValueAs5SecondsOnTheDut_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
+            err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
+            err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
+            err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
+            err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH reads UserCodeTemporaryDisableTime attribute from DUT\n");
+            err = TestThReadsUserCodeTemporaryDisableTimeAttributeFromDut_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : TH sends Lock Door Command to the DUT with valid PINCode\n");
+            err = TestThSendsLockDoorCommandToTheDutWithValidPINCode_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Clean the created credential\n");
+            err = TestCleanTheCreatedCredential_15();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        WaitForMs(0);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 16;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        WaitForCommissionee("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThWritesTheRequirePINforRemoteOperationAttributeValueAsFalseOnTheDut_1()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id requirePINforRemoteOperationArgument;
+        requirePINforRemoteOperationArgument = [NSNumber numberWithBool:false];
+        [cluster writeAttributeRequirePINforRemoteOperationWithValue:requirePINforRemoteOperationArgument
+                                                   completionHandler:^(NSError * _Nullable err) {
+                                                       NSLog(@"TH writes the RequirePINforRemoteOperation attribute value as False "
+                                                             @"on the DUT Error: %@",
+                                                           err);
+
+                                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                       NextTest();
+                                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithoutPINCode_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterLockDoorParams alloc] init];
+        params.pinCode = [[NSData alloc] initWithBytes:"" length:0];
+        [cluster lockDoorWithParams:params
+                  completionHandler:^(NSError * _Nullable err) {
+                      NSLog(@"TH sends Lock Door Command to the DUT without PINCode Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThWritesTheRequirePINforRemoteOperationAttributeValueAsTrueOnTheDut_3()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id requirePINforRemoteOperationArgument;
+        requirePINforRemoteOperationArgument = [NSNumber numberWithBool:true];
+        [cluster writeAttributeRequirePINforRemoteOperationWithValue:requirePINforRemoteOperationArgument
+                                                   completionHandler:^(NSError * _Nullable err) {
+                                                       NSLog(@"TH writes the RequirePINforRemoteOperation attribute value as True "
+                                                             @"on the DUT Error: %@",
+                                                           err);
+
+                                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                       NextTest();
+                                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialAndLockUnlockUser_4()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential and lock/unlock user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithValidPINCode_5()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterLockDoorParams alloc] init];
+        params.pinCode = [[NSData alloc] initWithBytes:"123456" length:6];
+        [cluster lockDoorWithParams:params
+                  completionHandler:^(NSError * _Nullable err) {
+                      NSLog(@"TH sends Lock Door Command to the DUT with valid PINCode Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithoutAnyArgumentPINCode_6()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterLockDoorParams alloc] init];
+        params.pinCode = [[NSData alloc] initWithBytes:"" length:0];
+        [cluster lockDoorWithParams:params
+                  completionHandler:^(NSError * _Nullable err) {
+                      NSLog(@"TH sends Lock Door Command to the DUT without any argument PINCode Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThWritesWrongCodeEntryLimitAttributeValueAs3OnTheDut_7()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id wrongCodeEntryLimitArgument;
+        wrongCodeEntryLimitArgument = [NSNumber numberWithUnsignedChar:3];
+        [cluster
+            writeAttributeWrongCodeEntryLimitWithValue:wrongCodeEntryLimitArgument
+                                     completionHandler:^(NSError * _Nullable err) {
+                                         NSLog(@"TH writes WrongCodeEntryLimit attribute value as 3 on the DUT Error: %@", err);
+
+                                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                         NextTest();
+                                     }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThWritesUserCodeTemporaryDisableTimeAttributeValueAs5SecondsOnTheDut_8()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id userCodeTemporaryDisableTimeArgument;
+        userCodeTemporaryDisableTimeArgument = [NSNumber numberWithUnsignedChar:5];
+        [cluster writeAttributeUserCodeTemporaryDisableTimeWithValue:userCodeTemporaryDisableTimeArgument
+                                                   completionHandler:^(NSError * _Nullable err) {
+                                                       NSLog(@"TH writes UserCodeTemporaryDisableTime attribute value as 5 seconds "
+                                                             @"on the DUT Error: %@",
+                                                           err);
+
+                                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                       NextTest();
+                                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_9()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterLockDoorParams alloc] init];
+        params.pinCode = [[NSData alloc] initWithBytes:"12345" length:5];
+        [cluster lockDoorWithParams:params
+                  completionHandler:^(NSError * _Nullable err) {
+                      NSLog(@"TH sends Lock Door Command to the DUT with invalid PINCode Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_10()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterLockDoorParams alloc] init];
+        params.pinCode = [[NSData alloc] initWithBytes:"54321" length:5];
+        [cluster lockDoorWithParams:params
+                  completionHandler:^(NSError * _Nullable err) {
+                      NSLog(@"TH sends Lock Door Command to the DUT with invalid PINCode Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_11()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterLockDoorParams alloc] init];
+        params.pinCode = [[NSData alloc] initWithBytes:"987623" length:6];
+        [cluster lockDoorWithParams:params
+                  completionHandler:^(NSError * _Nullable err) {
+                      NSLog(@"TH sends Lock Door Command to the DUT with invalid PINCode Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_12()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterLockDoorParams alloc] init];
+        params.pinCode = [[NSData alloc] initWithBytes:"67890" length:5];
+        [cluster lockDoorWithParams:params
+                  completionHandler:^(NSError * _Nullable err) {
+                      NSLog(@"TH sends Lock Door Command to the DUT with invalid PINCode Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsUserCodeTemporaryDisableTimeAttributeFromDut_13()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeUserCodeTemporaryDisableTimeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"TH reads UserCodeTemporaryDisableTime attribute from DUT Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("UserCodeTemporaryDisableTime", actualValue, 5));
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithValidPINCode_14()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterLockDoorParams alloc] init];
+        params.pinCode = [[NSData alloc] initWithBytes:"123456" length:6];
+        [cluster lockDoorWithParams:params
+                  completionHandler:^(NSError * _Nullable err) {
+                      NSLog(@"TH sends Lock Door Command to the DUT with valid PINCode Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCleanTheCreatedCredential_15()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        [cluster clearCredentialWithParams:params
+                         completionHandler:^(NSError * _Nullable err) {
+                             NSLog(@"Clean the created credential Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_DL_2_3 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_DL_2_3()
+        : TestCommandBridge("Test_TC_DL_2_3")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_DL_2_3() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DL_2_3\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DL_2_3\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -103063,8 +104679,8 @@ public:
             err = TestWait10000ms_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads LockState attriute\n");
-            err = TestThReadsLockStateAttriute_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads LockState attribute\n");
+            err = TestThReadsLockStateAttribute_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Clean the created credential\n");
@@ -103270,14 +104886,14 @@ private:
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestThReadsLockStateAttriute_7()
+    CHIP_ERROR TestThReadsLockStateAttribute_7()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeLockStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads LockState attriute Error: %@", err);
+            NSLog(@"TH reads LockState attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -103312,6 +104928,300 @@ private:
 
                              NextTest();
                          }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_DL_2_4 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_DL_2_4()
+        : TestCommandBridge("Test_TC_DL_2_4")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_DL_2_4() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DL_2_4\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DL_2_4\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Create new PIN credential and lock/unlock user\n");
+            err = TestCreateNewPinCredentialAndLockUnlockUser_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Precondition: Door is in locked state\n");
+            err = TestPreconditionDoorIsInLockedState_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH writes AutoRelockTime attribute value as 10 seconds on the DUT\n");
+            err = TestThWritesAutoRelockTimeAttributeValueAs10SecondsOnTheDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH sends the unlock with Timeout command to the DUT \n");
+            err = TestThSendsTheUnlockWithTimeoutCommandToTheDut_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads AutoRelockTime attribute from DUT\n");
+            err = TestThReadsAutoRelockTimeAttributeFromDut_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Wait 5000ms\n");
+            err = TestWait5000ms_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads LockState attribute\n");
+            err = TestThReadsLockStateAttribute_7();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        WaitForMs(0);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 8;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        WaitForCommissionee("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialAndLockUnlockUser_1()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential and lock/unlock user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestPreconditionDoorIsInLockedState_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterLockDoorParams alloc] init];
+        params.pinCode = [[NSData alloc] initWithBytes:"123456" length:6];
+        [cluster lockDoorWithParams:params
+                  completionHandler:^(NSError * _Nullable err) {
+                      NSLog(@"Precondition: Door is in locked state Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThWritesAutoRelockTimeAttributeValueAs10SecondsOnTheDut_3()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id autoRelockTimeArgument;
+        autoRelockTimeArgument = [NSNumber numberWithUnsignedInt:10UL];
+        [cluster writeAttributeAutoRelockTimeWithValue:autoRelockTimeArgument
+                                     completionHandler:^(NSError * _Nullable err) {
+                                         NSLog(@"TH writes AutoRelockTime attribute value as 10 seconds on the DUT Error: %@", err);
+
+                                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                         NextTest();
+                                     }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsTheUnlockWithTimeoutCommandToTheDut_4()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterUnlockWithTimeoutParams alloc] init];
+        params.timeout = [NSNumber numberWithUnsignedShort:5U];
+        params.pinCode = [[NSData alloc] initWithBytes:"123456" length:6];
+        [cluster unlockWithTimeoutWithParams:params
+                           completionHandler:^(NSError * _Nullable err) {
+                               NSLog(@"TH sends the unlock with Timeout command to the DUT  Error: %@", err);
+
+                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                               NextTest();
+                           }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAutoRelockTimeAttributeFromDut_5()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAutoRelockTimeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads AutoRelockTime attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AutoRelockTime", actualValue, 10UL));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWait5000ms_6()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+        value.ms = 5000UL;
+        WaitForMs("alpha", value);
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsLockStateAttribute_7()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeLockStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads LockState attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("LockState", actualValue));
+                VerifyOrReturn(CheckValue("LockState", actualValue, 1));
+            }
+
+            NextTest();
+        }];
 
         return CHIP_NO_ERROR;
     }
@@ -104971,6 +106881,8 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_TSUIC_2_2>(),
         make_unique<Test_TC_DIAG_TH_NW_1_1>(),
         make_unique<Test_TC_DIAG_TH_NW_1_2>(),
+        make_unique<Test_TC_DIAG_TH_NW_2_2>(),
+        make_unique<Test_TC_DIAG_TH_NW_2_3>(),
         make_unique<Test_TC_LC_1_2>(),
         make_unique<Test_TC_WIFIDIAG_1_1>(),
         make_unique<Test_TC_WIFIDIAG_3_1>(),
@@ -105027,7 +106939,9 @@ void registerCommandsTests(Commands & commands)
         make_unique<DL_UsersAndCredentials>(),
         make_unique<DL_LockUnlock>(),
         make_unique<DL_Schedules>(),
-        make_unique<Test_TC_DL_1_3>(),
+        make_unique<Test_TC_DL_2_2>(),
+        make_unique<Test_TC_DL_2_3>(),
+        make_unique<Test_TC_DL_2_4>(),
         make_unique<TestGroupsCluster>(),
         make_unique<TestGroupKeyManagementCluster>(),
 #endif // CONFIG_ENABLE_YAML_TESTS
