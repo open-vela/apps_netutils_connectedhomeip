@@ -21562,6 +21562,7 @@ public:
 | * MaxRFIDCodeLength                                                 | 0x0019 |
 | * MinRFIDCodeLength                                                 | 0x001A |
 | * CredentialRulesSupport                                            | 0x001B |
+| * NumberOfCredentialsSupportedPerUser                               | 0x001C |
 | * EnableLogging                                                     | 0x0020 |
 | * Language                                                          | 0x0021 |
 | * LEDSettings                                                       | 0x0022 |
@@ -24798,6 +24799,81 @@ public:
                                                                    SetCommandExitStatus([CHIPError errorToCHIPErrorCode:error]);
                                                                }
                                                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mWait ? UINT16_MAX : 10);
+    }
+};
+
+/*
+ * Attribute NumberOfCredentialsSupportedPerUser
+ */
+class ReadDoorLockNumberOfCredentialsSupportedPerUser : public ReadAttribute {
+public:
+    ReadDoorLockNumberOfCredentialsSupportedPerUser()
+        : ReadAttribute("number-of-credentials-supported-per-user")
+    {
+    }
+
+    ~ReadDoorLockNumberOfCredentialsSupportedPerUser() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000101) ReadAttribute (0x0000001C) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPDoorLock * cluster = [[CHIPDoorLock alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        CHIP_ERROR __block err = CHIP_NO_ERROR;
+        [cluster readAttributeNumberOfCredentialsSupportedPerUserWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"DoorLock.NumberOfCredentialsSupportedPerUser response %@", [value description]);
+            err = [CHIPError errorToCHIPErrorCode:error];
+
+            if (error != nil) {
+                ChipLogError(chipTool, "DoorLock NumberOfCredentialsSupportedPerUser read Error: %s", chip::ErrorStr(err));
+            }
+            SetCommandExitStatus(err);
+        }];
+        return err;
+    }
+};
+
+class SubscribeAttributeDoorLockNumberOfCredentialsSupportedPerUser : public SubscribeAttribute {
+public:
+    SubscribeAttributeDoorLockNumberOfCredentialsSupportedPerUser()
+        : SubscribeAttribute("number-of-credentials-supported-per-user")
+    {
+    }
+
+    ~SubscribeAttributeDoorLockNumberOfCredentialsSupportedPerUser() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000101) ReportAttribute (0x0000001C) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPDoorLock * cluster = [[CHIPDoorLock alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeNumberOfCredentialsSupportedPerUserWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+                                                                          maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+                                                                               params:params
+                                                              subscriptionEstablished:nullptr
+                                                                        reportHandler:^(
+                                                                            NSNumber * _Nullable value, NSError * _Nullable error) {
+                                                                            NSLog(@"DoorLock.NumberOfCredentialsSupportedPerUser "
+                                                                                  @"response %@",
+                                                                                [value description]);
+                                                                            if (error || !mWait) {
+                                                                                SetCommandExitStatus(
+                                                                                    [CHIPError errorToCHIPErrorCode:error]);
+                                                                            }
+                                                                        }];
 
         return CHIP_NO_ERROR;
     }
@@ -101502,6 +101578,8 @@ void registerClusterDoorLock(Commands & commands)
         make_unique<SubscribeAttributeDoorLockMinRFIDCodeLength>(), //
         make_unique<ReadDoorLockCredentialRulesSupport>(), //
         make_unique<SubscribeAttributeDoorLockCredentialRulesSupport>(), //
+        make_unique<ReadDoorLockNumberOfCredentialsSupportedPerUser>(), //
+        make_unique<SubscribeAttributeDoorLockNumberOfCredentialsSupportedPerUser>(), //
         make_unique<ReadDoorLockEnableLogging>(), //
         make_unique<WriteDoorLockEnableLogging>(), //
         make_unique<SubscribeAttributeDoorLockEnableLogging>(), //
