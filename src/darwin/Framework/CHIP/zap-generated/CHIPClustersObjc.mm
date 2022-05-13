@@ -19672,6 +19672,69 @@ using namespace chip::app::Clusters;
         });
 }
 
+- (void)readAttributeNumberOfCredentialsSupportedPerUserWithCompletionHandler:(void (^)(NSNumber * _Nullable value,
+                                                                                  NSError * _Nullable error))completionHandler
+{
+    new CHIPInt8uAttributeCallbackBridge(self.callbackQueue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+        using TypeInfo = DoorLock::Attributes::NumberOfCredentialsSupportedPerUser::TypeInfo;
+        auto successFn = Callback<Int8uAttributeCallback>::FromCancelable(success);
+        auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
+        return self.cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
+    });
+}
+
+- (void)subscribeAttributeNumberOfCredentialsSupportedPerUserWithMinInterval:(NSNumber * _Nonnull)minInterval
+                                                                 maxInterval:(NSNumber * _Nonnull)maxInterval
+                                                                      params:(CHIPSubscribeParams * _Nullable)params
+                                                     subscriptionEstablished:
+                                                         (SubscriptionEstablishedHandler _Nullable)subscriptionEstablishedHandler
+                                                               reportHandler:(void (^)(NSNumber * _Nullable value,
+                                                                                 NSError * _Nullable error))reportHandler
+{
+    new CHIPInt8uAttributeCallbackSubscriptionBridge(
+        self.callbackQueue, reportHandler,
+        ^(Cancelable * success, Cancelable * failure) {
+            if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
+                // We don't support disabling auto-resubscribe.
+                return CHIP_ERROR_INVALID_ARGUMENT;
+            }
+            using TypeInfo = DoorLock::Attributes::NumberOfCredentialsSupportedPerUser::TypeInfo;
+            auto successFn = Callback<Int8uAttributeCallback>::FromCancelable(success);
+            auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
+            return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
+                [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
+        },
+        subscriptionEstablishedHandler);
+}
+
++ (void)readAttributeNumberOfCredentialsSupportedPerUserWithAttributeCache:(CHIPAttributeCacheContainer *)attributeCacheContainer
+                                                                  endpoint:(NSNumber *)endpoint
+                                                                     queue:(dispatch_queue_t)queue
+                                                         completionHandler:(void (^)(NSNumber * _Nullable value,
+                                                                               NSError * _Nullable error))completionHandler
+{
+    new CHIPInt8uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+        if (attributeCacheContainer.cppAttributeCache) {
+            chip::app::ConcreteAttributePath path;
+            using TypeInfo = DoorLock::Attributes::NumberOfCredentialsSupportedPerUser::TypeInfo;
+            path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+            path.mClusterId = TypeInfo::GetClusterId();
+            path.mAttributeId = TypeInfo::GetAttributeId();
+            TypeInfo::DecodableType value;
+            CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
+            auto successFn = Callback<Int8uAttributeCallback>::FromCancelable(success);
+            if (err == CHIP_NO_ERROR) {
+                successFn->mCall(successFn->mContext, value);
+            }
+            return err;
+        }
+        return CHIP_ERROR_NOT_FOUND;
+    });
+}
+
 - (void)readAttributeEnableLoggingWithCompletionHandler:(void (^)(
                                                             NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
