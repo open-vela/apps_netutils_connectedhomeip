@@ -473,8 +473,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestWriteEntries_1()
@@ -2156,8 +2155,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -2472,8 +2470,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadMandatoryNonGlobalAttributeOutOfService_1()
@@ -2900,8 +2897,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadsPresentValueAttributeFromDut_1()
@@ -3238,8 +3234,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -3316,8 +3311,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
@@ -3372,8 +3366,7 @@ private:
         value.message = chip::Span<const char>("Please enter '0' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("0garbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -3471,8 +3464,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadMandatoryNonGlobalAttributeStateValue_1()
@@ -3631,8 +3623,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -3886,8 +3877,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -3997,8 +3987,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_7()
@@ -4043,8 +4032,7 @@ private:
         value.message = chip::Span<const char>("Please enter '0' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("0garbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -5102,8 +5090,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestValidateConstraintsOfAttributeCurrentHue_1()
@@ -8673,8 +8660,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTurnOnLightForColorControlTests_1()
@@ -8769,8 +8755,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 290UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_6()
@@ -8802,8 +8787,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 295UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_8()
@@ -8835,8 +8819,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 300UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_10()
@@ -8892,8 +8875,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 290UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_13()
@@ -8925,8 +8907,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 295UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_15()
@@ -8958,8 +8939,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 300UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_17()
@@ -9015,8 +8995,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 290UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_20()
@@ -9048,8 +9027,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 295UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_22()
@@ -9081,8 +9059,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 300UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_24()
@@ -9138,8 +9115,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 290UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_27()
@@ -9171,8 +9147,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 295UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_29()
@@ -9204,8 +9179,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 300UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_31()
@@ -9596,8 +9570,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTurnOnLightForColorControlTests_1()
@@ -9691,8 +9664,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 140UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_6()
@@ -9724,8 +9696,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 145UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_8()
@@ -9757,8 +9728,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 150UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_10()
@@ -9813,8 +9783,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 140UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_13()
@@ -9846,8 +9815,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 145UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_15()
@@ -9879,8 +9847,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 150UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_17()
@@ -9935,8 +9902,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 140UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_20()
@@ -9968,8 +9934,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 145UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_22()
@@ -10001,8 +9966,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 150UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_24()
@@ -10057,8 +10021,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 140UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_27()
@@ -10090,8 +10053,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 145UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_29()
@@ -10123,8 +10085,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 150UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_31()
@@ -10349,8 +10310,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTurnOnLightForColorControlTests_1()
@@ -10445,8 +10405,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 25UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestOverTransitionTimeReadCurrentHueAttributeFromDut_6()
@@ -10502,8 +10461,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 25UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestOverTransitionTimeReadCurrentHueAttributeFromDut_9()
@@ -10738,8 +10696,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTurnOnLightForColorControlTests_1()
@@ -10833,8 +10790,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 6UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_6()
@@ -10866,8 +10822,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 8UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_8()
@@ -10899,8 +10854,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 10UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_10()
@@ -11396,8 +11350,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTurnOnLightForColorControlTests_1()
@@ -11491,8 +11444,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 40UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_6()
@@ -11524,8 +11476,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 45UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_8()
@@ -11557,8 +11508,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 50UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_10()
@@ -11613,8 +11563,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 40UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_13()
@@ -11646,8 +11595,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 45UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_15()
@@ -11679,8 +11627,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 50UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_17()
@@ -11735,8 +11682,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 40UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_20()
@@ -11768,8 +11714,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 45UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_22()
@@ -11801,8 +11746,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 50UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_24()
@@ -11857,8 +11801,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 40UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_27()
@@ -11890,8 +11833,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 45UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_29()
@@ -11923,8 +11865,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 50UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_31()
@@ -11979,8 +11920,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 40UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_34()
@@ -12012,8 +11952,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 45UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_36()
@@ -12045,8 +11984,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 50UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_38()
@@ -12101,8 +12039,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 40UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_41()
@@ -12134,8 +12071,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 45UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_43()
@@ -12167,8 +12103,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 50UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_45()
@@ -12393,8 +12328,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTurnOnLightForColorControlTests_1()
@@ -12489,8 +12423,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 10UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestOverTransitionTimeReadCurrentSaturationAttributeFromDut_6()
@@ -12546,8 +12479,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 10UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestOverTransitionTimeReadsCurrentSaturationAttributeFromDut_9()
@@ -12767,8 +12699,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTurnOnLightForColorControlTests_1()
@@ -12888,8 +12819,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 10UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_7()
@@ -13134,8 +13064,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTurnOnLightForColorControlTests_1()
@@ -13255,8 +13184,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 20UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentXAttributeValueMatchedTheValueSentByTheLastCommand_7()
@@ -13524,8 +13452,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTurnOnLightForColorControlTests_1()
@@ -13644,8 +13571,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 150UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentXAttributeValueMatchedTheValueSentByTheLastCommand_7()
@@ -13961,8 +13887,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTurnOnLightForColorControlTests_1()
@@ -14082,8 +14007,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 50UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentXAttributeValueMatchedTheValueSentByTheLastCommand_7()
@@ -14312,8 +14236,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTurnOnLightForColorControlTests_1()
@@ -14407,8 +14330,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 10UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentColorTemprature_6()
@@ -14801,8 +14723,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTurnOnLightForColorControlTests_1()
@@ -14898,8 +14819,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 90UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_6()
@@ -14931,8 +14851,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 95UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_8()
@@ -14964,8 +14883,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_10()
@@ -15022,8 +14940,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 190UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_13()
@@ -15055,8 +14972,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 195UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_15()
@@ -15088,8 +15004,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 200UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_17()
@@ -15171,8 +15086,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 90UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_21()
@@ -15204,8 +15118,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 95UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_23()
@@ -15237,8 +15150,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_25()
@@ -15320,8 +15232,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 140UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_29()
@@ -15353,8 +15264,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 145UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_31()
@@ -15386,8 +15296,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 150UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_33()
@@ -15668,8 +15577,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTurnOnLightForColorControlTests_1()
@@ -15766,8 +15674,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 40UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentColorTemprature_6()
@@ -15799,8 +15706,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 45UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentColorTemprature_8()
@@ -15832,8 +15738,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 50UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentColorTemprature_10()
@@ -15891,8 +15796,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 40UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentColorTemprature_13()
@@ -15924,8 +15828,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 45UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentColorTemprature_15()
@@ -15957,8 +15860,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 50UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentColorTemprature_17()
@@ -16357,8 +16259,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTurnOnLightForColorControlTests_1()
@@ -16477,8 +16378,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 290UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_7()
@@ -16510,8 +16410,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 295UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_9()
@@ -16543,8 +16442,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 300UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_11()
@@ -16600,8 +16498,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 290UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_14()
@@ -16633,8 +16530,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 295UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_16()
@@ -16666,8 +16562,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 300UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_18()
@@ -16723,8 +16618,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 290UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_21()
@@ -16756,8 +16650,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 295UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_23()
@@ -16789,8 +16682,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 300UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_25()
@@ -16846,8 +16738,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 290UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_28()
@@ -16879,8 +16770,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 295UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_30()
@@ -16912,8 +16802,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 300UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_32()
@@ -17230,8 +17119,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTurnOnLightForColorControlTests_1()
@@ -17325,8 +17213,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 290UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_6()
@@ -17358,8 +17245,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 295UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_8()
@@ -17391,8 +17277,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 300UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_10()
@@ -17495,8 +17380,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 40UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_15()
@@ -17528,8 +17412,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 45UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_17()
@@ -17561,8 +17444,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 50UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_19()
@@ -17835,8 +17717,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTurnOnLightForColorControlTests_1()
@@ -17931,8 +17812,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 10UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestOverTransitionTimeReadEnhancedCurrentHueAttributeFromDut_6()
@@ -17988,8 +17868,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 10UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestOverTransitionTimeReadEnhancedCurrentHueAttributeFromDut_9()
@@ -18194,8 +18073,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTurnOnLightForColorControlTests_1()
@@ -18290,8 +18168,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 10UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_6()
@@ -18705,8 +18582,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTurnOnLightForColorControlTests_1()
@@ -18846,8 +18722,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastAttribute_8()
@@ -18973,8 +18848,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckSaturationAttributeValueMatchedTheValueSentByTheLastAttribute_14()
@@ -19150,8 +19024,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckCurrentXAttributeValueMatchedTheValueSentByTheLastAttribute_22()
@@ -19304,8 +19177,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadsCurrentColorAttributeValueMatchedTheValueSentByTheLastAttribute_29()
@@ -19431,8 +19303,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastAttribute_35()
@@ -20143,8 +20014,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestPreconditionTurnOnLightForColorControlTests_1()
@@ -20831,8 +20701,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 2000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadEnhancedCurrentHueAttributeFromDut_31()
@@ -21642,8 +21511,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestPreconditionTurnOnLightForColorControlTests_1()
@@ -22349,8 +22217,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestPreconditionTurnOnLightForColorControlTests_1()
@@ -23004,8 +22871,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestQueryDataModelRevision_1()
@@ -23504,8 +23370,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestQueryMaxNetworks_1()
@@ -23667,8 +23532,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestQueryFabricsList_1()
@@ -23888,8 +23752,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -24147,8 +24010,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadPHYRateAttributeConstraints_1()
@@ -24419,8 +24281,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 };
 
@@ -24580,8 +24441,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -24691,8 +24551,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_7()
@@ -24737,8 +24596,7 @@ private:
         value.message = chip::Span<const char>("Please enter '0' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("0garbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -24913,8 +24771,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheMandatoryAttributeMeasuredValue_1()
@@ -25288,8 +25145,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheMandatoryAttributeMeasuredValue_1()
@@ -25444,8 +25300,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTh1ReadsTheBreadCrumbAttributeFromTheDut_1()
@@ -25712,8 +25567,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThReadsTheClusterRevisionAttributeFromTheDut_1()
@@ -25841,8 +25695,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadFeatureMapAttributeFromTheDutAndVerifyThatTheDutResponseIndicatesFeatureMapAttributeHasTheValue0_7()
@@ -25851,8 +25704,7 @@ private:
         value.message = chip::Span<const char>("Please enter '0' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("0garbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -25950,8 +25802,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThReadsTheIdentifyTimeAttributeFromTheDut_1()
@@ -26240,8 +26091,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR
@@ -26272,8 +26122,7 @@ private:
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("DUT executes a blink effectgarbage: not in length on purpose", 27);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR
@@ -26304,8 +26153,7 @@ private:
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("DUT executes a breathe effectgarbage: not in length on purpose", 29);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR
@@ -26336,8 +26184,7 @@ private:
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("DUT executes an okay effectgarbage: not in length on purpose", 27);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR
@@ -26368,8 +26215,7 @@ private:
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("DUT executes a channel change effectgarbage: not in length on purpose", 36);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR
@@ -26400,8 +26246,7 @@ private:
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("DUT executes a breathe effectgarbage: not in length on purpose", 29);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR
@@ -26433,8 +26278,7 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>(
             "DUT stops the breathe effect after the current effect sequencegarbage: not in length on purpose", 62);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR
@@ -26465,8 +26309,7 @@ private:
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("DUT executes a breathe effectgarbage: not in length on purpose", 29);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR
@@ -26498,8 +26341,7 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message
             = chip::Span<const char>("DUT stops the breathe effect as soon as possiblegarbage: not in length on purpose", 48);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR
@@ -26530,8 +26372,7 @@ private:
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("DUT executes a blink effectgarbage: not in length on purpose", 27);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR
@@ -26563,8 +26404,7 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>(
             "DUT stops any effect that may be still running as soon as possiblegarbage: not in length on purpose", 66);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -26709,8 +26549,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -26797,8 +26636,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
@@ -26857,8 +26695,7 @@ private:
         value.message = chip::Span<const char>("Please enter '0' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("0garbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -26970,8 +26807,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThReadsMinMeasuredValueAttributeFromDut_1()
@@ -27208,8 +27044,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -27295,8 +27130,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
@@ -27538,8 +27372,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestResetLevelTo254_1()
@@ -27569,8 +27402,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadsTheCurrentLevelAttribute_3()
@@ -28033,8 +27865,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadsTheOnOffTransitionTimeAttributeFromTheDut_1()
@@ -28553,8 +28384,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_1()
@@ -28638,8 +28468,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_6()
@@ -28691,8 +28520,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 11000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_9()
@@ -28762,8 +28590,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 1000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_13()
@@ -28815,8 +28642,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 };
 
@@ -29019,8 +28845,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
     NSNumber * _Nonnull MaxlevelValue;
 
@@ -29076,16 +28901,14 @@ private:
             "Physically verify that the DUT moves at a rate of 32 units per second or as close as possible to this rate and "
             "completes moving to its maximum levelgarbage: not in length on purpose",
             148);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestWait3000ms_4()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 3000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_5()
@@ -29163,16 +28986,14 @@ private:
             "Physically verify that the DUT moves at a rate of 64 units per second or as close as possible to this rate and "
             "complete moving to its minimum levelgarbage: not in length on purpose",
             147);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestWait5000ms_9()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 5000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_10()
@@ -29254,8 +29075,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_14()
@@ -29285,8 +29105,7 @@ private:
         value.message = chip::Span<const char>("Physically verify that the device moves at the rate recorded in step 3a and "
                                                "completes moving to its maximum level.garbage: not in length on purpose",
             114);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestResetLevelTo254_16()
@@ -29316,8 +29135,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 };
 
@@ -29492,8 +29310,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestSendingOnCommand_1()
@@ -29541,8 +29358,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 3000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
     NSNumber * _Nonnull CurrentlevelValue;
 
@@ -29596,8 +29412,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 5000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_7()
@@ -29649,8 +29464,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 4000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_10()
@@ -29702,8 +29516,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestSendingOffCommand_13()
@@ -29881,8 +29694,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestSendingOnCommand_1()
@@ -29929,8 +29741,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
     NSNumber * _Nonnull CurrentLevelValue;
 
@@ -29988,8 +29799,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 2000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestSendsStopCommandToDut_7()
@@ -30061,8 +29871,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestSendingOffCommand_11()
@@ -30217,8 +30026,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -30277,8 +30085,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_4()
@@ -30335,8 +30142,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -30488,8 +30294,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -30566,8 +30371,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
@@ -30624,8 +30428,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -30782,8 +30585,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -30868,8 +30670,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
@@ -30933,8 +30734,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -31083,8 +30883,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -31163,8 +30962,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
@@ -31224,8 +31022,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -31373,8 +31170,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -31452,8 +31248,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
@@ -31508,8 +31303,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -31667,8 +31461,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -31748,8 +31541,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
@@ -31795,8 +31587,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -31941,8 +31732,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -32085,8 +31875,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -32243,8 +32032,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -32323,8 +32111,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
@@ -32382,8 +32169,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -32536,8 +32322,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -32615,8 +32400,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
@@ -32674,8 +32458,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -32832,8 +32615,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -32923,8 +32705,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
@@ -32987,8 +32768,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -33146,8 +32926,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -33225,8 +33004,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
@@ -33284,8 +33062,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -33437,8 +33214,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -33514,8 +33290,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
@@ -33574,8 +33349,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -33666,8 +33440,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestPutTheDeviceIntoLowPowerMode_1()
@@ -33933,8 +33706,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestSendSelect_1()
@@ -34339,8 +34111,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestSendRootMenu_1()
@@ -34563,8 +34334,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestSendNumbers1_1()
@@ -34938,8 +34708,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestSendRootMenu_1()
@@ -35230,8 +34999,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadCatalogListAttribute_1()
@@ -35335,8 +35103,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 };
 
@@ -35420,8 +35187,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 };
 
@@ -35505,8 +35271,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 };
 
@@ -35590,8 +35355,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 };
 
@@ -35675,8 +35439,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 };
 
@@ -35760,8 +35523,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 };
 
@@ -35852,8 +35614,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadsTheChannelListAttributeFromTheDut_1()
@@ -35962,8 +35723,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestLogACommand_1()
@@ -35971,8 +35731,7 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message
             = chip::Span<const char>("verify that the channel has changed on the device.garbage: not in length on purpose", 50);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -36063,8 +35822,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestLogACommand_1()
@@ -36072,8 +35830,7 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message
             = chip::Span<const char>("verify that the channel has changed on the devicegarbage: not in length on purpose", 49);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -36192,24 +35949,21 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestLogACommand_1()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Verify that media is pausedgarbage: not in length on purpose", 27);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestLogACommand_2()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Physically verify that the media is playinggarbage: not in length on purpose", 43);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadsThePlaybackStateAttribute_3()
@@ -36238,16 +35992,14 @@ private:
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Physically verify that the media is pausedgarbage: not in length on purpose", 42);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestLogACommand_5()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Physically verify that the media is stopedgarbage: not in length on purpose", 42);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -36387,24 +36139,21 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestLogACommand_1()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Verify that media is pausedgarbage: not in length on purpose", 27);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestLogACommand_2()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Physically verify that the media is playinggarbage: not in length on purpose", 43);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadsTheCurrentStateAttribute_3()
@@ -36434,8 +36183,7 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message
             = chip::Span<const char>("Physically verify that the media is started overgarbage: not in length on purpose", 48);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestLogACommand_5()
@@ -36443,8 +36191,7 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>(
             "Verify that the next media item in the queue has been loadedgarbage: not in length on purpose", 60);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestLogACommand_6()
@@ -36452,8 +36199,7 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>(
             "Verify that the previous media item in the queue has been loadedgarbage: not in length on purpose", 64);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestLogACommand_7()
@@ -36461,8 +36207,7 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message
             = chip::Span<const char>("Verify that the media has skipped forward 10 secondsgarbage: not in length on purpose", 52);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestLogACommand_8()
@@ -36470,8 +36215,7 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message
             = chip::Span<const char>("Verify that the media has skipped backward 10 secondsgarbage: not in length on purpose", 53);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -36576,16 +36320,14 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestLogACommand_1()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Verify that media is pausedgarbage: not in length on purpose", 27);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestLogACommand_2()
@@ -36593,8 +36335,7 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>(
             "Verify that the media has moved to 10 seconds from the starting point.garbage: not in length on purpose", 70);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestLogACommand_3()
@@ -36602,8 +36343,7 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>(
             "User prompt needed to enter the value beyond the furthest valid positiongarbage: not in length on purpose", 72);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -36750,16 +36490,14 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestLogACommand_1()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Verify that media is pausedgarbage: not in length on purpose", 27);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_2()
@@ -36788,8 +36526,7 @@ private:
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Verify that the media is playinggarbage: not in length on purpose", 32);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadsTheCurrentStateAttribute_4()
@@ -36819,8 +36556,7 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message
             = chip::Span<const char>("Verify that the media play speed has increasedgarbage: not in length on purpose", 46);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestLogACommand_6()
@@ -36828,8 +36564,7 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message
             = chip::Span<const char>("Verify that the media play has reversed directiongarbage: not in length on purpose", 49);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadsTheCurrentStateAttribute_7()
@@ -36859,8 +36594,7 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message
             = chip::Span<const char>("Verify that the media play has reversed directiongarbage: not in length on purpose", 49);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestLogACommand_9()
@@ -36868,8 +36602,7 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>(
             "Verify that the media is has resumed playing forward at the default speedgarbage: not in length on purpose", 73);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -36953,8 +36686,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 };
 
@@ -37038,8 +36770,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 };
 
@@ -37137,8 +36868,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadsTheCurrentTargetAttribute_1()
@@ -37307,16 +37037,14 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestPrecondition_1()
     {
         chip::app::Clusters::LogCommands::Commands::Log::Type value;
         value.message = chip::Span<const char>("DUT has one or more Content Apps availablegarbage: not in length on purpose", 42);
-        Log("alpha", value);
-        return CHIP_NO_ERROR;
+        return Log("alpha", value);
     }
 
     CHIP_ERROR TestReadsTheVendorNameAttribute_2()
@@ -37541,8 +37269,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThReadsTheAcceptHeaderAttributeFromTheDut_1()
@@ -37691,8 +37418,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThReadsTheClusterRevisionAttributeFromTheDut_1()
@@ -37954,8 +37680,7 @@ private:
     CHIP_ERROR TestStopTargetDevice_0()
     {
         chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
-        Stop("alpha", value);
-        return CHIP_NO_ERROR;
+        return Stop("alpha", value);
     }
 
     CHIP_ERROR TestStartTargetDeviceWithTheProvidedDiscriminatorForBasicCommissioningAdvertisement_1()
@@ -37963,16 +37688,14 @@ private:
         chip::app::Clusters::SystemCommands::Commands::Start::Type value;
         value.discriminator.Emplace();
         value.discriminator.Value() = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-        Start("alpha", value);
-        return CHIP_NO_ERROR;
+        return Start("alpha", value);
     }
 
     CHIP_ERROR TestThCr1StartsACommissioningProcessWithDutCe_2()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_3()
@@ -38058,16 +37781,14 @@ private:
         chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:0000000000I31506010", 22);
-        PairWithQRCode("beta", value);
-        return CHIP_NO_ERROR;
+        return PairWithQRCode("beta", value);
     }
 
     CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_7()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-        WaitForCommissionee("beta", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("beta", value);
     }
 
     CHIP_ERROR TestQueryFabricsList_8()
@@ -38406,8 +38127,7 @@ private:
     CHIP_ERROR TestStopTargetDevice_0()
     {
         chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
-        Stop("alpha", value);
-        return CHIP_NO_ERROR;
+        return Stop("alpha", value);
     }
 
     CHIP_ERROR TestStartTargetDeviceWithTheProvidedDiscriminatorForBasicCommissioningAdvertisement_1()
@@ -38415,16 +38135,14 @@ private:
         chip::app::Clusters::SystemCommands::Commands::Start::Type value;
         value.discriminator.Emplace();
         value.discriminator.Value() = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-        Start("alpha", value);
-        return CHIP_NO_ERROR;
+        return Start("alpha", value);
     }
 
     CHIP_ERROR TestThCr1StartsACommissioningProcessWithDutCe_2()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_3()
@@ -38495,16 +38213,14 @@ private:
         chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        PairWithQRCode("beta", value);
-        return CHIP_NO_ERROR;
+        return PairWithQRCode("beta", value);
     }
 
     CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_7()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-        WaitForCommissionee("beta", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("beta", value);
     }
 
     CHIP_ERROR TestQueryFabricsList_8()
@@ -38839,16 +38555,14 @@ private:
     CHIP_ERROR TestRebootTargetDevice_0()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
-        Reboot("alpha", value);
-        return CHIP_NO_ERROR;
+        return Reboot("alpha", value);
     }
 
     CHIP_ERROR TestThCr1StartsACommissioningProcessWithDutCe_1()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThCr1OpensANewCommissioningWindowOnDutCe_2()
@@ -38886,32 +38600,28 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 54000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestWaitForPixitCommWin18010Seconds_4()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 54000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestWaitForPixitCommWin18010Seconds_5()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 54000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestWaitForPixitCommWin18010Seconds_6()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 28000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_7()
@@ -38919,8 +38629,7 @@ private:
         chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        PairWithQRCode("beta", value);
-        return CHIP_NO_ERROR;
+        return PairWithQRCode("beta", value);
     }
 
     CHIP_ERROR TestThCr1OpensANewCommissioningWindowOnDutCe_8()
@@ -38978,8 +38687,7 @@ private:
         chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        PairWithQRCode("beta", value);
-        return CHIP_NO_ERROR;
+        return PairWithQRCode("beta", value);
     }
 
     CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_11()
@@ -39078,8 +38786,7 @@ private:
         chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
         value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        PairWithQRCode("gamma", value);
-        return CHIP_NO_ERROR;
+        return PairWithQRCode("gamma", value);
     }
 };
 
@@ -39294,8 +39001,7 @@ private:
     CHIP_ERROR TestStopTargetDevice_0()
     {
         chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
-        Stop("alpha", value);
-        return CHIP_NO_ERROR;
+        return Stop("alpha", value);
     }
 
     CHIP_ERROR TestStartTargetDeviceWithTheProvidedDiscriminatorForBasicCommissioningAdvertisement_1()
@@ -39303,16 +39009,14 @@ private:
         chip::app::Clusters::SystemCommands::Commands::Start::Type value;
         value.discriminator.Emplace();
         value.discriminator.Value() = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-        Start("alpha", value);
-        return CHIP_NO_ERROR;
+        return Start("alpha", value);
     }
 
     CHIP_ERROR TestThCr1StartsACommissioningProcessWithDutCe_2()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_3()
@@ -39341,32 +39045,28 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 54000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestWaitForPixitCommWin18010_5()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 54000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestWaitForPixitCommWin18010_6()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 54000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestWaitForPixitCommWin18010_7()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 28000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCommissionFromBeta_8()
@@ -39374,8 +39074,7 @@ private:
         chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        PairWithQRCode("beta", value);
-        return CHIP_NO_ERROR;
+        return PairWithQRCode("beta", value);
     }
 
     CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_9()
@@ -39424,8 +39123,7 @@ private:
         chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        PairWithQRCode("beta", value);
-        return CHIP_NO_ERROR;
+        return PairWithQRCode("beta", value);
     }
 
     CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_12()
@@ -39515,16 +39213,14 @@ private:
         chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        PairWithQRCode("beta", value);
-        return CHIP_NO_ERROR;
+        return PairWithQRCode("beta", value);
     }
 
     CHIP_ERROR TestThCr2StartsACommissioningProcessOnDutCe_17()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-        WaitForCommissionee("beta", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("beta", value);
     }
 
     CHIP_ERROR TestThCr3StartsACommissioningProcessWithDutCe_18()
@@ -39532,8 +39228,7 @@ private:
         chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
         value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        PairWithQRCode("gamma", value);
-        return CHIP_NO_ERROR;
+        return PairWithQRCode("gamma", value);
     }
 };
 
@@ -39782,16 +39477,14 @@ private:
     CHIP_ERROR TestRebootTargetDevice_0()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
-        Reboot("alpha", value);
-        return CHIP_NO_ERROR;
+        return Reboot("alpha", value);
     }
 
     CHIP_ERROR TestThCr1StartsACommissioningProcessWithDutCe_1()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_2()
@@ -39821,16 +39514,14 @@ private:
         chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
         value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        PairWithQRCode("gamma", value);
-        return CHIP_NO_ERROR;
+        return PairWithQRCode("gamma", value);
     }
 
     CHIP_ERROR TestThCr3StartsACommissioningProcessWithDutCe_4()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
-        WaitForCommissionee("gamma", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("gamma", value);
     }
 
     CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_5()
@@ -39860,16 +39551,14 @@ private:
         chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        PairWithQRCode("beta", value);
-        return CHIP_NO_ERROR;
+        return PairWithQRCode("beta", value);
     }
 
     CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_7()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-        WaitForCommissionee("beta", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("beta", value);
     }
 
     CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_8()
@@ -39962,32 +39651,28 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 54000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_12()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 54000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_13()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 54000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_14()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 18000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestThCr1ReOpensNewCommissioningWindowOnDutCe_15()
@@ -40089,32 +39774,28 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 54000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_19()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 54000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_20()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 54000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_21()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 18000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestThCr1OpensANewCommissioningWindowOnDutCe_22()
@@ -40334,8 +40015,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -40455,8 +40135,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_7()
@@ -40505,8 +40184,7 @@ private:
         value.message = chip::Span<const char>("Please enter '0' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("0garbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -40656,8 +40334,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadsMandatoryAttributeConstrainsOccupancy_1()
@@ -40987,8 +40664,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
     NSNumber * _Nonnull OccupancyValue;
 
@@ -41179,8 +40855,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -41240,8 +40915,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_4()
@@ -41435,8 +41109,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheMandatoryAttributeOnOff_1()
@@ -41770,8 +41443,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestSendOffCommand_1()
@@ -41990,8 +41662,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 1000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckOnOffAttributeValueIsTrueAfterToggleCommand_13()
@@ -42037,8 +41708,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 1000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestCheckOnOffAttributeValueIsFalseAfterToggleCommand_16()
@@ -42068,8 +41738,7 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>(
             "Operate on device to set OnOff attribute manually to ongarbage: not in length on purpose", 55);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserPromptSetOnOffAttributeManuallyToOff_18()
@@ -42077,8 +41746,7 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>(
             "Operate on device to set OnOff attribute manually to offgarbage: not in length on purpose", 56);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestResetOffCommand_19()
@@ -42695,8 +42363,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestSendOnCommand_1()
@@ -42720,8 +42387,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 1000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadsOnOffAttributeFromDut_3()
@@ -42789,8 +42455,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 1000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadsOnOffAttributeFromDut_7()
@@ -42858,8 +42523,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 1000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestReadsOnOffAttributeFromDut_11()
@@ -43875,8 +43539,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThSendsOnCommandToDut_1()
@@ -43942,16 +43605,14 @@ private:
     CHIP_ERROR TestPowerOffDut_4()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
-        Reboot("alpha", value);
-        return CHIP_NO_ERROR;
+        return Reboot("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_5()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThReadsTheOnOffAttributeFromTheDut_6()
@@ -43999,16 +43660,14 @@ private:
     CHIP_ERROR TestPowerOffDut_8()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
-        Reboot("alpha", value);
-        return CHIP_NO_ERROR;
+        return Reboot("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_9()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThReadsTheOnOffAttributeFromTheDut_10()
@@ -44056,16 +43715,14 @@ private:
     CHIP_ERROR TestPowerOffDut_12()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
-        Reboot("alpha", value);
-        return CHIP_NO_ERROR;
+        return Reboot("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_13()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThReadsTheOnOffAttributeFromTheDut_14()
@@ -44093,16 +43750,14 @@ private:
     CHIP_ERROR TestPowerOffDut_15()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
-        Reboot("alpha", value);
-        return CHIP_NO_ERROR;
+        return Reboot("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_16()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThReadsTheOnOffAttributeFromTheDut_17()
@@ -44150,16 +43805,14 @@ private:
     CHIP_ERROR TestPowerOffDut_19()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
-        Reboot("alpha", value);
-        return CHIP_NO_ERROR;
+        return Reboot("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_20()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThReadsTheOnOffAttributeFromTheDut_21()
@@ -44204,16 +43857,14 @@ private:
     CHIP_ERROR TestPowerOffDut_23()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
-        Reboot("alpha", value);
-        return CHIP_NO_ERROR;
+        return Reboot("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_24()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThReadsTheOnOffAttributeFromTheDut_25()
@@ -44378,8 +44029,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -44462,8 +44112,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
@@ -44643,8 +44292,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTestHarnessClientReadsStatusAttributeFromServerDut_1()
@@ -44899,8 +44547,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
@@ -45020,8 +44667,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadAcceptedCommandListAttributeFromTheDutAndVerifyThatTheDutResponse_7()
@@ -45030,8 +44676,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadGeneratedCommandListAttributeFromTheDutAndVerifyThatTheDutResponse_8()
@@ -45040,8 +44685,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadFeatureMapAttributeFromTheDutAndVerifyThatTheDutResponse_9()
@@ -45050,8 +44694,7 @@ private:
         value.message = chip::Span<const char>("Please enter '0' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("0garbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -45198,8 +44841,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheMandatoryAttributeConstraintsMeasuredValue_1()
@@ -45548,8 +45190,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeConstraintsClusterRevision_1()
@@ -46169,8 +45810,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheMandatoryAttributeMaxPressure_1()
@@ -47532,8 +47172,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestWrite1ToTheOperationModeAttributeToDutOperationMode_1()
@@ -47909,8 +47548,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestWrite0ToTheOperationModeAttributeToDut_1()
@@ -48400,8 +48038,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestWrite1ToTheLifetimeRunningHoursAttributeToDut_1()
@@ -48795,8 +48432,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThReadsTheClusterRevisionAttributeFromTheDut_1()
@@ -49027,8 +48663,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR
@@ -49038,8 +48673,7 @@ private:
         value.message = chip::Span<const char>("Enter the Valuegarbage: not in length on purpose", 15);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("3garbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAttributeList_2()
@@ -49076,8 +48710,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_4()
@@ -49136,8 +48769,7 @@ private:
         value.message = chip::Span<const char>("Please enter FeatureMap attribute valuegarbage: not in length on purpose", 39);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("0garbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -49253,8 +48885,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadsConstraintsOfAttributeMeasuredValue_1()
@@ -49480,8 +49111,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadsConstraintsOfAttributeMinMeasuredValue_1()
@@ -49681,8 +49311,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadNumberOfPositionsAttribute_1()
@@ -50157,24 +49786,21 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_1()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Set up subscription to SwitchLatched eventgarbage: not in length on purpose", 42);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_2()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator sets switch to first positiongarbage: not in length on purpose", 38);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentPositionAttribute_3()
@@ -50203,24 +49829,21 @@ private:
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator sets switch to second positiongarbage: not in length on purpose", 39);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_5()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Set up subscription to InitialPress eventgarbage: not in length on purpose", 41);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_6()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator does not operate switchgarbage: not in length on purpose", 32);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadCurrentPositionAttribute_7()
@@ -50249,8 +49872,7 @@ private:
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator sets switch to second positiongarbage: not in length on purpose", 39);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_9()
@@ -50258,8 +49880,7 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message
             = chip::Span<const char>("Operator does not operate switch (release switch)garbage: not in length on purpose", 49);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_10()
@@ -50267,56 +49888,49 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>(
             "Set up subscription to InitialPress and ShortRelease eventsgarbage: not in length on purpose", 59);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_11()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator does not operate switchgarbage: not in length on purpose", 32);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_12()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator operates switch (press briefly)garbage: not in length on purpose", 40);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_13()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_14()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator operates switch for 5 secondsgarbage: not in length on purpose", 38);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestWait3000ms_15()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 3000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_16()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_17()
@@ -50325,56 +49939,49 @@ private:
         value.message = chip::Span<const char>(
             "Set up subscription to InitialPress, LongPress, ShortRelease, LongRelease eventsgarbage: not in length on purpose",
             80);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_18()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator does not operate switchgarbage: not in length on purpose", 32);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_19()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator operates switch (press briefly)garbage: not in length on purpose", 40);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_20()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_21()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator operates switch for 5 secondsgarbage: not in length on purpose", 38);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestWait3000ms_22()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 3000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_23()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_24()
@@ -50383,48 +49990,42 @@ private:
         value.message = chip::Span<const char>("Set up subscription to InitialPress, ShortRelease, MultiPressOngoing, "
                                                "MultiPressComplete eventsgarbage: not in length on purpose",
             95);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_25()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator does not operate switchgarbage: not in length on purpose", 32);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_26()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator operates switch (press briefly)garbage: not in length on purpose", 40);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_27()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_28()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator operates switch (press briefly)garbage: not in length on purpose", 40);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_29()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_30()
@@ -50432,16 +50033,14 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message
             = chip::Span<const char>("Operator operates switch again (press briefly)garbage: not in length on purpose", 46);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_31()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_32()
@@ -50449,16 +50048,14 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message
             = chip::Span<const char>("Operator operates switch again (press briefly)garbage: not in length on purpose", 46);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_33()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_34()
@@ -50466,16 +50063,14 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message
             = chip::Span<const char>("Operator operates switch again (press briefly)garbage: not in length on purpose", 46);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_35()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_36()
@@ -50483,16 +50078,14 @@ private:
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message
             = chip::Span<const char>("Operator operates switch again (press briefly)garbage: not in length on purpose", 46);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestUserInteractionNeeded_37()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -50639,8 +50232,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR
@@ -50650,8 +50242,7 @@ private:
         value.message = chip::Span<const char>("Please enter ClusterRevision attribute valuegarbage: not in length on purpose", 44);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("4garbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAttributeList_2()
@@ -50689,8 +50280,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR
@@ -50700,8 +50290,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadGeneratedCommandListAttributeFromTheDutAndVerifyThatTheDutResponseProvidesAListOfSupportedCommands_5()
@@ -50710,8 +50299,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -50823,8 +50411,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheMandatoryAttributeMeasuredValue_1()
@@ -51050,8 +50637,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheMandatoryAttributeMinMeasuredValue_1()
@@ -51250,8 +50836,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeConstraintsClusterRevision_1()
@@ -51523,8 +51108,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutLocalTemperature_1()
@@ -52644,8 +52228,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadsOccupiedCoolingSetpointAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_1()
@@ -54021,8 +53604,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR
@@ -54032,8 +53614,7 @@ private:
         value.message = chip::Span<const char>("Please enter ClusterRevision attribute valuegarbage: not in length on purpose", 44);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("2garbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAttributeList_2()
@@ -54069,8 +53650,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_4()
@@ -54244,8 +53824,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadTheMandatoryAttributeTemperatureDisplayMode_1()
@@ -54625,8 +54204,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestWritesAValueOf0ToTemperatureDisplayModeAttributeOfDut_1()
@@ -55006,8 +54584,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestSendsResetCountsCommand_1()
@@ -55842,8 +55419,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestValidateConstraintsOfAttributeChannel_1()
@@ -58155,8 +57731,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestTh1ReadsLabelListAttributeFromTheDut_1()
@@ -58299,8 +57874,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadsNetworkInterfaceStructureAttributeFromDut_1()
@@ -58522,8 +58096,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 };
 
@@ -58658,8 +58231,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR Test2ReadTheGlobalAttributeClusterRevision_1()
@@ -59300,8 +58872,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR Test2ReadTheRoMandatoryAttributeDefaultType_1()
@@ -60655,8 +60226,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 };
 
@@ -60939,8 +60509,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR Test1aThSetTheModeAttributeBit0OfTheDut_1()
@@ -61432,8 +61001,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadsTypeAttributeFromDut_1()
@@ -61586,8 +61154,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadsEndProductTypeAttributeFromDut_1()
@@ -61945,8 +61512,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR Test1aThSendsDownOrCloseCommandToPrepositionTheDutInTheOppositeDirection_1()
@@ -61970,8 +61536,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 10000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test1cIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_3()
@@ -62159,8 +61724,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test2cIfPaLfThReadsTargetPositionLiftPercent100thsAttributeFromDut_11()
@@ -62191,8 +61755,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 2000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test3a1VerifyDutReportsOperationalStatusAttributeToThAfterAUpOrOpen_13()
@@ -62224,8 +61787,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 2000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test3bIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_15()
@@ -62361,8 +61923,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 3000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test4cVerifyDutUpdateOperationalStatusAttributeToThAfterAStopMotion_21()
@@ -62391,8 +61952,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 1000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test5bIfPaLfThReadsTargetPositionLiftPercent100thsAttributeFromDut_23()
@@ -62759,8 +62319,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR Test1aThSendsUpOrOpenCommandToPrepositionTheDutInTheOppositeDirection_1()
@@ -62784,8 +62343,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 10000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test1cIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_3()
@@ -62973,8 +62531,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test2cIfPaLfThReadsTargetPositionLiftPercent100thsAttributeFromDut_11()
@@ -63005,8 +62562,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 2000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test3aVerifyDutReportsOperationalStatusAttributeToThAfterADownOrClose_13()
@@ -63038,8 +62594,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 2000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test3bIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_15()
@@ -63175,8 +62730,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 3000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test4cVerifyDutUpdateOperationalStatusAttributeToThAfterAStopMotion_21()
@@ -63205,8 +62759,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 1000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test5bIfPaLfThReadsTargetPositionLiftPercent100thsAttributeFromDut_23()
@@ -63477,8 +63030,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR Test1aThSendsDownOrCloseCommandToPrepositionTheDutInTheOppositeDirection_1()
@@ -63502,8 +63054,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 6000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test1cThSendsUpOrOpenCommandToPrepositionTheDutInTheOppositeDirection_3()
@@ -63527,8 +63078,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 2000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
     bool testSendClusterTest_TC_WNCV_3_3_5_WaitForReport_Fulfilled = false;
     ResponseHandler _Nullable test_Test_TC_WNCV_3_3_OperationalStatus_Reported = nil;
@@ -63604,8 +63154,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 3000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test2cVerifyDutReportsOperationalStatusAttributeToThAfterAStopMotion_9()
@@ -63634,8 +63183,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 2000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test2eThReadsOperationalStatusAttributeFromDut_11()
@@ -63948,8 +63496,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR Test1aThSendsDownOrCloseCommandToPrepositionTheDutInTheOppositeDirection_1()
@@ -63973,8 +63520,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = mFastMotionDuration.HasValue() ? mFastMotionDuration.Value() : 3000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test2aThSendsUpOrOpenCommandToDut_3()
@@ -63998,8 +63544,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = mFullMotionDuration.HasValue() ? mFullMotionDuration.Value() : 6000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test3aIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_5()
@@ -64262,8 +63807,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR Test1aThSendsUpOrOpenCommandToPrepositionTheDutInTheOppositeDirection_1()
@@ -64287,8 +63831,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = mFastMotionDuration.HasValue() ? mFastMotionDuration.Value() : 3000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test2aThSendsDownOrCloseCommandToDut_3()
@@ -64312,8 +63855,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = mFullMotionDuration.HasValue() ? mFullMotionDuration.Value() : 6000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test3aIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_5()
@@ -64598,8 +64140,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR Test1aThSendsDownOrCloseCommandToPrepositionTheDutInTheOppositeDirection_1()
@@ -64623,8 +64164,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = mFullMotionDuration.HasValue() ? mFullMotionDuration.Value() : 6000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test1cIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_3()
@@ -64674,8 +64214,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test2cIfPaLfThReadsTargetPositionLiftPercent100thsAttributeFromDut_6()
@@ -64706,8 +64245,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = mFullMotionDuration.HasValue() ? mFullMotionDuration.Value() : 6000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test3bThReadsOperationalStatusAttributeFromDut_8()
@@ -64757,16 +64295,14 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test5aThWaitsForXSecondsMovementsOnTheDut_11()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = mFullMotionDuration.HasValue() ? mFullMotionDuration.Value() : 6000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test5bThReadsOperationalStatusAttributeFromDut_12()
@@ -64977,8 +64513,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR Test1aThSendsDownOrCloseCommandToPrepositionTheDutInTheOppositeDirection_1()
@@ -65002,8 +64537,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = mFullMotionDuration.HasValue() ? mFullMotionDuration.Value() : 6000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test1cIfPaTlThReadsCurrentPositionTiltPercent100thsAttributeFromDut_3()
@@ -65053,8 +64587,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test2cIfPaTlThReadsTargetPositionTiltPercent100thsAttributeFromDut_6()
@@ -65085,8 +64618,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = mFullMotionDuration.HasValue() ? mFullMotionDuration.Value() : 6000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test3bThReadsOperationalStatusAttributeFromDut_8()
@@ -65136,16 +64668,14 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test5aThWaitsForXSecondsMovementsOnTheDut_11()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = mFullMotionDuration.HasValue() ? mFullMotionDuration.Value() : 6000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test5bThReadsOperationalStatusAttributeFromDut_12()
@@ -65296,8 +64826,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
     NSNumber * _Nullable attrCurrentPositionLiftPercent100ths;
 
@@ -65528,8 +65057,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
     NSNumber * _Nullable attrCurrentPositionTiltPercent100ths;
 
@@ -65866,8 +65394,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR Test0bThSendsUpOrOpenCommandToPrepositionTheDut_1()
@@ -65912,8 +65439,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 500UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test1cThSendsStopMotionCommandToDut_4()
@@ -65937,8 +65463,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 500UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test2aIfPaTlTlThSendsGoToTiltPercentageCommandWith90ToDut_6()
@@ -65966,8 +65491,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 500UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR Test2cThSendsStopMotionCommandToDut_8()
@@ -65991,8 +65515,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 500UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
     NSNumber * _Nullable attrCurrentPositionLiftPercent100ths;
 
@@ -66050,16 +65573,14 @@ private:
     CHIP_ERROR Test3cRebootRestartTheDut_12()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
-        Reboot("alpha", value);
-        return CHIP_NO_ERROR;
+        return Reboot("alpha", value);
     }
 
     CHIP_ERROR Test3dWaitForTheCommissionedDeviceToBeRetrieved_13()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR Test3eThReadsCurrentPositionLiftPercent100thsFromDut_14()
@@ -66222,8 +65743,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadAttributeTargetNavigatorList_1()
@@ -66424,8 +65944,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadAttributeAudioOutputList_1()
@@ -66670,8 +66189,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadAttributeApplicationLauncherList_1()
@@ -66925,8 +66443,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestSendKeyCommand_1()
@@ -67056,8 +66573,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestGetSetupPinCommand_1()
@@ -67212,8 +66728,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadMacAddress_1()
@@ -67375,8 +66890,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadAttributeVendorName_1()
@@ -67805,8 +67319,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadAttributePlaybackState_1()
@@ -68489,8 +68002,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadAttributeChannelList_1()
@@ -68764,8 +68276,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestSleepInputStatusCommand_1()
@@ -68894,8 +68405,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadAttributeAcceptHeaderList_1()
@@ -69338,8 +68848,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadAttributeMediaInputList_1()
@@ -73096,8 +72605,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestSendTestCommand_1()
@@ -84707,8 +84215,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestWriteAttributeInt32uValue_1()
@@ -85207,16 +84714,14 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestWait100ms_1()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 100UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 };
 
@@ -85314,24 +84819,21 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestLogASimpleMessage_1()
     {
         chip::app::Clusters::LogCommands::Commands::Log::Type value;
         value.message = chip::Span<const char>("This is a simple messagegarbage: not in length on purpose", 24);
-        Log("alpha", value);
-        return CHIP_NO_ERROR;
+        return Log("alpha", value);
     }
 
     CHIP_ERROR TestDoASimpleUserPromptMessage_2()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("This is a simple messagegarbage: not in length on purpose", 24);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -86184,8 +85686,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
     NSNumber * _Nonnull TestAddArgumentDefaultValue;
 
@@ -88708,8 +88209,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
     NSNumber * _Nonnull TestAddArgumentDefaultValue;
 
@@ -88880,8 +88380,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadAttributeDeviceList_1()
@@ -89203,8 +88702,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadLocation_1()
@@ -89468,16 +88966,14 @@ private:
     CHIP_ERROR TestRebootTheDevice_12()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
-        Reboot("alpha", value);
-        return CHIP_NO_ERROR;
+        return Reboot("alpha", value);
     }
 
     CHIP_ERROR TestConnectToTheDeviceAgain_13()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadBackNodeLabelAfterReboot_14()
@@ -89862,8 +89358,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestWriteBreadcrumb12_1()
@@ -89961,16 +89456,14 @@ private:
     CHIP_ERROR TestRebootToResetBreadcrumb_5()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
-        Reboot("alpha", value);
-        return CHIP_NO_ERROR;
+        return Reboot("alpha", value);
     }
 
     CHIP_ERROR TestConnectToTheDeviceAgain_6()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadBackBreadcrumbAfterRebootAndEnsureItWasNotPersisted_7()
@@ -90194,16 +89687,14 @@ private:
         chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
         value.nodeId = 74565ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        PairWithQRCode("beta", value);
-        return CHIP_NO_ERROR;
+        return PairWithQRCode("beta", value);
     }
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForBeta_17()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = 74565ULL;
-        WaitForCommissionee("beta", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("beta", value);
     }
 
     CHIP_ERROR TestArmFailSafe_18()
@@ -90625,8 +90116,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestSendIdentifyCommandAndExpectSuccessResponse_1()
@@ -90779,8 +90269,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadNumberOfSupportedFabrics_1()
@@ -91284,8 +90773,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadDescription_1()
@@ -91805,16 +91293,14 @@ private:
     CHIP_ERROR TestRebootTargetDevice_25()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
-        Reboot("alpha", value);
-        return CHIP_NO_ERROR;
+        return Reboot("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_26()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestVerifyCurrentModeChangeBasedOnOnModeAsItOverwritesStartUpMode_27()
@@ -91862,16 +91348,14 @@ private:
     CHIP_ERROR TestRebootTargetDevice_29()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
-        Reboot("alpha", value);
-        return CHIP_NO_ERROR;
+        return Reboot("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_30()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestVerifyCurrentModeChangeBasedOnNewStartUpMode_31()
@@ -91998,8 +91482,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadNumberOfCommissionedFabrics_1()
@@ -92309,22 +91792,19 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestStopTheDefaultAccessory_1()
     {
         chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
-        Stop("alpha", value);
-        return CHIP_NO_ERROR;
+        return Stop("alpha", value);
     }
 
     CHIP_ERROR TestStartTheDefaultAccessoryWithNoCommandLineOptions_2()
     {
         chip::app::Clusters::SystemCommands::Commands::Start::Type value;
-        Start("alpha", value);
-        return CHIP_NO_ERROR;
+        return Start("alpha", value);
     }
 
     CHIP_ERROR TestStopTheDefaultAccessoryByKey_3()
@@ -92332,8 +91812,7 @@ private:
         chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
         value.registerKey.Emplace();
         value.registerKey.Value() = chip::Span<const char>("defaultgarbage: not in length on purpose", 7);
-        Stop("alpha", value);
-        return CHIP_NO_ERROR;
+        return Stop("alpha", value);
     }
 
     CHIP_ERROR TestStartTheDefaultAccessoryWithDiscriminatorCommandLineOption_4()
@@ -92341,15 +91820,13 @@ private:
         chip::app::Clusters::SystemCommands::Commands::Start::Type value;
         value.discriminator.Emplace();
         value.discriminator.Value() = 1111U;
-        Start("alpha", value);
-        return CHIP_NO_ERROR;
+        return Start("alpha", value);
     }
 
     CHIP_ERROR TestStopTheDefaultAccessory_5()
     {
         chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
-        Stop("alpha", value);
-        return CHIP_NO_ERROR;
+        return Stop("alpha", value);
     }
 
     CHIP_ERROR TestStartTheDefaultAccessoryWithDiscriminatorAndPortCommandLineOptions_6()
@@ -92359,15 +91836,13 @@ private:
         value.discriminator.Value() = 1111U;
         value.port.Emplace();
         value.port.Value() = 5560U;
-        Start("alpha", value);
-        return CHIP_NO_ERROR;
+        return Start("alpha", value);
     }
 
     CHIP_ERROR TestStopTheDefaultAccessory_7()
     {
         chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
-        Stop("alpha", value);
-        return CHIP_NO_ERROR;
+        return Stop("alpha", value);
     }
 
     CHIP_ERROR TestStartTheDefaultAccessoryWithMinCommissioningTimeoutOnly_8()
@@ -92375,15 +91850,13 @@ private:
         chip::app::Clusters::SystemCommands::Commands::Start::Type value;
         value.minCommissioningTimeout.Emplace();
         value.minCommissioningTimeout.Value() = 10U;
-        Start("alpha", value);
-        return CHIP_NO_ERROR;
+        return Start("alpha", value);
     }
 
     CHIP_ERROR TestStopTheDefaultAccessory_9()
     {
         chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
-        Stop("alpha", value);
-        return CHIP_NO_ERROR;
+        return Stop("alpha", value);
     }
 
     CHIP_ERROR TestStartTheDefaultAccessoryByKeyWithAllCommandLineOptions_10()
@@ -92399,8 +91872,7 @@ private:
         value.minCommissioningTimeout.Value() = 10U;
         value.registerKey.Emplace();
         value.registerKey.Value() = chip::Span<const char>("defaultgarbage: not in length on purpose", 7);
-        Start("alpha", value);
-        return CHIP_NO_ERROR;
+        return Start("alpha", value);
     }
 
     CHIP_ERROR TestStartASecondAccessoryWithAllCommandLineOptions_11()
@@ -92414,8 +91886,7 @@ private:
         value.kvs.Value() = chip::Span<const char>("/tmp/chip_kvs_lockgarbage: not in length on purpose", 18);
         value.registerKey.Emplace();
         value.registerKey.Value() = chip::Span<const char>("chip-lock-appgarbage: not in length on purpose", 13);
-        Start("alpha", value);
-        return CHIP_NO_ERROR;
+        return Start("alpha", value);
     }
 
     CHIP_ERROR TestCommissionSecondAccessoryFromAlpha_12()
@@ -92423,16 +91894,14 @@ private:
         chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
         value.nodeId = 3735928559ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0IX4122-.548G00", 22);
-        PairWithQRCode("alpha", value);
-        return CHIP_NO_ERROR;
+        return PairWithQRCode("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheSecondCommissionedDeviceToBeRetrievedForAlpha_13()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = 3735928559ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestStopTheSecondAccessory_14()
@@ -92440,8 +91909,7 @@ private:
         chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
         value.registerKey.Emplace();
         value.registerKey.Value() = chip::Span<const char>("chip-lock-appgarbage: not in length on purpose", 13);
-        Stop("alpha", value);
-        return CHIP_NO_ERROR;
+        return Stop("alpha", value);
     }
 
     CHIP_ERROR TestStartASecondAccessoryWithDifferentKvs_15()
@@ -92455,15 +91923,13 @@ private:
         value.kvs.Value() = chip::Span<const char>("/tmp/chip_kvs_lock2garbage: not in length on purpose", 19);
         value.registerKey.Emplace();
         value.registerKey.Value() = chip::Span<const char>("chip-lock-appgarbage: not in length on purpose", 13);
-        Start("alpha", value);
-        return CHIP_NO_ERROR;
+        return Start("alpha", value);
     }
 
     CHIP_ERROR TestRebootTheDefaultAccessory_16()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
-        Reboot("alpha", value);
-        return CHIP_NO_ERROR;
+        return Reboot("alpha", value);
     }
 
     CHIP_ERROR TestRebootTheDefaultAccessoryByKey_17()
@@ -92471,8 +91937,7 @@ private:
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
         value.registerKey.Emplace();
         value.registerKey.Value() = chip::Span<const char>("defaultgarbage: not in length on purpose", 7);
-        Reboot("alpha", value);
-        return CHIP_NO_ERROR;
+        return Reboot("alpha", value);
     }
 
     CHIP_ERROR TestRebootTheSecondAccessory_18()
@@ -92480,15 +91945,13 @@ private:
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
         value.registerKey.Emplace();
         value.registerKey.Value() = chip::Span<const char>("chip-lock-appgarbage: not in length on purpose", 13);
-        Reboot("alpha", value);
-        return CHIP_NO_ERROR;
+        return Reboot("alpha", value);
     }
 
     CHIP_ERROR TestFactoryResetTheDefaultAccessory_19()
     {
         chip::app::Clusters::SystemCommands::Commands::FactoryReset::Type value;
-        FactoryReset("alpha", value);
-        return CHIP_NO_ERROR;
+        return FactoryReset("alpha", value);
     }
 
     CHIP_ERROR TestFactoryResetTheDefaultAccessoryByKey_20()
@@ -92496,8 +91959,7 @@ private:
         chip::app::Clusters::SystemCommands::Commands::FactoryReset::Type value;
         value.registerKey.Emplace();
         value.registerKey.Value() = chip::Span<const char>("defaultgarbage: not in length on purpose", 7);
-        FactoryReset("alpha", value);
-        return CHIP_NO_ERROR;
+        return FactoryReset("alpha", value);
     }
 
     CHIP_ERROR TestFactoryResetTheSecondAccessory_21()
@@ -92505,8 +91967,7 @@ private:
         chip::app::Clusters::SystemCommands::Commands::FactoryReset::Type value;
         value.registerKey.Emplace();
         value.registerKey.Value() = chip::Span<const char>("chip-lock-appgarbage: not in length on purpose", 13);
-        FactoryReset("alpha", value);
-        return CHIP_NO_ERROR;
+        return FactoryReset("alpha", value);
     }
 };
 
@@ -92646,8 +92107,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestWriteEmptyBindingTable_1()
@@ -93032,8 +92492,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestClearUserLabelList_1()
@@ -93123,16 +92582,14 @@ private:
     CHIP_ERROR TestRebootTargetDevice_4()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
-        Reboot("alpha", value);
-        return CHIP_NO_ERROR;
+        return Reboot("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_5()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestVerify_6()
@@ -93274,16 +92731,14 @@ private:
     CHIP_ERROR TestRebootTargetDevice_0()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
-        Reboot("alpha", value);
-        return CHIP_NO_ERROR;
+        return Reboot("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheAlphaDeviceToBeRetrieved_1()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestQueryFabricsList_2()
@@ -93577,8 +93032,7 @@ private:
     CHIP_ERROR TestStopTargetDevice_0()
     {
         chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
-        Stop("alpha", value);
-        return CHIP_NO_ERROR;
+        return Stop("alpha", value);
     }
 
     CHIP_ERROR TestStartTargetDeviceWithTheProvidedDiscriminatorForBasicCommissioningAdvertisement_1()
@@ -93586,16 +93040,14 @@ private:
         chip::app::Clusters::SystemCommands::Commands::Start::Type value;
         value.discriminator.Emplace();
         value.discriminator.Value() = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-        Start("alpha", value);
-        return CHIP_NO_ERROR;
+        return Start("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForAlpha_2()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestCommissionFromAlphaWhenTheCommissioningWindowIsNotOpened_3()
@@ -93603,8 +93055,7 @@ private:
         chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
         value.nodeId = mNodeIdForDuplicateCommissioning.HasValue() ? mNodeIdForDuplicateCommissioning.Value() : 17ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        PairWithQRCode("alpha", value);
-        return CHIP_NO_ERROR;
+        return PairWithQRCode("alpha", value);
     }
 
     CHIP_ERROR TestOpenCommissioningWindowFromAlpha_4()
@@ -93634,8 +93085,7 @@ private:
         chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
         value.nodeId = mNodeIdForDuplicateCommissioning.HasValue() ? mNodeIdForDuplicateCommissioning.Value() : 17ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        PairWithQRCode("alpha", value);
-        return CHIP_NO_ERROR;
+        return PairWithQRCode("alpha", value);
     }
 
     CHIP_ERROR TestCheckThatWeJustHaveTheOneFabricAndDidNotAddANewOne_6()
@@ -93711,16 +93161,14 @@ private:
         chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        PairWithQRCode("beta", value);
-        return CHIP_NO_ERROR;
+        return PairWithQRCode("beta", value);
     }
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForBeta_10()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-        WaitForCommissionee("beta", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("beta", value);
     }
 
     CHIP_ERROR TestOpenCommissioningWindowFromBeta_11()
@@ -93750,16 +93198,14 @@ private:
         chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
         value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        PairWithQRCode("gamma", value);
-        return CHIP_NO_ERROR;
+        return PairWithQRCode("gamma", value);
     }
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForGamma_13()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
-        WaitForCommissionee("gamma", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("gamma", value);
     }
     NSString * _Nonnull readFromAlpha;
 
@@ -93970,8 +93416,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadsAListOfThreadMetricsStructNonGlobalAttributeFromDut_1()
@@ -94253,8 +93698,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestSendsResetWatermarksToDut_1()
@@ -94456,8 +93900,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestSetOnOffAttributeToFalse_1()
@@ -95407,8 +94850,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadAvailableUserSlotAndVerifyResponseFields_1()
@@ -100013,8 +99455,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestCreateNewPinCredentialAndLockUnlockUser_1()
@@ -100922,8 +100363,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestCreateNewPinCredentialAndScheduleUser_1()
@@ -103692,8 +103132,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestCreateNewPinCredentialAndLockUnlockUser_1()
@@ -103828,8 +103267,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 10000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestThReadsLockStateAttriute_7()
@@ -104085,8 +103523,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestViewGroup0Invalid_1()
@@ -104855,8 +104292,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestReadMaxGroupsPerFabric_1()
