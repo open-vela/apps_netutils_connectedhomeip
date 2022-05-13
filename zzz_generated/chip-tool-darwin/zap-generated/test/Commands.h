@@ -57826,7 +57826,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -57847,8 +57847,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThReadsTxTotalCountAttributeValueFromDut_1()
@@ -58377,7 +58376,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -58398,8 +58397,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThReadsRxTotalCountAttributeValueFromDut_1()
@@ -58669,8 +58667,7 @@ private:
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        UserPrompt("alpha", value);
-        return CHIP_NO_ERROR;
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestThReadsRxErrSecCountAttributeValueFromDut_15()
@@ -105110,7 +105107,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -105131,8 +105128,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestThWritesTheRequirePINforRemoteOperationAttributeValueAsFalseOnTheDut_1()
@@ -105898,7 +105894,7 @@ public:
         }
 
         // Go on to the next test.
-        WaitForMs(0);
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
     }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
@@ -105919,8 +105915,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        WaitForCommissionee("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForCommissionee("alpha", value);
     }
 
     CHIP_ERROR TestCreateNewPinCredentialAndLockUnlockUser_1()
@@ -106056,8 +106051,7 @@ private:
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 5000UL;
-        WaitForMs("alpha", value);
-        return CHIP_NO_ERROR;
+        return WaitForMs("alpha", value);
     }
 
     CHIP_ERROR TestThReadsLockStateAttribute_7()
