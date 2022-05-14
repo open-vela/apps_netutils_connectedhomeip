@@ -23800,18 +23800,15 @@ public:
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPDoorLock * cluster = [[CHIPDoorLock alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
-        CHIP_ERROR __block err = CHIP_NO_ERROR;
         [cluster readAttributeNumberOfCredentialsSupportedPerUserWithCompletionHandler:^(
             NSNumber * _Nullable value, NSError * _Nullable error) {
             NSLog(@"DoorLock.NumberOfCredentialsSupportedPerUser response %@", [value description]);
-            err = [CHIPError errorToCHIPErrorCode:error];
-
             if (error != nil) {
-                ChipLogError(chipTool, "DoorLock NumberOfCredentialsSupportedPerUser read Error: %s", chip::ErrorStr(err));
+                LogNSError("DoorLock NumberOfCredentialsSupportedPerUser read Error", error);
             }
-            SetCommandExitStatus(err);
+            SetCommandExitStatus(error);
         }];
-        return err;
+        return CHIP_NO_ERROR;
     }
 };
 
@@ -23843,8 +23840,7 @@ public:
                                                                                   @"response %@",
                                                                                 [value description]);
                                                                             if (error || !mWait) {
-                                                                                SetCommandExitStatus(
-                                                                                    [CHIPError errorToCHIPErrorCode:error]);
+                                                                                SetCommandExitStatus(error);
                                                                             }
                                                                         }];
 
