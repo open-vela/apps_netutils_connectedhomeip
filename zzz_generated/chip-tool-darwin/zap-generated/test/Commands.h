@@ -64699,7 +64699,6 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPWindowCoveringClusterGoToLiftPercentageParams alloc] init];
-        params.liftPercentageValue = [NSNumber numberWithUnsignedChar:25];
         params.liftPercent100thsValue = [NSNumber numberWithUnsignedShort:2500U];
         [cluster goToLiftPercentageWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
@@ -64828,7 +64827,6 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPWindowCoveringClusterGoToLiftPercentageParams alloc] init];
-        params.liftPercentageValue = [NSNumber numberWithUnsignedChar:75];
         params.liftPercent100thsValue = [NSNumber numberWithUnsignedShort:7520U];
         [cluster goToLiftPercentageWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
@@ -65252,7 +65250,6 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPWindowCoveringClusterGoToTiltPercentageParams alloc] init];
-        params.tiltPercentageValue = [NSNumber numberWithUnsignedChar:30];
         params.tiltPercent100thsValue = [NSNumber numberWithUnsignedShort:3000U];
         [cluster goToTiltPercentageWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
@@ -65381,7 +65378,6 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPWindowCoveringClusterGoToTiltPercentageParams alloc] init];
-        params.tiltPercentageValue = [NSNumber numberWithUnsignedChar:60];
         params.tiltPercent100thsValue = [NSNumber numberWithUnsignedShort:6005U];
         [cluster goToTiltPercentageWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
@@ -65670,7 +65666,6 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPWindowCoveringClusterGoToLiftPercentageParams alloc] init];
-        params.liftPercentageValue = [NSNumber numberWithUnsignedChar:63];
         params.liftPercent100thsValue = [NSNumber numberWithUnsignedShort:12288U];
         [cluster goToLiftPercentageWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
@@ -65690,7 +65685,6 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPWindowCoveringClusterGoToLiftPercentageParams alloc] init];
-        params.liftPercentageValue = [NSNumber numberWithUnsignedChar:100];
         params.liftPercent100thsValue = [NSNumber numberWithUnsignedShort:10001U];
         [cluster goToLiftPercentageWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
@@ -65710,7 +65704,6 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPWindowCoveringClusterGoToLiftPercentageParams alloc] init];
-        params.liftPercentageValue = [NSNumber numberWithUnsignedChar:255];
         params.liftPercent100thsValue = [NSNumber numberWithUnsignedShort:65535U];
         [cluster goToLiftPercentageWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
@@ -65932,7 +65925,6 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPWindowCoveringClusterGoToTiltPercentageParams alloc] init];
-        params.tiltPercentageValue = [NSNumber numberWithUnsignedChar:63];
         params.tiltPercent100thsValue = [NSNumber numberWithUnsignedShort:12288U];
         [cluster goToTiltPercentageWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
@@ -65952,7 +65944,6 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPWindowCoveringClusterGoToTiltPercentageParams alloc] init];
-        params.tiltPercentageValue = [NSNumber numberWithUnsignedChar:100];
         params.tiltPercent100thsValue = [NSNumber numberWithUnsignedShort:10001U];
         [cluster goToTiltPercentageWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
@@ -65972,7 +65963,6 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPWindowCoveringClusterGoToTiltPercentageParams alloc] init];
-        params.tiltPercentageValue = [NSNumber numberWithUnsignedChar:255];
         params.tiltPercent100thsValue = [NSNumber numberWithUnsignedShort:65535U];
         [cluster goToTiltPercentageWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
@@ -66224,7 +66214,6 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPWindowCoveringClusterGoToLiftPercentageParams alloc] init];
-        params.liftPercentageValue = [NSNumber numberWithUnsignedChar:90];
         params.liftPercent100thsValue = [NSNumber numberWithUnsignedShort:9000U];
         [cluster goToLiftPercentageWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
@@ -66276,7 +66265,6 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPWindowCoveringClusterGoToTiltPercentageParams alloc] init];
-        params.tiltPercentageValue = [NSNumber numberWithUnsignedChar:90];
         params.tiltPercent100thsValue = [NSNumber numberWithUnsignedShort:9000U];
         [cluster goToTiltPercentageWithParams:params
                             completionHandler:^(NSError * _Nullable err) {

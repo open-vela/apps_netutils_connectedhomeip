@@ -94344,7 +94344,6 @@ public:
     WindowCoveringGoToLiftPercentage()
         : ClusterCommand("go-to-lift-percentage")
     {
-        AddArgument("LiftPercentageValue", 0, UINT8_MAX, &mRequest.liftPercentageValue);
         AddArgument("LiftPercent100thsValue", 0, UINT16_MAX, &mRequest.liftPercent100thsValue);
         ClusterCommand::AddArguments();
     }
@@ -94358,12 +94357,7 @@ public:
         __auto_type * params = [[CHIPWindowCoveringClusterGoToLiftPercentageParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.liftPercentageValue = [NSNumber numberWithUnsignedChar:mRequest.liftPercentageValue];
-        if (mRequest.liftPercent100thsValue.HasValue()) {
-            params.liftPercent100thsValue = [NSNumber numberWithUnsignedShort:mRequest.liftPercent100thsValue.Value()];
-        } else {
-            params.liftPercent100thsValue = nil;
-        }
+        params.liftPercent100thsValue = [NSNumber numberWithUnsignedShort:mRequest.liftPercent100thsValue];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -94438,7 +94432,6 @@ public:
     WindowCoveringGoToTiltPercentage()
         : ClusterCommand("go-to-tilt-percentage")
     {
-        AddArgument("TiltPercentageValue", 0, UINT8_MAX, &mRequest.tiltPercentageValue);
         AddArgument("TiltPercent100thsValue", 0, UINT16_MAX, &mRequest.tiltPercent100thsValue);
         ClusterCommand::AddArguments();
     }
@@ -94452,12 +94445,7 @@ public:
         __auto_type * params = [[CHIPWindowCoveringClusterGoToTiltPercentageParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.tiltPercentageValue = [NSNumber numberWithUnsignedChar:mRequest.tiltPercentageValue];
-        if (mRequest.tiltPercent100thsValue.HasValue()) {
-            params.tiltPercent100thsValue = [NSNumber numberWithUnsignedShort:mRequest.tiltPercent100thsValue.Value()];
-        } else {
-            params.tiltPercent100thsValue = nil;
-        }
+        params.tiltPercent100thsValue = [NSNumber numberWithUnsignedShort:mRequest.tiltPercent100thsValue];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
