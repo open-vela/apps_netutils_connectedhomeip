@@ -38467,7 +38467,7 @@ public:
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
-        NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
+        NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributePercentSettingWithValue:value
                                                 params:params
@@ -38706,7 +38706,7 @@ public:
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
-        NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
+        NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeSpeedSettingWithValue:value
                                               params:params

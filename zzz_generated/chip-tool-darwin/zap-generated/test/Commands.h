@@ -212,6 +212,7 @@ public:
         printf("TestBinding\n");
         printf("TestUserLabelCluster\n");
         printf("TestArmFailSafe\n");
+        printf("TestFanControl\n");
         printf("TestMultiAdmin\n");
         printf("Test_TC_SWDIAG_1_1\n");
         printf("Test_TC_SWDIAG_2_1\n");
@@ -94514,6 +94515,778 @@ private:
     }
 };
 
+class TestFanControl : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    TestFanControl()
+        : TestCommandBridge("TestFanControl")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~TestFanControl() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: TestFanControl\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: TestFanControl\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Write fan mode\n");
+            err = TestWriteFanMode_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read back fan mode\n");
+            err = TestReadBackFanMode_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Write fan mode sequence\n");
+            err = TestWriteFanModeSequence_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read back fan mode sequence\n");
+            err = TestReadBackFanModeSequence_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Write percent setting\n");
+            err = TestWritePercentSetting_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read back percent setting\n");
+            err = TestReadBackPercentSetting_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Read back speed setting\n");
+            err = TestReadBackSpeedSetting_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read back speed current\n");
+            err = TestReadBackSpeedCurrent_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Write percent setting\n");
+            err = TestWritePercentSetting_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Read back percent setting\n");
+            err = TestReadBackPercentSetting_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Write speed setting\n");
+            err = TestWriteSpeedSetting_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Read back speed setting\n");
+            err = TestReadBackSpeedSetting_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Read back percent setting\n");
+            err = TestReadBackPercentSetting_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Read back percent current\n");
+            err = TestReadBackPercentCurrent_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Write speed setting\n");
+            err = TestWriteSpeedSetting_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Read back speed setting\n");
+            err = TestReadBackSpeedSetting_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Write fan mode\n");
+            err = TestWriteFanMode_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Read back percent setting\n");
+            err = TestReadBackPercentSetting_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Read back percent current\n");
+            err = TestReadBackPercentCurrent_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Read back speed setting\n");
+            err = TestReadBackSpeedSetting_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Read back speed current\n");
+            err = TestReadBackSpeedCurrent_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Write fan mode\n");
+            err = TestWriteFanMode_22();
+            break;
+        case 23:
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Read back percent setting\n");
+            err = TestReadBackPercentSetting_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Read back speed setting\n");
+            err = TestReadBackSpeedSetting_24();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 25;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestWriteFanMode_1()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id fanModeArgument;
+        fanModeArgument = [NSNumber numberWithUnsignedChar:3];
+        [cluster writeAttributeFanModeWithValue:fanModeArgument
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Write fan mode Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackFanMode_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFanModeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back fan mode Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("fan mode", actualValue, 3));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteFanModeSequence_3()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id fanModeSequenceArgument;
+        fanModeSequenceArgument = [NSNumber numberWithUnsignedChar:5];
+        [cluster writeAttributeFanModeSequenceWithValue:fanModeSequenceArgument
+                                      completionHandler:^(NSError * _Nullable err) {
+                                          NSLog(@"Write fan mode sequence Error: %@", err);
+
+                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackFanModeSequence_4()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFanModeSequenceWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back fan mode sequence Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("fan mode sequence", actualValue, 5));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritePercentSetting_5()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id percentSettingArgument;
+        percentSettingArgument = [NSNumber numberWithUnsignedChar:84];
+        [cluster writeAttributePercentSettingWithValue:percentSettingArgument
+                                     completionHandler:^(NSError * _Nullable err) {
+                                         NSLog(@"Write percent setting Error: %@", err);
+
+                                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                         NextTest();
+                                     }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackPercentSetting_6()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePercentSettingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back percent setting Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("percent setting", actualValue));
+                VerifyOrReturn(CheckValue("percent setting", actualValue, 84));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackSpeedSetting_7()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeSpeedSettingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back speed setting Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("speed setting", actualValue));
+                VerifyOrReturn(CheckValue("speed setting", actualValue, 84));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackSpeedCurrent_8()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeSpeedCurrentWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back speed current Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("speed current", actualValue, 84));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritePercentSetting_9()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id percentSettingArgument;
+        percentSettingArgument = nil;
+        [cluster writeAttributePercentSettingWithValue:percentSettingArgument
+                                     completionHandler:^(NSError * _Nullable err) {
+                                         NSLog(@"Write percent setting Error: %@", err);
+
+                                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                         NextTest();
+                                     }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackPercentSetting_10()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePercentSettingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back percent setting Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("percent setting", actualValue));
+                VerifyOrReturn(CheckValue("percent setting", actualValue, 84));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteSpeedSetting_11()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id speedSettingArgument;
+        speedSettingArgument = [NSNumber numberWithUnsignedChar:73];
+        [cluster writeAttributeSpeedSettingWithValue:speedSettingArgument
+                                   completionHandler:^(NSError * _Nullable err) {
+                                       NSLog(@"Write speed setting Error: %@", err);
+
+                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                       NextTest();
+                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackSpeedSetting_12()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeSpeedSettingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back speed setting Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("speed setting", actualValue));
+                VerifyOrReturn(CheckValue("speed setting", actualValue, 73));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackPercentSetting_13()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePercentSettingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back percent setting Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("percent setting", actualValue));
+                VerifyOrReturn(CheckValue("percent setting", actualValue, 73));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackPercentCurrent_14()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePercentCurrentWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back percent current Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("percent current", actualValue, 73));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteSpeedSetting_15()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id speedSettingArgument;
+        speedSettingArgument = nil;
+        [cluster writeAttributeSpeedSettingWithValue:speedSettingArgument
+                                   completionHandler:^(NSError * _Nullable err) {
+                                       NSLog(@"Write speed setting Error: %@", err);
+
+                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                       NextTest();
+                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackSpeedSetting_16()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeSpeedSettingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back speed setting Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("speed setting", actualValue));
+                VerifyOrReturn(CheckValue("speed setting", actualValue, 73));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteFanMode_17()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id fanModeArgument;
+        fanModeArgument = [NSNumber numberWithUnsignedChar:0];
+        [cluster writeAttributeFanModeWithValue:fanModeArgument
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Write fan mode Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackPercentSetting_18()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePercentSettingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back percent setting Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("percent setting", actualValue));
+                VerifyOrReturn(CheckValue("percent setting", actualValue, 0));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackPercentCurrent_19()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePercentCurrentWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back percent current Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("percent current", actualValue, 0));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackSpeedSetting_20()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeSpeedSettingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back speed setting Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("speed setting", actualValue));
+                VerifyOrReturn(CheckValue("speed setting", actualValue, 0));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackSpeedCurrent_21()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeSpeedCurrentWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back speed current Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("speed current", actualValue, 0));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteFanMode_22()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id fanModeArgument;
+        fanModeArgument = [NSNumber numberWithUnsignedChar:5];
+        [cluster writeAttributeFanModeWithValue:fanModeArgument
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Write fan mode Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackPercentSetting_23()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePercentSettingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back percent setting Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNull("percent setting", actualValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackSpeedSetting_24()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestFanControl * cluster = [[CHIPTestFanControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeSpeedSettingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back speed setting Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNull("speed setting", actualValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
 class TestMultiAdmin : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -108440,6 +109213,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<TestBinding>(),
         make_unique<TestUserLabelCluster>(),
         make_unique<TestArmFailSafe>(),
+        make_unique<TestFanControl>(),
         make_unique<TestMultiAdmin>(),
         make_unique<Test_TC_SWDIAG_1_1>(),
         make_unique<Test_TC_SWDIAG_2_1>(),
