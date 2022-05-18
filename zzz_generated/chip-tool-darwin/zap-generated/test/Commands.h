@@ -110,13 +110,11 @@ public:
         printf("Test_TC_MC_3_9\n");
         printf("Test_TC_MC_3_10\n");
         printf("Test_TC_MC_3_11\n");
+        printf("Test_TC_MC_3_12\n");
+        printf("Test_TC_MC_3_13\n");
         printf("Test_TC_MC_5_1\n");
         printf("Test_TC_MC_5_2\n");
         printf("Test_TC_MC_5_3\n");
-        printf("Test_TC_MC_6_1\n");
-        printf("Test_TC_MC_6_2\n");
-        printf("Test_TC_MC_6_3\n");
-        printf("Test_TC_MC_6_4\n");
         printf("Test_TC_MC_7_1\n");
         printf("Test_TC_MC_7_2\n");
         printf("Test_TC_MC_8_1\n");
@@ -131,7 +129,6 @@ public:
         printf("OTA_SuccessfulTransfer\n");
         printf("Test_TC_OCC_1_1\n");
         printf("Test_TC_OCC_2_1\n");
-        printf("Test_TC_OCC_2_2\n");
         printf("Test_TC_OO_1_1\n");
         printf("Test_TC_OO_2_1\n");
         printf("Test_TC_OO_2_2\n");
@@ -4056,564 +4053,252 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Validate constraints of attribute: current hue\n");
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Validate constraints of attribute: CurrentHue\n");
             err = TestValidateConstraintsOfAttributeCurrentHue_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Write the default value to mandatory attribute: CurrentHue\n");
-            err = TestWriteTheDefaultValueToMandatoryAttributeCurrentHue_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Validate constraints of attribute: CurrentSaturation\n");
+            err = TestValidateConstraintsOfAttributeCurrentSaturation_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Reads back mandatory attribute: CurrentHue\n");
-            err = TestReadsBackMandatoryAttributeCurrentHue_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Reads CurrentX attribute from DUT\n");
+            err = TestReadsCurrentXAttributeFromDut_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Validate constraints of attribute: CurrentSaturation\n");
-            err = TestValidateConstraintsOfAttributeCurrentSaturation_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Validate constraints of attribute: CurrentX\n");
+            err = TestValidateConstraintsOfAttributeCurrentX_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Write the default value to mandatory attribute: CurrentSaturation\n");
-            err = TestWriteTheDefaultValueToMandatoryAttributeCurrentSaturation_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Reads CurrentY attribute from DUT\n");
+            err = TestReadsCurrentYAttributeFromDut_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Reads back mandatory attribute: CurrentSaturation\n");
-            err = TestReadsBackMandatoryAttributeCurrentSaturation_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Validate constraints of attribute: CurrentY\n");
+            err = TestValidateConstraintsOfAttributeCurrentY_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Validate constraints of attribute: CurrentX\n");
-            err = TestValidateConstraintsOfAttributeCurrentX_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Reads ColorTemperatureMireds attribute from DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsColorTemperatureMiredsAttributeFromDut_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Write the default value to mandatory attribute: CurrentX\n");
-            err = TestWriteTheDefaultValueToMandatoryAttributeCurrentX_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Validate constraints of attribute: ColorTemperatureMireds\n");
+            err = TestValidateConstraintsOfAttributeColorTemperatureMireds_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Reads back mandatory attribute: CurrentX\n");
-            err = TestReadsBackMandatoryAttributeCurrentX_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Reads ColorMode attribute from DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsColorModeAttributeFromDut_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Validate constraints of attribute: CurrentY\n");
-            err = TestValidateConstraintsOfAttributeCurrentY_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Validate constraints of attribute: ColorMode\n");
+            err = TestValidateConstraintsOfAttributeColorMode_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Write the default values to mandatory attribute: CurrentY\n");
-            err = TestWriteTheDefaultValuesToMandatoryAttributeCurrentY_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Validate constraints of attribute: Options\n");
+            err = TestValidateConstraintsOfAttributeOptions_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Reads back mandatory attribute: CurrentY\n");
-            err = TestReadsBackMandatoryAttributeCurrentY_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Validate constraints of attribute: EnhancedCurrentHue\n");
+            err = TestValidateConstraintsOfAttributeEnhancedCurrentHue_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Validate constraints of attribute: ColorTemperatureMireds\n");
-            err = TestValidateConstraintsOfAttributeColorTemperatureMireds_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Validate constraints of attribute: EnhancedColorMode\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestValidateConstraintsOfAttributeEnhancedColorMode_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Validate constraints of attribute: ColorMode\n");
-            err = TestValidateConstraintsOfAttributeColorMode_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Validate constraints of attribute: ColorLoopActive\n");
+            err = TestValidateConstraintsOfAttributeColorLoopActive_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Validate constraints of attribute: Options\n");
-            err = TestValidateConstraintsOfAttributeOptions_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Validate constraints of attribute: ColorLoopDirection\n");
+            err = TestValidateConstraintsOfAttributeColorLoopDirection_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Write the default values to mandatory attribute: Options\n");
-            err = TestWriteTheDefaultValuesToMandatoryAttributeOptions_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Validate constraints of attribute: ColorLoopTime\n");
+            err = TestValidateConstraintsOfAttributeColorLoopTime_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Reads back mandatory attribute: Options\n");
-            err = TestReadsBackMandatoryAttributeOptions_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Validate constraints of attribute: ColorLoopStartEnhancedHue\n");
+            err = TestValidateConstraintsOfAttributeColorLoopStartEnhancedHue_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Validate constraints of attribute: EnhancedCurrentHue\n");
-            err = TestValidateConstraintsOfAttributeEnhancedCurrentHue_18();
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Validate constraints of attribute: ColorLoopStoredEnhancedHue\n");
+            err = TestValidateConstraintsOfAttributeColorLoopStoredEnhancedHue_18();
             break;
         case 19:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 19 : Write the default values to mandatory attribute: EnhancedCurrentHue\n");
-            err = TestWriteTheDefaultValuesToMandatoryAttributeEnhancedCurrentHue_19();
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Reads ColorCapabilities attribute from DUT\n");
+            err = TestReadsColorCapabilitiesAttributeFromDut_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Reads back mandatory attribute: EnhancedCurrentHue\n");
-            err = TestReadsBackMandatoryAttributeEnhancedCurrentHue_20();
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Validate constraints of attribute: ColorCapabilities\n");
+            err = TestValidateConstraintsOfAttributeColorCapabilities_20();
             break;
         case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : Validate constraints of attribute: EnhancedColorMode\n");
-            err = TestValidateConstraintsOfAttributeEnhancedColorMode_21();
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Reads ColorTempPhysicalMinMireds attribute from DUT\n");
+            err = TestReadsColorTempPhysicalMinMiredsAttributeFromDut_21();
             break;
         case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : Validate constraints of attribute: ColorLoopActive\n");
-            err = TestValidateConstraintsOfAttributeColorLoopActive_22();
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Validate constraints of attribute: ColorTempPhysicalMinMireds\n");
+            err = TestValidateConstraintsOfAttributeColorTempPhysicalMinMireds_22();
             break;
         case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : Write the default values to mandatory attribute: ColorLoopActive\n");
-            err = TestWriteTheDefaultValuesToMandatoryAttributeColorLoopActive_23();
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Read ColorTempPhysicalMaxMireds attribute from DUT\n");
+            err = TestReadColorTempPhysicalMaxMiredsAttributeFromDut_23();
             break;
         case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : Reads back mandatory attribute: ColorLoopActive\n");
-            err = TestReadsBackMandatoryAttributeColorLoopActive_24();
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Validate constraints of attribute: ColorTempPhysicalMaxMireds\n");
+            err = TestValidateConstraintsOfAttributeColorTempPhysicalMaxMireds_24();
             break;
         case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : Validate constraints of attribute: ColorLoopDirection\n");
-            err = TestValidateConstraintsOfAttributeColorLoopDirection_25();
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Read the optional attribute: CoupleColorTempToLevelMinMireds\n");
+            err = TestReadTheOptionalAttributeCoupleColorTempToLevelMinMireds_25();
             break;
         case 26:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 26 : Write the default values to mandatory attribute: ColorLoopDirection\n");
-            err = TestWriteTheDefaultValuesToMandatoryAttributeColorLoopDirection_26();
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Read the optional attribute: StartUpColorTemperatureMireds\n");
+            err = TestReadTheOptionalAttributeStartUpColorTemperatureMireds_26();
             break;
         case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : Reads back mandatory attribute: ColorLoopDirection\n");
-            err = TestReadsBackMandatoryAttributeColorLoopDirection_27();
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Validate constraints of attribute: RemainingTime\n");
+            err = TestValidateConstraintsOfAttributeRemainingTime_27();
             break;
         case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Validate constraints of attribute: ColorLoopTime\n");
-            err = TestValidateConstraintsOfAttributeColorLoopTime_28();
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Read the optional attribute: DriftCompensation\n");
+            err = TestReadTheOptionalAttributeDriftCompensation_28();
             break;
         case 29:
-            ChipLogProgress(chipTool, " ***** Test Step 29 : Write the default values to mandatory attribute: ColorLoopTime\n");
-            err = TestWriteTheDefaultValuesToMandatoryAttributeColorLoopTime_29();
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Read the optional attribute: CompensationText\n");
+            err = TestReadTheOptionalAttributeCompensationText_29();
             break;
         case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : Reads back mandatory attribute: ColorLoopTime\n");
-            err = TestReadsBackMandatoryAttributeColorLoopTime_30();
+            ChipLogProgress(chipTool, " ***** Test Step 30 : Read the mandatory attribute: NumberOfPrimaries\n");
+            err = TestReadTheMandatoryAttributeNumberOfPrimaries_30();
             break;
         case 31:
-            ChipLogProgress(chipTool, " ***** Test Step 31 : Validate constraints of attribute: ColorLoopStartEnhancedHue\n");
-            err = TestValidateConstraintsOfAttributeColorLoopStartEnhancedHue_31();
+            ChipLogProgress(chipTool, " ***** Test Step 31 : Read the mandatory attribute: Primary1X\n");
+            err = TestReadTheMandatoryAttributePrimary1X_31();
             break;
         case 32:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 32 : Write the default values to mandatory attribute: ColorLoopStartEnhancedHue\n");
-            err = TestWriteTheDefaultValuesToMandatoryAttributeColorLoopStartEnhancedHue_32();
+            ChipLogProgress(chipTool, " ***** Test Step 32 : Read the mandatory attribute: Primary1Y\n");
+            err = TestReadTheMandatoryAttributePrimary1Y_32();
             break;
         case 33:
-            ChipLogProgress(chipTool, " ***** Test Step 33 : Reads back mandatory attribute: ColorLoopStartEnhancedHue\n");
-            err = TestReadsBackMandatoryAttributeColorLoopStartEnhancedHue_33();
+            ChipLogProgress(chipTool, " ***** Test Step 33 : Read the mandatory attribute: Primary1Intensity\n");
+            err = TestReadTheMandatoryAttributePrimary1Intensity_33();
             break;
         case 34:
-            ChipLogProgress(chipTool, " ***** Test Step 34 : Validate constraints of attribute: ColorLoopStoredEnhancedHue\n");
-            err = TestValidateConstraintsOfAttributeColorLoopStoredEnhancedHue_34();
+            ChipLogProgress(chipTool, " ***** Test Step 34 : Read the mandatory attribute: Primary2X\n");
+            err = TestReadTheMandatoryAttributePrimary2X_34();
             break;
         case 35:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 35 : Write the default values to mandatory attribute: ColorLoopStoredEnhancedHue\n");
-            err = TestWriteTheDefaultValuesToMandatoryAttributeColorLoopStoredEnhancedHue_35();
+            ChipLogProgress(chipTool, " ***** Test Step 35 : Read the mandatory attribute: Primary2Y\n");
+            err = TestReadTheMandatoryAttributePrimary2Y_35();
             break;
         case 36:
-            ChipLogProgress(chipTool, " ***** Test Step 36 : Reads back mandatory attribute: ColorLoopStoredEnhancedHue\n");
-            err = TestReadsBackMandatoryAttributeColorLoopStoredEnhancedHue_36();
+            ChipLogProgress(chipTool, " ***** Test Step 36 : Validate constraints of attribute: Primary2Intensity\n");
+            err = TestValidateConstraintsOfAttributePrimary2Intensity_36();
             break;
         case 37:
-            ChipLogProgress(chipTool, " ***** Test Step 37 : Validate constraints of attribute: ColorCapabilities\n");
-            err = TestValidateConstraintsOfAttributeColorCapabilities_37();
+            ChipLogProgress(chipTool, " ***** Test Step 37 : Read the mandatory attribute: Primary3X\n");
+            err = TestReadTheMandatoryAttributePrimary3X_37();
             break;
         case 38:
-            ChipLogProgress(chipTool, " ***** Test Step 38 : Write the default values to mandatory attribute: ColorCapabilities\n");
-            err = TestWriteTheDefaultValuesToMandatoryAttributeColorCapabilities_38();
+            ChipLogProgress(chipTool, " ***** Test Step 38 : Read the mandatory attribute: Primary3Y\n");
+            err = TestReadTheMandatoryAttributePrimary3Y_38();
             break;
         case 39:
-            ChipLogProgress(chipTool, " ***** Test Step 39 : Reads back mandatory attribute: ColorCapabilities\n");
-            err = TestReadsBackMandatoryAttributeColorCapabilities_39();
+            ChipLogProgress(chipTool, " ***** Test Step 39 : Read the mandatory attribute: Primary3Intensity\n");
+            err = TestReadTheMandatoryAttributePrimary3Intensity_39();
             break;
         case 40:
-            ChipLogProgress(chipTool, " ***** Test Step 40 : Validate constraints of attribute: ColorTempPhysicalMinMireds\n");
-            err = TestValidateConstraintsOfAttributeColorTempPhysicalMinMireds_40();
+            ChipLogProgress(chipTool, " ***** Test Step 40 : Read the mandatory attribute: Primary4X\n");
+            err = TestReadTheMandatoryAttributePrimary4X_40();
             break;
         case 41:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 41 : Write the default values to mandatory  attribute: ColorTempPhysicalMinMireds\n");
-            err = TestWriteTheDefaultValuesToMandatoryAttributeColorTempPhysicalMinMireds_41();
+            ChipLogProgress(chipTool, " ***** Test Step 41 : Read the mandatory attribute: Primary4Y\n");
+            err = TestReadTheMandatoryAttributePrimary4Y_41();
             break;
         case 42:
-            ChipLogProgress(chipTool, " ***** Test Step 42 : Reads back mandatory attribute: ColorTempPhysicalMinMireds\n");
-            err = TestReadsBackMandatoryAttributeColorTempPhysicalMinMireds_42();
+            ChipLogProgress(chipTool, " ***** Test Step 42 : Read the mandatory attribute: Primary4Intensity\n");
+            err = TestReadTheMandatoryAttributePrimary4Intensity_42();
             break;
         case 43:
-            ChipLogProgress(chipTool, " ***** Test Step 43 : Validate constraints of attribute: ColorTempPhysicalMaxMireds\n");
-            err = TestValidateConstraintsOfAttributeColorTempPhysicalMaxMireds_43();
+            ChipLogProgress(chipTool, " ***** Test Step 43 : Read the mandatory attribute: Primary5X\n");
+            err = TestReadTheMandatoryAttributePrimary5X_43();
             break;
         case 44:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 44 : Write the default values to mandatory attribute: ColorTempPhysicalMaxMireds\n");
-            err = TestWriteTheDefaultValuesToMandatoryAttributeColorTempPhysicalMaxMireds_44();
+            ChipLogProgress(chipTool, " ***** Test Step 44 : Read the mandatory attribute: Primary5Y\n");
+            err = TestReadTheMandatoryAttributePrimary5Y_44();
             break;
         case 45:
-            ChipLogProgress(chipTool, " ***** Test Step 45 : Reads back mandatory attribute: ColorTempPhysicalMaxMireds\n");
-            err = TestReadsBackMandatoryAttributeColorTempPhysicalMaxMireds_45();
+            ChipLogProgress(chipTool, " ***** Test Step 45 : Read the mandatory attribute: Primary5Intensity\n");
+            err = TestReadTheMandatoryAttributePrimary5Intensity_45();
             break;
         case 46:
-            ChipLogProgress(chipTool, " ***** Test Step 46 : Read the optional attribute: CoupleColorTempToLevelMinMireds\n");
-            err = TestReadTheOptionalAttributeCoupleColorTempToLevelMinMireds_46();
+            ChipLogProgress(chipTool, " ***** Test Step 46 : Read the mandatory attribute: Primary6X\n");
+            err = TestReadTheMandatoryAttributePrimary6X_46();
             break;
         case 47:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 47 : Write the default values to optional attribute: CoupleColorTempToLevelMinMireds\n");
-            err = TestWriteTheDefaultValuesToOptionalAttributeCoupleColorTempToLevelMinMireds_47();
+            ChipLogProgress(chipTool, " ***** Test Step 47 : Read the mandatory attribute: Primary6Y\n");
+            err = TestReadTheMandatoryAttributePrimary6Y_47();
             break;
         case 48:
-            ChipLogProgress(chipTool, " ***** Test Step 48 : Reads back optional attribute: CoupleColorTempToLevelMinMireds\n");
-            err = TestReadsBackOptionalAttributeCoupleColorTempToLevelMinMireds_48();
+            ChipLogProgress(chipTool, " ***** Test Step 48 : Read the mandatory attribute: Primary6Intensity\n");
+            err = TestReadTheMandatoryAttributePrimary6Intensity_48();
             break;
         case 49:
-            ChipLogProgress(chipTool, " ***** Test Step 49 : Read the optional attribute: StartUpColorTemperatureMireds\n");
-            err = TestReadTheOptionalAttributeStartUpColorTemperatureMireds_49();
+            ChipLogProgress(chipTool, " ***** Test Step 49 : Read the optional attribute: WhitePointX\n");
+            err = TestReadTheOptionalAttributeWhitePointX_49();
             break;
         case 50:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 50 : Write the default values to optional attribute: StartUpColorTemperatureMireds\n");
-            err = TestWriteTheDefaultValuesToOptionalAttributeStartUpColorTemperatureMireds_50();
+            ChipLogProgress(chipTool, " ***** Test Step 50 : Read the optional attribute: WhitePointY\n");
+            err = TestReadTheOptionalAttributeWhitePointY_50();
             break;
         case 51:
-            ChipLogProgress(chipTool, " ***** Test Step 51 : Reads back optional attribute: StartUpColorTemperatureMireds\n");
-            err = TestReadsBackOptionalAttributeStartUpColorTemperatureMireds_51();
+            ChipLogProgress(chipTool, " ***** Test Step 51 : Read the optional attribute: ColorPointRX\n");
+            err = TestReadTheOptionalAttributeColorPointRX_51();
             break;
         case 52:
-            ChipLogProgress(chipTool, " ***** Test Step 52 : Validate constraints of attribute: RemainingTime\n");
-            err = TestValidateConstraintsOfAttributeRemainingTime_52();
+            ChipLogProgress(chipTool, " ***** Test Step 52 : Read the optional attribute: ColorPointRY\n");
+            err = TestReadTheOptionalAttributeColorPointRY_52();
             break;
         case 53:
-            ChipLogProgress(chipTool, " ***** Test Step 53 : Write the default values to optional attribute: RemainingTime\n");
-            err = TestWriteTheDefaultValuesToOptionalAttributeRemainingTime_53();
+            ChipLogProgress(chipTool, " ***** Test Step 53 : Read the optional attribute: ColorPointRIntensity\n");
+            err = TestReadTheOptionalAttributeColorPointRIntensity_53();
             break;
         case 54:
-            ChipLogProgress(chipTool, " ***** Test Step 54 : Reads back optional attribute: RemainingTime\n");
-            err = TestReadsBackOptionalAttributeRemainingTime_54();
+            ChipLogProgress(chipTool, " ***** Test Step 54 : Read the optional attribute: ColorPointGX\n");
+            err = TestReadTheOptionalAttributeColorPointGX_54();
             break;
         case 55:
-            ChipLogProgress(chipTool, " ***** Test Step 55 : Read the optional attribute: DriftCompensation\n");
-            err = TestReadTheOptionalAttributeDriftCompensation_55();
+            ChipLogProgress(chipTool, " ***** Test Step 55 : Read the optional attribute: ColorPointGY\n");
+            err = TestReadTheOptionalAttributeColorPointGY_55();
             break;
         case 56:
-            ChipLogProgress(chipTool, " ***** Test Step 56 : Write the default values to optional attribute: DriftCompensation\n");
-            err = TestWriteTheDefaultValuesToOptionalAttributeDriftCompensation_56();
+            ChipLogProgress(chipTool, " ***** Test Step 56 : Read the optional attribute: ColorPointGIntensity\n");
+            err = TestReadTheOptionalAttributeColorPointGIntensity_56();
             break;
         case 57:
-            ChipLogProgress(chipTool, " ***** Test Step 57 : Reads back optional attribute: DriftCompensation\n");
-            err = TestReadsBackOptionalAttributeDriftCompensation_57();
+            ChipLogProgress(chipTool, " ***** Test Step 57 : Read the optional attribute: ColorPointBX\n");
+            err = TestReadTheOptionalAttributeColorPointBX_57();
             break;
         case 58:
-            ChipLogProgress(chipTool, " ***** Test Step 58 : Read the optional attribute: CompensationText\n");
-            err = TestReadTheOptionalAttributeCompensationText_58();
+            ChipLogProgress(chipTool, " ***** Test Step 58 : Read the optional attribute: ColorPointBY\n");
+            err = TestReadTheOptionalAttributeColorPointBY_58();
             break;
         case 59:
-            ChipLogProgress(chipTool, " ***** Test Step 59 : Write the default values to optional attribute: CompensationText\n");
-            err = TestWriteTheDefaultValuesToOptionalAttributeCompensationText_59();
-            break;
-        case 60:
-            ChipLogProgress(chipTool, " ***** Test Step 60 : Reads back optional attribute: CompensationText\n");
-            err = TestReadsBackOptionalAttributeCompensationText_60();
-            break;
-        case 61:
-            ChipLogProgress(chipTool, " ***** Test Step 61 : Read the mandatory attribute: NumberOfPrimaries\n");
-            err = TestReadTheMandatoryAttributeNumberOfPrimaries_61();
-            break;
-        case 62:
-            ChipLogProgress(chipTool, " ***** Test Step 62 : Write the default mandatory attribute: NumberOfPrimaries\n");
-            err = TestWriteTheDefaultMandatoryAttributeNumberOfPrimaries_62();
-            break;
-        case 63:
-            ChipLogProgress(chipTool, " ***** Test Step 63 : Read back the mandatory attribute: NumberOfPrimaries\n");
-            err = TestReadBackTheMandatoryAttributeNumberOfPrimaries_63();
-            break;
-        case 64:
-            ChipLogProgress(chipTool, " ***** Test Step 64 : Read the mandatory attribute: Primary1X\n");
-            err = TestReadTheMandatoryAttributePrimary1X_64();
-            break;
-        case 65:
-            ChipLogProgress(chipTool, " ***** Test Step 65 : Write the default mandatory attribute: Primary1X\n");
-            err = TestWriteTheDefaultMandatoryAttributePrimary1X_65();
-            break;
-        case 66:
-            ChipLogProgress(chipTool, " ***** Test Step 66 : Read back the mandatory attribute: Primary1X\n");
-            err = TestReadBackTheMandatoryAttributePrimary1X_66();
-            break;
-        case 67:
-            ChipLogProgress(chipTool, " ***** Test Step 67 : Read the mandatory attribute: Primary1Y\n");
-            err = TestReadTheMandatoryAttributePrimary1Y_67();
-            break;
-        case 68:
-            ChipLogProgress(chipTool, " ***** Test Step 68 : Write the default mandatory attribute: Primary1Y\n");
-            err = TestWriteTheDefaultMandatoryAttributePrimary1Y_68();
-            break;
-        case 69:
-            ChipLogProgress(chipTool, " ***** Test Step 69 : Read back the mandatory attribute: Primary1Y\n");
-            err = TestReadBackTheMandatoryAttributePrimary1Y_69();
-            break;
-        case 70:
-            ChipLogProgress(chipTool, " ***** Test Step 70 : Read the mandatory attribute: Primary1Intensity\n");
-            err = TestReadTheMandatoryAttributePrimary1Intensity_70();
-            break;
-        case 71:
-            ChipLogProgress(chipTool, " ***** Test Step 71 : Read the mandatory attribute: Primary2X\n");
-            err = TestReadTheMandatoryAttributePrimary2X_71();
-            break;
-        case 72:
-            ChipLogProgress(chipTool, " ***** Test Step 72 : Write the default mandatory attribute: Primary2X\n");
-            err = TestWriteTheDefaultMandatoryAttributePrimary2X_72();
-            break;
-        case 73:
-            ChipLogProgress(chipTool, " ***** Test Step 73 : Read back the mandatory attribute: Primary2X\n");
-            err = TestReadBackTheMandatoryAttributePrimary2X_73();
-            break;
-        case 74:
-            ChipLogProgress(chipTool, " ***** Test Step 74 : Read the mandatory attribute: Primary2Y\n");
-            err = TestReadTheMandatoryAttributePrimary2Y_74();
-            break;
-        case 75:
-            ChipLogProgress(chipTool, " ***** Test Step 75 : Write the default mandatory attribute: Primary2Y\n");
-            err = TestWriteTheDefaultMandatoryAttributePrimary2Y_75();
-            break;
-        case 76:
-            ChipLogProgress(chipTool, " ***** Test Step 76 : Read back the mandatory attribute: Primary2Y\n");
-            err = TestReadBackTheMandatoryAttributePrimary2Y_76();
-            break;
-        case 77:
-            ChipLogProgress(chipTool, " ***** Test Step 77 : Validate constraints of attribute: Primary2Intensity\n");
-            err = TestValidateConstraintsOfAttributePrimary2Intensity_77();
-            break;
-        case 78:
-            ChipLogProgress(chipTool, " ***** Test Step 78 : Read the mandatory attribute: Primary3X\n");
-            err = TestReadTheMandatoryAttributePrimary3X_78();
-            break;
-        case 79:
-            ChipLogProgress(chipTool, " ***** Test Step 79 : Write the default mandatory attribute: Primary3X\n");
-            err = TestWriteTheDefaultMandatoryAttributePrimary3X_79();
-            break;
-        case 80:
-            ChipLogProgress(chipTool, " ***** Test Step 80 : Read back the mandatory attribute: Primary3X\n");
-            err = TestReadBackTheMandatoryAttributePrimary3X_80();
-            break;
-        case 81:
-            ChipLogProgress(chipTool, " ***** Test Step 81 : Read the mandatory attribute: Primary3Y\n");
-            err = TestReadTheMandatoryAttributePrimary3Y_81();
-            break;
-        case 82:
-            ChipLogProgress(chipTool, " ***** Test Step 82 : Write the default mandatory attribute: Primary3Y\n");
-            err = TestWriteTheDefaultMandatoryAttributePrimary3Y_82();
-            break;
-        case 83:
-            ChipLogProgress(chipTool, " ***** Test Step 83 : Read back the mandatory attribute: Primary3Y\n");
-            err = TestReadBackTheMandatoryAttributePrimary3Y_83();
-            break;
-        case 84:
-            ChipLogProgress(chipTool, " ***** Test Step 84 : Read the mandatory attribute: Primary3Intensity\n");
-            err = TestReadTheMandatoryAttributePrimary3Intensity_84();
-            break;
-        case 85:
-            ChipLogProgress(chipTool, " ***** Test Step 85 : Read the mandatory attribute: Primary4X\n");
-            err = TestReadTheMandatoryAttributePrimary4X_85();
-            break;
-        case 86:
-            ChipLogProgress(chipTool, " ***** Test Step 86 : Write the default mandatory attribute: Primary4X\n");
-            err = TestWriteTheDefaultMandatoryAttributePrimary4X_86();
-            break;
-        case 87:
-            ChipLogProgress(chipTool, " ***** Test Step 87 : Read back the mandatory attribute: Primary4X\n");
-            err = TestReadBackTheMandatoryAttributePrimary4X_87();
-            break;
-        case 88:
-            ChipLogProgress(chipTool, " ***** Test Step 88 : Read the mandatory attribute: Primary4Y\n");
-            err = TestReadTheMandatoryAttributePrimary4Y_88();
-            break;
-        case 89:
-            ChipLogProgress(chipTool, " ***** Test Step 89 : Write the default mandatory attribute: Primary4Y\n");
-            err = TestWriteTheDefaultMandatoryAttributePrimary4Y_89();
-            break;
-        case 90:
-            ChipLogProgress(chipTool, " ***** Test Step 90 : Read back the mandatory attribute: Primary4Y\n");
-            err = TestReadBackTheMandatoryAttributePrimary4Y_90();
-            break;
-        case 91:
-            ChipLogProgress(chipTool, " ***** Test Step 91 : Read the mandatory attribute: Primary4Intensity\n");
-            err = TestReadTheMandatoryAttributePrimary4Intensity_91();
-            break;
-        case 92:
-            ChipLogProgress(chipTool, " ***** Test Step 92 : Read the mandatory attribute: Primary5X\n");
-            err = TestReadTheMandatoryAttributePrimary5X_92();
-            break;
-        case 93:
-            ChipLogProgress(chipTool, " ***** Test Step 93 : Write the default mandatory attribute: Primary5X\n");
-            err = TestWriteTheDefaultMandatoryAttributePrimary5X_93();
-            break;
-        case 94:
-            ChipLogProgress(chipTool, " ***** Test Step 94 : Read back the mandatory attribute: Primary5X\n");
-            err = TestReadBackTheMandatoryAttributePrimary5X_94();
-            break;
-        case 95:
-            ChipLogProgress(chipTool, " ***** Test Step 95 : Read the mandatory attribute: Primary5Y\n");
-            err = TestReadTheMandatoryAttributePrimary5Y_95();
-            break;
-        case 96:
-            ChipLogProgress(chipTool, " ***** Test Step 96 : Write the default mandatory attribute: Primary5Y\n");
-            err = TestWriteTheDefaultMandatoryAttributePrimary5Y_96();
-            break;
-        case 97:
-            ChipLogProgress(chipTool, " ***** Test Step 97 : Read back the mandatory attribute: Primary5Y\n");
-            err = TestReadBackTheMandatoryAttributePrimary5Y_97();
-            break;
-        case 98:
-            ChipLogProgress(chipTool, " ***** Test Step 98 : Read the mandatory attribute: Primary5Intensity\n");
-            err = TestReadTheMandatoryAttributePrimary5Intensity_98();
-            break;
-        case 99:
-            ChipLogProgress(chipTool, " ***** Test Step 99 : Read the mandatory attribute: Primary6X\n");
-            err = TestReadTheMandatoryAttributePrimary6X_99();
-            break;
-        case 100:
-            ChipLogProgress(chipTool, " ***** Test Step 100 : Write the default mandatory attribute: Primary6X\n");
-            err = TestWriteTheDefaultMandatoryAttributePrimary6X_100();
-            break;
-        case 101:
-            ChipLogProgress(chipTool, " ***** Test Step 101 : Read back the mandatory attribute: Primary6X\n");
-            err = TestReadBackTheMandatoryAttributePrimary6X_101();
-            break;
-        case 102:
-            ChipLogProgress(chipTool, " ***** Test Step 102 : Read the mandatory attribute: Primary6Y\n");
-            err = TestReadTheMandatoryAttributePrimary6Y_102();
-            break;
-        case 103:
-            ChipLogProgress(chipTool, " ***** Test Step 103 : Write the default mandatory attribute: Primary6Y\n");
-            err = TestWriteTheDefaultMandatoryAttributePrimary6Y_103();
-            break;
-        case 104:
-            ChipLogProgress(chipTool, " ***** Test Step 104 : Read back the mandatory attribute: Primary6Y\n");
-            err = TestReadBackTheMandatoryAttributePrimary6Y_104();
-            break;
-        case 105:
-            ChipLogProgress(chipTool, " ***** Test Step 105 : Read the mandatory attribute: Primary6Intensity\n");
-            err = TestReadTheMandatoryAttributePrimary6Intensity_105();
-            break;
-        case 106:
-            ChipLogProgress(chipTool, " ***** Test Step 106 : Read the optional attribute: WhitePointX\n");
-            err = TestReadTheOptionalAttributeWhitePointX_106();
-            break;
-        case 107:
-            ChipLogProgress(chipTool, " ***** Test Step 107 : Write the default optional attribute: WhitePointX\n");
-            err = TestWriteTheDefaultOptionalAttributeWhitePointX_107();
-            break;
-        case 108:
-            ChipLogProgress(chipTool, " ***** Test Step 108 : Read back the optional attribute: WhitePointX\n");
-            err = TestReadBackTheOptionalAttributeWhitePointX_108();
-            break;
-        case 109:
-            ChipLogProgress(chipTool, " ***** Test Step 109 : Read the optional attribute: WhitePointY\n");
-            err = TestReadTheOptionalAttributeWhitePointY_109();
-            break;
-        case 110:
-            ChipLogProgress(chipTool, " ***** Test Step 110 : Write the default optional attribute: WhitePointY\n");
-            err = TestWriteTheDefaultOptionalAttributeWhitePointY_110();
-            break;
-        case 111:
-            ChipLogProgress(chipTool, " ***** Test Step 111 : Read back the optional attribute: WhitePointY\n");
-            err = TestReadBackTheOptionalAttributeWhitePointY_111();
-            break;
-        case 112:
-            ChipLogProgress(chipTool, " ***** Test Step 112 : Read the optional attribute: ColorPointRX\n");
-            err = TestReadTheOptionalAttributeColorPointRX_112();
-            break;
-        case 113:
-            ChipLogProgress(chipTool, " ***** Test Step 113 : Write the default optional attribute: ColorPointRX\n");
-            err = TestWriteTheDefaultOptionalAttributeColorPointRX_113();
-            break;
-        case 114:
-            ChipLogProgress(chipTool, " ***** Test Step 114 : Read back the optional attribute: ColorPointRX\n");
-            err = TestReadBackTheOptionalAttributeColorPointRX_114();
-            break;
-        case 115:
-            ChipLogProgress(chipTool, " ***** Test Step 115 : Read the optional attribute: ColorPointRY\n");
-            err = TestReadTheOptionalAttributeColorPointRY_115();
-            break;
-        case 116:
-            ChipLogProgress(chipTool, " ***** Test Step 116 : Write the default optional attribute: ColorPointRY\n");
-            err = TestWriteTheDefaultOptionalAttributeColorPointRY_116();
-            break;
-        case 117:
-            ChipLogProgress(chipTool, " ***** Test Step 117 : Read back the optional attribute: ColorPointRY\n");
-            err = TestReadBackTheOptionalAttributeColorPointRY_117();
-            break;
-        case 118:
-            ChipLogProgress(chipTool, " ***** Test Step 118 : Read the optional attribute: ColorPointRIntensity\n");
-            err = TestReadTheOptionalAttributeColorPointRIntensity_118();
-            break;
-        case 119:
-            ChipLogProgress(chipTool, " ***** Test Step 119 : Write the default optional attribute: ColorPointRIntensity\n");
-            err = TestWriteTheDefaultOptionalAttributeColorPointRIntensity_119();
-            break;
-        case 120:
-            ChipLogProgress(chipTool, " ***** Test Step 120 : Read back the optional attribute: ColorPointRIntensity\n");
-            err = TestReadBackTheOptionalAttributeColorPointRIntensity_120();
-            break;
-        case 121:
-            ChipLogProgress(chipTool, " ***** Test Step 121 : Read the optional attribute: ColorPointGX\n");
-            err = TestReadTheOptionalAttributeColorPointGX_121();
-            break;
-        case 122:
-            ChipLogProgress(chipTool, " ***** Test Step 122 : Write the default optional attribute: ColorPointGX\n");
-            err = TestWriteTheDefaultOptionalAttributeColorPointGX_122();
-            break;
-        case 123:
-            ChipLogProgress(chipTool, " ***** Test Step 123 : Read back the optional attribute: ColorPointGX\n");
-            err = TestReadBackTheOptionalAttributeColorPointGX_123();
-            break;
-        case 124:
-            ChipLogProgress(chipTool, " ***** Test Step 124 : Read the optional attribute: ColorPointGY\n");
-            err = TestReadTheOptionalAttributeColorPointGY_124();
-            break;
-        case 125:
-            ChipLogProgress(chipTool, " ***** Test Step 125 : Write the default optional attribute: ColorPointGY\n");
-            err = TestWriteTheDefaultOptionalAttributeColorPointGY_125();
-            break;
-        case 126:
-            ChipLogProgress(chipTool, " ***** Test Step 126 : Read back the optional attribute: ColorPointGY\n");
-            err = TestReadBackTheOptionalAttributeColorPointGY_126();
-            break;
-        case 127:
-            ChipLogProgress(chipTool, " ***** Test Step 127 : Read the optional attribute: ColorPointGIntensity\n");
-            err = TestReadTheOptionalAttributeColorPointGIntensity_127();
-            break;
-        case 128:
-            ChipLogProgress(chipTool, " ***** Test Step 128 : Write the default optional attribute: ColorPointGIntensity\n");
-            err = TestWriteTheDefaultOptionalAttributeColorPointGIntensity_128();
-            break;
-        case 129:
-            ChipLogProgress(chipTool, " ***** Test Step 129 : Read back the optional attribute: ColorPointGIntensity\n");
-            err = TestReadBackTheOptionalAttributeColorPointGIntensity_129();
-            break;
-        case 130:
-            ChipLogProgress(chipTool, " ***** Test Step 130 : Read the optional attribute: ColorPointBX\n");
-            err = TestReadTheOptionalAttributeColorPointBX_130();
-            break;
-        case 131:
-            ChipLogProgress(chipTool, " ***** Test Step 131 : Write the default optional attribute: ColorPointBX\n");
-            err = TestWriteTheDefaultOptionalAttributeColorPointBX_131();
-            break;
-        case 132:
-            ChipLogProgress(chipTool, " ***** Test Step 132 : Read back the optional attribute: ColorPointBX\n");
-            err = TestReadBackTheOptionalAttributeColorPointBX_132();
-            break;
-        case 133:
-            ChipLogProgress(chipTool, " ***** Test Step 133 : Read the optional attribute: ColorPointBY\n");
-            err = TestReadTheOptionalAttributeColorPointBY_133();
-            break;
-        case 134:
-            ChipLogProgress(chipTool, " ***** Test Step 134 : Write the default optional attribute: ColorPointBY\n");
-            err = TestWriteTheDefaultOptionalAttributeColorPointBY_134();
-            break;
-        case 135:
-            ChipLogProgress(chipTool, " ***** Test Step 135 : Read back the optional attribute: ColorPointBY\n");
-            err = TestReadBackTheOptionalAttributeColorPointBY_135();
-            break;
-        case 136:
-            ChipLogProgress(chipTool, " ***** Test Step 136 : Read the optional attribute: ColorPointBIntensity\n");
-            err = TestReadTheOptionalAttributeColorPointBIntensity_136();
-            break;
-        case 137:
-            ChipLogProgress(chipTool, " ***** Test Step 137 : Write the default optional attribute: ColorPointBIntensity\n");
-            err = TestWriteTheDefaultOptionalAttributeColorPointBIntensity_137();
-            break;
-        case 138:
-            ChipLogProgress(chipTool, " ***** Test Step 138 : Read back the optional attribute: ColorPointBIntensity\n");
-            err = TestReadBackTheOptionalAttributeColorPointBIntensity_138();
+            ChipLogProgress(chipTool, " ***** Test Step 59 : Read the optional attribute: ColorPointBIntensity\n");
+            err = TestReadTheOptionalAttributeColorPointBIntensity_59();
             break;
         }
 
@@ -4633,7 +4318,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -4642,7 +4327,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -4651,7 +4336,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -4660,7 +4345,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -4684,7 +4369,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -4696,7 +4381,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -4705,7 +4390,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 26:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -4714,7 +4399,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 29:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 30:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -4723,7 +4408,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 33:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -4732,7 +4417,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 35:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 36:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -4741,7 +4426,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 38:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 39:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -4750,7 +4435,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 41:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 42:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -4759,7 +4444,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 44:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 45:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -4768,7 +4453,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 47:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 48:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -4786,7 +4471,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 53:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 54:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -4795,7 +4480,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 56:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 57:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -4804,243 +4489,6 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 59:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 60:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 61:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 62:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 63:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 64:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 65:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 66:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 67:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 68:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 69:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 70:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 71:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 72:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 73:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 74:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 75:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 76:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 77:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 78:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 79:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 80:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 81:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 82:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 83:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 84:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 85:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 86:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 87:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 88:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 89:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 90:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 91:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 92:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 93:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 94:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 95:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 96:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 97:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 98:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 99:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 100:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 101:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 102:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 103:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 104:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 105:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 106:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 107:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 108:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 109:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 110:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 111:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 112:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 113:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 114:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 115:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 116:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 117:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 118:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 119:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 120:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 121:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 122:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 123:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 124:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 125:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 126:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 127:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 128:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 129:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 130:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 131:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 132:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 133:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 134:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 135:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 136:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 137:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 138:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         }
@@ -5056,7 +4504,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 139;
+    const uint16_t mTestCount = 60;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -5077,69 +4525,23 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentHueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Validate constraints of attribute: current hue Error: %@", err);
+            NSLog(@"Validate constraints of attribute: CurrentHue Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("current hue", actualValue, 0));
             }
 
+            VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultValueToMandatoryAttributeCurrentHue_2()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id currentHueArgument;
-        currentHueArgument = [NSNumber numberWithUnsignedChar:0];
-        [cluster writeAttributeCurrentHueWithValue:currentHueArgument
-                                 completionHandler:^(NSError * _Nullable err) {
-                                     NSLog(@"Write the default value to mandatory attribute: CurrentHue Error: %@", err);
-
-                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                     NextTest();
-                                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackMandatoryAttributeCurrentHue_3()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCurrentHueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back mandatory attribute: CurrentHue Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestValidateConstraintsOfAttributeCurrentSaturation_4()
+    CHIP_ERROR TestValidateConstraintsOfAttributeCurrentSaturation_2()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5150,57 +4552,32 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("current saturation", actualValue, 0));
             }
 
+            VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultValueToMandatoryAttributeCurrentSaturation_5()
+    CHIP_ERROR TestReadsCurrentXAttributeFromDut_3()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        id currentSaturationArgument;
-        currentSaturationArgument = [NSNumber numberWithUnsignedChar:0];
-        [cluster
-            writeAttributeCurrentSaturationWithValue:currentSaturationArgument
-                                   completionHandler:^(NSError * _Nullable err) {
-                                       NSLog(@"Write the default value to mandatory attribute: CurrentSaturation Error: %@", err);
-
-                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                       NextTest();
-                                   }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackMandatoryAttributeCurrentSaturation_6()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCurrentSaturationWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back mandatory attribute: CurrentSaturation Error: %@", err);
+        [cluster readAttributeCurrentXWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads CurrentX attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("current x", actualValue, 24939U));
             }
 
             NextTest();
@@ -5209,7 +4586,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestValidateConstraintsOfAttributeCurrentX_7()
+    CHIP_ERROR TestValidateConstraintsOfAttributeCurrentX_4()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5234,42 +4611,20 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultValueToMandatoryAttributeCurrentX_8()
+    CHIP_ERROR TestReadsCurrentYAttributeFromDut_5()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        id currentXArgument;
-        currentXArgument = [NSNumber numberWithUnsignedShort:24939U];
-        [cluster writeAttributeCurrentXWithValue:currentXArgument
-                               completionHandler:^(NSError * _Nullable err) {
-                                   NSLog(@"Write the default value to mandatory attribute: CurrentX Error: %@", err);
-
-                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                   NextTest();
-                               }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackMandatoryAttributeCurrentX_9()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCurrentXWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back mandatory attribute: CurrentX Error: %@", err);
+        [cluster readAttributeCurrentYWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads CurrentY attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("currentX", "", "uint16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentX", [value unsignedShortValue], 0U));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentX", [value unsignedShortValue], 65279U));
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("current y", actualValue, 24701U));
             }
 
             NextTest();
@@ -5278,7 +4633,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestValidateConstraintsOfAttributeCurrentY_10()
+    CHIP_ERROR TestValidateConstraintsOfAttributeCurrentY_6()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5303,42 +4658,20 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryAttributeCurrentY_11()
+    CHIP_ERROR TestReadsColorTemperatureMiredsAttributeFromDut_7()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        id currentYArgument;
-        currentYArgument = [NSNumber numberWithUnsignedShort:24701U];
-        [cluster writeAttributeCurrentYWithValue:currentYArgument
-                               completionHandler:^(NSError * _Nullable err) {
-                                   NSLog(@"Write the default values to mandatory attribute: CurrentY Error: %@", err);
-
-                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                   NextTest();
-                               }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackMandatoryAttributeCurrentY_12()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCurrentYWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back mandatory attribute: CurrentY Error: %@", err);
+        [cluster readAttributeColorTemperatureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads ColorTemperatureMireds attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("currentY", "", "uint16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentY", [value unsignedShortValue], 0U));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentY", [value unsignedShortValue], 65279U));
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("color temperature", actualValue, 250U));
             }
 
             NextTest();
@@ -5347,7 +4680,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestValidateConstraintsOfAttributeColorTemperatureMireds_13()
+    CHIP_ERROR TestValidateConstraintsOfAttributeColorTemperatureMireds_8()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5372,7 +4705,29 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestValidateConstraintsOfAttributeColorMode_14()
+    CHIP_ERROR TestReadsColorModeAttributeFromDut_9()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeColorModeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads ColorMode attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("color mode", actualValue, 1));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestValidateConstraintsOfAttributeColorMode_10()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5397,7 +4752,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestValidateConstraintsOfAttributeOptions_15()
+    CHIP_ERROR TestValidateConstraintsOfAttributeOptions_11()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5408,6 +4763,11 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("color control options", actualValue, 0));
+            }
+
             VerifyOrReturn(CheckConstraintType("colorControlOptions", "", "map8"));
             NextTest();
         }];
@@ -5415,49 +4775,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryAttributeOptions_16()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id colorControlOptionsArgument;
-        colorControlOptionsArgument = [NSNumber numberWithUnsignedChar:0];
-        [cluster writeAttributeColorControlOptionsWithValue:colorControlOptionsArgument
-                                          completionHandler:^(NSError * _Nullable err) {
-                                              NSLog(@"Write the default values to mandatory attribute: Options Error: %@", err);
-
-                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                              NextTest();
-                                          }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackMandatoryAttributeOptions_17()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeColorControlOptionsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back mandatory attribute: Options Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("color control options", actualValue, 0));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestValidateConstraintsOfAttributeEnhancedCurrentHue_18()
+    CHIP_ERROR TestValidateConstraintsOfAttributeEnhancedCurrentHue_12()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5468,44 +4786,10 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("enhancedCurrentHue", "", "uint16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryAttributeEnhancedCurrentHue_19()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id enhancedCurrentHueArgument;
-        enhancedCurrentHueArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributeEnhancedCurrentHueWithValue:enhancedCurrentHueArgument
-                                         completionHandler:^(NSError * _Nullable err) {
-                                             NSLog(@"Write the default values to mandatory attribute: EnhancedCurrentHue Error: %@",
-                                                 err);
-
-                                             VerifyOrReturn(
-                                                 CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                             NextTest();
-                                         }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackMandatoryAttributeEnhancedCurrentHue_20()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeEnhancedCurrentHueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back mandatory attribute: EnhancedCurrentHue Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("enhanced current hue", actualValue, 0U));
+            }
 
             VerifyOrReturn(CheckConstraintType("enhancedCurrentHue", "", "uint16"));
             NextTest();
@@ -5514,7 +4798,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestValidateConstraintsOfAttributeEnhancedColorMode_21()
+    CHIP_ERROR TestValidateConstraintsOfAttributeEnhancedColorMode_13()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5525,6 +4809,11 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("enhanced color mode", actualValue, 1));
+            }
+
             VerifyOrReturn(CheckConstraintType("enhancedColorMode", "", "enum8"));
             NextTest();
         }];
@@ -5532,7 +4821,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestValidateConstraintsOfAttributeColorLoopActive_22()
+    CHIP_ERROR TestValidateConstraintsOfAttributeColorLoopActive_14()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5543,43 +4832,10 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("colorLoopActive", "", "uint8"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryAttributeColorLoopActive_23()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id colorLoopActiveArgument;
-        colorLoopActiveArgument = [NSNumber numberWithUnsignedChar:0];
-        [cluster
-            writeAttributeColorLoopActiveWithValue:colorLoopActiveArgument
-                                 completionHandler:^(NSError * _Nullable err) {
-                                     NSLog(@"Write the default values to mandatory attribute: ColorLoopActive Error: %@", err);
-
-                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                     NextTest();
-                                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackMandatoryAttributeColorLoopActive_24()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeColorLoopActiveWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back mandatory attribute: ColorLoopActive Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("color loop active", actualValue, 0));
+            }
 
             VerifyOrReturn(CheckConstraintType("colorLoopActive", "", "uint8"));
             NextTest();
@@ -5588,7 +4844,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestValidateConstraintsOfAttributeColorLoopDirection_25()
+    CHIP_ERROR TestValidateConstraintsOfAttributeColorLoopDirection_15()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5599,44 +4855,10 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("colorLoopDirection", "", "uint8"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryAttributeColorLoopDirection_26()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id colorLoopDirectionArgument;
-        colorLoopDirectionArgument = [NSNumber numberWithUnsignedChar:0];
-        [cluster writeAttributeColorLoopDirectionWithValue:colorLoopDirectionArgument
-                                         completionHandler:^(NSError * _Nullable err) {
-                                             NSLog(@"Write the default values to mandatory attribute: ColorLoopDirection Error: %@",
-                                                 err);
-
-                                             VerifyOrReturn(
-                                                 CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                             NextTest();
-                                         }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackMandatoryAttributeColorLoopDirection_27()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeColorLoopDirectionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back mandatory attribute: ColorLoopDirection Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("color loop direction", actualValue, 0));
+            }
 
             VerifyOrReturn(CheckConstraintType("colorLoopDirection", "", "uint8"));
             NextTest();
@@ -5645,7 +4867,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestValidateConstraintsOfAttributeColorLoopTime_28()
+    CHIP_ERROR TestValidateConstraintsOfAttributeColorLoopTime_16()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5656,43 +4878,10 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("colorLoopTime", "", "uint16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryAttributeColorLoopTime_29()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id colorLoopTimeArgument;
-        colorLoopTimeArgument = [NSNumber numberWithUnsignedShort:25U];
-        [cluster
-            writeAttributeColorLoopTimeWithValue:colorLoopTimeArgument
-                               completionHandler:^(NSError * _Nullable err) {
-                                   NSLog(@"Write the default values to mandatory attribute: ColorLoopTime Error: %@", err);
-
-                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                   NextTest();
-                               }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackMandatoryAttributeColorLoopTime_30()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeColorLoopTimeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back mandatory attribute: ColorLoopTime Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("color loop time", actualValue, 25U));
+            }
 
             VerifyOrReturn(CheckConstraintType("colorLoopTime", "", "uint16"));
             NextTest();
@@ -5701,7 +4890,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestValidateConstraintsOfAttributeColorLoopStartEnhancedHue_31()
+    CHIP_ERROR TestValidateConstraintsOfAttributeColorLoopStartEnhancedHue_17()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5713,46 +4902,10 @@ private:
 
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                VerifyOrReturn(CheckConstraintType("colorLoopStartEnhancedHue", "", "uint16"));
-                NextTest();
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryAttributeColorLoopStartEnhancedHue_32()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id colorLoopStartEnhancedHueArgument;
-        colorLoopStartEnhancedHueArgument = [NSNumber numberWithUnsignedShort:8960U];
-        [cluster writeAttributeColorLoopStartEnhancedHueWithValue:colorLoopStartEnhancedHueArgument
-                                                completionHandler:^(NSError * _Nullable err) {
-                                                    NSLog(@"Write the default values to mandatory attribute: "
-                                                          @"ColorLoopStartEnhancedHue Error: %@",
-                                                        err);
-
-                                                    VerifyOrReturn(CheckValue(
-                                                        "status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                                    NextTest();
-                                                }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackMandatoryAttributeColorLoopStartEnhancedHue_33()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster
-            readAttributeColorLoopStartEnhancedHueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"Reads back mandatory attribute: ColorLoopStartEnhancedHue Error: %@", err);
-
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("color loop start enhanced hue", actualValue, 8960U));
+                }
 
                 VerifyOrReturn(CheckConstraintType("colorLoopStartEnhancedHue", "", "uint16"));
                 NextTest();
@@ -5761,7 +4914,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestValidateConstraintsOfAttributeColorLoopStoredEnhancedHue_34()
+    CHIP_ERROR TestValidateConstraintsOfAttributeColorLoopStoredEnhancedHue_18()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5773,46 +4926,10 @@ private:
 
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                VerifyOrReturn(CheckConstraintType("colorLoopStoredEnhancedHue", "", "uint16"));
-                NextTest();
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryAttributeColorLoopStoredEnhancedHue_35()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id colorLoopStoredEnhancedHueArgument;
-        colorLoopStoredEnhancedHueArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributeColorLoopStoredEnhancedHueWithValue:colorLoopStoredEnhancedHueArgument
-                                                 completionHandler:^(NSError * _Nullable err) {
-                                                     NSLog(@"Write the default values to mandatory attribute: "
-                                                           @"ColorLoopStoredEnhancedHue Error: %@",
-                                                         err);
-
-                                                     VerifyOrReturn(CheckValue(
-                                                         "status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                                     NextTest();
-                                                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackMandatoryAttributeColorLoopStoredEnhancedHue_36()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster
-            readAttributeColorLoopStoredEnhancedHueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"Reads back mandatory attribute: ColorLoopStoredEnhancedHue Error: %@", err);
-
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("color loop stored enhanced hue", actualValue, 0U));
+                }
 
                 VerifyOrReturn(CheckConstraintType("colorLoopStoredEnhancedHue", "", "uint16"));
                 NextTest();
@@ -5821,7 +4938,29 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestValidateConstraintsOfAttributeColorCapabilities_37()
+    CHIP_ERROR TestReadsColorCapabilitiesAttributeFromDut_19()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeColorCapabilitiesWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads ColorCapabilities attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("color capabilities", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestValidateConstraintsOfAttributeColorCapabilities_20()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5846,43 +4985,20 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryAttributeColorCapabilities_38()
+    CHIP_ERROR TestReadsColorTempPhysicalMinMiredsAttributeFromDut_21()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        id colorCapabilitiesArgument;
-        colorCapabilitiesArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster
-            writeAttributeColorCapabilitiesWithValue:colorCapabilitiesArgument
-                                   completionHandler:^(NSError * _Nullable err) {
-                                       NSLog(@"Write the default values to mandatory attribute: ColorCapabilities Error: %@", err);
-
-                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                       NextTest();
-                                   }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackMandatoryAttributeColorCapabilities_39()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeColorCapabilitiesWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back mandatory attribute: ColorCapabilities Error: %@", err);
+        [cluster readAttributeColorTempPhysicalMinWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads ColorTempPhysicalMinMireds attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("colorCapabilities", "", "map16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorCapabilities", [value unsignedShortValue], 0U));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorCapabilities", [value unsignedShortValue], 31U));
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("color temp physical min", actualValue, 0U));
             }
 
             NextTest();
@@ -5891,7 +5007,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestValidateConstraintsOfAttributeColorTempPhysicalMinMireds_40()
+    CHIP_ERROR TestValidateConstraintsOfAttributeColorTempPhysicalMinMireds_22()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5916,45 +5032,20 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryAttributeColorTempPhysicalMinMireds_41()
+    CHIP_ERROR TestReadColorTempPhysicalMaxMiredsAttributeFromDut_23()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        id colorTempPhysicalMinArgument;
-        colorTempPhysicalMinArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributeColorTempPhysicalMinWithValue:colorTempPhysicalMinArgument
-                                           completionHandler:^(NSError * _Nullable err) {
-                                               NSLog(@"Write the default values to mandatory  attribute: "
-                                                     @"ColorTempPhysicalMinMireds Error: %@",
-                                                   err);
-
-                                               VerifyOrReturn(
-                                                   CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                               NextTest();
-                                           }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackMandatoryAttributeColorTempPhysicalMinMireds_42()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeColorTempPhysicalMinWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back mandatory attribute: ColorTempPhysicalMinMireds Error: %@", err);
+        [cluster readAttributeColorTempPhysicalMaxWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read ColorTempPhysicalMaxMireds attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("colorTempPhysicalMin", "", "uint16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTempPhysicalMin", [value unsignedShortValue], 0U));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTempPhysicalMin", [value unsignedShortValue], 65279U));
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("color temp physical max", actualValue, 65279U));
             }
 
             NextTest();
@@ -5963,7 +5054,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestValidateConstraintsOfAttributeColorTempPhysicalMaxMireds_43()
+    CHIP_ERROR TestValidateConstraintsOfAttributeColorTempPhysicalMaxMireds_24()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5988,54 +5079,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryAttributeColorTempPhysicalMaxMireds_44()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id colorTempPhysicalMaxArgument;
-        colorTempPhysicalMaxArgument = [NSNumber numberWithUnsignedShort:65279U];
-        [cluster writeAttributeColorTempPhysicalMaxWithValue:colorTempPhysicalMaxArgument
-                                           completionHandler:^(NSError * _Nullable err) {
-                                               NSLog(@"Write the default values to mandatory attribute: ColorTempPhysicalMaxMireds "
-                                                     @"Error: %@",
-                                                   err);
-
-                                               VerifyOrReturn(
-                                                   CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                               NextTest();
-                                           }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackMandatoryAttributeColorTempPhysicalMaxMireds_45()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeColorTempPhysicalMaxWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back mandatory attribute: ColorTempPhysicalMaxMireds Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("colorTempPhysicalMax", "", "uint16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTempPhysicalMax", [value unsignedShortValue], 0U));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTempPhysicalMax", [value unsignedShortValue], 65279U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeCoupleColorTempToLevelMinMireds_46()
+    CHIP_ERROR TestReadTheOptionalAttributeCoupleColorTempToLevelMinMireds_25()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -6053,64 +5097,22 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("coupleColorTempToLevelMinMireds", "", "uint16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWriteTheDefaultValuesToOptionalAttributeCoupleColorTempToLevelMinMireds_47()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id coupleColorTempToLevelMinMiredsArgument;
-        coupleColorTempToLevelMinMiredsArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributeCoupleColorTempToLevelMinMiredsWithValue:coupleColorTempToLevelMinMiredsArgument
-                                                      completionHandler:^(NSError * _Nullable err) {
-                                                          NSLog(@"Write the default values to optional attribute: "
-                                                                @"CoupleColorTempToLevelMinMireds Error: %@",
-                                                              err);
-
-                                                          if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                                                              NextTest();
-                                                              return;
-                                                          }
-
-                                                          VerifyOrReturn(CheckValue(
-                                                              "status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                                          NextTest();
-                                                      }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackOptionalAttributeCoupleColorTempToLevelMinMireds_48()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCoupleColorTempToLevelMinMiredsWithCompletionHandler:^(
-            NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back optional attribute: CoupleColorTempToLevelMinMireds Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
+            if (value != nil) {
+                VerifyOrReturn(
+                    CheckConstraintMinValue<uint16_t>("coupleColorTempToLevelMinMireds", [value unsignedShortValue], 0U));
+            }
+            if (value != nil) {
+                VerifyOrReturn(
+                    CheckConstraintMaxValue<uint16_t>("coupleColorTempToLevelMinMireds", [value unsignedShortValue], 65279U));
             }
 
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("coupleColorTempToLevelMinMireds", "", "uint16"));
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeStartUpColorTemperatureMireds_49()
+    CHIP_ERROR TestReadTheOptionalAttributeStartUpColorTemperatureMireds_26()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -6142,62 +5144,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultValuesToOptionalAttributeStartUpColorTemperatureMireds_50()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id startUpColorTemperatureMiredsArgument;
-        startUpColorTemperatureMiredsArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributeStartUpColorTemperatureMiredsWithValue:startUpColorTemperatureMiredsArgument
-                                                    completionHandler:^(NSError * _Nullable err) {
-                                                        NSLog(@"Write the default values to optional attribute: "
-                                                              @"StartUpColorTemperatureMireds Error: %@",
-                                                            err);
-
-                                                        if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                                                            NextTest();
-                                                            return;
-                                                        }
-
-                                                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                                        NextTest();
-                                                    }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackOptionalAttributeStartUpColorTemperatureMireds_51()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster
-            readAttributeStartUpColorTemperatureMiredsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"Reads back optional attribute: StartUpColorTemperatureMireds Error: %@", err);
-
-                if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                    NextTest();
-                    return;
-                }
-
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                {
-                    id actualValue = value;
-                    VerifyOrReturn(CheckValue("start up color temperature mireds", actualValue, 0U));
-                }
-
-                NextTest();
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestValidateConstraintsOfAttributeRemainingTime_52()
+    CHIP_ERROR TestValidateConstraintsOfAttributeRemainingTime_27()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -6213,54 +5160,11 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("remainingTime", "", "uint16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWriteTheDefaultValuesToOptionalAttributeRemainingTime_53()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id remainingTimeArgument;
-        remainingTimeArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster
-            writeAttributeRemainingTimeWithValue:remainingTimeArgument
-                               completionHandler:^(NSError * _Nullable err) {
-                                   NSLog(@"Write the default values to optional attribute: RemainingTime Error: %@", err);
-
-                                   if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                                       NextTest();
-                                       return;
-                                   }
-
-                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                   NextTest();
-                               }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackOptionalAttributeRemainingTime_54()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeRemainingTimeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back optional attribute: RemainingTime Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("remaining time", actualValue, 0U));
             }
 
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
             VerifyOrReturn(CheckConstraintType("remainingTime", "", "uint16"));
             NextTest();
         }];
@@ -6268,7 +5172,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeDriftCompensation_55()
+    CHIP_ERROR TestReadTheOptionalAttributeDriftCompensation_28()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -6298,62 +5202,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultValuesToOptionalAttributeDriftCompensation_56()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id driftCompensationArgument;
-        driftCompensationArgument = [NSNumber numberWithUnsignedChar:0];
-        [cluster
-            writeAttributeDriftCompensationWithValue:driftCompensationArgument
-                                   completionHandler:^(NSError * _Nullable err) {
-                                       NSLog(@"Write the default values to optional attribute: DriftCompensation Error: %@", err);
-
-                                       if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                                           NextTest();
-                                           return;
-                                       }
-
-                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                       NextTest();
-                                   }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackOptionalAttributeDriftCompensation_57()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeDriftCompensationWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back optional attribute: DriftCompensation Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("driftCompensation", "", "enum8"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("driftCompensation", [value unsignedCharValue], 0));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("driftCompensation", [value unsignedCharValue], 4));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeCompensationText_58()
+    CHIP_ERROR TestReadTheOptionalAttributeCompensationText_29()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -6377,56 +5226,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultValuesToOptionalAttributeCompensationText_59()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id compensationTextArgument;
-        compensationTextArgument = @"";
-        [cluster
-            writeAttributeCompensationTextWithValue:compensationTextArgument
-                                  completionHandler:^(NSError * _Nullable err) {
-                                      NSLog(@"Write the default values to optional attribute: CompensationText Error: %@", err);
-
-                                      if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                                          NextTest();
-                                          return;
-                                      }
-
-                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                      NextTest();
-                                  }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackOptionalAttributeCompensationText_60()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCompensationTextWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back optional attribute: CompensationText Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("compensationText", "", "string"));
-            VerifyOrReturn(CheckConstraintMaxLength("compensationText", [value length], 254));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeNumberOfPrimaries_61()
+    CHIP_ERROR TestReadTheMandatoryAttributeNumberOfPrimaries_30()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -6451,52 +5251,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultMandatoryAttributeNumberOfPrimaries_62()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id numberOfPrimariesArgument;
-        numberOfPrimariesArgument = [NSNumber numberWithUnsignedChar:0];
-        [cluster
-            writeAttributeNumberOfPrimariesWithValue:numberOfPrimariesArgument
-                                   completionHandler:^(NSError * _Nullable err) {
-                                       NSLog(@"Write the default mandatory attribute: NumberOfPrimaries Error: %@", err);
-
-                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                       NextTest();
-                                   }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheMandatoryAttributeNumberOfPrimaries_63()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeNumberOfPrimariesWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the mandatory attribute: NumberOfPrimaries Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("numberOfPrimaries", "", "uint8"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("numberOfPrimaries", [value unsignedCharValue], 0));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("numberOfPrimaries", [value unsignedCharValue], 6));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary1X_64()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary1X_31()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -6521,51 +5276,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultMandatoryAttributePrimary1X_65()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id primary1XArgument;
-        primary1XArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributePrimary1XWithValue:primary1XArgument
-                                completionHandler:^(NSError * _Nullable err) {
-                                    NSLog(@"Write the default mandatory attribute: Primary1X Error: %@", err);
-
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                    NextTest();
-                                }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheMandatoryAttributePrimary1X_66()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributePrimary1XWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the mandatory attribute: Primary1X Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("primary1X", "", "uint16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("primary1X", [value unsignedShortValue], 0U));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("primary1X", [value unsignedShortValue], 65279U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary1Y_67()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary1Y_32()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -6590,51 +5301,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultMandatoryAttributePrimary1Y_68()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id primary1YArgument;
-        primary1YArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributePrimary1YWithValue:primary1YArgument
-                                completionHandler:^(NSError * _Nullable err) {
-                                    NSLog(@"Write the default mandatory attribute: Primary1Y Error: %@", err);
-
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                    NextTest();
-                                }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheMandatoryAttributePrimary1Y_69()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributePrimary1YWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the mandatory attribute: Primary1Y Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("primary1Y", "", "uint16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("primary1Y", [value unsignedShortValue], 0U));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("primary1Y", [value unsignedShortValue], 65279U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary1Intensity_70()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary1Intensity_33()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -6652,7 +5319,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary2X_71()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary2X_34()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -6677,51 +5344,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultMandatoryAttributePrimary2X_72()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id primary2XArgument;
-        primary2XArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributePrimary2XWithValue:primary2XArgument
-                                completionHandler:^(NSError * _Nullable err) {
-                                    NSLog(@"Write the default mandatory attribute: Primary2X Error: %@", err);
-
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                    NextTest();
-                                }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheMandatoryAttributePrimary2X_73()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributePrimary2XWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the mandatory attribute: Primary2X Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("primary2X", "", "uint16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("primary2X", [value unsignedShortValue], 0U));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("primary2X", [value unsignedShortValue], 65279U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary2Y_74()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary2Y_35()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -6746,51 +5369,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultMandatoryAttributePrimary2Y_75()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id primary2YArgument;
-        primary2YArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributePrimary2YWithValue:primary2YArgument
-                                completionHandler:^(NSError * _Nullable err) {
-                                    NSLog(@"Write the default mandatory attribute: Primary2Y Error: %@", err);
-
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                    NextTest();
-                                }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheMandatoryAttributePrimary2Y_76()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributePrimary2YWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the mandatory attribute: Primary2Y Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("primary2Y", "", "uint16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("primary2Y", [value unsignedShortValue], 0U));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("primary2Y", [value unsignedShortValue], 65279U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestValidateConstraintsOfAttributePrimary2Intensity_77()
+    CHIP_ERROR TestValidateConstraintsOfAttributePrimary2Intensity_36()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -6808,7 +5387,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary3X_78()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary3X_37()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -6833,51 +5412,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultMandatoryAttributePrimary3X_79()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id primary3XArgument;
-        primary3XArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributePrimary3XWithValue:primary3XArgument
-                                completionHandler:^(NSError * _Nullable err) {
-                                    NSLog(@"Write the default mandatory attribute: Primary3X Error: %@", err);
-
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                    NextTest();
-                                }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheMandatoryAttributePrimary3X_80()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributePrimary3XWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the mandatory attribute: Primary3X Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("primary3X", "", "uint16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("primary3X", [value unsignedShortValue], 0U));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("primary3X", [value unsignedShortValue], 65279U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary3Y_81()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary3Y_38()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -6902,51 +5437,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultMandatoryAttributePrimary3Y_82()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id primary3YArgument;
-        primary3YArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributePrimary3YWithValue:primary3YArgument
-                                completionHandler:^(NSError * _Nullable err) {
-                                    NSLog(@"Write the default mandatory attribute: Primary3Y Error: %@", err);
-
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                    NextTest();
-                                }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheMandatoryAttributePrimary3Y_83()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributePrimary3YWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the mandatory attribute: Primary3Y Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("primary3Y", "", "uint16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("primary3Y", [value unsignedShortValue], 0U));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("primary3Y", [value unsignedShortValue], 65279U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary3Intensity_84()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary3Intensity_39()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -6964,7 +5455,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary4X_85()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary4X_40()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -6989,51 +5480,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultMandatoryAttributePrimary4X_86()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id primary4XArgument;
-        primary4XArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributePrimary4XWithValue:primary4XArgument
-                                completionHandler:^(NSError * _Nullable err) {
-                                    NSLog(@"Write the default mandatory attribute: Primary4X Error: %@", err);
-
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                    NextTest();
-                                }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheMandatoryAttributePrimary4X_87()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributePrimary4XWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the mandatory attribute: Primary4X Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("primary4X", "", "uint16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("primary4X", [value unsignedShortValue], 0U));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("primary4X", [value unsignedShortValue], 65279U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary4Y_88()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary4Y_41()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -7058,51 +5505,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultMandatoryAttributePrimary4Y_89()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id primary4YArgument;
-        primary4YArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributePrimary4YWithValue:primary4YArgument
-                                completionHandler:^(NSError * _Nullable err) {
-                                    NSLog(@"Write the default mandatory attribute: Primary4Y Error: %@", err);
-
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                    NextTest();
-                                }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheMandatoryAttributePrimary4Y_90()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributePrimary4YWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the mandatory attribute: Primary4Y Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("primary4Y", "", "uint16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("primary4Y", [value unsignedShortValue], 0U));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("primary4Y", [value unsignedShortValue], 65279U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary4Intensity_91()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary4Intensity_42()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -7120,7 +5523,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary5X_92()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary5X_43()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -7145,51 +5548,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultMandatoryAttributePrimary5X_93()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id primary5XArgument;
-        primary5XArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributePrimary5XWithValue:primary5XArgument
-                                completionHandler:^(NSError * _Nullable err) {
-                                    NSLog(@"Write the default mandatory attribute: Primary5X Error: %@", err);
-
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                    NextTest();
-                                }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheMandatoryAttributePrimary5X_94()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributePrimary5XWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the mandatory attribute: Primary5X Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("primary5X", "", "uint16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("primary5X", [value unsignedShortValue], 0U));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("primary5X", [value unsignedShortValue], 65279U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary5Y_95()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary5Y_44()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -7214,51 +5573,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultMandatoryAttributePrimary5Y_96()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id primary5YArgument;
-        primary5YArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributePrimary5YWithValue:primary5YArgument
-                                completionHandler:^(NSError * _Nullable err) {
-                                    NSLog(@"Write the default mandatory attribute: Primary5Y Error: %@", err);
-
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                    NextTest();
-                                }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheMandatoryAttributePrimary5Y_97()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributePrimary5YWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the mandatory attribute: Primary5Y Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("primary5Y", "", "uint16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("primary5Y", [value unsignedShortValue], 0U));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("primary5Y", [value unsignedShortValue], 65279U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary5Intensity_98()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary5Intensity_45()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -7276,7 +5591,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary6X_99()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary6X_46()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -7301,51 +5616,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultMandatoryAttributePrimary6X_100()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id primary6XArgument;
-        primary6XArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributePrimary6XWithValue:primary6XArgument
-                                completionHandler:^(NSError * _Nullable err) {
-                                    NSLog(@"Write the default mandatory attribute: Primary6X Error: %@", err);
-
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                    NextTest();
-                                }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheMandatoryAttributePrimary6X_101()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributePrimary6XWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the mandatory attribute: Primary6X Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("primary6X", "", "uint16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("primary6X", [value unsignedShortValue], 0U));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("primary6X", [value unsignedShortValue], 65279U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary6Y_102()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary6Y_47()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -7370,51 +5641,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultMandatoryAttributePrimary6Y_103()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id primary6YArgument;
-        primary6YArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributePrimary6YWithValue:primary6YArgument
-                                completionHandler:^(NSError * _Nullable err) {
-                                    NSLog(@"Write the default mandatory attribute: Primary6Y Error: %@", err);
-
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                    NextTest();
-                                }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheMandatoryAttributePrimary6Y_104()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributePrimary6YWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the mandatory attribute: Primary6Y Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("primary6Y", "", "uint16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("primary6Y", [value unsignedShortValue], 0U));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("primary6Y", [value unsignedShortValue], 65279U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary6Intensity_105()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary6Intensity_48()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -7432,7 +5659,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeWhitePointX_106()
+    CHIP_ERROR TestReadTheOptionalAttributeWhitePointX_49()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -7462,59 +5689,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultOptionalAttributeWhitePointX_107()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id whitePointXArgument;
-        whitePointXArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributeWhitePointXWithValue:whitePointXArgument
-                                  completionHandler:^(NSError * _Nullable err) {
-                                      NSLog(@"Write the default optional attribute: WhitePointX Error: %@", err);
-
-                                      if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                                          NextTest();
-                                          return;
-                                      }
-
-                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                      NextTest();
-                                  }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheOptionalAttributeWhitePointX_108()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeWhitePointXWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the optional attribute: WhitePointX Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("white point x", actualValue, 0U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeWhitePointY_109()
+    CHIP_ERROR TestReadTheOptionalAttributeWhitePointY_50()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -7544,59 +5719,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultOptionalAttributeWhitePointY_110()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id whitePointYArgument;
-        whitePointYArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributeWhitePointYWithValue:whitePointYArgument
-                                  completionHandler:^(NSError * _Nullable err) {
-                                      NSLog(@"Write the default optional attribute: WhitePointY Error: %@", err);
-
-                                      if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                                          NextTest();
-                                          return;
-                                      }
-
-                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                      NextTest();
-                                  }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheOptionalAttributeWhitePointY_111()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeWhitePointYWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the optional attribute: WhitePointY Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("white point y", actualValue, 0U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeColorPointRX_112()
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointRX_51()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -7626,59 +5749,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultOptionalAttributeColorPointRX_113()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id colorPointRXArgument;
-        colorPointRXArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributeColorPointRXWithValue:colorPointRXArgument
-                                   completionHandler:^(NSError * _Nullable err) {
-                                       NSLog(@"Write the default optional attribute: ColorPointRX Error: %@", err);
-
-                                       if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                                           NextTest();
-                                           return;
-                                       }
-
-                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                       NextTest();
-                                   }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheOptionalAttributeColorPointRX_114()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeColorPointRXWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the optional attribute: ColorPointRX Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("color point r x", actualValue, 0U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeColorPointRY_115()
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointRY_52()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -7708,59 +5779,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultOptionalAttributeColorPointRY_116()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id colorPointRYArgument;
-        colorPointRYArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributeColorPointRYWithValue:colorPointRYArgument
-                                   completionHandler:^(NSError * _Nullable err) {
-                                       NSLog(@"Write the default optional attribute: ColorPointRY Error: %@", err);
-
-                                       if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                                           NextTest();
-                                           return;
-                                       }
-
-                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                       NextTest();
-                                   }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheOptionalAttributeColorPointRY_117()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeColorPointRYWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the optional attribute: ColorPointRY Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("color point r y", actualValue, 0U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeColorPointRIntensity_118()
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointRIntensity_53()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -7783,59 +5802,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultOptionalAttributeColorPointRIntensity_119()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id colorPointRIntensityArgument;
-        colorPointRIntensityArgument = [NSNumber numberWithUnsignedChar:0];
-        [cluster writeAttributeColorPointRIntensityWithValue:colorPointRIntensityArgument
-                                           completionHandler:^(NSError * _Nullable err) {
-                                               NSLog(@"Write the default optional attribute: ColorPointRIntensity Error: %@", err);
-
-                                               if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                                                   NextTest();
-                                                   return;
-                                               }
-
-                                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                               NextTest();
-                                           }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheOptionalAttributeColorPointRIntensity_120()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeColorPointRIntensityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the optional attribute: ColorPointRIntensity Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("color point r intensity", actualValue, 0));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeColorPointGX_121()
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointGX_54()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -7865,59 +5832,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultOptionalAttributeColorPointGX_122()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id colorPointGXArgument;
-        colorPointGXArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributeColorPointGXWithValue:colorPointGXArgument
-                                   completionHandler:^(NSError * _Nullable err) {
-                                       NSLog(@"Write the default optional attribute: ColorPointGX Error: %@", err);
-
-                                       if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                                           NextTest();
-                                           return;
-                                       }
-
-                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                       NextTest();
-                                   }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheOptionalAttributeColorPointGX_123()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeColorPointGXWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the optional attribute: ColorPointGX Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("color point g x", actualValue, 0U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeColorPointGY_124()
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointGY_55()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -7947,59 +5862,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultOptionalAttributeColorPointGY_125()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id colorPointGYArgument;
-        colorPointGYArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributeColorPointGYWithValue:colorPointGYArgument
-                                   completionHandler:^(NSError * _Nullable err) {
-                                       NSLog(@"Write the default optional attribute: ColorPointGY Error: %@", err);
-
-                                       if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                                           NextTest();
-                                           return;
-                                       }
-
-                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                       NextTest();
-                                   }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheOptionalAttributeColorPointGY_126()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeColorPointGYWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the optional attribute: ColorPointGY Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("color point g y", actualValue, 0U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeColorPointGIntensity_127()
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointGIntensity_56()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -8022,59 +5885,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultOptionalAttributeColorPointGIntensity_128()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id colorPointGIntensityArgument;
-        colorPointGIntensityArgument = [NSNumber numberWithUnsignedChar:0];
-        [cluster writeAttributeColorPointGIntensityWithValue:colorPointGIntensityArgument
-                                           completionHandler:^(NSError * _Nullable err) {
-                                               NSLog(@"Write the default optional attribute: ColorPointGIntensity Error: %@", err);
-
-                                               if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                                                   NextTest();
-                                                   return;
-                                               }
-
-                                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                               NextTest();
-                                           }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheOptionalAttributeColorPointGIntensity_129()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeColorPointGIntensityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the optional attribute: ColorPointGIntensity Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("color point g intensity", actualValue, 0));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeColorPointBX_130()
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointBX_57()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -8104,59 +5915,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultOptionalAttributeColorPointBX_131()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id colorPointBXArgument;
-        colorPointBXArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributeColorPointBXWithValue:colorPointBXArgument
-                                   completionHandler:^(NSError * _Nullable err) {
-                                       NSLog(@"Write the default optional attribute: ColorPointBX Error: %@", err);
-
-                                       if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                                           NextTest();
-                                           return;
-                                       }
-
-                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                       NextTest();
-                                   }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheOptionalAttributeColorPointBX_132()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeColorPointBXWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the optional attribute: ColorPointBX Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("color point b x", actualValue, 0U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeColorPointBY_133()
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointBY_58()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -8186,59 +5945,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultOptionalAttributeColorPointBY_134()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id colorPointBYArgument;
-        colorPointBYArgument = [NSNumber numberWithUnsignedShort:0U];
-        [cluster writeAttributeColorPointBYWithValue:colorPointBYArgument
-                                   completionHandler:^(NSError * _Nullable err) {
-                                       NSLog(@"Write the default optional attribute: ColorPointBY Error: %@", err);
-
-                                       if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                                           NextTest();
-                                           return;
-                                       }
-
-                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                       NextTest();
-                                   }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheOptionalAttributeColorPointBY_135()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeColorPointBYWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the optional attribute: ColorPointBY Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("color point b y", actualValue, 0U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeColorPointBIntensity_136()
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointBIntensity_59()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -8255,58 +5962,6 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("colorPointBIntensity", "", "uint8"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWriteTheDefaultOptionalAttributeColorPointBIntensity_137()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id colorPointBIntensityArgument;
-        colorPointBIntensityArgument = [NSNumber numberWithUnsignedChar:0];
-        [cluster writeAttributeColorPointBIntensityWithValue:colorPointBIntensityArgument
-                                           completionHandler:^(NSError * _Nullable err) {
-                                               NSLog(@"Write the default optional attribute: ColorPointBIntensity Error: %@", err);
-
-                                               if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                                                   NextTest();
-                                                   return;
-                                               }
-
-                                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                               NextTest();
-                                           }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadBackTheOptionalAttributeColorPointBIntensity_138()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeColorPointBIntensityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read back the optional attribute: ColorPointBIntensity Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("color point b intensity", actualValue, 0));
-            }
-
             NextTest();
         }];
 
@@ -27717,6 +25372,10 @@ public:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Reads the Options attribute \n");
             err = TestReadsTheOptionsAttribute_15();
             break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Reads the StartUpCurrentLevel attribute \n");
+            err = TestReadsTheStartUpCurrentLevelAttribute_16();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -27776,6 +25435,9 @@ public:
         case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -27789,7 +25451,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 16;
+    const uint16_t mTestCount = 17;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -28106,6 +25768,24 @@ private:
 
         return CHIP_NO_ERROR;
     }
+
+    CHIP_ERROR TestReadsTheStartUpCurrentLevelAttribute_16()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestLevelControl * cluster = [[CHIPTestLevelControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeStartUpCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the StartUpCurrentLevel attribute  Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("startUpCurrentLevel", "", "uint8"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
 };
 
 class Test_TC_LVL_2_2 : public TestCommandBridge {
@@ -28167,48 +25847,64 @@ public:
             err = TestWritesDefaultValueOfOnOffTransitionTimeAttribute_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : writes the OnLevel attribute on the DUT\n");
-            err = TestWritesTheOnLevelAttributeOnTheDut_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the OnLevel attribute from the DUT\n");
+            err = TestReadsTheOnLevelAttributeFromTheDut_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the OnLevel attribute from the DUT\n");
-            err = TestReadsTheOnLevelAttributeFromTheDut_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : writes the OnLevel attribute on the DUT\n");
+            err = TestWritesTheOnLevelAttributeOnTheDut_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Writes the OnTransitionTime attribute on the DUT\n");
-            err = TestWritesTheOnTransitionTimeAttributeOnTheDut_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Reads the OnLevel attribute from the DUT\n");
+            err = TestReadsTheOnLevelAttributeFromTheDut_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Reads the OnTransitionTime attribute from the DUT\n");
             err = TestReadsTheOnTransitionTimeAttributeFromTheDut_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Writes the OffTransitionTime attribute on the DUT\n");
-            err = TestWritesTheOffTransitionTimeAttributeOnTheDut_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Writes the OnTransitionTime attribute on the DUT\n");
+            err = TestWritesTheOnTransitionTimeAttributeOnTheDut_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Reads the OffTransitionTime attribute from the DUT\n");
-            err = TestReadsTheOffTransitionTimeAttributeFromTheDut_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Reads the OnTransitionTime attribute from the DUT\n");
+            err = TestReadsTheOnTransitionTimeAttributeFromTheDut_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Reads the DefaultMoveRate attribute from the DUT\n");
-            err = TestReadsTheDefaultMoveRateAttributeFromTheDut_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Reads the OffTransitionTime attribute from the DUT\n");
+            err = TestReadsTheOffTransitionTimeAttributeFromTheDut_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Writes the DefaultMoveRate attribute on the DUT\n");
-            err = TestWritesTheDefaultMoveRateAttributeOnTheDut_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Writes the OffTransitionTime attribute on the DUT\n");
+            err = TestWritesTheOffTransitionTimeAttributeOnTheDut_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Reads the DefaultMoveRate attribute from the DUT\n");
-            err = TestReadsTheDefaultMoveRateAttributeFromTheDut_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Reads the OffTransitionTime attribute from the DUT\n");
+            err = TestReadsTheOffTransitionTimeAttributeFromTheDut_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : writes the StartUpCurrentLevel attribute on the DUT\n");
-            err = TestWritesTheStartUpCurrentLevelAttributeOnTheDut_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Reads the DefaultMoveRate attribute from the DUT\n");
+            err = TestReadsTheDefaultMoveRateAttributeFromTheDut_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : reads the StartUpCurrentLevel attribute from the DUT\n");
-            err = TestReadsTheStartUpCurrentLevelAttributeFromTheDut_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Writes the DefaultMoveRate attribute on the DUT\n");
+            err = TestWritesTheDefaultMoveRateAttributeOnTheDut_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Reads the DefaultMoveRate attribute from the DUT\n");
+            err = TestReadsTheDefaultMoveRateAttributeFromTheDut_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Reads the StartUpCurrentLevel attribute from the DUT\n");
+            err = TestReadsTheStartUpCurrentLevelAttributeFromTheDut_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : writes the StartUpCurrentLevel attribute on the DUT\n");
+            err = TestWritesTheStartUpCurrentLevelAttributeOnTheDut_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : reads the StartUpCurrentLevel attribute from the DUT\n");
+            err = TestReadsTheStartUpCurrentLevelAttributeFromTheDut_19();
             break;
         }
 
@@ -28269,6 +25965,18 @@ public:
         case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -28282,7 +25990,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 16;
+    const uint16_t mTestCount = 20;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -28382,7 +26090,25 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheOnLevelAttributeOnTheDut_5()
+    CHIP_ERROR TestReadsTheOnLevelAttributeFromTheDut_5()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestLevelControl * cluster = [[CHIPTestLevelControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOnLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the OnLevel attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("onLevel", "", "uint8"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheOnLevelAttributeOnTheDut_6()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestLevelControl * cluster = [[CHIPTestLevelControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -28402,7 +26128,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheOnLevelAttributeFromTheDut_6()
+    CHIP_ERROR TestReadsTheOnLevelAttributeFromTheDut_7()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestLevelControl * cluster = [[CHIPTestLevelControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -28426,7 +26152,25 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheOnTransitionTimeAttributeOnTheDut_7()
+    CHIP_ERROR TestReadsTheOnTransitionTimeAttributeFromTheDut_8()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestLevelControl * cluster = [[CHIPTestLevelControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOnTransitionTimeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the OnTransitionTime attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("onTransitionTime", "", "uint16"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheOnTransitionTimeAttributeOnTheDut_9()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestLevelControl * cluster = [[CHIPTestLevelControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -28446,7 +26190,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheOnTransitionTimeAttributeFromTheDut_8()
+    CHIP_ERROR TestReadsTheOnTransitionTimeAttributeFromTheDut_10()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestLevelControl * cluster = [[CHIPTestLevelControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -28470,7 +26214,25 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheOffTransitionTimeAttributeOnTheDut_9()
+    CHIP_ERROR TestReadsTheOffTransitionTimeAttributeFromTheDut_11()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestLevelControl * cluster = [[CHIPTestLevelControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOffTransitionTimeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the OffTransitionTime attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("offTransitionTime", "", "uint16"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheOffTransitionTimeAttributeOnTheDut_12()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestLevelControl * cluster = [[CHIPTestLevelControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -28490,7 +26252,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheOffTransitionTimeAttributeFromTheDut_10()
+    CHIP_ERROR TestReadsTheOffTransitionTimeAttributeFromTheDut_13()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestLevelControl * cluster = [[CHIPTestLevelControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -28514,7 +26276,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheDefaultMoveRateAttributeFromTheDut_11()
+    CHIP_ERROR TestReadsTheDefaultMoveRateAttributeFromTheDut_14()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestLevelControl * cluster = [[CHIPTestLevelControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -28538,7 +26300,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheDefaultMoveRateAttributeOnTheDut_12()
+    CHIP_ERROR TestWritesTheDefaultMoveRateAttributeOnTheDut_15()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestLevelControl * cluster = [[CHIPTestLevelControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -28558,7 +26320,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheDefaultMoveRateAttributeFromTheDut_13()
+    CHIP_ERROR TestReadsTheDefaultMoveRateAttributeFromTheDut_16()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestLevelControl * cluster = [[CHIPTestLevelControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -28582,7 +26344,25 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheStartUpCurrentLevelAttributeOnTheDut_14()
+    CHIP_ERROR TestReadsTheStartUpCurrentLevelAttributeFromTheDut_17()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestLevelControl * cluster = [[CHIPTestLevelControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeStartUpCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the StartUpCurrentLevel attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("startUpCurrentLevel", "", "uint8"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheStartUpCurrentLevelAttributeOnTheDut_18()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestLevelControl * cluster = [[CHIPTestLevelControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -28602,7 +26382,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheStartUpCurrentLevelAttributeFromTheDut_15()
+    CHIP_ERROR TestReadsTheStartUpCurrentLevelAttributeFromTheDut_19()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestLevelControl * cluster = [[CHIPTestLevelControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -36389,6 +34169,344 @@ private:
     }
 };
 
+class Test_TC_MC_3_12 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_MC_3_12()
+        : TestCommandBridge("Test_TC_MC_3_12")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_MC_3_12() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_3_12\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_3_12\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Hide Input Status Command\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestHideInputStatusCommand_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Show Input Status Command\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestShowInputStatusCommand_2();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 3;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestHideInputStatusCommand_1()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaInput * cluster = [[CHIPTestMediaInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster hideInputStatusWithCompletionHandler:^(NSError * _Nullable err) {
+            NSLog(@"Hide Input Status Command Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestShowInputStatusCommand_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaInput * cluster = [[CHIPTestMediaInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster showInputStatusWithCompletionHandler:^(NSError * _Nullable err) {
+            NSLog(@"Show Input Status Command Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_MC_3_13 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_MC_3_13()
+        : TestCommandBridge("Test_TC_MC_3_13")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_MC_3_13() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_3_13\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_3_13\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read attribute media input list\n");
+            err = TestReadAttributeMediaInputList_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Rename Input Command\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestRenameInputCommand_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Rename Input Command\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestRenameInputCommand_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read attribute media input list\n");
+            err = TestReadAttributeMediaInputList_4();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 5;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadAttributeMediaInputList_1()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaInput * cluster = [[CHIPTestMediaInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeInputListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute media input list Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("inputList", "", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestRenameInputCommand_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaInput * cluster = [[CHIPTestMediaInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPMediaInputClusterRenameInputParams alloc] init];
+        params.index = [NSNumber numberWithUnsignedChar:1];
+        params.name = @"A1";
+        [cluster renameInputWithParams:params
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Rename Input Command Error: %@", err);
+
+                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                         NextTest();
+                     }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestRenameInputCommand_3()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaInput * cluster = [[CHIPTestMediaInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPMediaInputClusterRenameInputParams alloc] init];
+        params.index = [NSNumber numberWithUnsignedChar:1];
+        params.name = @"A2";
+        [cluster renameInputWithParams:params
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Rename Input Command Error: %@", err);
+
+                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                         NextTest();
+                     }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeMediaInputList_4()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaInput * cluster = [[CHIPTestMediaInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeInputListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute media input list Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("inputList", "", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_MC_5_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -36508,6 +34626,8 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("majornumber", 0, UINT16_MAX, &mMajornumber);
+        AddArgument("minornumber", 0, UINT16_MAX, &mMinornumber);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
@@ -36541,8 +34661,28 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : log a command\n");
-            err = TestLogACommand_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the ChannelList attribute\n");
+            err = TestReadsTheChannelListAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends a ChangeChannelByNumber command\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsAChangeChannelByNumberCommand_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : log a command\n");
+            err = TestLogACommand_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the CurrentChannel attribute\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsTheCurrentChannelAttribute_4();
             break;
         }
 
@@ -36561,6 +34701,15 @@ public:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -36574,11 +34723,13 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 2;
+    const uint16_t mTestCount = 5;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mMajornumber;
+    chip::Optional<uint16_t> mMinornumber;
     chip::Optional<uint16_t> mTimeout;
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
@@ -36588,12 +34739,76 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestLogACommand_1()
+    CHIP_ERROR TestReadsTheChannelListAttribute_1()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestChannel * cluster = [[CHIPTestChannel alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeChannelListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the ChannelList attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("channelList", "", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsAChangeChannelByNumberCommand_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestChannel * cluster = [[CHIPTestChannel alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPChannelClusterChangeChannelByNumberParams alloc] init];
+        params.majorNumber = mMajornumber.HasValue() ? [NSNumber numberWithUnsignedShort:mMajornumber.Value()]
+                                                     : [NSNumber numberWithUnsignedShort:1U];
+        params.minorNumber = mMinornumber.HasValue() ? [NSNumber numberWithUnsignedShort:mMinornumber.Value()]
+                                                     : [NSNumber numberWithUnsignedShort:2U];
+        [cluster changeChannelByNumberWithParams:params
+                               completionHandler:^(NSError * _Nullable err) {
+                                   NSLog(@"TH sends a ChangeChannelByNumber command Error: %@", err);
+
+                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                   NextTest();
+                               }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestLogACommand_3()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message
             = chip::Span<const char>("verify that the channel has changed on the device.garbage: not in length on purpose", 50);
         return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadsTheCurrentChannelAttribute_4()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestChannel * cluster = [[CHIPTestChannel alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletionHandler:^(
+            CHIPChannelClusterChannelInfo * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the CurrentChannel attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 };
 
@@ -36607,6 +34822,8 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("majornumber", 0, UINT16_MAX, &mMajornumber);
+        AddArgument("minornumber", 0, UINT16_MAX, &mMinornumber);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
@@ -36640,123 +34857,36 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : log a command\n");
-            err = TestLogACommand_1();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 2;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
-    CHIP_ERROR TestLogACommand_1()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message
-            = chip::Span<const char>("verify that the channel has changed on the devicegarbage: not in length on purpose", 49);
-        return UserPrompt("alpha", value);
-    }
-};
-
-class Test_TC_MC_6_1 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_6_1()
-        : TestCommandBridge("Test_TC_MC_6_1")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_MC_6_1() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_6_1\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_6_1\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : log a command\n");
-            err = TestLogACommand_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the ChannelList attribute from the DUT\n");
+            err = TestReadsTheChannelListAttributeFromTheDut_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : log a command\n");
-            err = TestLogACommand_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the CurrentChannel attribute from the DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsTheCurrentChannelAttributeFromTheDut_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Reads the playback state attribute\n");
-            err = TestReadsThePlaybackStateAttribute_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Sends a SkipChannel command to the DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestSendsASkipChannelCommandToTheDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : log a command\n");
             err = TestLogACommand_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : log a command\n");
-            err = TestLogACommand_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the CurrentChannel attribute from the DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsTheCurrentChannelAttributeFromTheDut_5();
             break;
         }
 
@@ -36805,6 +34935,8 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mMajornumber;
+    chip::Optional<uint16_t> mMinornumber;
     chip::Optional<uint16_t> mTimeout;
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
@@ -36814,34 +34946,43 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestLogACommand_1()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Verify that media is pausedgarbage: not in length on purpose", 27);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestLogACommand_2()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Physically verify that the media is playinggarbage: not in length on purpose", 43);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestReadsThePlaybackStateAttribute_3()
+    CHIP_ERROR TestReadsTheChannelListAttributeFromTheDut_1()
     {
         CHIPDevice * device = GetDevice("alpha");
-        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        CHIPTestChannel * cluster = [[CHIPTestChannel alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeCurrentStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads the playback state attribute Error: %@", err);
+        [cluster readAttributeChannelListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the ChannelList attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("channelList", "", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+    CHIPChannelClusterChannelInfo * _Nullable currentChannelvalue;
+
+    CHIP_ERROR TestReadsTheCurrentChannelAttributeFromTheDut_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestChannel * cluster = [[CHIPTestChannel alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletionHandler:^(
+            CHIPChannelClusterChannelInfo * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the CurrentChannel attribute from the DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentState", actualValue, 0));
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+            }
+            {
+                currentChannelvalue = value;
             }
 
             NextTest();
@@ -36850,26 +34991,59 @@ private:
         return CHIP_NO_ERROR;
     }
 
+    CHIP_ERROR TestSendsASkipChannelCommandToTheDut_3()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestChannel * cluster = [[CHIPTestChannel alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithUnsignedShort:1U];
+        [cluster skipChannelWithParams:params
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Sends a SkipChannel command to the DUT Error: %@", err);
+
+                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                         NextTest();
+                     }];
+
+        return CHIP_NO_ERROR;
+    }
+
     CHIP_ERROR TestLogACommand_4()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Physically verify that the media is pausedgarbage: not in length on purpose", 42);
+        value.message
+            = chip::Span<const char>("verify that the channel has changed on the devicegarbage: not in length on purpose", 49);
         return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestLogACommand_5()
+    CHIP_ERROR TestReadsTheCurrentChannelAttributeFromTheDut_5()
     {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Physically verify that the media is stopedgarbage: not in length on purpose", 42);
-        return UserPrompt("alpha", value);
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestChannel * cluster = [[CHIPTestChannel alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletionHandler:^(
+            CHIPChannelClusterChannelInfo * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the CurrentChannel attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("currentChannel", "", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 };
 
-class Test_TC_MC_6_2 : public TestCommandBridge {
+class Test_TC_MC_7_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_6_2()
-        : TestCommandBridge("Test_TC_MC_6_2")
+    Test_TC_MC_7_1()
+        : TestCommandBridge("Test_TC_MC_7_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -36879,7 +35053,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_6_2() {}
+    ~Test_TC_MC_7_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -36887,11 +35061,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_6_2\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_7_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_6_2\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_7_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -36908,232 +35082,24 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : log a command\n");
-            err = TestLogACommand_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the OutputList attribute\n");
+            err = TestReadsTheOutputListAttribute_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : log a command\n");
-            err = TestLogACommand_2();
-            break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Reads the CurrentState attribute\n");
-            err = TestReadsTheCurrentStateAttribute_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : log a command\n");
-            err = TestLogACommand_4();
-            break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : log a command\n");
-            err = TestLogACommand_5();
-            break;
-        case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : log a command\n");
-            err = TestLogACommand_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : log a command\n");
-            err = TestLogACommand_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : log a command\n");
-            err = TestLogACommand_8();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 9;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
-    CHIP_ERROR TestLogACommand_1()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Verify that media is pausedgarbage: not in length on purpose", 27);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestLogACommand_2()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Physically verify that the media is playinggarbage: not in length on purpose", 43);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestReadsTheCurrentStateAttribute_3()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCurrentStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads the CurrentState attribute Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentState", actualValue, 0));
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Sends a SelectAudioOutput command\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
             }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestLogACommand_4()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message
-            = chip::Span<const char>("Physically verify that the media is started overgarbage: not in length on purpose", 48);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestLogACommand_5()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "Verify that the next media item in the queue has been loadedgarbage: not in length on purpose", 60);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestLogACommand_6()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "Verify that the previous media item in the queue has been loadedgarbage: not in length on purpose", 64);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestLogACommand_7()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message
-            = chip::Span<const char>("Verify that the media has skipped forward 10 secondsgarbage: not in length on purpose", 52);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestLogACommand_8()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message
-            = chip::Span<const char>("Verify that the media has skipped backward 10 secondsgarbage: not in length on purpose", 53);
-        return UserPrompt("alpha", value);
-    }
-};
-
-class Test_TC_MC_6_3 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_6_3()
-        : TestCommandBridge("Test_TC_MC_6_3")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_MC_6_3() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_6_3\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_6_3\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : log a command\n");
-            err = TestLogACommand_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : log a command\n");
-            err = TestLogACommand_2();
+            err = TestSendsASelectAudioOutputCommand_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : log a command\n");
-            err = TestLogACommand_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Reads the CurrentOutput attribute\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsTheCurrentOutputAttribute_3();
             break;
         }
 
@@ -37185,370 +35151,64 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestLogACommand_1()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Verify that media is pausedgarbage: not in length on purpose", 27);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestLogACommand_2()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "Verify that the media has moved to 10 seconds from the starting point.garbage: not in length on purpose", 70);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestLogACommand_3()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "User prompt needed to enter the value beyond the furthest valid positiongarbage: not in length on purpose", 72);
-        return UserPrompt("alpha", value);
-    }
-};
-
-class Test_TC_MC_6_4 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_6_4()
-        : TestCommandBridge("Test_TC_MC_6_4")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_MC_6_4() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_6_4\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_6_4\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : log a command\n");
-            err = TestLogACommand_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the PlaybackSpeed attribute from the DUT\n");
-            err = TestReadsThePlaybackSpeedAttributeFromTheDut_2();
-            break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : log a command\n");
-            err = TestLogACommand_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the CurrentState attribute\n");
-            err = TestReadsTheCurrentStateAttribute_4();
-            break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : log a command\n");
-            err = TestLogACommand_5();
-            break;
-        case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : log a command\n");
-            err = TestLogACommand_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Reads the CurrentState attribute\n");
-            err = TestReadsTheCurrentStateAttribute_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : log a command\n");
-            err = TestLogACommand_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : log a command\n");
-            err = TestLogACommand_9();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 10;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
-    CHIP_ERROR TestLogACommand_1()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Verify that media is pausedgarbage: not in length on purpose", 27);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_2()
+    CHIP_ERROR TestReadsTheOutputListAttribute_1()
     {
         CHIPDevice * device = GetDevice("alpha");
-        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        CHIPTestAudioOutput * cluster = [[CHIPTestAudioOutput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributePlaybackSpeedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads the PlaybackSpeed attribute from the DUT Error: %@", err);
+        [cluster readAttributeOutputListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the OutputList attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("PlaybackSpeed", actualValue, 0.0f));
-            }
-
+            VerifyOrReturn(CheckConstraintType("outputList", "", "OutPutInfo"));
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestLogACommand_3()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Verify that the media is playinggarbage: not in length on purpose", 32);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestReadsTheCurrentStateAttribute_4()
+    CHIP_ERROR TestSendsASelectAudioOutputCommand_2()
     {
         CHIPDevice * device = GetDevice("alpha");
-        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        CHIPTestAudioOutput * cluster = [[CHIPTestAudioOutput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeCurrentStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads the CurrentState attribute Error: %@", err);
+        __auto_type * params = [[CHIPAudioOutputClusterSelectOutputParams alloc] init];
+        params.index = [NSNumber numberWithUnsignedChar:1];
+        [cluster selectOutputWithParams:params
+                      completionHandler:^(NSError * _Nullable err) {
+                          NSLog(@"Sends a SelectAudioOutput command Error: %@", err);
+
+                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                          NextTest();
+                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsTheCurrentOutputAttribute_3()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestAudioOutput * cluster = [[CHIPTestAudioOutput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentOutputWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the CurrentOutput attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentState", actualValue, 0));
+                VerifyOrReturn(CheckValue("CurrentOutput", actualValue, 1));
             }
 
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestLogACommand_5()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message
-            = chip::Span<const char>("Verify that the media play speed has increasedgarbage: not in length on purpose", 46);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestLogACommand_6()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message
-            = chip::Span<const char>("Verify that the media play has reversed directiongarbage: not in length on purpose", 49);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestReadsTheCurrentStateAttribute_7()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCurrentStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads the CurrentState attribute Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentState", actualValue, 0));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestLogACommand_8()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message
-            = chip::Span<const char>("Verify that the media play has reversed directiongarbage: not in length on purpose", 49);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestLogACommand_9()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "Verify that the media is has resumed playing forward at the default speedgarbage: not in length on purpose", 73);
-        return UserPrompt("alpha", value);
-    }
-};
-
-class Test_TC_MC_7_1 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_7_1()
-        : TestCommandBridge("Test_TC_MC_7_1")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_MC_7_1() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_7_1\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_7_1\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 1;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
     }
 };
 
@@ -37594,6 +35254,28 @@ public:
             ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the OutputList attribute from the DUT\n");
+            err = TestReadsTheOutputListAttributeFromTheDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Sends a RenameOutput command\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestSendsARenameOutputCommand_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : Reads the OutputList attribute from the DUT Verify that the output at the index provided in "
+                "step 2 has the name CertTest\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsTheOutputListAttributeFromTheDutVerifyThatTheOutputAtTheIndexProvidedInStep2HasTheNameCertTest_3();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -37606,6 +35288,15 @@ public:
     {
         switch (mTestIndex - 1) {
         case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         }
@@ -37621,7 +35312,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 1;
+    const uint16_t mTestCount = 4;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -37633,6 +35324,59 @@ private:
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
+    }
+    NSArray * _Nonnull audioOutputListValues;
+
+    CHIP_ERROR TestReadsTheOutputListAttributeFromTheDut_1()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestAudioOutput * cluster = [[CHIPTestAudioOutput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOutputListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the OutputList attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("outputList", "", "OutPutInfo"));
+            {
+                audioOutputListValues = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendsARenameOutputCommand_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestAudioOutput * cluster = [[CHIPTestAudioOutput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPAudioOutputClusterRenameOutputParams alloc] init];
+        params.index = [NSNumber numberWithUnsignedChar:1];
+        params.name = @"CertTest";
+        [cluster renameOutputWithParams:params
+                      completionHandler:^(NSError * _Nullable err) {
+                          NSLog(@"Sends a RenameOutput command Error: %@", err);
+
+                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                          NextTest();
+                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsTheOutputListAttributeFromTheDutVerifyThatTheOutputAtTheIndexProvidedInStep2HasTheNameCertTest_3()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -37833,12 +35577,24 @@ public:
             err = TestReadsTheProductIDAttribute_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the Status attribute\n");
-            err = TestReadsTheStatusAttribute_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the Application attribute\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsTheApplicationAttribute_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Reads the ApplicationVersion attribute\n");
-            err = TestReadsTheApplicationVersionAttribute_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Reads the Status attribute\n");
+            err = TestReadsTheStatusAttribute_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Reads the ApplicationVersion attribute\n");
+            err = TestReadsTheApplicationVersionAttribute_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Reads the AllowedVendorList attribute\n");
+            err = TestReadsTheAllowedVendorListAttribute_9();
             break;
         }
 
@@ -37875,6 +35631,12 @@ public:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -37888,7 +35650,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 8;
+    const uint16_t mTestCount = 10;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -37991,7 +35753,28 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheStatusAttribute_6()
+    CHIP_ERROR TestReadsTheApplicationAttribute_6()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeApplicationWithCompletionHandler:^(
+            CHIPApplicationBasicClusterApplicationBasicApplication * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the Application attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("application", "", "struct"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsTheStatusAttribute_7()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
@@ -38004,9 +35787,11 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("Status", actualValue, 0));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("status", [value unsignedCharValue], 0));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("status", [value unsignedCharValue], 3));
             }
 
             NextTest();
@@ -38015,7 +35800,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheApplicationVersionAttribute_7()
+    CHIP_ERROR TestReadsTheApplicationVersionAttribute_8()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
@@ -38030,6 +35815,26 @@ private:
 
             VerifyOrReturn(CheckConstraintType("applicationVersion", "", "string"));
             VerifyOrReturn(CheckConstraintMaxLength("applicationVersion", [value length], 32));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsTheAllowedVendorListAttribute_9()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAllowedVendorListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the AllowedVendorList attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("allowedVendorList", "", "list"));
             NextTest();
         }];
 
@@ -41824,159 +39629,6 @@ private:
 
                 NextTest();
             }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_OCC_2_2 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_OCC_2_2()
-        : TestCommandBridge("Test_TC_OCC_2_2")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_OCC_2_2() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_OCC_2_2\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_OCC_2_2\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Reads Occupancy attribute from DUT\n");
-            if (ShouldSkip("A_OCCUPANCY")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsOccupancyAttributeFromDut_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads back Occupancy attribute from DUT after few seconds\n");
-            if (ShouldSkip("A_OCCUPANCY")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsBackOccupancyAttributeFromDutAfterFewSeconds_2();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 3;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-    NSNumber * _Nonnull OccupancyValue;
-
-    CHIP_ERROR TestReadsOccupancyAttributeFromDut_1()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
-                                                                                     endpoint:1
-                                                                                        queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeOccupancyWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads Occupancy attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("occupancy", actualValue, 0));
-            }
-            {
-                OccupancyValue = value;
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackOccupancyAttributeFromDutAfterFewSeconds_2()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
-                                                                                     endpoint:1
-                                                                                        queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeOccupancyWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back Occupancy attribute from DUT after few seconds Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            NextTest();
-        }];
 
         return CHIP_NO_ERROR;
     }
@@ -46078,36 +43730,36 @@ public:
             err = TestReadTheMandatoryAttributeConstraintsMeasuredValue_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Write the default values to mandatory attribute: MeasuredValue\n");
-            err = TestWriteTheDefaultValuesToMandatoryAttributeMeasuredValue_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the mandatory attribute constraints: MinMeasuredValue\n");
+            err = TestReadTheMandatoryAttributeConstraintsMinMeasuredValue_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Reads back mandatory attribute: MeasuredValue\n");
-            err = TestReadsBackMandatoryAttributeMeasuredValue_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the mandatory attribute constraints: MaxMeasuredValue\n");
+            err = TestReadTheMandatoryAttributeConstraintsMaxMeasuredValue_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the mandatory attribute constraints: MinMeasuredValue\n");
-            err = TestReadTheMandatoryAttributeConstraintsMinMeasuredValue_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the optional attribute: Tolerance\n");
+            err = TestReadTheOptionalAttributeTolerance_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Write the default values to mandatory attribute: MinMeasuredValue\n");
-            err = TestWriteTheDefaultValuesToMandatoryAttributeMinMeasuredValue_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the optional attribute: ScaledValue\n");
+            err = TestReadTheOptionalAttributeScaledValue_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Reads back mandatory attribute: MinMeasuredValue\n");
-            err = TestReadsBackMandatoryAttributeMinMeasuredValue_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the optional attribute: MinScaledValue\n");
+            err = TestReadTheOptionalAttributeMinScaledValue_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Read the mandatory attribute constraints: MaxMeasuredValue\n");
-            err = TestReadTheMandatoryAttributeConstraintsMaxMeasuredValue_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Read the optional attribute: MaxScaledValue\n");
+            err = TestReadTheOptionalAttributeMaxScaledValue_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Write the default values to mandatory attribute: MaxMeasuredValue\n");
-            err = TestWriteTheDefaultValuesToMandatoryAttributeMaxMeasuredValue_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the optional attribute: ScaledTolerance\n");
+            err = TestReadTheOptionalAttributeScaledTolerance_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Reads back mandatory attribute: MaxMeasuredValue\n");
-            err = TestReadsBackMandatoryAttributeMaxMeasuredValue_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the optional attribute: Scale\n");
+            err = TestReadTheOptionalAttributeScale_9();
             break;
         }
 
@@ -46127,7 +43779,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -46136,7 +43788,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -46145,7 +43797,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -46191,51 +43843,11 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("measuredValue", "", "int16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryAttributeMeasuredValue_2()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPressureMeasurement * cluster = [[CHIPTestPressureMeasurement alloc] initWithDevice:device
-                                                                                           endpoint:1
-                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id measuredValueArgument;
-        measuredValueArgument = [NSNumber numberWithShort:0];
-        [cluster
-            writeAttributeMeasuredValueWithValue:measuredValueArgument
-                               completionHandler:^(NSError * _Nullable err) {
-                                   NSLog(@"Write the default values to mandatory attribute: MeasuredValue Error: %@", err);
-
-                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                   NextTest();
-                               }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackMandatoryAttributeMeasuredValue_3()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPressureMeasurement * cluster = [[CHIPTestPressureMeasurement alloc] initWithDevice:device
-                                                                                           endpoint:1
-                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMeasuredValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back mandatory attribute: MeasuredValue Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("MeasuredValue", actualValue));
-                VerifyOrReturn(CheckValue("MeasuredValue", actualValue, 0));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("measuredValue", [value shortValue], -32768));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("measuredValue", [value shortValue], 32767));
             }
 
             NextTest();
@@ -46244,7 +43856,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributeConstraintsMinMeasuredValue_4()
+    CHIP_ERROR TestReadTheMandatoryAttributeConstraintsMinMeasuredValue_2()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPressureMeasurement * cluster = [[CHIPTestPressureMeasurement alloc] initWithDevice:device
@@ -46258,51 +43870,11 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("minMeasuredValue", "", "int16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryAttributeMinMeasuredValue_5()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPressureMeasurement * cluster = [[CHIPTestPressureMeasurement alloc] initWithDevice:device
-                                                                                           endpoint:1
-                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id minMeasuredValueArgument;
-        minMeasuredValueArgument = [NSNumber numberWithShort:0];
-        [cluster
-            writeAttributeMinMeasuredValueWithValue:minMeasuredValueArgument
-                                  completionHandler:^(NSError * _Nullable err) {
-                                      NSLog(@"Write the default values to mandatory attribute: MinMeasuredValue Error: %@", err);
-
-                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                      NextTest();
-                                  }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsBackMandatoryAttributeMinMeasuredValue_6()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPressureMeasurement * cluster = [[CHIPTestPressureMeasurement alloc] initWithDevice:device
-                                                                                           endpoint:1
-                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMinMeasuredValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back mandatory attribute: MinMeasuredValue Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("MinMeasuredValue", actualValue));
-                VerifyOrReturn(CheckValue("MinMeasuredValue", actualValue, 0));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("minMeasuredValue", [value shortValue], -32768));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minMeasuredValue", [value shortValue], 32767));
             }
 
             NextTest();
@@ -46311,7 +43883,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributeConstraintsMaxMeasuredValue_7()
+    CHIP_ERROR TestReadTheMandatoryAttributeConstraintsMaxMeasuredValue_3()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPressureMeasurement * cluster = [[CHIPTestPressureMeasurement alloc] initWithDevice:device
@@ -46325,13 +43897,20 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "", "int16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxMeasuredValue", [value shortValue], -32768));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("maxMeasuredValue", [value shortValue], 32767));
+            }
+
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteTheDefaultValuesToMandatoryAttributeMaxMeasuredValue_8()
+    CHIP_ERROR TestReadTheOptionalAttributeTolerance_4()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPressureMeasurement * cluster = [[CHIPTestPressureMeasurement alloc] initWithDevice:device
@@ -46339,21 +43918,31 @@ private:
                                                                                               queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        id maxMeasuredValueArgument;
-        maxMeasuredValueArgument = [NSNumber numberWithShort:0];
-        [cluster
-            writeAttributeMaxMeasuredValueWithValue:maxMeasuredValueArgument
-                                  completionHandler:^(NSError * _Nullable err) {
-                                      NSLog(@"Write the default values to mandatory attribute: MaxMeasuredValue Error: %@", err);
+        [cluster readAttributeToleranceWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute: Tolerance Error: %@", err);
 
-                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                                      NextTest();
-                                  }];
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("tolerance", "", "int16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("tolerance", [value unsignedShortValue], 0U));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("tolerance", [value unsignedShortValue], 2048U));
+            }
+
+            NextTest();
+        }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsBackMandatoryAttributeMaxMeasuredValue_9()
+    CHIP_ERROR TestReadTheOptionalAttributeScaledValue_5()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPressureMeasurement * cluster = [[CHIPTestPressureMeasurement alloc] initWithDevice:device
@@ -46361,15 +43950,150 @@ private:
                                                                                               queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeMaxMeasuredValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads back mandatory attribute: MaxMeasuredValue Error: %@", err);
+        [cluster readAttributeScaledValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute: ScaledValue Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("MaxMeasuredValue", actualValue));
-                VerifyOrReturn(CheckValue("MaxMeasuredValue", actualValue, 0));
+            VerifyOrReturn(CheckConstraintType("scaledValue", "", "int16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("scaledValue", [value shortValue], -32768));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("scaledValue", [value shortValue], 32767));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeMinScaledValue_6()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPressureMeasurement * cluster = [[CHIPTestPressureMeasurement alloc] initWithDevice:device
+                                                                                           endpoint:1
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMinScaledValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute: MinScaledValue Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("minScaledValue", "", "int16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("minScaledValue", [value shortValue], -32768));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minScaledValue", [value shortValue], 32767));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeMaxScaledValue_7()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPressureMeasurement * cluster = [[CHIPTestPressureMeasurement alloc] initWithDevice:device
+                                                                                           endpoint:1
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMaxScaledValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute: MaxScaledValue Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("maxScaledValue", "", "int16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxScaledValue", [value shortValue], -32768));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("maxScaledValue", [value shortValue], 32767));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeScaledTolerance_8()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPressureMeasurement * cluster = [[CHIPTestPressureMeasurement alloc] initWithDevice:device
+                                                                                           endpoint:1
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeScaledToleranceWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute: ScaledTolerance Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("scaledTolerance", "", "int16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("scaledTolerance", [value unsignedShortValue], 0U));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("scaledTolerance", [value unsignedShortValue], 2048U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeScale_9()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPressureMeasurement * cluster = [[CHIPTestPressureMeasurement alloc] initWithDevice:device
+                                                                                           endpoint:1
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeScaleWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute: Scale Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("scale", "", "int8"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<int8_t>("scale", [value charValue], -127));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<int8_t>("scale", [value charValue], 127));
             }
 
             NextTest();
@@ -54943,14 +52667,8 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 1 : Read ClusterRevision attribute from the DUT and Verify that the DUT response indicates "
-                "ClusterRevision attribute has the value 2\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestReadClusterRevisionAttributeFromTheDutAndVerifyThatTheDutResponseIndicatesClusterRevisionAttributeHasTheValue2_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH read ClusterRevision attribute from the DUT\n");
+            err = TestThReadClusterRevisionAttributeFromTheDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: AttributeList\n");
@@ -55034,14 +52752,28 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR
-    TestReadClusterRevisionAttributeFromTheDutAndVerifyThatTheDutResponseIndicatesClusterRevisionAttributeHasTheValue2_1()
+    CHIP_ERROR TestThReadClusterRevisionAttributeFromTheDut_1()
     {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter ClusterRevision attribute valuegarbage: not in length on purpose", 44);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("2garbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostatUserInterfaceConfiguration * cluster =
+            [[CHIPTestThermostatUserInterfaceConfiguration alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH read ClusterRevision attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 2U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "", "uint16"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeAttributeList_2()
@@ -55455,104 +53187,146 @@ public:
             err = TestWritesAValueOf0ToTemperatureDisplayModeAttributeOfDut_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Writes a value of 1 to TemperatureDisplayMode attribute of DUT\n");
-            if (ShouldSkip("A_TEMPERATURE_DISPLAY_MODE")) {
-                NextTest();
-                return;
-            }
-            err = TestWritesAValueOf1ToTemperatureDisplayModeAttributeOfDut_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Verify device temperature displayed in °C\n");
+            err = TestVerifyDeviceTemperatureDisplayedInc_2();
             break;
         case 3:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 3 : Writes a value of greater than 1 to TemperatureDisplayMode attribute of DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Writes a value of 1 to TemperatureDisplayMode attribute of DUT\n");
             if (ShouldSkip("A_TEMPERATURE_DISPLAY_MODE")) {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueOfGreaterThan1ToTemperatureDisplayModeAttributeOfDut_3();
+            err = TestWritesAValueOf1ToTemperatureDisplayModeAttributeOfDut_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Writes a value of 0 to KeypadLockout attribute of DUT\n");
-            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
-                NextTest();
-                return;
-            }
-            err = TestWritesAValueOf0ToKeypadLockoutAttributeOfDut_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Verify device temperature displayed in °F\n");
+            err = TestVerifyDeviceTemperatureDisplayedInf_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Writes a value of 1 to KeypadLockout attribute of DUT\n");
-            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
+            ChipLogProgress(
+                chipTool, " ***** Test Step 5 : Writes a value of greater than 1 to TemperatureDisplayMode attribute of DUT\n");
+            if (ShouldSkip("A_TEMPERATURE_DISPLAY_MODE")) {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueOf1ToKeypadLockoutAttributeOfDut_5();
+            err = TestWritesAValueOfGreaterThan1ToTemperatureDisplayModeAttributeOfDut_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Writes a value of 2 to KeypadLockout attribute of DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Writes a value of 0 to KeypadLockout attribute of DUT\n");
             if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueOf2ToKeypadLockoutAttributeOfDut_6();
+            err = TestWritesAValueOf0ToKeypadLockoutAttributeOfDut_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Writes a value of 3 to KeypadLockout attribute of DUT\n");
-            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
-                NextTest();
-                return;
-            }
-            err = TestWritesAValueOf3ToKeypadLockoutAttributeOfDut_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Verify all device functionality available to the user\n");
+            err = TestVerifyAllDeviceFunctionalityAvailableToTheUser_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Writes a value of 4 to KeypadLockout attribute of DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Writes a value of 1 to KeypadLockout attribute of DUT\n");
             if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueOf4ToKeypadLockoutAttributeOfDut_8();
+            err = TestWritesAValueOf1ToKeypadLockoutAttributeOfDut_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Writes a value of 5 to KeypadLockout attribute of DUT\n");
-            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
-                NextTest();
-                return;
-            }
-            err = TestWritesAValueOf5ToKeypadLockoutAttributeOfDut_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Verify device operates at Level 1 reduced functionality\n");
+            err = TestVerifyDeviceOperatesAtLevel1ReducedFunctionality_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Writes a value of greater than 5 to KeypadLockout attribute of DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Writes a value of 2 to KeypadLockout attribute of DUT\n");
             if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueOfGreaterThan5ToKeypadLockoutAttributeOfDut_10();
+            err = TestWritesAValueOf2ToKeypadLockoutAttributeOfDut_10();
             break;
         case 11:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 11 : Writes a value of 0 to ScheduleProgrammingVisibility attribute of DUT\n");
-            if (ShouldSkip("A_SCHEDULE_PROGRAMMING_VISIBILITY")) {
-                NextTest();
-                return;
-            }
-            err = TestWritesAValueOf0ToScheduleProgrammingVisibilityAttributeOfDut_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Verify device operates at Level 2 reduced functionality\n");
+            err = TestVerifyDeviceOperatesAtLevel2ReducedFunctionality_11();
             break;
         case 12:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 12 : Writes a value of 1 to ScheduleProgrammingVisibility attribute of DUT\n");
-            if (ShouldSkip("A_SCHEDULE_PROGRAMMING_VISIBILITY")) {
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Writes a value of 3 to KeypadLockout attribute of DUT\n");
+            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueOf1ToScheduleProgrammingVisibilityAttributeOfDut_12();
+            err = TestWritesAValueOf3ToKeypadLockoutAttributeOfDut_12();
             break;
         case 13:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 13 : Writes a value of greater than 1 to ScheduleProgrammingVisibility attribute of DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Verify device operates at Level 3 reduced functionality\n");
+            err = TestVerifyDeviceOperatesAtLevel3ReducedFunctionality_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Writes a value of 4 to KeypadLockout attribute of DUT\n");
+            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesAValueOf4ToKeypadLockoutAttributeOfDut_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Verify device operates at Level 4 reduced functionality\n");
+            err = TestVerifyDeviceOperatesAtLevel4ReducedFunctionality_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Writes a value of 5 to KeypadLockout attribute of DUT\n");
+            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesAValueOf5ToKeypadLockoutAttributeOfDut_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Verify device operates at least functionality level\n");
+            err = TestVerifyDeviceOperatesAtLeastFunctionalityLevel_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Writes a value of greater than 5 to KeypadLockout attribute of DUT\n");
+            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesAValueOfGreaterThan5ToKeypadLockoutAttributeOfDut_18();
+            break;
+        case 19:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 19 : Writes a value of 0 to ScheduleProgrammingVisibility attribute of DUT\n");
             if (ShouldSkip("A_SCHEDULE_PROGRAMMING_VISIBILITY")) {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueOfGreaterThan1ToScheduleProgrammingVisibilityAttributeOfDut_13();
+            err = TestWritesAValueOf0ToScheduleProgrammingVisibilityAttributeOfDut_19();
+            break;
+        case 20:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 20 : Verify local schedule programming functionality is enabled at the thermostat\n");
+            err = TestVerifyLocalScheduleProgrammingFunctionalityIsEnabledAtTheThermostat_20();
+            break;
+        case 21:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 21 : Writes a value of 1 to ScheduleProgrammingVisibility attribute of DUT\n");
+            if (ShouldSkip("A_SCHEDULE_PROGRAMMING_VISIBILITY")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesAValueOf1ToScheduleProgrammingVisibilityAttributeOfDut_21();
+            break;
+        case 22:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 22 : Verify local schedule programming functionality is disabled at the thermostat\n");
+            err = TestVerifyLocalScheduleProgrammingFunctionalityIsDisabledAtTheThermostat_22();
+            break;
+        case 23:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 23 : Writes a value of greater than 1 to ScheduleProgrammingVisibility attribute of DUT\n");
+            if (ShouldSkip("A_SCHEDULE_PROGRAMMING_VISIBILITY")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesAValueOfGreaterThan1ToScheduleProgrammingVisibilityAttributeOfDut_23();
             break;
         }
 
@@ -55575,13 +53349,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -55596,7 +53370,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -55605,6 +53379,36 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         }
@@ -55620,7 +53424,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 14;
+    const uint16_t mTestCount = 24;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -55656,7 +53460,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueOf1ToTemperatureDisplayModeAttributeOfDut_2()
+    CHIP_ERROR TestVerifyDeviceTemperatureDisplayedInc_2()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Verify device temperature displayed in °Cgarbage: not in length on purpose", 42);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestWritesAValueOf1ToTemperatureDisplayModeAttributeOfDut_3()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostatUserInterfaceConfiguration * cluster =
@@ -55678,7 +53489,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueOfGreaterThan1ToTemperatureDisplayModeAttributeOfDut_3()
+    CHIP_ERROR TestVerifyDeviceTemperatureDisplayedInf_4()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Verify device temperature displayed in °Fgarbage: not in length on purpose", 42);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestWritesAValueOfGreaterThan1ToTemperatureDisplayModeAttributeOfDut_5()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostatUserInterfaceConfiguration * cluster =
@@ -55701,7 +53519,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueOf0ToKeypadLockoutAttributeOfDut_4()
+    CHIP_ERROR TestWritesAValueOf0ToKeypadLockoutAttributeOfDut_6()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostatUserInterfaceConfiguration * cluster =
@@ -55722,7 +53540,15 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueOf1ToKeypadLockoutAttributeOfDut_5()
+    CHIP_ERROR TestVerifyAllDeviceFunctionalityAvailableToTheUser_7()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Verify all device functionality available to the usergarbage: not in length on purpose", 53);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestWritesAValueOf1ToKeypadLockoutAttributeOfDut_8()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostatUserInterfaceConfiguration * cluster =
@@ -55743,7 +53569,15 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueOf2ToKeypadLockoutAttributeOfDut_6()
+    CHIP_ERROR TestVerifyDeviceOperatesAtLevel1ReducedFunctionality_9()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Verify device operates at Level 1 reduced functionalitygarbage: not in length on purpose", 55);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestWritesAValueOf2ToKeypadLockoutAttributeOfDut_10()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostatUserInterfaceConfiguration * cluster =
@@ -55764,7 +53598,15 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueOf3ToKeypadLockoutAttributeOfDut_7()
+    CHIP_ERROR TestVerifyDeviceOperatesAtLevel2ReducedFunctionality_11()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Verify device operates at Level 2 reduced functionalitygarbage: not in length on purpose", 55);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestWritesAValueOf3ToKeypadLockoutAttributeOfDut_12()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostatUserInterfaceConfiguration * cluster =
@@ -55785,7 +53627,15 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueOf4ToKeypadLockoutAttributeOfDut_8()
+    CHIP_ERROR TestVerifyDeviceOperatesAtLevel3ReducedFunctionality_13()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Verify device operates at Level 3 reduced functionalitygarbage: not in length on purpose", 55);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestWritesAValueOf4ToKeypadLockoutAttributeOfDut_14()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostatUserInterfaceConfiguration * cluster =
@@ -55806,7 +53656,15 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueOf5ToKeypadLockoutAttributeOfDut_9()
+    CHIP_ERROR TestVerifyDeviceOperatesAtLevel4ReducedFunctionality_15()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Verify device operates at Level 4 reduced functionalitygarbage: not in length on purpose", 55);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestWritesAValueOf5ToKeypadLockoutAttributeOfDut_16()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostatUserInterfaceConfiguration * cluster =
@@ -55827,7 +53685,15 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueOfGreaterThan5ToKeypadLockoutAttributeOfDut_10()
+    CHIP_ERROR TestVerifyDeviceOperatesAtLeastFunctionalityLevel_17()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Verify device operates at least functionality levelgarbage: not in length on purpose", 51);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestWritesAValueOfGreaterThan5ToKeypadLockoutAttributeOfDut_18()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostatUserInterfaceConfiguration * cluster =
@@ -55847,7 +53713,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueOf0ToScheduleProgrammingVisibilityAttributeOfDut_11()
+    CHIP_ERROR TestWritesAValueOf0ToScheduleProgrammingVisibilityAttributeOfDut_19()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostatUserInterfaceConfiguration * cluster =
@@ -55870,7 +53736,15 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueOf1ToScheduleProgrammingVisibilityAttributeOfDut_12()
+    CHIP_ERROR TestVerifyLocalScheduleProgrammingFunctionalityIsEnabledAtTheThermostat_20()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Verify local schedule programming functionality is enabled at the thermostatgarbage: not in length on purpose", 76);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestWritesAValueOf1ToScheduleProgrammingVisibilityAttributeOfDut_21()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostatUserInterfaceConfiguration * cluster =
@@ -55893,7 +53767,15 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueOfGreaterThan1ToScheduleProgrammingVisibilityAttributeOfDut_13()
+    CHIP_ERROR TestVerifyLocalScheduleProgrammingFunctionalityIsDisabledAtTheThermostat_22()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Verify local schedule programming functionality is disabled at the thermostatgarbage: not in length on purpose", 77);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestWritesAValueOfGreaterThan1ToScheduleProgrammingVisibilityAttributeOfDut_23()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostatUserInterfaceConfiguration * cluster =
@@ -109428,13 +107310,11 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_MC_3_9>(),
         make_unique<Test_TC_MC_3_10>(),
         make_unique<Test_TC_MC_3_11>(),
+        make_unique<Test_TC_MC_3_12>(),
+        make_unique<Test_TC_MC_3_13>(),
         make_unique<Test_TC_MC_5_1>(),
         make_unique<Test_TC_MC_5_2>(),
         make_unique<Test_TC_MC_5_3>(),
-        make_unique<Test_TC_MC_6_1>(),
-        make_unique<Test_TC_MC_6_2>(),
-        make_unique<Test_TC_MC_6_3>(),
-        make_unique<Test_TC_MC_6_4>(),
         make_unique<Test_TC_MC_7_1>(),
         make_unique<Test_TC_MC_7_2>(),
         make_unique<Test_TC_MC_8_1>(),
@@ -109449,7 +107329,6 @@ void registerCommandsTests(Commands & commands)
         make_unique<OTA_SuccessfulTransfer>(),
         make_unique<Test_TC_OCC_1_1>(),
         make_unique<Test_TC_OCC_2_1>(),
-        make_unique<Test_TC_OCC_2_2>(),
         make_unique<Test_TC_OO_1_1>(),
         make_unique<Test_TC_OO_2_1>(),
         make_unique<Test_TC_OO_2_2>(),
