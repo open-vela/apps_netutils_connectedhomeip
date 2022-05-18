@@ -128,6 +128,7 @@ public:
         printf("Test_TC_MF_1_5\n");
         printf("Test_TC_MF_1_6\n");
         printf("Test_TC_MF_1_15\n");
+        printf("OTA_SuccessfulTransfer\n");
         printf("Test_TC_OCC_1_1\n");
         printf("Test_TC_OCC_2_1\n");
         printf("Test_TC_OCC_2_2\n");
@@ -40807,6 +40808,322 @@ private:
                                  }];
 
         return CHIP_NO_ERROR;
+    }
+};
+
+class OTA_SuccessfulTransfer : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    OTA_SuccessfulTransfer()
+        : TestCommandBridge("OTA_SuccessfulTransfer")
+        , mTestIndex(0)
+    {
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("requestorNodeId", 0, UINT64_MAX, &mRequestorNodeId);
+        AddArgument("providerNodeId", 0, UINT64_MAX, &mProviderNodeId);
+        AddArgument("providerPayload", &mProviderPayload);
+        AddArgument("providerDiscriminator", 0, UINT16_MAX, &mProviderDiscriminator);
+        AddArgument("providerPort", 0, UINT16_MAX, &mProviderPort);
+        AddArgument("providerKvs", &mProviderKvs);
+        AddArgument("otaImageFilePath", &mOtaImageFilePath);
+        AddArgument("rawImageFilePath", &mRawImageFilePath);
+        AddArgument("rawImageContent", &mRawImageContent);
+        AddArgument("downloadImageFilePath", &mDownloadImageFilePath);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~OTA_SuccessfulTransfer() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: OTA_SuccessfulTransfer\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: OTA_SuccessfulTransfer\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Create OTA image\n");
+            err = TestCreateOtaImage_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Start the provider with an image\n");
+            err = TestStartTheProviderWithAnImage_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Commission the provider from alpha\n");
+            err = TestCommissionTheProviderFromAlpha_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Wait for the commissioned provider to be retrieved for alpha\n");
+            err = TestWaitForTheCommissionedProviderToBeRetrievedForAlpha_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Install ACL for QueryImage\n");
+            err = TestInstallAclForQueryImage_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Stop the requestor\n");
+            err = TestStopTheRequestor_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Start the requestor with an OTA download path\n");
+            err = TestStartTheRequestorWithAnOtaDownloadPath_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Wait for the commissioned requestor to be retrieved for alpha\n");
+            err = TestWaitForTheCommissionedRequestorToBeRetrievedForAlpha_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Send an announce OTA provider command to the requestor\n");
+            err = TestSendAnAnnounceOtaProviderCommandToTheRequestor_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Wait for transfer complete message\n");
+            err = TestWaitForTransferCompleteMessage_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Compare original file to downloaded file\n");
+            err = TestCompareOriginalFileToDownloadedFile_10();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 11;
+
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<chip::NodeId> mRequestorNodeId;
+    chip::Optional<chip::NodeId> mProviderNodeId;
+    chip::Optional<chip::CharSpan> mProviderPayload;
+    chip::Optional<uint16_t> mProviderDiscriminator;
+    chip::Optional<uint16_t> mProviderPort;
+    chip::Optional<chip::CharSpan> mProviderKvs;
+    chip::Optional<chip::CharSpan> mOtaImageFilePath;
+    chip::Optional<chip::CharSpan> mRawImageFilePath;
+    chip::Optional<chip::CharSpan> mRawImageContent;
+    chip::Optional<chip::CharSpan> mDownloadImageFilePath;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestCreateOtaImage_0()
+    {
+        chip::app::Clusters::SystemCommands::Commands::CreateOtaImage::Type value;
+        value.otaImageFilePath
+            = mOtaImageFilePath.HasValue() ? mOtaImageFilePath.Value() : chip::Span<const char>("/tmp/otaImage", 13);
+        value.rawImageFilePath
+            = mRawImageFilePath.HasValue() ? mRawImageFilePath.Value() : chip::Span<const char>("/tmp/rawImage", 13);
+        value.rawImageContent
+            = mRawImageContent.HasValue() ? mRawImageContent.Value() : chip::Span<const char>("Have a hootenanny!", 18);
+        return CreateOtaImage("alpha", value);
+    }
+
+    CHIP_ERROR TestStartTheProviderWithAnImage_1()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Start::Type value;
+        value.registerKey.Emplace();
+        value.registerKey.Value() = chip::Span<const char>("chip-ota-provider-appgarbage: not in length on purpose", 21);
+        value.discriminator.Emplace();
+        value.discriminator.Value() = mProviderDiscriminator.HasValue() ? mProviderDiscriminator.Value() : 50U;
+        value.port.Emplace();
+        value.port.Value() = mProviderPort.HasValue() ? mProviderPort.Value() : 5560U;
+        value.kvs.Emplace();
+        value.kvs.Value() = mProviderKvs.HasValue() ? mProviderKvs.Value() : chip::Span<const char>("/tmp/chip_kvs_provider", 22);
+        value.filepath.Emplace();
+        value.filepath.Value()
+            = mOtaImageFilePath.HasValue() ? mOtaImageFilePath.Value() : chip::Span<const char>("/tmp/otaImage", 13);
+        return Start("alpha", value);
+    }
+
+    CHIP_ERROR TestCommissionTheProviderFromAlpha_2()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        value.nodeId = mProviderNodeId.HasValue() ? mProviderNodeId.Value() : 12648430ULL;
+        value.payload
+            = mProviderPayload.HasValue() ? mProviderPayload.Value() : chip::Span<const char>("MT:-24J0IX4122-.548G00", 22);
+        return PairWithQRCode("alpha", value);
+    }
+
+    CHIP_ERROR TestWaitForTheCommissionedProviderToBeRetrievedForAlpha_3()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mProviderNodeId.HasValue() ? mProviderNodeId.Value() : 12648430ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestInstallAclForQueryImage_4()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestAccessControl * cluster = [[CHIPTestAccessControl alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
+                ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+            }
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1];
+
+            temp_0[1] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = nil;
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeAclWithValue:aclArgument
+                          completionHandler:^(NSError * _Nullable err) {
+                              NSLog(@"Install ACL for QueryImage Error: %@", err);
+
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                              NextTest();
+                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStopTheRequestor_5()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
+        return Stop("alpha", value);
+    }
+
+    CHIP_ERROR TestStartTheRequestorWithAnOtaDownloadPath_6()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Start::Type value;
+        value.otaDownloadPath.Emplace();
+        value.otaDownloadPath.Value() = mDownloadImageFilePath.HasValue() ? mDownloadImageFilePath.Value()
+                                                                          : chip::Span<const char>("/tmp/downloadedImage", 20);
+        return Start("alpha", value);
+    }
+
+    CHIP_ERROR TestWaitForTheCommissionedRequestorToBeRetrievedForAlpha_7()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mRequestorNodeId.HasValue() ? mRequestorNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestSendAnAnnounceOtaProviderCommandToTheRequestor_8()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOtaSoftwareUpdateRequestor * cluster = [[CHIPTestOtaSoftwareUpdateRequestor alloc] initWithDevice:device
+                                                                                                         endpoint:0
+                                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPOtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams alloc] init];
+        params.providerNodeId = mProviderNodeId.HasValue() ? [NSNumber numberWithUnsignedLongLong:mProviderNodeId.Value()]
+                                                           : [NSNumber numberWithUnsignedLongLong:12648430ULL];
+        params.vendorId = [NSNumber numberWithUnsignedShort:0U];
+        params.announcementReason = [NSNumber numberWithUnsignedChar:0];
+        params.endpoint
+            = mEndpoint.HasValue() ? [NSNumber numberWithUnsignedShort:mEndpoint.Value()] : [NSNumber numberWithUnsignedShort:0U];
+        [cluster announceOtaProviderWithParams:params
+                             completionHandler:^(NSError * _Nullable err) {
+                                 NSLog(@"Send an announce OTA provider command to the requestor Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWaitForTransferCompleteMessage_9()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForMessage::Type value;
+        value.registerKey.Emplace();
+        value.registerKey.Value() = chip::Span<const char>("defaultgarbage: not in length on purpose", 7);
+        value.message = chip::Span<const char>("OTA image downloadedgarbage: not in length on purpose", 20);
+        return WaitForMessage("alpha", value);
+    }
+
+    CHIP_ERROR TestCompareOriginalFileToDownloadedFile_10()
+    {
+        chip::app::Clusters::SystemCommands::Commands::CompareFiles::Type value;
+        value.file1 = mRawImageFilePath.HasValue() ? mRawImageFilePath.Value() : chip::Span<const char>("/tmp/rawImage", 13);
+        value.file2 = mDownloadImageFilePath.HasValue() ? mDownloadImageFilePath.Value()
+                                                        : chip::Span<const char>("/tmp/downloadedImage", 20);
+        return CompareFiles("alpha", value);
     }
 };
 
@@ -93554,6 +93871,8 @@ private:
     CHIP_ERROR TestStartTheDefaultAccessoryByKeyWithAllCommandLineOptions_10()
     {
         chip::app::Clusters::SystemCommands::Commands::Start::Type value;
+        value.registerKey.Emplace();
+        value.registerKey.Value() = chip::Span<const char>("defaultgarbage: not in length on purpose", 7);
         value.discriminator.Emplace();
         value.discriminator.Value() = 1111U;
         value.port.Emplace();
@@ -93562,22 +93881,20 @@ private:
         value.kvs.Value() = chip::Span<const char>("/tmp/chip_kvs_defaultgarbage: not in length on purpose", 21);
         value.minCommissioningTimeout.Emplace();
         value.minCommissioningTimeout.Value() = 10U;
-        value.registerKey.Emplace();
-        value.registerKey.Value() = chip::Span<const char>("defaultgarbage: not in length on purpose", 7);
         return Start("alpha", value);
     }
 
     CHIP_ERROR TestStartASecondAccessoryWithAllCommandLineOptions_11()
     {
         chip::app::Clusters::SystemCommands::Commands::Start::Type value;
+        value.registerKey.Emplace();
+        value.registerKey.Value() = chip::Span<const char>("chip-lock-appgarbage: not in length on purpose", 13);
         value.discriminator.Emplace();
         value.discriminator.Value() = 50U;
         value.port.Emplace();
         value.port.Value() = 5561U;
         value.kvs.Emplace();
         value.kvs.Value() = chip::Span<const char>("/tmp/chip_kvs_lockgarbage: not in length on purpose", 18);
-        value.registerKey.Emplace();
-        value.registerKey.Value() = chip::Span<const char>("chip-lock-appgarbage: not in length on purpose", 13);
         return Start("alpha", value);
     }
 
@@ -93607,14 +93924,14 @@ private:
     CHIP_ERROR TestStartASecondAccessoryWithDifferentKvs_15()
     {
         chip::app::Clusters::SystemCommands::Commands::Start::Type value;
+        value.registerKey.Emplace();
+        value.registerKey.Value() = chip::Span<const char>("chip-lock-appgarbage: not in length on purpose", 13);
         value.discriminator.Emplace();
         value.discriminator.Value() = 50U;
         value.port.Emplace();
         value.port.Value() = 5561U;
         value.kvs.Emplace();
         value.kvs.Value() = chip::Span<const char>("/tmp/chip_kvs_lock2garbage: not in length on purpose", 19);
-        value.registerKey.Emplace();
-        value.registerKey.Value() = chip::Span<const char>("chip-lock-appgarbage: not in length on purpose", 13);
         return Start("alpha", value);
     }
 
@@ -109129,6 +109446,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_MF_1_5>(),
         make_unique<Test_TC_MF_1_6>(),
         make_unique<Test_TC_MF_1_15>(),
+        make_unique<OTA_SuccessfulTransfer>(),
         make_unique<Test_TC_OCC_1_1>(),
         make_unique<Test_TC_OCC_2_1>(),
         make_unique<Test_TC_OCC_2_2>(),
