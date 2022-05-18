@@ -47884,8 +47884,8 @@ public:
 | Commands:                                                           |        |
 |------------------------------------------------------------------------------|
 | Attributes:                                                         |        |
-| * ActiveLocale                                                      | 0x0001 |
-| * SupportedLocales                                                  | 0x0002 |
+| * ActiveLocale                                                      | 0x0000 |
+| * SupportedLocales                                                  | 0x0001 |
 | * GeneratedCommandList                                              | 0xFFF8 |
 | * AcceptedCommandList                                               | 0xFFF9 |
 | * AttributeList                                                     | 0xFFFB |
@@ -47909,7 +47909,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000002B) ReadAttribute (0x00000001) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0x0000002B) ReadAttribute (0x00000000) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPLocalizationConfiguration * cluster = [[CHIPLocalizationConfiguration alloc] initWithDevice:device
@@ -47940,7 +47940,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000002B) WriteAttribute (0x00000001) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0x0000002B) WriteAttribute (0x00000000) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPLocalizationConfiguration * cluster = [[CHIPLocalizationConfiguration alloc] initWithDevice:device
                                                                                                endpoint:endpointId
@@ -47979,7 +47979,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000002B) ReportAttribute (0x00000001) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0x0000002B) ReportAttribute (0x00000000) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPLocalizationConfiguration * cluster = [[CHIPLocalizationConfiguration alloc] initWithDevice:device
                                                                                                endpoint:endpointId
@@ -48023,7 +48023,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000002B) ReadAttribute (0x00000002) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0x0000002B) ReadAttribute (0x00000001) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPLocalizationConfiguration * cluster = [[CHIPLocalizationConfiguration alloc] initWithDevice:device
@@ -48051,7 +48051,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000002B) ReportAttribute (0x00000002) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0x0000002B) ReportAttribute (0x00000001) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPLocalizationConfiguration * cluster = [[CHIPLocalizationConfiguration alloc] initWithDevice:device
                                                                                                endpoint:endpointId
