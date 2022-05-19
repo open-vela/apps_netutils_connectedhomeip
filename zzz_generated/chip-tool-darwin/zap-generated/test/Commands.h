@@ -38847,7 +38847,15 @@ private:
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3];
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2];
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = nil;
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [[CHIPAccessControlClusterTarget alloc] init];
+                ((CHIPAccessControlClusterTarget *) temp_3[0]).cluster = [NSNumber numberWithUnsignedInt:41UL];
+                ((CHIPAccessControlClusterTarget *) temp_3[0]).endpoint = nil;
+                ((CHIPAccessControlClusterTarget *) temp_3[0]).deviceType = nil;
+
+                ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).targets = temp_3;
+            }
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1];
 
             aclArgument = temp_0;
