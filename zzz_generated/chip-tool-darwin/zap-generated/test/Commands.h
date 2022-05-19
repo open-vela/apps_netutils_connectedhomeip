@@ -90737,18 +90737,18 @@ private:
                 VerifyOrReturn(
                     CheckValueAsString("Label", ((CHIPModeSelectClusterModeOptionStruct *) actualValue[0]).label, @"Black"));
                 VerifyOrReturn(CheckValue("Mode", ((CHIPModeSelectClusterModeOptionStruct *) actualValue[0]).mode, 0));
-                VerifyOrReturn(
-                    CheckValue("SemanticTag", ((CHIPModeSelectClusterModeOptionStruct *) actualValue[0]).semanticTag, 0UL));
+                VerifyOrReturn(CheckValue("SemanticTags",
+                    [((CHIPModeSelectClusterModeOptionStruct *) actualValue[0]).semanticTags count], static_cast<uint32_t>(1)));
                 VerifyOrReturn(
                     CheckValueAsString("Label", ((CHIPModeSelectClusterModeOptionStruct *) actualValue[1]).label, @"Cappuccino"));
                 VerifyOrReturn(CheckValue("Mode", ((CHIPModeSelectClusterModeOptionStruct *) actualValue[1]).mode, 4));
-                VerifyOrReturn(
-                    CheckValue("SemanticTag", ((CHIPModeSelectClusterModeOptionStruct *) actualValue[1]).semanticTag, 0UL));
+                VerifyOrReturn(CheckValue("SemanticTags",
+                    [((CHIPModeSelectClusterModeOptionStruct *) actualValue[1]).semanticTags count], static_cast<uint32_t>(1)));
                 VerifyOrReturn(
                     CheckValueAsString("Label", ((CHIPModeSelectClusterModeOptionStruct *) actualValue[2]).label, @"Espresso"));
                 VerifyOrReturn(CheckValue("Mode", ((CHIPModeSelectClusterModeOptionStruct *) actualValue[2]).mode, 7));
-                VerifyOrReturn(
-                    CheckValue("SemanticTag", ((CHIPModeSelectClusterModeOptionStruct *) actualValue[2]).semanticTag, 0UL));
+                VerifyOrReturn(CheckValue("SemanticTags",
+                    [((CHIPModeSelectClusterModeOptionStruct *) actualValue[2]).semanticTags count], static_cast<uint32_t>(1)));
             }
 
             NextTest();
