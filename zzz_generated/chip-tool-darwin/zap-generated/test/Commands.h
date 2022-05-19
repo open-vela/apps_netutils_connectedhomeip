@@ -36515,10 +36515,10 @@ private:
 
     CHIP_ERROR TestCommissionFromBeta_6()
     {
-        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:0000000000I31506010", 22);
-        return PairWithQRCode("beta", value);
+        return PairWithCode("beta", value);
     }
 
     CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_7()
@@ -36947,10 +36947,10 @@ private:
 
     CHIP_ERROR TestCommissionFromBeta_6()
     {
-        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        return PairWithQRCode("beta", value);
+        return PairWithCode("beta", value);
     }
 
     CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_7()
@@ -37374,10 +37374,10 @@ private:
 
     CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_7()
     {
-        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        return PairWithQRCode("beta", value);
+        return PairWithCode("beta", value);
     }
 
     CHIP_ERROR TestThCr1OpensANewCommissioningWindowOnDutCe_8()
@@ -37432,10 +37432,10 @@ private:
 
     CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_10()
     {
-        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        return PairWithQRCode("beta", value);
+        return PairWithCode("beta", value);
     }
 
     CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_11()
@@ -37531,18 +37531,18 @@ private:
 
     CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_15()
     {
-        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        return PairWithQRCode("beta", value);
+        return PairWithCode("beta", value);
     }
 
     CHIP_ERROR TestThCr3StartsACommissioningProcessWithDutCe_16()
     {
-        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        return PairWithQRCode("gamma", value);
+        return PairWithCode("gamma", value);
     }
 };
 
@@ -37827,10 +37827,10 @@ private:
 
     CHIP_ERROR TestCommissionFromBeta_8()
     {
-        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        return PairWithQRCode("beta", value);
+        return PairWithCode("beta", value);
     }
 
     CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_9()
@@ -37876,10 +37876,10 @@ private:
 
     CHIP_ERROR TestCommissionFromBeta_11()
     {
-        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        return PairWithQRCode("beta", value);
+        return PairWithCode("beta", value);
     }
 
     CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_12()
@@ -37966,10 +37966,10 @@ private:
 
     CHIP_ERROR TestCommissionFromBeta_16()
     {
-        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        return PairWithQRCode("beta", value);
+        return PairWithCode("beta", value);
     }
 
     CHIP_ERROR TestThCr2StartsACommissioningProcessOnDutCe_17()
@@ -37981,10 +37981,10 @@ private:
 
     CHIP_ERROR TestThCr3StartsACommissioningProcessWithDutCe_18()
     {
-        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        return PairWithQRCode("gamma", value);
+        return PairWithCode("gamma", value);
     }
 };
 
@@ -38267,10 +38267,10 @@ private:
 
     CHIP_ERROR TestCommissionFromGamma_3()
     {
-        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        return PairWithQRCode("gamma", value);
+        return PairWithCode("gamma", value);
     }
 
     CHIP_ERROR TestThCr3StartsACommissioningProcessWithDutCe_4()
@@ -38304,10 +38304,10 @@ private:
 
     CHIP_ERROR TestCommissionFromBeta_6()
     {
-        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        return PairWithQRCode("beta", value);
+        return PairWithCode("beta", value);
     }
 
     CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_7()
@@ -38809,11 +38809,11 @@ private:
 
     CHIP_ERROR TestCommissionTheProviderFromAlpha_2()
     {
-        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mProviderNodeId.HasValue() ? mProviderNodeId.Value() : 12648430ULL;
         value.payload
             = mProviderPayload.HasValue() ? mProviderPayload.Value() : chip::Span<const char>("MT:-24J0IX4122-.548G00", 22);
-        return PairWithQRCode("alpha", value);
+        return PairWithCode("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheCommissionedProviderToBeRetrievedForAlpha_3()
@@ -89575,10 +89575,10 @@ private:
 
     CHIP_ERROR TestCommissionFromBeta_16()
     {
-        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = 74565ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        return PairWithQRCode("beta", value);
+        return PairWithCode("beta", value);
     }
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForBeta_17()
@@ -91782,10 +91782,10 @@ private:
 
     CHIP_ERROR TestCommissionSecondAccessoryFromAlpha_12()
     {
-        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = 3735928559ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0IX4122-.548G00", 22);
-        return PairWithQRCode("alpha", value);
+        return PairWithCode("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheSecondCommissionedDeviceToBeRetrievedForAlpha_13()
@@ -93715,10 +93715,10 @@ private:
 
     CHIP_ERROR TestCommissionFromAlphaWhenTheCommissioningWindowIsNotOpened_3()
     {
-        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeIdForDuplicateCommissioning.HasValue() ? mNodeIdForDuplicateCommissioning.Value() : 17ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        return PairWithQRCode("alpha", value);
+        return PairWithCode("alpha", value);
     }
 
     CHIP_ERROR TestOpenCommissioningWindowFromAlpha_4()
@@ -93745,10 +93745,10 @@ private:
 
     CHIP_ERROR TestCommissionFromAlphaAgain_5()
     {
-        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeIdForDuplicateCommissioning.HasValue() ? mNodeIdForDuplicateCommissioning.Value() : 17ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        return PairWithQRCode("alpha", value);
+        return PairWithCode("alpha", value);
     }
 
     CHIP_ERROR TestCheckThatWeJustHaveTheOneFabricAndDidNotAddANewOne_6()
@@ -93821,10 +93821,10 @@ private:
 
     CHIP_ERROR TestCommissionFromBeta_9()
     {
-        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        return PairWithQRCode("beta", value);
+        return PairWithCode("beta", value);
     }
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForBeta_10()
@@ -93858,10 +93858,10 @@ private:
 
     CHIP_ERROR TestCommissionFromGamma_12()
     {
-        chip::app::Clusters::CommissionerCommands::Commands::PairWithQRCode::Type value;
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-        return PairWithQRCode("gamma", value);
+        return PairWithCode("gamma", value);
     }
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForGamma_13()
