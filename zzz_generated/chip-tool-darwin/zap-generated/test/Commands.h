@@ -54603,8 +54603,12 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("networkName", "", "string"));
-            VerifyOrReturn(CheckConstraintMaxLength("networkName", [value length], 16));
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("NetworkName", actualValue));
+                VerifyOrReturn(CheckValueAsString("NetworkName", actualValue, @""));
+            }
+
             NextTest();
         }];
 

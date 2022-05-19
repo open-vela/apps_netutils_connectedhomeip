@@ -73042,12 +73042,13 @@ using namespace chip::app::Clusters;
 
 - (void)readAttributeChannelWithCompletionHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new CHIPInt16uAttributeCallbackBridge(self.callbackQueue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
-        using TypeInfo = ThreadNetworkDiagnostics::Attributes::Channel::TypeInfo;
-        auto successFn = Callback<Int16uAttributeCallback>::FromCancelable(success);
-        auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
-        return self.cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
-    });
+    new CHIPNullableInt16uAttributeCallbackBridge(
+        self.callbackQueue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+            using TypeInfo = ThreadNetworkDiagnostics::Attributes::Channel::TypeInfo;
+            auto successFn = Callback<NullableInt16uAttributeCallback>::FromCancelable(success);
+            auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
+            return self.cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
+        });
 }
 
 - (void)subscribeAttributeChannelWithMinInterval:(NSNumber * _Nonnull)minInterval
@@ -73056,7 +73057,7 @@ using namespace chip::app::Clusters;
                          subscriptionEstablished:(SubscriptionEstablishedHandler _Nullable)subscriptionEstablishedHandler
                                    reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    new CHIPInt16uAttributeCallbackSubscriptionBridge(
+    new CHIPNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
         ^(Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
@@ -73064,11 +73065,11 @@ using namespace chip::app::Clusters;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = ThreadNetworkDiagnostics::Attributes::Channel::TypeInfo;
-            auto successFn = Callback<Int16uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt16uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73080,7 +73081,7 @@ using namespace chip::app::Clusters;
                                          queue:(dispatch_queue_t)queue
                              completionHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new CHIPInt16uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+    new CHIPNullableInt16uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = ThreadNetworkDiagnostics::Attributes::Channel::TypeInfo;
@@ -73089,7 +73090,7 @@ using namespace chip::app::Clusters;
             path.mAttributeId = TypeInfo::GetAttributeId();
             TypeInfo::DecodableType value;
             CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-            auto successFn = Callback<Int16uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt16uAttributeCallback>::FromCancelable(success);
             if (err == CHIP_NO_ERROR) {
                 successFn->mCall(successFn->mContext, value);
             }
@@ -73102,12 +73103,13 @@ using namespace chip::app::Clusters;
 - (void)readAttributeRoutingRoleWithCompletionHandler:(void (^)(
                                                           NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new CHIPInt8uAttributeCallbackBridge(self.callbackQueue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
-        using TypeInfo = ThreadNetworkDiagnostics::Attributes::RoutingRole::TypeInfo;
-        auto successFn = Callback<Int8uAttributeCallback>::FromCancelable(success);
-        auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
-        return self.cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
-    });
+    new CHIPNullableInt8uAttributeCallbackBridge(
+        self.callbackQueue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+            using TypeInfo = ThreadNetworkDiagnostics::Attributes::RoutingRole::TypeInfo;
+            auto successFn = Callback<NullableInt8uAttributeCallback>::FromCancelable(success);
+            auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
+            return self.cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
+        });
 }
 
 - (void)subscribeAttributeRoutingRoleWithMinInterval:(NSNumber * _Nonnull)minInterval
@@ -73116,7 +73118,7 @@ using namespace chip::app::Clusters;
                              subscriptionEstablished:(SubscriptionEstablishedHandler _Nullable)subscriptionEstablishedHandler
                                        reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    new CHIPInt8uAttributeCallbackSubscriptionBridge(
+    new CHIPNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
         ^(Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
@@ -73124,11 +73126,11 @@ using namespace chip::app::Clusters;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = ThreadNetworkDiagnostics::Attributes::RoutingRole::TypeInfo;
-            auto successFn = Callback<Int8uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt8uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73141,7 +73143,7 @@ using namespace chip::app::Clusters;
                                  completionHandler:
                                      (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new CHIPInt8uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+    new CHIPNullableInt8uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = ThreadNetworkDiagnostics::Attributes::RoutingRole::TypeInfo;
@@ -73150,7 +73152,7 @@ using namespace chip::app::Clusters;
             path.mAttributeId = TypeInfo::GetAttributeId();
             TypeInfo::DecodableType value;
             CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-            auto successFn = Callback<Int8uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt8uAttributeCallback>::FromCancelable(success);
             if (err == CHIP_NO_ERROR) {
                 successFn->mCall(successFn->mContext, value);
             }
@@ -73163,12 +73165,13 @@ using namespace chip::app::Clusters;
 - (void)readAttributeNetworkNameWithCompletionHandler:(void (^)(
                                                           NSString * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new CHIPCharStringAttributeCallbackBridge(self.callbackQueue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
-        using TypeInfo = ThreadNetworkDiagnostics::Attributes::NetworkName::TypeInfo;
-        auto successFn = Callback<CharStringAttributeCallback>::FromCancelable(success);
-        auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
-        return self.cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
-    });
+    new CHIPNullableCharStringAttributeCallbackBridge(
+        self.callbackQueue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+            using TypeInfo = ThreadNetworkDiagnostics::Attributes::NetworkName::TypeInfo;
+            auto successFn = Callback<NullableCharStringAttributeCallback>::FromCancelable(success);
+            auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
+            return self.cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
+        });
 }
 
 - (void)subscribeAttributeNetworkNameWithMinInterval:(NSNumber * _Nonnull)minInterval
@@ -73177,7 +73180,7 @@ using namespace chip::app::Clusters;
                              subscriptionEstablished:(SubscriptionEstablishedHandler _Nullable)subscriptionEstablishedHandler
                                        reportHandler:(void (^)(NSString * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    new CHIPCharStringAttributeCallbackSubscriptionBridge(
+    new CHIPNullableCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
         ^(Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
@@ -73185,11 +73188,11 @@ using namespace chip::app::Clusters;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = ThreadNetworkDiagnostics::Attributes::NetworkName::TypeInfo;
-            auto successFn = Callback<CharStringAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableCharStringAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73202,7 +73205,7 @@ using namespace chip::app::Clusters;
                                  completionHandler:
                                      (void (^)(NSString * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new CHIPCharStringAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+    new CHIPNullableCharStringAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = ThreadNetworkDiagnostics::Attributes::NetworkName::TypeInfo;
@@ -73211,7 +73214,7 @@ using namespace chip::app::Clusters;
             path.mAttributeId = TypeInfo::GetAttributeId();
             TypeInfo::DecodableType value;
             CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-            auto successFn = Callback<CharStringAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableCharStringAttributeCallback>::FromCancelable(success);
             if (err == CHIP_NO_ERROR) {
                 successFn->mCall(successFn->mContext, value);
             }
@@ -73223,12 +73226,13 @@ using namespace chip::app::Clusters;
 
 - (void)readAttributePanIdWithCompletionHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new CHIPInt16uAttributeCallbackBridge(self.callbackQueue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
-        using TypeInfo = ThreadNetworkDiagnostics::Attributes::PanId::TypeInfo;
-        auto successFn = Callback<Int16uAttributeCallback>::FromCancelable(success);
-        auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
-        return self.cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
-    });
+    new CHIPNullableInt16uAttributeCallbackBridge(
+        self.callbackQueue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+            using TypeInfo = ThreadNetworkDiagnostics::Attributes::PanId::TypeInfo;
+            auto successFn = Callback<NullableInt16uAttributeCallback>::FromCancelable(success);
+            auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
+            return self.cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
+        });
 }
 
 - (void)subscribeAttributePanIdWithMinInterval:(NSNumber * _Nonnull)minInterval
@@ -73237,7 +73241,7 @@ using namespace chip::app::Clusters;
                        subscriptionEstablished:(SubscriptionEstablishedHandler _Nullable)subscriptionEstablishedHandler
                                  reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    new CHIPInt16uAttributeCallbackSubscriptionBridge(
+    new CHIPNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
         ^(Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
@@ -73245,11 +73249,11 @@ using namespace chip::app::Clusters;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = ThreadNetworkDiagnostics::Attributes::PanId::TypeInfo;
-            auto successFn = Callback<Int16uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt16uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73261,7 +73265,7 @@ using namespace chip::app::Clusters;
                                        queue:(dispatch_queue_t)queue
                            completionHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new CHIPInt16uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+    new CHIPNullableInt16uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = ThreadNetworkDiagnostics::Attributes::PanId::TypeInfo;
@@ -73270,7 +73274,7 @@ using namespace chip::app::Clusters;
             path.mAttributeId = TypeInfo::GetAttributeId();
             TypeInfo::DecodableType value;
             CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-            auto successFn = Callback<Int16uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt16uAttributeCallback>::FromCancelable(success);
             if (err == CHIP_NO_ERROR) {
                 successFn->mCall(successFn->mContext, value);
             }
@@ -73283,12 +73287,13 @@ using namespace chip::app::Clusters;
 - (void)readAttributeExtendedPanIdWithCompletionHandler:(void (^)(
                                                             NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new CHIPInt64uAttributeCallbackBridge(self.callbackQueue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
-        using TypeInfo = ThreadNetworkDiagnostics::Attributes::ExtendedPanId::TypeInfo;
-        auto successFn = Callback<Int64uAttributeCallback>::FromCancelable(success);
-        auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
-        return self.cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
-    });
+    new CHIPNullableInt64uAttributeCallbackBridge(
+        self.callbackQueue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+            using TypeInfo = ThreadNetworkDiagnostics::Attributes::ExtendedPanId::TypeInfo;
+            auto successFn = Callback<NullableInt64uAttributeCallback>::FromCancelable(success);
+            auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
+            return self.cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
+        });
 }
 
 - (void)subscribeAttributeExtendedPanIdWithMinInterval:(NSNumber * _Nonnull)minInterval
@@ -73298,7 +73303,7 @@ using namespace chip::app::Clusters;
                                          reportHandler:
                                              (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    new CHIPInt64uAttributeCallbackSubscriptionBridge(
+    new CHIPNullableInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
         ^(Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
@@ -73306,11 +73311,11 @@ using namespace chip::app::Clusters;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = ThreadNetworkDiagnostics::Attributes::ExtendedPanId::TypeInfo;
-            auto successFn = Callback<Int64uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt64uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73323,7 +73328,7 @@ using namespace chip::app::Clusters;
                                    completionHandler:
                                        (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new CHIPInt64uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+    new CHIPNullableInt64uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = ThreadNetworkDiagnostics::Attributes::ExtendedPanId::TypeInfo;
@@ -73332,7 +73337,7 @@ using namespace chip::app::Clusters;
             path.mAttributeId = TypeInfo::GetAttributeId();
             TypeInfo::DecodableType value;
             CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-            auto successFn = Callback<Int64uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt64uAttributeCallback>::FromCancelable(success);
             if (err == CHIP_NO_ERROR) {
                 successFn->mCall(successFn->mContext, value);
             }
@@ -73345,10 +73350,10 @@ using namespace chip::app::Clusters;
 - (void)readAttributeMeshLocalPrefixWithCompletionHandler:(void (^)(
                                                               NSData * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new CHIPOctetStringAttributeCallbackBridge(
+    new CHIPNullableOctetStringAttributeCallbackBridge(
         self.callbackQueue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
             using TypeInfo = ThreadNetworkDiagnostics::Attributes::MeshLocalPrefix::TypeInfo;
-            auto successFn = Callback<OctetStringAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableOctetStringAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
         });
@@ -73361,7 +73366,7 @@ using namespace chip::app::Clusters;
                                            reportHandler:
                                                (void (^)(NSData * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    new CHIPOctetStringAttributeCallbackSubscriptionBridge(
+    new CHIPNullableOctetStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
         ^(Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
@@ -73369,11 +73374,11 @@ using namespace chip::app::Clusters;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = ThreadNetworkDiagnostics::Attributes::MeshLocalPrefix::TypeInfo;
-            auto successFn = Callback<OctetStringAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableOctetStringAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPOctetStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableOctetStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73386,7 +73391,7 @@ using namespace chip::app::Clusters;
                                      completionHandler:
                                          (void (^)(NSData * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new CHIPOctetStringAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+    new CHIPNullableOctetStringAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = ThreadNetworkDiagnostics::Attributes::MeshLocalPrefix::TypeInfo;
@@ -73395,7 +73400,7 @@ using namespace chip::app::Clusters;
             path.mAttributeId = TypeInfo::GetAttributeId();
             TypeInfo::DecodableType value;
             CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-            auto successFn = Callback<OctetStringAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableOctetStringAttributeCallback>::FromCancelable(success);
             if (err == CHIP_NO_ERROR) {
                 successFn->mCall(successFn->mContext, value);
             }
