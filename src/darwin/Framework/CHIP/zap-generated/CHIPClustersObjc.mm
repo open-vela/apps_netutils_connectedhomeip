@@ -55486,14 +55486,61 @@ using namespace chip::app::Clusters;
             }
             listFreer.add(listHolder_0);
             for (size_t i_0 = 0; i_0 < params.extensionFieldSets.count; ++i_0) {
-                if (![params.extensionFieldSets[i_0] isKindOfClass:[CHIPScenesClusterSceneExtensionFieldSet class]]) {
+                if (![params.extensionFieldSets[i_0] isKindOfClass:[CHIPScenesClusterExtensionFieldSet class]]) {
                     // Wrong kind of value.
                     return;
                 }
-                auto element_0 = (CHIPScenesClusterSceneExtensionFieldSet *) params.extensionFieldSets[i_0];
+                auto element_0 = (CHIPScenesClusterExtensionFieldSet *) params.extensionFieldSets[i_0];
                 listHolder_0->mList[i_0].clusterId = element_0.clusterId.unsignedIntValue;
-                listHolder_0->mList[i_0].length = element_0.length.unsignedCharValue;
-                listHolder_0->mList[i_0].value = element_0.value.unsignedCharValue;
+                {
+                    using ListType_2 = std::remove_reference_t<decltype(listHolder_0->mList[i_0].attributeValueList)>;
+                    using ListMemberType_2 = ListMemberTypeGetter<ListType_2>::Type;
+                    if (element_0.attributeValueList.count != 0) {
+                        auto * listHolder_2 = new ListHolder<ListMemberType_2>(element_0.attributeValueList.count);
+                        if (listHolder_2 == nullptr || listHolder_2->mList == nullptr) {
+                            return;
+                        }
+                        listFreer.add(listHolder_2);
+                        for (size_t i_2 = 0; i_2 < element_0.attributeValueList.count; ++i_2) {
+                            if (![element_0.attributeValueList[i_2] isKindOfClass:[CHIPScenesClusterAttributeValuePair class]]) {
+                                // Wrong kind of value.
+                                return;
+                            }
+                            auto element_2 = (CHIPScenesClusterAttributeValuePair *) element_0.attributeValueList[i_2];
+                            if (element_2.attributeId != nil) {
+                                auto & definedValue_4 = listHolder_2->mList[i_2].attributeId.Emplace();
+                                definedValue_4 = element_2.attributeId.unsignedIntValue;
+                            }
+                            {
+                                using ListType_4 = std::remove_reference_t<decltype(listHolder_2->mList[i_2].attributeValue)>;
+                                using ListMemberType_4 = ListMemberTypeGetter<ListType_4>::Type;
+                                if (element_2.attributeValue.count != 0) {
+                                    auto * listHolder_4 = new ListHolder<ListMemberType_4>(element_2.attributeValue.count);
+                                    if (listHolder_4 == nullptr || listHolder_4->mList == nullptr) {
+                                        return;
+                                    }
+                                    listFreer.add(listHolder_4);
+                                    for (size_t i_4 = 0; i_4 < element_2.attributeValue.count; ++i_4) {
+                                        if (![element_2.attributeValue[i_4] isKindOfClass:[NSNumber class]]) {
+                                            // Wrong kind of value.
+                                            return;
+                                        }
+                                        auto element_4 = (NSNumber *) element_2.attributeValue[i_4];
+                                        listHolder_4->mList[i_4] = element_4.unsignedCharValue;
+                                    }
+                                    listHolder_2->mList[i_2].attributeValue
+                                        = ListType_4(listHolder_4->mList, element_2.attributeValue.count);
+                                } else {
+                                    listHolder_2->mList[i_2].attributeValue = ListType_4();
+                                }
+                            }
+                        }
+                        listHolder_0->mList[i_0].attributeValueList
+                            = ListType_2(listHolder_2->mList, element_0.attributeValueList.count);
+                    } else {
+                        listHolder_0->mList[i_0].attributeValueList = ListType_2();
+                    }
+                }
             }
             request.extensionFieldSets = ListType_0(listHolder_0->mList, params.extensionFieldSets.count);
         } else {
@@ -55617,7 +55664,15 @@ using namespace chip::app::Clusters;
     }
     request.groupId = params.groupId.unsignedShortValue;
     request.sceneId = params.sceneId.unsignedCharValue;
-    request.transitionTime = params.transitionTime.unsignedShortValue;
+    if (params.transitionTime != nil) {
+        auto & definedValue_0 = request.transitionTime.Emplace();
+        if (params.transitionTime == nil) {
+            definedValue_0.SetNull();
+        } else {
+            auto & nonNullValue_1 = definedValue_0.SetNonNull();
+            nonNullValue_1 = params.transitionTime.unsignedShortValue;
+        }
+    }
 
     new CHIPCommandSuccessCallbackBridge(
         self.callbackQueue,
@@ -55681,14 +55736,61 @@ using namespace chip::app::Clusters;
             }
             listFreer.add(listHolder_0);
             for (size_t i_0 = 0; i_0 < params.extensionFieldSets.count; ++i_0) {
-                if (![params.extensionFieldSets[i_0] isKindOfClass:[CHIPScenesClusterSceneExtensionFieldSet class]]) {
+                if (![params.extensionFieldSets[i_0] isKindOfClass:[CHIPScenesClusterExtensionFieldSet class]]) {
                     // Wrong kind of value.
                     return;
                 }
-                auto element_0 = (CHIPScenesClusterSceneExtensionFieldSet *) params.extensionFieldSets[i_0];
+                auto element_0 = (CHIPScenesClusterExtensionFieldSet *) params.extensionFieldSets[i_0];
                 listHolder_0->mList[i_0].clusterId = element_0.clusterId.unsignedIntValue;
-                listHolder_0->mList[i_0].length = element_0.length.unsignedCharValue;
-                listHolder_0->mList[i_0].value = element_0.value.unsignedCharValue;
+                {
+                    using ListType_2 = std::remove_reference_t<decltype(listHolder_0->mList[i_0].attributeValueList)>;
+                    using ListMemberType_2 = ListMemberTypeGetter<ListType_2>::Type;
+                    if (element_0.attributeValueList.count != 0) {
+                        auto * listHolder_2 = new ListHolder<ListMemberType_2>(element_0.attributeValueList.count);
+                        if (listHolder_2 == nullptr || listHolder_2->mList == nullptr) {
+                            return;
+                        }
+                        listFreer.add(listHolder_2);
+                        for (size_t i_2 = 0; i_2 < element_0.attributeValueList.count; ++i_2) {
+                            if (![element_0.attributeValueList[i_2] isKindOfClass:[CHIPScenesClusterAttributeValuePair class]]) {
+                                // Wrong kind of value.
+                                return;
+                            }
+                            auto element_2 = (CHIPScenesClusterAttributeValuePair *) element_0.attributeValueList[i_2];
+                            if (element_2.attributeId != nil) {
+                                auto & definedValue_4 = listHolder_2->mList[i_2].attributeId.Emplace();
+                                definedValue_4 = element_2.attributeId.unsignedIntValue;
+                            }
+                            {
+                                using ListType_4 = std::remove_reference_t<decltype(listHolder_2->mList[i_2].attributeValue)>;
+                                using ListMemberType_4 = ListMemberTypeGetter<ListType_4>::Type;
+                                if (element_2.attributeValue.count != 0) {
+                                    auto * listHolder_4 = new ListHolder<ListMemberType_4>(element_2.attributeValue.count);
+                                    if (listHolder_4 == nullptr || listHolder_4->mList == nullptr) {
+                                        return;
+                                    }
+                                    listFreer.add(listHolder_4);
+                                    for (size_t i_4 = 0; i_4 < element_2.attributeValue.count; ++i_4) {
+                                        if (![element_2.attributeValue[i_4] isKindOfClass:[NSNumber class]]) {
+                                            // Wrong kind of value.
+                                            return;
+                                        }
+                                        auto element_4 = (NSNumber *) element_2.attributeValue[i_4];
+                                        listHolder_4->mList[i_4] = element_4.unsignedCharValue;
+                                    }
+                                    listHolder_2->mList[i_2].attributeValue
+                                        = ListType_4(listHolder_4->mList, element_2.attributeValue.count);
+                                } else {
+                                    listHolder_2->mList[i_2].attributeValue = ListType_4();
+                                }
+                            }
+                        }
+                        listHolder_0->mList[i_0].attributeValueList
+                            = ListType_2(listHolder_2->mList, element_0.attributeValueList.count);
+                    } else {
+                        listHolder_0->mList[i_0].attributeValueList = ListType_2();
+                    }
+                }
             }
             request.extensionFieldSets = ListType_0(listHolder_0->mList, params.extensionFieldSets.count);
         } else {
@@ -56062,12 +56164,13 @@ using namespace chip::app::Clusters;
 - (void)readAttributeLastConfiguredByWithCompletionHandler:(void (^)(NSNumber * _Nullable value,
                                                                NSError * _Nullable error))completionHandler
 {
-    new CHIPInt64uAttributeCallbackBridge(self.callbackQueue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
-        using TypeInfo = Scenes::Attributes::LastConfiguredBy::TypeInfo;
-        auto successFn = Callback<Int64uAttributeCallback>::FromCancelable(success);
-        auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
-        return self.cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
-    });
+    new CHIPNullableInt64uAttributeCallbackBridge(
+        self.callbackQueue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+            using TypeInfo = Scenes::Attributes::LastConfiguredBy::TypeInfo;
+            auto successFn = Callback<NullableInt64uAttributeCallback>::FromCancelable(success);
+            auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
+            return self.cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
+        });
 }
 
 - (void)subscribeAttributeLastConfiguredByWithMinInterval:(NSNumber * _Nonnull)minInterval
@@ -56077,7 +56180,7 @@ using namespace chip::app::Clusters;
                                             reportHandler:
                                                 (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    new CHIPInt64uAttributeCallbackSubscriptionBridge(
+    new CHIPNullableInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
         ^(Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
@@ -56085,11 +56188,11 @@ using namespace chip::app::Clusters;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = Scenes::Attributes::LastConfiguredBy::TypeInfo;
-            auto successFn = Callback<Int64uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt64uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -56102,7 +56205,7 @@ using namespace chip::app::Clusters;
                                       completionHandler:
                                           (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new CHIPInt64uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+    new CHIPNullableInt64uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = Scenes::Attributes::LastConfiguredBy::TypeInfo;
@@ -56111,7 +56214,7 @@ using namespace chip::app::Clusters;
             path.mAttributeId = TypeInfo::GetAttributeId();
             TypeInfo::DecodableType value;
             CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-            auto successFn = Callback<Int64uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt64uAttributeCallback>::FromCancelable(success);
             if (err == CHIP_NO_ERROR) {
                 successFn->mCall(successFn->mContext, value);
             }
