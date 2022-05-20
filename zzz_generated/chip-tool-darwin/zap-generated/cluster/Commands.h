@@ -65890,11 +65890,32 @@ public:
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
             for (auto & entry_0 : mRequest.extensionFieldSets) {
-                CHIPScenesClusterSceneExtensionFieldSet * newElement_0;
-                newElement_0 = [CHIPScenesClusterSceneExtensionFieldSet new];
+                CHIPScenesClusterExtensionFieldSet * newElement_0;
+                newElement_0 = [CHIPScenesClusterExtensionFieldSet new];
                 newElement_0.clusterId = [NSNumber numberWithUnsignedInt:entry_0.clusterId];
-                newElement_0.length = [NSNumber numberWithUnsignedChar:entry_0.length];
-                newElement_0.value = [NSNumber numberWithUnsignedChar:entry_0.value];
+                { // Scope for our temporary variables
+                    auto * array_2 = [NSMutableArray new];
+                    for (auto & entry_2 : entry_0.attributeValueList) {
+                        CHIPScenesClusterAttributeValuePair * newElement_2;
+                        newElement_2 = [CHIPScenesClusterAttributeValuePair new];
+                        if (entry_2.attributeId.HasValue()) {
+                            newElement_2.attributeId = [NSNumber numberWithUnsignedInt:entry_2.attributeId.Value()];
+                        } else {
+                            newElement_2.attributeId = nil;
+                        }
+                        { // Scope for our temporary variables
+                            auto * array_4 = [NSMutableArray new];
+                            for (auto & entry_4 : entry_2.attributeValue) {
+                                NSNumber * newElement_4;
+                                newElement_4 = [NSNumber numberWithUnsignedChar:entry_4];
+                                [array_4 addObject:newElement_4];
+                            }
+                            newElement_2.attributeValue = array_4;
+                        }
+                        [array_2 addObject:newElement_2];
+                    }
+                    newElement_0.attributeValueList = array_2;
+                }
                 [array_0 addObject:newElement_0];
             }
             params.extensionFieldSets = array_0;
@@ -65920,7 +65941,7 @@ public:
 
 private:
     chip::app::Clusters::Scenes::Commands::AddScene::Type mRequest;
-    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::Scenes::Structs::SceneExtensionFieldSet::Type>>
+    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::Scenes::Structs::ExtensionFieldSet::Type>>
         mComplex_ExtensionFieldSets;
 };
 
@@ -66138,7 +66159,15 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
         params.sceneId = [NSNumber numberWithUnsignedChar:mRequest.sceneId];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        if (mRequest.transitionTime.HasValue()) {
+            if (mRequest.transitionTime.Value().IsNull()) {
+                params.transitionTime = nil;
+            } else {
+                params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime.Value().Value()];
+            }
+        } else {
+            params.transitionTime = nil;
+        }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -66242,11 +66271,32 @@ public:
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
             for (auto & entry_0 : mRequest.extensionFieldSets) {
-                CHIPScenesClusterSceneExtensionFieldSet * newElement_0;
-                newElement_0 = [CHIPScenesClusterSceneExtensionFieldSet new];
+                CHIPScenesClusterExtensionFieldSet * newElement_0;
+                newElement_0 = [CHIPScenesClusterExtensionFieldSet new];
                 newElement_0.clusterId = [NSNumber numberWithUnsignedInt:entry_0.clusterId];
-                newElement_0.length = [NSNumber numberWithUnsignedChar:entry_0.length];
-                newElement_0.value = [NSNumber numberWithUnsignedChar:entry_0.value];
+                { // Scope for our temporary variables
+                    auto * array_2 = [NSMutableArray new];
+                    for (auto & entry_2 : entry_0.attributeValueList) {
+                        CHIPScenesClusterAttributeValuePair * newElement_2;
+                        newElement_2 = [CHIPScenesClusterAttributeValuePair new];
+                        if (entry_2.attributeId.HasValue()) {
+                            newElement_2.attributeId = [NSNumber numberWithUnsignedInt:entry_2.attributeId.Value()];
+                        } else {
+                            newElement_2.attributeId = nil;
+                        }
+                        { // Scope for our temporary variables
+                            auto * array_4 = [NSMutableArray new];
+                            for (auto & entry_4 : entry_2.attributeValue) {
+                                NSNumber * newElement_4;
+                                newElement_4 = [NSNumber numberWithUnsignedChar:entry_4];
+                                [array_4 addObject:newElement_4];
+                            }
+                            newElement_2.attributeValue = array_4;
+                        }
+                        [array_2 addObject:newElement_2];
+                    }
+                    newElement_0.attributeValueList = array_2;
+                }
                 [array_0 addObject:newElement_0];
             }
             params.extensionFieldSets = array_0;
@@ -66273,7 +66323,7 @@ public:
 
 private:
     chip::app::Clusters::Scenes::Commands::EnhancedAddScene::Type mRequest;
-    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::Scenes::Structs::SceneExtensionFieldSet::Type>>
+    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::Scenes::Structs::ExtensionFieldSet::Type>>
         mComplex_ExtensionFieldSets;
 };
 
