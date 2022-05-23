@@ -3257,12 +3257,13 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(5)));
+                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(6)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 65528UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 65529UL));
                 VerifyOrReturn(CheckValue("", actualValue[3], 65531UL));
-                VerifyOrReturn(CheckValue("", actualValue[4], 65533UL));
+                VerifyOrReturn(CheckValue("", actualValue[4], 65532UL));
+                VerifyOrReturn(CheckValue("", actualValue[5], 65533UL));
             }
 
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
@@ -23707,13 +23708,14 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(6)));
+                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(7)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 1UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 65528UL));
                 VerifyOrReturn(CheckValue("", actualValue[3], 65529UL));
                 VerifyOrReturn(CheckValue("", actualValue[4], 65531UL));
-                VerifyOrReturn(CheckValue("", actualValue[5], 65533UL));
+                VerifyOrReturn(CheckValue("", actualValue[5], 65532UL));
+                VerifyOrReturn(CheckValue("", actualValue[6], 65533UL));
             }
 
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
@@ -24695,7 +24697,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(9)));
+                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(10)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 1UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 2UL));
@@ -24704,7 +24706,8 @@ private:
                 VerifyOrReturn(CheckValue("", actualValue[5], 65528UL));
                 VerifyOrReturn(CheckValue("", actualValue[6], 65529UL));
                 VerifyOrReturn(CheckValue("", actualValue[7], 65531UL));
-                VerifyOrReturn(CheckValue("", actualValue[8], 65533UL));
+                VerifyOrReturn(CheckValue("", actualValue[8], 65532UL));
+                VerifyOrReturn(CheckValue("", actualValue[9], 65533UL));
             }
 
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
@@ -28274,11 +28277,12 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(4)));
+                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(5)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 65528UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 65529UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 65531UL));
-                VerifyOrReturn(CheckValue("", actualValue[3], 65533UL));
+                VerifyOrReturn(CheckValue("", actualValue[3], 65532UL));
+                VerifyOrReturn(CheckValue("", actualValue[4], 65533UL));
             }
 
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
@@ -29435,13 +29439,14 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(6)));
+                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(7)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 1UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 65528UL));
                 VerifyOrReturn(CheckValue("", actualValue[3], 65529UL));
                 VerifyOrReturn(CheckValue("", actualValue[4], 65531UL));
-                VerifyOrReturn(CheckValue("", actualValue[5], 65533UL));
+                VerifyOrReturn(CheckValue("", actualValue[5], 65532UL));
+                VerifyOrReturn(CheckValue("", actualValue[6], 65533UL));
             }
 
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
@@ -30587,13 +30592,14 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(6)));
+                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(7)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 1UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 65528UL));
                 VerifyOrReturn(CheckValue("", actualValue[3], 65529UL));
                 VerifyOrReturn(CheckValue("", actualValue[4], 65531UL));
-                VerifyOrReturn(CheckValue("", actualValue[5], 65533UL));
+                VerifyOrReturn(CheckValue("", actualValue[5], 65532UL));
+                VerifyOrReturn(CheckValue("", actualValue[6], 65533UL));
             }
 
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
@@ -30886,7 +30892,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(12)));
+                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(13)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 1UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 2UL));
@@ -30898,7 +30904,8 @@ private:
                 VerifyOrReturn(CheckValue("", actualValue[8], 65528UL));
                 VerifyOrReturn(CheckValue("", actualValue[9], 65529UL));
                 VerifyOrReturn(CheckValue("", actualValue[10], 65531UL));
-                VerifyOrReturn(CheckValue("", actualValue[11], 65533UL));
+                VerifyOrReturn(CheckValue("", actualValue[11], 65532UL));
+                VerifyOrReturn(CheckValue("", actualValue[12], 65533UL));
             }
 
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
@@ -31191,13 +31198,14 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(6)));
+                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(7)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 1UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 65528UL));
                 VerifyOrReturn(CheckValue("", actualValue[3], 65529UL));
                 VerifyOrReturn(CheckValue("", actualValue[4], 65531UL));
-                VerifyOrReturn(CheckValue("", actualValue[5], 65533UL));
+                VerifyOrReturn(CheckValue("", actualValue[5], 65532UL));
+                VerifyOrReturn(CheckValue("", actualValue[6], 65533UL));
             }
 
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
@@ -31455,11 +31463,12 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(4)));
+                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(5)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 65528UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 65529UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 65531UL));
-                VerifyOrReturn(CheckValue("", actualValue[3], 65533UL));
+                VerifyOrReturn(CheckValue("", actualValue[3], 65532UL));
+                VerifyOrReturn(CheckValue("", actualValue[4], 65533UL));
             }
 
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
@@ -89005,7 +89014,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(24)));
+                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(25)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 1UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 2UL));
@@ -89029,7 +89038,8 @@ private:
                 VerifyOrReturn(CheckValue("", actualValue[20], 65528UL));
                 VerifyOrReturn(CheckValue("", actualValue[21], 65529UL));
                 VerifyOrReturn(CheckValue("", actualValue[22], 65531UL));
-                VerifyOrReturn(CheckValue("", actualValue[23], 65533UL));
+                VerifyOrReturn(CheckValue("", actualValue[23], 65532UL));
+                VerifyOrReturn(CheckValue("", actualValue[24], 65533UL));
             }
 
             NextTest();
