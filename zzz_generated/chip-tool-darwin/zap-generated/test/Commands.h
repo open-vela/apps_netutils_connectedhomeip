@@ -66162,7 +66162,7 @@ private:
     CHIP_ERROR TestReadAttributeAudioOutputList_1()
     {
         CHIPDevice * device = GetDevice("alpha");
-        CHIPTestAudioOutput * cluster = [[CHIPTestAudioOutput alloc] initWithDevice:device endpoint:2 queue:mCallbackQueue];
+        CHIPTestAudioOutput * cluster = [[CHIPTestAudioOutput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeOutputListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -66193,7 +66193,7 @@ private:
     CHIP_ERROR TestReadAttributeCurrentAudioOutput_2()
     {
         CHIPDevice * device = GetDevice("alpha");
-        CHIPTestAudioOutput * cluster = [[CHIPTestAudioOutput alloc] initWithDevice:device endpoint:2 queue:mCallbackQueue];
+        CHIPTestAudioOutput * cluster = [[CHIPTestAudioOutput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentOutputWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
@@ -66215,7 +66215,7 @@ private:
     CHIP_ERROR TestSelectOutputCommand_3()
     {
         CHIPDevice * device = GetDevice("alpha");
-        CHIPTestAudioOutput * cluster = [[CHIPTestAudioOutput alloc] initWithDevice:device endpoint:2 queue:mCallbackQueue];
+        CHIPTestAudioOutput * cluster = [[CHIPTestAudioOutput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPAudioOutputClusterSelectOutputParams alloc] init];
@@ -66235,7 +66235,7 @@ private:
     CHIP_ERROR TestRenameOutputCommand_4()
     {
         CHIPDevice * device = GetDevice("alpha");
-        CHIPTestAudioOutput * cluster = [[CHIPTestAudioOutput alloc] initWithDevice:device endpoint:2 queue:mCallbackQueue];
+        CHIPTestAudioOutput * cluster = [[CHIPTestAudioOutput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPAudioOutputClusterRenameOutputParams alloc] init];
@@ -66256,7 +66256,7 @@ private:
     CHIP_ERROR TestReadAttributeAudioOutputList_5()
     {
         CHIPDevice * device = GetDevice("alpha");
-        CHIPTestAudioOutput * cluster = [[CHIPTestAudioOutput alloc] initWithDevice:device endpoint:2 queue:mCallbackQueue];
+        CHIPTestAudioOutput * cluster = [[CHIPTestAudioOutput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeOutputListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
