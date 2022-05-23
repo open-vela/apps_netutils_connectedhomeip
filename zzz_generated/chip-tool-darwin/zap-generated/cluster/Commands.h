@@ -80490,9 +80490,9 @@ public:
 | * AbsMaxHeatSetpointLimit                                           | 0x0004 |
 | * AbsMinCoolSetpointLimit                                           | 0x0005 |
 | * AbsMaxCoolSetpointLimit                                           | 0x0006 |
-| * PiCoolingDemand                                                   | 0x0007 |
-| * PiHeatingDemand                                                   | 0x0008 |
-| * HvacSystemTypeConfiguration                                       | 0x0009 |
+| * PICoolingDemand                                                   | 0x0007 |
+| * PIHeatingDemand                                                   | 0x0008 |
+| * HVACSystemTypeConfiguration                                       | 0x0009 |
 | * LocalTemperatureCalibration                                       | 0x0010 |
 | * OccupiedCoolingSetpoint                                           | 0x0011 |
 | * OccupiedHeatingSetpoint                                           | 0x0012 |
@@ -80518,14 +80518,21 @@ public:
 | * SetpointChangeSource                                              | 0x0030 |
 | * SetpointChangeAmount                                              | 0x0031 |
 | * SetpointChangeSourceTimestamp                                     | 0x0032 |
-| * AcType                                                            | 0x0040 |
-| * AcCapacity                                                        | 0x0041 |
-| * AcRefrigerantType                                                 | 0x0042 |
-| * AcCompressorType                                                  | 0x0043 |
-| * AcErrorCode                                                       | 0x0044 |
-| * AcLouverPosition                                                  | 0x0045 |
-| * AcCoilTemperature                                                 | 0x0046 |
-| * AcCapacityFormat                                                  | 0x0047 |
+| * OccupiedSetback                                                   | 0x0034 |
+| * OccupiedSetbackMin                                                | 0x0035 |
+| * OccupiedSetbackMax                                                | 0x0036 |
+| * UnoccupiedSetback                                                 | 0x0037 |
+| * UnoccupiedSetbackMin                                              | 0x0038 |
+| * UnoccupiedSetbackMax                                              | 0x0039 |
+| * EmergencyHeatDelta                                                | 0x003A |
+| * ACType                                                            | 0x0040 |
+| * ACCapacity                                                        | 0x0041 |
+| * ACRefrigerantType                                                 | 0x0042 |
+| * ACCompressorType                                                  | 0x0043 |
+| * ACErrorCode                                                       | 0x0044 |
+| * ACLouverPosition                                                  | 0x0045 |
+| * ACCoilTemperature                                                 | 0x0046 |
+| * ACCapacityformat                                                  | 0x0047 |
 | * GeneratedCommandList                                              | 0xFFF8 |
 | * AcceptedCommandList                                               | 0xFFF9 |
 | * AttributeList                                                     | 0xFFFB |
@@ -80588,12 +80595,12 @@ class ThermostatSetWeeklySchedule : public ClusterCommand {
 public:
     ThermostatSetWeeklySchedule()
         : ClusterCommand("set-weekly-schedule")
-        , mComplex_Payload(&mRequest.payload)
+        , mComplex_Transitions(&mRequest.transitions)
     {
         AddArgument("NumberOfTransitionsForSequence", 0, UINT8_MAX, &mRequest.numberOfTransitionsForSequence);
         AddArgument("DayOfWeekForSequence", 0, UINT8_MAX, &mRequest.dayOfWeekForSequence);
         AddArgument("ModeForSequence", 0, UINT8_MAX, &mRequest.modeForSequence);
-        AddArgument("Payload", &mComplex_Payload);
+        AddArgument("Transitions", &mComplex_Transitions);
         ClusterCommand::AddArguments();
     }
 
@@ -80611,12 +80618,23 @@ public:
         params.modeForSequence = [NSNumber numberWithUnsignedChar:mRequest.modeForSequence.Raw()];
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
-            for (auto & entry_0 : mRequest.payload) {
-                NSNumber * newElement_0;
-                newElement_0 = [NSNumber numberWithUnsignedChar:entry_0];
+            for (auto & entry_0 : mRequest.transitions) {
+                CHIPThermostatClusterThermostatScheduleTransition * newElement_0;
+                newElement_0 = [CHIPThermostatClusterThermostatScheduleTransition new];
+                newElement_0.transitionTime = [NSNumber numberWithUnsignedShort:entry_0.transitionTime];
+                if (entry_0.heatSetpoint.IsNull()) {
+                    newElement_0.heatSetpoint = nil;
+                } else {
+                    newElement_0.heatSetpoint = [NSNumber numberWithShort:entry_0.heatSetpoint.Value()];
+                }
+                if (entry_0.coolSetpoint.IsNull()) {
+                    newElement_0.coolSetpoint = nil;
+                } else {
+                    newElement_0.coolSetpoint = [NSNumber numberWithShort:entry_0.coolSetpoint.Value()];
+                }
                 [array_0 addObject:newElement_0];
             }
-            params.payload = array_0;
+            params.transitions = array_0;
         }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
@@ -80638,7 +80656,9 @@ public:
 
 private:
     chip::app::Clusters::Thermostat::Commands::SetWeeklySchedule::Type mRequest;
-    TypedComplexArgument<chip::app::DataModel::List<const uint8_t>> mComplex_Payload;
+    TypedComplexArgument<
+        chip::app::DataModel::List<const chip::app::Clusters::Thermostat::Structs::ThermostatScheduleTransition::Type>>
+        mComplex_Transitions;
 };
 
 /*
@@ -81249,16 +81269,16 @@ public:
 };
 
 /*
- * Attribute PiCoolingDemand
+ * Attribute PICoolingDemand
  */
-class ReadThermostatPiCoolingDemand : public ReadAttribute {
+class ReadThermostatPICoolingDemand : public ReadAttribute {
 public:
-    ReadThermostatPiCoolingDemand()
-        : ReadAttribute("pi-cooling-demand")
+    ReadThermostatPICoolingDemand()
+        : ReadAttribute("picooling-demand")
     {
     }
 
-    ~ReadThermostatPiCoolingDemand() {}
+    ~ReadThermostatPICoolingDemand() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -81266,10 +81286,10 @@ public:
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
-        [cluster readAttributePiCoolingDemandWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"Thermostat.PiCoolingDemand response %@", [value description]);
+        [cluster readAttributePICoolingDemandWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Thermostat.PICoolingDemand response %@", [value description]);
             if (error != nil) {
-                LogNSError("Thermostat PiCoolingDemand read Error", error);
+                LogNSError("Thermostat PICoolingDemand read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -81277,14 +81297,14 @@ public:
     }
 };
 
-class SubscribeAttributeThermostatPiCoolingDemand : public SubscribeAttribute {
+class SubscribeAttributeThermostatPICoolingDemand : public SubscribeAttribute {
 public:
-    SubscribeAttributeThermostatPiCoolingDemand()
-        : SubscribeAttribute("pi-cooling-demand")
+    SubscribeAttributeThermostatPICoolingDemand()
+        : SubscribeAttribute("picooling-demand")
     {
     }
 
-    ~SubscribeAttributeThermostatPiCoolingDemand() {}
+    ~SubscribeAttributeThermostatPICoolingDemand() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -81295,12 +81315,12 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributePiCoolingDemandWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributePICoolingDemandWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
                                                       maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
                                                            params:params
                                           subscriptionEstablished:nullptr
                                                     reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                                                        NSLog(@"Thermostat.PiCoolingDemand response %@", [value description]);
+                                                        NSLog(@"Thermostat.PICoolingDemand response %@", [value description]);
                                                         if (error || !mWait) {
                                                             SetCommandExitStatus(error);
                                                         }
@@ -81316,16 +81336,16 @@ public:
 };
 
 /*
- * Attribute PiHeatingDemand
+ * Attribute PIHeatingDemand
  */
-class ReadThermostatPiHeatingDemand : public ReadAttribute {
+class ReadThermostatPIHeatingDemand : public ReadAttribute {
 public:
-    ReadThermostatPiHeatingDemand()
-        : ReadAttribute("pi-heating-demand")
+    ReadThermostatPIHeatingDemand()
+        : ReadAttribute("piheating-demand")
     {
     }
 
-    ~ReadThermostatPiHeatingDemand() {}
+    ~ReadThermostatPIHeatingDemand() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -81333,10 +81353,10 @@ public:
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
-        [cluster readAttributePiHeatingDemandWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"Thermostat.PiHeatingDemand response %@", [value description]);
+        [cluster readAttributePIHeatingDemandWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Thermostat.PIHeatingDemand response %@", [value description]);
             if (error != nil) {
-                LogNSError("Thermostat PiHeatingDemand read Error", error);
+                LogNSError("Thermostat PIHeatingDemand read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -81344,14 +81364,14 @@ public:
     }
 };
 
-class SubscribeAttributeThermostatPiHeatingDemand : public SubscribeAttribute {
+class SubscribeAttributeThermostatPIHeatingDemand : public SubscribeAttribute {
 public:
-    SubscribeAttributeThermostatPiHeatingDemand()
-        : SubscribeAttribute("pi-heating-demand")
+    SubscribeAttributeThermostatPIHeatingDemand()
+        : SubscribeAttribute("piheating-demand")
     {
     }
 
-    ~SubscribeAttributeThermostatPiHeatingDemand() {}
+    ~SubscribeAttributeThermostatPIHeatingDemand() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -81362,12 +81382,12 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributePiHeatingDemandWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributePIHeatingDemandWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
                                                       maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
                                                            params:params
                                           subscriptionEstablished:nullptr
                                                     reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                                                        NSLog(@"Thermostat.PiHeatingDemand response %@", [value description]);
+                                                        NSLog(@"Thermostat.PIHeatingDemand response %@", [value description]);
                                                         if (error || !mWait) {
                                                             SetCommandExitStatus(error);
                                                         }
@@ -81383,16 +81403,16 @@ public:
 };
 
 /*
- * Attribute HvacSystemTypeConfiguration
+ * Attribute HVACSystemTypeConfiguration
  */
-class ReadThermostatHvacSystemTypeConfiguration : public ReadAttribute {
+class ReadThermostatHVACSystemTypeConfiguration : public ReadAttribute {
 public:
-    ReadThermostatHvacSystemTypeConfiguration()
-        : ReadAttribute("hvac-system-type-configuration")
+    ReadThermostatHVACSystemTypeConfiguration()
+        : ReadAttribute("hvacsystem-type-configuration")
     {
     }
 
-    ~ReadThermostatHvacSystemTypeConfiguration() {}
+    ~ReadThermostatHVACSystemTypeConfiguration() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -81401,10 +81421,10 @@ public:
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         [cluster
-            readAttributeHvacSystemTypeConfigurationWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"Thermostat.HvacSystemTypeConfiguration response %@", [value description]);
+            readAttributeHVACSystemTypeConfigurationWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"Thermostat.HVACSystemTypeConfiguration response %@", [value description]);
                 if (error != nil) {
-                    LogNSError("Thermostat HvacSystemTypeConfiguration read Error", error);
+                    LogNSError("Thermostat HVACSystemTypeConfiguration read Error", error);
                 }
                 SetCommandExitStatus(error);
             }];
@@ -81412,17 +81432,17 @@ public:
     }
 };
 
-class WriteThermostatHvacSystemTypeConfiguration : public WriteAttribute {
+class WriteThermostatHVACSystemTypeConfiguration : public WriteAttribute {
 public:
-    WriteThermostatHvacSystemTypeConfiguration()
-        : WriteAttribute("hvac-system-type-configuration")
+    WriteThermostatHVACSystemTypeConfiguration()
+        : WriteAttribute("hvacsystem-type-configuration")
     {
-        AddArgument("attr-name", "hvac-system-type-configuration");
+        AddArgument("attr-name", "hvacsystem-type-configuration");
         AddArgument("attr-value", 0, UINT8_MAX, &mValue);
         WriteAttribute::AddArguments();
     }
 
-    ~WriteThermostatHvacSystemTypeConfiguration() {}
+    ~WriteThermostatHVACSystemTypeConfiguration() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -81435,11 +81455,11 @@ public:
         params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
-        [cluster writeAttributeHvacSystemTypeConfigurationWithValue:value
+        [cluster writeAttributeHVACSystemTypeConfigurationWithValue:value
                                                              params:params
                                                   completionHandler:^(NSError * _Nullable error) {
                                                       if (error != nil) {
-                                                          LogNSError("Thermostat HvacSystemTypeConfiguration write Error", error);
+                                                          LogNSError("Thermostat HVACSystemTypeConfiguration write Error", error);
                                                       }
                                                       SetCommandExitStatus(error);
                                                   }];
@@ -81450,14 +81470,14 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeThermostatHvacSystemTypeConfiguration : public SubscribeAttribute {
+class SubscribeAttributeThermostatHVACSystemTypeConfiguration : public SubscribeAttribute {
 public:
-    SubscribeAttributeThermostatHvacSystemTypeConfiguration()
-        : SubscribeAttribute("hvac-system-type-configuration")
+    SubscribeAttributeThermostatHVACSystemTypeConfiguration()
+        : SubscribeAttribute("hvacsystem-type-configuration")
     {
     }
 
-    ~SubscribeAttributeThermostatHvacSystemTypeConfiguration() {}
+    ~SubscribeAttributeThermostatHVACSystemTypeConfiguration() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -81469,12 +81489,12 @@ public:
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
         [cluster
-            subscribeAttributeHvacSystemTypeConfigurationWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            subscribeAttributeHVACSystemTypeConfigurationWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
                                                              maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
                                                                   params:params
                                                  subscriptionEstablished:nullptr
                                                            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                                                               NSLog(@"Thermostat.HvacSystemTypeConfiguration response %@",
+                                                               NSLog(@"Thermostat.HVACSystemTypeConfiguration response %@",
                                                                    [value description]);
                                                                if (error || !mWait) {
                                                                    SetCommandExitStatus(error);
@@ -83376,7 +83396,7 @@ public:
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
-        NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
+        NSNumber * _Nullable value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster writeAttributeTemperatureSetpointHoldDurationWithValue:value
                                                                  params:params
@@ -83821,27 +83841,27 @@ public:
 };
 
 /*
- * Attribute AcType
+ * Attribute OccupiedSetback
  */
-class ReadThermostatAcType : public ReadAttribute {
+class ReadThermostatOccupiedSetback : public ReadAttribute {
 public:
-    ReadThermostatAcType()
-        : ReadAttribute("ac-type")
+    ReadThermostatOccupiedSetback()
+        : ReadAttribute("occupied-setback")
     {
     }
 
-    ~ReadThermostatAcType() {}
+    ~ReadThermostatOccupiedSetback() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000201) ReadAttribute (0x00000040) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0x00000201) ReadAttribute (0x00000034) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
-        [cluster readAttributeAcTypeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"Thermostat.AcType response %@", [value description]);
+        [cluster readAttributeOccupiedSetbackWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Thermostat.OccupiedSetback response %@", [value description]);
             if (error != nil) {
-                LogNSError("Thermostat AcType read Error", error);
+                LogNSError("Thermostat OccupiedSetback read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -83849,17 +83869,602 @@ public:
     }
 };
 
-class WriteThermostatAcType : public WriteAttribute {
+class WriteThermostatOccupiedSetback : public WriteAttribute {
 public:
-    WriteThermostatAcType()
-        : WriteAttribute("ac-type")
+    WriteThermostatOccupiedSetback()
+        : WriteAttribute("occupied-setback")
     {
-        AddArgument("attr-name", "ac-type");
+        AddArgument("attr-name", "occupied-setback");
         AddArgument("attr-value", 0, UINT8_MAX, &mValue);
         WriteAttribute::AddArguments();
     }
 
-    ~WriteThermostatAcType() {}
+    ~WriteThermostatOccupiedSetback() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000201) WriteAttribute (0x00000034) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
+        params.timedWriteTimeoutMs
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
+        NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
+
+        [cluster writeAttributeOccupiedSetbackWithValue:value
+                                                 params:params
+                                      completionHandler:^(NSError * _Nullable error) {
+                                          if (error != nil) {
+                                              LogNSError("Thermostat OccupiedSetback write Error", error);
+                                          }
+                                          SetCommandExitStatus(error);
+                                      }];
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    uint8_t mValue;
+};
+
+class SubscribeAttributeThermostatOccupiedSetback : public SubscribeAttribute {
+public:
+    SubscribeAttributeThermostatOccupiedSetback()
+        : SubscribeAttribute("occupied-setback")
+    {
+    }
+
+    ~SubscribeAttributeThermostatOccupiedSetback() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000201) ReportAttribute (0x00000034) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeOccupiedSetbackWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+                                                      maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+                                                           params:params
+                                          subscriptionEstablished:nullptr
+                                                    reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                                                        NSLog(@"Thermostat.OccupiedSetback response %@", [value description]);
+                                                        if (error || !mWait) {
+                                                            SetCommandExitStatus(error);
+                                                        }
+                                                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mWait ? UINT16_MAX : 10);
+    }
+};
+
+/*
+ * Attribute OccupiedSetbackMin
+ */
+class ReadThermostatOccupiedSetbackMin : public ReadAttribute {
+public:
+    ReadThermostatOccupiedSetbackMin()
+        : ReadAttribute("occupied-setback-min")
+    {
+    }
+
+    ~ReadThermostatOccupiedSetbackMin() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000201) ReadAttribute (0x00000035) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        [cluster readAttributeOccupiedSetbackMinWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Thermostat.OccupiedSetbackMin response %@", [value description]);
+            if (error != nil) {
+                LogNSError("Thermostat OccupiedSetbackMin read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeThermostatOccupiedSetbackMin : public SubscribeAttribute {
+public:
+    SubscribeAttributeThermostatOccupiedSetbackMin()
+        : SubscribeAttribute("occupied-setback-min")
+    {
+    }
+
+    ~SubscribeAttributeThermostatOccupiedSetbackMin() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000201) ReportAttribute (0x00000035) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeOccupiedSetbackMinWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+                                                         maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+                                                              params:params
+                                             subscriptionEstablished:nullptr
+                                                       reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                                                           NSLog(@"Thermostat.OccupiedSetbackMin response %@", [value description]);
+                                                           if (error || !mWait) {
+                                                               SetCommandExitStatus(error);
+                                                           }
+                                                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mWait ? UINT16_MAX : 10);
+    }
+};
+
+/*
+ * Attribute OccupiedSetbackMax
+ */
+class ReadThermostatOccupiedSetbackMax : public ReadAttribute {
+public:
+    ReadThermostatOccupiedSetbackMax()
+        : ReadAttribute("occupied-setback-max")
+    {
+    }
+
+    ~ReadThermostatOccupiedSetbackMax() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000201) ReadAttribute (0x00000036) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        [cluster readAttributeOccupiedSetbackMaxWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Thermostat.OccupiedSetbackMax response %@", [value description]);
+            if (error != nil) {
+                LogNSError("Thermostat OccupiedSetbackMax read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeThermostatOccupiedSetbackMax : public SubscribeAttribute {
+public:
+    SubscribeAttributeThermostatOccupiedSetbackMax()
+        : SubscribeAttribute("occupied-setback-max")
+    {
+    }
+
+    ~SubscribeAttributeThermostatOccupiedSetbackMax() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000201) ReportAttribute (0x00000036) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeOccupiedSetbackMaxWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+                                                         maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+                                                              params:params
+                                             subscriptionEstablished:nullptr
+                                                       reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                                                           NSLog(@"Thermostat.OccupiedSetbackMax response %@", [value description]);
+                                                           if (error || !mWait) {
+                                                               SetCommandExitStatus(error);
+                                                           }
+                                                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mWait ? UINT16_MAX : 10);
+    }
+};
+
+/*
+ * Attribute UnoccupiedSetback
+ */
+class ReadThermostatUnoccupiedSetback : public ReadAttribute {
+public:
+    ReadThermostatUnoccupiedSetback()
+        : ReadAttribute("unoccupied-setback")
+    {
+    }
+
+    ~ReadThermostatUnoccupiedSetback() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000201) ReadAttribute (0x00000037) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        [cluster readAttributeUnoccupiedSetbackWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Thermostat.UnoccupiedSetback response %@", [value description]);
+            if (error != nil) {
+                LogNSError("Thermostat UnoccupiedSetback read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class WriteThermostatUnoccupiedSetback : public WriteAttribute {
+public:
+    WriteThermostatUnoccupiedSetback()
+        : WriteAttribute("unoccupied-setback")
+    {
+        AddArgument("attr-name", "unoccupied-setback");
+        AddArgument("attr-value", 0, UINT8_MAX, &mValue);
+        WriteAttribute::AddArguments();
+    }
+
+    ~WriteThermostatUnoccupiedSetback() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000201) WriteAttribute (0x00000037) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
+        params.timedWriteTimeoutMs
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
+        NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
+
+        [cluster writeAttributeUnoccupiedSetbackWithValue:value
+                                                   params:params
+                                        completionHandler:^(NSError * _Nullable error) {
+                                            if (error != nil) {
+                                                LogNSError("Thermostat UnoccupiedSetback write Error", error);
+                                            }
+                                            SetCommandExitStatus(error);
+                                        }];
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    uint8_t mValue;
+};
+
+class SubscribeAttributeThermostatUnoccupiedSetback : public SubscribeAttribute {
+public:
+    SubscribeAttributeThermostatUnoccupiedSetback()
+        : SubscribeAttribute("unoccupied-setback")
+    {
+    }
+
+    ~SubscribeAttributeThermostatUnoccupiedSetback() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000201) ReportAttribute (0x00000037) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeUnoccupiedSetbackWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+                                                        maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+                                                             params:params
+                                            subscriptionEstablished:nullptr
+                                                      reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                                                          NSLog(@"Thermostat.UnoccupiedSetback response %@", [value description]);
+                                                          if (error || !mWait) {
+                                                              SetCommandExitStatus(error);
+                                                          }
+                                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mWait ? UINT16_MAX : 10);
+    }
+};
+
+/*
+ * Attribute UnoccupiedSetbackMin
+ */
+class ReadThermostatUnoccupiedSetbackMin : public ReadAttribute {
+public:
+    ReadThermostatUnoccupiedSetbackMin()
+        : ReadAttribute("unoccupied-setback-min")
+    {
+    }
+
+    ~ReadThermostatUnoccupiedSetbackMin() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000201) ReadAttribute (0x00000038) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        [cluster readAttributeUnoccupiedSetbackMinWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Thermostat.UnoccupiedSetbackMin response %@", [value description]);
+            if (error != nil) {
+                LogNSError("Thermostat UnoccupiedSetbackMin read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeThermostatUnoccupiedSetbackMin : public SubscribeAttribute {
+public:
+    SubscribeAttributeThermostatUnoccupiedSetbackMin()
+        : SubscribeAttribute("unoccupied-setback-min")
+    {
+    }
+
+    ~SubscribeAttributeThermostatUnoccupiedSetbackMin() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000201) ReportAttribute (0x00000038) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster
+            subscribeAttributeUnoccupiedSetbackMinWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+                                                      maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+                                                           params:params
+                                          subscriptionEstablished:nullptr
+                                                    reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                                                        NSLog(@"Thermostat.UnoccupiedSetbackMin response %@", [value description]);
+                                                        if (error || !mWait) {
+                                                            SetCommandExitStatus(error);
+                                                        }
+                                                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mWait ? UINT16_MAX : 10);
+    }
+};
+
+/*
+ * Attribute UnoccupiedSetbackMax
+ */
+class ReadThermostatUnoccupiedSetbackMax : public ReadAttribute {
+public:
+    ReadThermostatUnoccupiedSetbackMax()
+        : ReadAttribute("unoccupied-setback-max")
+    {
+    }
+
+    ~ReadThermostatUnoccupiedSetbackMax() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000201) ReadAttribute (0x00000039) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        [cluster readAttributeUnoccupiedSetbackMaxWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Thermostat.UnoccupiedSetbackMax response %@", [value description]);
+            if (error != nil) {
+                LogNSError("Thermostat UnoccupiedSetbackMax read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeThermostatUnoccupiedSetbackMax : public SubscribeAttribute {
+public:
+    SubscribeAttributeThermostatUnoccupiedSetbackMax()
+        : SubscribeAttribute("unoccupied-setback-max")
+    {
+    }
+
+    ~SubscribeAttributeThermostatUnoccupiedSetbackMax() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000201) ReportAttribute (0x00000039) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster
+            subscribeAttributeUnoccupiedSetbackMaxWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+                                                      maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+                                                           params:params
+                                          subscriptionEstablished:nullptr
+                                                    reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                                                        NSLog(@"Thermostat.UnoccupiedSetbackMax response %@", [value description]);
+                                                        if (error || !mWait) {
+                                                            SetCommandExitStatus(error);
+                                                        }
+                                                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mWait ? UINT16_MAX : 10);
+    }
+};
+
+/*
+ * Attribute EmergencyHeatDelta
+ */
+class ReadThermostatEmergencyHeatDelta : public ReadAttribute {
+public:
+    ReadThermostatEmergencyHeatDelta()
+        : ReadAttribute("emergency-heat-delta")
+    {
+    }
+
+    ~ReadThermostatEmergencyHeatDelta() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000201) ReadAttribute (0x0000003A) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        [cluster readAttributeEmergencyHeatDeltaWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Thermostat.EmergencyHeatDelta response %@", [value description]);
+            if (error != nil) {
+                LogNSError("Thermostat EmergencyHeatDelta read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class WriteThermostatEmergencyHeatDelta : public WriteAttribute {
+public:
+    WriteThermostatEmergencyHeatDelta()
+        : WriteAttribute("emergency-heat-delta")
+    {
+        AddArgument("attr-name", "emergency-heat-delta");
+        AddArgument("attr-value", 0, UINT8_MAX, &mValue);
+        WriteAttribute::AddArguments();
+    }
+
+    ~WriteThermostatEmergencyHeatDelta() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000201) WriteAttribute (0x0000003A) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
+        params.timedWriteTimeoutMs
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
+        NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
+
+        [cluster writeAttributeEmergencyHeatDeltaWithValue:value
+                                                    params:params
+                                         completionHandler:^(NSError * _Nullable error) {
+                                             if (error != nil) {
+                                                 LogNSError("Thermostat EmergencyHeatDelta write Error", error);
+                                             }
+                                             SetCommandExitStatus(error);
+                                         }];
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    uint8_t mValue;
+};
+
+class SubscribeAttributeThermostatEmergencyHeatDelta : public SubscribeAttribute {
+public:
+    SubscribeAttributeThermostatEmergencyHeatDelta()
+        : SubscribeAttribute("emergency-heat-delta")
+    {
+    }
+
+    ~SubscribeAttributeThermostatEmergencyHeatDelta() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000201) ReportAttribute (0x0000003A) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeEmergencyHeatDeltaWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+                                                         maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+                                                              params:params
+                                             subscriptionEstablished:nullptr
+                                                       reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                                                           NSLog(@"Thermostat.EmergencyHeatDelta response %@", [value description]);
+                                                           if (error || !mWait) {
+                                                               SetCommandExitStatus(error);
+                                                           }
+                                                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mWait ? UINT16_MAX : 10);
+    }
+};
+
+/*
+ * Attribute ACType
+ */
+class ReadThermostatACType : public ReadAttribute {
+public:
+    ReadThermostatACType()
+        : ReadAttribute("actype")
+    {
+    }
+
+    ~ReadThermostatACType() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000201) ReadAttribute (0x00000040) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        [cluster readAttributeACTypeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Thermostat.ACType response %@", [value description]);
+            if (error != nil) {
+                LogNSError("Thermostat ACType read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class WriteThermostatACType : public WriteAttribute {
+public:
+    WriteThermostatACType()
+        : WriteAttribute("actype")
+    {
+        AddArgument("attr-name", "actype");
+        AddArgument("attr-value", 0, UINT8_MAX, &mValue);
+        WriteAttribute::AddArguments();
+    }
+
+    ~WriteThermostatACType() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -83872,11 +84477,11 @@ public:
         params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
-        [cluster writeAttributeAcTypeWithValue:value
+        [cluster writeAttributeACTypeWithValue:value
                                         params:params
                              completionHandler:^(NSError * _Nullable error) {
                                  if (error != nil) {
-                                     LogNSError("Thermostat AcType write Error", error);
+                                     LogNSError("Thermostat ACType write Error", error);
                                  }
                                  SetCommandExitStatus(error);
                              }];
@@ -83887,14 +84492,14 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeThermostatAcType : public SubscribeAttribute {
+class SubscribeAttributeThermostatACType : public SubscribeAttribute {
 public:
-    SubscribeAttributeThermostatAcType()
-        : SubscribeAttribute("ac-type")
+    SubscribeAttributeThermostatACType()
+        : SubscribeAttribute("actype")
     {
     }
 
-    ~SubscribeAttributeThermostatAcType() {}
+    ~SubscribeAttributeThermostatACType() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -83905,12 +84510,12 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeAcTypeWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeACTypeWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
                                              maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
                                                   params:params
                                  subscriptionEstablished:nullptr
                                            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                                               NSLog(@"Thermostat.AcType response %@", [value description]);
+                                               NSLog(@"Thermostat.ACType response %@", [value description]);
                                                if (error || !mWait) {
                                                    SetCommandExitStatus(error);
                                                }
@@ -83926,16 +84531,16 @@ public:
 };
 
 /*
- * Attribute AcCapacity
+ * Attribute ACCapacity
  */
-class ReadThermostatAcCapacity : public ReadAttribute {
+class ReadThermostatACCapacity : public ReadAttribute {
 public:
-    ReadThermostatAcCapacity()
-        : ReadAttribute("ac-capacity")
+    ReadThermostatACCapacity()
+        : ReadAttribute("accapacity")
     {
     }
 
-    ~ReadThermostatAcCapacity() {}
+    ~ReadThermostatACCapacity() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -83943,10 +84548,10 @@ public:
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
-        [cluster readAttributeAcCapacityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"Thermostat.AcCapacity response %@", [value description]);
+        [cluster readAttributeACCapacityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Thermostat.ACCapacity response %@", [value description]);
             if (error != nil) {
-                LogNSError("Thermostat AcCapacity read Error", error);
+                LogNSError("Thermostat ACCapacity read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -83954,17 +84559,17 @@ public:
     }
 };
 
-class WriteThermostatAcCapacity : public WriteAttribute {
+class WriteThermostatACCapacity : public WriteAttribute {
 public:
-    WriteThermostatAcCapacity()
-        : WriteAttribute("ac-capacity")
+    WriteThermostatACCapacity()
+        : WriteAttribute("accapacity")
     {
-        AddArgument("attr-name", "ac-capacity");
+        AddArgument("attr-name", "accapacity");
         AddArgument("attr-value", 0, UINT16_MAX, &mValue);
         WriteAttribute::AddArguments();
     }
 
-    ~WriteThermostatAcCapacity() {}
+    ~WriteThermostatACCapacity() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -83977,11 +84582,11 @@ public:
         params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
 
-        [cluster writeAttributeAcCapacityWithValue:value
+        [cluster writeAttributeACCapacityWithValue:value
                                             params:params
                                  completionHandler:^(NSError * _Nullable error) {
                                      if (error != nil) {
-                                         LogNSError("Thermostat AcCapacity write Error", error);
+                                         LogNSError("Thermostat ACCapacity write Error", error);
                                      }
                                      SetCommandExitStatus(error);
                                  }];
@@ -83992,14 +84597,14 @@ private:
     uint16_t mValue;
 };
 
-class SubscribeAttributeThermostatAcCapacity : public SubscribeAttribute {
+class SubscribeAttributeThermostatACCapacity : public SubscribeAttribute {
 public:
-    SubscribeAttributeThermostatAcCapacity()
-        : SubscribeAttribute("ac-capacity")
+    SubscribeAttributeThermostatACCapacity()
+        : SubscribeAttribute("accapacity")
     {
     }
 
-    ~SubscribeAttributeThermostatAcCapacity() {}
+    ~SubscribeAttributeThermostatACCapacity() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -84010,12 +84615,12 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeAcCapacityWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeACCapacityWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
                                                  maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
                                                       params:params
                                      subscriptionEstablished:nullptr
                                                reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                                                   NSLog(@"Thermostat.AcCapacity response %@", [value description]);
+                                                   NSLog(@"Thermostat.ACCapacity response %@", [value description]);
                                                    if (error || !mWait) {
                                                        SetCommandExitStatus(error);
                                                    }
@@ -84031,16 +84636,16 @@ public:
 };
 
 /*
- * Attribute AcRefrigerantType
+ * Attribute ACRefrigerantType
  */
-class ReadThermostatAcRefrigerantType : public ReadAttribute {
+class ReadThermostatACRefrigerantType : public ReadAttribute {
 public:
-    ReadThermostatAcRefrigerantType()
-        : ReadAttribute("ac-refrigerant-type")
+    ReadThermostatACRefrigerantType()
+        : ReadAttribute("acrefrigerant-type")
     {
     }
 
-    ~ReadThermostatAcRefrigerantType() {}
+    ~ReadThermostatACRefrigerantType() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -84048,10 +84653,10 @@ public:
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
-        [cluster readAttributeAcRefrigerantTypeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"Thermostat.AcRefrigerantType response %@", [value description]);
+        [cluster readAttributeACRefrigerantTypeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Thermostat.ACRefrigerantType response %@", [value description]);
             if (error != nil) {
-                LogNSError("Thermostat AcRefrigerantType read Error", error);
+                LogNSError("Thermostat ACRefrigerantType read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -84059,17 +84664,17 @@ public:
     }
 };
 
-class WriteThermostatAcRefrigerantType : public WriteAttribute {
+class WriteThermostatACRefrigerantType : public WriteAttribute {
 public:
-    WriteThermostatAcRefrigerantType()
-        : WriteAttribute("ac-refrigerant-type")
+    WriteThermostatACRefrigerantType()
+        : WriteAttribute("acrefrigerant-type")
     {
-        AddArgument("attr-name", "ac-refrigerant-type");
+        AddArgument("attr-name", "acrefrigerant-type");
         AddArgument("attr-value", 0, UINT8_MAX, &mValue);
         WriteAttribute::AddArguments();
     }
 
-    ~WriteThermostatAcRefrigerantType() {}
+    ~WriteThermostatACRefrigerantType() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -84082,11 +84687,11 @@ public:
         params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
-        [cluster writeAttributeAcRefrigerantTypeWithValue:value
+        [cluster writeAttributeACRefrigerantTypeWithValue:value
                                                    params:params
                                         completionHandler:^(NSError * _Nullable error) {
                                             if (error != nil) {
-                                                LogNSError("Thermostat AcRefrigerantType write Error", error);
+                                                LogNSError("Thermostat ACRefrigerantType write Error", error);
                                             }
                                             SetCommandExitStatus(error);
                                         }];
@@ -84097,14 +84702,14 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeThermostatAcRefrigerantType : public SubscribeAttribute {
+class SubscribeAttributeThermostatACRefrigerantType : public SubscribeAttribute {
 public:
-    SubscribeAttributeThermostatAcRefrigerantType()
-        : SubscribeAttribute("ac-refrigerant-type")
+    SubscribeAttributeThermostatACRefrigerantType()
+        : SubscribeAttribute("acrefrigerant-type")
     {
     }
 
-    ~SubscribeAttributeThermostatAcRefrigerantType() {}
+    ~SubscribeAttributeThermostatACRefrigerantType() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -84115,12 +84720,12 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeAcRefrigerantTypeWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeACRefrigerantTypeWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
                                                         maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
                                                              params:params
                                             subscriptionEstablished:nullptr
                                                       reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                                                          NSLog(@"Thermostat.AcRefrigerantType response %@", [value description]);
+                                                          NSLog(@"Thermostat.ACRefrigerantType response %@", [value description]);
                                                           if (error || !mWait) {
                                                               SetCommandExitStatus(error);
                                                           }
@@ -84136,16 +84741,16 @@ public:
 };
 
 /*
- * Attribute AcCompressorType
+ * Attribute ACCompressorType
  */
-class ReadThermostatAcCompressorType : public ReadAttribute {
+class ReadThermostatACCompressorType : public ReadAttribute {
 public:
-    ReadThermostatAcCompressorType()
-        : ReadAttribute("ac-compressor-type")
+    ReadThermostatACCompressorType()
+        : ReadAttribute("accompressor-type")
     {
     }
 
-    ~ReadThermostatAcCompressorType() {}
+    ~ReadThermostatACCompressorType() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -84153,10 +84758,10 @@ public:
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
-        [cluster readAttributeAcCompressorTypeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"Thermostat.AcCompressorType response %@", [value description]);
+        [cluster readAttributeACCompressorTypeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Thermostat.ACCompressorType response %@", [value description]);
             if (error != nil) {
-                LogNSError("Thermostat AcCompressorType read Error", error);
+                LogNSError("Thermostat ACCompressorType read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -84164,17 +84769,17 @@ public:
     }
 };
 
-class WriteThermostatAcCompressorType : public WriteAttribute {
+class WriteThermostatACCompressorType : public WriteAttribute {
 public:
-    WriteThermostatAcCompressorType()
-        : WriteAttribute("ac-compressor-type")
+    WriteThermostatACCompressorType()
+        : WriteAttribute("accompressor-type")
     {
-        AddArgument("attr-name", "ac-compressor-type");
+        AddArgument("attr-name", "accompressor-type");
         AddArgument("attr-value", 0, UINT8_MAX, &mValue);
         WriteAttribute::AddArguments();
     }
 
-    ~WriteThermostatAcCompressorType() {}
+    ~WriteThermostatACCompressorType() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -84187,11 +84792,11 @@ public:
         params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
-        [cluster writeAttributeAcCompressorTypeWithValue:value
+        [cluster writeAttributeACCompressorTypeWithValue:value
                                                   params:params
                                        completionHandler:^(NSError * _Nullable error) {
                                            if (error != nil) {
-                                               LogNSError("Thermostat AcCompressorType write Error", error);
+                                               LogNSError("Thermostat ACCompressorType write Error", error);
                                            }
                                            SetCommandExitStatus(error);
                                        }];
@@ -84202,14 +84807,14 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeThermostatAcCompressorType : public SubscribeAttribute {
+class SubscribeAttributeThermostatACCompressorType : public SubscribeAttribute {
 public:
-    SubscribeAttributeThermostatAcCompressorType()
-        : SubscribeAttribute("ac-compressor-type")
+    SubscribeAttributeThermostatACCompressorType()
+        : SubscribeAttribute("accompressor-type")
     {
     }
 
-    ~SubscribeAttributeThermostatAcCompressorType() {}
+    ~SubscribeAttributeThermostatACCompressorType() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -84220,12 +84825,12 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeAcCompressorTypeWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeACCompressorTypeWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
                                                        maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
                                                             params:params
                                            subscriptionEstablished:nullptr
                                                      reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                                                         NSLog(@"Thermostat.AcCompressorType response %@", [value description]);
+                                                         NSLog(@"Thermostat.ACCompressorType response %@", [value description]);
                                                          if (error || !mWait) {
                                                              SetCommandExitStatus(error);
                                                          }
@@ -84241,16 +84846,16 @@ public:
 };
 
 /*
- * Attribute AcErrorCode
+ * Attribute ACErrorCode
  */
-class ReadThermostatAcErrorCode : public ReadAttribute {
+class ReadThermostatACErrorCode : public ReadAttribute {
 public:
-    ReadThermostatAcErrorCode()
-        : ReadAttribute("ac-error-code")
+    ReadThermostatACErrorCode()
+        : ReadAttribute("acerror-code")
     {
     }
 
-    ~ReadThermostatAcErrorCode() {}
+    ~ReadThermostatACErrorCode() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -84258,10 +84863,10 @@ public:
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
-        [cluster readAttributeAcErrorCodeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"Thermostat.AcErrorCode response %@", [value description]);
+        [cluster readAttributeACErrorCodeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Thermostat.ACErrorCode response %@", [value description]);
             if (error != nil) {
-                LogNSError("Thermostat AcErrorCode read Error", error);
+                LogNSError("Thermostat ACErrorCode read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -84269,17 +84874,17 @@ public:
     }
 };
 
-class WriteThermostatAcErrorCode : public WriteAttribute {
+class WriteThermostatACErrorCode : public WriteAttribute {
 public:
-    WriteThermostatAcErrorCode()
-        : WriteAttribute("ac-error-code")
+    WriteThermostatACErrorCode()
+        : WriteAttribute("acerror-code")
     {
-        AddArgument("attr-name", "ac-error-code");
+        AddArgument("attr-name", "acerror-code");
         AddArgument("attr-value", 0, UINT32_MAX, &mValue);
         WriteAttribute::AddArguments();
     }
 
-    ~WriteThermostatAcErrorCode() {}
+    ~WriteThermostatACErrorCode() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -84292,11 +84897,11 @@ public:
         params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedInt:mValue];
 
-        [cluster writeAttributeAcErrorCodeWithValue:value
+        [cluster writeAttributeACErrorCodeWithValue:value
                                              params:params
                                   completionHandler:^(NSError * _Nullable error) {
                                       if (error != nil) {
-                                          LogNSError("Thermostat AcErrorCode write Error", error);
+                                          LogNSError("Thermostat ACErrorCode write Error", error);
                                       }
                                       SetCommandExitStatus(error);
                                   }];
@@ -84307,14 +84912,14 @@ private:
     uint32_t mValue;
 };
 
-class SubscribeAttributeThermostatAcErrorCode : public SubscribeAttribute {
+class SubscribeAttributeThermostatACErrorCode : public SubscribeAttribute {
 public:
-    SubscribeAttributeThermostatAcErrorCode()
-        : SubscribeAttribute("ac-error-code")
+    SubscribeAttributeThermostatACErrorCode()
+        : SubscribeAttribute("acerror-code")
     {
     }
 
-    ~SubscribeAttributeThermostatAcErrorCode() {}
+    ~SubscribeAttributeThermostatACErrorCode() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -84325,12 +84930,12 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeAcErrorCodeWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeACErrorCodeWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
                                                   maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
                                                        params:params
                                       subscriptionEstablished:nullptr
                                                 reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                                                    NSLog(@"Thermostat.AcErrorCode response %@", [value description]);
+                                                    NSLog(@"Thermostat.ACErrorCode response %@", [value description]);
                                                     if (error || !mWait) {
                                                         SetCommandExitStatus(error);
                                                     }
@@ -84346,16 +84951,16 @@ public:
 };
 
 /*
- * Attribute AcLouverPosition
+ * Attribute ACLouverPosition
  */
-class ReadThermostatAcLouverPosition : public ReadAttribute {
+class ReadThermostatACLouverPosition : public ReadAttribute {
 public:
-    ReadThermostatAcLouverPosition()
-        : ReadAttribute("ac-louver-position")
+    ReadThermostatACLouverPosition()
+        : ReadAttribute("aclouver-position")
     {
     }
 
-    ~ReadThermostatAcLouverPosition() {}
+    ~ReadThermostatACLouverPosition() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -84363,10 +84968,10 @@ public:
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
-        [cluster readAttributeAcLouverPositionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"Thermostat.AcLouverPosition response %@", [value description]);
+        [cluster readAttributeACLouverPositionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Thermostat.ACLouverPosition response %@", [value description]);
             if (error != nil) {
-                LogNSError("Thermostat AcLouverPosition read Error", error);
+                LogNSError("Thermostat ACLouverPosition read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -84374,17 +84979,17 @@ public:
     }
 };
 
-class WriteThermostatAcLouverPosition : public WriteAttribute {
+class WriteThermostatACLouverPosition : public WriteAttribute {
 public:
-    WriteThermostatAcLouverPosition()
-        : WriteAttribute("ac-louver-position")
+    WriteThermostatACLouverPosition()
+        : WriteAttribute("aclouver-position")
     {
-        AddArgument("attr-name", "ac-louver-position");
+        AddArgument("attr-name", "aclouver-position");
         AddArgument("attr-value", 0, UINT8_MAX, &mValue);
         WriteAttribute::AddArguments();
     }
 
-    ~WriteThermostatAcLouverPosition() {}
+    ~WriteThermostatACLouverPosition() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -84397,11 +85002,11 @@ public:
         params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
-        [cluster writeAttributeAcLouverPositionWithValue:value
+        [cluster writeAttributeACLouverPositionWithValue:value
                                                   params:params
                                        completionHandler:^(NSError * _Nullable error) {
                                            if (error != nil) {
-                                               LogNSError("Thermostat AcLouverPosition write Error", error);
+                                               LogNSError("Thermostat ACLouverPosition write Error", error);
                                            }
                                            SetCommandExitStatus(error);
                                        }];
@@ -84412,14 +85017,14 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeThermostatAcLouverPosition : public SubscribeAttribute {
+class SubscribeAttributeThermostatACLouverPosition : public SubscribeAttribute {
 public:
-    SubscribeAttributeThermostatAcLouverPosition()
-        : SubscribeAttribute("ac-louver-position")
+    SubscribeAttributeThermostatACLouverPosition()
+        : SubscribeAttribute("aclouver-position")
     {
     }
 
-    ~SubscribeAttributeThermostatAcLouverPosition() {}
+    ~SubscribeAttributeThermostatACLouverPosition() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -84430,12 +85035,12 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeAcLouverPositionWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeACLouverPositionWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
                                                        maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
                                                             params:params
                                            subscriptionEstablished:nullptr
                                                      reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                                                         NSLog(@"Thermostat.AcLouverPosition response %@", [value description]);
+                                                         NSLog(@"Thermostat.ACLouverPosition response %@", [value description]);
                                                          if (error || !mWait) {
                                                              SetCommandExitStatus(error);
                                                          }
@@ -84451,16 +85056,16 @@ public:
 };
 
 /*
- * Attribute AcCoilTemperature
+ * Attribute ACCoilTemperature
  */
-class ReadThermostatAcCoilTemperature : public ReadAttribute {
+class ReadThermostatACCoilTemperature : public ReadAttribute {
 public:
-    ReadThermostatAcCoilTemperature()
-        : ReadAttribute("ac-coil-temperature")
+    ReadThermostatACCoilTemperature()
+        : ReadAttribute("accoil-temperature")
     {
     }
 
-    ~ReadThermostatAcCoilTemperature() {}
+    ~ReadThermostatACCoilTemperature() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -84468,10 +85073,10 @@ public:
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
-        [cluster readAttributeAcCoilTemperatureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"Thermostat.AcCoilTemperature response %@", [value description]);
+        [cluster readAttributeACCoilTemperatureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Thermostat.ACCoilTemperature response %@", [value description]);
             if (error != nil) {
-                LogNSError("Thermostat AcCoilTemperature read Error", error);
+                LogNSError("Thermostat ACCoilTemperature read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -84479,14 +85084,14 @@ public:
     }
 };
 
-class SubscribeAttributeThermostatAcCoilTemperature : public SubscribeAttribute {
+class SubscribeAttributeThermostatACCoilTemperature : public SubscribeAttribute {
 public:
-    SubscribeAttributeThermostatAcCoilTemperature()
-        : SubscribeAttribute("ac-coil-temperature")
+    SubscribeAttributeThermostatACCoilTemperature()
+        : SubscribeAttribute("accoil-temperature")
     {
     }
 
-    ~SubscribeAttributeThermostatAcCoilTemperature() {}
+    ~SubscribeAttributeThermostatACCoilTemperature() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -84497,12 +85102,12 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeAcCoilTemperatureWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeACCoilTemperatureWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
                                                         maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
                                                              params:params
                                             subscriptionEstablished:nullptr
                                                       reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                                                          NSLog(@"Thermostat.AcCoilTemperature response %@", [value description]);
+                                                          NSLog(@"Thermostat.ACCoilTemperature response %@", [value description]);
                                                           if (error || !mWait) {
                                                               SetCommandExitStatus(error);
                                                           }
@@ -84518,16 +85123,16 @@ public:
 };
 
 /*
- * Attribute AcCapacityFormat
+ * Attribute ACCapacityformat
  */
-class ReadThermostatAcCapacityFormat : public ReadAttribute {
+class ReadThermostatACCapacityformat : public ReadAttribute {
 public:
-    ReadThermostatAcCapacityFormat()
-        : ReadAttribute("ac-capacity-format")
+    ReadThermostatACCapacityformat()
+        : ReadAttribute("accapacityformat")
     {
     }
 
-    ~ReadThermostatAcCapacityFormat() {}
+    ~ReadThermostatACCapacityformat() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -84535,10 +85140,10 @@ public:
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
-        [cluster readAttributeAcCapacityFormatWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"Thermostat.AcCapacityFormat response %@", [value description]);
+        [cluster readAttributeACCapacityformatWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Thermostat.ACCapacityformat response %@", [value description]);
             if (error != nil) {
-                LogNSError("Thermostat AcCapacityFormat read Error", error);
+                LogNSError("Thermostat ACCapacityformat read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -84546,17 +85151,17 @@ public:
     }
 };
 
-class WriteThermostatAcCapacityFormat : public WriteAttribute {
+class WriteThermostatACCapacityformat : public WriteAttribute {
 public:
-    WriteThermostatAcCapacityFormat()
-        : WriteAttribute("ac-capacity-format")
+    WriteThermostatACCapacityformat()
+        : WriteAttribute("accapacityformat")
     {
-        AddArgument("attr-name", "ac-capacity-format");
+        AddArgument("attr-name", "accapacityformat");
         AddArgument("attr-value", 0, UINT8_MAX, &mValue);
         WriteAttribute::AddArguments();
     }
 
-    ~WriteThermostatAcCapacityFormat() {}
+    ~WriteThermostatACCapacityformat() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -84569,11 +85174,11 @@ public:
         params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
-        [cluster writeAttributeAcCapacityFormatWithValue:value
+        [cluster writeAttributeACCapacityformatWithValue:value
                                                   params:params
                                        completionHandler:^(NSError * _Nullable error) {
                                            if (error != nil) {
-                                               LogNSError("Thermostat AcCapacityFormat write Error", error);
+                                               LogNSError("Thermostat ACCapacityformat write Error", error);
                                            }
                                            SetCommandExitStatus(error);
                                        }];
@@ -84584,14 +85189,14 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeThermostatAcCapacityFormat : public SubscribeAttribute {
+class SubscribeAttributeThermostatACCapacityformat : public SubscribeAttribute {
 public:
-    SubscribeAttributeThermostatAcCapacityFormat()
-        : SubscribeAttribute("ac-capacity-format")
+    SubscribeAttributeThermostatACCapacityformat()
+        : SubscribeAttribute("accapacityformat")
     {
     }
 
-    ~SubscribeAttributeThermostatAcCapacityFormat() {}
+    ~SubscribeAttributeThermostatACCapacityformat() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -84602,12 +85207,12 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeAcCapacityFormatWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeACCapacityformatWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
                                                        maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
                                                             params:params
                                            subscriptionEstablished:nullptr
                                                      reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                                                         NSLog(@"Thermostat.AcCapacityFormat response %@", [value description]);
+                                                         NSLog(@"Thermostat.ACCapacityformat response %@", [value description]);
                                                          if (error || !mWait) {
                                                              SetCommandExitStatus(error);
                                                          }
@@ -99320,13 +99925,13 @@ void registerClusterThermostat(Commands & commands)
         make_unique<SubscribeAttributeThermostatAbsMinCoolSetpointLimit>(), //
         make_unique<ReadThermostatAbsMaxCoolSetpointLimit>(), //
         make_unique<SubscribeAttributeThermostatAbsMaxCoolSetpointLimit>(), //
-        make_unique<ReadThermostatPiCoolingDemand>(), //
-        make_unique<SubscribeAttributeThermostatPiCoolingDemand>(), //
-        make_unique<ReadThermostatPiHeatingDemand>(), //
-        make_unique<SubscribeAttributeThermostatPiHeatingDemand>(), //
-        make_unique<ReadThermostatHvacSystemTypeConfiguration>(), //
-        make_unique<WriteThermostatHvacSystemTypeConfiguration>(), //
-        make_unique<SubscribeAttributeThermostatHvacSystemTypeConfiguration>(), //
+        make_unique<ReadThermostatPICoolingDemand>(), //
+        make_unique<SubscribeAttributeThermostatPICoolingDemand>(), //
+        make_unique<ReadThermostatPIHeatingDemand>(), //
+        make_unique<SubscribeAttributeThermostatPIHeatingDemand>(), //
+        make_unique<ReadThermostatHVACSystemTypeConfiguration>(), //
+        make_unique<WriteThermostatHVACSystemTypeConfiguration>(), //
+        make_unique<SubscribeAttributeThermostatHVACSystemTypeConfiguration>(), //
         make_unique<ReadThermostatLocalTemperatureCalibration>(), //
         make_unique<WriteThermostatLocalTemperatureCalibration>(), //
         make_unique<SubscribeAttributeThermostatLocalTemperatureCalibration>(), //
@@ -99393,29 +99998,46 @@ void registerClusterThermostat(Commands & commands)
         make_unique<SubscribeAttributeThermostatSetpointChangeAmount>(), //
         make_unique<ReadThermostatSetpointChangeSourceTimestamp>(), //
         make_unique<SubscribeAttributeThermostatSetpointChangeSourceTimestamp>(), //
-        make_unique<ReadThermostatAcType>(), //
-        make_unique<WriteThermostatAcType>(), //
-        make_unique<SubscribeAttributeThermostatAcType>(), //
-        make_unique<ReadThermostatAcCapacity>(), //
-        make_unique<WriteThermostatAcCapacity>(), //
-        make_unique<SubscribeAttributeThermostatAcCapacity>(), //
-        make_unique<ReadThermostatAcRefrigerantType>(), //
-        make_unique<WriteThermostatAcRefrigerantType>(), //
-        make_unique<SubscribeAttributeThermostatAcRefrigerantType>(), //
-        make_unique<ReadThermostatAcCompressorType>(), //
-        make_unique<WriteThermostatAcCompressorType>(), //
-        make_unique<SubscribeAttributeThermostatAcCompressorType>(), //
-        make_unique<ReadThermostatAcErrorCode>(), //
-        make_unique<WriteThermostatAcErrorCode>(), //
-        make_unique<SubscribeAttributeThermostatAcErrorCode>(), //
-        make_unique<ReadThermostatAcLouverPosition>(), //
-        make_unique<WriteThermostatAcLouverPosition>(), //
-        make_unique<SubscribeAttributeThermostatAcLouverPosition>(), //
-        make_unique<ReadThermostatAcCoilTemperature>(), //
-        make_unique<SubscribeAttributeThermostatAcCoilTemperature>(), //
-        make_unique<ReadThermostatAcCapacityFormat>(), //
-        make_unique<WriteThermostatAcCapacityFormat>(), //
-        make_unique<SubscribeAttributeThermostatAcCapacityFormat>(), //
+        make_unique<ReadThermostatOccupiedSetback>(), //
+        make_unique<WriteThermostatOccupiedSetback>(), //
+        make_unique<SubscribeAttributeThermostatOccupiedSetback>(), //
+        make_unique<ReadThermostatOccupiedSetbackMin>(), //
+        make_unique<SubscribeAttributeThermostatOccupiedSetbackMin>(), //
+        make_unique<ReadThermostatOccupiedSetbackMax>(), //
+        make_unique<SubscribeAttributeThermostatOccupiedSetbackMax>(), //
+        make_unique<ReadThermostatUnoccupiedSetback>(), //
+        make_unique<WriteThermostatUnoccupiedSetback>(), //
+        make_unique<SubscribeAttributeThermostatUnoccupiedSetback>(), //
+        make_unique<ReadThermostatUnoccupiedSetbackMin>(), //
+        make_unique<SubscribeAttributeThermostatUnoccupiedSetbackMin>(), //
+        make_unique<ReadThermostatUnoccupiedSetbackMax>(), //
+        make_unique<SubscribeAttributeThermostatUnoccupiedSetbackMax>(), //
+        make_unique<ReadThermostatEmergencyHeatDelta>(), //
+        make_unique<WriteThermostatEmergencyHeatDelta>(), //
+        make_unique<SubscribeAttributeThermostatEmergencyHeatDelta>(), //
+        make_unique<ReadThermostatACType>(), //
+        make_unique<WriteThermostatACType>(), //
+        make_unique<SubscribeAttributeThermostatACType>(), //
+        make_unique<ReadThermostatACCapacity>(), //
+        make_unique<WriteThermostatACCapacity>(), //
+        make_unique<SubscribeAttributeThermostatACCapacity>(), //
+        make_unique<ReadThermostatACRefrigerantType>(), //
+        make_unique<WriteThermostatACRefrigerantType>(), //
+        make_unique<SubscribeAttributeThermostatACRefrigerantType>(), //
+        make_unique<ReadThermostatACCompressorType>(), //
+        make_unique<WriteThermostatACCompressorType>(), //
+        make_unique<SubscribeAttributeThermostatACCompressorType>(), //
+        make_unique<ReadThermostatACErrorCode>(), //
+        make_unique<WriteThermostatACErrorCode>(), //
+        make_unique<SubscribeAttributeThermostatACErrorCode>(), //
+        make_unique<ReadThermostatACLouverPosition>(), //
+        make_unique<WriteThermostatACLouverPosition>(), //
+        make_unique<SubscribeAttributeThermostatACLouverPosition>(), //
+        make_unique<ReadThermostatACCoilTemperature>(), //
+        make_unique<SubscribeAttributeThermostatACCoilTemperature>(), //
+        make_unique<ReadThermostatACCapacityformat>(), //
+        make_unique<WriteThermostatACCapacityformat>(), //
+        make_unique<SubscribeAttributeThermostatACCapacityformat>(), //
         make_unique<ReadThermostatGeneratedCommandList>(), //
         make_unique<SubscribeAttributeThermostatGeneratedCommandList>(), //
         make_unique<ReadThermostatAcceptedCommandList>(), //
