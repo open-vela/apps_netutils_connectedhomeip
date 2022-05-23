@@ -51409,7 +51409,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("occupied cooling setpoint", actualValue, 2600));
+                VerifyOrReturn(CheckValue("OccupiedCoolingSetpoint", actualValue, 2600));
             }
 
             VerifyOrReturn(CheckConstraintType("occupiedCoolingSetpoint", "", "int16"));
@@ -51471,7 +51471,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("occupied cooling setpoint", actualValue, 2000));
+                VerifyOrReturn(CheckValue("OccupiedCoolingSetpoint", actualValue, 2000));
             }
 
             NextTest();
@@ -51548,7 +51548,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("occupied heating setpoint", actualValue, 2000));
+                VerifyOrReturn(CheckValue("OccupiedHeatingSetpoint", actualValue, 2000));
             }
 
             VerifyOrReturn(CheckConstraintType("occupiedHeatingSetpoint", "", "int16"));
@@ -51600,7 +51600,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("occupied heating setpoint", actualValue, 2100));
+                VerifyOrReturn(CheckValue("OccupiedHeatingSetpoint", actualValue, 2100));
             }
 
             NextTest();
@@ -51667,7 +51667,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("min heat setpoint limit", actualValue, 700));
+                VerifyOrReturn(CheckValue("MinHeatSetpointLimit", actualValue, 700));
             }
 
             VerifyOrReturn(CheckConstraintType("minHeatSetpointLimit", "", "int16"));
@@ -51719,7 +51719,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("min heat setpoint limit", actualValue, 2000));
+                VerifyOrReturn(CheckValue("MinHeatSetpointLimit", actualValue, 2000));
             }
 
             NextTest();
@@ -51786,7 +51786,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("max heat setpoint limit", actualValue, 3000));
+                VerifyOrReturn(CheckValue("MaxHeatSetpointLimit", actualValue, 3000));
             }
 
             VerifyOrReturn(CheckConstraintType("maxHeatSetpointLimit", "", "int16"));
@@ -51838,7 +51838,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("max heat setpoint limit", actualValue, 2000));
+                VerifyOrReturn(CheckValue("MaxHeatSetpointLimit", actualValue, 2000));
             }
 
             NextTest();
@@ -51910,7 +51910,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("min cool setpoint limit", actualValue, 1600));
+                VerifyOrReturn(CheckValue("MinCoolSetpointLimit", actualValue, 1600));
             }
 
             VerifyOrReturn(CheckConstraintType("minCoolSetpointLimit", "", "int16"));
@@ -51972,7 +51972,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("min cool setpoint limit", actualValue, 2000));
+                VerifyOrReturn(CheckValue("MinCoolSetpointLimit", actualValue, 2000));
             }
 
             NextTest();
@@ -52054,7 +52054,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("max cool setpoint limit", actualValue, 3200));
+                VerifyOrReturn(CheckValue("MaxCoolSetpointLimit", actualValue, 3200));
             }
 
             VerifyOrReturn(CheckConstraintType("maxCoolSetpointLimit", "", "int16"));
@@ -52116,7 +52116,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("max cool setpoint limit", actualValue, 2000));
+                VerifyOrReturn(CheckValue("MaxCoolSetpointLimit", actualValue, 2000));
             }
 
             NextTest();
@@ -52389,7 +52389,7 @@ private:
 
                 {
                     id actualValue = value;
-                    VerifyOrReturn(CheckValue("control sequence of operation", actualValue, 4));
+                    VerifyOrReturn(CheckValue("ControlSequenceOfOperation", actualValue, 4));
                 }
 
                 VerifyOrReturn(CheckConstraintType("controlSequenceOfOperation", "", "enum8"));
@@ -52442,7 +52442,7 @@ private:
 
                 {
                     id actualValue = value;
-                    VerifyOrReturn(CheckValue("control sequence of operation", actualValue, 2));
+                    VerifyOrReturn(CheckValue("ControlSequenceOfOperation", actualValue, 2));
                 }
 
                 NextTest();
