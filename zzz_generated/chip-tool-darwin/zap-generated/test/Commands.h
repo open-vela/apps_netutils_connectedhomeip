@@ -223,6 +223,8 @@ public:
         printf("Test_TC_DL_2_2\n");
         printf("Test_TC_DL_2_3\n");
         printf("Test_TC_DL_2_4\n");
+        printf("Test_TC_DL_2_8\n");
+        printf("Test_TC_DL_2_11\n");
         printf("TestGroupsCluster\n");
         printf("TestGroupKeyManagementCluster\n");
 
@@ -43246,8 +43248,230 @@ public:
             err = TestTestHarnessClientReadsDescriptionAttributeFromServerDut_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Test Harness Client reads BatChargeLevel from Server DUT\n");
-            err = TestTestHarnessClientReadsBatChargeLevelFromServerDut_4();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 4 : Test Harness Client reads WiredAssessedInputVoltage attribue from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsWiredAssessedInputVoltageAttribueFromServerDut_4();
+            break;
+        case 5:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 5 : Test Harness Client reads WiredAssessedInputFrequency attribute from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsWiredAssessedInputFrequencyAttributeFromServerDut_5();
+            break;
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : Test Harness Client reads WiredCurrentType attribute from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsWiredCurrentTypeAttributeFromServerDut_6();
+            break;
+        case 7:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 7 : Test Harness Client reads WiredAssessedCurrent attribute from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsWiredAssessedCurrentAttributeFromServerDut_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Test Harness Client reads WiredNominalVoltage from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsWiredNominalVoltageFromServerDut_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Test Harness Client reads WiredMaximumCurrent from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsWiredMaximumCurrentFromServerDut_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Test Harness Client reads WiredPresent from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsWiredPresentFromServerDut_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Test Harness Client reads ActiveWiredFaults from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsActiveWiredFaultsFromServerDut_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Test Harness Client reads BatVoltage from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsBatVoltageFromServerDut_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Test Harness Client reads BatPercentRemaining from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsBatPercentRemainingFromServerDut_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Test Harness Client reads BatTimeRemaining from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsBatTimeRemainingFromServerDut_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Test Harness Client reads BatChargeLevel from Server DUT\n");
+            err = TestTestHarnessClientReadsBatChargeLevelFromServerDut_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Test Harness Client reads BatReplacementNeeded from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsBatReplacementNeededFromServerDut_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Test Harness Client reads BatReplaceability from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsBatReplaceabilityFromServerDut_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Test Harness Client reads BatPresent from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsBatPresentFromServerDut_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Test Harness Client readsActiveBatFaults from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsActiveBatFaultsFromServerDut_19();
+            break;
+        case 20:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 20 : Test Harness Client reads BatReplacementDescription from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsBatReplacementDescriptionFromServerDut_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Test Harness Client reads BatCommonDesignation from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsBatCommonDesignationFromServerDut_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Test Harness Client reads BatANSIDesignation from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsBatANSIDesignationFromServerDut_22();
+            break;
+        case 23:
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Test Harness Client reads BatIECDesignation from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsBatIECDesignationFromServerDut_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Test Harness Client reads BatApprovedChemistry from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsBatApprovedChemistryFromServerDut_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Test Harness Client reads BatCapacity from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsBatCapacityFromServerDut_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Test Harness Client reads BatQuantity from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsBatQuantityFromServerDut_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Test Harness Client reads BatChargeState from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsBatChargeStateFromServerDut_27();
+            break;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Test Harness Client reads BatTimeToFullCharge from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsBatTimeToFullChargeFromServerDut_28();
+            break;
+        case 29:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 29 : Test Harness Client reads BatFunctionalWhileCharging from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsBatFunctionalWhileChargingFromServerDut_29();
+            break;
+        case 30:
+            ChipLogProgress(chipTool, " ***** Test Step 30 : Test Harness Client reads BatChargingCurrent from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsBatChargingCurrentFromServerDut_30();
+            break;
+        case 31:
+            ChipLogProgress(chipTool, " ***** Test Step 31 : Test Harness Client reads ActiveBatChargeFaults from Server DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsActiveBatChargeFaultsFromServerDut_31();
             break;
         }
 
@@ -43275,6 +43499,87 @@ public:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -43288,7 +43593,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 5;
+    const uint16_t mTestCount = 32;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -43363,7 +43668,214 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTestHarnessClientReadsBatChargeLevelFromServerDut_4()
+    CHIP_ERROR TestTestHarnessClientReadsWiredAssessedInputVoltageAttribueFromServerDut_4()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeWiredAssessedInputVoltageWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Test Harness Client reads WiredAssessedInputVoltage attribue from Server DUT Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                VerifyOrReturn(CheckConstraintType("wiredAssessedInputVoltage", "", "uint32"));
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsWiredAssessedInputFrequencyAttributeFromServerDut_5()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeWiredAssessedInputFrequencyWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Test Harness Client reads WiredAssessedInputFrequency attribute from Server DUT Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                VerifyOrReturn(CheckConstraintType("wiredAssessedInputFrequency", "", "uint16"));
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsWiredCurrentTypeAttributeFromServerDut_6()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeWiredCurrentTypeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads WiredCurrentType attribute from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("wiredCurrentType", "", "enum8"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("wiredCurrentType", [value unsignedCharValue], 0));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("wiredCurrentType", [value unsignedCharValue], 1));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsWiredAssessedCurrentAttributeFromServerDut_7()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeWiredAssessedCurrentWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads WiredAssessedCurrent attribute from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("wiredAssessedCurrent", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsWiredNominalVoltageFromServerDut_8()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeWiredNominalVoltageWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads WiredNominalVoltage from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("wiredNominalVoltage", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsWiredMaximumCurrentFromServerDut_9()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeWiredMaximumCurrentWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads WiredMaximumCurrent from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("wiredMaximumCurrent", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsWiredPresentFromServerDut_10()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeWiredPresentWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads WiredPresent from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("wiredPresent", "", "bool"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsActiveWiredFaultsFromServerDut_11()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeActiveWiredFaultsWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads ActiveWiredFaults from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("activeWiredFaults", "", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsBatVoltageFromServerDut_12()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBatteryVoltageWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads BatVoltage from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("batteryVoltage", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsBatPercentRemainingFromServerDut_13()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBatteryPercentRemainingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads BatPercentRemaining from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("batteryPercentRemaining", "", "uint8"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsBatTimeRemainingFromServerDut_14()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBatteryTimeRemainingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads BatTimeRemaining from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("batteryTimeRemaining", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsBatChargeLevelFromServerDut_15()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -43382,6 +43894,327 @@ private:
                 VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batteryChargeLevel", [value unsignedCharValue], 2));
             }
 
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsBatReplacementNeededFromServerDut_16()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBatteryReplacementNeededWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads BatReplacementNeeded from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("batteryReplacementNeeded", "", "bool"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsBatReplaceabilityFromServerDut_17()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBatteryReplaceabilityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads BatReplaceability from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("batteryReplaceability", "", "enum8"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("batteryReplaceability", [value unsignedCharValue], 0));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batteryReplaceability", [value unsignedCharValue], 3));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsBatPresentFromServerDut_18()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBatteryPresentWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads BatPresent from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("batteryPresent", "", "bool"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsActiveBatFaultsFromServerDut_19()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeActiveBatteryFaultsWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client readsActiveBatFaults from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("activeBatteryFaults", "", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsBatReplacementDescriptionFromServerDut_20()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeBatteryReplacementDescriptionWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Test Harness Client reads BatReplacementDescription from Server DUT Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                VerifyOrReturn(CheckConstraintType("batteryReplacementDescription", "", "string"));
+                VerifyOrReturn(CheckConstraintMaxLength("batteryReplacementDescription", [value length], 60));
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsBatCommonDesignationFromServerDut_21()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBatteryCommonDesignationWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads BatCommonDesignation from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("batteryCommonDesignation", "", "uint32"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("batteryCommonDesignation", [value unsignedIntValue], 0UL));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("batteryCommonDesignation", [value unsignedIntValue], 80UL));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsBatANSIDesignationFromServerDut_22()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBatteryANSIDesignationWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads BatANSIDesignation from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("batteryANSIDesignation", "", "string"));
+            VerifyOrReturn(CheckConstraintMaxLength("batteryANSIDesignation", [value length], 20));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsBatIECDesignationFromServerDut_23()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBatteryIECDesignationWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads BatIECDesignation from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("batteryIECDesignation", "", "string"));
+            VerifyOrReturn(CheckConstraintMaxLength("batteryIECDesignation", [value length], 20));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsBatApprovedChemistryFromServerDut_24()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBatteryApprovedChemistryWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads BatApprovedChemistry from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("batteryApprovedChemistry", "", "uint32"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("batteryApprovedChemistry", [value unsignedIntValue], 0UL));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("batteryApprovedChemistry", [value unsignedIntValue], 32UL));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsBatCapacityFromServerDut_25()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBatteryCapacityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads BatCapacity from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("batteryCapacity", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsBatQuantityFromServerDut_26()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBatteryQuantityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads BatQuantity from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("batteryQuantity", "", "uint8"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsBatChargeStateFromServerDut_27()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBatteryChargeStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads BatChargeState from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("batteryChargeState", "", "enum8"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("batteryChargeState", [value unsignedCharValue], 0));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batteryChargeState", [value unsignedCharValue], 3));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsBatTimeToFullChargeFromServerDut_28()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBatteryTimeToFullChargeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads BatTimeToFullCharge from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("batteryTimeToFullCharge", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsBatFunctionalWhileChargingFromServerDut_29()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBatteryFunctionalWhileChargingWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads BatFunctionalWhileCharging from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("batteryFunctionalWhileCharging", "", "bool"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsBatChargingCurrentFromServerDut_30()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBatteryChargingCurrentWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads BatChargingCurrent from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("batteryChargingCurrent", "", "uint32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsActiveBatChargeFaultsFromServerDut_31()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeActiveBatteryChargeFaultsWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads ActiveBatChargeFaults from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("activeBatteryChargeFaults", "", "list"));
             NextTest();
         }];
 
@@ -50135,62 +50968,390 @@ public:
             err = TestReadsConstraintsOfOptionalAttributesFromDutAbsMaxCoolSetpointLimit_5();
             break;
         case 6:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 6 : Reads constraints of optional attributes from DUT: OccupiedCoolingSetpoint\n");
-            err = TestReadsConstraintsOfOptionalAttributesFromDutOccupiedCoolingSetpoint_6();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 6 : Read PICoolingDemand attribute from the DUT Verify that the DUT responds with a uint8 "
+                "value.The value has to be in the range of 0 to 100\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadPICoolingDemandAttributeFromTheDutVerifyThatTheDutRespondsWithAUint8ValueTheValueHasToBeInTheRangeOf0To100_6();
             break;
         case 7:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 7 : Reads constraints of mandatory attributes from DUT: OccupiedHeatingSetpoint\n");
-            err = TestReadsConstraintsOfMandatoryAttributesFromDutOccupiedHeatingSetpoint_7();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Read PIHeatingDemand attribute from the DUT and Verify that the DUT responds with a uint8 "
+                "value.The value has to be in the range of 0 to 100\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadPIHeatingDemandAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint8ValueTheValueHasToBeInTheRangeOf0To100_7();
             break;
         case 8:
             ChipLogProgress(
-                chipTool, " ***** Test Step 8 : Reads constraints of mandatory attributes from DUT: MinHeatSetpointLimit\n");
-            err = TestReadsConstraintsOfMandatoryAttributesFromDutMinHeatSetpointLimit_8();
+                chipTool, " ***** Test Step 8 : Reads constraints of optional attributes from DUT: OccupiedCoolingSetpoint\n");
+            err = TestReadsConstraintsOfOptionalAttributesFromDutOccupiedCoolingSetpoint_8();
             break;
         case 9:
             ChipLogProgress(
-                chipTool, " ***** Test Step 9 : Reads constraints of mandatory attributes from DUT: MaxHeatSetpointLimit\n");
-            err = TestReadsConstraintsOfMandatoryAttributesFromDutMaxHeatSetpointLimit_9();
+                chipTool, " ***** Test Step 9 : Reads constraints of mandatory attributes from DUT: OccupiedHeatingSetpoint\n");
+            err = TestReadsConstraintsOfMandatoryAttributesFromDutOccupiedHeatingSetpoint_9();
             break;
         case 10:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 10 : Reads constraints of optional attributes from DUT: MinCoolSetpointLimit\n");
-            err = TestReadsConstraintsOfOptionalAttributesFromDutMinCoolSetpointLimit_10();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 10 : Read UnoccupiedCoolingSetpoint attribute from the DUT and Verify that the DUT responds with "
+                "an int16 value\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadUnoccupiedCoolingSetpointAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnInt16Value_10();
             break;
         case 11:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 11 : Reads constraints of optional attributes from DUT: MaxCoolSetpointLimit\n");
-            err = TestReadsConstraintsOfOptionalAttributesFromDutMaxCoolSetpointLimit_11();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : Read UnoccupiedHeatingSetpoint attribute from the DUT and Verify that the DUT responds with "
+                "an int16 value\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadUnoccupiedHeatingSetpointAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnInt16Value_11();
             break;
         case 12:
             ChipLogProgress(
-                chipTool, " ***** Test Step 12 : Reads constraints of mandatory attributes from DUT: ControlSequenceOfOperation\n");
-            err = TestReadsConstraintsOfMandatoryAttributesFromDutControlSequenceOfOperation_12();
+                chipTool, " ***** Test Step 12 : Reads constraints of mandatory attributes from DUT: MinHeatSetpointLimit\n");
+            err = TestReadsConstraintsOfMandatoryAttributesFromDutMinHeatSetpointLimit_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Reads constraints of mandatory attributes from DUT: SystemMode\n");
-            err = TestReadsConstraintsOfMandatoryAttributesFromDutSystemMode_13();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 13 : Reads constraints of mandatory attributes from DUT: MaxHeatSetpointLimit\n");
+            err = TestReadsConstraintsOfMandatoryAttributesFromDutMaxHeatSetpointLimit_13();
             break;
         case 14:
             ChipLogProgress(
-                chipTool, " ***** Test Step 14 : Reads constraints of optional attributes from DUT: MinSetpointDeadBand\n");
-            err = TestReadsConstraintsOfOptionalAttributesFromDutMinSetpointDeadBand_14();
+                chipTool, " ***** Test Step 14 : Reads constraints of optional attributes from DUT: MinCoolSetpointLimit\n");
+            err = TestReadsConstraintsOfOptionalAttributesFromDutMinCoolSetpointLimit_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Reads constraints of optional attributes from DUT: StartOfWeek\n");
-            err = TestReadsConstraintsOfOptionalAttributesFromDutStartOfWeek_15();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 15 : Reads constraints of optional attributes from DUT: MaxCoolSetpointLimit\n");
+            err = TestReadsConstraintsOfOptionalAttributesFromDutMaxCoolSetpointLimit_15();
             break;
         case 16:
             ChipLogProgress(
-                chipTool, " ***** Test Step 16 : Reads constraints of optional attributes from DUT: NumberOfWeeklyTransitions\n");
-            err = TestReadsConstraintsOfOptionalAttributesFromDutNumberOfWeeklyTransitions_16();
+                chipTool, " ***** Test Step 16 : Reads constraints of mandatory attributes from DUT: ControlSequenceOfOperation\n");
+            err = TestReadsConstraintsOfMandatoryAttributesFromDutControlSequenceOfOperation_16();
             break;
         case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Reads constraints of mandatory attributes from DUT: SystemMode\n");
+            err = TestReadsConstraintsOfMandatoryAttributesFromDutSystemMode_17();
+            break;
+        case 18:
             ChipLogProgress(
-                chipTool, " ***** Test Step 17 : Reads constraints of optional attributes from DUT: NumberOfDailyTransitions\n");
-            err = TestReadsConstraintsOfOptionalAttributesFromDutNumberOfDailyTransitions_17();
+                chipTool, " ***** Test Step 18 : Read OutdoorTemperature attribute from the DUT and Verify the datatype\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadOutdoorTemperatureAttributeFromTheDutAndVerifyTheDatatype_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 19 : Read Occupancy attribute from the DUT and Verify the datatype and response value\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadOccupancyAttributeFromTheDutAndVerifyTheDatatypeAndResponseValue_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 20 : Read HVACSystemTypeConfiguration attribute from the DUT and Verify that the DUT responds "
+                "with a map8 value. The value has to be in the range of 0x00 to 0x3f\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadHVACSystemTypeConfigurationAttributeFromTheDutAndVerifyThatTheDutRespondsWithAMap8ValueTheValueHasToBeInTheRangeOf0x00To0x3f_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 21 : Read LocalTemperatureCalibration attribute from the DUT and Verify that the DUT responds "
+                "with an int8 value.The value has to be in the range of -25 to 25\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadLocalTemperatureCalibrationAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnInt8ValueTheValueHasToBeInTheRangeOf25To25_21();
+            break;
+        case 22:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 22 : Reads constraints of optional attributes from DUT: MinSetpointDeadBand\n");
+            err = TestReadsConstraintsOfOptionalAttributesFromDutMinSetpointDeadBand_22();
+            break;
+        case 23:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 23 : Read RemoteSensing attribute from the DUT and Verify that the DUT responds with a map8 "
+                "value. The value has to be in the range of 0x00 to 0x07\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadRemoteSensingAttributeFromTheDutAndVerifyThatTheDutRespondsWithAMap8ValueTheValueHasToBeInTheRangeOf0x00To0x07_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 24 : Read AlarmMask attribute from the DUT and Verify that the DUT responds with a map8 "
+                "value.The value has to be in the range of 0x00 to 0x07.\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadAlarmMaskAttributeFromTheDutAndVerifyThatTheDutRespondsWithAMap8ValueTheValueHasToBeInTheRangeOf0x00To0x07_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 25 : Read ThermostatRunningMode attribute from the DUT and Verify that the DUT responds with an "
+                "enum8 value.The value has to be 0, 3 or 4\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadThermostatRunningModeAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnEnum8ValueTheValueHasToBe03Or4_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Reads constraints of optional attributes from DUT: StartOfWeek\n");
+            err = TestReadsConstraintsOfOptionalAttributesFromDutStartOfWeek_26();
+            break;
+        case 27:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 27 : Reads constraints of optional attributes from DUT: NumberOfWeeklyTransitions\n");
+            err = TestReadsConstraintsOfOptionalAttributesFromDutNumberOfWeeklyTransitions_27();
+            break;
+        case 28:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 28 : Reads constraints of optional attributes from DUT: NumberOfDailyTransitions\n");
+            err = TestReadsConstraintsOfOptionalAttributesFromDutNumberOfDailyTransitions_28();
+            break;
+        case 29:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 29 : Read TemperatureSetpointHold attribute from the DUT and Verify that the DUT responds with "
+                "an enum8 value.The value has to 0 or 1\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTemperatureSetpointHoldAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnEnum8ValueTheValueHasTo0Or1_29();
+            break;
+        case 30:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 30 : Read TemperatureSetpointHoldDuration attribute from the DUT and Verify that the DUT "
+                "responds with a uint16 value or NULL.The value has to be in the range of 0 to 1440\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTemperatureSetpointHoldDurationAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint16ValueOrNULLTheValueHasToBeInTheRangeOf0To1440_30();
+            break;
+        case 31:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 31 : Read ThermostatProgrammingOperationMode attribute from the DUT and Verify that the DUT "
+                "responds with a map8 value.The value has to be in the range of 0x00 to 0x07\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadThermostatProgrammingOperationModeAttributeFromTheDutAndVerifyThatTheDutRespondsWithAMap8ValueTheValueHasToBeInTheRangeOf0x00To0x07_31();
+            break;
+        case 32:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 32 : Read ThermostatRunningState attribute from the DUT and Verify that the DUT responds with a "
+                "map16 value.The value has to be in the range of 0x00 to 0x7F\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadThermostatRunningStateAttributeFromTheDutAndVerifyThatTheDutRespondsWithAMap16ValueTheValueHasToBeInTheRangeOf0x00To0x7F_32();
+            break;
+        case 33:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 33 : Read SetpointChangeSource attribute from the DUT and Verify that the DUT responds with an "
+                "enum8 value. The value has to be in the range of 0 to 2\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadSetpointChangeSourceAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnEnum8ValueTheValueHasToBeInTheRangeOf0To2_33();
+            break;
+        case 34:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 34 : Read SetpointChangeAmount attribute from the DUT and Verify that the DUT responds with an "
+                "int16 value or NULL\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadSetpointChangeAmountAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnInt16ValueOrNull_34();
+            break;
+        case 35:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 35 : Read SetpointChangeSourceTimestamp attribute from the DUT and Verify that the DUT responds "
+                "with a utc value\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadSetpointChangeSourceTimestampAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUtcValue_35();
+            break;
+        case 36:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 36 : Read OccupiedSetback attribute from the DUT and Verify that the DUT responds with a uint8 "
+                "value or NULL\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadOccupiedSetbackAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint8ValueOrNull_36();
+            break;
+        case 37:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 37 : Read OccupiedSetbackMin attribute from the DUT and Verify that the DUT responds with a "
+                "uint8 value or NULL\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadOccupiedSetbackMinAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint8ValueOrNull_37();
+            break;
+        case 38:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 38 : Read OccupiedSetbackMax attribute from the DUT and Verify that the DUT responds with a "
+                "uint8 value or NULL\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadOccupiedSetbackMaxAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint8ValueOrNull_38();
+            break;
+        case 39:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 39 : Read UnoccupiedSetback attribute from the DUT and Verify that the DUT responds with a uint8 "
+                "value or NULL\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadUnoccupiedSetbackAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint8ValueOrNull_39();
+            break;
+        case 40:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 40 : Read UnoccupiedSetbackMin attribute from the DUT and Verify that the DUT responds with a "
+                "uint8 value or NULL\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadUnoccupiedSetbackMinAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint8ValueOrNull_40();
+            break;
+        case 41:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 41 : Read UnoccupiedSetbackMax attribute from the DUT and Verify that the DUT responds with a "
+                "uint8 value or NULL\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadUnoccupiedSetbackMaxAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint8ValueOrNull_41();
+            break;
+        case 42:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 42 : Read EmergencyHeatDelta attribute from the DUT and Verify that the DUT responds with a "
+                "uint8 value or NULL\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadEmergencyHeatDeltaAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint8ValueOrNull_42();
+            break;
+        case 43:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 43 : Read ACType attribute from the DUT and Verify that the DUT responds with an enum8 value. "
+                "The value has to be in the range of 0 to 4\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadACTypeAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnEnum8ValueTheValueHasToBeInTheRangeOf0To4_43();
+            break;
+        case 44:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 44 : Read ACCapacity attribute from the DUT and Verify that the DUT responds with a uint16 "
+                "value\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadACCapacityAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint16Value_44();
+            break;
+        case 45:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 45 : Read ACRefrigerantType attribute from the DUT and VVerify that the DUT responds with an "
+                "enum8 value.The value has to be in the range of 0 to 3\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadACRefrigerantTypeAttributeFromTheDutAndVVerifyThatTheDutRespondsWithAnEnum8ValueTheValueHasToBeInTheRangeOf0To3_45();
+            break;
+        case 46:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 46 : Read ACCompressorType attribute from the DUT and Verify that the DUT responds with an enum8 "
+                "value.The value has to be in the range of 0 to 3\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadACCompressorTypeAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnEnum8ValueTheValueHasToBeInTheRangeOf0To3_46();
+            break;
+        case 47:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 47 : Read ACErrorCode attribute from the DUT and Verify that the DUT responds with a map32 "
+                "value\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadACErrorCodeAttributeFromTheDutAndVerifyThatTheDutRespondsWithAMap32Value_47();
+            break;
+        case 48:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 48 : Read ACLouverPosition attribute from the DUT and Verify that the DUT responds with an enum8 "
+                "value.The value has to be in the range of 1 to 5\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadACLouverPositionAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnEnum8ValueTheValueHasToBeInTheRangeOf1To5_48();
+            break;
+        case 49:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 49 : Read ACCoilTemperature attribute from the DUT and Verify that the DUT responds with an "
+                "int16 value or NULL\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadACCoilTemperatureAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnInt16ValueOrNull_49();
+            break;
+        case 50:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 50 : Read ACCapacityFormat attribute from the DUT and Verify that the DUT responds with an enum8 "
+                "value.The value has to be 0.\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadACCapacityFormatAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnEnum8ValueTheValueHasToBe0_50();
             break;
         }
 
@@ -50257,6 +51418,105 @@ public:
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 35:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 36:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 37:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 38:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 39:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 40:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 41:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 42:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 43:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 44:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 45:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 46:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 47:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 48:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 49:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 50:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -50270,7 +51530,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 18;
+    const uint16_t mTestCount = 51;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -50412,7 +51672,27 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutOccupiedCoolingSetpoint_6()
+    CHIP_ERROR
+    TestReadPICoolingDemandAttributeFromTheDutVerifyThatTheDutRespondsWithAUint8ValueTheValueHasToBeInTheRangeOf0To100_6()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestReadPIHeatingDemandAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint8ValueTheValueHasToBeInTheRangeOf0To100_7()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutOccupiedCoolingSetpoint_8()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -50442,7 +51722,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutOccupiedHeatingSetpoint_7()
+    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutOccupiedHeatingSetpoint_9()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -50467,7 +51747,25 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutMinHeatSetpointLimit_8()
+    CHIP_ERROR TestReadUnoccupiedCoolingSetpointAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnInt16Value_10()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadUnoccupiedHeatingSetpointAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnInt16Value_11()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutMinHeatSetpointLimit_12()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -50492,7 +51790,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutMaxHeatSetpointLimit_9()
+    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutMaxHeatSetpointLimit_13()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -50517,7 +51815,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutMinCoolSetpointLimit_10()
+    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutMinCoolSetpointLimit_14()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -50547,7 +51845,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutMaxCoolSetpointLimit_11()
+    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutMaxCoolSetpointLimit_15()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -50577,7 +51875,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutControlSequenceOfOperation_12()
+    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutControlSequenceOfOperation_16()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -50603,7 +51901,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutSystemMode_13()
+    CHIP_ERROR TestReadsConstraintsOfMandatoryAttributesFromDutSystemMode_17()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -50628,7 +51926,45 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutMinSetpointDeadBand_14()
+    CHIP_ERROR TestReadOutdoorTemperatureAttributeFromTheDutAndVerifyTheDatatype_18()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadOccupancyAttributeFromTheDutAndVerifyTheDatatypeAndResponseValue_19()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestReadHVACSystemTypeConfigurationAttributeFromTheDutAndVerifyThatTheDutRespondsWithAMap8ValueTheValueHasToBeInTheRangeOf0x00To0x3f_20()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestReadLocalTemperatureCalibrationAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnInt8ValueTheValueHasToBeInTheRangeOf25To25_21()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutMinSetpointDeadBand_22()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -50658,7 +51994,36 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutStartOfWeek_15()
+    CHIP_ERROR
+    TestReadRemoteSensingAttributeFromTheDutAndVerifyThatTheDutRespondsWithAMap8ValueTheValueHasToBeInTheRangeOf0x00To0x07_23()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestReadAlarmMaskAttributeFromTheDutAndVerifyThatTheDutRespondsWithAMap8ValueTheValueHasToBeInTheRangeOf0x00To0x07_24()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadThermostatRunningModeAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnEnum8ValueTheValueHasToBe03Or4_25()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutStartOfWeek_26()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -50688,7 +52053,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutNumberOfWeeklyTransitions_16()
+    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutNumberOfWeeklyTransitions_27()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -50712,7 +52077,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutNumberOfDailyTransitions_17()
+    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutNumberOfDailyTransitions_28()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -50733,6 +52098,211 @@ private:
         }];
 
         return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTemperatureSetpointHoldAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnEnum8ValueTheValueHasTo0Or1_29()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestReadTemperatureSetpointHoldDurationAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint16ValueOrNULLTheValueHasToBeInTheRangeOf0To1440_30()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestReadThermostatProgrammingOperationModeAttributeFromTheDutAndVerifyThatTheDutRespondsWithAMap8ValueTheValueHasToBeInTheRangeOf0x00To0x07_31()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestReadThermostatRunningStateAttributeFromTheDutAndVerifyThatTheDutRespondsWithAMap16ValueTheValueHasToBeInTheRangeOf0x00To0x7F_32()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestReadSetpointChangeSourceAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnEnum8ValueTheValueHasToBeInTheRangeOf0To2_33()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadSetpointChangeAmountAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnInt16ValueOrNull_34()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadSetpointChangeSourceTimestampAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUtcValue_35()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadOccupiedSetbackAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint8ValueOrNull_36()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadOccupiedSetbackMinAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint8ValueOrNull_37()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadOccupiedSetbackMaxAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint8ValueOrNull_38()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadUnoccupiedSetbackAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint8ValueOrNull_39()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadUnoccupiedSetbackMinAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint8ValueOrNull_40()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadUnoccupiedSetbackMaxAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint8ValueOrNull_41()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadEmergencyHeatDeltaAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint8ValueOrNull_42()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadACTypeAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnEnum8ValueTheValueHasToBeInTheRangeOf0To4_43()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadACCapacityAttributeFromTheDutAndVerifyThatTheDutRespondsWithAUint16Value_44()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestReadACRefrigerantTypeAttributeFromTheDutAndVVerifyThatTheDutRespondsWithAnEnum8ValueTheValueHasToBeInTheRangeOf0To3_45()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestReadACCompressorTypeAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnEnum8ValueTheValueHasToBeInTheRangeOf0To3_46()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadACErrorCodeAttributeFromTheDutAndVerifyThatTheDutRespondsWithAMap32Value_47()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestReadACLouverPositionAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnEnum8ValueTheValueHasToBeInTheRangeOf1To5_48()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadACCoilTemperatureAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnInt16ValueOrNull_49()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadACCapacityFormatAttributeFromTheDutAndVerifyThatTheDutRespondsWithAnEnum8ValueTheValueHasToBe0_50()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -106033,6 +107603,1068 @@ private:
     }
 };
 
+class Test_TC_DL_2_8 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_DL_2_8()
+        : TestCommandBridge("Test_TC_DL_2_8")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_DL_2_8() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DL_2_8\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DL_2_8\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Create new PIN credential and lock/unlock user\n");
+            err = TestCreateNewPinCredentialAndLockUnlockUser_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Get Max number of Week Day schedules for user\n");
+            err = TestGetMaxNumberOfWeekDaySchedulesForUser_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Get number of supported users\n");
+            err = TestGetNumberOfSupportedUsers_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Send Set Week Day Schedule Command to DUT\n");
+            err = TestSendSetWeekDayScheduleCommandToDut_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : send GetWeekDay Schedule Command \n");
+            err = TestSendGetWeekDayScheduleCommand_5();
+            break;
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : Send Set Week Day Schedule Command to DUT and verify INVALID_COMMAND response\n");
+            err = TestSendSetWeekDayScheduleCommandToDutAndVerifyInvalidCommandResponse_6();
+            break;
+        case 7:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 7 : send GetWeekDay Schedule Command to DUT and verify INVALID_COMMAND response\n");
+            err = TestSendGetWeekDayScheduleCommandToDutAndVerifyInvalidCommandResponse_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Clear all week day schedules for the first user\n");
+            err = TestClearAllWeekDaySchedulesForTheFirstUser_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : send GetWeekDay Schedule Command \n");
+            err = TestSendGetWeekDayScheduleCommand_9();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 10;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialAndLockUnlockUser_1()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential and lock/unlock user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nonnull NumberOfWeekDaySchedulesSupportedPerUser;
+
+    CHIP_ERROR TestGetMaxNumberOfWeekDaySchedulesForUser_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeNumberOfWeekDaySchedulesSupportedPerUserWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Get Max number of Week Day schedules for user Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("NumberOfWeekDaySchedulesSupportedPerUser", actualValue, 10));
+            }
+            {
+                NumberOfWeekDaySchedulesSupportedPerUser = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nonnull NumberOfTotalUsersSupported;
+
+    CHIP_ERROR TestGetNumberOfSupportedUsers_3()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeNumberOfTotalUsersSupportedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Get number of supported users Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("NumberOfTotalUsersSupported", actualValue, 10U));
+                }
+                {
+                    NumberOfTotalUsersSupported = value;
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendSetWeekDayScheduleCommandToDut_4()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:2];
+        params.startHour = [NSNumber numberWithUnsignedChar:15];
+        params.startMinute = [NSNumber numberWithUnsignedChar:45];
+        params.endHour = [NSNumber numberWithUnsignedChar:16];
+        params.endMinute = [NSNumber numberWithUnsignedChar:55];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Send Set Week Day Schedule Command to DUT Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendGetWeekDayScheduleCommand_5()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster
+            getWeekDayScheduleWithParams:params
+                       completionHandler:^(
+                           CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                           NSLog(@"send GetWeekDay Schedule Command  Error: %@", err);
+
+                           VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                           if (values.weekDayIndex != nil) {
+                               VerifyOrReturn(
+                                   CheckConstraintMinValue<uint8_t>("weekDayIndex", [values.weekDayIndex unsignedCharValue], 1));
+                           }
+
+                           if (values.userIndex != nil) {
+                               VerifyOrReturn(
+                                   CheckConstraintMinValue<uint16_t>("userIndex", [values.userIndex unsignedShortValue], 1U));
+                           }
+
+                           {
+                               id actualValue = values.status;
+                               VerifyOrReturn(CheckValue("status", actualValue, 0));
+                           }
+
+                           if (values.daysMask != nil) {
+                               VerifyOrReturn(CheckConstraintMinValue<uint8_t>("daysMask", [values.daysMask unsignedCharValue], 0));
+                           }
+                           if (values.daysMask != nil) {
+                               VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("daysMask", [values.daysMask unsignedCharValue], 6));
+                           }
+
+                           if (values.startHour != nil) {
+                               VerifyOrReturn(
+                                   CheckConstraintMinValue<uint8_t>("startHour", [values.startHour unsignedCharValue], 0));
+                           }
+                           if (values.startHour != nil) {
+                               VerifyOrReturn(
+                                   CheckConstraintMaxValue<uint8_t>("startHour", [values.startHour unsignedCharValue], 23));
+                           }
+
+                           if (values.startMinute != nil) {
+                               VerifyOrReturn(
+                                   CheckConstraintMinValue<uint8_t>("startMinute", [values.startMinute unsignedCharValue], 0));
+                           }
+                           if (values.startMinute != nil) {
+                               VerifyOrReturn(
+                                   CheckConstraintMaxValue<uint8_t>("startMinute", [values.startMinute unsignedCharValue], 59));
+                           }
+
+                           if (values.endHour != nil) {
+                               VerifyOrReturn(CheckConstraintMinValue<uint8_t>("endHour", [values.endHour unsignedCharValue], 0));
+                           }
+                           if (values.endHour != nil) {
+                               VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("endHour", [values.endHour unsignedCharValue], 23));
+                           }
+
+                           if (values.endMinute != nil) {
+                               VerifyOrReturn(
+                                   CheckConstraintMinValue<uint8_t>("endMinute", [values.endMinute unsignedCharValue], 0));
+                           }
+                           if (values.endMinute != nil) {
+                               VerifyOrReturn(
+                                   CheckConstraintMaxValue<uint8_t>("endMinute", [values.endMinute unsignedCharValue], 59));
+                           }
+
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendSetWeekDayScheduleCommandToDutAndVerifyInvalidCommandResponse_6()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:7];
+        params.startHour = [NSNumber numberWithUnsignedChar:15];
+        params.startMinute = [NSNumber numberWithUnsignedChar:45];
+        params.endHour = [NSNumber numberWithUnsignedChar:16];
+        params.endMinute = [NSNumber numberWithUnsignedChar:55];
+        [cluster
+            setWeekDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Send Set Week Day Schedule Command to DUT and verify INVALID_COMMAND response Error: %@", err);
+
+                           VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendGetWeekDayScheduleCommandToDutAndVerifyInvalidCommandResponse_7()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster
+            getWeekDayScheduleWithParams:params
+                       completionHandler:^(
+                           CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                           NSLog(@"send GetWeekDay Schedule Command to DUT and verify INVALID_COMMAND response Error: %@", err);
+
+                           VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                           {
+                               id actualValue = values.weekDayIndex;
+                               VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 0));
+                           }
+
+                           {
+                               id actualValue = values.userIndex;
+                               VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                           }
+
+                           {
+                               id actualValue = values.status;
+                               VerifyOrReturn(CheckValue("status", actualValue, 133));
+                           }
+
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearAllWeekDaySchedulesForTheFirstUser_8()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:254];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearWeekDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear all week day schedules for the first user Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendGetWeekDayScheduleCommand_9()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"send GetWeekDay Schedule Command  Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 2));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_DL_2_11 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_DL_2_11()
+        : TestCommandBridge("Test_TC_DL_2_11")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_DL_2_11() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DL_2_11\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DL_2_11\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Create new PIN credential and lock/unlock user\n");
+            err = TestCreateNewPinCredentialAndLockUnlockUser_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Create new PIN credential and lock/unlock for second user\n");
+            err = TestCreateNewPinCredentialAndLockUnlockForSecondUser_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Get Max number of year Day schedules for user\n");
+            err = TestGetMaxNumberOfYearDaySchedulesForUser_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Get number of supported users\n");
+            err = TestGetNumberOfSupportedUsers_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Send Set Year Day Schedule Command to DUT\n");
+            err = TestSendSetYearDayScheduleCommandToDut_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : send Get Year Day Schedule Command\n");
+            err = TestSendGetYearDayScheduleCommand_6();
+            break;
+        case 7:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 7 : Send Set Year Day Schedule Command to DUT and verify INVALID_COMMAND response\n");
+            err = TestSendSetYearDayScheduleCommandToDutAndVerifyInvalidCommandResponse_7();
+            break;
+        case 8:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 8 : send Get Year Day Schedule Command to DUT and Verify INVALID_FIELD response\n");
+            err = TestSendGetYearDayScheduleCommandToDutAndVerifyInvalidFieldResponse_8();
+            break;
+        case 9:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 9 : send Get Year Day Schedule Command to DUT and verify NOT_FOUND response\n");
+            err = TestSendGetYearDayScheduleCommandToDutAndVerifyNotFoundResponse_9();
+            break;
+        case 10:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 10 : send Get Year Day Schedule Command  to DUT and verify NOT_FOUND response \n");
+            err = TestSendGetYearDayScheduleCommandToDutAndVerifyNotFoundResponse_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Send Set Year Day Schedule Command to DUT\n");
+            err = TestSendSetYearDayScheduleCommandToDut_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : send Get Year Day Schedule Command \n");
+            err = TestSendGetYearDayScheduleCommand_12();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 13;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialAndLockUnlockUser_1()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential and lock/unlock user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialAndLockUnlockForSecondUser_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123457" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential and lock/unlock for second user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nonnull NumberOfYearDaySchedulesSupportedPerUser;
+
+    CHIP_ERROR TestGetMaxNumberOfYearDaySchedulesForUser_3()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeNumberOfYearDaySchedulesSupportedPerUserWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Get Max number of year Day schedules for user Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("NumberOfYearDaySchedulesSupportedPerUser", actualValue, 10));
+            }
+            {
+                NumberOfYearDaySchedulesSupportedPerUser = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nonnull NumberOfTotalUsersSupported;
+
+    CHIP_ERROR TestGetNumberOfSupportedUsers_4()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeNumberOfTotalUsersSupportedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Get number of supported users Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("NumberOfTotalUsersSupported", actualValue, 10U));
+                }
+                {
+                    NumberOfTotalUsersSupported = value;
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendSetYearDayScheduleCommandToDut_5()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:10UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:20UL];
+        [cluster setYearDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Send Set Year Day Schedule Command to DUT Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendGetYearDayScheduleCommand_6()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"send Get Year Day Schedule Command Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                if (values.yearDayIndex != nil) {
+                                    VerifyOrReturn(CheckConstraintMinValue<uint8_t>(
+                                        "yearDayIndex", [values.yearDayIndex unsignedCharValue], 1));
+                                }
+
+                                if (values.userIndex != nil) {
+                                    VerifyOrReturn(
+                                        CheckConstraintMinValue<uint16_t>("userIndex", [values.userIndex unsignedShortValue], 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                VerifyOrReturn(CheckConstraintType("localStartTime", "", "epoch-s"));
+
+                                VerifyOrReturn(CheckConstraintType("localEndTime", "", "epoch-s"));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendSetYearDayScheduleCommandToDutAndVerifyInvalidCommandResponse_7()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.userIndex = [NSNumber numberWithUnsignedShort:10U];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:30UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:10UL];
+        [cluster
+            setYearDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Send Set Year Day Schedule Command to DUT and verify INVALID_COMMAND response Error: %@", err);
+
+                           VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendGetYearDayScheduleCommandToDutAndVerifyInvalidFieldResponse_8()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.userIndex = [NSNumber numberWithUnsignedShort:21U];
+        [cluster
+            getYearDayScheduleWithParams:params
+                       completionHandler:^(
+                           CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                           NSLog(@"send Get Year Day Schedule Command to DUT and Verify INVALID_FIELD response Error: %@", err);
+
+                           VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                           {
+                               id actualValue = values.yearDayIndex;
+                               VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2));
+                           }
+
+                           {
+                               id actualValue = values.userIndex;
+                               VerifyOrReturn(CheckValue("userIndex", actualValue, 21U));
+                           }
+
+                           {
+                               id actualValue = values.status;
+                               VerifyOrReturn(CheckValue("status", actualValue, 133));
+                           }
+
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendGetYearDayScheduleCommandToDutAndVerifyNotFoundResponse_9()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:10];
+        params.userIndex = [NSNumber numberWithUnsignedShort:5U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"send Get Year Day Schedule Command to DUT and verify NOT_FOUND response Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 10));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 5U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendGetYearDayScheduleCommandToDutAndVerifyNotFoundResponse_10()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"send Get Year Day Schedule Command  to DUT and verify NOT_FOUND response  Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendSetYearDayScheduleCommandToDut_11()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:10UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:20UL];
+        [cluster setYearDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Send Set Year Day Schedule Command to DUT Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendGetYearDayScheduleCommand_12()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"send Get Year Day Schedule Command  Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 10UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 20UL));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
 class TestGroupsCluster : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -107749,6 +110381,8 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_DL_2_2>(),
         make_unique<Test_TC_DL_2_3>(),
         make_unique<Test_TC_DL_2_4>(),
+        make_unique<Test_TC_DL_2_8>(),
+        make_unique<Test_TC_DL_2_11>(),
         make_unique<TestGroupsCluster>(),
         make_unique<TestGroupKeyManagementCluster>(),
 #endif // CONFIG_ENABLE_YAML_TESTS
