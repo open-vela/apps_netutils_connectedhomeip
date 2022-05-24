@@ -4533,7 +4533,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current hue", actualValue, 0));
+                VerifyOrReturn(CheckValue("CurrentHue", actualValue, 0));
             }
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
@@ -4556,7 +4556,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current saturation", actualValue, 0));
+                VerifyOrReturn(CheckValue("CurrentSaturation", actualValue, 0));
             }
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
@@ -4579,7 +4579,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current x", actualValue, 24939U));
+                VerifyOrReturn(CheckValue("CurrentX", actualValue, 24939U));
             }
 
             NextTest();
@@ -4626,7 +4626,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current y", actualValue, 24701U));
+                VerifyOrReturn(CheckValue("CurrentY", actualValue, 24701U));
             }
 
             NextTest();
@@ -4673,7 +4673,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color temperature", actualValue, 250U));
+                VerifyOrReturn(CheckValue("ColorTemperature", actualValue, 250U));
             }
 
             NextTest();
@@ -4720,7 +4720,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color mode", actualValue, 1));
+                VerifyOrReturn(CheckValue("ColorMode", actualValue, 1));
             }
 
             NextTest();
@@ -4760,17 +4760,17 @@ private:
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeColorControlOptionsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeOptionsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Validate constraints of attribute: Options Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color control options", actualValue, 0));
+                VerifyOrReturn(CheckValue("Options", actualValue, 0));
             }
 
-            VerifyOrReturn(CheckConstraintType("colorControlOptions", "", "map8"));
+            VerifyOrReturn(CheckConstraintType("options", "", "map8"));
             NextTest();
         }];
 
@@ -4790,7 +4790,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("enhanced current hue", actualValue, 0U));
+                VerifyOrReturn(CheckValue("EnhancedCurrentHue", actualValue, 0U));
             }
 
             VerifyOrReturn(CheckConstraintType("enhancedCurrentHue", "", "uint16"));
@@ -4813,7 +4813,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("enhanced color mode", actualValue, 1));
+                VerifyOrReturn(CheckValue("EnhancedColorMode", actualValue, 1));
             }
 
             VerifyOrReturn(CheckConstraintType("enhancedColorMode", "", "enum8"));
@@ -4836,7 +4836,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop active", actualValue, 0));
+                VerifyOrReturn(CheckValue("ColorLoopActive", actualValue, 0));
             }
 
             VerifyOrReturn(CheckConstraintType("colorLoopActive", "", "uint8"));
@@ -4859,7 +4859,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop direction", actualValue, 0));
+                VerifyOrReturn(CheckValue("ColorLoopDirection", actualValue, 0));
             }
 
             VerifyOrReturn(CheckConstraintType("colorLoopDirection", "", "uint8"));
@@ -4882,7 +4882,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop time", actualValue, 25U));
+                VerifyOrReturn(CheckValue("ColorLoopTime", actualValue, 25U));
             }
 
             VerifyOrReturn(CheckConstraintType("colorLoopTime", "", "uint16"));
@@ -4906,7 +4906,7 @@ private:
 
                 {
                     id actualValue = value;
-                    VerifyOrReturn(CheckValue("color loop start enhanced hue", actualValue, 8960U));
+                    VerifyOrReturn(CheckValue("ColorLoopStartEnhancedHue", actualValue, 8960U));
                 }
 
                 VerifyOrReturn(CheckConstraintType("colorLoopStartEnhancedHue", "", "uint16"));
@@ -4930,7 +4930,7 @@ private:
 
                 {
                     id actualValue = value;
-                    VerifyOrReturn(CheckValue("color loop stored enhanced hue", actualValue, 0U));
+                    VerifyOrReturn(CheckValue("ColorLoopStoredEnhancedHue", actualValue, 0U));
                 }
 
                 VerifyOrReturn(CheckConstraintType("colorLoopStoredEnhancedHue", "", "uint16"));
@@ -4953,7 +4953,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color capabilities", actualValue, 0U));
+                VerifyOrReturn(CheckValue("ColorCapabilities", actualValue, 0U));
             }
 
             NextTest();
@@ -4993,18 +4993,19 @@ private:
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeColorTempPhysicalMinWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads ColorTempPhysicalMinMireds attribute from DUT Error: %@", err);
+        [cluster
+            readAttributeColorTempPhysicalMinMiredsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Reads ColorTempPhysicalMinMireds attribute from DUT Error: %@", err);
 
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("color temp physical min", actualValue, 0U));
-            }
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("ColorTempPhysicalMinMireds", actualValue, 0U));
+                }
 
-            NextTest();
-        }];
+                NextTest();
+            }];
 
         return CHIP_NO_ERROR;
     }
@@ -5015,17 +5016,18 @@ private:
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeColorTempPhysicalMinWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeColorTempPhysicalMinMiredsWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Validate constraints of attribute: ColorTempPhysicalMinMireds Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("colorTempPhysicalMin", "", "uint16"));
+            VerifyOrReturn(CheckConstraintType("colorTempPhysicalMinMireds", "", "uint16"));
             if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTempPhysicalMin", [value unsignedShortValue], 0U));
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTempPhysicalMinMireds", [value unsignedShortValue], 0U));
             }
             if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTempPhysicalMin", [value unsignedShortValue], 65279U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTempPhysicalMinMireds", [value unsignedShortValue], 65279U));
             }
 
             NextTest();
@@ -5040,18 +5042,19 @@ private:
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeColorTempPhysicalMaxWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read ColorTempPhysicalMaxMireds attribute from DUT Error: %@", err);
+        [cluster
+            readAttributeColorTempPhysicalMaxMiredsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Read ColorTempPhysicalMaxMireds attribute from DUT Error: %@", err);
 
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("color temp physical max", actualValue, 65279U));
-            }
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("ColorTempPhysicalMaxMireds", actualValue, 65279U));
+                }
 
-            NextTest();
-        }];
+                NextTest();
+            }];
 
         return CHIP_NO_ERROR;
     }
@@ -5062,17 +5065,18 @@ private:
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeColorTempPhysicalMaxWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeColorTempPhysicalMaxMiredsWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Validate constraints of attribute: ColorTempPhysicalMaxMireds Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("colorTempPhysicalMax", "", "uint16"));
+            VerifyOrReturn(CheckConstraintType("colorTempPhysicalMaxMireds", "", "uint16"));
             if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTempPhysicalMax", [value unsignedShortValue], 0U));
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTempPhysicalMaxMireds", [value unsignedShortValue], 0U));
             }
             if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTempPhysicalMax", [value unsignedShortValue], 65279U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTempPhysicalMaxMireds", [value unsignedShortValue], 65279U));
             }
 
             NextTest();
@@ -5164,7 +5168,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("remaining time", actualValue, 0U));
+                VerifyOrReturn(CheckValue("RemainingTime", actualValue, 0U));
             }
 
             VerifyOrReturn(CheckConstraintType("remainingTime", "", "uint16"));
@@ -12433,8 +12437,8 @@ private:
         __auto_type * params = [[CHIPColorControlClusterMoveColorTemperatureParams alloc] init];
         params.moveMode = [NSNumber numberWithUnsignedChar:1];
         params.rate = [NSNumber numberWithUnsignedShort:10U];
-        params.colorTemperatureMinimum = [NSNumber numberWithUnsignedShort:1U];
-        params.colorTemperatureMaximum = [NSNumber numberWithUnsignedShort:255U];
+        params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:1U];
+        params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:255U];
         params.optionsMask = [NSNumber numberWithUnsignedChar:0];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
         [cluster moveColorTemperatureWithParams:params
@@ -12554,8 +12558,8 @@ private:
         __auto_type * params = [[CHIPColorControlClusterMoveColorTemperatureParams alloc] init];
         params.moveMode = [NSNumber numberWithUnsignedChar:3];
         params.rate = [NSNumber numberWithUnsignedShort:20U];
-        params.colorTemperatureMinimum = [NSNumber numberWithUnsignedShort:1U];
-        params.colorTemperatureMaximum = [NSNumber numberWithUnsignedShort:255U];
+        params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:1U];
+        params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:255U];
         params.optionsMask = [NSNumber numberWithUnsignedChar:0];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
         [cluster moveColorTemperatureWithParams:params
@@ -12675,8 +12679,8 @@ private:
         __auto_type * params = [[CHIPColorControlClusterMoveColorTemperatureParams alloc] init];
         params.moveMode = [NSNumber numberWithUnsignedChar:1];
         params.rate = [NSNumber numberWithUnsignedShort:10U];
-        params.colorTemperatureMinimum = [NSNumber numberWithUnsignedShort:1U];
-        params.colorTemperatureMaximum = [NSNumber numberWithUnsignedShort:255U];
+        params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:1U];
+        params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:255U];
         params.optionsMask = [NSNumber numberWithUnsignedChar:0];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
         [cluster moveColorTemperatureWithParams:params
@@ -12700,8 +12704,8 @@ private:
         __auto_type * params = [[CHIPColorControlClusterMoveColorTemperatureParams alloc] init];
         params.moveMode = [NSNumber numberWithUnsignedChar:0];
         params.rate = [NSNumber numberWithUnsignedShort:10U];
-        params.colorTemperatureMinimum = [NSNumber numberWithUnsignedShort:1U];
-        params.colorTemperatureMaximum = [NSNumber numberWithUnsignedShort:255U];
+        params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:1U];
+        params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:255U];
         params.optionsMask = [NSNumber numberWithUnsignedChar:0];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
         [cluster moveColorTemperatureWithParams:params
@@ -12821,8 +12825,8 @@ private:
         __auto_type * params = [[CHIPColorControlClusterMoveColorTemperatureParams alloc] init];
         params.moveMode = [NSNumber numberWithUnsignedChar:3];
         params.rate = [NSNumber numberWithUnsignedShort:20U];
-        params.colorTemperatureMinimum = [NSNumber numberWithUnsignedShort:1U];
-        params.colorTemperatureMaximum = [NSNumber numberWithUnsignedShort:255U];
+        params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:1U];
+        params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:255U];
         params.optionsMask = [NSNumber numberWithUnsignedChar:0];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
         [cluster moveColorTemperatureWithParams:params
@@ -12846,8 +12850,8 @@ private:
         __auto_type * params = [[CHIPColorControlClusterMoveColorTemperatureParams alloc] init];
         params.moveMode = [NSNumber numberWithUnsignedChar:0];
         params.rate = [NSNumber numberWithUnsignedShort:10U];
-        params.colorTemperatureMinimum = [NSNumber numberWithUnsignedShort:1U];
-        params.colorTemperatureMaximum = [NSNumber numberWithUnsignedShort:255U];
+        params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:1U];
+        params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:255U];
         params.optionsMask = [NSNumber numberWithUnsignedChar:0];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
         [cluster moveColorTemperatureWithParams:params
@@ -13288,8 +13292,8 @@ private:
         params.stepMode = [NSNumber numberWithUnsignedChar:1];
         params.stepSize = [NSNumber numberWithUnsignedShort:5U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:50U];
-        params.colorTemperatureMinimum = [NSNumber numberWithUnsignedShort:5U];
-        params.colorTemperatureMaximum = [NSNumber numberWithUnsignedShort:100U];
+        params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:5U];
+        params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:100U];
         params.optionsMask = [NSNumber numberWithUnsignedChar:0];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
         [cluster stepColorTemperatureWithParams:params
@@ -13410,8 +13414,8 @@ private:
         params.stepMode = [NSNumber numberWithUnsignedChar:3];
         params.stepSize = [NSNumber numberWithUnsignedShort:5U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:50U];
-        params.colorTemperatureMinimum = [NSNumber numberWithUnsignedShort:5U];
-        params.colorTemperatureMaximum = [NSNumber numberWithUnsignedShort:100U];
+        params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:5U];
+        params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:100U];
         params.optionsMask = [NSNumber numberWithUnsignedChar:0];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
         [cluster stepColorTemperatureWithParams:params
@@ -16720,8 +16724,8 @@ private:
         __auto_type * params = [[CHIPColorControlClusterMoveColorTemperatureParams alloc] init];
         params.moveMode = [NSNumber numberWithUnsignedChar:1];
         params.rate = [NSNumber numberWithUnsignedShort:10U];
-        params.colorTemperatureMinimum = [NSNumber numberWithUnsignedShort:1U];
-        params.colorTemperatureMaximum = [NSNumber numberWithUnsignedShort:255U];
+        params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:1U];
+        params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:255U];
         params.optionsMask = [NSNumber numberWithUnsignedChar:0];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
         [cluster moveColorTemperatureWithParams:params
@@ -17729,7 +17733,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop active", actualValue, 0));
+                VerifyOrReturn(CheckValue("ColorLoopActive", actualValue, 0));
             }
 
             NextTest();
@@ -17777,7 +17781,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop direction", actualValue, 0));
+                VerifyOrReturn(CheckValue("ColorLoopDirection", actualValue, 0));
             }
 
             NextTest();
@@ -17825,7 +17829,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop time", actualValue, 30U));
+                VerifyOrReturn(CheckValue("ColorLoopTime", actualValue, 30U));
             }
 
             NextTest();
@@ -17874,7 +17878,7 @@ private:
 
                 {
                     id actualValue = value;
-                    VerifyOrReturn(CheckValue("color loop start enhanced hue", actualValue, 160U));
+                    VerifyOrReturn(CheckValue("ColorLoopStartEnhancedHue", actualValue, 160U));
                 }
 
                 NextTest();
@@ -17922,7 +17926,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop active", actualValue, 1));
+                VerifyOrReturn(CheckValue("ColorLoopActive", actualValue, 1));
             }
 
             NextTest();
@@ -17968,7 +17972,7 @@ private:
 
                 {
                     id actualValue = value;
-                    VerifyOrReturn(CheckValue("color loop stored enhanced hue", actualValue, EnhancedCurrentHueValue1));
+                    VerifyOrReturn(CheckValue("ColorLoopStoredEnhancedHue", actualValue, EnhancedCurrentHueValue1));
                 }
 
                 NextTest();
@@ -18016,7 +18020,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop active", actualValue, 0));
+                VerifyOrReturn(CheckValue("ColorLoopActive", actualValue, 0));
             }
 
             NextTest();
@@ -18062,7 +18066,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("enhanced current hue", actualValue, ColorLoopStoredEnhancedHueValue1));
+                VerifyOrReturn(CheckValue("EnhancedCurrentHue", actualValue, ColorLoopStoredEnhancedHueValue1));
             }
 
             NextTest();
@@ -18110,7 +18114,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop direction", actualValue, 1));
+                VerifyOrReturn(CheckValue("ColorLoopDirection", actualValue, 1));
             }
 
             NextTest();
@@ -18158,7 +18162,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop active", actualValue, 1));
+                VerifyOrReturn(CheckValue("ColorLoopActive", actualValue, 1));
             }
 
             NextTest();
@@ -18204,7 +18208,7 @@ private:
 
                 {
                     id actualValue = value;
-                    VerifyOrReturn(CheckValue("color loop stored enhanced hue", actualValue, EnhancedCurrentHueValue2));
+                    VerifyOrReturn(CheckValue("ColorLoopStoredEnhancedHue", actualValue, EnhancedCurrentHueValue2));
                 }
 
                 NextTest();
@@ -18252,7 +18256,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop active", actualValue, 0));
+                VerifyOrReturn(CheckValue("ColorLoopActive", actualValue, 0));
             }
 
             NextTest();
@@ -18298,7 +18302,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("enhanced current hue", actualValue, ColorLoopStoredEnhancedHueValue2));
+                VerifyOrReturn(CheckValue("EnhancedCurrentHue", actualValue, ColorLoopStoredEnhancedHueValue2));
             }
 
             NextTest();
@@ -18351,7 +18355,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("enhanced current hue", actualValue, 40960U));
+                VerifyOrReturn(CheckValue("EnhancedCurrentHue", actualValue, 40960U));
             }
 
             NextTest();
@@ -18399,7 +18403,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop direction", actualValue, 0));
+                VerifyOrReturn(CheckValue("ColorLoopDirection", actualValue, 0));
             }
 
             NextTest();
@@ -18447,7 +18451,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop active", actualValue, 1));
+                VerifyOrReturn(CheckValue("ColorLoopActive", actualValue, 1));
             }
 
             NextTest();
@@ -18493,7 +18497,7 @@ private:
 
                 {
                     id actualValue = value;
-                    VerifyOrReturn(CheckValue("color loop stored enhanced hue", actualValue, EnhancedCurrentHueValue3));
+                    VerifyOrReturn(CheckValue("ColorLoopStoredEnhancedHue", actualValue, EnhancedCurrentHueValue3));
                 }
 
                 NextTest();
@@ -18541,7 +18545,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop active", actualValue, 0));
+                VerifyOrReturn(CheckValue("ColorLoopActive", actualValue, 0));
             }
 
             NextTest();
@@ -18587,7 +18591,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("enhanced current hue", actualValue, ColorLoopStoredEnhancedHueValue3));
+                VerifyOrReturn(CheckValue("EnhancedCurrentHue", actualValue, ColorLoopStoredEnhancedHueValue3));
             }
 
             NextTest();
@@ -18635,7 +18639,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop direction", actualValue, 1));
+                VerifyOrReturn(CheckValue("ColorLoopDirection", actualValue, 1));
             }
 
             NextTest();
@@ -18683,7 +18687,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop active", actualValue, 1));
+                VerifyOrReturn(CheckValue("ColorLoopActive", actualValue, 1));
             }
 
             NextTest();
@@ -18729,7 +18733,7 @@ private:
 
                 {
                     id actualValue = value;
-                    VerifyOrReturn(CheckValue("color loop stored enhanced hue", actualValue, EnhancedCurrentHueValue4));
+                    VerifyOrReturn(CheckValue("ColorLoopStoredEnhancedHue", actualValue, EnhancedCurrentHueValue4));
                 }
 
                 NextTest();
@@ -18777,7 +18781,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop active", actualValue, 0));
+                VerifyOrReturn(CheckValue("ColorLoopActive", actualValue, 0));
             }
 
             NextTest();
@@ -18823,7 +18827,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("enhanced current hue", actualValue, ColorLoopStoredEnhancedHue4));
+                VerifyOrReturn(CheckValue("EnhancedCurrentHue", actualValue, ColorLoopStoredEnhancedHue4));
             }
 
             NextTest();
@@ -19226,7 +19230,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop active", actualValue, 0));
+                VerifyOrReturn(CheckValue("ColorLoopActive", actualValue, 0));
             }
 
             NextTest();
@@ -19248,7 +19252,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop direction", actualValue, 0));
+                VerifyOrReturn(CheckValue("ColorLoopDirection", actualValue, 0));
             }
 
             NextTest();
@@ -19270,7 +19274,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop time", actualValue, 30U));
+                VerifyOrReturn(CheckValue("ColorLoopTime", actualValue, 30U));
             }
 
             NextTest();
@@ -19293,7 +19297,7 @@ private:
 
                 {
                     id actualValue = value;
-                    VerifyOrReturn(CheckValue("color loop start enhanced hue", actualValue, 160U));
+                    VerifyOrReturn(CheckValue("ColorLoopStartEnhancedHue", actualValue, 160U));
                 }
 
                 NextTest();
@@ -19364,7 +19368,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop active", actualValue, 1));
+                VerifyOrReturn(CheckValue("ColorLoopActive", actualValue, 1));
             }
 
             NextTest();
@@ -19387,7 +19391,7 @@ private:
 
                 {
                     id actualValue = value;
-                    VerifyOrReturn(CheckValue("color loop stored enhanced hue", actualValue, EnhancedCurrentHueValue));
+                    VerifyOrReturn(CheckValue("ColorLoopStoredEnhancedHue", actualValue, EnhancedCurrentHueValue));
                 }
 
                 NextTest();
@@ -19435,7 +19439,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop direction", actualValue, 1));
+                VerifyOrReturn(CheckValue("ColorLoopDirection", actualValue, 1));
             }
 
             NextTest();
@@ -19483,7 +19487,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop active", actualValue, 0));
+                VerifyOrReturn(CheckValue("ColorLoopActive", actualValue, 0));
             }
 
             NextTest();
@@ -19529,7 +19533,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("enhanced current hue", actualValue, ColorLoopStoredEnhancedHueValue));
+                VerifyOrReturn(CheckValue("EnhancedCurrentHue", actualValue, ColorLoopStoredEnhancedHueValue));
             }
 
             NextTest();
@@ -19932,7 +19936,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop active", actualValue, 0));
+                VerifyOrReturn(CheckValue("ColorLoopActive", actualValue, 0));
             }
 
             NextTest();
@@ -19954,7 +19958,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop direction", actualValue, 0));
+                VerifyOrReturn(CheckValue("ColorLoopDirection", actualValue, 0));
             }
 
             NextTest();
@@ -19976,7 +19980,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop time", actualValue, 30U));
+                VerifyOrReturn(CheckValue("ColorLoopTime", actualValue, 30U));
             }
 
             NextTest();
@@ -19999,7 +20003,7 @@ private:
 
                 {
                     id actualValue = value;
-                    VerifyOrReturn(CheckValue("color loop start enhanced hue", actualValue, 160U));
+                    VerifyOrReturn(CheckValue("ColorLoopStartEnhancedHue", actualValue, 160U));
                 }
 
                 NextTest();
@@ -20047,7 +20051,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop active", actualValue, 1));
+                VerifyOrReturn(CheckValue("ColorLoopActive", actualValue, 1));
             }
 
             NextTest();
@@ -20093,7 +20097,7 @@ private:
 
                 {
                     id actualValue = value;
-                    VerifyOrReturn(CheckValue("color loop stored enhanced hue", actualValue, EnhancedCurrentHueValue));
+                    VerifyOrReturn(CheckValue("ColorLoopStoredEnhancedHue", actualValue, EnhancedCurrentHueValue));
                 }
 
                 NextTest();
@@ -20141,7 +20145,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop time", actualValue, 60U));
+                VerifyOrReturn(CheckValue("ColorLoopTime", actualValue, 60U));
             }
 
             NextTest();
@@ -20189,7 +20193,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("color loop active", actualValue, 0));
+                VerifyOrReturn(CheckValue("ColorLoopActive", actualValue, 0));
             }
 
             NextTest();
@@ -20235,7 +20239,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("enhanced current hue", actualValue, ColorLoopStoredEnhancedHueValue));
+                VerifyOrReturn(CheckValue("EnhancedCurrentHue", actualValue, ColorLoopStoredEnhancedHueValue));
             }
 
             NextTest();

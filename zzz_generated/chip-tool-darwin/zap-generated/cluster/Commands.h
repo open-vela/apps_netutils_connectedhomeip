@@ -13358,7 +13358,7 @@ public:
 | * CompensationText                                                  | 0x0006 |
 | * ColorTemperature                                                  | 0x0007 |
 | * ColorMode                                                         | 0x0008 |
-| * ColorControlOptions                                               | 0x000F |
+| * Options                                                           | 0x000F |
 | * NumberOfPrimaries                                                 | 0x0010 |
 | * Primary1X                                                         | 0x0011 |
 | * Primary1Y                                                         | 0x0012 |
@@ -13397,8 +13397,8 @@ public:
 | * ColorLoopStartEnhancedHue                                         | 0x4005 |
 | * ColorLoopStoredEnhancedHue                                        | 0x4006 |
 | * ColorCapabilities                                                 | 0x400A |
-| * ColorTempPhysicalMin                                              | 0x400B |
-| * ColorTempPhysicalMax                                              | 0x400C |
+| * ColorTempPhysicalMinMireds                                        | 0x400B |
+| * ColorTempPhysicalMaxMireds                                        | 0x400C |
 | * CoupleColorTempToLevelMinMireds                                   | 0x400D |
 | * StartUpColorTemperatureMireds                                     | 0x4010 |
 | * GeneratedCommandList                                              | 0xFFF8 |
@@ -14290,8 +14290,8 @@ public:
     {
         AddArgument("MoveMode", 0, UINT8_MAX, &mRequest.moveMode);
         AddArgument("Rate", 0, UINT16_MAX, &mRequest.rate);
-        AddArgument("ColorTemperatureMinimum", 0, UINT16_MAX, &mRequest.colorTemperatureMinimum);
-        AddArgument("ColorTemperatureMaximum", 0, UINT16_MAX, &mRequest.colorTemperatureMaximum);
+        AddArgument("ColorTemperatureMinimumMireds", 0, UINT16_MAX, &mRequest.colorTemperatureMinimumMireds);
+        AddArgument("ColorTemperatureMaximumMireds", 0, UINT16_MAX, &mRequest.colorTemperatureMaximumMireds);
         AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
         AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
@@ -14308,8 +14308,8 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.moveMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.moveMode)];
         params.rate = [NSNumber numberWithUnsignedShort:mRequest.rate];
-        params.colorTemperatureMinimum = [NSNumber numberWithUnsignedShort:mRequest.colorTemperatureMinimum];
-        params.colorTemperatureMaximum = [NSNumber numberWithUnsignedShort:mRequest.colorTemperatureMaximum];
+        params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:mRequest.colorTemperatureMinimumMireds];
+        params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:mRequest.colorTemperatureMaximumMireds];
         params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
@@ -14345,8 +14345,8 @@ public:
         AddArgument("StepMode", 0, UINT8_MAX, &mRequest.stepMode);
         AddArgument("StepSize", 0, UINT16_MAX, &mRequest.stepSize);
         AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
-        AddArgument("ColorTemperatureMinimum", 0, UINT16_MAX, &mRequest.colorTemperatureMinimum);
-        AddArgument("ColorTemperatureMaximum", 0, UINT16_MAX, &mRequest.colorTemperatureMaximum);
+        AddArgument("ColorTemperatureMinimumMireds", 0, UINT16_MAX, &mRequest.colorTemperatureMinimumMireds);
+        AddArgument("ColorTemperatureMaximumMireds", 0, UINT16_MAX, &mRequest.colorTemperatureMaximumMireds);
         AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
         AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
@@ -14364,8 +14364,8 @@ public:
         params.stepMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.stepMode)];
         params.stepSize = [NSNumber numberWithUnsignedShort:mRequest.stepSize];
         params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
-        params.colorTemperatureMinimum = [NSNumber numberWithUnsignedShort:mRequest.colorTemperatureMinimum];
-        params.colorTemperatureMaximum = [NSNumber numberWithUnsignedShort:mRequest.colorTemperatureMaximum];
+        params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:mRequest.colorTemperatureMinimumMireds];
+        params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:mRequest.colorTemperatureMaximumMireds];
         params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
@@ -14994,16 +14994,16 @@ public:
 };
 
 /*
- * Attribute ColorControlOptions
+ * Attribute Options
  */
-class ReadColorControlColorControlOptions : public ReadAttribute {
+class ReadColorControlOptions : public ReadAttribute {
 public:
-    ReadColorControlColorControlOptions()
-        : ReadAttribute("color-control-options")
+    ReadColorControlOptions()
+        : ReadAttribute("options")
     {
     }
 
-    ~ReadColorControlColorControlOptions() {}
+    ~ReadColorControlOptions() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -15011,10 +15011,10 @@ public:
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPColorControl * cluster = [[CHIPColorControl alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
-        [cluster readAttributeColorControlOptionsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"ColorControl.ColorControlOptions response %@", [value description]);
+        [cluster readAttributeOptionsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ColorControl.Options response %@", [value description]);
             if (error != nil) {
-                LogNSError("ColorControl ColorControlOptions read Error", error);
+                LogNSError("ColorControl Options read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -15022,17 +15022,17 @@ public:
     }
 };
 
-class WriteColorControlColorControlOptions : public WriteAttribute {
+class WriteColorControlOptions : public WriteAttribute {
 public:
-    WriteColorControlColorControlOptions()
-        : WriteAttribute("color-control-options")
+    WriteColorControlOptions()
+        : WriteAttribute("options")
     {
-        AddArgument("attr-name", "color-control-options");
+        AddArgument("attr-name", "options");
         AddArgument("attr-value", 0, UINT8_MAX, &mValue);
         WriteAttribute::AddArguments();
     }
 
-    ~WriteColorControlColorControlOptions() {}
+    ~WriteColorControlOptions() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -15045,14 +15045,14 @@ public:
         params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
         NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
 
-        [cluster writeAttributeColorControlOptionsWithValue:value
-                                                     params:params
-                                          completionHandler:^(NSError * _Nullable error) {
-                                              if (error != nil) {
-                                                  LogNSError("ColorControl ColorControlOptions write Error", error);
-                                              }
-                                              SetCommandExitStatus(error);
-                                          }];
+        [cluster writeAttributeOptionsWithValue:value
+                                         params:params
+                              completionHandler:^(NSError * _Nullable error) {
+                                  if (error != nil) {
+                                      LogNSError("ColorControl Options write Error", error);
+                                  }
+                                  SetCommandExitStatus(error);
+                              }];
         return CHIP_NO_ERROR;
     }
 
@@ -15060,14 +15060,14 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeColorControlColorControlOptions : public SubscribeAttribute {
+class SubscribeAttributeColorControlOptions : public SubscribeAttribute {
 public:
-    SubscribeAttributeColorControlColorControlOptions()
-        : SubscribeAttribute("color-control-options")
+    SubscribeAttributeColorControlOptions()
+        : SubscribeAttribute("options")
     {
     }
 
-    ~SubscribeAttributeColorControlColorControlOptions() {}
+    ~SubscribeAttributeColorControlOptions() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -15078,17 +15078,16 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster
-            subscribeAttributeColorControlOptionsWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
-                                                     maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
-                                                          params:params
-                                         subscriptionEstablished:nullptr
-                                                   reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                                                       NSLog(@"ColorControl.ColorControlOptions response %@", [value description]);
-                                                       if (error || !mWait) {
-                                                           SetCommandExitStatus(error);
-                                                       }
-                                                   }];
+        [cluster subscribeAttributeOptionsWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+                                              maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+                                                   params:params
+                                  subscriptionEstablished:nullptr
+                                            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                                                NSLog(@"ColorControl.Options response %@", [value description]);
+                                                if (error || !mWait) {
+                                                    SetCommandExitStatus(error);
+                                                }
+                                            }];
 
         return CHIP_NO_ERROR;
     }
@@ -16842,7 +16841,7 @@ public:
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
-        NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
+        NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeColorPointRIntensityWithValue:value
                                                       params:params
@@ -17158,7 +17157,7 @@ public:
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
-        NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
+        NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeColorPointGIntensityWithValue:value
                                                       params:params
@@ -17474,7 +17473,7 @@ public:
         params.timedWriteTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
-        NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
+        NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster writeAttributeColorPointBIntensityWithValue:value
                                                       params:params
@@ -18075,16 +18074,16 @@ public:
 };
 
 /*
- * Attribute ColorTempPhysicalMin
+ * Attribute ColorTempPhysicalMinMireds
  */
-class ReadColorControlColorTempPhysicalMin : public ReadAttribute {
+class ReadColorControlColorTempPhysicalMinMireds : public ReadAttribute {
 public:
-    ReadColorControlColorTempPhysicalMin()
-        : ReadAttribute("color-temp-physical-min")
+    ReadColorControlColorTempPhysicalMinMireds()
+        : ReadAttribute("color-temp-physical-min-mireds")
     {
     }
 
-    ~ReadColorControlColorTempPhysicalMin() {}
+    ~ReadColorControlColorTempPhysicalMinMireds() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -18092,25 +18091,26 @@ public:
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPColorControl * cluster = [[CHIPColorControl alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
-        [cluster readAttributeColorTempPhysicalMinWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"ColorControl.ColorTempPhysicalMin response %@", [value description]);
-            if (error != nil) {
-                LogNSError("ColorControl ColorTempPhysicalMin read Error", error);
-            }
-            SetCommandExitStatus(error);
-        }];
+        [cluster
+            readAttributeColorTempPhysicalMinMiredsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"ColorControl.ColorTempPhysicalMinMireds response %@", [value description]);
+                if (error != nil) {
+                    LogNSError("ColorControl ColorTempPhysicalMinMireds read Error", error);
+                }
+                SetCommandExitStatus(error);
+            }];
         return CHIP_NO_ERROR;
     }
 };
 
-class SubscribeAttributeColorControlColorTempPhysicalMin : public SubscribeAttribute {
+class SubscribeAttributeColorControlColorTempPhysicalMinMireds : public SubscribeAttribute {
 public:
-    SubscribeAttributeColorControlColorTempPhysicalMin()
-        : SubscribeAttribute("color-temp-physical-min")
+    SubscribeAttributeColorControlColorTempPhysicalMinMireds()
+        : SubscribeAttribute("color-temp-physical-min-mireds")
     {
     }
 
-    ~SubscribeAttributeColorControlColorTempPhysicalMin() {}
+    ~SubscribeAttributeColorControlColorTempPhysicalMinMireds() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -18121,17 +18121,18 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeColorTempPhysicalMinWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
-                                                           maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
-                                                                params:params
-                                               subscriptionEstablished:nullptr
-                                                         reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                                                             NSLog(@"ColorControl.ColorTempPhysicalMin response %@",
-                                                                 [value description]);
-                                                             if (error || !mWait) {
-                                                                 SetCommandExitStatus(error);
-                                                             }
-                                                         }];
+        [cluster
+            subscribeAttributeColorTempPhysicalMinMiredsWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+                                                            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+                                                                 params:params
+                                                subscriptionEstablished:nullptr
+                                                          reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                                                              NSLog(@"ColorControl.ColorTempPhysicalMinMireds response %@",
+                                                                  [value description]);
+                                                              if (error || !mWait) {
+                                                                  SetCommandExitStatus(error);
+                                                              }
+                                                          }];
 
         return CHIP_NO_ERROR;
     }
@@ -18143,16 +18144,16 @@ public:
 };
 
 /*
- * Attribute ColorTempPhysicalMax
+ * Attribute ColorTempPhysicalMaxMireds
  */
-class ReadColorControlColorTempPhysicalMax : public ReadAttribute {
+class ReadColorControlColorTempPhysicalMaxMireds : public ReadAttribute {
 public:
-    ReadColorControlColorTempPhysicalMax()
-        : ReadAttribute("color-temp-physical-max")
+    ReadColorControlColorTempPhysicalMaxMireds()
+        : ReadAttribute("color-temp-physical-max-mireds")
     {
     }
 
-    ~ReadColorControlColorTempPhysicalMax() {}
+    ~ReadColorControlColorTempPhysicalMaxMireds() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -18160,25 +18161,26 @@ public:
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPColorControl * cluster = [[CHIPColorControl alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
-        [cluster readAttributeColorTempPhysicalMaxWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"ColorControl.ColorTempPhysicalMax response %@", [value description]);
-            if (error != nil) {
-                LogNSError("ColorControl ColorTempPhysicalMax read Error", error);
-            }
-            SetCommandExitStatus(error);
-        }];
+        [cluster
+            readAttributeColorTempPhysicalMaxMiredsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"ColorControl.ColorTempPhysicalMaxMireds response %@", [value description]);
+                if (error != nil) {
+                    LogNSError("ColorControl ColorTempPhysicalMaxMireds read Error", error);
+                }
+                SetCommandExitStatus(error);
+            }];
         return CHIP_NO_ERROR;
     }
 };
 
-class SubscribeAttributeColorControlColorTempPhysicalMax : public SubscribeAttribute {
+class SubscribeAttributeColorControlColorTempPhysicalMaxMireds : public SubscribeAttribute {
 public:
-    SubscribeAttributeColorControlColorTempPhysicalMax()
-        : SubscribeAttribute("color-temp-physical-max")
+    SubscribeAttributeColorControlColorTempPhysicalMaxMireds()
+        : SubscribeAttribute("color-temp-physical-max-mireds")
     {
     }
 
-    ~SubscribeAttributeColorControlColorTempPhysicalMax() {}
+    ~SubscribeAttributeColorControlColorTempPhysicalMaxMireds() {}
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
@@ -18189,17 +18191,18 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeColorTempPhysicalMaxWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
-                                                           maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
-                                                                params:params
-                                               subscriptionEstablished:nullptr
-                                                         reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                                                             NSLog(@"ColorControl.ColorTempPhysicalMax response %@",
-                                                                 [value description]);
-                                                             if (error || !mWait) {
-                                                                 SetCommandExitStatus(error);
-                                                             }
-                                                         }];
+        [cluster
+            subscribeAttributeColorTempPhysicalMaxMiredsWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+                                                            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+                                                                 params:params
+                                                subscriptionEstablished:nullptr
+                                                          reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                                                              NSLog(@"ColorControl.ColorTempPhysicalMaxMireds response %@",
+                                                                  [value description]);
+                                                              if (error || !mWait) {
+                                                                  SetCommandExitStatus(error);
+                                                              }
+                                                          }];
 
         return CHIP_NO_ERROR;
     }
@@ -97555,9 +97558,9 @@ void registerClusterColorControl(Commands & commands)
         make_unique<SubscribeAttributeColorControlColorTemperature>(), //
         make_unique<ReadColorControlColorMode>(), //
         make_unique<SubscribeAttributeColorControlColorMode>(), //
-        make_unique<ReadColorControlColorControlOptions>(), //
-        make_unique<WriteColorControlColorControlOptions>(), //
-        make_unique<SubscribeAttributeColorControlColorControlOptions>(), //
+        make_unique<ReadColorControlOptions>(), //
+        make_unique<WriteColorControlOptions>(), //
+        make_unique<SubscribeAttributeColorControlOptions>(), //
         make_unique<ReadColorControlNumberOfPrimaries>(), //
         make_unique<SubscribeAttributeColorControlNumberOfPrimaries>(), //
         make_unique<ReadColorControlPrimary1X>(), //
@@ -97645,10 +97648,10 @@ void registerClusterColorControl(Commands & commands)
         make_unique<SubscribeAttributeColorControlColorLoopStoredEnhancedHue>(), //
         make_unique<ReadColorControlColorCapabilities>(), //
         make_unique<SubscribeAttributeColorControlColorCapabilities>(), //
-        make_unique<ReadColorControlColorTempPhysicalMin>(), //
-        make_unique<SubscribeAttributeColorControlColorTempPhysicalMin>(), //
-        make_unique<ReadColorControlColorTempPhysicalMax>(), //
-        make_unique<SubscribeAttributeColorControlColorTempPhysicalMax>(), //
+        make_unique<ReadColorControlColorTempPhysicalMinMireds>(), //
+        make_unique<SubscribeAttributeColorControlColorTempPhysicalMinMireds>(), //
+        make_unique<ReadColorControlColorTempPhysicalMaxMireds>(), //
+        make_unique<SubscribeAttributeColorControlColorTempPhysicalMaxMireds>(), //
         make_unique<ReadColorControlCoupleColorTempToLevelMinMireds>(), //
         make_unique<SubscribeAttributeColorControlCoupleColorTempToLevelMinMireds>(), //
         make_unique<ReadColorControlStartUpColorTemperatureMireds>(), //
