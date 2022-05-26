@@ -23744,10 +23744,9 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(3)));
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(2)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
-                VerifyOrReturn(CheckValue("", actualValue[1], 1UL));
-                VerifyOrReturn(CheckValue("", actualValue[2], 64UL));
+                VerifyOrReturn(CheckValue("", actualValue[1], 64UL));
             }
 
             VerifyOrReturn(CheckConstraintType("acceptedCommandList", "", "list"));
@@ -23770,8 +23769,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(1)));
-                VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
             }
 
             VerifyOrReturn(CheckConstraintType("generatedCommandList", "", "list"));
