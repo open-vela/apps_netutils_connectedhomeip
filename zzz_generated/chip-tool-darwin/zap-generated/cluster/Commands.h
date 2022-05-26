@@ -44131,7 +44131,6 @@ public:
 |------------------------------------------------------------------------------|
 | Commands:                                                           |        |
 | * Identify                                                          |   0x00 |
-| * IdentifyQuery                                                     |   0x01 |
 | * TriggerEffect                                                     |   0x40 |
 |------------------------------------------------------------------------------|
 | Attributes:                                                         |        |
@@ -44188,48 +44187,6 @@ public:
 
 private:
     chip::app::Clusters::Identify::Commands::Identify::Type mRequest;
-};
-
-/*
- * Command IdentifyQuery
- */
-class IdentifyIdentifyQuery : public ClusterCommand {
-public:
-    IdentifyIdentifyQuery()
-        : ClusterCommand("identify-query")
-    {
-        ClusterCommand::AddArguments();
-    }
-
-    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000003) command (0x00000001) on endpoint %u", endpointId);
-
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        CHIPIdentify * cluster = [[CHIPIdentify alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
-        __auto_type * params = [[CHIPIdentifyClusterIdentifyQueryParams alloc] init];
-        params.timedInvokeTimeoutMs
-            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        uint16_t repeatCount = mRepeatCount.ValueOr(1);
-        uint16_t __block responsesNeeded = repeatCount;
-        while (repeatCount--) {
-            [cluster identifyQueryWithCompletionHandler:^(
-                CHIPIdentifyClusterIdentifyQueryResponseParams * _Nullable values, NSError * _Nullable error) {
-                NSLog(@"Values: %@", values);
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
-        }
-        return CHIP_NO_ERROR;
-    }
-
-private:
 };
 
 /*
@@ -98547,7 +98504,6 @@ void registerClusterIdentify(Commands & commands)
     commands_list clusterCommands = {
         make_unique<ClusterCommand>(Id), //
         make_unique<IdentifyIdentify>(), //
-        make_unique<IdentifyIdentifyQuery>(), //
         make_unique<IdentifyTriggerEffect>(), //
         make_unique<ReadAttribute>(Id), //
         make_unique<ReadIdentifyIdentifyTime>(), //

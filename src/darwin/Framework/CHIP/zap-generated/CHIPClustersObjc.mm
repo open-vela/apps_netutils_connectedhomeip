@@ -37194,33 +37194,6 @@ using namespace chip::app::Clusters;
         });
 }
 
-- (void)identifyQueryWithCompletionHandler:(void (^)(CHIPIdentifyClusterIdentifyQueryResponseParams * _Nullable data,
-                                               NSError * _Nullable error))completionHandler
-{
-    [self identifyQueryWithParams:nil completionHandler:completionHandler];
-}
-- (void)identifyQueryWithParams:(CHIPIdentifyClusterIdentifyQueryParams * _Nullable)params
-              completionHandler:(void (^)(CHIPIdentifyClusterIdentifyQueryResponseParams * _Nullable data,
-                                    NSError * _Nullable error))completionHandler
-{
-    chip::Optional<uint16_t> timedInvokeTimeoutMs;
-    ListFreer listFreer;
-    Identify::Commands::IdentifyQuery::Type request;
-    if (params != nil) {
-        if (params.timedInvokeTimeoutMs != nil) {
-            timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-        }
-    }
-
-    new CHIPIdentifyClusterIdentifyQueryResponseCallbackBridge(
-        self.callbackQueue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
-            auto successFn = Callback<CHIPIdentifyClusterIdentifyQueryResponseCallbackType>::FromCancelable(success);
-            auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
-            return self.cppCluster.InvokeCommand(
-                request, successFn->mContext, successFn->mCall, failureFn->mCall, timedInvokeTimeoutMs);
-        });
-}
-
 - (void)triggerEffectWithParams:(CHIPIdentifyClusterTriggerEffectParams *)params
               completionHandler:(StatusCompletion)completionHandler
 {
