@@ -97164,6 +97164,10 @@ public:
             ChipLogProgress(chipTool, " ***** Test Step 112 : Try to create sixth PIN credential and make sure it fails\n");
             err = TestTryToCreateSixthPinCredentialAndMakeSureItFails_112();
             break;
+        case 113:
+            ChipLogProgress(chipTool, " ***** Test Step 113 : Final clean-up\n");
+            err = TestFinalCleanUp_113();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -97514,6 +97518,9 @@ public:
         case 112:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 113:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -97527,7 +97534,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 113;
+    const uint16_t mTestCount = 114;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -102770,6 +102777,26 @@ private:
 
         return CHIP_NO_ERROR;
     }
+
+    CHIP_ERROR TestFinalCleanUp_113()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearUserWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"Final clean-up Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                       NextTest();
+                   }];
+
+        return CHIP_NO_ERROR;
+    }
 };
 
 class DL_LockUnlock : public TestCommandBridge {
@@ -103226,322 +103253,498 @@ public:
             err = TestGetMaxNumberOfYearDaySchedulesForUserAndVerifyDefaultValue_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Create Week Day schedule with 0 index\n");
-            err = TestCreateWeekDayScheduleWith0Index_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Get Max number of Holiday schedules and verify default value\n");
+            err = TestGetMaxNumberOfHolidaySchedulesAndVerifyDefaultValue_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Create Week Day schedule with out-of-bounds index\n");
-            err = TestCreateWeekDayScheduleWithOutOfBoundsIndex_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Create Week Day schedule with 0 index\n");
+            err = TestCreateWeekDayScheduleWith0Index_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Create Week Day schedule with 0 user index\n");
-            err = TestCreateWeekDayScheduleWith0UserIndex_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Create Week Day schedule with out-of-bounds index\n");
+            err = TestCreateWeekDayScheduleWithOutOfBoundsIndex_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Create Week Day schedule with out-of-bounds user index\n");
-            err = TestCreateWeekDayScheduleWithOutOfBoundsUserIndex_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Create Week Day schedule with 0 user index\n");
+            err = TestCreateWeekDayScheduleWith0UserIndex_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Create Week Day schedule for non-existing user\n");
-            err = TestCreateWeekDayScheduleForNonExistingUser_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Create Week Day schedule with out-of-bounds user index\n");
+            err = TestCreateWeekDayScheduleWithOutOfBoundsUserIndex_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Create Week Day schedule with 0 days mask\n");
-            err = TestCreateWeekDayScheduleWith0DaysMask_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Create Week Day schedule for non-existing user\n");
+            err = TestCreateWeekDayScheduleForNonExistingUser_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Create Week Day schedule for Sunday and Monday\n");
-            err = TestCreateWeekDayScheduleForSundayAndMonday_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Create Week Day schedule with 0 days mask\n");
+            err = TestCreateWeekDayScheduleWith0DaysMask_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Create Week Day schedule for Sunday Wednesday and Saturday\n");
-            err = TestCreateWeekDayScheduleForSundayWednesdayAndSaturday_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Create Week Day schedule for Sunday and Monday\n");
+            err = TestCreateWeekDayScheduleForSundayAndMonday_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Create Week Day schedule with invalid start hour\n");
-            err = TestCreateWeekDayScheduleWithInvalidStartHour_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Create Week Day schedule for Sunday Wednesday and Saturday\n");
+            err = TestCreateWeekDayScheduleForSundayWednesdayAndSaturday_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Create Week Day schedule with invalid start minute\n");
-            err = TestCreateWeekDayScheduleWithInvalidStartMinute_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Create Week Day schedule with invalid start hour\n");
+            err = TestCreateWeekDayScheduleWithInvalidStartHour_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Create Week Day schedule with invalid end hour\n");
-            err = TestCreateWeekDayScheduleWithInvalidEndHour_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Create Week Day schedule with invalid start minute\n");
+            err = TestCreateWeekDayScheduleWithInvalidStartMinute_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Create Week Day schedule with invalid end minute\n");
-            err = TestCreateWeekDayScheduleWithInvalidEndMinute_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Create Week Day schedule with invalid end hour\n");
+            err = TestCreateWeekDayScheduleWithInvalidEndHour_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Create Week Day schedule with start hour later that end hour\n");
-            err = TestCreateWeekDayScheduleWithStartHourLaterThatEndHour_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Create Week Day schedule with invalid end minute\n");
+            err = TestCreateWeekDayScheduleWithInvalidEndMinute_17();
             break;
         case 18:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 18 : Create Week Day schedule with start minute later that end minute when hours are equal\n");
-            err = TestCreateWeekDayScheduleWithStartMinuteLaterThatEndMinuteWhenHoursAreEqual_18();
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Create Week Day schedule with start hour later that end hour\n");
+            err = TestCreateWeekDayScheduleWithStartHourLaterThatEndHour_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Make sure that previous operations did not create a schedule\n");
-            err = TestMakeSureThatPreviousOperationsDidNotCreateASchedule_19();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 19 : Create Week Day schedule with start minute later that end minute when hours are equal\n");
+            err = TestCreateWeekDayScheduleWithStartMinuteLaterThatEndMinuteWhenHoursAreEqual_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Get Week Day schedule with 0 index\n");
-            err = TestGetWeekDayScheduleWith0Index_20();
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Make sure that previous operations did not create a schedule\n");
+            err = TestMakeSureThatPreviousOperationsDidNotCreateASchedule_20();
             break;
         case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : Get Week Day schedule with out-of-bounds index\n");
-            err = TestGetWeekDayScheduleWithOutOfBoundsIndex_21();
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Get Week Day schedule with 0 index\n");
+            err = TestGetWeekDayScheduleWith0Index_21();
             break;
         case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : Get Week Day schedule with 0 user index\n");
-            err = TestGetWeekDayScheduleWith0UserIndex_22();
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Get Week Day schedule with out-of-bounds index\n");
+            err = TestGetWeekDayScheduleWithOutOfBoundsIndex_22();
             break;
         case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : Get Week Day schedule with out-of-bounds user index\n");
-            err = TestGetWeekDayScheduleWithOutOfBoundsUserIndex_23();
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Get Week Day schedule with 0 user index\n");
+            err = TestGetWeekDayScheduleWith0UserIndex_23();
             break;
         case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : Get Week Day schedule with non-existing user index\n");
-            err = TestGetWeekDayScheduleWithNonExistingUserIndex_24();
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Get Week Day schedule with out-of-bounds user index\n");
+            err = TestGetWeekDayScheduleWithOutOfBoundsUserIndex_24();
             break;
         case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : Create Year Day schedule with 0 index\n");
-            err = TestCreateYearDayScheduleWith0Index_25();
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Get Week Day schedule with non-existing user index\n");
+            err = TestGetWeekDayScheduleWithNonExistingUserIndex_25();
             break;
         case 26:
-            ChipLogProgress(chipTool, " ***** Test Step 26 : Create Year Day schedule with out-of-bounds index\n");
-            err = TestCreateYearDayScheduleWithOutOfBoundsIndex_26();
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Create Year Day schedule with 0 index\n");
+            err = TestCreateYearDayScheduleWith0Index_26();
             break;
         case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : Create Year Day schedule with 0 user index\n");
-            err = TestCreateYearDayScheduleWith0UserIndex_27();
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Create Year Day schedule with out-of-bounds index\n");
+            err = TestCreateYearDayScheduleWithOutOfBoundsIndex_27();
             break;
         case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Create Year Day schedule with out-of-bounds user index\n");
-            err = TestCreateYearDayScheduleWithOutOfBoundsUserIndex_28();
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Create Year Day schedule with 0 user index\n");
+            err = TestCreateYearDayScheduleWith0UserIndex_28();
             break;
         case 29:
-            ChipLogProgress(chipTool, " ***** Test Step 29 : Create Year Day schedule for non-existing user\n");
-            err = TestCreateYearDayScheduleForNonExistingUser_29();
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Create Year Day schedule with out-of-bounds user index\n");
+            err = TestCreateYearDayScheduleWithOutOfBoundsUserIndex_29();
             break;
         case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : Create Year Day schedule with start hour later that end hour\n");
-            err = TestCreateYearDayScheduleWithStartHourLaterThatEndHour_30();
+            ChipLogProgress(chipTool, " ***** Test Step 30 : Create Year Day schedule for non-existing user\n");
+            err = TestCreateYearDayScheduleForNonExistingUser_30();
             break;
         case 31:
-            ChipLogProgress(chipTool, " ***** Test Step 31 : Make sure that previous operations did not create a schedule\n");
-            err = TestMakeSureThatPreviousOperationsDidNotCreateASchedule_31();
+            ChipLogProgress(chipTool, " ***** Test Step 31 : Create Year Day schedule with start hour later that end hour\n");
+            err = TestCreateYearDayScheduleWithStartHourLaterThatEndHour_31();
             break;
         case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : Get Year Day schedule with 0 index\n");
-            err = TestGetYearDayScheduleWith0Index_32();
+            ChipLogProgress(chipTool, " ***** Test Step 32 : Make sure that previous operations did not create a schedule\n");
+            err = TestMakeSureThatPreviousOperationsDidNotCreateASchedule_32();
             break;
         case 33:
-            ChipLogProgress(chipTool, " ***** Test Step 33 : Get Year Day schedule with out-of-bounds index\n");
-            err = TestGetYearDayScheduleWithOutOfBoundsIndex_33();
+            ChipLogProgress(chipTool, " ***** Test Step 33 : Get Year Day schedule with 0 index\n");
+            err = TestGetYearDayScheduleWith0Index_33();
             break;
         case 34:
-            ChipLogProgress(chipTool, " ***** Test Step 34 : Get Year Day schedule with 0 user index\n");
-            err = TestGetYearDayScheduleWith0UserIndex_34();
+            ChipLogProgress(chipTool, " ***** Test Step 34 : Get Year Day schedule with out-of-bounds index\n");
+            err = TestGetYearDayScheduleWithOutOfBoundsIndex_34();
             break;
         case 35:
-            ChipLogProgress(chipTool, " ***** Test Step 35 : Get Year Day schedule with out-of-bounds user index\n");
-            err = TestGetYearDayScheduleWithOutOfBoundsUserIndex_35();
+            ChipLogProgress(chipTool, " ***** Test Step 35 : Get Year Day schedule with 0 user index\n");
+            err = TestGetYearDayScheduleWith0UserIndex_35();
             break;
         case 36:
-            ChipLogProgress(chipTool, " ***** Test Step 36 : Get Year Day schedule with non-existing user index\n");
-            err = TestGetYearDayScheduleWithNonExistingUserIndex_36();
+            ChipLogProgress(chipTool, " ***** Test Step 36 : Get Year Day schedule with out-of-bounds user index\n");
+            err = TestGetYearDayScheduleWithOutOfBoundsUserIndex_36();
             break;
         case 37:
-            ChipLogProgress(chipTool, " ***** Test Step 37 : Create Week Day schedule with valid parameters\n");
-            err = TestCreateWeekDayScheduleWithValidParameters_37();
+            ChipLogProgress(chipTool, " ***** Test Step 37 : Get Year Day schedule with non-existing user index\n");
+            err = TestGetYearDayScheduleWithNonExistingUserIndex_37();
             break;
         case 38:
-            ChipLogProgress(chipTool, " ***** Test Step 38 : Verify created schedule\n");
-            err = TestVerifyCreatedSchedule_38();
+            ChipLogProgress(chipTool, " ***** Test Step 38 : Create Holiday schedule with 0 index\n");
+            err = TestCreateHolidayScheduleWith0Index_38();
             break;
         case 39:
-            ChipLogProgress(chipTool, " ***** Test Step 39 : Create Year Day schedule with valid parameters\n");
-            err = TestCreateYearDayScheduleWithValidParameters_39();
+            ChipLogProgress(chipTool, " ***** Test Step 39 : Create Holiday schedule with out-of-bounds index\n");
+            err = TestCreateHolidayScheduleWithOutOfBoundsIndex_39();
             break;
         case 40:
-            ChipLogProgress(chipTool, " ***** Test Step 40 : Verify created schedule\n");
-            err = TestVerifyCreatedSchedule_40();
+            ChipLogProgress(chipTool, " ***** Test Step 40 : Create Holiday schedule with start hour later that end hour\n");
+            err = TestCreateHolidayScheduleWithStartHourLaterThatEndHour_40();
             break;
         case 41:
-            ChipLogProgress(chipTool, " ***** Test Step 41 : Clear Week Day schedule with 0 index\n");
-            err = TestClearWeekDayScheduleWith0Index_41();
+            ChipLogProgress(chipTool, " ***** Test Step 41 : Create Holiday schedule with invalid operating mode\n");
+            err = TestCreateHolidayScheduleWithInvalidOperatingMode_41();
             break;
         case 42:
-            ChipLogProgress(chipTool, " ***** Test Step 42 : Clear Week Day schedule with out-of-bounds index\n");
-            err = TestClearWeekDayScheduleWithOutOfBoundsIndex_42();
+            ChipLogProgress(chipTool, " ***** Test Step 42 : Make sure that previous operations did not create a schedule\n");
+            err = TestMakeSureThatPreviousOperationsDidNotCreateASchedule_42();
             break;
         case 43:
-            ChipLogProgress(chipTool, " ***** Test Step 43 : Clear Week Day schedule with 0 user index\n");
-            err = TestClearWeekDayScheduleWith0UserIndex_43();
+            ChipLogProgress(chipTool, " ***** Test Step 43 : Get Holiday schedule with 0 index\n");
+            err = TestGetHolidayScheduleWith0Index_43();
             break;
         case 44:
-            ChipLogProgress(chipTool, " ***** Test Step 44 : Clear Week Day schedule with out-of-bounds user index\n");
-            err = TestClearWeekDayScheduleWithOutOfBoundsUserIndex_44();
+            ChipLogProgress(chipTool, " ***** Test Step 44 : Get Holiday schedule with out-of-bounds index\n");
+            err = TestGetHolidayScheduleWithOutOfBoundsIndex_44();
             break;
         case 45:
-            ChipLogProgress(chipTool, " ***** Test Step 45 : Clear Week Day schedule with non-existing user\n");
-            err = TestClearWeekDayScheduleWithNonExistingUser_45();
+            ChipLogProgress(chipTool, " ***** Test Step 45 : Create Holiday schedule with valid parameters\n");
+            err = TestCreateHolidayScheduleWithValidParameters_45();
             break;
         case 46:
-            ChipLogProgress(chipTool, " ***** Test Step 46 : Clear Year Day schedule with 0 index\n");
-            err = TestClearYearDayScheduleWith0Index_46();
+            ChipLogProgress(chipTool, " ***** Test Step 46 : Verify created schedule\n");
+            err = TestVerifyCreatedSchedule_46();
             break;
         case 47:
-            ChipLogProgress(chipTool, " ***** Test Step 47 : Clear Year Day schedule with out-of-bounds index\n");
-            err = TestClearYearDayScheduleWithOutOfBoundsIndex_47();
+            ChipLogProgress(chipTool, " ***** Test Step 47 : Create Week Day schedule with valid parameters\n");
+            err = TestCreateWeekDayScheduleWithValidParameters_47();
             break;
         case 48:
-            ChipLogProgress(chipTool, " ***** Test Step 48 : Clear Year Day schedule with 0 user index\n");
-            err = TestClearYearDayScheduleWith0UserIndex_48();
+            ChipLogProgress(chipTool, " ***** Test Step 48 : Verify created schedule\n");
+            err = TestVerifyCreatedSchedule_48();
             break;
         case 49:
-            ChipLogProgress(chipTool, " ***** Test Step 49 : Clear Year Day schedule with out-of-bounds user index\n");
-            err = TestClearYearDayScheduleWithOutOfBoundsUserIndex_49();
+            ChipLogProgress(chipTool, " ***** Test Step 49 : Create Year Day schedule with valid parameters\n");
+            err = TestCreateYearDayScheduleWithValidParameters_49();
             break;
         case 50:
-            ChipLogProgress(chipTool, " ***** Test Step 50 : Clear Year Day schedule with non-existing user\n");
-            err = TestClearYearDayScheduleWithNonExistingUser_50();
+            ChipLogProgress(chipTool, " ***** Test Step 50 : Verify created schedule\n");
+            err = TestVerifyCreatedSchedule_50();
             break;
         case 51:
-            ChipLogProgress(chipTool, " ***** Test Step 51 : Make sure that week day schedule was not deleted\n");
-            err = TestMakeSureThatWeekDayScheduleWasNotDeleted_51();
+            ChipLogProgress(chipTool, " ***** Test Step 51 : Clear Week Day schedule with 0 index\n");
+            err = TestClearWeekDayScheduleWith0Index_51();
             break;
         case 52:
-            ChipLogProgress(chipTool, " ***** Test Step 52 : Make sure that year day schedule was not deleted\n");
-            err = TestMakeSureThatYearDayScheduleWasNotDeleted_52();
+            ChipLogProgress(chipTool, " ***** Test Step 52 : Clear Week Day schedule with out-of-bounds index\n");
+            err = TestClearWeekDayScheduleWithOutOfBoundsIndex_52();
             break;
         case 53:
-            ChipLogProgress(chipTool, " ***** Test Step 53 : Create another Week Day schedule with valid parameters\n");
-            err = TestCreateAnotherWeekDayScheduleWithValidParameters_53();
+            ChipLogProgress(chipTool, " ***** Test Step 53 : Clear Week Day schedule with 0 user index\n");
+            err = TestClearWeekDayScheduleWith0UserIndex_53();
             break;
         case 54:
-            ChipLogProgress(chipTool, " ***** Test Step 54 : Verify created week day schedule\n");
-            err = TestVerifyCreatedWeekDaySchedule_54();
+            ChipLogProgress(chipTool, " ***** Test Step 54 : Clear Week Day schedule with out-of-bounds user index\n");
+            err = TestClearWeekDayScheduleWithOutOfBoundsUserIndex_54();
             break;
         case 55:
-            ChipLogProgress(chipTool, " ***** Test Step 55 : Create another Year Day schedule with valid parameters\n");
-            err = TestCreateAnotherYearDayScheduleWithValidParameters_55();
+            ChipLogProgress(chipTool, " ***** Test Step 55 : Clear Week Day schedule with non-existing user\n");
+            err = TestClearWeekDayScheduleWithNonExistingUser_55();
             break;
         case 56:
-            ChipLogProgress(chipTool, " ***** Test Step 56 : Verify created year day schedule\n");
-            err = TestVerifyCreatedYearDaySchedule_56();
+            ChipLogProgress(chipTool, " ***** Test Step 56 : Make sure that week day schedule was not deleted\n");
+            err = TestMakeSureThatWeekDayScheduleWasNotDeleted_56();
             break;
         case 57:
-            ChipLogProgress(chipTool, " ***** Test Step 57 : Clear a single week day schedule for the first user\n");
-            err = TestClearASingleWeekDayScheduleForTheFirstUser_57();
+            ChipLogProgress(chipTool, " ***** Test Step 57 : Make sure that year day schedule was not deleted\n");
+            err = TestMakeSureThatYearDayScheduleWasNotDeleted_57();
             break;
         case 58:
-            ChipLogProgress(chipTool, " ***** Test Step 58 : Verify cleared week day schedule\n");
-            err = TestVerifyClearedWeekDaySchedule_58();
+            ChipLogProgress(chipTool, " ***** Test Step 58 : Make sure that holiday schedule was not deleted\n");
+            err = TestMakeSureThatHolidayScheduleWasNotDeleted_58();
             break;
         case 59:
-            ChipLogProgress(chipTool, " ***** Test Step 59 : Clear all remaining week day schedules for the first user\n");
-            err = TestClearAllRemainingWeekDaySchedulesForTheFirstUser_59();
+            ChipLogProgress(chipTool, " ***** Test Step 59 : Clear Year Day schedule with 0 index\n");
+            err = TestClearYearDayScheduleWith0Index_59();
             break;
         case 60:
-            ChipLogProgress(chipTool, " ***** Test Step 60 : Verify cleared week schedule\n");
-            err = TestVerifyClearedWeekSchedule_60();
+            ChipLogProgress(chipTool, " ***** Test Step 60 : Clear Year Day schedule with out-of-bounds index\n");
+            err = TestClearYearDayScheduleWithOutOfBoundsIndex_60();
             break;
         case 61:
-            ChipLogProgress(chipTool, " ***** Test Step 61 : Make sure that first year day schedule was not deleted\n");
-            err = TestMakeSureThatFirstYearDayScheduleWasNotDeleted_61();
+            ChipLogProgress(chipTool, " ***** Test Step 61 : Clear Year Day schedule with 0 user index\n");
+            err = TestClearYearDayScheduleWith0UserIndex_61();
             break;
         case 62:
-            ChipLogProgress(chipTool, " ***** Test Step 62 : Make sure that second year day schedule was not deleted\n");
-            err = TestMakeSureThatSecondYearDayScheduleWasNotDeleted_62();
+            ChipLogProgress(chipTool, " ***** Test Step 62 : Clear Year Day schedule with out-of-bounds user index\n");
+            err = TestClearYearDayScheduleWithOutOfBoundsUserIndex_62();
             break;
         case 63:
-            ChipLogProgress(chipTool, " ***** Test Step 63 : Create another Week Day schedule with valid parameters\n");
-            err = TestCreateAnotherWeekDayScheduleWithValidParameters_63();
+            ChipLogProgress(chipTool, " ***** Test Step 63 : Clear Year Day schedule with non-existing user\n");
+            err = TestClearYearDayScheduleWithNonExistingUser_63();
             break;
         case 64:
-            ChipLogProgress(chipTool, " ***** Test Step 64 : Clear a single year day schedule for the first user\n");
-            err = TestClearASingleYearDayScheduleForTheFirstUser_64();
+            ChipLogProgress(chipTool, " ***** Test Step 64 : Make sure that week day schedule was not deleted\n");
+            err = TestMakeSureThatWeekDayScheduleWasNotDeleted_64();
             break;
         case 65:
-            ChipLogProgress(chipTool, " ***** Test Step 65 : Verify cleared year day schedule\n");
-            err = TestVerifyClearedYearDaySchedule_65();
+            ChipLogProgress(chipTool, " ***** Test Step 65 : Make sure that year day schedule was not deleted\n");
+            err = TestMakeSureThatYearDayScheduleWasNotDeleted_65();
             break;
         case 66:
-            ChipLogProgress(chipTool, " ***** Test Step 66 : Clear all remaining year schedules for the first user\n");
-            err = TestClearAllRemainingYearSchedulesForTheFirstUser_66();
+            ChipLogProgress(chipTool, " ***** Test Step 66 : Make sure that holiday schedule was not deleted\n");
+            err = TestMakeSureThatHolidayScheduleWasNotDeleted_66();
             break;
         case 67:
-            ChipLogProgress(chipTool, " ***** Test Step 67 : Verify that second year day schedule was cleared\n");
-            err = TestVerifyThatSecondYearDayScheduleWasCleared_67();
+            ChipLogProgress(chipTool, " ***** Test Step 67 : Clear Holiday schedule with 0 index\n");
+            err = TestClearHolidayScheduleWith0Index_67();
             break;
         case 68:
-            ChipLogProgress(chipTool, " ***** Test Step 68 : Verify created week day schedule\n");
-            err = TestVerifyCreatedWeekDaySchedule_68();
+            ChipLogProgress(chipTool, " ***** Test Step 68 : Clear Holiday schedule with out-of-bounds index\n");
+            err = TestClearHolidayScheduleWithOutOfBoundsIndex_68();
             break;
         case 69:
-            ChipLogProgress(chipTool, " ***** Test Step 69 : Clear all remaining week day schedules for the first user\n");
-            err = TestClearAllRemainingWeekDaySchedulesForTheFirstUser_69();
+            ChipLogProgress(chipTool, " ***** Test Step 69 : Make sure that week day schedule was not deleted\n");
+            err = TestMakeSureThatWeekDayScheduleWasNotDeleted_69();
             break;
         case 70:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 70 : Create new user without credential so we can add more schedules to it\n");
-            err = TestCreateNewUserWithoutCredentialSoWeCanAddMoreSchedulesToIt_70();
+            ChipLogProgress(chipTool, " ***** Test Step 70 : Make sure that year day schedule was not deleted\n");
+            err = TestMakeSureThatYearDayScheduleWasNotDeleted_70();
             break;
         case 71:
-            ChipLogProgress(chipTool, " ***** Test Step 71 : Create Week Day schedule with valid parameters for first user\n");
-            err = TestCreateWeekDayScheduleWithValidParametersForFirstUser_71();
+            ChipLogProgress(chipTool, " ***** Test Step 71 : Make sure that holiday schedule was not deleted\n");
+            err = TestMakeSureThatHolidayScheduleWasNotDeleted_71();
             break;
         case 72:
-            ChipLogProgress(chipTool, " ***** Test Step 72 : Verify created week day schedule for first user\n");
-            err = TestVerifyCreatedWeekDayScheduleForFirstUser_72();
+            ChipLogProgress(chipTool, " ***** Test Step 72 : Create another Week Day schedule with valid parameters\n");
+            err = TestCreateAnotherWeekDayScheduleWithValidParameters_72();
             break;
         case 73:
-            ChipLogProgress(chipTool, " ***** Test Step 73 : Create Year Day schedule for first user\n");
-            err = TestCreateYearDayScheduleForFirstUser_73();
+            ChipLogProgress(chipTool, " ***** Test Step 73 : Verify created week day schedule\n");
+            err = TestVerifyCreatedWeekDaySchedule_73();
             break;
         case 74:
-            ChipLogProgress(chipTool, " ***** Test Step 74 : Verify created year day schedule for first\n");
-            err = TestVerifyCreatedYearDayScheduleForFirst_74();
+            ChipLogProgress(chipTool, " ***** Test Step 74 : Create another Year Day schedule with valid parameters\n");
+            err = TestCreateAnotherYearDayScheduleWithValidParameters_74();
             break;
         case 75:
-            ChipLogProgress(chipTool, " ***** Test Step 75 : Create Week Day schedule with valid parameters for second user\n");
-            err = TestCreateWeekDayScheduleWithValidParametersForSecondUser_75();
+            ChipLogProgress(chipTool, " ***** Test Step 75 : Verify created year day schedule\n");
+            err = TestVerifyCreatedYearDaySchedule_75();
             break;
         case 76:
-            ChipLogProgress(chipTool, " ***** Test Step 76 : Verify created week day schedule for first user\n");
-            err = TestVerifyCreatedWeekDayScheduleForFirstUser_76();
+            ChipLogProgress(chipTool, " ***** Test Step 76 : Create another Holiday schedule with valid parameters\n");
+            err = TestCreateAnotherHolidayScheduleWithValidParameters_76();
             break;
         case 77:
-            ChipLogProgress(chipTool, " ***** Test Step 77 : Create Year Day schedule for second user\n");
-            err = TestCreateYearDayScheduleForSecondUser_77();
+            ChipLogProgress(chipTool, " ***** Test Step 77 : Verify created holiday schedule\n");
+            err = TestVerifyCreatedHolidaySchedule_77();
             break;
         case 78:
-            ChipLogProgress(chipTool, " ***** Test Step 78 : Verify created year day schedule for first\n");
-            err = TestVerifyCreatedYearDayScheduleForFirst_78();
+            ChipLogProgress(chipTool, " ***** Test Step 78 : Clear a single week day schedule for the first user\n");
+            err = TestClearASingleWeekDayScheduleForTheFirstUser_78();
             break;
         case 79:
-            ChipLogProgress(chipTool, " ***** Test Step 79 : Cleanup\n");
-            err = TestCleanup_79();
+            ChipLogProgress(chipTool, " ***** Test Step 79 : Verify cleared week day schedule\n");
+            err = TestVerifyClearedWeekDaySchedule_79();
             break;
         case 80:
-            ChipLogProgress(chipTool, " ***** Test Step 80 : Make sure clearing first user also cleared week day schedules\n");
-            err = TestMakeSureClearingFirstUserAlsoClearedWeekDaySchedules_80();
+            ChipLogProgress(chipTool, " ***** Test Step 80 : Clear all remaining week day schedules for the first user\n");
+            err = TestClearAllRemainingWeekDaySchedulesForTheFirstUser_80();
             break;
         case 81:
-            ChipLogProgress(chipTool, " ***** Test Step 81 : Make sure clearing first user also cleared year day schedules\n");
-            err = TestMakeSureClearingFirstUserAlsoClearedYearDaySchedules_81();
+            ChipLogProgress(chipTool, " ***** Test Step 81 : Verify cleared week schedule\n");
+            err = TestVerifyClearedWeekSchedule_81();
             break;
         case 82:
-            ChipLogProgress(chipTool, " ***** Test Step 82 : Make sure clearing second user also cleared week day schedules\n");
-            err = TestMakeSureClearingSecondUserAlsoClearedWeekDaySchedules_82();
+            ChipLogProgress(chipTool, " ***** Test Step 82 : Make sure that first year day schedule was not deleted\n");
+            err = TestMakeSureThatFirstYearDayScheduleWasNotDeleted_82();
             break;
         case 83:
-            ChipLogProgress(chipTool, " ***** Test Step 83 : Make sure clearing second user also cleared year day schedules\n");
-            err = TestMakeSureClearingSecondUserAlsoClearedYearDaySchedules_83();
+            ChipLogProgress(chipTool, " ***** Test Step 83 : Make sure that second year day schedule was not deleted\n");
+            err = TestMakeSureThatSecondYearDayScheduleWasNotDeleted_83();
+            break;
+        case 84:
+            ChipLogProgress(chipTool, " ***** Test Step 84 : Make sure that first holiday schedule was not deleted\n");
+            err = TestMakeSureThatFirstHolidayScheduleWasNotDeleted_84();
+            break;
+        case 85:
+            ChipLogProgress(chipTool, " ***** Test Step 85 : Make sure that second holiday schedule was not deleted\n");
+            err = TestMakeSureThatSecondHolidayScheduleWasNotDeleted_85();
+            break;
+        case 86:
+            ChipLogProgress(chipTool, " ***** Test Step 86 : Create another Week Day schedule with valid parameters\n");
+            err = TestCreateAnotherWeekDayScheduleWithValidParameters_86();
+            break;
+        case 87:
+            ChipLogProgress(chipTool, " ***** Test Step 87 : Clear a single year day schedule for the first user\n");
+            err = TestClearASingleYearDayScheduleForTheFirstUser_87();
+            break;
+        case 88:
+            ChipLogProgress(chipTool, " ***** Test Step 88 : Verify cleared year day schedule\n");
+            err = TestVerifyClearedYearDaySchedule_88();
+            break;
+        case 89:
+            ChipLogProgress(chipTool, " ***** Test Step 89 : Clear all remaining year schedules for the first user\n");
+            err = TestClearAllRemainingYearSchedulesForTheFirstUser_89();
+            break;
+        case 90:
+            ChipLogProgress(chipTool, " ***** Test Step 90 : Verify that second year day schedule was cleared\n");
+            err = TestVerifyThatSecondYearDayScheduleWasCleared_90();
+            break;
+        case 91:
+            ChipLogProgress(chipTool, " ***** Test Step 91 : Verify created week day schedule\n");
+            err = TestVerifyCreatedWeekDaySchedule_91();
+            break;
+        case 92:
+            ChipLogProgress(chipTool, " ***** Test Step 92 : Clear all remaining week day schedules for the first user\n");
+            err = TestClearAllRemainingWeekDaySchedulesForTheFirstUser_92();
+            break;
+        case 93:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 93 : Create new user without credential so we can add more schedules to it\n");
+            err = TestCreateNewUserWithoutCredentialSoWeCanAddMoreSchedulesToIt_93();
+            break;
+        case 94:
+            ChipLogProgress(chipTool, " ***** Test Step 94 : Create Week Day schedule with valid parameters for first user\n");
+            err = TestCreateWeekDayScheduleWithValidParametersForFirstUser_94();
+            break;
+        case 95:
+            ChipLogProgress(chipTool, " ***** Test Step 95 : Verify created week day schedule for first user\n");
+            err = TestVerifyCreatedWeekDayScheduleForFirstUser_95();
+            break;
+        case 96:
+            ChipLogProgress(chipTool, " ***** Test Step 96 : Create Year Day schedule for first user\n");
+            err = TestCreateYearDayScheduleForFirstUser_96();
+            break;
+        case 97:
+            ChipLogProgress(chipTool, " ***** Test Step 97 : Verify created year day schedule for first\n");
+            err = TestVerifyCreatedYearDayScheduleForFirst_97();
+            break;
+        case 98:
+            ChipLogProgress(chipTool, " ***** Test Step 98 : Create Week Day schedule with valid parameters for second user\n");
+            err = TestCreateWeekDayScheduleWithValidParametersForSecondUser_98();
+            break;
+        case 99:
+            ChipLogProgress(chipTool, " ***** Test Step 99 : Verify created week day schedule for first user\n");
+            err = TestVerifyCreatedWeekDayScheduleForFirstUser_99();
+            break;
+        case 100:
+            ChipLogProgress(chipTool, " ***** Test Step 100 : Create Year Day schedule for second user\n");
+            err = TestCreateYearDayScheduleForSecondUser_100();
+            break;
+        case 101:
+            ChipLogProgress(chipTool, " ***** Test Step 101 : Verify created year day schedule for first\n");
+            err = TestVerifyCreatedYearDayScheduleForFirst_101();
+            break;
+        case 102:
+            ChipLogProgress(chipTool, " ***** Test Step 102 : Cleanup the user\n");
+            err = TestCleanupTheUser_102();
+            break;
+        case 103:
+            ChipLogProgress(chipTool, " ***** Test Step 103 : Make sure clearing first user also cleared week day schedules\n");
+            err = TestMakeSureClearingFirstUserAlsoClearedWeekDaySchedules_103();
+            break;
+        case 104:
+            ChipLogProgress(chipTool, " ***** Test Step 104 : Make sure clearing first user also cleared year day schedules\n");
+            err = TestMakeSureClearingFirstUserAlsoClearedYearDaySchedules_104();
+            break;
+        case 105:
+            ChipLogProgress(chipTool, " ***** Test Step 105 : Make sure clearing second user also cleared week day schedules\n");
+            err = TestMakeSureClearingSecondUserAlsoClearedWeekDaySchedules_105();
+            break;
+        case 106:
+            ChipLogProgress(chipTool, " ***** Test Step 106 : Make sure clearing second user also cleared year day schedules\n");
+            err = TestMakeSureClearingSecondUserAlsoClearedYearDaySchedules_106();
+            break;
+        case 107:
+            ChipLogProgress(chipTool, " ***** Test Step 107 : Make sure that first holiday schedule was not deleted\n");
+            err = TestMakeSureThatFirstHolidayScheduleWasNotDeleted_107();
+            break;
+        case 108:
+            ChipLogProgress(chipTool, " ***** Test Step 108 : Make sure that second holiday schedule was not deleted\n");
+            err = TestMakeSureThatSecondHolidayScheduleWasNotDeleted_108();
+            break;
+        case 109:
+            ChipLogProgress(chipTool, " ***** Test Step 109 : Create another Holiday schedule at the last slot\n");
+            err = TestCreateAnotherHolidayScheduleAtTheLastSlot_109();
+            break;
+        case 110:
+            ChipLogProgress(chipTool, " ***** Test Step 110 : Verify Created Holiday Schedule\n");
+            err = TestVerifyCreatedHolidaySchedule_110();
+            break;
+        case 111:
+            ChipLogProgress(chipTool, " ***** Test Step 111 : Create new PIN credential and schedule user\n");
+            err = TestCreateNewPinCredentialAndScheduleUser_111();
+            break;
+        case 112:
+            ChipLogProgress(chipTool, " ***** Test Step 112 : Create Week Day schedule for first user\n");
+            err = TestCreateWeekDayScheduleForFirstUser_112();
+            break;
+        case 113:
+            ChipLogProgress(chipTool, " ***** Test Step 113 : Create Year Day schedule for first user\n");
+            err = TestCreateYearDayScheduleForFirstUser_113();
+            break;
+        case 114:
+            ChipLogProgress(chipTool, " ***** Test Step 114 : Clear a single holiday schedule\n");
+            err = TestClearASingleHolidaySchedule_114();
+            break;
+        case 115:
+            ChipLogProgress(chipTool, " ***** Test Step 115 : Make sure that first holiday schedule was not deleted\n");
+            err = TestMakeSureThatFirstHolidayScheduleWasNotDeleted_115();
+            break;
+        case 116:
+            ChipLogProgress(chipTool, " ***** Test Step 116 : Make sure that second holiday schedule was deleted\n");
+            err = TestMakeSureThatSecondHolidayScheduleWasDeleted_116();
+            break;
+        case 117:
+            ChipLogProgress(chipTool, " ***** Test Step 117 : Make sure that third holiday schedule was not deleted\n");
+            err = TestMakeSureThatThirdHolidayScheduleWasNotDeleted_117();
+            break;
+        case 118:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 118 : Make sure clearing holiday schedule did not clear week day schedule\n");
+            err = TestMakeSureClearingHolidayScheduleDidNotClearWeekDaySchedule_118();
+            break;
+        case 119:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 119 : Make sure clearing holiday schedule did not clear year day schedule\n");
+            err = TestMakeSureClearingHolidayScheduleDidNotClearYearDaySchedule_119();
+            break;
+        case 120:
+            ChipLogProgress(chipTool, " ***** Test Step 120 : Clear all remaining holiday schedules\n");
+            err = TestClearAllRemainingHolidaySchedules_120();
+            break;
+        case 121:
+            ChipLogProgress(chipTool, " ***** Test Step 121 : Make sure that first holiday is still deleted\n");
+            err = TestMakeSureThatFirstHolidayIsStillDeleted_121();
+            break;
+        case 122:
+            ChipLogProgress(chipTool, " ***** Test Step 122 : Make sure that second holiday schedule was deleted\n");
+            err = TestMakeSureThatSecondHolidayScheduleWasDeleted_122();
+            break;
+        case 123:
+            ChipLogProgress(chipTool, " ***** Test Step 123 : Make sure that third holiday schedule was not deleted\n");
+            err = TestMakeSureThatThirdHolidayScheduleWasNotDeleted_123();
+            break;
+        case 124:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 124 : Make sure clearing holiday schedule did not clear week day schedule\n");
+            err = TestMakeSureClearingHolidayScheduleDidNotClearWeekDaySchedule_124();
+            break;
+        case 125:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 125 : Make sure clearing holiday schedule did not clear year day schedule\n");
+            err = TestMakeSureClearingHolidayScheduleDidNotClearYearDaySchedule_125();
+            break;
+        case 126:
+            ChipLogProgress(chipTool, " ***** Test Step 126 : Final Cleanup\n");
+            err = TestFinalCleanup_126();
             break;
         }
 
@@ -103570,7 +103773,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
@@ -103582,10 +103785,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
             break;
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
@@ -103612,7 +103815,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -103630,7 +103833,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 25:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
@@ -103642,13 +103845,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 29:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
-            break;
-        case 30:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            break;
         case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 32:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -103669,58 +103872,58 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 38:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 39:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 40:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 41:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 42:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 43:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 44:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 45:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 46:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 47:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 48:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 49:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 50:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 51:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 52:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 53:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 54:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 55:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
             break;
         case 56:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -103732,19 +103935,19 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 59:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 60:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 61:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 62:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 63:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
             break;
         case 64:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -103756,10 +103959,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 67:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 68:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 69:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -103806,6 +104009,135 @@ public:
         case 83:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 84:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 85:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 86:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 87:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 88:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 89:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 90:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 91:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 92:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 93:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 94:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 95:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 96:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 97:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 98:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 99:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 100:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 101:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 102:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 103:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 104:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 105:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 106:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 107:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 108:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 109:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 110:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 111:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 112:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 113:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 114:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 115:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 116:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 117:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 118:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 119:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 120:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 121:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 122:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 123:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 124:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 125:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 126:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -103819,7 +104151,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 84;
+    const uint16_t mTestCount = 127;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -103959,8 +104291,35 @@ private:
 
         return CHIP_NO_ERROR;
     }
+    NSNumber * _Nonnull NumberOfHolidaySchedulesSupported;
 
-    CHIP_ERROR TestCreateWeekDayScheduleWith0Index_5()
+    CHIP_ERROR TestGetMaxNumberOfHolidaySchedulesAndVerifyDefaultValue_5()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeNumberOfHolidaySchedulesSupportedWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Get Max number of Holiday schedules and verify default value Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("NumberOfHolidaySchedulesSupported", actualValue, 10));
+            }
+            {
+                NumberOfHolidaySchedulesSupported = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleWith0Index_6()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -103985,7 +104344,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateWeekDayScheduleWithOutOfBoundsIndex_6()
+    CHIP_ERROR TestCreateWeekDayScheduleWithOutOfBoundsIndex_7()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104010,7 +104369,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateWeekDayScheduleWith0UserIndex_7()
+    CHIP_ERROR TestCreateWeekDayScheduleWith0UserIndex_8()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104035,7 +104394,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateWeekDayScheduleWithOutOfBoundsUserIndex_8()
+    CHIP_ERROR TestCreateWeekDayScheduleWithOutOfBoundsUserIndex_9()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104060,7 +104419,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateWeekDayScheduleForNonExistingUser_9()
+    CHIP_ERROR TestCreateWeekDayScheduleForNonExistingUser_10()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104085,7 +104444,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateWeekDayScheduleWith0DaysMask_10()
+    CHIP_ERROR TestCreateWeekDayScheduleWith0DaysMask_11()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104110,7 +104469,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateWeekDayScheduleForSundayAndMonday_11()
+    CHIP_ERROR TestCreateWeekDayScheduleForSundayAndMonday_12()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104135,7 +104494,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateWeekDayScheduleForSundayWednesdayAndSaturday_12()
+    CHIP_ERROR TestCreateWeekDayScheduleForSundayWednesdayAndSaturday_13()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104160,7 +104519,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateWeekDayScheduleWithInvalidStartHour_13()
+    CHIP_ERROR TestCreateWeekDayScheduleWithInvalidStartHour_14()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104185,7 +104544,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateWeekDayScheduleWithInvalidStartMinute_14()
+    CHIP_ERROR TestCreateWeekDayScheduleWithInvalidStartMinute_15()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104210,7 +104569,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateWeekDayScheduleWithInvalidEndHour_15()
+    CHIP_ERROR TestCreateWeekDayScheduleWithInvalidEndHour_16()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104235,7 +104594,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateWeekDayScheduleWithInvalidEndMinute_16()
+    CHIP_ERROR TestCreateWeekDayScheduleWithInvalidEndMinute_17()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104260,7 +104619,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateWeekDayScheduleWithStartHourLaterThatEndHour_17()
+    CHIP_ERROR TestCreateWeekDayScheduleWithStartHourLaterThatEndHour_18()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104285,7 +104644,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateWeekDayScheduleWithStartMinuteLaterThatEndMinuteWhenHoursAreEqual_18()
+    CHIP_ERROR TestCreateWeekDayScheduleWithStartMinuteLaterThatEndMinuteWhenHoursAreEqual_19()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104312,7 +104671,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestMakeSureThatPreviousOperationsDidNotCreateASchedule_19()
+    CHIP_ERROR TestMakeSureThatPreviousOperationsDidNotCreateASchedule_20()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104349,7 +104708,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGetWeekDayScheduleWith0Index_20()
+    CHIP_ERROR TestGetWeekDayScheduleWith0Index_21()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104386,7 +104745,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGetWeekDayScheduleWithOutOfBoundsIndex_21()
+    CHIP_ERROR TestGetWeekDayScheduleWithOutOfBoundsIndex_22()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104424,7 +104783,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGetWeekDayScheduleWith0UserIndex_22()
+    CHIP_ERROR TestGetWeekDayScheduleWith0UserIndex_23()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104461,7 +104820,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGetWeekDayScheduleWithOutOfBoundsUserIndex_23()
+    CHIP_ERROR TestGetWeekDayScheduleWithOutOfBoundsUserIndex_24()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104499,7 +104858,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGetWeekDayScheduleWithNonExistingUserIndex_24()
+    CHIP_ERROR TestGetWeekDayScheduleWithNonExistingUserIndex_25()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104536,7 +104895,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateYearDayScheduleWith0Index_25()
+    CHIP_ERROR TestCreateYearDayScheduleWith0Index_26()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104558,7 +104917,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateYearDayScheduleWithOutOfBoundsIndex_26()
+    CHIP_ERROR TestCreateYearDayScheduleWithOutOfBoundsIndex_27()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104580,7 +104939,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateYearDayScheduleWith0UserIndex_27()
+    CHIP_ERROR TestCreateYearDayScheduleWith0UserIndex_28()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104602,7 +104961,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateYearDayScheduleWithOutOfBoundsUserIndex_28()
+    CHIP_ERROR TestCreateYearDayScheduleWithOutOfBoundsUserIndex_29()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104624,7 +104983,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateYearDayScheduleForNonExistingUser_29()
+    CHIP_ERROR TestCreateYearDayScheduleForNonExistingUser_30()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104646,7 +105005,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateYearDayScheduleWithStartHourLaterThatEndHour_30()
+    CHIP_ERROR TestCreateYearDayScheduleWithStartHourLaterThatEndHour_31()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104668,7 +105027,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestMakeSureThatPreviousOperationsDidNotCreateASchedule_31()
+    CHIP_ERROR TestMakeSureThatPreviousOperationsDidNotCreateASchedule_32()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104705,7 +105064,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGetYearDayScheduleWith0Index_32()
+    CHIP_ERROR TestGetYearDayScheduleWith0Index_33()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104742,7 +105101,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGetYearDayScheduleWithOutOfBoundsIndex_33()
+    CHIP_ERROR TestGetYearDayScheduleWithOutOfBoundsIndex_34()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104780,7 +105139,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGetYearDayScheduleWith0UserIndex_34()
+    CHIP_ERROR TestGetYearDayScheduleWith0UserIndex_35()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104817,7 +105176,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGetYearDayScheduleWithOutOfBoundsUserIndex_35()
+    CHIP_ERROR TestGetYearDayScheduleWithOutOfBoundsUserIndex_36()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104855,7 +105214,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGetYearDayScheduleWithNonExistingUserIndex_36()
+    CHIP_ERROR TestGetYearDayScheduleWithNonExistingUserIndex_37()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104892,7 +105251,258 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateWeekDayScheduleWithValidParameters_37()
+    CHIP_ERROR TestCreateHolidayScheduleWith0Index_38()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
+        params.operatingMode = [NSNumber numberWithUnsignedChar:0];
+        [cluster setHolidayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Holiday schedule with 0 index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateHolidayScheduleWithOutOfBoundsIndex_39()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:[NumberOfHolidaySchedulesSupported unsignedCharValue] + 1];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
+        params.operatingMode = [NSNumber numberWithUnsignedChar:0];
+        [cluster setHolidayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Holiday schedule with out-of-bounds index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateHolidayScheduleWithStartHourLaterThatEndHour_40()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:12345689UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:12345688UL];
+        params.operatingMode = [NSNumber numberWithUnsignedChar:0];
+        [cluster setHolidayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Holiday schedule with start hour later that end hour Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateHolidayScheduleWithInvalidOperatingMode_41()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
+        params.operatingMode = [NSNumber numberWithUnsignedChar:5];
+        [cluster setHolidayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Holiday schedule with invalid operating mode Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatPreviousOperationsDidNotCreateASchedule_42()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        [cluster getHolidayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that previous operations did not create a schedule Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.holidayIndex;
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGetHolidayScheduleWith0Index_43()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:0];
+        [cluster getHolidayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Get Holiday schedule with 0 index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.holidayIndex;
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGetHolidayScheduleWithOutOfBoundsIndex_44()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:[NumberOfHolidaySchedulesSupported unsignedCharValue] + 1];
+        [cluster getHolidayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Get Holiday schedule with out-of-bounds index Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.holidayIndex;
+                                    VerifyOrReturn(CheckValue(
+                                        "holidayIndex", actualValue, [NumberOfHolidaySchedulesSupported unsignedCharValue] + 1));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateHolidayScheduleWithValidParameters_45()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
+        params.operatingMode = [NSNumber numberWithUnsignedChar:0];
+        [cluster setHolidayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Holiday schedule with valid parameters Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedSchedule_46()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        [cluster getHolidayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Verify created schedule Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.holidayIndex;
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                }
+
+                                {
+                                    id actualValue = values.operatingMode;
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleWithValidParameters_47()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104918,7 +105528,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyCreatedSchedule_38()
+    CHIP_ERROR TestVerifyCreatedSchedule_48()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104980,7 +105590,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateYearDayScheduleWithValidParameters_39()
+    CHIP_ERROR TestCreateYearDayScheduleWithValidParameters_49()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105003,7 +105613,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyCreatedSchedule_40()
+    CHIP_ERROR TestVerifyCreatedSchedule_50()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105050,7 +105660,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearWeekDayScheduleWith0Index_41()
+    CHIP_ERROR TestClearWeekDayScheduleWith0Index_51()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105070,7 +105680,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearWeekDayScheduleWithOutOfBoundsIndex_42()
+    CHIP_ERROR TestClearWeekDayScheduleWithOutOfBoundsIndex_52()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105090,7 +105700,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearWeekDayScheduleWith0UserIndex_43()
+    CHIP_ERROR TestClearWeekDayScheduleWith0UserIndex_53()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105110,7 +105720,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearWeekDayScheduleWithOutOfBoundsUserIndex_44()
+    CHIP_ERROR TestClearWeekDayScheduleWithOutOfBoundsUserIndex_54()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105130,7 +105740,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearWeekDayScheduleWithNonExistingUser_45()
+    CHIP_ERROR TestClearWeekDayScheduleWithNonExistingUser_55()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105150,107 +105760,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearYearDayScheduleWith0Index_46()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:0];
-        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        [cluster clearYearDayScheduleWithParams:params
-                              completionHandler:^(NSError * _Nullable err) {
-                                  NSLog(@"Clear Year Day schedule with 0 index Error: %@", err);
-
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                  NextTest();
-                              }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestClearYearDayScheduleWithOutOfBoundsIndex_47()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1];
-        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        [cluster clearYearDayScheduleWithParams:params
-                              completionHandler:^(NSError * _Nullable err) {
-                                  NSLog(@"Clear Year Day schedule with out-of-bounds index Error: %@", err);
-
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                  NextTest();
-                              }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestClearYearDayScheduleWith0UserIndex_48()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
-        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
-        [cluster clearYearDayScheduleWithParams:params
-                              completionHandler:^(NSError * _Nullable err) {
-                                  NSLog(@"Clear Year Day schedule with 0 user index Error: %@", err);
-
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                  NextTest();
-                              }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestClearYearDayScheduleWithOutOfBoundsUserIndex_49()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
-        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
-        [cluster clearYearDayScheduleWithParams:params
-                              completionHandler:^(NSError * _Nullable err) {
-                                  NSLog(@"Clear Year Day schedule with out-of-bounds user index Error: %@", err);
-
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                  NextTest();
-                              }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestClearYearDayScheduleWithNonExistingUser_50()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
-        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
-        [cluster clearYearDayScheduleWithParams:params
-                              completionHandler:^(NSError * _Nullable err) {
-                                  NSLog(@"Clear Year Day schedule with non-existing user Error: %@", err);
-
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_NOT_FOUND));
-                                  NextTest();
-                              }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestMakeSureThatWeekDayScheduleWasNotDeleted_51()
+    CHIP_ERROR TestMakeSureThatWeekDayScheduleWasNotDeleted_56()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105312,7 +105822,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestMakeSureThatYearDayScheduleWasNotDeleted_52()
+    CHIP_ERROR TestMakeSureThatYearDayScheduleWasNotDeleted_57()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105359,7 +105869,501 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateAnotherWeekDayScheduleWithValidParameters_53()
+    CHIP_ERROR TestMakeSureThatHolidayScheduleWasNotDeleted_58()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        [cluster getHolidayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that holiday schedule was not deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.holidayIndex;
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                }
+
+                                {
+                                    id actualValue = values.operatingMode;
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearYearDayScheduleWith0Index_59()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearYearDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear Year Day schedule with 0 index Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearYearDayScheduleWithOutOfBoundsIndex_60()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearYearDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear Year Day schedule with out-of-bounds index Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearYearDayScheduleWith0UserIndex_61()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        [cluster clearYearDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear Year Day schedule with 0 user index Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearYearDayScheduleWithOutOfBoundsUserIndex_62()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        [cluster clearYearDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear Year Day schedule with out-of-bounds user index Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearYearDayScheduleWithNonExistingUser_63()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster clearYearDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear Year Day schedule with non-existing user Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_NOT_FOUND));
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatWeekDayScheduleWasNotDeleted_64()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that week day schedule was not deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.daysMask;
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.startHour;
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 15));
+                                }
+
+                                {
+                                    id actualValue = values.startMinute;
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 16));
+                                }
+
+                                {
+                                    id actualValue = values.endHour;
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 18));
+                                }
+
+                                {
+                                    id actualValue = values.endMinute;
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 0));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatYearDayScheduleWasNotDeleted_65()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that year day schedule was not deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatHolidayScheduleWasNotDeleted_66()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        [cluster getHolidayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that holiday schedule was not deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.holidayIndex;
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                }
+
+                                {
+                                    id actualValue = values.operatingMode;
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearHolidayScheduleWith0Index_67()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:0];
+        [cluster clearHolidayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear Holiday schedule with 0 index Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearHolidayScheduleWithOutOfBoundsIndex_68()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1];
+        [cluster clearHolidayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear Holiday schedule with out-of-bounds index Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatWeekDayScheduleWasNotDeleted_69()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that week day schedule was not deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.daysMask;
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.startHour;
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 15));
+                                }
+
+                                {
+                                    id actualValue = values.startMinute;
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 16));
+                                }
+
+                                {
+                                    id actualValue = values.endHour;
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 18));
+                                }
+
+                                {
+                                    id actualValue = values.endMinute;
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 0));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatYearDayScheduleWasNotDeleted_70()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that year day schedule was not deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatHolidayScheduleWasNotDeleted_71()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        [cluster getHolidayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that holiday schedule was not deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.holidayIndex;
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                }
+
+                                {
+                                    id actualValue = values.operatingMode;
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateAnotherWeekDayScheduleWithValidParameters_72()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105385,7 +106389,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyCreatedWeekDaySchedule_54()
+    CHIP_ERROR TestVerifyCreatedWeekDaySchedule_73()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105447,7 +106451,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateAnotherYearDayScheduleWithValidParameters_55()
+    CHIP_ERROR TestCreateAnotherYearDayScheduleWithValidParameters_74()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105470,7 +106474,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyCreatedYearDaySchedule_56()
+    CHIP_ERROR TestVerifyCreatedYearDaySchedule_75()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105517,7 +106521,76 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearASingleWeekDayScheduleForTheFirstUser_57()
+    CHIP_ERROR TestCreateAnotherHolidayScheduleWithValidParameters_76()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:123456UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:1234567UL];
+        params.operatingMode = [NSNumber numberWithUnsignedChar:1];
+        [cluster setHolidayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create another Holiday schedule with valid parameters Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedHolidaySchedule_77()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:2];
+        [cluster getHolidayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Verify created holiday schedule Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.holidayIndex;
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 123456UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 1234567UL));
+                                }
+
+                                {
+                                    id actualValue = values.operatingMode;
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 1));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearASingleWeekDayScheduleForTheFirstUser_78()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105538,7 +106611,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyClearedWeekDaySchedule_58()
+    CHIP_ERROR TestVerifyClearedWeekDaySchedule_79()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105575,7 +106648,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearAllRemainingWeekDaySchedulesForTheFirstUser_59()
+    CHIP_ERROR TestClearAllRemainingWeekDaySchedulesForTheFirstUser_80()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105596,7 +106669,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyClearedWeekSchedule_60()
+    CHIP_ERROR TestVerifyClearedWeekSchedule_81()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105633,7 +106706,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestMakeSureThatFirstYearDayScheduleWasNotDeleted_61()
+    CHIP_ERROR TestMakeSureThatFirstYearDayScheduleWasNotDeleted_82()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105680,7 +106753,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestMakeSureThatSecondYearDayScheduleWasNotDeleted_62()
+    CHIP_ERROR TestMakeSureThatSecondYearDayScheduleWasNotDeleted_83()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105727,7 +106800,99 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateAnotherWeekDayScheduleWithValidParameters_63()
+    CHIP_ERROR TestMakeSureThatFirstHolidayScheduleWasNotDeleted_84()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        [cluster getHolidayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that first holiday schedule was not deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.holidayIndex;
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                }
+
+                                {
+                                    id actualValue = values.operatingMode;
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatSecondHolidayScheduleWasNotDeleted_85()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:2];
+        [cluster getHolidayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that second holiday schedule was not deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.holidayIndex;
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 123456UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 1234567UL));
+                                }
+
+                                {
+                                    id actualValue = values.operatingMode;
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 1));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateAnotherWeekDayScheduleWithValidParameters_86()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105753,7 +106918,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearASingleYearDayScheduleForTheFirstUser_64()
+    CHIP_ERROR TestClearASingleYearDayScheduleForTheFirstUser_87()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105774,7 +106939,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyClearedYearDaySchedule_65()
+    CHIP_ERROR TestVerifyClearedYearDaySchedule_88()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105811,7 +106976,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearAllRemainingYearSchedulesForTheFirstUser_66()
+    CHIP_ERROR TestClearAllRemainingYearSchedulesForTheFirstUser_89()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105832,7 +106997,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyThatSecondYearDayScheduleWasCleared_67()
+    CHIP_ERROR TestVerifyThatSecondYearDayScheduleWasCleared_90()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105869,7 +107034,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyCreatedWeekDaySchedule_68()
+    CHIP_ERROR TestVerifyCreatedWeekDaySchedule_91()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105931,7 +107096,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearAllRemainingWeekDaySchedulesForTheFirstUser_69()
+    CHIP_ERROR TestClearAllRemainingWeekDaySchedulesForTheFirstUser_92()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105952,7 +107117,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewUserWithoutCredentialSoWeCanAddMoreSchedulesToIt_70()
+    CHIP_ERROR TestCreateNewUserWithoutCredentialSoWeCanAddMoreSchedulesToIt_93()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105978,7 +107143,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateWeekDayScheduleWithValidParametersForFirstUser_71()
+    CHIP_ERROR TestCreateWeekDayScheduleWithValidParametersForFirstUser_94()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106004,7 +107169,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyCreatedWeekDayScheduleForFirstUser_72()
+    CHIP_ERROR TestVerifyCreatedWeekDayScheduleForFirstUser_95()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106066,7 +107231,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateYearDayScheduleForFirstUser_73()
+    CHIP_ERROR TestCreateYearDayScheduleForFirstUser_96()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106089,7 +107254,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyCreatedYearDayScheduleForFirst_74()
+    CHIP_ERROR TestVerifyCreatedYearDayScheduleForFirst_97()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106136,7 +107301,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateWeekDayScheduleWithValidParametersForSecondUser_75()
+    CHIP_ERROR TestCreateWeekDayScheduleWithValidParametersForSecondUser_98()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106162,7 +107327,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyCreatedWeekDayScheduleForFirstUser_76()
+    CHIP_ERROR TestVerifyCreatedWeekDayScheduleForFirstUser_99()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106224,7 +107389,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateYearDayScheduleForSecondUser_77()
+    CHIP_ERROR TestCreateYearDayScheduleForSecondUser_100()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106247,7 +107412,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyCreatedYearDayScheduleForFirst_78()
+    CHIP_ERROR TestVerifyCreatedYearDayScheduleForFirst_101()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106294,7 +107459,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCleanup_79()
+    CHIP_ERROR TestCleanupTheUser_102()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106304,7 +107469,7 @@ private:
         params.userIndex = [NSNumber numberWithUnsignedShort:65534U];
         [cluster clearUserWithParams:params
                    completionHandler:^(NSError * _Nullable err) {
-                       NSLog(@"Cleanup Error: %@", err);
+                       NSLog(@"Cleanup the user Error: %@", err);
 
                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -106314,7 +107479,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestMakeSureClearingFirstUserAlsoClearedWeekDaySchedules_80()
+    CHIP_ERROR TestMakeSureClearingFirstUserAlsoClearedWeekDaySchedules_103()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106351,7 +107516,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestMakeSureClearingFirstUserAlsoClearedYearDaySchedules_81()
+    CHIP_ERROR TestMakeSureClearingFirstUserAlsoClearedYearDaySchedules_104()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106388,7 +107553,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestMakeSureClearingSecondUserAlsoClearedWeekDaySchedules_82()
+    CHIP_ERROR TestMakeSureClearingSecondUserAlsoClearedWeekDaySchedules_105()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106425,7 +107590,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestMakeSureClearingSecondUserAlsoClearedYearDaySchedules_83()
+    CHIP_ERROR TestMakeSureClearingSecondUserAlsoClearedYearDaySchedules_106()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106458,6 +107623,756 @@ private:
 
                                 NextTest();
                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatFirstHolidayScheduleWasNotDeleted_107()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        [cluster getHolidayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that first holiday schedule was not deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.holidayIndex;
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                }
+
+                                {
+                                    id actualValue = values.operatingMode;
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatSecondHolidayScheduleWasNotDeleted_108()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:2];
+        [cluster getHolidayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that second holiday schedule was not deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.holidayIndex;
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 123456UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 1234567UL));
+                                }
+
+                                {
+                                    id actualValue = values.operatingMode;
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 1));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateAnotherHolidayScheduleAtTheLastSlot_109()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NumberOfHolidaySchedulesSupported copy];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:1UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:100UL];
+        params.operatingMode = [NSNumber numberWithUnsignedChar:4];
+        [cluster setHolidayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create another Holiday schedule at the last slot Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedHolidaySchedule_110()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NumberOfHolidaySchedulesSupported copy];
+        [cluster getHolidayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Verify Created Holiday Schedule Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.holidayIndex;
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, NumberOfHolidaySchedulesSupported));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 1UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 100UL));
+                                }
+
+                                {
+                                    id actualValue = values.operatingMode;
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 4));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialAndScheduleUser_111()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential and schedule user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateWeekDayScheduleForFirstUser_112()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1];
+        params.startHour = [NSNumber numberWithUnsignedChar:0];
+        params.startMinute = [NSNumber numberWithUnsignedChar:0];
+        params.endHour = [NSNumber numberWithUnsignedChar:23];
+        params.endMinute = [NSNumber numberWithUnsignedChar:59];
+        [cluster setWeekDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Week Day schedule for first user Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateYearDayScheduleForFirstUser_113()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:9000UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:888888888UL];
+        [cluster setYearDayScheduleWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Create Year Day schedule for first user Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearASingleHolidaySchedule_114()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:2];
+        [cluster clearHolidayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear a single holiday schedule Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatFirstHolidayScheduleWasNotDeleted_115()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        [cluster getHolidayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that first holiday schedule was not deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.holidayIndex;
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                }
+
+                                {
+                                    id actualValue = values.operatingMode;
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatSecondHolidayScheduleWasDeleted_116()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:2];
+        [cluster getHolidayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that second holiday schedule was deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.holidayIndex;
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatThirdHolidayScheduleWasNotDeleted_117()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NumberOfHolidaySchedulesSupported copy];
+        [cluster getHolidayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that third holiday schedule was not deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.holidayIndex;
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, NumberOfHolidaySchedulesSupported));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 1UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 100UL));
+                                }
+
+                                {
+                                    id actualValue = values.operatingMode;
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 4));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureClearingHolidayScheduleDidNotClearWeekDaySchedule_118()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure clearing holiday schedule did not clear week day schedule Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.daysMask;
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.startHour;
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.startMinute;
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.endHour;
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 23));
+                                }
+
+                                {
+                                    id actualValue = values.endMinute;
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 59));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureClearingHolidayScheduleDidNotClearYearDaySchedule_119()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure clearing holiday schedule did not clear year day schedule Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 9000UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 888888888UL));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearAllRemainingHolidaySchedules_120()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:254];
+        [cluster clearHolidayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear all remaining holiday schedules Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatFirstHolidayIsStillDeleted_121()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        [cluster getHolidayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that first holiday is still deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.holidayIndex;
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatSecondHolidayScheduleWasDeleted_122()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:2];
+        [cluster getHolidayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that second holiday schedule was deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.holidayIndex;
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatThirdHolidayScheduleWasNotDeleted_123()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NumberOfHolidaySchedulesSupported copy];
+        [cluster getHolidayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure that third holiday schedule was not deleted Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.holidayIndex;
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, NumberOfHolidaySchedulesSupported));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureClearingHolidayScheduleDidNotClearWeekDaySchedule_124()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure clearing holiday schedule did not clear week day schedule Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.daysMask;
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.startHour;
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.startMinute;
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.endHour;
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 23));
+                                }
+
+                                {
+                                    id actualValue = values.endMinute;
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 59));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureClearingHolidayScheduleDidNotClearYearDaySchedule_125()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                CHIPDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Make sure clearing holiday schedule did not clear year day schedule Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                }
+
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
+
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                }
+
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 9000UL));
+                                }
+
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 888888888UL));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestFinalCleanup_126()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:65534U];
+        [cluster clearUserWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"Final Cleanup Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                       NextTest();
+                   }];
 
         return CHIP_NO_ERROR;
     }
