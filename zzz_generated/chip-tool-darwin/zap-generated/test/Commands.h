@@ -70,7 +70,6 @@ public:
         printf("Test_TC_ETHDIAG_2_1\n");
         printf("Test_TC_FLW_1_1\n");
         printf("Test_TC_FLW_2_1\n");
-        printf("Test_TC_FLW_2_2\n");
         printf("Test_TC_GC_1_1\n");
         printf("Test_TC_GC_2_1\n");
         printf("Test_TC_I_1_1\n");
@@ -145,12 +144,9 @@ public:
         printf("Test_TC_PSCFG_1_1\n");
         printf("Test_TC_RH_1_1\n");
         printf("Test_TC_RH_2_1\n");
-        printf("Test_TC_RH_2_2\n");
         printf("Test_TC_SWTCH_2_1\n");
-        printf("Test_TC_SWTCH_2_2\n");
         printf("Test_TC_TM_1_1\n");
         printf("Test_TC_TM_2_1\n");
-        printf("Test_TC_TM_2_2\n");
         printf("Test_TC_TSTAT_1_1\n");
         printf("Test_TC_TSTAT_2_1\n");
         printf("Test_TC_TSTAT_2_2\n");
@@ -3385,10 +3381,6 @@ public:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Read mandatory non-global attribute: StateValue\n");
             err = TestReadMandatoryNonGlobalAttributeStateValue_1();
             break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read mandatory non-global attribute constraints: StateValue\n");
-            err = TestReadMandatoryNonGlobalAttributeConstraintsStateValue_2();
-            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -3406,9 +3398,6 @@ public:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -3422,7 +3411,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 3;
+    const uint16_t mTestCount = 2;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -3451,23 +3440,6 @@ private:
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("StateValue", actualValue, 0));
             }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadMandatoryNonGlobalAttributeConstraintsStateValue_2()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestBooleanState * cluster = [[CHIPTestBooleanState alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeStateValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read mandatory non-global attribute constraints: StateValue Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("stateValue", "", "bool"));
             NextTest();
@@ -22769,140 +22741,6 @@ private:
     }
 };
 
-class Test_TC_FLW_2_2 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_FLW_2_2()
-        : TestCommandBridge("Test_TC_FLW_2_2")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_FLW_2_2() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_FLW_2_2\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_FLW_2_2\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : read the mandatory attribute: MeasuredValue\n");
-            err = TestReadTheMandatoryAttributeMeasuredValue_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : read the mandatory attribute: MeasuredValue\n");
-            err = TestReadTheMandatoryAttributeMeasuredValue_2();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 3;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeMeasuredValue_1()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestFlowMeasurement * cluster = [[CHIPTestFlowMeasurement alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMeasuredValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the mandatory attribute: MeasuredValue Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("measuredValue", "", "uint16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeMeasuredValue_2()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestFlowMeasurement * cluster = [[CHIPTestFlowMeasurement alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMeasuredValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the mandatory attribute: MeasuredValue Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("measuredValue", "", "uint16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
 class Test_TC_GC_1_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -29235,43 +29073,39 @@ public:
             err = TestReadTheGlobalAttributeClusterRevision_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute constraints: ClusterRevision\n");
-            err = TestReadTheGlobalAttributeConstraintsClusterRevision_2();
-            break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: AttributeList\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheGlobalAttributeAttributeList_3();
+            err = TestReadTheGlobalAttributeAttributeList_2();
             break;
-        case 4:
+        case 3:
             ChipLogProgress(chipTool,
-                " ***** Test Step 4 : Read EventList attribute from the DUT and Verify that the DUT response provides a list of "
+                " ***** Test Step 3 : Read EventList attribute from the DUT and Verify that the DUT response provides a list of "
                 "supported events.\n");
             if (ShouldSkip("PICS_USER_PROMPT")) {
                 NextTest();
                 return;
             }
-            err = TestReadEventListAttributeFromTheDutAndVerifyThatTheDutResponseProvidesAListOfSupportedEvents_4();
+            err = TestReadEventListAttributeFromTheDutAndVerifyThatTheDutResponseProvidesAListOfSupportedEvents_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AcceptedCommandList\n");
-            err = TestReadTheGlobalAttributeAcceptedCommandList_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the global attribute: GeneratedCommandList\n");
-            err = TestReadTheGlobalAttributeGeneratedCommandList_6();
-            break;
-        case 7:
             ChipLogProgress(
-                chipTool, " ***** Test Step 7 : Read FeatureMap attribute from the DUT and Verify that the DUT response\n");
+                chipTool, " ***** Test Step 6 : Read FeatureMap attribute from the DUT and Verify that the DUT response\n");
             if (ShouldSkip("PICS_USER_PROMPT")) {
                 NextTest();
                 return;
             }
-            err = TestReadFeatureMapAttributeFromTheDutAndVerifyThatTheDutResponse_7();
+            err = TestReadFeatureMapAttributeFromTheDutAndVerifyThatTheDutResponse_6();
             break;
         }
 
@@ -29305,9 +29139,6 @@ public:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -29321,7 +29152,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 8;
+    const uint16_t mTestCount = 7;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -29351,23 +29182,6 @@ private:
                 VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
             }
 
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheGlobalAttributeConstraintsClusterRevision_2()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestWakeOnLan * cluster = [[CHIPTestWakeOnLan alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeClusterRevisionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read the global attribute constraints: ClusterRevision Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
             VerifyOrReturn(CheckConstraintType("clusterRevision", "", "uint16"));
             NextTest();
         }];
@@ -29375,7 +29189,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_3()
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_2()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestWakeOnLan * cluster = [[CHIPTestWakeOnLan alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -29388,14 +29202,13 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(7)));
+                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(6)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 1UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 65528UL));
                 VerifyOrReturn(CheckValue("", actualValue[3], 65529UL));
                 VerifyOrReturn(CheckValue("", actualValue[4], 65531UL));
-                VerifyOrReturn(CheckValue("", actualValue[5], 65532UL));
-                VerifyOrReturn(CheckValue("", actualValue[6], 65533UL));
+                VerifyOrReturn(CheckValue("", actualValue[5], 65533UL));
             }
 
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
@@ -29405,7 +29218,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadEventListAttributeFromTheDutAndVerifyThatTheDutResponseProvidesAListOfSupportedEvents_4()
+    CHIP_ERROR TestReadEventListAttributeFromTheDutAndVerifyThatTheDutResponseProvidesAListOfSupportedEvents_3()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
@@ -29414,7 +29227,7 @@ private:
         return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_4()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestWakeOnLan * cluster = [[CHIPTestWakeOnLan alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -29437,7 +29250,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_6()
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_5()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestWakeOnLan * cluster = [[CHIPTestWakeOnLan alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -29460,7 +29273,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadFeatureMapAttributeFromTheDutAndVerifyThatTheDutResponse_7()
+    CHIP_ERROR TestReadFeatureMapAttributeFromTheDutAndVerifyThatTheDutResponse_6()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
@@ -29801,43 +29614,39 @@ public:
             err = TestReadTheGlobalAttributeClusterRevision_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute constraints: ClusterRevision\n");
-            err = TestReadTheGlobalAttributeConstraintsClusterRevision_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: AttributeList\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAttributeList_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AcceptedCommandList\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheGlobalAttributeAttributeList_3();
+            err = TestReadTheGlobalAttributeAcceptedCommandList_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: AcceptedCommandList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: GeneratedCommandList\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheGlobalAttributeAcceptedCommandList_4();
+            err = TestReadTheGlobalAttributeGeneratedCommandList_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: GeneratedCommandList\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestReadTheGlobalAttributeGeneratedCommandList_5();
-            break;
-        case 6:
             ChipLogProgress(chipTool,
-                " ***** Test Step 6 : Read FeatureMap attribute from the DUT and Verify that the DUT values based on feature/PICS "
+                " ***** Test Step 5 : Read FeatureMap attribute from the DUT and Verify that the DUT values based on feature/PICS "
                 "support:Bit 0 - Set to 1 if the DUT supports Advanced Seek (PICS_ADVANCEDSEEK is true) Bit 1 - Set to 1 if the "
                 "DUT supports Variable Speed (PICS_VARIABLESPEED is true)\n");
             if (ShouldSkip("PICS_USER_PROMPT")) {
                 NextTest();
                 return;
             }
-            err = TestReadFeatureMapAttributeFromTheDutAndVerifyThatTheDutValuesBasedOnFeaturePicsSupportBit0SetTo1IfTheDutSupportsAdvancedSeekPicsAdvancedseekIsTrueBit1SetTo1IfTheDutSupportsVariableSpeedPicsVariablespeedIsTrue_6();
+            err = TestReadFeatureMapAttributeFromTheDutAndVerifyThatTheDutValuesBasedOnFeaturePicsSupportBit0SetTo1IfTheDutSupportsAdvancedSeekPicsAdvancedseekIsTrueBit1SetTo1IfTheDutSupportsVariableSpeedPicsVariablespeedIsTrue_5();
             break;
         }
 
@@ -29868,9 +29677,6 @@ public:
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -29884,7 +29690,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 7;
+    const uint16_t mTestCount = 6;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -29914,23 +29720,6 @@ private:
                 VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
             }
 
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheGlobalAttributeConstraintsClusterRevision_2()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeClusterRevisionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read the global attribute constraints: ClusterRevision Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
             VerifyOrReturn(CheckConstraintType("clusterRevision", "", "uint16"));
             NextTest();
         }];
@@ -29938,7 +29727,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_3()
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_2()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -29973,7 +29762,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_4()
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_3()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -30007,7 +29796,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_5()
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_4()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -30032,7 +29821,7 @@ private:
     }
 
     CHIP_ERROR
-    TestReadFeatureMapAttributeFromTheDutAndVerifyThatTheDutValuesBasedOnFeaturePicsSupportBit0SetTo1IfTheDutSupportsAdvancedSeekPicsAdvancedseekIsTrueBit1SetTo1IfTheDutSupportsVariableSpeedPicsVariablespeedIsTrue_6()
+    TestReadFeatureMapAttributeFromTheDutAndVerifyThatTheDutValuesBasedOnFeaturePicsSupportBit0SetTo1IfTheDutSupportsAdvancedSeekPicsAdvancedseekIsTrueBit1SetTo1IfTheDutSupportsVariableSpeedPicsVariablespeedIsTrue_5()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
@@ -32195,20 +31984,20 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Send RootMenu\n");
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH sends CEC Settings Keys(0x0A) to DUT\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestSendRootMenu_1();
+            err = TestThSendsCecSettingsKeys0x0AToDut_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Send SetupMenu\n");
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends CEC Home Keys(0x09) to DUT\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestSendSetupMenu_2();
+            err = TestThSendsCecHomeKeys0x09ToDut_2();
             break;
         }
 
@@ -32257,27 +32046,7 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestSendRootMenu_1()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:9];
-        [cluster sendKeyWithParams:params
-                 completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send RootMenu Error: %@", err);
-
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                     NextTest();
-                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestSendSetupMenu_2()
+    CHIP_ERROR TestThSendsCecSettingsKeys0x0AToDut_1()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -32287,7 +32056,27 @@ private:
         params.keyCode = [NSNumber numberWithUnsignedChar:10];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send SetupMenu Error: %@", err);
+                     NSLog(@"TH sends CEC Settings Keys(0x0A) to DUT Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsCecHomeKeys0x09ToDut_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
+        params.keyCode = [NSNumber numberWithUnsignedChar:9];
+        [cluster sendKeyWithParams:params
+                 completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"TH sends CEC Home Keys(0x09) to DUT Error: %@", err);
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -32704,84 +32493,84 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Send RootMenu\n");
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH sends same KeyPad input codes to DUT\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestSendRootMenu_1();
+            err = TestThSendsSameKeyPadInputCodesToDut_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Send RootMenu\n");
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends same KeyPad input codes to DUT\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestSendRootMenu_2();
+            err = TestThSendsSameKeyPadInputCodesToDut_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Send RootMenu\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH sends same KeyPad input codes to DUT\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestSendRootMenu_3();
+            err = TestThSendsSameKeyPadInputCodesToDut_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Send RootMenu\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH sends same KeyPad input codes to DUT\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestSendRootMenu_4();
+            err = TestThSendsSameKeyPadInputCodesToDut_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Send RootMenu\n");
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH sends same KeyPad input codes to DUT\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestSendRootMenu_5();
+            err = TestThSendsSameKeyPadInputCodesToDut_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Send RootMenu\n");
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH sends same KeyPad input codes to DUT\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestSendRootMenu_6();
+            err = TestThSendsSameKeyPadInputCodesToDut_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Send RootMenu\n");
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH sends same KeyPad input codes to DUT\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestSendRootMenu_7();
+            err = TestThSendsSameKeyPadInputCodesToDut_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Send RootMenu\n");
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH sends same KeyPad input codes to DUT\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestSendRootMenu_8();
+            err = TestThSendsSameKeyPadInputCodesToDut_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Send RootMenu\n");
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH sends same KeyPad input codes to DUT\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestSendRootMenu_9();
+            err = TestThSendsSameKeyPadInputCodesToDut_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Send RootMenu\n");
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH sends same KeyPad input codes to DUT\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestSendRootMenu_10();
+            err = TestThSendsSameKeyPadInputCodesToDut_10();
             break;
         }
 
@@ -32854,7 +32643,7 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestSendRootMenu_1()
+    CHIP_ERROR TestThSendsSameKeyPadInputCodesToDut_1()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -32864,7 +32653,7 @@ private:
         params.keyCode = [NSNumber numberWithUnsignedChar:9];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send RootMenu Error: %@", err);
+                     NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -32874,7 +32663,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendRootMenu_2()
+    CHIP_ERROR TestThSendsSameKeyPadInputCodesToDut_2()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -32884,7 +32673,7 @@ private:
         params.keyCode = [NSNumber numberWithUnsignedChar:9];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send RootMenu Error: %@", err);
+                     NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -32894,7 +32683,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendRootMenu_3()
+    CHIP_ERROR TestThSendsSameKeyPadInputCodesToDut_3()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -32904,7 +32693,7 @@ private:
         params.keyCode = [NSNumber numberWithUnsignedChar:9];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send RootMenu Error: %@", err);
+                     NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -32914,7 +32703,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendRootMenu_4()
+    CHIP_ERROR TestThSendsSameKeyPadInputCodesToDut_4()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -32924,7 +32713,7 @@ private:
         params.keyCode = [NSNumber numberWithUnsignedChar:9];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send RootMenu Error: %@", err);
+                     NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -32934,7 +32723,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendRootMenu_5()
+    CHIP_ERROR TestThSendsSameKeyPadInputCodesToDut_5()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -32944,7 +32733,7 @@ private:
         params.keyCode = [NSNumber numberWithUnsignedChar:9];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send RootMenu Error: %@", err);
+                     NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -32954,7 +32743,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendRootMenu_6()
+    CHIP_ERROR TestThSendsSameKeyPadInputCodesToDut_6()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -32964,7 +32753,7 @@ private:
         params.keyCode = [NSNumber numberWithUnsignedChar:9];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send RootMenu Error: %@", err);
+                     NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -32974,7 +32763,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendRootMenu_7()
+    CHIP_ERROR TestThSendsSameKeyPadInputCodesToDut_7()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -32984,7 +32773,7 @@ private:
         params.keyCode = [NSNumber numberWithUnsignedChar:9];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send RootMenu Error: %@", err);
+                     NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -32994,7 +32783,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendRootMenu_8()
+    CHIP_ERROR TestThSendsSameKeyPadInputCodesToDut_8()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -33004,7 +32793,7 @@ private:
         params.keyCode = [NSNumber numberWithUnsignedChar:9];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send RootMenu Error: %@", err);
+                     NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -33014,7 +32803,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendRootMenu_9()
+    CHIP_ERROR TestThSendsSameKeyPadInputCodesToDut_9()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -33024,7 +32813,7 @@ private:
         params.keyCode = [NSNumber numberWithUnsignedChar:9];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send RootMenu Error: %@", err);
+                     NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -33034,7 +32823,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendRootMenu_10()
+    CHIP_ERROR TestThSendsSameKeyPadInputCodesToDut_10()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -33044,7 +32833,7 @@ private:
         params.keyCode = [NSNumber numberWithUnsignedChar:9];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send RootMenu Error: %@", err);
+                     NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -39459,30 +39248,186 @@ public:
             err = TestReadsBackMandatoryAttributeOccupancy_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Reads mandatory attribute constrains: OccupancySensorType\n");
-            err = TestReadsMandatoryAttributeConstrainsOccupancySensorType_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Reads mandatory attribute: OccupancySensorType\n");
+            err = TestReadsMandatoryAttributeOccupancySensorType_4();
             break;
         case 5:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 5 : Writes the respective default value to mandatory attribute: OccupancySensorType\n");
-            err = TestWritesTheRespectiveDefaultValueToMandatoryAttributeOccupancySensorType_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Reads mandatory attribute constrains: OccupancySensorType\n");
+            err = TestReadsMandatoryAttributeConstrainsOccupancySensorType_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Reads back mandatory attribute: OccupancySensorType\n");
-            err = TestReadsBackMandatoryAttributeOccupancySensorType_6();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : Writes the respective default value to mandatory attribute: OccupancySensorType\n");
+            err = TestWritesTheRespectiveDefaultValueToMandatoryAttributeOccupancySensorType_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Reads mandatory attribute constrains: OccupancySensorTypeBitmap\n");
-            err = TestReadsMandatoryAttributeConstrainsOccupancySensorTypeBitmap_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Reads back mandatory attribute: OccupancySensorType\n");
+            err = TestReadsBackMandatoryAttributeOccupancySensorType_7();
             break;
         case 8:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Writes the respective default value to mandatory attribute: OccupancySensorTypeBitmap\n");
-            err = TestWritesTheRespectiveDefaultValueToMandatoryAttributeOccupancySensorTypeBitmap_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Reads mandatory attribute constrains: OccupancySensorTypeBitmap\n");
+            err = TestReadsMandatoryAttributeConstrainsOccupancySensorTypeBitmap_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Reads back mandatory attribute: OccupancySensorTypeBitmap\n");
-            err = TestReadsBackMandatoryAttributeOccupancySensorTypeBitmap_9();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : Writes the respective default value to mandatory attribute: OccupancySensorTypeBitmap\n");
+            err = TestWritesTheRespectiveDefaultValueToMandatoryAttributeOccupancySensorTypeBitmap_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Reads back mandatory attribute: OccupancySensorTypeBitmap\n");
+            err = TestReadsBackMandatoryAttributeOccupancySensorTypeBitmap_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Reads optional attribute: PIROccupiedToUnoccupiedDelay\n");
+            err = TestReadsOptionalAttributePIROccupiedToUnoccupiedDelay_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 12 : Writes the respective default value to optional attribute: PIROccupiedToUnoccupiedDelay\n");
+            err = TestWritesTheRespectiveDefaultValueToOptionalAttributePIROccupiedToUnoccupiedDelay_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Reads back optional attribute: PIROccupiedToUnoccupiedDelay\n");
+            err = TestReadsBackOptionalAttributePIROccupiedToUnoccupiedDelay_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Reads optional attribute: PIRUnoccupiedToOccupiedDelay\n");
+            err = TestReadsOptionalAttributePIRUnoccupiedToOccupiedDelay_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Reads optional attribute constrains: PIRUnoccupiedToOccupiedDelay\n");
+            err = TestReadsOptionalAttributeConstrainsPIRUnoccupiedToOccupiedDelay_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 16 : Writes the respective default value to optional attribute: PIRUnoccupiedToOccupiedDelay\n");
+            err = TestWritesTheRespectiveDefaultValueToOptionalAttributePIRUnoccupiedToOccupiedDelay_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Reads back optional attribute: PIRUnoccupiedToOccupiedDelay\n");
+            err = TestReadsBackOptionalAttributePIRUnoccupiedToOccupiedDelay_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Reads optional attribute: PIRUnoccupiedToOccupiedThreshold\n");
+            err = TestReadsOptionalAttributePIRUnoccupiedToOccupiedThreshold_18();
+            break;
+        case 19:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 19 : Reads optional attribute constrains: PIRUnoccupiedToOccupiedThreshold\n");
+            err = TestReadsOptionalAttributeConstrainsPIRUnoccupiedToOccupiedThreshold_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 20 : Writes the respective default value to optional attribute: "
+                "PIRUnoccupiedToOccupiedThreshold\n");
+            err = TestWritesTheRespectiveDefaultValueToOptionalAttributePIRUnoccupiedToOccupiedThreshold_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Reads back optional attribute: PIRUnoccupiedToOccupiedThreshold\n");
+            err = TestReadsBackOptionalAttributePIRUnoccupiedToOccupiedThreshold_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Read optional attribute: UltrasonicOccupiedToUnoccupiedDelay\n");
+            err = TestReadOptionalAttributeUltrasonicOccupiedToUnoccupiedDelay_22();
+            break;
+        case 23:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 23 : Writes the respective default value to optional attribute: "
+                "UltrasonicOccupiedToUnoccupiedDelay\n");
+            err = TestWritesTheRespectiveDefaultValueToOptionalAttributeUltrasonicOccupiedToUnoccupiedDelay_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Read back optional attribute: UltrasonicOccupiedToUnoccupiedDelay\n");
+            err = TestReadBackOptionalAttributeUltrasonicOccupiedToUnoccupiedDelay_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Read attribute: UltrasonicUnoccupiedToOccupiedDelay\n");
+            err = TestReadAttributeUltrasonicUnoccupiedToOccupiedDelay_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 26 : Writes the respective default value to optional attribute: "
+                "UltrasonicUnoccupiedToOccupiedDelay\n");
+            err = TestWritesTheRespectiveDefaultValueToOptionalAttributeUltrasonicUnoccupiedToOccupiedDelay_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Read back attribute: UltrasonicUnoccupiedToOccupiedDelay\n");
+            err = TestReadBackAttributeUltrasonicUnoccupiedToOccupiedDelay_27();
+            break;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Read attribute: UltrasonicUnoccupiedToOccupiedThreshold\n");
+            err = TestReadAttributeUltrasonicUnoccupiedToOccupiedThreshold_28();
+            break;
+        case 29:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 29 : Writes the respective default value to optional attribute: "
+                "UltrasonicUnoccupiedToOccupiedThreshold\n");
+            err = TestWritesTheRespectiveDefaultValueToOptionalAttributeUltrasonicUnoccupiedToOccupiedThreshold_29();
+            break;
+        case 30:
+            ChipLogProgress(chipTool, " ***** Test Step 30 : Read back attribute: UltrasonicUnoccupiedToOccupiedThreshold\n");
+            err = TestReadBackAttributeUltrasonicUnoccupiedToOccupiedThreshold_30();
+            break;
+        case 31:
+            ChipLogProgress(chipTool, " ***** Test Step 31 : Reads optional attribute: PhysicalContactOccupiedToUnoccupiedDelay\n");
+            err = TestReadsOptionalAttributePhysicalContactOccupiedToUnoccupiedDelay_31();
+            break;
+        case 32:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 32 : Reads optional attribute constrains: PhysicalContactOccupiedToUnoccupiedDelay\n");
+            err = TestReadsOptionalAttributeConstrainsPhysicalContactOccupiedToUnoccupiedDelay_32();
+            break;
+        case 33:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 33 : Writes the respective default value to optional attribute: "
+                "PhysicalContactOccupiedToUnoccupiedDelay\n");
+            err = TestWritesTheRespectiveDefaultValueToOptionalAttributePhysicalContactOccupiedToUnoccupiedDelay_33();
+            break;
+        case 34:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 34 : Reads back optional attribute: PhysicalContactOccupiedToUnoccupiedDelay\n");
+            err = TestReadsBackOptionalAttributePhysicalContactOccupiedToUnoccupiedDelay_34();
+            break;
+        case 35:
+            ChipLogProgress(chipTool, " ***** Test Step 35 : Reads optional attribute: PhysicalContactUnoccupiedToOccupiedDelay\n");
+            err = TestReadsOptionalAttributePhysicalContactUnoccupiedToOccupiedDelay_35();
+            break;
+        case 36:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 36 : Reads optional attribute constrains: PhysicalContactUnoccupiedToOccupiedDelay\n");
+            err = TestReadsOptionalAttributeConstrainsPhysicalContactUnoccupiedToOccupiedDelay_36();
+            break;
+        case 37:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 37 : Writes the respective default value to optional attribute: "
+                "PhysicalContactUnoccupiedToOccupiedDelay\n");
+            err = TestWritesTheRespectiveDefaultValueToOptionalAttributePhysicalContactUnoccupiedToOccupiedDelay_37();
+            break;
+        case 38:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 38 : Reads back optional attribute: PhysicalContactUnoccupiedToOccupiedDelay\n");
+            err = TestReadsBackOptionalAttributePhysicalContactUnoccupiedToOccupiedDelay_38();
+            break;
+        case 39:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 39 : Reads optional attribute: PhysicalContactUnoccupiedToOccupiedThreshold\n");
+            err = TestReadsOptionalAttributePhysicalContactUnoccupiedToOccupiedThreshold_39();
+            break;
+        case 40:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 40 : Reads optional attribute constrains: PhysicalContactUnoccupiedToOccupiedThreshold\n");
+            err = TestReadsOptionalAttributeConstrainsPhysicalContactUnoccupiedToOccupiedThreshold_40();
+            break;
+        case 41:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 41 : Writes the respective default value to optional attribute: "
+                "PhysicalContactUnoccupiedToOccupiedThreshold\n");
+            err = TestWritesTheRespectiveDefaultValueToOptionalAttributePhysicalContactUnoccupiedToOccupiedThreshold_41();
+            break;
+        case 42:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 42 : Reads back optional attribute: PhysicalContactUnoccupiedToOccupiedThreshold\n");
+            err = TestReadsBackOptionalAttributePhysicalContactUnoccupiedToOccupiedThreshold_42();
             break;
         }
 
@@ -39511,18 +39456,117 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
             break;
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 35:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 36:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 37:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 38:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 39:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 40:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 41:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 42:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         }
@@ -39538,7 +39582,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 10;
+    const uint16_t mTestCount = 43;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -39624,7 +39668,31 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsMandatoryAttributeConstrainsOccupancySensorType_4()
+    CHIP_ERROR TestReadsMandatoryAttributeOccupancySensorType_4()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOccupancySensorTypeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads mandatory attribute: OccupancySensorType Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("occupancy sensor type", actualValue, 0));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsMandatoryAttributeConstrainsOccupancySensorType_5()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
@@ -39651,7 +39719,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheRespectiveDefaultValueToMandatoryAttributeOccupancySensorType_5()
+    CHIP_ERROR TestWritesTheRespectiveDefaultValueToMandatoryAttributeOccupancySensorType_6()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
@@ -39675,7 +39743,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsBackMandatoryAttributeOccupancySensorType_6()
+    CHIP_ERROR TestReadsBackMandatoryAttributeOccupancySensorType_7()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
@@ -39688,9 +39756,12 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("occupancy sensor type", actualValue, 0));
+            VerifyOrReturn(CheckConstraintType("occupancySensorType", "", "enum8"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("occupancySensorType", [value unsignedCharValue], 0));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("occupancySensorType", [value unsignedCharValue], 3));
             }
 
             NextTest();
@@ -39699,7 +39770,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsMandatoryAttributeConstrainsOccupancySensorTypeBitmap_7()
+    CHIP_ERROR TestReadsMandatoryAttributeConstrainsOccupancySensorTypeBitmap_8()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
@@ -39718,7 +39789,7 @@ private:
                     VerifyOrReturn(CheckConstraintMinValue<uint8_t>("occupancySensorTypeBitmap", [value unsignedCharValue], 1));
                 }
                 if (value != nil) {
-                    VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("occupancySensorTypeBitmap", [value unsignedCharValue], 7));
+                    VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("occupancySensorTypeBitmap", [value unsignedCharValue], 273));
                 }
 
                 NextTest();
@@ -39727,7 +39798,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheRespectiveDefaultValueToMandatoryAttributeOccupancySensorTypeBitmap_8()
+    CHIP_ERROR TestWritesTheRespectiveDefaultValueToMandatoryAttributeOccupancySensorTypeBitmap_9()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
@@ -39751,7 +39822,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsBackMandatoryAttributeOccupancySensorTypeBitmap_9()
+    CHIP_ERROR TestReadsBackMandatoryAttributeOccupancySensorTypeBitmap_10()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
@@ -39765,13 +39836,982 @@ private:
 
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                {
-                    id actualValue = value;
-                    VerifyOrReturn(CheckValue("occupancy sensor type bitmap", actualValue, 1));
+                VerifyOrReturn(CheckConstraintType("occupancySensorTypeBitmap", "", "map8"));
+                if (value != nil) {
+                    VerifyOrReturn(CheckConstraintMinValue<uint8_t>("occupancySensorTypeBitmap", [value unsignedCharValue], 1));
+                }
+                if (value != nil) {
+                    VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("occupancySensorTypeBitmap", [value unsignedCharValue], 273));
                 }
 
                 NextTest();
             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsOptionalAttributePIROccupiedToUnoccupiedDelay_11()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributePirOccupiedToUnoccupiedDelayWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Reads optional attribute: PIROccupiedToUnoccupiedDelay Error: %@", err);
+
+                if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                    NextTest();
+                    return;
+                }
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("PIR occupied to unoccupied delay", actualValue, 0U));
+                }
+
+                VerifyOrReturn(CheckConstraintType("pirOccupiedToUnoccupiedDelay", "", "uint16"));
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheRespectiveDefaultValueToOptionalAttributePIROccupiedToUnoccupiedDelay_12()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id pirOccupiedToUnoccupiedDelayArgument;
+        pirOccupiedToUnoccupiedDelayArgument = [NSNumber numberWithUnsignedShort:0U];
+        [cluster writeAttributePirOccupiedToUnoccupiedDelayWithValue:pirOccupiedToUnoccupiedDelayArgument
+                                                   completionHandler:^(NSError * _Nullable err) {
+                                                       NSLog(@"Writes the respective default value to optional attribute: "
+                                                             @"PIROccupiedToUnoccupiedDelay Error: %@",
+                                                           err);
+
+                                                       if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                           NextTest();
+                                                           return;
+                                                       }
+
+                                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                       NextTest();
+                                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsBackOptionalAttributePIROccupiedToUnoccupiedDelay_13()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributePirOccupiedToUnoccupiedDelayWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Reads back optional attribute: PIROccupiedToUnoccupiedDelay Error: %@", err);
+
+                if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                    NextTest();
+                    return;
+                }
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("PIR occupied to unoccupied delay", actualValue, 0U));
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsOptionalAttributePIRUnoccupiedToOccupiedDelay_14()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributePirUnoccupiedToOccupiedDelayWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Reads optional attribute: PIRUnoccupiedToOccupiedDelay Error: %@", err);
+
+                if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                    NextTest();
+                    return;
+                }
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("PIR unoccupied to occupied delay", actualValue, 0U));
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsOptionalAttributeConstrainsPIRUnoccupiedToOccupiedDelay_15()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributePirUnoccupiedToOccupiedDelayWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Reads optional attribute constrains: PIRUnoccupiedToOccupiedDelay Error: %@", err);
+
+                if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                    NextTest();
+                    return;
+                }
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                VerifyOrReturn(CheckConstraintType("pirUnoccupiedToOccupiedDelay", "", "uint16"));
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheRespectiveDefaultValueToOptionalAttributePIRUnoccupiedToOccupiedDelay_16()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id pirUnoccupiedToOccupiedDelayArgument;
+        pirUnoccupiedToOccupiedDelayArgument = [NSNumber numberWithUnsignedShort:0U];
+        [cluster writeAttributePirUnoccupiedToOccupiedDelayWithValue:pirUnoccupiedToOccupiedDelayArgument
+                                                   completionHandler:^(NSError * _Nullable err) {
+                                                       NSLog(@"Writes the respective default value to optional attribute: "
+                                                             @"PIRUnoccupiedToOccupiedDelay Error: %@",
+                                                           err);
+
+                                                       if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                           NextTest();
+                                                           return;
+                                                       }
+
+                                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                       NextTest();
+                                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsBackOptionalAttributePIRUnoccupiedToOccupiedDelay_17()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributePirUnoccupiedToOccupiedDelayWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Reads back optional attribute: PIRUnoccupiedToOccupiedDelay Error: %@", err);
+
+                if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                    NextTest();
+                    return;
+                }
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("PIR unoccupied to occupied delay", actualValue, 0U));
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsOptionalAttributePIRUnoccupiedToOccupiedThreshold_18()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePirUnoccupiedToOccupiedThresholdWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads optional attribute: PIRUnoccupiedToOccupiedThreshold Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("PIR unoccupied to occupied threshold", actualValue, 1));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsOptionalAttributeConstrainsPIRUnoccupiedToOccupiedThreshold_19()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePirUnoccupiedToOccupiedThresholdWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads optional attribute constrains: PIRUnoccupiedToOccupiedThreshold Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("pirUnoccupiedToOccupiedThreshold", "", "uint8"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("pirUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 1));
+            }
+            if (value != nil) {
+                VerifyOrReturn(
+                    CheckConstraintMaxValue<uint8_t>("pirUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 254));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheRespectiveDefaultValueToOptionalAttributePIRUnoccupiedToOccupiedThreshold_20()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id pirUnoccupiedToOccupiedThresholdArgument;
+        pirUnoccupiedToOccupiedThresholdArgument = [NSNumber numberWithUnsignedChar:1];
+        [cluster writeAttributePirUnoccupiedToOccupiedThresholdWithValue:pirUnoccupiedToOccupiedThresholdArgument
+                                                       completionHandler:^(NSError * _Nullable err) {
+                                                           NSLog(@"Writes the respective default value to optional attribute: "
+                                                                 @"PIRUnoccupiedToOccupiedThreshold Error: %@",
+                                                               err);
+
+                                                           if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                               NextTest();
+                                                               return;
+                                                           }
+
+                                                           VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                           NextTest();
+                                                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsBackOptionalAttributePIRUnoccupiedToOccupiedThreshold_21()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePirUnoccupiedToOccupiedThresholdWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads back optional attribute: PIRUnoccupiedToOccupiedThreshold Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("PIR unoccupied to occupied threshold", actualValue, 1));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadOptionalAttributeUltrasonicOccupiedToUnoccupiedDelay_22()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeUltrasonicOccupiedToUnoccupiedDelayWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read optional attribute: UltrasonicOccupiedToUnoccupiedDelay Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ultrasonic occupied to unoccupied delay", actualValue, 0U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("ultrasonicOccupiedToUnoccupiedDelay", "", "uint16"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheRespectiveDefaultValueToOptionalAttributeUltrasonicOccupiedToUnoccupiedDelay_23()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id ultrasonicOccupiedToUnoccupiedDelayArgument;
+        ultrasonicOccupiedToUnoccupiedDelayArgument = [NSNumber numberWithUnsignedShort:0U];
+        [cluster writeAttributeUltrasonicOccupiedToUnoccupiedDelayWithValue:ultrasonicOccupiedToUnoccupiedDelayArgument
+                                                          completionHandler:^(NSError * _Nullable err) {
+                                                              NSLog(@"Writes the respective default value to optional attribute: "
+                                                                    @"UltrasonicOccupiedToUnoccupiedDelay Error: %@",
+                                                                  err);
+
+                                                              if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                                  NextTest();
+                                                                  return;
+                                                              }
+
+                                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                              NextTest();
+                                                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackOptionalAttributeUltrasonicOccupiedToUnoccupiedDelay_24()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeUltrasonicOccupiedToUnoccupiedDelayWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back optional attribute: UltrasonicOccupiedToUnoccupiedDelay Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ultrasonic occupied to unoccupied delay", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeUltrasonicUnoccupiedToOccupiedDelay_25()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeUltrasonicUnoccupiedToOccupiedDelayWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute: UltrasonicUnoccupiedToOccupiedDelay Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ultrasonic unoccupied to occupied delay", actualValue, 0U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("ultrasonicUnoccupiedToOccupiedDelay", "", "uint16"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheRespectiveDefaultValueToOptionalAttributeUltrasonicUnoccupiedToOccupiedDelay_26()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id ultrasonicUnoccupiedToOccupiedDelayArgument;
+        ultrasonicUnoccupiedToOccupiedDelayArgument = [NSNumber numberWithUnsignedShort:0U];
+        [cluster writeAttributeUltrasonicUnoccupiedToOccupiedDelayWithValue:ultrasonicUnoccupiedToOccupiedDelayArgument
+                                                          completionHandler:^(NSError * _Nullable err) {
+                                                              NSLog(@"Writes the respective default value to optional attribute: "
+                                                                    @"UltrasonicUnoccupiedToOccupiedDelay Error: %@",
+                                                                  err);
+
+                                                              if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                                  NextTest();
+                                                                  return;
+                                                              }
+
+                                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                              NextTest();
+                                                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackAttributeUltrasonicUnoccupiedToOccupiedDelay_27()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeUltrasonicUnoccupiedToOccupiedDelayWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back attribute: UltrasonicUnoccupiedToOccupiedDelay Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ultrasonic unoccupied to occupied delay", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeUltrasonicUnoccupiedToOccupiedThreshold_28()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeUltrasonicUnoccupiedToOccupiedThresholdWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute: UltrasonicUnoccupiedToOccupiedThreshold Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ultrasonic unoccupied to occupied threshold", actualValue, 1));
+            }
+
+            VerifyOrReturn(CheckConstraintType("ultrasonicUnoccupiedToOccupiedThreshold", "", "uint16"));
+            if (value != nil) {
+                VerifyOrReturn(
+                    CheckConstraintMinValue<uint8_t>("ultrasonicUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 1));
+            }
+            if (value != nil) {
+                VerifyOrReturn(
+                    CheckConstraintMaxValue<uint8_t>("ultrasonicUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 254));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheRespectiveDefaultValueToOptionalAttributeUltrasonicUnoccupiedToOccupiedThreshold_29()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id ultrasonicUnoccupiedToOccupiedThresholdArgument;
+        ultrasonicUnoccupiedToOccupiedThresholdArgument = [NSNumber numberWithUnsignedChar:1];
+        [cluster
+            writeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValue:ultrasonicUnoccupiedToOccupiedThresholdArgument
+                                                         completionHandler:^(NSError * _Nullable err) {
+                                                             NSLog(@"Writes the respective default value to optional attribute: "
+                                                                   @"UltrasonicUnoccupiedToOccupiedThreshold Error: %@",
+                                                                 err);
+
+                                                             if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                                 NextTest();
+                                                                 return;
+                                                             }
+
+                                                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                             NextTest();
+                                                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackAttributeUltrasonicUnoccupiedToOccupiedThreshold_30()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeUltrasonicUnoccupiedToOccupiedThresholdWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back attribute: UltrasonicUnoccupiedToOccupiedThreshold Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ultrasonic unoccupied to occupied threshold", actualValue, 1));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsOptionalAttributePhysicalContactOccupiedToUnoccupiedDelay_31()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePhysicalContactOccupiedToUnoccupiedDelayWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads optional attribute: PhysicalContactOccupiedToUnoccupiedDelay Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("physical contact occupied to unoccupied delay", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsOptionalAttributeConstrainsPhysicalContactOccupiedToUnoccupiedDelay_32()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePhysicalContactOccupiedToUnoccupiedDelayWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads optional attribute constrains: PhysicalContactOccupiedToUnoccupiedDelay Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("physicalContactOccupiedToUnoccupiedDelay", "", "uint16"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheRespectiveDefaultValueToOptionalAttributePhysicalContactOccupiedToUnoccupiedDelay_33()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id physicalContactOccupiedToUnoccupiedDelayArgument;
+        physicalContactOccupiedToUnoccupiedDelayArgument = [NSNumber numberWithUnsignedShort:0U];
+        [cluster
+            writeAttributePhysicalContactOccupiedToUnoccupiedDelayWithValue:physicalContactOccupiedToUnoccupiedDelayArgument
+                                                          completionHandler:^(NSError * _Nullable err) {
+                                                              NSLog(@"Writes the respective default value to optional attribute: "
+                                                                    @"PhysicalContactOccupiedToUnoccupiedDelay Error: %@",
+                                                                  err);
+
+                                                              if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                                  NextTest();
+                                                                  return;
+                                                              }
+
+                                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                              NextTest();
+                                                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsBackOptionalAttributePhysicalContactOccupiedToUnoccupiedDelay_34()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePhysicalContactOccupiedToUnoccupiedDelayWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads back optional attribute: PhysicalContactOccupiedToUnoccupiedDelay Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("physical contact occupied to unoccupied delay", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsOptionalAttributePhysicalContactUnoccupiedToOccupiedDelay_35()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePhysicalContactUnoccupiedToOccupiedDelayWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads optional attribute: PhysicalContactUnoccupiedToOccupiedDelay Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("physical contact unoccupied to occupied delay", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsOptionalAttributeConstrainsPhysicalContactUnoccupiedToOccupiedDelay_36()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePhysicalContactUnoccupiedToOccupiedDelayWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads optional attribute constrains: PhysicalContactUnoccupiedToOccupiedDelay Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("physicalContactUnoccupiedToOccupiedDelay", "", "uint16"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheRespectiveDefaultValueToOptionalAttributePhysicalContactUnoccupiedToOccupiedDelay_37()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id physicalContactUnoccupiedToOccupiedDelayArgument;
+        physicalContactUnoccupiedToOccupiedDelayArgument = [NSNumber numberWithUnsignedShort:0U];
+        [cluster
+            writeAttributePhysicalContactUnoccupiedToOccupiedDelayWithValue:physicalContactUnoccupiedToOccupiedDelayArgument
+                                                          completionHandler:^(NSError * _Nullable err) {
+                                                              NSLog(@"Writes the respective default value to optional attribute: "
+                                                                    @"PhysicalContactUnoccupiedToOccupiedDelay Error: %@",
+                                                                  err);
+
+                                                              if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                                  NextTest();
+                                                                  return;
+                                                              }
+
+                                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                              NextTest();
+                                                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsBackOptionalAttributePhysicalContactUnoccupiedToOccupiedDelay_38()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePhysicalContactUnoccupiedToOccupiedDelayWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads back optional attribute: PhysicalContactUnoccupiedToOccupiedDelay Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("physical contact unoccupied to occupied delay", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsOptionalAttributePhysicalContactUnoccupiedToOccupiedThreshold_39()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePhysicalContactUnoccupiedToOccupiedThresholdWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads optional attribute: PhysicalContactUnoccupiedToOccupiedThreshold Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("physical contact unoccupied to occupied threshold", actualValue, 1));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsOptionalAttributeConstrainsPhysicalContactUnoccupiedToOccupiedThreshold_40()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePhysicalContactUnoccupiedToOccupiedThresholdWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads optional attribute constrains: PhysicalContactUnoccupiedToOccupiedThreshold Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("physicalContactUnoccupiedToOccupiedThreshold", "", "uint8"));
+            if (value != nil) {
+                VerifyOrReturn(
+                    CheckConstraintMinValue<uint8_t>("physicalContactUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 1));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>(
+                    "physicalContactUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 254));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheRespectiveDefaultValueToOptionalAttributePhysicalContactUnoccupiedToOccupiedThreshold_41()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id physicalContactUnoccupiedToOccupiedThresholdArgument;
+        physicalContactUnoccupiedToOccupiedThresholdArgument = [NSNumber numberWithUnsignedChar:1];
+        [cluster
+            writeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValue:physicalContactUnoccupiedToOccupiedThresholdArgument
+                                                              completionHandler:^(NSError * _Nullable err) {
+                                                                  NSLog(
+                                                                      @"Writes the respective default value to optional attribute: "
+                                                                      @"PhysicalContactUnoccupiedToOccupiedThreshold Error: %@",
+                                                                      err);
+
+                                                                  if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                                      NextTest();
+                                                                      return;
+                                                                  }
+
+                                                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                                  NextTest();
+                                                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsBackOptionalAttributePhysicalContactUnoccupiedToOccupiedThreshold_42()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOccupancySensing * cluster = [[CHIPTestOccupancySensing alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePhysicalContactUnoccupiedToOccupiedThresholdWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads back optional attribute: PhysicalContactUnoccupiedToOccupiedThreshold Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("physical contact unoccupied to occupied threshold", actualValue, 1));
+            }
+
+            NextTest();
+        }];
 
         return CHIP_NO_ERROR;
     }
@@ -43065,38 +44105,34 @@ public:
             err = TestReadTheGlobalAttributeClusterRevision_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute constraints: ClusterRevision\n");
-            err = TestReadTheGlobalAttributeConstraintsClusterRevision_2();
-            break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: AttributeList\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheGlobalAttributeAttributeList_3();
+            err = TestReadTheGlobalAttributeAttributeList_2();
             break;
-        case 4:
+        case 3:
             ChipLogProgress(chipTool,
-                " ***** Test Step 4 : Read EventList attribute from the DUT and Verify that the DUT response provides a list of "
+                " ***** Test Step 3 : Read EventList attribute from the DUT and Verify that the DUT response provides a list of "
                 "supported events.\n");
             if (ShouldSkip("PICS_USER_PROMPT")) {
                 NextTest();
                 return;
             }
-            err = TestReadEventListAttributeFromTheDutAndVerifyThatTheDutResponseProvidesAListOfSupportedEvents_4();
+            err = TestReadEventListAttributeFromTheDutAndVerifyThatTheDutResponseProvidesAListOfSupportedEvents_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AcceptedCommandList\n");
-            err = TestReadTheGlobalAttributeAcceptedCommandList_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the global attribute: GeneratedCommandList\n");
-            err = TestReadTheGlobalAttributeGeneratedCommandList_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : read the optional global attribute: FeatureMap\n");
-            err = TestReadTheOptionalGlobalAttributeFeatureMap_7();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : read the optional global attribute: FeatureMap\n");
+            err = TestReadTheOptionalGlobalAttributeFeatureMap_6();
             break;
         }
 
@@ -43130,9 +44166,6 @@ public:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -43146,7 +44179,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 8;
+    const uint16_t mTestCount = 7;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -43176,23 +44209,6 @@ private:
                 VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
             }
 
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheGlobalAttributeConstraintsClusterRevision_2()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeClusterRevisionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read the global attribute constraints: ClusterRevision Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
             VerifyOrReturn(CheckConstraintType("clusterRevision", "", "uint16"));
             NextTest();
         }];
@@ -43200,7 +44216,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_3()
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_2()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -43234,7 +44250,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadEventListAttributeFromTheDutAndVerifyThatTheDutResponseProvidesAListOfSupportedEvents_4()
+    CHIP_ERROR TestReadEventListAttributeFromTheDutAndVerifyThatTheDutResponseProvidesAListOfSupportedEvents_3()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
@@ -43243,7 +44259,7 @@ private:
         return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_4()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -43266,7 +44282,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_6()
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_5()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -43289,7 +44305,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalGlobalAttributeFeatureMap_7()
+    CHIP_ERROR TestReadTheOptionalGlobalAttributeFeatureMap_6()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPowerSource * cluster = [[CHIPTestPowerSource alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -45401,200 +46417,96 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : read the mandatory attribute: MaxPressure\n");
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the mandatory attribute: MaxPressure\n");
             err = TestReadTheMandatoryAttributeMaxPressure_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : read the mandatory attribute: MaxSpeed\n");
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the mandatory attribute: MaxSpeed\n");
             err = TestReadTheMandatoryAttributeMaxSpeed_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : read the mandatory attribute: MaxFlow\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the mandatory attribute: MaxFlow\n");
             err = TestReadTheMandatoryAttributeMaxFlow_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : read the mandatory attribute: EffectiveOperationMode\n");
-            err = TestReadTheMandatoryAttributeEffectiveOperationMode_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the optional attribute: MinConstPressure\n");
+            err = TestReadTheOptionalAttributeMinConstPressure_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : read the mandatory attribute: EffectiveControlMode\n");
-            err = TestReadTheMandatoryAttributeEffectiveControlMode_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the optional attribute: MaxConstPressure\n");
+            err = TestReadTheOptionalAttributeMaxConstPressure_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : read the mandatory attribute: Capacity\n");
-            err = TestReadTheMandatoryAttributeCapacity_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the optional attribute: MinCompPressure\n");
+            err = TestReadTheOptionalAttributeMinCompPressure_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : read the mandatory attribute: MaxPressure\n");
-            err = TestReadTheMandatoryAttributeMaxPressure_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Read the optional attribute: MaxCompPressure\n");
+            err = TestReadTheOptionalAttributeMaxCompPressure_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : read the mandatory attribute: MaxSpeed\n");
-            err = TestReadTheMandatoryAttributeMaxSpeed_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the optional attribute: MinConstSpeed\n");
+            err = TestReadTheOptionalAttributeMinConstSpeed_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : read the mandatory attribute: MaxFlow\n");
-            err = TestReadTheMandatoryAttributeMaxFlow_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the optional attribute: MaxConstSpeed\n");
+            err = TestReadTheOptionalAttributeMaxConstSpeed_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : read the mandatory attribute: EffectiveOperationMode\n");
-            err = TestReadTheMandatoryAttributeEffectiveOperationMode_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Read the optional attribute: MinConstFlow\n");
+            err = TestReadTheOptionalAttributeMinConstFlow_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : read the mandatory attribute: EffectiveControlMode\n");
-            err = TestReadTheMandatoryAttributeEffectiveControlMode_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Read the optional attribute: MaxConstFlow\n");
+            err = TestReadTheOptionalAttributeMaxConstFlow_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : read the mandatory attribute: Capacity\n");
-            err = TestReadTheMandatoryAttributeCapacity_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Read the optional attribute: MinConstTemp\n");
+            err = TestReadTheOptionalAttributeMinConstTemp_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : read the optional attribute: MinConstPressure\n");
-            err = TestReadTheOptionalAttributeMinConstPressure_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Read the optional attribute: MaxConstTemp\n");
+            err = TestReadTheOptionalAttributeMaxConstTemp_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : read the optional attribute: MaxConstPressure\n");
-            err = TestReadTheOptionalAttributeMaxConstPressure_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Read the optional attribute: PumpStatus\n");
+            err = TestReadTheOptionalAttributePumpStatus_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : read the optional attribute: MinCompPressure\n");
-            err = TestReadTheOptionalAttributeMinCompPressure_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Read attribute: EffectiveOperationMode\n");
+            err = TestReadAttributeEffectiveOperationMode_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : read the optional attribute: MaxCompPressure\n");
-            err = TestReadTheOptionalAttributeMaxCompPressure_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Read attribute: EffectiveControlMode\n");
+            err = TestReadAttributeEffectiveControlMode_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : read the optional attribute: MinConstSpeed\n");
-            err = TestReadTheOptionalAttributeMinConstSpeed_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Read attribute: Capacity\n");
+            err = TestReadAttributeCapacity_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : read the optional attribute: MaxConstSpeed\n");
-            err = TestReadTheOptionalAttributeMaxConstSpeed_18();
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Read the optional attribute: Speed\n");
+            err = TestReadTheOptionalAttributeSpeed_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : read the optional attribute: MinConstFlow\n");
-            err = TestReadTheOptionalAttributeMinConstFlow_19();
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Read the optional attribute: LifetimeRunningHours\n");
+            err = TestReadTheOptionalAttributeLifetimeRunningHours_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : read the optional attribute: MaxConstFlow\n");
-            err = TestReadTheOptionalAttributeMaxConstFlow_20();
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Read the optional attribute: Power\n");
+            err = TestReadTheOptionalAttributePower_20();
             break;
         case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : read the optional attribute: MinConstTemp\n");
-            err = TestReadTheOptionalAttributeMinConstTemp_21();
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Read the optional attribute: LifetimeEnergyConsumed\n");
+            err = TestReadTheOptionalAttributeLifetimeEnergyConsumed_21();
             break;
         case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : read the optional attribute: MaxConstTemp\n");
-            err = TestReadTheOptionalAttributeMaxConstTemp_22();
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Read optional attribute: OperationMode\n");
+            err = TestReadOptionalAttributeOperationMode_22();
             break;
         case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : read the optional attribute: PumpStatus\n");
-            err = TestReadTheOptionalAttributePumpStatus_23();
-            break;
-        case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : read the optional attribute: PumpStatus\n");
-            err = TestReadTheOptionalAttributePumpStatus_24();
-            break;
-        case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : read the optional attribute: Speed\n");
-            err = TestReadTheOptionalAttributeSpeed_25();
-            break;
-        case 26:
-            ChipLogProgress(chipTool, " ***** Test Step 26 : read the optional attribute: LifetimeRunningHours\n");
-            err = TestReadTheOptionalAttributeLifetimeRunningHours_26();
-            break;
-        case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : read the optional attribute: LifetimeRunningHours\n");
-            err = TestReadTheOptionalAttributeLifetimeRunningHours_27();
-            break;
-        case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : read the optional attribute: Power\n");
-            err = TestReadTheOptionalAttributePower_28();
-            break;
-        case 29:
-            ChipLogProgress(chipTool, " ***** Test Step 29 : read the optional attribute: LifetimeEnergyConsumed\n");
-            err = TestReadTheOptionalAttributeLifetimeEnergyConsumed_29();
-            break;
-        case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : read the optional attribute: LifetimeEnergyConsumed\n");
-            err = TestReadTheOptionalAttributeLifetimeEnergyConsumed_30();
-            break;
-        case 31:
-            ChipLogProgress(chipTool, " ***** Test Step 31 : write to the optional attribute: LifetimeEnergyConsumed\n");
-            err = TestWriteToTheOptionalAttributeLifetimeEnergyConsumed_31();
-            break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : read the optional attribute: MinConstPressure\n");
-            err = TestReadTheOptionalAttributeMinConstPressure_32();
-            break;
-        case 33:
-            ChipLogProgress(chipTool, " ***** Test Step 33 : read the optional attribute: MaxConstPressure\n");
-            err = TestReadTheOptionalAttributeMaxConstPressure_33();
-            break;
-        case 34:
-            ChipLogProgress(chipTool, " ***** Test Step 34 : read the optional attribute: MinCompPressure\n");
-            err = TestReadTheOptionalAttributeMinCompPressure_34();
-            break;
-        case 35:
-            ChipLogProgress(chipTool, " ***** Test Step 35 : read the optional attribute: MaxCompPressure\n");
-            err = TestReadTheOptionalAttributeMaxCompPressure_35();
-            break;
-        case 36:
-            ChipLogProgress(chipTool, " ***** Test Step 36 : read the optional attribute: MinConstSpeed\n");
-            err = TestReadTheOptionalAttributeMinConstSpeed_36();
-            break;
-        case 37:
-            ChipLogProgress(chipTool, " ***** Test Step 37 : read the optional attribute: MaxConstSpeed\n");
-            err = TestReadTheOptionalAttributeMaxConstSpeed_37();
-            break;
-        case 38:
-            ChipLogProgress(chipTool, " ***** Test Step 38 : read the optional attribute: MinConstFlow\n");
-            err = TestReadTheOptionalAttributeMinConstFlow_38();
-            break;
-        case 39:
-            ChipLogProgress(chipTool, " ***** Test Step 39 : read the optional attribute: MaxConstFlow\n");
-            err = TestReadTheOptionalAttributeMaxConstFlow_39();
-            break;
-        case 40:
-            ChipLogProgress(chipTool, " ***** Test Step 40 : read the optional attribute: MinConstTemp\n");
-            err = TestReadTheOptionalAttributeMinConstTemp_40();
-            break;
-        case 41:
-            ChipLogProgress(chipTool, " ***** Test Step 41 : read the optional attribute: MaxConstTemp\n");
-            err = TestReadTheOptionalAttributeMaxConstTemp_41();
-            break;
-        case 42:
-            ChipLogProgress(chipTool, " ***** Test Step 42 : read the optional attribute: PumpStatus\n");
-            err = TestReadTheOptionalAttributePumpStatus_42();
-            break;
-        case 43:
-            ChipLogProgress(chipTool, " ***** Test Step 43 : read the optional attribute: PumpStatus\n");
-            err = TestReadTheOptionalAttributePumpStatus_43();
-            break;
-        case 44:
-            ChipLogProgress(chipTool, " ***** Test Step 44 : read the optional attribute: Speed\n");
-            err = TestReadTheOptionalAttributeSpeed_44();
-            break;
-        case 45:
-            ChipLogProgress(chipTool, " ***** Test Step 45 : read the optional attribute: LifetimeRunningHours\n");
-            err = TestReadTheOptionalAttributeLifetimeRunningHours_45();
-            break;
-        case 46:
-            ChipLogProgress(chipTool, " ***** Test Step 46 : read the optional attribute: LifetimeRunningHours\n");
-            err = TestReadTheOptionalAttributeLifetimeRunningHours_46();
-            break;
-        case 47:
-            ChipLogProgress(chipTool, " ***** Test Step 47 : read the optional attribute: Power\n");
-            err = TestReadTheOptionalAttributePower_47();
-            break;
-        case 48:
-            ChipLogProgress(chipTool, " ***** Test Step 48 : read the optional attribute: LifetimeEnergyConsumed\n");
-            err = TestReadTheOptionalAttributeLifetimeEnergyConsumed_48();
-            break;
-        case 49:
-            ChipLogProgress(chipTool, " ***** Test Step 49 : read the optional attribute: LifetimeEnergyConsumed\n");
-            err = TestReadTheOptionalAttributeLifetimeEnergyConsumed_49();
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Read optional attribute: ControlMode\n");
+            err = TestReadOptionalAttributeControlMode_23();
             break;
         }
 
@@ -45679,84 +46591,6 @@ public:
         case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 24:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 25:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 26:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 27:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 28:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 29:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 33:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 34:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 35:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 36:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 37:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 38:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 39:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 40:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 41:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 42:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 43:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 44:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 45:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 46:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 47:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 48:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 49:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -45770,7 +46604,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 50;
+    const uint16_t mTestCount = 24;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -45793,11 +46627,18 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeMaxPressureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the mandatory attribute: MaxPressure Error: %@", err);
+            NSLog(@"Read the mandatory attribute: MaxPressure Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("maxPressure", "", "int16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxPressure", [value shortValue], -32768));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("maxPressure", [value shortValue], 32767));
+            }
+
             NextTest();
         }];
 
@@ -45813,11 +46654,18 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeMaxSpeedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the mandatory attribute: MaxSpeed Error: %@", err);
+            NSLog(@"Read the mandatory attribute: MaxSpeed Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("maxSpeed", "", "uint16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("maxSpeed", [value unsignedShortValue], 0U));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("maxSpeed", [value unsignedShortValue], 65535U));
+            }
+
             NextTest();
         }];
 
@@ -45833,198 +46681,25 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeMaxFlowWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the mandatory attribute: MaxFlow Error: %@", err);
+            NSLog(@"Read the mandatory attribute: MaxFlow Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("maxFlow", "", "uint16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("maxFlow", [value unsignedShortValue], 0U));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("maxFlow", [value unsignedShortValue], 65535U));
+            }
+
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributeEffectiveOperationMode_4()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeEffectiveOperationModeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the mandatory attribute: EffectiveOperationMode Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("effectiveOperationMode", "", "enum8"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeEffectiveControlMode_5()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeEffectiveControlModeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the mandatory attribute: EffectiveControlMode Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("effectiveControlMode", "", "enum8"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeCapacity_6()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCapacityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the mandatory attribute: Capacity Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("capacity", "", "int16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeMaxPressure_7()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMaxPressureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the mandatory attribute: MaxPressure Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("maxPressure", "", "int16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeMaxSpeed_8()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMaxSpeedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the mandatory attribute: MaxSpeed Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("maxSpeed", "", "uint16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeMaxFlow_9()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMaxFlowWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the mandatory attribute: MaxFlow Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("maxFlow", "", "uint16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeEffectiveOperationMode_10()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeEffectiveOperationModeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the mandatory attribute: EffectiveOperationMode Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("effectiveOperationMode", "", "enum8"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeEffectiveControlMode_11()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeEffectiveControlModeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the mandatory attribute: EffectiveControlMode Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("effectiveControlMode", "", "enum8"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeCapacity_12()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCapacityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the mandatory attribute: Capacity Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("capacity", "", "int16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeMinConstPressure_13()
+    CHIP_ERROR TestReadTheOptionalAttributeMinConstPressure_4()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
@@ -46033,7 +46708,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeMinConstPressureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MinConstPressure Error: %@", err);
+            NSLog(@"Read the optional attribute: MinConstPressure Error: %@", err);
 
             if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
                 NextTest();
@@ -46043,13 +46718,20 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("minConstPressure", "", "int16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("minConstPressure", [value shortValue], -32768));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minConstPressure", [value shortValue], 32767));
+            }
+
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeMaxConstPressure_14()
+    CHIP_ERROR TestReadTheOptionalAttributeMaxConstPressure_5()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
@@ -46058,7 +46740,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeMaxConstPressureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MaxConstPressure Error: %@", err);
+            NSLog(@"Read the optional attribute: MaxConstPressure Error: %@", err);
 
             if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
                 NextTest();
@@ -46068,13 +46750,20 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("maxConstPressure", "", "int16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxConstPressure", [value shortValue], -32768));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("maxConstPressure", [value shortValue], 32767));
+            }
+
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeMinCompPressure_15()
+    CHIP_ERROR TestReadTheOptionalAttributeMinCompPressure_6()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
@@ -46083,7 +46772,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeMinCompPressureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MinCompPressure Error: %@", err);
+            NSLog(@"Read the optional attribute: MinCompPressure Error: %@", err);
 
             if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
                 NextTest();
@@ -46093,13 +46782,20 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("minCompPressure", "", "int16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("minCompPressure", [value shortValue], -32768));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minCompPressure", [value shortValue], 32767));
+            }
+
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeMaxCompPressure_16()
+    CHIP_ERROR TestReadTheOptionalAttributeMaxCompPressure_7()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
@@ -46108,7 +46804,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeMaxCompPressureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MaxCompPressure Error: %@", err);
+            NSLog(@"Read the optional attribute: MaxCompPressure Error: %@", err);
 
             if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
                 NextTest();
@@ -46118,13 +46814,20 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("maxCompPressure", "", "int16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxCompPressure", [value shortValue], -32768));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("maxCompPressure", [value shortValue], 32767));
+            }
+
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeMinConstSpeed_17()
+    CHIP_ERROR TestReadTheOptionalAttributeMinConstSpeed_8()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
@@ -46133,7 +46836,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeMinConstSpeedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MinConstSpeed Error: %@", err);
+            NSLog(@"Read the optional attribute: MinConstSpeed Error: %@", err);
 
             if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
                 NextTest();
@@ -46143,13 +46846,20 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("minConstSpeed", "", "uint16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("minConstSpeed", [value unsignedShortValue], 0U));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("minConstSpeed", [value unsignedShortValue], 65535U));
+            }
+
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeMaxConstSpeed_18()
+    CHIP_ERROR TestReadTheOptionalAttributeMaxConstSpeed_9()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
@@ -46158,7 +46868,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeMaxConstSpeedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MaxConstSpeed Error: %@", err);
+            NSLog(@"Read the optional attribute: MaxConstSpeed Error: %@", err);
 
             if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
                 NextTest();
@@ -46168,13 +46878,20 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("maxConstSpeed", "", "uint16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("maxConstSpeed", [value unsignedShortValue], 0U));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("maxConstSpeed", [value unsignedShortValue], 65535U));
+            }
+
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeMinConstFlow_19()
+    CHIP_ERROR TestReadTheOptionalAttributeMinConstFlow_10()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
@@ -46183,7 +46900,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeMinConstFlowWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MinConstFlow Error: %@", err);
+            NSLog(@"Read the optional attribute: MinConstFlow Error: %@", err);
 
             if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
                 NextTest();
@@ -46193,13 +46910,20 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("minConstFlow", "", "uint16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("minConstFlow", [value unsignedShortValue], 0U));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("minConstFlow", [value unsignedShortValue], 65535U));
+            }
+
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeMaxConstFlow_20()
+    CHIP_ERROR TestReadTheOptionalAttributeMaxConstFlow_11()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
@@ -46208,7 +46932,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeMaxConstFlowWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MaxConstFlow Error: %@", err);
+            NSLog(@"Read the optional attribute: MaxConstFlow Error: %@", err);
 
             if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
                 NextTest();
@@ -46218,13 +46942,20 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("maxConstFlow", "", "uint16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("maxConstFlow", [value unsignedShortValue], 0U));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("maxConstFlow", [value unsignedShortValue], 65535U));
+            }
+
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeMinConstTemp_21()
+    CHIP_ERROR TestReadTheOptionalAttributeMinConstTemp_12()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
@@ -46233,7 +46964,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeMinConstTempWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MinConstTemp Error: %@", err);
+            NSLog(@"Read the optional attribute: MinConstTemp Error: %@", err);
 
             if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
                 NextTest();
@@ -46244,506 +46975,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("minConstTemp", "", "int16"));
             if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<int16_t>("minConstTemp", [value shortValue], -27315));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeMaxConstTemp_22()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMaxConstTempWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MaxConstTemp Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("maxConstTemp", "", "int16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxConstTemp", [value shortValue], -27315));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributePumpStatus_23()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributePumpStatusWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: PumpStatus Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("PumpStatus", actualValue, 0U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributePumpStatus_24()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributePumpStatusWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: PumpStatus Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("pumpStatus", "", "map16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeSpeed_25()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeSpeedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: Speed Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("speed", "", "uint16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeLifetimeRunningHours_26()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeLifetimeRunningHoursWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: LifetimeRunningHours Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("LifetimeRunningHours", actualValue));
-                VerifyOrReturn(CheckValue("LifetimeRunningHours", actualValue, 0UL));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeLifetimeRunningHours_27()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeLifetimeRunningHoursWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: LifetimeRunningHours Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("lifetimeRunningHours", "", "uint24"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributePower_28()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributePowerWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: Power Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("power", "", "uint24"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeLifetimeEnergyConsumed_29()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeLifetimeEnergyConsumedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: LifetimeEnergyConsumed Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("LifetimeEnergyConsumed", actualValue));
-                VerifyOrReturn(CheckValue("LifetimeEnergyConsumed", actualValue, 0UL));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeLifetimeEnergyConsumed_30()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeLifetimeEnergyConsumedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: LifetimeEnergyConsumed Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("lifetimeEnergyConsumed", "", "uint32"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWriteToTheOptionalAttributeLifetimeEnergyConsumed_31()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id lifetimeEnergyConsumedArgument;
-        lifetimeEnergyConsumedArgument = [NSNumber numberWithUnsignedInt:0UL];
-        [cluster writeAttributeLifetimeEnergyConsumedWithValue:lifetimeEnergyConsumedArgument
-                                             completionHandler:^(NSError * _Nullable err) {
-                                                 NSLog(@"write to the optional attribute: LifetimeEnergyConsumed Error: %@", err);
-
-                                                 if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                                                     NextTest();
-                                                     return;
-                                                 }
-
-                                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                                 NextTest();
-                                             }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeMinConstPressure_32()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMinConstPressureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MinConstPressure Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("minConstPressure", "", "int16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeMaxConstPressure_33()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMaxConstPressureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MaxConstPressure Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("maxConstPressure", "", "int16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeMinCompPressure_34()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMinCompPressureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MinCompPressure Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("minCompPressure", "", "int16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeMaxCompPressure_35()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMaxCompPressureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MaxCompPressure Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("maxCompPressure", "", "int16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeMinConstSpeed_36()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMinConstSpeedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MinConstSpeed Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("minConstSpeed", "", "uint16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeMaxConstSpeed_37()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMaxConstSpeedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MaxConstSpeed Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("maxConstSpeed", "", "uint16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeMinConstFlow_38()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMinConstFlowWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MinConstFlow Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("minConstFlow", "", "uint16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeMaxConstFlow_39()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMaxConstFlowWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MaxConstFlow Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("maxConstFlow", "", "uint16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeMinConstTemp_40()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMinConstTempWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MinConstTemp Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("minConstTemp", "", "int16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<int16_t>("minConstTemp", [value shortValue], -27315));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("minConstTemp", [value shortValue], -32768));
             }
             if (value != nil) {
                 VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minConstTemp", [value shortValue], 32767));
@@ -46755,7 +46987,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeMaxConstTemp_41()
+    CHIP_ERROR TestReadTheOptionalAttributeMaxConstTemp_13()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
@@ -46764,7 +46996,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeMaxConstTempWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: MaxConstTemp Error: %@", err);
+            NSLog(@"Read the optional attribute: MaxConstTemp Error: %@", err);
 
             if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
                 NextTest();
@@ -46775,7 +47007,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("maxConstTemp", "", "int16"));
             if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxConstTemp", [value shortValue], -27315));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxConstTemp", [value shortValue], -32768));
             }
             if (value != nil) {
                 VerifyOrReturn(CheckConstraintMaxValue<int16_t>("maxConstTemp", [value shortValue], 32767));
@@ -46787,7 +47019,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributePumpStatus_42()
+    CHIP_ERROR TestReadTheOptionalAttributePumpStatus_14()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
@@ -46796,36 +47028,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributePumpStatusWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: PumpStatus Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("PumpStatus", actualValue, 0U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributePumpStatus_43()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributePumpStatusWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: PumpStatus Error: %@", err);
+            NSLog(@"Read the optional attribute: PumpStatus Error: %@", err);
 
             if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
                 NextTest();
@@ -46835,13 +47038,101 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("pumpStatus", "", "map16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("pumpStatus", [value unsignedShortValue], 0U));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("pumpStatus", [value unsignedShortValue], 8U));
+            }
+
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeSpeed_44()
+    CHIP_ERROR TestReadAttributeEffectiveOperationMode_15()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
+                                                                                                           endpoint:1
+                                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEffectiveOperationModeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute: EffectiveOperationMode Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("effectiveOperationMode", "", "enum8"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("effectiveOperationMode", [value unsignedCharValue], 0));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("effectiveOperationMode", [value unsignedCharValue], 3));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeEffectiveControlMode_16()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
+                                                                                                           endpoint:1
+                                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEffectiveControlModeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute: EffectiveControlMode Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("effectiveControlMode", "", "enum8"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("effectiveControlMode", [value unsignedCharValue], 0));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("effectiveControlMode", [value unsignedCharValue], 7));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeCapacity_17()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
+                                                                                                           endpoint:1
+                                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCapacityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute: Capacity Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("capacity", "", "int16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("capacity", [value shortValue], -32768));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("capacity", [value shortValue], 32767));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeSpeed_18()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
@@ -46850,7 +47141,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeSpeedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: Speed Error: %@", err);
+            NSLog(@"Read the optional attribute: Speed Error: %@", err);
 
             if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
                 NextTest();
@@ -46860,29 +47151,11 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("speed", "", "uint16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeLifetimeRunningHours_45()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeLifetimeRunningHoursWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: LifetimeRunningHours Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("LifetimeRunningHours", actualValue));
-                VerifyOrReturn(CheckValue("LifetimeRunningHours", actualValue, 0UL));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("speed", [value unsignedShortValue], 0U));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("speed", [value unsignedShortValue], 65535U));
             }
 
             NextTest();
@@ -46891,7 +47164,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeLifetimeRunningHours_46()
+    CHIP_ERROR TestReadTheOptionalAttributeLifetimeRunningHours_19()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
@@ -46900,7 +47173,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeLifetimeRunningHoursWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: LifetimeRunningHours Error: %@", err);
+            NSLog(@"Read the optional attribute: LifetimeRunningHours Error: %@", err);
 
             if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
                 NextTest();
@@ -46910,13 +47183,20 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("lifetimeRunningHours", "", "uint24"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("lifetimeRunningHours", [value unsignedIntValue], 0UL));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("lifetimeRunningHours", [value unsignedIntValue], 16777215UL));
+            }
+
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributePower_47()
+    CHIP_ERROR TestReadTheOptionalAttributePower_20()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
@@ -46925,7 +47205,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributePowerWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: Power Error: %@", err);
+            NSLog(@"Read the optional attribute: Power Error: %@", err);
 
             if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
                 NextTest();
@@ -46935,34 +47215,11 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("power", "", "uint24"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheOptionalAttributeLifetimeEnergyConsumed_48()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeLifetimeEnergyConsumedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: LifetimeEnergyConsumed Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("power", [value unsignedIntValue], 0UL));
             }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("LifetimeEnergyConsumed", actualValue));
-                VerifyOrReturn(CheckValue("LifetimeEnergyConsumed", actualValue, 0UL));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("power", [value unsignedIntValue], 16777215UL));
             }
 
             NextTest();
@@ -46971,7 +47228,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeLifetimeEnergyConsumed_49()
+    CHIP_ERROR TestReadTheOptionalAttributeLifetimeEnergyConsumed_21()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
@@ -46980,7 +47237,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeLifetimeEnergyConsumedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the optional attribute: LifetimeEnergyConsumed Error: %@", err);
+            NSLog(@"Read the optional attribute: LifetimeEnergyConsumed Error: %@", err);
 
             if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
                 NextTest();
@@ -46990,6 +47247,72 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("lifetimeEnergyConsumed", "", "uint32"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("lifetimeEnergyConsumed", [value unsignedIntValue], 0UL));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("lifetimeEnergyConsumed", [value unsignedIntValue], 4294967295UL));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadOptionalAttributeOperationMode_22()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
+                                                                                                           endpoint:1
+                                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOperationModeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read optional attribute: OperationMode Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("operationMode", "", "enum8"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("operationMode", [value unsignedCharValue], 0));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("operationMode", [value unsignedCharValue], 3));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadOptionalAttributeControlMode_23()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestPumpConfigurationAndControl * cluster = [[CHIPTestPumpConfigurationAndControl alloc] initWithDevice:device
+                                                                                                           endpoint:1
+                                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeControlModeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read optional attribute: ControlMode Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("controlMode", "", "enum8"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("controlMode", [value unsignedCharValue], 0));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("controlMode", [value unsignedCharValue], 7));
+            }
+
             NextTest();
         }];
 
@@ -49036,11 +49359,11 @@ private:
     }
 };
 
-class Test_TC_RH_2_2 : public TestCommandBridge {
+class Test_TC_SWTCH_2_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_RH_2_2()
-        : TestCommandBridge("Test_TC_RH_2_2")
+    Test_TC_SWTCH_2_1()
+        : TestCommandBridge("Test_TC_SWTCH_2_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -49050,7 +49373,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_RH_2_2() {}
+    ~Test_TC_SWTCH_2_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -49058,11 +49381,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_RH_2_2\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_SWTCH_2_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_RH_2_2\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_SWTCH_2_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -49079,24 +49402,16 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Reads constraints of attribute: MinMeasuredValue\n");
-            err = TestReadsConstraintsOfAttributeMinMeasuredValue_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read NumberOfPositions attribute\n");
+            err = TestReadNumberOfPositionsAttribute_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads MeasuredValue attribute from DUT\n");
-            if (ShouldSkip("A_RELATIVEHUMIDITY")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsMeasuredValueAttributeFromDut_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read CurrentPosition attribute\n");
+            err = TestReadCurrentPositionAttribute_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the mandatory attribute: MeasuredValue\n");
-            if (ShouldSkip("A_RELATIVEHUMIDITY")) {
-                NextTest();
-                return;
-            }
-            err = TestReadTheMandatoryAttributeMeasuredValue_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read MultiPressMax attribute\n");
+            err = TestReadMultiPressMaxAttribute_3();
             break;
         }
 
@@ -49148,206 +49463,6 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestReadsConstraintsOfAttributeMinMeasuredValue_1()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestRelativeHumidityMeasurement * cluster = [[CHIPTestRelativeHumidityMeasurement alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMinMeasuredValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads constraints of attribute: MinMeasuredValue Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("minMeasuredValue", "", "int16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("minMeasuredValue", [value unsignedShortValue], 0U));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("minMeasuredValue", [value unsignedShortValue], 9999U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsMeasuredValueAttributeFromDut_2()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestRelativeHumidityMeasurement * cluster = [[CHIPTestRelativeHumidityMeasurement alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMeasuredValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads MeasuredValue attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("measuredValue", "", "int16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("measuredValue", [value unsignedShortValue], 0U));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("measuredValue", [value unsignedShortValue], 10000U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeMeasuredValue_3()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestRelativeHumidityMeasurement * cluster = [[CHIPTestRelativeHumidityMeasurement alloc] initWithDevice:device
-                                                                                                           endpoint:1
-                                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMeasuredValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read the mandatory attribute: MeasuredValue Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("measuredValue", "", "uint16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_SWTCH_2_1 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_SWTCH_2_1()
-        : TestCommandBridge("Test_TC_SWTCH_2_1")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_SWTCH_2_1() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_SWTCH_2_1\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_SWTCH_2_1\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Read NumberOfPositions attribute\n");
-            err = TestReadNumberOfPositionsAttribute_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read NumberOfPositions attribute\n");
-            err = TestReadNumberOfPositionsAttribute_2();
-            break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Read CurrentPosition attribute\n");
-            err = TestReadCurrentPositionAttribute_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Read CurrentPosition attribute\n");
-            err = TestReadCurrentPositionAttribute_4();
-            break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Read MultiPressMax attribute\n");
-            err = TestReadMultiPressMaxAttribute_5();
-            break;
-        case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Read MultiPressMax attribute\n");
-            err = TestReadMultiPressMaxAttribute_6();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 7;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
     CHIP_ERROR TestReadNumberOfPositionsAttribute_1()
     {
         CHIPDevice * device = GetDevice("alpha");
@@ -49364,23 +49479,6 @@ private:
                 VerifyOrReturn(CheckValue("number of positions", actualValue, 2));
             }
 
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadNumberOfPositionsAttribute_2()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestSwitch * cluster = [[CHIPTestSwitch alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeNumberOfPositionsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read NumberOfPositions attribute Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
             VerifyOrReturn(CheckConstraintType("numberOfPositions", "", "uint8"));
             if (value != nil) {
                 VerifyOrReturn(CheckConstraintMinValue<uint8_t>("numberOfPositions", [value unsignedCharValue], 2));
@@ -49392,7 +49490,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadCurrentPositionAttribute_3()
+    CHIP_ERROR TestReadCurrentPositionAttribute_2()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestSwitch * cluster = [[CHIPTestSwitch alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -49408,23 +49506,6 @@ private:
                 VerifyOrReturn(CheckValue("current position", actualValue, 0));
             }
 
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadCurrentPositionAttribute_4()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestSwitch * cluster = [[CHIPTestSwitch alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCurrentPositionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read CurrentPosition attribute Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
             VerifyOrReturn(CheckConstraintType("currentPosition", "", "uint8"));
             if (value != nil) {
                 VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentPosition", [value unsignedCharValue], 0));
@@ -49436,7 +49517,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadMultiPressMaxAttribute_5()
+    CHIP_ERROR TestReadMultiPressMaxAttribute_3()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestSwitch * cluster = [[CHIPTestSwitch alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -49452,23 +49533,6 @@ private:
                 VerifyOrReturn(CheckValue("multi press max", actualValue, 2));
             }
 
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadMultiPressMaxAttribute_6()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestSwitch * cluster = [[CHIPTestSwitch alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMultiPressMaxWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read MultiPressMax attribute Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
             VerifyOrReturn(CheckConstraintType("multiPressMax", "", "uint8"));
             if (value != nil) {
                 VerifyOrReturn(CheckConstraintMinValue<uint8_t>("multiPressMax", [value unsignedCharValue], 2));
@@ -49478,648 +49542,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_SWTCH_2_2 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_SWTCH_2_2()
-        : TestCommandBridge("Test_TC_SWTCH_2_2")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_SWTCH_2_2() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_SWTCH_2_2\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_SWTCH_2_2\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : User interaction needed\n");
-            err = TestUserInteractionNeeded_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : User interaction needed\n");
-            err = TestUserInteractionNeeded_2();
-            break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Read CurrentPosition attribute\n");
-            err = TestReadCurrentPositionAttribute_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : User interaction needed\n");
-            err = TestUserInteractionNeeded_4();
-            break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : User interaction needed\n");
-            err = TestUserInteractionNeeded_5();
-            break;
-        case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : User interaction needed\n");
-            err = TestUserInteractionNeeded_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Read CurrentPosition attribute\n");
-            err = TestReadCurrentPositionAttribute_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : User interaction needed\n");
-            err = TestUserInteractionNeeded_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : User interaction needed\n");
-            err = TestUserInteractionNeeded_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : User interaction needed\n");
-            err = TestUserInteractionNeeded_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : User interaction needed\n");
-            err = TestUserInteractionNeeded_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : User interaction needed\n");
-            err = TestUserInteractionNeeded_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : User interaction needed\n");
-            err = TestUserInteractionNeeded_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : User interaction needed\n");
-            err = TestUserInteractionNeeded_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Wait 3000ms\n");
-            err = TestWait3000ms_15();
-            break;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : User interaction needed\n");
-            err = TestUserInteractionNeeded_16();
-            break;
-        case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : User interaction needed\n");
-            err = TestUserInteractionNeeded_17();
-            break;
-        case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : User interaction needed\n");
-            err = TestUserInteractionNeeded_18();
-            break;
-        case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : User interaction needed\n");
-            err = TestUserInteractionNeeded_19();
-            break;
-        case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : User interaction needed\n");
-            err = TestUserInteractionNeeded_20();
-            break;
-        case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : User interaction needed\n");
-            err = TestUserInteractionNeeded_21();
-            break;
-        case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : Wait 3000ms\n");
-            err = TestWait3000ms_22();
-            break;
-        case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : User interaction needed\n");
-            err = TestUserInteractionNeeded_23();
-            break;
-        case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : User interaction needed\n");
-            err = TestUserInteractionNeeded_24();
-            break;
-        case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : User interaction needed\n");
-            err = TestUserInteractionNeeded_25();
-            break;
-        case 26:
-            ChipLogProgress(chipTool, " ***** Test Step 26 : User interaction needed\n");
-            err = TestUserInteractionNeeded_26();
-            break;
-        case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : User interaction needed\n");
-            err = TestUserInteractionNeeded_27();
-            break;
-        case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : User interaction needed\n");
-            err = TestUserInteractionNeeded_28();
-            break;
-        case 29:
-            ChipLogProgress(chipTool, " ***** Test Step 29 : User interaction needed\n");
-            err = TestUserInteractionNeeded_29();
-            break;
-        case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : User interaction needed\n");
-            err = TestUserInteractionNeeded_30();
-            break;
-        case 31:
-            ChipLogProgress(chipTool, " ***** Test Step 31 : User interaction needed\n");
-            err = TestUserInteractionNeeded_31();
-            break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : User interaction needed\n");
-            err = TestUserInteractionNeeded_32();
-            break;
-        case 33:
-            ChipLogProgress(chipTool, " ***** Test Step 33 : User interaction needed\n");
-            err = TestUserInteractionNeeded_33();
-            break;
-        case 34:
-            ChipLogProgress(chipTool, " ***** Test Step 34 : User interaction needed\n");
-            err = TestUserInteractionNeeded_34();
-            break;
-        case 35:
-            ChipLogProgress(chipTool, " ***** Test Step 35 : User interaction needed\n");
-            err = TestUserInteractionNeeded_35();
-            break;
-        case 36:
-            ChipLogProgress(chipTool, " ***** Test Step 36 : User interaction needed\n");
-            err = TestUserInteractionNeeded_36();
-            break;
-        case 37:
-            ChipLogProgress(chipTool, " ***** Test Step 37 : User interaction needed\n");
-            err = TestUserInteractionNeeded_37();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 24:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 25:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 26:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 27:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 28:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 29:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 33:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 34:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 35:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 36:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 37:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 38;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_1()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Set up subscription to SwitchLatched eventgarbage: not in length on purpose", 42);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_2()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator sets switch to first positiongarbage: not in length on purpose", 38);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestReadCurrentPositionAttribute_3()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestSwitch * cluster = [[CHIPTestSwitch alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCurrentPositionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read CurrentPosition attribute Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("current position", actualValue, 0));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_4()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator sets switch to second positiongarbage: not in length on purpose", 39);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_5()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Set up subscription to InitialPress eventgarbage: not in length on purpose", 41);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_6()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator does not operate switchgarbage: not in length on purpose", 32);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestReadCurrentPositionAttribute_7()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestSwitch * cluster = [[CHIPTestSwitch alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCurrentPositionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read CurrentPosition attribute Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("current position", actualValue, 0));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_8()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator sets switch to second positiongarbage: not in length on purpose", 39);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_9()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message
-            = chip::Span<const char>("Operator does not operate switch (release switch)garbage: not in length on purpose", 49);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_10()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "Set up subscription to InitialPress and ShortRelease eventsgarbage: not in length on purpose", 59);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_11()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator does not operate switchgarbage: not in length on purpose", 32);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_12()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator operates switch (press briefly)garbage: not in length on purpose", 40);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_13()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_14()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator operates switch for 5 secondsgarbage: not in length on purpose", 38);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestWait3000ms_15()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 3000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_16()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_17()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "Set up subscription to InitialPress, LongPress, ShortRelease, LongRelease eventsgarbage: not in length on purpose",
-            80);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_18()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator does not operate switchgarbage: not in length on purpose", 32);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_19()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator operates switch (press briefly)garbage: not in length on purpose", 40);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_20()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_21()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator operates switch for 5 secondsgarbage: not in length on purpose", 38);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestWait3000ms_22()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 3000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_23()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_24()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Set up subscription to InitialPress, ShortRelease, MultiPressOngoing, "
-                                               "MultiPressComplete eventsgarbage: not in length on purpose",
-            95);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_25()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator does not operate switchgarbage: not in length on purpose", 32);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_26()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator operates switch (press briefly)garbage: not in length on purpose", 40);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_27()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_28()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator operates switch (press briefly)garbage: not in length on purpose", 40);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_29()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_30()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message
-            = chip::Span<const char>("Operator operates switch again (press briefly)garbage: not in length on purpose", 46);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_31()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_32()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message
-            = chip::Span<const char>("Operator operates switch again (press briefly)garbage: not in length on purpose", 46);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_33()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_34()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message
-            = chip::Span<const char>("Operator operates switch again (press briefly)garbage: not in length on purpose", 46);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_35()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_36()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message
-            = chip::Span<const char>("Operator operates switch again (press briefly)garbage: not in length on purpose", 46);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestUserInteractionNeeded_37()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Operator releases switchgarbage: not in length on purpose", 24);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -50548,220 +49970,6 @@ private:
                 VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("tolerance", [value unsignedShortValue], 2048U));
             }
 
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_TM_2_2 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_TM_2_2()
-        : TestCommandBridge("Test_TC_TM_2_2")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_TM_2_2() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_TM_2_2\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_TM_2_2\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : read the mandatory attribute: MinMeasuredValue\n");
-            err = TestReadTheMandatoryAttributeMinMeasuredValue_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : read the mandatory attribute: MaxMeasuredValue\n");
-            err = TestReadTheMandatoryAttributeMaxMeasuredValue_2();
-            break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Reads MeasuredValue attribute from DUT\n");
-            if (ShouldSkip("A_TEMPERATURE")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsMeasuredValueAttributeFromDut_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the mandatory attribute: MeasuredValue\n");
-            if (ShouldSkip("A_TEMPERATURE")) {
-                NextTest();
-                return;
-            }
-            err = TestReadTheMandatoryAttributeMeasuredValue_4();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 5;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeMinMeasuredValue_1()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestTemperatureMeasurement * cluster = [[CHIPTestTemperatureMeasurement alloc] initWithDevice:device
-                                                                                                 endpoint:1
-                                                                                                    queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMinMeasuredValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the mandatory attribute: MinMeasuredValue Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("minMeasuredValue", "", "int16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<int16_t>("minMeasuredValue", [value shortValue], -27315));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minMeasuredValue", [value shortValue], 32766));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeMaxMeasuredValue_2()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestTemperatureMeasurement * cluster = [[CHIPTestTemperatureMeasurement alloc] initWithDevice:device
-                                                                                                 endpoint:1
-                                                                                                    queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMaxMeasuredValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"read the mandatory attribute: MaxMeasuredValue Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "", "int16"));
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxMeasuredValue", [value shortValue], -27314));
-            }
-            if (value != nil) {
-                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("maxMeasuredValue", [value shortValue], 32767));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsMeasuredValueAttributeFromDut_3()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestTemperatureMeasurement * cluster = [[CHIPTestTemperatureMeasurement alloc] initWithDevice:device
-                                                                                                 endpoint:1
-                                                                                                    queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMeasuredValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads MeasuredValue attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("measuredValue", "", "uint16"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeMeasuredValue_4()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestTemperatureMeasurement * cluster = [[CHIPTestTemperatureMeasurement alloc] initWithDevice:device
-                                                                                                 endpoint:1
-                                                                                                    queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMeasuredValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read the mandatory attribute: MeasuredValue Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("measuredValue", "", "uint16"));
             NextTest();
         }];
 
@@ -52497,413 +51705,791 @@ public:
             break;
         case 4:
             ChipLogProgress(
-                chipTool, " ***** Test Step 4 : Writes the limit of MinCoolSetpointLimit to OccupiedCoolingSetpoint attribute\n");
-            if (ShouldSkip("A_OCCUPIEDCOOLINGSETPOINT")) {
+                chipTool, " ***** Test Step 4 : Writes OccupiedCoolingSetpoint to value below the MinCoolSetpointLimit\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_OCCUPIEDCOOLINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfMinCoolSetpointLimitToOccupiedCoolingSetpointAttribute_4();
+            err = TestWritesOccupiedCoolingSetpointToValueBelowTheMinCoolSetpointLimit_4();
             break;
         case 5:
             ChipLogProgress(
-                chipTool, " ***** Test Step 5 : Writes the limit of MaxCoolSetpointLimit to OccupiedCoolingSetpoint attribute\n");
+                chipTool, " ***** Test Step 5 : Writes OccupiedCoolingSetpoint to value above the MaxCoolSetpointLimit\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_OCCUPIEDCOOLINGSETPOINT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesOccupiedCoolingSetpointToValueAboveTheMaxCoolSetpointLimit_5();
+            break;
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : Writes the limit of MinCoolSetpointLimit to OccupiedCoolingSetpoint attribute\n");
             if (ShouldSkip("A_OCCUPIEDCOOLINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfMaxCoolSetpointLimitToOccupiedCoolingSetpointAttribute_5();
+            err = TestWritesTheLimitOfMinCoolSetpointLimitToOccupiedCoolingSetpointAttribute_6();
             break;
-        case 6:
+        case 7:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 7 : Writes the limit of MaxCoolSetpointLimit to OccupiedCoolingSetpoint attribute\n");
+            if (ShouldSkip("A_OCCUPIEDCOOLINGSETPOINT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesTheLimitOfMaxCoolSetpointLimitToOccupiedCoolingSetpointAttribute_7();
+            break;
+        case 8:
             ChipLogProgress(chipTool,
-                " ***** Test Step 6 : Reads OccupiedHeatingSetpoint attribute from Server DUT and verifies that the value is "
+                " ***** Test Step 8 : Reads OccupiedHeatingSetpoint attribute from Server DUT and verifies that the value is "
                 "within range\n");
             if (ShouldSkip("A_OCCUPIEDHEATINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestReadsOccupiedHeatingSetpointAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 7 : Writes a value back that is different but valid for OccupiedHeatingSetpoint attribute\n");
-            if (ShouldSkip("A_OCCUPIEDHEATINGSETPOINT")) {
-                NextTest();
-                return;
-            }
-            err = TestWritesAValueBackThatIsDifferentButValidForOccupiedHeatingSetpointAttribute_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Reads it back again to confirm the successful write of OccupiedHeatingSetpoint attribute\n");
-            if (ShouldSkip("A_OCCUPIEDHEATINGSETPOINT")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfOccupiedHeatingSetpointAttribute_8();
+            err = TestReadsOccupiedHeatingSetpointAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_8();
             break;
         case 9:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 9 : Writes the limit of MinHeatSetpointLimit to OccupiedHeatingSetpoint attribute\n");
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : Writes a value back that is different but valid for OccupiedHeatingSetpoint attribute\n");
             if (ShouldSkip("A_OCCUPIEDHEATINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfMinHeatSetpointLimitToOccupiedHeatingSetpointAttribute_9();
+            err = TestWritesAValueBackThatIsDifferentButValidForOccupiedHeatingSetpointAttribute_9();
             break;
         case 10:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 10 : Writes the limit of MaxHeatSetpointLimit to OccupiedHeatingSetpoint attribute\n");
+            ChipLogProgress(chipTool,
+                " ***** Test Step 10 : Reads it back again to confirm the successful write of OccupiedHeatingSetpoint attribute\n");
             if (ShouldSkip("A_OCCUPIEDHEATINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfMaxHeatSetpointLimitToOccupiedHeatingSetpointAttribute_10();
+            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfOccupiedHeatingSetpointAttribute_10();
             break;
         case 11:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 11 : Reads MinHeatSetpointLimit attribute from Server DUT and verifies that the value is within "
-                "range\n");
-            if (ShouldSkip("A_MINHEATSETPOINTLIMIT")) {
+            ChipLogProgress(
+                chipTool, " ***** Test Step 11 : Writes OccupiedHeatingSetpoint to value below the MinHeatSetpointLimit\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_OCCUPIEDHEATINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestReadsMinHeatSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_11();
+            err = TestWritesOccupiedHeatingSetpointToValueBelowTheMinHeatSetpointLimit_11();
             break;
         case 12:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 12 : Writes a value back that is different but valid for MinHeatSetpointLimit attribute\n");
-            if (ShouldSkip("A_MINHEATSETPOINTLIMIT")) {
+            ChipLogProgress(
+                chipTool, " ***** Test Step 12 : Writes OccupiedHeatingSetpoint to value above the MaxHeatSetpointLimit\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_OCCUPIEDHEATINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueBackThatIsDifferentButValidForMinHeatSetpointLimitAttribute_12();
+            err = TestWritesOccupiedHeatingSetpointToValueAboveTheMaxHeatSetpointLimit_12();
             break;
         case 13:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 13 : Reads it back again to confirm the successful write of MinHeatSetpointLimit attribute\n");
-            if (ShouldSkip("A_MINHEATSETPOINTLIMIT")) {
+            ChipLogProgress(
+                chipTool, " ***** Test Step 13 : Writes the limit of MinHeatSetpointLimit to OccupiedHeatingSetpoint attribute\n");
+            if (ShouldSkip("A_OCCUPIEDHEATINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinHeatSetpointLimitAttribute_13();
+            err = TestWritesTheLimitOfMinHeatSetpointLimitToOccupiedHeatingSetpointAttribute_13();
             break;
         case 14:
             ChipLogProgress(
-                chipTool, " ***** Test Step 14 : Writes the limit of AbsMinHeatSetpointLimit to MinHeatSetpointLimit attribute\n");
-            if (ShouldSkip("A_MINHEATSETPOINTLIMIT")) {
+                chipTool, " ***** Test Step 14 : Writes the limit of MaxHeatSetpointLimit to OccupiedHeatingSetpoint attribute\n");
+            if (ShouldSkip("A_OCCUPIEDHEATINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfAbsMinHeatSetpointLimitToMinHeatSetpointLimitAttribute_14();
+            err = TestWritesTheLimitOfMaxHeatSetpointLimitToOccupiedHeatingSetpointAttribute_14();
             break;
         case 15:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 15 : Writes the limit of AbsMaxHeatSetpointLimit to MinHeatSetpointLimit attribute\n");
-            if (ShouldSkip("A_MINHEATSETPOINTLIMIT")) {
+            ChipLogProgress(chipTool,
+                " ***** Test Step 15 : Reads UnoccupiedCoolingSetpoint attribute from Server DUT and verifies that the value is "
+                "within range\n");
+            if (ShouldSkip("A_UNOCCUPIEDCOOLINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMinHeatSetpointLimitAttribute_15();
+            err = TestReadsUnoccupiedCoolingSetpointAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_15();
             break;
         case 16:
             ChipLogProgress(chipTool,
-                " ***** Test Step 16 : Reads MaxHeatSetpointLimit attribute from Server DUT and verifies that the value is within "
-                "range\n");
-            if (ShouldSkip("A_MAXHEATSETPOINTLIMIT")) {
+                " ***** Test Step 16 : Writes a value back that is different but valid for UnoccupiedCoolingSetpoint attribute\n");
+            if (ShouldSkip("A_UNOCCUPIEDCOOLINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestReadsMaxHeatSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_16();
+            err = TestWritesAValueBackThatIsDifferentButValidForUnoccupiedCoolingSetpointAttribute_16();
             break;
         case 17:
             ChipLogProgress(chipTool,
-                " ***** Test Step 17 : Writes a value back that is different but valid for MaxHeatSetpointLimit attribute\n");
-            if (ShouldSkip("A_MAXHEATSETPOINTLIMIT")) {
+                " ***** Test Step 17 : Reads it back again to confirm the successful write of UnoccupiedCoolingSetpoint "
+                "attribute\n");
+            if (ShouldSkip("A_UNOCCUPIEDCOOLINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueBackThatIsDifferentButValidForMaxHeatSetpointLimitAttribute_17();
+            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfUnoccupiedCoolingSetpointAttribute_17();
             break;
         case 18:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 18 : Reads it back again to confirm the successful write of MaxHeatSetpointLimit attribute\n");
-            if (ShouldSkip("A_MAXHEATSETPOINTLIMIT")) {
+            ChipLogProgress(
+                chipTool, " ***** Test Step 18 : Writes UnoccupiedCoolingSetpoint to value below the MinHeatSetpointLimit\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_UNOCCUPIEDCOOLINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMaxHeatSetpointLimitAttribute_18();
+            err = TestWritesUnoccupiedCoolingSetpointToValueBelowTheMinHeatSetpointLimit_18();
             break;
         case 19:
             ChipLogProgress(
-                chipTool, " ***** Test Step 19 : Writes the limit of AbsMinHeatSetpointLimit to MaxHeatSetpointLimit attribute\n");
-            if (ShouldSkip("A_MAXHEATSETPOINTLIMIT")) {
+                chipTool, " ***** Test Step 19 : Writes UnoccupiedCoolingSetpoint to value above the MaxHeatSetpointLimit\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_UNOCCUPIEDCOOLINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfAbsMinHeatSetpointLimitToMaxHeatSetpointLimitAttribute_19();
+            err = TestWritesUnoccupiedCoolingSetpointToValueAboveTheMaxHeatSetpointLimit_19();
             break;
         case 20:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 20 : Writes the limit of AbsMaxHeatSetpointLimit to MaxHeatSetpointLimit attribute\n");
-            if (ShouldSkip("A_MAXHEATSETPOINTLIMIT")) {
+            ChipLogProgress(chipTool,
+                " ***** Test Step 20 : Writes the limit of MinCoolSetpointLimit to UnoccupiedCoolingSetpoint attribute\n");
+            if (ShouldSkip("A_UNOCCUPIEDCOOLINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMaxHeatSetpointLimitAttribute_20();
+            err = TestWritesTheLimitOfMinCoolSetpointLimitToUnoccupiedCoolingSetpointAttribute_20();
             break;
         case 21:
             ChipLogProgress(chipTool,
-                " ***** Test Step 21 : Reads MinCoolSetpointLimit attribute from Server DUT and verifies that the value is within "
-                "range\n");
-            if (ShouldSkip("A_MINCOOLSETPOINTLIMIT")) {
+                " ***** Test Step 21 : Writes the limit of MaxCoolSetpointLimit to UnoccupiedCoolingSetpoint attribute\n");
+            if (ShouldSkip("A_UNOCCUPIEDCOOLINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestReadsMinCoolSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_21();
+            err = TestWritesTheLimitOfMaxCoolSetpointLimitToUnoccupiedCoolingSetpointAttribute_21();
             break;
         case 22:
             ChipLogProgress(chipTool,
-                " ***** Test Step 22 : Writes a value back that is different but valid for MinCoolSetpointLimit attribute\n");
-            if (ShouldSkip("A_MINCOOLSETPOINTLIMIT")) {
+                " ***** Test Step 22 : Reads UnoccupiedHeatingSetpoint attribute from Server DUT and verifies that the value is "
+                "within range\n");
+            if (ShouldSkip("A_UNOCCUPIEDHEATINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueBackThatIsDifferentButValidForMinCoolSetpointLimitAttribute_22();
+            err = TestReadsUnoccupiedHeatingSetpointAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_22();
             break;
         case 23:
             ChipLogProgress(chipTool,
-                " ***** Test Step 23 : Reads it back again to confirm the successful write of MinCoolSetpointLimit attribute\n");
-            if (ShouldSkip("A_MINCOOLSETPOINTLIMIT")) {
+                " ***** Test Step 23 : Writes a value back that is different but valid for UnoccupiedHeatingSetpoint attribute\n");
+            if (ShouldSkip("A_UNOCCUPIEDHEATINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinCoolSetpointLimitAttribute_23();
+            err = TestWritesAValueBackThatIsDifferentButValidForUnoccupiedHeatingSetpointAttribute_23();
             break;
         case 24:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 24 : Writes the limit of AbsMinCoolSetpointLimit to MinCoolSetpointLimit attribute\n");
-            if (ShouldSkip("A_MINCOOLSETPOINTLIMIT")) {
+            ChipLogProgress(chipTool,
+                " ***** Test Step 24 : Reads it back again to confirm the successful write of UnoccupiedHeatingSetpoint "
+                "attribute\n");
+            if (ShouldSkip("A_UNOCCUPIEDHEATINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfAbsMinCoolSetpointLimitToMinCoolSetpointLimitAttribute_24();
+            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfUnoccupiedHeatingSetpointAttribute_24();
             break;
         case 25:
             ChipLogProgress(
-                chipTool, " ***** Test Step 25 : Writes the limit of MaxCoolSetpointLimit to MinCoolSetpointLimit attribute\n");
+                chipTool, " ***** Test Step 25 : Writes UnoccupiedHeatingSetpoint to value below the MinHeatSetpointLimit\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_UNOCCUPIEDHEATINGSETPOINT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesUnoccupiedHeatingSetpointToValueBelowTheMinHeatSetpointLimit_25();
+            break;
+        case 26:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 26 : Writes UnoccupiedHeatingSetpoint to value above the MaxHeatSetpointLimit\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_UNOCCUPIEDHEATINGSETPOINT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesUnoccupiedHeatingSetpointToValueAboveTheMaxHeatSetpointLimit_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 27 : Writes the limit of MinHeatSetpointLimit to UnoccupiedHeatingSetpoint attribute\n");
+            if (ShouldSkip("A_UNOCCUPIEDHEATINGSETPOINT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesTheLimitOfMinHeatSetpointLimitToUnoccupiedHeatingSetpointAttribute_27();
+            break;
+        case 28:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 28 : Writes the limit of MaxHeatSetpointLimit to UnoccupiedHeatingSetpoint attribute\n");
+            if (ShouldSkip("A_UNOCCUPIEDHEATINGSETPOINT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesTheLimitOfMaxHeatSetpointLimitToUnoccupiedHeatingSetpointAttribute_28();
+            break;
+        case 29:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 29 : Reads MinHeatSetpointLimit attribute from Server DUT and verifies that the value is within "
+                "range\n");
+            if (ShouldSkip("A_MINHEATSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsMinHeatSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_29();
+            break;
+        case 30:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 30 : Writes a value back that is different but valid for MinHeatSetpointLimit attribute\n");
+            if (ShouldSkip("A_MINHEATSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesAValueBackThatIsDifferentButValidForMinHeatSetpointLimitAttribute_30();
+            break;
+        case 31:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 31 : Reads it back again to confirm the successful write of MinHeatSetpointLimit attribute\n");
+            if (ShouldSkip("A_MINHEATSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinHeatSetpointLimitAttribute_31();
+            break;
+        case 32:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 32 : Writes MinHeatSetpointLimit to value below the AbsMinHeatSetpointLimit \n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_MINHEATSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesMinHeatSetpointLimitToValueBelowTheAbsMinHeatSetpointLimit_32();
+            break;
+        case 33:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 33 : Writes MinHeatSetpointLimit to value above the AbsMaxHeatSetpointLimit \n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_MINHEATSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesMinHeatSetpointLimitToValueAboveTheAbsMaxHeatSetpointLimit_33();
+            break;
+        case 34:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 34 : Writes the limit of AbsMinHeatSetpointLimit to MinHeatSetpointLimit attribute\n");
+            if (ShouldSkip("A_MINHEATSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesTheLimitOfAbsMinHeatSetpointLimitToMinHeatSetpointLimitAttribute_34();
+            break;
+        case 35:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 35 : Writes the limit of AbsMaxHeatSetpointLimit to MinHeatSetpointLimit attribute\n");
+            if (ShouldSkip("A_MINHEATSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMinHeatSetpointLimitAttribute_35();
+            break;
+        case 36:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 36 : Reads MaxHeatSetpointLimit attribute from Server DUT and verifies that the value is within "
+                "range\n");
+            if (ShouldSkip("A_MAXHEATSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsMaxHeatSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_36();
+            break;
+        case 37:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 37 : Writes a value back that is different but valid for MaxHeatSetpointLimit attribute\n");
+            if (ShouldSkip("A_MAXHEATSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesAValueBackThatIsDifferentButValidForMaxHeatSetpointLimitAttribute_37();
+            break;
+        case 38:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 38 : Reads it back again to confirm the successful write of MaxHeatSetpointLimit attribute\n");
+            if (ShouldSkip("A_MAXHEATSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMaxHeatSetpointLimitAttribute_38();
+            break;
+        case 39:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 39 : Writes MaxHeatSetpointLimit to value below the AbsMinHeatSetpointLimit \n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_MAXHEATSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesMaxHeatSetpointLimitToValueBelowTheAbsMinHeatSetpointLimit_39();
+            break;
+        case 40:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 40 : Writes MaxHeatSetpointLimit to value above the AbsMaxHeatSetpointLimit \n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_MAXHEATSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesMaxHeatSetpointLimitToValueAboveTheAbsMaxHeatSetpointLimit_40();
+            break;
+        case 41:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 41 : Writes the limit of AbsMinHeatSetpointLimit to MaxHeatSetpointLimit attribute\n");
+            if (ShouldSkip("A_MAXHEATSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesTheLimitOfAbsMinHeatSetpointLimitToMaxHeatSetpointLimitAttribute_41();
+            break;
+        case 42:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 42 : Writes the limit of AbsMaxHeatSetpointLimit to MaxHeatSetpointLimit attribute\n");
+            if (ShouldSkip("A_MAXHEATSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMaxHeatSetpointLimitAttribute_42();
+            break;
+        case 43:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 43 : Reads MinCoolSetpointLimit attribute from Server DUT and verifies that the value is within "
+                "range\n");
             if (ShouldSkip("A_MINCOOLSETPOINTLIMIT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfMaxCoolSetpointLimitToMinCoolSetpointLimitAttribute_25();
+            err = TestReadsMinCoolSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_43();
             break;
-        case 26:
+        case 44:
             ChipLogProgress(chipTool,
-                " ***** Test Step 26 : Reads MaxCoolSetpointLimit attribute from Server DUT and verifies that the value is within "
+                " ***** Test Step 44 : Writes a value back that is different but valid for MinCoolSetpointLimit attribute\n");
+            if (ShouldSkip("A_MINCOOLSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesAValueBackThatIsDifferentButValidForMinCoolSetpointLimitAttribute_44();
+            break;
+        case 45:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 45 : Reads it back again to confirm the successful write of MinCoolSetpointLimit attribute\n");
+            if (ShouldSkip("A_MINCOOLSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinCoolSetpointLimitAttribute_45();
+            break;
+        case 46:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 46 : Writes MinCoolSetpointLimit to value below the AbsMinCoolSetpointLimit \n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_MINCOOLSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesMinCoolSetpointLimitToValueBelowTheAbsMinCoolSetpointLimit_46();
+            break;
+        case 47:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 47 : Writes MinCoolSetpointLimit to value above the MaxCoolSetpointLimit \n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_MINCOOLSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesMinCoolSetpointLimitToValueAboveTheMaxCoolSetpointLimit_47();
+            break;
+        case 48:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 48 : Writes the limit of AbsMinCoolSetpointLimit to MinCoolSetpointLimit attribute\n");
+            if (ShouldSkip("A_MINCOOLSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesTheLimitOfAbsMinCoolSetpointLimitToMinCoolSetpointLimitAttribute_48();
+            break;
+        case 49:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 49 : Writes the limit of MaxCoolSetpointLimit to MinCoolSetpointLimit attribute\n");
+            if (ShouldSkip("A_MINCOOLSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesTheLimitOfMaxCoolSetpointLimitToMinCoolSetpointLimitAttribute_49();
+            break;
+        case 50:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 50 : Reads MaxCoolSetpointLimit attribute from Server DUT and verifies that the value is within "
                 "range\n");
             if (ShouldSkip("A_MAXCOOLSETPOINTLIMIT")) {
                 NextTest();
                 return;
             }
-            err = TestReadsMaxCoolSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_26();
+            err = TestReadsMaxCoolSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_50();
             break;
-        case 27:
+        case 51:
             ChipLogProgress(chipTool,
-                " ***** Test Step 27 : Writes a value back that is different but valid for MaxCoolSetpointLimit attribute\n");
+                " ***** Test Step 51 : Writes a value back that is different but valid for MaxCoolSetpointLimit attribute\n");
             if (ShouldSkip("A_MAXCOOLSETPOINTLIMIT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueBackThatIsDifferentButValidForMaxCoolSetpointLimitAttribute_27();
+            err = TestWritesAValueBackThatIsDifferentButValidForMaxCoolSetpointLimitAttribute_51();
             break;
-        case 28:
+        case 52:
             ChipLogProgress(chipTool,
-                " ***** Test Step 28 : Reads it back again to confirm the successful write of MaxCoolSetpointLimit attribute\n");
+                " ***** Test Step 52 : Reads it back again to confirm the successful write of MaxCoolSetpointLimit attribute\n");
             if (ShouldSkip("A_MAXCOOLSETPOINTLIMIT")) {
                 NextTest();
                 return;
             }
-            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMaxCoolSetpointLimitAttribute_28();
+            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMaxCoolSetpointLimitAttribute_52();
             break;
-        case 29:
+        case 53:
             ChipLogProgress(
-                chipTool, " ***** Test Step 29 : Writes the limit of AbsMinCoolSetpointLimit to MaxCoolSetpointLimit attribute\n");
-            if (ShouldSkip("A_MAXCOOLSETPOINTLIMIT")) {
+                chipTool, " ***** Test Step 53 : Writes MaxCoolSetpointLimit to value below the AbsMinCoolSetpointLimit \n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_MAXCOOLSETPOINTLIMIT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfAbsMinCoolSetpointLimitToMaxCoolSetpointLimitAttribute_29();
+            err = TestWritesMaxCoolSetpointLimitToValueBelowTheAbsMinCoolSetpointLimit_53();
             break;
-        case 30:
+        case 54:
             ChipLogProgress(
-                chipTool, " ***** Test Step 30 : Writes the limit of MaxCoolSetpointLimit to MaxCoolSetpointLimit attribute\n");
+                chipTool, " ***** Test Step 54 : Writes MaxCoolSetpointLimit to value above the MaxCoolSetpointLimit \n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_MAXCOOLSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesMaxCoolSetpointLimitToValueAboveTheMaxCoolSetpointLimit_54();
+            break;
+        case 55:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 55 : Writes the limit of AbsMinCoolSetpointLimit to MaxCoolSetpointLimit attribute\n");
             if (ShouldSkip("A_MAXCOOLSETPOINTLIMIT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfMaxCoolSetpointLimitToMaxCoolSetpointLimitAttribute_30();
+            err = TestWritesTheLimitOfAbsMinCoolSetpointLimitToMaxCoolSetpointLimitAttribute_55();
             break;
-        case 31:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 31 : Writes (sets back) the limit of MinHeatSetpointLimit to MinHeatSetpointLimit attribute\n");
+        case 56:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 56 : Writes the limit of MaxCoolSetpointLimit to MaxCoolSetpointLimit attribute\n");
+            if (ShouldSkip("A_MAXCOOLSETPOINTLIMIT")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesTheLimitOfMaxCoolSetpointLimitToMaxCoolSetpointLimitAttribute_56();
+            break;
+        case 57:
+            ChipLogProgress(chipTool, " ***** Test Step 57 : Writes (sets back) default value of MinHeatSetpointLimit\n");
             if (ShouldSkip("A_MINHEATSETPOINTLIMIT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesSetsBackTheLimitOfMinHeatSetpointLimitToMinHeatSetpointLimitAttribute_31();
+            err = TestWritesSetsBackDefaultValueOfMinHeatSetpointLimit_57();
             break;
-        case 32:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 32 : Writes (sets back) the limit of MaxHeatSetpointLimit to MinHeatSetpointLimit attribute\n");
+        case 58:
+            ChipLogProgress(chipTool, " ***** Test Step 58 : Writes (sets back)default value of MaxHeatSetpointLimit\n");
             if (ShouldSkip("A_MINHEATSETPOINTLIMIT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesSetsBackTheLimitOfMaxHeatSetpointLimitToMinHeatSetpointLimitAttribute_32();
+            err = TestWritesSetsBackdefaultValueOfMaxHeatSetpointLimit_58();
             break;
-        case 33:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 33 : Writes (sets back) the limit of MinHeatSetpointLimit to MaxHeatSetpointLimit attribute\n");
-            if (ShouldSkip("A_MINHEATSETPOINTLIMIT")) {
-                NextTest();
-                return;
-            }
-            err = TestWritesSetsBackTheLimitOfMinHeatSetpointLimitToMaxHeatSetpointLimitAttribute_33();
-            break;
-        case 34:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 34 : Writes (sets back) the limit of MaxHeatSetpointLimit to MaxHeatSetpointLimit attribute\n");
-            if (ShouldSkip("A_MINHEATSETPOINTLIMIT")) {
-                NextTest();
-                return;
-            }
-            err = TestWritesSetsBackTheLimitOfMaxHeatSetpointLimitToMaxHeatSetpointLimitAttribute_34();
-            break;
-        case 35:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 35 : Writes (sets back) the limit of MinCoolSetpointLimit to MinCoolSetpointLimit attribute\n");
+        case 59:
+            ChipLogProgress(chipTool, " ***** Test Step 59 : Writes (sets back) default value of MinCoolSetpointLimit\n");
             if (ShouldSkip("A_MINCOOLSETPOINTLIMIT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesSetsBackTheLimitOfMinCoolSetpointLimitToMinCoolSetpointLimitAttribute_35();
+            err = TestWritesSetsBackDefaultValueOfMinCoolSetpointLimit_59();
             break;
-        case 36:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 36 : Writes (sets back) the limit of MaxCoolSetpointLimit to MinCoolSetpointLimit attribute\n");
-            if (ShouldSkip("A_MINCOOLSETPOINTLIMIT")) {
-                NextTest();
-                return;
-            }
-            err = TestWritesSetsBackTheLimitOfMaxCoolSetpointLimitToMinCoolSetpointLimitAttribute_36();
-            break;
-        case 37:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 37 : Writes (sets back) the limit of MinCoolSetpointLimit to MaxCoolSetpointLimit attribute\n");
+        case 60:
+            ChipLogProgress(chipTool, " ***** Test Step 60 : Writes (sets back) default value of MaxCoolSetpointLimit\n");
             if (ShouldSkip("A_MAXCOOLSETPOINTLIMIT")) {
                 NextTest();
                 return;
             }
-            err = TestWritesSetsBackTheLimitOfMinCoolSetpointLimitToMaxCoolSetpointLimitAttribute_37();
+            err = TestWritesSetsBackDefaultValueOfMaxCoolSetpointLimit_60();
             break;
-        case 38:
+        case 61:
             ChipLogProgress(chipTool,
-                " ***** Test Step 38 : Writes (sets back) the limit of MaxCoolSetpointLimit to MaxCoolSetpointLimit attribute\n");
-            if (ShouldSkip("A_MAXCOOLSETPOINTLIMIT")) {
+                " ***** Test Step 61 : Reads MinSetpointDeadBand attribute from Server DUT and verifies that the value is within "
+                "range\n");
+            if (ShouldSkip("A_MINSETPOINTDEADBAND")) {
                 NextTest();
                 return;
             }
-            err = TestWritesSetsBackTheLimitOfMaxCoolSetpointLimitToMaxCoolSetpointLimitAttribute_38();
+            err = TestReadsMinSetpointDeadBandAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_61();
             break;
-        case 39:
+        case 62:
             ChipLogProgress(chipTool,
-                " ***** Test Step 39 : Reads ControlSequenceOfOperation from Server DUT and verifies that the value is valid\n");
+                " ***** Test Step 62 : Writes a value back that is different but valid for MinSetpointDeadBand attribute\n");
+            if (ShouldSkip("A_MINSETPOINTDEADBAND")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesAValueBackThatIsDifferentButValidForMinSetpointDeadBandAttribute_62();
+            break;
+        case 63:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 63 : Reads it back again to confirm the successful write of MinSetpointDeadBand attribute\n");
+            if (ShouldSkip("A_MINSETPOINTDEADBAND")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinSetpointDeadBandAttribute_63();
+            break;
+        case 64:
+            ChipLogProgress(chipTool, " ***** Test Step 64 : Writes the value below MinSetpointDeadBand\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_MINSETPOINTDEADBAND")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesTheValueBelowMinSetpointDeadBand_64();
+            break;
+        case 65:
+            ChipLogProgress(chipTool, " ***** Test Step 65 : Writes the value above MinSetpointDeadBand \n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_MINSETPOINTDEADBAND")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesTheValueAboveMinSetpointDeadBand_65();
+            break;
+        case 66:
+            ChipLogProgress(chipTool, " ***** Test Step 66 : Writes the min limit of MinSetpointDeadBand\n");
+            if (ShouldSkip("A_MINSETPOINTDEADBAND")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesTheMinLimitOfMinSetpointDeadBand_66();
+            break;
+        case 67:
+            ChipLogProgress(chipTool, " ***** Test Step 67 : Writes the max limit of MinSetpointDeadBand\n");
+            if (ShouldSkip("A_MINSETPOINTDEADBAND")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesTheMaxLimitOfMinSetpointDeadBand_67();
+            break;
+        case 68:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 68 : Reads ControlSequenceOfOperation from Server DUT and verifies that the value is valid\n");
             if (ShouldSkip("A_CONTROLSEQUENCEOFOPERATION")) {
                 NextTest();
                 return;
             }
-            err = TestReadsControlSequenceOfOperationFromServerDutAndVerifiesThatTheValueIsValid_39();
+            err = TestReadsControlSequenceOfOperationFromServerDutAndVerifiesThatTheValueIsValid_68();
             break;
-        case 40:
+        case 69:
             ChipLogProgress(
-                chipTool, " ***** Test Step 40 : Write Attribute command for ControlSequenceOfOperation with a new valid value\n");
+                chipTool, " ***** Test Step 69 : Write Attribute command for ControlSequenceOfOperation with a new valid value\n");
             if (ShouldSkip("A_CONTROLSEQUENCEOFOPERATION")) {
                 NextTest();
                 return;
             }
-            err = TestWriteAttributeCommandForControlSequenceOfOperationWithANewValidValue_40();
+            err = TestWriteAttributeCommandForControlSequenceOfOperationWithANewValidValue_69();
             break;
-        case 41:
-            ChipLogProgress(chipTool, " ***** Test Step 41 : Read it back again to confirm the successful write\n");
+        case 70:
+            ChipLogProgress(chipTool, " ***** Test Step 70 : Read it back again to confirm the successful write\n");
             if (ShouldSkip("A_CONTROLSEQUENCEOFOPERATION")) {
                 NextTest();
                 return;
             }
-            err = TestReadItBackAgainToConfirmTheSuccessfulWrite_41();
+            err = TestReadItBackAgainToConfirmTheSuccessfulWrite_70();
             break;
-        case 42:
-            ChipLogProgress(chipTool, " ***** Test Step 42 : Sets OccupiedHeatingSetpoint to default value\n");
+        case 71:
+            ChipLogProgress(chipTool, " ***** Test Step 71 : Sets OccupiedHeatingSetpoint to default value\n");
             if (ShouldSkip("A_OCCUPIEDHEATINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestSetsOccupiedHeatingSetpointToDefaultValue_42();
+            err = TestSetsOccupiedHeatingSetpointToDefaultValue_71();
             break;
-        case 43:
-            ChipLogProgress(chipTool, " ***** Test Step 43 : Sets OccupiedHeatingSetpoint to default value\n");
+        case 72:
+            ChipLogProgress(chipTool, " ***** Test Step 72 : Sends SetpointRaise Command\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && CR_SetpointRaiseLower")) {
+                NextTest();
+                return;
+            }
+            err = TestSendsSetpointRaiseCommand_72();
+            break;
+        case 73:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 73 : Reads back OccupiedHeatingSetpoint to confirm the success of the write\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_OCCUPIEDHEATINGSETPOINT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsBackOccupiedHeatingSetpointToConfirmTheSuccessOfTheWrite_73();
+            break;
+        case 74:
+            ChipLogProgress(chipTool, " ***** Test Step 74 : Sets OccupiedHeatingSetpoint to default value\n");
             if (ShouldSkip("A_OCCUPIEDHEATINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestSetsOccupiedHeatingSetpointToDefaultValue_43();
+            err = TestSetsOccupiedHeatingSetpointToDefaultValue_74();
             break;
-        case 44:
-            ChipLogProgress(chipTool, " ***** Test Step 44 : Sets OccupiedCoolingSetpoint to default value\n");
+        case 75:
+            ChipLogProgress(chipTool, " ***** Test Step 75 : Sends SetpointRaise Command\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && CR_SetpointRaiseLower")) {
+                NextTest();
+                return;
+            }
+            err = TestSendsSetpointRaiseCommand_75();
+            break;
+        case 76:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 76 : Reads back OccupiedHeatingSetpoint to confirm the success of the write\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_OCCUPIEDCOOLINGSETPOINT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsBackOccupiedHeatingSetpointToConfirmTheSuccessOfTheWrite_76();
+            break;
+        case 77:
+            ChipLogProgress(chipTool, " ***** Test Step 77 : Sets OccupiedCoolingSetpoint to default value\n");
             if (ShouldSkip("A_OCCUPIEDCOOLINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestSetsOccupiedCoolingSetpointToDefaultValue_44();
+            err = TestSetsOccupiedCoolingSetpointToDefaultValue_77();
             break;
-        case 45:
-            ChipLogProgress(chipTool, " ***** Test Step 45 : Sets OccupiedCoolingSetpoint to default value\n");
+        case 78:
+            ChipLogProgress(chipTool, " ***** Test Step 78 : Sends SetpointRaise Command\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && CR_SetpointRaiseLower")) {
+                NextTest();
+                return;
+            }
+            err = TestSendsSetpointRaiseCommand_78();
+            break;
+        case 79:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 79 : Reads back OccupiedCoolingSetpoint to confirm the success of the write\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_OCCUPIEDCOOLINGSETPOINT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsBackOccupiedCoolingSetpointToConfirmTheSuccessOfTheWrite_79();
+            break;
+        case 80:
+            ChipLogProgress(chipTool, " ***** Test Step 80 : Sets OccupiedCoolingSetpoint to default value\n");
             if (ShouldSkip("A_OCCUPIEDCOOLINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestSetsOccupiedCoolingSetpointToDefaultValue_45();
+            err = TestSetsOccupiedCoolingSetpointToDefaultValue_80();
             break;
-        case 46:
-            ChipLogProgress(chipTool, " ***** Test Step 46 : Sets OccupiedCoolingSetpoint to default value\n");
+        case 81:
+            ChipLogProgress(chipTool, " ***** Test Step 81 : Sends SetpointRaise Command\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && CR_SetpointRaiseLower")) {
+                NextTest();
+                return;
+            }
+            err = TestSendsSetpointRaiseCommand_81();
+            break;
+        case 82:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 82 : Reads back OccupiedCoolingSetpoint to confirm the success of the write\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_OCCUPIEDCOOLINGSETPOINT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsBackOccupiedCoolingSetpointToConfirmTheSuccessOfTheWrite_82();
+            break;
+        case 83:
+            ChipLogProgress(chipTool, " ***** Test Step 83 : Sets OccupiedCoolingSetpoint to default value\n");
             if (ShouldSkip("A_OCCUPIEDCOOLINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestSetsOccupiedCoolingSetpointToDefaultValue_46();
+            err = TestSetsOccupiedCoolingSetpointToDefaultValue_83();
             break;
-        case 47:
-            ChipLogProgress(chipTool, " ***** Test Step 47 : Sets OccupiedHeatingSetpoint to default value\n");
+        case 84:
+            ChipLogProgress(chipTool, " ***** Test Step 84 : Sets OccupiedHeatingSetpoint to default value\n");
             if (ShouldSkip("A_OCCUPIEDHEATINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestSetsOccupiedHeatingSetpointToDefaultValue_47();
+            err = TestSetsOccupiedHeatingSetpointToDefaultValue_84();
             break;
-        case 48:
-            ChipLogProgress(chipTool, " ***** Test Step 48 : Sets OccupiedCoolingSetpoint to default value\n");
+        case 85:
+            ChipLogProgress(chipTool, " ***** Test Step 85 : Sends SetpointRaise Command\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && CR_SetpointRaiseLower")) {
+                NextTest();
+                return;
+            }
+            err = TestSendsSetpointRaiseCommand_85();
+            break;
+        case 86:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 86 : Reads back OccupiedCoolingSetpoint to confirm the success of the write\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsBackOccupiedCoolingSetpointToConfirmTheSuccessOfTheWrite_86();
+            break;
+        case 87:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 87 : Reads back OccupiedHeatingSetpoint to confirm the success of the write\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_OCCUPIEDHEATINGSETPOINT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsBackOccupiedHeatingSetpointToConfirmTheSuccessOfTheWrite_87();
+            break;
+        case 88:
+            ChipLogProgress(chipTool, " ***** Test Step 88 : Sets OccupiedCoolingSetpoint to default value\n");
             if (ShouldSkip("A_OCCUPIEDCOOLINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestSetsOccupiedCoolingSetpointToDefaultValue_48();
+            err = TestSetsOccupiedCoolingSetpointToDefaultValue_88();
             break;
-        case 49:
-            ChipLogProgress(chipTool, " ***** Test Step 49 : Sets OccupiedHeatingSetpoint to default value\n");
+        case 89:
+            ChipLogProgress(chipTool, " ***** Test Step 89 : Sets OccupiedHeatingSetpoint to default value\n");
             if (ShouldSkip("A_OCCUPIEDHEATINGSETPOINT")) {
                 NextTest();
                 return;
             }
-            err = TestSetsOccupiedHeatingSetpointToDefaultValue_49();
+            err = TestSetsOccupiedHeatingSetpointToDefaultValue_89();
+            break;
+        case 90:
+            ChipLogProgress(chipTool, " ***** Test Step 90 : Sends SetpointRaise Command\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && CR_SetpointRaiseLower")) {
+                NextTest();
+                return;
+            }
+            err = TestSendsSetpointRaiseCommand_90();
+            break;
+        case 91:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 91 : Reads back OccupiedCoolingSetpoint to confirm the success of the write\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_OCCUPIEDCOOLINGSETPOINT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsBackOccupiedCoolingSetpointToConfirmTheSuccessOfTheWrite_91();
+            break;
+        case 92:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 92 : Reads back OccupiedHeatingSetpoint to confirm the success of the write\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && A_OCCUPIEDHEATINGSETPOINT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsBackOccupiedHeatingSetpointToConfirmTheSuccessOfTheWrite_92();
             break;
         }
 
@@ -52929,10 +52515,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -52950,10 +52536,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -52971,10 +52557,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -52992,10 +52578,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 25:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 26:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -53013,10 +52599,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 33:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 34:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -53034,10 +52620,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 39:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 40:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 41:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -53055,15 +52641,144 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 46:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 47:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 48:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 49:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 50:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 51:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 52:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 53:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 54:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 55:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 56:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 57:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 58:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 59:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 60:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 61:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 62:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 63:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 64:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 65:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 66:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 67:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 68:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 69:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 70:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 71:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 72:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 73:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 74:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 75:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 76:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 77:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 78:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 79:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 80:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 81:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 82:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 83:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 84:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 85:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 86:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 87:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 88:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 89:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 90:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 91:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 92:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         }
@@ -53079,7 +52794,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 50;
+    const uint16_t mTestCount = 93;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -53183,7 +52898,61 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfMinCoolSetpointLimitToOccupiedCoolingSetpointAttribute_4()
+    CHIP_ERROR TestWritesOccupiedCoolingSetpointToValueBelowTheMinCoolSetpointLimit_4()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id occupiedCoolingSetpointArgument;
+        occupiedCoolingSetpointArgument = [NSNumber numberWithShort:30];
+        [cluster writeAttributeOccupiedCoolingSetpointWithValue:occupiedCoolingSetpointArgument
+                                              completionHandler:^(NSError * _Nullable err) {
+                                                  NSLog(@"Writes OccupiedCoolingSetpoint to value below the MinCoolSetpointLimit "
+                                                        @"Error: %@",
+                                                      err);
+
+                                                  if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                      NextTest();
+                                                      return;
+                                                  }
+
+                                                  VerifyOrReturn(
+                                                      CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                  NextTest();
+                                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesOccupiedCoolingSetpointToValueAboveTheMaxCoolSetpointLimit_5()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id occupiedCoolingSetpointArgument;
+        occupiedCoolingSetpointArgument = [NSNumber numberWithShort:4000];
+        [cluster writeAttributeOccupiedCoolingSetpointWithValue:occupiedCoolingSetpointArgument
+                                              completionHandler:^(NSError * _Nullable err) {
+                                                  NSLog(@"Writes OccupiedCoolingSetpoint to value above the MaxCoolSetpointLimit "
+                                                        @"Error: %@",
+                                                      err);
+
+                                                  if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                      NextTest();
+                                                      return;
+                                                  }
+
+                                                  VerifyOrReturn(
+                                                      CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                  NextTest();
+                                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheLimitOfMinCoolSetpointLimitToOccupiedCoolingSetpointAttribute_6()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53210,7 +52979,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfMaxCoolSetpointLimitToOccupiedCoolingSetpointAttribute_5()
+    CHIP_ERROR TestWritesTheLimitOfMaxCoolSetpointLimitToOccupiedCoolingSetpointAttribute_7()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53237,7 +53006,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsOccupiedHeatingSetpointAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_6()
+    CHIP_ERROR TestReadsOccupiedHeatingSetpointAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_8()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53246,6 +53015,11 @@ private:
         [cluster readAttributeOccupiedHeatingSetpointWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Reads OccupiedHeatingSetpoint attribute from Server DUT and verifies that the value is within range Error: %@",
                 err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -53268,7 +53042,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForOccupiedHeatingSetpointAttribute_7()
+    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForOccupiedHeatingSetpointAttribute_9()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53282,6 +53056,11 @@ private:
                                                         @"OccupiedHeatingSetpoint attribute Error: %@",
                                                       err);
 
+                                                  if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                      NextTest();
+                                                      return;
+                                                  }
+
                                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                                                   NextTest();
@@ -53290,7 +53069,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfOccupiedHeatingSetpointAttribute_8()
+    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfOccupiedHeatingSetpointAttribute_10()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53298,6 +53077,11 @@ private:
 
         [cluster readAttributeOccupiedHeatingSetpointWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Reads it back again to confirm the successful write of OccupiedHeatingSetpoint attribute Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -53312,7 +53096,61 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfMinHeatSetpointLimitToOccupiedHeatingSetpointAttribute_9()
+    CHIP_ERROR TestWritesOccupiedHeatingSetpointToValueBelowTheMinHeatSetpointLimit_11()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id occupiedHeatingSetpointArgument;
+        occupiedHeatingSetpointArgument = [NSNumber numberWithShort:1002];
+        [cluster writeAttributeOccupiedHeatingSetpointWithValue:occupiedHeatingSetpointArgument
+                                              completionHandler:^(NSError * _Nullable err) {
+                                                  NSLog(@"Writes OccupiedHeatingSetpoint to value below the MinHeatSetpointLimit "
+                                                        @"Error: %@",
+                                                      err);
+
+                                                  if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                      NextTest();
+                                                      return;
+                                                  }
+
+                                                  VerifyOrReturn(
+                                                      CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                  NextTest();
+                                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesOccupiedHeatingSetpointToValueAboveTheMaxHeatSetpointLimit_12()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id occupiedHeatingSetpointArgument;
+        occupiedHeatingSetpointArgument = [NSNumber numberWithShort:4010];
+        [cluster writeAttributeOccupiedHeatingSetpointWithValue:occupiedHeatingSetpointArgument
+                                              completionHandler:^(NSError * _Nullable err) {
+                                                  NSLog(@"Writes OccupiedHeatingSetpoint to value above the MaxHeatSetpointLimit "
+                                                        @"Error: %@",
+                                                      err);
+
+                                                  if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                      NextTest();
+                                                      return;
+                                                  }
+
+                                                  VerifyOrReturn(
+                                                      CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                  NextTest();
+                                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheLimitOfMinHeatSetpointLimitToOccupiedHeatingSetpointAttribute_13()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53326,6 +53164,11 @@ private:
                                                         @"attribute Error: %@",
                                                       err);
 
+                                                  if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                      NextTest();
+                                                      return;
+                                                  }
+
                                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                                                   NextTest();
@@ -53334,7 +53177,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfMaxHeatSetpointLimitToOccupiedHeatingSetpointAttribute_10()
+    CHIP_ERROR TestWritesTheLimitOfMaxHeatSetpointLimitToOccupiedHeatingSetpointAttribute_14()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53348,6 +53191,11 @@ private:
                                                         @"attribute Error: %@",
                                                       err);
 
+                                                  if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                      NextTest();
+                                                      return;
+                                                  }
+
                                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                                                   NextTest();
@@ -53356,7 +53204,409 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsMinHeatSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_11()
+    CHIP_ERROR TestReadsUnoccupiedCoolingSetpointAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_15()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeUnoccupiedCoolingSetpointWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(
+                @"Reads UnoccupiedCoolingSetpoint attribute from Server DUT and verifies that the value is within range Error: %@",
+                err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("UnoccupiedCoolingSetpoint", actualValue, 2600));
+            }
+
+            VerifyOrReturn(CheckConstraintType("unoccupiedCoolingSetpoint", "", "int16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("unoccupiedCoolingSetpoint", [value shortValue], 1600));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("unoccupiedCoolingSetpoint", [value shortValue], 3200));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForUnoccupiedCoolingSetpointAttribute_16()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id unoccupiedCoolingSetpointArgument;
+        unoccupiedCoolingSetpointArgument = [NSNumber numberWithShort:2500];
+        [cluster writeAttributeUnoccupiedCoolingSetpointWithValue:unoccupiedCoolingSetpointArgument
+                                                completionHandler:^(NSError * _Nullable err) {
+                                                    NSLog(@"Writes a value back that is different but valid for "
+                                                          @"UnoccupiedCoolingSetpoint attribute Error: %@",
+                                                        err);
+
+                                                    if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                        NextTest();
+                                                        return;
+                                                    }
+
+                                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                    NextTest();
+                                                }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfUnoccupiedCoolingSetpointAttribute_17()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeUnoccupiedCoolingSetpointWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Reads it back again to confirm the successful write of UnoccupiedCoolingSetpoint attribute Error: %@", err);
+
+                if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                    NextTest();
+                    return;
+                }
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("UnoccupiedCoolingSetpoint", actualValue, 2500));
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesUnoccupiedCoolingSetpointToValueBelowTheMinHeatSetpointLimit_18()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id unoccupiedCoolingSetpointArgument;
+        unoccupiedCoolingSetpointArgument = [NSNumber numberWithShort:1002];
+        [cluster writeAttributeUnoccupiedCoolingSetpointWithValue:unoccupiedCoolingSetpointArgument
+                                                completionHandler:^(NSError * _Nullable err) {
+                                                    NSLog(@"Writes UnoccupiedCoolingSetpoint to value below the "
+                                                          @"MinHeatSetpointLimit Error: %@",
+                                                        err);
+
+                                                    if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                        NextTest();
+                                                        return;
+                                                    }
+
+                                                    VerifyOrReturn(CheckValue(
+                                                        "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                    NextTest();
+                                                }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesUnoccupiedCoolingSetpointToValueAboveTheMaxHeatSetpointLimit_19()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id unoccupiedCoolingSetpointArgument;
+        unoccupiedCoolingSetpointArgument = [NSNumber numberWithShort:4010];
+        [cluster writeAttributeUnoccupiedCoolingSetpointWithValue:unoccupiedCoolingSetpointArgument
+                                                completionHandler:^(NSError * _Nullable err) {
+                                                    NSLog(@"Writes UnoccupiedCoolingSetpoint to value above the "
+                                                          @"MaxHeatSetpointLimit Error: %@",
+                                                        err);
+
+                                                    if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                        NextTest();
+                                                        return;
+                                                    }
+
+                                                    VerifyOrReturn(CheckValue(
+                                                        "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                    NextTest();
+                                                }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheLimitOfMinCoolSetpointLimitToUnoccupiedCoolingSetpointAttribute_20()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id unoccupiedCoolingSetpointArgument;
+        unoccupiedCoolingSetpointArgument = [NSNumber numberWithShort:1800];
+        [cluster writeAttributeUnoccupiedCoolingSetpointWithValue:unoccupiedCoolingSetpointArgument
+                                                completionHandler:^(NSError * _Nullable err) {
+                                                    NSLog(@"Writes the limit of MinCoolSetpointLimit to UnoccupiedCoolingSetpoint "
+                                                          @"attribute Error: %@",
+                                                        err);
+
+                                                    if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                        NextTest();
+                                                        return;
+                                                    }
+
+                                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                    NextTest();
+                                                }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheLimitOfMaxCoolSetpointLimitToUnoccupiedCoolingSetpointAttribute_21()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id unoccupiedCoolingSetpointArgument;
+        unoccupiedCoolingSetpointArgument = [NSNumber numberWithShort:3000];
+        [cluster writeAttributeUnoccupiedCoolingSetpointWithValue:unoccupiedCoolingSetpointArgument
+                                                completionHandler:^(NSError * _Nullable err) {
+                                                    NSLog(@"Writes the limit of MaxCoolSetpointLimit to UnoccupiedCoolingSetpoint "
+                                                          @"attribute Error: %@",
+                                                        err);
+
+                                                    if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                        NextTest();
+                                                        return;
+                                                    }
+
+                                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                    NextTest();
+                                                }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsUnoccupiedHeatingSetpointAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_22()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeUnoccupiedHeatingSetpointWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(
+                @"Reads UnoccupiedHeatingSetpoint attribute from Server DUT and verifies that the value is within range Error: %@",
+                err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("UnoccupiedHeatingSetpoint", actualValue, 2000));
+            }
+
+            VerifyOrReturn(CheckConstraintType("unoccupiedHeatingSetpoint", "", "int16"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("unoccupiedHeatingSetpoint", [value shortValue], 700));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("unoccupiedHeatingSetpoint", [value shortValue], 3000));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForUnoccupiedHeatingSetpointAttribute_23()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id unoccupiedHeatingSetpointArgument;
+        unoccupiedHeatingSetpointArgument = [NSNumber numberWithShort:2500];
+        [cluster writeAttributeUnoccupiedHeatingSetpointWithValue:unoccupiedHeatingSetpointArgument
+                                                completionHandler:^(NSError * _Nullable err) {
+                                                    NSLog(@"Writes a value back that is different but valid for "
+                                                          @"UnoccupiedHeatingSetpoint attribute Error: %@",
+                                                        err);
+
+                                                    if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                        NextTest();
+                                                        return;
+                                                    }
+
+                                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                    NextTest();
+                                                }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfUnoccupiedHeatingSetpointAttribute_24()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeUnoccupiedHeatingSetpointWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Reads it back again to confirm the successful write of UnoccupiedHeatingSetpoint attribute Error: %@", err);
+
+                if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                    NextTest();
+                    return;
+                }
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("UnoccupiedHeatingSetpoint", actualValue, 2500));
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesUnoccupiedHeatingSetpointToValueBelowTheMinHeatSetpointLimit_25()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id unoccupiedHeatingSetpointArgument;
+        unoccupiedHeatingSetpointArgument = [NSNumber numberWithShort:500];
+        [cluster writeAttributeUnoccupiedHeatingSetpointWithValue:unoccupiedHeatingSetpointArgument
+                                                completionHandler:^(NSError * _Nullable err) {
+                                                    NSLog(@"Writes UnoccupiedHeatingSetpoint to value below the "
+                                                          @"MinHeatSetpointLimit Error: %@",
+                                                        err);
+
+                                                    if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                        NextTest();
+                                                        return;
+                                                    }
+
+                                                    VerifyOrReturn(CheckValue(
+                                                        "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                    NextTest();
+                                                }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesUnoccupiedHeatingSetpointToValueAboveTheMaxHeatSetpointLimit_26()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id unoccupiedHeatingSetpointArgument;
+        unoccupiedHeatingSetpointArgument = [NSNumber numberWithShort:4010];
+        [cluster writeAttributeUnoccupiedHeatingSetpointWithValue:unoccupiedHeatingSetpointArgument
+                                                completionHandler:^(NSError * _Nullable err) {
+                                                    NSLog(@"Writes UnoccupiedHeatingSetpoint to value above the "
+                                                          @"MaxHeatSetpointLimit Error: %@",
+                                                        err);
+
+                                                    if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                        NextTest();
+                                                        return;
+                                                    }
+
+                                                    VerifyOrReturn(CheckValue(
+                                                        "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                    NextTest();
+                                                }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheLimitOfMinHeatSetpointLimitToUnoccupiedHeatingSetpointAttribute_27()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id unoccupiedHeatingSetpointArgument;
+        unoccupiedHeatingSetpointArgument = [NSNumber numberWithShort:1800];
+        [cluster writeAttributeUnoccupiedHeatingSetpointWithValue:unoccupiedHeatingSetpointArgument
+                                                completionHandler:^(NSError * _Nullable err) {
+                                                    NSLog(@"Writes the limit of MinHeatSetpointLimit to UnoccupiedHeatingSetpoint "
+                                                          @"attribute Error: %@",
+                                                        err);
+
+                                                    if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                        NextTest();
+                                                        return;
+                                                    }
+
+                                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                    NextTest();
+                                                }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheLimitOfMaxHeatSetpointLimitToUnoccupiedHeatingSetpointAttribute_28()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id unoccupiedHeatingSetpointArgument;
+        unoccupiedHeatingSetpointArgument = [NSNumber numberWithShort:3000];
+        [cluster writeAttributeUnoccupiedHeatingSetpointWithValue:unoccupiedHeatingSetpointArgument
+                                                completionHandler:^(NSError * _Nullable err) {
+                                                    NSLog(@"Writes the limit of MaxHeatSetpointLimit to UnoccupiedHeatingSetpoint "
+                                                          @"attribute Error: %@",
+                                                        err);
+
+                                                    if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                        NextTest();
+                                                        return;
+                                                    }
+
+                                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                    NextTest();
+                                                }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsMinHeatSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_29()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53365,6 +53615,11 @@ private:
         [cluster readAttributeMinHeatSetpointLimitWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(
                 @"Reads MinHeatSetpointLimit attribute from Server DUT and verifies that the value is within range Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -53387,7 +53642,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForMinHeatSetpointLimitAttribute_12()
+    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForMinHeatSetpointLimitAttribute_30()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53401,6 +53656,11 @@ private:
                                                      @"attribute Error: %@",
                                                    err);
 
+                                               if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                   NextTest();
+                                                   return;
+                                               }
+
                                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                                                NextTest();
@@ -53409,7 +53669,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinHeatSetpointLimitAttribute_13()
+    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinHeatSetpointLimitAttribute_31()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53417,6 +53677,11 @@ private:
 
         [cluster readAttributeMinHeatSetpointLimitWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Reads it back again to confirm the successful write of MinHeatSetpointLimit attribute Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -53431,7 +53696,63 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfAbsMinHeatSetpointLimitToMinHeatSetpointLimitAttribute_14()
+    CHIP_ERROR TestWritesMinHeatSetpointLimitToValueBelowTheAbsMinHeatSetpointLimit_32()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id minHeatSetpointLimitArgument;
+        minHeatSetpointLimitArgument = [NSNumber numberWithShort:650];
+        [cluster
+            writeAttributeMinHeatSetpointLimitWithValue:minHeatSetpointLimitArgument
+                                      completionHandler:^(NSError * _Nullable err) {
+                                          NSLog(
+                                              @"Writes MinHeatSetpointLimit to value below the AbsMinHeatSetpointLimit  Error: %@",
+                                              err);
+
+                                          if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                              NextTest();
+                                              return;
+                                          }
+
+                                          VerifyOrReturn(
+                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesMinHeatSetpointLimitToValueAboveTheAbsMaxHeatSetpointLimit_33()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id minHeatSetpointLimitArgument;
+        minHeatSetpointLimitArgument = [NSNumber numberWithShort:4050];
+        [cluster
+            writeAttributeMinHeatSetpointLimitWithValue:minHeatSetpointLimitArgument
+                                      completionHandler:^(NSError * _Nullable err) {
+                                          NSLog(
+                                              @"Writes MinHeatSetpointLimit to value above the AbsMaxHeatSetpointLimit  Error: %@",
+                                              err);
+
+                                          if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                              NextTest();
+                                              return;
+                                          }
+
+                                          VerifyOrReturn(
+                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheLimitOfAbsMinHeatSetpointLimitToMinHeatSetpointLimitAttribute_34()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53445,6 +53766,11 @@ private:
                                                      @"attribute Error: %@",
                                                    err);
 
+                                               if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                   NextTest();
+                                                   return;
+                                               }
+
                                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                                                NextTest();
@@ -53453,7 +53779,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMinHeatSetpointLimitAttribute_15()
+    CHIP_ERROR TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMinHeatSetpointLimitAttribute_35()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53467,6 +53793,11 @@ private:
                                                      @"attribute Error: %@",
                                                    err);
 
+                                               if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                   NextTest();
+                                                   return;
+                                               }
+
                                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                                                NextTest();
@@ -53475,7 +53806,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsMaxHeatSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_16()
+    CHIP_ERROR TestReadsMaxHeatSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_36()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53484,6 +53815,11 @@ private:
         [cluster readAttributeMaxHeatSetpointLimitWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(
                 @"Reads MaxHeatSetpointLimit attribute from Server DUT and verifies that the value is within range Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -53506,7 +53842,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForMaxHeatSetpointLimitAttribute_17()
+    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForMaxHeatSetpointLimitAttribute_37()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53520,6 +53856,11 @@ private:
                                                      @"attribute Error: %@",
                                                    err);
 
+                                               if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                   NextTest();
+                                                   return;
+                                               }
+
                                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                                                NextTest();
@@ -53528,7 +53869,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMaxHeatSetpointLimitAttribute_18()
+    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMaxHeatSetpointLimitAttribute_38()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53536,6 +53877,11 @@ private:
 
         [cluster readAttributeMaxHeatSetpointLimitWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Reads it back again to confirm the successful write of MaxHeatSetpointLimit attribute Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -53550,7 +53896,63 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfAbsMinHeatSetpointLimitToMaxHeatSetpointLimitAttribute_19()
+    CHIP_ERROR TestWritesMaxHeatSetpointLimitToValueBelowTheAbsMinHeatSetpointLimit_39()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id maxHeatSetpointLimitArgument;
+        maxHeatSetpointLimitArgument = [NSNumber numberWithShort:500];
+        [cluster
+            writeAttributeMaxHeatSetpointLimitWithValue:maxHeatSetpointLimitArgument
+                                      completionHandler:^(NSError * _Nullable err) {
+                                          NSLog(
+                                              @"Writes MaxHeatSetpointLimit to value below the AbsMinHeatSetpointLimit  Error: %@",
+                                              err);
+
+                                          if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                              NextTest();
+                                              return;
+                                          }
+
+                                          VerifyOrReturn(
+                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesMaxHeatSetpointLimitToValueAboveTheAbsMaxHeatSetpointLimit_40()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id maxHeatSetpointLimitArgument;
+        maxHeatSetpointLimitArgument = [NSNumber numberWithShort:4000];
+        [cluster
+            writeAttributeMaxHeatSetpointLimitWithValue:maxHeatSetpointLimitArgument
+                                      completionHandler:^(NSError * _Nullable err) {
+                                          NSLog(
+                                              @"Writes MaxHeatSetpointLimit to value above the AbsMaxHeatSetpointLimit  Error: %@",
+                                              err);
+
+                                          if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                              NextTest();
+                                              return;
+                                          }
+
+                                          VerifyOrReturn(
+                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheLimitOfAbsMinHeatSetpointLimitToMaxHeatSetpointLimitAttribute_41()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53564,6 +53966,11 @@ private:
                                                      @"attribute Error: %@",
                                                    err);
 
+                                               if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                   NextTest();
+                                                   return;
+                                               }
+
                                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                                                NextTest();
@@ -53572,7 +53979,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMaxHeatSetpointLimitAttribute_20()
+    CHIP_ERROR TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMaxHeatSetpointLimitAttribute_42()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53586,6 +53993,11 @@ private:
                                                      @"attribute Error: %@",
                                                    err);
 
+                                               if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                   NextTest();
+                                                   return;
+                                               }
+
                                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                                                NextTest();
@@ -53594,7 +54006,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsMinCoolSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_21()
+    CHIP_ERROR TestReadsMinCoolSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_43()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53630,7 +54042,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForMinCoolSetpointLimitAttribute_22()
+    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForMinCoolSetpointLimitAttribute_44()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53657,7 +54069,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinCoolSetpointLimitAttribute_23()
+    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinCoolSetpointLimitAttribute_45()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53684,7 +54096,62 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfAbsMinCoolSetpointLimitToMinCoolSetpointLimitAttribute_24()
+    CHIP_ERROR TestWritesMinCoolSetpointLimitToValueBelowTheAbsMinCoolSetpointLimit_46()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id minCoolSetpointLimitArgument;
+        minCoolSetpointLimitArgument = [NSNumber numberWithShort:1000];
+        [cluster
+            writeAttributeMinCoolSetpointLimitWithValue:minCoolSetpointLimitArgument
+                                      completionHandler:^(NSError * _Nullable err) {
+                                          NSLog(
+                                              @"Writes MinCoolSetpointLimit to value below the AbsMinCoolSetpointLimit  Error: %@",
+                                              err);
+
+                                          if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                              NextTest();
+                                              return;
+                                          }
+
+                                          VerifyOrReturn(
+                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesMinCoolSetpointLimitToValueAboveTheMaxCoolSetpointLimit_47()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id minCoolSetpointLimitArgument;
+        minCoolSetpointLimitArgument = [NSNumber numberWithShort:4000];
+        [cluster
+            writeAttributeMinCoolSetpointLimitWithValue:minCoolSetpointLimitArgument
+                                      completionHandler:^(NSError * _Nullable err) {
+                                          NSLog(@"Writes MinCoolSetpointLimit to value above the MaxCoolSetpointLimit  Error: %@",
+                                              err);
+
+                                          if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                              NextTest();
+                                              return;
+                                          }
+
+                                          VerifyOrReturn(
+                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheLimitOfAbsMinCoolSetpointLimitToMinCoolSetpointLimitAttribute_48()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53711,7 +54178,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfMaxCoolSetpointLimitToMinCoolSetpointLimitAttribute_25()
+    CHIP_ERROR TestWritesTheLimitOfMaxCoolSetpointLimitToMinCoolSetpointLimitAttribute_49()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53738,7 +54205,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsMaxCoolSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_26()
+    CHIP_ERROR TestReadsMaxCoolSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_50()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53774,7 +54241,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForMaxCoolSetpointLimitAttribute_27()
+    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForMaxCoolSetpointLimitAttribute_51()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53801,7 +54268,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMaxCoolSetpointLimitAttribute_28()
+    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMaxCoolSetpointLimitAttribute_52()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53828,7 +54295,62 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfAbsMinCoolSetpointLimitToMaxCoolSetpointLimitAttribute_29()
+    CHIP_ERROR TestWritesMaxCoolSetpointLimitToValueBelowTheAbsMinCoolSetpointLimit_53()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id maxCoolSetpointLimitArgument;
+        maxCoolSetpointLimitArgument = [NSNumber numberWithShort:1000];
+        [cluster
+            writeAttributeMaxCoolSetpointLimitWithValue:maxCoolSetpointLimitArgument
+                                      completionHandler:^(NSError * _Nullable err) {
+                                          NSLog(
+                                              @"Writes MaxCoolSetpointLimit to value below the AbsMinCoolSetpointLimit  Error: %@",
+                                              err);
+
+                                          if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                              NextTest();
+                                              return;
+                                          }
+
+                                          VerifyOrReturn(
+                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesMaxCoolSetpointLimitToValueAboveTheMaxCoolSetpointLimit_54()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id maxCoolSetpointLimitArgument;
+        maxCoolSetpointLimitArgument = [NSNumber numberWithShort:4000];
+        [cluster
+            writeAttributeMaxCoolSetpointLimitWithValue:maxCoolSetpointLimitArgument
+                                      completionHandler:^(NSError * _Nullable err) {
+                                          NSLog(@"Writes MaxCoolSetpointLimit to value above the MaxCoolSetpointLimit  Error: %@",
+                                              err);
+
+                                          if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                              NextTest();
+                                              return;
+                                          }
+
+                                          VerifyOrReturn(
+                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheLimitOfAbsMinCoolSetpointLimitToMaxCoolSetpointLimitAttribute_55()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53855,7 +54377,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfMaxCoolSetpointLimitToMaxCoolSetpointLimitAttribute_30()
+    CHIP_ERROR TestWritesTheLimitOfMaxCoolSetpointLimitToMaxCoolSetpointLimitAttribute_56()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53882,7 +54404,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesSetsBackTheLimitOfMinHeatSetpointLimitToMinHeatSetpointLimitAttribute_31()
+    CHIP_ERROR TestWritesSetsBackDefaultValueOfMinHeatSetpointLimit_57()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53892,9 +54414,12 @@ private:
         minHeatSetpointLimitArgument = [NSNumber numberWithShort:700];
         [cluster writeAttributeMinHeatSetpointLimitWithValue:minHeatSetpointLimitArgument
                                            completionHandler:^(NSError * _Nullable err) {
-                                               NSLog(@"Writes (sets back) the limit of MinHeatSetpointLimit to "
-                                                     @"MinHeatSetpointLimit attribute Error: %@",
-                                                   err);
+                                               NSLog(@"Writes (sets back) default value of MinHeatSetpointLimit Error: %@", err);
+
+                                               if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                   NextTest();
+                                                   return;
+                                               }
 
                                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -53904,51 +54429,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesSetsBackTheLimitOfMaxHeatSetpointLimitToMinHeatSetpointLimitAttribute_32()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id minHeatSetpointLimitArgument;
-        minHeatSetpointLimitArgument = [NSNumber numberWithShort:3000];
-        [cluster writeAttributeMinHeatSetpointLimitWithValue:minHeatSetpointLimitArgument
-                                           completionHandler:^(NSError * _Nullable err) {
-                                               NSLog(@"Writes (sets back) the limit of MaxHeatSetpointLimit to "
-                                                     @"MinHeatSetpointLimit attribute Error: %@",
-                                                   err);
-
-                                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                               NextTest();
-                                           }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWritesSetsBackTheLimitOfMinHeatSetpointLimitToMaxHeatSetpointLimitAttribute_33()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id maxHeatSetpointLimitArgument;
-        maxHeatSetpointLimitArgument = [NSNumber numberWithShort:700];
-        [cluster writeAttributeMaxHeatSetpointLimitWithValue:maxHeatSetpointLimitArgument
-                                           completionHandler:^(NSError * _Nullable err) {
-                                               NSLog(@"Writes (sets back) the limit of MinHeatSetpointLimit to "
-                                                     @"MaxHeatSetpointLimit attribute Error: %@",
-                                                   err);
-
-                                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                               NextTest();
-                                           }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWritesSetsBackTheLimitOfMaxHeatSetpointLimitToMaxHeatSetpointLimitAttribute_34()
+    CHIP_ERROR TestWritesSetsBackdefaultValueOfMaxHeatSetpointLimit_58()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53958,9 +54439,12 @@ private:
         maxHeatSetpointLimitArgument = [NSNumber numberWithShort:3000];
         [cluster writeAttributeMaxHeatSetpointLimitWithValue:maxHeatSetpointLimitArgument
                                            completionHandler:^(NSError * _Nullable err) {
-                                               NSLog(@"Writes (sets back) the limit of MaxHeatSetpointLimit to "
-                                                     @"MaxHeatSetpointLimit attribute Error: %@",
-                                                   err);
+                                               NSLog(@"Writes (sets back)default value of MaxHeatSetpointLimit Error: %@", err);
+
+                                               if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                   NextTest();
+                                                   return;
+                                               }
 
                                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -53970,7 +54454,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesSetsBackTheLimitOfMinCoolSetpointLimitToMinCoolSetpointLimitAttribute_35()
+    CHIP_ERROR TestWritesSetsBackDefaultValueOfMinCoolSetpointLimit_59()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -53980,9 +54464,7 @@ private:
         minCoolSetpointLimitArgument = [NSNumber numberWithShort:1600];
         [cluster writeAttributeMinCoolSetpointLimitWithValue:minCoolSetpointLimitArgument
                                            completionHandler:^(NSError * _Nullable err) {
-                                               NSLog(@"Writes (sets back) the limit of MinCoolSetpointLimit to "
-                                                     @"MinCoolSetpointLimit attribute Error: %@",
-                                                   err);
+                                               NSLog(@"Writes (sets back) default value of MinCoolSetpointLimit Error: %@", err);
 
                                                if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
                                                    NextTest();
@@ -53997,61 +54479,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesSetsBackTheLimitOfMaxCoolSetpointLimitToMinCoolSetpointLimitAttribute_36()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id minCoolSetpointLimitArgument;
-        minCoolSetpointLimitArgument = [NSNumber numberWithShort:3200];
-        [cluster writeAttributeMinCoolSetpointLimitWithValue:minCoolSetpointLimitArgument
-                                           completionHandler:^(NSError * _Nullable err) {
-                                               NSLog(@"Writes (sets back) the limit of MaxCoolSetpointLimit to "
-                                                     @"MinCoolSetpointLimit attribute Error: %@",
-                                                   err);
-
-                                               if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                                                   NextTest();
-                                                   return;
-                                               }
-
-                                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                               NextTest();
-                                           }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWritesSetsBackTheLimitOfMinCoolSetpointLimitToMaxCoolSetpointLimitAttribute_37()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id maxCoolSetpointLimitArgument;
-        maxCoolSetpointLimitArgument = [NSNumber numberWithShort:1600];
-        [cluster writeAttributeMaxCoolSetpointLimitWithValue:maxCoolSetpointLimitArgument
-                                           completionHandler:^(NSError * _Nullable err) {
-                                               NSLog(@"Writes (sets back) the limit of MinCoolSetpointLimit to "
-                                                     @"MaxCoolSetpointLimit attribute Error: %@",
-                                                   err);
-
-                                               if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                                                   NextTest();
-                                                   return;
-                                               }
-
-                                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                               NextTest();
-                                           }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWritesSetsBackTheLimitOfMaxCoolSetpointLimitToMaxCoolSetpointLimitAttribute_38()
+    CHIP_ERROR TestWritesSetsBackDefaultValueOfMaxCoolSetpointLimit_60()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -54061,9 +54489,7 @@ private:
         maxCoolSetpointLimitArgument = [NSNumber numberWithShort:3200];
         [cluster writeAttributeMaxCoolSetpointLimitWithValue:maxCoolSetpointLimitArgument
                                            completionHandler:^(NSError * _Nullable err) {
-                                               NSLog(@"Writes (sets back) the limit of MaxCoolSetpointLimit to "
-                                                     @"MaxCoolSetpointLimit attribute Error: %@",
-                                                   err);
+                                               NSLog(@"Writes (sets back) default value of MaxCoolSetpointLimit Error: %@", err);
 
                                                if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
                                                    NextTest();
@@ -54078,7 +54504,197 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsControlSequenceOfOperationFromServerDutAndVerifiesThatTheValueIsValid_39()
+    CHIP_ERROR TestReadsMinSetpointDeadBandAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_61()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMinSetpointDeadBandWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(
+                @"Reads MinSetpointDeadBand attribute from Server DUT and verifies that the value is within range Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("MinSetpointDeadBand", actualValue, 25));
+            }
+
+            VerifyOrReturn(CheckConstraintType("minSetpointDeadBand", "", "temp-s8"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<int8_t>("minSetpointDeadBand", [value charValue], 0));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<int8_t>("minSetpointDeadBand", [value charValue], 25));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForMinSetpointDeadBandAttribute_62()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id minSetpointDeadBandArgument;
+        minSetpointDeadBandArgument = [NSNumber numberWithChar:5];
+        [cluster writeAttributeMinSetpointDeadBandWithValue:minSetpointDeadBandArgument
+                                          completionHandler:^(NSError * _Nullable err) {
+                                              NSLog(@"Writes a value back that is different but valid for MinSetpointDeadBand "
+                                                    @"attribute Error: %@",
+                                                  err);
+
+                                              if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                  NextTest();
+                                                  return;
+                                              }
+
+                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                              NextTest();
+                                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinSetpointDeadBandAttribute_63()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMinSetpointDeadBandWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads it back again to confirm the successful write of MinSetpointDeadBand attribute Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("MinSetpointDeadBand", actualValue, 5));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheValueBelowMinSetpointDeadBand_64()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id minSetpointDeadBandArgument;
+        minSetpointDeadBandArgument = [NSNumber numberWithChar:-1];
+        [cluster writeAttributeMinSetpointDeadBandWithValue:minSetpointDeadBandArgument
+                                          completionHandler:^(NSError * _Nullable err) {
+                                              NSLog(@"Writes the value below MinSetpointDeadBand Error: %@", err);
+
+                                              if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                  NextTest();
+                                                  return;
+                                              }
+
+                                              VerifyOrReturn(
+                                                  CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                              NextTest();
+                                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheValueAboveMinSetpointDeadBand_65()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id minSetpointDeadBandArgument;
+        minSetpointDeadBandArgument = [NSNumber numberWithChar:30];
+        [cluster writeAttributeMinSetpointDeadBandWithValue:minSetpointDeadBandArgument
+                                          completionHandler:^(NSError * _Nullable err) {
+                                              NSLog(@"Writes the value above MinSetpointDeadBand  Error: %@", err);
+
+                                              if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                  NextTest();
+                                                  return;
+                                              }
+
+                                              VerifyOrReturn(
+                                                  CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                              NextTest();
+                                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheMinLimitOfMinSetpointDeadBand_66()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id minSetpointDeadBandArgument;
+        minSetpointDeadBandArgument = [NSNumber numberWithChar:0];
+        [cluster writeAttributeMinSetpointDeadBandWithValue:minSetpointDeadBandArgument
+                                          completionHandler:^(NSError * _Nullable err) {
+                                              NSLog(@"Writes the min limit of MinSetpointDeadBand Error: %@", err);
+
+                                              if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                  NextTest();
+                                                  return;
+                                              }
+
+                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                              NextTest();
+                                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesTheMaxLimitOfMinSetpointDeadBand_67()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id minSetpointDeadBandArgument;
+        minSetpointDeadBandArgument = [NSNumber numberWithChar:25];
+        [cluster writeAttributeMinSetpointDeadBandWithValue:minSetpointDeadBandArgument
+                                          completionHandler:^(NSError * _Nullable err) {
+                                              NSLog(@"Writes the max limit of MinSetpointDeadBand Error: %@", err);
+
+                                              if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                  NextTest();
+                                                  return;
+                                              }
+
+                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                              NextTest();
+                                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsControlSequenceOfOperationFromServerDutAndVerifiesThatTheValueIsValid_68()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -54109,7 +54725,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeCommandForControlSequenceOfOperationWithANewValidValue_40()
+    CHIP_ERROR TestWriteAttributeCommandForControlSequenceOfOperationWithANewValidValue_69()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -54131,7 +54747,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadItBackAgainToConfirmTheSuccessfulWrite_41()
+    CHIP_ERROR TestReadItBackAgainToConfirmTheSuccessfulWrite_70()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -54154,7 +54770,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSetsOccupiedHeatingSetpointToDefaultValue_42()
+    CHIP_ERROR TestSetsOccupiedHeatingSetpointToDefaultValue_71()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -54166,6 +54782,11 @@ private:
                                               completionHandler:^(NSError * _Nullable err) {
                                                   NSLog(@"Sets OccupiedHeatingSetpoint to default value Error: %@", err);
 
+                                                  if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                      NextTest();
+                                                      return;
+                                                  }
+
                                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                                                   NextTest();
@@ -54174,7 +54795,55 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSetsOccupiedHeatingSetpointToDefaultValue_43()
+    CHIP_ERROR TestSendsSetpointRaiseCommand_72()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPThermostatClusterSetpointRaiseLowerParams alloc] init];
+        params.mode = [NSNumber numberWithUnsignedChar:0];
+        params.amount = [NSNumber numberWithChar:-30];
+        [cluster setpointRaiseLowerWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Sends SetpointRaise Command Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsBackOccupiedHeatingSetpointToConfirmTheSuccessOfTheWrite_73()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOccupiedHeatingSetpointWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads back OccupiedHeatingSetpoint to confirm the success of the write Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OccupiedHeatingSetpoint", actualValue, -30));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSetsOccupiedHeatingSetpointToDefaultValue_74()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -54186,6 +54855,11 @@ private:
                                               completionHandler:^(NSError * _Nullable err) {
                                                   NSLog(@"Sets OccupiedHeatingSetpoint to default value Error: %@", err);
 
+                                                  if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                      NextTest();
+                                                      return;
+                                                  }
+
                                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                                                   NextTest();
@@ -54194,7 +54868,55 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSetsOccupiedCoolingSetpointToDefaultValue_44()
+    CHIP_ERROR TestSendsSetpointRaiseCommand_75()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPThermostatClusterSetpointRaiseLowerParams alloc] init];
+        params.mode = [NSNumber numberWithUnsignedChar:0];
+        params.amount = [NSNumber numberWithChar:30];
+        [cluster setpointRaiseLowerWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Sends SetpointRaise Command Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsBackOccupiedHeatingSetpointToConfirmTheSuccessOfTheWrite_76()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOccupiedHeatingSetpointWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads back OccupiedHeatingSetpoint to confirm the success of the write Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OccupiedHeatingSetpoint", actualValue, 30));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSetsOccupiedCoolingSetpointToDefaultValue_77()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -54219,7 +54941,55 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSetsOccupiedCoolingSetpointToDefaultValue_45()
+    CHIP_ERROR TestSendsSetpointRaiseCommand_78()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPThermostatClusterSetpointRaiseLowerParams alloc] init];
+        params.mode = [NSNumber numberWithUnsignedChar:1];
+        params.amount = [NSNumber numberWithChar:-30];
+        [cluster setpointRaiseLowerWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Sends SetpointRaise Command Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsBackOccupiedCoolingSetpointToConfirmTheSuccessOfTheWrite_79()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOccupiedCoolingSetpointWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads back OccupiedCoolingSetpoint to confirm the success of the write Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OccupiedCoolingSetpoint", actualValue, -30));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSetsOccupiedCoolingSetpointToDefaultValue_80()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -54244,7 +55014,55 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSetsOccupiedCoolingSetpointToDefaultValue_46()
+    CHIP_ERROR TestSendsSetpointRaiseCommand_81()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPThermostatClusterSetpointRaiseLowerParams alloc] init];
+        params.mode = [NSNumber numberWithUnsignedChar:1];
+        params.amount = [NSNumber numberWithChar:30];
+        [cluster setpointRaiseLowerWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Sends SetpointRaise Command Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsBackOccupiedCoolingSetpointToConfirmTheSuccessOfTheWrite_82()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOccupiedCoolingSetpointWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads back OccupiedCoolingSetpoint to confirm the success of the write Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OccupiedCoolingSetpoint", actualValue, 30));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSetsOccupiedCoolingSetpointToDefaultValue_83()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -54269,7 +55087,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSetsOccupiedHeatingSetpointToDefaultValue_47()
+    CHIP_ERROR TestSetsOccupiedHeatingSetpointToDefaultValue_84()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -54281,6 +55099,11 @@ private:
                                               completionHandler:^(NSError * _Nullable err) {
                                                   NSLog(@"Sets OccupiedHeatingSetpoint to default value Error: %@", err);
 
+                                                  if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                      NextTest();
+                                                      return;
+                                                  }
+
                                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                                                   NextTest();
@@ -54289,7 +55112,82 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSetsOccupiedCoolingSetpointToDefaultValue_48()
+    CHIP_ERROR TestSendsSetpointRaiseCommand_85()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPThermostatClusterSetpointRaiseLowerParams alloc] init];
+        params.mode = [NSNumber numberWithUnsignedChar:2];
+        params.amount = [NSNumber numberWithChar:-30];
+        [cluster setpointRaiseLowerWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Sends SetpointRaise Command Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsBackOccupiedCoolingSetpointToConfirmTheSuccessOfTheWrite_86()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOccupiedCoolingSetpointWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads back OccupiedCoolingSetpoint to confirm the success of the write Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OccupiedCoolingSetpoint", actualValue, -30));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsBackOccupiedHeatingSetpointToConfirmTheSuccessOfTheWrite_87()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOccupiedHeatingSetpointWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads back OccupiedHeatingSetpoint to confirm the success of the write Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OccupiedHeatingSetpoint", actualValue, -30));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSetsOccupiedCoolingSetpointToDefaultValue_88()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -54314,7 +55212,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSetsOccupiedHeatingSetpointToDefaultValue_49()
+    CHIP_ERROR TestSetsOccupiedHeatingSetpointToDefaultValue_89()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -54326,10 +55224,90 @@ private:
                                               completionHandler:^(NSError * _Nullable err) {
                                                   NSLog(@"Sets OccupiedHeatingSetpoint to default value Error: %@", err);
 
+                                                  if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                                                      NextTest();
+                                                      return;
+                                                  }
+
                                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                                                   NextTest();
                                               }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendsSetpointRaiseCommand_90()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPThermostatClusterSetpointRaiseLowerParams alloc] init];
+        params.mode = [NSNumber numberWithUnsignedChar:2];
+        params.amount = [NSNumber numberWithChar:30];
+        [cluster setpointRaiseLowerWithParams:params
+                            completionHandler:^(NSError * _Nullable err) {
+                                NSLog(@"Sends SetpointRaise Command Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsBackOccupiedCoolingSetpointToConfirmTheSuccessOfTheWrite_91()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOccupiedCoolingSetpointWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads back OccupiedCoolingSetpoint to confirm the success of the write Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OccupiedCoolingSetpoint", actualValue, 30));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsBackOccupiedHeatingSetpointToConfirmTheSuccessOfTheWrite_92()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestThermostat * cluster = [[CHIPTestThermostat alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOccupiedHeatingSetpointWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads back OccupiedHeatingSetpoint to confirm the success of the write Error: %@", err);
+
+            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
+                NextTest();
+                return;
+            }
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OccupiedHeatingSetpoint", actualValue, 30));
+            }
+
+            NextTest();
+        }];
 
         return CHIP_NO_ERROR;
     }
@@ -61574,14 +62552,6 @@ public:
             }
             err = TestReadsTypeAttributeFromDut_1();
             break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads Type attribute constraints\n");
-            if (ShouldSkip("A_TYPE")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsTypeAttributeConstraints_2();
-            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -61599,9 +62569,6 @@ public:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -61615,7 +62582,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 3;
+    const uint16_t mTestCount = 2;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -61644,23 +62611,6 @@ private:
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("Type", actualValue, 0));
             }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsTypeAttributeConstraints_2()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestWindowCovering * cluster = [[CHIPTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeTypeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads Type attribute constraints Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("type", "", "enum8"));
             if (value != nil) {
@@ -61727,14 +62677,6 @@ public:
             }
             err = TestReadsEndProductTypeAttributeFromDut_1();
             break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads EndProductType attribute constraints from DUT\n");
-            if (ShouldSkip("A_ENDPRODUCTTYPE")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsEndProductTypeAttributeConstraintsFromDut_2();
-            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -61752,9 +62694,6 @@ public:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -61768,7 +62707,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 3;
+    const uint16_t mTestCount = 2;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -61797,23 +62736,6 @@ private:
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("EndProductType", actualValue, 0));
             }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsEndProductTypeAttributeConstraintsFromDut_2()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestWindowCovering * cluster = [[CHIPTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeEndProductTypeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads EndProductType attribute constraints from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("endProductType", "", "enum8"));
             if (value != nil) {
@@ -64094,40 +65016,44 @@ public:
             err = Test2bThWaitsForFullMotionDurationSecondsMovementsOnTheDevice_4();
             break;
         case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : 2c: TH reads OperationalStatus attribute from DUT\n");
+            err = Test2cThReadsOperationalStatusAttributeFromDut_5();
+            break;
+        case 6:
             ChipLogProgress(
-                chipTool, " ***** Test Step 5 : 3a: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
+                chipTool, " ***** Test Step 6 : 3a: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
             if (ShouldSkip("WNCV_LF && WNCV_PA_LF")) {
                 NextTest();
                 return;
             }
-            err = Test3aIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_5();
+            err = Test3aIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_6();
             break;
-        case 6:
+        case 7:
             ChipLogProgress(chipTool,
-                " ***** Test Step 6 : 3b: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT\n");
+                " ***** Test Step 7 : 3b: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT\n");
             if (ShouldSkip("WNCV_LF && WNCV_PA_LF && A_CURRENTPOSITIONLIFTPERCENTAGE")) {
                 NextTest();
                 return;
             }
-            err = Test3bIfPaLfThReadsCurrentPositionLiftPercentageOptionalAttributeFromDut_6();
+            err = Test3bIfPaLfThReadsCurrentPositionLiftPercentageOptionalAttributeFromDut_7();
             break;
-        case 7:
+        case 8:
             ChipLogProgress(
-                chipTool, " ***** Test Step 7 : 3c: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
+                chipTool, " ***** Test Step 8 : 3c: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
             if (ShouldSkip("WNCV_TL && WNCV_PA_TL")) {
                 NextTest();
                 return;
             }
-            err = Test3cIfPaTlThReadsCurrentPositionTiltPercent100thsAttributeFromDut_7();
+            err = Test3cIfPaTlThReadsCurrentPositionTiltPercent100thsAttributeFromDut_8();
             break;
-        case 8:
+        case 9:
             ChipLogProgress(chipTool,
-                " ***** Test Step 8 : 3d: If (PA & TL) TH reads CurrentPositionTiltPercentage optional attribute from DUT\n");
+                " ***** Test Step 9 : 3d: If (PA & TL) TH reads CurrentPositionTiltPercentage optional attribute from DUT\n");
             if (ShouldSkip("WNCV_TL && WNCV_PA_TL && A_CURRENTPOSITIONLIFTPERCENTAGE")) {
                 NextTest();
                 return;
             }
-            err = Test3dIfPaTlThReadsCurrentPositionTiltPercentageOptionalAttributeFromDut_8();
+            err = Test3dIfPaTlThReadsCurrentPositionTiltPercentageOptionalAttributeFromDut_9();
             break;
         }
 
@@ -64167,6 +65093,9 @@ public:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -64180,7 +65109,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 9;
+    const uint16_t mTestCount = 10;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -64244,7 +65173,29 @@ private:
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR Test3aIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_5()
+    CHIP_ERROR Test2cThReadsOperationalStatusAttributeFromDut_5()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestWindowCovering * cluster = [[CHIPTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOperationalStatusWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"2c: TH reads OperationalStatus attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR Test3aIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_6()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestWindowCovering * cluster = [[CHIPTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -64268,7 +65219,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3bIfPaLfThReadsCurrentPositionLiftPercentageOptionalAttributeFromDut_6()
+    CHIP_ERROR Test3bIfPaLfThReadsCurrentPositionLiftPercentageOptionalAttributeFromDut_7()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestWindowCovering * cluster = [[CHIPTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -64292,7 +65243,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3cIfPaTlThReadsCurrentPositionTiltPercent100thsAttributeFromDut_7()
+    CHIP_ERROR Test3cIfPaTlThReadsCurrentPositionTiltPercent100thsAttributeFromDut_8()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestWindowCovering * cluster = [[CHIPTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -64316,7 +65267,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3dIfPaTlThReadsCurrentPositionTiltPercentageOptionalAttributeFromDut_8()
+    CHIP_ERROR Test3dIfPaTlThReadsCurrentPositionTiltPercentageOptionalAttributeFromDut_9()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestWindowCovering * cluster = [[CHIPTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -64405,40 +65356,44 @@ public:
             err = Test2bThWaitsForFullMotionDurationSecondsMovementsOnTheDevice_4();
             break;
         case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : 2c: TH reads OperationalStatus attribute from DUT\n");
+            err = Test2cThReadsOperationalStatusAttributeFromDut_5();
+            break;
+        case 6:
             ChipLogProgress(
-                chipTool, " ***** Test Step 5 : 3a: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
+                chipTool, " ***** Test Step 6 : 3a: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
             if (ShouldSkip("WNCV_LF && WNCV_PA_LF")) {
                 NextTest();
                 return;
             }
-            err = Test3aIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_5();
+            err = Test3aIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_6();
             break;
-        case 6:
+        case 7:
             ChipLogProgress(chipTool,
-                " ***** Test Step 6 : 3b: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT\n");
+                " ***** Test Step 7 : 3b: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT\n");
             if (ShouldSkip("WNCV_LF && WNCV_PA_LF && A_CURRENTPOSITIONLIFTPERCENTAGE")) {
                 NextTest();
                 return;
             }
-            err = Test3bIfPaLfThReadsCurrentPositionLiftPercentageOptionalAttributeFromDut_6();
+            err = Test3bIfPaLfThReadsCurrentPositionLiftPercentageOptionalAttributeFromDut_7();
             break;
-        case 7:
+        case 8:
             ChipLogProgress(
-                chipTool, " ***** Test Step 7 : 3c: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
+                chipTool, " ***** Test Step 8 : 3c: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
             if (ShouldSkip("WNCV_TL && WNCV_PA_TL")) {
                 NextTest();
                 return;
             }
-            err = Test3cIfPaTlThReadsCurrentPositionTiltPercent100thsAttributeFromDut_7();
+            err = Test3cIfPaTlThReadsCurrentPositionTiltPercent100thsAttributeFromDut_8();
             break;
-        case 8:
+        case 9:
             ChipLogProgress(chipTool,
-                " ***** Test Step 8 : 3d: If (PA & TL) TH reads CurrentPositionTiltPercentage optional attribute from DUT\n");
+                " ***** Test Step 9 : 3d: If (PA & TL) TH reads CurrentPositionTiltPercentage optional attribute from DUT\n");
             if (ShouldSkip("WNCV_TL && WNCV_PA_TL && A_CURRENTPOSITIONLIFTPERCENTAGE")) {
                 NextTest();
                 return;
             }
-            err = Test3dIfPaTlThReadsCurrentPositionTiltPercentageOptionalAttributeFromDut_8();
+            err = Test3dIfPaTlThReadsCurrentPositionTiltPercentageOptionalAttributeFromDut_9();
             break;
         }
 
@@ -64478,6 +65433,9 @@ public:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -64491,7 +65449,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 9;
+    const uint16_t mTestCount = 10;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -64555,7 +65513,29 @@ private:
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR Test3aIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_5()
+    CHIP_ERROR Test2cThReadsOperationalStatusAttributeFromDut_5()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestWindowCovering * cluster = [[CHIPTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOperationalStatusWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"2c: TH reads OperationalStatus attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR Test3aIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_6()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestWindowCovering * cluster = [[CHIPTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -64579,7 +65559,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3bIfPaLfThReadsCurrentPositionLiftPercentageOptionalAttributeFromDut_6()
+    CHIP_ERROR Test3bIfPaLfThReadsCurrentPositionLiftPercentageOptionalAttributeFromDut_7()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestWindowCovering * cluster = [[CHIPTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -64603,7 +65583,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3cIfPaTlThReadsCurrentPositionTiltPercent100thsAttributeFromDut_7()
+    CHIP_ERROR Test3cIfPaTlThReadsCurrentPositionTiltPercent100thsAttributeFromDut_8()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestWindowCovering * cluster = [[CHIPTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -64627,7 +65607,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3dIfPaTlThReadsCurrentPositionTiltPercentageOptionalAttributeFromDut_8()
+    CHIP_ERROR Test3dIfPaTlThReadsCurrentPositionTiltPercentageOptionalAttributeFromDut_9()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestWindowCovering * cluster = [[CHIPTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -65806,28 +66786,38 @@ public:
             err = Test1aIfPaLfLfThReadsCurrentPositionLiftPercent100thsFromDut_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : 2b: TH sends GoToLiftPercentage command with BadParam to DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF || WNCV_LF && CR_GOTOLIFTPERCENTAGE")) {
+            ChipLogProgress(chipTool,
+                " ***** Test Step 2 : 1b 1c: If (PA_LF & LF) TH reads CurrentPositionLiftPercentage from DUT + assert "
+                "CurrentPositionLiftPercent100ths/100 equals CurrentPositionLiftPercentage\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && WNCV_LF && WNCV_PA_LF && A_CURRENTPOSITIONLIFTPERCENTAGE")) {
                 NextTest();
                 return;
             }
-            err = Test2bThSendsGoToLiftPercentageCommandWithBadParamToDut_2();
+            err = Test1b1cIfPaLfLfThReadsCurrentPositionLiftPercentageFromDutAssertCurrentPositionLiftPercent100ths100EqualsCurrentPositionLiftPercentage_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : 3a: TH sends GoToLiftPercentage command with 10001 to DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : 2b: TH sends GoToLiftPercentage command with BadParam to DUT\n");
             if (ShouldSkip("WNCV_LF && WNCV_PA_LF || WNCV_LF && CR_GOTOLIFTPERCENTAGE")) {
                 NextTest();
                 return;
             }
-            err = Test3aThSendsGoToLiftPercentageCommandWith10001ToDut_3();
+            err = Test2bThSendsGoToLiftPercentageCommandWithBadParamToDut_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : 4a: TH sends GoToLiftPercentage command with 0xFFFF to DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : 3a: TH sends GoToLiftPercentage command with 10001 to DUT\n");
             if (ShouldSkip("WNCV_LF && WNCV_PA_LF || WNCV_LF && CR_GOTOLIFTPERCENTAGE")) {
                 NextTest();
                 return;
             }
-            err = Test4aThSendsGoToLiftPercentageCommandWith0xFFFFToDut_4();
+            err = Test3aThSendsGoToLiftPercentageCommandWith10001ToDut_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : 4a: TH sends GoToLiftPercentage command with 0xFFFF to DUT\n");
+            if (ShouldSkip("WNCV_LF && WNCV_PA_LF || WNCV_LF && CR_GOTOLIFTPERCENTAGE")) {
+                NextTest();
+                return;
+            }
+            err = Test4aThSendsGoToLiftPercentageCommandWith0xFFFFToDut_5();
             break;
         }
 
@@ -65847,12 +66837,15 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         }
@@ -65868,7 +66861,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 5;
+    const uint16_t mTestCount = 6;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -65913,7 +66906,44 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test2bThSendsGoToLiftPercentageCommandWithBadParamToDut_2()
+    CHIP_ERROR
+    Test1b1cIfPaLfLfThReadsCurrentPositionLiftPercentageFromDutAssertCurrentPositionLiftPercent100ths100EqualsCurrentPositionLiftPercentage_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestWindowCovering * cluster = [[CHIPTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeCurrentPositionLiftPercentageWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"1b 1c: If (PA_LF & LF) TH reads CurrentPositionLiftPercentage from DUT + assert "
+                      @"CurrentPositionLiftPercent100ths/100 equals CurrentPositionLiftPercentage Error: %@",
+                    err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValueNonNull("CurrentPositionLiftPercentage", actualValue));
+                    VerifyOrReturn(CheckValue("CurrentPositionLiftPercentage", actualValue,
+                        [attrCurrentPositionLiftPercent100ths unsignedShortValue] / 100));
+                }
+
+                if (value != nil) {
+                    VerifyOrReturn(
+                        CheckConstraintMinValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 0));
+                }
+                if (value != nil) {
+                    VerifyOrReturn(
+                        CheckConstraintMaxValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 100));
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR Test2bThSendsGoToLiftPercentageCommandWithBadParamToDut_3()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestWindowCovering * cluster = [[CHIPTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -65932,7 +66962,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3aThSendsGoToLiftPercentageCommandWith10001ToDut_3()
+    CHIP_ERROR Test3aThSendsGoToLiftPercentageCommandWith10001ToDut_4()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestWindowCovering * cluster = [[CHIPTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -65951,7 +66981,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test4aThSendsGoToLiftPercentageCommandWith0xFFFFToDut_4()
+    CHIP_ERROR Test4aThSendsGoToLiftPercentageCommandWith0xFFFFToDut_5()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestWindowCovering * cluster = [[CHIPTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -111402,7 +112432,6 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_ETHDIAG_2_1>(),
         make_unique<Test_TC_FLW_1_1>(),
         make_unique<Test_TC_FLW_2_1>(),
-        make_unique<Test_TC_FLW_2_2>(),
         make_unique<Test_TC_GC_1_1>(),
         make_unique<Test_TC_GC_2_1>(),
         make_unique<Test_TC_I_1_1>(),
@@ -111477,12 +112506,9 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_PSCFG_1_1>(),
         make_unique<Test_TC_RH_1_1>(),
         make_unique<Test_TC_RH_2_1>(),
-        make_unique<Test_TC_RH_2_2>(),
         make_unique<Test_TC_SWTCH_2_1>(),
-        make_unique<Test_TC_SWTCH_2_2>(),
         make_unique<Test_TC_TM_1_1>(),
         make_unique<Test_TC_TM_2_1>(),
-        make_unique<Test_TC_TM_2_2>(),
         make_unique<Test_TC_TSTAT_1_1>(),
         make_unique<Test_TC_TSTAT_2_1>(),
         make_unique<Test_TC_TSTAT_2_2>(),
