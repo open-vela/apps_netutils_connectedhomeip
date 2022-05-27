@@ -80440,7 +80440,6 @@ public:
 | * SetWeeklySchedule                                                 |   0x01 |
 | * GetWeeklySchedule                                                 |   0x02 |
 | * ClearWeeklySchedule                                               |   0x03 |
-| * GetRelayStatusLog                                                 |   0x04 |
 |------------------------------------------------------------------------------|
 | Attributes:                                                         |        |
 | * LocalTemperature                                                  | 0x0000 |
@@ -80466,7 +80465,6 @@ public:
 | * RemoteSensing                                                     | 0x001A |
 | * ControlSequenceOfOperation                                        | 0x001B |
 | * SystemMode                                                        | 0x001C |
-| * AlarmMask                                                         | 0x001D |
 | * ThermostatRunningMode                                             | 0x001E |
 | * StartOfWeek                                                       | 0x0020 |
 | * NumberOfWeeklyTransitions                                         | 0x0021 |
@@ -80693,48 +80691,6 @@ public:
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
             [cluster clearWeeklyScheduleWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
-        }
-        return CHIP_NO_ERROR;
-    }
-
-private:
-};
-
-/*
- * Command GetRelayStatusLog
- */
-class ThermostatGetRelayStatusLog : public ClusterCommand {
-public:
-    ThermostatGetRelayStatusLog()
-        : ClusterCommand("get-relay-status-log")
-    {
-        ClusterCommand::AddArguments();
-    }
-
-    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000201) command (0x00000004) on endpoint %u", endpointId);
-
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
-        __auto_type * params = [[CHIPThermostatClusterGetRelayStatusLogParams alloc] init];
-        params.timedInvokeTimeoutMs
-            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        uint16_t repeatCount = mRepeatCount.ValueOr(1);
-        uint16_t __block responsesNeeded = repeatCount;
-        while (repeatCount--) {
-            [cluster getRelayStatusLogWithCompletionHandler:^(
-                CHIPThermostatClusterGetRelayStatusLogResponseParams * _Nullable values, NSError * _Nullable error) {
-                NSLog(@"Values: %@", values);
                 responsesNeeded--;
                 if (error != nil) {
                     mError = error;
@@ -82846,73 +82802,6 @@ public:
                                                        SetCommandExitStatus(error);
                                                    }
                                                }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mWait ? UINT16_MAX : 10);
-    }
-};
-
-/*
- * Attribute AlarmMask
- */
-class ReadThermostatAlarmMask : public ReadAttribute {
-public:
-    ReadThermostatAlarmMask()
-        : ReadAttribute("alarm-mask")
-    {
-    }
-
-    ~ReadThermostatAlarmMask() {}
-
-    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000201) ReadAttribute (0x0000001D) on endpoint %u", endpointId);
-
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
-        [cluster readAttributeAlarmMaskWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"Thermostat.AlarmMask response %@", [value description]);
-            if (error != nil) {
-                LogNSError("Thermostat AlarmMask read Error", error);
-            }
-            SetCommandExitStatus(error);
-        }];
-        return CHIP_NO_ERROR;
-    }
-};
-
-class SubscribeAttributeThermostatAlarmMask : public SubscribeAttribute {
-public:
-    SubscribeAttributeThermostatAlarmMask()
-        : SubscribeAttribute("alarm-mask")
-    {
-    }
-
-    ~SubscribeAttributeThermostatAlarmMask() {}
-
-    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000201) ReportAttribute (0x0000001D) on endpoint %u", endpointId);
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        CHIPThermostat * cluster = [[CHIPThermostat alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
-        CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
-        params.keepPreviousSubscriptions
-            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
-        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeAlarmMaskWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
-                                                maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
-                                                     params:params
-                                    subscriptionEstablished:nullptr
-                                              reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                                                  NSLog(@"Thermostat.AlarmMask response %@", [value description]);
-                                                  if (error || !mWait) {
-                                                      SetCommandExitStatus(error);
-                                                  }
-                                              }];
 
         return CHIP_NO_ERROR;
     }
@@ -99866,7 +99755,6 @@ void registerClusterThermostat(Commands & commands)
         make_unique<ThermostatSetWeeklySchedule>(), //
         make_unique<ThermostatGetWeeklySchedule>(), //
         make_unique<ThermostatClearWeeklySchedule>(), //
-        make_unique<ThermostatGetRelayStatusLog>(), //
         make_unique<ReadAttribute>(Id), //
         make_unique<ReadThermostatLocalTemperature>(), //
         make_unique<WriteAttribute>(Id), //
@@ -99930,8 +99818,6 @@ void registerClusterThermostat(Commands & commands)
         make_unique<ReadThermostatSystemMode>(), //
         make_unique<WriteThermostatSystemMode>(), //
         make_unique<SubscribeAttributeThermostatSystemMode>(), //
-        make_unique<ReadThermostatAlarmMask>(), //
-        make_unique<SubscribeAttributeThermostatAlarmMask>(), //
         make_unique<ReadThermostatThermostatRunningMode>(), //
         make_unique<SubscribeAttributeThermostatThermostatRunningMode>(), //
         make_unique<ReadThermostatStartOfWeek>(), //
