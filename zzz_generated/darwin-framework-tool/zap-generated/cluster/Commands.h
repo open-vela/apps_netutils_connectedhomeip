@@ -57826,7 +57826,7 @@ public:
         AddArgument("NOCValue", &mRequest.NOCValue);
         AddArgument("ICACValue", &mRequest.ICACValue);
         AddArgument("IPKValue", &mRequest.IPKValue);
-        AddArgument("CaseAdminNode", 0, UINT64_MAX, &mRequest.caseAdminNode);
+        AddArgument("CaseAdminSubject", 0, UINT64_MAX, &mRequest.caseAdminSubject);
         AddArgument("AdminVendorId", 0, UINT16_MAX, &mRequest.adminVendorId);
         ClusterCommand::AddArguments();
     }
@@ -57849,7 +57849,7 @@ public:
             params.icacValue = nil;
         }
         params.ipkValue = [NSData dataWithBytes:mRequest.IPKValue.data() length:mRequest.IPKValue.size()];
-        params.caseAdminNode = [NSNumber numberWithUnsignedLongLong:mRequest.caseAdminNode];
+        params.caseAdminSubject = [NSNumber numberWithUnsignedLongLong:mRequest.caseAdminSubject];
         params.adminVendorId = [NSNumber numberWithUnsignedShort:chip::to_underlying(mRequest.adminVendorId)];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;

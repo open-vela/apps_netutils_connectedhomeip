@@ -48586,7 +48586,7 @@ using namespace chip::app::Clusters;
         definedValue_0 = [self asByteSpan:params.icacValue];
     }
     request.IPKValue = [self asByteSpan:params.ipkValue];
-    request.caseAdminNode = params.caseAdminNode.unsignedLongLongValue;
+    request.caseAdminSubject = params.caseAdminSubject.unsignedLongLongValue;
     request.adminVendorId
         = static_cast<std::remove_reference_t<decltype(request.adminVendorId)>>(params.adminVendorId.unsignedShortValue);
 
