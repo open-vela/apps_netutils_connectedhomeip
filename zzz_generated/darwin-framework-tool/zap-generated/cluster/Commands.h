@@ -41498,6 +41498,7 @@ public:
 | Cluster GeneralDiagnostics                                          | 0x0033 |
 |------------------------------------------------------------------------------|
 | Commands:                                                           |        |
+| * TestEventTrigger                                                  |   0x00 |
 |------------------------------------------------------------------------------|
 | Attributes:                                                         |        |
 | * NetworkInterfaces                                                 | 0x0000 |
@@ -41508,6 +41509,7 @@ public:
 | * ActiveHardwareFaults                                              | 0x0005 |
 | * ActiveRadioFaults                                                 | 0x0006 |
 | * ActiveNetworkFaults                                               | 0x0007 |
+| * TestEventTriggersEnabled                                          | 0x0008 |
 | * GeneratedCommandList                                              | 0xFFF8 |
 | * AcceptedCommandList                                               | 0xFFF9 |
 | * AttributeList                                                     | 0xFFFB |
@@ -41520,6 +41522,54 @@ public:
 | * NetworkFaultChange                                                | 0x0002 |
 | * BootReason                                                        | 0x0003 |
 \*----------------------------------------------------------------------------*/
+
+/*
+ * Command TestEventTrigger
+ */
+class GeneralDiagnosticsTestEventTrigger : public ClusterCommand {
+public:
+    GeneralDiagnosticsTestEventTrigger()
+        : ClusterCommand("test-event-trigger")
+    {
+        AddArgument("EnableKey", &mRequest.enableKey);
+        AddArgument("EventTrigger", 0, UINT64_MAX, &mRequest.eventTrigger);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000033) command (0x00000000) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPGeneralDiagnostics * cluster = [[CHIPGeneralDiagnostics alloc] initWithDevice:device
+                                                                                 endpoint:endpointId
+                                                                                    queue:callbackQueue];
+        __auto_type * params = [[CHIPGeneralDiagnosticsClusterTestEventTriggerParams alloc] init];
+        params.timedInvokeTimeoutMs
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.enableKey = [NSData dataWithBytes:mRequest.enableKey.data() length:mRequest.enableKey.size()];
+        params.eventTrigger = [NSNumber numberWithUnsignedLongLong:mRequest.eventTrigger];
+        uint16_t repeatCount = mRepeatCount.ValueOr(1);
+        uint16_t __block responsesNeeded = repeatCount;
+        while (repeatCount--) {
+            [cluster testEventTriggerWithParams:params
+                              completionHandler:^(NSError * _Nullable error) {
+                                  responsesNeeded--;
+                                  if (error != nil) {
+                                      mError = error;
+                                      LogNSError("Error", error);
+                                  }
+                                  if (responsesNeeded == 0) {
+                                      SetCommandExitStatus(mError);
+                                  }
+                              }];
+        }
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type mRequest;
+};
 
 /*
  * Attribute NetworkInterfaces
@@ -42079,6 +42129,80 @@ public:
                                               subscriptionEstablished:nullptr
                                                         reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                                                             NSLog(@"GeneralDiagnostics.ActiveNetworkFaults response %@",
+                                                                [value description]);
+                                                            if (error || !mWait) {
+                                                                SetCommandExitStatus(error);
+                                                            }
+                                                        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mWait ? UINT16_MAX : 10);
+    }
+};
+
+/*
+ * Attribute TestEventTriggersEnabled
+ */
+class ReadGeneralDiagnosticsTestEventTriggersEnabled : public ReadAttribute {
+public:
+    ReadGeneralDiagnosticsTestEventTriggersEnabled()
+        : ReadAttribute("test-event-triggers-enabled")
+    {
+    }
+
+    ~ReadGeneralDiagnosticsTestEventTriggersEnabled() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000033) ReadAttribute (0x00000008) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPGeneralDiagnostics * cluster = [[CHIPGeneralDiagnostics alloc] initWithDevice:device
+                                                                                 endpoint:endpointId
+                                                                                    queue:callbackQueue];
+        [cluster
+            readAttributeTestEventTriggersEnabledWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"GeneralDiagnostics.TestEventTriggersEnabled response %@", [value description]);
+                if (error != nil) {
+                    LogNSError("GeneralDiagnostics TestEventTriggersEnabled read Error", error);
+                }
+                SetCommandExitStatus(error);
+            }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeGeneralDiagnosticsTestEventTriggersEnabled : public SubscribeAttribute {
+public:
+    SubscribeAttributeGeneralDiagnosticsTestEventTriggersEnabled()
+        : SubscribeAttribute("test-event-triggers-enabled")
+    {
+    }
+
+    ~SubscribeAttributeGeneralDiagnosticsTestEventTriggersEnabled() {}
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000033) ReportAttribute (0x00000008) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPGeneralDiagnostics * cluster = [[CHIPGeneralDiagnostics alloc] initWithDevice:device
+                                                                                 endpoint:endpointId
+                                                                                    queue:callbackQueue];
+        CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster
+            subscribeAttributeTestEventTriggersEnabledWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+                                                          maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+                                                               params:params
+                                              subscriptionEstablished:nullptr
+                                                        reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                                                            NSLog(@"GeneralDiagnostics.TestEventTriggersEnabled response %@",
                                                                 [value description]);
                                                             if (error || !mWait) {
                                                                 SetCommandExitStatus(error);
@@ -98280,6 +98404,7 @@ void registerClusterGeneralDiagnostics(Commands & commands)
 
     commands_list clusterCommands = {
         make_unique<ClusterCommand>(Id), //
+        make_unique<GeneralDiagnosticsTestEventTrigger>(), //
         make_unique<ReadAttribute>(Id), //
         make_unique<ReadGeneralDiagnosticsNetworkInterfaces>(), //
         make_unique<WriteAttribute>(Id), //
@@ -98299,6 +98424,8 @@ void registerClusterGeneralDiagnostics(Commands & commands)
         make_unique<SubscribeAttributeGeneralDiagnosticsActiveRadioFaults>(), //
         make_unique<ReadGeneralDiagnosticsActiveNetworkFaults>(), //
         make_unique<SubscribeAttributeGeneralDiagnosticsActiveNetworkFaults>(), //
+        make_unique<ReadGeneralDiagnosticsTestEventTriggersEnabled>(), //
+        make_unique<SubscribeAttributeGeneralDiagnosticsTestEventTriggersEnabled>(), //
         make_unique<ReadGeneralDiagnosticsGeneratedCommandList>(), //
         make_unique<SubscribeAttributeGeneralDiagnosticsGeneratedCommandList>(), //
         make_unique<ReadGeneralDiagnosticsAcceptedCommandList>(), //
