@@ -90639,7 +90639,8 @@ public:
         CHIPThreadNetworkDiagnostics * cluster = [[CHIPThreadNetworkDiagnostics alloc] initWithDevice:device
                                                                                              endpoint:endpointId
                                                                                                 queue:callbackQueue];
-        [cluster readAttributeSecurityPolicyWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+        [cluster readAttributeSecurityPolicyWithCompletionHandler:^(
+            CHIPThreadNetworkDiagnosticsClusterSecurityPolicy * _Nullable value, NSError * _Nullable error) {
             NSLog(@"ThreadNetworkDiagnostics.SecurityPolicy response %@", [value description]);
             if (error != nil) {
                 LogNSError("ThreadNetworkDiagnostics SecurityPolicy read Error", error);
@@ -90670,17 +90671,19 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeSecurityPolicyWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
-                                                     maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
-                                                          params:params
-                                         subscriptionEstablished:nullptr
-                                                   reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                                                       NSLog(@"ThreadNetworkDiagnostics.SecurityPolicy response %@",
-                                                           [value description]);
-                                                       if (error || !mWait) {
-                                                           SetCommandExitStatus(error);
-                                                       }
-                                                   }];
+        [cluster
+            subscribeAttributeSecurityPolicyWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+                                                maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+                                                     params:params
+                                    subscriptionEstablished:nullptr
+                                              reportHandler:^(CHIPThreadNetworkDiagnosticsClusterSecurityPolicy * _Nullable value,
+                                                  NSError * _Nullable error) {
+                                                  NSLog(
+                                                      @"ThreadNetworkDiagnostics.SecurityPolicy response %@", [value description]);
+                                                  if (error || !mWait) {
+                                                      SetCommandExitStatus(error);
+                                                  }
+                                              }];
 
         return CHIP_NO_ERROR;
     }
@@ -90782,14 +90785,14 @@ public:
         CHIPThreadNetworkDiagnostics * cluster = [[CHIPThreadNetworkDiagnostics alloc] initWithDevice:device
                                                                                              endpoint:endpointId
                                                                                                 queue:callbackQueue];
-        [cluster
-            readAttributeOperationalDatasetComponentsWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"ThreadNetworkDiagnostics.OperationalDatasetComponents response %@", [value description]);
-                if (error != nil) {
-                    LogNSError("ThreadNetworkDiagnostics OperationalDatasetComponents read Error", error);
-                }
-                SetCommandExitStatus(error);
-            }];
+        [cluster readAttributeOperationalDatasetComponentsWithCompletionHandler:^(
+            CHIPThreadNetworkDiagnosticsClusterOperationalDatasetComponents * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ThreadNetworkDiagnostics.OperationalDatasetComponents response %@", [value description]);
+            if (error != nil) {
+                LogNSError("ThreadNetworkDiagnostics OperationalDatasetComponents read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
         return CHIP_NO_ERROR;
     }
 };
@@ -90819,7 +90822,9 @@ public:
                                                               maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
                                                                    params:params
                                                   subscriptionEstablished:nullptr
-                                                            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                                                            reportHandler:^(
+                                                                CHIPThreadNetworkDiagnosticsClusterOperationalDatasetComponents * _Nullable value,
+                                                                NSError * _Nullable error) {
                                                                 NSLog(@"ThreadNetworkDiagnostics.OperationalDatasetComponents "
                                                                       @"response %@",
                                                                     [value description]);
