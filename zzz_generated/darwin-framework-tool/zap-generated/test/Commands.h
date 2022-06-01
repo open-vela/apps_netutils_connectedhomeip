@@ -68167,20 +68167,20 @@ public:
             err = TestReadAttributeOctetStringWithEmbeddedNull_109();
             break;
         case 110:
-            ChipLogProgress(chipTool, " ***** Test Step 110 : Write attribute OCTET_STRING with weird chars\n");
-            err = TestWriteAttributeOctetStringWithWeirdChars_110();
+            ChipLogProgress(chipTool, " ***** Test Step 110 : Write attribute OCTET_STRING with hex: format\n");
+            err = TestWriteAttributeOctetStringWithHexFormat_110();
             break;
         case 111:
-            ChipLogProgress(chipTool, " ***** Test Step 111 : Read attribute OCTET_STRING with weird chars\n");
-            err = TestReadAttributeOctetStringWithWeirdChars_111();
+            ChipLogProgress(chipTool, " ***** Test Step 111 : Read attribute OCTET_STRING with hex: format\n");
+            err = TestReadAttributeOctetStringWithHexFormat_111();
             break;
         case 112:
-            ChipLogProgress(chipTool, " ***** Test Step 112 : Write attribute OCTET_STRING\n");
-            err = TestWriteAttributeOctetString_112();
+            ChipLogProgress(chipTool, " ***** Test Step 112 : Write attribute OCTET_STRING with weird chars\n");
+            err = TestWriteAttributeOctetStringWithWeirdChars_112();
             break;
         case 113:
-            ChipLogProgress(chipTool, " ***** Test Step 113 : Read attribute OCTET_STRING\n");
-            err = TestReadAttributeOctetString_113();
+            ChipLogProgress(chipTool, " ***** Test Step 113 : Read attribute OCTET_STRING with weird chars\n");
+            err = TestReadAttributeOctetStringWithWeirdChars_113();
             break;
         case 114:
             ChipLogProgress(chipTool, " ***** Test Step 114 : Write attribute OCTET_STRING\n");
@@ -68195,965 +68195,965 @@ public:
             err = TestWriteAttributeOctetString_116();
             break;
         case 117:
-            ChipLogProgress(chipTool, " ***** Test Step 117 : Read attribute LONG_OCTET_STRING Default Value\n");
-            err = TestReadAttributeLongOctetStringDefaultValue_117();
+            ChipLogProgress(chipTool, " ***** Test Step 117 : Read attribute OCTET_STRING\n");
+            err = TestReadAttributeOctetString_117();
             break;
         case 118:
-            ChipLogProgress(chipTool, " ***** Test Step 118 : Write attribute LONG_OCTET_STRING\n");
-            err = TestWriteAttributeLongOctetString_118();
+            ChipLogProgress(chipTool, " ***** Test Step 118 : Write attribute OCTET_STRING\n");
+            err = TestWriteAttributeOctetString_118();
             break;
         case 119:
-            ChipLogProgress(chipTool, " ***** Test Step 119 : Read attribute LONG_OCTET_STRING\n");
-            err = TestReadAttributeLongOctetString_119();
+            ChipLogProgress(chipTool, " ***** Test Step 119 : Read attribute LONG_OCTET_STRING Default Value\n");
+            err = TestReadAttributeLongOctetStringDefaultValue_119();
             break;
         case 120:
             ChipLogProgress(chipTool, " ***** Test Step 120 : Write attribute LONG_OCTET_STRING\n");
             err = TestWriteAttributeLongOctetString_120();
             break;
         case 121:
-            ChipLogProgress(chipTool, " ***** Test Step 121 : Read attribute CHAR_STRING Default Value\n");
-            err = TestReadAttributeCharStringDefaultValue_121();
+            ChipLogProgress(chipTool, " ***** Test Step 121 : Read attribute LONG_OCTET_STRING\n");
+            err = TestReadAttributeLongOctetString_121();
             break;
         case 122:
-            ChipLogProgress(chipTool, " ***** Test Step 122 : Write attribute CHAR_STRING\n");
-            err = TestWriteAttributeCharString_122();
+            ChipLogProgress(chipTool, " ***** Test Step 122 : Write attribute LONG_OCTET_STRING\n");
+            err = TestWriteAttributeLongOctetString_122();
             break;
         case 123:
-            ChipLogProgress(chipTool, " ***** Test Step 123 : Read attribute CHAR_STRING\n");
-            err = TestReadAttributeCharString_123();
+            ChipLogProgress(chipTool, " ***** Test Step 123 : Read attribute CHAR_STRING Default Value\n");
+            err = TestReadAttributeCharStringDefaultValue_123();
             break;
         case 124:
-            ChipLogProgress(chipTool, " ***** Test Step 124 : Write attribute CHAR_STRING - Value too long\n");
-            err = TestWriteAttributeCharStringValueTooLong_124();
+            ChipLogProgress(chipTool, " ***** Test Step 124 : Write attribute CHAR_STRING\n");
+            err = TestWriteAttributeCharString_124();
             break;
         case 125:
             ChipLogProgress(chipTool, " ***** Test Step 125 : Read attribute CHAR_STRING\n");
             err = TestReadAttributeCharString_125();
             break;
         case 126:
-            ChipLogProgress(chipTool, " ***** Test Step 126 : Write attribute CHAR_STRING - Empty\n");
-            err = TestWriteAttributeCharStringEmpty_126();
+            ChipLogProgress(chipTool, " ***** Test Step 126 : Write attribute CHAR_STRING - Value too long\n");
+            err = TestWriteAttributeCharStringValueTooLong_126();
             break;
         case 127:
-            ChipLogProgress(chipTool, " ***** Test Step 127 : Read attribute LONG_CHAR_STRING Default Value\n");
-            err = TestReadAttributeLongCharStringDefaultValue_127();
+            ChipLogProgress(chipTool, " ***** Test Step 127 : Read attribute CHAR_STRING\n");
+            err = TestReadAttributeCharString_127();
             break;
         case 128:
-            ChipLogProgress(chipTool, " ***** Test Step 128 : Write attribute LONG_CHAR_STRING\n");
-            err = TestWriteAttributeLongCharString_128();
+            ChipLogProgress(chipTool, " ***** Test Step 128 : Write attribute CHAR_STRING - Empty\n");
+            err = TestWriteAttributeCharStringEmpty_128();
             break;
         case 129:
-            ChipLogProgress(chipTool, " ***** Test Step 129 : Read attribute LONG_CHAR_STRING\n");
-            err = TestReadAttributeLongCharString_129();
+            ChipLogProgress(chipTool, " ***** Test Step 129 : Read attribute LONG_CHAR_STRING Default Value\n");
+            err = TestReadAttributeLongCharStringDefaultValue_129();
             break;
         case 130:
             ChipLogProgress(chipTool, " ***** Test Step 130 : Write attribute LONG_CHAR_STRING\n");
             err = TestWriteAttributeLongCharString_130();
             break;
         case 131:
-            ChipLogProgress(chipTool, " ***** Test Step 131 : Read attribute LIST_LONG_OCTET_STRING (for chunked read)\n");
-            err = TestReadAttributeListLongOctetStringForChunkedRead_131();
+            ChipLogProgress(chipTool, " ***** Test Step 131 : Read attribute LONG_CHAR_STRING\n");
+            err = TestReadAttributeLongCharString_131();
             break;
         case 132:
-            ChipLogProgress(chipTool, " ***** Test Step 132 : Write attribute LIST_LONG_OCTET_STRING (for chunked write)\n");
-            err = TestWriteAttributeListLongOctetStringForChunkedWrite_132();
+            ChipLogProgress(chipTool, " ***** Test Step 132 : Write attribute LONG_CHAR_STRING\n");
+            err = TestWriteAttributeLongCharString_132();
             break;
         case 133:
             ChipLogProgress(chipTool, " ***** Test Step 133 : Read attribute LIST_LONG_OCTET_STRING (for chunked read)\n");
             err = TestReadAttributeListLongOctetStringForChunkedRead_133();
             break;
         case 134:
-            ChipLogProgress(chipTool, " ***** Test Step 134 : Read attribute EPOCH_US Default Value\n");
-            err = TestReadAttributeEpochUsDefaultValue_134();
+            ChipLogProgress(chipTool, " ***** Test Step 134 : Write attribute LIST_LONG_OCTET_STRING (for chunked write)\n");
+            err = TestWriteAttributeListLongOctetStringForChunkedWrite_134();
             break;
         case 135:
-            ChipLogProgress(chipTool, " ***** Test Step 135 : Write attribute EPOCH_US Max Value\n");
-            err = TestWriteAttributeEpochUsMaxValue_135();
+            ChipLogProgress(chipTool, " ***** Test Step 135 : Read attribute LIST_LONG_OCTET_STRING (for chunked read)\n");
+            err = TestReadAttributeListLongOctetStringForChunkedRead_135();
             break;
         case 136:
-            ChipLogProgress(chipTool, " ***** Test Step 136 : Read attribute EPOCH_US Max Value\n");
-            err = TestReadAttributeEpochUsMaxValue_136();
+            ChipLogProgress(chipTool, " ***** Test Step 136 : Read attribute EPOCH_US Default Value\n");
+            err = TestReadAttributeEpochUsDefaultValue_136();
             break;
         case 137:
-            ChipLogProgress(chipTool, " ***** Test Step 137 : Write attribute EPOCH_US Min Value\n");
-            err = TestWriteAttributeEpochUsMinValue_137();
+            ChipLogProgress(chipTool, " ***** Test Step 137 : Write attribute EPOCH_US Max Value\n");
+            err = TestWriteAttributeEpochUsMaxValue_137();
             break;
         case 138:
-            ChipLogProgress(chipTool, " ***** Test Step 138 : Read attribute EPOCH_US Min Value\n");
-            err = TestReadAttributeEpochUsMinValue_138();
+            ChipLogProgress(chipTool, " ***** Test Step 138 : Read attribute EPOCH_US Max Value\n");
+            err = TestReadAttributeEpochUsMaxValue_138();
             break;
         case 139:
-            ChipLogProgress(chipTool, " ***** Test Step 139 : Read attribute EPOCH_S Default Value\n");
-            err = TestReadAttributeEpochSDefaultValue_139();
+            ChipLogProgress(chipTool, " ***** Test Step 139 : Write attribute EPOCH_US Min Value\n");
+            err = TestWriteAttributeEpochUsMinValue_139();
             break;
         case 140:
-            ChipLogProgress(chipTool, " ***** Test Step 140 : Write attribute EPOCH_S Max Value\n");
-            err = TestWriteAttributeEpochSMaxValue_140();
+            ChipLogProgress(chipTool, " ***** Test Step 140 : Read attribute EPOCH_US Min Value\n");
+            err = TestReadAttributeEpochUsMinValue_140();
             break;
         case 141:
-            ChipLogProgress(chipTool, " ***** Test Step 141 : Read attribute EPOCH_S Max Value\n");
-            err = TestReadAttributeEpochSMaxValue_141();
+            ChipLogProgress(chipTool, " ***** Test Step 141 : Read attribute EPOCH_S Default Value\n");
+            err = TestReadAttributeEpochSDefaultValue_141();
             break;
         case 142:
-            ChipLogProgress(chipTool, " ***** Test Step 142 : Write attribute EPOCH_S Min Value\n");
-            err = TestWriteAttributeEpochSMinValue_142();
+            ChipLogProgress(chipTool, " ***** Test Step 142 : Write attribute EPOCH_S Max Value\n");
+            err = TestWriteAttributeEpochSMaxValue_142();
             break;
         case 143:
-            ChipLogProgress(chipTool, " ***** Test Step 143 : Read attribute EPOCH_S Min Value\n");
-            err = TestReadAttributeEpochSMinValue_143();
+            ChipLogProgress(chipTool, " ***** Test Step 143 : Read attribute EPOCH_S Max Value\n");
+            err = TestReadAttributeEpochSMaxValue_143();
             break;
         case 144:
-            ChipLogProgress(chipTool, " ***** Test Step 144 : Read attribute UNSUPPORTED\n");
-            err = TestReadAttributeUnsupported_144();
+            ChipLogProgress(chipTool, " ***** Test Step 144 : Write attribute EPOCH_S Min Value\n");
+            err = TestWriteAttributeEpochSMinValue_144();
             break;
         case 145:
-            ChipLogProgress(chipTool, " ***** Test Step 145 : Writeattribute UNSUPPORTED\n");
-            err = TestWriteattributeUnsupported_145();
+            ChipLogProgress(chipTool, " ***** Test Step 145 : Read attribute EPOCH_S Min Value\n");
+            err = TestReadAttributeEpochSMinValue_145();
             break;
         case 146:
-            ChipLogProgress(chipTool, " ***** Test Step 146 : Send Test Command to unsupported endpoint\n");
-            err = TestSendTestCommandToUnsupportedEndpoint_146();
+            ChipLogProgress(chipTool, " ***** Test Step 146 : Read attribute UNSUPPORTED\n");
+            err = TestReadAttributeUnsupported_146();
             break;
         case 147:
-            ChipLogProgress(chipTool, " ***** Test Step 147 : Send Test Command to unsupported cluster\n");
-            err = TestSendTestCommandToUnsupportedCluster_147();
+            ChipLogProgress(chipTool, " ***** Test Step 147 : Writeattribute UNSUPPORTED\n");
+            err = TestWriteattributeUnsupported_147();
             break;
         case 148:
-            ChipLogProgress(chipTool, " ***** Test Step 148 : Read attribute vendor_id Default Value\n");
-            err = TestReadAttributeVendorIdDefaultValue_148();
+            ChipLogProgress(chipTool, " ***** Test Step 148 : Send Test Command to unsupported endpoint\n");
+            err = TestSendTestCommandToUnsupportedEndpoint_148();
             break;
         case 149:
-            ChipLogProgress(chipTool, " ***** Test Step 149 : Write attribute vendor_id\n");
-            err = TestWriteAttributeVendorId_149();
+            ChipLogProgress(chipTool, " ***** Test Step 149 : Send Test Command to unsupported cluster\n");
+            err = TestSendTestCommandToUnsupportedCluster_149();
             break;
         case 150:
-            ChipLogProgress(chipTool, " ***** Test Step 150 : Read attribute vendor_id\n");
-            err = TestReadAttributeVendorId_150();
+            ChipLogProgress(chipTool, " ***** Test Step 150 : Read attribute vendor_id Default Value\n");
+            err = TestReadAttributeVendorIdDefaultValue_150();
             break;
         case 151:
-            ChipLogProgress(chipTool, " ***** Test Step 151 : Restore attribute vendor_id\n");
-            err = TestRestoreAttributeVendorId_151();
+            ChipLogProgress(chipTool, " ***** Test Step 151 : Write attribute vendor_id\n");
+            err = TestWriteAttributeVendorId_151();
             break;
         case 152:
-            ChipLogProgress(chipTool, " ***** Test Step 152 : Send a command with a vendor_id and enum\n");
-            err = TestSendACommandWithAVendorIdAndEnum_152();
+            ChipLogProgress(chipTool, " ***** Test Step 152 : Read attribute vendor_id\n");
+            err = TestReadAttributeVendorId_152();
             break;
         case 153:
-            ChipLogProgress(chipTool, " ***** Test Step 153 : Send Test Command With Struct Argument and arg1.b is true\n");
-            err = TestSendTestCommandWithStructArgumentAndArg1bIsTrue_153();
+            ChipLogProgress(chipTool, " ***** Test Step 153 : Restore attribute vendor_id\n");
+            err = TestRestoreAttributeVendorId_153();
             break;
         case 154:
-            ChipLogProgress(chipTool, " ***** Test Step 154 : Send Test Command With Struct Argument and arg1.b is false\n");
-            err = TestSendTestCommandWithStructArgumentAndArg1bIsFalse_154();
+            ChipLogProgress(chipTool, " ***** Test Step 154 : Send a command with a vendor_id and enum\n");
+            err = TestSendACommandWithAVendorIdAndEnum_154();
             break;
         case 155:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 155 : Send Test Command With Nested Struct Argument and arg1.c.b is true\n");
-            err = TestSendTestCommandWithNestedStructArgumentAndArg1cbIsTrue_155();
+            ChipLogProgress(chipTool, " ***** Test Step 155 : Send Test Command With Struct Argument and arg1.b is true\n");
+            err = TestSendTestCommandWithStructArgumentAndArg1bIsTrue_155();
             break;
         case 156:
-            ChipLogProgress(chipTool, " ***** Test Step 156 : Send Test Command With Nested Struct Argument arg1.c.b is false\n");
-            err = TestSendTestCommandWithNestedStructArgumentArg1cbIsFalse_156();
+            ChipLogProgress(chipTool, " ***** Test Step 156 : Send Test Command With Struct Argument and arg1.b is false\n");
+            err = TestSendTestCommandWithStructArgumentAndArg1bIsFalse_156();
             break;
         case 157:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 157 : Send Test Command With Nested Struct List Argument and all fields b of arg1.d are true\n");
-            err = TestSendTestCommandWithNestedStructListArgumentAndAllFieldsBOfArg1dAreTrue_157();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 157 : Send Test Command With Nested Struct Argument and arg1.c.b is true\n");
+            err = TestSendTestCommandWithNestedStructArgumentAndArg1cbIsTrue_157();
             break;
         case 158:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 158 : Send Test Command With Nested Struct List Argument and some fields b of arg1.d are "
-                "false\n");
-            err = TestSendTestCommandWithNestedStructListArgumentAndSomeFieldsBOfArg1dAreFalse_158();
+            ChipLogProgress(chipTool, " ***** Test Step 158 : Send Test Command With Nested Struct Argument arg1.c.b is false\n");
+            err = TestSendTestCommandWithNestedStructArgumentArg1cbIsFalse_158();
             break;
         case 159:
-            ChipLogProgress(chipTool, " ***** Test Step 159 : Send Test Command With Struct Argument and see what we get back\n");
-            err = TestSendTestCommandWithStructArgumentAndSeeWhatWeGetBack_159();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 159 : Send Test Command With Nested Struct List Argument and all fields b of arg1.d are true\n");
+            err = TestSendTestCommandWithNestedStructListArgumentAndAllFieldsBOfArg1dAreTrue_159();
             break;
         case 160:
-            ChipLogProgress(chipTool, " ***** Test Step 160 : Send Test Command With List of INT8U and none of them is set to 0\n");
-            err = TestSendTestCommandWithListOfInt8uAndNoneOfThemIsSetTo0_160();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 160 : Send Test Command With Nested Struct List Argument and some fields b of arg1.d are "
+                "false\n");
+            err = TestSendTestCommandWithNestedStructListArgumentAndSomeFieldsBOfArg1dAreFalse_160();
             break;
         case 161:
-            ChipLogProgress(chipTool, " ***** Test Step 161 : Send Test Command With List of INT8U and one of them is set to 0\n");
-            err = TestSendTestCommandWithListOfInt8uAndOneOfThemIsSetTo0_161();
+            ChipLogProgress(chipTool, " ***** Test Step 161 : Send Test Command With Struct Argument and see what we get back\n");
+            err = TestSendTestCommandWithStructArgumentAndSeeWhatWeGetBack_161();
             break;
         case 162:
-            ChipLogProgress(chipTool, " ***** Test Step 162 : Send Test Command With List of INT8U and get it reversed\n");
-            err = TestSendTestCommandWithListOfInt8uAndGetItReversed_162();
+            ChipLogProgress(chipTool, " ***** Test Step 162 : Send Test Command With List of INT8U and none of them is set to 0\n");
+            err = TestSendTestCommandWithListOfInt8uAndNoneOfThemIsSetTo0_162();
             break;
         case 163:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 163 : Send Test Command With empty List of INT8U and get an empty list back\n");
-            err = TestSendTestCommandWithEmptyListOfInt8uAndGetAnEmptyListBack_163();
+            ChipLogProgress(chipTool, " ***** Test Step 163 : Send Test Command With List of INT8U and one of them is set to 0\n");
+            err = TestSendTestCommandWithListOfInt8uAndOneOfThemIsSetTo0_163();
             break;
         case 164:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 164 : Send Test Command With List of Struct Argument and arg1.b of first item is true\n");
-            err = TestSendTestCommandWithListOfStructArgumentAndArg1bOfFirstItemIsTrue_164();
+            ChipLogProgress(chipTool, " ***** Test Step 164 : Send Test Command With List of INT8U and get it reversed\n");
+            err = TestSendTestCommandWithListOfInt8uAndGetItReversed_164();
             break;
         case 165:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 165 : Send Test Command With List of Struct Argument and arg1.b of first item is false\n");
-            err = TestSendTestCommandWithListOfStructArgumentAndArg1bOfFirstItemIsFalse_165();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 165 : Send Test Command With empty List of INT8U and get an empty list back\n");
+            err = TestSendTestCommandWithEmptyListOfInt8uAndGetAnEmptyListBack_165();
             break;
         case 166:
             ChipLogProgress(chipTool,
-                " ***** Test Step 166 : Send Test Command With List of Nested Struct List Argument and all fields b of elements of "
-                "arg1.d are true\n");
-            err = TestSendTestCommandWithListOfNestedStructListArgumentAndAllFieldsBOfElementsOfArg1dAreTrue_166();
+                " ***** Test Step 166 : Send Test Command With List of Struct Argument and arg1.b of first item is true\n");
+            err = TestSendTestCommandWithListOfStructArgumentAndArg1bOfFirstItemIsTrue_166();
             break;
         case 167:
             ChipLogProgress(chipTool,
-                " ***** Test Step 167 : Send Test Command With Nested Struct List Argument and some fields b of elements of arg1.d "
-                "are false\n");
-            err = TestSendTestCommandWithNestedStructListArgumentAndSomeFieldsBOfElementsOfArg1dAreFalse_167();
+                " ***** Test Step 167 : Send Test Command With List of Struct Argument and arg1.b of first item is false\n");
+            err = TestSendTestCommandWithListOfStructArgumentAndArg1bOfFirstItemIsFalse_167();
             break;
         case 168:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 168 : Write attribute LIST With List of INT8U and none of them is set to 0\n");
-            err = TestWriteAttributeListWithListOfInt8uAndNoneOfThemIsSetTo0_168();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 168 : Send Test Command With List of Nested Struct List Argument and all fields b of elements of "
+                "arg1.d are true\n");
+            err = TestSendTestCommandWithListOfNestedStructListArgumentAndAllFieldsBOfElementsOfArg1dAreTrue_168();
             break;
         case 169:
-            ChipLogProgress(chipTool, " ***** Test Step 169 : Read attribute LIST With List of INT8U\n");
-            err = TestReadAttributeListWithListOfInt8u_169();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 169 : Send Test Command With Nested Struct List Argument and some fields b of elements of arg1.d "
+                "are false\n");
+            err = TestSendTestCommandWithNestedStructListArgumentAndSomeFieldsBOfElementsOfArg1dAreFalse_169();
             break;
         case 170:
-            ChipLogProgress(chipTool, " ***** Test Step 170 : Write attribute LIST With List of OCTET_STRING\n");
-            err = TestWriteAttributeListWithListOfOctetString_170();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 170 : Write attribute LIST With List of INT8U and none of them is set to 0\n");
+            err = TestWriteAttributeListWithListOfInt8uAndNoneOfThemIsSetTo0_170();
             break;
         case 171:
-            ChipLogProgress(chipTool, " ***** Test Step 171 : Read attribute LIST With List of OCTET_STRING\n");
-            err = TestReadAttributeListWithListOfOctetString_171();
+            ChipLogProgress(chipTool, " ***** Test Step 171 : Read attribute LIST With List of INT8U\n");
+            err = TestReadAttributeListWithListOfInt8u_171();
             break;
         case 172:
-            ChipLogProgress(chipTool, " ***** Test Step 172 : Write attribute LIST With List of LIST_STRUCT_OCTET_STRING\n");
-            err = TestWriteAttributeListWithListOfListStructOctetString_172();
+            ChipLogProgress(chipTool, " ***** Test Step 172 : Write attribute LIST With List of OCTET_STRING\n");
+            err = TestWriteAttributeListWithListOfOctetString_172();
             break;
         case 173:
-            ChipLogProgress(chipTool, " ***** Test Step 173 : Read attribute LIST With List of LIST_STRUCT_OCTET_STRING\n");
-            err = TestReadAttributeListWithListOfListStructOctetString_173();
+            ChipLogProgress(chipTool, " ***** Test Step 173 : Read attribute LIST With List of OCTET_STRING\n");
+            err = TestReadAttributeListWithListOfOctetString_173();
             break;
         case 174:
-            ChipLogProgress(chipTool, " ***** Test Step 174 : Send Test Command with optional arg set.\n");
-            err = TestSendTestCommandWithOptionalArgSet_174();
+            ChipLogProgress(chipTool, " ***** Test Step 174 : Write attribute LIST With List of LIST_STRUCT_OCTET_STRING\n");
+            err = TestWriteAttributeListWithListOfListStructOctetString_174();
             break;
         case 175:
-            ChipLogProgress(chipTool, " ***** Test Step 175 : Send Test Command without its optional arg.\n");
-            err = TestSendTestCommandWithoutItsOptionalArg_175();
+            ChipLogProgress(chipTool, " ***** Test Step 175 : Read attribute LIST With List of LIST_STRUCT_OCTET_STRING\n");
+            err = TestReadAttributeListWithListOfListStructOctetString_175();
             break;
         case 176:
-            ChipLogProgress(chipTool, " ***** Test Step 176 : Read list of structs containing nullables and optionals\n");
-            err = TestReadListOfStructsContainingNullablesAndOptionals_176();
+            ChipLogProgress(chipTool, " ***** Test Step 176 : Send Test Command with optional arg set.\n");
+            err = TestSendTestCommandWithOptionalArgSet_176();
             break;
         case 177:
-            ChipLogProgress(chipTool, " ***** Test Step 177 : Write list of structs containing nullables and optionals\n");
-            err = TestWriteListOfStructsContainingNullablesAndOptionals_177();
+            ChipLogProgress(chipTool, " ***** Test Step 177 : Send Test Command without its optional arg.\n");
+            err = TestSendTestCommandWithoutItsOptionalArg_177();
             break;
         case 178:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 178 : Read list of structs containing nullables and optionals after writing\n");
-            err = TestReadListOfStructsContainingNullablesAndOptionalsAfterWriting_178();
+            ChipLogProgress(chipTool, " ***** Test Step 178 : Read list of structs containing nullables and optionals\n");
+            err = TestReadListOfStructsContainingNullablesAndOptionals_178();
             break;
         case 179:
-            ChipLogProgress(chipTool, " ***** Test Step 179 : Write attribute NULLABLE_BOOLEAN null\n");
-            err = TestWriteAttributeNullableBooleanNull_179();
+            ChipLogProgress(chipTool, " ***** Test Step 179 : Write list of structs containing nullables and optionals\n");
+            err = TestWriteListOfStructsContainingNullablesAndOptionals_179();
             break;
         case 180:
-            ChipLogProgress(chipTool, " ***** Test Step 180 : Read attribute NULLABLE_BOOLEAN null\n");
-            err = TestReadAttributeNullableBooleanNull_180();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 180 : Read list of structs containing nullables and optionals after writing\n");
+            err = TestReadListOfStructsContainingNullablesAndOptionalsAfterWriting_180();
             break;
         case 181:
-            ChipLogProgress(chipTool, " ***** Test Step 181 : Write attribute NULLABLE_BOOLEAN True\n");
-            err = TestWriteAttributeNullableBooleanTrue_181();
+            ChipLogProgress(chipTool, " ***** Test Step 181 : Write attribute NULLABLE_BOOLEAN null\n");
+            err = TestWriteAttributeNullableBooleanNull_181();
             break;
         case 182:
-            ChipLogProgress(chipTool, " ***** Test Step 182 : Read attribute NULLABLE_BOOLEAN True\n");
-            err = TestReadAttributeNullableBooleanTrue_182();
+            ChipLogProgress(chipTool, " ***** Test Step 182 : Read attribute NULLABLE_BOOLEAN null\n");
+            err = TestReadAttributeNullableBooleanNull_182();
             break;
         case 183:
-            ChipLogProgress(chipTool, " ***** Test Step 183 : Read attribute NULLABLE_BOOLEAN not null\n");
-            err = TestReadAttributeNullableBooleanNotNull_183();
+            ChipLogProgress(chipTool, " ***** Test Step 183 : Write attribute NULLABLE_BOOLEAN True\n");
+            err = TestWriteAttributeNullableBooleanTrue_183();
             break;
         case 184:
-            ChipLogProgress(chipTool, " ***** Test Step 184 : Write attribute NULLABLE_BITMAP8 Max Value\n");
-            err = TestWriteAttributeNullableBitmap8MaxValue_184();
+            ChipLogProgress(chipTool, " ***** Test Step 184 : Read attribute NULLABLE_BOOLEAN True\n");
+            err = TestReadAttributeNullableBooleanTrue_184();
             break;
         case 185:
-            ChipLogProgress(chipTool, " ***** Test Step 185 : Read attribute NULLABLE_BITMAP8 Max Value\n");
-            err = TestReadAttributeNullableBitmap8MaxValue_185();
+            ChipLogProgress(chipTool, " ***** Test Step 185 : Read attribute NULLABLE_BOOLEAN not null\n");
+            err = TestReadAttributeNullableBooleanNotNull_185();
             break;
         case 186:
-            ChipLogProgress(chipTool, " ***** Test Step 186 : Write attribute NULLABLE_BITMAP8 Invalid Value\n");
-            err = TestWriteAttributeNullableBitmap8InvalidValue_186();
+            ChipLogProgress(chipTool, " ***** Test Step 186 : Write attribute NULLABLE_BITMAP8 Max Value\n");
+            err = TestWriteAttributeNullableBitmap8MaxValue_186();
             break;
         case 187:
-            ChipLogProgress(chipTool, " ***** Test Step 187 : Read attribute NULLABLE_BITMAP8 unchanged Value\n");
-            err = TestReadAttributeNullableBitmap8UnchangedValue_187();
+            ChipLogProgress(chipTool, " ***** Test Step 187 : Read attribute NULLABLE_BITMAP8 Max Value\n");
+            err = TestReadAttributeNullableBitmap8MaxValue_187();
             break;
         case 188:
-            ChipLogProgress(chipTool, " ***** Test Step 188 : Write attribute NULLABLE_BITMAP8 null Value\n");
-            err = TestWriteAttributeNullableBitmap8NullValue_188();
+            ChipLogProgress(chipTool, " ***** Test Step 188 : Write attribute NULLABLE_BITMAP8 Invalid Value\n");
+            err = TestWriteAttributeNullableBitmap8InvalidValue_188();
             break;
         case 189:
-            ChipLogProgress(chipTool, " ***** Test Step 189 : Read attribute NULLABLE_BITMAP8 null Value\n");
-            err = TestReadAttributeNullableBitmap8NullValue_189();
+            ChipLogProgress(chipTool, " ***** Test Step 189 : Read attribute NULLABLE_BITMAP8 unchanged Value\n");
+            err = TestReadAttributeNullableBitmap8UnchangedValue_189();
             break;
         case 190:
-            ChipLogProgress(chipTool, " ***** Test Step 190 : Read attribute NULLABLE_BITMAP8 not 254 Value\n");
-            err = TestReadAttributeNullableBitmap8Not254Value_190();
+            ChipLogProgress(chipTool, " ***** Test Step 190 : Write attribute NULLABLE_BITMAP8 null Value\n");
+            err = TestWriteAttributeNullableBitmap8NullValue_190();
             break;
         case 191:
-            ChipLogProgress(chipTool, " ***** Test Step 191 : Write attribute NULLABLE_BITMAP16 Max Value\n");
-            err = TestWriteAttributeNullableBitmap16MaxValue_191();
+            ChipLogProgress(chipTool, " ***** Test Step 191 : Read attribute NULLABLE_BITMAP8 null Value\n");
+            err = TestReadAttributeNullableBitmap8NullValue_191();
             break;
         case 192:
-            ChipLogProgress(chipTool, " ***** Test Step 192 : Read attribute NULLABLE_BITMAP16 Max Value\n");
-            err = TestReadAttributeNullableBitmap16MaxValue_192();
+            ChipLogProgress(chipTool, " ***** Test Step 192 : Read attribute NULLABLE_BITMAP8 not 254 Value\n");
+            err = TestReadAttributeNullableBitmap8Not254Value_192();
             break;
         case 193:
-            ChipLogProgress(chipTool, " ***** Test Step 193 : Write attribute NULLABLE_BITMAP16 Invalid Value\n");
-            err = TestWriteAttributeNullableBitmap16InvalidValue_193();
+            ChipLogProgress(chipTool, " ***** Test Step 193 : Write attribute NULLABLE_BITMAP16 Max Value\n");
+            err = TestWriteAttributeNullableBitmap16MaxValue_193();
             break;
         case 194:
-            ChipLogProgress(chipTool, " ***** Test Step 194 : Read attribute NULLABLE_BITMAP16 unchanged Value\n");
-            err = TestReadAttributeNullableBitmap16UnchangedValue_194();
+            ChipLogProgress(chipTool, " ***** Test Step 194 : Read attribute NULLABLE_BITMAP16 Max Value\n");
+            err = TestReadAttributeNullableBitmap16MaxValue_194();
             break;
         case 195:
-            ChipLogProgress(chipTool, " ***** Test Step 195 : Write attribute NULLABLE_BITMAP16 null Value\n");
-            err = TestWriteAttributeNullableBitmap16NullValue_195();
+            ChipLogProgress(chipTool, " ***** Test Step 195 : Write attribute NULLABLE_BITMAP16 Invalid Value\n");
+            err = TestWriteAttributeNullableBitmap16InvalidValue_195();
             break;
         case 196:
-            ChipLogProgress(chipTool, " ***** Test Step 196 : Read attribute NULLABLE_BITMAP16 null Value\n");
-            err = TestReadAttributeNullableBitmap16NullValue_196();
+            ChipLogProgress(chipTool, " ***** Test Step 196 : Read attribute NULLABLE_BITMAP16 unchanged Value\n");
+            err = TestReadAttributeNullableBitmap16UnchangedValue_196();
             break;
         case 197:
-            ChipLogProgress(chipTool, " ***** Test Step 197 : Write attribute NULLABLE_BITMAP32 Max Value\n");
-            err = TestWriteAttributeNullableBitmap32MaxValue_197();
+            ChipLogProgress(chipTool, " ***** Test Step 197 : Write attribute NULLABLE_BITMAP16 null Value\n");
+            err = TestWriteAttributeNullableBitmap16NullValue_197();
             break;
         case 198:
-            ChipLogProgress(chipTool, " ***** Test Step 198 : Read attribute NULLABLE_BITMAP32 Max Value\n");
-            err = TestReadAttributeNullableBitmap32MaxValue_198();
+            ChipLogProgress(chipTool, " ***** Test Step 198 : Read attribute NULLABLE_BITMAP16 null Value\n");
+            err = TestReadAttributeNullableBitmap16NullValue_198();
             break;
         case 199:
-            ChipLogProgress(chipTool, " ***** Test Step 199 : Write attribute NULLABLE_BITMAP32 Invalid Value\n");
-            err = TestWriteAttributeNullableBitmap32InvalidValue_199();
+            ChipLogProgress(chipTool, " ***** Test Step 199 : Write attribute NULLABLE_BITMAP32 Max Value\n");
+            err = TestWriteAttributeNullableBitmap32MaxValue_199();
             break;
         case 200:
-            ChipLogProgress(chipTool, " ***** Test Step 200 : Read attribute NULLABLE_BITMAP32 unchanged Value\n");
-            err = TestReadAttributeNullableBitmap32UnchangedValue_200();
+            ChipLogProgress(chipTool, " ***** Test Step 200 : Read attribute NULLABLE_BITMAP32 Max Value\n");
+            err = TestReadAttributeNullableBitmap32MaxValue_200();
             break;
         case 201:
-            ChipLogProgress(chipTool, " ***** Test Step 201 : Write attribute NULLABLE_BITMAP32 null Value\n");
-            err = TestWriteAttributeNullableBitmap32NullValue_201();
+            ChipLogProgress(chipTool, " ***** Test Step 201 : Write attribute NULLABLE_BITMAP32 Invalid Value\n");
+            err = TestWriteAttributeNullableBitmap32InvalidValue_201();
             break;
         case 202:
-            ChipLogProgress(chipTool, " ***** Test Step 202 : Read attribute NULLABLE_BITMAP32 null Value\n");
-            err = TestReadAttributeNullableBitmap32NullValue_202();
+            ChipLogProgress(chipTool, " ***** Test Step 202 : Read attribute NULLABLE_BITMAP32 unchanged Value\n");
+            err = TestReadAttributeNullableBitmap32UnchangedValue_202();
             break;
         case 203:
-            ChipLogProgress(chipTool, " ***** Test Step 203 : Write attribute NULLABLE_BITMAP64 Max Value\n");
-            err = TestWriteAttributeNullableBitmap64MaxValue_203();
+            ChipLogProgress(chipTool, " ***** Test Step 203 : Write attribute NULLABLE_BITMAP32 null Value\n");
+            err = TestWriteAttributeNullableBitmap32NullValue_203();
             break;
         case 204:
-            ChipLogProgress(chipTool, " ***** Test Step 204 : Read attribute NULLABLE_BITMAP64 Max Value\n");
-            err = TestReadAttributeNullableBitmap64MaxValue_204();
+            ChipLogProgress(chipTool, " ***** Test Step 204 : Read attribute NULLABLE_BITMAP32 null Value\n");
+            err = TestReadAttributeNullableBitmap32NullValue_204();
             break;
         case 205:
-            ChipLogProgress(chipTool, " ***** Test Step 205 : Write attribute NULLABLE_BITMAP64 Invalid Value\n");
-            err = TestWriteAttributeNullableBitmap64InvalidValue_205();
+            ChipLogProgress(chipTool, " ***** Test Step 205 : Write attribute NULLABLE_BITMAP64 Max Value\n");
+            err = TestWriteAttributeNullableBitmap64MaxValue_205();
             break;
         case 206:
-            ChipLogProgress(chipTool, " ***** Test Step 206 : Read attribute NULLABLE_BITMAP64 unchanged Value\n");
-            err = TestReadAttributeNullableBitmap64UnchangedValue_206();
+            ChipLogProgress(chipTool, " ***** Test Step 206 : Read attribute NULLABLE_BITMAP64 Max Value\n");
+            err = TestReadAttributeNullableBitmap64MaxValue_206();
             break;
         case 207:
-            ChipLogProgress(chipTool, " ***** Test Step 207 : Write attribute NULLABLE_BITMAP64 null Value\n");
-            err = TestWriteAttributeNullableBitmap64NullValue_207();
+            ChipLogProgress(chipTool, " ***** Test Step 207 : Write attribute NULLABLE_BITMAP64 Invalid Value\n");
+            err = TestWriteAttributeNullableBitmap64InvalidValue_207();
             break;
         case 208:
-            ChipLogProgress(chipTool, " ***** Test Step 208 : Read attribute NULLABLE_BITMAP64 null Value\n");
-            err = TestReadAttributeNullableBitmap64NullValue_208();
+            ChipLogProgress(chipTool, " ***** Test Step 208 : Read attribute NULLABLE_BITMAP64 unchanged Value\n");
+            err = TestReadAttributeNullableBitmap64UnchangedValue_208();
             break;
         case 209:
-            ChipLogProgress(chipTool, " ***** Test Step 209 : Write attribute NULLABLE_INT8U Min Value\n");
-            err = TestWriteAttributeNullableInt8uMinValue_209();
+            ChipLogProgress(chipTool, " ***** Test Step 209 : Write attribute NULLABLE_BITMAP64 null Value\n");
+            err = TestWriteAttributeNullableBitmap64NullValue_209();
             break;
         case 210:
-            ChipLogProgress(chipTool, " ***** Test Step 210 : Read attribute NULLABLE_INT8U Min Value\n");
-            err = TestReadAttributeNullableInt8uMinValue_210();
+            ChipLogProgress(chipTool, " ***** Test Step 210 : Read attribute NULLABLE_BITMAP64 null Value\n");
+            err = TestReadAttributeNullableBitmap64NullValue_210();
             break;
         case 211:
-            ChipLogProgress(chipTool, " ***** Test Step 211 : Write attribute NULLABLE_INT8U Max Value\n");
-            err = TestWriteAttributeNullableInt8uMaxValue_211();
+            ChipLogProgress(chipTool, " ***** Test Step 211 : Write attribute NULLABLE_INT8U Min Value\n");
+            err = TestWriteAttributeNullableInt8uMinValue_211();
             break;
         case 212:
-            ChipLogProgress(chipTool, " ***** Test Step 212 : Read attribute NULLABLE_INT8U Max Value\n");
-            err = TestReadAttributeNullableInt8uMaxValue_212();
+            ChipLogProgress(chipTool, " ***** Test Step 212 : Read attribute NULLABLE_INT8U Min Value\n");
+            err = TestReadAttributeNullableInt8uMinValue_212();
             break;
         case 213:
-            ChipLogProgress(chipTool, " ***** Test Step 213 : Write attribute NULLABLE_INT8U Invalid Value\n");
-            err = TestWriteAttributeNullableInt8uInvalidValue_213();
+            ChipLogProgress(chipTool, " ***** Test Step 213 : Write attribute NULLABLE_INT8U Max Value\n");
+            err = TestWriteAttributeNullableInt8uMaxValue_213();
             break;
         case 214:
-            ChipLogProgress(chipTool, " ***** Test Step 214 : Read attribute NULLABLE_INT8U unchanged Value\n");
-            err = TestReadAttributeNullableInt8uUnchangedValue_214();
+            ChipLogProgress(chipTool, " ***** Test Step 214 : Read attribute NULLABLE_INT8U Max Value\n");
+            err = TestReadAttributeNullableInt8uMaxValue_214();
             break;
         case 215:
-            ChipLogProgress(chipTool, " ***** Test Step 215 : Read attribute NULLABLE_INT8U unchanged Value with constraint\n");
-            err = TestReadAttributeNullableInt8uUnchangedValueWithConstraint_215();
+            ChipLogProgress(chipTool, " ***** Test Step 215 : Write attribute NULLABLE_INT8U Invalid Value\n");
+            err = TestWriteAttributeNullableInt8uInvalidValue_215();
             break;
         case 216:
-            ChipLogProgress(chipTool, " ***** Test Step 216 : Write attribute NULLABLE_INT8U null Value\n");
-            err = TestWriteAttributeNullableInt8uNullValue_216();
+            ChipLogProgress(chipTool, " ***** Test Step 216 : Read attribute NULLABLE_INT8U unchanged Value\n");
+            err = TestReadAttributeNullableInt8uUnchangedValue_216();
             break;
         case 217:
-            ChipLogProgress(chipTool, " ***** Test Step 217 : Read attribute NULLABLE_INT8U null Value\n");
-            err = TestReadAttributeNullableInt8uNullValue_217();
+            ChipLogProgress(chipTool, " ***** Test Step 217 : Read attribute NULLABLE_INT8U unchanged Value with constraint\n");
+            err = TestReadAttributeNullableInt8uUnchangedValueWithConstraint_217();
             break;
         case 218:
-            ChipLogProgress(chipTool, " ***** Test Step 218 : Read attribute NULLABLE_INT8U null Value & range\n");
-            err = TestReadAttributeNullableInt8uNullValueRange_218();
+            ChipLogProgress(chipTool, " ***** Test Step 218 : Write attribute NULLABLE_INT8U null Value\n");
+            err = TestWriteAttributeNullableInt8uNullValue_218();
             break;
         case 219:
-            ChipLogProgress(chipTool, " ***** Test Step 219 : Read attribute NULLABLE_INT8U null Value & not\n");
-            err = TestReadAttributeNullableInt8uNullValueNot_219();
+            ChipLogProgress(chipTool, " ***** Test Step 219 : Read attribute NULLABLE_INT8U null Value\n");
+            err = TestReadAttributeNullableInt8uNullValue_219();
             break;
         case 220:
-            ChipLogProgress(chipTool, " ***** Test Step 220 : Write attribute NULLABLE_INT8U Value\n");
-            err = TestWriteAttributeNullableInt8uValue_220();
+            ChipLogProgress(chipTool, " ***** Test Step 220 : Read attribute NULLABLE_INT8U null Value & range\n");
+            err = TestReadAttributeNullableInt8uNullValueRange_220();
             break;
         case 221:
-            ChipLogProgress(chipTool, " ***** Test Step 221 : Read attribute NULLABLE_INT8U Value in range\n");
-            err = TestReadAttributeNullableInt8uValueInRange_221();
+            ChipLogProgress(chipTool, " ***** Test Step 221 : Read attribute NULLABLE_INT8U null Value & not\n");
+            err = TestReadAttributeNullableInt8uNullValueNot_221();
             break;
         case 222:
-            ChipLogProgress(chipTool, " ***** Test Step 222 : Read attribute NULLABLE_INT8U notValue OK\n");
-            err = TestReadAttributeNullableInt8uNotValueOk_222();
+            ChipLogProgress(chipTool, " ***** Test Step 222 : Write attribute NULLABLE_INT8U Value\n");
+            err = TestWriteAttributeNullableInt8uValue_222();
             break;
         case 223:
-            ChipLogProgress(chipTool, " ***** Test Step 223 : Write attribute NULLABLE_INT16U Min Value\n");
-            err = TestWriteAttributeNullableInt16uMinValue_223();
+            ChipLogProgress(chipTool, " ***** Test Step 223 : Read attribute NULLABLE_INT8U Value in range\n");
+            err = TestReadAttributeNullableInt8uValueInRange_223();
             break;
         case 224:
-            ChipLogProgress(chipTool, " ***** Test Step 224 : Read attribute NULLABLE_INT16U Min Value\n");
-            err = TestReadAttributeNullableInt16uMinValue_224();
+            ChipLogProgress(chipTool, " ***** Test Step 224 : Read attribute NULLABLE_INT8U notValue OK\n");
+            err = TestReadAttributeNullableInt8uNotValueOk_224();
             break;
         case 225:
-            ChipLogProgress(chipTool, " ***** Test Step 225 : Write attribute NULLABLE_INT16U Max Value\n");
-            err = TestWriteAttributeNullableInt16uMaxValue_225();
+            ChipLogProgress(chipTool, " ***** Test Step 225 : Write attribute NULLABLE_INT16U Min Value\n");
+            err = TestWriteAttributeNullableInt16uMinValue_225();
             break;
         case 226:
-            ChipLogProgress(chipTool, " ***** Test Step 226 : Read attribute NULLABLE_INT16U Max Value\n");
-            err = TestReadAttributeNullableInt16uMaxValue_226();
+            ChipLogProgress(chipTool, " ***** Test Step 226 : Read attribute NULLABLE_INT16U Min Value\n");
+            err = TestReadAttributeNullableInt16uMinValue_226();
             break;
         case 227:
-            ChipLogProgress(chipTool, " ***** Test Step 227 : Write attribute NULLABLE_INT16U Invalid Value\n");
-            err = TestWriteAttributeNullableInt16uInvalidValue_227();
+            ChipLogProgress(chipTool, " ***** Test Step 227 : Write attribute NULLABLE_INT16U Max Value\n");
+            err = TestWriteAttributeNullableInt16uMaxValue_227();
             break;
         case 228:
-            ChipLogProgress(chipTool, " ***** Test Step 228 : Read attribute NULLABLE_INT16U unchanged Value\n");
-            err = TestReadAttributeNullableInt16uUnchangedValue_228();
+            ChipLogProgress(chipTool, " ***** Test Step 228 : Read attribute NULLABLE_INT16U Max Value\n");
+            err = TestReadAttributeNullableInt16uMaxValue_228();
             break;
         case 229:
-            ChipLogProgress(chipTool, " ***** Test Step 229 : Write attribute NULLABLE_INT16U null Value\n");
-            err = TestWriteAttributeNullableInt16uNullValue_229();
+            ChipLogProgress(chipTool, " ***** Test Step 229 : Write attribute NULLABLE_INT16U Invalid Value\n");
+            err = TestWriteAttributeNullableInt16uInvalidValue_229();
             break;
         case 230:
-            ChipLogProgress(chipTool, " ***** Test Step 230 : Read attribute NULLABLE_INT16U null Value\n");
-            err = TestReadAttributeNullableInt16uNullValue_230();
+            ChipLogProgress(chipTool, " ***** Test Step 230 : Read attribute NULLABLE_INT16U unchanged Value\n");
+            err = TestReadAttributeNullableInt16uUnchangedValue_230();
             break;
         case 231:
-            ChipLogProgress(chipTool, " ***** Test Step 231 : Read attribute NULLABLE_INT16U null Value & range\n");
-            err = TestReadAttributeNullableInt16uNullValueRange_231();
+            ChipLogProgress(chipTool, " ***** Test Step 231 : Write attribute NULLABLE_INT16U null Value\n");
+            err = TestWriteAttributeNullableInt16uNullValue_231();
             break;
         case 232:
-            ChipLogProgress(chipTool, " ***** Test Step 232 : Read attribute NULLABLE_INT16U null Value & not\n");
-            err = TestReadAttributeNullableInt16uNullValueNot_232();
+            ChipLogProgress(chipTool, " ***** Test Step 232 : Read attribute NULLABLE_INT16U null Value\n");
+            err = TestReadAttributeNullableInt16uNullValue_232();
             break;
         case 233:
-            ChipLogProgress(chipTool, " ***** Test Step 233 : Write attribute NULLABLE_INT16U Value\n");
-            err = TestWriteAttributeNullableInt16uValue_233();
+            ChipLogProgress(chipTool, " ***** Test Step 233 : Read attribute NULLABLE_INT16U null Value & range\n");
+            err = TestReadAttributeNullableInt16uNullValueRange_233();
             break;
         case 234:
-            ChipLogProgress(chipTool, " ***** Test Step 234 : Read attribute NULLABLE_INT16U Value in range\n");
-            err = TestReadAttributeNullableInt16uValueInRange_234();
+            ChipLogProgress(chipTool, " ***** Test Step 234 : Read attribute NULLABLE_INT16U null Value & not\n");
+            err = TestReadAttributeNullableInt16uNullValueNot_234();
             break;
         case 235:
-            ChipLogProgress(chipTool, " ***** Test Step 235 : Read attribute NULLABLE_INT16U notValue OK\n");
-            err = TestReadAttributeNullableInt16uNotValueOk_235();
+            ChipLogProgress(chipTool, " ***** Test Step 235 : Write attribute NULLABLE_INT16U Value\n");
+            err = TestWriteAttributeNullableInt16uValue_235();
             break;
         case 236:
-            ChipLogProgress(chipTool, " ***** Test Step 236 : Write attribute NULLABLE_INT32U Min Value\n");
-            err = TestWriteAttributeNullableInt32uMinValue_236();
+            ChipLogProgress(chipTool, " ***** Test Step 236 : Read attribute NULLABLE_INT16U Value in range\n");
+            err = TestReadAttributeNullableInt16uValueInRange_236();
             break;
         case 237:
-            ChipLogProgress(chipTool, " ***** Test Step 237 : Read attribute NULLABLE_INT32U Min Value\n");
-            err = TestReadAttributeNullableInt32uMinValue_237();
+            ChipLogProgress(chipTool, " ***** Test Step 237 : Read attribute NULLABLE_INT16U notValue OK\n");
+            err = TestReadAttributeNullableInt16uNotValueOk_237();
             break;
         case 238:
-            ChipLogProgress(chipTool, " ***** Test Step 238 : Write attribute NULLABLE_INT32U Max Value\n");
-            err = TestWriteAttributeNullableInt32uMaxValue_238();
+            ChipLogProgress(chipTool, " ***** Test Step 238 : Write attribute NULLABLE_INT32U Min Value\n");
+            err = TestWriteAttributeNullableInt32uMinValue_238();
             break;
         case 239:
-            ChipLogProgress(chipTool, " ***** Test Step 239 : Read attribute NULLABLE_INT32U Max Value\n");
-            err = TestReadAttributeNullableInt32uMaxValue_239();
+            ChipLogProgress(chipTool, " ***** Test Step 239 : Read attribute NULLABLE_INT32U Min Value\n");
+            err = TestReadAttributeNullableInt32uMinValue_239();
             break;
         case 240:
-            ChipLogProgress(chipTool, " ***** Test Step 240 : Write attribute NULLABLE_INT32U Invalid Value\n");
-            err = TestWriteAttributeNullableInt32uInvalidValue_240();
+            ChipLogProgress(chipTool, " ***** Test Step 240 : Write attribute NULLABLE_INT32U Max Value\n");
+            err = TestWriteAttributeNullableInt32uMaxValue_240();
             break;
         case 241:
-            ChipLogProgress(chipTool, " ***** Test Step 241 : Read attribute NULLABLE_INT32U unchanged Value\n");
-            err = TestReadAttributeNullableInt32uUnchangedValue_241();
+            ChipLogProgress(chipTool, " ***** Test Step 241 : Read attribute NULLABLE_INT32U Max Value\n");
+            err = TestReadAttributeNullableInt32uMaxValue_241();
             break;
         case 242:
-            ChipLogProgress(chipTool, " ***** Test Step 242 : Write attribute NULLABLE_INT32U null Value\n");
-            err = TestWriteAttributeNullableInt32uNullValue_242();
+            ChipLogProgress(chipTool, " ***** Test Step 242 : Write attribute NULLABLE_INT32U Invalid Value\n");
+            err = TestWriteAttributeNullableInt32uInvalidValue_242();
             break;
         case 243:
-            ChipLogProgress(chipTool, " ***** Test Step 243 : Read attribute NULLABLE_INT32U null Value\n");
-            err = TestReadAttributeNullableInt32uNullValue_243();
+            ChipLogProgress(chipTool, " ***** Test Step 243 : Read attribute NULLABLE_INT32U unchanged Value\n");
+            err = TestReadAttributeNullableInt32uUnchangedValue_243();
             break;
         case 244:
-            ChipLogProgress(chipTool, " ***** Test Step 244 : Read attribute NULLABLE_INT32U null Value & range\n");
-            err = TestReadAttributeNullableInt32uNullValueRange_244();
+            ChipLogProgress(chipTool, " ***** Test Step 244 : Write attribute NULLABLE_INT32U null Value\n");
+            err = TestWriteAttributeNullableInt32uNullValue_244();
             break;
         case 245:
-            ChipLogProgress(chipTool, " ***** Test Step 245 : Read attribute NULLABLE_INT32U null Value & not\n");
-            err = TestReadAttributeNullableInt32uNullValueNot_245();
+            ChipLogProgress(chipTool, " ***** Test Step 245 : Read attribute NULLABLE_INT32U null Value\n");
+            err = TestReadAttributeNullableInt32uNullValue_245();
             break;
         case 246:
-            ChipLogProgress(chipTool, " ***** Test Step 246 : Write attribute NULLABLE_INT32U Value\n");
-            err = TestWriteAttributeNullableInt32uValue_246();
+            ChipLogProgress(chipTool, " ***** Test Step 246 : Read attribute NULLABLE_INT32U null Value & range\n");
+            err = TestReadAttributeNullableInt32uNullValueRange_246();
             break;
         case 247:
-            ChipLogProgress(chipTool, " ***** Test Step 247 : Read attribute NULLABLE_INT32U Value in range\n");
-            err = TestReadAttributeNullableInt32uValueInRange_247();
+            ChipLogProgress(chipTool, " ***** Test Step 247 : Read attribute NULLABLE_INT32U null Value & not\n");
+            err = TestReadAttributeNullableInt32uNullValueNot_247();
             break;
         case 248:
-            ChipLogProgress(chipTool, " ***** Test Step 248 : Read attribute NULLABLE_INT32U notValue OK\n");
-            err = TestReadAttributeNullableInt32uNotValueOk_248();
+            ChipLogProgress(chipTool, " ***** Test Step 248 : Write attribute NULLABLE_INT32U Value\n");
+            err = TestWriteAttributeNullableInt32uValue_248();
             break;
         case 249:
-            ChipLogProgress(chipTool, " ***** Test Step 249 : Write attribute NULLABLE_INT64U Min Value\n");
-            err = TestWriteAttributeNullableInt64uMinValue_249();
+            ChipLogProgress(chipTool, " ***** Test Step 249 : Read attribute NULLABLE_INT32U Value in range\n");
+            err = TestReadAttributeNullableInt32uValueInRange_249();
             break;
         case 250:
-            ChipLogProgress(chipTool, " ***** Test Step 250 : Read attribute NULLABLE_INT64U Min Value\n");
-            err = TestReadAttributeNullableInt64uMinValue_250();
+            ChipLogProgress(chipTool, " ***** Test Step 250 : Read attribute NULLABLE_INT32U notValue OK\n");
+            err = TestReadAttributeNullableInt32uNotValueOk_250();
             break;
         case 251:
-            ChipLogProgress(chipTool, " ***** Test Step 251 : Write attribute NULLABLE_INT64U Max Value\n");
-            err = TestWriteAttributeNullableInt64uMaxValue_251();
+            ChipLogProgress(chipTool, " ***** Test Step 251 : Write attribute NULLABLE_INT64U Min Value\n");
+            err = TestWriteAttributeNullableInt64uMinValue_251();
             break;
         case 252:
-            ChipLogProgress(chipTool, " ***** Test Step 252 : Read attribute NULLABLE_INT64U Max Value\n");
-            err = TestReadAttributeNullableInt64uMaxValue_252();
+            ChipLogProgress(chipTool, " ***** Test Step 252 : Read attribute NULLABLE_INT64U Min Value\n");
+            err = TestReadAttributeNullableInt64uMinValue_252();
             break;
         case 253:
-            ChipLogProgress(chipTool, " ***** Test Step 253 : Write attribute NULLABLE_INT64U Invalid Value\n");
-            err = TestWriteAttributeNullableInt64uInvalidValue_253();
+            ChipLogProgress(chipTool, " ***** Test Step 253 : Write attribute NULLABLE_INT64U Max Value\n");
+            err = TestWriteAttributeNullableInt64uMaxValue_253();
             break;
         case 254:
-            ChipLogProgress(chipTool, " ***** Test Step 254 : Read attribute NULLABLE_INT64U unchanged Value\n");
-            err = TestReadAttributeNullableInt64uUnchangedValue_254();
+            ChipLogProgress(chipTool, " ***** Test Step 254 : Read attribute NULLABLE_INT64U Max Value\n");
+            err = TestReadAttributeNullableInt64uMaxValue_254();
             break;
         case 255:
-            ChipLogProgress(chipTool, " ***** Test Step 255 : Write attribute NULLABLE_INT64U null Value\n");
-            err = TestWriteAttributeNullableInt64uNullValue_255();
+            ChipLogProgress(chipTool, " ***** Test Step 255 : Write attribute NULLABLE_INT64U Invalid Value\n");
+            err = TestWriteAttributeNullableInt64uInvalidValue_255();
             break;
         case 256:
-            ChipLogProgress(chipTool, " ***** Test Step 256 : Read attribute NULLABLE_INT64U null Value\n");
-            err = TestReadAttributeNullableInt64uNullValue_256();
+            ChipLogProgress(chipTool, " ***** Test Step 256 : Read attribute NULLABLE_INT64U unchanged Value\n");
+            err = TestReadAttributeNullableInt64uUnchangedValue_256();
             break;
         case 257:
-            ChipLogProgress(chipTool, " ***** Test Step 257 : Read attribute NULLABLE_INT64U null Value & range\n");
-            err = TestReadAttributeNullableInt64uNullValueRange_257();
+            ChipLogProgress(chipTool, " ***** Test Step 257 : Write attribute NULLABLE_INT64U null Value\n");
+            err = TestWriteAttributeNullableInt64uNullValue_257();
             break;
         case 258:
-            ChipLogProgress(chipTool, " ***** Test Step 258 : Read attribute NULLABLE_INT64U null Value & not\n");
-            err = TestReadAttributeNullableInt64uNullValueNot_258();
+            ChipLogProgress(chipTool, " ***** Test Step 258 : Read attribute NULLABLE_INT64U null Value\n");
+            err = TestReadAttributeNullableInt64uNullValue_258();
             break;
         case 259:
-            ChipLogProgress(chipTool, " ***** Test Step 259 : Write attribute NULLABLE_INT64U Value\n");
-            err = TestWriteAttributeNullableInt64uValue_259();
+            ChipLogProgress(chipTool, " ***** Test Step 259 : Read attribute NULLABLE_INT64U null Value & range\n");
+            err = TestReadAttributeNullableInt64uNullValueRange_259();
             break;
         case 260:
-            ChipLogProgress(chipTool, " ***** Test Step 260 : Read attribute NULLABLE_INT64U Value in range\n");
-            err = TestReadAttributeNullableInt64uValueInRange_260();
+            ChipLogProgress(chipTool, " ***** Test Step 260 : Read attribute NULLABLE_INT64U null Value & not\n");
+            err = TestReadAttributeNullableInt64uNullValueNot_260();
             break;
         case 261:
-            ChipLogProgress(chipTool, " ***** Test Step 261 : Read attribute NULLABLE_INT64U notValue OK\n");
-            err = TestReadAttributeNullableInt64uNotValueOk_261();
+            ChipLogProgress(chipTool, " ***** Test Step 261 : Write attribute NULLABLE_INT64U Value\n");
+            err = TestWriteAttributeNullableInt64uValue_261();
             break;
         case 262:
-            ChipLogProgress(chipTool, " ***** Test Step 262 : Write attribute NULLABLE_INT8S Min Value\n");
-            err = TestWriteAttributeNullableInt8sMinValue_262();
+            ChipLogProgress(chipTool, " ***** Test Step 262 : Read attribute NULLABLE_INT64U Value in range\n");
+            err = TestReadAttributeNullableInt64uValueInRange_262();
             break;
         case 263:
-            ChipLogProgress(chipTool, " ***** Test Step 263 : Read attribute NULLABLE_INT8S Min Value\n");
-            err = TestReadAttributeNullableInt8sMinValue_263();
+            ChipLogProgress(chipTool, " ***** Test Step 263 : Read attribute NULLABLE_INT64U notValue OK\n");
+            err = TestReadAttributeNullableInt64uNotValueOk_263();
             break;
         case 264:
-            ChipLogProgress(chipTool, " ***** Test Step 264 : Write attribute NULLABLE_INT8S Invalid Value\n");
-            err = TestWriteAttributeNullableInt8sInvalidValue_264();
+            ChipLogProgress(chipTool, " ***** Test Step 264 : Write attribute NULLABLE_INT8S Min Value\n");
+            err = TestWriteAttributeNullableInt8sMinValue_264();
             break;
         case 265:
-            ChipLogProgress(chipTool, " ***** Test Step 265 : Read attribute NULLABLE_INT8S unchanged Value\n");
-            err = TestReadAttributeNullableInt8sUnchangedValue_265();
+            ChipLogProgress(chipTool, " ***** Test Step 265 : Read attribute NULLABLE_INT8S Min Value\n");
+            err = TestReadAttributeNullableInt8sMinValue_265();
             break;
         case 266:
-            ChipLogProgress(chipTool, " ***** Test Step 266 : Write attribute NULLABLE_INT8S null Value\n");
-            err = TestWriteAttributeNullableInt8sNullValue_266();
+            ChipLogProgress(chipTool, " ***** Test Step 266 : Write attribute NULLABLE_INT8S Invalid Value\n");
+            err = TestWriteAttributeNullableInt8sInvalidValue_266();
             break;
         case 267:
-            ChipLogProgress(chipTool, " ***** Test Step 267 : Read attribute NULLABLE_INT8S null Value\n");
-            err = TestReadAttributeNullableInt8sNullValue_267();
+            ChipLogProgress(chipTool, " ***** Test Step 267 : Read attribute NULLABLE_INT8S unchanged Value\n");
+            err = TestReadAttributeNullableInt8sUnchangedValue_267();
             break;
         case 268:
-            ChipLogProgress(chipTool, " ***** Test Step 268 : Read attribute NULLABLE_INT8S null Value & range\n");
-            err = TestReadAttributeNullableInt8sNullValueRange_268();
+            ChipLogProgress(chipTool, " ***** Test Step 268 : Write attribute NULLABLE_INT8S null Value\n");
+            err = TestWriteAttributeNullableInt8sNullValue_268();
             break;
         case 269:
-            ChipLogProgress(chipTool, " ***** Test Step 269 : Read attribute NULLABLE_INT8S null Value & not\n");
-            err = TestReadAttributeNullableInt8sNullValueNot_269();
+            ChipLogProgress(chipTool, " ***** Test Step 269 : Read attribute NULLABLE_INT8S null Value\n");
+            err = TestReadAttributeNullableInt8sNullValue_269();
             break;
         case 270:
-            ChipLogProgress(chipTool, " ***** Test Step 270 : Write attribute NULLABLE_INT8S Value\n");
-            err = TestWriteAttributeNullableInt8sValue_270();
+            ChipLogProgress(chipTool, " ***** Test Step 270 : Read attribute NULLABLE_INT8S null Value & range\n");
+            err = TestReadAttributeNullableInt8sNullValueRange_270();
             break;
         case 271:
-            ChipLogProgress(chipTool, " ***** Test Step 271 : Read attribute NULLABLE_INT8S Value in range\n");
-            err = TestReadAttributeNullableInt8sValueInRange_271();
+            ChipLogProgress(chipTool, " ***** Test Step 271 : Read attribute NULLABLE_INT8S null Value & not\n");
+            err = TestReadAttributeNullableInt8sNullValueNot_271();
             break;
         case 272:
-            ChipLogProgress(chipTool, " ***** Test Step 272 : Read attribute NULLABLE_INT8S notValue OK\n");
-            err = TestReadAttributeNullableInt8sNotValueOk_272();
+            ChipLogProgress(chipTool, " ***** Test Step 272 : Write attribute NULLABLE_INT8S Value\n");
+            err = TestWriteAttributeNullableInt8sValue_272();
             break;
         case 273:
-            ChipLogProgress(chipTool, " ***** Test Step 273 : Write attribute NULLABLE_INT16S Min Value\n");
-            err = TestWriteAttributeNullableInt16sMinValue_273();
+            ChipLogProgress(chipTool, " ***** Test Step 273 : Read attribute NULLABLE_INT8S Value in range\n");
+            err = TestReadAttributeNullableInt8sValueInRange_273();
             break;
         case 274:
-            ChipLogProgress(chipTool, " ***** Test Step 274 : Read attribute NULLABLE_INT16S Min Value\n");
-            err = TestReadAttributeNullableInt16sMinValue_274();
+            ChipLogProgress(chipTool, " ***** Test Step 274 : Read attribute NULLABLE_INT8S notValue OK\n");
+            err = TestReadAttributeNullableInt8sNotValueOk_274();
             break;
         case 275:
-            ChipLogProgress(chipTool, " ***** Test Step 275 : Write attribute NULLABLE_INT16S Invalid Value\n");
-            err = TestWriteAttributeNullableInt16sInvalidValue_275();
+            ChipLogProgress(chipTool, " ***** Test Step 275 : Write attribute NULLABLE_INT16S Min Value\n");
+            err = TestWriteAttributeNullableInt16sMinValue_275();
             break;
         case 276:
-            ChipLogProgress(chipTool, " ***** Test Step 276 : Read attribute NULLABLE_INT16S unchanged Value\n");
-            err = TestReadAttributeNullableInt16sUnchangedValue_276();
+            ChipLogProgress(chipTool, " ***** Test Step 276 : Read attribute NULLABLE_INT16S Min Value\n");
+            err = TestReadAttributeNullableInt16sMinValue_276();
             break;
         case 277:
-            ChipLogProgress(chipTool, " ***** Test Step 277 : Write attribute NULLABLE_INT16S null Value\n");
-            err = TestWriteAttributeNullableInt16sNullValue_277();
+            ChipLogProgress(chipTool, " ***** Test Step 277 : Write attribute NULLABLE_INT16S Invalid Value\n");
+            err = TestWriteAttributeNullableInt16sInvalidValue_277();
             break;
         case 278:
-            ChipLogProgress(chipTool, " ***** Test Step 278 : Read attribute NULLABLE_INT16S null Value\n");
-            err = TestReadAttributeNullableInt16sNullValue_278();
+            ChipLogProgress(chipTool, " ***** Test Step 278 : Read attribute NULLABLE_INT16S unchanged Value\n");
+            err = TestReadAttributeNullableInt16sUnchangedValue_278();
             break;
         case 279:
-            ChipLogProgress(chipTool, " ***** Test Step 279 : Read attribute NULLABLE_INT16S null Value & range\n");
-            err = TestReadAttributeNullableInt16sNullValueRange_279();
+            ChipLogProgress(chipTool, " ***** Test Step 279 : Write attribute NULLABLE_INT16S null Value\n");
+            err = TestWriteAttributeNullableInt16sNullValue_279();
             break;
         case 280:
-            ChipLogProgress(chipTool, " ***** Test Step 280 : Read attribute NULLABLE_INT16S null Value & not\n");
-            err = TestReadAttributeNullableInt16sNullValueNot_280();
+            ChipLogProgress(chipTool, " ***** Test Step 280 : Read attribute NULLABLE_INT16S null Value\n");
+            err = TestReadAttributeNullableInt16sNullValue_280();
             break;
         case 281:
-            ChipLogProgress(chipTool, " ***** Test Step 281 : Write attribute NULLABLE_INT16S Value\n");
-            err = TestWriteAttributeNullableInt16sValue_281();
+            ChipLogProgress(chipTool, " ***** Test Step 281 : Read attribute NULLABLE_INT16S null Value & range\n");
+            err = TestReadAttributeNullableInt16sNullValueRange_281();
             break;
         case 282:
-            ChipLogProgress(chipTool, " ***** Test Step 282 : Read attribute NULLABLE_INT16S Value in range\n");
-            err = TestReadAttributeNullableInt16sValueInRange_282();
+            ChipLogProgress(chipTool, " ***** Test Step 282 : Read attribute NULLABLE_INT16S null Value & not\n");
+            err = TestReadAttributeNullableInt16sNullValueNot_282();
             break;
         case 283:
-            ChipLogProgress(chipTool, " ***** Test Step 283 : Read attribute NULLABLE_INT16S notValue OK\n");
-            err = TestReadAttributeNullableInt16sNotValueOk_283();
+            ChipLogProgress(chipTool, " ***** Test Step 283 : Write attribute NULLABLE_INT16S Value\n");
+            err = TestWriteAttributeNullableInt16sValue_283();
             break;
         case 284:
-            ChipLogProgress(chipTool, " ***** Test Step 284 : Write attribute NULLABLE_INT32S Min Value\n");
-            err = TestWriteAttributeNullableInt32sMinValue_284();
+            ChipLogProgress(chipTool, " ***** Test Step 284 : Read attribute NULLABLE_INT16S Value in range\n");
+            err = TestReadAttributeNullableInt16sValueInRange_284();
             break;
         case 285:
-            ChipLogProgress(chipTool, " ***** Test Step 285 : Read attribute NULLABLE_INT32S Min Value\n");
-            err = TestReadAttributeNullableInt32sMinValue_285();
+            ChipLogProgress(chipTool, " ***** Test Step 285 : Read attribute NULLABLE_INT16S notValue OK\n");
+            err = TestReadAttributeNullableInt16sNotValueOk_285();
             break;
         case 286:
-            ChipLogProgress(chipTool, " ***** Test Step 286 : Write attribute NULLABLE_INT32S Invalid Value\n");
-            err = TestWriteAttributeNullableInt32sInvalidValue_286();
+            ChipLogProgress(chipTool, " ***** Test Step 286 : Write attribute NULLABLE_INT32S Min Value\n");
+            err = TestWriteAttributeNullableInt32sMinValue_286();
             break;
         case 287:
-            ChipLogProgress(chipTool, " ***** Test Step 287 : Read attribute NULLABLE_INT32S unchanged Value\n");
-            err = TestReadAttributeNullableInt32sUnchangedValue_287();
+            ChipLogProgress(chipTool, " ***** Test Step 287 : Read attribute NULLABLE_INT32S Min Value\n");
+            err = TestReadAttributeNullableInt32sMinValue_287();
             break;
         case 288:
-            ChipLogProgress(chipTool, " ***** Test Step 288 : Write attribute NULLABLE_INT32S null Value\n");
-            err = TestWriteAttributeNullableInt32sNullValue_288();
+            ChipLogProgress(chipTool, " ***** Test Step 288 : Write attribute NULLABLE_INT32S Invalid Value\n");
+            err = TestWriteAttributeNullableInt32sInvalidValue_288();
             break;
         case 289:
-            ChipLogProgress(chipTool, " ***** Test Step 289 : Read attribute NULLABLE_INT32S null Value\n");
-            err = TestReadAttributeNullableInt32sNullValue_289();
+            ChipLogProgress(chipTool, " ***** Test Step 289 : Read attribute NULLABLE_INT32S unchanged Value\n");
+            err = TestReadAttributeNullableInt32sUnchangedValue_289();
             break;
         case 290:
-            ChipLogProgress(chipTool, " ***** Test Step 290 : Read attribute NULLABLE_INT32S null Value & range\n");
-            err = TestReadAttributeNullableInt32sNullValueRange_290();
+            ChipLogProgress(chipTool, " ***** Test Step 290 : Write attribute NULLABLE_INT32S null Value\n");
+            err = TestWriteAttributeNullableInt32sNullValue_290();
             break;
         case 291:
-            ChipLogProgress(chipTool, " ***** Test Step 291 : Read attribute NULLABLE_INT32S null Value & not\n");
-            err = TestReadAttributeNullableInt32sNullValueNot_291();
+            ChipLogProgress(chipTool, " ***** Test Step 291 : Read attribute NULLABLE_INT32S null Value\n");
+            err = TestReadAttributeNullableInt32sNullValue_291();
             break;
         case 292:
-            ChipLogProgress(chipTool, " ***** Test Step 292 : Write attribute NULLABLE_INT32S Value\n");
-            err = TestWriteAttributeNullableInt32sValue_292();
+            ChipLogProgress(chipTool, " ***** Test Step 292 : Read attribute NULLABLE_INT32S null Value & range\n");
+            err = TestReadAttributeNullableInt32sNullValueRange_292();
             break;
         case 293:
-            ChipLogProgress(chipTool, " ***** Test Step 293 : Read attribute NULLABLE_INT32S Value in range\n");
-            err = TestReadAttributeNullableInt32sValueInRange_293();
+            ChipLogProgress(chipTool, " ***** Test Step 293 : Read attribute NULLABLE_INT32S null Value & not\n");
+            err = TestReadAttributeNullableInt32sNullValueNot_293();
             break;
         case 294:
-            ChipLogProgress(chipTool, " ***** Test Step 294 : Read attribute NULLABLE_INT32S notValue OK\n");
-            err = TestReadAttributeNullableInt32sNotValueOk_294();
+            ChipLogProgress(chipTool, " ***** Test Step 294 : Write attribute NULLABLE_INT32S Value\n");
+            err = TestWriteAttributeNullableInt32sValue_294();
             break;
         case 295:
-            ChipLogProgress(chipTool, " ***** Test Step 295 : Write attribute NULLABLE_INT64S Min Value\n");
-            err = TestWriteAttributeNullableInt64sMinValue_295();
+            ChipLogProgress(chipTool, " ***** Test Step 295 : Read attribute NULLABLE_INT32S Value in range\n");
+            err = TestReadAttributeNullableInt32sValueInRange_295();
             break;
         case 296:
-            ChipLogProgress(chipTool, " ***** Test Step 296 : Read attribute NULLABLE_INT64S Min Value\n");
-            err = TestReadAttributeNullableInt64sMinValue_296();
+            ChipLogProgress(chipTool, " ***** Test Step 296 : Read attribute NULLABLE_INT32S notValue OK\n");
+            err = TestReadAttributeNullableInt32sNotValueOk_296();
             break;
         case 297:
-            ChipLogProgress(chipTool, " ***** Test Step 297 : Write attribute NULLABLE_INT64S Invalid Value\n");
-            err = TestWriteAttributeNullableInt64sInvalidValue_297();
+            ChipLogProgress(chipTool, " ***** Test Step 297 : Write attribute NULLABLE_INT64S Min Value\n");
+            err = TestWriteAttributeNullableInt64sMinValue_297();
             break;
         case 298:
-            ChipLogProgress(chipTool, " ***** Test Step 298 : Read attribute NULLABLE_INT64S unchanged Value\n");
-            err = TestReadAttributeNullableInt64sUnchangedValue_298();
+            ChipLogProgress(chipTool, " ***** Test Step 298 : Read attribute NULLABLE_INT64S Min Value\n");
+            err = TestReadAttributeNullableInt64sMinValue_298();
             break;
         case 299:
-            ChipLogProgress(chipTool, " ***** Test Step 299 : Write attribute NULLABLE_INT64S null Value\n");
-            err = TestWriteAttributeNullableInt64sNullValue_299();
+            ChipLogProgress(chipTool, " ***** Test Step 299 : Write attribute NULLABLE_INT64S Invalid Value\n");
+            err = TestWriteAttributeNullableInt64sInvalidValue_299();
             break;
         case 300:
-            ChipLogProgress(chipTool, " ***** Test Step 300 : Read attribute NULLABLE_INT64S null Value\n");
-            err = TestReadAttributeNullableInt64sNullValue_300();
+            ChipLogProgress(chipTool, " ***** Test Step 300 : Read attribute NULLABLE_INT64S unchanged Value\n");
+            err = TestReadAttributeNullableInt64sUnchangedValue_300();
             break;
         case 301:
-            ChipLogProgress(chipTool, " ***** Test Step 301 : Read attribute NULLABLE_INT64S null Value & range\n");
-            err = TestReadAttributeNullableInt64sNullValueRange_301();
+            ChipLogProgress(chipTool, " ***** Test Step 301 : Write attribute NULLABLE_INT64S null Value\n");
+            err = TestWriteAttributeNullableInt64sNullValue_301();
             break;
         case 302:
-            ChipLogProgress(chipTool, " ***** Test Step 302 : Read attribute NULLABLE_INT64S null Value & not\n");
-            err = TestReadAttributeNullableInt64sNullValueNot_302();
+            ChipLogProgress(chipTool, " ***** Test Step 302 : Read attribute NULLABLE_INT64S null Value\n");
+            err = TestReadAttributeNullableInt64sNullValue_302();
             break;
         case 303:
-            ChipLogProgress(chipTool, " ***** Test Step 303 : Write attribute NULLABLE_INT64S Value\n");
-            err = TestWriteAttributeNullableInt64sValue_303();
+            ChipLogProgress(chipTool, " ***** Test Step 303 : Read attribute NULLABLE_INT64S null Value & range\n");
+            err = TestReadAttributeNullableInt64sNullValueRange_303();
             break;
         case 304:
-            ChipLogProgress(chipTool, " ***** Test Step 304 : Read attribute NULLABLE_INT64S Value in range\n");
-            err = TestReadAttributeNullableInt64sValueInRange_304();
+            ChipLogProgress(chipTool, " ***** Test Step 304 : Read attribute NULLABLE_INT64S null Value & not\n");
+            err = TestReadAttributeNullableInt64sNullValueNot_304();
             break;
         case 305:
-            ChipLogProgress(chipTool, " ***** Test Step 305 : Read attribute NULLABLE_INT64S notValue OK\n");
-            err = TestReadAttributeNullableInt64sNotValueOk_305();
+            ChipLogProgress(chipTool, " ***** Test Step 305 : Write attribute NULLABLE_INT64S Value\n");
+            err = TestWriteAttributeNullableInt64sValue_305();
             break;
         case 306:
-            ChipLogProgress(chipTool, " ***** Test Step 306 : Write attribute NULLABLE_SINGLE medium Value\n");
-            err = TestWriteAttributeNullableSingleMediumValue_306();
+            ChipLogProgress(chipTool, " ***** Test Step 306 : Read attribute NULLABLE_INT64S Value in range\n");
+            err = TestReadAttributeNullableInt64sValueInRange_306();
             break;
         case 307:
-            ChipLogProgress(chipTool, " ***** Test Step 307 : Read attribute NULLABLE_SINGLE medium Value\n");
-            err = TestReadAttributeNullableSingleMediumValue_307();
+            ChipLogProgress(chipTool, " ***** Test Step 307 : Read attribute NULLABLE_INT64S notValue OK\n");
+            err = TestReadAttributeNullableInt64sNotValueOk_307();
             break;
         case 308:
-            ChipLogProgress(chipTool, " ***** Test Step 308 : Write attribute NULLABLE_SINGLE largest Value\n");
-            err = TestWriteAttributeNullableSingleLargestValue_308();
+            ChipLogProgress(chipTool, " ***** Test Step 308 : Write attribute NULLABLE_SINGLE medium Value\n");
+            err = TestWriteAttributeNullableSingleMediumValue_308();
             break;
         case 309:
-            ChipLogProgress(chipTool, " ***** Test Step 309 : Read attribute NULLABLE_SINGLE largest Value\n");
-            err = TestReadAttributeNullableSingleLargestValue_309();
+            ChipLogProgress(chipTool, " ***** Test Step 309 : Read attribute NULLABLE_SINGLE medium Value\n");
+            err = TestReadAttributeNullableSingleMediumValue_309();
             break;
         case 310:
-            ChipLogProgress(chipTool, " ***** Test Step 310 : Write attribute NULLABLE_SINGLE smallest Value\n");
-            err = TestWriteAttributeNullableSingleSmallestValue_310();
+            ChipLogProgress(chipTool, " ***** Test Step 310 : Write attribute NULLABLE_SINGLE largest Value\n");
+            err = TestWriteAttributeNullableSingleLargestValue_310();
             break;
         case 311:
-            ChipLogProgress(chipTool, " ***** Test Step 311 : Read attribute NULLABLE_SINGLE smallest Value\n");
-            err = TestReadAttributeNullableSingleSmallestValue_311();
+            ChipLogProgress(chipTool, " ***** Test Step 311 : Read attribute NULLABLE_SINGLE largest Value\n");
+            err = TestReadAttributeNullableSingleLargestValue_311();
             break;
         case 312:
-            ChipLogProgress(chipTool, " ***** Test Step 312 : Write attribute NULLABLE_SINGLE null Value\n");
-            err = TestWriteAttributeNullableSingleNullValue_312();
+            ChipLogProgress(chipTool, " ***** Test Step 312 : Write attribute NULLABLE_SINGLE smallest Value\n");
+            err = TestWriteAttributeNullableSingleSmallestValue_312();
             break;
         case 313:
-            ChipLogProgress(chipTool, " ***** Test Step 313 : Read attribute NULLABLE_SINGLE null Value\n");
-            err = TestReadAttributeNullableSingleNullValue_313();
+            ChipLogProgress(chipTool, " ***** Test Step 313 : Read attribute NULLABLE_SINGLE smallest Value\n");
+            err = TestReadAttributeNullableSingleSmallestValue_313();
             break;
         case 314:
-            ChipLogProgress(chipTool, " ***** Test Step 314 : Write attribute NULLABLE_SINGLE 0 Value\n");
-            err = TestWriteAttributeNullableSingle0Value_314();
+            ChipLogProgress(chipTool, " ***** Test Step 314 : Write attribute NULLABLE_SINGLE null Value\n");
+            err = TestWriteAttributeNullableSingleNullValue_314();
             break;
         case 315:
-            ChipLogProgress(chipTool, " ***** Test Step 315 : Read attribute NULLABLE_SINGLE 0 Value\n");
-            err = TestReadAttributeNullableSingle0Value_315();
+            ChipLogProgress(chipTool, " ***** Test Step 315 : Read attribute NULLABLE_SINGLE null Value\n");
+            err = TestReadAttributeNullableSingleNullValue_315();
             break;
         case 316:
-            ChipLogProgress(chipTool, " ***** Test Step 316 : Write attribute NULLABLE_DOUBLE medium Value\n");
-            err = TestWriteAttributeNullableDoubleMediumValue_316();
+            ChipLogProgress(chipTool, " ***** Test Step 316 : Write attribute NULLABLE_SINGLE 0 Value\n");
+            err = TestWriteAttributeNullableSingle0Value_316();
             break;
         case 317:
-            ChipLogProgress(chipTool, " ***** Test Step 317 : Read attribute NULLABLE_DOUBLE medium Value\n");
-            err = TestReadAttributeNullableDoubleMediumValue_317();
+            ChipLogProgress(chipTool, " ***** Test Step 317 : Read attribute NULLABLE_SINGLE 0 Value\n");
+            err = TestReadAttributeNullableSingle0Value_317();
             break;
         case 318:
-            ChipLogProgress(chipTool, " ***** Test Step 318 : Write attribute NULLABLE_DOUBLE largest Value\n");
-            err = TestWriteAttributeNullableDoubleLargestValue_318();
+            ChipLogProgress(chipTool, " ***** Test Step 318 : Write attribute NULLABLE_DOUBLE medium Value\n");
+            err = TestWriteAttributeNullableDoubleMediumValue_318();
             break;
         case 319:
-            ChipLogProgress(chipTool, " ***** Test Step 319 : Read attribute NULLABLE_DOUBLE largest Value\n");
-            err = TestReadAttributeNullableDoubleLargestValue_319();
+            ChipLogProgress(chipTool, " ***** Test Step 319 : Read attribute NULLABLE_DOUBLE medium Value\n");
+            err = TestReadAttributeNullableDoubleMediumValue_319();
             break;
         case 320:
-            ChipLogProgress(chipTool, " ***** Test Step 320 : Write attribute NULLABLE_DOUBLE smallest Value\n");
-            err = TestWriteAttributeNullableDoubleSmallestValue_320();
+            ChipLogProgress(chipTool, " ***** Test Step 320 : Write attribute NULLABLE_DOUBLE largest Value\n");
+            err = TestWriteAttributeNullableDoubleLargestValue_320();
             break;
         case 321:
-            ChipLogProgress(chipTool, " ***** Test Step 321 : Read attribute NULLABLE_DOUBLE smallest Value\n");
-            err = TestReadAttributeNullableDoubleSmallestValue_321();
+            ChipLogProgress(chipTool, " ***** Test Step 321 : Read attribute NULLABLE_DOUBLE largest Value\n");
+            err = TestReadAttributeNullableDoubleLargestValue_321();
             break;
         case 322:
-            ChipLogProgress(chipTool, " ***** Test Step 322 : Write attribute NULLABLE_DOUBLE null Value\n");
-            err = TestWriteAttributeNullableDoubleNullValue_322();
+            ChipLogProgress(chipTool, " ***** Test Step 322 : Write attribute NULLABLE_DOUBLE smallest Value\n");
+            err = TestWriteAttributeNullableDoubleSmallestValue_322();
             break;
         case 323:
-            ChipLogProgress(chipTool, " ***** Test Step 323 : Read attribute NULLABLE_DOUBLE null Value\n");
-            err = TestReadAttributeNullableDoubleNullValue_323();
+            ChipLogProgress(chipTool, " ***** Test Step 323 : Read attribute NULLABLE_DOUBLE smallest Value\n");
+            err = TestReadAttributeNullableDoubleSmallestValue_323();
             break;
         case 324:
-            ChipLogProgress(chipTool, " ***** Test Step 324 : Write attribute NULLABLE_DOUBLE 0 Value\n");
-            err = TestWriteAttributeNullableDouble0Value_324();
+            ChipLogProgress(chipTool, " ***** Test Step 324 : Write attribute NULLABLE_DOUBLE null Value\n");
+            err = TestWriteAttributeNullableDoubleNullValue_324();
             break;
         case 325:
-            ChipLogProgress(chipTool, " ***** Test Step 325 : Read attribute NULLABLE_DOUBLE 0 Value\n");
-            err = TestReadAttributeNullableDouble0Value_325();
+            ChipLogProgress(chipTool, " ***** Test Step 325 : Read attribute NULLABLE_DOUBLE null Value\n");
+            err = TestReadAttributeNullableDoubleNullValue_325();
             break;
         case 326:
-            ChipLogProgress(chipTool, " ***** Test Step 326 : Write attribute NULLABLE_ENUM8 Min Value\n");
-            err = TestWriteAttributeNullableEnum8MinValue_326();
+            ChipLogProgress(chipTool, " ***** Test Step 326 : Write attribute NULLABLE_DOUBLE 0 Value\n");
+            err = TestWriteAttributeNullableDouble0Value_326();
             break;
         case 327:
-            ChipLogProgress(chipTool, " ***** Test Step 327 : Read attribute NULLABLE_ENUM8 Min Value\n");
-            err = TestReadAttributeNullableEnum8MinValue_327();
+            ChipLogProgress(chipTool, " ***** Test Step 327 : Read attribute NULLABLE_DOUBLE 0 Value\n");
+            err = TestReadAttributeNullableDouble0Value_327();
             break;
         case 328:
-            ChipLogProgress(chipTool, " ***** Test Step 328 : Write attribute NULLABLE_ENUM8 Max Value\n");
-            err = TestWriteAttributeNullableEnum8MaxValue_328();
+            ChipLogProgress(chipTool, " ***** Test Step 328 : Write attribute NULLABLE_ENUM8 Min Value\n");
+            err = TestWriteAttributeNullableEnum8MinValue_328();
             break;
         case 329:
-            ChipLogProgress(chipTool, " ***** Test Step 329 : Read attribute NULLABLE_ENUM8 Max Value\n");
-            err = TestReadAttributeNullableEnum8MaxValue_329();
+            ChipLogProgress(chipTool, " ***** Test Step 329 : Read attribute NULLABLE_ENUM8 Min Value\n");
+            err = TestReadAttributeNullableEnum8MinValue_329();
             break;
         case 330:
-            ChipLogProgress(chipTool, " ***** Test Step 330 : Write attribute NULLABLE_ENUM8 Invalid Value\n");
-            err = TestWriteAttributeNullableEnum8InvalidValue_330();
+            ChipLogProgress(chipTool, " ***** Test Step 330 : Write attribute NULLABLE_ENUM8 Max Value\n");
+            err = TestWriteAttributeNullableEnum8MaxValue_330();
             break;
         case 331:
-            ChipLogProgress(chipTool, " ***** Test Step 331 : Read attribute NULLABLE_ENUM8 unchanged Value\n");
-            err = TestReadAttributeNullableEnum8UnchangedValue_331();
+            ChipLogProgress(chipTool, " ***** Test Step 331 : Read attribute NULLABLE_ENUM8 Max Value\n");
+            err = TestReadAttributeNullableEnum8MaxValue_331();
             break;
         case 332:
-            ChipLogProgress(chipTool, " ***** Test Step 332 : Write attribute NULLABLE_ENUM8 null Value\n");
-            err = TestWriteAttributeNullableEnum8NullValue_332();
+            ChipLogProgress(chipTool, " ***** Test Step 332 : Write attribute NULLABLE_ENUM8 Invalid Value\n");
+            err = TestWriteAttributeNullableEnum8InvalidValue_332();
             break;
         case 333:
-            ChipLogProgress(chipTool, " ***** Test Step 333 : Read attribute NULLABLE_ENUM8 null Value\n");
-            err = TestReadAttributeNullableEnum8NullValue_333();
+            ChipLogProgress(chipTool, " ***** Test Step 333 : Read attribute NULLABLE_ENUM8 unchanged Value\n");
+            err = TestReadAttributeNullableEnum8UnchangedValue_333();
             break;
         case 334:
-            ChipLogProgress(chipTool, " ***** Test Step 334 : Write attribute NULLABLE_ENUM16 Min Value\n");
-            err = TestWriteAttributeNullableEnum16MinValue_334();
+            ChipLogProgress(chipTool, " ***** Test Step 334 : Write attribute NULLABLE_ENUM8 null Value\n");
+            err = TestWriteAttributeNullableEnum8NullValue_334();
             break;
         case 335:
-            ChipLogProgress(chipTool, " ***** Test Step 335 : Read attribute NULLABLE_ENUM16 Min Value\n");
-            err = TestReadAttributeNullableEnum16MinValue_335();
+            ChipLogProgress(chipTool, " ***** Test Step 335 : Read attribute NULLABLE_ENUM8 null Value\n");
+            err = TestReadAttributeNullableEnum8NullValue_335();
             break;
         case 336:
-            ChipLogProgress(chipTool, " ***** Test Step 336 : Write attribute NULLABLE_ENUM16 Max Value\n");
-            err = TestWriteAttributeNullableEnum16MaxValue_336();
+            ChipLogProgress(chipTool, " ***** Test Step 336 : Write attribute NULLABLE_ENUM16 Min Value\n");
+            err = TestWriteAttributeNullableEnum16MinValue_336();
             break;
         case 337:
-            ChipLogProgress(chipTool, " ***** Test Step 337 : Read attribute NULLABLE_ENUM16 Max Value\n");
-            err = TestReadAttributeNullableEnum16MaxValue_337();
+            ChipLogProgress(chipTool, " ***** Test Step 337 : Read attribute NULLABLE_ENUM16 Min Value\n");
+            err = TestReadAttributeNullableEnum16MinValue_337();
             break;
         case 338:
-            ChipLogProgress(chipTool, " ***** Test Step 338 : Write attribute NULLABLE_ENUM16 Invalid Value\n");
-            err = TestWriteAttributeNullableEnum16InvalidValue_338();
+            ChipLogProgress(chipTool, " ***** Test Step 338 : Write attribute NULLABLE_ENUM16 Max Value\n");
+            err = TestWriteAttributeNullableEnum16MaxValue_338();
             break;
         case 339:
-            ChipLogProgress(chipTool, " ***** Test Step 339 : Read attribute NULLABLE_ENUM16 unchanged Value\n");
-            err = TestReadAttributeNullableEnum16UnchangedValue_339();
+            ChipLogProgress(chipTool, " ***** Test Step 339 : Read attribute NULLABLE_ENUM16 Max Value\n");
+            err = TestReadAttributeNullableEnum16MaxValue_339();
             break;
         case 340:
-            ChipLogProgress(chipTool, " ***** Test Step 340 : Write attribute NULLABLE_ENUM16 null Value\n");
-            err = TestWriteAttributeNullableEnum16NullValue_340();
+            ChipLogProgress(chipTool, " ***** Test Step 340 : Write attribute NULLABLE_ENUM16 Invalid Value\n");
+            err = TestWriteAttributeNullableEnum16InvalidValue_340();
             break;
         case 341:
-            ChipLogProgress(chipTool, " ***** Test Step 341 : Read attribute NULLABLE_ENUM16 null Value\n");
-            err = TestReadAttributeNullableEnum16NullValue_341();
+            ChipLogProgress(chipTool, " ***** Test Step 341 : Read attribute NULLABLE_ENUM16 unchanged Value\n");
+            err = TestReadAttributeNullableEnum16UnchangedValue_341();
             break;
         case 342:
-            ChipLogProgress(chipTool, " ***** Test Step 342 : Write attribute NULLABLE_SIMPLE_ENUM Min Value\n");
-            err = TestWriteAttributeNullableSimpleEnumMinValue_342();
+            ChipLogProgress(chipTool, " ***** Test Step 342 : Write attribute NULLABLE_ENUM16 null Value\n");
+            err = TestWriteAttributeNullableEnum16NullValue_342();
             break;
         case 343:
-            ChipLogProgress(chipTool, " ***** Test Step 343 : Read attribute NULLABLE_SIMPLE_ENUM Min Value\n");
-            err = TestReadAttributeNullableSimpleEnumMinValue_343();
+            ChipLogProgress(chipTool, " ***** Test Step 343 : Read attribute NULLABLE_ENUM16 null Value\n");
+            err = TestReadAttributeNullableEnum16NullValue_343();
             break;
         case 344:
-            ChipLogProgress(chipTool, " ***** Test Step 344 : Write attribute NULLABLE_SIMPLE_ENUM Max Value\n");
-            err = TestWriteAttributeNullableSimpleEnumMaxValue_344();
+            ChipLogProgress(chipTool, " ***** Test Step 344 : Write attribute NULLABLE_SIMPLE_ENUM Min Value\n");
+            err = TestWriteAttributeNullableSimpleEnumMinValue_344();
             break;
         case 345:
-            ChipLogProgress(chipTool, " ***** Test Step 345 : Read attribute NULLABLE_SIMPLE_ENUM Max Value\n");
-            err = TestReadAttributeNullableSimpleEnumMaxValue_345();
+            ChipLogProgress(chipTool, " ***** Test Step 345 : Read attribute NULLABLE_SIMPLE_ENUM Min Value\n");
+            err = TestReadAttributeNullableSimpleEnumMinValue_345();
             break;
         case 346:
-            ChipLogProgress(chipTool, " ***** Test Step 346 : Write attribute NULLABLE_SIMPLE_ENUM Invalid Value\n");
-            err = TestWriteAttributeNullableSimpleEnumInvalidValue_346();
+            ChipLogProgress(chipTool, " ***** Test Step 346 : Write attribute NULLABLE_SIMPLE_ENUM Max Value\n");
+            err = TestWriteAttributeNullableSimpleEnumMaxValue_346();
             break;
         case 347:
-            ChipLogProgress(chipTool, " ***** Test Step 347 : Read attribute NULLABLE_SIMPLE_ENUM unchanged Value\n");
-            err = TestReadAttributeNullableSimpleEnumUnchangedValue_347();
+            ChipLogProgress(chipTool, " ***** Test Step 347 : Read attribute NULLABLE_SIMPLE_ENUM Max Value\n");
+            err = TestReadAttributeNullableSimpleEnumMaxValue_347();
             break;
         case 348:
-            ChipLogProgress(chipTool, " ***** Test Step 348 : Write attribute NULLABLE_SIMPLE_ENUM null Value\n");
-            err = TestWriteAttributeNullableSimpleEnumNullValue_348();
+            ChipLogProgress(chipTool, " ***** Test Step 348 : Write attribute NULLABLE_SIMPLE_ENUM Invalid Value\n");
+            err = TestWriteAttributeNullableSimpleEnumInvalidValue_348();
             break;
         case 349:
-            ChipLogProgress(chipTool, " ***** Test Step 349 : Read attribute NULLABLE_SIMPLE_ENUM null Value\n");
-            err = TestReadAttributeNullableSimpleEnumNullValue_349();
+            ChipLogProgress(chipTool, " ***** Test Step 349 : Read attribute NULLABLE_SIMPLE_ENUM unchanged Value\n");
+            err = TestReadAttributeNullableSimpleEnumUnchangedValue_349();
             break;
         case 350:
-            ChipLogProgress(chipTool, " ***** Test Step 350 : Read attribute NULLABLE_SIMPLE_ENUM not 254 Value\n");
-            err = TestReadAttributeNullableSimpleEnumNot254Value_350();
+            ChipLogProgress(chipTool, " ***** Test Step 350 : Write attribute NULLABLE_SIMPLE_ENUM null Value\n");
+            err = TestWriteAttributeNullableSimpleEnumNullValue_350();
             break;
         case 351:
-            ChipLogProgress(chipTool, " ***** Test Step 351 : Read attribute NULLABLE_OCTET_STRING Default Value\n");
-            err = TestReadAttributeNullableOctetStringDefaultValue_351();
+            ChipLogProgress(chipTool, " ***** Test Step 351 : Read attribute NULLABLE_SIMPLE_ENUM null Value\n");
+            err = TestReadAttributeNullableSimpleEnumNullValue_351();
             break;
         case 352:
-            ChipLogProgress(chipTool, " ***** Test Step 352 : Write attribute NULLABLE_OCTET_STRING\n");
-            err = TestWriteAttributeNullableOctetString_352();
+            ChipLogProgress(chipTool, " ***** Test Step 352 : Read attribute NULLABLE_SIMPLE_ENUM not 254 Value\n");
+            err = TestReadAttributeNullableSimpleEnumNot254Value_352();
             break;
         case 353:
-            ChipLogProgress(chipTool, " ***** Test Step 353 : Read attribute NULLABLE_OCTET_STRING\n");
-            err = TestReadAttributeNullableOctetString_353();
+            ChipLogProgress(chipTool, " ***** Test Step 353 : Read attribute NULLABLE_OCTET_STRING Default Value\n");
+            err = TestReadAttributeNullableOctetStringDefaultValue_353();
             break;
         case 354:
             ChipLogProgress(chipTool, " ***** Test Step 354 : Write attribute NULLABLE_OCTET_STRING\n");
@@ -69172,610 +69172,618 @@ public:
             err = TestReadAttributeNullableOctetString_357();
             break;
         case 358:
-            ChipLogProgress(chipTool, " ***** Test Step 358 : Read attribute NULLABLE_OCTET_STRING not TestValue\n");
-            err = TestReadAttributeNullableOctetStringNotTestValue_358();
+            ChipLogProgress(chipTool, " ***** Test Step 358 : Write attribute NULLABLE_OCTET_STRING\n");
+            err = TestWriteAttributeNullableOctetString_358();
             break;
         case 359:
-            ChipLogProgress(chipTool, " ***** Test Step 359 : Read attribute NULLABLE_CHAR_STRING Default Value\n");
-            err = TestReadAttributeNullableCharStringDefaultValue_359();
+            ChipLogProgress(chipTool, " ***** Test Step 359 : Read attribute NULLABLE_OCTET_STRING\n");
+            err = TestReadAttributeNullableOctetString_359();
             break;
         case 360:
-            ChipLogProgress(chipTool, " ***** Test Step 360 : Write attribute NULLABLE_CHAR_STRING\n");
-            err = TestWriteAttributeNullableCharString_360();
+            ChipLogProgress(chipTool, " ***** Test Step 360 : Read attribute NULLABLE_OCTET_STRING not TestValue\n");
+            err = TestReadAttributeNullableOctetStringNotTestValue_360();
             break;
         case 361:
-            ChipLogProgress(chipTool, " ***** Test Step 361 : Read attribute NULLABLE_CHAR_STRING\n");
-            err = TestReadAttributeNullableCharString_361();
+            ChipLogProgress(chipTool, " ***** Test Step 361 : Read attribute NULLABLE_CHAR_STRING Default Value\n");
+            err = TestReadAttributeNullableCharStringDefaultValue_361();
             break;
         case 362:
-            ChipLogProgress(chipTool, " ***** Test Step 362 : Read attribute NULLABLE_CHAR_STRING\n");
-            err = TestReadAttributeNullableCharString_362();
+            ChipLogProgress(chipTool, " ***** Test Step 362 : Write attribute NULLABLE_CHAR_STRING\n");
+            err = TestWriteAttributeNullableCharString_362();
             break;
         case 363:
-            ChipLogProgress(chipTool, " ***** Test Step 363 : Write attribute NULLABLE_CHAR_STRING - Value too long\n");
-            err = TestWriteAttributeNullableCharStringValueTooLong_363();
+            ChipLogProgress(chipTool, " ***** Test Step 363 : Read attribute NULLABLE_CHAR_STRING\n");
+            err = TestReadAttributeNullableCharString_363();
             break;
         case 364:
             ChipLogProgress(chipTool, " ***** Test Step 364 : Read attribute NULLABLE_CHAR_STRING\n");
             err = TestReadAttributeNullableCharString_364();
             break;
         case 365:
-            ChipLogProgress(chipTool, " ***** Test Step 365 : Write attribute NULLABLE_CHAR_STRING - Empty\n");
-            err = TestWriteAttributeNullableCharStringEmpty_365();
+            ChipLogProgress(chipTool, " ***** Test Step 365 : Write attribute NULLABLE_CHAR_STRING - Value too long\n");
+            err = TestWriteAttributeNullableCharStringValueTooLong_365();
             break;
         case 366:
             ChipLogProgress(chipTool, " ***** Test Step 366 : Read attribute NULLABLE_CHAR_STRING\n");
             err = TestReadAttributeNullableCharString_366();
             break;
         case 367:
-            ChipLogProgress(chipTool, " ***** Test Step 367 : Read attribute NULLABLE_CHAR_STRING not ☉T☉\n");
-            err = TestReadAttributeNullableCharStringNott_367();
+            ChipLogProgress(chipTool, " ***** Test Step 367 : Write attribute NULLABLE_CHAR_STRING - Empty\n");
+            err = TestWriteAttributeNullableCharStringEmpty_367();
             break;
         case 368:
-            ChipLogProgress(chipTool, " ***** Test Step 368 : Read attribute from nonexistent endpoint.\n");
-            err = TestReadAttributeFromNonexistentEndpoint_368();
+            ChipLogProgress(chipTool, " ***** Test Step 368 : Read attribute NULLABLE_CHAR_STRING\n");
+            err = TestReadAttributeNullableCharString_368();
             break;
         case 369:
-            ChipLogProgress(chipTool, " ***** Test Step 369 : Read attribute from nonexistent cluster.\n");
-            err = TestReadAttributeFromNonexistentCluster_369();
+            ChipLogProgress(chipTool, " ***** Test Step 369 : Read attribute NULLABLE_CHAR_STRING not ☉T☉\n");
+            err = TestReadAttributeNullableCharStringNott_369();
             break;
         case 370:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 370 : Send a command that takes an optional parameter but do not set it.\n");
-            err = TestSendACommandThatTakesAnOptionalParameterButDoNotSetIt_370();
+            ChipLogProgress(chipTool, " ***** Test Step 370 : Read attribute from nonexistent endpoint.\n");
+            err = TestReadAttributeFromNonexistentEndpoint_370();
             break;
         case 371:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 371 : Send a command that takes an optional parameter but do not set it.\n");
-            err = TestSendACommandThatTakesAnOptionalParameterButDoNotSetIt_371();
+            ChipLogProgress(chipTool, " ***** Test Step 371 : Read attribute from nonexistent cluster.\n");
+            err = TestReadAttributeFromNonexistentCluster_371();
             break;
         case 372:
-            ChipLogProgress(chipTool, " ***** Test Step 372 : Report: Subscribe to list attribute\n");
-            err = TestReportSubscribeToListAttribute_372();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 372 : Send a command that takes an optional parameter but do not set it.\n");
+            err = TestSendACommandThatTakesAnOptionalParameterButDoNotSetIt_372();
             break;
         case 373:
-            ChipLogProgress(chipTool, " ***** Test Step 373 : Subscribe to list attribute\n");
-            err = TestSubscribeToListAttribute_373();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 373 : Send a command that takes an optional parameter but do not set it.\n");
+            err = TestSendACommandThatTakesAnOptionalParameterButDoNotSetIt_373();
             break;
         case 374:
-            ChipLogProgress(chipTool, " ***** Test Step 374 : Write subscribed-to list attribute\n");
-            err = TestWriteSubscribedToListAttribute_374();
+            ChipLogProgress(chipTool, " ***** Test Step 374 : Report: Subscribe to list attribute\n");
+            err = TestReportSubscribeToListAttribute_374();
             break;
         case 375:
-            ChipLogProgress(chipTool, " ***** Test Step 375 : Check for list attribute report\n");
-            err = TestCheckForListAttributeReport_375();
+            ChipLogProgress(chipTool, " ***** Test Step 375 : Subscribe to list attribute\n");
+            err = TestSubscribeToListAttribute_375();
             break;
         case 376:
-            ChipLogProgress(chipTool, " ***** Test Step 376 : Read range-restricted unsigned 8-bit integer\n");
-            err = TestReadRangeRestrictedUnsigned8BitInteger_376();
+            ChipLogProgress(chipTool, " ***** Test Step 376 : Write subscribed-to list attribute\n");
+            err = TestWriteSubscribedToListAttribute_376();
             break;
         case 377:
-            ChipLogProgress(chipTool, " ***** Test Step 377 : Write min value to a range-restricted unsigned 8-bit integer\n");
-            err = TestWriteMinValueToARangeRestrictedUnsigned8BitInteger_377();
+            ChipLogProgress(chipTool, " ***** Test Step 377 : Check for list attribute report\n");
+            err = TestCheckForListAttributeReport_377();
             break;
         case 378:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 378 : Write just-below-range value to a range-restricted unsigned 8-bit integer\n");
-            err = TestWriteJustBelowRangeValueToARangeRestrictedUnsigned8BitInteger_378();
+            ChipLogProgress(chipTool, " ***** Test Step 378 : Read range-restricted unsigned 8-bit integer\n");
+            err = TestReadRangeRestrictedUnsigned8BitInteger_378();
             break;
         case 379:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 379 : Write just-above-range value to a range-restricted unsigned 8-bit integer\n");
-            err = TestWriteJustAboveRangeValueToARangeRestrictedUnsigned8BitInteger_379();
+            ChipLogProgress(chipTool, " ***** Test Step 379 : Write min value to a range-restricted unsigned 8-bit integer\n");
+            err = TestWriteMinValueToARangeRestrictedUnsigned8BitInteger_379();
             break;
         case 380:
-            ChipLogProgress(chipTool, " ***** Test Step 380 : Write max value to a range-restricted unsigned 8-bit integer\n");
-            err = TestWriteMaxValueToARangeRestrictedUnsigned8BitInteger_380();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 380 : Write just-below-range value to a range-restricted unsigned 8-bit integer\n");
+            err = TestWriteJustBelowRangeValueToARangeRestrictedUnsigned8BitInteger_380();
             break;
         case 381:
             ChipLogProgress(
-                chipTool, " ***** Test Step 381 : Verify range-restricted unsigned 8-bit integer value has not changed\n");
-            err = TestVerifyRangeRestrictedUnsigned8BitIntegerValueHasNotChanged_381();
+                chipTool, " ***** Test Step 381 : Write just-above-range value to a range-restricted unsigned 8-bit integer\n");
+            err = TestWriteJustAboveRangeValueToARangeRestrictedUnsigned8BitInteger_381();
             break;
         case 382:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 382 : Write min valid value to a range-restricted unsigned 8-bit integer\n");
-            err = TestWriteMinValidValueToARangeRestrictedUnsigned8BitInteger_382();
+            ChipLogProgress(chipTool, " ***** Test Step 382 : Write max value to a range-restricted unsigned 8-bit integer\n");
+            err = TestWriteMaxValueToARangeRestrictedUnsigned8BitInteger_382();
             break;
         case 383:
             ChipLogProgress(
-                chipTool, " ***** Test Step 383 : Verify range-restricted unsigned 8-bit integer value is at min valid\n");
-            err = TestVerifyRangeRestrictedUnsigned8BitIntegerValueIsAtMinValid_383();
+                chipTool, " ***** Test Step 383 : Verify range-restricted unsigned 8-bit integer value has not changed\n");
+            err = TestVerifyRangeRestrictedUnsigned8BitIntegerValueHasNotChanged_383();
             break;
         case 384:
             ChipLogProgress(
-                chipTool, " ***** Test Step 384 : Write max valid value to a range-restricted unsigned 8-bit integer\n");
-            err = TestWriteMaxValidValueToARangeRestrictedUnsigned8BitInteger_384();
+                chipTool, " ***** Test Step 384 : Write min valid value to a range-restricted unsigned 8-bit integer\n");
+            err = TestWriteMinValidValueToARangeRestrictedUnsigned8BitInteger_384();
             break;
         case 385:
             ChipLogProgress(
-                chipTool, " ***** Test Step 385 : Verify range-restricted unsigned 8-bit integer value is at max valid\n");
-            err = TestVerifyRangeRestrictedUnsigned8BitIntegerValueIsAtMaxValid_385();
+                chipTool, " ***** Test Step 385 : Verify range-restricted unsigned 8-bit integer value is at min valid\n");
+            err = TestVerifyRangeRestrictedUnsigned8BitIntegerValueIsAtMinValid_385();
             break;
         case 386:
             ChipLogProgress(
-                chipTool, " ***** Test Step 386 : Write middle valid value to a range-restricted unsigned 8-bit integer\n");
-            err = TestWriteMiddleValidValueToARangeRestrictedUnsigned8BitInteger_386();
+                chipTool, " ***** Test Step 386 : Write max valid value to a range-restricted unsigned 8-bit integer\n");
+            err = TestWriteMaxValidValueToARangeRestrictedUnsigned8BitInteger_386();
             break;
         case 387:
             ChipLogProgress(
-                chipTool, " ***** Test Step 387 : Verify range-restricted unsigned 8-bit integer value is at mid valid\n");
-            err = TestVerifyRangeRestrictedUnsigned8BitIntegerValueIsAtMidValid_387();
+                chipTool, " ***** Test Step 387 : Verify range-restricted unsigned 8-bit integer value is at max valid\n");
+            err = TestVerifyRangeRestrictedUnsigned8BitIntegerValueIsAtMaxValid_387();
             break;
         case 388:
-            ChipLogProgress(chipTool, " ***** Test Step 388 : Read range-restricted unsigned 16-bit integer\n");
-            err = TestReadRangeRestrictedUnsigned16BitInteger_388();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 388 : Write middle valid value to a range-restricted unsigned 8-bit integer\n");
+            err = TestWriteMiddleValidValueToARangeRestrictedUnsigned8BitInteger_388();
             break;
         case 389:
-            ChipLogProgress(chipTool, " ***** Test Step 389 : Write min value to a range-restricted unsigned 16-bit integer\n");
-            err = TestWriteMinValueToARangeRestrictedUnsigned16BitInteger_389();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 389 : Verify range-restricted unsigned 8-bit integer value is at mid valid\n");
+            err = TestVerifyRangeRestrictedUnsigned8BitIntegerValueIsAtMidValid_389();
             break;
         case 390:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 390 : Write just-below-range value to a range-restricted unsigned 16-bit integer\n");
-            err = TestWriteJustBelowRangeValueToARangeRestrictedUnsigned16BitInteger_390();
+            ChipLogProgress(chipTool, " ***** Test Step 390 : Read range-restricted unsigned 16-bit integer\n");
+            err = TestReadRangeRestrictedUnsigned16BitInteger_390();
             break;
         case 391:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 391 : Write just-above-range value to a range-restricted unsigned 16-bit integer\n");
-            err = TestWriteJustAboveRangeValueToARangeRestrictedUnsigned16BitInteger_391();
+            ChipLogProgress(chipTool, " ***** Test Step 391 : Write min value to a range-restricted unsigned 16-bit integer\n");
+            err = TestWriteMinValueToARangeRestrictedUnsigned16BitInteger_391();
             break;
         case 392:
-            ChipLogProgress(chipTool, " ***** Test Step 392 : Write max value to a range-restricted unsigned 16-bit integer\n");
-            err = TestWriteMaxValueToARangeRestrictedUnsigned16BitInteger_392();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 392 : Write just-below-range value to a range-restricted unsigned 16-bit integer\n");
+            err = TestWriteJustBelowRangeValueToARangeRestrictedUnsigned16BitInteger_392();
             break;
         case 393:
             ChipLogProgress(
-                chipTool, " ***** Test Step 393 : Verify range-restricted unsigned 16-bit integer value has not changed\n");
-            err = TestVerifyRangeRestrictedUnsigned16BitIntegerValueHasNotChanged_393();
+                chipTool, " ***** Test Step 393 : Write just-above-range value to a range-restricted unsigned 16-bit integer\n");
+            err = TestWriteJustAboveRangeValueToARangeRestrictedUnsigned16BitInteger_393();
             break;
         case 394:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 394 : Write min valid value to a range-restricted unsigned 16-bit integer\n");
-            err = TestWriteMinValidValueToARangeRestrictedUnsigned16BitInteger_394();
+            ChipLogProgress(chipTool, " ***** Test Step 394 : Write max value to a range-restricted unsigned 16-bit integer\n");
+            err = TestWriteMaxValueToARangeRestrictedUnsigned16BitInteger_394();
             break;
         case 395:
             ChipLogProgress(
-                chipTool, " ***** Test Step 395 : Verify range-restricted unsigned 16-bit integer value is at min valid\n");
-            err = TestVerifyRangeRestrictedUnsigned16BitIntegerValueIsAtMinValid_395();
+                chipTool, " ***** Test Step 395 : Verify range-restricted unsigned 16-bit integer value has not changed\n");
+            err = TestVerifyRangeRestrictedUnsigned16BitIntegerValueHasNotChanged_395();
             break;
         case 396:
             ChipLogProgress(
-                chipTool, " ***** Test Step 396 : Write max valid value to a range-restricted unsigned 16-bit integer\n");
-            err = TestWriteMaxValidValueToARangeRestrictedUnsigned16BitInteger_396();
+                chipTool, " ***** Test Step 396 : Write min valid value to a range-restricted unsigned 16-bit integer\n");
+            err = TestWriteMinValidValueToARangeRestrictedUnsigned16BitInteger_396();
             break;
         case 397:
             ChipLogProgress(
-                chipTool, " ***** Test Step 397 : Verify range-restricted unsigned 16-bit integer value is at max valid\n");
-            err = TestVerifyRangeRestrictedUnsigned16BitIntegerValueIsAtMaxValid_397();
+                chipTool, " ***** Test Step 397 : Verify range-restricted unsigned 16-bit integer value is at min valid\n");
+            err = TestVerifyRangeRestrictedUnsigned16BitIntegerValueIsAtMinValid_397();
             break;
         case 398:
             ChipLogProgress(
-                chipTool, " ***** Test Step 398 : Write middle valid value to a range-restricted unsigned 16-bit integer\n");
-            err = TestWriteMiddleValidValueToARangeRestrictedUnsigned16BitInteger_398();
+                chipTool, " ***** Test Step 398 : Write max valid value to a range-restricted unsigned 16-bit integer\n");
+            err = TestWriteMaxValidValueToARangeRestrictedUnsigned16BitInteger_398();
             break;
         case 399:
             ChipLogProgress(
-                chipTool, " ***** Test Step 399 : Verify range-restricted unsigned 16-bit integer value is at mid valid\n");
-            err = TestVerifyRangeRestrictedUnsigned16BitIntegerValueIsAtMidValid_399();
+                chipTool, " ***** Test Step 399 : Verify range-restricted unsigned 16-bit integer value is at max valid\n");
+            err = TestVerifyRangeRestrictedUnsigned16BitIntegerValueIsAtMaxValid_399();
             break;
         case 400:
-            ChipLogProgress(chipTool, " ***** Test Step 400 : Read range-restricted signed 8-bit integer\n");
-            err = TestReadRangeRestrictedSigned8BitInteger_400();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 400 : Write middle valid value to a range-restricted unsigned 16-bit integer\n");
+            err = TestWriteMiddleValidValueToARangeRestrictedUnsigned16BitInteger_400();
             break;
         case 401:
-            ChipLogProgress(chipTool, " ***** Test Step 401 : Write min value to a range-restricted signed 8-bit integer\n");
-            err = TestWriteMinValueToARangeRestrictedSigned8BitInteger_401();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 401 : Verify range-restricted unsigned 16-bit integer value is at mid valid\n");
+            err = TestVerifyRangeRestrictedUnsigned16BitIntegerValueIsAtMidValid_401();
             break;
         case 402:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 402 : Write just-below-range value to a range-restricted signed 8-bit integer\n");
-            err = TestWriteJustBelowRangeValueToARangeRestrictedSigned8BitInteger_402();
+            ChipLogProgress(chipTool, " ***** Test Step 402 : Read range-restricted signed 8-bit integer\n");
+            err = TestReadRangeRestrictedSigned8BitInteger_402();
             break;
         case 403:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 403 : Write just-above-range value to a range-restricted signed 8-bit integer\n");
-            err = TestWriteJustAboveRangeValueToARangeRestrictedSigned8BitInteger_403();
+            ChipLogProgress(chipTool, " ***** Test Step 403 : Write min value to a range-restricted signed 8-bit integer\n");
+            err = TestWriteMinValueToARangeRestrictedSigned8BitInteger_403();
             break;
         case 404:
-            ChipLogProgress(chipTool, " ***** Test Step 404 : Write max value to a range-restricted signed 8-bit integer\n");
-            err = TestWriteMaxValueToARangeRestrictedSigned8BitInteger_404();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 404 : Write just-below-range value to a range-restricted signed 8-bit integer\n");
+            err = TestWriteJustBelowRangeValueToARangeRestrictedSigned8BitInteger_404();
             break;
         case 405:
             ChipLogProgress(
-                chipTool, " ***** Test Step 405 : Verify range-restricted signed 8-bit integer value has not changed\n");
-            err = TestVerifyRangeRestrictedSigned8BitIntegerValueHasNotChanged_405();
+                chipTool, " ***** Test Step 405 : Write just-above-range value to a range-restricted signed 8-bit integer\n");
+            err = TestWriteJustAboveRangeValueToARangeRestrictedSigned8BitInteger_405();
             break;
         case 406:
-            ChipLogProgress(chipTool, " ***** Test Step 406 : Write min valid value to a range-restricted signed 8-bit integer\n");
-            err = TestWriteMinValidValueToARangeRestrictedSigned8BitInteger_406();
+            ChipLogProgress(chipTool, " ***** Test Step 406 : Write max value to a range-restricted signed 8-bit integer\n");
+            err = TestWriteMaxValueToARangeRestrictedSigned8BitInteger_406();
             break;
         case 407:
             ChipLogProgress(
-                chipTool, " ***** Test Step 407 : Verify range-restricted signed 8-bit integer value is at min valid\n");
-            err = TestVerifyRangeRestrictedSigned8BitIntegerValueIsAtMinValid_407();
+                chipTool, " ***** Test Step 407 : Verify range-restricted signed 8-bit integer value has not changed\n");
+            err = TestVerifyRangeRestrictedSigned8BitIntegerValueHasNotChanged_407();
             break;
         case 408:
-            ChipLogProgress(chipTool, " ***** Test Step 408 : Write max valid value to a range-restricted signed 8-bit integer\n");
-            err = TestWriteMaxValidValueToARangeRestrictedSigned8BitInteger_408();
+            ChipLogProgress(chipTool, " ***** Test Step 408 : Write min valid value to a range-restricted signed 8-bit integer\n");
+            err = TestWriteMinValidValueToARangeRestrictedSigned8BitInteger_408();
             break;
         case 409:
             ChipLogProgress(
-                chipTool, " ***** Test Step 409 : Verify range-restricted signed 8-bit integer value is at max valid\n");
-            err = TestVerifyRangeRestrictedSigned8BitIntegerValueIsAtMaxValid_409();
+                chipTool, " ***** Test Step 409 : Verify range-restricted signed 8-bit integer value is at min valid\n");
+            err = TestVerifyRangeRestrictedSigned8BitIntegerValueIsAtMinValid_409();
             break;
         case 410:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 410 : Write middle valid value to a range-restricted signed 8-bit integer\n");
-            err = TestWriteMiddleValidValueToARangeRestrictedSigned8BitInteger_410();
+            ChipLogProgress(chipTool, " ***** Test Step 410 : Write max valid value to a range-restricted signed 8-bit integer\n");
+            err = TestWriteMaxValidValueToARangeRestrictedSigned8BitInteger_410();
             break;
         case 411:
             ChipLogProgress(
-                chipTool, " ***** Test Step 411 : Verify range-restricted signed 8-bit integer value is at mid valid\n");
-            err = TestVerifyRangeRestrictedSigned8BitIntegerValueIsAtMidValid_411();
+                chipTool, " ***** Test Step 411 : Verify range-restricted signed 8-bit integer value is at max valid\n");
+            err = TestVerifyRangeRestrictedSigned8BitIntegerValueIsAtMaxValid_411();
             break;
         case 412:
-            ChipLogProgress(chipTool, " ***** Test Step 412 : Read range-restricted signed 16-bit integer\n");
-            err = TestReadRangeRestrictedSigned16BitInteger_412();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 412 : Write middle valid value to a range-restricted signed 8-bit integer\n");
+            err = TestWriteMiddleValidValueToARangeRestrictedSigned8BitInteger_412();
             break;
         case 413:
-            ChipLogProgress(chipTool, " ***** Test Step 413 : Write min value to a range-restricted signed 16-bit integer\n");
-            err = TestWriteMinValueToARangeRestrictedSigned16BitInteger_413();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 413 : Verify range-restricted signed 8-bit integer value is at mid valid\n");
+            err = TestVerifyRangeRestrictedSigned8BitIntegerValueIsAtMidValid_413();
             break;
         case 414:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 414 : Write just-below-range value to a range-restricted signed 16-bit integer\n");
-            err = TestWriteJustBelowRangeValueToARangeRestrictedSigned16BitInteger_414();
+            ChipLogProgress(chipTool, " ***** Test Step 414 : Read range-restricted signed 16-bit integer\n");
+            err = TestReadRangeRestrictedSigned16BitInteger_414();
             break;
         case 415:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 415 : Write just-above-range value to a range-restricted signed 16-bit integer\n");
-            err = TestWriteJustAboveRangeValueToARangeRestrictedSigned16BitInteger_415();
+            ChipLogProgress(chipTool, " ***** Test Step 415 : Write min value to a range-restricted signed 16-bit integer\n");
+            err = TestWriteMinValueToARangeRestrictedSigned16BitInteger_415();
             break;
         case 416:
-            ChipLogProgress(chipTool, " ***** Test Step 416 : Write max value to a range-restricted signed 16-bit integer\n");
-            err = TestWriteMaxValueToARangeRestrictedSigned16BitInteger_416();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 416 : Write just-below-range value to a range-restricted signed 16-bit integer\n");
+            err = TestWriteJustBelowRangeValueToARangeRestrictedSigned16BitInteger_416();
             break;
         case 417:
             ChipLogProgress(
-                chipTool, " ***** Test Step 417 : Verify range-restricted signed 16-bit integer value has not changed\n");
-            err = TestVerifyRangeRestrictedSigned16BitIntegerValueHasNotChanged_417();
+                chipTool, " ***** Test Step 417 : Write just-above-range value to a range-restricted signed 16-bit integer\n");
+            err = TestWriteJustAboveRangeValueToARangeRestrictedSigned16BitInteger_417();
             break;
         case 418:
-            ChipLogProgress(chipTool, " ***** Test Step 418 : Write min valid value to a range-restricted signed 16-bit integer\n");
-            err = TestWriteMinValidValueToARangeRestrictedSigned16BitInteger_418();
+            ChipLogProgress(chipTool, " ***** Test Step 418 : Write max value to a range-restricted signed 16-bit integer\n");
+            err = TestWriteMaxValueToARangeRestrictedSigned16BitInteger_418();
             break;
         case 419:
             ChipLogProgress(
-                chipTool, " ***** Test Step 419 : Verify range-restricted signed 16-bit integer value is at min valid\n");
-            err = TestVerifyRangeRestrictedSigned16BitIntegerValueIsAtMinValid_419();
+                chipTool, " ***** Test Step 419 : Verify range-restricted signed 16-bit integer value has not changed\n");
+            err = TestVerifyRangeRestrictedSigned16BitIntegerValueHasNotChanged_419();
             break;
         case 420:
-            ChipLogProgress(chipTool, " ***** Test Step 420 : Write max valid value to a range-restricted signed 16-bit integer\n");
-            err = TestWriteMaxValidValueToARangeRestrictedSigned16BitInteger_420();
+            ChipLogProgress(chipTool, " ***** Test Step 420 : Write min valid value to a range-restricted signed 16-bit integer\n");
+            err = TestWriteMinValidValueToARangeRestrictedSigned16BitInteger_420();
             break;
         case 421:
             ChipLogProgress(
-                chipTool, " ***** Test Step 421 : Verify range-restricted signed 16-bit integer value is at max valid\n");
-            err = TestVerifyRangeRestrictedSigned16BitIntegerValueIsAtMaxValid_421();
+                chipTool, " ***** Test Step 421 : Verify range-restricted signed 16-bit integer value is at min valid\n");
+            err = TestVerifyRangeRestrictedSigned16BitIntegerValueIsAtMinValid_421();
             break;
         case 422:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 422 : Write middle valid value to a range-restricted signed 16-bit integer\n");
-            err = TestWriteMiddleValidValueToARangeRestrictedSigned16BitInteger_422();
+            ChipLogProgress(chipTool, " ***** Test Step 422 : Write max valid value to a range-restricted signed 16-bit integer\n");
+            err = TestWriteMaxValidValueToARangeRestrictedSigned16BitInteger_422();
             break;
         case 423:
             ChipLogProgress(
-                chipTool, " ***** Test Step 423 : Verify range-restricted signed 16-bit integer value is at mid valid\n");
-            err = TestVerifyRangeRestrictedSigned16BitIntegerValueIsAtMidValid_423();
+                chipTool, " ***** Test Step 423 : Verify range-restricted signed 16-bit integer value is at max valid\n");
+            err = TestVerifyRangeRestrictedSigned16BitIntegerValueIsAtMaxValid_423();
             break;
         case 424:
-            ChipLogProgress(chipTool, " ***** Test Step 424 : Read nullable range-restricted unsigned 8-bit integer\n");
-            err = TestReadNullableRangeRestrictedUnsigned8BitInteger_424();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 424 : Write middle valid value to a range-restricted signed 16-bit integer\n");
+            err = TestWriteMiddleValidValueToARangeRestrictedSigned16BitInteger_424();
             break;
         case 425:
             ChipLogProgress(
-                chipTool, " ***** Test Step 425 : Write min value to a nullable range-restricted unsigned 8-bit integer\n");
-            err = TestWriteMinValueToANullableRangeRestrictedUnsigned8BitInteger_425();
+                chipTool, " ***** Test Step 425 : Verify range-restricted signed 16-bit integer value is at mid valid\n");
+            err = TestVerifyRangeRestrictedSigned16BitIntegerValueIsAtMidValid_425();
             break;
         case 426:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 426 : Write just-below-range value to a nullable range-restricted unsigned 8-bit integer\n");
-            err = TestWriteJustBelowRangeValueToANullableRangeRestrictedUnsigned8BitInteger_426();
+            ChipLogProgress(chipTool, " ***** Test Step 426 : Read nullable range-restricted unsigned 8-bit integer\n");
+            err = TestReadNullableRangeRestrictedUnsigned8BitInteger_426();
             break;
         case 427:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 427 : Write just-above-range value to a nullable range-restricted unsigned 8-bit integer\n");
-            err = TestWriteJustAboveRangeValueToANullableRangeRestrictedUnsigned8BitInteger_427();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 427 : Write min value to a nullable range-restricted unsigned 8-bit integer\n");
+            err = TestWriteMinValueToANullableRangeRestrictedUnsigned8BitInteger_427();
             break;
         case 428:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 428 : Write max value to a nullable range-restricted unsigned 8-bit integer\n");
-            err = TestWriteMaxValueToANullableRangeRestrictedUnsigned8BitInteger_428();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 428 : Write just-below-range value to a nullable range-restricted unsigned 8-bit integer\n");
+            err = TestWriteJustBelowRangeValueToANullableRangeRestrictedUnsigned8BitInteger_428();
             break;
         case 429:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 429 : Verify nullable range-restricted unsigned 8-bit integer value has not changed\n");
-            err = TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueHasNotChanged_429();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 429 : Write just-above-range value to a nullable range-restricted unsigned 8-bit integer\n");
+            err = TestWriteJustAboveRangeValueToANullableRangeRestrictedUnsigned8BitInteger_429();
             break;
         case 430:
             ChipLogProgress(
-                chipTool, " ***** Test Step 430 : Write min valid value to a nullable range-restricted unsigned 8-bit integer\n");
-            err = TestWriteMinValidValueToANullableRangeRestrictedUnsigned8BitInteger_430();
+                chipTool, " ***** Test Step 430 : Write max value to a nullable range-restricted unsigned 8-bit integer\n");
+            err = TestWriteMaxValueToANullableRangeRestrictedUnsigned8BitInteger_430();
             break;
         case 431:
             ChipLogProgress(
-                chipTool, " ***** Test Step 431 : Verify nullable range-restricted unsigned 8-bit integer value is at min valid\n");
-            err = TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsAtMinValid_431();
+                chipTool, " ***** Test Step 431 : Verify nullable range-restricted unsigned 8-bit integer value has not changed\n");
+            err = TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueHasNotChanged_431();
             break;
         case 432:
             ChipLogProgress(
-                chipTool, " ***** Test Step 432 : Write max valid value to a nullable range-restricted unsigned 8-bit integer\n");
-            err = TestWriteMaxValidValueToANullableRangeRestrictedUnsigned8BitInteger_432();
+                chipTool, " ***** Test Step 432 : Write min valid value to a nullable range-restricted unsigned 8-bit integer\n");
+            err = TestWriteMinValidValueToANullableRangeRestrictedUnsigned8BitInteger_432();
             break;
         case 433:
             ChipLogProgress(
-                chipTool, " ***** Test Step 433 : Verify nullable range-restricted unsigned 8-bit integer value is at max valid\n");
-            err = TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsAtMaxValid_433();
+                chipTool, " ***** Test Step 433 : Verify nullable range-restricted unsigned 8-bit integer value is at min valid\n");
+            err = TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsAtMinValid_433();
             break;
         case 434:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 434 : Write middle valid value to a nullable range-restricted unsigned 8-bit integer\n");
-            err = TestWriteMiddleValidValueToANullableRangeRestrictedUnsigned8BitInteger_434();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 434 : Write max valid value to a nullable range-restricted unsigned 8-bit integer\n");
+            err = TestWriteMaxValidValueToANullableRangeRestrictedUnsigned8BitInteger_434();
             break;
         case 435:
             ChipLogProgress(
-                chipTool, " ***** Test Step 435 : Verify nullable range-restricted unsigned 8-bit integer value is at mid valid\n");
-            err = TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsAtMidValid_435();
+                chipTool, " ***** Test Step 435 : Verify nullable range-restricted unsigned 8-bit integer value is at max valid\n");
+            err = TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsAtMaxValid_435();
             break;
         case 436:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 436 : Write null value to a nullable range-restricted unsigned 8-bit integer\n");
-            err = TestWriteNullValueToANullableRangeRestrictedUnsigned8BitInteger_436();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 436 : Write middle valid value to a nullable range-restricted unsigned 8-bit integer\n");
+            err = TestWriteMiddleValidValueToANullableRangeRestrictedUnsigned8BitInteger_436();
             break;
         case 437:
             ChipLogProgress(
-                chipTool, " ***** Test Step 437 : Verify nullable range-restricted unsigned 8-bit integer value is null\n");
-            err = TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsNull_437();
+                chipTool, " ***** Test Step 437 : Verify nullable range-restricted unsigned 8-bit integer value is at mid valid\n");
+            err = TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsAtMidValid_437();
             break;
         case 438:
-            ChipLogProgress(chipTool, " ***** Test Step 438 : Read nullable range-restricted unsigned 16-bit integer\n");
-            err = TestReadNullableRangeRestrictedUnsigned16BitInteger_438();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 438 : Write null value to a nullable range-restricted unsigned 8-bit integer\n");
+            err = TestWriteNullValueToANullableRangeRestrictedUnsigned8BitInteger_438();
             break;
         case 439:
             ChipLogProgress(
-                chipTool, " ***** Test Step 439 : Write min value to a nullable range-restricted unsigned 16-bit integer\n");
-            err = TestWriteMinValueToANullableRangeRestrictedUnsigned16BitInteger_439();
+                chipTool, " ***** Test Step 439 : Verify nullable range-restricted unsigned 8-bit integer value is null\n");
+            err = TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsNull_439();
             break;
         case 440:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 440 : Write just-below-range value to a nullable range-restricted unsigned 16-bit integer\n");
-            err = TestWriteJustBelowRangeValueToANullableRangeRestrictedUnsigned16BitInteger_440();
+            ChipLogProgress(chipTool, " ***** Test Step 440 : Read nullable range-restricted unsigned 16-bit integer\n");
+            err = TestReadNullableRangeRestrictedUnsigned16BitInteger_440();
             break;
         case 441:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 441 : Write just-above-range value to a nullable range-restricted unsigned 16-bit integer\n");
-            err = TestWriteJustAboveRangeValueToANullableRangeRestrictedUnsigned16BitInteger_441();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 441 : Write min value to a nullable range-restricted unsigned 16-bit integer\n");
+            err = TestWriteMinValueToANullableRangeRestrictedUnsigned16BitInteger_441();
             break;
         case 442:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 442 : Write max value to a nullable range-restricted unsigned 16-bit integer\n");
-            err = TestWriteMaxValueToANullableRangeRestrictedUnsigned16BitInteger_442();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 442 : Write just-below-range value to a nullable range-restricted unsigned 16-bit integer\n");
+            err = TestWriteJustBelowRangeValueToANullableRangeRestrictedUnsigned16BitInteger_442();
             break;
         case 443:
             ChipLogProgress(chipTool,
-                " ***** Test Step 443 : Verify nullable range-restricted unsigned 16-bit integer value has not changed\n");
-            err = TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueHasNotChanged_443();
+                " ***** Test Step 443 : Write just-above-range value to a nullable range-restricted unsigned 16-bit integer\n");
+            err = TestWriteJustAboveRangeValueToANullableRangeRestrictedUnsigned16BitInteger_443();
             break;
         case 444:
             ChipLogProgress(
-                chipTool, " ***** Test Step 444 : Write min valid value to a nullable range-restricted unsigned 16-bit integer\n");
-            err = TestWriteMinValidValueToANullableRangeRestrictedUnsigned16BitInteger_444();
+                chipTool, " ***** Test Step 444 : Write max value to a nullable range-restricted unsigned 16-bit integer\n");
+            err = TestWriteMaxValueToANullableRangeRestrictedUnsigned16BitInteger_444();
             break;
         case 445:
             ChipLogProgress(chipTool,
-                " ***** Test Step 445 : Verify nullable range-restricted unsigned 16-bit integer value is at min valid\n");
-            err = TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsAtMinValid_445();
+                " ***** Test Step 445 : Verify nullable range-restricted unsigned 16-bit integer value has not changed\n");
+            err = TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueHasNotChanged_445();
             break;
         case 446:
             ChipLogProgress(
-                chipTool, " ***** Test Step 446 : Write max valid value to a nullable range-restricted unsigned 16-bit integer\n");
-            err = TestWriteMaxValidValueToANullableRangeRestrictedUnsigned16BitInteger_446();
+                chipTool, " ***** Test Step 446 : Write min valid value to a nullable range-restricted unsigned 16-bit integer\n");
+            err = TestWriteMinValidValueToANullableRangeRestrictedUnsigned16BitInteger_446();
             break;
         case 447:
             ChipLogProgress(chipTool,
-                " ***** Test Step 447 : Verify nullable range-restricted unsigned 16-bit integer value is at max valid\n");
-            err = TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsAtMaxValid_447();
+                " ***** Test Step 447 : Verify nullable range-restricted unsigned 16-bit integer value is at min valid\n");
+            err = TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsAtMinValid_447();
             break;
         case 448:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 448 : Write middle valid value to a nullable range-restricted unsigned 16-bit integer\n");
-            err = TestWriteMiddleValidValueToANullableRangeRestrictedUnsigned16BitInteger_448();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 448 : Write max valid value to a nullable range-restricted unsigned 16-bit integer\n");
+            err = TestWriteMaxValidValueToANullableRangeRestrictedUnsigned16BitInteger_448();
             break;
         case 449:
             ChipLogProgress(chipTool,
-                " ***** Test Step 449 : Verify nullable range-restricted unsigned 16-bit integer value is at mid valid\n");
-            err = TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsAtMidValid_449();
+                " ***** Test Step 449 : Verify nullable range-restricted unsigned 16-bit integer value is at max valid\n");
+            err = TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsAtMaxValid_449();
             break;
         case 450:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 450 : Write null value to a nullable range-restricted unsigned 16-bit integer\n");
-            err = TestWriteNullValueToANullableRangeRestrictedUnsigned16BitInteger_450();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 450 : Write middle valid value to a nullable range-restricted unsigned 16-bit integer\n");
+            err = TestWriteMiddleValidValueToANullableRangeRestrictedUnsigned16BitInteger_450();
             break;
         case 451:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 451 : Verify nullable range-restricted unsigned 16-bit integer value is null\n");
-            err = TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsNull_451();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 451 : Verify nullable range-restricted unsigned 16-bit integer value is at mid valid\n");
+            err = TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsAtMidValid_451();
             break;
         case 452:
-            ChipLogProgress(chipTool, " ***** Test Step 452 : Read nullable range-restricted signed 8-bit integer\n");
-            err = TestReadNullableRangeRestrictedSigned8BitInteger_452();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 452 : Write null value to a nullable range-restricted unsigned 16-bit integer\n");
+            err = TestWriteNullValueToANullableRangeRestrictedUnsigned16BitInteger_452();
             break;
         case 453:
             ChipLogProgress(
-                chipTool, " ***** Test Step 453 : Write min value to a nullable range-restricted signed 8-bit integer\n");
-            err = TestWriteMinValueToANullableRangeRestrictedSigned8BitInteger_453();
+                chipTool, " ***** Test Step 453 : Verify nullable range-restricted unsigned 16-bit integer value is null\n");
+            err = TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsNull_453();
             break;
         case 454:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 454 : Write just-below-range value to a nullable range-restricted signed 8-bit integer\n");
-            err = TestWriteJustBelowRangeValueToANullableRangeRestrictedSigned8BitInteger_454();
+            ChipLogProgress(chipTool, " ***** Test Step 454 : Read nullable range-restricted signed 8-bit integer\n");
+            err = TestReadNullableRangeRestrictedSigned8BitInteger_454();
             break;
         case 455:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 455 : Write just-above-range value to a nullable range-restricted signed 8-bit integer\n");
-            err = TestWriteJustAboveRangeValueToANullableRangeRestrictedSigned8BitInteger_455();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 455 : Write min value to a nullable range-restricted signed 8-bit integer\n");
+            err = TestWriteMinValueToANullableRangeRestrictedSigned8BitInteger_455();
             break;
         case 456:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 456 : Write max value to a nullable range-restricted signed 8-bit integer\n");
-            err = TestWriteMaxValueToANullableRangeRestrictedSigned8BitInteger_456();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 456 : Write just-below-range value to a nullable range-restricted signed 8-bit integer\n");
+            err = TestWriteJustBelowRangeValueToANullableRangeRestrictedSigned8BitInteger_456();
             break;
         case 457:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 457 : Verify nullable range-restricted signed 8-bit integer value has not changed\n");
-            err = TestVerifyNullableRangeRestrictedSigned8BitIntegerValueHasNotChanged_457();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 457 : Write just-above-range value to a nullable range-restricted signed 8-bit integer\n");
+            err = TestWriteJustAboveRangeValueToANullableRangeRestrictedSigned8BitInteger_457();
             break;
         case 458:
             ChipLogProgress(
-                chipTool, " ***** Test Step 458 : Write min valid value to a nullable range-restricted signed 8-bit integer\n");
-            err = TestWriteMinValidValueToANullableRangeRestrictedSigned8BitInteger_458();
+                chipTool, " ***** Test Step 458 : Write max value to a nullable range-restricted signed 8-bit integer\n");
+            err = TestWriteMaxValueToANullableRangeRestrictedSigned8BitInteger_458();
             break;
         case 459:
             ChipLogProgress(
-                chipTool, " ***** Test Step 459 : Verify nullable range-restricted signed 8-bit integer value is at min valid\n");
-            err = TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtMinValid_459();
+                chipTool, " ***** Test Step 459 : Verify nullable range-restricted signed 8-bit integer value has not changed\n");
+            err = TestVerifyNullableRangeRestrictedSigned8BitIntegerValueHasNotChanged_459();
             break;
         case 460:
             ChipLogProgress(
-                chipTool, " ***** Test Step 460 : Write max valid value to a nullable range-restricted signed 8-bit integer\n");
-            err = TestWriteMaxValidValueToANullableRangeRestrictedSigned8BitInteger_460();
+                chipTool, " ***** Test Step 460 : Write min valid value to a nullable range-restricted signed 8-bit integer\n");
+            err = TestWriteMinValidValueToANullableRangeRestrictedSigned8BitInteger_460();
             break;
         case 461:
             ChipLogProgress(
-                chipTool, " ***** Test Step 461 : Verify nullable range-restricted signed 8-bit integer value is at max valid\n");
-            err = TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtMaxValid_461();
+                chipTool, " ***** Test Step 461 : Verify nullable range-restricted signed 8-bit integer value is at min valid\n");
+            err = TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtMinValid_461();
             break;
         case 462:
             ChipLogProgress(
-                chipTool, " ***** Test Step 462 : Write middle valid value to a nullable range-restricted signed 8-bit integer\n");
-            err = TestWriteMiddleValidValueToANullableRangeRestrictedSigned8BitInteger_462();
+                chipTool, " ***** Test Step 462 : Write max valid value to a nullable range-restricted signed 8-bit integer\n");
+            err = TestWriteMaxValidValueToANullableRangeRestrictedSigned8BitInteger_462();
             break;
         case 463:
             ChipLogProgress(
-                chipTool, " ***** Test Step 463 : Verify nullable range-restricted signed 8-bit integer value is at mid valid\n");
-            err = TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtMidValid_463();
+                chipTool, " ***** Test Step 463 : Verify nullable range-restricted signed 8-bit integer value is at max valid\n");
+            err = TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtMaxValid_463();
             break;
         case 464:
             ChipLogProgress(
-                chipTool, " ***** Test Step 464 : Write null value to a nullable range-restricted signed 8-bit integer\n");
-            err = TestWriteNullValueToANullableRangeRestrictedSigned8BitInteger_464();
+                chipTool, " ***** Test Step 464 : Write middle valid value to a nullable range-restricted signed 8-bit integer\n");
+            err = TestWriteMiddleValidValueToANullableRangeRestrictedSigned8BitInteger_464();
             break;
         case 465:
             ChipLogProgress(
-                chipTool, " ***** Test Step 465 : Verify nullable range-restricted signed 8-bit integer value is at null\n");
-            err = TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtNull_465();
+                chipTool, " ***** Test Step 465 : Verify nullable range-restricted signed 8-bit integer value is at mid valid\n");
+            err = TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtMidValid_465();
             break;
         case 466:
-            ChipLogProgress(chipTool, " ***** Test Step 466 : Read nullable range-restricted signed 16-bit integer\n");
-            err = TestReadNullableRangeRestrictedSigned16BitInteger_466();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 466 : Write null value to a nullable range-restricted signed 8-bit integer\n");
+            err = TestWriteNullValueToANullableRangeRestrictedSigned8BitInteger_466();
             break;
         case 467:
             ChipLogProgress(
-                chipTool, " ***** Test Step 467 : Write min value to a nullable range-restricted signed 16-bit integer\n");
-            err = TestWriteMinValueToANullableRangeRestrictedSigned16BitInteger_467();
+                chipTool, " ***** Test Step 467 : Verify nullable range-restricted signed 8-bit integer value is at null\n");
+            err = TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtNull_467();
             break;
         case 468:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 468 : Write just-below-range value to a nullable range-restricted signed 16-bit integer\n");
-            err = TestWriteJustBelowRangeValueToANullableRangeRestrictedSigned16BitInteger_468();
+            ChipLogProgress(chipTool, " ***** Test Step 468 : Read nullable range-restricted signed 16-bit integer\n");
+            err = TestReadNullableRangeRestrictedSigned16BitInteger_468();
             break;
         case 469:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 469 : Write just-above-range value to a nullable range-restricted signed 16-bit integer\n");
-            err = TestWriteJustAboveRangeValueToANullableRangeRestrictedSigned16BitInteger_469();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 469 : Write min value to a nullable range-restricted signed 16-bit integer\n");
+            err = TestWriteMinValueToANullableRangeRestrictedSigned16BitInteger_469();
             break;
         case 470:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 470 : Write max value to a nullable range-restricted signed 16-bit integer\n");
-            err = TestWriteMaxValueToANullableRangeRestrictedSigned16BitInteger_470();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 470 : Write just-below-range value to a nullable range-restricted signed 16-bit integer\n");
+            err = TestWriteJustBelowRangeValueToANullableRangeRestrictedSigned16BitInteger_470();
             break;
         case 471:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 471 : Verify nullable range-restricted signed 16-bit integer value has not changed\n");
-            err = TestVerifyNullableRangeRestrictedSigned16BitIntegerValueHasNotChanged_471();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 471 : Write just-above-range value to a nullable range-restricted signed 16-bit integer\n");
+            err = TestWriteJustAboveRangeValueToANullableRangeRestrictedSigned16BitInteger_471();
             break;
         case 472:
             ChipLogProgress(
-                chipTool, " ***** Test Step 472 : Write min valid value to a nullable range-restricted signed 16-bit integer\n");
-            err = TestWriteMinValidValueToANullableRangeRestrictedSigned16BitInteger_472();
+                chipTool, " ***** Test Step 472 : Write max value to a nullable range-restricted signed 16-bit integer\n");
+            err = TestWriteMaxValueToANullableRangeRestrictedSigned16BitInteger_472();
             break;
         case 473:
             ChipLogProgress(
-                chipTool, " ***** Test Step 473 : Verify nullable range-restricted signed 16-bit integer value is at min valid\n");
-            err = TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsAtMinValid_473();
+                chipTool, " ***** Test Step 473 : Verify nullable range-restricted signed 16-bit integer value has not changed\n");
+            err = TestVerifyNullableRangeRestrictedSigned16BitIntegerValueHasNotChanged_473();
             break;
         case 474:
             ChipLogProgress(
-                chipTool, " ***** Test Step 474 : Write max valid value to a nullable range-restricted signed 16-bit integer\n");
-            err = TestWriteMaxValidValueToANullableRangeRestrictedSigned16BitInteger_474();
+                chipTool, " ***** Test Step 474 : Write min valid value to a nullable range-restricted signed 16-bit integer\n");
+            err = TestWriteMinValidValueToANullableRangeRestrictedSigned16BitInteger_474();
             break;
         case 475:
             ChipLogProgress(
-                chipTool, " ***** Test Step 475 : Verify nullable range-restricted signed 16-bit integer value is at max valid\n");
-            err = TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsAtMaxValid_475();
+                chipTool, " ***** Test Step 475 : Verify nullable range-restricted signed 16-bit integer value is at min valid\n");
+            err = TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsAtMinValid_475();
             break;
         case 476:
             ChipLogProgress(
-                chipTool, " ***** Test Step 476 : Write middle valid value to a nullable range-restricted signed 16-bit integer\n");
-            err = TestWriteMiddleValidValueToANullableRangeRestrictedSigned16BitInteger_476();
+                chipTool, " ***** Test Step 476 : Write max valid value to a nullable range-restricted signed 16-bit integer\n");
+            err = TestWriteMaxValidValueToANullableRangeRestrictedSigned16BitInteger_476();
             break;
         case 477:
             ChipLogProgress(
-                chipTool, " ***** Test Step 477 : Verify nullable range-restricted signed 16-bit integer value is at mid valid\n");
-            err = TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsAtMidValid_477();
+                chipTool, " ***** Test Step 477 : Verify nullable range-restricted signed 16-bit integer value is at max valid\n");
+            err = TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsAtMaxValid_477();
             break;
         case 478:
             ChipLogProgress(
-                chipTool, " ***** Test Step 478 : Write null value to a nullable range-restricted signed 16-bit integer\n");
-            err = TestWriteNullValueToANullableRangeRestrictedSigned16BitInteger_478();
+                chipTool, " ***** Test Step 478 : Write middle valid value to a nullable range-restricted signed 16-bit integer\n");
+            err = TestWriteMiddleValidValueToANullableRangeRestrictedSigned16BitInteger_478();
             break;
         case 479:
             ChipLogProgress(
-                chipTool, " ***** Test Step 479 : Verify nullable range-restricted signed 16-bit integer value is null\n");
-            err = TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsNull_479();
+                chipTool, " ***** Test Step 479 : Verify nullable range-restricted signed 16-bit integer value is at mid valid\n");
+            err = TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsAtMidValid_479();
             break;
         case 480:
-            ChipLogProgress(chipTool, " ***** Test Step 480 : Write attribute that returns general status on write\n");
-            err = TestWriteAttributeThatReturnsGeneralStatusOnWrite_480();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 480 : Write null value to a nullable range-restricted signed 16-bit integer\n");
+            err = TestWriteNullValueToANullableRangeRestrictedSigned16BitInteger_480();
             break;
         case 481:
-            ChipLogProgress(chipTool, " ***** Test Step 481 : Write attribute that returns cluster-specific status on write\n");
-            err = TestWriteAttributeThatReturnsClusterSpecificStatusOnWrite_481();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 481 : Verify nullable range-restricted signed 16-bit integer value is null\n");
+            err = TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsNull_481();
             break;
         case 482:
-            ChipLogProgress(chipTool, " ***** Test Step 482 : Read attribute that returns general status on read\n");
-            err = TestReadAttributeThatReturnsGeneralStatusOnRead_482();
+            ChipLogProgress(chipTool, " ***** Test Step 482 : Write attribute that returns general status on write\n");
+            err = TestWriteAttributeThatReturnsGeneralStatusOnWrite_482();
             break;
         case 483:
-            ChipLogProgress(chipTool, " ***** Test Step 483 : read attribute that returns cluster-specific status on read\n");
-            err = TestReadAttributeThatReturnsClusterSpecificStatusOnRead_483();
+            ChipLogProgress(chipTool, " ***** Test Step 483 : Write attribute that returns cluster-specific status on write\n");
+            err = TestWriteAttributeThatReturnsClusterSpecificStatusOnWrite_483();
             break;
         case 484:
-            ChipLogProgress(chipTool, " ***** Test Step 484 : read AcceptedCommandList attribute\n");
-            err = TestReadAcceptedCommandListAttribute_484();
+            ChipLogProgress(chipTool, " ***** Test Step 484 : Read attribute that returns general status on read\n");
+            err = TestReadAttributeThatReturnsGeneralStatusOnRead_484();
             break;
         case 485:
-            ChipLogProgress(chipTool, " ***** Test Step 485 : read GeneratedCommandList attribute\n");
-            err = TestReadGeneratedCommandListAttribute_485();
+            ChipLogProgress(chipTool, " ***** Test Step 485 : read attribute that returns cluster-specific status on read\n");
+            err = TestReadAttributeThatReturnsClusterSpecificStatusOnRead_485();
             break;
         case 486:
-            ChipLogProgress(chipTool, " ***** Test Step 486 : Write struct-typed attribute\n");
-            err = TestWriteStructTypedAttribute_486();
+            ChipLogProgress(chipTool, " ***** Test Step 486 : read AcceptedCommandList attribute\n");
+            err = TestReadAcceptedCommandListAttribute_486();
             break;
         case 487:
-            ChipLogProgress(chipTool, " ***** Test Step 487 : Read struct-typed attribute\n");
-            err = TestReadStructTypedAttribute_487();
+            ChipLogProgress(chipTool, " ***** Test Step 487 : read GeneratedCommandList attribute\n");
+            err = TestReadGeneratedCommandListAttribute_487();
+            break;
+        case 488:
+            ChipLogProgress(chipTool, " ***** Test Step 488 : Write struct-typed attribute\n");
+            err = TestWriteStructTypedAttribute_488();
+            break;
+        case 489:
+            ChipLogProgress(chipTool, " ***** Test Step 489 : Read struct-typed attribute\n");
+            err = TestReadStructTypedAttribute_489();
             break;
         }
 
@@ -70131,13 +70139,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 114:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 115:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 116:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 117:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70161,13 +70169,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 124:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 125:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 126:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 127:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70227,16 +70235,16 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 146:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ENDPOINT));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 147:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_CLUSTER));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 148:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ENDPOINT));
             break;
         case 149:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_CLUSTER));
             break;
         case 150:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70347,13 +70355,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 186:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 187:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 188:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 189:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70368,13 +70376,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 193:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 194:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 195:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 196:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70386,13 +70394,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 199:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 200:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 201:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 202:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70404,13 +70412,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 205:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 206:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 207:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 208:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70428,13 +70436,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 213:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 214:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 215:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 216:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70470,13 +70478,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 227:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 228:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 229:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 230:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70509,13 +70517,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 240:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 241:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 242:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 243:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70548,13 +70556,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 253:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 254:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 255:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 256:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70581,13 +70589,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 264:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 265:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 266:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 267:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70614,13 +70622,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 275:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 276:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 277:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 278:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70647,13 +70655,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 286:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 287:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 288:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 289:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70680,13 +70688,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 297:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 298:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 299:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 300:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70779,13 +70787,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 330:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 331:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 332:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 333:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70803,13 +70811,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 338:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 339:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 340:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 341:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70827,13 +70835,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 346:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 347:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 348:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 349:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70893,19 +70901,19 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 368:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ENDPOINT));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 369:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_CLUSTER));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 370:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_VALUE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ENDPOINT));
             break;
         case 371:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_CLUSTER));
             break;
         case 372:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_VALUE));
             break;
         case 373:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70920,10 +70928,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 377:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 378:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 379:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
@@ -70932,10 +70940,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 381:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 382:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 383:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70956,10 +70964,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 389:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 390:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 391:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
@@ -70968,10 +70976,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 393:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 394:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 395:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -70992,10 +71000,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 401:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 402:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 403:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
@@ -71004,10 +71012,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 405:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 406:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 407:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -71028,10 +71036,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 413:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 414:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 415:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
@@ -71040,10 +71048,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 417:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 418:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 419:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -71064,10 +71072,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 425:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 426:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 427:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
@@ -71076,10 +71084,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 429:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 430:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 431:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -71106,10 +71114,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 439:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 440:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 441:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
@@ -71118,10 +71126,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 443:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 444:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 445:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -71148,10 +71156,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 453:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 454:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 455:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
@@ -71160,10 +71168,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 457:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 458:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 459:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -71190,10 +71198,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 467:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 468:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 469:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
@@ -71202,10 +71210,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 471:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 472:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 473:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -71229,10 +71237,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 480:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_DATA_TYPE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 481:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 482:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_DATA_TYPE));
@@ -71241,15 +71249,21 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 484:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_DATA_TYPE));
             break;
         case 485:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 486:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 487:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 488:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 489:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         }
@@ -71265,7 +71279,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 488;
+    const uint16_t mTestCount = 490;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -73586,7 +73600,50 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeOctetStringWithWeirdChars_110()
+    CHIP_ERROR TestWriteAttributeOctetStringWithHexFormat_110()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id octetStringArgument;
+        octetStringArgument = [[NSData alloc] initWithBytes:"\x00\x01\x02\x03\x04\x05" length:6];
+        [cluster writeAttributeOctetStringWithValue:octetStringArgument
+                                  completionHandler:^(NSError * _Nullable err) {
+                                      NSLog(@"Write attribute OCTET_STRING with hex: format Error: %@", err);
+
+                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeOctetStringWithHexFormat_111()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOctetStringWithCompletionHandler:^(NSData * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute OCTET_STRING with hex: format Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueAsString(
+                    "octet_string", actualValue, [[NSData alloc] initWithBytes:"\x00\x01\x02\x03\x04\x05" length:6]));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteAttributeOctetStringWithWeirdChars_112()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -73606,7 +73663,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeOctetStringWithWeirdChars_111()
+    CHIP_ERROR TestReadAttributeOctetStringWithWeirdChars_113()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -73629,7 +73686,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeOctetString_112()
+    CHIP_ERROR TestWriteAttributeOctetString_114()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -73643,48 +73700,6 @@ private:
 
                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                                      NextTest();
-                                  }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadAttributeOctetString_113()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeOctetStringWithCompletionHandler:^(NSData * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read attribute OCTET_STRING Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(
-                    CheckValueAsString("octet_string", actualValue, [[NSData alloc] initWithBytes:"TestValue" length:9]));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWriteAttributeOctetString_114()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id octetStringArgument;
-        octetStringArgument = [[NSData alloc] initWithBytes:"TestValueLongerThan10" length:21];
-        [cluster writeAttributeOctetStringWithValue:octetStringArgument
-                                  completionHandler:^(NSError * _Nullable err) {
-                                      NSLog(@"Write attribute OCTET_STRING Error: %@", err);
-
-                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                       NextTest();
                                   }];
 
@@ -73721,6 +73736,48 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id octetStringArgument;
+        octetStringArgument = [[NSData alloc] initWithBytes:"TestValueLongerThan10" length:21];
+        [cluster writeAttributeOctetStringWithValue:octetStringArgument
+                                  completionHandler:^(NSError * _Nullable err) {
+                                      NSLog(@"Write attribute OCTET_STRING Error: %@", err);
+
+                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeOctetString_117()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOctetStringWithCompletionHandler:^(NSData * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute OCTET_STRING Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(
+                    CheckValueAsString("octet_string", actualValue, [[NSData alloc] initWithBytes:"TestValue" length:9]));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteAttributeOctetString_118()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id octetStringArgument;
         octetStringArgument = [[NSData alloc] initWithBytes:"" length:0];
         [cluster writeAttributeOctetStringWithValue:octetStringArgument
                                   completionHandler:^(NSError * _Nullable err) {
@@ -73734,7 +73791,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeLongOctetStringDefaultValue_117()
+    CHIP_ERROR TestReadAttributeLongOctetStringDefaultValue_119()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -73756,7 +73813,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeLongOctetString_118()
+    CHIP_ERROR TestWriteAttributeLongOctetString_120()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -73780,7 +73837,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeLongOctetString_119()
+    CHIP_ERROR TestReadAttributeLongOctetString_121()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -73808,7 +73865,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeLongOctetString_120()
+    CHIP_ERROR TestWriteAttributeLongOctetString_122()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -73828,7 +73885,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeCharStringDefaultValue_121()
+    CHIP_ERROR TestReadAttributeCharStringDefaultValue_123()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -73850,7 +73907,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeCharString_122()
+    CHIP_ERROR TestWriteAttributeCharString_124()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -73864,47 +73921,6 @@ private:
 
                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                                     NextTest();
-                                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadAttributeCharString_123()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCharStringWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read attribute CHAR_STRING Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValueAsString("char_string", actualValue, @"☉T☉"));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWriteAttributeCharStringValueTooLong_124()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id charStringArgument;
-        charStringArgument = @"☉TestValueLongerThan10☉";
-        [cluster writeAttributeCharStringWithValue:charStringArgument
-                                 completionHandler:^(NSError * _Nullable err) {
-                                     NSLog(@"Write attribute CHAR_STRING - Value too long Error: %@", err);
-
-                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                      NextTest();
                                  }];
 
@@ -73933,7 +73949,48 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeCharStringEmpty_126()
+    CHIP_ERROR TestWriteAttributeCharStringValueTooLong_126()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id charStringArgument;
+        charStringArgument = @"☉TestValueLongerThan10☉";
+        [cluster writeAttributeCharStringWithValue:charStringArgument
+                                 completionHandler:^(NSError * _Nullable err) {
+                                     NSLog(@"Write attribute CHAR_STRING - Value too long Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeCharString_127()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCharStringWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute CHAR_STRING Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueAsString("char_string", actualValue, @"☉T☉"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteAttributeCharStringEmpty_128()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -73953,7 +74010,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeLongCharStringDefaultValue_127()
+    CHIP_ERROR TestReadAttributeLongCharStringDefaultValue_129()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -73975,7 +74032,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeLongCharString_128()
+    CHIP_ERROR TestWriteAttributeLongCharString_130()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -73998,7 +74055,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeLongCharString_129()
+    CHIP_ERROR TestReadAttributeLongCharString_131()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74023,7 +74080,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeLongCharString_130()
+    CHIP_ERROR TestWriteAttributeLongCharString_132()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74043,7 +74100,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeListLongOctetStringForChunkedRead_131()
+    CHIP_ERROR TestReadAttributeListLongOctetStringForChunkedRead_133()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74101,7 +74158,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeListLongOctetStringForChunkedWrite_132()
+    CHIP_ERROR TestWriteAttributeListLongOctetStringForChunkedWrite_134()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74164,7 +74221,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeListLongOctetStringForChunkedRead_133()
+    CHIP_ERROR TestReadAttributeListLongOctetStringForChunkedRead_135()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74231,7 +74288,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeEpochUsDefaultValue_134()
+    CHIP_ERROR TestReadAttributeEpochUsDefaultValue_136()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74253,7 +74310,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeEpochUsMaxValue_135()
+    CHIP_ERROR TestWriteAttributeEpochUsMaxValue_137()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74273,7 +74330,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeEpochUsMaxValue_136()
+    CHIP_ERROR TestReadAttributeEpochUsMaxValue_138()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74295,7 +74352,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeEpochUsMinValue_137()
+    CHIP_ERROR TestWriteAttributeEpochUsMinValue_139()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74315,7 +74372,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeEpochUsMinValue_138()
+    CHIP_ERROR TestReadAttributeEpochUsMinValue_140()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74337,7 +74394,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeEpochSDefaultValue_139()
+    CHIP_ERROR TestReadAttributeEpochSDefaultValue_141()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74359,7 +74416,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeEpochSMaxValue_140()
+    CHIP_ERROR TestWriteAttributeEpochSMaxValue_142()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74379,7 +74436,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeEpochSMaxValue_141()
+    CHIP_ERROR TestReadAttributeEpochSMaxValue_143()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74401,7 +74458,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeEpochSMinValue_142()
+    CHIP_ERROR TestWriteAttributeEpochSMinValue_144()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74421,7 +74478,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeEpochSMinValue_143()
+    CHIP_ERROR TestReadAttributeEpochSMinValue_145()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74443,7 +74500,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeUnsupported_144()
+    CHIP_ERROR TestReadAttributeUnsupported_146()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74470,7 +74527,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteattributeUnsupported_145()
+    CHIP_ERROR TestWriteattributeUnsupported_147()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74495,7 +74552,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendTestCommandToUnsupportedEndpoint_146()
+    CHIP_ERROR TestSendTestCommandToUnsupportedEndpoint_148()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:200 queue:mCallbackQueue];
@@ -74511,7 +74568,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendTestCommandToUnsupportedCluster_147()
+    CHIP_ERROR TestSendTestCommandToUnsupportedCluster_149()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -74527,7 +74584,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeVendorIdDefaultValue_148()
+    CHIP_ERROR TestReadAttributeVendorIdDefaultValue_150()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74549,7 +74606,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeVendorId_149()
+    CHIP_ERROR TestWriteAttributeVendorId_151()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74569,7 +74626,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeVendorId_150()
+    CHIP_ERROR TestReadAttributeVendorId_152()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74591,7 +74648,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRestoreAttributeVendorId_151()
+    CHIP_ERROR TestRestoreAttributeVendorId_153()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74611,7 +74668,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendACommandWithAVendorIdAndEnum_152()
+    CHIP_ERROR TestSendACommandWithAVendorIdAndEnum_154()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74643,7 +74700,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendTestCommandWithStructArgumentAndArg1bIsTrue_153()
+    CHIP_ERROR TestSendTestCommandWithStructArgumentAndArg1bIsTrue_155()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74678,7 +74735,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendTestCommandWithStructArgumentAndArg1bIsFalse_154()
+    CHIP_ERROR TestSendTestCommandWithStructArgumentAndArg1bIsFalse_156()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74713,7 +74770,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendTestCommandWithNestedStructArgumentAndArg1cbIsTrue_155()
+    CHIP_ERROR TestSendTestCommandWithNestedStructArgumentAndArg1cbIsTrue_157()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74759,7 +74816,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendTestCommandWithNestedStructArgumentArg1cbIsFalse_156()
+    CHIP_ERROR TestSendTestCommandWithNestedStructArgumentArg1cbIsFalse_158()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74805,7 +74862,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendTestCommandWithNestedStructListArgumentAndAllFieldsBOfArg1dAreTrue_157()
+    CHIP_ERROR TestSendTestCommandWithNestedStructListArgumentAndAllFieldsBOfArg1dAreTrue_159()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74897,7 +74954,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendTestCommandWithNestedStructListArgumentAndSomeFieldsBOfArg1dAreFalse_158()
+    CHIP_ERROR TestSendTestCommandWithNestedStructListArgumentAndSomeFieldsBOfArg1dAreFalse_160()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -74989,7 +75046,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendTestCommandWithStructArgumentAndSeeWhatWeGetBack_159()
+    CHIP_ERROR TestSendTestCommandWithStructArgumentAndSeeWhatWeGetBack_161()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75034,7 +75091,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendTestCommandWithListOfInt8uAndNoneOfThemIsSetTo0_160()
+    CHIP_ERROR TestSendTestCommandWithListOfInt8uAndNoneOfThemIsSetTo0_162()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75073,7 +75130,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendTestCommandWithListOfInt8uAndOneOfThemIsSetTo0_161()
+    CHIP_ERROR TestSendTestCommandWithListOfInt8uAndOneOfThemIsSetTo0_163()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75112,7 +75169,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendTestCommandWithListOfInt8uAndGetItReversed_162()
+    CHIP_ERROR TestSendTestCommandWithListOfInt8uAndGetItReversed_164()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75160,7 +75217,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendTestCommandWithEmptyListOfInt8uAndGetAnEmptyListBack_163()
+    CHIP_ERROR TestSendTestCommandWithEmptyListOfInt8uAndGetAnEmptyListBack_165()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75190,7 +75247,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendTestCommandWithListOfStructArgumentAndArg1bOfFirstItemIsTrue_164()
+    CHIP_ERROR TestSendTestCommandWithListOfStructArgumentAndArg1bOfFirstItemIsTrue_166()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75241,7 +75298,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendTestCommandWithListOfStructArgumentAndArg1bOfFirstItemIsFalse_165()
+    CHIP_ERROR TestSendTestCommandWithListOfStructArgumentAndArg1bOfFirstItemIsFalse_167()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75292,7 +75349,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendTestCommandWithListOfNestedStructListArgumentAndAllFieldsBOfElementsOfArg1dAreTrue_166()
+    CHIP_ERROR TestSendTestCommandWithListOfNestedStructListArgumentAndAllFieldsBOfElementsOfArg1dAreTrue_168()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75390,7 +75447,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendTestCommandWithNestedStructListArgumentAndSomeFieldsBOfElementsOfArg1dAreFalse_167()
+    CHIP_ERROR TestSendTestCommandWithNestedStructListArgumentAndSomeFieldsBOfElementsOfArg1dAreFalse_169()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75488,7 +75545,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeListWithListOfInt8uAndNoneOfThemIsSetTo0_168()
+    CHIP_ERROR TestWriteAttributeListWithListOfInt8uAndNoneOfThemIsSetTo0_170()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75515,7 +75572,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeListWithListOfInt8u_169()
+    CHIP_ERROR TestReadAttributeListWithListOfInt8u_171()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75541,7 +75598,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeListWithListOfOctetString_170()
+    CHIP_ERROR TestWriteAttributeListWithListOfOctetString_172()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75568,7 +75625,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeListWithListOfOctetString_171()
+    CHIP_ERROR TestReadAttributeListWithListOfOctetString_173()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75594,7 +75651,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeListWithListOfListStructOctetString_172()
+    CHIP_ERROR TestWriteAttributeListWithListOfListStructOctetString_174()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75637,7 +75694,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeListWithListOfListStructOctetString_173()
+    CHIP_ERROR TestReadAttributeListWithListOfListStructOctetString_175()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75679,7 +75736,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendTestCommandWithOptionalArgSet_174()
+    CHIP_ERROR TestSendTestCommandWithOptionalArgSet_176()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75722,7 +75779,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendTestCommandWithoutItsOptionalArg_175()
+    CHIP_ERROR TestSendTestCommandWithoutItsOptionalArg_177()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75748,7 +75805,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadListOfStructsContainingNullablesAndOptionals_176()
+    CHIP_ERROR TestReadListOfStructsContainingNullablesAndOptionals_178()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75779,7 +75836,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteListOfStructsContainingNullablesAndOptionals_177()
+    CHIP_ERROR TestWriteListOfStructsContainingNullablesAndOptionals_179()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75815,7 +75872,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadListOfStructsContainingNullablesAndOptionalsAfterWriting_178()
+    CHIP_ERROR TestReadListOfStructsContainingNullablesAndOptionalsAfterWriting_180()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75853,7 +75910,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableBooleanNull_179()
+    CHIP_ERROR TestWriteAttributeNullableBooleanNull_181()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75874,7 +75931,7 @@ private:
     }
     NSNumber * _Nullable booValueNull;
 
-    CHIP_ERROR TestReadAttributeNullableBooleanNull_180()
+    CHIP_ERROR TestReadAttributeNullableBooleanNull_182()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75899,7 +75956,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableBooleanTrue_181()
+    CHIP_ERROR TestWriteAttributeNullableBooleanTrue_183()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75919,7 +75976,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableBooleanTrue_182()
+    CHIP_ERROR TestReadAttributeNullableBooleanTrue_184()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75942,7 +75999,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableBooleanNotNull_183()
+    CHIP_ERROR TestReadAttributeNullableBooleanNotNull_185()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75963,7 +76020,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableBitmap8MaxValue_184()
+    CHIP_ERROR TestWriteAttributeNullableBitmap8MaxValue_186()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -75983,7 +76040,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableBitmap8MaxValue_185()
+    CHIP_ERROR TestReadAttributeNullableBitmap8MaxValue_187()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76006,7 +76063,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableBitmap8InvalidValue_186()
+    CHIP_ERROR TestWriteAttributeNullableBitmap8InvalidValue_188()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76027,7 +76084,7 @@ private:
     }
     NSNumber * _Nullable nullableValue254;
 
-    CHIP_ERROR TestReadAttributeNullableBitmap8UnchangedValue_187()
+    CHIP_ERROR TestReadAttributeNullableBitmap8UnchangedValue_189()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76053,7 +76110,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableBitmap8NullValue_188()
+    CHIP_ERROR TestWriteAttributeNullableBitmap8NullValue_190()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76073,7 +76130,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableBitmap8NullValue_189()
+    CHIP_ERROR TestReadAttributeNullableBitmap8NullValue_191()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76095,7 +76152,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableBitmap8Not254Value_190()
+    CHIP_ERROR TestReadAttributeNullableBitmap8Not254Value_192()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76116,7 +76173,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableBitmap16MaxValue_191()
+    CHIP_ERROR TestWriteAttributeNullableBitmap16MaxValue_193()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76136,7 +76193,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableBitmap16MaxValue_192()
+    CHIP_ERROR TestReadAttributeNullableBitmap16MaxValue_194()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76159,7 +76216,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableBitmap16InvalidValue_193()
+    CHIP_ERROR TestWriteAttributeNullableBitmap16InvalidValue_195()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76179,7 +76236,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableBitmap16UnchangedValue_194()
+    CHIP_ERROR TestReadAttributeNullableBitmap16UnchangedValue_196()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76202,7 +76259,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableBitmap16NullValue_195()
+    CHIP_ERROR TestWriteAttributeNullableBitmap16NullValue_197()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76222,7 +76279,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableBitmap16NullValue_196()
+    CHIP_ERROR TestReadAttributeNullableBitmap16NullValue_198()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76244,7 +76301,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableBitmap32MaxValue_197()
+    CHIP_ERROR TestWriteAttributeNullableBitmap32MaxValue_199()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76264,7 +76321,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableBitmap32MaxValue_198()
+    CHIP_ERROR TestReadAttributeNullableBitmap32MaxValue_200()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76287,7 +76344,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableBitmap32InvalidValue_199()
+    CHIP_ERROR TestWriteAttributeNullableBitmap32InvalidValue_201()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76307,7 +76364,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableBitmap32UnchangedValue_200()
+    CHIP_ERROR TestReadAttributeNullableBitmap32UnchangedValue_202()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76330,7 +76387,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableBitmap32NullValue_201()
+    CHIP_ERROR TestWriteAttributeNullableBitmap32NullValue_203()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76350,7 +76407,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableBitmap32NullValue_202()
+    CHIP_ERROR TestReadAttributeNullableBitmap32NullValue_204()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76372,7 +76429,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableBitmap64MaxValue_203()
+    CHIP_ERROR TestWriteAttributeNullableBitmap64MaxValue_205()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76392,7 +76449,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableBitmap64MaxValue_204()
+    CHIP_ERROR TestReadAttributeNullableBitmap64MaxValue_206()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76415,7 +76472,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableBitmap64InvalidValue_205()
+    CHIP_ERROR TestWriteAttributeNullableBitmap64InvalidValue_207()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76435,7 +76492,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableBitmap64UnchangedValue_206()
+    CHIP_ERROR TestReadAttributeNullableBitmap64UnchangedValue_208()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76458,7 +76515,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableBitmap64NullValue_207()
+    CHIP_ERROR TestWriteAttributeNullableBitmap64NullValue_209()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76478,7 +76535,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableBitmap64NullValue_208()
+    CHIP_ERROR TestReadAttributeNullableBitmap64NullValue_210()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76500,7 +76557,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt8uMinValue_209()
+    CHIP_ERROR TestWriteAttributeNullableInt8uMinValue_211()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76520,7 +76577,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8uMinValue_210()
+    CHIP_ERROR TestReadAttributeNullableInt8uMinValue_212()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76543,7 +76600,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt8uMaxValue_211()
+    CHIP_ERROR TestWriteAttributeNullableInt8uMaxValue_213()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76563,7 +76620,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8uMaxValue_212()
+    CHIP_ERROR TestReadAttributeNullableInt8uMaxValue_214()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76586,7 +76643,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt8uInvalidValue_213()
+    CHIP_ERROR TestWriteAttributeNullableInt8uInvalidValue_215()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76605,7 +76662,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8uUnchangedValue_214()
+    CHIP_ERROR TestReadAttributeNullableInt8uUnchangedValue_216()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76628,7 +76685,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8uUnchangedValueWithConstraint_215()
+    CHIP_ERROR TestReadAttributeNullableInt8uUnchangedValueWithConstraint_217()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76647,7 +76704,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt8uNullValue_216()
+    CHIP_ERROR TestWriteAttributeNullableInt8uNullValue_218()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76667,7 +76724,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8uNullValue_217()
+    CHIP_ERROR TestReadAttributeNullableInt8uNullValue_219()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76689,7 +76746,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8uNullValueRange_218()
+    CHIP_ERROR TestReadAttributeNullableInt8uNullValueRange_220()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76713,7 +76770,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8uNullValueNot_219()
+    CHIP_ERROR TestReadAttributeNullableInt8uNullValueNot_221()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76734,7 +76791,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt8uValue_220()
+    CHIP_ERROR TestWriteAttributeNullableInt8uValue_222()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76754,7 +76811,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8uValueInRange_221()
+    CHIP_ERROR TestReadAttributeNullableInt8uValueInRange_223()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76778,7 +76835,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8uNotValueOk_222()
+    CHIP_ERROR TestReadAttributeNullableInt8uNotValueOk_224()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76799,7 +76856,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt16uMinValue_223()
+    CHIP_ERROR TestWriteAttributeNullableInt16uMinValue_225()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76819,7 +76876,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt16uMinValue_224()
+    CHIP_ERROR TestReadAttributeNullableInt16uMinValue_226()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76842,7 +76899,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt16uMaxValue_225()
+    CHIP_ERROR TestWriteAttributeNullableInt16uMaxValue_227()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76862,7 +76919,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt16uMaxValue_226()
+    CHIP_ERROR TestReadAttributeNullableInt16uMaxValue_228()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76885,7 +76942,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt16uInvalidValue_227()
+    CHIP_ERROR TestWriteAttributeNullableInt16uInvalidValue_229()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76905,7 +76962,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt16uUnchangedValue_228()
+    CHIP_ERROR TestReadAttributeNullableInt16uUnchangedValue_230()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76928,7 +76985,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt16uNullValue_229()
+    CHIP_ERROR TestWriteAttributeNullableInt16uNullValue_231()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76948,7 +77005,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt16uNullValue_230()
+    CHIP_ERROR TestReadAttributeNullableInt16uNullValue_232()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76970,7 +77027,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt16uNullValueRange_231()
+    CHIP_ERROR TestReadAttributeNullableInt16uNullValueRange_233()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -76994,7 +77051,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt16uNullValueNot_232()
+    CHIP_ERROR TestReadAttributeNullableInt16uNullValueNot_234()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77015,7 +77072,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt16uValue_233()
+    CHIP_ERROR TestWriteAttributeNullableInt16uValue_235()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77035,7 +77092,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt16uValueInRange_234()
+    CHIP_ERROR TestReadAttributeNullableInt16uValueInRange_236()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77059,7 +77116,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt16uNotValueOk_235()
+    CHIP_ERROR TestReadAttributeNullableInt16uNotValueOk_237()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77080,7 +77137,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt32uMinValue_236()
+    CHIP_ERROR TestWriteAttributeNullableInt32uMinValue_238()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77100,7 +77157,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt32uMinValue_237()
+    CHIP_ERROR TestReadAttributeNullableInt32uMinValue_239()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77123,7 +77180,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt32uMaxValue_238()
+    CHIP_ERROR TestWriteAttributeNullableInt32uMaxValue_240()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77143,7 +77200,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt32uMaxValue_239()
+    CHIP_ERROR TestReadAttributeNullableInt32uMaxValue_241()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77166,7 +77223,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt32uInvalidValue_240()
+    CHIP_ERROR TestWriteAttributeNullableInt32uInvalidValue_242()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77186,7 +77243,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt32uUnchangedValue_241()
+    CHIP_ERROR TestReadAttributeNullableInt32uUnchangedValue_243()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77209,7 +77266,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt32uNullValue_242()
+    CHIP_ERROR TestWriteAttributeNullableInt32uNullValue_244()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77229,7 +77286,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt32uNullValue_243()
+    CHIP_ERROR TestReadAttributeNullableInt32uNullValue_245()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77251,7 +77308,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt32uNullValueRange_244()
+    CHIP_ERROR TestReadAttributeNullableInt32uNullValueRange_246()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77275,7 +77332,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt32uNullValueNot_245()
+    CHIP_ERROR TestReadAttributeNullableInt32uNullValueNot_247()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77296,7 +77353,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt32uValue_246()
+    CHIP_ERROR TestWriteAttributeNullableInt32uValue_248()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77316,7 +77373,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt32uValueInRange_247()
+    CHIP_ERROR TestReadAttributeNullableInt32uValueInRange_249()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77340,7 +77397,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt32uNotValueOk_248()
+    CHIP_ERROR TestReadAttributeNullableInt32uNotValueOk_250()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77361,7 +77418,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt64uMinValue_249()
+    CHIP_ERROR TestWriteAttributeNullableInt64uMinValue_251()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77381,7 +77438,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt64uMinValue_250()
+    CHIP_ERROR TestReadAttributeNullableInt64uMinValue_252()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77404,7 +77461,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt64uMaxValue_251()
+    CHIP_ERROR TestWriteAttributeNullableInt64uMaxValue_253()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77424,7 +77481,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt64uMaxValue_252()
+    CHIP_ERROR TestReadAttributeNullableInt64uMaxValue_254()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77447,7 +77504,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt64uInvalidValue_253()
+    CHIP_ERROR TestWriteAttributeNullableInt64uInvalidValue_255()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77467,7 +77524,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt64uUnchangedValue_254()
+    CHIP_ERROR TestReadAttributeNullableInt64uUnchangedValue_256()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77490,7 +77547,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt64uNullValue_255()
+    CHIP_ERROR TestWriteAttributeNullableInt64uNullValue_257()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77510,7 +77567,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt64uNullValue_256()
+    CHIP_ERROR TestReadAttributeNullableInt64uNullValue_258()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77532,7 +77589,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt64uNullValueRange_257()
+    CHIP_ERROR TestReadAttributeNullableInt64uNullValueRange_259()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77557,7 +77614,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt64uNullValueNot_258()
+    CHIP_ERROR TestReadAttributeNullableInt64uNullValueNot_260()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77578,7 +77635,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt64uValue_259()
+    CHIP_ERROR TestWriteAttributeNullableInt64uValue_261()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77598,7 +77655,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt64uValueInRange_260()
+    CHIP_ERROR TestReadAttributeNullableInt64uValueInRange_262()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77623,7 +77680,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt64uNotValueOk_261()
+    CHIP_ERROR TestReadAttributeNullableInt64uNotValueOk_263()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77644,7 +77701,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt8sMinValue_262()
+    CHIP_ERROR TestWriteAttributeNullableInt8sMinValue_264()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77664,7 +77721,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8sMinValue_263()
+    CHIP_ERROR TestReadAttributeNullableInt8sMinValue_265()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77687,7 +77744,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt8sInvalidValue_264()
+    CHIP_ERROR TestWriteAttributeNullableInt8sInvalidValue_266()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77706,7 +77763,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8sUnchangedValue_265()
+    CHIP_ERROR TestReadAttributeNullableInt8sUnchangedValue_267()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77729,7 +77786,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt8sNullValue_266()
+    CHIP_ERROR TestWriteAttributeNullableInt8sNullValue_268()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77749,7 +77806,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8sNullValue_267()
+    CHIP_ERROR TestReadAttributeNullableInt8sNullValue_269()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77771,7 +77828,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8sNullValueRange_268()
+    CHIP_ERROR TestReadAttributeNullableInt8sNullValueRange_270()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77795,7 +77852,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8sNullValueNot_269()
+    CHIP_ERROR TestReadAttributeNullableInt8sNullValueNot_271()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77816,7 +77873,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt8sValue_270()
+    CHIP_ERROR TestWriteAttributeNullableInt8sValue_272()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77836,7 +77893,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8sValueInRange_271()
+    CHIP_ERROR TestReadAttributeNullableInt8sValueInRange_273()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77860,7 +77917,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8sNotValueOk_272()
+    CHIP_ERROR TestReadAttributeNullableInt8sNotValueOk_274()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77881,7 +77938,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt16sMinValue_273()
+    CHIP_ERROR TestWriteAttributeNullableInt16sMinValue_275()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77901,7 +77958,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt16sMinValue_274()
+    CHIP_ERROR TestReadAttributeNullableInt16sMinValue_276()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77924,7 +77981,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt16sInvalidValue_275()
+    CHIP_ERROR TestWriteAttributeNullableInt16sInvalidValue_277()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77944,7 +78001,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt16sUnchangedValue_276()
+    CHIP_ERROR TestReadAttributeNullableInt16sUnchangedValue_278()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77967,7 +78024,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt16sNullValue_277()
+    CHIP_ERROR TestWriteAttributeNullableInt16sNullValue_279()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -77987,7 +78044,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt16sNullValue_278()
+    CHIP_ERROR TestReadAttributeNullableInt16sNullValue_280()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78009,7 +78066,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt16sNullValueRange_279()
+    CHIP_ERROR TestReadAttributeNullableInt16sNullValueRange_281()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78033,7 +78090,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt16sNullValueNot_280()
+    CHIP_ERROR TestReadAttributeNullableInt16sNullValueNot_282()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78054,7 +78111,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt16sValue_281()
+    CHIP_ERROR TestWriteAttributeNullableInt16sValue_283()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78074,7 +78131,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt16sValueInRange_282()
+    CHIP_ERROR TestReadAttributeNullableInt16sValueInRange_284()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78098,7 +78155,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt16sNotValueOk_283()
+    CHIP_ERROR TestReadAttributeNullableInt16sNotValueOk_285()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78119,7 +78176,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt32sMinValue_284()
+    CHIP_ERROR TestWriteAttributeNullableInt32sMinValue_286()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78139,7 +78196,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt32sMinValue_285()
+    CHIP_ERROR TestReadAttributeNullableInt32sMinValue_287()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78162,7 +78219,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt32sInvalidValue_286()
+    CHIP_ERROR TestWriteAttributeNullableInt32sInvalidValue_288()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78182,7 +78239,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt32sUnchangedValue_287()
+    CHIP_ERROR TestReadAttributeNullableInt32sUnchangedValue_289()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78205,7 +78262,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt32sNullValue_288()
+    CHIP_ERROR TestWriteAttributeNullableInt32sNullValue_290()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78225,7 +78282,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt32sNullValue_289()
+    CHIP_ERROR TestReadAttributeNullableInt32sNullValue_291()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78247,7 +78304,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt32sNullValueRange_290()
+    CHIP_ERROR TestReadAttributeNullableInt32sNullValueRange_292()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78271,7 +78328,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt32sNullValueNot_291()
+    CHIP_ERROR TestReadAttributeNullableInt32sNullValueNot_293()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78292,7 +78349,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt32sValue_292()
+    CHIP_ERROR TestWriteAttributeNullableInt32sValue_294()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78312,7 +78369,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt32sValueInRange_293()
+    CHIP_ERROR TestReadAttributeNullableInt32sValueInRange_295()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78336,7 +78393,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt32sNotValueOk_294()
+    CHIP_ERROR TestReadAttributeNullableInt32sNotValueOk_296()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78357,7 +78414,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt64sMinValue_295()
+    CHIP_ERROR TestWriteAttributeNullableInt64sMinValue_297()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78377,7 +78434,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt64sMinValue_296()
+    CHIP_ERROR TestReadAttributeNullableInt64sMinValue_298()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78400,7 +78457,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt64sInvalidValue_297()
+    CHIP_ERROR TestWriteAttributeNullableInt64sInvalidValue_299()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78420,7 +78477,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt64sUnchangedValue_298()
+    CHIP_ERROR TestReadAttributeNullableInt64sUnchangedValue_300()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78443,7 +78500,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt64sNullValue_299()
+    CHIP_ERROR TestWriteAttributeNullableInt64sNullValue_301()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78463,7 +78520,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt64sNullValue_300()
+    CHIP_ERROR TestReadAttributeNullableInt64sNullValue_302()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78485,7 +78542,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt64sNullValueRange_301()
+    CHIP_ERROR TestReadAttributeNullableInt64sNullValueRange_303()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78509,7 +78566,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt64sNullValueNot_302()
+    CHIP_ERROR TestReadAttributeNullableInt64sNullValueNot_304()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78530,7 +78587,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt64sValue_303()
+    CHIP_ERROR TestWriteAttributeNullableInt64sValue_305()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78550,7 +78607,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt64sValueInRange_304()
+    CHIP_ERROR TestReadAttributeNullableInt64sValueInRange_306()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78574,7 +78631,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt64sNotValueOk_305()
+    CHIP_ERROR TestReadAttributeNullableInt64sNotValueOk_307()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78595,7 +78652,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableSingleMediumValue_306()
+    CHIP_ERROR TestWriteAttributeNullableSingleMediumValue_308()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78615,7 +78672,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableSingleMediumValue_307()
+    CHIP_ERROR TestReadAttributeNullableSingleMediumValue_309()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78638,7 +78695,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableSingleLargestValue_308()
+    CHIP_ERROR TestWriteAttributeNullableSingleLargestValue_310()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78658,7 +78715,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableSingleLargestValue_309()
+    CHIP_ERROR TestReadAttributeNullableSingleLargestValue_311()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78681,7 +78738,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableSingleSmallestValue_310()
+    CHIP_ERROR TestWriteAttributeNullableSingleSmallestValue_312()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78701,7 +78758,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableSingleSmallestValue_311()
+    CHIP_ERROR TestReadAttributeNullableSingleSmallestValue_313()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78724,7 +78781,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableSingleNullValue_312()
+    CHIP_ERROR TestWriteAttributeNullableSingleNullValue_314()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78744,7 +78801,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableSingleNullValue_313()
+    CHIP_ERROR TestReadAttributeNullableSingleNullValue_315()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78766,7 +78823,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableSingle0Value_314()
+    CHIP_ERROR TestWriteAttributeNullableSingle0Value_316()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78786,7 +78843,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableSingle0Value_315()
+    CHIP_ERROR TestReadAttributeNullableSingle0Value_317()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78809,7 +78866,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableDoubleMediumValue_316()
+    CHIP_ERROR TestWriteAttributeNullableDoubleMediumValue_318()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78829,7 +78886,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableDoubleMediumValue_317()
+    CHIP_ERROR TestReadAttributeNullableDoubleMediumValue_319()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78852,7 +78909,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableDoubleLargestValue_318()
+    CHIP_ERROR TestWriteAttributeNullableDoubleLargestValue_320()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78872,7 +78929,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableDoubleLargestValue_319()
+    CHIP_ERROR TestReadAttributeNullableDoubleLargestValue_321()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78895,7 +78952,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableDoubleSmallestValue_320()
+    CHIP_ERROR TestWriteAttributeNullableDoubleSmallestValue_322()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78915,7 +78972,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableDoubleSmallestValue_321()
+    CHIP_ERROR TestReadAttributeNullableDoubleSmallestValue_323()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78938,7 +78995,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableDoubleNullValue_322()
+    CHIP_ERROR TestWriteAttributeNullableDoubleNullValue_324()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78958,7 +79015,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableDoubleNullValue_323()
+    CHIP_ERROR TestReadAttributeNullableDoubleNullValue_325()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -78980,7 +79037,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableDouble0Value_324()
+    CHIP_ERROR TestWriteAttributeNullableDouble0Value_326()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79000,7 +79057,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableDouble0Value_325()
+    CHIP_ERROR TestReadAttributeNullableDouble0Value_327()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79023,7 +79080,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableEnum8MinValue_326()
+    CHIP_ERROR TestWriteAttributeNullableEnum8MinValue_328()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79043,7 +79100,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableEnum8MinValue_327()
+    CHIP_ERROR TestReadAttributeNullableEnum8MinValue_329()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79066,7 +79123,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableEnum8MaxValue_328()
+    CHIP_ERROR TestWriteAttributeNullableEnum8MaxValue_330()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79086,7 +79143,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableEnum8MaxValue_329()
+    CHIP_ERROR TestReadAttributeNullableEnum8MaxValue_331()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79109,7 +79166,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableEnum8InvalidValue_330()
+    CHIP_ERROR TestWriteAttributeNullableEnum8InvalidValue_332()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79128,7 +79185,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableEnum8UnchangedValue_331()
+    CHIP_ERROR TestReadAttributeNullableEnum8UnchangedValue_333()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79151,7 +79208,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableEnum8NullValue_332()
+    CHIP_ERROR TestWriteAttributeNullableEnum8NullValue_334()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79171,7 +79228,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableEnum8NullValue_333()
+    CHIP_ERROR TestReadAttributeNullableEnum8NullValue_335()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79193,7 +79250,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableEnum16MinValue_334()
+    CHIP_ERROR TestWriteAttributeNullableEnum16MinValue_336()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79213,7 +79270,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableEnum16MinValue_335()
+    CHIP_ERROR TestReadAttributeNullableEnum16MinValue_337()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79236,7 +79293,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableEnum16MaxValue_336()
+    CHIP_ERROR TestWriteAttributeNullableEnum16MaxValue_338()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79256,7 +79313,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableEnum16MaxValue_337()
+    CHIP_ERROR TestReadAttributeNullableEnum16MaxValue_339()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79279,7 +79336,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableEnum16InvalidValue_338()
+    CHIP_ERROR TestWriteAttributeNullableEnum16InvalidValue_340()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79299,7 +79356,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableEnum16UnchangedValue_339()
+    CHIP_ERROR TestReadAttributeNullableEnum16UnchangedValue_341()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79322,7 +79379,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableEnum16NullValue_340()
+    CHIP_ERROR TestWriteAttributeNullableEnum16NullValue_342()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79342,7 +79399,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableEnum16NullValue_341()
+    CHIP_ERROR TestReadAttributeNullableEnum16NullValue_343()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79364,7 +79421,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableSimpleEnumMinValue_342()
+    CHIP_ERROR TestWriteAttributeNullableSimpleEnumMinValue_344()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79384,7 +79441,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableSimpleEnumMinValue_343()
+    CHIP_ERROR TestReadAttributeNullableSimpleEnumMinValue_345()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79407,7 +79464,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableSimpleEnumMaxValue_344()
+    CHIP_ERROR TestWriteAttributeNullableSimpleEnumMaxValue_346()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79427,7 +79484,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableSimpleEnumMaxValue_345()
+    CHIP_ERROR TestReadAttributeNullableSimpleEnumMaxValue_347()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79450,7 +79507,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableSimpleEnumInvalidValue_346()
+    CHIP_ERROR TestWriteAttributeNullableSimpleEnumInvalidValue_348()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79471,7 +79528,7 @@ private:
     }
     NSNumber * _Nullable nullableEnumAttr254;
 
-    CHIP_ERROR TestReadAttributeNullableSimpleEnumUnchangedValue_347()
+    CHIP_ERROR TestReadAttributeNullableSimpleEnumUnchangedValue_349()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79497,7 +79554,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableSimpleEnumNullValue_348()
+    CHIP_ERROR TestWriteAttributeNullableSimpleEnumNullValue_350()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79517,7 +79574,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableSimpleEnumNullValue_349()
+    CHIP_ERROR TestReadAttributeNullableSimpleEnumNullValue_351()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79539,7 +79596,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableSimpleEnumNot254Value_350()
+    CHIP_ERROR TestReadAttributeNullableSimpleEnumNot254Value_352()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79560,7 +79617,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableOctetStringDefaultValue_351()
+    CHIP_ERROR TestReadAttributeNullableOctetStringDefaultValue_353()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79584,7 +79641,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableOctetString_352()
+    CHIP_ERROR TestWriteAttributeNullableOctetString_354()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79605,7 +79662,7 @@ private:
     }
     NSData * _Nullable nullableOctetStrTestValue;
 
-    CHIP_ERROR TestReadAttributeNullableOctetString_353()
+    CHIP_ERROR TestReadAttributeNullableOctetString_355()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79632,48 +79689,6 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableOctetString_354()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id nullableOctetStringArgument;
-        nullableOctetStringArgument = nil;
-        [cluster writeAttributeNullableOctetStringWithValue:nullableOctetStringArgument
-                                          completionHandler:^(NSError * _Nullable err) {
-                                              NSLog(@"Write attribute NULLABLE_OCTET_STRING Error: %@", err);
-
-                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                              NextTest();
-                                          }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadAttributeNullableOctetString_355()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeNullableOctetStringWithCompletionHandler:^(NSData * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read attribute NULLABLE_OCTET_STRING Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValueNull("nullable_octet_string", actualValue));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
     CHIP_ERROR TestWriteAttributeNullableOctetString_356()
     {
         CHIPDevice * device = GetDevice("alpha");
@@ -79681,7 +79696,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableOctetStringArgument;
-        nullableOctetStringArgument = [[NSData alloc] initWithBytes:"" length:0];
+        nullableOctetStringArgument = nil;
         [cluster writeAttributeNullableOctetStringWithValue:nullableOctetStringArgument
                                           completionHandler:^(NSError * _Nullable err) {
                                               NSLog(@"Write attribute NULLABLE_OCTET_STRING Error: %@", err);
@@ -79707,6 +79722,48 @@ private:
 
             {
                 id actualValue = value;
+                VerifyOrReturn(CheckValueNull("nullable_octet_string", actualValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteAttributeNullableOctetString_358()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id nullableOctetStringArgument;
+        nullableOctetStringArgument = [[NSData alloc] initWithBytes:"" length:0];
+        [cluster writeAttributeNullableOctetStringWithValue:nullableOctetStringArgument
+                                          completionHandler:^(NSError * _Nullable err) {
+                                              NSLog(@"Write attribute NULLABLE_OCTET_STRING Error: %@", err);
+
+                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                              NextTest();
+                                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeNullableOctetString_359()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeNullableOctetStringWithCompletionHandler:^(NSData * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute NULLABLE_OCTET_STRING Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("nullable_octet_string", actualValue));
                 VerifyOrReturn(
                     CheckValueAsString("nullable_octet_string", actualValue, [[NSData alloc] initWithBytes:"" length:0]));
@@ -79718,7 +79775,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableOctetStringNotTestValue_358()
+    CHIP_ERROR TestReadAttributeNullableOctetStringNotTestValue_360()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79739,7 +79796,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableCharStringDefaultValue_359()
+    CHIP_ERROR TestReadAttributeNullableCharStringDefaultValue_361()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79762,7 +79819,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableCharString_360()
+    CHIP_ERROR TestWriteAttributeNullableCharString_362()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79783,7 +79840,7 @@ private:
     }
     NSString * _Nullable nullableCharStringSave;
 
-    CHIP_ERROR TestReadAttributeNullableCharString_361()
+    CHIP_ERROR TestReadAttributeNullableCharString_363()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79809,7 +79866,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableCharString_362()
+    CHIP_ERROR TestReadAttributeNullableCharString_364()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79836,7 +79893,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableCharStringValueTooLong_363()
+    CHIP_ERROR TestWriteAttributeNullableCharStringValueTooLong_365()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79847,48 +79904,6 @@ private:
         [cluster writeAttributeNullableCharStringWithValue:nullableCharStringArgument
                                          completionHandler:^(NSError * _Nullable err) {
                                              NSLog(@"Write attribute NULLABLE_CHAR_STRING - Value too long Error: %@", err);
-
-                                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                             NextTest();
-                                         }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadAttributeNullableCharString_364()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeNullableCharStringWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read attribute NULLABLE_CHAR_STRING Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValueNull("nullable_char_string", actualValue));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWriteAttributeNullableCharStringEmpty_365()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id nullableCharStringArgument;
-        nullableCharStringArgument = @"";
-        [cluster writeAttributeNullableCharStringWithValue:nullableCharStringArgument
-                                         completionHandler:^(NSError * _Nullable err) {
-                                             NSLog(@"Write attribute NULLABLE_CHAR_STRING - Empty Error: %@", err);
 
                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -79911,6 +79926,48 @@ private:
 
             {
                 id actualValue = value;
+                VerifyOrReturn(CheckValueNull("nullable_char_string", actualValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteAttributeNullableCharStringEmpty_367()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id nullableCharStringArgument;
+        nullableCharStringArgument = @"";
+        [cluster writeAttributeNullableCharStringWithValue:nullableCharStringArgument
+                                         completionHandler:^(NSError * _Nullable err) {
+                                             NSLog(@"Write attribute NULLABLE_CHAR_STRING - Empty Error: %@", err);
+
+                                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                             NextTest();
+                                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeNullableCharString_368()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeNullableCharStringWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute NULLABLE_CHAR_STRING Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("nullable_char_string", actualValue));
                 VerifyOrReturn(CheckValueAsString("nullable_char_string", actualValue, @""));
             }
@@ -79921,7 +79978,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableCharStringNott_367()
+    CHIP_ERROR TestReadAttributeNullableCharStringNott_369()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79942,7 +79999,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeFromNonexistentEndpoint_368()
+    CHIP_ERROR TestReadAttributeFromNonexistentEndpoint_370()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:200 queue:mCallbackQueue];
@@ -79958,7 +80015,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeFromNonexistentCluster_369()
+    CHIP_ERROR TestReadAttributeFromNonexistentCluster_371()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -79974,7 +80031,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendACommandThatTakesAnOptionalParameterButDoNotSetIt_370()
+    CHIP_ERROR TestSendACommandThatTakesAnOptionalParameterButDoNotSetIt_372()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -79994,7 +80051,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendACommandThatTakesAnOptionalParameterButDoNotSetIt_371()
+    CHIP_ERROR TestSendACommandThatTakesAnOptionalParameterButDoNotSetIt_373()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80015,10 +80072,10 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    bool testSendClusterTestCluster_372_WaitForReport_Fulfilled = false;
+    bool testSendClusterTestCluster_374_WaitForReport_Fulfilled = false;
     ResponseHandler _Nullable test_TestCluster_list_int8u_Reported = nil;
 
-    CHIP_ERROR TestReportSubscribeToListAttribute_372()
+    CHIP_ERROR TestReportSubscribeToListAttribute_374()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80038,14 +80095,14 @@ private:
                 VerifyOrReturn(CheckValue("", actualValue[3], 4));
             }
 
-            testSendClusterTestCluster_372_WaitForReport_Fulfilled = true;
+            testSendClusterTestCluster_374_WaitForReport_Fulfilled = true;
         };
 
         NextTest();
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSubscribeToListAttribute_373()
+    CHIP_ERROR TestSubscribeToListAttribute_375()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80059,7 +80116,7 @@ private:
             params:params
             subscriptionEstablished:^{
                 VerifyOrReturn(
-                    testSendClusterTestCluster_372_WaitForReport_Fulfilled, SetCommandExitStatus(CHIP_ERROR_INCORRECT_STATE));
+                    testSendClusterTestCluster_374_WaitForReport_Fulfilled, SetCommandExitStatus(CHIP_ERROR_INCORRECT_STATE));
                 NextTest();
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -80076,7 +80133,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteSubscribedToListAttribute_374()
+    CHIP_ERROR TestWriteSubscribedToListAttribute_376()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80103,7 +80160,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCheckForListAttributeReport_375()
+    CHIP_ERROR TestCheckForListAttributeReport_377()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80129,7 +80186,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadRangeRestrictedUnsigned8BitInteger_376()
+    CHIP_ERROR TestReadRangeRestrictedUnsigned8BitInteger_378()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80151,7 +80208,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMinValueToARangeRestrictedUnsigned8BitInteger_377()
+    CHIP_ERROR TestWriteMinValueToARangeRestrictedUnsigned8BitInteger_379()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80172,7 +80229,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteJustBelowRangeValueToARangeRestrictedUnsigned8BitInteger_378()
+    CHIP_ERROR TestWriteJustBelowRangeValueToARangeRestrictedUnsigned8BitInteger_380()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80194,7 +80251,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteJustAboveRangeValueToARangeRestrictedUnsigned8BitInteger_379()
+    CHIP_ERROR TestWriteJustAboveRangeValueToARangeRestrictedUnsigned8BitInteger_381()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80216,7 +80273,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMaxValueToARangeRestrictedUnsigned8BitInteger_380()
+    CHIP_ERROR TestWriteMaxValueToARangeRestrictedUnsigned8BitInteger_382()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80237,7 +80294,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyRangeRestrictedUnsigned8BitIntegerValueHasNotChanged_381()
+    CHIP_ERROR TestVerifyRangeRestrictedUnsigned8BitIntegerValueHasNotChanged_383()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80259,7 +80316,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMinValidValueToARangeRestrictedUnsigned8BitInteger_382()
+    CHIP_ERROR TestWriteMinValidValueToARangeRestrictedUnsigned8BitInteger_384()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80281,7 +80338,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyRangeRestrictedUnsigned8BitIntegerValueIsAtMinValid_383()
+    CHIP_ERROR TestVerifyRangeRestrictedUnsigned8BitIntegerValueIsAtMinValid_385()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80303,7 +80360,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMaxValidValueToARangeRestrictedUnsigned8BitInteger_384()
+    CHIP_ERROR TestWriteMaxValidValueToARangeRestrictedUnsigned8BitInteger_386()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80325,7 +80382,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyRangeRestrictedUnsigned8BitIntegerValueIsAtMaxValid_385()
+    CHIP_ERROR TestVerifyRangeRestrictedUnsigned8BitIntegerValueIsAtMaxValid_387()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80347,7 +80404,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMiddleValidValueToARangeRestrictedUnsigned8BitInteger_386()
+    CHIP_ERROR TestWriteMiddleValidValueToARangeRestrictedUnsigned8BitInteger_388()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80369,7 +80426,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyRangeRestrictedUnsigned8BitIntegerValueIsAtMidValid_387()
+    CHIP_ERROR TestVerifyRangeRestrictedUnsigned8BitIntegerValueIsAtMidValid_389()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80391,7 +80448,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadRangeRestrictedUnsigned16BitInteger_388()
+    CHIP_ERROR TestReadRangeRestrictedUnsigned16BitInteger_390()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80413,7 +80470,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMinValueToARangeRestrictedUnsigned16BitInteger_389()
+    CHIP_ERROR TestWriteMinValueToARangeRestrictedUnsigned16BitInteger_391()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80434,7 +80491,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteJustBelowRangeValueToARangeRestrictedUnsigned16BitInteger_390()
+    CHIP_ERROR TestWriteJustBelowRangeValueToARangeRestrictedUnsigned16BitInteger_392()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80456,7 +80513,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteJustAboveRangeValueToARangeRestrictedUnsigned16BitInteger_391()
+    CHIP_ERROR TestWriteJustAboveRangeValueToARangeRestrictedUnsigned16BitInteger_393()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80478,7 +80535,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMaxValueToARangeRestrictedUnsigned16BitInteger_392()
+    CHIP_ERROR TestWriteMaxValueToARangeRestrictedUnsigned16BitInteger_394()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80499,7 +80556,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyRangeRestrictedUnsigned16BitIntegerValueHasNotChanged_393()
+    CHIP_ERROR TestVerifyRangeRestrictedUnsigned16BitIntegerValueHasNotChanged_395()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80521,7 +80578,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMinValidValueToARangeRestrictedUnsigned16BitInteger_394()
+    CHIP_ERROR TestWriteMinValidValueToARangeRestrictedUnsigned16BitInteger_396()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80543,7 +80600,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyRangeRestrictedUnsigned16BitIntegerValueIsAtMinValid_395()
+    CHIP_ERROR TestVerifyRangeRestrictedUnsigned16BitIntegerValueIsAtMinValid_397()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80565,7 +80622,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMaxValidValueToARangeRestrictedUnsigned16BitInteger_396()
+    CHIP_ERROR TestWriteMaxValidValueToARangeRestrictedUnsigned16BitInteger_398()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80587,7 +80644,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyRangeRestrictedUnsigned16BitIntegerValueIsAtMaxValid_397()
+    CHIP_ERROR TestVerifyRangeRestrictedUnsigned16BitIntegerValueIsAtMaxValid_399()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80609,7 +80666,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMiddleValidValueToARangeRestrictedUnsigned16BitInteger_398()
+    CHIP_ERROR TestWriteMiddleValidValueToARangeRestrictedUnsigned16BitInteger_400()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80632,7 +80689,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyRangeRestrictedUnsigned16BitIntegerValueIsAtMidValid_399()
+    CHIP_ERROR TestVerifyRangeRestrictedUnsigned16BitIntegerValueIsAtMidValid_401()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80654,7 +80711,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadRangeRestrictedSigned8BitInteger_400()
+    CHIP_ERROR TestReadRangeRestrictedSigned8BitInteger_402()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80676,7 +80733,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMinValueToARangeRestrictedSigned8BitInteger_401()
+    CHIP_ERROR TestWriteMinValueToARangeRestrictedSigned8BitInteger_403()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80696,7 +80753,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteJustBelowRangeValueToARangeRestrictedSigned8BitInteger_402()
+    CHIP_ERROR TestWriteJustBelowRangeValueToARangeRestrictedSigned8BitInteger_404()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80719,7 +80776,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteJustAboveRangeValueToARangeRestrictedSigned8BitInteger_403()
+    CHIP_ERROR TestWriteJustAboveRangeValueToARangeRestrictedSigned8BitInteger_405()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80742,7 +80799,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMaxValueToARangeRestrictedSigned8BitInteger_404()
+    CHIP_ERROR TestWriteMaxValueToARangeRestrictedSigned8BitInteger_406()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80762,7 +80819,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyRangeRestrictedSigned8BitIntegerValueHasNotChanged_405()
+    CHIP_ERROR TestVerifyRangeRestrictedSigned8BitIntegerValueHasNotChanged_407()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80784,7 +80841,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMinValidValueToARangeRestrictedSigned8BitInteger_406()
+    CHIP_ERROR TestWriteMinValidValueToARangeRestrictedSigned8BitInteger_408()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80805,7 +80862,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyRangeRestrictedSigned8BitIntegerValueIsAtMinValid_407()
+    CHIP_ERROR TestVerifyRangeRestrictedSigned8BitIntegerValueIsAtMinValid_409()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80827,7 +80884,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMaxValidValueToARangeRestrictedSigned8BitInteger_408()
+    CHIP_ERROR TestWriteMaxValidValueToARangeRestrictedSigned8BitInteger_410()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80848,7 +80905,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyRangeRestrictedSigned8BitIntegerValueIsAtMaxValid_409()
+    CHIP_ERROR TestVerifyRangeRestrictedSigned8BitIntegerValueIsAtMaxValid_411()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80870,7 +80927,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMiddleValidValueToARangeRestrictedSigned8BitInteger_410()
+    CHIP_ERROR TestWriteMiddleValidValueToARangeRestrictedSigned8BitInteger_412()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80892,7 +80949,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyRangeRestrictedSigned8BitIntegerValueIsAtMidValid_411()
+    CHIP_ERROR TestVerifyRangeRestrictedSigned8BitIntegerValueIsAtMidValid_413()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80914,7 +80971,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadRangeRestrictedSigned16BitInteger_412()
+    CHIP_ERROR TestReadRangeRestrictedSigned16BitInteger_414()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80936,7 +80993,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMinValueToARangeRestrictedSigned16BitInteger_413()
+    CHIP_ERROR TestWriteMinValueToARangeRestrictedSigned16BitInteger_415()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80957,7 +81014,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteJustBelowRangeValueToARangeRestrictedSigned16BitInteger_414()
+    CHIP_ERROR TestWriteJustBelowRangeValueToARangeRestrictedSigned16BitInteger_416()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -80979,7 +81036,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteJustAboveRangeValueToARangeRestrictedSigned16BitInteger_415()
+    CHIP_ERROR TestWriteJustAboveRangeValueToARangeRestrictedSigned16BitInteger_417()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81001,7 +81058,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMaxValueToARangeRestrictedSigned16BitInteger_416()
+    CHIP_ERROR TestWriteMaxValueToARangeRestrictedSigned16BitInteger_418()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81022,7 +81079,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyRangeRestrictedSigned16BitIntegerValueHasNotChanged_417()
+    CHIP_ERROR TestVerifyRangeRestrictedSigned16BitIntegerValueHasNotChanged_419()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81044,7 +81101,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMinValidValueToARangeRestrictedSigned16BitInteger_418()
+    CHIP_ERROR TestWriteMinValidValueToARangeRestrictedSigned16BitInteger_420()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81066,7 +81123,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyRangeRestrictedSigned16BitIntegerValueIsAtMinValid_419()
+    CHIP_ERROR TestVerifyRangeRestrictedSigned16BitIntegerValueIsAtMinValid_421()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81088,7 +81145,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMaxValidValueToARangeRestrictedSigned16BitInteger_420()
+    CHIP_ERROR TestWriteMaxValidValueToARangeRestrictedSigned16BitInteger_422()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81110,7 +81167,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyRangeRestrictedSigned16BitIntegerValueIsAtMaxValid_421()
+    CHIP_ERROR TestVerifyRangeRestrictedSigned16BitIntegerValueIsAtMaxValid_423()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81132,7 +81189,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMiddleValidValueToARangeRestrictedSigned16BitInteger_422()
+    CHIP_ERROR TestWriteMiddleValidValueToARangeRestrictedSigned16BitInteger_424()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81154,7 +81211,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyRangeRestrictedSigned16BitIntegerValueIsAtMidValid_423()
+    CHIP_ERROR TestVerifyRangeRestrictedSigned16BitIntegerValueIsAtMidValid_425()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81176,7 +81233,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadNullableRangeRestrictedUnsigned8BitInteger_424()
+    CHIP_ERROR TestReadNullableRangeRestrictedUnsigned8BitInteger_426()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81200,7 +81257,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMinValueToANullableRangeRestrictedUnsigned8BitInteger_425()
+    CHIP_ERROR TestWriteMinValueToANullableRangeRestrictedUnsigned8BitInteger_427()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81222,7 +81279,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteJustBelowRangeValueToANullableRangeRestrictedUnsigned8BitInteger_426()
+    CHIP_ERROR TestWriteJustBelowRangeValueToANullableRangeRestrictedUnsigned8BitInteger_428()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81244,7 +81301,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteJustAboveRangeValueToANullableRangeRestrictedUnsigned8BitInteger_427()
+    CHIP_ERROR TestWriteJustAboveRangeValueToANullableRangeRestrictedUnsigned8BitInteger_429()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81266,7 +81323,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMaxValueToANullableRangeRestrictedUnsigned8BitInteger_428()
+    CHIP_ERROR TestWriteMaxValueToANullableRangeRestrictedUnsigned8BitInteger_430()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81288,7 +81345,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueHasNotChanged_429()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueHasNotChanged_431()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81312,7 +81369,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMinValidValueToANullableRangeRestrictedUnsigned8BitInteger_430()
+    CHIP_ERROR TestWriteMinValidValueToANullableRangeRestrictedUnsigned8BitInteger_432()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81334,7 +81391,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsAtMinValid_431()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsAtMinValid_433()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81358,7 +81415,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMaxValidValueToANullableRangeRestrictedUnsigned8BitInteger_432()
+    CHIP_ERROR TestWriteMaxValidValueToANullableRangeRestrictedUnsigned8BitInteger_434()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81380,7 +81437,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsAtMaxValid_433()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsAtMaxValid_435()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81404,7 +81461,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMiddleValidValueToANullableRangeRestrictedUnsigned8BitInteger_434()
+    CHIP_ERROR TestWriteMiddleValidValueToANullableRangeRestrictedUnsigned8BitInteger_436()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81426,7 +81483,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsAtMidValid_435()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsAtMidValid_437()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81450,7 +81507,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteNullValueToANullableRangeRestrictedUnsigned8BitInteger_436()
+    CHIP_ERROR TestWriteNullValueToANullableRangeRestrictedUnsigned8BitInteger_438()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81472,7 +81529,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsNull_437()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsNull_439()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81495,7 +81552,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadNullableRangeRestrictedUnsigned16BitInteger_438()
+    CHIP_ERROR TestReadNullableRangeRestrictedUnsigned16BitInteger_440()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81519,7 +81576,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMinValueToANullableRangeRestrictedUnsigned16BitInteger_439()
+    CHIP_ERROR TestWriteMinValueToANullableRangeRestrictedUnsigned16BitInteger_441()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81541,7 +81598,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteJustBelowRangeValueToANullableRangeRestrictedUnsigned16BitInteger_440()
+    CHIP_ERROR TestWriteJustBelowRangeValueToANullableRangeRestrictedUnsigned16BitInteger_442()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81563,7 +81620,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteJustAboveRangeValueToANullableRangeRestrictedUnsigned16BitInteger_441()
+    CHIP_ERROR TestWriteJustAboveRangeValueToANullableRangeRestrictedUnsigned16BitInteger_443()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81585,7 +81642,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMaxValueToANullableRangeRestrictedUnsigned16BitInteger_442()
+    CHIP_ERROR TestWriteMaxValueToANullableRangeRestrictedUnsigned16BitInteger_444()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81607,7 +81664,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueHasNotChanged_443()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueHasNotChanged_445()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81631,7 +81688,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMinValidValueToANullableRangeRestrictedUnsigned16BitInteger_444()
+    CHIP_ERROR TestWriteMinValidValueToANullableRangeRestrictedUnsigned16BitInteger_446()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81653,7 +81710,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsAtMinValid_445()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsAtMinValid_447()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81677,7 +81734,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMaxValidValueToANullableRangeRestrictedUnsigned16BitInteger_446()
+    CHIP_ERROR TestWriteMaxValidValueToANullableRangeRestrictedUnsigned16BitInteger_448()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81699,7 +81756,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsAtMaxValid_447()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsAtMaxValid_449()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81723,7 +81780,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMiddleValidValueToANullableRangeRestrictedUnsigned16BitInteger_448()
+    CHIP_ERROR TestWriteMiddleValidValueToANullableRangeRestrictedUnsigned16BitInteger_450()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81745,7 +81802,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsAtMidValid_449()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsAtMidValid_451()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81769,7 +81826,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteNullValueToANullableRangeRestrictedUnsigned16BitInteger_450()
+    CHIP_ERROR TestWriteNullValueToANullableRangeRestrictedUnsigned16BitInteger_452()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81791,7 +81848,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsNull_451()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsNull_453()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81814,7 +81871,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadNullableRangeRestrictedSigned8BitInteger_452()
+    CHIP_ERROR TestReadNullableRangeRestrictedSigned8BitInteger_454()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81838,7 +81895,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMinValueToANullableRangeRestrictedSigned8BitInteger_453()
+    CHIP_ERROR TestWriteMinValueToANullableRangeRestrictedSigned8BitInteger_455()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81860,7 +81917,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteJustBelowRangeValueToANullableRangeRestrictedSigned8BitInteger_454()
+    CHIP_ERROR TestWriteJustBelowRangeValueToANullableRangeRestrictedSigned8BitInteger_456()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81882,7 +81939,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteJustAboveRangeValueToANullableRangeRestrictedSigned8BitInteger_455()
+    CHIP_ERROR TestWriteJustAboveRangeValueToANullableRangeRestrictedSigned8BitInteger_457()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81904,7 +81961,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMaxValueToANullableRangeRestrictedSigned8BitInteger_456()
+    CHIP_ERROR TestWriteMaxValueToANullableRangeRestrictedSigned8BitInteger_458()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81926,7 +81983,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned8BitIntegerValueHasNotChanged_457()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned8BitIntegerValueHasNotChanged_459()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81950,7 +82007,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMinValidValueToANullableRangeRestrictedSigned8BitInteger_458()
+    CHIP_ERROR TestWriteMinValidValueToANullableRangeRestrictedSigned8BitInteger_460()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81972,7 +82029,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtMinValid_459()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtMinValid_461()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -81996,7 +82053,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMaxValidValueToANullableRangeRestrictedSigned8BitInteger_460()
+    CHIP_ERROR TestWriteMaxValidValueToANullableRangeRestrictedSigned8BitInteger_462()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82018,7 +82075,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtMaxValid_461()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtMaxValid_463()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82042,7 +82099,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMiddleValidValueToANullableRangeRestrictedSigned8BitInteger_462()
+    CHIP_ERROR TestWriteMiddleValidValueToANullableRangeRestrictedSigned8BitInteger_464()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82064,7 +82121,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtMidValid_463()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtMidValid_465()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82088,7 +82145,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteNullValueToANullableRangeRestrictedSigned8BitInteger_464()
+    CHIP_ERROR TestWriteNullValueToANullableRangeRestrictedSigned8BitInteger_466()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82110,7 +82167,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtNull_465()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtNull_467()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82133,7 +82190,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadNullableRangeRestrictedSigned16BitInteger_466()
+    CHIP_ERROR TestReadNullableRangeRestrictedSigned16BitInteger_468()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82157,7 +82214,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMinValueToANullableRangeRestrictedSigned16BitInteger_467()
+    CHIP_ERROR TestWriteMinValueToANullableRangeRestrictedSigned16BitInteger_469()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82179,7 +82236,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteJustBelowRangeValueToANullableRangeRestrictedSigned16BitInteger_468()
+    CHIP_ERROR TestWriteJustBelowRangeValueToANullableRangeRestrictedSigned16BitInteger_470()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82201,7 +82258,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteJustAboveRangeValueToANullableRangeRestrictedSigned16BitInteger_469()
+    CHIP_ERROR TestWriteJustAboveRangeValueToANullableRangeRestrictedSigned16BitInteger_471()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82223,7 +82280,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMaxValueToANullableRangeRestrictedSigned16BitInteger_470()
+    CHIP_ERROR TestWriteMaxValueToANullableRangeRestrictedSigned16BitInteger_472()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82245,7 +82302,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned16BitIntegerValueHasNotChanged_471()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned16BitIntegerValueHasNotChanged_473()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82269,7 +82326,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMinValidValueToANullableRangeRestrictedSigned16BitInteger_472()
+    CHIP_ERROR TestWriteMinValidValueToANullableRangeRestrictedSigned16BitInteger_474()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82291,7 +82348,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsAtMinValid_473()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsAtMinValid_475()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82315,7 +82372,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMaxValidValueToANullableRangeRestrictedSigned16BitInteger_474()
+    CHIP_ERROR TestWriteMaxValidValueToANullableRangeRestrictedSigned16BitInteger_476()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82337,7 +82394,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsAtMaxValid_475()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsAtMaxValid_477()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82361,7 +82418,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteMiddleValidValueToANullableRangeRestrictedSigned16BitInteger_476()
+    CHIP_ERROR TestWriteMiddleValidValueToANullableRangeRestrictedSigned16BitInteger_478()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82383,7 +82440,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsAtMidValid_477()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsAtMidValid_479()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82407,7 +82464,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteNullValueToANullableRangeRestrictedSigned16BitInteger_478()
+    CHIP_ERROR TestWriteNullValueToANullableRangeRestrictedSigned16BitInteger_480()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82429,7 +82486,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsNull_479()
+    CHIP_ERROR TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsNull_481()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82452,7 +82509,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeThatReturnsGeneralStatusOnWrite_480()
+    CHIP_ERROR TestWriteAttributeThatReturnsGeneralStatusOnWrite_482()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82472,7 +82529,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeThatReturnsClusterSpecificStatusOnWrite_481()
+    CHIP_ERROR TestWriteAttributeThatReturnsClusterSpecificStatusOnWrite_483()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82492,7 +82549,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeThatReturnsGeneralStatusOnRead_482()
+    CHIP_ERROR TestReadAttributeThatReturnsGeneralStatusOnRead_484()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82508,7 +82565,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeThatReturnsClusterSpecificStatusOnRead_483()
+    CHIP_ERROR TestReadAttributeThatReturnsClusterSpecificStatusOnRead_485()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82524,7 +82581,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAcceptedCommandListAttribute_484()
+    CHIP_ERROR TestReadAcceptedCommandListAttribute_486()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82564,7 +82621,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGeneratedCommandListAttribute_485()
+    CHIP_ERROR TestReadGeneratedCommandListAttribute_487()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82595,7 +82652,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteStructTypedAttribute_486()
+    CHIP_ERROR TestWriteStructTypedAttribute_488()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82624,7 +82681,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadStructTypedAttribute_487()
+    CHIP_ERROR TestReadStructTypedAttribute_489()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
