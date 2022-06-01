@@ -91355,6 +91355,22 @@ public:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads NodeLabel mandatory attribute of target device\n");
             err = TestReadsNodeLabelMandatoryAttributeOfTargetDevice_4();
             break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Invoke AddTrustedRootCertificate without fail-safe\n");
+            err = TestInvokeAddTrustedRootCertificateWithoutFailSafe_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Invoke AddNOC without fail-safe\n");
+            err = TestInvokeAddNOCWithoutFailSafe_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Invoke UpdateNOC without fail-safe\n");
+            err = TestInvokeUpdateNOCWithoutFailSafe_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Invoke CSRRequest without fail-safe\n");
+            err = TestInvokeCSRRequestWithoutFailSafe_8();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -91381,6 +91397,18 @@ public:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILSAFE_REQUIRED));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILSAFE_REQUIRED));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILSAFE_REQUIRED));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILSAFE_REQUIRED));
+            break;
         }
 
         // Go on to the next test.
@@ -91394,7 +91422,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 5;
+    const uint16_t mTestCount = 9;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::EndpointId> mEndpoint;
@@ -91490,6 +91518,99 @@ private:
 
             NextTest();
         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestInvokeAddTrustedRootCertificateWithoutFailSafe_5()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOperationalCredentials * cluster = [[CHIPTestOperationalCredentials alloc] initWithDevice:device
+                                                                                                 endpoint:0
+                                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPOperationalCredentialsClusterAddTrustedRootCertificateParams alloc] init];
+        params.rootCertificate = [[NSData alloc] initWithBytes:"00000000" length:8];
+        [cluster addTrustedRootCertificateWithParams:params
+                                   completionHandler:^(NSError * _Nullable err) {
+                                       NSLog(@"Invoke AddTrustedRootCertificate without fail-safe Error: %@", err);
+
+                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILSAFE_REQUIRED));
+                                       NextTest();
+                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestInvokeAddNOCWithoutFailSafe_6()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOperationalCredentials * cluster = [[CHIPTestOperationalCredentials alloc] initWithDevice:device
+                                                                                                 endpoint:0
+                                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPOperationalCredentialsClusterAddNOCParams alloc] init];
+        params.nocValue = [[NSData alloc] initWithBytes:"00112233" length:8];
+        params.ipkValue = [[NSData alloc] initWithBytes:"\000\001\002\003\004\005\006\007\000\001\002\003\004\005\006\007"
+                                                 length:16];
+        params.caseAdminSubject = [NSNumber numberWithUnsignedLongLong:1234ULL];
+        params.adminVendorId = [NSNumber numberWithUnsignedShort:65521U];
+        [cluster
+             addNOCWithParams:params
+            completionHandler:^(CHIPOperationalCredentialsClusterNOCResponseParams * _Nullable values, NSError * _Nullable err) {
+                NSLog(@"Invoke AddNOC without fail-safe Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILSAFE_REQUIRED));
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestInvokeUpdateNOCWithoutFailSafe_7()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOperationalCredentials * cluster = [[CHIPTestOperationalCredentials alloc] initWithDevice:device
+                                                                                                 endpoint:0
+                                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPOperationalCredentialsClusterUpdateNOCParams alloc] init];
+        params.nocValue = [[NSData alloc] initWithBytes:"00112233" length:8];
+        [cluster
+            updateNOCWithParams:params
+              completionHandler:^(CHIPOperationalCredentialsClusterNOCResponseParams * _Nullable values, NSError * _Nullable err) {
+                  NSLog(@"Invoke UpdateNOC without fail-safe Error: %@", err);
+
+                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILSAFE_REQUIRED));
+                  NextTest();
+              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestInvokeCSRRequestWithoutFailSafe_8()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestOperationalCredentials * cluster = [[CHIPTestOperationalCredentials alloc] initWithDevice:device
+                                                                                                 endpoint:0
+                                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPOperationalCredentialsClusterCSRRequestParams alloc] init];
+        params.csrNonce = [[NSData alloc] initWithBytes:"\000\001\002\003\004\005\006\007\000\001\002\003\004\005\006\007\000\001"
+                                                        "\002\003\004\005\006\007\000\001\002\003\004\005\006\007"
+                                                 length:32];
+        [cluster
+            CSRRequestWithParams:params
+               completionHandler:^(CHIPOperationalCredentialsClusterCSRResponseParams * _Nullable values, NSError * _Nullable err) {
+                   NSLog(@"Invoke CSRRequest without fail-safe Error: %@", err);
+
+                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILSAFE_REQUIRED));
+                   NextTest();
+               }];
 
         return CHIP_NO_ERROR;
     }
