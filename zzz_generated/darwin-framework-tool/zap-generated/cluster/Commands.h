@@ -57776,7 +57776,6 @@ public:
 | * UpdateFabricLabel                                                 |   0x09 |
 | * RemoveFabric                                                      |   0x0A |
 | * AddTrustedRootCertificate                                         |   0x0B |
-| * RemoveTrustedRootCertificate                                      |   0x0C |
 |------------------------------------------------------------------------------|
 | Attributes:                                                         |        |
 | * NOCs                                                              | 0x0000 |
@@ -58195,53 +58194,6 @@ public:
 
 private:
     chip::app::Clusters::OperationalCredentials::Commands::AddTrustedRootCertificate::Type mRequest;
-};
-
-/*
- * Command RemoveTrustedRootCertificate
- */
-class OperationalCredentialsRemoveTrustedRootCertificate : public ClusterCommand {
-public:
-    OperationalCredentialsRemoveTrustedRootCertificate()
-        : ClusterCommand("remove-trusted-root-certificate")
-    {
-        AddArgument("TrustedRootIdentifier", &mRequest.trustedRootIdentifier);
-        ClusterCommand::AddArguments();
-    }
-
-    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000003E) command (0x0000000C) on endpoint %u", endpointId);
-
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        CHIPOperationalCredentials * cluster = [[CHIPOperationalCredentials alloc] initWithDevice:device
-                                                                                         endpoint:endpointId
-                                                                                            queue:callbackQueue];
-        __auto_type * params = [[CHIPOperationalCredentialsClusterRemoveTrustedRootCertificateParams alloc] init];
-        params.timedInvokeTimeoutMs
-            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.trustedRootIdentifier = [NSData dataWithBytes:mRequest.trustedRootIdentifier.data()
-                                                      length:mRequest.trustedRootIdentifier.size()];
-        uint16_t repeatCount = mRepeatCount.ValueOr(1);
-        uint16_t __block responsesNeeded = repeatCount;
-        while (repeatCount--) {
-            [cluster removeTrustedRootCertificateWithParams:params
-                                          completionHandler:^(NSError * _Nullable error) {
-                                              responsesNeeded--;
-                                              if (error != nil) {
-                                                  mError = error;
-                                                  LogNSError("Error", error);
-                                              }
-                                              if (responsesNeeded == 0) {
-                                                  SetCommandExitStatus(mError);
-                                              }
-                                          }];
-        }
-        return CHIP_NO_ERROR;
-    }
-
-private:
-    chip::app::Clusters::OperationalCredentials::Commands::RemoveTrustedRootCertificate::Type mRequest;
 };
 
 /*
@@ -99115,7 +99067,6 @@ void registerClusterOperationalCredentials(Commands & commands)
         make_unique<OperationalCredentialsUpdateFabricLabel>(), //
         make_unique<OperationalCredentialsRemoveFabric>(), //
         make_unique<OperationalCredentialsAddTrustedRootCertificate>(), //
-        make_unique<OperationalCredentialsRemoveTrustedRootCertificate>(), //
         make_unique<ReadAttribute>(Id), //
         make_unique<ReadOperationalCredentialsNOCs>(), //
         make_unique<WriteAttribute>(Id), //
