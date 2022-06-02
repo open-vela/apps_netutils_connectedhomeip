@@ -38997,6 +38997,32 @@ using namespace chip::app::Clusters;
         });
 }
 
+- (void)moveToClosestFrequencyWithParams:(CHIPLevelControlClusterMoveToClosestFrequencyParams *)params
+                       completionHandler:(StatusCompletion)completionHandler
+{
+    chip::Optional<uint16_t> timedInvokeTimeoutMs;
+    ListFreer listFreer;
+    LevelControl::Commands::MoveToClosestFrequency::Type request;
+    if (params != nil) {
+        if (params.timedInvokeTimeoutMs != nil) {
+            timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+        }
+    }
+    request.frequency = params.frequency.unsignedShortValue;
+
+    new CHIPCommandSuccessCallbackBridge(
+        self.callbackQueue,
+        ^(id _Nullable value, NSError * _Nullable error) {
+            completionHandler(error);
+        },
+        ^(Cancelable * success, Cancelable * failure) {
+            auto successFn = Callback<CHIPCommandSuccessCallbackType>::FromCancelable(success);
+            auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
+            return self.cppCluster.InvokeCommand(
+                request, successFn->mContext, successFn->mCall, failureFn->mCall, timedInvokeTimeoutMs);
+        });
+}
+
 - (void)readAttributeCurrentLevelWithCompletionHandler:(void (^)(
                                                            NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {

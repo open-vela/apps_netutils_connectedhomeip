@@ -46016,6 +46016,7 @@ public:
 | * MoveWithOnOff                                                     |   0x05 |
 | * StepWithOnOff                                                     |   0x06 |
 | * StopWithOnOff                                                     |   0x07 |
+| * MoveToClosestFrequency                                            |   0x08 |
 |------------------------------------------------------------------------------|
 | Attributes:                                                         |        |
 | * CurrentLevel                                                      | 0x0000 |
@@ -46417,6 +46418,50 @@ public:
     }
 
 private:
+};
+
+/*
+ * Command MoveToClosestFrequency
+ */
+class LevelControlMoveToClosestFrequency : public ClusterCommand {
+public:
+    LevelControlMoveToClosestFrequency()
+        : ClusterCommand("move-to-closest-frequency")
+    {
+        AddArgument("Frequency", 0, UINT16_MAX, &mRequest.frequency);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000008) command (0x00000008) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        CHIPLevelControl * cluster = [[CHIPLevelControl alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
+        __auto_type * params = [[CHIPLevelControlClusterMoveToClosestFrequencyParams alloc] init];
+        params.timedInvokeTimeoutMs
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.frequency = [NSNumber numberWithUnsignedShort:mRequest.frequency];
+        uint16_t repeatCount = mRepeatCount.ValueOr(1);
+        uint16_t __block responsesNeeded = repeatCount;
+        while (repeatCount--) {
+            [cluster moveToClosestFrequencyWithParams:params
+                                    completionHandler:^(NSError * _Nullable error) {
+                                        responsesNeeded--;
+                                        if (error != nil) {
+                                            mError = error;
+                                            LogNSError("Error", error);
+                                        }
+                                        if (responsesNeeded == 0) {
+                                            SetCommandExitStatus(mError);
+                                        }
+                                    }];
+        }
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    chip::app::Clusters::LevelControl::Commands::MoveToClosestFrequency::Type mRequest;
 };
 
 /*
@@ -98577,6 +98622,7 @@ void registerClusterLevelControl(Commands & commands)
         make_unique<LevelControlMoveWithOnOff>(), //
         make_unique<LevelControlStepWithOnOff>(), //
         make_unique<LevelControlStopWithOnOff>(), //
+        make_unique<LevelControlMoveToClosestFrequency>(), //
         make_unique<ReadAttribute>(Id), //
         make_unique<ReadLevelControlCurrentLevel>(), //
         make_unique<WriteAttribute>(Id), //
