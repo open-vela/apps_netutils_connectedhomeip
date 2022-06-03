@@ -63,11 +63,10 @@ public:
         printf("Test_TC_CC_9_1\n");
         printf("Test_TC_CC_9_2\n");
         printf("Test_TC_CC_9_3\n");
-        printf("Test_TC_DM_1_1\n");
-        printf("Test_TC_DM_3_1\n");
+        printf("Test_TC_DM_2_1\n");
         printf("Test_TC_EMR_1_1\n");
-        printf("Test_TC_ETHDIAG_1_1\n");
-        printf("Test_TC_ETHDIAG_2_1\n");
+        printf("Test_TC_DGETH_2_1\n");
+        printf("Test_TC_DGETH_2_2\n");
         printf("Test_TC_FLW_1_1\n");
         printf("Test_TC_FLW_2_1\n");
         printf("Test_TC_GC_1_1\n");
@@ -97,7 +96,6 @@ public:
         printf("Test_TC_MC_1_11\n");
         printf("Test_TC_MC_1_12\n");
         printf("Test_TC_MC_2_1\n");
-        printf("Test_TC_MC_3_1\n");
         printf("Test_TC_MC_3_2\n");
         printf("Test_TC_MC_3_3\n");
         printf("Test_TC_MC_3_4\n");
@@ -155,8 +153,8 @@ public:
         printf("Test_TC_TSUIC_2_2\n");
         printf("Test_TC_ULABEL_1_1\n");
         printf("Test_TC_ULABEL_2_2\n");
-        printf("Test_TC_WIFIDIAG_1_1\n");
-        printf("Test_TC_WIFIDIAG_3_1\n");
+        printf("Test_TC_DGWIFI_2_1\n");
+        printf("Test_TC_DGWIFI_2_3\n");
         printf("Test_TC_WNCV_1_1\n");
         printf("Test_TC_WNCV_2_1\n");
         printf("Test_TC_WNCV_2_2\n");
@@ -20257,11 +20255,11 @@ private:
     }
 };
 
-class Test_TC_DM_1_1 : public TestCommandBridge {
+class Test_TC_DM_2_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_DM_1_1()
-        : TestCommandBridge("Test_TC_DM_1_1")
+    Test_TC_DM_2_1()
+        : TestCommandBridge("Test_TC_DM_2_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -20271,7 +20269,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_DM_1_1() {}
+    ~Test_TC_DM_2_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -20279,11 +20277,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DM_1_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DM_2_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DM_1_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DM_2_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -20336,52 +20334,61 @@ public:
             err = TestQueryHardwareVersionString_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Query SoftwareVersion\n");
-            err = TestQuerySoftwareVersion_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Query SoftwareVersionString\n");
-            err = TestQuerySoftwareVersionString_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Query ManufacturingDate\n");
-            if (ShouldSkip("MANF_DATE")) {
+            ChipLogProgress(chipTool,
+                " ***** Test Step 10 : TH reads SoftwareVersionString from the DUT and Verify it is of type string and verify the "
+                "format\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
                 NextTest();
                 return;
             }
-            err = TestQueryManufacturingDate_12();
+            err = TestThReadsSoftwareVersionStringFromTheDutAndVerifyItIsOfTypeStringAndVerifyTheFormat_10();
             break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Query PartNumber\n");
+        case 11:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : TH reads ManufacturingDate from the DUT and Verify it is of type string and verify the "
+                "format\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsManufacturingDateFromTheDutAndVerifyItIsOfTypeStringAndVerifyTheFormat_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Query PartNumber\n");
             if (ShouldSkip("PART_NUM")) {
                 NextTest();
                 return;
             }
-            err = TestQueryPartNumber_13();
+            err = TestQueryPartNumber_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 13 : TH reads ProductURL from the DUT and Verify it is of type string and verify the format\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsProductURLFromTheDutAndVerifyItIsOfTypeStringAndVerifyTheFormat_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Query ProductURL\n");
-            err = TestQueryProductURL_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Query ProductLabel\n");
+            err = TestQueryProductLabel_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Query ProductLabel\n");
-            err = TestQueryProductLabel_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Query SerialNumber\n");
+            err = TestQuerySerialNumber_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Query SerialNumber\n");
-            err = TestQuerySerialNumber_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Query LocalConfigDisabled\n");
+            err = TestQueryLocalConfigDisabled_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Query LocalConfigDisabled\n");
-            err = TestQueryLocalConfigDisabled_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Query Reachable\n");
+            err = TestQueryReachable_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Query Reachable\n");
-            err = TestQueryReachable_18();
-            break;
-        case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Query UniqueID\n");
-            err = TestQueryUniqueID_19();
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Query UniqueID\n");
+            err = TestQueryUniqueID_18();
             break;
         }
 
@@ -20451,9 +20458,6 @@ public:
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -20467,7 +20471,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 20;
+    const uint16_t mTestCount = 19;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -20604,8 +20608,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("location", "", "string"));
-            VerifyOrReturn(CheckConstraintFormat("location", "", "ISO 3166-1 alpha-2"));
-            VerifyOrReturn(CheckConstraintMaxLength("location", [value length], 2));
+            VerifyOrReturn(CheckConstraintMaxLength("location", [value length], 16));
             NextTest();
         }];
 
@@ -20650,72 +20653,25 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestQuerySoftwareVersion_10()
+    CHIP_ERROR TestThReadsSoftwareVersionStringFromTheDutAndVerifyItIsOfTypeStringAndVerifyTheFormat_10()
     {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestBasic * cluster = [[CHIPTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeSoftwareVersionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Query SoftwareVersion Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("softwareVersion", "", "uint32"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestQuerySoftwareVersionString_11()
+    CHIP_ERROR TestThReadsManufacturingDateFromTheDutAndVerifyItIsOfTypeStringAndVerifyTheFormat_11()
     {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestBasic * cluster = [[CHIPTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeSoftwareVersionStringWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Query SoftwareVersionString Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("softwareVersionString", "", "string"));
-            VerifyOrReturn(CheckConstraintFormat("softwareVersionString", "", "ASCII"));
-            VerifyOrReturn(CheckConstraintMinLength("softwareVersionString", [value length], 1));
-            VerifyOrReturn(CheckConstraintMaxLength("softwareVersionString", [value length], 64));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestQueryManufacturingDate_12()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestBasic * cluster = [[CHIPTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeManufacturingDateWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Query ManufacturingDate Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("manufacturingDate", "", "string"));
-            VerifyOrReturn(CheckConstraintFormat("manufacturingDate", "", "ISO 8601"));
-            VerifyOrReturn(CheckConstraintMinLength("manufacturingDate", [value length], 8));
-            VerifyOrReturn(CheckConstraintMaxLength("manufacturingDate", [value length], 16));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestQueryPartNumber_13()
+    CHIP_ERROR TestQueryPartNumber_12()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestBasic * cluster = [[CHIPTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -20739,32 +20695,16 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestQueryProductURL_14()
+    CHIP_ERROR TestThReadsProductURLFromTheDutAndVerifyItIsOfTypeStringAndVerifyTheFormat_13()
     {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestBasic * cluster = [[CHIPTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeProductURLWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Query ProductURL Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("productURL", "", "string"));
-            VerifyOrReturn(CheckConstraintFormat("productURL", "", "RFC3986"));
-            VerifyOrReturn(CheckConstraintMaxLength("productURL", [value length], 256));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestQueryProductLabel_15()
+    CHIP_ERROR TestQueryProductLabel_14()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestBasic * cluster = [[CHIPTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -20788,7 +20728,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestQuerySerialNumber_16()
+    CHIP_ERROR TestQuerySerialNumber_15()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestBasic * cluster = [[CHIPTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -20812,7 +20752,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestQueryLocalConfigDisabled_17()
+    CHIP_ERROR TestQueryLocalConfigDisabled_16()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestBasic * cluster = [[CHIPTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -20835,7 +20775,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestQueryReachable_18()
+    CHIP_ERROR TestQueryReachable_17()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestBasic * cluster = [[CHIPTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -20858,7 +20798,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestQueryUniqueID_19()
+    CHIP_ERROR TestQueryUniqueID_18()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestBasic * cluster = [[CHIPTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -20876,154 +20816,6 @@ private:
 
             VerifyOrReturn(CheckConstraintType("uniqueID", "", "string"));
             VerifyOrReturn(CheckConstraintMaxLength("uniqueID", [value length], 32));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_DM_3_1 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_DM_3_1()
-        : TestCommandBridge("Test_TC_DM_3_1")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_DM_3_1() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DM_3_1\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DM_3_1\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Query MaxNetworks\n");
-            err = TestQueryMaxNetworks_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Query Networks\n");
-            err = TestQueryNetworks_2();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 3;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
-    CHIP_ERROR TestQueryMaxNetworks_1()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestNetworkCommissioning * cluster = [[CHIPTestNetworkCommissioning alloc] initWithDevice:device
-                                                                                             endpoint:0
-                                                                                                queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMaxNetworksWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Query MaxNetworks Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("maxNetworks", "", "uint8"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestQueryNetworks_2()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestNetworkCommissioning * cluster = [[CHIPTestNetworkCommissioning alloc] initWithDevice:device
-                                                                                             endpoint:0
-                                                                                                queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeNetworksWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Query Networks Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("networks", "", "list"));
             NextTest();
         }];
 
@@ -21262,11 +21054,11 @@ private:
     }
 };
 
-class Test_TC_ETHDIAG_1_1 : public TestCommandBridge {
+class Test_TC_DGETH_2_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_ETHDIAG_1_1()
-        : TestCommandBridge("Test_TC_ETHDIAG_1_1")
+    Test_TC_DGETH_2_1()
+        : TestCommandBridge("Test_TC_DGETH_2_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -21276,7 +21068,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_ETHDIAG_1_1() {}
+    ~Test_TC_DGETH_2_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -21284,11 +21076,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ETHDIAG_1_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DGETH_2_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ETHDIAG_1_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DGETH_2_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -21754,11 +21546,11 @@ private:
     }
 };
 
-class Test_TC_ETHDIAG_2_1 : public TestCommandBridge {
+class Test_TC_DGETH_2_2 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_ETHDIAG_2_1()
-        : TestCommandBridge("Test_TC_ETHDIAG_2_1")
+    Test_TC_DGETH_2_2()
+        : TestCommandBridge("Test_TC_DGETH_2_2")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -21768,7 +21560,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_ETHDIAG_2_1() {}
+    ~Test_TC_DGETH_2_2() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -21776,11 +21568,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ETHDIAG_2_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DGETH_2_2\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ETHDIAG_2_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DGETH_2_2\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -31384,554 +31176,6 @@ private:
 
             NextTest();
         }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_MC_3_1 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_3_1()
-        : TestCommandBridge("Test_TC_MC_3_1")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_MC_3_1() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_3_1\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_3_1\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Send Select\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestSendSelect_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Send Up\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestSendUp_2();
-            break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Send Down\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestSendDown_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Send Left\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestSendLeft_4();
-            break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Send Right\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestSendRight_5();
-            break;
-        case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Send RightUp\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestSendRightUp_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Send RightDown\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestSendRightDown_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Send LeftUp\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestSendLeftUp_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Send LeftDown\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestSendLeftDown_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Send RootMenu\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestSendRootMenu_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Send SetupMenu\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestSendSetupMenu_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Send ContentsMenu\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestSendContentsMenu_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Send FavoriteMenu\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestSendFavoriteMenu_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Send Exit\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestSendExit_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Send Invalid\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestSendInvalid_15();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 16;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
-    CHIP_ERROR TestSendSelect_1()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:0];
-        [cluster sendKeyWithParams:params
-                 completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send Select Error: %@", err);
-
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                     NextTest();
-                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestSendUp_2()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:1];
-        [cluster sendKeyWithParams:params
-                 completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send Up Error: %@", err);
-
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                     NextTest();
-                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestSendDown_3()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:2];
-        [cluster sendKeyWithParams:params
-                 completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send Down Error: %@", err);
-
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                     NextTest();
-                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestSendLeft_4()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:3];
-        [cluster sendKeyWithParams:params
-                 completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send Left Error: %@", err);
-
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                     NextTest();
-                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestSendRight_5()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:4];
-        [cluster sendKeyWithParams:params
-                 completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send Right Error: %@", err);
-
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                     NextTest();
-                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestSendRightUp_6()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:5];
-        [cluster sendKeyWithParams:params
-                 completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send RightUp Error: %@", err);
-
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                     NextTest();
-                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestSendRightDown_7()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:6];
-        [cluster sendKeyWithParams:params
-                 completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send RightDown Error: %@", err);
-
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                     NextTest();
-                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestSendLeftUp_8()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:7];
-        [cluster sendKeyWithParams:params
-                 completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send LeftUp Error: %@", err);
-
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                     NextTest();
-                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestSendLeftDown_9()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:8];
-        [cluster sendKeyWithParams:params
-                 completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send LeftDown Error: %@", err);
-
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                     NextTest();
-                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestSendRootMenu_10()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:9];
-        [cluster sendKeyWithParams:params
-                 completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send RootMenu Error: %@", err);
-
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                     NextTest();
-                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestSendSetupMenu_11()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:10];
-        [cluster sendKeyWithParams:params
-                 completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send SetupMenu Error: %@", err);
-
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                     NextTest();
-                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestSendContentsMenu_12()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:11];
-        [cluster sendKeyWithParams:params
-                 completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send ContentsMenu Error: %@", err);
-
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                     NextTest();
-                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestSendFavoriteMenu_13()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:12];
-        [cluster sendKeyWithParams:params
-                 completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send FavoriteMenu Error: %@", err);
-
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                     NextTest();
-                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestSendExit_14()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:13];
-        [cluster sendKeyWithParams:params
-                 completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send Exit Error: %@", err);
-
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                     NextTest();
-                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestSendInvalid_15()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestKeypadInput * cluster = [[CHIPTestKeypadInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:255];
-        [cluster sendKeyWithParams:params
-                 completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
-                     NSLog(@"Send Invalid Error: %@", err);
-
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-                     NextTest();
-                 }];
 
         return CHIP_NO_ERROR;
     }
@@ -56530,11 +55774,11 @@ private:
     }
 };
 
-class Test_TC_WIFIDIAG_1_1 : public TestCommandBridge {
+class Test_TC_DGWIFI_2_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_WIFIDIAG_1_1()
-        : TestCommandBridge("Test_TC_WIFIDIAG_1_1")
+    Test_TC_DGWIFI_2_1()
+        : TestCommandBridge("Test_TC_DGWIFI_2_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -56544,7 +55788,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_WIFIDIAG_1_1() {}
+    ~Test_TC_DGWIFI_2_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -56552,11 +55796,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_WIFIDIAG_1_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DGWIFI_2_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_WIFIDIAG_1_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DGWIFI_2_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -57007,11 +56251,11 @@ private:
     }
 };
 
-class Test_TC_WIFIDIAG_3_1 : public TestCommandBridge {
+class Test_TC_DGWIFI_2_3 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_WIFIDIAG_3_1()
-        : TestCommandBridge("Test_TC_WIFIDIAG_3_1")
+    Test_TC_DGWIFI_2_3()
+        : TestCommandBridge("Test_TC_DGWIFI_2_3")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -57021,7 +56265,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_WIFIDIAG_3_1() {}
+    ~Test_TC_DGWIFI_2_3() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -57029,11 +56273,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_WIFIDIAG_3_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DGWIFI_2_3\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_WIFIDIAG_3_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DGWIFI_2_3\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -109615,11 +108859,10 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_CC_9_1>(),
         make_unique<Test_TC_CC_9_2>(),
         make_unique<Test_TC_CC_9_3>(),
-        make_unique<Test_TC_DM_1_1>(),
-        make_unique<Test_TC_DM_3_1>(),
+        make_unique<Test_TC_DM_2_1>(),
         make_unique<Test_TC_EMR_1_1>(),
-        make_unique<Test_TC_ETHDIAG_1_1>(),
-        make_unique<Test_TC_ETHDIAG_2_1>(),
+        make_unique<Test_TC_DGETH_2_1>(),
+        make_unique<Test_TC_DGETH_2_2>(),
         make_unique<Test_TC_FLW_1_1>(),
         make_unique<Test_TC_FLW_2_1>(),
         make_unique<Test_TC_GC_1_1>(),
@@ -109649,7 +108892,6 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_MC_1_11>(),
         make_unique<Test_TC_MC_1_12>(),
         make_unique<Test_TC_MC_2_1>(),
-        make_unique<Test_TC_MC_3_1>(),
         make_unique<Test_TC_MC_3_2>(),
         make_unique<Test_TC_MC_3_3>(),
         make_unique<Test_TC_MC_3_4>(),
@@ -109707,8 +108949,8 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_TSUIC_2_2>(),
         make_unique<Test_TC_ULABEL_1_1>(),
         make_unique<Test_TC_ULABEL_2_2>(),
-        make_unique<Test_TC_WIFIDIAG_1_1>(),
-        make_unique<Test_TC_WIFIDIAG_3_1>(),
+        make_unique<Test_TC_DGWIFI_2_1>(),
+        make_unique<Test_TC_DGWIFI_2_3>(),
         make_unique<Test_TC_WNCV_1_1>(),
         make_unique<Test_TC_WNCV_2_1>(),
         make_unique<Test_TC_WNCV_2_2>(),
