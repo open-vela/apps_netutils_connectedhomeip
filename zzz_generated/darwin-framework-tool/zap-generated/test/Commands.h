@@ -94798,8 +94798,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -94966,8 +94965,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -95094,8 +95092,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -95198,8 +95195,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -95302,8 +95298,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -95406,8 +95401,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -95510,8 +95504,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -95614,8 +95607,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -95718,8 +95710,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 3U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -95962,7 +95953,7 @@ private:
                      {
                          id actualValue = values.nextUserIndex;
                          VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 3U));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
                      }
 
                      NextTest();
@@ -96065,7 +96056,7 @@ private:
                      {
                          id actualValue = values.nextUserIndex;
                          VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 3U));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
                      }
 
                      NextTest();
@@ -96193,8 +96184,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 3U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -96340,8 +96330,7 @@ private:
 
                                  {
                                      id actualValue = values.nextCredentialIndex;
-                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
                                  }
 
                                  NextTest();
@@ -96515,8 +96504,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -96568,8 +96556,7 @@ private:
 
                                  {
                                      id actualValue = values.nextCredentialIndex;
-                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
                                  }
 
                                  NextTest();
@@ -96782,8 +96769,7 @@ private:
 
                                  {
                                      id actualValue = values.nextCredentialIndex;
-                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
                                  }
 
                                  NextTest();
@@ -96913,8 +96899,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -96966,8 +96951,7 @@ private:
 
                                  {
                                      id actualValue = values.nextCredentialIndex;
-                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
                                  }
 
                                  NextTest();
@@ -97734,7 +97718,7 @@ private:
                 {
                     id actualValue = values.nextUserIndex;
                     VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                    VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 3U));
+                    VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
                 }
 
                 NextTest();
@@ -97874,7 +97858,7 @@ private:
                 {
                     id actualValue = values.nextUserIndex;
                     VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                    VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 3U));
+                    VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
                 }
 
                 NextTest();
@@ -97947,7 +97931,7 @@ private:
                                  {
                                      id actualValue = values.nextCredentialIndex;
                                      VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 6U));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
                                  }
 
                                  NextTest();
@@ -98038,7 +98022,7 @@ private:
                 {
                     id actualValue = values.nextUserIndex;
                     VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                    VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 3U));
+                    VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
                 }
 
                 NextTest();
@@ -98111,7 +98095,7 @@ private:
                                  {
                                      id actualValue = values.nextCredentialIndex;
                                      VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 6U));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
                                  }
 
                                  NextTest();
@@ -98181,8 +98165,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 3U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -98301,7 +98284,7 @@ private:
                                  {
                                      id actualValue = values.nextCredentialIndex;
                                      VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
                                  }
 
                                  NextTest();
@@ -98351,7 +98334,7 @@ private:
                                  {
                                      id actualValue = values.nextCredentialIndex;
                                      VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
                                  }
 
                                  NextTest();
@@ -98401,7 +98384,7 @@ private:
                                  {
                                      id actualValue = values.nextCredentialIndex;
                                      VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 6U));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
                                  }
 
                                  NextTest();
@@ -98482,8 +98465,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -98553,8 +98535,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 3U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -98761,8 +98742,7 @@ private:
 
                                  {
                                      id actualValue = values.nextCredentialIndex;
-                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
                                  }
 
                                  NextTest();
@@ -98811,8 +98791,7 @@ private:
 
                                  {
                                      id actualValue = values.nextCredentialIndex;
-                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
                                  }
 
                                  NextTest();
@@ -98861,8 +98840,7 @@ private:
 
                                  {
                                      id actualValue = values.nextCredentialIndex;
-                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 7U));
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
                                  }
 
                                  NextTest();
@@ -98932,8 +98910,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -99003,8 +98980,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 3U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -99074,8 +99050,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 4U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -99145,8 +99120,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 5U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -99316,8 +99290,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
@@ -99637,8 +99610,7 @@ private:
 
                      {
                          id actualValue = values.nextUserIndex;
-                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
                      }
 
                      NextTest();
