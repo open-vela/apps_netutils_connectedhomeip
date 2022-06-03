@@ -56157,6 +56157,7 @@ public:
         : ClusterCommand("csrrequest")
     {
         AddArgument("CSRNonce", &mRequest.CSRNonce);
+        AddArgument("IsForUpdateNOC", 0, 1, &mRequest.isForUpdateNOC);
         ClusterCommand::AddArguments();
     }
 
@@ -56172,6 +56173,11 @@ public:
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.csrNonce = [NSData dataWithBytes:mRequest.CSRNonce.data() length:mRequest.CSRNonce.size()];
+        if (mRequest.isForUpdateNOC.HasValue()) {
+            params.isForUpdateNOC = [NSNumber numberWithBool:mRequest.isForUpdateNOC.Value()];
+        } else {
+            params.isForUpdateNOC = nil;
+        }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {

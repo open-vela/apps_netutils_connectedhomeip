@@ -47285,6 +47285,10 @@ using namespace chip::app::Clusters;
         }
     }
     request.CSRNonce = [self asByteSpan:params.csrNonce];
+    if (params.isForUpdateNOC != nil) {
+        auto & definedValue_0 = request.isForUpdateNOC.Emplace();
+        definedValue_0 = params.isForUpdateNOC.boolValue;
+    }
 
     new CHIPOperationalCredentialsClusterCSRResponseCallbackBridge(
         self.callbackQueue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
