@@ -82756,62 +82756,61 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Write attribute INT32U Value\n");
-            err = TestWriteAttributeInt32uValue_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Write attribute LIST With List of INT8U\n");
+            err = TestWriteAttributeListWithListOfInt8u_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read attribute INT32U Value MinValue Constraints\n");
-            err = TestReadAttributeInt32uValueMinValueConstraints_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read attribute LIST With Partial List of INT8U that should be in it\n");
+            err = TestReadAttributeListWithPartialListOfInt8uThatShouldBeInIt_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Read attribute INT32U Value MaxValue Constraints\n");
-            err = TestReadAttributeInt32uValueMaxValueConstraints_3();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Read attribute LIST With Partial List of INT8U that should not be included\n");
+            err = TestReadAttributeListWithPartialListOfInt8uThatShouldNotBeIncluded_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Read attribute INT32U Value NotValue Constraints\n");
-            err = TestReadAttributeInt32uValueNotValueConstraints_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Write attribute LIST Back to Default Value\n");
+            err = TestWriteAttributeListBackToDefaultValue_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Write attribute INT32U Value Back to Default Value\n");
-            err = TestWriteAttributeInt32uValueBackToDefaultValue_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Write attribute INT32U Value\n");
+            err = TestWriteAttributeInt32uValue_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Write attribute CHAR_STRING Value\n");
-            err = TestWriteAttributeCharStringValue_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read attribute INT32U Value MinValue Constraints\n");
+            err = TestReadAttributeInt32uValueMinValueConstraints_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Read attribute CHAR_STRING Value MinLength Constraints\n");
-            err = TestReadAttributeCharStringValueMinLengthConstraints_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Read attribute INT32U Value MaxValue Constraints\n");
+            err = TestReadAttributeInt32uValueMaxValueConstraints_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Read attribute CHAR_STRING Value MaxLength Constraints\n");
-            err = TestReadAttributeCharStringValueMaxLengthConstraints_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read attribute INT32U Value NotValue Constraints\n");
+            err = TestReadAttributeInt32uValueNotValueConstraints_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Read attribute CHAR_STRING Value StartsWith Constraints\n");
-            err = TestReadAttributeCharStringValueStartsWithConstraints_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Write attribute INT32U Value Back to Default Value\n");
+            err = TestWriteAttributeInt32uValueBackToDefaultValue_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Read attribute CHAR_STRING Value EndsWith Constraints\n");
-            err = TestReadAttributeCharStringValueEndsWithConstraints_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Write attribute CHAR_STRING Value\n");
+            err = TestWriteAttributeCharStringValue_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Write attribute CHAR_STRING Value\n");
-            err = TestWriteAttributeCharStringValue_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Read attribute CHAR_STRING Value MinLength Constraints\n");
+            err = TestReadAttributeCharStringValueMinLengthConstraints_11();
             break;
         case 12:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 12 : Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints\n");
-            err = TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Read attribute CHAR_STRING Value MaxLength Constraints\n");
+            err = TestReadAttributeCharStringValueMaxLengthConstraints_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Write attribute CHAR_STRING Value\n");
-            err = TestWriteAttributeCharStringValue_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Read attribute CHAR_STRING Value StartsWith Constraints\n");
+            err = TestReadAttributeCharStringValueStartsWithConstraints_13();
             break;
         case 14:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 14 : Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints\n");
-            err = TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Read attribute CHAR_STRING Value EndsWith Constraints\n");
+            err = TestReadAttributeCharStringValueEndsWithConstraints_14();
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Write attribute CHAR_STRING Value\n");
@@ -82827,20 +82826,38 @@ public:
             err = TestWriteAttributeCharStringValue_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Read attribute CHAR_STRING Value isHexString Constraints\n");
-            err = TestReadAttributeCharStringValueIsHexStringConstraints_18();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 18 : Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints\n");
+            err = TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_18();
             break;
         case 19:
             ChipLogProgress(chipTool, " ***** Test Step 19 : Write attribute CHAR_STRING Value\n");
             err = TestWriteAttributeCharStringValue_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Read attribute CHAR_STRING Value isHexString Constraints\n");
-            err = TestReadAttributeCharStringValueIsHexStringConstraints_20();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 20 : Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints\n");
+            err = TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_20();
             break;
         case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : Write attribute CHAR_STRING Value Back to Default Value\n");
-            err = TestWriteAttributeCharStringValueBackToDefaultValue_21();
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Write attribute CHAR_STRING Value\n");
+            err = TestWriteAttributeCharStringValue_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Read attribute CHAR_STRING Value isHexString Constraints\n");
+            err = TestReadAttributeCharStringValueIsHexStringConstraints_22();
+            break;
+        case 23:
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Write attribute CHAR_STRING Value\n");
+            err = TestWriteAttributeCharStringValue_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Read attribute CHAR_STRING Value isHexString Constraints\n");
+            err = TestReadAttributeCharStringValueIsHexStringConstraints_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Write attribute CHAR_STRING Value Back to Default Value\n");
+            err = TestWriteAttributeCharStringValueBackToDefaultValue_25();
             break;
         }
 
@@ -82919,6 +82936,18 @@ public:
         case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -82932,7 +82961,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 22;
+    const uint16_t mTestCount = 26;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -82946,7 +82975,102 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestWriteAttributeInt32uValue_1()
+    CHIP_ERROR TestWriteAttributeListWithListOfInt8u_1()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id listInt8uArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [NSNumber numberWithUnsignedChar:1];
+            temp_0[1] = [NSNumber numberWithUnsignedChar:2];
+            temp_0[2] = [NSNumber numberWithUnsignedChar:3];
+            temp_0[3] = [NSNumber numberWithUnsignedChar:4];
+            listInt8uArgument = temp_0;
+        }
+        [cluster writeAttributeListInt8uWithValue:listInt8uArgument
+                                completionHandler:^(NSError * _Nullable err) {
+                                    NSLog(@"Write attribute LIST With List of INT8U Error: %@", err);
+
+                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                    NextTest();
+                                }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeListWithPartialListOfInt8uThatShouldBeInIt_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeListInt8uWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute LIST With Partial List of INT8U that should be in it Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintContains("listInt8u", value, 2));
+                VerifyOrReturn(CheckConstraintContains("listInt8u", value, 3));
+                VerifyOrReturn(CheckConstraintContains("listInt8u", value, 4));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeListWithPartialListOfInt8uThatShouldNotBeIncluded_3()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeListInt8uWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute LIST With Partial List of INT8U that should not be included Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintExcludes("listInt8u", value, 0));
+                VerifyOrReturn(CheckConstraintExcludes("listInt8u", value, 5));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteAttributeListBackToDefaultValue_4()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id listInt8uArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            listInt8uArgument = temp_0;
+        }
+        [cluster writeAttributeListInt8uWithValue:listInt8uArgument
+                                completionHandler:^(NSError * _Nullable err) {
+                                    NSLog(@"Write attribute LIST Back to Default Value Error: %@", err);
+
+                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                    NextTest();
+                                }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteAttributeInt32uValue_5()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82966,7 +83090,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeInt32uValueMinValueConstraints_2()
+    CHIP_ERROR TestReadAttributeInt32uValueMinValueConstraints_6()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -82987,7 +83111,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeInt32uValueMaxValueConstraints_3()
+    CHIP_ERROR TestReadAttributeInt32uValueMaxValueConstraints_7()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -83008,7 +83132,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeInt32uValueNotValueConstraints_4()
+    CHIP_ERROR TestReadAttributeInt32uValueNotValueConstraints_8()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -83029,7 +83153,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeInt32uValueBackToDefaultValue_5()
+    CHIP_ERROR TestWriteAttributeInt32uValueBackToDefaultValue_9()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -83049,7 +83173,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeCharStringValue_6()
+    CHIP_ERROR TestWriteAttributeCharStringValue_10()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -83069,7 +83193,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeCharStringValueMinLengthConstraints_7()
+    CHIP_ERROR TestReadAttributeCharStringValueMinLengthConstraints_11()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -83087,7 +83211,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeCharStringValueMaxLengthConstraints_8()
+    CHIP_ERROR TestReadAttributeCharStringValueMaxLengthConstraints_12()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -83105,7 +83229,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeCharStringValueStartsWithConstraints_9()
+    CHIP_ERROR TestReadAttributeCharStringValueStartsWithConstraints_13()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -83123,7 +83247,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeCharStringValueEndsWithConstraints_10()
+    CHIP_ERROR TestReadAttributeCharStringValueEndsWithConstraints_14()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -83141,84 +83265,6 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeCharStringValue_11()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id charStringArgument;
-        charStringArgument = @"lowercase";
-        [cluster writeAttributeCharStringWithValue:charStringArgument
-                                 completionHandler:^(NSError * _Nullable err) {
-                                     NSLog(@"Write attribute CHAR_STRING Value Error: %@", err);
-
-                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                     NextTest();
-                                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_12()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCharStringWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintIsUpperCase("charString", value, false));
-            VerifyOrReturn(CheckConstraintIsLowerCase("charString", value, true));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWriteAttributeCharStringValue_13()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id charStringArgument;
-        charStringArgument = @"UPPERCASE";
-        [cluster writeAttributeCharStringWithValue:charStringArgument
-                                 completionHandler:^(NSError * _Nullable err) {
-                                     NSLog(@"Write attribute CHAR_STRING Value Error: %@", err);
-
-                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                     NextTest();
-                                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_14()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCharStringWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintIsUpperCase("charString", value, true));
-            VerifyOrReturn(CheckConstraintIsLowerCase("charString", value, false));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
     CHIP_ERROR TestWriteAttributeCharStringValue_15()
     {
         CHIPDevice * device = GetDevice("alpha");
@@ -83226,7 +83272,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id charStringArgument;
-        charStringArgument = @"lowUPPER";
+        charStringArgument = @"lowercase";
         [cluster writeAttributeCharStringWithValue:charStringArgument
                                  completionHandler:^(NSError * _Nullable err) {
                                      NSLog(@"Write attribute CHAR_STRING Value Error: %@", err);
@@ -83251,7 +83297,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintIsUpperCase("charString", value, false));
-            VerifyOrReturn(CheckConstraintIsLowerCase("charString", value, false));
+            VerifyOrReturn(CheckConstraintIsLowerCase("charString", value, true));
             NextTest();
         }];
 
@@ -83259,6 +83305,84 @@ private:
     }
 
     CHIP_ERROR TestWriteAttributeCharStringValue_17()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id charStringArgument;
+        charStringArgument = @"UPPERCASE";
+        [cluster writeAttributeCharStringWithValue:charStringArgument
+                                 completionHandler:^(NSError * _Nullable err) {
+                                     NSLog(@"Write attribute CHAR_STRING Value Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_18()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCharStringWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintIsUpperCase("charString", value, true));
+            VerifyOrReturn(CheckConstraintIsLowerCase("charString", value, false));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteAttributeCharStringValue_19()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id charStringArgument;
+        charStringArgument = @"lowUPPER";
+        [cluster writeAttributeCharStringWithValue:charStringArgument
+                                 completionHandler:^(NSError * _Nullable err) {
+                                     NSLog(@"Write attribute CHAR_STRING Value Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_20()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCharStringWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintIsUpperCase("charString", value, false));
+            VerifyOrReturn(CheckConstraintIsLowerCase("charString", value, false));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteAttributeCharStringValue_21()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -83278,7 +83402,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeCharStringValueIsHexStringConstraints_18()
+    CHIP_ERROR TestReadAttributeCharStringValueIsHexStringConstraints_22()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -83296,7 +83420,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeCharStringValue_19()
+    CHIP_ERROR TestWriteAttributeCharStringValue_23()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -83316,7 +83440,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeCharStringValueIsHexStringConstraints_20()
+    CHIP_ERROR TestReadAttributeCharStringValueIsHexStringConstraints_24()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -83334,7 +83458,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeCharStringValueBackToDefaultValue_21()
+    CHIP_ERROR TestWriteAttributeCharStringValueBackToDefaultValue_25()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestTestCluster * cluster = [[CHIPTestTestCluster alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
