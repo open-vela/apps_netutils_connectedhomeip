@@ -203,7 +203,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPAccessControlAclListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPAccessControlAclListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -319,7 +319,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPAccessControlExtensionListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPAccessControlExtensionListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -382,7 +382,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -445,7 +445,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -508,7 +508,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -572,7 +572,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPAccessControlGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPAccessControlGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -637,7 +637,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPAccessControlAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPAccessControlAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -700,7 +700,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPAccessControlAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPAccessControlAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -762,7 +762,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -823,7 +823,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -983,7 +983,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPAccountLoginGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPAccountLoginGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -1048,7 +1048,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPAccountLoginAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPAccountLoginAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -1111,7 +1111,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPAccountLoginAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPAccountLoginAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -1173,7 +1173,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -1234,7 +1234,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -1398,7 +1398,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -1460,7 +1460,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -1522,7 +1522,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -1588,7 +1588,7 @@ using namespace chip::app::Clusters;
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPAdministratorCommissioningGeneratedCommandListListAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -1654,7 +1654,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPAdministratorCommissioningAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -1717,7 +1717,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPAdministratorCommissioningAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPAdministratorCommissioningAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -1779,7 +1779,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -1840,7 +1840,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -1910,7 +1910,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -1970,7 +1970,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -2031,7 +2031,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -2092,7 +2092,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -2155,7 +2155,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPApplicationBasicApplicationStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPApplicationBasicApplicationStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -2218,7 +2218,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPApplicationBasicClusterApplicationStatusEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPApplicationBasicClusterApplicationStatusEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -2280,7 +2280,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -2343,7 +2343,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPApplicationBasicAllowedVendorListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPApplicationBasicAllowedVendorListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -2408,7 +2408,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPApplicationBasicGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPApplicationBasicGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -2473,7 +2473,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPApplicationBasicAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPApplicationBasicAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -2536,7 +2536,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPApplicationBasicAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPApplicationBasicAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -2598,7 +2598,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -2659,7 +2659,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -2806,7 +2806,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPApplicationLauncherCatalogListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPApplicationLauncherCatalogListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -2914,7 +2914,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPApplicationLauncherCurrentAppStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPApplicationLauncherCurrentAppStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -2979,7 +2979,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPApplicationLauncherGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPApplicationLauncherGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -3044,7 +3044,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPApplicationLauncherAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPApplicationLauncherAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -3107,7 +3107,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPApplicationLauncherAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPApplicationLauncherAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -3169,7 +3169,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -3230,7 +3230,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -3354,7 +3354,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPAudioOutputOutputListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPAudioOutputOutputListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -3416,7 +3416,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -3480,7 +3480,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPAudioOutputGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPAudioOutputGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -3545,7 +3545,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPAudioOutputAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPAudioOutputAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -3608,7 +3608,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPAudioOutputAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPAudioOutputAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -3670,7 +3670,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -3731,7 +3731,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -3857,7 +3857,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -3920,7 +3920,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -3983,7 +3983,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -4077,7 +4077,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -4171,7 +4171,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -4269,7 +4269,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -4367,7 +4367,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -4461,7 +4461,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -4555,7 +4555,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -4617,7 +4617,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -4681,7 +4681,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBarrierControlGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBarrierControlGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -4746,7 +4746,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBarrierControlAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBarrierControlAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -4809,7 +4809,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBarrierControlAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBarrierControlAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -4871,7 +4871,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -4932,7 +4932,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -5032,7 +5032,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -5093,7 +5093,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -5153,7 +5153,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPVendorIdAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPVendorIdAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -5213,7 +5213,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -5274,7 +5274,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -5366,7 +5366,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -5458,7 +5458,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -5519,7 +5519,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -5582,7 +5582,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -5644,7 +5644,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -5707,7 +5707,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -5769,7 +5769,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -5830,7 +5830,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -5890,7 +5890,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -5950,7 +5950,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -6011,7 +6011,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -6106,7 +6106,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -6167,7 +6167,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -6227,7 +6227,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -6289,7 +6289,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBasicCapabilityMinimaStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBasicCapabilityMinimaStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -6354,7 +6354,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBasicGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBasicGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -6419,7 +6419,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBasicAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBasicAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -6482,7 +6482,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBasicAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBasicAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -6543,7 +6543,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -6604,7 +6604,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -6706,7 +6706,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -6798,7 +6798,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -6891,7 +6891,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -6984,7 +6984,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -7045,7 +7045,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -7137,7 +7137,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -7230,7 +7230,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -7291,7 +7291,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -7353,7 +7353,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -7417,7 +7417,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBinaryInputBasicGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBinaryInputBasicGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -7482,7 +7482,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBinaryInputBasicAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBinaryInputBasicAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -7545,7 +7545,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBinaryInputBasicAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBinaryInputBasicAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -7607,7 +7607,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -7668,7 +7668,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -7809,7 +7809,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBindingBindingListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBindingBindingListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -7872,7 +7872,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBindingGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBindingGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -7937,7 +7937,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBindingAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBindingAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -8000,7 +8000,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBindingAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBindingAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -8062,7 +8062,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -8123,7 +8123,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -8193,7 +8193,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -8256,7 +8256,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanStateGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanStateGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -8321,7 +8321,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanStateAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanStateAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -8384,7 +8384,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanStateAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanStateAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -8446,7 +8446,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -8507,7 +8507,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -8943,7 +8943,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBridgedActionsActionListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBridgedActionsActionListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -9005,7 +9005,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBridgedActionsEndpointListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBridgedActionsEndpointListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -9067,7 +9067,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -9130,7 +9130,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBridgedActionsGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBridgedActionsGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -9195,7 +9195,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBridgedActionsAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBridgedActionsAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -9258,7 +9258,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBridgedActionsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBridgedActionsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -9320,7 +9320,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -9381,7 +9381,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -9451,7 +9451,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -9511,7 +9511,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPVendorIdAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPVendorIdAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -9571,7 +9571,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -9664,7 +9664,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -9725,7 +9725,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -9788,7 +9788,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -9850,7 +9850,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -9913,7 +9913,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -9975,7 +9975,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -10036,7 +10036,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -10096,7 +10096,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -10156,7 +10156,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -10217,7 +10217,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -10278,7 +10278,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -10338,7 +10338,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -10401,7 +10401,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBridgedDeviceBasicGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBridgedDeviceBasicGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -10466,7 +10466,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBridgedDeviceBasicAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBridgedDeviceBasicAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -10529,7 +10529,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBridgedDeviceBasicAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBridgedDeviceBasicAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -10591,7 +10591,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -10652,7 +10652,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -10798,7 +10798,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPChannelChannelListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPChannelChannelListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -10860,7 +10860,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPChannelLineupStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPChannelLineupStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -10923,7 +10923,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPChannelCurrentChannelStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPChannelCurrentChannelStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -10988,7 +10988,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPChannelGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPChannelGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -11053,7 +11053,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPChannelAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPChannelAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -11116,7 +11116,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPChannelAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPChannelAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -11178,7 +11178,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -11239,7 +11239,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -11870,7 +11870,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -11931,7 +11931,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -11993,7 +11993,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -12054,7 +12054,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -12114,7 +12114,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -12175,7 +12175,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -12237,7 +12237,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -12299,7 +12299,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -12360,7 +12360,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -12451,7 +12451,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -12513,7 +12513,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -12574,7 +12574,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -12634,7 +12634,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -12696,7 +12696,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -12757,7 +12757,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -12817,7 +12817,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -12879,7 +12879,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -12940,7 +12940,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -13000,7 +13000,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -13062,7 +13062,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -13123,7 +13123,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -13183,7 +13183,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -13245,7 +13245,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -13306,7 +13306,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -13366,7 +13366,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -13428,7 +13428,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -13489,7 +13489,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -13549,7 +13549,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -13611,7 +13611,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -13704,7 +13704,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -13797,7 +13797,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -13890,7 +13890,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -13983,7 +13983,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -14085,7 +14085,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -14178,7 +14178,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -14271,7 +14271,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -14373,7 +14373,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -14466,7 +14466,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -14559,7 +14559,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -14661,7 +14661,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -14723,7 +14723,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -14785,7 +14785,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -14847,7 +14847,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -14909,7 +14909,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -14971,7 +14971,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -15034,7 +15034,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -15097,7 +15097,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -15159,7 +15159,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -15222,7 +15222,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -15285,7 +15285,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -15348,7 +15348,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -15446,7 +15446,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -15510,7 +15510,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPColorControlGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPColorControlGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -15575,7 +15575,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPColorControlAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPColorControlAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -15638,7 +15638,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPColorControlAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPColorControlAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -15700,7 +15700,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -15761,7 +15761,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -16031,7 +16031,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPContentLauncherAcceptHeaderListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPContentLauncherAcceptHeaderListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -16130,7 +16130,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -16194,7 +16194,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPContentLauncherGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPContentLauncherGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -16259,7 +16259,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPContentLauncherAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPContentLauncherAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -16322,7 +16322,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPContentLauncherAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPContentLauncherAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -16384,7 +16384,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -16445,7 +16445,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -16516,7 +16516,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDescriptorDeviceListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDescriptorDeviceListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -16578,7 +16578,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDescriptorServerListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDescriptorServerListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -16640,7 +16640,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDescriptorClientListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDescriptorClientListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -16702,7 +16702,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDescriptorPartsListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDescriptorPartsListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -16765,7 +16765,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDescriptorGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDescriptorGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -16830,7 +16830,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDescriptorAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDescriptorAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -16893,7 +16893,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDescriptorAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDescriptorAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -16955,7 +16955,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -17016,7 +17016,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -17115,7 +17115,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDiagnosticLogsGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDiagnosticLogsGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -17180,7 +17180,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDiagnosticLogsAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDiagnosticLogsAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -17243,7 +17243,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDiagnosticLogsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDiagnosticLogsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -17305,7 +17305,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -17366,7 +17366,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -18001,7 +18001,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableDoorLockClusterDlLockStateAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableDoorLockClusterDlLockStateAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -18063,7 +18063,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDoorLockClusterDlLockTypeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDoorLockClusterDlLockTypeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -18125,7 +18125,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -18187,7 +18187,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableDoorLockClusterDlDoorStateAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableDoorLockClusterDlDoorStateAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -18281,7 +18281,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -18375,7 +18375,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -18468,7 +18468,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -18530,7 +18530,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -18593,7 +18593,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -18656,7 +18656,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -18719,7 +18719,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -18783,7 +18783,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -18847,7 +18847,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -18909,7 +18909,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -18971,7 +18971,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -19033,7 +19033,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -19095,7 +19095,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -19159,7 +19159,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDoorLockCredentialRulesSupportAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDoorLockCredentialRulesSupportAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -19223,7 +19223,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -19316,7 +19316,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -19408,7 +19408,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -19502,7 +19502,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -19595,7 +19595,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -19690,7 +19690,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDoorLockClusterDlOperatingModeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDoorLockClusterDlOperatingModeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -19755,7 +19755,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDoorLockSupportedOperatingModesAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDoorLockSupportedOperatingModesAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -19820,7 +19820,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDoorLockDefaultConfigurationRegisterAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDoorLockDefaultConfigurationRegisterAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -19917,7 +19917,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -20013,7 +20013,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -20109,7 +20109,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -20207,7 +20207,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -20306,7 +20306,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDoorLockLocalProgrammingFeaturesAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDoorLockLocalProgrammingFeaturesAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -20402,7 +20402,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -20500,7 +20500,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -20594,7 +20594,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -20692,7 +20692,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -20787,7 +20787,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -20851,7 +20851,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDoorLockGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDoorLockGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -20916,7 +20916,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDoorLockAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDoorLockAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -20979,7 +20979,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDoorLockAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDoorLockAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -21041,7 +21041,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -21102,7 +21102,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -21230,7 +21230,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -21291,7 +21291,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -21351,7 +21351,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -21412,7 +21412,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -21473,7 +21473,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -21533,7 +21533,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -21594,7 +21594,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -21654,7 +21654,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -21714,7 +21714,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -21774,7 +21774,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -21836,7 +21836,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -21898,7 +21898,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -21961,7 +21961,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -22023,7 +22023,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -22085,7 +22085,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -22147,7 +22147,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -22208,7 +22208,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -22270,7 +22270,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -22332,7 +22332,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -22394,7 +22394,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -22456,7 +22456,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -22518,7 +22518,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -22580,7 +22580,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -22643,7 +22643,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -22706,7 +22706,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -22769,7 +22769,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -22832,7 +22832,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -22895,7 +22895,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -22958,7 +22958,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -23021,7 +23021,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -23084,7 +23084,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -23147,7 +23147,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -23210,7 +23210,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -23273,7 +23273,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -23336,7 +23336,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -23399,7 +23399,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -23461,7 +23461,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -23523,7 +23523,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -23584,7 +23584,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -23647,7 +23647,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -23710,7 +23710,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -23773,7 +23773,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -23836,7 +23836,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -23899,7 +23899,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -23962,7 +23962,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -24024,7 +24024,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -24085,7 +24085,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -24146,7 +24146,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -24208,7 +24208,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -24269,7 +24269,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -24330,7 +24330,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -24392,7 +24392,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -24453,7 +24453,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -24515,7 +24515,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -24577,7 +24577,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -24639,7 +24639,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -24701,7 +24701,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -24762,7 +24762,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -24860,7 +24860,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -24958,7 +24958,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -25056,7 +25056,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -25154,7 +25154,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -25249,7 +25249,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -25345,7 +25345,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -25408,7 +25408,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -25470,7 +25470,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -25533,7 +25533,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -25595,7 +25595,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -25657,7 +25657,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -25719,7 +25719,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -25813,7 +25813,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -25875,7 +25875,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -25937,7 +25937,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -26032,7 +26032,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -26094,7 +26094,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -26156,7 +26156,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -26219,7 +26219,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -26282,7 +26282,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -26345,7 +26345,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -26408,7 +26408,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -26471,7 +26471,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -26534,7 +26534,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -26596,7 +26596,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -26658,7 +26658,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -26720,7 +26720,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -26783,7 +26783,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -26846,7 +26846,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -26908,7 +26908,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -26971,7 +26971,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27034,7 +27034,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27096,7 +27096,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27159,7 +27159,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27222,7 +27222,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27284,7 +27284,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27347,7 +27347,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27410,7 +27410,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27473,7 +27473,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27536,7 +27536,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27598,7 +27598,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27661,7 +27661,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27725,7 +27725,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27788,7 +27788,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27851,7 +27851,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27914,7 +27914,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27977,7 +27977,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -28040,7 +28040,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -28102,7 +28102,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -28165,7 +28165,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -28228,7 +28228,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -28290,7 +28290,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -28353,7 +28353,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -28416,7 +28416,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -28478,7 +28478,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -28541,7 +28541,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -28604,7 +28604,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -28666,7 +28666,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -28729,7 +28729,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -28792,7 +28792,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -28855,7 +28855,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -28918,7 +28918,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -28980,7 +28980,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -29043,7 +29043,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -29107,7 +29107,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -29170,7 +29170,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -29233,7 +29233,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -29296,7 +29296,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -29359,7 +29359,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -29422,7 +29422,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -29487,7 +29487,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPElectricalMeasurementGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -29551,7 +29551,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPElectricalMeasurementAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPElectricalMeasurementAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -29614,7 +29614,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPElectricalMeasurementAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPElectricalMeasurementAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -29676,7 +29676,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -29737,7 +29737,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -29840,7 +29840,7 @@ using namespace chip::app::Clusters;
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPNullableEthernetNetworkDiagnosticsClusterPHYRateTypeAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -29902,7 +29902,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -29963,7 +29963,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -30025,7 +30025,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -30086,7 +30086,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -30147,7 +30147,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -30208,7 +30208,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -30271,7 +30271,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -30333,7 +30333,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -30399,7 +30399,7 @@ using namespace chip::app::Clusters;
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPEthernetNetworkDiagnosticsGeneratedCommandListListAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -30465,7 +30465,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPEthernetNetworkDiagnosticsAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -30528,7 +30528,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPEthernetNetworkDiagnosticsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPEthernetNetworkDiagnosticsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -30590,7 +30590,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -30651,7 +30651,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -30753,7 +30753,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPFanControlClusterFanModeTypeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPFanControlClusterFanModeTypeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -30848,7 +30848,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPFanControlClusterFanModeSequenceTypeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPFanControlClusterFanModeSequenceTypeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -30949,7 +30949,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -31011,7 +31011,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -31072,7 +31072,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -31170,7 +31170,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -31231,7 +31231,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -31292,7 +31292,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -31385,7 +31385,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -31446,7 +31446,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -31539,7 +31539,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -31603,7 +31603,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPFanControlGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPFanControlGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -31668,7 +31668,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPFanControlAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPFanControlAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -31731,7 +31731,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPFanControlAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPFanControlAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -31793,7 +31793,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -31854,7 +31854,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -31925,7 +31925,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPFixedLabelLabelListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPFixedLabelLabelListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -31988,7 +31988,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPFixedLabelGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPFixedLabelGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -32053,7 +32053,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPFixedLabelAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPFixedLabelAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -32116,7 +32116,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPFixedLabelAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPFixedLabelAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -32178,7 +32178,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -32239,7 +32239,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -32311,7 +32311,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -32374,7 +32374,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -32437,7 +32437,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -32498,7 +32498,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -32561,7 +32561,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPFlowMeasurementGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPFlowMeasurementGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -32626,7 +32626,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPFlowMeasurementAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPFlowMeasurementAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -32689,7 +32689,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPFlowMeasurementAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPFlowMeasurementAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -32751,7 +32751,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -32812,7 +32812,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -32995,7 +32995,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -33060,7 +33060,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPGeneralCommissioningBasicCommissioningInfoStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -33126,7 +33126,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPGeneralCommissioningClusterRegulatoryLocationTypeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -33191,7 +33191,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPGeneralCommissioningClusterRegulatoryLocationTypeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -33255,7 +33255,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -33319,7 +33319,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPGeneralCommissioningGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPGeneralCommissioningGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -33384,7 +33384,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPGeneralCommissioningAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPGeneralCommissioningAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -33447,7 +33447,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPGeneralCommissioningAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPGeneralCommissioningAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -33509,7 +33509,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -33570,7 +33570,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -33669,7 +33669,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPGeneralDiagnosticsNetworkInterfacesListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPGeneralDiagnosticsNetworkInterfacesListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -33731,7 +33731,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -33791,7 +33791,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -33853,7 +33853,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -33914,7 +33914,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -33978,7 +33978,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPGeneralDiagnosticsActiveHardwareFaultsListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPGeneralDiagnosticsActiveHardwareFaultsListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -34042,7 +34042,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPGeneralDiagnosticsActiveRadioFaultsListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPGeneralDiagnosticsActiveRadioFaultsListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -34107,7 +34107,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPGeneralDiagnosticsActiveNetworkFaultsListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPGeneralDiagnosticsActiveNetworkFaultsListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -34171,7 +34171,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -34235,7 +34235,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPGeneralDiagnosticsGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPGeneralDiagnosticsGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -34300,7 +34300,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPGeneralDiagnosticsAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPGeneralDiagnosticsAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -34363,7 +34363,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPGeneralDiagnosticsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPGeneralDiagnosticsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -34425,7 +34425,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -34486,7 +34486,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -34772,7 +34772,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPGroupKeyManagementGroupKeyMapListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPGroupKeyManagementGroupKeyMapListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -34835,7 +34835,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPGroupKeyManagementGroupTableListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPGroupKeyManagementGroupTableListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -34897,7 +34897,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -34960,7 +34960,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -35024,7 +35024,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPGroupKeyManagementGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPGroupKeyManagementGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -35089,7 +35089,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPGroupKeyManagementAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPGroupKeyManagementAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -35152,7 +35152,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPGroupKeyManagementAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPGroupKeyManagementAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -35214,7 +35214,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -35275,7 +35275,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -35515,7 +35515,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -35579,7 +35579,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPGroupsGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPGroupsGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -35644,7 +35644,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPGroupsAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPGroupsAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -35707,7 +35707,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPGroupsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPGroupsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -35768,7 +35768,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -35829,7 +35829,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -35985,7 +35985,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -36046,7 +36046,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -36110,7 +36110,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPIdentifyGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPIdentifyGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -36175,7 +36175,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPIdentifyAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPIdentifyAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -36238,7 +36238,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPIdentifyAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPIdentifyAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -36300,7 +36300,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -36361,7 +36361,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -36433,7 +36433,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -36496,7 +36496,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -36559,7 +36559,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -36620,7 +36620,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -36682,7 +36682,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -36747,7 +36747,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPIlluminanceMeasurementGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -36812,7 +36812,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPIlluminanceMeasurementAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -36874,7 +36874,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPIlluminanceMeasurementAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPIlluminanceMeasurementAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -36936,7 +36936,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -36997,7 +36997,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -37093,7 +37093,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPKeypadInputGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPKeypadInputGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -37158,7 +37158,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPKeypadInputAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPKeypadInputAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -37221,7 +37221,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPKeypadInputAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPKeypadInputAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -37283,7 +37283,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -37344,7 +37344,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -37663,7 +37663,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -37725,7 +37725,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -37786,7 +37786,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -37846,7 +37846,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -37907,7 +37907,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -37968,7 +37968,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -38029,7 +38029,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -38121,7 +38121,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -38215,7 +38215,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -38313,7 +38313,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -38412,7 +38412,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -38512,7 +38512,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -38612,7 +38612,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -38713,7 +38713,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -38777,7 +38777,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPLevelControlGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPLevelControlGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -38842,7 +38842,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPLevelControlAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPLevelControlAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -38905,7 +38905,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPLevelControlAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPLevelControlAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -38967,7 +38967,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -39028,7 +39028,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -39130,7 +39130,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -39194,7 +39194,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPLocalizationConfigurationSupportedLocalesListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -39259,7 +39259,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPLocalizationConfigurationGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -39325,7 +39325,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPLocalizationConfigurationAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -39388,7 +39388,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPLocalizationConfigurationAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPLocalizationConfigurationAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -39450,7 +39450,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -39511,7 +39511,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -39612,7 +39612,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPLowPowerGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPLowPowerGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -39677,7 +39677,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPLowPowerAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPLowPowerAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -39740,7 +39740,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPLowPowerAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPLowPowerAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -39802,7 +39802,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -39863,7 +39863,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -40043,7 +40043,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPMediaInputInputListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPMediaInputInputListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -40103,7 +40103,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -40167,7 +40167,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPMediaInputGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPMediaInputGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -40232,7 +40232,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPMediaInputAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPMediaInputAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -40295,7 +40295,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPMediaInputAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPMediaInputAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -40357,7 +40357,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -40418,7 +40418,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -40774,7 +40774,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPMediaPlaybackClusterPlaybackStateEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPMediaPlaybackClusterPlaybackStateEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -40837,7 +40837,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -40898,7 +40898,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -40960,7 +40960,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPMediaPlaybackSampledPositionStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPMediaPlaybackSampledPositionStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -41023,7 +41023,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPFloatAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPFloatAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -41085,7 +41085,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -41148,7 +41148,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -41212,7 +41212,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPMediaPlaybackGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPMediaPlaybackGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -41277,7 +41277,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPMediaPlaybackAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPMediaPlaybackAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -41340,7 +41340,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPMediaPlaybackAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPMediaPlaybackAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -41402,7 +41402,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -41463,7 +41463,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -41559,7 +41559,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -41622,7 +41622,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -41685,7 +41685,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPModeSelectSupportedModesListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPModeSelectSupportedModesListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -41747,7 +41747,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -41846,7 +41846,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -41944,7 +41944,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -42007,7 +42007,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPModeSelectGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPModeSelectGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -42072,7 +42072,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPModeSelectAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPModeSelectAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -42135,7 +42135,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPModeSelectAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPModeSelectAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -42197,7 +42197,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -42258,7 +42258,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -42502,7 +42502,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -42563,7 +42563,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNetworkCommissioningNetworksListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNetworkCommissioningNetworksListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -42625,7 +42625,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -42688,7 +42688,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -42782,7 +42782,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -42850,7 +42850,7 @@ using namespace chip::app::Clusters;
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPNullableNetworkCommissioningClusterNetworkCommissioningStatusAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -42914,7 +42914,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableOctetStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableOctetStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -42978,7 +42978,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt32sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt32sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -43042,7 +43042,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNetworkCommissioningGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNetworkCommissioningGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -43107,7 +43107,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNetworkCommissioningAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNetworkCommissioningAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -43170,7 +43170,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNetworkCommissioningAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNetworkCommissioningAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -43232,7 +43232,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -43293,7 +43293,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -43482,7 +43482,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPOtaSoftwareUpdateProviderGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -43548,7 +43548,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPOtaSoftwareUpdateProviderAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -43611,7 +43611,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPOtaSoftwareUpdateProviderAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPOtaSoftwareUpdateProviderAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -43673,7 +43673,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -43734,7 +43734,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -43898,7 +43898,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPOtaSoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -43961,7 +43961,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -44027,7 +44027,7 @@ using namespace chip::app::Clusters;
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPOtaSoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -44092,7 +44092,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -44158,7 +44158,7 @@ using namespace chip::app::Clusters;
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPOtaSoftwareUpdateRequestorGeneratedCommandListListAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -44224,7 +44224,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPOtaSoftwareUpdateRequestorAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -44287,7 +44287,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPOtaSoftwareUpdateRequestorAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPOtaSoftwareUpdateRequestorAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -44349,7 +44349,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -44410,7 +44410,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -44480,7 +44480,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -44542,7 +44542,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -44605,7 +44605,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -44703,7 +44703,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -44801,7 +44801,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -44899,7 +44899,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -44997,7 +44997,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -45095,7 +45095,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -45193,7 +45193,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -45292,7 +45292,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -45391,7 +45391,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -45490,7 +45490,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -45555,7 +45555,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPOccupancySensingGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPOccupancySensingGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -45620,7 +45620,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPOccupancySensingAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPOccupancySensingAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -45683,7 +45683,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPOccupancySensingAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPOccupancySensingAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -45745,7 +45745,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -45806,7 +45806,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -46044,7 +46044,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -46105,7 +46105,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -46197,7 +46197,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -46289,7 +46289,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -46388,7 +46388,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableOnOffClusterOnOffStartUpOnOffAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableOnOffClusterOnOffStartUpOnOffAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -46453,7 +46453,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPOnOffGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPOnOffGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -46518,7 +46518,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPOnOffAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPOnOffAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -46581,7 +46581,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPOnOffAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPOnOffAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -46642,7 +46642,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -46703,7 +46703,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -46773,7 +46773,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -46866,7 +46866,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -46931,7 +46931,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPOnOffSwitchConfigurationGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -46997,7 +46997,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPOnOffSwitchConfigurationAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -47060,7 +47060,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPOnOffSwitchConfigurationAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPOnOffSwitchConfigurationAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -47122,7 +47122,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -47183,7 +47183,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -47460,7 +47460,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPOperationalCredentialsNOCsListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPOperationalCredentialsNOCsListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -47523,7 +47523,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPOperationalCredentialsFabricsListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPOperationalCredentialsFabricsListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -47585,7 +47585,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -47648,7 +47648,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -47713,7 +47713,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPOperationalCredentialsTrustedRootCertificatesListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -47776,7 +47776,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -47841,7 +47841,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPOperationalCredentialsGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -47906,7 +47906,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPOperationalCredentialsAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -47968,7 +47968,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPOperationalCredentialsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPOperationalCredentialsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -48030,7 +48030,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -48091,7 +48091,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -48160,7 +48160,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -48219,7 +48219,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -48279,7 +48279,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -48342,7 +48342,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -48405,7 +48405,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -48467,7 +48467,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -48530,7 +48530,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -48593,7 +48593,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -48656,7 +48656,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -48717,7 +48717,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -48780,7 +48780,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPPowerSourceActiveWiredFaultsListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPPowerSourceActiveWiredFaultsListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -48843,7 +48843,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -48906,7 +48906,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -48969,7 +48969,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -49031,7 +49031,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -49094,7 +49094,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -49157,7 +49157,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -49219,7 +49219,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -49283,7 +49283,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPPowerSourceActiveBatteryFaultsListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPPowerSourceActiveBatteryFaultsListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -49347,7 +49347,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -49410,7 +49410,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -49473,7 +49473,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -49536,7 +49536,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -49599,7 +49599,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -49661,7 +49661,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -49723,7 +49723,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -49785,7 +49785,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -49848,7 +49848,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -49911,7 +49911,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -49974,7 +49974,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -50038,7 +50038,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPPowerSourceActiveBatteryChargeFaultsListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPPowerSourceActiveBatteryChargeFaultsListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -50103,7 +50103,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPPowerSourceGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPPowerSourceGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -50168,7 +50168,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPPowerSourceAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPPowerSourceAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -50231,7 +50231,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPPowerSourceAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPPowerSourceAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -50293,7 +50293,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -50354,7 +50354,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -50424,7 +50424,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPPowerSourceConfigurationSourcesListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPPowerSourceConfigurationSourcesListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -50489,7 +50489,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPPowerSourceConfigurationGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -50555,7 +50555,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPPowerSourceConfigurationAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -50618,7 +50618,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPPowerSourceConfigurationAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPPowerSourceConfigurationAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -50680,7 +50680,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -50741,7 +50741,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -50813,7 +50813,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -50876,7 +50876,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -50939,7 +50939,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -51000,7 +51000,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -51061,7 +51061,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -51124,7 +51124,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -51187,7 +51187,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -51249,7 +51249,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -51309,7 +51309,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -51372,7 +51372,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPPressureMeasurementGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPPressureMeasurementGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -51437,7 +51437,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPPressureMeasurementAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPPressureMeasurementAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -51500,7 +51500,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPPressureMeasurementAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPPressureMeasurementAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -51562,7 +51562,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -51623,7 +51623,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -51694,7 +51694,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -51756,7 +51756,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -51816,7 +51816,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -51878,7 +51878,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -51941,7 +51941,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -52004,7 +52004,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -52067,7 +52067,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -52130,7 +52130,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -52193,7 +52193,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -52255,7 +52255,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -52317,7 +52317,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -52379,7 +52379,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -52441,7 +52441,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -52503,7 +52503,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPPumpConfigurationAndControlPumpStatusAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPPumpConfigurationAndControlPumpStatusAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -52571,7 +52571,7 @@ using namespace chip::app::Clusters;
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPPumpConfigurationAndControlClusterPumpOperationModeAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -52637,7 +52637,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPPumpConfigurationAndControlClusterPumpControlModeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -52700,7 +52700,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -52760,7 +52760,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -52861,7 +52861,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -52922,7 +52922,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -53025,7 +53025,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -53124,7 +53124,7 @@ using namespace chip::app::Clusters;
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPPumpConfigurationAndControlClusterPumpOperationModeAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -53220,7 +53220,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPPumpConfigurationAndControlClusterPumpControlModeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -53289,7 +53289,7 @@ using namespace chip::app::Clusters;
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPPumpConfigurationAndControlGeneratedCommandListListAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -53356,7 +53356,7 @@ using namespace chip::app::Clusters;
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPPumpConfigurationAndControlAcceptedCommandListListAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -53419,7 +53419,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPPumpConfigurationAndControlAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPPumpConfigurationAndControlAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -53481,7 +53481,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -53542,7 +53542,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -53614,7 +53614,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -53677,7 +53677,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -53740,7 +53740,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -53801,7 +53801,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -53868,7 +53868,7 @@ using namespace chip::app::Clusters;
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPRelativeHumidityMeasurementGeneratedCommandListListAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -53935,7 +53935,7 @@ using namespace chip::app::Clusters;
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPRelativeHumidityMeasurementAcceptedCommandListListAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -53998,7 +53998,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPRelativeHumidityMeasurementAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPRelativeHumidityMeasurementAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -54060,7 +54060,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -54121,7 +54121,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -54589,7 +54589,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -54649,7 +54649,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -54710,7 +54710,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -54771,7 +54771,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -54831,7 +54831,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -54894,7 +54894,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -54958,7 +54958,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPScenesGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPScenesGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -55023,7 +55023,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPScenesAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPScenesAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -55086,7 +55086,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPScenesAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPScenesAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -55147,7 +55147,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -55208,7 +55208,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -55308,7 +55308,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPSoftwareDiagnosticsThreadMetricsListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPSoftwareDiagnosticsThreadMetricsListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -55371,7 +55371,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -55433,7 +55433,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -55496,7 +55496,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -55560,7 +55560,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPSoftwareDiagnosticsGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPSoftwareDiagnosticsGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -55625,7 +55625,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPSoftwareDiagnosticsAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPSoftwareDiagnosticsAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -55688,7 +55688,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPSoftwareDiagnosticsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPSoftwareDiagnosticsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -55750,7 +55750,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -55811,7 +55811,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -55882,7 +55882,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -55944,7 +55944,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -56006,7 +56006,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -56070,7 +56070,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPSwitchGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPSwitchGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -56135,7 +56135,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPSwitchAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPSwitchAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -56198,7 +56198,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPSwitchAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPSwitchAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -56259,7 +56259,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -56320,7 +56320,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -56418,7 +56418,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTargetNavigatorTargetListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTargetNavigatorTargetListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -56480,7 +56480,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -56544,7 +56544,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTargetNavigatorGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTargetNavigatorGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -56609,7 +56609,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTargetNavigatorAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTargetNavigatorAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -56672,7 +56672,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTargetNavigatorAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTargetNavigatorAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -56734,7 +56734,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -56795,7 +56795,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -56867,7 +56867,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -56930,7 +56930,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -56993,7 +56993,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -57054,7 +57054,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -57118,7 +57118,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPTemperatureMeasurementGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -57183,7 +57183,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPTemperatureMeasurementAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -57245,7 +57245,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTemperatureMeasurementAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTemperatureMeasurementAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -57307,7 +57307,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -57368,7 +57368,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -58740,7 +58740,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -58832,7 +58832,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTestClusterBitmap8AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTestClusterBitmap8AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -58925,7 +58925,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTestClusterBitmap16AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTestClusterBitmap16AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -59018,7 +59018,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTestClusterBitmap32AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTestClusterBitmap32AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -59111,7 +59111,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTestClusterBitmap64AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTestClusterBitmap64AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -59202,7 +59202,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -59293,7 +59293,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -59384,7 +59384,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -59475,7 +59475,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -59566,7 +59566,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -59657,7 +59657,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -59748,7 +59748,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -59839,7 +59839,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -59930,7 +59930,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -60021,7 +60021,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -60112,7 +60112,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -60203,7 +60203,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -60294,7 +60294,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -60385,7 +60385,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -60476,7 +60476,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -60567,7 +60567,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -60658,7 +60658,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -60749,7 +60749,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -60841,7 +60841,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPFloatAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPFloatAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -60934,7 +60934,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPDoubleAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPDoubleAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -61028,7 +61028,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPOctetStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPOctetStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -61142,7 +61142,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTestClusterListInt8uListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTestClusterListInt8uListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -61258,7 +61258,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTestClusterListOctetStringListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTestClusterListOctetStringListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -61377,7 +61377,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTestClusterListStructOctetStringListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTestClusterListStructOctetStringListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -61473,7 +61473,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPOctetStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPOctetStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -61566,7 +61566,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -61659,7 +61659,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -61751,7 +61751,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -61842,7 +61842,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -61934,7 +61934,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPVendorIdAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPVendorIdAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -62226,7 +62226,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPTestClusterListNullablesAndOptionalsStructListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -62320,7 +62320,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTestClusterClusterSimpleEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTestClusterClusterSimpleEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -62425,7 +62425,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTestClusterStructAttrStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTestClusterStructAttrStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -62521,7 +62521,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -62616,7 +62616,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -62712,7 +62712,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -62808,7 +62808,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -62925,7 +62925,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTestClusterListLongOctetStringListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTestClusterListLongOctetStringListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -63099,7 +63099,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTestClusterListFabricScopedListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTestClusterListFabricScopedListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -63194,7 +63194,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -63289,7 +63289,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -63384,7 +63384,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -63477,7 +63477,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -63577,7 +63577,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -63677,7 +63677,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTestClusterNullableBitmap8AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTestClusterNullableBitmap8AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -63778,7 +63778,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTestClusterNullableBitmap16AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTestClusterNullableBitmap16AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -63879,7 +63879,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTestClusterNullableBitmap32AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTestClusterNullableBitmap32AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -63980,7 +63980,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTestClusterNullableBitmap64AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTestClusterNullableBitmap64AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -64081,7 +64081,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -64181,7 +64181,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -64281,7 +64281,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -64381,7 +64381,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -64481,7 +64481,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -64581,7 +64581,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -64681,7 +64681,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -64781,7 +64781,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -64881,7 +64881,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -64981,7 +64981,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -65081,7 +65081,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt32sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt32sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -65181,7 +65181,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt32sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt32sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -65281,7 +65281,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -65381,7 +65381,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -65481,7 +65481,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -65581,7 +65581,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -65681,7 +65681,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -65781,7 +65781,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -65882,7 +65882,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableFloatAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableFloatAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -65983,7 +65983,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableDoubleAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableDoubleAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -66084,7 +66084,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableOctetStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableOctetStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -66184,7 +66184,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -66284,7 +66284,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableTestClusterClusterSimpleEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableTestClusterClusterSimpleEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -66395,7 +66395,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTestClusterNullableStructStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTestClusterNullableStructStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -66500,7 +66500,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -66604,7 +66604,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -66708,7 +66708,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -66812,7 +66812,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -66876,7 +66876,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTestClusterGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTestClusterGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -66941,7 +66941,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTestClusterAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTestClusterAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -67004,7 +67004,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTestClusterAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTestClusterAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -67066,7 +67066,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -67127,7 +67127,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -67345,7 +67345,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -67408,7 +67408,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -67469,7 +67469,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -67531,7 +67531,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -67594,7 +67594,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -67657,7 +67657,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -67720,7 +67720,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -67782,7 +67782,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -67844,7 +67844,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -67942,7 +67942,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -68040,7 +68040,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -68138,7 +68138,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -68236,7 +68236,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -68334,7 +68334,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -68432,7 +68432,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -68527,7 +68527,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -68622,7 +68622,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -68717,7 +68717,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -68812,7 +68812,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -68907,7 +68907,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -69001,7 +69001,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -69100,7 +69100,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPThermostatClusterThermostatControlSequenceAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPThermostatClusterThermostatControlSequenceAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -69194,7 +69194,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -69256,7 +69256,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -69317,7 +69317,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -69380,7 +69380,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -69443,7 +69443,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -69541,7 +69541,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -69645,7 +69645,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -69743,7 +69743,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -69806,7 +69806,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -69869,7 +69869,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -69933,7 +69933,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -69996,7 +69996,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -70096,7 +70096,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -70159,7 +70159,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -70222,7 +70222,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -70322,7 +70322,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -70386,7 +70386,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -70450,7 +70450,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -70544,7 +70544,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -70636,7 +70636,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -70728,7 +70728,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -70821,7 +70821,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -70915,7 +70915,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -71008,7 +71008,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -71102,7 +71102,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -71165,7 +71165,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -71259,7 +71259,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -71323,7 +71323,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPThermostatGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPThermostatGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -71388,7 +71388,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPThermostatAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPThermostatAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -71451,7 +71451,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPThermostatAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPThermostatAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -71513,7 +71513,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -71574,7 +71574,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -71679,7 +71679,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -71773,7 +71773,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -71871,7 +71871,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -71939,7 +71939,7 @@ using namespace chip::app::Clusters;
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPThermostatUserInterfaceConfigurationGeneratedCommandListListAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -72009,7 +72009,7 @@ using namespace chip::app::Clusters;
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPThermostatUserInterfaceConfigurationAcceptedCommandListListAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -72077,7 +72077,7 @@ using namespace chip::app::Clusters;
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPThermostatUserInterfaceConfigurationAttributeListListAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -72139,7 +72139,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -72200,7 +72200,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -72299,7 +72299,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -72362,7 +72362,7 @@ using namespace chip::app::Clusters;
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPNullableThreadNetworkDiagnosticsClusterRoutingRoleAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -72425,7 +72425,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -72486,7 +72486,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -72548,7 +72548,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -72611,7 +72611,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableOctetStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableOctetStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -72672,7 +72672,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -72736,7 +72736,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPThreadNetworkDiagnosticsNeighborTableListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -72799,7 +72799,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPThreadNetworkDiagnosticsRouteTableListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPThreadNetworkDiagnosticsRouteTableListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -72862,7 +72862,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -72924,7 +72924,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -72985,7 +72985,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73048,7 +73048,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73111,7 +73111,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73173,7 +73173,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73235,7 +73235,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73297,7 +73297,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73359,7 +73359,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73421,7 +73421,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73484,7 +73484,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73547,7 +73547,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73609,7 +73609,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73670,7 +73670,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73732,7 +73732,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73794,7 +73794,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73857,7 +73857,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73918,7 +73918,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -73981,7 +73981,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -74042,7 +74042,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -74104,7 +74104,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -74166,7 +74166,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -74229,7 +74229,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -74290,7 +74290,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -74351,7 +74351,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -74414,7 +74414,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -74477,7 +74477,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -74539,7 +74539,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -74601,7 +74601,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -74664,7 +74664,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -74725,7 +74725,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -74787,7 +74787,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -74849,7 +74849,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -74910,7 +74910,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -74972,7 +74972,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -75034,7 +75034,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -75097,7 +75097,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -75158,7 +75158,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -75221,7 +75221,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -75284,7 +75284,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -75346,7 +75346,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -75408,7 +75408,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -75471,7 +75471,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -75534,7 +75534,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -75596,7 +75596,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -75658,7 +75658,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -75720,7 +75720,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -75783,7 +75783,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -75846,7 +75846,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -75907,7 +75907,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -75970,7 +75970,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPThreadNetworkDiagnosticsSecurityPolicyStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPThreadNetworkDiagnosticsSecurityPolicyStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -76033,7 +76033,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableOctetStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableOctetStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -76104,7 +76104,7 @@ using namespace chip::app::Clusters;
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPThreadNetworkDiagnosticsOperationalDatasetComponentsStructAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -76177,7 +76177,7 @@ using namespace chip::app::Clusters;
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPThreadNetworkDiagnosticsActiveNetworkFaultsListListAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -76243,7 +76243,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPThreadNetworkDiagnosticsGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -76309,7 +76309,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPThreadNetworkDiagnosticsAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -76372,7 +76372,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPThreadNetworkDiagnosticsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPThreadNetworkDiagnosticsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -76434,7 +76434,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -76495,7 +76495,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -76598,7 +76598,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTimeFormatLocalizationClusterHourFormatAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTimeFormatLocalizationClusterHourFormatAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -76693,7 +76693,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTimeFormatLocalizationClusterCalendarTypeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTimeFormatLocalizationClusterCalendarTypeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -76759,7 +76759,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPTimeFormatLocalizationSupportedCalendarTypesListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -76825,7 +76825,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPTimeFormatLocalizationGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -76890,7 +76890,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPTimeFormatLocalizationAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -76952,7 +76952,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPTimeFormatLocalizationAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPTimeFormatLocalizationAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -77014,7 +77014,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -77075,7 +77075,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -77179,7 +77179,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPUnitLocalizationClusterTempUnitAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPUnitLocalizationClusterTempUnitAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -77244,7 +77244,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPUnitLocalizationGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPUnitLocalizationGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -77309,7 +77309,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPUnitLocalizationAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPUnitLocalizationAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -77372,7 +77372,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPUnitLocalizationAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPUnitLocalizationAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -77434,7 +77434,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -77495,7 +77495,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -77620,7 +77620,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPUserLabelLabelListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPUserLabelLabelListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -77683,7 +77683,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPUserLabelGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPUserLabelGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -77748,7 +77748,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPUserLabelAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPUserLabelAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -77811,7 +77811,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPUserLabelAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPUserLabelAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -77873,7 +77873,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -77934,7 +77934,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -78004,7 +78004,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -78067,7 +78067,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPWakeOnLanGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPWakeOnLanGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -78132,7 +78132,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPWakeOnLanAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPWakeOnLanAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -78195,7 +78195,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPWakeOnLanAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPWakeOnLanAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -78257,7 +78257,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -78318,7 +78318,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -78417,7 +78417,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableOctetStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableOctetStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -78479,7 +78479,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPNullableWiFiNetworkDiagnosticsClusterSecurityTypeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -78546,7 +78546,7 @@ using namespace chip::app::Clusters;
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPNullableWiFiNetworkDiagnosticsClusterWiFiVersionTypeAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -78610,7 +78610,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -78671,7 +78671,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -78732,7 +78732,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -78794,7 +78794,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -78857,7 +78857,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -78920,7 +78920,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -78983,7 +78983,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -79046,7 +79046,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -79108,7 +79108,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -79169,7 +79169,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -79234,7 +79234,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPWiFiNetworkDiagnosticsGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -79299,7 +79299,7 @@ using namespace chip::app::Clusters;
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 CHIPWiFiNetworkDiagnosticsAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
-                params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
+                nil, params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
@@ -79361,7 +79361,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPWiFiNetworkDiagnosticsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPWiFiNetworkDiagnosticsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -79423,7 +79423,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -79484,7 +79484,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -79745,7 +79745,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPWindowCoveringClusterTypeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPWindowCoveringClusterTypeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -79808,7 +79808,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -79871,7 +79871,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -79935,7 +79935,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -79999,7 +79999,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -80062,7 +80062,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -80125,7 +80125,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -80187,7 +80187,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPWindowCoveringConfigStatusAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPWindowCoveringConfigStatusAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -80252,7 +80252,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -80316,7 +80316,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -80378,7 +80378,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -80442,7 +80442,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -80506,7 +80506,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -80569,7 +80569,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPWindowCoveringClusterEndProductTypeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPWindowCoveringClusterEndProductTypeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -80634,7 +80634,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -80698,7 +80698,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -80761,7 +80761,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -80824,7 +80824,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -80887,7 +80887,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -80950,7 +80950,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -81043,7 +81043,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPWindowCoveringModeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPWindowCoveringModeAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -81103,7 +81103,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -81167,7 +81167,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPWindowCoveringGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPWindowCoveringGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -81232,7 +81232,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPWindowCoveringAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPWindowCoveringAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -81295,7 +81295,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPWindowCoveringAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPWindowCoveringAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -81357,7 +81357,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -81418,7 +81418,7 @@ using namespace chip::app::Clusters;
             auto failureFn = Callback<CHIPDefaultFailureCallbackType>::FromCancelable(failure);
             return self.cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                CHIPInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
