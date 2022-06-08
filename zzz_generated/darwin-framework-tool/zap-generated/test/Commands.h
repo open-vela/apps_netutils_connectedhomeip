@@ -25134,10 +25134,17 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("min level", actualValue, 0));
+                VerifyOrReturn(CheckValue("min level", actualValue, 1));
             }
 
             VerifyOrReturn(CheckConstraintType("minLevel", "", "uint8"));
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("minLevel", [value unsignedCharValue], 0));
+            }
+            if (value != nil) {
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("minLevel", [value unsignedCharValue], 1));
+            }
+
             NextTest();
         }];
 
