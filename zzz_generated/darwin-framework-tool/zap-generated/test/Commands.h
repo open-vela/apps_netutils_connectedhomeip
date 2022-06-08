@@ -36334,60 +36334,48 @@ public:
             err = TestWaitForPixitCommWin18010Seconds_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Wait for PIXIT_COMM_WIN(180) + 10 seconds\n");
-            err = TestWaitForPixitCommWin18010Seconds_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH_CR2 starts a commissioning process with DUT_CE\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCe_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Wait for PIXIT_COMM_WIN(180) + 10 seconds\n");
-            err = TestWaitForPixitCommWin18010Seconds_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH_CR1 opens a new commissioning window on DUT_CE\n");
+            err = TestThCr1OpensANewCommissioningWindowOnDutCe_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Wait for PIXIT_COMM_WIN(180) + 10 seconds\n");
-            err = TestWaitForPixitCommWin18010Seconds_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH_CR1 revokes the commissioning window on DUT_CE\n");
+            err = TestThCr1RevokesTheCommissioningWindowOnDutCe_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : TH_CR2 starts a commissioning process with DUT_CE\n");
             err = TestThCr2StartsACommissioningProcessWithDutCe_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : TH_CR1 opens a new commissioning window on DUT_CE\n");
-            err = TestThCr1OpensANewCommissioningWindowOnDutCe_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH_CR1 revokes the commissioning window on DUT_CE\n");
+            err = TestThCr1RevokesTheCommissioningWindowOnDutCe_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : TH_CR1 revokes the commissioning window on DUT_CE\n");
-            err = TestThCr1RevokesTheCommissioningWindowOnDutCe_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH_CR1 writes the mandatory attribute NodeLabel of DUT_CE\n");
+            err = TestThCr1WritesTheMandatoryAttributeNodeLabelOfDutCe_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : TH_CR2 starts a commissioning process with DUT_CE\n");
-            err = TestThCr2StartsACommissioningProcessWithDutCe_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH_CR1 read the mandatory attribute NodeLabel of DUT_CE\n");
+            err = TestThCr1ReadTheMandatoryAttributeNodeLabelOfDutCe_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : TH_CR1 revokes the commissioning window on DUT_CE\n");
-            err = TestThCr1RevokesTheCommissioningWindowOnDutCe_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH_CR1 opens a new commissioning window on DUT_CE\n");
+            err = TestThCr1OpensANewCommissioningWindowOnDutCe_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : TH_CR1 writes the mandatory attribute NodeLabel of DUT_CE\n");
-            err = TestThCr1WritesTheMandatoryAttributeNodeLabelOfDutCe_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : TH_CR1 read the mandatory attribute NodeLabel of DUT_CE\n");
-            err = TestThCr1ReadTheMandatoryAttributeNodeLabelOfDutCe_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : TH_CR1 opens a new commissioning window on DUT_CE\n");
-            err = TestThCr1OpensANewCommissioningWindowOnDutCe_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : TH_CR2 starts a commissioning process with DUT_CE\n");
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH_CR2 starts a commissioning process with DUT_CE\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestThCr2StartsACommissioningProcessWithDutCe_15();
+            err = TestThCr2StartsACommissioningProcessWithDutCe_12();
             break;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : TH_CR3 starts a commissioning process with DUT_CE\n");
-            err = TestThCr3StartsACommissioningProcessWithDutCe_16();
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH_CR3 starts a commissioning process with DUT_CE\n");
+            err = TestThCr3StartsACommissioningProcessWithDutCe_13();
             break;
         }
 
@@ -36413,7 +36401,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -36425,30 +36413,21 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         }
@@ -36461,7 +36440,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 17;
+    const uint16_t mTestCount = 14;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<uint16_t> mTimeout;
@@ -36519,32 +36498,11 @@ private:
     CHIP_ERROR TestWaitForPixitCommWin18010Seconds_3()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
+        value.ms = 190000UL;
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestWaitForPixitCommWin18010Seconds_4()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestWaitForPixitCommWin18010Seconds_5()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestWaitForPixitCommWin18010Seconds_6()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 28000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_7()
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_4()
     {
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
@@ -36552,7 +36510,7 @@ private:
         return PairWithCode("beta", value);
     }
 
-    CHIP_ERROR TestThCr1OpensANewCommissioningWindowOnDutCe_8()
+    CHIP_ERROR TestThCr1OpensANewCommissioningWindowOnDutCe_5()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -36583,7 +36541,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_9()
+    CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_6()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -36602,7 +36560,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_10()
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_7()
     {
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
@@ -36610,7 +36568,7 @@ private:
         return PairWithCode("beta", value);
     }
 
-    CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_11()
+    CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_8()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -36628,7 +36586,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1WritesTheMandatoryAttributeNodeLabelOfDutCe_12()
+    CHIP_ERROR TestThCr1WritesTheMandatoryAttributeNodeLabelOfDutCe_9()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestBasic * cluster = [[CHIPTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -36648,7 +36606,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1ReadTheMandatoryAttributeNodeLabelOfDutCe_13()
+    CHIP_ERROR TestThCr1ReadTheMandatoryAttributeNodeLabelOfDutCe_10()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestBasic * cluster = [[CHIPTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -36670,7 +36628,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1OpensANewCommissioningWindowOnDutCe_14()
+    CHIP_ERROR TestThCr1OpensANewCommissioningWindowOnDutCe_11()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -36701,7 +36659,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_15()
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_12()
     {
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
@@ -36709,7 +36667,7 @@ private:
         return PairWithCode("beta", value);
     }
 
-    CHIP_ERROR TestThCr3StartsACommissioningProcessWithDutCe_16()
+    CHIP_ERROR TestThCr3StartsACommissioningProcessWithDutCe_13()
     {
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
@@ -36782,60 +36740,48 @@ public:
             err = TestWaitForPixitCommWin18010_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Wait for PIXIT_COMM_WIN(180) + 10\n");
-            err = TestWaitForPixitCommWin18010_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Commission from beta\n");
+            err = TestCommissionFromBeta_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Wait for PIXIT_COMM_WIN(180) + 10\n");
-            err = TestWaitForPixitCommWin18010_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH_CR1 opens a commissioning window on DUT_CE\n");
+            err = TestThCr1OpensACommissioningWindowOnDutCe_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Wait for PIXIT_COMM_WIN(180) + 10\n");
-            err = TestWaitForPixitCommWin18010_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH_CR1 revokes the commissioning window on DUT_CE\n");
+            err = TestThCr1RevokesTheCommissioningWindowOnDutCe_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Commission from beta\n");
             err = TestCommissionFromBeta_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : TH_CR1 opens a commissioning window on DUT_CE\n");
-            err = TestThCr1OpensACommissioningWindowOnDutCe_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH_CR1 revokes the commissioning window on DUT_CE\n");
+            err = TestThCr1RevokesTheCommissioningWindowOnDutCe_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : TH_CR1 revokes the commissioning window on DUT_CE\n");
-            err = TestThCr1RevokesTheCommissioningWindowOnDutCe_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH_CR1 writes the mandatory attribute NodeLabel of DUT_CE\n");
+            err = TestThCr1WritesTheMandatoryAttributeNodeLabelOfDutCe_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Commission from beta\n");
-            err = TestCommissionFromBeta_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH_CR1 read the mandatory attribute NodeLabel of DUT_CE\n");
+            err = TestThCr1ReadTheMandatoryAttributeNodeLabelOfDutCe_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : TH_CR1 revokes the commissioning window on DUT_CE\n");
-            err = TestThCr1RevokesTheCommissioningWindowOnDutCe_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH_CR1 opens a commissioning window on DUT_CE\n");
+            err = TestThCr1OpensACommissioningWindowOnDutCe_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : TH_CR1 writes the mandatory attribute NodeLabel of DUT_CE\n");
-            err = TestThCr1WritesTheMandatoryAttributeNodeLabelOfDutCe_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Commission from beta\n");
+            err = TestCommissionFromBeta_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : TH_CR1 read the mandatory attribute NodeLabel of DUT_CE\n");
-            err = TestThCr1ReadTheMandatoryAttributeNodeLabelOfDutCe_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : TH_CR2 starts a commissioning process on DUT_CE\n");
+            err = TestThCr2StartsACommissioningProcessOnDutCe_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : TH_CR1 opens a commissioning window on DUT_CE\n");
-            err = TestThCr1OpensACommissioningWindowOnDutCe_15();
-            break;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Commission from beta\n");
-            err = TestCommissionFromBeta_16();
-            break;
-        case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : TH_CR2 starts a commissioning process on DUT_CE\n");
-            err = TestThCr2StartsACommissioningProcessOnDutCe_17();
-            break;
-        case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : TH_CR3 starts a commissioning process with DUT_CE\n");
-            err = TestThCr3StartsACommissioningProcessWithDutCe_18();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH_CR3 starts a commissioning process with DUT_CE\n");
+            err = TestThCr3StartsACommissioningProcessWithDutCe_15();
             break;
         }
 
@@ -36864,7 +36810,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -36876,16 +36822,16 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -36894,15 +36840,6 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         }
@@ -36915,7 +36852,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 19;
+    const uint16_t mTestCount = 16;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<uint16_t> mTimeout;
@@ -36972,32 +36909,11 @@ private:
     CHIP_ERROR TestWaitForPixitCommWin18010_4()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
+        value.ms = 190000UL;
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestWaitForPixitCommWin18010_5()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestWaitForPixitCommWin18010_6()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestWaitForPixitCommWin18010_7()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 28000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestCommissionFromBeta_8()
+    CHIP_ERROR TestCommissionFromBeta_5()
     {
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
@@ -37005,7 +36921,7 @@ private:
         return PairWithCode("beta", value);
     }
 
-    CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_9()
+    CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_6()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -37027,7 +36943,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_10()
+    CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_7()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -37046,7 +36962,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCommissionFromBeta_11()
+    CHIP_ERROR TestCommissionFromBeta_8()
     {
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
@@ -37054,7 +36970,7 @@ private:
         return PairWithCode("beta", value);
     }
 
-    CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_12()
+    CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_9()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -37072,7 +36988,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1WritesTheMandatoryAttributeNodeLabelOfDutCe_13()
+    CHIP_ERROR TestThCr1WritesTheMandatoryAttributeNodeLabelOfDutCe_10()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestBasic * cluster = [[CHIPTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -37092,7 +37008,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1ReadTheMandatoryAttributeNodeLabelOfDutCe_14()
+    CHIP_ERROR TestThCr1ReadTheMandatoryAttributeNodeLabelOfDutCe_11()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestBasic * cluster = [[CHIPTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -37114,7 +37030,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_15()
+    CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_12()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -37136,7 +37052,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCommissionFromBeta_16()
+    CHIP_ERROR TestCommissionFromBeta_13()
     {
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
@@ -37144,14 +37060,14 @@ private:
         return PairWithCode("beta", value);
     }
 
-    CHIP_ERROR TestThCr2StartsACommissioningProcessOnDutCe_17()
+    CHIP_ERROR TestThCr2StartsACommissioningProcessOnDutCe_14()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         return WaitForCommissionee("beta", value);
     }
 
-    CHIP_ERROR TestThCr3StartsACommissioningProcessWithDutCe_18()
+    CHIP_ERROR TestThCr3StartsACommissioningProcessWithDutCe_15()
     {
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
@@ -37251,52 +37167,28 @@ public:
             err = TestWaitForTheExpirationOfPixitCommWinSeconds_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Wait for the expiration of PIXIT_COMM_WIN seconds\n");
-            err = TestWaitForTheExpirationOfPixitCommWinSeconds_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH_CR1 re-opens new commissioning window on DUT_CE\n");
+            err = TestThCr1ReOpensNewCommissioningWindowOnDutCe_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Wait for the expiration of PIXIT_COMM_WIN seconds\n");
-            err = TestWaitForTheExpirationOfPixitCommWinSeconds_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH_CR3 opens a new commissioning window on DUT_CE\n");
+            err = TestThCr3OpensANewCommissioningWindowOnDutCe_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Wait for the expiration of PIXIT_COMM_WIN seconds\n");
-            err = TestWaitForTheExpirationOfPixitCommWinSeconds_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : TH_CR1 reads the list of Fabrics on DUT_CE\n");
+            err = TestThCr1ReadsTheListOfFabricsOnDutCe_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : TH_CR1 re-opens new commissioning window on DUT_CE\n");
-            err = TestThCr1ReOpensNewCommissioningWindowOnDutCe_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Wait for the expiration of PIXIT_COMM_WIN seconds\n");
+            err = TestWaitForTheExpirationOfPixitCommWinSeconds_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : TH_CR3 opens a new commissioning window on DUT_CE\n");
-            err = TestThCr3OpensANewCommissioningWindowOnDutCe_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : TH_CR1 opens a new commissioning window on DUT_CE\n");
+            err = TestThCr1OpensANewCommissioningWindowOnDutCe_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : TH_CR1 reads the list of Fabrics on DUT_CE\n");
-            err = TestThCr1ReadsTheListOfFabricsOnDutCe_17();
-            break;
-        case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Wait for the expiration of PIXIT_COMM_WIN seconds\n");
-            err = TestWaitForTheExpirationOfPixitCommWinSeconds_18();
-            break;
-        case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Wait for the expiration of PIXIT_COMM_WIN seconds\n");
-            err = TestWaitForTheExpirationOfPixitCommWinSeconds_19();
-            break;
-        case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Wait for the expiration of PIXIT_COMM_WIN seconds\n");
-            err = TestWaitForTheExpirationOfPixitCommWinSeconds_20();
-            break;
-        case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : Wait for the expiration of PIXIT_COMM_WIN seconds\n");
-            err = TestWaitForTheExpirationOfPixitCommWinSeconds_21();
-            break;
-        case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : TH_CR1 opens a new commissioning window on DUT_CE\n");
-            err = TestThCr1OpensANewCommissioningWindowOnDutCe_22();
-            break;
-        case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : TH_CR2 opens a new commissioning window on DUT_CE\n");
-            err = TestThCr2OpensANewCommissioningWindowOnDutCe_23();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : TH_CR2 opens a new commissioning window on DUT_CE\n");
+            err = TestThCr2OpensANewCommissioningWindowOnDutCe_17();
             break;
         }
 
@@ -37349,7 +37241,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -37358,27 +37250,9 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         }
@@ -37391,7 +37265,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 24;
+    const uint16_t mTestCount = 18;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<uint16_t> mTimeout;
@@ -37578,32 +37452,11 @@ private:
     CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_11()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
+        value.ms = 180000UL;
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_12()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_13()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_14()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 18000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestThCr1ReOpensNewCommissioningWindowOnDutCe_15()
+    CHIP_ERROR TestThCr1ReOpensNewCommissioningWindowOnDutCe_12()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -37634,7 +37487,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr3OpensANewCommissioningWindowOnDutCe_16()
+    CHIP_ERROR TestThCr3OpensANewCommissioningWindowOnDutCe_13()
     {
         CHIPDevice * device = GetDevice("gamma");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -37664,7 +37517,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1ReadsTheListOfFabricsOnDutCe_17()
+    CHIP_ERROR TestThCr1ReadsTheListOfFabricsOnDutCe_14()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestOperationalCredentials * cluster = [[CHIPTestOperationalCredentials alloc] initWithDevice:device
@@ -37698,35 +37551,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_18()
+    CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_15()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
+        value.ms = 180000UL;
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_19()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_20()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_21()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 18000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestThCr1OpensANewCommissioningWindowOnDutCe_22()
+    CHIP_ERROR TestThCr1OpensANewCommissioningWindowOnDutCe_16()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -37757,7 +37589,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr2OpensANewCommissioningWindowOnDutCe_23()
+    CHIP_ERROR TestThCr2OpensANewCommissioningWindowOnDutCe_17()
     {
         CHIPDevice * device = GetDevice("beta");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
