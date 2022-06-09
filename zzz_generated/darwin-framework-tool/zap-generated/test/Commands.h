@@ -69,8 +69,8 @@ public:
         printf("Test_TC_DGETH_2_2\n");
         printf("Test_TC_FLW_1_1\n");
         printf("Test_TC_FLW_2_1\n");
-        printf("Test_TC_GC_1_1\n");
-        printf("Test_TC_GC_2_1\n");
+        printf("Test_TC_CGEN_1_1\n");
+        printf("Test_TC_CGEN_2_1\n");
         printf("Test_TC_I_1_1\n");
         printf("Test_TC_I_2_1\n");
         printf("Test_TC_I_2_3\n");
@@ -22530,11 +22530,11 @@ private:
     }
 };
 
-class Test_TC_GC_1_1 : public TestCommandBridge {
+class Test_TC_CGEN_1_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_GC_1_1()
-        : TestCommandBridge("Test_TC_GC_1_1")
+    Test_TC_CGEN_1_1()
+        : TestCommandBridge("Test_TC_CGEN_1_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -22544,7 +22544,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_GC_1_1() {}
+    ~Test_TC_CGEN_1_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -22552,11 +22552,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_GC_1_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CGEN_1_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_GC_1_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CGEN_1_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -22811,11 +22811,11 @@ private:
     }
 };
 
-class Test_TC_GC_2_1 : public TestCommandBridge {
+class Test_TC_CGEN_2_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_GC_2_1()
-        : TestCommandBridge("Test_TC_GC_2_1")
+    Test_TC_CGEN_2_1()
+        : TestCommandBridge("Test_TC_CGEN_2_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -22825,7 +22825,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_GC_2_1() {}
+    ~Test_TC_CGEN_2_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -22833,11 +22833,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_GC_2_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CGEN_2_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_GC_2_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CGEN_2_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -109582,8 +109582,8 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_DGETH_2_2>(),
         make_unique<Test_TC_FLW_1_1>(),
         make_unique<Test_TC_FLW_2_1>(),
-        make_unique<Test_TC_GC_1_1>(),
-        make_unique<Test_TC_GC_2_1>(),
+        make_unique<Test_TC_CGEN_1_1>(),
+        make_unique<Test_TC_CGEN_2_1>(),
         make_unique<Test_TC_I_1_1>(),
         make_unique<Test_TC_I_2_1>(),
         make_unique<Test_TC_I_2_3>(),
