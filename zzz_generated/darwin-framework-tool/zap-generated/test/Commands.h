@@ -58767,11 +58767,6 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("Type", actualValue, 0));
-            }
-
             VerifyOrReturn(CheckConstraintType("type", "", "enum8"));
             if (value != nil) {
                 VerifyOrReturn(CheckConstraintMinValue<uint8_t>("type", [value unsignedCharValue], 0));
