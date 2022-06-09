@@ -145,13 +145,13 @@
 | ApplicationLauncher                                                 | 0x050C |
 | ApplicationBasic                                                    | 0x050D |
 | AccountLogin                                                        | 0x050E |
-| TestCluster                                                         | 0x050F |
 | Messaging                                                           | 0x0703 |
 | ApplianceIdentification                                             | 0x0B00 |
 | MeterIdentification                                                 | 0x0B01 |
 | ApplianceEventsAndAlert                                             | 0x0B02 |
 | ApplianceStatistics                                                 | 0x0B03 |
 | ElectricalMeasurement                                               | 0x0B04 |
+| TestCluster                                                         | 0xFFF1FC05|
 \*----------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------*\
@@ -67945,7 +67945,7 @@ public:
 };
 
 /*----------------------------------------------------------------------------*\
-| Cluster TestCluster                                                 | 0x050F |
+| Cluster TestCluster                                                 | 0xFFF1FC05|
 |------------------------------------------------------------------------------|
 | Commands:                                                           |        |
 | * Test                                                              |   0x00 |
@@ -68077,7 +68077,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x00000000) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000000) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -68117,7 +68117,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x00000001) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000001) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -68157,7 +68157,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x00000002) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000002) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -68199,7 +68199,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x00000003) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000003) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -68241,7 +68241,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x00000004) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000004) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -68288,7 +68288,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x00000005) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000005) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -68344,7 +68344,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x00000006) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000006) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -68504,7 +68504,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x00000007) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000007) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -68562,7 +68562,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x00000008) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000008) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -68623,7 +68623,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x00000009) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000009) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -68690,7 +68690,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x0000000A) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x0000000A) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -68746,7 +68746,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x0000000B) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x0000000B) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -68853,7 +68853,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x0000000C) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x0000000C) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -68970,7 +68970,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x0000000D) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x0000000D) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -69027,7 +69027,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x0000000E) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x0000000E) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -69074,7 +69074,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x0000000F) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x0000000F) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -69146,7 +69146,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x00000010) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000010) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -69352,7 +69352,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x00000011) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000011) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -69408,7 +69408,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x00000012) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000012) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -69449,7 +69449,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x00000013) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000013) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -69499,7 +69499,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x00000014) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000014) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -69547,7 +69547,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) command (0x00000015) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000015) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -69595,7 +69595,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000000) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000000) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -69624,7 +69624,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000000) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000000) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -69659,7 +69659,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000000) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000000) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -69700,7 +69700,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000001) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000001) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -69729,7 +69729,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000001) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000001) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -69764,7 +69764,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000001) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000001) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -69805,7 +69805,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000002) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000002) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -69834,7 +69834,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000002) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000002) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -69869,7 +69869,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000002) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000002) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -69910,7 +69910,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000003) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000003) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -69939,7 +69939,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000003) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000003) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -69974,7 +69974,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000003) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000003) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -70015,7 +70015,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000004) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000004) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -70044,7 +70044,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000004) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000004) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -70079,7 +70079,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000004) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000004) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -70120,7 +70120,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000005) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000005) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -70149,7 +70149,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000005) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000005) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -70184,7 +70184,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000005) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000005) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -70225,7 +70225,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000006) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000006) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -70254,7 +70254,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000006) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000006) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -70289,7 +70289,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000006) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000006) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -70330,7 +70330,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000007) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000007) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -70359,7 +70359,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000007) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000007) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -70394,7 +70394,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000007) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000007) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -70435,7 +70435,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000008) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000008) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -70464,7 +70464,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000008) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000008) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -70499,7 +70499,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000008) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000008) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -70540,7 +70540,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000009) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000009) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -70569,7 +70569,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000009) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000009) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -70604,7 +70604,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000009) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000009) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -70645,7 +70645,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000000A) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000000A) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -70674,7 +70674,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000000A) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000000A) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -70709,7 +70709,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000000A) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000000A) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -70750,7 +70750,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000000B) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000000B) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -70779,7 +70779,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000000B) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000000B) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -70814,7 +70814,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000000B) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000000B) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -70855,7 +70855,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000000C) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000000C) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -70884,7 +70884,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000000C) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000000C) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -70919,7 +70919,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000000C) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000000C) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -70960,7 +70960,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000000D) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000000D) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -70989,7 +70989,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000000D) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000000D) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -71024,7 +71024,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000000D) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000000D) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -71065,7 +71065,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000000E) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000000E) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -71094,7 +71094,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000000E) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000000E) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -71129,7 +71129,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000000E) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000000E) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -71170,7 +71170,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000000F) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000000F) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -71199,7 +71199,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000000F) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000000F) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -71234,7 +71234,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000000F) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000000F) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -71275,7 +71275,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000010) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000010) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -71304,7 +71304,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000010) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000010) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -71339,7 +71339,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000010) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000010) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -71380,7 +71380,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000011) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000011) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -71409,7 +71409,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000011) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000011) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -71444,7 +71444,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000011) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000011) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -71485,7 +71485,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000012) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000012) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -71514,7 +71514,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000012) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000012) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -71549,7 +71549,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000012) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000012) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -71590,7 +71590,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000013) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000013) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -71619,7 +71619,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000013) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000013) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -71654,7 +71654,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000013) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000013) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -71695,7 +71695,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000014) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000014) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -71724,7 +71724,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000014) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000014) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -71759,7 +71759,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000014) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000014) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -71800,7 +71800,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000015) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000015) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -71829,7 +71829,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000015) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000015) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -71864,7 +71864,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000015) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000015) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -71905,7 +71905,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000016) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000016) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -71934,7 +71934,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000016) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000016) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -71969,7 +71969,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000016) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000016) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -72010,7 +72010,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000017) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000017) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -72039,7 +72039,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000017) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000017) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -72074,7 +72074,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000017) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000017) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -72115,7 +72115,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000018) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000018) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -72144,7 +72144,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000018) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000018) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -72179,7 +72179,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000018) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000018) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -72220,7 +72220,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000019) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000019) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -72249,7 +72249,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000019) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000019) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -72284,7 +72284,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000019) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000019) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -72325,7 +72325,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000001A) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000001A) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -72355,7 +72355,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000001A) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000001A) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -72400,7 +72400,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000001A) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000001A) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -72441,7 +72441,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000001B) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000001B) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -72471,7 +72471,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000001B) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000001B) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -72516,7 +72516,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000001B) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000001B) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -72557,7 +72557,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000001C) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000001C) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -72587,7 +72587,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000001C) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000001C) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -72636,7 +72636,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000001C) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000001C) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -72678,7 +72678,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000001D) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000001D) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -72707,7 +72707,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000001D) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000001D) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -72742,7 +72742,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000001D) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000001D) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -72783,7 +72783,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000001E) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000001E) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -72812,7 +72812,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000001E) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000001E) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -72849,7 +72849,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000001E) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000001E) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -72890,7 +72890,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000001F) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000001F) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -72919,7 +72919,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000001F) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000001F) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -72956,7 +72956,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000001F) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000001F) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -72997,7 +72997,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000020) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000020) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -73026,7 +73026,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000020) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000020) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -73061,7 +73061,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000020) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000020) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -73102,7 +73102,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000021) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000021) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -73131,7 +73131,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000021) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000021) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -73166,7 +73166,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000021) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000021) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -73207,7 +73207,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000022) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000022) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -73236,7 +73236,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000022) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000022) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -73271,7 +73271,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000022) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000022) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -73312,7 +73312,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000023) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000023) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -73343,7 +73343,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000023) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000023) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -73542,7 +73542,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000023) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000023) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -73586,7 +73586,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000024) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000024) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -73615,7 +73615,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000024) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000024) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -73650,7 +73650,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000024) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000024) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -73691,7 +73691,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000025) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000025) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -73722,7 +73722,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000025) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000025) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -73767,7 +73767,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000025) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000025) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -73809,7 +73809,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000026) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000026) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -73838,7 +73838,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000026) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000026) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -73873,7 +73873,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000026) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000026) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -73915,7 +73915,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000027) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000027) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -73944,7 +73944,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000027) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000027) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -73979,7 +73979,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000027) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000027) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -74021,7 +74021,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000028) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000028) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -74050,7 +74050,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000028) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000028) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -74085,7 +74085,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000028) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000028) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -74127,7 +74127,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000029) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000029) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -74156,7 +74156,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000029) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000029) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -74191,7 +74191,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000029) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000029) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -74233,7 +74233,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000002A) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000002A) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -74263,7 +74263,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000002A) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000002A) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -74308,7 +74308,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000002A) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000002A) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -74350,7 +74350,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000002B) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000002B) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -74383,7 +74383,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000002B) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000002B) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -74478,7 +74478,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000002B) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000002B) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -74519,7 +74519,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000030) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000030) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -74548,7 +74548,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000030) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000030) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -74583,7 +74583,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000030) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000030) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -74624,7 +74624,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000031) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000031) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -74653,7 +74653,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000031) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000031) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -74688,7 +74688,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000031) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000031) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -74730,7 +74730,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00000032) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000032) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -74759,7 +74759,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00000032) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000032) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -74794,7 +74794,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00000032) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000032) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -74836,7 +74836,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x000000FF) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x000000FF) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -74865,7 +74865,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x000000FF) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x000000FF) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -74900,7 +74900,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x000000FF) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x000000FF) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -74941,7 +74941,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004000) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004000) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -74970,7 +74970,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004000) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004000) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -75005,7 +75005,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004000) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004000) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -75046,7 +75046,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004001) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004001) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -75075,7 +75075,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004001) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004001) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -75110,7 +75110,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004001) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004001) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -75151,7 +75151,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004002) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004002) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -75180,7 +75180,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004002) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004002) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -75215,7 +75215,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004002) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004002) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -75256,7 +75256,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004003) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004003) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -75285,7 +75285,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004003) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004003) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -75320,7 +75320,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004003) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004003) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -75361,7 +75361,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004004) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004004) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -75390,7 +75390,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004004) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004004) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -75425,7 +75425,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004004) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004004) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -75466,7 +75466,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004005) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004005) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -75495,7 +75495,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004005) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004005) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -75530,7 +75530,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004005) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004005) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -75571,7 +75571,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004006) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004006) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -75600,7 +75600,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004006) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004006) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -75635,7 +75635,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004006) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004006) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -75676,7 +75676,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004007) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004007) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -75705,7 +75705,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004007) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004007) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -75740,7 +75740,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004007) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004007) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -75781,7 +75781,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004008) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004008) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -75810,7 +75810,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004008) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004008) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -75845,7 +75845,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004008) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004008) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -75886,7 +75886,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004009) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004009) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -75915,7 +75915,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004009) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004009) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -75950,7 +75950,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004009) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004009) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -75991,7 +75991,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000400A) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000400A) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -76020,7 +76020,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000400A) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000400A) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -76055,7 +76055,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000400A) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000400A) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -76096,7 +76096,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000400B) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000400B) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -76125,7 +76125,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000400B) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000400B) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -76160,7 +76160,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000400B) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000400B) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -76201,7 +76201,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000400C) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000400C) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -76230,7 +76230,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000400C) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000400C) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -76265,7 +76265,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000400C) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000400C) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -76306,7 +76306,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000400D) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000400D) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -76335,7 +76335,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000400D) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000400D) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -76370,7 +76370,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000400D) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000400D) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -76411,7 +76411,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000400E) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000400E) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -76440,7 +76440,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000400E) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000400E) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -76475,7 +76475,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000400E) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000400E) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -76516,7 +76516,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000400F) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000400F) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -76545,7 +76545,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000400F) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000400F) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -76580,7 +76580,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000400F) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000400F) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -76621,7 +76621,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004010) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004010) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -76650,7 +76650,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004010) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004010) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -76685,7 +76685,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004010) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004010) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -76726,7 +76726,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004011) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004011) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -76755,7 +76755,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004011) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004011) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -76790,7 +76790,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004011) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004011) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -76831,7 +76831,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004012) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004012) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -76860,7 +76860,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004012) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004012) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -76895,7 +76895,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004012) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004012) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -76936,7 +76936,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004013) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004013) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -76965,7 +76965,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004013) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004013) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -77000,7 +77000,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004013) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004013) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -77041,7 +77041,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004014) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004014) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -77070,7 +77070,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004014) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004014) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -77105,7 +77105,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004014) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004014) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -77146,7 +77146,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004015) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004015) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -77175,7 +77175,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004015) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004015) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -77210,7 +77210,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004015) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004015) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -77251,7 +77251,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004016) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004016) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -77280,7 +77280,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004016) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004016) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -77315,7 +77315,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004016) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004016) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -77356,7 +77356,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004017) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004017) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -77385,7 +77385,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004017) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004017) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -77420,7 +77420,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004017) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004017) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -77462,7 +77462,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004018) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004018) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -77491,7 +77491,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004018) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004018) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -77526,7 +77526,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004018) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004018) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -77568,7 +77568,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004019) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004019) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -77597,7 +77597,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004019) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004019) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -77632,7 +77632,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004019) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004019) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -77674,7 +77674,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000401E) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000401E) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -77703,7 +77703,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x0000401E) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000401E) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -77740,7 +77740,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000401E) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000401E) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -77782,7 +77782,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004024) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004024) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -77811,7 +77811,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004024) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004024) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -77846,7 +77846,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004024) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004024) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -77887,7 +77887,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004025) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004025) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -77918,7 +77918,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004025) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004025) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -77969,7 +77969,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004025) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004025) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -78011,7 +78011,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004026) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004026) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -78041,7 +78041,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004026) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004026) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -78077,7 +78077,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004026) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004026) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -78120,7 +78120,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004027) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004027) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -78150,7 +78150,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004027) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004027) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -78186,7 +78186,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004027) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004027) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -78229,7 +78229,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004028) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004028) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -78259,7 +78259,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004028) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004028) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -78295,7 +78295,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004028) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004028) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -78339,7 +78339,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x00004029) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004029) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -78369,7 +78369,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) WriteAttribute (0x00004029) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004029) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPWriteParams * params = [[CHIPWriteParams alloc] init];
@@ -78405,7 +78405,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x00004029) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004029) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -78449,7 +78449,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000FFF8) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000FFF8) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -78475,7 +78475,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000FFF8) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000FFF8) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -78517,7 +78517,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000FFF9) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000FFF9) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -78543,7 +78543,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000FFF9) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000FFF9) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -78585,7 +78585,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000FFFB) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000FFFB) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -78611,7 +78611,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000FFFB) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000FFFB) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -78652,7 +78652,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000FFFC) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000FFFC) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -78678,7 +78678,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000FFFC) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000FFFC) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
@@ -78719,7 +78719,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReadAttribute (0x0000FFFD) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000FFFD) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
@@ -78745,7 +78745,7 @@ public:
 
     CHIP_ERROR SendCommand(CHIPDevice * device, chip::EndpointId endpointId) override
     {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000050F) ReportAttribute (0x0000FFFD) on endpoint %u", endpointId);
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000FFFD) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         CHIPTestCluster * cluster = [[CHIPTestCluster alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
         CHIPSubscribeParams * params = [[CHIPSubscribeParams alloc] init];
