@@ -75228,24 +75228,20 @@ private:
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [[CHIPTestClusterClusterTestListStructOctet alloc] init];
-            ((CHIPTestClusterClusterTestListStructOctet *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedLongLong:0ULL];
-            ((CHIPTestClusterClusterTestListStructOctet *) temp_0[0]).operationalCert = [[NSData alloc] initWithBytes:"Test0"
-                                                                                                               length:5];
+            ((CHIPTestClusterClusterTestListStructOctet *) temp_0[0]).member1 = [NSNumber numberWithUnsignedLongLong:0ULL];
+            ((CHIPTestClusterClusterTestListStructOctet *) temp_0[0]).member2 = [[NSData alloc] initWithBytes:"Test0" length:5];
 
             temp_0[1] = [[CHIPTestClusterClusterTestListStructOctet alloc] init];
-            ((CHIPTestClusterClusterTestListStructOctet *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedLongLong:1ULL];
-            ((CHIPTestClusterClusterTestListStructOctet *) temp_0[1]).operationalCert = [[NSData alloc] initWithBytes:"Test1"
-                                                                                                               length:5];
+            ((CHIPTestClusterClusterTestListStructOctet *) temp_0[1]).member1 = [NSNumber numberWithUnsignedLongLong:1ULL];
+            ((CHIPTestClusterClusterTestListStructOctet *) temp_0[1]).member2 = [[NSData alloc] initWithBytes:"Test1" length:5];
 
             temp_0[2] = [[CHIPTestClusterClusterTestListStructOctet alloc] init];
-            ((CHIPTestClusterClusterTestListStructOctet *) temp_0[2]).fabricIndex = [NSNumber numberWithUnsignedLongLong:2ULL];
-            ((CHIPTestClusterClusterTestListStructOctet *) temp_0[2]).operationalCert = [[NSData alloc] initWithBytes:"Test2"
-                                                                                                               length:5];
+            ((CHIPTestClusterClusterTestListStructOctet *) temp_0[2]).member1 = [NSNumber numberWithUnsignedLongLong:2ULL];
+            ((CHIPTestClusterClusterTestListStructOctet *) temp_0[2]).member2 = [[NSData alloc] initWithBytes:"Test2" length:5];
 
             temp_0[3] = [[CHIPTestClusterClusterTestListStructOctet alloc] init];
-            ((CHIPTestClusterClusterTestListStructOctet *) temp_0[3]).fabricIndex = [NSNumber numberWithUnsignedLongLong:3ULL];
-            ((CHIPTestClusterClusterTestListStructOctet *) temp_0[3]).operationalCert = [[NSData alloc] initWithBytes:"Test3"
-                                                                                                               length:5];
+            ((CHIPTestClusterClusterTestListStructOctet *) temp_0[3]).member1 = [NSNumber numberWithUnsignedLongLong:3ULL];
+            ((CHIPTestClusterClusterTestListStructOctet *) temp_0[3]).member2 = [[NSData alloc] initWithBytes:"Test3" length:5];
 
             listStructOctetStringArgument = temp_0;
         }
@@ -75275,25 +75271,17 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("list_struct_octet_string", [actualValue count], static_cast<uint32_t>(4)));
-                VerifyOrReturn(
-                    CheckValue("fabricIndex", ((CHIPTestClusterClusterTestListStructOctet *) actualValue[0]).fabricIndex, 0ULL));
-                VerifyOrReturn(CheckValueAsString("operationalCert",
-                    ((CHIPTestClusterClusterTestListStructOctet *) actualValue[0]).operationalCert,
+                VerifyOrReturn(CheckValue("member1", ((CHIPTestClusterClusterTestListStructOctet *) actualValue[0]).member1, 0ULL));
+                VerifyOrReturn(CheckValueAsString("member2", ((CHIPTestClusterClusterTestListStructOctet *) actualValue[0]).member2,
                     [[NSData alloc] initWithBytes:"Test0" length:5]));
-                VerifyOrReturn(
-                    CheckValue("fabricIndex", ((CHIPTestClusterClusterTestListStructOctet *) actualValue[1]).fabricIndex, 1ULL));
-                VerifyOrReturn(CheckValueAsString("operationalCert",
-                    ((CHIPTestClusterClusterTestListStructOctet *) actualValue[1]).operationalCert,
+                VerifyOrReturn(CheckValue("member1", ((CHIPTestClusterClusterTestListStructOctet *) actualValue[1]).member1, 1ULL));
+                VerifyOrReturn(CheckValueAsString("member2", ((CHIPTestClusterClusterTestListStructOctet *) actualValue[1]).member2,
                     [[NSData alloc] initWithBytes:"Test1" length:5]));
-                VerifyOrReturn(
-                    CheckValue("fabricIndex", ((CHIPTestClusterClusterTestListStructOctet *) actualValue[2]).fabricIndex, 2ULL));
-                VerifyOrReturn(CheckValueAsString("operationalCert",
-                    ((CHIPTestClusterClusterTestListStructOctet *) actualValue[2]).operationalCert,
+                VerifyOrReturn(CheckValue("member1", ((CHIPTestClusterClusterTestListStructOctet *) actualValue[2]).member1, 2ULL));
+                VerifyOrReturn(CheckValueAsString("member2", ((CHIPTestClusterClusterTestListStructOctet *) actualValue[2]).member2,
                     [[NSData alloc] initWithBytes:"Test2" length:5]));
-                VerifyOrReturn(
-                    CheckValue("fabricIndex", ((CHIPTestClusterClusterTestListStructOctet *) actualValue[3]).fabricIndex, 3ULL));
-                VerifyOrReturn(CheckValueAsString("operationalCert",
-                    ((CHIPTestClusterClusterTestListStructOctet *) actualValue[3]).operationalCert,
+                VerifyOrReturn(CheckValue("member1", ((CHIPTestClusterClusterTestListStructOctet *) actualValue[3]).member1, 3ULL));
+                VerifyOrReturn(CheckValueAsString("member2", ((CHIPTestClusterClusterTestListStructOctet *) actualValue[3]).member2,
                     [[NSData alloc] initWithBytes:"Test3" length:5]));
             }
 

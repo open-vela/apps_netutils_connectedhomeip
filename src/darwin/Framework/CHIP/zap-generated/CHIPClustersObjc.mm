@@ -61342,8 +61342,8 @@ using namespace chip::app::Clusters;
                             return CHIP_ERROR_INVALID_ARGUMENT;
                         }
                         auto element_0 = (CHIPTestClusterClusterTestListStructOctet *) value[i_0];
-                        listHolder_0->mList[i_0].fabricIndex = element_0.fabricIndex.unsignedLongLongValue;
-                        listHolder_0->mList[i_0].operationalCert = [self asByteSpan:element_0.operationalCert];
+                        listHolder_0->mList[i_0].member1 = element_0.member1.unsignedLongLongValue;
+                        listHolder_0->mList[i_0].member2 = [self asByteSpan:element_0.member2];
                     }
                     cppValue = ListType_0(listHolder_0->mList, value.count);
                 } else {
