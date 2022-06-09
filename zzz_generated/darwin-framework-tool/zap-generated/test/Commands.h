@@ -30371,7 +30371,7 @@ private:
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
-                                                                                     endpoint:1
+                                                                                     endpoint:3
                                                                                         queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -30395,7 +30395,7 @@ private:
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
-                                                                                     endpoint:1
+                                                                                     endpoint:3
                                                                                         queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -30415,7 +30415,7 @@ private:
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
-                                                                                     endpoint:1
+                                                                                     endpoint:3
                                                                                         queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -30462,7 +30462,7 @@ private:
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
-                                                                                     endpoint:1
+                                                                                     endpoint:3
                                                                                         queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -30489,7 +30489,7 @@ private:
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
-                                                                                     endpoint:1
+                                                                                     endpoint:3
                                                                                         queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -30964,7 +30964,7 @@ private:
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
     {
         CHIPDevice * device = GetDevice("alpha");
-        CHIPTestAccountLogin * cluster = [[CHIPTestAccountLogin alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        CHIPTestAccountLogin * cluster = [[CHIPTestAccountLogin alloc] initWithDevice:device endpoint:3 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeClusterRevisionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
@@ -30987,7 +30987,7 @@ private:
     CHIP_ERROR TestReadTheGlobalAttributeAttributeList_2()
     {
         CHIPDevice * device = GetDevice("alpha");
-        CHIPTestAccountLogin * cluster = [[CHIPTestAccountLogin alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        CHIPTestAccountLogin * cluster = [[CHIPTestAccountLogin alloc] initWithDevice:device endpoint:3 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -31024,7 +31024,7 @@ private:
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_4()
     {
         CHIPDevice * device = GetDevice("alpha");
-        CHIPTestAccountLogin * cluster = [[CHIPTestAccountLogin alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        CHIPTestAccountLogin * cluster = [[CHIPTestAccountLogin alloc] initWithDevice:device endpoint:3 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -31050,7 +31050,7 @@ private:
     CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_5()
     {
         CHIPDevice * device = GetDevice("alpha");
-        CHIPTestAccountLogin * cluster = [[CHIPTestAccountLogin alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        CHIPTestAccountLogin * cluster = [[CHIPTestAccountLogin alloc] initWithDevice:device endpoint:3 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -34847,7 +34847,7 @@ private:
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
-                                                                                     endpoint:1
+                                                                                     endpoint:3
                                                                                         queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -34868,7 +34868,7 @@ private:
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
-                                                                                     endpoint:1
+                                                                                     endpoint:3
                                                                                         queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -34888,7 +34888,7 @@ private:
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
-                                                                                     endpoint:1
+                                                                                     endpoint:3
                                                                                         queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -34909,7 +34909,7 @@ private:
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
-                                                                                     endpoint:1
+                                                                                     endpoint:3
                                                                                         queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -34929,7 +34929,7 @@ private:
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
-                                                                                     endpoint:1
+                                                                                     endpoint:3
                                                                                         queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -34950,7 +34950,7 @@ private:
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
-                                                                                     endpoint:1
+                                                                                     endpoint:3
                                                                                         queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -34976,7 +34976,7 @@ private:
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
-                                                                                     endpoint:1
+                                                                                     endpoint:3
                                                                                         queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -34997,7 +34997,7 @@ private:
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
-                                                                                     endpoint:1
+                                                                                     endpoint:3
                                                                                         queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
