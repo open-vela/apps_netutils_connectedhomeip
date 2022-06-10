@@ -108089,20 +108089,20 @@ public:
             err = TestViewGroup0Invalid_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : View Group 1 (not found)\n");
-            err = TestViewGroup1NotFound_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : View First Group (not found)\n");
+            err = TestViewFirstGroupNotFound_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Add Group 1 (new)\n");
-            err = TestAddGroup1New_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Add First Group (new)\n");
+            err = TestAddFirstGroupNew_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : View Group 1 (new)\n");
-            err = TestViewGroup1New_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : View First Group (new)\n");
+            err = TestViewFirstGroupNew_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : View Group 2 (not found)\n");
-            err = TestViewGroup2NotFound_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : View Second Group (not found)\n");
+            err = TestViewSecondGroupNotFound_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Get Group Membership 1 (all)\n");
@@ -108113,8 +108113,8 @@ public:
             err = TestViewGroup3NotFound_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : View Group 1 (existing)\n");
-            err = TestViewGroup1Existing_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : View First Group (existing)\n");
+            err = TestViewFirstGroupExisting_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Remove Group 0 (invalid)\n");
@@ -108125,12 +108125,12 @@ public:
             err = TestRemoveGroup4NotFound_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : View Group 1 (not removed)\n");
-            err = TestViewGroup1NotRemoved_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : View First Group (not removed)\n");
+            err = TestViewFirstGroupNotRemoved_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : View Group 2 (removed)\n");
-            err = TestViewGroup2Removed_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : View Second Group (removed)\n");
+            err = TestViewSecondGroupRemoved_12();
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Get Group Membership 3\n");
@@ -108141,12 +108141,12 @@ public:
             err = TestRemoveAll_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : View Group 1 (removed)\n");
-            err = TestViewGroup1Removed_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : View First Group (removed)\n");
+            err = TestViewFirstGroupRemoved_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : View Group 2 (still removed)\n");
-            err = TestViewGroup2StillRemoved_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : View Second Group (still removed)\n");
+            err = TestViewSecondGroupStillRemoved_16();
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : View Group 3 (removed)\n");
@@ -108281,7 +108281,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewGroup1NotFound_2()
+    CHIP_ERROR TestViewFirstGroupNotFound_2()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestGroups * cluster = [[CHIPTestGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -108291,7 +108291,7 @@ private:
         params.groupId = [NSNumber numberWithUnsignedShort:1U];
         [cluster viewGroupWithParams:params
                    completionHandler:^(CHIPGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
-                       NSLog(@"View Group 1 (not found) Error: %@", err);
+                       NSLog(@"View First Group (not found) Error: %@", err);
 
                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -108311,7 +108311,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddGroup1New_3()
+    CHIP_ERROR TestAddFirstGroupNew_3()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestGroups * cluster = [[CHIPTestGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -108322,7 +108322,7 @@ private:
         params.groupName = @"Group #1";
         [cluster addGroupWithParams:params
                   completionHandler:^(CHIPGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
-                      NSLog(@"Add Group 1 (new) Error: %@", err);
+                      NSLog(@"Add First Group (new) Error: %@", err);
 
                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -108342,7 +108342,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewGroup1New_4()
+    CHIP_ERROR TestViewFirstGroupNew_4()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestGroups * cluster = [[CHIPTestGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -108352,7 +108352,7 @@ private:
         params.groupId = [NSNumber numberWithUnsignedShort:1U];
         [cluster viewGroupWithParams:params
                    completionHandler:^(CHIPGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
-                       NSLog(@"View Group 1 (new) Error: %@", err);
+                       NSLog(@"View First Group (new) Error: %@", err);
 
                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -108377,7 +108377,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewGroup2NotFound_5()
+    CHIP_ERROR TestViewSecondGroupNotFound_5()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestGroups * cluster = [[CHIPTestGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -108387,7 +108387,7 @@ private:
         params.groupId = [NSNumber numberWithUnsignedShort:4369U];
         [cluster viewGroupWithParams:params
                    completionHandler:^(CHIPGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
-                       NSLog(@"View Group 2 (not found) Error: %@", err);
+                       NSLog(@"View Second Group (not found) Error: %@", err);
 
                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -108472,7 +108472,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewGroup1Existing_8()
+    CHIP_ERROR TestViewFirstGroupExisting_8()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestGroups * cluster = [[CHIPTestGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -108482,7 +108482,7 @@ private:
         params.groupId = [NSNumber numberWithUnsignedShort:1U];
         [cluster viewGroupWithParams:params
                    completionHandler:^(CHIPGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
-                       NSLog(@"View Group 1 (existing) Error: %@", err);
+                       NSLog(@"View First Group (existing) Error: %@", err);
 
                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -108567,7 +108567,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewGroup1NotRemoved_11()
+    CHIP_ERROR TestViewFirstGroupNotRemoved_11()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestGroups * cluster = [[CHIPTestGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -108577,7 +108577,7 @@ private:
         params.groupId = [NSNumber numberWithUnsignedShort:1U];
         [cluster viewGroupWithParams:params
                    completionHandler:^(CHIPGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
-                       NSLog(@"View Group 1 (not removed) Error: %@", err);
+                       NSLog(@"View First Group (not removed) Error: %@", err);
 
                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -108602,7 +108602,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewGroup2Removed_12()
+    CHIP_ERROR TestViewSecondGroupRemoved_12()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestGroups * cluster = [[CHIPTestGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -108612,7 +108612,7 @@ private:
         params.groupId = [NSNumber numberWithUnsignedShort:4369U];
         [cluster viewGroupWithParams:params
                    completionHandler:^(CHIPGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
-                       NSLog(@"View Group 2 (removed) Error: %@", err);
+                       NSLog(@"View Second Group (removed) Error: %@", err);
 
                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -108688,7 +108688,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewGroup1Removed_15()
+    CHIP_ERROR TestViewFirstGroupRemoved_15()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestGroups * cluster = [[CHIPTestGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -108698,7 +108698,7 @@ private:
         params.groupId = [NSNumber numberWithUnsignedShort:1U];
         [cluster viewGroupWithParams:params
                    completionHandler:^(CHIPGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
-                       NSLog(@"View Group 1 (removed) Error: %@", err);
+                       NSLog(@"View First Group (removed) Error: %@", err);
 
                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -108718,7 +108718,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewGroup2StillRemoved_16()
+    CHIP_ERROR TestViewSecondGroupStillRemoved_16()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestGroups * cluster = [[CHIPTestGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -108728,7 +108728,7 @@ private:
         params.groupId = [NSNumber numberWithUnsignedShort:4369U];
         [cluster viewGroupWithParams:params
                    completionHandler:^(CHIPGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
-                       NSLog(@"View Group 2 (still removed) Error: %@", err);
+                       NSLog(@"View Second Group (still removed) Error: %@", err);
 
                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
