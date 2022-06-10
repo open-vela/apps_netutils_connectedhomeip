@@ -1100,16 +1100,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster logoutWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster logoutWithParams:params
+                    completionHandler:^(NSError * _Nullable error) {
+                        responsesNeeded--;
+                        if (error != nil) {
+                            mError = error;
+                            LogNSError("Error", error);
+                        }
+                        if (responsesNeeded == 0) {
+                            SetCommandExitStatus(mError);
+                        }
+                    }];
         }
         return CHIP_NO_ERROR;
     }
@@ -1575,16 +1576,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster revokeCommissioningWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster revokeCommissioningWithParams:params
+                                 completionHandler:^(NSError * _Nullable error) {
+                                     responsesNeeded--;
+                                     if (error != nil) {
+                                         mError = error;
+                                         LogNSError("Error", error);
+                                     }
+                                     if (responsesNeeded == 0) {
+                                         SetCommandExitStatus(mError);
+                                     }
+                                 }];
         }
         return CHIP_NO_ERROR;
     }
@@ -4369,16 +4371,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster barrierControlStopWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster barrierControlStopWithParams:params
+                                completionHandler:^(NSError * _Nullable error) {
+                                    responsesNeeded--;
+                                    if (error != nil) {
+                                        mError = error;
+                                        LogNSError("Error", error);
+                                    }
+                                    if (responsesNeeded == 0) {
+                                        SetCommandExitStatus(mError);
+                                    }
+                                }];
         }
         return CHIP_NO_ERROR;
     }
@@ -5622,16 +5625,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster mfgSpecificPingWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster mfgSpecificPingWithParams:params
+                             completionHandler:^(NSError * _Nullable error) {
+                                 responsesNeeded--;
+                                 if (error != nil) {
+                                     mError = error;
+                                     LogNSError("Error", error);
+                                 }
+                                 if (responsesNeeded == 0) {
+                                     SetCommandExitStatus(mError);
+                                 }
+                             }];
         }
         return CHIP_NO_ERROR;
     }
@@ -23914,16 +23918,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster getProfileInfoCommandWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster getProfileInfoCommandWithParams:params
+                                   completionHandler:^(NSError * _Nullable error) {
+                                       responsesNeeded--;
+                                       if (error != nil) {
+                                           mError = error;
+                                           LogNSError("Error", error);
+                                       }
+                                       if (responsesNeeded == 0) {
+                                           SetCommandExitStatus(mError);
+                                       }
+                                   }];
         }
         return CHIP_NO_ERROR;
     }
@@ -33356,16 +33361,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster resetCountsWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster resetCountsWithParams:params
+                         completionHandler:^(NSError * _Nullable error) {
+                             responsesNeeded--;
+                             if (error != nil) {
+                                 mError = error;
+                                 LogNSError("Error", error);
+                             }
+                             if (responsesNeeded == 0) {
+                                 SetCommandExitStatus(mError);
+                             }
+                         }];
         }
         return CHIP_NO_ERROR;
     }
@@ -36679,18 +36685,20 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster commissioningCompleteWithCompletionHandler:^(
-                CHIPGeneralCommissioningClusterCommissioningCompleteResponseParams * _Nullable values, NSError * _Nullable error) {
-                NSLog(@"Values: %@", values);
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster commissioningCompleteWithParams:params
+                                   completionHandler:^(
+                                       CHIPGeneralCommissioningClusterCommissioningCompleteResponseParams * _Nullable values,
+                                       NSError * _Nullable error) {
+                                       NSLog(@"Values: %@", values);
+                                       responsesNeeded--;
+                                       if (error != nil) {
+                                           mError = error;
+                                           LogNSError("Error", error);
+                                       }
+                                       if (responsesNeeded == 0) {
+                                           SetCommandExitStatus(mError);
+                                       }
+                                   }];
         }
         return CHIP_NO_ERROR;
     }
@@ -39586,16 +39594,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster removeAllGroupsWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster removeAllGroupsWithParams:params
+                             completionHandler:^(NSError * _Nullable error) {
+                                 responsesNeeded--;
+                                 if (error != nil) {
+                                     mError = error;
+                                     LogNSError("Error", error);
+                                 }
+                                 if (responsesNeeded == 0) {
+                                     SetCommandExitStatus(mError);
+                                 }
+                             }];
         }
         return CHIP_NO_ERROR;
     }
@@ -42066,16 +42075,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster stopWithOnOffWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster stopWithOnOffWithParams:params
+                           completionHandler:^(NSError * _Nullable error) {
+                               responsesNeeded--;
+                               if (error != nil) {
+                                   mError = error;
+                                   LogNSError("Error", error);
+                               }
+                               if (responsesNeeded == 0) {
+                                   SetCommandExitStatus(mError);
+                               }
+                           }];
         }
         return CHIP_NO_ERROR;
     }
@@ -44141,16 +44151,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster sleepWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster sleepWithParams:params
+                   completionHandler:^(NSError * _Nullable error) {
+                       responsesNeeded--;
+                       if (error != nil) {
+                           mError = error;
+                           LogNSError("Error", error);
+                       }
+                       if (responsesNeeded == 0) {
+                           SetCommandExitStatus(mError);
+                       }
+                   }];
         }
         return CHIP_NO_ERROR;
     }
@@ -44557,16 +44568,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster showInputStatusWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster showInputStatusWithParams:params
+                             completionHandler:^(NSError * _Nullable error) {
+                                 responsesNeeded--;
+                                 if (error != nil) {
+                                     mError = error;
+                                     LogNSError("Error", error);
+                                 }
+                                 if (responsesNeeded == 0) {
+                                     SetCommandExitStatus(mError);
+                                 }
+                             }];
         }
         return CHIP_NO_ERROR;
     }
@@ -44597,16 +44609,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster hideInputStatusWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster hideInputStatusWithParams:params
+                             completionHandler:^(NSError * _Nullable error) {
+                                 responsesNeeded--;
+                                 if (error != nil) {
+                                     mError = error;
+                                     LogNSError("Error", error);
+                                 }
+                                 if (responsesNeeded == 0) {
+                                     SetCommandExitStatus(mError);
+                                 }
+                             }];
         }
         return CHIP_NO_ERROR;
     }
@@ -45154,18 +45167,19 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster playWithCompletionHandler:^(
-                CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
-                NSLog(@"Values: %@", values);
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster
+                   playWithParams:params
+                completionHandler:^(CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
+                    NSLog(@"Values: %@", values);
+                    responsesNeeded--;
+                    if (error != nil) {
+                        mError = error;
+                        LogNSError("Error", error);
+                    }
+                    if (responsesNeeded == 0) {
+                        SetCommandExitStatus(mError);
+                    }
+                }];
         }
         return CHIP_NO_ERROR;
     }
@@ -45196,18 +45210,19 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster pauseWithCompletionHandler:^(
-                CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
-                NSLog(@"Values: %@", values);
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster
+                  pauseWithParams:params
+                completionHandler:^(CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
+                    NSLog(@"Values: %@", values);
+                    responsesNeeded--;
+                    if (error != nil) {
+                        mError = error;
+                        LogNSError("Error", error);
+                    }
+                    if (responsesNeeded == 0) {
+                        SetCommandExitStatus(mError);
+                    }
+                }];
         }
         return CHIP_NO_ERROR;
     }
@@ -45238,18 +45253,19 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster stopPlaybackWithCompletionHandler:^(
-                CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
-                NSLog(@"Values: %@", values);
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster stopPlaybackWithParams:params
+                          completionHandler:^(
+                              CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
+                              NSLog(@"Values: %@", values);
+                              responsesNeeded--;
+                              if (error != nil) {
+                                  mError = error;
+                                  LogNSError("Error", error);
+                              }
+                              if (responsesNeeded == 0) {
+                                  SetCommandExitStatus(mError);
+                              }
+                          }];
         }
         return CHIP_NO_ERROR;
     }
@@ -45280,18 +45296,19 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster startOverWithCompletionHandler:^(
-                CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
-                NSLog(@"Values: %@", values);
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster startOverWithParams:params
+                       completionHandler:^(
+                           CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
+                           NSLog(@"Values: %@", values);
+                           responsesNeeded--;
+                           if (error != nil) {
+                               mError = error;
+                               LogNSError("Error", error);
+                           }
+                           if (responsesNeeded == 0) {
+                               SetCommandExitStatus(mError);
+                           }
+                       }];
         }
         return CHIP_NO_ERROR;
     }
@@ -45322,18 +45339,19 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster previousWithCompletionHandler:^(
-                CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
-                NSLog(@"Values: %@", values);
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster
+                previousWithParams:params
+                 completionHandler:^(CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
+                     NSLog(@"Values: %@", values);
+                     responsesNeeded--;
+                     if (error != nil) {
+                         mError = error;
+                         LogNSError("Error", error);
+                     }
+                     if (responsesNeeded == 0) {
+                         SetCommandExitStatus(mError);
+                     }
+                 }];
         }
         return CHIP_NO_ERROR;
     }
@@ -45364,18 +45382,19 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster nextWithCompletionHandler:^(
-                CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
-                NSLog(@"Values: %@", values);
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster
+                   nextWithParams:params
+                completionHandler:^(CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
+                    NSLog(@"Values: %@", values);
+                    responsesNeeded--;
+                    if (error != nil) {
+                        mError = error;
+                        LogNSError("Error", error);
+                    }
+                    if (responsesNeeded == 0) {
+                        SetCommandExitStatus(mError);
+                    }
+                }];
         }
         return CHIP_NO_ERROR;
     }
@@ -45406,18 +45425,19 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster rewindWithCompletionHandler:^(
-                CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
-                NSLog(@"Values: %@", values);
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster
+                 rewindWithParams:params
+                completionHandler:^(CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
+                    NSLog(@"Values: %@", values);
+                    responsesNeeded--;
+                    if (error != nil) {
+                        mError = error;
+                        LogNSError("Error", error);
+                    }
+                    if (responsesNeeded == 0) {
+                        SetCommandExitStatus(mError);
+                    }
+                }];
         }
         return CHIP_NO_ERROR;
     }
@@ -45448,18 +45468,19 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster fastForwardWithCompletionHandler:^(
-                CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
-                NSLog(@"Values: %@", values);
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster fastForwardWithParams:params
+                         completionHandler:^(
+                             CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
+                             NSLog(@"Values: %@", values);
+                             responsesNeeded--;
+                             if (error != nil) {
+                                 mError = error;
+                                 LogNSError("Error", error);
+                             }
+                             if (responsesNeeded == 0) {
+                                 SetCommandExitStatus(mError);
+                             }
+                         }];
         }
         return CHIP_NO_ERROR;
     }
@@ -51373,16 +51394,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster offWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster offWithParams:params
+                 completionHandler:^(NSError * _Nullable error) {
+                     responsesNeeded--;
+                     if (error != nil) {
+                         mError = error;
+                         LogNSError("Error", error);
+                     }
+                     if (responsesNeeded == 0) {
+                         SetCommandExitStatus(mError);
+                     }
+                 }];
         }
         return CHIP_NO_ERROR;
     }
@@ -51413,16 +51435,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster onWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster onWithParams:params
+                completionHandler:^(NSError * _Nullable error) {
+                    responsesNeeded--;
+                    if (error != nil) {
+                        mError = error;
+                        LogNSError("Error", error);
+                    }
+                    if (responsesNeeded == 0) {
+                        SetCommandExitStatus(mError);
+                    }
+                }];
         }
         return CHIP_NO_ERROR;
     }
@@ -51453,16 +51476,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster toggleWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster toggleWithParams:params
+                    completionHandler:^(NSError * _Nullable error) {
+                        responsesNeeded--;
+                        if (error != nil) {
+                            mError = error;
+                            LogNSError("Error", error);
+                        }
+                        if (responsesNeeded == 0) {
+                            SetCommandExitStatus(mError);
+                        }
+                    }];
         }
         return CHIP_NO_ERROR;
     }
@@ -51539,16 +51563,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster onWithRecallGlobalSceneWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster onWithRecallGlobalSceneWithParams:params
+                                     completionHandler:^(NSError * _Nullable error) {
+                                         responsesNeeded--;
+                                         if (error != nil) {
+                                             mError = error;
+                                             LogNSError("Error", error);
+                                         }
+                                         if (responsesNeeded == 0) {
+                                             SetCommandExitStatus(mError);
+                                         }
+                                     }];
         }
         return CHIP_NO_ERROR;
     }
@@ -61776,16 +61801,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster resetWatermarksWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster resetWatermarksWithParams:params
+                             completionHandler:^(NSError * _Nullable error) {
+                                 responsesNeeded--;
+                                 if (error != nil) {
+                                     mError = error;
+                                     LogNSError("Error", error);
+                                 }
+                                 if (responsesNeeded == 0) {
+                                     SetCommandExitStatus(mError);
+                                 }
+                             }];
         }
         return CHIP_NO_ERROR;
     }
@@ -64187,16 +64213,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster testWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster testWithParams:params
+                  completionHandler:^(NSError * _Nullable error) {
+                      responsesNeeded--;
+                      if (error != nil) {
+                          mError = error;
+                          LogNSError("Error", error);
+                      }
+                      if (responsesNeeded == 0) {
+                          SetCommandExitStatus(mError);
+                      }
+                  }];
         }
         return CHIP_NO_ERROR;
     }
@@ -64227,16 +64254,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster testNotHandledWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster testNotHandledWithParams:params
+                            completionHandler:^(NSError * _Nullable error) {
+                                responsesNeeded--;
+                                if (error != nil) {
+                                    mError = error;
+                                    LogNSError("Error", error);
+                                }
+                                if (responsesNeeded == 0) {
+                                    SetCommandExitStatus(mError);
+                                }
+                            }];
         }
         return CHIP_NO_ERROR;
     }
@@ -64267,18 +64295,19 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster testSpecificWithCompletionHandler:^(
-                CHIPTestClusterClusterTestSpecificResponseParams * _Nullable values, NSError * _Nullable error) {
-                NSLog(@"Values: %@", values);
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster testSpecificWithParams:params
+                          completionHandler:^(
+                              CHIPTestClusterClusterTestSpecificResponseParams * _Nullable values, NSError * _Nullable error) {
+                              NSLog(@"Values: %@", values);
+                              responsesNeeded--;
+                              if (error != nil) {
+                                  mError = error;
+                                  LogNSError("Error", error);
+                              }
+                              if (responsesNeeded == 0) {
+                                  SetCommandExitStatus(mError);
+                              }
+                          }];
         }
         return CHIP_NO_ERROR;
     }
@@ -64309,16 +64338,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster testUnknownCommandWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster testUnknownCommandWithParams:params
+                                completionHandler:^(NSError * _Nullable error) {
+                                    responsesNeeded--;
+                                    if (error != nil) {
+                                        mError = error;
+                                        LogNSError("Error", error);
+                                    }
+                                    if (responsesNeeded == 0) {
+                                        SetCommandExitStatus(mError);
+                                    }
+                                }];
         }
         return CHIP_NO_ERROR;
     }
@@ -65518,16 +65548,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster timedInvokeRequestWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster timedInvokeRequestWithParams:params
+                                completionHandler:^(NSError * _Nullable error) {
+                                    responsesNeeded--;
+                                    if (error != nil) {
+                                        mError = error;
+                                        LogNSError("Error", error);
+                                    }
+                                    if (responsesNeeded == 0) {
+                                        SetCommandExitStatus(mError);
+                                    }
+                                }];
         }
         return CHIP_NO_ERROR;
     }
@@ -74699,16 +74730,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster clearWeeklyScheduleWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster clearWeeklyScheduleWithParams:params
+                                 completionHandler:^(NSError * _Nullable error) {
+                                     responsesNeeded--;
+                                     if (error != nil) {
+                                         mError = error;
+                                         LogNSError("Error", error);
+                                     }
+                                     if (responsesNeeded == 0) {
+                                         SetCommandExitStatus(mError);
+                                     }
+                                 }];
         }
         return CHIP_NO_ERROR;
     }
@@ -79923,16 +79955,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster resetCountsWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster resetCountsWithParams:params
+                         completionHandler:^(NSError * _Nullable error) {
+                             responsesNeeded--;
+                             if (error != nil) {
+                                 mError = error;
+                                 LogNSError("Error", error);
+                             }
+                             if (responsesNeeded == 0) {
+                                 SetCommandExitStatus(mError);
+                             }
+                         }];
         }
         return CHIP_NO_ERROR;
     }
@@ -86487,16 +86520,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster resetCountsWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster resetCountsWithParams:params
+                         completionHandler:^(NSError * _Nullable error) {
+                             responsesNeeded--;
+                             if (error != nil) {
+                                 mError = error;
+                                 LogNSError("Error", error);
+                             }
+                             if (responsesNeeded == 0) {
+                                 SetCommandExitStatus(mError);
+                             }
+                         }];
         }
         return CHIP_NO_ERROR;
     }
@@ -87771,16 +87805,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster upOrOpenWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster upOrOpenWithParams:params
+                      completionHandler:^(NSError * _Nullable error) {
+                          responsesNeeded--;
+                          if (error != nil) {
+                              mError = error;
+                              LogNSError("Error", error);
+                          }
+                          if (responsesNeeded == 0) {
+                              SetCommandExitStatus(mError);
+                          }
+                      }];
         }
         return CHIP_NO_ERROR;
     }
@@ -87811,16 +87846,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster downOrCloseWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster downOrCloseWithParams:params
+                         completionHandler:^(NSError * _Nullable error) {
+                             responsesNeeded--;
+                             if (error != nil) {
+                                 mError = error;
+                                 LogNSError("Error", error);
+                             }
+                             if (responsesNeeded == 0) {
+                                 SetCommandExitStatus(mError);
+                             }
+                         }];
         }
         return CHIP_NO_ERROR;
     }
@@ -87851,16 +87887,17 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster stopMotionWithCompletionHandler:^(NSError * _Nullable error) {
-                responsesNeeded--;
-                if (error != nil) {
-                    mError = error;
-                    LogNSError("Error", error);
-                }
-                if (responsesNeeded == 0) {
-                    SetCommandExitStatus(mError);
-                }
-            }];
+            [cluster stopMotionWithParams:params
+                        completionHandler:^(NSError * _Nullable error) {
+                            responsesNeeded--;
+                            if (error != nil) {
+                                mError = error;
+                                LogNSError("Error", error);
+                            }
+                            if (responsesNeeded == 0) {
+                                SetCommandExitStatus(mError);
+                            }
+                        }];
         }
         return CHIP_NO_ERROR;
     }
