@@ -130,9 +130,6 @@
 | ChlorodibromomethaneConcentrationMeasurement                        | 0x0427 |
 | ChloroformConcentrationMeasurement                                  | 0x0428 |
 | SodiumConcentrationMeasurement                                      | 0x0429 |
-| IasZone                                                             | 0x0500 |
-| IasAce                                                              | 0x0501 |
-| IasWd                                                               | 0x0502 |
 | WakeOnLan                                                           | 0x0503 |
 | Channel                                                             | 0x0504 |
 | TargetNavigator                                                     | 0x0505 |
