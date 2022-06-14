@@ -34152,10 +34152,6 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the Application attribute\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestReadsTheApplicationAttribute_6();
             break;
         case 7:
