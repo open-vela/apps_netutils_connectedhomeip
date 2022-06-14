@@ -121,6 +121,8 @@ public:
         printf("Test_TC_MF_1_4\n");
         printf("Test_TC_MF_1_5\n");
         printf("Test_TC_MF_1_6\n");
+        printf("Test_TC_MF_1_9\n");
+        printf("Test_TC_MF_1_10\n");
         printf("Test_TC_MF_1_15\n");
         printf("OTA_SuccessfulTransfer\n");
         printf("Test_TC_OCC_1_1\n");
@@ -35728,60 +35730,48 @@ public:
             err = TestWaitForPixitCommWin18010Seconds_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Wait for PIXIT_COMM_WIN(180) + 10 seconds\n");
-            err = TestWaitForPixitCommWin18010Seconds_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH_CR2 starts a commissioning process with DUT_CE\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCe_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Wait for PIXIT_COMM_WIN(180) + 10 seconds\n");
-            err = TestWaitForPixitCommWin18010Seconds_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH_CR1 opens a new commissioning window on DUT_CE\n");
+            err = TestThCr1OpensANewCommissioningWindowOnDutCe_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Wait for PIXIT_COMM_WIN(180) + 10 seconds\n");
-            err = TestWaitForPixitCommWin18010Seconds_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH_CR1 revokes the commissioning window on DUT_CE\n");
+            err = TestThCr1RevokesTheCommissioningWindowOnDutCe_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : TH_CR2 starts a commissioning process with DUT_CE\n");
             err = TestThCr2StartsACommissioningProcessWithDutCe_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : TH_CR1 opens a new commissioning window on DUT_CE\n");
-            err = TestThCr1OpensANewCommissioningWindowOnDutCe_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH_CR1 revokes the commissioning window on DUT_CE\n");
+            err = TestThCr1RevokesTheCommissioningWindowOnDutCe_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : TH_CR1 revokes the commissioning window on DUT_CE\n");
-            err = TestThCr1RevokesTheCommissioningWindowOnDutCe_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH_CR1 writes the mandatory attribute NodeLabel of DUT_CE\n");
+            err = TestThCr1WritesTheMandatoryAttributeNodeLabelOfDutCe_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : TH_CR2 starts a commissioning process with DUT_CE\n");
-            err = TestThCr2StartsACommissioningProcessWithDutCe_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH_CR1 read the mandatory attribute NodeLabel of DUT_CE\n");
+            err = TestThCr1ReadTheMandatoryAttributeNodeLabelOfDutCe_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : TH_CR1 revokes the commissioning window on DUT_CE\n");
-            err = TestThCr1RevokesTheCommissioningWindowOnDutCe_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH_CR1 opens a new commissioning window on DUT_CE\n");
+            err = TestThCr1OpensANewCommissioningWindowOnDutCe_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : TH_CR1 writes the mandatory attribute NodeLabel of DUT_CE\n");
-            err = TestThCr1WritesTheMandatoryAttributeNodeLabelOfDutCe_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : TH_CR1 read the mandatory attribute NodeLabel of DUT_CE\n");
-            err = TestThCr1ReadTheMandatoryAttributeNodeLabelOfDutCe_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : TH_CR1 opens a new commissioning window on DUT_CE\n");
-            err = TestThCr1OpensANewCommissioningWindowOnDutCe_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : TH_CR2 starts a commissioning process with DUT_CE\n");
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH_CR2 starts a commissioning process with DUT_CE\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestThCr2StartsACommissioningProcessWithDutCe_15();
+            err = TestThCr2StartsACommissioningProcessWithDutCe_12();
             break;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : TH_CR3 starts a commissioning process with DUT_CE\n");
-            err = TestThCr3StartsACommissioningProcessWithDutCe_16();
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH_CR3 starts a commissioning process with DUT_CE\n");
+            err = TestThCr3StartsACommissioningProcessWithDutCe_13();
             break;
         }
 
@@ -35807,7 +35797,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -35819,30 +35809,21 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         }
@@ -35855,7 +35836,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 17;
+    const uint16_t mTestCount = 14;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<uint16_t> mTimeout;
@@ -35913,32 +35894,11 @@ private:
     CHIP_ERROR TestWaitForPixitCommWin18010Seconds_3()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
+        value.ms = 190000UL;
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestWaitForPixitCommWin18010Seconds_4()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestWaitForPixitCommWin18010Seconds_5()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestWaitForPixitCommWin18010Seconds_6()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 28000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_7()
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_4()
     {
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
@@ -35946,7 +35906,7 @@ private:
         return PairWithCode("beta", value);
     }
 
-    CHIP_ERROR TestThCr1OpensANewCommissioningWindowOnDutCe_8()
+    CHIP_ERROR TestThCr1OpensANewCommissioningWindowOnDutCe_5()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -35977,7 +35937,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_9()
+    CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_6()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -35996,7 +35956,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_10()
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_7()
     {
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
@@ -36004,7 +35964,7 @@ private:
         return PairWithCode("beta", value);
     }
 
-    CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_11()
+    CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_8()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -36022,7 +35982,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1WritesTheMandatoryAttributeNodeLabelOfDutCe_12()
+    CHIP_ERROR TestThCr1WritesTheMandatoryAttributeNodeLabelOfDutCe_9()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestBasic * cluster = [[CHIPTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -36042,7 +36002,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1ReadTheMandatoryAttributeNodeLabelOfDutCe_13()
+    CHIP_ERROR TestThCr1ReadTheMandatoryAttributeNodeLabelOfDutCe_10()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestBasic * cluster = [[CHIPTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -36064,7 +36024,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1OpensANewCommissioningWindowOnDutCe_14()
+    CHIP_ERROR TestThCr1OpensANewCommissioningWindowOnDutCe_11()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -36095,7 +36055,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_15()
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_12()
     {
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
@@ -36103,7 +36063,7 @@ private:
         return PairWithCode("beta", value);
     }
 
-    CHIP_ERROR TestThCr3StartsACommissioningProcessWithDutCe_16()
+    CHIP_ERROR TestThCr3StartsACommissioningProcessWithDutCe_13()
     {
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
@@ -36176,60 +36136,48 @@ public:
             err = TestWaitForPixitCommWin18010_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Wait for PIXIT_COMM_WIN(180) + 10\n");
-            err = TestWaitForPixitCommWin18010_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Commission from beta\n");
+            err = TestCommissionFromBeta_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Wait for PIXIT_COMM_WIN(180) + 10\n");
-            err = TestWaitForPixitCommWin18010_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH_CR1 opens a commissioning window on DUT_CE\n");
+            err = TestThCr1OpensACommissioningWindowOnDutCe_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Wait for PIXIT_COMM_WIN(180) + 10\n");
-            err = TestWaitForPixitCommWin18010_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH_CR1 revokes the commissioning window on DUT_CE\n");
+            err = TestThCr1RevokesTheCommissioningWindowOnDutCe_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Commission from beta\n");
             err = TestCommissionFromBeta_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : TH_CR1 opens a commissioning window on DUT_CE\n");
-            err = TestThCr1OpensACommissioningWindowOnDutCe_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH_CR1 revokes the commissioning window on DUT_CE\n");
+            err = TestThCr1RevokesTheCommissioningWindowOnDutCe_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : TH_CR1 revokes the commissioning window on DUT_CE\n");
-            err = TestThCr1RevokesTheCommissioningWindowOnDutCe_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH_CR1 writes the mandatory attribute NodeLabel of DUT_CE\n");
+            err = TestThCr1WritesTheMandatoryAttributeNodeLabelOfDutCe_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Commission from beta\n");
-            err = TestCommissionFromBeta_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH_CR1 read the mandatory attribute NodeLabel of DUT_CE\n");
+            err = TestThCr1ReadTheMandatoryAttributeNodeLabelOfDutCe_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : TH_CR1 revokes the commissioning window on DUT_CE\n");
-            err = TestThCr1RevokesTheCommissioningWindowOnDutCe_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH_CR1 opens a commissioning window on DUT_CE\n");
+            err = TestThCr1OpensACommissioningWindowOnDutCe_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : TH_CR1 writes the mandatory attribute NodeLabel of DUT_CE\n");
-            err = TestThCr1WritesTheMandatoryAttributeNodeLabelOfDutCe_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Commission from beta\n");
+            err = TestCommissionFromBeta_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : TH_CR1 read the mandatory attribute NodeLabel of DUT_CE\n");
-            err = TestThCr1ReadTheMandatoryAttributeNodeLabelOfDutCe_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : TH_CR2 starts a commissioning process on DUT_CE\n");
+            err = TestThCr2StartsACommissioningProcessOnDutCe_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : TH_CR1 opens a commissioning window on DUT_CE\n");
-            err = TestThCr1OpensACommissioningWindowOnDutCe_15();
-            break;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Commission from beta\n");
-            err = TestCommissionFromBeta_16();
-            break;
-        case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : TH_CR2 starts a commissioning process on DUT_CE\n");
-            err = TestThCr2StartsACommissioningProcessOnDutCe_17();
-            break;
-        case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : TH_CR3 starts a commissioning process with DUT_CE\n");
-            err = TestThCr3StartsACommissioningProcessWithDutCe_18();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH_CR3 starts a commissioning process with DUT_CE\n");
+            err = TestThCr3StartsACommissioningProcessWithDutCe_15();
             break;
         }
 
@@ -36258,7 +36206,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -36270,16 +36218,16 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -36288,15 +36236,6 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         }
@@ -36309,7 +36248,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 19;
+    const uint16_t mTestCount = 16;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<uint16_t> mTimeout;
@@ -36366,32 +36305,11 @@ private:
     CHIP_ERROR TestWaitForPixitCommWin18010_4()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
+        value.ms = 190000UL;
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestWaitForPixitCommWin18010_5()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestWaitForPixitCommWin18010_6()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestWaitForPixitCommWin18010_7()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 28000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestCommissionFromBeta_8()
+    CHIP_ERROR TestCommissionFromBeta_5()
     {
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
@@ -36399,7 +36317,7 @@ private:
         return PairWithCode("beta", value);
     }
 
-    CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_9()
+    CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_6()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -36421,7 +36339,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_10()
+    CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_7()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -36440,7 +36358,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCommissionFromBeta_11()
+    CHIP_ERROR TestCommissionFromBeta_8()
     {
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
@@ -36448,7 +36366,7 @@ private:
         return PairWithCode("beta", value);
     }
 
-    CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_12()
+    CHIP_ERROR TestThCr1RevokesTheCommissioningWindowOnDutCe_9()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -36466,7 +36384,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1WritesTheMandatoryAttributeNodeLabelOfDutCe_13()
+    CHIP_ERROR TestThCr1WritesTheMandatoryAttributeNodeLabelOfDutCe_10()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestBasic * cluster = [[CHIPTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -36486,7 +36404,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1ReadTheMandatoryAttributeNodeLabelOfDutCe_14()
+    CHIP_ERROR TestThCr1ReadTheMandatoryAttributeNodeLabelOfDutCe_11()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestBasic * cluster = [[CHIPTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -36508,7 +36426,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_15()
+    CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_12()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -36530,7 +36448,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCommissionFromBeta_16()
+    CHIP_ERROR TestCommissionFromBeta_13()
     {
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
@@ -36538,18 +36456,996 @@ private:
         return PairWithCode("beta", value);
     }
 
-    CHIP_ERROR TestThCr2StartsACommissioningProcessOnDutCe_17()
+    CHIP_ERROR TestThCr2StartsACommissioningProcessOnDutCe_14()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         return WaitForCommissionee("beta", value);
     }
 
-    CHIP_ERROR TestThCr3StartsACommissioningProcessWithDutCe_18()
+    CHIP_ERROR TestThCr3StartsACommissioningProcessWithDutCe_15()
     {
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
+        return PairWithCode("gamma", value);
+    }
+};
+
+class Test_TC_MF_1_9 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_MF_1_9()
+        : TestCommandBridge("Test_TC_MF_1_9")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+        AddArgument("nodeIdForDuplicateCommissioning", 0, UINT64_MAX, &mNodeIdForDuplicateCommissioning);
+        AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
+        AddArgument("nodeId3", 0, UINT64_MAX, &mNodeId3);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
+        AddArgument("payload", &mPayload);
+        AddArgument("payload2", &mPayload2);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_MF_1_9() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MF_1_9\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MF_1_9\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Reboot target device\n");
+            err = TestRebootTargetDevice_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH_CR1 starts a commissioning process with DUT_CE\n");
+            err = TestThCr1StartsACommissioningProcessWithDutCe_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH_CR1 opens a new commissioning window on DUT_CE\n");
+            err = TestThCr1OpensANewCommissioningWindowOnDutCe_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_3();
+            break;
+        case 4:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 4 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_4();
+            break;
+        case 5:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 5 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_5();
+            break;
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_6();
+            break;
+        case 7:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 7 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_7();
+            break;
+        case 8:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 8 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_8();
+            break;
+        case 9:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 9 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_9();
+            break;
+        case 10:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 10 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_10();
+            break;
+        case 11:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 11 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_11();
+            break;
+        case 12:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 12 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_12();
+            break;
+        case 13:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 13 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_13();
+            break;
+        case 14:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 14 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_14();
+            break;
+        case 15:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 15 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_15();
+            break;
+        case 16:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 16 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_16();
+            break;
+        case 17:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 17 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_17();
+            break;
+        case 18:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 18 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_18();
+            break;
+        case 19:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 19 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_19();
+            break;
+        case 20:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 20 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_20();
+            break;
+        case 21:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 21 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_21();
+            break;
+        case 22:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 22 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_22();
+            break;
+        case 23:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 23 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool, " ***** Test Step 24 : TH_CR3 starts a commissioning process with DUT_CE\n");
+            err = TestThCr3StartsACommissioningProcessWithDutCe_24();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(700)); }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 25;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<uint16_t> mTimeout;
+    chip::Optional<chip::NodeId> mNodeIdForDuplicateCommissioning;
+    chip::Optional<chip::NodeId> mNodeId2;
+    chip::Optional<chip::NodeId> mNodeId3;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mDiscriminator;
+    chip::Optional<chip::CharSpan> mPayload;
+    chip::Optional<chip::CharSpan> mPayload2;
+
+    CHIP_ERROR TestRebootTargetDevice_0()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
+        return Reboot("alpha", value);
+    }
+
+    CHIP_ERROR TestThCr1StartsACommissioningProcessWithDutCe_1()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThCr1OpensANewCommissioningWindowOnDutCe_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
+                                                                                                         endpoint:0
+                                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPAdministratorCommissioningClusterOpenCommissioningWindowParams alloc] init];
+        params.commissioningTimeout = [NSNumber numberWithUnsignedShort:180U];
+        params.pakeVerifier =
+            [[NSData alloc] initWithBytes:"\006\307V\337\374\327\042e4R\241-\315\224]\214T\332+\017<\275\033M\303\361\255\262#"
+                                          "\256\262k\004|\322L\226\206o\227\233\035\203\354P\342\264\2560\315\362\375\263+"
+                                          "\330\242\021\2707\334\224\355\315V\364\321Cw\031\020v\277\305\235\231\267\3350S\357\326"
+                                          "\360,D4\362\275\322z\244\371\316\247\015s\216L"
+                                   length:97];
+        params.discriminator = mDiscriminator.HasValue() ? [NSNumber numberWithUnsignedShort:mDiscriminator.Value()]
+                                                         : [NSNumber numberWithUnsignedShort:3840U];
+        params.iterations = [NSNumber numberWithUnsignedInt:1000UL];
+        params.salt = [[NSData alloc] initWithBytes:"SPAKE2P Key Salt" length:16];
+        [cluster openCommissioningWindowWithParams:params
+                                 completionHandler:^(NSError * _Nullable err) {
+                                     NSLog(@"TH_CR1 opens a new commissioning window on DUT_CE Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_3()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_4()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_5()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_6()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_7()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_8()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_9()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_10()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_11()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_12()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_13()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_14()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_15()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_16()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_17()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_18()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_19()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_20()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_21()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_22()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_23()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr3StartsACommissioningProcessWithDutCe_24()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
+        value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
+        return PairWithCode("gamma", value);
+    }
+};
+
+class Test_TC_MF_1_10 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_MF_1_10()
+        : TestCommandBridge("Test_TC_MF_1_10")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+        AddArgument("nodeIdForDuplicateCommissioning", 0, UINT64_MAX, &mNodeIdForDuplicateCommissioning);
+        AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
+        AddArgument("nodeId3", 0, UINT64_MAX, &mNodeId3);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
+        AddArgument("payload", &mPayload);
+        AddArgument("payload2", &mPayload2);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_MF_1_10() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MF_1_10\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MF_1_10\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Reboot target device\n");
+            err = TestRebootTargetDevice_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH_CR1 starts a commissioning process with DUT_CE\n");
+            err = TestThCr1StartsACommissioningProcessWithDutCe_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH_CR1 opens a commissioning window on DUT_CE\n");
+            err = TestThCr1OpensACommissioningWindowOnDutCe_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_3();
+            break;
+        case 4:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 4 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_4();
+            break;
+        case 5:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 5 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_5();
+            break;
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_6();
+            break;
+        case 7:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 7 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_7();
+            break;
+        case 8:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 8 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_8();
+            break;
+        case 9:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 9 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_9();
+            break;
+        case 10:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 10 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_10();
+            break;
+        case 11:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 11 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_11();
+            break;
+        case 12:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 12 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_12();
+            break;
+        case 13:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 13 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_13();
+            break;
+        case 14:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 14 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_14();
+            break;
+        case 15:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 15 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_15();
+            break;
+        case 16:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 16 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_16();
+            break;
+        case 17:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 17 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_17();
+            break;
+        case 18:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 18 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_18();
+            break;
+        case 19:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 19 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_19();
+            break;
+        case 20:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 20 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_20();
+            break;
+        case 21:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 21 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_21();
+            break;
+        case 22:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 22 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_22();
+            break;
+        case 23:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 23 : TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool, " ***** Test Step 24 : TH_CR3 starts a commissioning process with DUT_CE\n");
+            err = TestThCr3StartsACommissioningProcessWithDutCe_24();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(700)); }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 25;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<uint16_t> mTimeout;
+    chip::Optional<chip::NodeId> mNodeIdForDuplicateCommissioning;
+    chip::Optional<chip::NodeId> mNodeId2;
+    chip::Optional<chip::NodeId> mNodeId3;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mDiscriminator;
+    chip::Optional<chip::CharSpan> mPayload;
+    chip::Optional<chip::CharSpan> mPayload2;
+
+    CHIP_ERROR TestRebootTargetDevice_0()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
+        return Reboot("alpha", value);
+    }
+
+    CHIP_ERROR TestThCr1StartsACommissioningProcessWithDutCe_1()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
+                                                                                                         endpoint:0
+                                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPAdministratorCommissioningClusterOpenBasicCommissioningWindowParams alloc] init];
+        params.commissioningTimeout = [NSNumber numberWithUnsignedShort:180U];
+        [cluster openBasicCommissioningWindowWithParams:params
+                                      completionHandler:^(NSError * _Nullable err) {
+                                          NSLog(@"TH_CR1 opens a commissioning window on DUT_CE Error: %@", err);
+
+                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_3()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_4()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_5()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_6()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_7()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_8()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_9()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_10()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_11()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_12()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_13()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_14()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_15()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_16()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_17()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_18()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_19()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_20()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_21()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_22()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCeUsingInvalidSetupCode_23()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+        value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestThCr3StartsACommissioningProcessWithDutCe_24()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
+        value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:0000000000I31506010", 22);
         return PairWithCode("gamma", value);
     }
 };
@@ -36645,52 +37541,28 @@ public:
             err = TestWaitForTheExpirationOfPixitCommWinSeconds_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Wait for the expiration of PIXIT_COMM_WIN seconds\n");
-            err = TestWaitForTheExpirationOfPixitCommWinSeconds_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH_CR1 re-opens new commissioning window on DUT_CE\n");
+            err = TestThCr1ReOpensNewCommissioningWindowOnDutCe_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Wait for the expiration of PIXIT_COMM_WIN seconds\n");
-            err = TestWaitForTheExpirationOfPixitCommWinSeconds_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH_CR3 opens a new commissioning window on DUT_CE\n");
+            err = TestThCr3OpensANewCommissioningWindowOnDutCe_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Wait for the expiration of PIXIT_COMM_WIN seconds\n");
-            err = TestWaitForTheExpirationOfPixitCommWinSeconds_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : TH_CR1 reads the list of Fabrics on DUT_CE\n");
+            err = TestThCr1ReadsTheListOfFabricsOnDutCe_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : TH_CR1 re-opens new commissioning window on DUT_CE\n");
-            err = TestThCr1ReOpensNewCommissioningWindowOnDutCe_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Wait for the expiration of PIXIT_COMM_WIN seconds\n");
+            err = TestWaitForTheExpirationOfPixitCommWinSeconds_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : TH_CR3 opens a new commissioning window on DUT_CE\n");
-            err = TestThCr3OpensANewCommissioningWindowOnDutCe_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : TH_CR1 opens a new commissioning window on DUT_CE\n");
+            err = TestThCr1OpensANewCommissioningWindowOnDutCe_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : TH_CR1 reads the list of Fabrics on DUT_CE\n");
-            err = TestThCr1ReadsTheListOfFabricsOnDutCe_17();
-            break;
-        case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Wait for the expiration of PIXIT_COMM_WIN seconds\n");
-            err = TestWaitForTheExpirationOfPixitCommWinSeconds_18();
-            break;
-        case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Wait for the expiration of PIXIT_COMM_WIN seconds\n");
-            err = TestWaitForTheExpirationOfPixitCommWinSeconds_19();
-            break;
-        case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Wait for the expiration of PIXIT_COMM_WIN seconds\n");
-            err = TestWaitForTheExpirationOfPixitCommWinSeconds_20();
-            break;
-        case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : Wait for the expiration of PIXIT_COMM_WIN seconds\n");
-            err = TestWaitForTheExpirationOfPixitCommWinSeconds_21();
-            break;
-        case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : TH_CR1 opens a new commissioning window on DUT_CE\n");
-            err = TestThCr1OpensANewCommissioningWindowOnDutCe_22();
-            break;
-        case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : TH_CR2 opens a new commissioning window on DUT_CE\n");
-            err = TestThCr2OpensANewCommissioningWindowOnDutCe_23();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : TH_CR2 opens a new commissioning window on DUT_CE\n");
+            err = TestThCr2OpensANewCommissioningWindowOnDutCe_17();
             break;
         }
 
@@ -36743,7 +37615,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -36752,27 +37624,9 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         }
@@ -36785,7 +37639,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 24;
+    const uint16_t mTestCount = 18;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<uint16_t> mTimeout;
@@ -36972,32 +37826,11 @@ private:
     CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_11()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
+        value.ms = 180000UL;
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_12()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_13()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_14()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 18000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestThCr1ReOpensNewCommissioningWindowOnDutCe_15()
+    CHIP_ERROR TestThCr1ReOpensNewCommissioningWindowOnDutCe_12()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -37028,7 +37861,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr3OpensANewCommissioningWindowOnDutCe_16()
+    CHIP_ERROR TestThCr3OpensANewCommissioningWindowOnDutCe_13()
     {
         CHIPDevice * device = GetDevice("gamma");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -37058,7 +37891,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1ReadsTheListOfFabricsOnDutCe_17()
+    CHIP_ERROR TestThCr1ReadsTheListOfFabricsOnDutCe_14()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestOperationalCredentials * cluster = [[CHIPTestOperationalCredentials alloc] initWithDevice:device
@@ -37092,35 +37925,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_18()
+    CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_15()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
+        value.ms = 180000UL;
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_19()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_20()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 54000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestWaitForTheExpirationOfPixitCommWinSeconds_21()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 18000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestThCr1OpensANewCommissioningWindowOnDutCe_22()
+    CHIP_ERROR TestThCr1OpensANewCommissioningWindowOnDutCe_16()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -37151,7 +37963,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr2OpensANewCommissioningWindowOnDutCe_23()
+    CHIP_ERROR TestThCr2OpensANewCommissioningWindowOnDutCe_17()
     {
         CHIPDevice * device = GetDevice("beta");
         CHIPTestAdministratorCommissioning * cluster = [[CHIPTestAdministratorCommissioning alloc] initWithDevice:device
@@ -108739,6 +109551,8 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_MF_1_4>(),
         make_unique<Test_TC_MF_1_5>(),
         make_unique<Test_TC_MF_1_6>(),
+        make_unique<Test_TC_MF_1_9>(),
+        make_unique<Test_TC_MF_1_10>(),
         make_unique<Test_TC_MF_1_15>(),
         make_unique<OTA_SuccessfulTransfer>(),
         make_unique<Test_TC_OCC_1_1>(),
