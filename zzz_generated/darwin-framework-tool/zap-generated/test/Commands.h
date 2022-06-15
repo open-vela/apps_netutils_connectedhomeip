@@ -22678,6 +22678,8 @@ private:
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("FailSafeExpiryLengthSeconds",
                     ((CHIPGeneralCommissioningClusterBasicCommissioningInfo *) actualValue).failSafeExpiryLengthSeconds, 60U));
+                VerifyOrReturn(CheckValue("MaxCumulativeFailsafeSeconds",
+                    ((CHIPGeneralCommissioningClusterBasicCommissioningInfo *) actualValue).maxCumulativeFailsafeSeconds, 900U));
             }
 
             NextTest();
