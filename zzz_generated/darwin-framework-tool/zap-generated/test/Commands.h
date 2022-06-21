@@ -207,9 +207,9 @@ public:
         printf("TestArmFailSafe\n");
         printf("TestFanControl\n");
         printf("TestMultiAdmin\n");
-        printf("Test_TC_SWDIAG_1_1\n");
-        printf("Test_TC_SWDIAG_2_1\n");
-        printf("Test_TC_SWDIAG_3_1\n");
+        printf("Test_TC_DGSW_2_1\n");
+        printf("Test_TC_DGSW_2_2\n");
+        printf("Test_TC_DGSW_2_3\n");
         printf("TestSubscribe_OnOff\n");
         printf("DL_UsersAndCredentials\n");
         printf("DL_LockUnlock\n");
@@ -4019,26 +4019,50 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Validate constraints of attribute: CurrentHue\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestValidateConstraintsOfAttributeCurrentHue_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Validate constraints of attribute: CurrentSaturation\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestValidateConstraintsOfAttributeCurrentSaturation_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads CurrentX attribute from DUT\n");
+            if (ShouldSkip("CC.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentXAttributeFromDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Validate constraints of attribute: CurrentX\n");
+            if (ShouldSkip("CC.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestValidateConstraintsOfAttributeCurrentX_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Reads CurrentY attribute from DUT\n");
+            if (ShouldSkip("CC.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentYAttributeFromDut_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Validate constraints of attribute: CurrentY\n");
+            if (ShouldSkip("CC.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestValidateConstraintsOfAttributeCurrentY_6();
             break;
         case 7:
@@ -4051,6 +4075,10 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Validate constraints of attribute: ColorTemperatureMireds\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestValidateConstraintsOfAttributeColorTemperatureMireds_8();
             break;
         case 9:
@@ -4063,14 +4091,26 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Validate constraints of attribute: ColorMode\n");
+            if (ShouldSkip("CC.S.A0008")) {
+                NextTest();
+                return;
+            }
             err = TestValidateConstraintsOfAttributeColorMode_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Validate constraints of attribute: Options\n");
+            if (ShouldSkip("CC.S.A000f")) {
+                NextTest();
+                return;
+            }
             err = TestValidateConstraintsOfAttributeOptions_11();
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Validate constraints of attribute: EnhancedCurrentHue\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestValidateConstraintsOfAttributeEnhancedCurrentHue_12();
             break;
         case 13:
@@ -4083,186 +4123,370 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Validate constraints of attribute: ColorLoopActive\n");
+            if (ShouldSkip("CC.S.A4002")) {
+                NextTest();
+                return;
+            }
             err = TestValidateConstraintsOfAttributeColorLoopActive_14();
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Validate constraints of attribute: ColorLoopDirection\n");
+            if (ShouldSkip("CC.S.A4003")) {
+                NextTest();
+                return;
+            }
             err = TestValidateConstraintsOfAttributeColorLoopDirection_15();
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : Validate constraints of attribute: ColorLoopTime\n");
+            if (ShouldSkip("CC.S.A4004")) {
+                NextTest();
+                return;
+            }
             err = TestValidateConstraintsOfAttributeColorLoopTime_16();
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Validate constraints of attribute: ColorLoopStartEnhancedHue\n");
+            if (ShouldSkip("CC.S.A4005")) {
+                NextTest();
+                return;
+            }
             err = TestValidateConstraintsOfAttributeColorLoopStartEnhancedHue_17();
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Validate constraints of attribute: ColorLoopStoredEnhancedHue\n");
+            if (ShouldSkip("CC.S.A4006")) {
+                NextTest();
+                return;
+            }
             err = TestValidateConstraintsOfAttributeColorLoopStoredEnhancedHue_18();
             break;
         case 19:
             ChipLogProgress(chipTool, " ***** Test Step 19 : Reads ColorCapabilities attribute from DUT\n");
+            if (ShouldSkip("CC.S.A400a")) {
+                NextTest();
+                return;
+            }
             err = TestReadsColorCapabilitiesAttributeFromDut_19();
             break;
         case 20:
             ChipLogProgress(chipTool, " ***** Test Step 20 : Validate constraints of attribute: ColorCapabilities\n");
+            if (ShouldSkip("CC.S.A400a")) {
+                NextTest();
+                return;
+            }
             err = TestValidateConstraintsOfAttributeColorCapabilities_20();
             break;
         case 21:
             ChipLogProgress(chipTool, " ***** Test Step 21 : Reads ColorTempPhysicalMinMireds attribute from DUT\n");
+            if (ShouldSkip("CC.S.A400b")) {
+                NextTest();
+                return;
+            }
             err = TestReadsColorTempPhysicalMinMiredsAttributeFromDut_21();
             break;
         case 22:
             ChipLogProgress(chipTool, " ***** Test Step 22 : Validate constraints of attribute: ColorTempPhysicalMinMireds\n");
+            if (ShouldSkip("CC.S.A400b")) {
+                NextTest();
+                return;
+            }
             err = TestValidateConstraintsOfAttributeColorTempPhysicalMinMireds_22();
             break;
         case 23:
             ChipLogProgress(chipTool, " ***** Test Step 23 : Read ColorTempPhysicalMaxMireds attribute from DUT\n");
+            if (ShouldSkip("CC.S.A400c")) {
+                NextTest();
+                return;
+            }
             err = TestReadColorTempPhysicalMaxMiredsAttributeFromDut_23();
             break;
         case 24:
             ChipLogProgress(chipTool, " ***** Test Step 24 : Validate constraints of attribute: ColorTempPhysicalMaxMireds\n");
+            if (ShouldSkip("CC.S.A400c")) {
+                NextTest();
+                return;
+            }
             err = TestValidateConstraintsOfAttributeColorTempPhysicalMaxMireds_24();
             break;
         case 25:
             ChipLogProgress(chipTool, " ***** Test Step 25 : Read the optional attribute: CoupleColorTempToLevelMinMireds\n");
+            if (ShouldSkip("CC.S.A400d")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeCoupleColorTempToLevelMinMireds_25();
             break;
         case 26:
             ChipLogProgress(chipTool, " ***** Test Step 26 : Read the optional attribute: StartUpColorTemperatureMireds\n");
+            if (ShouldSkip("CC.S.A4010")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeStartUpColorTemperatureMireds_26();
             break;
         case 27:
             ChipLogProgress(chipTool, " ***** Test Step 27 : Validate constraints of attribute: RemainingTime\n");
+            if (ShouldSkip("CC.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestValidateConstraintsOfAttributeRemainingTime_27();
             break;
         case 28:
             ChipLogProgress(chipTool, " ***** Test Step 28 : Read the optional attribute: DriftCompensation\n");
+            if (ShouldSkip("CC.S.A0005")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeDriftCompensation_28();
             break;
         case 29:
             ChipLogProgress(chipTool, " ***** Test Step 29 : Read the optional attribute: CompensationText\n");
+            if (ShouldSkip("CC.S.A0005")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeCompensationText_29();
             break;
         case 30:
             ChipLogProgress(chipTool, " ***** Test Step 30 : Read the mandatory attribute: NumberOfPrimaries\n");
+            if (ShouldSkip("CC.S.A0010")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributeNumberOfPrimaries_30();
             break;
         case 31:
             ChipLogProgress(chipTool, " ***** Test Step 31 : Read the mandatory attribute: Primary1X\n");
+            if (ShouldSkip("CC.S.A0011")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributePrimary1X_31();
             break;
         case 32:
             ChipLogProgress(chipTool, " ***** Test Step 32 : Read the mandatory attribute: Primary1Y\n");
+            if (ShouldSkip("CC.S.A0012")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributePrimary1Y_32();
             break;
         case 33:
             ChipLogProgress(chipTool, " ***** Test Step 33 : Read the mandatory attribute: Primary1Intensity\n");
+            if (ShouldSkip("CC.S.A0013")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributePrimary1Intensity_33();
             break;
         case 34:
             ChipLogProgress(chipTool, " ***** Test Step 34 : Read the mandatory attribute: Primary2X\n");
+            if (ShouldSkip("CC.S.A0015")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributePrimary2X_34();
             break;
         case 35:
             ChipLogProgress(chipTool, " ***** Test Step 35 : Read the mandatory attribute: Primary2Y\n");
+            if (ShouldSkip("CC.S.A0016")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributePrimary2Y_35();
             break;
         case 36:
             ChipLogProgress(chipTool, " ***** Test Step 36 : Validate constraints of attribute: Primary2Intensity\n");
+            if (ShouldSkip("CC.S.A0017")) {
+                NextTest();
+                return;
+            }
             err = TestValidateConstraintsOfAttributePrimary2Intensity_36();
             break;
         case 37:
             ChipLogProgress(chipTool, " ***** Test Step 37 : Read the mandatory attribute: Primary3X\n");
+            if (ShouldSkip("CC.S.A0019")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributePrimary3X_37();
             break;
         case 38:
             ChipLogProgress(chipTool, " ***** Test Step 38 : Read the mandatory attribute: Primary3Y\n");
+            if (ShouldSkip("CC.S.A001a")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributePrimary3Y_38();
             break;
         case 39:
             ChipLogProgress(chipTool, " ***** Test Step 39 : Read the mandatory attribute: Primary3Intensity\n");
+            if (ShouldSkip("CC.S.A001b")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributePrimary3Intensity_39();
             break;
         case 40:
             ChipLogProgress(chipTool, " ***** Test Step 40 : Read the mandatory attribute: Primary4X\n");
+            if (ShouldSkip("CC.S.A0020")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributePrimary4X_40();
             break;
         case 41:
             ChipLogProgress(chipTool, " ***** Test Step 41 : Read the mandatory attribute: Primary4Y\n");
+            if (ShouldSkip("CC.S.A0021")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributePrimary4Y_41();
             break;
         case 42:
             ChipLogProgress(chipTool, " ***** Test Step 42 : Read the mandatory attribute: Primary4Intensity\n");
+            if (ShouldSkip("CC.S.A0022")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributePrimary4Intensity_42();
             break;
         case 43:
             ChipLogProgress(chipTool, " ***** Test Step 43 : Read the mandatory attribute: Primary5X\n");
+            if (ShouldSkip("CC.S.A0024")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributePrimary5X_43();
             break;
         case 44:
             ChipLogProgress(chipTool, " ***** Test Step 44 : Read the mandatory attribute: Primary5Y\n");
+            if (ShouldSkip("CC.S.A0025")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributePrimary5Y_44();
             break;
         case 45:
             ChipLogProgress(chipTool, " ***** Test Step 45 : Read the mandatory attribute: Primary5Intensity\n");
+            if (ShouldSkip("CC.S.A0026")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributePrimary5Intensity_45();
             break;
         case 46:
             ChipLogProgress(chipTool, " ***** Test Step 46 : Read the mandatory attribute: Primary6X\n");
+            if (ShouldSkip("CC.S.A0028")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributePrimary6X_46();
             break;
         case 47:
             ChipLogProgress(chipTool, " ***** Test Step 47 : Read the mandatory attribute: Primary6Y\n");
+            if (ShouldSkip("CC.S.A0029")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributePrimary6Y_47();
             break;
         case 48:
             ChipLogProgress(chipTool, " ***** Test Step 48 : Read the mandatory attribute: Primary6Intensity\n");
+            if (ShouldSkip("CC.S.A002a")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributePrimary6Intensity_48();
             break;
         case 49:
             ChipLogProgress(chipTool, " ***** Test Step 49 : Read the optional attribute: WhitePointX\n");
+            if (ShouldSkip("CC.S.A0030")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeWhitePointX_49();
             break;
         case 50:
             ChipLogProgress(chipTool, " ***** Test Step 50 : Read the optional attribute: WhitePointY\n");
+            if (ShouldSkip("CC.S.A0031")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeWhitePointY_50();
             break;
         case 51:
             ChipLogProgress(chipTool, " ***** Test Step 51 : Read the optional attribute: ColorPointRX\n");
+            if (ShouldSkip("CC.S.A0032")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeColorPointRX_51();
             break;
         case 52:
             ChipLogProgress(chipTool, " ***** Test Step 52 : Read the optional attribute: ColorPointRY\n");
+            if (ShouldSkip("CC.S.A0033")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeColorPointRY_52();
             break;
         case 53:
             ChipLogProgress(chipTool, " ***** Test Step 53 : Read the optional attribute: ColorPointRIntensity\n");
+            if (ShouldSkip("CC.S.A0034")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeColorPointRIntensity_53();
             break;
         case 54:
             ChipLogProgress(chipTool, " ***** Test Step 54 : Read the optional attribute: ColorPointGX\n");
+            if (ShouldSkip("CC.S.A0036")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeColorPointGX_54();
             break;
         case 55:
             ChipLogProgress(chipTool, " ***** Test Step 55 : Read the optional attribute: ColorPointGY\n");
+            if (ShouldSkip("CC.S.A0037")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeColorPointGY_55();
             break;
         case 56:
             ChipLogProgress(chipTool, " ***** Test Step 56 : Read the optional attribute: ColorPointGIntensity\n");
+            if (ShouldSkip("CC.S.A0038")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeColorPointGIntensity_56();
             break;
         case 57:
             ChipLogProgress(chipTool, " ***** Test Step 57 : Read the optional attribute: ColorPointBX\n");
+            if (ShouldSkip("CC.S.A003a")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeColorPointBX_57();
             break;
         case 58:
             ChipLogProgress(chipTool, " ***** Test Step 58 : Read the optional attribute: ColorPointBY\n");
+            if (ShouldSkip("CC.S.A003b")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeColorPointBY_58();
             break;
         case 59:
             ChipLogProgress(chipTool, " ***** Test Step 59 : Read the optional attribute: ColorPointBIntensity\n");
+            if (ShouldSkip("CC.S.A003c")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeColorPointBIntensity_59();
             break;
         }
@@ -5903,10 +6127,18 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads CurrentHue attribute from DUT\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentHueAttributeFromDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Move to hue shortest distance command\n");
+            if (ShouldSkip("CC.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveToHueShortestDistanceCommand_4();
             break;
         case 5:
@@ -5916,6 +6148,10 @@ public:
         case 6:
             ChipLogProgress(
                 chipTool, " ***** Test Step 6 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_6();
             break;
         case 7:
@@ -5925,6 +6161,10 @@ public:
         case 8:
             ChipLogProgress(
                 chipTool, " ***** Test Step 8 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_8();
             break;
         case 9:
@@ -5934,10 +6174,18 @@ public:
         case 10:
             ChipLogProgress(
                 chipTool, " ***** Test Step 10 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Move to hue longest distance command\n");
+            if (ShouldSkip("CC.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveToHueLongestDistanceCommand_11();
             break;
         case 12:
@@ -5947,6 +6195,10 @@ public:
         case 13:
             ChipLogProgress(
                 chipTool, " ***** Test Step 13 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_13();
             break;
         case 14:
@@ -5956,6 +6208,10 @@ public:
         case 15:
             ChipLogProgress(
                 chipTool, " ***** Test Step 15 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_15();
             break;
         case 16:
@@ -5965,10 +6221,18 @@ public:
         case 17:
             ChipLogProgress(
                 chipTool, " ***** Test Step 17 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_17();
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Move to hue up command\n");
+            if (ShouldSkip("CC.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveToHueUpCommand_18();
             break;
         case 19:
@@ -5978,6 +6242,10 @@ public:
         case 20:
             ChipLogProgress(
                 chipTool, " ***** Test Step 20 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_20();
             break;
         case 21:
@@ -5987,6 +6255,10 @@ public:
         case 22:
             ChipLogProgress(
                 chipTool, " ***** Test Step 22 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_22();
             break;
         case 23:
@@ -5996,10 +6268,18 @@ public:
         case 24:
             ChipLogProgress(
                 chipTool, " ***** Test Step 24 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_24();
             break;
         case 25:
             ChipLogProgress(chipTool, " ***** Test Step 25 : Move to hue down command\n");
+            if (ShouldSkip("CC.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveToHueDownCommand_25();
             break;
         case 26:
@@ -6009,6 +6289,10 @@ public:
         case 27:
             ChipLogProgress(
                 chipTool, " ***** Test Step 27 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_27();
             break;
         case 28:
@@ -6018,6 +6302,10 @@ public:
         case 29:
             ChipLogProgress(
                 chipTool, " ***** Test Step 29 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_29();
             break;
         case 30:
@@ -6027,6 +6315,10 @@ public:
         case 31:
             ChipLogProgress(
                 chipTool, " ***** Test Step 31 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_31();
             break;
         case 32:
@@ -6761,10 +7053,18 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads CurrentHue attribute from DUT\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentHueAttributeFromDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Move hue up command\n");
+            if (ShouldSkip("CC.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveHueUpCommand_4();
             break;
         case 5:
@@ -6774,6 +7074,10 @@ public:
         case 6:
             ChipLogProgress(
                 chipTool, " ***** Test Step 6 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_6();
             break;
         case 7:
@@ -6783,6 +7087,10 @@ public:
         case 8:
             ChipLogProgress(
                 chipTool, " ***** Test Step 8 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_8();
             break;
         case 9:
@@ -6792,10 +7100,18 @@ public:
         case 10:
             ChipLogProgress(
                 chipTool, " ***** Test Step 10 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Move hue stop command\n");
+            if (ShouldSkip("CC.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveHueStopCommand_11();
             break;
         case 12:
@@ -6805,6 +7121,10 @@ public:
         case 13:
             ChipLogProgress(
                 chipTool, " ***** Test Step 13 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_13();
             break;
         case 14:
@@ -6814,6 +7134,10 @@ public:
         case 15:
             ChipLogProgress(
                 chipTool, " ***** Test Step 15 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_15();
             break;
         case 16:
@@ -6823,10 +7147,18 @@ public:
         case 17:
             ChipLogProgress(
                 chipTool, " ***** Test Step 17 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_17();
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Move hue down command\n");
+            if (ShouldSkip("CC.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveHueDownCommand_18();
             break;
         case 19:
@@ -6836,6 +7168,10 @@ public:
         case 20:
             ChipLogProgress(
                 chipTool, " ***** Test Step 20 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_20();
             break;
         case 21:
@@ -6845,6 +7181,10 @@ public:
         case 22:
             ChipLogProgress(
                 chipTool, " ***** Test Step 22 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_22();
             break;
         case 23:
@@ -6854,10 +7194,18 @@ public:
         case 24:
             ChipLogProgress(
                 chipTool, " ***** Test Step 24 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_24();
             break;
         case 25:
             ChipLogProgress(chipTool, " ***** Test Step 25 : Move hue stop command\n");
+            if (ShouldSkip("CC.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveHueStopCommand_25();
             break;
         case 26:
@@ -6867,6 +7215,10 @@ public:
         case 27:
             ChipLogProgress(
                 chipTool, " ***** Test Step 27 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_27();
             break;
         case 28:
@@ -6876,6 +7228,10 @@ public:
         case 29:
             ChipLogProgress(
                 chipTool, " ***** Test Step 29 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_29();
             break;
         case 30:
@@ -6885,6 +7241,10 @@ public:
         case 31:
             ChipLogProgress(
                 chipTool, " ***** Test Step 31 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_31();
             break;
         case 32:
@@ -7615,10 +7975,18 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads CurrentHue attribute from DUT\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentHueAttributeFromDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Step hue up command\n");
+            if (ShouldSkip("CC.S.C02.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestStepHueUpCommand_4();
             break;
         case 5:
@@ -7627,10 +7995,18 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Over TransitionTime,Read CurrentHue attribute from DUT\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestOverTransitionTimeReadCurrentHueAttributeFromDut_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Step hue down command\n");
+            if (ShouldSkip("CC.S.C02.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestStepHueDownCommand_7();
             break;
         case 8:
@@ -7639,6 +8015,10 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Over TransitionTime,Read CurrentHue attribute from DUT\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestOverTransitionTimeReadCurrentHueAttributeFromDut_9();
             break;
         case 10:
@@ -7979,10 +8359,18 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Check Saturation attribute value matched before any change\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckSaturationAttributeValueMatchedBeforeAnyChange_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Move to saturation command\n");
+            if (ShouldSkip("CC.S.C03.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveToSaturationCommand_4();
             break;
         case 5:
@@ -7992,6 +8380,10 @@ public:
         case 6:
             ChipLogProgress(chipTool,
                 " ***** Test Step 6 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_6();
             break;
         case 7:
@@ -8001,6 +8393,10 @@ public:
         case 8:
             ChipLogProgress(chipTool,
                 " ***** Test Step 8 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_8();
             break;
         case 9:
@@ -8010,6 +8406,10 @@ public:
         case 10:
             ChipLogProgress(chipTool,
                 " ***** Test Step 10 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_10();
             break;
         case 11:
@@ -8357,10 +8757,18 @@ public:
         case 3:
             ChipLogProgress(
                 chipTool, " ***** Test Step 3 : Check Saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckSaturationAttributeValueMatchedTheValueSentByTheLastCommand_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Move saturation up command\n");
+            if (ShouldSkip("CC.S.C04.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveSaturationUpCommand_4();
             break;
         case 5:
@@ -8370,6 +8778,10 @@ public:
         case 6:
             ChipLogProgress(chipTool,
                 " ***** Test Step 6 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_6();
             break;
         case 7:
@@ -8379,6 +8791,10 @@ public:
         case 8:
             ChipLogProgress(chipTool,
                 " ***** Test Step 8 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_8();
             break;
         case 9:
@@ -8388,10 +8804,18 @@ public:
         case 10:
             ChipLogProgress(chipTool,
                 " ***** Test Step 10 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Move saturation down command\n");
+            if (ShouldSkip("CC.S.C04.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveSaturationDownCommand_11();
             break;
         case 12:
@@ -8401,6 +8825,10 @@ public:
         case 13:
             ChipLogProgress(chipTool,
                 " ***** Test Step 13 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_13();
             break;
         case 14:
@@ -8410,6 +8838,10 @@ public:
         case 15:
             ChipLogProgress(chipTool,
                 " ***** Test Step 15 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_15();
             break;
         case 16:
@@ -8419,10 +8851,18 @@ public:
         case 17:
             ChipLogProgress(chipTool,
                 " ***** Test Step 17 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_17();
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Move saturation up command\n");
+            if (ShouldSkip("CC.S.C04.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveSaturationUpCommand_18();
             break;
         case 19:
@@ -8432,6 +8872,10 @@ public:
         case 20:
             ChipLogProgress(chipTool,
                 " ***** Test Step 20 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_20();
             break;
         case 21:
@@ -8441,6 +8885,10 @@ public:
         case 22:
             ChipLogProgress(chipTool,
                 " ***** Test Step 22 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_22();
             break;
         case 23:
@@ -8450,10 +8898,18 @@ public:
         case 24:
             ChipLogProgress(chipTool,
                 " ***** Test Step 24 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_24();
             break;
         case 25:
             ChipLogProgress(chipTool, " ***** Test Step 25 : Move saturation stop command\n");
+            if (ShouldSkip("CC.S.C04.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveSaturationStopCommand_25();
             break;
         case 26:
@@ -8463,6 +8919,10 @@ public:
         case 27:
             ChipLogProgress(chipTool,
                 " ***** Test Step 27 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_27();
             break;
         case 28:
@@ -8472,6 +8932,10 @@ public:
         case 29:
             ChipLogProgress(chipTool,
                 " ***** Test Step 29 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_29();
             break;
         case 30:
@@ -8481,10 +8945,18 @@ public:
         case 31:
             ChipLogProgress(chipTool,
                 " ***** Test Step 31 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_31();
             break;
         case 32:
             ChipLogProgress(chipTool, " ***** Test Step 32 : Move saturation down command\n");
+            if (ShouldSkip("CC.S.C04.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveSaturationDownCommand_32();
             break;
         case 33:
@@ -8494,6 +8966,10 @@ public:
         case 34:
             ChipLogProgress(chipTool,
                 " ***** Test Step 34 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_34();
             break;
         case 35:
@@ -8503,6 +8979,10 @@ public:
         case 36:
             ChipLogProgress(chipTool,
                 " ***** Test Step 36 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_36();
             break;
         case 37:
@@ -8512,10 +8992,18 @@ public:
         case 38:
             ChipLogProgress(chipTool,
                 " ***** Test Step 38 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_38();
             break;
         case 39:
             ChipLogProgress(chipTool, " ***** Test Step 39 : Move saturation stop command\n");
+            if (ShouldSkip("CC.S.C04.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveSaturationStopCommand_39();
             break;
         case 40:
@@ -8525,6 +9013,10 @@ public:
         case 41:
             ChipLogProgress(chipTool,
                 " ***** Test Step 41 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_41();
             break;
         case 42:
@@ -8534,6 +9026,10 @@ public:
         case 43:
             ChipLogProgress(chipTool,
                 " ***** Test Step 43 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_43();
             break;
         case 44:
@@ -8543,6 +9039,10 @@ public:
         case 45:
             ChipLogProgress(chipTool,
                 " ***** Test Step 45 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_45();
             break;
         case 46:
@@ -9529,10 +10029,18 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads CurrentSaturation attribute from DUT\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentSaturationAttributeFromDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Step saturation up command\n");
+            if (ShouldSkip("CC.S.C05.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestStepSaturationUpCommand_4();
             break;
         case 5:
@@ -9541,10 +10049,18 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Over TransitionTime,Read CurrentSaturation attribute from DUT\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestOverTransitionTimeReadCurrentSaturationAttributeFromDut_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Step saturation down command\n");
+            if (ShouldSkip("CC.S.C05.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestStepSaturationDownCommand_7();
             break;
         case 8:
@@ -9553,6 +10069,10 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Over TransitionTime,Reads CurrentSaturation attribute from DUT\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestOverTransitionTimeReadsCurrentSaturationAttributeFromDut_9();
             break;
         case 10:
@@ -9893,14 +10413,26 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Check current hue attribute value matched before any change\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedBeforeAnyChange_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Check Saturation attribute value matched before any change\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckSaturationAttributeValueMatchedBeforeAnyChange_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Move To current hue and saturation command\n");
+            if (ShouldSkip("CC.S.C06.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveToCurrentHueAndSaturationCommand_5();
             break;
         case 6:
@@ -9910,11 +10442,19 @@ public:
         case 7:
             ChipLogProgress(
                 chipTool, " ***** Test Step 7 : Check current hue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_7();
             break;
         case 8:
             ChipLogProgress(chipTool,
                 " ***** Test Step 8 : Check current saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentSaturationAttributeValueMatchedTheValueSentByTheLastCommand_8();
             break;
         case 9:
@@ -10242,14 +10782,26 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Check current x attribute value matched before any change\n");
+            if (ShouldSkip("CC.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentXAttributeValueMatchedBeforeAnyChange_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Check current y attribute value matched before any change\n");
+            if (ShouldSkip("CC.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentYAttributeValueMatchedBeforeAnyChange_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Move to Color command\n");
+            if (ShouldSkip("CC.S.C07.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveToColorCommand_5();
             break;
         case 6:
@@ -10259,11 +10811,19 @@ public:
         case 7:
             ChipLogProgress(
                 chipTool, " ***** Test Step 7 : Check current x attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentXAttributeValueMatchedTheValueSentByTheLastCommand_7();
             break;
         case 8:
             ChipLogProgress(
                 chipTool, " ***** Test Step 8 : Check current y attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentYAttributeValueMatchedTheValueSentByTheLastCommand_8();
             break;
         case 9:
@@ -10591,14 +11151,26 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Check current x attribute value  matched before any change\n");
+            if (ShouldSkip("CC.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentXAttributeValueMatchedBeforeAnyChange_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Check current y attribute value matched before any change\n");
+            if (ShouldSkip("CC.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentYAttributeValueMatchedBeforeAnyChange_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Move Color command\n");
+            if (ShouldSkip("CC.S.C08.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveColorCommand_5();
             break;
         case 6:
@@ -10608,25 +11180,45 @@ public:
         case 7:
             ChipLogProgress(
                 chipTool, " ***** Test Step 7 : Check current x attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentXAttributeValueMatchedTheValueSentByTheLastCommand_7();
             break;
         case 8:
             ChipLogProgress(
                 chipTool, " ***** Test Step 8 : Check current y attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentYAttributeValueMatchedTheValueSentByTheLastCommand_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Stop Move Step command\n");
+            if (ShouldSkip("CC.S.C47.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestStopMoveStepCommand_9();
             break;
         case 10:
             ChipLogProgress(
                 chipTool, " ***** Test Step 10 : Check current x attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentXAttributeValueMatchedTheValueSentByTheLastCommand_10();
             break;
         case 11:
             ChipLogProgress(
                 chipTool, " ***** Test Step 11 : Check current y attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentYAttributeValueMatchedTheValueSentByTheLastCommand_11();
             break;
         case 12:
@@ -11025,14 +11617,26 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Check current x attribute value  matched before any change\n");
+            if (ShouldSkip("CC.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentXAttributeValueMatchedBeforeAnyChange_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Check current y attribute  value  matched before any change\n");
+            if (ShouldSkip("CC.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentYAttributeValueMatchedBeforeAnyChange_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Step Color command\n");
+            if (ShouldSkip("CC.S.C09.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestStepColorCommand_5();
             break;
         case 6:
@@ -11042,11 +11646,19 @@ public:
         case 7:
             ChipLogProgress(
                 chipTool, " ***** Test Step 7 : Check current x attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentXAttributeValueMatchedTheValueSentByTheLastCommand_7();
             break;
         case 8:
             ChipLogProgress(
                 chipTool, " ***** Test Step 8 : Check current y attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentYAttributeValueMatchedTheValueSentByTheLastCommand_8();
             break;
         case 9:
@@ -11374,10 +11986,18 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read current color temprature\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTemprature_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Move To Color Temperature command\n");
+            if (ShouldSkip("CC.S.C0A.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveToColorTemperatureCommand_4();
             break;
         case 5:
@@ -11386,6 +12006,10 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Read current color temprature\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTemprature_6();
             break;
         case 7:
@@ -11664,10 +12288,18 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read current color temprature\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTemprature_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Move up color temperature command\n");
+            if (ShouldSkip("CC.S.C4B.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveUpColorTemperatureCommand_4();
             break;
         case 5:
@@ -11676,6 +12308,10 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Read current color temprature attribute from DUT several times\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_6();
             break;
         case 7:
@@ -11684,6 +12320,10 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Read current color temprature attribute from DUT several times\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_8();
             break;
         case 9:
@@ -11692,10 +12332,18 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Read current color temprature attribute from DUT several times\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Move down color temperature command\n");
+            if (ShouldSkip("CC.S.C4B.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveDownColorTemperatureCommand_11();
             break;
         case 12:
@@ -11704,6 +12352,10 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Read current color temprature attribute from DUT several times\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_13();
             break;
         case 14:
@@ -11712,6 +12364,10 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Read current color temprature attribute from DUT several times\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_15();
             break;
         case 16:
@@ -11720,14 +12376,26 @@ public:
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Read current color temprature attribute from DUT several times\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_17();
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Move up color temperature command\n");
+            if (ShouldSkip("CC.S.C4B.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveUpColorTemperatureCommand_18();
             break;
         case 19:
             ChipLogProgress(chipTool, " ***** Test Step 19 : Stop Color Temperature command\n");
+            if (ShouldSkip("CC.S.C4B.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestStopColorTemperatureCommand_19();
             break;
         case 20:
@@ -11736,6 +12404,10 @@ public:
             break;
         case 21:
             ChipLogProgress(chipTool, " ***** Test Step 21 : Read current color temprature attribute from DUT several times\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_21();
             break;
         case 22:
@@ -11744,6 +12416,10 @@ public:
             break;
         case 23:
             ChipLogProgress(chipTool, " ***** Test Step 23 : Read current color temprature attribute from DUT several times\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_23();
             break;
         case 24:
@@ -11752,14 +12428,26 @@ public:
             break;
         case 25:
             ChipLogProgress(chipTool, " ***** Test Step 25 : Read current color temprature attribute from DUT several times\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_25();
             break;
         case 26:
             ChipLogProgress(chipTool, " ***** Test Step 26 : Move down color temperature command\n");
+            if (ShouldSkip("CC.S.C4B.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveDownColorTemperatureCommand_26();
             break;
         case 27:
             ChipLogProgress(chipTool, " ***** Test Step 27 : Stop Color Temperature command\n");
+            if (ShouldSkip("CC.S.C4B.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestStopColorTemperatureCommand_27();
             break;
         case 28:
@@ -11768,6 +12456,10 @@ public:
             break;
         case 29:
             ChipLogProgress(chipTool, " ***** Test Step 29 : Read current color temprature attribute from DUT several times\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_29();
             break;
         case 30:
@@ -11776,6 +12468,10 @@ public:
             break;
         case 31:
             ChipLogProgress(chipTool, " ***** Test Step 31 : Read current color temprature attribute from DUT several times\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_31();
             break;
         case 32:
@@ -11784,6 +12480,10 @@ public:
             break;
         case 33:
             ChipLogProgress(chipTool, " ***** Test Step 33 : Read current color temprature attribute from DUT several times\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTempratureAttributeFromDutSeveralTimes_33();
             break;
         case 34:
@@ -12578,10 +13278,18 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read current color temprature\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTemprature_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Step up color temperature command\n");
+            if (ShouldSkip("CC.S.C4C.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestStepUpColorTemperatureCommand_4();
             break;
         case 5:
@@ -12590,6 +13298,10 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Read current color temprature\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTemprature_6();
             break;
         case 7:
@@ -12598,6 +13310,10 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Read current color temprature\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTemprature_8();
             break;
         case 9:
@@ -12606,10 +13322,18 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Read current color temprature\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTemprature_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Step down color temperature command\n");
+            if (ShouldSkip("CC.S.C4C.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestStepDownColorTemperatureCommand_11();
             break;
         case 12:
@@ -12618,6 +13342,10 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Read current color temprature\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTemprature_13();
             break;
         case 14:
@@ -12626,6 +13354,10 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Read current color temprature\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTemprature_15();
             break;
         case 16:
@@ -12634,6 +13366,10 @@ public:
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Read current color temprature\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentColorTemprature_17();
             break;
         case 18:
@@ -13114,15 +13850,27 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Enhanced Move To Hue command\n");
+            if (ShouldSkip("CC.S.C40.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestEnhancedMoveToHueCommand_3();
             break;
         case 4:
             ChipLogProgress(chipTool,
                 " ***** Test Step 4 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Enhanced Move To Hue command\n");
+            if (ShouldSkip("CC.S.C40.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestEnhancedMoveToHueCommand_5();
             break;
         case 6:
@@ -13132,6 +13880,10 @@ public:
         case 7:
             ChipLogProgress(chipTool,
                 " ***** Test Step 7 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_7();
             break;
         case 8:
@@ -13141,6 +13893,10 @@ public:
         case 9:
             ChipLogProgress(chipTool,
                 " ***** Test Step 9 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_9();
             break;
         case 10:
@@ -13150,10 +13906,18 @@ public:
         case 11:
             ChipLogProgress(chipTool,
                 " ***** Test Step 11 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_11();
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Enhanced Move To Hue command\n");
+            if (ShouldSkip("CC.S.C40.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestEnhancedMoveToHueCommand_12();
             break;
         case 13:
@@ -13163,6 +13927,10 @@ public:
         case 14:
             ChipLogProgress(chipTool,
                 " ***** Test Step 14 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_14();
             break;
         case 15:
@@ -13172,6 +13940,10 @@ public:
         case 16:
             ChipLogProgress(chipTool,
                 " ***** Test Step 16 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_16();
             break;
         case 17:
@@ -13181,10 +13953,18 @@ public:
         case 18:
             ChipLogProgress(chipTool,
                 " ***** Test Step 18 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_18();
             break;
         case 19:
             ChipLogProgress(chipTool, " ***** Test Step 19 : Enhanced Move To Hue command\n");
+            if (ShouldSkip("CC.S.C40.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestEnhancedMoveToHueCommand_19();
             break;
         case 20:
@@ -13194,6 +13974,10 @@ public:
         case 21:
             ChipLogProgress(chipTool,
                 " ***** Test Step 21 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_21();
             break;
         case 22:
@@ -13203,6 +13987,10 @@ public:
         case 23:
             ChipLogProgress(chipTool,
                 " ***** Test Step 23 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_23();
             break;
         case 24:
@@ -13212,10 +14000,18 @@ public:
         case 25:
             ChipLogProgress(chipTool,
                 " ***** Test Step 25 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_25();
             break;
         case 26:
             ChipLogProgress(chipTool, " ***** Test Step 26 : Enhanced Move To Hue command\n");
+            if (ShouldSkip("CC.S.C40.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestEnhancedMoveToHueCommand_26();
             break;
         case 27:
@@ -13225,6 +14021,10 @@ public:
         case 28:
             ChipLogProgress(chipTool,
                 " ***** Test Step 28 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_28();
             break;
         case 29:
@@ -13234,6 +14034,10 @@ public:
         case 30:
             ChipLogProgress(chipTool,
                 " ***** Test Step 30 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_30();
             break;
         case 31:
@@ -13243,6 +14047,10 @@ public:
         case 32:
             ChipLogProgress(chipTool,
                 " ***** Test Step 32 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_32();
             break;
         case 33:
@@ -14004,10 +14812,18 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Check EnhancedCurrentHue attribute from DUT\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeFromDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Enhanced Move Hue Up command\n");
+            if (ShouldSkip("CC.S.C41.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestEnhancedMoveHueUpCommand_4();
             break;
         case 5:
@@ -14017,6 +14833,10 @@ public:
         case 6:
             ChipLogProgress(chipTool,
                 " ***** Test Step 6 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_6();
             break;
         case 7:
@@ -14026,6 +14846,10 @@ public:
         case 8:
             ChipLogProgress(chipTool,
                 " ***** Test Step 8 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_8();
             break;
         case 9:
@@ -14035,19 +14859,35 @@ public:
         case 10:
             ChipLogProgress(chipTool,
                 " ***** Test Step 10 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Enhanced Move Hue Stop command\n");
+            if (ShouldSkip("CC.S.C41.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestEnhancedMoveHueStopCommand_11();
             break;
         case 12:
             ChipLogProgress(chipTool,
                 " ***** Test Step 12 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Enhanced Move Hue Down command \n");
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Enhanced Move Hue Down command\n");
+            if (ShouldSkip("CC.S.C41.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestEnhancedMoveHueDownCommand_13();
             break;
         case 14:
@@ -14057,6 +14897,10 @@ public:
         case 15:
             ChipLogProgress(chipTool,
                 " ***** Test Step 15 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_15();
             break;
         case 16:
@@ -14066,6 +14910,10 @@ public:
         case 17:
             ChipLogProgress(chipTool,
                 " ***** Test Step 17 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_17();
             break;
         case 18:
@@ -14075,15 +14923,27 @@ public:
         case 19:
             ChipLogProgress(chipTool,
                 " ***** Test Step 19 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_19();
             break;
         case 20:
             ChipLogProgress(chipTool, " ***** Test Step 20 : Enhanced Move Hue Stop command\n");
+            if (ShouldSkip("CC.S.C41.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestEnhancedMoveHueStopCommand_20();
             break;
         case 21:
             ChipLogProgress(chipTool,
                 " ***** Test Step 21 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_21();
             break;
         case 22:
@@ -14428,7 +15288,7 @@ private:
         params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster enhancedMoveHueWithParams:params
                          completionHandler:^(NSError * _Nullable err) {
-                             NSLog(@"Enhanced Move Hue Down command  Error: %@", err);
+                             NSLog(@"Enhanced Move Hue Down command Error: %@", err);
 
                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -14658,10 +15518,18 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads EnhancedCurrentHue attribute from DUT\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsEnhancedCurrentHueAttributeFromDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Enhanced Step Hue Up command\n");
+            if (ShouldSkip("CC.S.C42.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestEnhancedStepHueUpCommand_4();
             break;
         case 5:
@@ -14670,10 +15538,18 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Over TransitionTime,Read EnhancedCurrentHue attribute from DUT\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestOverTransitionTimeReadEnhancedCurrentHueAttributeFromDut_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Enhanced Step Hue Down command\n");
+            if (ShouldSkip("CC.S.C42.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestEnhancedStepHueDownCommand_7();
             break;
         case 8:
@@ -14682,6 +15558,10 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Over TransitionTime,Read EnhancedCurrentHue attribute from DUT\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestOverTransitionTimeReadEnhancedCurrentHueAttributeFromDut_9();
             break;
         case 10:
@@ -15022,10 +15902,18 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads EnhancedCurrentHue attribute from DUT\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsEnhancedCurrentHueAttributeFromDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Enhanced move to hue and saturation command\n");
+            if (ShouldSkip("CC.S.C43.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestEnhancedMoveToHueAndSaturationCommand_4();
             break;
         case 5:
@@ -15035,6 +15923,10 @@ public:
         case 6:
             ChipLogProgress(chipTool,
                 " ***** Test Step 6 : Check EnhancedCurrentHue attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastCommand_6();
             break;
         case 7:
@@ -15314,18 +16206,34 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Move hue up command\n");
+            if (ShouldSkip("CC.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveHueUpCommand_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads CurrentHue attribute from DUT\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentHueAttributeFromDut_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Stop Move Step command\n");
+            if (ShouldSkip("CC.S.C47.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestStopMoveStepCommand_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Reads CurrentHue attribute from DUT\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentHueAttributeFromDut_6();
             break;
         case 7:
@@ -15335,23 +16243,43 @@ public:
         case 8:
             ChipLogProgress(
                 chipTool, " ***** Test Step 8 : Check current hue attribute value matched the value sent by the last attribute\n");
+            if (ShouldSkip("CC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentHueAttributeValueMatchedTheValueSentByTheLastAttribute_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Move saturation up command\n");
+            if (ShouldSkip("CC.S.C04.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveSaturationUpCommand_9();
             break;
         case 10:
             ChipLogProgress(
                 chipTool, " ***** Test Step 10 : Check Saturation attribute value matched the value sent by the last command\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckSaturationAttributeValueMatchedTheValueSentByTheLastCommand_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Stop Move Step command\n");
+            if (ShouldSkip("CC.S.C47.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestStopMoveStepCommand_11();
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Reads CurrentSaturation attribute from DUT.\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentSaturationAttributeFromDut_12();
             break;
         case 13:
@@ -15361,30 +16289,58 @@ public:
         case 14:
             ChipLogProgress(
                 chipTool, " ***** Test Step 14 : Check Saturation attribute value matched the value sent by the last attribute\n");
+            if (ShouldSkip("CC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestCheckSaturationAttributeValueMatchedTheValueSentByTheLastAttribute_14();
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Move Color command\n");
+            if (ShouldSkip("CC.S.C08.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveColorCommand_15();
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : Reads CurrentX attribute from DUT\n");
+            if (ShouldSkip("CC.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentXAttributeFromDut_16();
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Reads CurrentY attribute from DUT\n");
+            if (ShouldSkip("CC.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentYAttributeFromDut_17();
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Stop Move Step command\n");
+            if (ShouldSkip("CC.S.C47.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestStopMoveStepCommand_18();
             break;
         case 19:
             ChipLogProgress(chipTool, " ***** Test Step 19 : Reads CurrentX attribute from DUT\n");
+            if (ShouldSkip("CC.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentXAttributeFromDut_19();
             break;
         case 20:
             ChipLogProgress(chipTool, " ***** Test Step 20 : Reads CurrentY attribute from DUT\n");
+            if (ShouldSkip("CC.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentYAttributeFromDut_20();
             break;
         case 21:
@@ -15394,27 +16350,51 @@ public:
         case 22:
             ChipLogProgress(
                 chipTool, " ***** Test Step 22 : Check current x attribute value matched the value sent by the last attribute\n");
+            if (ShouldSkip("CC.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentXAttributeValueMatchedTheValueSentByTheLastAttribute_22();
             break;
         case 23:
             ChipLogProgress(
                 chipTool, " ***** Test Step 23 : Check current y attribute value matched the value sent by the last attribute\n");
+            if (ShouldSkip("CC.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestCheckCurrentYAttributeValueMatchedTheValueSentByTheLastAttribute_23();
             break;
         case 24:
             ChipLogProgress(chipTool, " ***** Test Step 24 : Move up color temperature command\n");
+            if (ShouldSkip("CC.S.C4B.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestMoveUpColorTemperatureCommand_24();
             break;
         case 25:
             ChipLogProgress(chipTool, " ***** Test Step 25 : Reads current color temprature from DUT\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentColorTempratureFromDut_25();
             break;
         case 26:
             ChipLogProgress(chipTool, " ***** Test Step 26 : Stop Move Step command\n");
+            if (ShouldSkip("CC.S.C47.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestStopMoveStepCommand_26();
             break;
         case 27:
             ChipLogProgress(chipTool, " ***** Test Step 27 : Reads current color temprature from DUT\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentColorTempratureFromDut_27();
             break;
         case 28:
@@ -15424,22 +16404,42 @@ public:
         case 29:
             ChipLogProgress(chipTool,
                 " ***** Test Step 29 : Reads current color attribute value matched the value sent by the last attribute\n");
+            if (ShouldSkip("CC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentColorAttributeValueMatchedTheValueSentByTheLastAttribute_29();
             break;
         case 30:
             ChipLogProgress(chipTool, " ***** Test Step 30 : Enhanced Move Hue Up command\n");
+            if (ShouldSkip("CC.S.C41.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestEnhancedMoveHueUpCommand_30();
             break;
         case 31:
             ChipLogProgress(chipTool, " ***** Test Step 31 : Reads EnhancedCurrentHue attribute value from DUT\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsEnhancedCurrentHueAttributeValueFromDut_31();
             break;
         case 32:
             ChipLogProgress(chipTool, " ***** Test Step 32 : Stop Move Step command\n");
+            if (ShouldSkip("CC.S.C47.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestStopMoveStepCommand_32();
             break;
         case 33:
             ChipLogProgress(chipTool, " ***** Test Step 33 : Reads EnhancedCurrentHue attribute value from DUT\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsEnhancedCurrentHueAttributeValueFromDut_33();
             break;
         case 34:
@@ -15449,6 +16449,10 @@ public:
         case 35:
             ChipLogProgress(chipTool,
                 " ***** Test Step 35 : Check EnhancedCurrentHue attribute value matched the value sent by the last attribute\n");
+            if (ShouldSkip("CC.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckEnhancedCurrentHueAttributeValueMatchedTheValueSentByTheLastAttribute_35();
             break;
         case 36:
@@ -16948,12 +17952,22 @@ public:
             err = TestReadTheGlobalAttributeAttributeList_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: AcceptedCommandList\n");
-            err = TestReadTheGlobalAttributeAcceptedCommandList_4();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 4 : Read EventList attribute from the DUT and Verify that the DUT response provides a list of "
+                "supported events.\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadEventListAttributeFromTheDutAndVerifyThatTheDutResponseProvidesAListOfSupportedEvents_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: GeneratedCommandList\n");
-            err = TestReadTheGlobalAttributeGeneratedCommandList_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_6();
             break;
         }
 
@@ -16984,6 +17998,9 @@ public:
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -16997,7 +18014,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 6;
+    const uint16_t mTestCount = 7;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -17068,6 +18085,20 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(9)));
+                VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
+                VerifyOrReturn(CheckValue("", actualValue[1], 1UL));
+                VerifyOrReturn(CheckValue("", actualValue[2], 2UL));
+                VerifyOrReturn(CheckValue("", actualValue[3], 3UL));
+                VerifyOrReturn(CheckValue("", actualValue[4], 65528UL));
+                VerifyOrReturn(CheckValue("", actualValue[5], 65529UL));
+                VerifyOrReturn(CheckValue("", actualValue[6], 65531UL));
+                VerifyOrReturn(CheckValue("", actualValue[7], 65532UL));
+                VerifyOrReturn(CheckValue("", actualValue[8], 65533UL));
+            }
+
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
             NextTest();
         }];
@@ -17075,7 +18106,16 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_4()
+    CHIP_ERROR TestReadEventListAttributeFromTheDutAndVerifyThatTheDutResponseProvidesAListOfSupportedEvents_4()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDescriptor * cluster = [[CHIPTestDescriptor alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -17098,7 +18138,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_5()
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_6()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDescriptor * cluster = [[CHIPTestDescriptor alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -19203,6 +20243,10 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheGlobalAttributeAttributeList_3();
             break;
         case 4:
@@ -19331,6 +20375,18 @@ private:
             NSLog(@"Read the global attribute: AttributeList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(7)));
+                VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
+                VerifyOrReturn(CheckValue("", actualValue[1], 1UL));
+                VerifyOrReturn(CheckValue("", actualValue[2], 8UL));
+                VerifyOrReturn(CheckValue("", actualValue[3], 65528UL));
+                VerifyOrReturn(CheckValue("", actualValue[4], 65529UL));
+                VerifyOrReturn(CheckValue("", actualValue[5], 65531UL));
+                VerifyOrReturn(CheckValue("", actualValue[6], 65533UL));
+            }
 
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
             NextTest();
@@ -88861,11 +89917,11 @@ private:
     }
 };
 
-class Test_TC_SWDIAG_1_1 : public TestCommandBridge {
+class Test_TC_DGSW_2_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_SWDIAG_1_1()
-        : TestCommandBridge("Test_TC_SWDIAG_1_1")
+    Test_TC_DGSW_2_1()
+        : TestCommandBridge("Test_TC_DGSW_2_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -88875,7 +89931,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_SWDIAG_1_1() {}
+    ~Test_TC_DGSW_2_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -88883,11 +89939,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_SWDIAG_1_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DGSW_2_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_SWDIAG_1_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DGSW_2_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -88905,7 +89961,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads a list of ThreadMetrics struct non-global attribute from DUT.\n");
-            if (ShouldSkip("A_THREADMETRICS")) {
+            if (ShouldSkip("DGSW.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -88913,11 +89969,15 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads CurrentHeapFree non-global attribute value from DUT\n");
+            if (ShouldSkip("DGSW.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentHeapFreeNonGlobalAttributeValueFromDut_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads CurrentHeapUsed non-global attribute value from DUT\n");
-            if (ShouldSkip("A_CURRENTHEAPUSED")) {
+            if (ShouldSkip("DGSW.S.A0003")) {
                 NextTest();
                 return;
             }
@@ -88925,7 +89985,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads CurrentHeapHighWaterMark non-global attribute value from DUT\n");
-            if (ShouldSkip("A_CURRENTHEAPHIGHWATERMARK")) {
+            if (ShouldSkip("DGSW.S.A0004")) {
                 NextTest();
                 return;
             }
@@ -89015,11 +90075,6 @@ private:
         [cluster readAttributeCurrentHeapFreeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Reads CurrentHeapFree non-global attribute value from DUT Error: %@", err);
 
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHeapFree", "", "uint64"));
@@ -89039,11 +90094,6 @@ private:
 
         [cluster readAttributeCurrentHeapUsedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Reads CurrentHeapUsed non-global attribute value from DUT Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -89065,11 +90115,6 @@ private:
         [cluster readAttributeCurrentHeapHighWatermarkWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Reads CurrentHeapHighWaterMark non-global attribute value from DUT Error: %@", err);
 
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHeapHighWatermark", "", "uint64"));
@@ -89080,11 +90125,11 @@ private:
     }
 };
 
-class Test_TC_SWDIAG_2_1 : public TestCommandBridge {
+class Test_TC_DGSW_2_2 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_SWDIAG_2_1()
-        : TestCommandBridge("Test_TC_SWDIAG_2_1")
+    Test_TC_DGSW_2_2()
+        : TestCommandBridge("Test_TC_DGSW_2_2")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -89094,7 +90139,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_SWDIAG_2_1() {}
+    ~Test_TC_DGSW_2_2() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -89102,11 +90147,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_SWDIAG_2_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DGSW_2_2\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_SWDIAG_2_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DGSW_2_2\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -89172,11 +90217,11 @@ private:
     }
 };
 
-class Test_TC_SWDIAG_3_1 : public TestCommandBridge {
+class Test_TC_DGSW_2_3 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_SWDIAG_3_1()
-        : TestCommandBridge("Test_TC_SWDIAG_3_1")
+    Test_TC_DGSW_2_3()
+        : TestCommandBridge("Test_TC_DGSW_2_3")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -89186,7 +90231,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_SWDIAG_3_1() {}
+    ~Test_TC_DGSW_2_3() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -89194,11 +90239,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_SWDIAG_3_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DGSW_2_3\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_SWDIAG_3_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DGSW_2_3\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -89216,7 +90261,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Sends ResetWatermarks to DUT\n");
-            if (ShouldSkip("CR_RESETWATERMARKS")) {
+            if (ShouldSkip("DGSW.S.C00")) {
                 NextTest();
                 return;
             }
@@ -89224,7 +90269,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads a list of ThreadMetrics struct attribute from DUT.\n");
-            if (ShouldSkip("A_THREADMETRICS")) {
+            if (ShouldSkip("DGSW.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -89232,7 +90277,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads CurrentHeapUsed attribute value from DUT\n");
-            if (ShouldSkip("A_CURRENTHEAPUSED")) {
+            if (ShouldSkip("DGSW.S.A0003")) {
                 NextTest();
                 return;
             }
@@ -89240,7 +90285,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads CurrentHeapHighWaterMark attribute value from DUT\n");
-            if (ShouldSkip("A_CURRENTHEAPHIGHWATERMARK")) {
+            if (ShouldSkip("DGSW.S.A0004")) {
                 NextTest();
                 return;
             }
@@ -89349,11 +90394,6 @@ private:
         [cluster readAttributeCurrentHeapUsedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Reads CurrentHeapUsed attribute value from DUT Error: %@", err);
 
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHeapUsed", "", "uint64"));
@@ -89373,11 +90413,6 @@ private:
 
         [cluster readAttributeCurrentHeapHighWatermarkWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Reads CurrentHeapHighWaterMark attribute value from DUT Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -106183,9 +107218,9 @@ void registerCommandsTests(Commands & commands)
         make_unique<TestArmFailSafe>(),
         make_unique<TestFanControl>(),
         make_unique<TestMultiAdmin>(),
-        make_unique<Test_TC_SWDIAG_1_1>(),
-        make_unique<Test_TC_SWDIAG_2_1>(),
-        make_unique<Test_TC_SWDIAG_3_1>(),
+        make_unique<Test_TC_DGSW_2_1>(),
+        make_unique<Test_TC_DGSW_2_2>(),
+        make_unique<Test_TC_DGSW_2_3>(),
         make_unique<TestSubscribe_OnOff>(),
         make_unique<DL_UsersAndCredentials>(),
         make_unique<DL_LockUnlock>(),
