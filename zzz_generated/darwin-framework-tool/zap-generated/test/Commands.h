@@ -105258,12 +105258,16 @@ public:
             err = TestRemoveAll_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : KeySet Remove 2\n");
-            err = TestKeySetRemove2_18();
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Read GroupTable 3\n");
+            err = TestReadGroupTable3_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : KeySet Read (also removed)\n");
-            err = TestKeySetReadAlsoRemoved_19();
+            ChipLogProgress(chipTool, " ***** Test Step 19 : KeySet Remove 2\n");
+            err = TestKeySetRemove2_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : KeySet Read (also removed)\n");
+            err = TestKeySetReadAlsoRemoved_20();
             break;
         }
 
@@ -105334,6 +105338,9 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
             break;
         }
@@ -105349,7 +105356,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 20;
+    const uint16_t mTestCount = 21;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -105918,7 +105925,34 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetRemove2_18()
+    CHIP_ERROR TestReadGroupTable3_18()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestGroupKeyManagement * cluster = [[CHIPTestGroupKeyManagement alloc] initWithDevice:device
+                                                                                         endpoint:0
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        CHIPReadParams * params = [[CHIPReadParams alloc] init];
+        params.fabricFiltered = [NSNumber numberWithBool:true];
+        [cluster readAttributeGroupTableWithParams:params
+                                 completionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                     NSLog(@"Read GroupTable 3 Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                     {
+                                         id actualValue = value;
+                                         VerifyOrReturn(CheckValue("GroupTable", [actualValue count], static_cast<uint32_t>(0)));
+                                     }
+
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetRemove2_19()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestGroupKeyManagement * cluster = [[CHIPTestGroupKeyManagement alloc] initWithDevice:device
@@ -105940,7 +105974,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetReadAlsoRemoved_19()
+    CHIP_ERROR TestKeySetReadAlsoRemoved_20()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestGroupKeyManagement * cluster = [[CHIPTestGroupKeyManagement alloc] initWithDevice:device
