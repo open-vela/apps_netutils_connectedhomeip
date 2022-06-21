@@ -488,8 +488,8 @@ private:
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
@@ -510,11 +510,11 @@ private:
 
                 ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).targets = temp_3;
             }
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             temp_0[1] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:4ULL];
@@ -542,11 +542,11 @@ private:
 
                 ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).targets = temp_3;
             }
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             temp_0[2] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[2]).privilege = [NSNumber numberWithUnsignedChar:3];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[2]).authMode = [NSNumber numberWithUnsignedChar:3];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[2]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[2]).authMode = [NSNumber numberWithUnsignedChar:3U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:12ULL];
@@ -574,7 +574,7 @@ private:
 
                 ((CHIPAccessControlClusterAccessControlEntry *) temp_0[2]).targets = temp_3;
             }
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[2]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[2]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -609,9 +609,9 @@ private:
                              id actualValue = value;
                              VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(3)));
                              VerifyOrReturn(CheckValue(
-                                 "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5));
+                                 "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
                              VerifyOrReturn(CheckValue(
-                                 "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2));
+                                 "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
                              VerifyOrReturn(CheckValueNull(
                                  "Subjects", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
                              VerifyOrReturn(CheckValueNonNull(
@@ -676,11 +676,11 @@ private:
                                          .targets[2])
                                      .deviceType));
                              VerifyOrReturn(CheckValue(
-                                 "FabricIndex", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1));
+                                 "FabricIndex", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
                              VerifyOrReturn(CheckValue(
-                                 "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).privilege, 1));
+                                 "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).privilege, 1U));
                              VerifyOrReturn(CheckValue(
-                                 "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).authMode, 2));
+                                 "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).authMode, 2U));
                              VerifyOrReturn(CheckValueNonNull(
                                  "Subjects", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).subjects));
                              VerifyOrReturn(CheckValue("Subjects",
@@ -756,11 +756,11 @@ private:
                                          .targets[2])
                                      .deviceType));
                              VerifyOrReturn(CheckValue(
-                                 "FabricIndex", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).fabricIndex, 1));
+                                 "FabricIndex", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).fabricIndex, 1U));
                              VerifyOrReturn(CheckValue(
-                                 "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[2]).privilege, 3));
+                                 "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[2]).privilege, 3U));
                              VerifyOrReturn(CheckValue(
-                                 "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[2]).authMode, 3));
+                                 "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[2]).authMode, 3U));
                              VerifyOrReturn(CheckValueNonNull(
                                  "Subjects", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[2]).subjects));
                              VerifyOrReturn(CheckValue("Subjects",
@@ -836,7 +836,7 @@ private:
                                          .targets[2])
                                      .deviceType));
                              VerifyOrReturn(CheckValue(
-                                 "FabricIndex", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[2]).fabricIndex, 1));
+                                 "FabricIndex", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[2]).fabricIndex, 1U));
                          }
 
                          NextTest();
@@ -855,15 +855,15 @@ private:
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             temp_0[1] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
@@ -872,7 +872,7 @@ private:
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).targets = temp_3;
             }
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -906,25 +906,25 @@ private:
                                   id actualValue = value;
                                   VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(2)));
                                   VerifyOrReturn(CheckValue(
-                                      "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5));
+                                      "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
                                   VerifyOrReturn(CheckValue(
-                                      "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2));
+                                      "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
                                   VerifyOrReturn(CheckValueNull(
                                       "Subjects", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
                                   VerifyOrReturn(CheckValueNull(
                                       "Targets", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).targets));
                                   VerifyOrReturn(CheckValue("FabricIndex",
-                                      ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1));
+                                      ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
                                   VerifyOrReturn(CheckValue(
-                                      "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).privilege, 1));
+                                      "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).privilege, 1U));
                                   VerifyOrReturn(CheckValue(
-                                      "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).authMode, 2));
+                                      "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).authMode, 2U));
                                   VerifyOrReturn(CheckValueNull(
                                       "Subjects", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).subjects));
                                   VerifyOrReturn(CheckValueNull(
                                       "Targets", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).targets));
                                   VerifyOrReturn(CheckValue("FabricIndex",
-                                      ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).fabricIndex, 1));
+                                      ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).fabricIndex, 1U));
                               }
 
                               NextTest();
@@ -943,18 +943,18 @@ private:
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             temp_0[1] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:5];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:3];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:3U];
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = nil;
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -987,15 +987,15 @@ private:
                                   id actualValue = value;
                                   VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(1)));
                                   VerifyOrReturn(CheckValue(
-                                      "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5));
+                                      "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
                                   VerifyOrReturn(CheckValue(
-                                      "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2));
+                                      "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
                                   VerifyOrReturn(CheckValueNull(
                                       "Subjects", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
                                   VerifyOrReturn(CheckValueNull(
                                       "Targets", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).targets));
                                   VerifyOrReturn(CheckValue("FabricIndex",
-                                      ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1));
+                                      ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
                               }
 
                               NextTest();
@@ -1014,18 +1014,18 @@ private:
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             temp_0[1] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:1];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:1U];
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = nil;
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -1058,15 +1058,15 @@ private:
                                   id actualValue = value;
                                   VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(1)));
                                   VerifyOrReturn(CheckValue(
-                                      "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5));
+                                      "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
                                   VerifyOrReturn(CheckValue(
-                                      "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2));
+                                      "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
                                   VerifyOrReturn(CheckValueNull(
                                       "Subjects", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
                                   VerifyOrReturn(CheckValueNull(
                                       "Targets", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).targets));
                                   VerifyOrReturn(CheckValue("FabricIndex",
-                                      ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1));
+                                      ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
                               }
 
                               NextTest();
@@ -1085,22 +1085,22 @@ private:
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             temp_0[1] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:0ULL];
                 ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
             }
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -1133,15 +1133,15 @@ private:
                                   id actualValue = value;
                                   VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(1)));
                                   VerifyOrReturn(CheckValue(
-                                      "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5));
+                                      "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
                                   VerifyOrReturn(CheckValue(
-                                      "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2));
+                                      "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
                                   VerifyOrReturn(CheckValueNull(
                                       "Subjects", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
                                   VerifyOrReturn(CheckValueNull(
                                       "Targets", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).targets));
                                   VerifyOrReturn(CheckValue("FabricIndex",
-                                      ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1));
+                                      ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
                               }
 
                               NextTest();
@@ -1160,15 +1160,15 @@ private:
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             temp_0[1] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = nil;
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
@@ -1179,7 +1179,7 @@ private:
 
                 ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).targets = temp_3;
             }
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -1212,15 +1212,15 @@ private:
                                   id actualValue = value;
                                   VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(1)));
                                   VerifyOrReturn(CheckValue(
-                                      "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5));
+                                      "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
                                   VerifyOrReturn(CheckValue(
-                                      "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2));
+                                      "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
                                   VerifyOrReturn(CheckValueNull(
                                       "Subjects", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
                                   VerifyOrReturn(CheckValueNull(
                                       "Targets", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).targets));
                                   VerifyOrReturn(CheckValue("FabricIndex",
-                                      ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1));
+                                      ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
                               }
 
                               NextTest();
@@ -1239,15 +1239,15 @@ private:
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             temp_0[1] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:1ULL];
@@ -1273,7 +1273,7 @@ private:
                 ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
             }
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -1306,15 +1306,15 @@ private:
                                   id actualValue = value;
                                   VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(1)));
                                   VerifyOrReturn(CheckValue(
-                                      "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5));
+                                      "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
                                   VerifyOrReturn(CheckValue(
-                                      "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2));
+                                      "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
                                   VerifyOrReturn(CheckValueNull(
                                       "Subjects", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
                                   VerifyOrReturn(CheckValueNull(
                                       "Targets", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).targets));
                                   VerifyOrReturn(CheckValue("FabricIndex",
-                                      ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1));
+                                      ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
                               }
 
                               NextTest();
@@ -1333,15 +1333,15 @@ private:
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             temp_0[1] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = nil;
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
@@ -1447,7 +1447,7 @@ private:
 
                 ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).targets = temp_3;
             }
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -1480,15 +1480,15 @@ private:
                                   id actualValue = value;
                                   VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(1)));
                                   VerifyOrReturn(CheckValue(
-                                      "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5));
+                                      "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
                                   VerifyOrReturn(CheckValue(
-                                      "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2));
+                                      "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
                                   VerifyOrReturn(CheckValueNull(
                                       "Subjects", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
                                   VerifyOrReturn(CheckValueNull(
                                       "Targets", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).targets));
                                   VerifyOrReturn(CheckValue("FabricIndex",
-                                      ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1));
+                                      ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
                               }
 
                               NextTest();
@@ -1507,8 +1507,8 @@ private:
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
@@ -1529,11 +1529,11 @@ private:
 
                 ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).targets = temp_3;
             }
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             temp_0[1] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:4ULL];
@@ -1561,11 +1561,11 @@ private:
 
                 ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).targets = temp_3;
             }
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             temp_0[2] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[2]).privilege = [NSNumber numberWithUnsignedChar:3];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[2]).authMode = [NSNumber numberWithUnsignedChar:3];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[2]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[2]).authMode = [NSNumber numberWithUnsignedChar:3U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:12ULL];
@@ -1593,11 +1593,11 @@ private:
 
                 ((CHIPAccessControlClusterAccessControlEntry *) temp_0[2]).targets = temp_3;
             }
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[2]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[2]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             temp_0[3] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[3]).privilege = [NSNumber numberWithUnsignedChar:1];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[3]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[3]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[3]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:20ULL];
@@ -1625,7 +1625,7 @@ private:
 
                 ((CHIPAccessControlClusterAccessControlEntry *) temp_0[3]).targets = temp_3;
             }
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[3]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[3]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -1659,9 +1659,9 @@ private:
                              id actualValue = value;
                              VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(3)));
                              VerifyOrReturn(CheckValue(
-                                 "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5));
+                                 "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
                              VerifyOrReturn(CheckValue(
-                                 "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2));
+                                 "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
                              VerifyOrReturn(CheckValueNull(
                                  "Subjects", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
                              VerifyOrReturn(CheckValueNonNull(
@@ -1726,11 +1726,11 @@ private:
                                          .targets[2])
                                      .deviceType));
                              VerifyOrReturn(CheckValue(
-                                 "FabricIndex", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1));
+                                 "FabricIndex", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
                              VerifyOrReturn(CheckValue(
-                                 "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).privilege, 1));
+                                 "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).privilege, 1U));
                              VerifyOrReturn(CheckValue(
-                                 "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).authMode, 2));
+                                 "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).authMode, 2U));
                              VerifyOrReturn(CheckValueNonNull(
                                  "Subjects", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).subjects));
                              VerifyOrReturn(CheckValue("Subjects",
@@ -1806,11 +1806,11 @@ private:
                                          .targets[2])
                                      .deviceType));
                              VerifyOrReturn(CheckValue(
-                                 "FabricIndex", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).fabricIndex, 1));
+                                 "FabricIndex", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[1]).fabricIndex, 1U));
                              VerifyOrReturn(CheckValue(
-                                 "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[2]).privilege, 3));
+                                 "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[2]).privilege, 3U));
                              VerifyOrReturn(CheckValue(
-                                 "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[2]).authMode, 3));
+                                 "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[2]).authMode, 3U));
                              VerifyOrReturn(CheckValueNonNull(
                                  "Subjects", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[2]).subjects));
                              VerifyOrReturn(CheckValue("Subjects",
@@ -1886,7 +1886,7 @@ private:
                                          .targets[2])
                                      .deviceType));
                              VerifyOrReturn(CheckValue(
-                                 "FabricIndex", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[2]).fabricIndex, 1));
+                                 "FabricIndex", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[2]).fabricIndex, 1U));
                          }
 
                          NextTest();
@@ -1905,11 +1905,11 @@ private:
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -1943,15 +1943,15 @@ private:
                                   id actualValue = value;
                                   VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(1)));
                                   VerifyOrReturn(CheckValue(
-                                      "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5));
+                                      "Privilege", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
                                   VerifyOrReturn(CheckValue(
-                                      "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2));
+                                      "AuthMode", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
                                   VerifyOrReturn(CheckValueNull(
                                       "Subjects", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
                                   VerifyOrReturn(CheckValueNull(
                                       "Targets", ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).targets));
                                   VerifyOrReturn(CheckValue("FabricIndex",
-                                      ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1));
+                                      ((CHIPAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
                               }
 
                               NextTest();
@@ -2604,7 +2604,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("status flags", actualValue, 0));
+                VerifyOrReturn(CheckValue("status flags", actualValue, 0U));
             }
 
             NextTest();
@@ -2627,8 +2627,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("statusFlags", "", "map8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("statusFlags", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("statusFlags", [value unsignedCharValue], 15));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("statusFlags", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("statusFlags", [value unsignedCharValue], 15U));
 
             NextTest();
         }];
@@ -2645,7 +2645,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id statusFlagsArgument;
-        statusFlagsArgument = [NSNumber numberWithUnsignedChar:0];
+        statusFlagsArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster
             writeAttributeStatusFlagsWithValue:statusFlagsArgument
                              completionHandler:^(NSError * _Nullable err) {
@@ -2673,7 +2673,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("status flags", actualValue, 0));
+                VerifyOrReturn(CheckValue("status flags", actualValue, 0U));
             }
 
             NextTest();
@@ -2917,7 +2917,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("status flags", actualValue, 0));
+                VerifyOrReturn(CheckValue("status flags", actualValue, 0U));
             }
 
             NextTest();
@@ -2989,7 +2989,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("status flags", actualValue, 0));
+                VerifyOrReturn(CheckValue("status flags", actualValue, 0U));
             }
 
             NextTest();
@@ -3013,7 +3013,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("status flags", actualValue, 0));
+                VerifyOrReturn(CheckValue("status flags", actualValue, 0U));
             }
 
             NextTest();
@@ -3037,7 +3037,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("status flags", actualValue, 0));
+                VerifyOrReturn(CheckValue("status flags", actualValue, 0U));
             }
 
             NextTest();
@@ -4496,7 +4496,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentHue", actualValue, 0));
+                VerifyOrReturn(CheckValue("CurrentHue", actualValue, 0U));
             }
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
@@ -4519,7 +4519,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentSaturation", actualValue, 0));
+                VerifyOrReturn(CheckValue("CurrentSaturation", actualValue, 0U));
             }
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
@@ -4671,7 +4671,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ColorMode", actualValue, 1));
+                VerifyOrReturn(CheckValue("ColorMode", actualValue, 1U));
             }
 
             NextTest();
@@ -4692,8 +4692,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("colorMode", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("colorMode", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("colorMode", [value unsignedCharValue], 2));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("colorMode", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("colorMode", [value unsignedCharValue], 2U));
 
             NextTest();
         }];
@@ -4714,7 +4714,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("Options", actualValue, 0));
+                VerifyOrReturn(CheckValue("Options", actualValue, 0U));
             }
 
             VerifyOrReturn(CheckConstraintType("options", "", "map8"));
@@ -4760,7 +4760,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("EnhancedColorMode", actualValue, 1));
+                VerifyOrReturn(CheckValue("EnhancedColorMode", actualValue, 1U));
             }
 
             VerifyOrReturn(CheckConstraintType("enhancedColorMode", "", "enum8"));
@@ -4783,7 +4783,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ColorLoopActive", actualValue, 0));
+                VerifyOrReturn(CheckValue("ColorLoopActive", actualValue, 0U));
             }
 
             VerifyOrReturn(CheckConstraintType("colorLoopActive", "", "uint8"));
@@ -4806,7 +4806,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ColorLoopDirection", actualValue, 0));
+                VerifyOrReturn(CheckValue("ColorLoopDirection", actualValue, 0U));
             }
 
             VerifyOrReturn(CheckConstraintType("colorLoopDirection", "", "uint8"));
@@ -5120,8 +5120,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("driftCompensation", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("driftCompensation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("driftCompensation", [value unsignedCharValue], 4));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("driftCompensation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("driftCompensation", [value unsignedCharValue], 4U));
 
             NextTest();
         }];
@@ -5167,8 +5167,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("numberOfPrimaries", "", "uint8"));
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("numberOfPrimaries", [value unsignedCharValue], 0));
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("numberOfPrimaries", [value unsignedCharValue], 6));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("numberOfPrimaries", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("numberOfPrimaries", [value unsignedCharValue], 6U));
             }
 
             NextTest();
@@ -6228,8 +6228,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -6244,11 +6244,11 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveToHueParams alloc] init];
-        params.hue = [NSNumber numberWithUnsignedChar:150];
-        params.direction = [NSNumber numberWithUnsignedChar:0];
+        params.hue = [NSNumber numberWithUnsignedChar:150U];
+        params.direction = [NSNumber numberWithUnsignedChar:0U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:300U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveToHueWithParams:params
                    completionHandler:^(NSError * _Nullable err) {
                        NSLog(@"Move to hue shortest distance command Error: %@", err);
@@ -6280,8 +6280,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -6308,8 +6308,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -6336,8 +6336,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -6352,11 +6352,11 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveToHueParams alloc] init];
-        params.hue = [NSNumber numberWithUnsignedChar:200];
-        params.direction = [NSNumber numberWithUnsignedChar:1];
+        params.hue = [NSNumber numberWithUnsignedChar:200U];
+        params.direction = [NSNumber numberWithUnsignedChar:1U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:300U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveToHueWithParams:params
                    completionHandler:^(NSError * _Nullable err) {
                        NSLog(@"Move to hue longest distance command Error: %@", err);
@@ -6388,8 +6388,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -6416,8 +6416,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -6444,8 +6444,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -6460,11 +6460,11 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveToHueParams alloc] init];
-        params.hue = [NSNumber numberWithUnsignedChar:250];
-        params.direction = [NSNumber numberWithUnsignedChar:2];
+        params.hue = [NSNumber numberWithUnsignedChar:250U];
+        params.direction = [NSNumber numberWithUnsignedChar:2U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:300U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveToHueWithParams:params
                    completionHandler:^(NSError * _Nullable err) {
                        NSLog(@"Move to hue up command Error: %@", err);
@@ -6496,8 +6496,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -6524,8 +6524,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -6552,8 +6552,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -6568,11 +6568,11 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveToHueParams alloc] init];
-        params.hue = [NSNumber numberWithUnsignedChar:225];
-        params.direction = [NSNumber numberWithUnsignedChar:3];
+        params.hue = [NSNumber numberWithUnsignedChar:225U];
+        params.direction = [NSNumber numberWithUnsignedChar:3U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:300U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveToHueWithParams:params
                    completionHandler:^(NSError * _Nullable err) {
                        NSLog(@"Move to hue down command Error: %@", err);
@@ -6604,8 +6604,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -6632,8 +6632,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -6660,8 +6660,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -7086,8 +7086,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -7102,10 +7102,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveHueParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:1];
-        params.rate = [NSNumber numberWithUnsignedChar:50];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.moveMode = [NSNumber numberWithUnsignedChar:1U];
+        params.rate = [NSNumber numberWithUnsignedChar:50U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveHueWithParams:params
                  completionHandler:^(NSError * _Nullable err) {
                      NSLog(@"Move hue up command Error: %@", err);
@@ -7137,8 +7137,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -7165,8 +7165,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -7193,8 +7193,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -7209,10 +7209,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveHueParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:0];
-        params.rate = [NSNumber numberWithUnsignedChar:50];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.moveMode = [NSNumber numberWithUnsignedChar:0U];
+        params.rate = [NSNumber numberWithUnsignedChar:50U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveHueWithParams:params
                  completionHandler:^(NSError * _Nullable err) {
                      NSLog(@"Move hue stop command Error: %@", err);
@@ -7244,8 +7244,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -7272,8 +7272,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -7300,8 +7300,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -7316,10 +7316,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveHueParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:3];
-        params.rate = [NSNumber numberWithUnsignedChar:50];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.moveMode = [NSNumber numberWithUnsignedChar:3U];
+        params.rate = [NSNumber numberWithUnsignedChar:50U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveHueWithParams:params
                  completionHandler:^(NSError * _Nullable err) {
                      NSLog(@"Move hue down command Error: %@", err);
@@ -7351,8 +7351,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -7379,8 +7379,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -7407,8 +7407,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -7423,10 +7423,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveHueParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:0];
-        params.rate = [NSNumber numberWithUnsignedChar:50];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.moveMode = [NSNumber numberWithUnsignedChar:0U];
+        params.rate = [NSNumber numberWithUnsignedChar:50U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveHueWithParams:params
                  completionHandler:^(NSError * _Nullable err) {
                      NSLog(@"Move hue stop command Error: %@", err);
@@ -7458,8 +7458,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -7486,8 +7486,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -7514,8 +7514,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -7774,8 +7774,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -7790,11 +7790,11 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterStepHueParams alloc] init];
-        params.stepMode = [NSNumber numberWithUnsignedChar:1];
-        params.stepSize = [NSNumber numberWithUnsignedChar:5];
-        params.transitionTime = [NSNumber numberWithUnsignedChar:25];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.stepMode = [NSNumber numberWithUnsignedChar:1U];
+        params.stepSize = [NSNumber numberWithUnsignedChar:5U];
+        params.transitionTime = [NSNumber numberWithUnsignedChar:25U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stepHueWithParams:params
                  completionHandler:^(NSError * _Nullable err) {
                      NSLog(@"Step hue up command Error: %@", err);
@@ -7826,8 +7826,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -7842,11 +7842,11 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterStepHueParams alloc] init];
-        params.stepMode = [NSNumber numberWithUnsignedChar:3];
-        params.stepSize = [NSNumber numberWithUnsignedChar:5];
-        params.transitionTime = [NSNumber numberWithUnsignedChar:25];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.stepMode = [NSNumber numberWithUnsignedChar:3U];
+        params.stepSize = [NSNumber numberWithUnsignedChar:5U];
+        params.transitionTime = [NSNumber numberWithUnsignedChar:25U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stepHueWithParams:params
                  completionHandler:^(NSError * _Nullable err) {
                      NSLog(@"Step hue down command Error: %@", err);
@@ -7878,8 +7878,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -8148,8 +8148,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -8164,10 +8164,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveToSaturationParams alloc] init];
-        params.saturation = [NSNumber numberWithUnsignedChar:90];
+        params.saturation = [NSNumber numberWithUnsignedChar:90U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:10U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveToSaturationWithParams:params
                           completionHandler:^(NSError * _Nullable err) {
                               NSLog(@"Move to saturation command Error: %@", err);
@@ -8199,8 +8199,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -8227,8 +8227,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -8255,8 +8255,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -8786,8 +8786,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -8802,10 +8802,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveSaturationParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:1];
-        params.rate = [NSNumber numberWithUnsignedChar:5];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.moveMode = [NSNumber numberWithUnsignedChar:1U];
+        params.rate = [NSNumber numberWithUnsignedChar:5U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveSaturationWithParams:params
                         completionHandler:^(NSError * _Nullable err) {
                             NSLog(@"Move saturation up command Error: %@", err);
@@ -8837,8 +8837,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -8865,8 +8865,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -8893,8 +8893,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -8909,10 +8909,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveSaturationParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:3];
-        params.rate = [NSNumber numberWithUnsignedChar:5];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.moveMode = [NSNumber numberWithUnsignedChar:3U];
+        params.rate = [NSNumber numberWithUnsignedChar:5U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveSaturationWithParams:params
                         completionHandler:^(NSError * _Nullable err) {
                             NSLog(@"Move saturation down command Error: %@", err);
@@ -8944,8 +8944,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -8972,8 +8972,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -9000,8 +9000,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -9016,10 +9016,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveSaturationParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:1];
-        params.rate = [NSNumber numberWithUnsignedChar:5];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.moveMode = [NSNumber numberWithUnsignedChar:1U];
+        params.rate = [NSNumber numberWithUnsignedChar:5U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveSaturationWithParams:params
                         completionHandler:^(NSError * _Nullable err) {
                             NSLog(@"Move saturation up command Error: %@", err);
@@ -9051,8 +9051,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -9079,8 +9079,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -9107,8 +9107,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -9123,10 +9123,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveSaturationParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:0];
-        params.rate = [NSNumber numberWithUnsignedChar:5];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.moveMode = [NSNumber numberWithUnsignedChar:0U];
+        params.rate = [NSNumber numberWithUnsignedChar:5U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveSaturationWithParams:params
                         completionHandler:^(NSError * _Nullable err) {
                             NSLog(@"Move saturation stop command Error: %@", err);
@@ -9158,8 +9158,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -9186,8 +9186,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -9214,8 +9214,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -9230,10 +9230,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveSaturationParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:3];
-        params.rate = [NSNumber numberWithUnsignedChar:5];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.moveMode = [NSNumber numberWithUnsignedChar:3U];
+        params.rate = [NSNumber numberWithUnsignedChar:5U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveSaturationWithParams:params
                         completionHandler:^(NSError * _Nullable err) {
                             NSLog(@"Move saturation down command Error: %@", err);
@@ -9265,8 +9265,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -9293,8 +9293,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -9321,8 +9321,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -9337,10 +9337,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveSaturationParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:0];
-        params.rate = [NSNumber numberWithUnsignedChar:5];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.moveMode = [NSNumber numberWithUnsignedChar:0U];
+        params.rate = [NSNumber numberWithUnsignedChar:5U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveSaturationWithParams:params
                         completionHandler:^(NSError * _Nullable err) {
                             NSLog(@"Move saturation stop command Error: %@", err);
@@ -9372,8 +9372,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -9400,8 +9400,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -9428,8 +9428,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -9688,8 +9688,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -9704,11 +9704,11 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterStepSaturationParams alloc] init];
-        params.stepMode = [NSNumber numberWithUnsignedChar:1];
-        params.stepSize = [NSNumber numberWithUnsignedChar:15];
-        params.transitionTime = [NSNumber numberWithUnsignedChar:10];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.stepMode = [NSNumber numberWithUnsignedChar:1U];
+        params.stepSize = [NSNumber numberWithUnsignedChar:15U];
+        params.transitionTime = [NSNumber numberWithUnsignedChar:10U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stepSaturationWithParams:params
                         completionHandler:^(NSError * _Nullable err) {
                             NSLog(@"Step saturation up command Error: %@", err);
@@ -9740,8 +9740,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -9756,11 +9756,11 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterStepSaturationParams alloc] init];
-        params.stepMode = [NSNumber numberWithUnsignedChar:3];
-        params.stepSize = [NSNumber numberWithUnsignedChar:20];
-        params.transitionTime = [NSNumber numberWithUnsignedChar:10];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.stepMode = [NSNumber numberWithUnsignedChar:3U];
+        params.stepSize = [NSNumber numberWithUnsignedChar:20U];
+        params.transitionTime = [NSNumber numberWithUnsignedChar:10U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stepSaturationWithParams:params
                         completionHandler:^(NSError * _Nullable err) {
                             NSLog(@"Step saturation down command Error: %@", err);
@@ -9792,8 +9792,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -10047,8 +10047,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -10068,8 +10068,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -10084,11 +10084,11 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveToHueAndSaturationParams alloc] init];
-        params.hue = [NSNumber numberWithUnsignedChar:40];
-        params.saturation = [NSNumber numberWithUnsignedChar:160];
+        params.hue = [NSNumber numberWithUnsignedChar:40U];
+        params.saturation = [NSNumber numberWithUnsignedChar:160U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:10U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveToHueAndSaturationWithParams:params
                                 completionHandler:^(NSError * _Nullable err) {
                                     NSLog(@"Move To current hue and saturation command Error: %@", err);
@@ -10120,8 +10120,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -10141,8 +10141,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -10436,8 +10436,8 @@ private:
         params.colorX = [NSNumber numberWithUnsignedShort:200U];
         params.colorY = [NSNumber numberWithUnsignedShort:300U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:20U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveToColorWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
                          NSLog(@"Move to Color command Error: %@", err);
@@ -10807,8 +10807,8 @@ private:
         __auto_type * params = [[CHIPColorControlClusterMoveColorParams alloc] init];
         params.rateX = [NSNumber numberWithShort:15];
         params.rateY = [NSNumber numberWithShort:20];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveColorWithParams:params
                    completionHandler:^(NSError * _Nullable err) {
                        NSLog(@"Move Color command Error: %@", err);
@@ -10877,8 +10877,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterStopMoveStepParams alloc] init];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stopMoveStepWithParams:params
                       completionHandler:^(NSError * _Nullable err) {
                           NSLog(@"Stop Move Step command Error: %@", err);
@@ -11219,8 +11219,8 @@ private:
         params.stepX = [NSNumber numberWithShort:15];
         params.stepY = [NSNumber numberWithShort:20];
         params.transitionTime = [NSNumber numberWithUnsignedShort:50U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stepColorWithParams:params
                    completionHandler:^(NSError * _Nullable err) {
                        NSLog(@"Step Color command Error: %@", err);
@@ -11530,8 +11530,8 @@ private:
         __auto_type * params = [[CHIPColorControlClusterMoveToColorTemperatureParams alloc] init];
         params.colorTemperature = [NSNumber numberWithUnsignedShort:100U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:10U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveToColorTemperatureWithParams:params
                                 completionHandler:^(NSError * _Nullable err) {
                                     NSLog(@"Move To Color Temperature command Error: %@", err);
@@ -12007,12 +12007,12 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveColorTemperatureParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:1];
+        params.moveMode = [NSNumber numberWithUnsignedChar:1U];
         params.rate = [NSNumber numberWithUnsignedShort:10U];
         params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:1U];
         params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:255U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveColorTemperatureWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Move up color temperature command Error: %@", err);
@@ -12116,12 +12116,12 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveColorTemperatureParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:3];
+        params.moveMode = [NSNumber numberWithUnsignedChar:3U];
         params.rate = [NSNumber numberWithUnsignedShort:20U];
         params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:1U];
         params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:255U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveColorTemperatureWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Move down color temperature command Error: %@", err);
@@ -12225,12 +12225,12 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveColorTemperatureParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:1];
+        params.moveMode = [NSNumber numberWithUnsignedChar:1U];
         params.rate = [NSNumber numberWithUnsignedShort:10U];
         params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:1U];
         params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:255U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveColorTemperatureWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Move up color temperature command Error: %@", err);
@@ -12250,12 +12250,12 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveColorTemperatureParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:0];
+        params.moveMode = [NSNumber numberWithUnsignedChar:0U];
         params.rate = [NSNumber numberWithUnsignedShort:10U];
         params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:1U];
         params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:255U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveColorTemperatureWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Stop Color Temperature command Error: %@", err);
@@ -12359,12 +12359,12 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveColorTemperatureParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:3];
+        params.moveMode = [NSNumber numberWithUnsignedChar:3U];
         params.rate = [NSNumber numberWithUnsignedShort:20U];
         params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:1U];
         params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:255U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveColorTemperatureWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Move down color temperature command Error: %@", err);
@@ -12384,12 +12384,12 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveColorTemperatureParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:0];
+        params.moveMode = [NSNumber numberWithUnsignedChar:0U];
         params.rate = [NSNumber numberWithUnsignedShort:10U];
         params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:1U];
         params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:255U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveColorTemperatureWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Stop Color Temperature command Error: %@", err);
@@ -12809,13 +12809,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterStepColorTemperatureParams alloc] init];
-        params.stepMode = [NSNumber numberWithUnsignedChar:1];
+        params.stepMode = [NSNumber numberWithUnsignedChar:1U];
         params.stepSize = [NSNumber numberWithUnsignedShort:5U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:50U];
         params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:5U];
         params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:100U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stepColorTemperatureWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Step up color temperature command Error: %@", err);
@@ -12919,13 +12919,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterStepColorTemperatureParams alloc] init];
-        params.stepMode = [NSNumber numberWithUnsignedChar:3];
+        params.stepMode = [NSNumber numberWithUnsignedChar:3U];
         params.stepSize = [NSNumber numberWithUnsignedShort:5U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:50U];
         params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:5U];
         params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:100U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stepColorTemperatureWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Step down color temperature command Error: %@", err);
@@ -13443,10 +13443,10 @@ private:
 
         __auto_type * params = [[CHIPColorControlClusterEnhancedMoveToHueParams alloc] init];
         params.enhancedHue = [NSNumber numberWithUnsignedShort:1025U];
-        params.direction = [NSNumber numberWithUnsignedChar:0];
+        params.direction = [NSNumber numberWithUnsignedChar:0U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:1U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster enhancedMoveToHueWithParams:params
                            completionHandler:^(NSError * _Nullable err) {
                                NSLog(@"Enhanced Move To Hue command Error: %@", err);
@@ -13488,10 +13488,10 @@ private:
 
         __auto_type * params = [[CHIPColorControlClusterEnhancedMoveToHueParams alloc] init];
         params.enhancedHue = [NSNumber numberWithUnsignedShort:1100U];
-        params.direction = [NSNumber numberWithUnsignedChar:0];
+        params.direction = [NSNumber numberWithUnsignedChar:0U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:300U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster enhancedMoveToHueWithParams:params
                            completionHandler:^(NSError * _Nullable err) {
                                NSLog(@"Enhanced Move To Hue command Error: %@", err);
@@ -13596,10 +13596,10 @@ private:
 
         __auto_type * params = [[CHIPColorControlClusterEnhancedMoveToHueParams alloc] init];
         params.enhancedHue = [NSNumber numberWithUnsignedShort:1150U];
-        params.direction = [NSNumber numberWithUnsignedChar:1];
+        params.direction = [NSNumber numberWithUnsignedChar:1U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:300U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster enhancedMoveToHueWithParams:params
                            completionHandler:^(NSError * _Nullable err) {
                                NSLog(@"Enhanced Move To Hue command Error: %@", err);
@@ -13704,10 +13704,10 @@ private:
 
         __auto_type * params = [[CHIPColorControlClusterEnhancedMoveToHueParams alloc] init];
         params.enhancedHue = [NSNumber numberWithUnsignedShort:1200U];
-        params.direction = [NSNumber numberWithUnsignedChar:2];
+        params.direction = [NSNumber numberWithUnsignedChar:2U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:300U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster enhancedMoveToHueWithParams:params
                            completionHandler:^(NSError * _Nullable err) {
                                NSLog(@"Enhanced Move To Hue command Error: %@", err);
@@ -13812,10 +13812,10 @@ private:
 
         __auto_type * params = [[CHIPColorControlClusterEnhancedMoveToHueParams alloc] init];
         params.enhancedHue = [NSNumber numberWithUnsignedShort:1300U];
-        params.direction = [NSNumber numberWithUnsignedChar:3];
+        params.direction = [NSNumber numberWithUnsignedChar:3U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:300U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster enhancedMoveToHueWithParams:params
                            completionHandler:^(NSError * _Nullable err) {
                                NSLog(@"Enhanced Move To Hue command Error: %@", err);
@@ -14271,10 +14271,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterEnhancedMoveHueParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:1];
+        params.moveMode = [NSNumber numberWithUnsignedChar:1U];
         params.rate = [NSNumber numberWithUnsignedShort:50U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster enhancedMoveHueWithParams:params
                          completionHandler:^(NSError * _Nullable err) {
                              NSLog(@"Enhanced Move Hue Up command Error: %@", err);
@@ -14378,10 +14378,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterEnhancedMoveHueParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:0];
+        params.moveMode = [NSNumber numberWithUnsignedChar:0U];
         params.rate = [NSNumber numberWithUnsignedShort:0U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster enhancedMoveHueWithParams:params
                          completionHandler:^(NSError * _Nullable err) {
                              NSLog(@"Enhanced Move Hue Stop command Error: %@", err);
@@ -14422,10 +14422,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterEnhancedMoveHueParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:3];
+        params.moveMode = [NSNumber numberWithUnsignedChar:3U];
         params.rate = [NSNumber numberWithUnsignedShort:5U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster enhancedMoveHueWithParams:params
                          completionHandler:^(NSError * _Nullable err) {
                              NSLog(@"Enhanced Move Hue Down command  Error: %@", err);
@@ -14529,10 +14529,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterEnhancedMoveHueParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:0];
+        params.moveMode = [NSNumber numberWithUnsignedChar:0U];
         params.rate = [NSNumber numberWithUnsignedShort:0U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster enhancedMoveHueWithParams:params
                          completionHandler:^(NSError * _Nullable err) {
                              NSLog(@"Enhanced Move Hue Stop command Error: %@", err);
@@ -14833,11 +14833,11 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterEnhancedStepHueParams alloc] init];
-        params.stepMode = [NSNumber numberWithUnsignedChar:0];
+        params.stepMode = [NSNumber numberWithUnsignedChar:0U];
         params.stepSize = [NSNumber numberWithUnsignedShort:50U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:1U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster enhancedStepHueWithParams:params
                          completionHandler:^(NSError * _Nullable err) {
                              NSLog(@"Enhanced Step Hue Up command Error: %@", err);
@@ -14885,11 +14885,11 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterEnhancedStepHueParams alloc] init];
-        params.stepMode = [NSNumber numberWithUnsignedChar:1];
+        params.stepMode = [NSNumber numberWithUnsignedChar:1U];
         params.stepSize = [NSNumber numberWithUnsignedShort:75U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:1U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster enhancedStepHueWithParams:params
                          completionHandler:^(NSError * _Nullable err) {
                              NSLog(@"Enhanced Step Hue Down command Error: %@", err);
@@ -15178,10 +15178,10 @@ private:
 
         __auto_type * params = [[CHIPColorControlClusterEnhancedMoveToHueAndSaturationParams alloc] init];
         params.enhancedHue = [NSNumber numberWithUnsignedShort:1200U];
-        params.saturation = [NSNumber numberWithUnsignedChar:90];
+        params.saturation = [NSNumber numberWithUnsignedChar:90U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:10U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster enhancedMoveToHueAndSaturationWithParams:params
                                         completionHandler:^(NSError * _Nullable err) {
                                             NSLog(@"Enhanced move to hue and saturation command Error: %@", err);
@@ -15657,10 +15657,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveHueParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:1];
-        params.rate = [NSNumber numberWithUnsignedChar:50];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.moveMode = [NSNumber numberWithUnsignedChar:1U];
+        params.rate = [NSNumber numberWithUnsignedChar:50U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveHueWithParams:params
                  completionHandler:^(NSError * _Nullable err) {
                      NSLog(@"Move hue up command Error: %@", err);
@@ -15685,8 +15685,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -15701,8 +15701,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterStopMoveStepParams alloc] init];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stopMoveStepWithParams:params
                       completionHandler:^(NSError * _Nullable err) {
                           NSLog(@"Stop Move Step command Error: %@", err);
@@ -15727,8 +15727,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -15755,8 +15755,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -15771,10 +15771,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveSaturationParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:1];
-        params.rate = [NSNumber numberWithUnsignedChar:5];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.moveMode = [NSNumber numberWithUnsignedChar:1U];
+        params.rate = [NSNumber numberWithUnsignedChar:5U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveSaturationWithParams:params
                         completionHandler:^(NSError * _Nullable err) {
                             NSLog(@"Move saturation up command Error: %@", err);
@@ -15799,8 +15799,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -15815,8 +15815,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterStopMoveStepParams alloc] init];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stopMoveStepWithParams:params
                       completionHandler:^(NSError * _Nullable err) {
                           NSLog(@"Stop Move Step command Error: %@", err);
@@ -15841,8 +15841,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -15869,8 +15869,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -15887,8 +15887,8 @@ private:
         __auto_type * params = [[CHIPColorControlClusterMoveColorParams alloc] init];
         params.rateX = [NSNumber numberWithShort:15];
         params.rateY = [NSNumber numberWithShort:20];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveColorWithParams:params
                    completionHandler:^(NSError * _Nullable err) {
                        NSLog(@"Move Color command Error: %@", err);
@@ -15950,8 +15950,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterStopMoveStepParams alloc] init];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stopMoveStepWithParams:params
                       completionHandler:^(NSError * _Nullable err) {
                           NSLog(@"Stop Move Step command Error: %@", err);
@@ -16062,12 +16062,12 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterMoveColorTemperatureParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:1];
+        params.moveMode = [NSNumber numberWithUnsignedChar:1U];
         params.rate = [NSNumber numberWithUnsignedShort:10U];
         params.colorTemperatureMinimumMireds = [NSNumber numberWithUnsignedShort:1U];
         params.colorTemperatureMaximumMireds = [NSNumber numberWithUnsignedShort:255U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveColorTemperatureWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Move up color temperature command Error: %@", err);
@@ -16108,8 +16108,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterStopMoveStepParams alloc] init];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stopMoveStepWithParams:params
                       completionHandler:^(NSError * _Nullable err) {
                           NSLog(@"Stop Move Step command Error: %@", err);
@@ -16178,10 +16178,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterEnhancedMoveHueParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:1];
+        params.moveMode = [NSNumber numberWithUnsignedChar:1U];
         params.rate = [NSNumber numberWithUnsignedShort:50U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster enhancedMoveHueWithParams:params
                          completionHandler:^(NSError * _Nullable err) {
                              NSLog(@"Enhanced Move Hue Up command Error: %@", err);
@@ -16222,8 +16222,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPColorControlClusterStopMoveStepParams alloc] init];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stopMoveStepWithParams:params
                       completionHandler:^(NSError * _Nullable err) {
                           NSLog(@"Stop Move Step command Error: %@", err);
@@ -17606,8 +17606,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("PHYRate", "", "enum8"));
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("PHYRate", [value unsignedCharValue], 0));
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("PHYRate", [value unsignedCharValue], 9));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("PHYRate", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("PHYRate", [value unsignedCharValue], 9U));
             }
 
             NextTest();
@@ -19091,8 +19091,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("regulatoryConfig", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("regulatoryConfig", [value unsignedCharValue], 2));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("regulatoryConfig", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("regulatoryConfig", [value unsignedCharValue], 2U));
 
             NextTest();
         }];
@@ -19113,8 +19113,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("locationCapability", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("locationCapability", [value unsignedCharValue], 2));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("locationCapability", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("locationCapability", [value unsignedCharValue], 2U));
 
             NextTest();
         }];
@@ -19706,8 +19706,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("bootReasons", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("bootReasons", [value unsignedCharValue], 6));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("bootReasons", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("bootReasons", [value unsignedCharValue], 6U));
 
             NextTest();
         }];
@@ -20151,8 +20151,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("identifyType", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("identifyType", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("identifyType", [value unsignedCharValue], 5));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("identifyType", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("identifyType", [value unsignedCharValue], 5U));
 
             NextTest();
         }];
@@ -20766,8 +20766,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPIdentifyClusterTriggerEffectParams alloc] init];
-        params.effectIdentifier = [NSNumber numberWithUnsignedChar:0];
-        params.effectVariant = [NSNumber numberWithUnsignedChar:0];
+        params.effectIdentifier = [NSNumber numberWithUnsignedChar:0U];
+        params.effectVariant = [NSNumber numberWithUnsignedChar:0U];
         [cluster triggerEffectWithParams:params
                        completionHandler:^(NSError * _Nullable err) {
                            NSLog(@"TH sends TriggerEffect command to DUT with the effect identifier field set to 0x00 blink and "
@@ -20797,8 +20797,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPIdentifyClusterTriggerEffectParams alloc] init];
-        params.effectIdentifier = [NSNumber numberWithUnsignedChar:1];
-        params.effectVariant = [NSNumber numberWithUnsignedChar:0];
+        params.effectIdentifier = [NSNumber numberWithUnsignedChar:1U];
+        params.effectVariant = [NSNumber numberWithUnsignedChar:0U];
         [cluster triggerEffectWithParams:params
                        completionHandler:^(NSError * _Nullable err) {
                            NSLog(@"TH sends TriggerEffect command to DUT with the effect identifier field set to 0x01 breathe and "
@@ -20828,8 +20828,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPIdentifyClusterTriggerEffectParams alloc] init];
-        params.effectIdentifier = [NSNumber numberWithUnsignedChar:2];
-        params.effectVariant = [NSNumber numberWithUnsignedChar:0];
+        params.effectIdentifier = [NSNumber numberWithUnsignedChar:2U];
+        params.effectVariant = [NSNumber numberWithUnsignedChar:0U];
         [cluster triggerEffectWithParams:params
                        completionHandler:^(NSError * _Nullable err) {
                            NSLog(@"TH sends TriggerEffect command to DUT with the effect identifier field set to 0x02 okay and the "
@@ -20859,8 +20859,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPIdentifyClusterTriggerEffectParams alloc] init];
-        params.effectIdentifier = [NSNumber numberWithUnsignedChar:11];
-        params.effectVariant = [NSNumber numberWithUnsignedChar:0];
+        params.effectIdentifier = [NSNumber numberWithUnsignedChar:11U];
+        params.effectVariant = [NSNumber numberWithUnsignedChar:0U];
         [cluster triggerEffectWithParams:params
                        completionHandler:^(NSError * _Nullable err) {
                            NSLog(@"TH sends TriggerEffect command to DUT with the effect identifier field set to 0x0b channel "
@@ -20890,8 +20890,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPIdentifyClusterTriggerEffectParams alloc] init];
-        params.effectIdentifier = [NSNumber numberWithUnsignedChar:1];
-        params.effectVariant = [NSNumber numberWithUnsignedChar:0];
+        params.effectIdentifier = [NSNumber numberWithUnsignedChar:1U];
+        params.effectVariant = [NSNumber numberWithUnsignedChar:0U];
         [cluster triggerEffectWithParams:params
                        completionHandler:^(NSError * _Nullable err) {
                            NSLog(@"TH sends TriggerEffect command to DUT with the effect identifier field set to 0x01 breathe and "
@@ -20921,8 +20921,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPIdentifyClusterTriggerEffectParams alloc] init];
-        params.effectIdentifier = [NSNumber numberWithUnsignedChar:254];
-        params.effectVariant = [NSNumber numberWithUnsignedChar:0];
+        params.effectIdentifier = [NSNumber numberWithUnsignedChar:254U];
+        params.effectVariant = [NSNumber numberWithUnsignedChar:0U];
         [cluster triggerEffectWithParams:params
                        completionHandler:^(NSError * _Nullable err) {
                            NSLog(@"TH sends TriggerEffect command to DUT with the effect identifier field set to 0xfe finish "
@@ -20953,8 +20953,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPIdentifyClusterTriggerEffectParams alloc] init];
-        params.effectIdentifier = [NSNumber numberWithUnsignedChar:1];
-        params.effectVariant = [NSNumber numberWithUnsignedChar:0];
+        params.effectIdentifier = [NSNumber numberWithUnsignedChar:1U];
+        params.effectVariant = [NSNumber numberWithUnsignedChar:0U];
         [cluster triggerEffectWithParams:params
                        completionHandler:^(NSError * _Nullable err) {
                            NSLog(@"TH sends TriggerEffect command to DUT with the effect identifier field set to 0x01 breathe and "
@@ -20984,8 +20984,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPIdentifyClusterTriggerEffectParams alloc] init];
-        params.effectIdentifier = [NSNumber numberWithUnsignedChar:255];
-        params.effectVariant = [NSNumber numberWithUnsignedChar:0];
+        params.effectIdentifier = [NSNumber numberWithUnsignedChar:255U];
+        params.effectVariant = [NSNumber numberWithUnsignedChar:0U];
         [cluster triggerEffectWithParams:params
                        completionHandler:^(NSError * _Nullable err) {
                            NSLog(@"TH sends TriggerEffect command to DUT with the effect identifier field set to 0xff stop effect "
@@ -21016,8 +21016,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPIdentifyClusterTriggerEffectParams alloc] init];
-        params.effectIdentifier = [NSNumber numberWithUnsignedChar:0];
-        params.effectVariant = [NSNumber numberWithUnsignedChar:66];
+        params.effectIdentifier = [NSNumber numberWithUnsignedChar:0U];
+        params.effectVariant = [NSNumber numberWithUnsignedChar:66U];
         [cluster triggerEffectWithParams:params
                        completionHandler:^(NSError * _Nullable err) {
                            NSLog(@"TH sends TriggerEffect command to DUT with the effect identifier field set to 0x00 blink and "
@@ -21047,8 +21047,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPIdentifyClusterTriggerEffectParams alloc] init];
-        params.effectIdentifier = [NSNumber numberWithUnsignedChar:255];
-        params.effectVariant = [NSNumber numberWithUnsignedChar:0];
+        params.effectIdentifier = [NSNumber numberWithUnsignedChar:255U];
+        params.effectVariant = [NSNumber numberWithUnsignedChar:0U];
         [cluster triggerEffectWithParams:params
                        completionHandler:^(NSError * _Nullable err) {
                            NSLog(@"TH sends TriggerEffect command to DUT with the effect identifier field set to 0xff stop effect "
@@ -22085,10 +22085,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPLevelControlClusterMoveToLevelParams alloc] init];
-        params.level = [NSNumber numberWithUnsignedChar:254];
+        params.level = [NSNumber numberWithUnsignedChar:254U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1];
+        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveToLevelWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
                          NSLog(@"Reset level to 254 Error: %@", err);
@@ -22121,7 +22121,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 254));
+                VerifyOrReturn(CheckValue("current level", actualValue, 254U));
             }
 
             VerifyOrReturn(CheckConstraintType("currentLevel", "", "uint8"));
@@ -22167,12 +22167,12 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("min level", actualValue, 1));
+                VerifyOrReturn(CheckValue("min level", actualValue, 1U));
             }
 
             VerifyOrReturn(CheckConstraintType("minLevel", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("minLevel", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("minLevel", [value unsignedCharValue], 1));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("minLevel", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("minLevel", [value unsignedCharValue], 1U));
 
             NextTest();
         }];
@@ -22391,7 +22391,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("options", actualValue, 0));
+                VerifyOrReturn(CheckValue("options", actualValue, 0U));
             }
 
             VerifyOrReturn(CheckConstraintType("options", "", "map8"));
@@ -22739,7 +22739,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id onLevelArgument;
-        onLevelArgument = [NSNumber numberWithUnsignedChar:254];
+        onLevelArgument = [NSNumber numberWithUnsignedChar:254U];
         [cluster writeAttributeOnLevelWithValue:onLevelArgument
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"writes the OnLevel attribute on the DUT Error: %@", err);
@@ -22766,7 +22766,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("on level", actualValue));
-                VerifyOrReturn(CheckValue("on level", actualValue, 254));
+                VerifyOrReturn(CheckValue("on level", actualValue, 254U));
             }
             if (value != nil) {
 
@@ -22942,7 +22942,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("default move rate", actualValue));
-                VerifyOrReturn(CheckValue("default move rate", actualValue, 50));
+                VerifyOrReturn(CheckValue("default move rate", actualValue, 50U));
             }
             if (value != nil) {
 
@@ -22962,7 +22962,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id defaultMoveRateArgument;
-        defaultMoveRateArgument = [NSNumber numberWithUnsignedChar:100];
+        defaultMoveRateArgument = [NSNumber numberWithUnsignedChar:100U];
         [cluster writeAttributeDefaultMoveRateWithValue:defaultMoveRateArgument
                                       completionHandler:^(NSError * _Nullable err) {
                                           NSLog(@"Writes the DefaultMoveRate attribute on the DUT Error: %@", err);
@@ -22989,7 +22989,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("default move rate", actualValue));
-                VerifyOrReturn(CheckValue("default move rate", actualValue, 100));
+                VerifyOrReturn(CheckValue("default move rate", actualValue, 100U));
             }
             if (value != nil) {
 
@@ -23035,7 +23035,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id startUpCurrentLevelArgument;
-        startUpCurrentLevelArgument = [NSNumber numberWithUnsignedChar:254];
+        startUpCurrentLevelArgument = [NSNumber numberWithUnsignedChar:254U];
         [cluster writeAttributeStartUpCurrentLevelWithValue:startUpCurrentLevelArgument
                                           completionHandler:^(NSError * _Nullable err) {
                                               NSLog(@"writes the StartUpCurrentLevel attribute on the DUT Error: %@", err);
@@ -23062,7 +23062,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("start up current level", actualValue));
-                VerifyOrReturn(CheckValue("start up current level", actualValue, 254));
+                VerifyOrReturn(CheckValue("start up current level", actualValue, 254U));
             }
             if (value != nil) {
 
@@ -23346,10 +23346,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPLevelControlClusterMoveToLevelParams alloc] init];
-        params.level = [NSNumber numberWithUnsignedChar:64];
+        params.level = [NSNumber numberWithUnsignedChar:64U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:65535U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1];
+        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveToLevelWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
                          NSLog(@"sends a Move to level command Error: %@", err);
@@ -23382,7 +23382,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 64));
+                VerifyOrReturn(CheckValue("current level", actualValue, 64U));
             }
 
             NextTest();
@@ -23398,10 +23398,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPLevelControlClusterMoveToLevelParams alloc] init];
-        params.level = [NSNumber numberWithUnsignedChar:100];
+        params.level = [NSNumber numberWithUnsignedChar:100U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:100U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1];
+        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveToLevelWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
                          NSLog(@"sends a Move to level command Error: %@", err);
@@ -23434,7 +23434,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 100));
+                VerifyOrReturn(CheckValue("current level", actualValue, 100U));
             }
 
             NextTest();
@@ -23468,10 +23468,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPLevelControlClusterMoveToLevelParams alloc] init];
-        params.level = [NSNumber numberWithUnsignedChar:128];
+        params.level = [NSNumber numberWithUnsignedChar:128U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:65535U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1];
+        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveToLevelWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
                          NSLog(@"sends a Move to level command Error: %@", err);
@@ -23504,7 +23504,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 128));
+                VerifyOrReturn(CheckValue("current level", actualValue, 128U));
             }
 
             NextTest();
@@ -23520,10 +23520,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPLevelControlClusterMoveToLevelParams alloc] init];
-        params.level = [NSNumber numberWithUnsignedChar:254];
+        params.level = [NSNumber numberWithUnsignedChar:254U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1];
+        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveToLevelWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
                          NSLog(@"Reset level to 254 Error: %@", err);
@@ -23776,10 +23776,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPLevelControlClusterMoveParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:0];
-        params.rate = [NSNumber numberWithUnsignedChar:32];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1];
+        params.moveMode = [NSNumber numberWithUnsignedChar:0U];
+        params.rate = [NSNumber numberWithUnsignedChar:32U];
+        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveWithParams:params
               completionHandler:^(NSError * _Nullable err) {
                   NSLog(@"sends a Move up command Error: %@", err);
@@ -23861,10 +23861,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPLevelControlClusterMoveParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:1];
-        params.rate = [NSNumber numberWithUnsignedChar:64];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1];
+        params.moveMode = [NSNumber numberWithUnsignedChar:1U];
+        params.rate = [NSNumber numberWithUnsignedChar:64U];
+        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveWithParams:params
               completionHandler:^(NSError * _Nullable err) {
                   NSLog(@"sends a Move down command Error: %@", err);
@@ -23907,11 +23907,11 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 1));
+                VerifyOrReturn(CheckValue("current level", actualValue, 1U));
             }
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 1));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 1U));
 
             NextTest();
         }];
@@ -23952,10 +23952,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPLevelControlClusterMoveParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:0];
-        params.rate = [NSNumber numberWithUnsignedChar:255];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1];
+        params.moveMode = [NSNumber numberWithUnsignedChar:0U];
+        params.rate = [NSNumber numberWithUnsignedChar:255U];
+        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveWithParams:params
               completionHandler:^(NSError * _Nullable err) {
                   NSLog(@"sends a Move up command at default move rate Error: %@", err);
@@ -23986,7 +23986,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintNotValue("currentLevel", value, 255));
+            VerifyOrReturn(CheckConstraintNotValue("currentLevel", value, 255U));
 
             NextTest();
         }];
@@ -24010,10 +24010,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPLevelControlClusterMoveToLevelParams alloc] init];
-        params.level = [NSNumber numberWithUnsignedChar:254];
+        params.level = [NSNumber numberWithUnsignedChar:254U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1];
+        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveToLevelWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
                          NSLog(@"Reset level to 254 Error: %@", err);
@@ -24232,11 +24232,11 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPLevelControlClusterStepParams alloc] init];
-        params.stepMode = [NSNumber numberWithUnsignedChar:1];
-        params.stepSize = [NSNumber numberWithUnsignedChar:100];
+        params.stepMode = [NSNumber numberWithUnsignedChar:1U];
+        params.stepSize = [NSNumber numberWithUnsignedChar:100U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:20U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stepWithParams:params
               completionHandler:^(NSError * _Nullable err) {
                   NSLog(@"Precondition: DUT level is set to its lowest point Error: %@", err);
@@ -24286,11 +24286,11 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPLevelControlClusterStepParams alloc] init];
-        params.stepMode = [NSNumber numberWithUnsignedChar:0];
-        params.stepSize = [NSNumber numberWithUnsignedChar:64];
+        params.stepMode = [NSNumber numberWithUnsignedChar:0U];
+        params.stepSize = [NSNumber numberWithUnsignedChar:64U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:2U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stepWithParams:params
               completionHandler:^(NSError * _Nullable err) {
                   NSLog(@"Sends step up command to DUT Error: %@", err);
@@ -24336,11 +24336,11 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPLevelControlClusterStepParams alloc] init];
-        params.stepMode = [NSNumber numberWithUnsignedChar:1];
-        params.stepSize = [NSNumber numberWithUnsignedChar:64];
+        params.stepMode = [NSNumber numberWithUnsignedChar:1U];
+        params.stepSize = [NSNumber numberWithUnsignedChar:64U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:2U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stepWithParams:params
               completionHandler:^(NSError * _Nullable err) {
                   NSLog(@"Sends a Step down command Error: %@", err);
@@ -24389,10 +24389,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPLevelControlClusterMoveToLevelParams alloc] init];
-        params.level = [NSNumber numberWithUnsignedChar:254];
+        params.level = [NSNumber numberWithUnsignedChar:254U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1];
+        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveToLevelWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
                          NSLog(@"Reset level to 254 Error: %@", err);
@@ -24614,10 +24614,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPLevelControlClusterMoveToLevelParams alloc] init];
-        params.level = [NSNumber numberWithUnsignedChar:0];
+        params.level = [NSNumber numberWithUnsignedChar:0U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1];
+        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveToLevelWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
                          NSLog(@"Precondition: set DUT to lowest point Error: %@", err);
@@ -24649,8 +24649,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 1));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 1U));
             {
                 CurrentLevelValue = value;
             }
@@ -24668,10 +24668,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPLevelControlClusterMoveParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:0];
-        params.rate = [NSNumber numberWithUnsignedChar:1];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1];
+        params.moveMode = [NSNumber numberWithUnsignedChar:0U];
+        params.rate = [NSNumber numberWithUnsignedChar:1U];
+        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveWithParams:params
               completionHandler:^(NSError * _Nullable err) {
                   NSLog(@"Sends a move up command to DUT Error: %@", err);
@@ -24698,8 +24698,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPLevelControlClusterStopParams alloc] init];
-        params.optionMask = [NSNumber numberWithUnsignedChar:0];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:0];
+        params.optionMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stopWithParams:params
               completionHandler:^(NSError * _Nullable err) {
                   NSLog(@"Sends stop command to DUT Error: %@", err);
@@ -24738,10 +24738,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPLevelControlClusterMoveToLevelParams alloc] init];
-        params.level = [NSNumber numberWithUnsignedChar:254];
+        params.level = [NSNumber numberWithUnsignedChar:254U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1];
+        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveToLevelWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
                          NSLog(@"Reset level to 254 Error: %@", err);
@@ -28405,7 +28405,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:10];
+        params.keyCode = [NSNumber numberWithUnsignedChar:10U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"TH sends CEC Settings Keys(0x0A) to DUT Error: %@", err);
@@ -28425,7 +28425,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:9];
+        params.keyCode = [NSNumber numberWithUnsignedChar:9U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"TH sends CEC Home Keys(0x09) to DUT Error: %@", err);
@@ -28628,7 +28628,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:33];
+        params.keyCode = [NSNumber numberWithUnsignedChar:33U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"Send Numbers1 Error: %@", err);
@@ -28648,7 +28648,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:34];
+        params.keyCode = [NSNumber numberWithUnsignedChar:34U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"Send Numbers2 Error: %@", err);
@@ -28668,7 +28668,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:35];
+        params.keyCode = [NSNumber numberWithUnsignedChar:35U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"Send Numbers3 Error: %@", err);
@@ -28688,7 +28688,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:36];
+        params.keyCode = [NSNumber numberWithUnsignedChar:36U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"Send Numbers4 Error: %@", err);
@@ -28708,7 +28708,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:37];
+        params.keyCode = [NSNumber numberWithUnsignedChar:37U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"Send Numbers5 Error: %@", err);
@@ -28728,7 +28728,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:38];
+        params.keyCode = [NSNumber numberWithUnsignedChar:38U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"Send Numbers6 Error: %@", err);
@@ -28748,7 +28748,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:39];
+        params.keyCode = [NSNumber numberWithUnsignedChar:39U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"Send Numbers7 Error: %@", err);
@@ -28768,7 +28768,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:40];
+        params.keyCode = [NSNumber numberWithUnsignedChar:40U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"Send Numbers8 Error: %@", err);
@@ -28788,7 +28788,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:41];
+        params.keyCode = [NSNumber numberWithUnsignedChar:41U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"Send Numbers9 Error: %@", err);
@@ -29002,7 +29002,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:9];
+        params.keyCode = [NSNumber numberWithUnsignedChar:9U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
@@ -29022,7 +29022,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:9];
+        params.keyCode = [NSNumber numberWithUnsignedChar:9U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
@@ -29042,7 +29042,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:9];
+        params.keyCode = [NSNumber numberWithUnsignedChar:9U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
@@ -29062,7 +29062,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:9];
+        params.keyCode = [NSNumber numberWithUnsignedChar:9U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
@@ -29082,7 +29082,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:9];
+        params.keyCode = [NSNumber numberWithUnsignedChar:9U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
@@ -29102,7 +29102,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:9];
+        params.keyCode = [NSNumber numberWithUnsignedChar:9U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
@@ -29122,7 +29122,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:9];
+        params.keyCode = [NSNumber numberWithUnsignedChar:9U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
@@ -29142,7 +29142,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:9];
+        params.keyCode = [NSNumber numberWithUnsignedChar:9U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
@@ -29162,7 +29162,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:9];
+        params.keyCode = [NSNumber numberWithUnsignedChar:9U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
@@ -29182,7 +29182,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:9];
+        params.keyCode = [NSNumber numberWithUnsignedChar:9U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"TH sends same KeyPad input codes to DUT Error: %@", err);
@@ -29572,7 +29572,7 @@ private:
 
                        {
                            id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 1));
+                           VerifyOrReturn(CheckValue("status", actualValue, 1U));
                        }
 
                        {
@@ -29611,7 +29611,7 @@ private:
 
                        {
                            id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 1));
+                           VerifyOrReturn(CheckValue("status", actualValue, 1U));
                        }
 
                        {
@@ -29650,7 +29650,7 @@ private:
 
                        {
                            id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 2));
+                           VerifyOrReturn(CheckValue("status", actualValue, 2U));
                        }
 
                        {
@@ -29794,7 +29794,7 @@ private:
 
                 {
                     id actualValue = values.status;
-                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                 }
 
                 {
@@ -29823,7 +29823,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("Status", actualValue, 0));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             NextTest();
@@ -29980,7 +29980,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("Status", actualValue, 0));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             NextTest();
@@ -30236,7 +30236,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPMediaInputClusterSelectInputParams alloc] init];
-        params.index = [NSNumber numberWithUnsignedChar:1];
+        params.index = [NSNumber numberWithUnsignedChar:1U];
         [cluster selectInputWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
                          NSLog(@"Select Input Command Error: %@", err);
@@ -30262,7 +30262,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentInput", actualValue, 1));
+                VerifyOrReturn(CheckValue("CurrentInput", actualValue, 1U));
             }
 
             NextTest();
@@ -30556,7 +30556,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPMediaInputClusterRenameInputParams alloc] init];
-        params.index = [NSNumber numberWithUnsignedChar:1];
+        params.index = [NSNumber numberWithUnsignedChar:1U];
         params.name = @"A1";
         [cluster renameInputWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
@@ -30577,7 +30577,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPMediaInputClusterRenameInputParams alloc] init];
-        params.index = [NSNumber numberWithUnsignedChar:1];
+        params.index = [NSNumber numberWithUnsignedChar:1U];
         params.name = @"A2";
         [cluster renameInputWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
@@ -31283,7 +31283,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPAudioOutputClusterSelectOutputParams alloc] init];
-        params.index = [NSNumber numberWithUnsignedChar:1];
+        params.index = [NSNumber numberWithUnsignedChar:1U];
         [cluster selectOutputWithParams:params
                       completionHandler:^(NSError * _Nullable err) {
                           NSLog(@"Sends a SelectAudioOutput command Error: %@", err);
@@ -31309,7 +31309,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentOutput", actualValue, 1));
+                VerifyOrReturn(CheckValue("CurrentOutput", actualValue, 1U));
             }
 
             NextTest();
@@ -31463,7 +31463,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPAudioOutputClusterRenameOutputParams alloc] init];
-        params.index = [NSNumber numberWithUnsignedChar:1];
+        params.index = [NSNumber numberWithUnsignedChar:1U];
         params.name = @"CertTest";
         [cluster renameOutputWithParams:params
                       completionHandler:^(NSError * _Nullable err) {
@@ -31688,7 +31688,7 @@ private:
 
         __auto_type * params = [[CHIPTargetNavigatorClusterNavigateTargetParams alloc] init];
         params.target = mTargetvalue1.HasValue() ? [NSNumber numberWithUnsignedChar:mTargetvalue1.Value()]
-                                                 : [NSNumber numberWithUnsignedChar:1];
+                                                 : [NSNumber numberWithUnsignedChar:1U];
         [cluster navigateTargetWithParams:params
                         completionHandler:^(
                             CHIPTargetNavigatorClusterNavigateTargetResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -31698,7 +31698,7 @@ private:
 
                             {
                                 id actualValue = values.status;
-                                VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                VerifyOrReturn(CheckValue("status", actualValue, 0U));
                             }
 
                             NextTest();
@@ -31720,7 +31720,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentTarget", actualValue, mTargetvalue1.HasValue() ? mTargetvalue1.Value() : 1));
+                VerifyOrReturn(CheckValue("CurrentTarget", actualValue, mTargetvalue1.HasValue() ? mTargetvalue1.Value() : 1U));
             }
 
             NextTest();
@@ -31755,7 +31755,7 @@ private:
 
         __auto_type * params = [[CHIPTargetNavigatorClusterNavigateTargetParams alloc] init];
         params.target = mTargetvalue2.HasValue() ? [NSNumber numberWithUnsignedChar:mTargetvalue2.Value()]
-                                                 : [NSNumber numberWithUnsignedChar:2];
+                                                 : [NSNumber numberWithUnsignedChar:2U];
         [cluster navigateTargetWithParams:params
                         completionHandler:^(
                             CHIPTargetNavigatorClusterNavigateTargetResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -31765,7 +31765,7 @@ private:
 
                             {
                                 id actualValue = values.status;
-                                VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                VerifyOrReturn(CheckValue("status", actualValue, 0U));
                             }
 
                             NextTest();
@@ -31787,7 +31787,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentTarget", actualValue, mTargetvalue2.HasValue() ? mTargetvalue2.Value() : 2));
+                VerifyOrReturn(CheckValue("CurrentTarget", actualValue, mTargetvalue2.HasValue() ? mTargetvalue2.Value() : 2U));
             }
 
             NextTest();
@@ -32066,8 +32066,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("status", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("status", [value unsignedCharValue], 3));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("status", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("status", [value unsignedCharValue], 3U));
 
             NextTest();
         }];
@@ -35918,19 +35918,19 @@ private:
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
                 ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
             }
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             temp_0[1] = [[CHIPAccessControlClusterAccessControlEntry alloc] init];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3];
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
             ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = nil;
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
@@ -35941,7 +35941,7 @@ private:
 
                 ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).targets = temp_3;
             }
-            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1];
+            ((CHIPAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             aclArgument = temp_0;
         }
@@ -35991,7 +35991,7 @@ private:
         params.providerNodeId = mProviderNodeId.HasValue() ? [NSNumber numberWithUnsignedLongLong:mProviderNodeId.Value()]
                                                            : [NSNumber numberWithUnsignedLongLong:12648430ULL];
         params.vendorId = [NSNumber numberWithUnsignedShort:0U];
-        params.announcementReason = [NSNumber numberWithUnsignedChar:0];
+        params.announcementReason = [NSNumber numberWithUnsignedChar:0U];
         params.endpoint
             = mEndpoint.HasValue() ? [NSNumber numberWithUnsignedShort:mEndpoint.Value()] : [NSNumber numberWithUnsignedShort:0U];
         [cluster announceOtaProviderWithParams:params
@@ -36771,8 +36771,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("occupancy", "", "map8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("occupancy", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("occupancy", [value unsignedCharValue], 1));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("occupancy", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("occupancy", [value unsignedCharValue], 1U));
 
             NextTest();
         }];
@@ -36789,7 +36789,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id occupancyArgument;
-        occupancyArgument = [NSNumber numberWithUnsignedChar:0];
+        occupancyArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeOccupancyWithValue:occupancyArgument
                                 completionHandler:^(NSError * _Nullable err) {
                                     NSLog(@"Writes the respective default value to mandatory attribute: Occupancy Error: %@", err);
@@ -36816,7 +36816,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("occupancy", actualValue, 0));
+                VerifyOrReturn(CheckValue("occupancy", actualValue, 0U));
             }
 
             NextTest();
@@ -36840,7 +36840,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("occupancy sensor type", actualValue, 0));
+                VerifyOrReturn(CheckValue("occupancy sensor type", actualValue, 0U));
             }
 
             NextTest();
@@ -36863,8 +36863,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("occupancySensorType", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("occupancySensorType", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("occupancySensorType", [value unsignedCharValue], 3));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("occupancySensorType", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("occupancySensorType", [value unsignedCharValue], 3U));
 
             NextTest();
         }];
@@ -36881,7 +36881,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id occupancySensorTypeArgument;
-        occupancySensorTypeArgument = [NSNumber numberWithUnsignedChar:0];
+        occupancySensorTypeArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeOccupancySensorTypeWithValue:occupancySensorTypeArgument
                                           completionHandler:^(NSError * _Nullable err) {
                                               NSLog(@"Writes the respective default value to mandatory attribute: "
@@ -36910,8 +36910,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("occupancySensorType", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("occupancySensorType", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("occupancySensorType", [value unsignedCharValue], 3));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("occupancySensorType", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("occupancySensorType", [value unsignedCharValue], 3U));
 
             NextTest();
         }];
@@ -36934,8 +36934,8 @@ private:
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                 VerifyOrReturn(CheckConstraintType("occupancySensorTypeBitmap", "", "map8"));
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("occupancySensorTypeBitmap", [value unsignedCharValue], 1));
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("occupancySensorTypeBitmap", [value unsignedCharValue], 273));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("occupancySensorTypeBitmap", [value unsignedCharValue], 1U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("occupancySensorTypeBitmap", [value unsignedCharValue], 273U));
 
                 NextTest();
             }];
@@ -36952,7 +36952,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id occupancySensorTypeBitmapArgument;
-        occupancySensorTypeBitmapArgument = [NSNumber numberWithUnsignedChar:1];
+        occupancySensorTypeBitmapArgument = [NSNumber numberWithUnsignedChar:1U];
         [cluster writeAttributeOccupancySensorTypeBitmapWithValue:occupancySensorTypeBitmapArgument
                                                 completionHandler:^(NSError * _Nullable err) {
                                                     NSLog(@"Writes the respective default value to mandatory attribute: "
@@ -36982,8 +36982,8 @@ private:
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                 VerifyOrReturn(CheckConstraintType("occupancySensorTypeBitmap", "", "map8"));
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("occupancySensorTypeBitmap", [value unsignedCharValue], 1));
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("occupancySensorTypeBitmap", [value unsignedCharValue], 273));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("occupancySensorTypeBitmap", [value unsignedCharValue], 1U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("occupancySensorTypeBitmap", [value unsignedCharValue], 273U));
 
                 NextTest();
             }];
@@ -37217,7 +37217,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("PIR unoccupied to occupied threshold", actualValue, 1));
+                VerifyOrReturn(CheckValue("PIR unoccupied to occupied threshold", actualValue, 1U));
             }
 
             NextTest();
@@ -37246,8 +37246,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("pirUnoccupiedToOccupiedThreshold", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("pirUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 1));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("pirUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 254));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("pirUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 1U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("pirUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -37264,7 +37264,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id pirUnoccupiedToOccupiedThresholdArgument;
-        pirUnoccupiedToOccupiedThresholdArgument = [NSNumber numberWithUnsignedChar:1];
+        pirUnoccupiedToOccupiedThresholdArgument = [NSNumber numberWithUnsignedChar:1U];
         [cluster writeAttributePirUnoccupiedToOccupiedThresholdWithValue:pirUnoccupiedToOccupiedThresholdArgument
                                                        completionHandler:^(NSError * _Nullable err) {
                                                            NSLog(@"Writes the respective default value to optional attribute: "
@@ -37305,7 +37305,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("PIR unoccupied to occupied threshold", actualValue, 1));
+                VerifyOrReturn(CheckValue("PIR unoccupied to occupied threshold", actualValue, 1U));
             }
 
             NextTest();
@@ -37515,14 +37515,14 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ultrasonic unoccupied to occupied threshold", actualValue, 1));
+                VerifyOrReturn(CheckValue("ultrasonic unoccupied to occupied threshold", actualValue, 1U));
             }
 
             VerifyOrReturn(CheckConstraintType("ultrasonicUnoccupiedToOccupiedThreshold", "", "uint16"));
             VerifyOrReturn(
-                CheckConstraintMinValue<uint8_t>("ultrasonicUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 1));
+                CheckConstraintMinValue<uint8_t>("ultrasonicUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 1U));
             VerifyOrReturn(
-                CheckConstraintMaxValue<uint8_t>("ultrasonicUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 254));
+                CheckConstraintMaxValue<uint8_t>("ultrasonicUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -37539,7 +37539,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id ultrasonicUnoccupiedToOccupiedThresholdArgument;
-        ultrasonicUnoccupiedToOccupiedThresholdArgument = [NSNumber numberWithUnsignedChar:1];
+        ultrasonicUnoccupiedToOccupiedThresholdArgument = [NSNumber numberWithUnsignedChar:1U];
         [cluster
             writeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithValue:ultrasonicUnoccupiedToOccupiedThresholdArgument
                                                          completionHandler:^(NSError * _Nullable err) {
@@ -37581,7 +37581,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ultrasonic unoccupied to occupied threshold", actualValue, 1));
+                VerifyOrReturn(CheckValue("ultrasonic unoccupied to occupied threshold", actualValue, 1U));
             }
 
             NextTest();
@@ -37843,7 +37843,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("physical contact unoccupied to occupied threshold", actualValue, 1));
+                VerifyOrReturn(CheckValue("physical contact unoccupied to occupied threshold", actualValue, 1U));
             }
 
             NextTest();
@@ -37873,9 +37873,9 @@ private:
 
             VerifyOrReturn(CheckConstraintType("physicalContactUnoccupiedToOccupiedThreshold", "", "uint8"));
             VerifyOrReturn(
-                CheckConstraintMinValue<uint8_t>("physicalContactUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 1));
+                CheckConstraintMinValue<uint8_t>("physicalContactUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 1U));
             VerifyOrReturn(
-                CheckConstraintMaxValue<uint8_t>("physicalContactUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 254));
+                CheckConstraintMaxValue<uint8_t>("physicalContactUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -37892,7 +37892,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id physicalContactUnoccupiedToOccupiedThresholdArgument;
-        physicalContactUnoccupiedToOccupiedThresholdArgument = [NSNumber numberWithUnsignedChar:1];
+        physicalContactUnoccupiedToOccupiedThresholdArgument = [NSNumber numberWithUnsignedChar:1U];
         [cluster
             writeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithValue:physicalContactUnoccupiedToOccupiedThresholdArgument
                                                               completionHandler:^(NSError * _Nullable err) {
@@ -37935,7 +37935,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("physical contact unoccupied to occupied threshold", actualValue, 1));
+                VerifyOrReturn(CheckValue("physical contact unoccupied to occupied threshold", actualValue, 1U));
             }
 
             NextTest();
@@ -39371,7 +39371,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id startUpOnOffArgument;
-        startUpOnOffArgument = [NSNumber numberWithUnsignedChar:0];
+        startUpOnOffArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeStartUpOnOffWithValue:startUpOnOffArgument
                                    completionHandler:^(NSError * _Nullable err) {
                                        NSLog(@"TH writes a value of 0 to StartUpOnOff attribute of DUT Error: %@", err);
@@ -39398,7 +39398,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("StartUpOnOff", actualValue));
-                VerifyOrReturn(CheckValue("StartUpOnOff", actualValue, 0));
+                VerifyOrReturn(CheckValue("StartUpOnOff", actualValue, 0U));
             }
 
             NextTest();
@@ -39449,7 +39449,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id startUpOnOffArgument;
-        startUpOnOffArgument = [NSNumber numberWithUnsignedChar:1];
+        startUpOnOffArgument = [NSNumber numberWithUnsignedChar:1U];
         [cluster writeAttributeStartUpOnOffWithValue:startUpOnOffArgument
                                    completionHandler:^(NSError * _Nullable err) {
                                        NSLog(@"TH writes a value of 1 to StartUpOnOff attribute of DUT Error: %@", err);
@@ -39504,7 +39504,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id startUpOnOffArgument;
-        startUpOnOffArgument = [NSNumber numberWithUnsignedChar:2];
+        startUpOnOffArgument = [NSNumber numberWithUnsignedChar:2U];
         [cluster writeAttributeStartUpOnOffWithValue:startUpOnOffArgument
                                    completionHandler:^(NSError * _Nullable err) {
                                        NSLog(@"TH writes a value of 2 to StartUpOnOff attribute of DUT Error: %@", err);
@@ -40391,8 +40391,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("status", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("status", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("status", [value unsignedCharValue], 3));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("status", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("status", [value unsignedCharValue], 3U));
 
             NextTest();
         }];
@@ -40486,8 +40486,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("wiredCurrentType", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("wiredCurrentType", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("wiredCurrentType", [value unsignedCharValue], 1));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("wiredCurrentType", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("wiredCurrentType", [value unsignedCharValue], 1U));
 
             NextTest();
         }];
@@ -40651,8 +40651,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("batteryChargeLevel", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("batteryChargeLevel", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batteryChargeLevel", [value unsignedCharValue], 2));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("batteryChargeLevel", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batteryChargeLevel", [value unsignedCharValue], 2U));
 
             NextTest();
         }];
@@ -40690,8 +40690,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("batteryReplaceability", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("batteryReplaceability", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batteryReplaceability", [value unsignedCharValue], 3));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("batteryReplaceability", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batteryReplaceability", [value unsignedCharValue], 3U));
 
             NextTest();
         }];
@@ -40883,8 +40883,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("batteryChargeState", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("batteryChargeState", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batteryChargeState", [value unsignedCharValue], 3));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("batteryChargeState", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batteryChargeState", [value unsignedCharValue], 3U));
 
             NextTest();
         }];
@@ -42639,8 +42639,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("effectiveOperationMode", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("effectiveOperationMode", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("effectiveOperationMode", [value unsignedCharValue], 3));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("effectiveOperationMode", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("effectiveOperationMode", [value unsignedCharValue], 3U));
 
             NextTest();
         }];
@@ -42662,8 +42662,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("effectiveControlMode", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("effectiveControlMode", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("effectiveControlMode", [value unsignedCharValue], 7));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("effectiveControlMode", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("effectiveControlMode", [value unsignedCharValue], 7U));
 
             NextTest();
         }];
@@ -42835,8 +42835,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("operationMode", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("operationMode", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("operationMode", [value unsignedCharValue], 3));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("operationMode", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("operationMode", [value unsignedCharValue], 3U));
 
             NextTest();
         }];
@@ -42863,8 +42863,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("controlMode", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("controlMode", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("controlMode", [value unsignedCharValue], 7));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("controlMode", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("controlMode", [value unsignedCharValue], 7U));
 
             NextTest();
         }];
@@ -43031,7 +43031,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id operationModeArgument;
-        operationModeArgument = [NSNumber numberWithUnsignedChar:1];
+        operationModeArgument = [NSNumber numberWithUnsignedChar:1U];
         [cluster writeAttributeOperationModeWithValue:operationModeArgument
                                     completionHandler:^(NSError * _Nullable err) {
                                         NSLog(@"Write 1 to the OperationMode attribute to DUT: OperationMode Error: %@", err);
@@ -43059,7 +43059,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("EffectiveOperationMode", actualValue, 1));
+                VerifyOrReturn(CheckValue("EffectiveOperationMode", actualValue, 1U));
             }
 
             NextTest();
@@ -43077,7 +43077,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id operationModeArgument;
-        operationModeArgument = [NSNumber numberWithUnsignedChar:2];
+        operationModeArgument = [NSNumber numberWithUnsignedChar:2U];
         [cluster writeAttributeOperationModeWithValue:operationModeArgument
                                     completionHandler:^(NSError * _Nullable err) {
                                         NSLog(@"Write 2 to the OperationMode attribute to DUT: OperationMode Error: %@", err);
@@ -43105,7 +43105,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("EffectiveOperationMode", actualValue, 2));
+                VerifyOrReturn(CheckValue("EffectiveOperationMode", actualValue, 2U));
             }
 
             NextTest();
@@ -43123,7 +43123,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id operationModeArgument;
-        operationModeArgument = [NSNumber numberWithUnsignedChar:3];
+        operationModeArgument = [NSNumber numberWithUnsignedChar:3U];
         [cluster writeAttributeOperationModeWithValue:operationModeArgument
                                     completionHandler:^(NSError * _Nullable err) {
                                         NSLog(@"Write 3 to the OperationMode attribute to DUT: OperationMode Error: %@", err);
@@ -43151,7 +43151,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("EffectiveOperationMode", actualValue, 3));
+                VerifyOrReturn(CheckValue("EffectiveOperationMode", actualValue, 3U));
             }
 
             NextTest();
@@ -43407,7 +43407,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id operationModeArgument;
-        operationModeArgument = [NSNumber numberWithUnsignedChar:0];
+        operationModeArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeOperationModeWithValue:operationModeArgument
                                     completionHandler:^(NSError * _Nullable err) {
                                         NSLog(@"Write 0 to the OperationMode attribute to DUT Error: %@", err);
@@ -43435,7 +43435,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("EffectiveOperationMode", actualValue, 0));
+                VerifyOrReturn(CheckValue("EffectiveOperationMode", actualValue, 0U));
             }
 
             NextTest();
@@ -43453,7 +43453,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id controlModeArgument;
-        controlModeArgument = [NSNumber numberWithUnsignedChar:0];
+        controlModeArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeControlModeWithValue:controlModeArgument
                                   completionHandler:^(NSError * _Nullable err) {
                                       NSLog(@"Write 0 to the ControlMode attribute to DUT Error: %@", err);
@@ -43481,7 +43481,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("EffectiveControlMode", actualValue, 0));
+                VerifyOrReturn(CheckValue("EffectiveControlMode", actualValue, 0U));
             }
 
             NextTest();
@@ -43499,7 +43499,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id controlModeArgument;
-        controlModeArgument = [NSNumber numberWithUnsignedChar:1];
+        controlModeArgument = [NSNumber numberWithUnsignedChar:1U];
         [cluster writeAttributeControlModeWithValue:controlModeArgument
                                   completionHandler:^(NSError * _Nullable err) {
                                       NSLog(@"Write 1 to the ControlMode attribute to DUT Error: %@", err);
@@ -43527,7 +43527,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("EffectiveControlMode", actualValue, 1));
+                VerifyOrReturn(CheckValue("EffectiveControlMode", actualValue, 1U));
             }
 
             NextTest();
@@ -43545,7 +43545,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id controlModeArgument;
-        controlModeArgument = [NSNumber numberWithUnsignedChar:2];
+        controlModeArgument = [NSNumber numberWithUnsignedChar:2U];
         [cluster writeAttributeControlModeWithValue:controlModeArgument
                                   completionHandler:^(NSError * _Nullable err) {
                                       NSLog(@"Write 2 to the ControlMode attribute to DUT Error: %@", err);
@@ -43573,7 +43573,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("EffectiveControlMode", actualValue, 2));
+                VerifyOrReturn(CheckValue("EffectiveControlMode", actualValue, 2U));
             }
 
             NextTest();
@@ -43591,7 +43591,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id controlModeArgument;
-        controlModeArgument = [NSNumber numberWithUnsignedChar:3];
+        controlModeArgument = [NSNumber numberWithUnsignedChar:3U];
         [cluster writeAttributeControlModeWithValue:controlModeArgument
                                   completionHandler:^(NSError * _Nullable err) {
                                       NSLog(@"Write 3 to the ControlMode attribute to DUT Error: %@", err);
@@ -43619,7 +43619,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("EffectiveControlMode", actualValue, 3));
+                VerifyOrReturn(CheckValue("EffectiveControlMode", actualValue, 3U));
             }
 
             NextTest();
@@ -43637,7 +43637,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id controlModeArgument;
-        controlModeArgument = [NSNumber numberWithUnsignedChar:5];
+        controlModeArgument = [NSNumber numberWithUnsignedChar:5U];
         [cluster writeAttributeControlModeWithValue:controlModeArgument
                                   completionHandler:^(NSError * _Nullable err) {
                                       NSLog(@"Write 5 to the ControlMode attribute to DUT Error: %@", err);
@@ -43665,7 +43665,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("EffectiveControlMode", actualValue, 5));
+                VerifyOrReturn(CheckValue("EffectiveControlMode", actualValue, 5U));
             }
 
             NextTest();
@@ -43683,7 +43683,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id controlModeArgument;
-        controlModeArgument = [NSNumber numberWithUnsignedChar:7];
+        controlModeArgument = [NSNumber numberWithUnsignedChar:7U];
         [cluster writeAttributeControlModeWithValue:controlModeArgument
                                   completionHandler:^(NSError * _Nullable err) {
                                       NSLog(@"Write 7 to the ControlMode attribute to DUT Error: %@", err);
@@ -43711,7 +43711,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("EffectiveControlMode", actualValue, 7));
+                VerifyOrReturn(CheckValue("EffectiveControlMode", actualValue, 7U));
             }
 
             NextTest();
@@ -45045,11 +45045,11 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("number of positions", actualValue, 2));
+                VerifyOrReturn(CheckValue("number of positions", actualValue, 2U));
             }
 
             VerifyOrReturn(CheckConstraintType("numberOfPositions", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("numberOfPositions", [value unsignedCharValue], 2));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("numberOfPositions", [value unsignedCharValue], 2U));
 
             NextTest();
         }];
@@ -45070,11 +45070,11 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current position", actualValue, 0));
+                VerifyOrReturn(CheckValue("current position", actualValue, 0U));
             }
 
             VerifyOrReturn(CheckConstraintType("currentPosition", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentPosition", [value unsignedCharValue], 0));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentPosition", [value unsignedCharValue], 0U));
 
             NextTest();
         }];
@@ -45095,11 +45095,11 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("multi press max", actualValue, 2));
+                VerifyOrReturn(CheckValue("multi press max", actualValue, 2U));
             }
 
             VerifyOrReturn(CheckConstraintType("multiPressMax", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("multiPressMax", [value unsignedCharValue], 2));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("multiPressMax", [value unsignedCharValue], 2U));
 
             NextTest();
         }];
@@ -46812,8 +46812,8 @@ private:
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                 VerifyOrReturn(CheckConstraintType("controlSequenceOfOperation", "", "enum8"));
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("controlSequenceOfOperation", [value unsignedCharValue], 0));
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("controlSequenceOfOperation", [value unsignedCharValue], 5));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("controlSequenceOfOperation", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("controlSequenceOfOperation", [value unsignedCharValue], 5U));
 
                 NextTest();
             }];
@@ -46833,8 +46833,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("systemMode", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("systemMode", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("systemMode", [value unsignedCharValue], 9));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("systemMode", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("systemMode", [value unsignedCharValue], 9U));
 
             NextTest();
         }];
@@ -46952,8 +46952,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("startOfWeek", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("startOfWeek", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("startOfWeek", [value unsignedCharValue], 6));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("startOfWeek", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("startOfWeek", [value unsignedCharValue], 6U));
 
             NextTest();
         }];
@@ -49777,12 +49777,12 @@ private:
 
                 {
                     id actualValue = value;
-                    VerifyOrReturn(CheckValue("ControlSequenceOfOperation", actualValue, 4));
+                    VerifyOrReturn(CheckValue("ControlSequenceOfOperation", actualValue, 4U));
                 }
 
                 VerifyOrReturn(CheckConstraintType("controlSequenceOfOperation", "", "enum8"));
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("controlSequenceOfOperation", [value unsignedCharValue], 0));
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("controlSequenceOfOperation", [value unsignedCharValue], 5));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("controlSequenceOfOperation", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("controlSequenceOfOperation", [value unsignedCharValue], 5U));
 
                 NextTest();
             }];
@@ -49797,7 +49797,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id controlSequenceOfOperationArgument;
-        controlSequenceOfOperationArgument = [NSNumber numberWithUnsignedChar:2];
+        controlSequenceOfOperationArgument = [NSNumber numberWithUnsignedChar:2U];
         [cluster writeAttributeControlSequenceOfOperationWithValue:controlSequenceOfOperationArgument
                                                  completionHandler:^(NSError * _Nullable err) {
                                                      NSLog(@"Write Attribute command for ControlSequenceOfOperation with a new "
@@ -49826,7 +49826,7 @@ private:
 
                 {
                     id actualValue = value;
-                    VerifyOrReturn(CheckValue("ControlSequenceOfOperation", actualValue, 2));
+                    VerifyOrReturn(CheckValue("ControlSequenceOfOperation", actualValue, 2U));
                 }
 
                 NextTest();
@@ -49842,7 +49842,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPThermostatClusterSetpointRaiseLowerParams alloc] init];
-        params.mode = [NSNumber numberWithUnsignedChar:0];
+        params.mode = [NSNumber numberWithUnsignedChar:0U];
         params.amount = [NSNumber numberWithChar:-30];
         [cluster setpointRaiseLowerWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
@@ -49890,7 +49890,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPThermostatClusterSetpointRaiseLowerParams alloc] init];
-        params.mode = [NSNumber numberWithUnsignedChar:0];
+        params.mode = [NSNumber numberWithUnsignedChar:0U];
         params.amount = [NSNumber numberWithChar:30];
         [cluster setpointRaiseLowerWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
@@ -49963,7 +49963,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPThermostatClusterSetpointRaiseLowerParams alloc] init];
-        params.mode = [NSNumber numberWithUnsignedChar:1];
+        params.mode = [NSNumber numberWithUnsignedChar:1U];
         params.amount = [NSNumber numberWithChar:-30];
         [cluster setpointRaiseLowerWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
@@ -50036,7 +50036,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPThermostatClusterSetpointRaiseLowerParams alloc] init];
-        params.mode = [NSNumber numberWithUnsignedChar:1];
+        params.mode = [NSNumber numberWithUnsignedChar:1U];
         params.amount = [NSNumber numberWithChar:30];
         [cluster setpointRaiseLowerWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
@@ -50109,7 +50109,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPThermostatClusterSetpointRaiseLowerParams alloc] init];
-        params.mode = [NSNumber numberWithUnsignedChar:2];
+        params.mode = [NSNumber numberWithUnsignedChar:2U];
         params.amount = [NSNumber numberWithChar:-30];
         [cluster setpointRaiseLowerWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
@@ -50209,7 +50209,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPThermostatClusterSetpointRaiseLowerParams alloc] init];
-        params.mode = [NSNumber numberWithUnsignedChar:2];
+        params.mode = [NSNumber numberWithUnsignedChar:2U];
         params.amount = [NSNumber numberWithChar:30];
         [cluster setpointRaiseLowerWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
@@ -50670,8 +50670,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("temperatureDisplayMode", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("temperatureDisplayMode", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("temperatureDisplayMode", [value unsignedCharValue], 1));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("temperatureDisplayMode", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("temperatureDisplayMode", [value unsignedCharValue], 1U));
 
             NextTest();
         }];
@@ -50692,8 +50692,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("keypadLockout", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("keypadLockout", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("keypadLockout", [value unsignedCharValue], 5));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("keypadLockout", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("keypadLockout", [value unsignedCharValue], 5U));
 
             NextTest();
         }];
@@ -50715,8 +50715,8 @@ private:
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                 VerifyOrReturn(CheckConstraintType("scheduleProgrammingVisibility", "", "enum8"));
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("scheduleProgrammingVisibility", [value unsignedCharValue], 0));
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("scheduleProgrammingVisibility", [value unsignedCharValue], 1));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("scheduleProgrammingVisibility", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("scheduleProgrammingVisibility", [value unsignedCharValue], 1U));
 
                 NextTest();
             }];
@@ -51035,7 +51035,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id temperatureDisplayModeArgument;
-        temperatureDisplayModeArgument = [NSNumber numberWithUnsignedChar:0];
+        temperatureDisplayModeArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster
             writeAttributeTemperatureDisplayModeWithValue:temperatureDisplayModeArgument
                                         completionHandler:^(NSError * _Nullable err) {
@@ -51064,7 +51064,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id temperatureDisplayModeArgument;
-        temperatureDisplayModeArgument = [NSNumber numberWithUnsignedChar:1];
+        temperatureDisplayModeArgument = [NSNumber numberWithUnsignedChar:1U];
         [cluster
             writeAttributeTemperatureDisplayModeWithValue:temperatureDisplayModeArgument
                                         completionHandler:^(NSError * _Nullable err) {
@@ -51093,7 +51093,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id temperatureDisplayModeArgument;
-        temperatureDisplayModeArgument = [NSNumber numberWithUnsignedChar:2];
+        temperatureDisplayModeArgument = [NSNumber numberWithUnsignedChar:2U];
         [cluster writeAttributeTemperatureDisplayModeWithValue:temperatureDisplayModeArgument
                                              completionHandler:^(NSError * _Nullable err) {
                                                  NSLog(@"Writes a value of greater than 1 to TemperatureDisplayMode attribute of "
@@ -51116,7 +51116,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id keypadLockoutArgument;
-        keypadLockoutArgument = [NSNumber numberWithUnsignedChar:0];
+        keypadLockoutArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeKeypadLockoutWithValue:keypadLockoutArgument
                                     completionHandler:^(NSError * _Nullable err) {
                                         NSLog(@"Writes a value of 0 to KeypadLockout attribute of DUT Error: %@", err);
@@ -51145,7 +51145,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id keypadLockoutArgument;
-        keypadLockoutArgument = [NSNumber numberWithUnsignedChar:1];
+        keypadLockoutArgument = [NSNumber numberWithUnsignedChar:1U];
         [cluster writeAttributeKeypadLockoutWithValue:keypadLockoutArgument
                                     completionHandler:^(NSError * _Nullable err) {
                                         NSLog(@"Writes a value of 1 to KeypadLockout attribute of DUT Error: %@", err);
@@ -51174,7 +51174,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id keypadLockoutArgument;
-        keypadLockoutArgument = [NSNumber numberWithUnsignedChar:2];
+        keypadLockoutArgument = [NSNumber numberWithUnsignedChar:2U];
         [cluster writeAttributeKeypadLockoutWithValue:keypadLockoutArgument
                                     completionHandler:^(NSError * _Nullable err) {
                                         NSLog(@"Writes a value of 2 to KeypadLockout attribute of DUT Error: %@", err);
@@ -51203,7 +51203,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id keypadLockoutArgument;
-        keypadLockoutArgument = [NSNumber numberWithUnsignedChar:3];
+        keypadLockoutArgument = [NSNumber numberWithUnsignedChar:3U];
         [cluster writeAttributeKeypadLockoutWithValue:keypadLockoutArgument
                                     completionHandler:^(NSError * _Nullable err) {
                                         NSLog(@"Writes a value of 3 to KeypadLockout attribute of DUT Error: %@", err);
@@ -51232,7 +51232,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id keypadLockoutArgument;
-        keypadLockoutArgument = [NSNumber numberWithUnsignedChar:4];
+        keypadLockoutArgument = [NSNumber numberWithUnsignedChar:4U];
         [cluster writeAttributeKeypadLockoutWithValue:keypadLockoutArgument
                                     completionHandler:^(NSError * _Nullable err) {
                                         NSLog(@"Writes a value of 4 to KeypadLockout attribute of DUT Error: %@", err);
@@ -51261,7 +51261,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id keypadLockoutArgument;
-        keypadLockoutArgument = [NSNumber numberWithUnsignedChar:5];
+        keypadLockoutArgument = [NSNumber numberWithUnsignedChar:5U];
         [cluster writeAttributeKeypadLockoutWithValue:keypadLockoutArgument
                                     completionHandler:^(NSError * _Nullable err) {
                                         NSLog(@"Writes a value of 5 to KeypadLockout attribute of DUT Error: %@", err);
@@ -51290,7 +51290,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id keypadLockoutArgument;
-        keypadLockoutArgument = [NSNumber numberWithUnsignedChar:6];
+        keypadLockoutArgument = [NSNumber numberWithUnsignedChar:6U];
         [cluster writeAttributeKeypadLockoutWithValue:keypadLockoutArgument
                                     completionHandler:^(NSError * _Nullable err) {
                                         NSLog(@"Writes a value of greater than 5 to KeypadLockout attribute of DUT Error: %@", err);
@@ -51310,7 +51310,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id scheduleProgrammingVisibilityArgument;
-        scheduleProgrammingVisibilityArgument = [NSNumber numberWithUnsignedChar:0];
+        scheduleProgrammingVisibilityArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeScheduleProgrammingVisibilityWithValue:scheduleProgrammingVisibilityArgument
                                                     completionHandler:^(NSError * _Nullable err) {
                                                         NSLog(@"Writes a value of 0 to ScheduleProgrammingVisibility attribute of "
@@ -51341,7 +51341,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id scheduleProgrammingVisibilityArgument;
-        scheduleProgrammingVisibilityArgument = [NSNumber numberWithUnsignedChar:1];
+        scheduleProgrammingVisibilityArgument = [NSNumber numberWithUnsignedChar:1U];
         [cluster writeAttributeScheduleProgrammingVisibilityWithValue:scheduleProgrammingVisibilityArgument
                                                     completionHandler:^(NSError * _Nullable err) {
                                                         NSLog(@"Writes a value of 1 to ScheduleProgrammingVisibility attribute of "
@@ -51372,7 +51372,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id scheduleProgrammingVisibilityArgument;
-        scheduleProgrammingVisibilityArgument = [NSNumber numberWithUnsignedChar:2];
+        scheduleProgrammingVisibilityArgument = [NSNumber numberWithUnsignedChar:2U];
         [cluster writeAttributeScheduleProgrammingVisibilityWithValue:scheduleProgrammingVisibilityArgument
                                                     completionHandler:^(NSError * _Nullable err) {
                                                         NSLog(@"Writes a value of greater than 1 to ScheduleProgrammingVisibility "
@@ -52532,8 +52532,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("wiFiVersion", "", "enum"));
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("wiFiVersion", [value unsignedCharValue], 0));
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("wiFiVersion", [value unsignedCharValue], 5));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("wiFiVersion", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("wiFiVersion", [value unsignedCharValue], 5U));
             }
 
             NextTest();
@@ -53734,8 +53734,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("type", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("type", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("type", [value unsignedCharValue], 9));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("type", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("type", [value unsignedCharValue], 9U));
 
             NextTest();
         }];
@@ -53755,8 +53755,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("configStatus", "", "map8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("configStatus", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("configStatus", [value unsignedCharValue], 63));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("configStatus", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("configStatus", [value unsignedCharValue], 63U));
 
             NextTest();
         }];
@@ -53776,8 +53776,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("operationalStatus", "", "map8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("operationalStatus", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("operationalStatus", [value unsignedCharValue], 63));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("operationalStatus", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("operationalStatus", [value unsignedCharValue], 63U));
 
             NextTest();
         }];
@@ -53797,8 +53797,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("endProductType", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("endProductType", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("endProductType", [value unsignedCharValue], 23));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("endProductType", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("endProductType", [value unsignedCharValue], 23U));
 
             NextTest();
         }];
@@ -53818,8 +53818,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("mode", "", "map8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("mode", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("mode", [value unsignedCharValue], 15));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("mode", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("mode", [value unsignedCharValue], 15U));
 
             NextTest();
         }];
@@ -53834,7 +53834,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id modeArgument;
-        modeArgument = [NSNumber numberWithUnsignedChar:0];
+        modeArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeModeWithValue:modeArgument
                            completionHandler:^(NSError * _Nullable err) {
                                NSLog(@"1f: write a value into the RW mandatory attribute:: Mode Error: %@", err);
@@ -54247,9 +54247,9 @@ private:
 
                     VerifyOrReturn(CheckConstraintType("currentPositionLiftPercentage", "", "Percent"));
                     VerifyOrReturn(
-                        CheckConstraintMinValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 0));
+                        CheckConstraintMinValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 0U));
                     VerifyOrReturn(
-                        CheckConstraintMaxValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 100));
+                        CheckConstraintMaxValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 100U));
                 }
 
                 NextTest();
@@ -54274,9 +54274,9 @@ private:
 
                     VerifyOrReturn(CheckConstraintType("currentPositionTiltPercentage", "", "Percent"));
                     VerifyOrReturn(
-                        CheckConstraintMinValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 0));
+                        CheckConstraintMinValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 0U));
                     VerifyOrReturn(
-                        CheckConstraintMaxValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 100));
+                        CheckConstraintMaxValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 100U));
                 }
 
                 NextTest();
@@ -54702,7 +54702,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id modeArgument;
-        modeArgument = [NSNumber numberWithUnsignedChar:1];
+        modeArgument = [NSNumber numberWithUnsignedChar:1U];
         [cluster writeAttributeModeWithValue:modeArgument
                            completionHandler:^(NSError * _Nullable err) {
                                NSLog(@"1a: TH set the Mode Attribute bit0 of the DUT Error: %@", err);
@@ -54726,8 +54726,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("configStatus", [value unsignedCharValue], 4));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("configStatus", [value unsignedCharValue], 127));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("configStatus", [value unsignedCharValue], 4U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("configStatus", [value unsignedCharValue], 127U));
 
             NextTest();
         }];
@@ -54742,7 +54742,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id modeArgument;
-        modeArgument = [NSNumber numberWithUnsignedChar:0];
+        modeArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeModeWithValue:modeArgument
                            completionHandler:^(NSError * _Nullable err) {
                                NSLog(@"1c: TH clear the Mode Attribute bit0 of the DUT Error: %@", err);
@@ -54766,8 +54766,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("configStatus", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("configStatus", [value unsignedCharValue], 127));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("configStatus", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("configStatus", [value unsignedCharValue], 127U));
 
             NextTest();
         }];
@@ -54782,7 +54782,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id modeArgument;
-        modeArgument = [NSNumber numberWithUnsignedChar:2];
+        modeArgument = [NSNumber numberWithUnsignedChar:2U];
         [cluster writeAttributeModeWithValue:modeArgument
                            completionHandler:^(NSError * _Nullable err) {
                                NSLog(@"2a: TH set the Mode Attribute bit1 of the DUT Error: %@", err);
@@ -54807,8 +54807,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("configStatus", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("configStatus", [value unsignedCharValue], 127));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("configStatus", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("configStatus", [value unsignedCharValue], 127U));
             {
                 configStatusValA = value;
             }
@@ -54842,7 +54842,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id modeArgument;
-        modeArgument = [NSNumber numberWithUnsignedChar:0];
+        modeArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeModeWithValue:modeArgument
                            completionHandler:^(NSError * _Nullable err) {
                                NSLog(@"2d: TH clear the Mode Attribute bit1 of the DUT Error: %@", err);
@@ -54866,8 +54866,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("configStatus", [value unsignedCharValue], 1));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("configStatus", [value unsignedCharValue], 127));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("configStatus", [value unsignedCharValue], 1U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("configStatus", [value unsignedCharValue], 127U));
 
             NextTest();
         }];
@@ -54886,8 +54886,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("mode", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("mode", [value unsignedCharValue], 127));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("mode", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("mode", [value unsignedCharValue], 127U));
 
             NextTest();
         }];
@@ -54919,7 +54919,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id modeArgument;
-        modeArgument = [NSNumber numberWithUnsignedChar:4];
+        modeArgument = [NSNumber numberWithUnsignedChar:4U];
         [cluster writeAttributeModeWithValue:modeArgument
                            completionHandler:^(NSError * _Nullable err) {
                                NSLog(@"3a: TH set the Mode Attribute bit2 of the DUT Error: %@", err);
@@ -54944,8 +54944,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("configStatus", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("configStatus", [value unsignedCharValue], 127));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("configStatus", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("configStatus", [value unsignedCharValue], 127U));
             {
                 configStatusValB = value;
             }
@@ -54979,7 +54979,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id modeArgument;
-        modeArgument = [NSNumber numberWithUnsignedChar:0];
+        modeArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeModeWithValue:modeArgument
                            completionHandler:^(NSError * _Nullable err) {
                                NSLog(@"3d: TH clear the Mode Attribute bit2 of the DUT Error: %@", err);
@@ -55003,8 +55003,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("configStatus", [value unsignedCharValue], 1));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("configStatus", [value unsignedCharValue], 127));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("configStatus", [value unsignedCharValue], 1U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("configStatus", [value unsignedCharValue], 127U));
 
             NextTest();
         }];
@@ -55023,8 +55023,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("mode", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("mode", [value unsignedCharValue], 127));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("mode", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("mode", [value unsignedCharValue], 127U));
 
             NextTest();
         }];
@@ -55156,8 +55156,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("type", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("type", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("type", [value unsignedCharValue], 9));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("type", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("type", [value unsignedCharValue], 9U));
 
             NextTest();
         }];
@@ -55273,12 +55273,12 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("EndProductType", actualValue, 0));
+                VerifyOrReturn(CheckValue("EndProductType", actualValue, 0U));
             }
 
             VerifyOrReturn(CheckConstraintType("endProductType", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("endProductType", [value unsignedCharValue], 0));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("endProductType", [value unsignedCharValue], 23));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("endProductType", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("endProductType", [value unsignedCharValue], 23U));
 
             NextTest();
         }];
@@ -55676,9 +55676,9 @@ private:
 
                     VerifyOrReturn(CheckConstraintType("currentPositionLiftPercentage", "", "uint8"));
                     VerifyOrReturn(
-                        CheckConstraintMinValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 1));
+                        CheckConstraintMinValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 1U));
                     VerifyOrReturn(
-                        CheckConstraintMaxValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 100));
+                        CheckConstraintMaxValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 100U));
                 }
 
                 NextTest();
@@ -55730,9 +55730,9 @@ private:
 
                     VerifyOrReturn(CheckConstraintType("currentPositionTiltPercentage", "", "uint8"));
                     VerifyOrReturn(
-                        CheckConstraintMinValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 1));
+                        CheckConstraintMinValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 1U));
                     VerifyOrReturn(
-                        CheckConstraintMaxValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 100));
+                        CheckConstraintMaxValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 100U));
                 }
 
                 NextTest();
@@ -55884,8 +55884,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("operationalStatus", "", "map8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("operationalStatus", [value unsignedCharValue], 5));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("operationalStatus", [value unsignedCharValue], 21));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("operationalStatus", [value unsignedCharValue], 5U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("operationalStatus", [value unsignedCharValue], 21U));
 
             NextTest();
         };
@@ -55943,9 +55943,9 @@ private:
 
                     VerifyOrReturn(CheckConstraintType("currentPositionLiftPercentage", "", "uint8"));
                     VerifyOrReturn(
-                        CheckConstraintMinValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 0));
+                        CheckConstraintMinValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 0U));
                     VerifyOrReturn(
-                        CheckConstraintMaxValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 99));
+                        CheckConstraintMaxValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 99U));
                 }
 
                 NextTest();
@@ -55997,9 +55997,9 @@ private:
 
                     VerifyOrReturn(CheckConstraintType("currentPositionTiltPercentage", "", "uint8"));
                     VerifyOrReturn(
-                        CheckConstraintMinValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 0));
+                        CheckConstraintMinValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 0U));
                     VerifyOrReturn(
-                        CheckConstraintMaxValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 99));
+                        CheckConstraintMaxValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 99U));
                 }
 
                 NextTest();
@@ -56045,7 +56045,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0));
+                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0U));
             }
 
             NextTest();
@@ -56505,9 +56505,9 @@ private:
 
                     VerifyOrReturn(CheckConstraintType("currentPositionLiftPercentage", "", "uint8"));
                     VerifyOrReturn(
-                        CheckConstraintMinValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 0));
+                        CheckConstraintMinValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 0U));
                     VerifyOrReturn(
-                        CheckConstraintMaxValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 99));
+                        CheckConstraintMaxValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 99U));
                 }
 
                 NextTest();
@@ -56559,9 +56559,9 @@ private:
 
                     VerifyOrReturn(CheckConstraintType("currentPositionTiltPercentage", "", "uint8"));
                     VerifyOrReturn(
-                        CheckConstraintMinValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 0));
+                        CheckConstraintMinValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 0U));
                     VerifyOrReturn(
-                        CheckConstraintMaxValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 99));
+                        CheckConstraintMaxValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 99U));
                 }
 
                 NextTest();
@@ -56713,8 +56713,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("operationalStatus", "", "map8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("operationalStatus", [value unsignedCharValue], 10));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("operationalStatus", [value unsignedCharValue], 42));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("operationalStatus", [value unsignedCharValue], 10U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("operationalStatus", [value unsignedCharValue], 42U));
 
             NextTest();
         };
@@ -56772,9 +56772,9 @@ private:
 
                     VerifyOrReturn(CheckConstraintType("currentPositionLiftPercentage", "", "uint8"));
                     VerifyOrReturn(
-                        CheckConstraintMinValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 1));
+                        CheckConstraintMinValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 1U));
                     VerifyOrReturn(
-                        CheckConstraintMaxValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 100));
+                        CheckConstraintMaxValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 100U));
                 }
 
                 NextTest();
@@ -56826,9 +56826,9 @@ private:
 
                     VerifyOrReturn(CheckConstraintType("currentPositionTiltPercentage", "", "uint8"));
                     VerifyOrReturn(
-                        CheckConstraintMinValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 1));
+                        CheckConstraintMinValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 1U));
                     VerifyOrReturn(
-                        CheckConstraintMaxValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 100));
+                        CheckConstraintMaxValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 100U));
                 }
 
                 NextTest();
@@ -56874,7 +56874,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0));
+                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0U));
             }
 
             NextTest();
@@ -57296,7 +57296,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0));
+                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0U));
             }
 
             NextTest();
@@ -57325,7 +57325,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0));
+                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0U));
             }
 
             NextTest();
@@ -57691,7 +57691,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0));
+                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0U));
             }
 
             NextTest();
@@ -57739,7 +57739,7 @@ private:
                 {
                     id actualValue = value;
                     VerifyOrReturn(CheckValueNonNull("CurrentPositionLiftPercentage", actualValue));
-                    VerifyOrReturn(CheckValue("CurrentPositionLiftPercentage", actualValue, 0));
+                    VerifyOrReturn(CheckValue("CurrentPositionLiftPercentage", actualValue, 0U));
                 }
 
                 NextTest();
@@ -57787,7 +57787,7 @@ private:
                 {
                     id actualValue = value;
                     VerifyOrReturn(CheckValueNonNull("CurrentPositionTiltPercentage", actualValue));
-                    VerifyOrReturn(CheckValue("CurrentPositionTiltPercentage", actualValue, 0));
+                    VerifyOrReturn(CheckValue("CurrentPositionTiltPercentage", actualValue, 0U));
                 }
 
                 NextTest();
@@ -58031,7 +58031,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0));
+                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0U));
             }
 
             NextTest();
@@ -58079,7 +58079,7 @@ private:
                 {
                     id actualValue = value;
                     VerifyOrReturn(CheckValueNonNull("CurrentPositionLiftPercentage", actualValue));
-                    VerifyOrReturn(CheckValue("CurrentPositionLiftPercentage", actualValue, 100));
+                    VerifyOrReturn(CheckValue("CurrentPositionLiftPercentage", actualValue, 100U));
                 }
 
                 NextTest();
@@ -58127,7 +58127,7 @@ private:
                 {
                     id actualValue = value;
                     VerifyOrReturn(CheckValueNonNull("CurrentPositionTiltPercentage", actualValue));
-                    VerifyOrReturn(CheckValue("CurrentPositionTiltPercentage", actualValue, 100));
+                    VerifyOrReturn(CheckValue("CurrentPositionTiltPercentage", actualValue, 100U));
                 }
 
                 NextTest();
@@ -58502,7 +58502,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0));
+                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0U));
             }
 
             NextTest();
@@ -58550,7 +58550,7 @@ private:
                 {
                     id actualValue = value;
                     VerifyOrReturn(CheckValueNonNull("CurrentPositionLiftPercentage", actualValue));
-                    VerifyOrReturn(CheckValue("CurrentPositionLiftPercentage", actualValue, 25));
+                    VerifyOrReturn(CheckValue("CurrentPositionLiftPercentage", actualValue, 25U));
                 }
 
                 NextTest();
@@ -58630,7 +58630,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0));
+                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0U));
             }
 
             NextTest();
@@ -58678,7 +58678,7 @@ private:
                 {
                     id actualValue = value;
                     VerifyOrReturn(CheckValueNonNull("CurrentPositionLiftPercentage", actualValue));
-                    VerifyOrReturn(CheckValue("CurrentPositionLiftPercentage", actualValue, 75));
+                    VerifyOrReturn(CheckValue("CurrentPositionLiftPercentage", actualValue, 75U));
                 }
 
                 NextTest();
@@ -59053,7 +59053,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0));
+                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0U));
             }
 
             NextTest();
@@ -59101,7 +59101,7 @@ private:
                 {
                     id actualValue = value;
                     VerifyOrReturn(CheckValueNonNull("CurrentPositionTiltPercentage", actualValue));
-                    VerifyOrReturn(CheckValue("CurrentPositionTiltPercentage", actualValue, 30));
+                    VerifyOrReturn(CheckValue("CurrentPositionTiltPercentage", actualValue, 30U));
                 }
 
                 NextTest();
@@ -59181,7 +59181,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0));
+                VerifyOrReturn(CheckValue("OperationalStatus", actualValue, 0U));
             }
 
             NextTest();
@@ -59229,7 +59229,7 @@ private:
                 {
                     id actualValue = value;
                     VerifyOrReturn(CheckValueNonNull("CurrentPositionTiltPercentage", actualValue));
-                    VerifyOrReturn(CheckValue("CurrentPositionTiltPercentage", actualValue, 60));
+                    VerifyOrReturn(CheckValue("CurrentPositionTiltPercentage", actualValue, 60U));
                 }
 
                 NextTest();
@@ -59429,14 +59429,14 @@ private:
                     id actualValue = value;
                     VerifyOrReturn(CheckValueNonNull("CurrentPositionLiftPercentage", actualValue));
                     VerifyOrReturn(CheckValue("CurrentPositionLiftPercentage", actualValue,
-                        [attrCurrentPositionLiftPercent100ths unsignedShortValue] / 100));
+                        [attrCurrentPositionLiftPercent100ths unsignedShortValue] / 100U));
                 }
                 if (value != nil) {
 
                     VerifyOrReturn(
-                        CheckConstraintMinValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 0));
+                        CheckConstraintMinValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 0U));
                     VerifyOrReturn(
-                        CheckConstraintMaxValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 100));
+                        CheckConstraintMaxValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 100U));
                 }
 
                 NextTest();
@@ -59693,14 +59693,14 @@ private:
                     id actualValue = value;
                     VerifyOrReturn(CheckValueNonNull("CurrentPositionTiltPercentage", actualValue));
                     VerifyOrReturn(CheckValue("CurrentPositionTiltPercentage", actualValue,
-                        [attrCurrentPositionTiltPercent100ths unsignedShortValue] / 100));
+                        [attrCurrentPositionTiltPercent100ths unsignedShortValue] / 100U));
                 }
                 if (value != nil) {
 
                     VerifyOrReturn(
-                        CheckConstraintMinValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 0));
+                        CheckConstraintMinValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 0U));
                     VerifyOrReturn(
-                        CheckConstraintMaxValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 100));
+                        CheckConstraintMaxValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 100U));
                 }
 
                 NextTest();
@@ -60342,10 +60342,10 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("TargetList", [actualValue count], static_cast<uint32_t>(2)));
-                VerifyOrReturn(CheckValue("identifier", ((CHIPTargetNavigatorClusterTargetInfo *) actualValue[0]).identifier, 1));
+                VerifyOrReturn(CheckValue("identifier", ((CHIPTargetNavigatorClusterTargetInfo *) actualValue[0]).identifier, 1U));
                 VerifyOrReturn(
                     CheckValueAsString("name", ((CHIPTargetNavigatorClusterTargetInfo *) actualValue[0]).name, @"exampleName"));
-                VerifyOrReturn(CheckValue("identifier", ((CHIPTargetNavigatorClusterTargetInfo *) actualValue[1]).identifier, 2));
+                VerifyOrReturn(CheckValue("identifier", ((CHIPTargetNavigatorClusterTargetInfo *) actualValue[1]).identifier, 2U));
                 VerifyOrReturn(
                     CheckValueAsString("name", ((CHIPTargetNavigatorClusterTargetInfo *) actualValue[1]).name, @"exampleName"));
             }
@@ -60369,7 +60369,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentTarget", actualValue, 0));
+                VerifyOrReturn(CheckValue("CurrentTarget", actualValue, 0U));
             }
 
             NextTest();
@@ -60385,7 +60385,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPTargetNavigatorClusterNavigateTargetParams alloc] init];
-        params.target = [NSNumber numberWithUnsignedChar:1];
+        params.target = [NSNumber numberWithUnsignedChar:1U];
         params.data = @"1";
         [cluster navigateTargetWithParams:params
                         completionHandler:^(
@@ -60396,7 +60396,7 @@ private:
 
                             {
                                 id actualValue = values.status;
-                                VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                VerifyOrReturn(CheckValue("status", actualValue, 0U));
                             }
 
                             {
@@ -60543,14 +60543,14 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("OutputList", [actualValue count], static_cast<uint32_t>(3)));
-                VerifyOrReturn(CheckValue("index", ((CHIPAudioOutputClusterOutputInfo *) actualValue[0]).index, 1));
-                VerifyOrReturn(CheckValue("outputType", ((CHIPAudioOutputClusterOutputInfo *) actualValue[0]).outputType, 0));
+                VerifyOrReturn(CheckValue("index", ((CHIPAudioOutputClusterOutputInfo *) actualValue[0]).index, 1U));
+                VerifyOrReturn(CheckValue("outputType", ((CHIPAudioOutputClusterOutputInfo *) actualValue[0]).outputType, 0U));
                 VerifyOrReturn(CheckValueAsString("name", ((CHIPAudioOutputClusterOutputInfo *) actualValue[0]).name, @"HDMI"));
-                VerifyOrReturn(CheckValue("index", ((CHIPAudioOutputClusterOutputInfo *) actualValue[1]).index, 2));
-                VerifyOrReturn(CheckValue("outputType", ((CHIPAudioOutputClusterOutputInfo *) actualValue[1]).outputType, 0));
+                VerifyOrReturn(CheckValue("index", ((CHIPAudioOutputClusterOutputInfo *) actualValue[1]).index, 2U));
+                VerifyOrReturn(CheckValue("outputType", ((CHIPAudioOutputClusterOutputInfo *) actualValue[1]).outputType, 0U));
                 VerifyOrReturn(CheckValueAsString("name", ((CHIPAudioOutputClusterOutputInfo *) actualValue[1]).name, @"HDMI"));
-                VerifyOrReturn(CheckValue("index", ((CHIPAudioOutputClusterOutputInfo *) actualValue[2]).index, 3));
-                VerifyOrReturn(CheckValue("outputType", ((CHIPAudioOutputClusterOutputInfo *) actualValue[2]).outputType, 0));
+                VerifyOrReturn(CheckValue("index", ((CHIPAudioOutputClusterOutputInfo *) actualValue[2]).index, 3U));
+                VerifyOrReturn(CheckValue("outputType", ((CHIPAudioOutputClusterOutputInfo *) actualValue[2]).outputType, 0U));
                 VerifyOrReturn(CheckValueAsString("name", ((CHIPAudioOutputClusterOutputInfo *) actualValue[2]).name, @"HDMI"));
             }
 
@@ -60573,7 +60573,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentOutput", actualValue, 1));
+                VerifyOrReturn(CheckValue("CurrentOutput", actualValue, 1U));
             }
 
             NextTest();
@@ -60589,7 +60589,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPAudioOutputClusterSelectOutputParams alloc] init];
-        params.index = [NSNumber numberWithUnsignedChar:1];
+        params.index = [NSNumber numberWithUnsignedChar:1U];
         [cluster selectOutputWithParams:params
                       completionHandler:^(NSError * _Nullable err) {
                           NSLog(@"Select Output Command Error: %@", err);
@@ -60609,7 +60609,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPAudioOutputClusterRenameOutputParams alloc] init];
-        params.index = [NSNumber numberWithUnsignedChar:1];
+        params.index = [NSNumber numberWithUnsignedChar:1U];
         params.name = @"HDMI Test";
         [cluster renameOutputWithParams:params
                       completionHandler:^(NSError * _Nullable err) {
@@ -60637,15 +60637,15 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("OutputList", [actualValue count], static_cast<uint32_t>(3)));
-                VerifyOrReturn(CheckValue("index", ((CHIPAudioOutputClusterOutputInfo *) actualValue[0]).index, 1));
-                VerifyOrReturn(CheckValue("outputType", ((CHIPAudioOutputClusterOutputInfo *) actualValue[0]).outputType, 0));
+                VerifyOrReturn(CheckValue("index", ((CHIPAudioOutputClusterOutputInfo *) actualValue[0]).index, 1U));
+                VerifyOrReturn(CheckValue("outputType", ((CHIPAudioOutputClusterOutputInfo *) actualValue[0]).outputType, 0U));
                 VerifyOrReturn(
                     CheckValueAsString("name", ((CHIPAudioOutputClusterOutputInfo *) actualValue[0]).name, @"HDMI Test"));
-                VerifyOrReturn(CheckValue("index", ((CHIPAudioOutputClusterOutputInfo *) actualValue[1]).index, 2));
-                VerifyOrReturn(CheckValue("outputType", ((CHIPAudioOutputClusterOutputInfo *) actualValue[1]).outputType, 0));
+                VerifyOrReturn(CheckValue("index", ((CHIPAudioOutputClusterOutputInfo *) actualValue[1]).index, 2U));
+                VerifyOrReturn(CheckValue("outputType", ((CHIPAudioOutputClusterOutputInfo *) actualValue[1]).outputType, 0U));
                 VerifyOrReturn(CheckValueAsString("name", ((CHIPAudioOutputClusterOutputInfo *) actualValue[1]).name, @"HDMI"));
-                VerifyOrReturn(CheckValue("index", ((CHIPAudioOutputClusterOutputInfo *) actualValue[2]).index, 3));
-                VerifyOrReturn(CheckValue("outputType", ((CHIPAudioOutputClusterOutputInfo *) actualValue[2]).outputType, 0));
+                VerifyOrReturn(CheckValue("index", ((CHIPAudioOutputClusterOutputInfo *) actualValue[2]).index, 3U));
+                VerifyOrReturn(CheckValue("outputType", ((CHIPAudioOutputClusterOutputInfo *) actualValue[2]).outputType, 0U));
                 VerifyOrReturn(CheckValueAsString("name", ((CHIPAudioOutputClusterOutputInfo *) actualValue[2]).name, @"HDMI"));
             }
 
@@ -60849,7 +60849,7 @@ private:
 
                        {
                            id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 0));
+                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
                        }
 
                        {
@@ -60886,7 +60886,7 @@ private:
 
                 {
                     id actualValue = values.status;
-                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                 }
 
                 {
@@ -60923,7 +60923,7 @@ private:
 
                 {
                     id actualValue = values.status;
-                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                 }
 
                 {
@@ -61035,7 +61035,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPKeypadInputClusterSendKeyParams alloc] init];
-        params.keyCode = [NSNumber numberWithUnsignedChar:3];
+        params.keyCode = [NSNumber numberWithUnsignedChar:3U];
         [cluster sendKeyWithParams:params
                  completionHandler:^(CHIPKeypadInputClusterSendKeyResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"Send Key Command Error: %@", err);
@@ -61044,7 +61044,7 @@ private:
 
                      {
                          id actualValue = values.status;
-                         VerifyOrReturn(CheckValue("status", actualValue, 0));
+                         VerifyOrReturn(CheckValue("status", actualValue, 0U));
                      }
 
                      NextTest();
@@ -61586,7 +61586,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("Status", actualValue, 0));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             NextTest();
@@ -61917,7 +61917,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentState", actualValue, 0));
+                VerifyOrReturn(CheckValue("CurrentState", actualValue, 0U));
             }
 
             NextTest();
@@ -62080,7 +62080,7 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0));
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
             }
 
             {
@@ -62108,7 +62108,7 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0));
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
             }
 
             {
@@ -62136,7 +62136,7 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0));
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
             }
 
             {
@@ -62164,7 +62164,7 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0));
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
             }
 
             {
@@ -62192,7 +62192,7 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0));
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
             }
 
             {
@@ -62220,7 +62220,7 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0));
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
             }
 
             {
@@ -62248,7 +62248,7 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0));
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
             }
 
             {
@@ -62276,7 +62276,7 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0));
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
             }
 
             {
@@ -62307,7 +62307,7 @@ private:
 
                     {
                         id actualValue = values.status;
-                        VerifyOrReturn(CheckValue("status", actualValue, 0));
+                        VerifyOrReturn(CheckValue("status", actualValue, 0U));
                     }
 
                     {
@@ -62364,7 +62364,7 @@ private:
 
                      {
                          id actualValue = values.status;
-                         VerifyOrReturn(CheckValue("status", actualValue, 0));
+                         VerifyOrReturn(CheckValue("status", actualValue, 0U));
                      }
 
                      {
@@ -62420,7 +62420,7 @@ private:
 
                   {
                       id actualValue = values.status;
-                      VerifyOrReturn(CheckValue("status", actualValue, 0));
+                      VerifyOrReturn(CheckValue("status", actualValue, 0U));
                   }
 
                   {
@@ -62659,7 +62659,7 @@ private:
                         "lineupName", ((CHIPChannelClusterLineupInfo *) actualValue).lineupName, @"Comcast King County"));
                     VerifyOrReturn(
                         CheckValueAsString("postalCode", ((CHIPChannelClusterLineupInfo *) actualValue).postalCode, @"98052"));
-                    VerifyOrReturn(CheckValue("lineupInfoType", ((CHIPChannelClusterLineupInfo *) actualValue).lineupInfoType, 0));
+                    VerifyOrReturn(CheckValue("lineupInfoType", ((CHIPChannelClusterLineupInfo *) actualValue).lineupInfoType, 0U));
                 }
 
                 NextTest();
@@ -62715,7 +62715,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -63048,7 +63048,7 @@ private:
         {
             NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
             temp_1[0] = [[CHIPContentLauncherClusterParameter alloc] init];
-            ((CHIPContentLauncherClusterParameter *) temp_1[0]).type = [NSNumber numberWithUnsignedChar:1];
+            ((CHIPContentLauncherClusterParameter *) temp_1[0]).type = [NSNumber numberWithUnsignedChar:1U];
             ((CHIPContentLauncherClusterParameter *) temp_1[0]).value = @"exampleValue";
             {
                 NSMutableArray * temp_4 = [[NSMutableArray alloc] init];
@@ -63073,7 +63073,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -63132,7 +63132,7 @@ private:
                                                       .background)
                 .size)
             .metric
-            = [NSNumber numberWithUnsignedChar:0];
+            = [NSNumber numberWithUnsignedChar:0U];
 
         ((CHIPContentLauncherClusterBrandingInformation *) params.brandingInformation).logo =
             [[CHIPContentLauncherClusterStyleInformation alloc] init];
@@ -63168,7 +63168,7 @@ private:
                                                       .logo)
                 .size)
             .metric
-            = [NSNumber numberWithUnsignedChar:0];
+            = [NSNumber numberWithUnsignedChar:0U];
 
         ((CHIPContentLauncherClusterBrandingInformation *) params.brandingInformation).progressBar =
             [[CHIPContentLauncherClusterStyleInformation alloc] init];
@@ -63204,7 +63204,7 @@ private:
                                                       .progressBar)
                 .size)
             .metric
-            = [NSNumber numberWithUnsignedChar:0];
+            = [NSNumber numberWithUnsignedChar:0U];
 
         ((CHIPContentLauncherClusterBrandingInformation *) params.brandingInformation).splash =
             [[CHIPContentLauncherClusterStyleInformation alloc] init];
@@ -63240,7 +63240,7 @@ private:
                                                       .splash)
                 .size)
             .metric
-            = [NSNumber numberWithUnsignedChar:0];
+            = [NSNumber numberWithUnsignedChar:0U];
 
         ((CHIPContentLauncherClusterBrandingInformation *) params.brandingInformation).waterMark =
             [[CHIPContentLauncherClusterStyleInformation alloc] init];
@@ -63276,7 +63276,7 @@ private:
                                                       .waterMark)
                 .size)
             .metric
-            = [NSNumber numberWithUnsignedChar:0];
+            = [NSNumber numberWithUnsignedChar:0U];
 
         [cluster launchURLWithParams:params
                    completionHandler:^(CHIPContentLauncherClusterLaunchResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -63286,7 +63286,7 @@ private:
 
                        {
                            id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 0));
+                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
                        }
 
                        {
@@ -63447,14 +63447,14 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("InputList", [actualValue count], static_cast<uint32_t>(2)));
-                VerifyOrReturn(CheckValue("index", ((CHIPMediaInputClusterInputInfo *) actualValue[0]).index, 1));
-                VerifyOrReturn(CheckValue("inputType", ((CHIPMediaInputClusterInputInfo *) actualValue[0]).inputType, 4));
+                VerifyOrReturn(CheckValue("index", ((CHIPMediaInputClusterInputInfo *) actualValue[0]).index, 1U));
+                VerifyOrReturn(CheckValue("inputType", ((CHIPMediaInputClusterInputInfo *) actualValue[0]).inputType, 4U));
                 VerifyOrReturn(CheckValueAsString("name", ((CHIPMediaInputClusterInputInfo *) actualValue[0]).name, @"HDMI"));
                 VerifyOrReturn(
                     CheckValueAsString("description", ((CHIPMediaInputClusterInputInfo *) actualValue[0]).descriptionString,
                         @"High-Definition Multimedia Interface"));
-                VerifyOrReturn(CheckValue("index", ((CHIPMediaInputClusterInputInfo *) actualValue[1]).index, 2));
-                VerifyOrReturn(CheckValue("inputType", ((CHIPMediaInputClusterInputInfo *) actualValue[1]).inputType, 4));
+                VerifyOrReturn(CheckValue("index", ((CHIPMediaInputClusterInputInfo *) actualValue[1]).index, 2U));
+                VerifyOrReturn(CheckValue("inputType", ((CHIPMediaInputClusterInputInfo *) actualValue[1]).inputType, 4U));
                 VerifyOrReturn(CheckValueAsString("name", ((CHIPMediaInputClusterInputInfo *) actualValue[1]).name, @"HDMI"));
                 VerifyOrReturn(
                     CheckValueAsString("description", ((CHIPMediaInputClusterInputInfo *) actualValue[1]).descriptionString,
@@ -63480,7 +63480,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentInput", actualValue, 1));
+                VerifyOrReturn(CheckValue("CurrentInput", actualValue, 1U));
             }
 
             NextTest();
@@ -63496,7 +63496,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPMediaInputClusterSelectInputParams alloc] init];
-        params.index = [NSNumber numberWithUnsignedChar:1];
+        params.index = [NSNumber numberWithUnsignedChar:1U];
         [cluster selectInputWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
                          NSLog(@"Select Input Command Error: %@", err);
@@ -63550,7 +63550,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPMediaInputClusterRenameInputParams alloc] init];
-        params.index = [NSNumber numberWithUnsignedChar:1];
+        params.index = [NSNumber numberWithUnsignedChar:1U];
         params.name = @"HDMI Test";
         [cluster renameInputWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
@@ -63578,14 +63578,14 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("InputList", [actualValue count], static_cast<uint32_t>(2)));
-                VerifyOrReturn(CheckValue("index", ((CHIPMediaInputClusterInputInfo *) actualValue[0]).index, 1));
-                VerifyOrReturn(CheckValue("inputType", ((CHIPMediaInputClusterInputInfo *) actualValue[0]).inputType, 4));
+                VerifyOrReturn(CheckValue("index", ((CHIPMediaInputClusterInputInfo *) actualValue[0]).index, 1U));
+                VerifyOrReturn(CheckValue("inputType", ((CHIPMediaInputClusterInputInfo *) actualValue[0]).inputType, 4U));
                 VerifyOrReturn(CheckValueAsString("name", ((CHIPMediaInputClusterInputInfo *) actualValue[0]).name, @"HDMI Test"));
                 VerifyOrReturn(
                     CheckValueAsString("description", ((CHIPMediaInputClusterInputInfo *) actualValue[0]).descriptionString,
                         @"High-Definition Multimedia Interface"));
-                VerifyOrReturn(CheckValue("index", ((CHIPMediaInputClusterInputInfo *) actualValue[1]).index, 2));
-                VerifyOrReturn(CheckValue("inputType", ((CHIPMediaInputClusterInputInfo *) actualValue[1]).inputType, 4));
+                VerifyOrReturn(CheckValue("index", ((CHIPMediaInputClusterInputInfo *) actualValue[1]).index, 2U));
+                VerifyOrReturn(CheckValue("inputType", ((CHIPMediaInputClusterInputInfo *) actualValue[1]).inputType, 4U));
                 VerifyOrReturn(CheckValueAsString("name", ((CHIPMediaInputClusterInputInfo *) actualValue[1]).name, @"HDMI"));
                 VerifyOrReturn(
                     CheckValueAsString("description", ((CHIPMediaInputClusterInputInfo *) actualValue[1]).descriptionString,
@@ -67251,7 +67251,7 @@ private:
 
             {
                 id actualValue = values.returnValue;
-                VerifyOrReturn(CheckValue("returnValue", actualValue, 7));
+                VerifyOrReturn(CheckValue("returnValue", actualValue, 7U));
             }
 
             NextTest();
@@ -67267,8 +67267,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPTestClusterClusterTestAddArgumentsParams alloc] init];
-        params.arg1 = [NSNumber numberWithUnsignedChar:3];
-        params.arg2 = [NSNumber numberWithUnsignedChar:17];
+        params.arg1 = [NSNumber numberWithUnsignedChar:3U];
+        params.arg2 = [NSNumber numberWithUnsignedChar:17U];
         [cluster testAddArgumentsWithParams:params
                           completionHandler:^(
                               CHIPTestClusterClusterTestAddArgumentsResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -67278,7 +67278,7 @@ private:
 
                               {
                                   id actualValue = values.returnValue;
-                                  VerifyOrReturn(CheckValue("returnValue", actualValue, 20));
+                                  VerifyOrReturn(CheckValue("returnValue", actualValue, 20U));
                               }
 
                               NextTest();
@@ -67294,8 +67294,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPTestClusterClusterTestAddArgumentsParams alloc] init];
-        params.arg1 = [NSNumber numberWithUnsignedChar:250];
-        params.arg2 = [NSNumber numberWithUnsignedChar:6];
+        params.arg1 = [NSNumber numberWithUnsignedChar:250U];
+        params.arg2 = [NSNumber numberWithUnsignedChar:6U];
         [cluster testAddArgumentsWithParams:params
                           completionHandler:^(
                               CHIPTestClusterClusterTestAddArgumentsResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -67427,7 +67427,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("bitmap8", actualValue, 0));
+                VerifyOrReturn(CheckValue("bitmap8", actualValue, 0U));
             }
 
             NextTest();
@@ -67443,7 +67443,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id bitmap8Argument;
-        bitmap8Argument = [NSNumber numberWithUnsignedChar:255];
+        bitmap8Argument = [NSNumber numberWithUnsignedChar:255U];
         [cluster writeAttributeBitmap8WithValue:bitmap8Argument
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Write attribute BITMAP8 Max Value Error: %@", err);
@@ -67469,7 +67469,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("bitmap8", actualValue, 255));
+                VerifyOrReturn(CheckValue("bitmap8", actualValue, 255U));
             }
 
             NextTest();
@@ -67485,7 +67485,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id bitmap8Argument;
-        bitmap8Argument = [NSNumber numberWithUnsignedChar:0];
+        bitmap8Argument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeBitmap8WithValue:bitmap8Argument
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Write attribute BITMAP8 Min Value Error: %@", err);
@@ -67511,7 +67511,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("bitmap8", actualValue, 0));
+                VerifyOrReturn(CheckValue("bitmap8", actualValue, 0U));
             }
 
             NextTest();
@@ -67851,7 +67851,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("int8u", actualValue, 0));
+                VerifyOrReturn(CheckValue("int8u", actualValue, 0U));
             }
 
             NextTest();
@@ -67867,7 +67867,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id int8uArgument;
-        int8uArgument = [NSNumber numberWithUnsignedChar:255];
+        int8uArgument = [NSNumber numberWithUnsignedChar:255U];
         [cluster writeAttributeInt8uWithValue:int8uArgument
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Write attribute INT8U Max Value Error: %@", err);
@@ -67893,7 +67893,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("int8u", actualValue, 255));
+                VerifyOrReturn(CheckValue("int8u", actualValue, 255U));
             }
 
             NextTest();
@@ -67909,7 +67909,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id int8uArgument;
-        int8uArgument = [NSNumber numberWithUnsignedChar:0];
+        int8uArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeInt8uWithValue:int8uArgument
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Write attribute INT8U Min Value Error: %@", err);
@@ -67935,7 +67935,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("int8u", actualValue, 0));
+                VerifyOrReturn(CheckValue("int8u", actualValue, 0U));
             }
 
             NextTest();
@@ -69247,7 +69247,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("enum8", actualValue, 0));
+                VerifyOrReturn(CheckValue("enum8", actualValue, 0U));
             }
 
             NextTest();
@@ -69263,7 +69263,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id enum8Argument;
-        enum8Argument = [NSNumber numberWithUnsignedChar:255];
+        enum8Argument = [NSNumber numberWithUnsignedChar:255U];
         [cluster writeAttributeEnum8WithValue:enum8Argument
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Write attribute ENUM8 Max Value Error: %@", err);
@@ -69289,7 +69289,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("enum8", actualValue, 255));
+                VerifyOrReturn(CheckValue("enum8", actualValue, 255U));
             }
 
             NextTest();
@@ -69305,7 +69305,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id enum8Argument;
-        enum8Argument = [NSNumber numberWithUnsignedChar:0];
+        enum8Argument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeEnum8WithValue:enum8Argument
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Write attribute ENUM8 Min Value Error: %@", err);
@@ -69331,7 +69331,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("enum8", actualValue, 0));
+                VerifyOrReturn(CheckValue("enum8", actualValue, 0U));
             }
 
             NextTest();
@@ -70587,7 +70587,7 @@ private:
 
         __auto_type * params = [[CHIPTestClusterClusterTestEnumsRequestParams alloc] init];
         params.arg1 = [NSNumber numberWithUnsignedShort:20003U];
-        params.arg2 = [NSNumber numberWithUnsignedChar:101];
+        params.arg2 = [NSNumber numberWithUnsignedChar:101U];
         [cluster testEnumsRequestWithParams:params
                           completionHandler:^(
                               CHIPTestClusterClusterTestEnumsResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -70602,7 +70602,7 @@ private:
 
                               {
                                   id actualValue = values.arg2;
-                                  VerifyOrReturn(CheckValue("arg2", actualValue, 101));
+                                  VerifyOrReturn(CheckValue("arg2", actualValue, 101U));
                               }
 
                               NextTest();
@@ -70619,12 +70619,12 @@ private:
 
         __auto_type * params = [[CHIPTestClusterClusterTestStructArgumentRequestParams alloc] init];
         params.arg1 = [[CHIPTestClusterClusterSimpleStruct alloc] init];
-        ((CHIPTestClusterClusterSimpleStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPTestClusterClusterSimpleStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:0U];
         ((CHIPTestClusterClusterSimpleStruct *) params.arg1).b = [NSNumber numberWithBool:true];
-        ((CHIPTestClusterClusterSimpleStruct *) params.arg1).c = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPTestClusterClusterSimpleStruct *) params.arg1).c = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPTestClusterClusterSimpleStruct *) params.arg1).d = [[NSData alloc] initWithBytes:"octet_string" length:12];
         ((CHIPTestClusterClusterSimpleStruct *) params.arg1).e = @"char_string";
-        ((CHIPTestClusterClusterSimpleStruct *) params.arg1).f = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPTestClusterClusterSimpleStruct *) params.arg1).f = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPTestClusterClusterSimpleStruct *) params.arg1).g = [NSNumber numberWithFloat:0.0f];
         ((CHIPTestClusterClusterSimpleStruct *) params.arg1).h = [NSNumber numberWithDouble:0];
 
@@ -70654,12 +70654,12 @@ private:
 
         __auto_type * params = [[CHIPTestClusterClusterTestStructArgumentRequestParams alloc] init];
         params.arg1 = [[CHIPTestClusterClusterSimpleStruct alloc] init];
-        ((CHIPTestClusterClusterSimpleStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPTestClusterClusterSimpleStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:0U];
         ((CHIPTestClusterClusterSimpleStruct *) params.arg1).b = [NSNumber numberWithBool:false];
-        ((CHIPTestClusterClusterSimpleStruct *) params.arg1).c = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPTestClusterClusterSimpleStruct *) params.arg1).c = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPTestClusterClusterSimpleStruct *) params.arg1).d = [[NSData alloc] initWithBytes:"octet_string" length:12];
         ((CHIPTestClusterClusterSimpleStruct *) params.arg1).e = @"char_string";
-        ((CHIPTestClusterClusterSimpleStruct *) params.arg1).f = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPTestClusterClusterSimpleStruct *) params.arg1).f = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPTestClusterClusterSimpleStruct *) params.arg1).g = [NSNumber numberWithFloat:0.0f];
         ((CHIPTestClusterClusterSimpleStruct *) params.arg1).h = [NSNumber numberWithDouble:0];
 
@@ -70689,20 +70689,20 @@ private:
 
         __auto_type * params = [[CHIPTestClusterClusterTestNestedStructArgumentRequestParams alloc] init];
         params.arg1 = [[CHIPTestClusterClusterNestedStruct alloc] init];
-        ((CHIPTestClusterClusterNestedStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPTestClusterClusterNestedStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:0U];
         ((CHIPTestClusterClusterNestedStruct *) params.arg1).b = [NSNumber numberWithBool:true];
         ((CHIPTestClusterClusterNestedStruct *) params.arg1).c = [[CHIPTestClusterClusterSimpleStruct alloc] init];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStruct *) params.arg1).c).a =
-            [NSNumber numberWithUnsignedChar:0];
+            [NSNumber numberWithUnsignedChar:0U];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStruct *) params.arg1).c).b =
             [NSNumber numberWithBool:true];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStruct *) params.arg1).c).c =
-            [NSNumber numberWithUnsignedChar:2];
+            [NSNumber numberWithUnsignedChar:2U];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStruct *) params.arg1).c).d =
             [[NSData alloc] initWithBytes:"octet_string" length:12];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStruct *) params.arg1).c).e = @"char_string";
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStruct *) params.arg1).c).f =
-            [NSNumber numberWithUnsignedChar:1];
+            [NSNumber numberWithUnsignedChar:1U];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStruct *) params.arg1).c).g =
             [NSNumber numberWithFloat:0.0f];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStruct *) params.arg1).c).h =
@@ -70735,20 +70735,20 @@ private:
 
         __auto_type * params = [[CHIPTestClusterClusterTestNestedStructArgumentRequestParams alloc] init];
         params.arg1 = [[CHIPTestClusterClusterNestedStruct alloc] init];
-        ((CHIPTestClusterClusterNestedStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPTestClusterClusterNestedStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:0U];
         ((CHIPTestClusterClusterNestedStruct *) params.arg1).b = [NSNumber numberWithBool:true];
         ((CHIPTestClusterClusterNestedStruct *) params.arg1).c = [[CHIPTestClusterClusterSimpleStruct alloc] init];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStruct *) params.arg1).c).a =
-            [NSNumber numberWithUnsignedChar:0];
+            [NSNumber numberWithUnsignedChar:0U];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStruct *) params.arg1).c).b =
             [NSNumber numberWithBool:false];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStruct *) params.arg1).c).c =
-            [NSNumber numberWithUnsignedChar:2];
+            [NSNumber numberWithUnsignedChar:2U];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStruct *) params.arg1).c).d =
             [[NSData alloc] initWithBytes:"octet_string" length:12];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStruct *) params.arg1).c).e = @"char_string";
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStruct *) params.arg1).c).f =
-            [NSNumber numberWithUnsignedChar:1];
+            [NSNumber numberWithUnsignedChar:1U];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStruct *) params.arg1).c).g =
             [NSNumber numberWithFloat:0.0f];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStruct *) params.arg1).c).h =
@@ -70781,20 +70781,20 @@ private:
 
         __auto_type * params = [[CHIPTestClusterClusterTestNestedStructListArgumentRequestParams alloc] init];
         params.arg1 = [[CHIPTestClusterClusterNestedStructList alloc] init];
-        ((CHIPTestClusterClusterNestedStructList *) params.arg1).a = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPTestClusterClusterNestedStructList *) params.arg1).a = [NSNumber numberWithUnsignedChar:0U];
         ((CHIPTestClusterClusterNestedStructList *) params.arg1).b = [NSNumber numberWithBool:true];
         ((CHIPTestClusterClusterNestedStructList *) params.arg1).c = [[CHIPTestClusterClusterSimpleStruct alloc] init];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) params.arg1).c).a =
-            [NSNumber numberWithUnsignedChar:0];
+            [NSNumber numberWithUnsignedChar:0U];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) params.arg1).c).b =
             [NSNumber numberWithBool:true];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) params.arg1).c).c =
-            [NSNumber numberWithUnsignedChar:2];
+            [NSNumber numberWithUnsignedChar:2U];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) params.arg1).c).d =
             [[NSData alloc] initWithBytes:"octet_string" length:12];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) params.arg1).c).e = @"char_string";
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) params.arg1).c).f =
-            [NSNumber numberWithUnsignedChar:1];
+            [NSNumber numberWithUnsignedChar:1U];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) params.arg1).c).g =
             [NSNumber numberWithFloat:0.0f];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) params.arg1).c).h =
@@ -70803,22 +70803,22 @@ private:
         {
             NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
             temp_1[0] = [[CHIPTestClusterClusterSimpleStruct alloc] init];
-            ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).a = [NSNumber numberWithUnsignedChar:1];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).a = [NSNumber numberWithUnsignedChar:1U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).b = [NSNumber numberWithBool:true];
-            ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).c = [NSNumber numberWithUnsignedChar:3];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).c = [NSNumber numberWithUnsignedChar:3U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).d = [[NSData alloc] initWithBytes:"nested_octet_string" length:19];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).e = @"nested_char_string";
-            ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).f = [NSNumber numberWithUnsignedChar:1];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).f = [NSNumber numberWithUnsignedChar:1U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).g = [NSNumber numberWithFloat:0.0f];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).h = [NSNumber numberWithDouble:0];
 
             temp_1[1] = [[CHIPTestClusterClusterSimpleStruct alloc] init];
-            ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).a = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).a = [NSNumber numberWithUnsignedChar:2U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).b = [NSNumber numberWithBool:true];
-            ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).c = [NSNumber numberWithUnsignedChar:3];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).c = [NSNumber numberWithUnsignedChar:3U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).d = [[NSData alloc] initWithBytes:"nested_octet_string" length:19];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).e = @"nested_char_string";
-            ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).f = [NSNumber numberWithUnsignedChar:1];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).f = [NSNumber numberWithUnsignedChar:1U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).g = [NSNumber numberWithFloat:0.0f];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).h = [NSNumber numberWithDouble:0];
 
@@ -70840,8 +70840,8 @@ private:
         }
         {
             NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
-            temp_1[0] = [NSNumber numberWithUnsignedChar:0];
-            temp_1[1] = [NSNumber numberWithUnsignedChar:255];
+            temp_1[0] = [NSNumber numberWithUnsignedChar:0U];
+            temp_1[1] = [NSNumber numberWithUnsignedChar:255U];
             ((CHIPTestClusterClusterNestedStructList *) params.arg1).g = temp_1;
         }
 
@@ -70873,20 +70873,20 @@ private:
 
         __auto_type * params = [[CHIPTestClusterClusterTestNestedStructListArgumentRequestParams alloc] init];
         params.arg1 = [[CHIPTestClusterClusterNestedStructList alloc] init];
-        ((CHIPTestClusterClusterNestedStructList *) params.arg1).a = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPTestClusterClusterNestedStructList *) params.arg1).a = [NSNumber numberWithUnsignedChar:0U];
         ((CHIPTestClusterClusterNestedStructList *) params.arg1).b = [NSNumber numberWithBool:true];
         ((CHIPTestClusterClusterNestedStructList *) params.arg1).c = [[CHIPTestClusterClusterSimpleStruct alloc] init];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) params.arg1).c).a =
-            [NSNumber numberWithUnsignedChar:0];
+            [NSNumber numberWithUnsignedChar:0U];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) params.arg1).c).b =
             [NSNumber numberWithBool:true];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) params.arg1).c).c =
-            [NSNumber numberWithUnsignedChar:2];
+            [NSNumber numberWithUnsignedChar:2U];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) params.arg1).c).d =
             [[NSData alloc] initWithBytes:"octet_string" length:12];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) params.arg1).c).e = @"char_string";
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) params.arg1).c).f =
-            [NSNumber numberWithUnsignedChar:1];
+            [NSNumber numberWithUnsignedChar:1U];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) params.arg1).c).g =
             [NSNumber numberWithFloat:0.0f];
         ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) params.arg1).c).h =
@@ -70895,22 +70895,22 @@ private:
         {
             NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
             temp_1[0] = [[CHIPTestClusterClusterSimpleStruct alloc] init];
-            ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).a = [NSNumber numberWithUnsignedChar:1];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).a = [NSNumber numberWithUnsignedChar:1U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).b = [NSNumber numberWithBool:true];
-            ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).c = [NSNumber numberWithUnsignedChar:3];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).c = [NSNumber numberWithUnsignedChar:3U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).d = [[NSData alloc] initWithBytes:"nested_octet_string" length:19];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).e = @"nested_char_string";
-            ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).f = [NSNumber numberWithUnsignedChar:1];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).f = [NSNumber numberWithUnsignedChar:1U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).g = [NSNumber numberWithFloat:0.0f];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[0]).h = [NSNumber numberWithDouble:0];
 
             temp_1[1] = [[CHIPTestClusterClusterSimpleStruct alloc] init];
-            ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).a = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).a = [NSNumber numberWithUnsignedChar:2U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).b = [NSNumber numberWithBool:false];
-            ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).c = [NSNumber numberWithUnsignedChar:3];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).c = [NSNumber numberWithUnsignedChar:3U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).d = [[NSData alloc] initWithBytes:"nested_octet_string" length:19];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).e = @"nested_char_string";
-            ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).f = [NSNumber numberWithUnsignedChar:1];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).f = [NSNumber numberWithUnsignedChar:1U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).g = [NSNumber numberWithFloat:0.0f];
             ((CHIPTestClusterClusterSimpleStruct *) temp_1[1]).h = [NSNumber numberWithDouble:0];
 
@@ -70932,8 +70932,8 @@ private:
         }
         {
             NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
-            temp_1[0] = [NSNumber numberWithUnsignedChar:0];
-            temp_1[1] = [NSNumber numberWithUnsignedChar:255];
+            temp_1[0] = [NSNumber numberWithUnsignedChar:0U];
+            temp_1[1] = [NSNumber numberWithUnsignedChar:255U];
             ((CHIPTestClusterClusterNestedStructList *) params.arg1).g = temp_1;
         }
 
@@ -70965,12 +70965,12 @@ private:
 
         __auto_type * params = [[CHIPTestClusterClusterSimpleStructEchoRequestParams alloc] init];
         params.arg1 = [[CHIPTestClusterClusterSimpleStruct alloc] init];
-        ((CHIPTestClusterClusterSimpleStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:17];
+        ((CHIPTestClusterClusterSimpleStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:17U];
         ((CHIPTestClusterClusterSimpleStruct *) params.arg1).b = [NSNumber numberWithBool:false];
-        ((CHIPTestClusterClusterSimpleStruct *) params.arg1).c = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPTestClusterClusterSimpleStruct *) params.arg1).c = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPTestClusterClusterSimpleStruct *) params.arg1).d = [[NSData alloc] initWithBytes:"octet_string" length:12];
         ((CHIPTestClusterClusterSimpleStruct *) params.arg1).e = @"char_string";
-        ((CHIPTestClusterClusterSimpleStruct *) params.arg1).f = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPTestClusterClusterSimpleStruct *) params.arg1).f = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPTestClusterClusterSimpleStruct *) params.arg1).g = [NSNumber numberWithFloat:0.1f];
         ((CHIPTestClusterClusterSimpleStruct *) params.arg1).h = [NSNumber numberWithDouble:0.1];
 
@@ -70984,14 +70984,14 @@ private:
 
                                 {
                                     id actualValue = values.arg1;
-                                    VerifyOrReturn(CheckValue("a", ((CHIPTestClusterClusterSimpleStruct *) actualValue).a, 17));
+                                    VerifyOrReturn(CheckValue("a", ((CHIPTestClusterClusterSimpleStruct *) actualValue).a, 17U));
                                     VerifyOrReturn(CheckValue("b", ((CHIPTestClusterClusterSimpleStruct *) actualValue).b, false));
-                                    VerifyOrReturn(CheckValue("c", ((CHIPTestClusterClusterSimpleStruct *) actualValue).c, 2));
+                                    VerifyOrReturn(CheckValue("c", ((CHIPTestClusterClusterSimpleStruct *) actualValue).c, 2U));
                                     VerifyOrReturn(CheckValueAsString("d", ((CHIPTestClusterClusterSimpleStruct *) actualValue).d,
                                         [[NSData alloc] initWithBytes:"octet_string" length:12]));
                                     VerifyOrReturn(CheckValueAsString(
                                         "e", ((CHIPTestClusterClusterSimpleStruct *) actualValue).e, @"char_string"));
-                                    VerifyOrReturn(CheckValue("f", ((CHIPTestClusterClusterSimpleStruct *) actualValue).f, 1));
+                                    VerifyOrReturn(CheckValue("f", ((CHIPTestClusterClusterSimpleStruct *) actualValue).f, 1U));
                                     VerifyOrReturn(CheckValue("g", ((CHIPTestClusterClusterSimpleStruct *) actualValue).g, 0.1f));
                                     VerifyOrReturn(CheckValue("h", ((CHIPTestClusterClusterSimpleStruct *) actualValue).h, 0.1));
                                 }
@@ -71011,15 +71011,15 @@ private:
         __auto_type * params = [[CHIPTestClusterClusterTestListInt8UArgumentRequestParams alloc] init];
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [NSNumber numberWithUnsignedChar:1];
-            temp_0[1] = [NSNumber numberWithUnsignedChar:2];
-            temp_0[2] = [NSNumber numberWithUnsignedChar:3];
-            temp_0[3] = [NSNumber numberWithUnsignedChar:4];
-            temp_0[4] = [NSNumber numberWithUnsignedChar:5];
-            temp_0[5] = [NSNumber numberWithUnsignedChar:6];
-            temp_0[6] = [NSNumber numberWithUnsignedChar:7];
-            temp_0[7] = [NSNumber numberWithUnsignedChar:8];
-            temp_0[8] = [NSNumber numberWithUnsignedChar:9];
+            temp_0[0] = [NSNumber numberWithUnsignedChar:1U];
+            temp_0[1] = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[2] = [NSNumber numberWithUnsignedChar:3U];
+            temp_0[3] = [NSNumber numberWithUnsignedChar:4U];
+            temp_0[4] = [NSNumber numberWithUnsignedChar:5U];
+            temp_0[5] = [NSNumber numberWithUnsignedChar:6U];
+            temp_0[6] = [NSNumber numberWithUnsignedChar:7U];
+            temp_0[7] = [NSNumber numberWithUnsignedChar:8U];
+            temp_0[8] = [NSNumber numberWithUnsignedChar:9U];
             params.arg1 = temp_0;
         }
         [cluster
@@ -71050,16 +71050,16 @@ private:
         __auto_type * params = [[CHIPTestClusterClusterTestListInt8UArgumentRequestParams alloc] init];
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [NSNumber numberWithUnsignedChar:1];
-            temp_0[1] = [NSNumber numberWithUnsignedChar:2];
-            temp_0[2] = [NSNumber numberWithUnsignedChar:3];
-            temp_0[3] = [NSNumber numberWithUnsignedChar:4];
-            temp_0[4] = [NSNumber numberWithUnsignedChar:5];
-            temp_0[5] = [NSNumber numberWithUnsignedChar:6];
-            temp_0[6] = [NSNumber numberWithUnsignedChar:7];
-            temp_0[7] = [NSNumber numberWithUnsignedChar:8];
-            temp_0[8] = [NSNumber numberWithUnsignedChar:9];
-            temp_0[9] = [NSNumber numberWithUnsignedChar:0];
+            temp_0[0] = [NSNumber numberWithUnsignedChar:1U];
+            temp_0[1] = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[2] = [NSNumber numberWithUnsignedChar:3U];
+            temp_0[3] = [NSNumber numberWithUnsignedChar:4U];
+            temp_0[4] = [NSNumber numberWithUnsignedChar:5U];
+            temp_0[5] = [NSNumber numberWithUnsignedChar:6U];
+            temp_0[6] = [NSNumber numberWithUnsignedChar:7U];
+            temp_0[7] = [NSNumber numberWithUnsignedChar:8U];
+            temp_0[8] = [NSNumber numberWithUnsignedChar:9U];
+            temp_0[9] = [NSNumber numberWithUnsignedChar:0U];
             params.arg1 = temp_0;
         }
         [cluster testListInt8UArgumentRequestWithParams:params
@@ -71089,15 +71089,15 @@ private:
         __auto_type * params = [[CHIPTestClusterClusterTestListInt8UReverseRequestParams alloc] init];
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [NSNumber numberWithUnsignedChar:1];
-            temp_0[1] = [NSNumber numberWithUnsignedChar:2];
-            temp_0[2] = [NSNumber numberWithUnsignedChar:3];
-            temp_0[3] = [NSNumber numberWithUnsignedChar:4];
-            temp_0[4] = [NSNumber numberWithUnsignedChar:5];
-            temp_0[5] = [NSNumber numberWithUnsignedChar:6];
-            temp_0[6] = [NSNumber numberWithUnsignedChar:7];
-            temp_0[7] = [NSNumber numberWithUnsignedChar:8];
-            temp_0[8] = [NSNumber numberWithUnsignedChar:9];
+            temp_0[0] = [NSNumber numberWithUnsignedChar:1U];
+            temp_0[1] = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[2] = [NSNumber numberWithUnsignedChar:3U];
+            temp_0[3] = [NSNumber numberWithUnsignedChar:4U];
+            temp_0[4] = [NSNumber numberWithUnsignedChar:5U];
+            temp_0[5] = [NSNumber numberWithUnsignedChar:6U];
+            temp_0[6] = [NSNumber numberWithUnsignedChar:7U];
+            temp_0[7] = [NSNumber numberWithUnsignedChar:8U];
+            temp_0[8] = [NSNumber numberWithUnsignedChar:9U];
             params.arg1 = temp_0;
         }
         [cluster
@@ -71111,15 +71111,15 @@ private:
                                     {
                                         id actualValue = values.arg1;
                                         VerifyOrReturn(CheckValue("arg1", [actualValue count], static_cast<uint32_t>(9)));
-                                        VerifyOrReturn(CheckValue("", actualValue[0], 9));
-                                        VerifyOrReturn(CheckValue("", actualValue[1], 8));
-                                        VerifyOrReturn(CheckValue("", actualValue[2], 7));
-                                        VerifyOrReturn(CheckValue("", actualValue[3], 6));
-                                        VerifyOrReturn(CheckValue("", actualValue[4], 5));
-                                        VerifyOrReturn(CheckValue("", actualValue[5], 4));
-                                        VerifyOrReturn(CheckValue("", actualValue[6], 3));
-                                        VerifyOrReturn(CheckValue("", actualValue[7], 2));
-                                        VerifyOrReturn(CheckValue("", actualValue[8], 1));
+                                        VerifyOrReturn(CheckValue("", actualValue[0], 9U));
+                                        VerifyOrReturn(CheckValue("", actualValue[1], 8U));
+                                        VerifyOrReturn(CheckValue("", actualValue[2], 7U));
+                                        VerifyOrReturn(CheckValue("", actualValue[3], 6U));
+                                        VerifyOrReturn(CheckValue("", actualValue[4], 5U));
+                                        VerifyOrReturn(CheckValue("", actualValue[5], 4U));
+                                        VerifyOrReturn(CheckValue("", actualValue[6], 3U));
+                                        VerifyOrReturn(CheckValue("", actualValue[7], 2U));
+                                        VerifyOrReturn(CheckValue("", actualValue[8], 1U));
                                     }
 
                                     NextTest();
@@ -71168,22 +71168,22 @@ private:
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [[CHIPTestClusterClusterSimpleStruct alloc] init];
-            ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).a = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).a = [NSNumber numberWithUnsignedChar:0U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).b = [NSNumber numberWithBool:true];
-            ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).c = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).c = [NSNumber numberWithUnsignedChar:2U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).d = [[NSData alloc] initWithBytes:"first_octet_string" length:18];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).e = @"first_char_string";
-            ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).f = [NSNumber numberWithUnsignedChar:1];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).f = [NSNumber numberWithUnsignedChar:1U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).g = [NSNumber numberWithFloat:0.0f];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).h = [NSNumber numberWithDouble:0];
 
             temp_0[1] = [[CHIPTestClusterClusterSimpleStruct alloc] init];
-            ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).a = [NSNumber numberWithUnsignedChar:1];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).a = [NSNumber numberWithUnsignedChar:1U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).b = [NSNumber numberWithBool:true];
-            ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).c = [NSNumber numberWithUnsignedChar:3];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).c = [NSNumber numberWithUnsignedChar:3U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).d = [[NSData alloc] initWithBytes:"second_octet_string" length:19];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).e = @"second_char_string";
-            ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).f = [NSNumber numberWithUnsignedChar:1];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).f = [NSNumber numberWithUnsignedChar:1U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).g = [NSNumber numberWithFloat:0.0f];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).h = [NSNumber numberWithDouble:0];
 
@@ -71219,22 +71219,22 @@ private:
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [[CHIPTestClusterClusterSimpleStruct alloc] init];
-            ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).a = [NSNumber numberWithUnsignedChar:1];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).a = [NSNumber numberWithUnsignedChar:1U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).b = [NSNumber numberWithBool:true];
-            ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).c = [NSNumber numberWithUnsignedChar:3];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).c = [NSNumber numberWithUnsignedChar:3U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).d = [[NSData alloc] initWithBytes:"second_octet_string" length:19];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).e = @"second_char_string";
-            ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).f = [NSNumber numberWithUnsignedChar:1];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).f = [NSNumber numberWithUnsignedChar:1U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).g = [NSNumber numberWithFloat:0.0f];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[0]).h = [NSNumber numberWithDouble:0];
 
             temp_0[1] = [[CHIPTestClusterClusterSimpleStruct alloc] init];
-            ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).a = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).a = [NSNumber numberWithUnsignedChar:0U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).b = [NSNumber numberWithBool:false];
-            ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).c = [NSNumber numberWithUnsignedChar:2];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).c = [NSNumber numberWithUnsignedChar:2U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).d = [[NSData alloc] initWithBytes:"first_octet_string" length:18];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).e = @"first_char_string";
-            ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).f = [NSNumber numberWithUnsignedChar:1];
+            ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).f = [NSNumber numberWithUnsignedChar:1U];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).g = [NSNumber numberWithFloat:0.0f];
             ((CHIPTestClusterClusterSimpleStruct *) temp_0[1]).h = [NSNumber numberWithDouble:0];
 
@@ -71270,20 +71270,20 @@ private:
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [[CHIPTestClusterClusterNestedStructList alloc] init];
-            ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).a = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).a = [NSNumber numberWithUnsignedChar:0U];
             ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).b = [NSNumber numberWithBool:true];
             ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).c = [[CHIPTestClusterClusterSimpleStruct alloc] init];
             ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).c).a =
-                [NSNumber numberWithUnsignedChar:0];
+                [NSNumber numberWithUnsignedChar:0U];
             ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).c).b =
                 [NSNumber numberWithBool:true];
             ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).c).c =
-                [NSNumber numberWithUnsignedChar:2];
+                [NSNumber numberWithUnsignedChar:2U];
             ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).c).d =
                 [[NSData alloc] initWithBytes:"octet_string" length:12];
             ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).c).e = @"char_string";
             ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).c).f =
-                [NSNumber numberWithUnsignedChar:1];
+                [NSNumber numberWithUnsignedChar:1U];
             ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).c).g =
                 [NSNumber numberWithFloat:0.0f];
             ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).c).h =
@@ -71292,24 +71292,24 @@ private:
             {
                 NSMutableArray * temp_2 = [[NSMutableArray alloc] init];
                 temp_2[0] = [[CHIPTestClusterClusterSimpleStruct alloc] init];
-                ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).a = [NSNumber numberWithUnsignedChar:1];
+                ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).a = [NSNumber numberWithUnsignedChar:1U];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).b = [NSNumber numberWithBool:true];
-                ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).c = [NSNumber numberWithUnsignedChar:3];
+                ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).c = [NSNumber numberWithUnsignedChar:3U];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).d = [[NSData alloc] initWithBytes:"nested_octet_string"
                                                                                               length:19];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).e = @"nested_char_string";
-                ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).f = [NSNumber numberWithUnsignedChar:1];
+                ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).f = [NSNumber numberWithUnsignedChar:1U];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).g = [NSNumber numberWithFloat:0.0f];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).h = [NSNumber numberWithDouble:0];
 
                 temp_2[1] = [[CHIPTestClusterClusterSimpleStruct alloc] init];
-                ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).a = [NSNumber numberWithUnsignedChar:2];
+                ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).a = [NSNumber numberWithUnsignedChar:2U];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).b = [NSNumber numberWithBool:true];
-                ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).c = [NSNumber numberWithUnsignedChar:3];
+                ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).c = [NSNumber numberWithUnsignedChar:3U];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).d = [[NSData alloc] initWithBytes:"nested_octet_string"
                                                                                               length:19];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).e = @"nested_char_string";
-                ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).f = [NSNumber numberWithUnsignedChar:1];
+                ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).f = [NSNumber numberWithUnsignedChar:1U];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).g = [NSNumber numberWithFloat:0.0f];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).h = [NSNumber numberWithDouble:0];
 
@@ -71331,8 +71331,8 @@ private:
             }
             {
                 NSMutableArray * temp_2 = [[NSMutableArray alloc] init];
-                temp_2[0] = [NSNumber numberWithUnsignedChar:0];
-                temp_2[1] = [NSNumber numberWithUnsignedChar:255];
+                temp_2[0] = [NSNumber numberWithUnsignedChar:0U];
+                temp_2[1] = [NSNumber numberWithUnsignedChar:255U];
                 ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).g = temp_2;
             }
 
@@ -71368,20 +71368,20 @@ private:
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [[CHIPTestClusterClusterNestedStructList alloc] init];
-            ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).a = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).a = [NSNumber numberWithUnsignedChar:0U];
             ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).b = [NSNumber numberWithBool:true];
             ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).c = [[CHIPTestClusterClusterSimpleStruct alloc] init];
             ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).c).a =
-                [NSNumber numberWithUnsignedChar:0];
+                [NSNumber numberWithUnsignedChar:0U];
             ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).c).b =
                 [NSNumber numberWithBool:true];
             ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).c).c =
-                [NSNumber numberWithUnsignedChar:2];
+                [NSNumber numberWithUnsignedChar:2U];
             ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).c).d =
                 [[NSData alloc] initWithBytes:"octet_string" length:12];
             ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).c).e = @"char_string";
             ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).c).f =
-                [NSNumber numberWithUnsignedChar:1];
+                [NSNumber numberWithUnsignedChar:1U];
             ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).c).g =
                 [NSNumber numberWithFloat:0.0f];
             ((CHIPTestClusterClusterSimpleStruct *) ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).c).h =
@@ -71390,24 +71390,24 @@ private:
             {
                 NSMutableArray * temp_2 = [[NSMutableArray alloc] init];
                 temp_2[0] = [[CHIPTestClusterClusterSimpleStruct alloc] init];
-                ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).a = [NSNumber numberWithUnsignedChar:1];
+                ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).a = [NSNumber numberWithUnsignedChar:1U];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).b = [NSNumber numberWithBool:true];
-                ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).c = [NSNumber numberWithUnsignedChar:3];
+                ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).c = [NSNumber numberWithUnsignedChar:3U];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).d = [[NSData alloc] initWithBytes:"nested_octet_string"
                                                                                               length:19];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).e = @"nested_char_string";
-                ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).f = [NSNumber numberWithUnsignedChar:1];
+                ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).f = [NSNumber numberWithUnsignedChar:1U];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).g = [NSNumber numberWithFloat:0.0f];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[0]).h = [NSNumber numberWithDouble:0];
 
                 temp_2[1] = [[CHIPTestClusterClusterSimpleStruct alloc] init];
-                ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).a = [NSNumber numberWithUnsignedChar:2];
+                ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).a = [NSNumber numberWithUnsignedChar:2U];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).b = [NSNumber numberWithBool:false];
-                ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).c = [NSNumber numberWithUnsignedChar:3];
+                ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).c = [NSNumber numberWithUnsignedChar:3U];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).d = [[NSData alloc] initWithBytes:"nested_octet_string"
                                                                                               length:19];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).e = @"nested_char_string";
-                ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).f = [NSNumber numberWithUnsignedChar:1];
+                ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).f = [NSNumber numberWithUnsignedChar:1U];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).g = [NSNumber numberWithFloat:0.0f];
                 ((CHIPTestClusterClusterSimpleStruct *) temp_2[1]).h = [NSNumber numberWithDouble:0];
 
@@ -71429,8 +71429,8 @@ private:
             }
             {
                 NSMutableArray * temp_2 = [[NSMutableArray alloc] init];
-                temp_2[0] = [NSNumber numberWithUnsignedChar:0];
-                temp_2[1] = [NSNumber numberWithUnsignedChar:255];
+                temp_2[0] = [NSNumber numberWithUnsignedChar:0U];
+                temp_2[1] = [NSNumber numberWithUnsignedChar:255U];
                 ((CHIPTestClusterClusterNestedStructList *) temp_0[0]).g = temp_2;
             }
 
@@ -71465,10 +71465,10 @@ private:
         id listInt8uArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [NSNumber numberWithUnsignedChar:1];
-            temp_0[1] = [NSNumber numberWithUnsignedChar:2];
-            temp_0[2] = [NSNumber numberWithUnsignedChar:3];
-            temp_0[3] = [NSNumber numberWithUnsignedChar:4];
+            temp_0[0] = [NSNumber numberWithUnsignedChar:1U];
+            temp_0[1] = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[2] = [NSNumber numberWithUnsignedChar:3U];
+            temp_0[3] = [NSNumber numberWithUnsignedChar:4U];
             listInt8uArgument = temp_0;
         }
         [cluster writeAttributeListInt8uWithValue:listInt8uArgument
@@ -71497,10 +71497,10 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("list_int8u", [actualValue count], static_cast<uint32_t>(4)));
-                VerifyOrReturn(CheckValue("", actualValue[0], 1));
-                VerifyOrReturn(CheckValue("", actualValue[1], 2));
-                VerifyOrReturn(CheckValue("", actualValue[2], 3));
-                VerifyOrReturn(CheckValue("", actualValue[3], 4));
+                VerifyOrReturn(CheckValue("", actualValue[0], 1U));
+                VerifyOrReturn(CheckValue("", actualValue[1], 2U));
+                VerifyOrReturn(CheckValue("", actualValue[2], 3U));
+                VerifyOrReturn(CheckValue("", actualValue[3], 4U));
             }
 
             NextTest();
@@ -71642,7 +71642,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPTestClusterClusterTestNullableOptionalRequestParams alloc] init];
-        params.arg1 = [NSNumber numberWithUnsignedChar:5];
+        params.arg1 = [NSNumber numberWithUnsignedChar:5U];
         [cluster
             testNullableOptionalRequestWithParams:params
                                 completionHandler:^(CHIPTestClusterClusterTestNullableOptionalResponseParams * _Nullable values,
@@ -71663,13 +71663,13 @@ private:
 
                                     {
                                         id actualValue = values.value;
-                                        VerifyOrReturn(CheckValue("value", actualValue, 5));
+                                        VerifyOrReturn(CheckValue("value", actualValue, 5U));
                                     }
 
                                     {
                                         id actualValue = values.originalValue;
                                         VerifyOrReturn(CheckValueNonNull("originalValue", actualValue));
-                                        VerifyOrReturn(CheckValue("originalValue", actualValue, 5));
+                                        VerifyOrReturn(CheckValue("originalValue", actualValue, 5U));
                                     }
 
                                     NextTest();
@@ -71750,8 +71750,8 @@ private:
             ((CHIPTestClusterClusterNullablesAndOptionalsStruct *) temp_0[0]).nullableStruct = nil;
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
-                temp_3[0] = [NSNumber numberWithUnsignedChar:1];
-                temp_3[1] = [NSNumber numberWithUnsignedChar:2];
+                temp_3[0] = [NSNumber numberWithUnsignedChar:1U];
+                temp_3[1] = [NSNumber numberWithUnsignedChar:2U];
                 ((CHIPTestClusterClusterNullablesAndOptionalsStruct *) temp_0[0]).nullableList = temp_3;
             }
 
@@ -71798,9 +71798,9 @@ private:
                     [((CHIPTestClusterClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableList count],
                     static_cast<uint32_t>(2)));
                 VerifyOrReturn(
-                    CheckValue("", ((CHIPTestClusterClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableList[0], 1));
+                    CheckValue("", ((CHIPTestClusterClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableList[0], 1U));
                 VerifyOrReturn(
-                    CheckValue("", ((CHIPTestClusterClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableList[1], 2));
+                    CheckValue("", ((CHIPTestClusterClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableList[1], 2U));
             }
 
             NextTest();
@@ -71926,7 +71926,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableBitmap8Argument;
-        nullableBitmap8Argument = [NSNumber numberWithUnsignedChar:254];
+        nullableBitmap8Argument = [NSNumber numberWithUnsignedChar:254U];
         [cluster writeAttributeNullableBitmap8WithValue:nullableBitmap8Argument
                                       completionHandler:^(NSError * _Nullable err) {
                                           NSLog(@"Write attribute NULLABLE_BITMAP8 Max Value Error: %@", err);
@@ -71953,7 +71953,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("nullable_bitmap8", actualValue));
-                VerifyOrReturn(CheckValue("nullable_bitmap8", actualValue, 254));
+                VerifyOrReturn(CheckValue("nullable_bitmap8", actualValue, 254U));
             }
 
             NextTest();
@@ -71969,7 +71969,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableBitmap8Argument;
-        nullableBitmap8Argument = [NSNumber numberWithUnsignedChar:255];
+        nullableBitmap8Argument = [NSNumber numberWithUnsignedChar:255U];
         [cluster
             writeAttributeNullableBitmap8WithValue:nullableBitmap8Argument
                                  completionHandler:^(NSError * _Nullable err) {
@@ -71997,7 +71997,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("nullable_bitmap8", actualValue));
-                VerifyOrReturn(CheckValue("nullable_bitmap8", actualValue, 254));
+                VerifyOrReturn(CheckValue("nullable_bitmap8", actualValue, 254U));
             }
             {
                 nullableValue254 = value;
@@ -72463,7 +72463,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableInt8uArgument;
-        nullableInt8uArgument = [NSNumber numberWithUnsignedChar:0];
+        nullableInt8uArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeNullableInt8uWithValue:nullableInt8uArgument
                                     completionHandler:^(NSError * _Nullable err) {
                                         NSLog(@"Write attribute NULLABLE_INT8U Min Value Error: %@", err);
@@ -72490,7 +72490,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("nullable_int8u", actualValue));
-                VerifyOrReturn(CheckValue("nullable_int8u", actualValue, 0));
+                VerifyOrReturn(CheckValue("nullable_int8u", actualValue, 0U));
             }
 
             NextTest();
@@ -72506,7 +72506,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableInt8uArgument;
-        nullableInt8uArgument = [NSNumber numberWithUnsignedChar:254];
+        nullableInt8uArgument = [NSNumber numberWithUnsignedChar:254U];
         [cluster writeAttributeNullableInt8uWithValue:nullableInt8uArgument
                                     completionHandler:^(NSError * _Nullable err) {
                                         NSLog(@"Write attribute NULLABLE_INT8U Max Value Error: %@", err);
@@ -72533,7 +72533,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("nullable_int8u", actualValue));
-                VerifyOrReturn(CheckValue("nullable_int8u", actualValue, 254));
+                VerifyOrReturn(CheckValue("nullable_int8u", actualValue, 254U));
             }
 
             NextTest();
@@ -72549,7 +72549,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableInt8uArgument;
-        nullableInt8uArgument = [NSNumber numberWithUnsignedChar:255];
+        nullableInt8uArgument = [NSNumber numberWithUnsignedChar:255U];
         [cluster writeAttributeNullableInt8uWithValue:nullableInt8uArgument
                                     completionHandler:^(NSError * _Nullable err) {
                                         NSLog(@"Write attribute NULLABLE_INT8U Invalid Value Error: %@", err);
@@ -72575,7 +72575,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("nullable_int8u", actualValue));
-                VerifyOrReturn(CheckValue("nullable_int8u", actualValue, 254));
+                VerifyOrReturn(CheckValue("nullable_int8u", actualValue, 254U));
             }
 
             NextTest();
@@ -72660,8 +72660,8 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("nullableInt8u", [value unsignedCharValue], 0));
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("nullableInt8u", [value unsignedCharValue], 254));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("nullableInt8u", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("nullableInt8u", [value unsignedCharValue], 254U));
             }
 
             NextTest();
@@ -72683,7 +72683,7 @@ private:
 
             if (value != nil) {
             }
-            VerifyOrReturn(CheckConstraintNotValue("nullableInt8u", value, 254));
+            VerifyOrReturn(CheckConstraintNotValue("nullableInt8u", value, 254U));
 
             NextTest();
         }];
@@ -72698,7 +72698,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableInt8uArgument;
-        nullableInt8uArgument = [NSNumber numberWithUnsignedChar:128];
+        nullableInt8uArgument = [NSNumber numberWithUnsignedChar:128U];
         [cluster writeAttributeNullableInt8uWithValue:nullableInt8uArgument
                                     completionHandler:^(NSError * _Nullable err) {
                                         NSLog(@"Write attribute NULLABLE_INT8U Value Error: %@", err);
@@ -72724,8 +72724,8 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("nullableInt8u", [value unsignedCharValue], 0));
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("nullableInt8u", [value unsignedCharValue], 254));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("nullableInt8u", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("nullableInt8u", [value unsignedCharValue], 254U));
             }
 
             NextTest();
@@ -72747,7 +72747,7 @@ private:
 
             if (value != nil) {
             }
-            VerifyOrReturn(CheckConstraintNotValue("nullableInt8u", value, 129));
+            VerifyOrReturn(CheckConstraintNotValue("nullableInt8u", value, 129U));
 
             NextTest();
         }];
@@ -74972,7 +74972,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableEnum8Argument;
-        nullableEnum8Argument = [NSNumber numberWithUnsignedChar:0];
+        nullableEnum8Argument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeNullableEnum8WithValue:nullableEnum8Argument
                                     completionHandler:^(NSError * _Nullable err) {
                                         NSLog(@"Write attribute NULLABLE_ENUM8 Min Value Error: %@", err);
@@ -74999,7 +74999,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("nullable_enum8", actualValue));
-                VerifyOrReturn(CheckValue("nullable_enum8", actualValue, 0));
+                VerifyOrReturn(CheckValue("nullable_enum8", actualValue, 0U));
             }
 
             NextTest();
@@ -75015,7 +75015,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableEnum8Argument;
-        nullableEnum8Argument = [NSNumber numberWithUnsignedChar:254];
+        nullableEnum8Argument = [NSNumber numberWithUnsignedChar:254U];
         [cluster writeAttributeNullableEnum8WithValue:nullableEnum8Argument
                                     completionHandler:^(NSError * _Nullable err) {
                                         NSLog(@"Write attribute NULLABLE_ENUM8 Max Value Error: %@", err);
@@ -75042,7 +75042,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("nullable_enum8", actualValue));
-                VerifyOrReturn(CheckValue("nullable_enum8", actualValue, 254));
+                VerifyOrReturn(CheckValue("nullable_enum8", actualValue, 254U));
             }
 
             NextTest();
@@ -75058,7 +75058,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableEnum8Argument;
-        nullableEnum8Argument = [NSNumber numberWithUnsignedChar:255];
+        nullableEnum8Argument = [NSNumber numberWithUnsignedChar:255U];
         [cluster writeAttributeNullableEnum8WithValue:nullableEnum8Argument
                                     completionHandler:^(NSError * _Nullable err) {
                                         NSLog(@"Write attribute NULLABLE_ENUM8 Invalid Value Error: %@", err);
@@ -75084,7 +75084,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("nullable_enum8", actualValue));
-                VerifyOrReturn(CheckValue("nullable_enum8", actualValue, 254));
+                VerifyOrReturn(CheckValue("nullable_enum8", actualValue, 254U));
             }
 
             NextTest();
@@ -75313,7 +75313,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableEnumAttrArgument;
-        nullableEnumAttrArgument = [NSNumber numberWithUnsignedChar:0];
+        nullableEnumAttrArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeNullableEnumAttrWithValue:nullableEnumAttrArgument
                                        completionHandler:^(NSError * _Nullable err) {
                                            NSLog(@"Write attribute NULLABLE_SIMPLE_ENUM Min Value Error: %@", err);
@@ -75340,7 +75340,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("nullable_enum_attr", actualValue));
-                VerifyOrReturn(CheckValue("nullable_enum_attr", actualValue, 0));
+                VerifyOrReturn(CheckValue("nullable_enum_attr", actualValue, 0U));
             }
 
             NextTest();
@@ -75356,7 +75356,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableEnumAttrArgument;
-        nullableEnumAttrArgument = [NSNumber numberWithUnsignedChar:254];
+        nullableEnumAttrArgument = [NSNumber numberWithUnsignedChar:254U];
         [cluster writeAttributeNullableEnumAttrWithValue:nullableEnumAttrArgument
                                        completionHandler:^(NSError * _Nullable err) {
                                            NSLog(@"Write attribute NULLABLE_SIMPLE_ENUM Max Value Error: %@", err);
@@ -75383,7 +75383,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("nullable_enum_attr", actualValue));
-                VerifyOrReturn(CheckValue("nullable_enum_attr", actualValue, 254));
+                VerifyOrReturn(CheckValue("nullable_enum_attr", actualValue, 254U));
             }
 
             NextTest();
@@ -75399,7 +75399,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableEnumAttrArgument;
-        nullableEnumAttrArgument = [NSNumber numberWithUnsignedChar:255];
+        nullableEnumAttrArgument = [NSNumber numberWithUnsignedChar:255U];
         [cluster
             writeAttributeNullableEnumAttrWithValue:nullableEnumAttrArgument
                                   completionHandler:^(NSError * _Nullable err) {
@@ -75427,7 +75427,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("nullable_enum_attr", actualValue));
-                VerifyOrReturn(CheckValue("nullable_enum_attr", actualValue, 254));
+                VerifyOrReturn(CheckValue("nullable_enum_attr", actualValue, 254U));
             }
             {
                 nullableEnumAttr254 = value;
@@ -75974,10 +75974,10 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("list_int8u", [actualValue count], static_cast<uint32_t>(4)));
-                VerifyOrReturn(CheckValue("", actualValue[0], 1));
-                VerifyOrReturn(CheckValue("", actualValue[1], 2));
-                VerifyOrReturn(CheckValue("", actualValue[2], 3));
-                VerifyOrReturn(CheckValue("", actualValue[3], 4));
+                VerifyOrReturn(CheckValue("", actualValue[0], 1U));
+                VerifyOrReturn(CheckValue("", actualValue[1], 2U));
+                VerifyOrReturn(CheckValue("", actualValue[2], 3U));
+                VerifyOrReturn(CheckValue("", actualValue[3], 4U));
             }
 
             testSendClusterTestCluster_374_WaitForReport_Fulfilled = true;
@@ -76027,10 +76027,10 @@ private:
         id listInt8uArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [NSNumber numberWithUnsignedChar:5];
-            temp_0[1] = [NSNumber numberWithUnsignedChar:6];
-            temp_0[2] = [NSNumber numberWithUnsignedChar:7];
-            temp_0[3] = [NSNumber numberWithUnsignedChar:8];
+            temp_0[0] = [NSNumber numberWithUnsignedChar:5U];
+            temp_0[1] = [NSNumber numberWithUnsignedChar:6U];
+            temp_0[2] = [NSNumber numberWithUnsignedChar:7U];
+            temp_0[3] = [NSNumber numberWithUnsignedChar:8U];
             listInt8uArgument = temp_0;
         }
         [cluster writeAttributeListInt8uWithValue:listInt8uArgument
@@ -76059,10 +76059,10 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("list_int8u", [actualValue count], static_cast<uint32_t>(4)));
-                VerifyOrReturn(CheckValue("", actualValue[0], 5));
-                VerifyOrReturn(CheckValue("", actualValue[1], 6));
-                VerifyOrReturn(CheckValue("", actualValue[2], 7));
-                VerifyOrReturn(CheckValue("", actualValue[3], 8));
+                VerifyOrReturn(CheckValue("", actualValue[0], 5U));
+                VerifyOrReturn(CheckValue("", actualValue[1], 6U));
+                VerifyOrReturn(CheckValue("", actualValue[2], 7U));
+                VerifyOrReturn(CheckValue("", actualValue[3], 8U));
             }
 
             NextTest();
@@ -76084,7 +76084,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("range_restricted_int8u", actualValue, 70));
+                VerifyOrReturn(CheckValue("range_restricted_int8u", actualValue, 70U));
             }
 
             NextTest();
@@ -76100,7 +76100,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id rangeRestrictedInt8uArgument;
-        rangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:0];
+        rangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster
             writeAttributeRangeRestrictedInt8uWithValue:rangeRestrictedInt8uArgument
                                       completionHandler:^(NSError * _Nullable err) {
@@ -76121,7 +76121,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id rangeRestrictedInt8uArgument;
-        rangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:19];
+        rangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:19U];
         [cluster writeAttributeRangeRestrictedInt8uWithValue:rangeRestrictedInt8uArgument
                                            completionHandler:^(NSError * _Nullable err) {
                                                NSLog(@"Write just-below-range value to a range-restricted unsigned 8-bit integer "
@@ -76143,7 +76143,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id rangeRestrictedInt8uArgument;
-        rangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:101];
+        rangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:101U];
         [cluster writeAttributeRangeRestrictedInt8uWithValue:rangeRestrictedInt8uArgument
                                            completionHandler:^(NSError * _Nullable err) {
                                                NSLog(@"Write just-above-range value to a range-restricted unsigned 8-bit integer "
@@ -76165,7 +76165,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id rangeRestrictedInt8uArgument;
-        rangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:255];
+        rangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:255U];
         [cluster
             writeAttributeRangeRestrictedInt8uWithValue:rangeRestrictedInt8uArgument
                                       completionHandler:^(NSError * _Nullable err) {
@@ -76192,7 +76192,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("range_restricted_int8u", actualValue, 70));
+                VerifyOrReturn(CheckValue("range_restricted_int8u", actualValue, 70U));
             }
 
             NextTest();
@@ -76208,7 +76208,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id rangeRestrictedInt8uArgument;
-        rangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:20];
+        rangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:20U];
         [cluster
             writeAttributeRangeRestrictedInt8uWithValue:rangeRestrictedInt8uArgument
                                       completionHandler:^(NSError * _Nullable err) {
@@ -76236,7 +76236,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("range_restricted_int8u", actualValue, 20));
+                VerifyOrReturn(CheckValue("range_restricted_int8u", actualValue, 20U));
             }
 
             NextTest();
@@ -76252,7 +76252,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id rangeRestrictedInt8uArgument;
-        rangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:100];
+        rangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:100U];
         [cluster
             writeAttributeRangeRestrictedInt8uWithValue:rangeRestrictedInt8uArgument
                                       completionHandler:^(NSError * _Nullable err) {
@@ -76280,7 +76280,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("range_restricted_int8u", actualValue, 100));
+                VerifyOrReturn(CheckValue("range_restricted_int8u", actualValue, 100U));
             }
 
             NextTest();
@@ -76296,7 +76296,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id rangeRestrictedInt8uArgument;
-        rangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:50];
+        rangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:50U];
         [cluster
             writeAttributeRangeRestrictedInt8uWithValue:rangeRestrictedInt8uArgument
                                       completionHandler:^(NSError * _Nullable err) {
@@ -76324,7 +76324,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("range_restricted_int8u", actualValue, 50));
+                VerifyOrReturn(CheckValue("range_restricted_int8u", actualValue, 50U));
             }
 
             NextTest();
@@ -77133,7 +77133,7 @@ private:
                 {
                     id actualValue = value;
                     VerifyOrReturn(CheckValueNonNull("nullable_range_restricted_int8u", actualValue));
-                    VerifyOrReturn(CheckValue("nullable_range_restricted_int8u", actualValue, 70));
+                    VerifyOrReturn(CheckValue("nullable_range_restricted_int8u", actualValue, 70U));
                 }
 
                 NextTest();
@@ -77149,7 +77149,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableRangeRestrictedInt8uArgument;
-        nullableRangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:0];
+        nullableRangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeNullableRangeRestrictedInt8uWithValue:nullableRangeRestrictedInt8uArgument
                                                    completionHandler:^(NSError * _Nullable err) {
                                                        NSLog(@"Write min value to a nullable range-restricted unsigned 8-bit "
@@ -77171,7 +77171,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableRangeRestrictedInt8uArgument;
-        nullableRangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:19];
+        nullableRangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:19U];
         [cluster writeAttributeNullableRangeRestrictedInt8uWithValue:nullableRangeRestrictedInt8uArgument
                                                    completionHandler:^(NSError * _Nullable err) {
                                                        NSLog(@"Write just-below-range value to a nullable range-restricted "
@@ -77193,7 +77193,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableRangeRestrictedInt8uArgument;
-        nullableRangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:101];
+        nullableRangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:101U];
         [cluster writeAttributeNullableRangeRestrictedInt8uWithValue:nullableRangeRestrictedInt8uArgument
                                                    completionHandler:^(NSError * _Nullable err) {
                                                        NSLog(@"Write just-above-range value to a nullable range-restricted "
@@ -77215,7 +77215,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableRangeRestrictedInt8uArgument;
-        nullableRangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:254];
+        nullableRangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:254U];
         [cluster writeAttributeNullableRangeRestrictedInt8uWithValue:nullableRangeRestrictedInt8uArgument
                                                    completionHandler:^(NSError * _Nullable err) {
                                                        NSLog(@"Write max value to a nullable range-restricted unsigned 8-bit "
@@ -77245,7 +77245,7 @@ private:
                 {
                     id actualValue = value;
                     VerifyOrReturn(CheckValueNonNull("nullable_range_restricted_int8u", actualValue));
-                    VerifyOrReturn(CheckValue("nullable_range_restricted_int8u", actualValue, 70));
+                    VerifyOrReturn(CheckValue("nullable_range_restricted_int8u", actualValue, 70U));
                 }
 
                 NextTest();
@@ -77261,7 +77261,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableRangeRestrictedInt8uArgument;
-        nullableRangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:20];
+        nullableRangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:20U];
         [cluster writeAttributeNullableRangeRestrictedInt8uWithValue:nullableRangeRestrictedInt8uArgument
                                                    completionHandler:^(NSError * _Nullable err) {
                                                        NSLog(@"Write min valid value to a nullable range-restricted unsigned 8-bit "
@@ -77291,7 +77291,7 @@ private:
                 {
                     id actualValue = value;
                     VerifyOrReturn(CheckValueNonNull("nullable_range_restricted_int8u", actualValue));
-                    VerifyOrReturn(CheckValue("nullable_range_restricted_int8u", actualValue, 20));
+                    VerifyOrReturn(CheckValue("nullable_range_restricted_int8u", actualValue, 20U));
                 }
 
                 NextTest();
@@ -77307,7 +77307,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableRangeRestrictedInt8uArgument;
-        nullableRangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:100];
+        nullableRangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:100U];
         [cluster writeAttributeNullableRangeRestrictedInt8uWithValue:nullableRangeRestrictedInt8uArgument
                                                    completionHandler:^(NSError * _Nullable err) {
                                                        NSLog(@"Write max valid value to a nullable range-restricted unsigned 8-bit "
@@ -77337,7 +77337,7 @@ private:
                 {
                     id actualValue = value;
                     VerifyOrReturn(CheckValueNonNull("nullable_range_restricted_int8u", actualValue));
-                    VerifyOrReturn(CheckValue("nullable_range_restricted_int8u", actualValue, 100));
+                    VerifyOrReturn(CheckValue("nullable_range_restricted_int8u", actualValue, 100U));
                 }
 
                 NextTest();
@@ -77353,7 +77353,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id nullableRangeRestrictedInt8uArgument;
-        nullableRangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:50];
+        nullableRangeRestrictedInt8uArgument = [NSNumber numberWithUnsignedChar:50U];
         [cluster writeAttributeNullableRangeRestrictedInt8uWithValue:nullableRangeRestrictedInt8uArgument
                                                    completionHandler:^(NSError * _Nullable err) {
                                                        NSLog(@"Write middle valid value to a nullable range-restricted unsigned "
@@ -77383,7 +77383,7 @@ private:
                 {
                     id actualValue = value;
                     VerifyOrReturn(CheckValueNonNull("nullable_range_restricted_int8u", actualValue));
-                    VerifyOrReturn(CheckValue("nullable_range_restricted_int8u", actualValue, 50));
+                    VerifyOrReturn(CheckValue("nullable_range_restricted_int8u", actualValue, 50U));
                 }
 
                 NextTest();
@@ -78545,12 +78545,12 @@ private:
 
         id structAttrArgument;
         structAttrArgument = [[CHIPTestClusterClusterSimpleStruct alloc] init];
-        ((CHIPTestClusterClusterSimpleStruct *) structAttrArgument).a = [NSNumber numberWithUnsignedChar:5];
+        ((CHIPTestClusterClusterSimpleStruct *) structAttrArgument).a = [NSNumber numberWithUnsignedChar:5U];
         ((CHIPTestClusterClusterSimpleStruct *) structAttrArgument).b = [NSNumber numberWithBool:true];
-        ((CHIPTestClusterClusterSimpleStruct *) structAttrArgument).c = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPTestClusterClusterSimpleStruct *) structAttrArgument).c = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPTestClusterClusterSimpleStruct *) structAttrArgument).d = [[NSData alloc] initWithBytes:"abc" length:3];
         ((CHIPTestClusterClusterSimpleStruct *) structAttrArgument).e = @"";
-        ((CHIPTestClusterClusterSimpleStruct *) structAttrArgument).f = [NSNumber numberWithUnsignedChar:17];
+        ((CHIPTestClusterClusterSimpleStruct *) structAttrArgument).f = [NSNumber numberWithUnsignedChar:17U];
         ((CHIPTestClusterClusterSimpleStruct *) structAttrArgument).g = [NSNumber numberWithFloat:1.5f];
         ((CHIPTestClusterClusterSimpleStruct *) structAttrArgument).h = [NSNumber numberWithDouble:3.14159265358979];
 
@@ -78580,13 +78580,13 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("a", ((CHIPTestClusterClusterSimpleStruct *) actualValue).a, 5));
+                VerifyOrReturn(CheckValue("a", ((CHIPTestClusterClusterSimpleStruct *) actualValue).a, 5U));
                 VerifyOrReturn(CheckValue("b", ((CHIPTestClusterClusterSimpleStruct *) actualValue).b, true));
-                VerifyOrReturn(CheckValue("c", ((CHIPTestClusterClusterSimpleStruct *) actualValue).c, 2));
+                VerifyOrReturn(CheckValue("c", ((CHIPTestClusterClusterSimpleStruct *) actualValue).c, 2U));
                 VerifyOrReturn(CheckValueAsString(
                     "d", ((CHIPTestClusterClusterSimpleStruct *) actualValue).d, [[NSData alloc] initWithBytes:"abc" length:3]));
                 VerifyOrReturn(CheckValueAsString("e", ((CHIPTestClusterClusterSimpleStruct *) actualValue).e, @""));
-                VerifyOrReturn(CheckValue("f", ((CHIPTestClusterClusterSimpleStruct *) actualValue).f, 17));
+                VerifyOrReturn(CheckValue("f", ((CHIPTestClusterClusterSimpleStruct *) actualValue).f, 17U));
                 VerifyOrReturn(CheckValue("g", ((CHIPTestClusterClusterSimpleStruct *) actualValue).g, 1.5f));
                 VerifyOrReturn(CheckValue("h", ((CHIPTestClusterClusterSimpleStruct *) actualValue).h, 3.14159265358979));
             }
@@ -78869,10 +78869,10 @@ private:
         id listInt8uArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [NSNumber numberWithUnsignedChar:1];
-            temp_0[1] = [NSNumber numberWithUnsignedChar:2];
-            temp_0[2] = [NSNumber numberWithUnsignedChar:3];
-            temp_0[3] = [NSNumber numberWithUnsignedChar:4];
+            temp_0[0] = [NSNumber numberWithUnsignedChar:1U];
+            temp_0[1] = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[2] = [NSNumber numberWithUnsignedChar:3U];
+            temp_0[3] = [NSNumber numberWithUnsignedChar:4U];
             listInt8uArgument = temp_0;
         }
         [cluster writeAttributeListInt8uWithValue:listInt8uArgument
@@ -78898,9 +78898,9 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintContains("listInt8u", value, 2));
-            VerifyOrReturn(CheckConstraintContains("listInt8u", value, 3));
-            VerifyOrReturn(CheckConstraintContains("listInt8u", value, 4));
+            VerifyOrReturn(CheckConstraintContains("listInt8u", value, 2U));
+            VerifyOrReturn(CheckConstraintContains("listInt8u", value, 3U));
+            VerifyOrReturn(CheckConstraintContains("listInt8u", value, 4U));
 
             NextTest();
         }];
@@ -78919,8 +78919,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintExcludes("listInt8u", value, 0));
-            VerifyOrReturn(CheckConstraintExcludes("listInt8u", value, 5));
+            VerifyOrReturn(CheckConstraintExcludes("listInt8u", value, 0U));
+            VerifyOrReturn(CheckConstraintExcludes("listInt8u", value, 5U));
 
             NextTest();
         }];
@@ -80424,8 +80424,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPTestClusterClusterTestAddArgumentsParams alloc] init];
-        params.arg1 = [NSNumber numberWithUnsignedChar:3];
-        params.arg2 = [NSNumber numberWithUnsignedChar:17];
+        params.arg1 = [NSNumber numberWithUnsignedChar:3U];
+        params.arg2 = [NSNumber numberWithUnsignedChar:17U];
         [cluster testAddArgumentsWithParams:params
                           completionHandler:^(
                               CHIPTestClusterClusterTestAddArgumentsResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -80435,7 +80435,7 @@ private:
 
                               {
                                   id actualValue = values.returnValue;
-                                  VerifyOrReturn(CheckValue("returnValue", actualValue, 20));
+                                  VerifyOrReturn(CheckValue("returnValue", actualValue, 20U));
                               }
                               {
                                   TestAddArgumentDefaultValue = values.returnValue;
@@ -80454,8 +80454,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPTestClusterClusterTestAddArgumentsParams alloc] init];
-        params.arg1 = [NSNumber numberWithUnsignedChar:3];
-        params.arg2 = [NSNumber numberWithUnsignedChar:17];
+        params.arg1 = [NSNumber numberWithUnsignedChar:3U];
+        params.arg2 = [NSNumber numberWithUnsignedChar:17U];
         [cluster testAddArgumentsWithParams:params
                           completionHandler:^(
                               CHIPTestClusterClusterTestAddArgumentsResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -80481,7 +80481,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPTestClusterClusterTestAddArgumentsParams alloc] init];
-        params.arg1 = [NSNumber numberWithUnsignedChar:3];
+        params.arg1 = [NSNumber numberWithUnsignedChar:3U];
         params.arg2 = [TestAddArgumentDefaultValue copy];
         [cluster
             testAddArgumentsWithParams:params
@@ -80620,7 +80620,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("bitmap8", actualValue, 0));
+                VerifyOrReturn(CheckValue("bitmap8", actualValue, 0U));
             }
             {
                 readAttributeBitmap8DefaultValue = value;
@@ -80639,7 +80639,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id bitmap8Argument;
-        bitmap8Argument = [NSNumber numberWithUnsignedChar:1];
+        bitmap8Argument = [NSNumber numberWithUnsignedChar:1U];
         [cluster writeAttributeBitmap8WithValue:bitmap8Argument
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Write attribute BITMAP8 Not Default Value Error: %@", err);
@@ -81048,7 +81048,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("int8u", actualValue, 0));
+                VerifyOrReturn(CheckValue("int8u", actualValue, 0U));
             }
             {
                 readAttributeInt8uDefaultValue = value;
@@ -81067,7 +81067,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id int8uArgument;
-        int8uArgument = [NSNumber numberWithUnsignedChar:1];
+        int8uArgument = [NSNumber numberWithUnsignedChar:1U];
         [cluster writeAttributeInt8uWithValue:int8uArgument
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Write attribute INT8U Not Default Value Error: %@", err);
@@ -81904,7 +81904,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("enum8", actualValue, 0));
+                VerifyOrReturn(CheckValue("enum8", actualValue, 0U));
             }
             {
                 readAttributeEnum8DefaultValue = value;
@@ -81923,7 +81923,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id enum8Argument;
-        enum8Argument = [NSNumber numberWithUnsignedChar:1];
+        enum8Argument = [NSNumber numberWithUnsignedChar:1U];
         [cluster writeAttributeEnum8WithValue:enum8Argument
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Write attribute ENUM8 Not Default Value Error: %@", err);
@@ -82901,8 +82901,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPTestClusterClusterTestAddArgumentsParams alloc] init];
-        params.arg1 = [NSNumber numberWithUnsignedChar:3];
-        params.arg2 = [NSNumber numberWithUnsignedChar:17];
+        params.arg1 = [NSNumber numberWithUnsignedChar:3U];
+        params.arg2 = [NSNumber numberWithUnsignedChar:17U];
         [cluster testAddArgumentsWithParams:params
                           completionHandler:^(
                               CHIPTestClusterClusterTestAddArgumentsResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -82912,7 +82912,7 @@ private:
 
                               {
                                   id actualValue = values.returnValue;
-                                  VerifyOrReturn(CheckValue("returnValue", actualValue, 20));
+                                  VerifyOrReturn(CheckValue("returnValue", actualValue, 20U));
                               }
                               {
                                   TestAddArgumentDefaultValue = values.returnValue;
@@ -82931,7 +82931,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPTestClusterClusterTestAddArgumentsParams alloc] init];
-        params.arg1 = mArg1.HasValue() ? [NSNumber numberWithUnsignedChar:mArg1.Value()] : [NSNumber numberWithUnsignedChar:5];
+        params.arg1 = mArg1.HasValue() ? [NSNumber numberWithUnsignedChar:mArg1.Value()] : [NSNumber numberWithUnsignedChar:5U];
         params.arg2 = [TestAddArgumentDefaultValue copy];
         [cluster testAddArgumentsWithParams:params
                           completionHandler:^(
@@ -82943,7 +82943,7 @@ private:
                               {
                                   id actualValue = values.returnValue;
                                   VerifyOrReturn(CheckValue("returnValue", actualValue,
-                                      mReturnValueWithArg1.HasValue() ? mReturnValueWithArg1.Value() : 25));
+                                      mReturnValueWithArg1.HasValue() ? mReturnValueWithArg1.Value() : 25U));
                               }
 
                               NextTest();
@@ -84234,7 +84234,7 @@ private:
 
             {
                 id actualValue = values.errorCode;
-                VerifyOrReturn(CheckValue("errorCode", actualValue, 3));
+                VerifyOrReturn(CheckValue("errorCode", actualValue, 3U));
             }
 
             NextTest();
@@ -84309,7 +84309,7 @@ private:
 
                          {
                              id actualValue = values.errorCode;
-                             VerifyOrReturn(CheckValue("errorCode", actualValue, 4));
+                             VerifyOrReturn(CheckValue("errorCode", actualValue, 4U));
                          }
 
                          NextTest();
@@ -84399,7 +84399,7 @@ private:
 
                          {
                              id actualValue = values.errorCode;
-                             VerifyOrReturn(CheckValue("errorCode", actualValue, 0));
+                             VerifyOrReturn(CheckValue("errorCode", actualValue, 0U));
                          }
 
                          NextTest();
@@ -84452,7 +84452,7 @@ private:
 
                          {
                              id actualValue = values.errorCode;
-                             VerifyOrReturn(CheckValue("errorCode", actualValue, 4));
+                             VerifyOrReturn(CheckValue("errorCode", actualValue, 4U));
                          }
 
                          NextTest();
@@ -84501,7 +84501,7 @@ private:
 
             {
                 id actualValue = values.errorCode;
-                VerifyOrReturn(CheckValue("errorCode", actualValue, 2));
+                VerifyOrReturn(CheckValue("errorCode", actualValue, 2U));
             }
 
             NextTest();
@@ -84550,7 +84550,7 @@ private:
 
             {
                 id actualValue = values.errorCode;
-                VerifyOrReturn(CheckValue("errorCode", actualValue, 0));
+                VerifyOrReturn(CheckValue("errorCode", actualValue, 0U));
             }
 
             NextTest();
@@ -84603,7 +84603,7 @@ private:
 
                          {
                              id actualValue = values.errorCode;
-                             VerifyOrReturn(CheckValue("errorCode", actualValue, 0));
+                             VerifyOrReturn(CheckValue("errorCode", actualValue, 0U));
                          }
 
                          NextTest();
@@ -84656,7 +84656,7 @@ private:
 
                          {
                              id actualValue = values.errorCode;
-                             VerifyOrReturn(CheckValue("errorCode", actualValue, 0));
+                             VerifyOrReturn(CheckValue("errorCode", actualValue, 0U));
                          }
 
                          NextTest();
@@ -84968,7 +84968,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("supportedFabrics", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("supportedFabrics", [value unsignedCharValue], 4));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("supportedFabrics", [value unsignedCharValue], 4U));
 
             NextTest();
         }];
@@ -84990,7 +84990,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("commissionedFabrics", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("commissionedFabrics", [value unsignedCharValue], 1));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("commissionedFabrics", [value unsignedCharValue], 1U));
 
             NextTest();
         }];
@@ -85013,7 +85013,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentFabricIndex", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<chip::FabricIndex>("currentFabricIndex", [value unsignedCharValue], 1));
+            VerifyOrReturn(CheckConstraintMinValue<chip::FabricIndex>("currentFabricIndex", [value unsignedCharValue], 1U));
             {
                 ourFabricIndex = value;
             }
@@ -85033,7 +85033,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPOperationalCredentialsClusterRemoveFabricParams alloc] init];
-        params.fabricIndex = [NSNumber numberWithUnsignedChar:243];
+        params.fabricIndex = [NSNumber numberWithUnsignedChar:243U];
         [cluster removeFabricWithParams:params
                       completionHandler:^(
                           CHIPOperationalCredentialsClusterNOCResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -85043,7 +85043,7 @@ private:
 
                           {
                               id actualValue = values.statusCode;
-                              VerifyOrReturn(CheckValue("StatusCode", actualValue, 11));
+                              VerifyOrReturn(CheckValue("StatusCode", actualValue, 11U));
                           }
 
                           NextTest();
@@ -85103,7 +85103,7 @@ private:
 
                                {
                                    id actualValue = values.statusCode;
-                                   VerifyOrReturn(CheckValue("StatusCode", actualValue, 0));
+                                   VerifyOrReturn(CheckValue("StatusCode", actualValue, 0U));
                                }
 
                                {
@@ -85513,17 +85513,17 @@ private:
                 VerifyOrReturn(CheckValue("SupportedModes", [actualValue count], static_cast<uint32_t>(3)));
                 VerifyOrReturn(
                     CheckValueAsString("Label", ((CHIPModeSelectClusterModeOptionStruct *) actualValue[0]).label, @"Black"));
-                VerifyOrReturn(CheckValue("Mode", ((CHIPModeSelectClusterModeOptionStruct *) actualValue[0]).mode, 0));
+                VerifyOrReturn(CheckValue("Mode", ((CHIPModeSelectClusterModeOptionStruct *) actualValue[0]).mode, 0U));
                 VerifyOrReturn(CheckValue("SemanticTags",
                     [((CHIPModeSelectClusterModeOptionStruct *) actualValue[0]).semanticTags count], static_cast<uint32_t>(1)));
                 VerifyOrReturn(
                     CheckValueAsString("Label", ((CHIPModeSelectClusterModeOptionStruct *) actualValue[1]).label, @"Cappuccino"));
-                VerifyOrReturn(CheckValue("Mode", ((CHIPModeSelectClusterModeOptionStruct *) actualValue[1]).mode, 4));
+                VerifyOrReturn(CheckValue("Mode", ((CHIPModeSelectClusterModeOptionStruct *) actualValue[1]).mode, 4U));
                 VerifyOrReturn(CheckValue("SemanticTags",
                     [((CHIPModeSelectClusterModeOptionStruct *) actualValue[1]).semanticTags count], static_cast<uint32_t>(1)));
                 VerifyOrReturn(
                     CheckValueAsString("Label", ((CHIPModeSelectClusterModeOptionStruct *) actualValue[2]).label, @"Espresso"));
-                VerifyOrReturn(CheckValue("Mode", ((CHIPModeSelectClusterModeOptionStruct *) actualValue[2]).mode, 7));
+                VerifyOrReturn(CheckValue("Mode", ((CHIPModeSelectClusterModeOptionStruct *) actualValue[2]).mode, 7U));
                 VerifyOrReturn(CheckValue("SemanticTags",
                     [((CHIPModeSelectClusterModeOptionStruct *) actualValue[2]).semanticTags count], static_cast<uint32_t>(1)));
             }
@@ -85547,7 +85547,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentMode", actualValue, 0));
+                VerifyOrReturn(CheckValue("CurrentMode", actualValue, 0U));
             }
 
             NextTest();
@@ -85570,7 +85570,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("StartUpMode", actualValue));
-                VerifyOrReturn(CheckValue("StartUpMode", actualValue, 0));
+                VerifyOrReturn(CheckValue("StartUpMode", actualValue, 0U));
             }
 
             NextTest();
@@ -85608,7 +85608,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPModeSelectClusterChangeToModeParams alloc] init];
-        params.newMode = [NSNumber numberWithUnsignedChar:4];
+        params.newMode = [NSNumber numberWithUnsignedChar:4U];
         [cluster changeToModeWithParams:params
                       completionHandler:^(NSError * _Nullable err) {
                           NSLog(@"Change to Supported Mode Error: %@", err);
@@ -85635,7 +85635,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentMode", actualValue, 4));
+                VerifyOrReturn(CheckValue("CurrentMode", actualValue, 4U));
             }
             {
                 currentModeBeforeToggle = value;
@@ -85654,7 +85654,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPModeSelectClusterChangeToModeParams alloc] init];
-        params.newMode = [NSNumber numberWithUnsignedChar:2];
+        params.newMode = [NSNumber numberWithUnsignedChar:2U];
         [cluster changeToModeWithParams:params
                       completionHandler:^(NSError * _Nullable err) {
                           NSLog(@"Change to Unsupported Mode Error: %@", err);
@@ -85729,7 +85729,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id onModeArgument;
-        onModeArgument = [NSNumber numberWithUnsignedChar:2];
+        onModeArgument = [NSNumber numberWithUnsignedChar:2U];
         [cluster writeAttributeOnModeWithValue:onModeArgument
                              completionHandler:^(NSError * _Nullable err) {
                                  NSLog(@"Change to Unsupported OnMode Error: %@", err);
@@ -85748,7 +85748,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id onModeArgument;
-        onModeArgument = [NSNumber numberWithUnsignedChar:7];
+        onModeArgument = [NSNumber numberWithUnsignedChar:7U];
         [cluster writeAttributeOnModeWithValue:onModeArgument
                              completionHandler:^(NSError * _Nullable err) {
                                  NSLog(@"Change OnMode Error: %@", err);
@@ -85776,7 +85776,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("OnMode", actualValue));
-                VerifyOrReturn(CheckValue("OnMode", actualValue, 7));
+                VerifyOrReturn(CheckValue("OnMode", actualValue, 7U));
             }
             {
                 OnModeValue = value;
@@ -85851,7 +85851,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id startUpModeArgument;
-        startUpModeArgument = [NSNumber numberWithUnsignedChar:2];
+        startUpModeArgument = [NSNumber numberWithUnsignedChar:2U];
         [cluster writeAttributeStartUpModeWithValue:startUpModeArgument
                                   completionHandler:^(NSError * _Nullable err) {
                                       NSLog(@"Change to Unsupported StartUp Mode Error: %@", err);
@@ -85870,7 +85870,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id startUpModeArgument;
-        startUpModeArgument = [NSNumber numberWithUnsignedChar:7];
+        startUpModeArgument = [NSNumber numberWithUnsignedChar:7U];
         [cluster writeAttributeStartUpModeWithValue:startUpModeArgument
                                   completionHandler:^(NSError * _Nullable err) {
                                       NSLog(@"Change to Supported StartUp Mode Error: %@", err);
@@ -85897,7 +85897,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("StartUpMode", actualValue));
-                VerifyOrReturn(CheckValue("StartUpMode", actualValue, 7));
+                VerifyOrReturn(CheckValue("StartUpMode", actualValue, 7U));
             }
 
             NextTest();
@@ -85913,7 +85913,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPModeSelectClusterChangeToModeParams alloc] init];
-        params.newMode = [NSNumber numberWithUnsignedChar:0];
+        params.newMode = [NSNumber numberWithUnsignedChar:0U];
         [cluster changeToModeWithParams:params
                       completionHandler:^(NSError * _Nullable err) {
                           NSLog(@"Change CurrentMode to another value Error: %@", err);
@@ -85933,7 +85933,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id onModeArgument;
-        onModeArgument = [NSNumber numberWithUnsignedChar:4];
+        onModeArgument = [NSNumber numberWithUnsignedChar:4U];
         [cluster writeAttributeOnModeWithValue:onModeArgument
                              completionHandler:^(NSError * _Nullable err) {
                                  NSLog(@"Change On Mode Error: %@", err);
@@ -85953,7 +85953,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id startUpOnOffArgument;
-        startUpOnOffArgument = [NSNumber numberWithUnsignedChar:1];
+        startUpOnOffArgument = [NSNumber numberWithUnsignedChar:1U];
         [cluster writeAttributeStartUpOnOffWithValue:startUpOnOffArgument
                                    completionHandler:^(NSError * _Nullable err) {
                                        NSLog(@"Set StartUpOnOff Error: %@", err);
@@ -85992,7 +85992,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentMode", actualValue, 4));
+                VerifyOrReturn(CheckValue("CurrentMode", actualValue, 4U));
             }
 
             NextTest();
@@ -86047,7 +86047,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentMode", actualValue, 7));
+                VerifyOrReturn(CheckValue("CurrentMode", actualValue, 7U));
             }
 
             NextTest();
@@ -86176,7 +86176,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("CommissionedFabrics", actualValue, 1));
+                VerifyOrReturn(CheckValue("CommissionedFabrics", actualValue, 1U));
             }
 
             VerifyOrReturn(CheckConstraintType("commissionedFabrics", "", "uint8"));
@@ -86201,7 +86201,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentFabricIndex", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<chip::FabricIndex>("currentFabricIndex", [value unsignedCharValue], 1));
+            VerifyOrReturn(CheckConstraintMinValue<chip::FabricIndex>("currentFabricIndex", [value unsignedCharValue], 1U));
             {
                 ourFabricIndex = value;
             }
@@ -86842,14 +86842,14 @@ private:
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [[CHIPBindingClusterTargetStruct alloc] init];
-            ((CHIPBindingClusterTargetStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPBindingClusterTargetStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             temp_0[1] = [[CHIPBindingClusterTargetStruct alloc] init];
             ((CHIPBindingClusterTargetStruct *) temp_0[1]).node = [NSNumber numberWithUnsignedLongLong:1ULL];
             ((CHIPBindingClusterTargetStruct *) temp_0[1]).group = [NSNumber numberWithUnsignedShort:1U];
             ((CHIPBindingClusterTargetStruct *) temp_0[1]).endpoint = [NSNumber numberWithUnsignedShort:1U];
             ((CHIPBindingClusterTargetStruct *) temp_0[1]).cluster = [NSNumber numberWithUnsignedInt:6UL];
-            ((CHIPBindingClusterTargetStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPBindingClusterTargetStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             bindingArgument = temp_0;
         }
@@ -86875,18 +86875,18 @@ private:
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [[CHIPBindingClusterTargetStruct alloc] init];
             ((CHIPBindingClusterTargetStruct *) temp_0[0]).group = [NSNumber numberWithUnsignedShort:1U];
-            ((CHIPBindingClusterTargetStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPBindingClusterTargetStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             temp_0[1] = [[CHIPBindingClusterTargetStruct alloc] init];
             ((CHIPBindingClusterTargetStruct *) temp_0[1]).node = [NSNumber numberWithUnsignedLongLong:1ULL];
             ((CHIPBindingClusterTargetStruct *) temp_0[1]).endpoint = [NSNumber numberWithUnsignedShort:1U];
             ((CHIPBindingClusterTargetStruct *) temp_0[1]).cluster = [NSNumber numberWithUnsignedInt:6UL];
-            ((CHIPBindingClusterTargetStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPBindingClusterTargetStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             temp_0[2] = [[CHIPBindingClusterTargetStruct alloc] init];
             ((CHIPBindingClusterTargetStruct *) temp_0[2]).node = [NSNumber numberWithUnsignedLongLong:2ULL];
             ((CHIPBindingClusterTargetStruct *) temp_0[2]).endpoint = [NSNumber numberWithUnsignedShort:1U];
-            ((CHIPBindingClusterTargetStruct *) temp_0[2]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPBindingClusterTargetStruct *) temp_0[2]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             bindingArgument = temp_0;
         }
@@ -86921,20 +86921,20 @@ private:
                                  id actualValue = value;
                                  VerifyOrReturn(CheckValue("Binding", [actualValue count], static_cast<uint32_t>(3)));
                                  VerifyOrReturn(CheckValue("Group", ((CHIPBindingClusterTargetStruct *) actualValue[0]).group, 1U));
-                                 VerifyOrReturn(
-                                     CheckValue("FabricIndex", ((CHIPBindingClusterTargetStruct *) actualValue[0]).fabricIndex, 1));
+                                 VerifyOrReturn(CheckValue(
+                                     "FabricIndex", ((CHIPBindingClusterTargetStruct *) actualValue[0]).fabricIndex, 1U));
                                  VerifyOrReturn(CheckValue("Node", ((CHIPBindingClusterTargetStruct *) actualValue[1]).node, 1ULL));
                                  VerifyOrReturn(
                                      CheckValue("Endpoint", ((CHIPBindingClusterTargetStruct *) actualValue[1]).endpoint, 1U));
                                  VerifyOrReturn(
                                      CheckValue("Cluster", ((CHIPBindingClusterTargetStruct *) actualValue[1]).cluster, 6UL));
-                                 VerifyOrReturn(
-                                     CheckValue("FabricIndex", ((CHIPBindingClusterTargetStruct *) actualValue[1]).fabricIndex, 1));
+                                 VerifyOrReturn(CheckValue(
+                                     "FabricIndex", ((CHIPBindingClusterTargetStruct *) actualValue[1]).fabricIndex, 1U));
                                  VerifyOrReturn(CheckValue("Node", ((CHIPBindingClusterTargetStruct *) actualValue[2]).node, 2ULL));
                                  VerifyOrReturn(
                                      CheckValue("Endpoint", ((CHIPBindingClusterTargetStruct *) actualValue[2]).endpoint, 1U));
-                                 VerifyOrReturn(
-                                     CheckValue("FabricIndex", ((CHIPBindingClusterTargetStruct *) actualValue[2]).fabricIndex, 1));
+                                 VerifyOrReturn(CheckValue(
+                                     "FabricIndex", ((CHIPBindingClusterTargetStruct *) actualValue[2]).fabricIndex, 1U));
                              }
 
                              NextTest();
@@ -86955,7 +86955,7 @@ private:
             temp_0[0] = [[CHIPBindingClusterTargetStruct alloc] init];
             ((CHIPBindingClusterTargetStruct *) temp_0[0]).node = [NSNumber numberWithUnsignedLongLong:3ULL];
             ((CHIPBindingClusterTargetStruct *) temp_0[0]).endpoint = [NSNumber numberWithUnsignedShort:1U];
-            ((CHIPBindingClusterTargetStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0];
+            ((CHIPBindingClusterTargetStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             bindingArgument = temp_0;
         }
@@ -86992,8 +86992,8 @@ private:
                                  VerifyOrReturn(CheckValue("Node", ((CHIPBindingClusterTargetStruct *) actualValue[0]).node, 3ULL));
                                  VerifyOrReturn(
                                      CheckValue("Endpoint", ((CHIPBindingClusterTargetStruct *) actualValue[0]).endpoint, 1U));
-                                 VerifyOrReturn(
-                                     CheckValue("FabricIndex", ((CHIPBindingClusterTargetStruct *) actualValue[0]).fabricIndex, 1));
+                                 VerifyOrReturn(CheckValue(
+                                     "FabricIndex", ((CHIPBindingClusterTargetStruct *) actualValue[0]).fabricIndex, 1U));
                              }
 
                              NextTest();
@@ -87021,20 +87021,20 @@ private:
                                  id actualValue = value;
                                  VerifyOrReturn(CheckValue("Binding", [actualValue count], static_cast<uint32_t>(3)));
                                  VerifyOrReturn(CheckValue("Group", ((CHIPBindingClusterTargetStruct *) actualValue[0]).group, 1U));
-                                 VerifyOrReturn(
-                                     CheckValue("FabricIndex", ((CHIPBindingClusterTargetStruct *) actualValue[0]).fabricIndex, 1));
+                                 VerifyOrReturn(CheckValue(
+                                     "FabricIndex", ((CHIPBindingClusterTargetStruct *) actualValue[0]).fabricIndex, 1U));
                                  VerifyOrReturn(CheckValue("Node", ((CHIPBindingClusterTargetStruct *) actualValue[1]).node, 1ULL));
                                  VerifyOrReturn(
                                      CheckValue("Endpoint", ((CHIPBindingClusterTargetStruct *) actualValue[1]).endpoint, 1U));
                                  VerifyOrReturn(
                                      CheckValue("Cluster", ((CHIPBindingClusterTargetStruct *) actualValue[1]).cluster, 6UL));
-                                 VerifyOrReturn(
-                                     CheckValue("FabricIndex", ((CHIPBindingClusterTargetStruct *) actualValue[1]).fabricIndex, 1));
+                                 VerifyOrReturn(CheckValue(
+                                     "FabricIndex", ((CHIPBindingClusterTargetStruct *) actualValue[1]).fabricIndex, 1U));
                                  VerifyOrReturn(CheckValue("Node", ((CHIPBindingClusterTargetStruct *) actualValue[2]).node, 2ULL));
                                  VerifyOrReturn(
                                      CheckValue("Endpoint", ((CHIPBindingClusterTargetStruct *) actualValue[2]).endpoint, 1U));
-                                 VerifyOrReturn(
-                                     CheckValue("FabricIndex", ((CHIPBindingClusterTargetStruct *) actualValue[2]).fabricIndex, 1));
+                                 VerifyOrReturn(CheckValue(
+                                     "FabricIndex", ((CHIPBindingClusterTargetStruct *) actualValue[2]).fabricIndex, 1U));
                              }
 
                              NextTest();
@@ -87493,7 +87493,7 @@ private:
 
                          {
                              id actualValue = values.errorCode;
-                             VerifyOrReturn(CheckValue("errorCode", actualValue, 0));
+                             VerifyOrReturn(CheckValue("errorCode", actualValue, 0U));
                          }
 
                          NextTest();
@@ -87876,7 +87876,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id fanModeArgument;
-        fanModeArgument = [NSNumber numberWithUnsignedChar:3];
+        fanModeArgument = [NSNumber numberWithUnsignedChar:3U];
         [cluster writeAttributeFanModeWithValue:fanModeArgument
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Write fan mode Error: %@", err);
@@ -87902,7 +87902,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("fan mode", actualValue, 3));
+                VerifyOrReturn(CheckValue("fan mode", actualValue, 3U));
             }
 
             NextTest();
@@ -87918,7 +87918,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id fanModeSequenceArgument;
-        fanModeSequenceArgument = [NSNumber numberWithUnsignedChar:5];
+        fanModeSequenceArgument = [NSNumber numberWithUnsignedChar:5U];
         [cluster writeAttributeFanModeSequenceWithValue:fanModeSequenceArgument
                                       completionHandler:^(NSError * _Nullable err) {
                                           NSLog(@"Write fan mode sequence Error: %@", err);
@@ -87944,7 +87944,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("fan mode sequence", actualValue, 5));
+                VerifyOrReturn(CheckValue("fan mode sequence", actualValue, 5U));
             }
 
             NextTest();
@@ -87960,7 +87960,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id percentSettingArgument;
-        percentSettingArgument = [NSNumber numberWithUnsignedChar:84];
+        percentSettingArgument = [NSNumber numberWithUnsignedChar:84U];
         [cluster writeAttributePercentSettingWithValue:percentSettingArgument
                                      completionHandler:^(NSError * _Nullable err) {
                                          NSLog(@"Write percent setting Error: %@", err);
@@ -87987,7 +87987,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("percent setting", actualValue));
-                VerifyOrReturn(CheckValue("percent setting", actualValue, 84));
+                VerifyOrReturn(CheckValue("percent setting", actualValue, 84U));
             }
 
             NextTest();
@@ -88010,7 +88010,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("speed setting", actualValue));
-                VerifyOrReturn(CheckValue("speed setting", actualValue, 84));
+                VerifyOrReturn(CheckValue("speed setting", actualValue, 84U));
             }
 
             NextTest();
@@ -88032,7 +88032,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("speed current", actualValue, 84));
+                VerifyOrReturn(CheckValue("speed current", actualValue, 84U));
             }
 
             NextTest();
@@ -88075,7 +88075,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("percent setting", actualValue));
-                VerifyOrReturn(CheckValue("percent setting", actualValue, 84));
+                VerifyOrReturn(CheckValue("percent setting", actualValue, 84U));
             }
 
             NextTest();
@@ -88091,7 +88091,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id speedSettingArgument;
-        speedSettingArgument = [NSNumber numberWithUnsignedChar:73];
+        speedSettingArgument = [NSNumber numberWithUnsignedChar:73U];
         [cluster writeAttributeSpeedSettingWithValue:speedSettingArgument
                                    completionHandler:^(NSError * _Nullable err) {
                                        NSLog(@"Write speed setting Error: %@", err);
@@ -88118,7 +88118,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("speed setting", actualValue));
-                VerifyOrReturn(CheckValue("speed setting", actualValue, 73));
+                VerifyOrReturn(CheckValue("speed setting", actualValue, 73U));
             }
 
             NextTest();
@@ -88141,7 +88141,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("percent setting", actualValue));
-                VerifyOrReturn(CheckValue("percent setting", actualValue, 73));
+                VerifyOrReturn(CheckValue("percent setting", actualValue, 73U));
             }
 
             NextTest();
@@ -88163,7 +88163,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("percent current", actualValue, 73));
+                VerifyOrReturn(CheckValue("percent current", actualValue, 73U));
             }
 
             NextTest();
@@ -88206,7 +88206,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("speed setting", actualValue));
-                VerifyOrReturn(CheckValue("speed setting", actualValue, 73));
+                VerifyOrReturn(CheckValue("speed setting", actualValue, 73U));
             }
 
             NextTest();
@@ -88222,7 +88222,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id fanModeArgument;
-        fanModeArgument = [NSNumber numberWithUnsignedChar:0];
+        fanModeArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeFanModeWithValue:fanModeArgument
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Write fan mode Error: %@", err);
@@ -88249,7 +88249,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("percent setting", actualValue));
-                VerifyOrReturn(CheckValue("percent setting", actualValue, 0));
+                VerifyOrReturn(CheckValue("percent setting", actualValue, 0U));
             }
 
             NextTest();
@@ -88271,7 +88271,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("percent current", actualValue, 0));
+                VerifyOrReturn(CheckValue("percent current", actualValue, 0U));
             }
 
             NextTest();
@@ -88294,7 +88294,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("speed setting", actualValue));
-                VerifyOrReturn(CheckValue("speed setting", actualValue, 0));
+                VerifyOrReturn(CheckValue("speed setting", actualValue, 0U));
             }
 
             NextTest();
@@ -88316,7 +88316,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("speed current", actualValue, 0));
+                VerifyOrReturn(CheckValue("speed current", actualValue, 0U));
             }
 
             NextTest();
@@ -88332,7 +88332,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id fanModeArgument;
-        fanModeArgument = [NSNumber numberWithUnsignedChar:5];
+        fanModeArgument = [NSNumber numberWithUnsignedChar:5U];
         [cluster writeAttributeFanModeWithValue:fanModeArgument
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Write fan mode Error: %@", err);
@@ -90698,7 +90698,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = nil;
         params.userUniqueId = nil;
@@ -90750,19 +90750,19 @@ private:
                      {
                          id actualValue = values.userStatus;
                          VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.userType;
                          VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
                      }
 
                      {
                          id actualValue = values.credentialRule;
                          VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
                      }
 
                      {
@@ -90773,13 +90773,13 @@ private:
                      {
                          id actualValue = values.creatorFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.lastModifiedFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                      }
 
                      {
@@ -90800,7 +90800,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = nil;
         params.userUniqueId = nil;
@@ -90825,7 +90825,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:2];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = @"new_user";
         params.userUniqueId = nil;
@@ -90877,19 +90877,19 @@ private:
                      {
                          id actualValue = values.userStatus;
                          VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.userType;
                          VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
                      }
 
                      {
                          id actualValue = values.credentialRule;
                          VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
                      }
 
                      {
@@ -90900,13 +90900,13 @@ private:
                      {
                          id actualValue = values.creatorFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.lastModifiedFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                      }
 
                      {
@@ -90927,7 +90927,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:2];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = nil;
         params.userUniqueId = [NSNumber numberWithUnsignedInt:305441741UL];
@@ -90980,19 +90980,19 @@ private:
                      {
                          id actualValue = values.userStatus;
                          VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.userType;
                          VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
                      }
 
                      {
                          id actualValue = values.credentialRule;
                          VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
                      }
 
                      {
@@ -91003,13 +91003,13 @@ private:
                      {
                          id actualValue = values.creatorFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.lastModifiedFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                      }
 
                      {
@@ -91030,11 +91030,11 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:2];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = nil;
         params.userUniqueId = nil;
-        params.userStatus = [NSNumber numberWithUnsignedChar:3];
+        params.userStatus = [NSNumber numberWithUnsignedChar:3U];
         params.userType = nil;
         params.credentialRule = nil;
         [cluster setUserWithParams:params
@@ -91083,19 +91083,19 @@ private:
                      {
                          id actualValue = values.userStatus;
                          VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                         VerifyOrReturn(CheckValue("userStatus", actualValue, 3));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 3U));
                      }
 
                      {
                          id actualValue = values.userType;
                          VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
                      }
 
                      {
                          id actualValue = values.credentialRule;
                          VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
                      }
 
                      {
@@ -91106,13 +91106,13 @@ private:
                      {
                          id actualValue = values.creatorFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.lastModifiedFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                      }
 
                      {
@@ -91133,12 +91133,12 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:2];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = nil;
         params.userUniqueId = nil;
         params.userStatus = nil;
-        params.userType = [NSNumber numberWithUnsignedChar:6];
+        params.userType = [NSNumber numberWithUnsignedChar:6U];
         params.credentialRule = nil;
         [cluster setUserWithParams:params
                  completionHandler:^(NSError * _Nullable err) {
@@ -91186,19 +91186,19 @@ private:
                      {
                          id actualValue = values.userStatus;
                          VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                         VerifyOrReturn(CheckValue("userStatus", actualValue, 3));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 3U));
                      }
 
                      {
                          id actualValue = values.userType;
                          VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                         VerifyOrReturn(CheckValue("userType", actualValue, 6));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 6U));
                      }
 
                      {
                          id actualValue = values.credentialRule;
                          VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
                      }
 
                      {
@@ -91209,13 +91209,13 @@ private:
                      {
                          id actualValue = values.creatorFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.lastModifiedFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                      }
 
                      {
@@ -91236,13 +91236,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:2];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = nil;
         params.userUniqueId = nil;
         params.userStatus = nil;
         params.userType = nil;
-        params.credentialRule = [NSNumber numberWithUnsignedChar:2];
+        params.credentialRule = [NSNumber numberWithUnsignedChar:2U];
         [cluster setUserWithParams:params
                  completionHandler:^(NSError * _Nullable err) {
                      NSLog(@"Modify credentialRule for existing user Error: %@", err);
@@ -91289,19 +91289,19 @@ private:
                      {
                          id actualValue = values.userStatus;
                          VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                         VerifyOrReturn(CheckValue("userStatus", actualValue, 3));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 3U));
                      }
 
                      {
                          id actualValue = values.userType;
                          VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                         VerifyOrReturn(CheckValue("userType", actualValue, 6));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 6U));
                      }
 
                      {
                          id actualValue = values.credentialRule;
                          VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 2));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 2U));
                      }
 
                      {
@@ -91312,13 +91312,13 @@ private:
                      {
                          id actualValue = values.creatorFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.lastModifiedFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                      }
 
                      {
@@ -91339,13 +91339,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:2];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = @"test_user";
         params.userUniqueId = [NSNumber numberWithUnsignedInt:466460832UL];
-        params.userStatus = [NSNumber numberWithUnsignedChar:1];
-        params.userType = [NSNumber numberWithUnsignedChar:0];
-        params.credentialRule = [NSNumber numberWithUnsignedChar:1];
+        params.userStatus = [NSNumber numberWithUnsignedChar:1U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        params.credentialRule = [NSNumber numberWithUnsignedChar:1U];
         [cluster setUserWithParams:params
                  completionHandler:^(NSError * _Nullable err) {
                      NSLog(@"Modify all fields for existing user Error: %@", err);
@@ -91392,19 +91392,19 @@ private:
                      {
                          id actualValue = values.userStatus;
                          VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.userType;
                          VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
                      }
 
                      {
                          id actualValue = values.credentialRule;
                          VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 1));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 1U));
                      }
 
                      {
@@ -91415,13 +91415,13 @@ private:
                      {
                          id actualValue = values.creatorFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.lastModifiedFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                      }
 
                      {
@@ -91442,13 +91442,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         params.userName = @"test_user2";
         params.userUniqueId = [NSNumber numberWithUnsignedInt:12648430UL];
-        params.userStatus = [NSNumber numberWithUnsignedChar:1];
-        params.userType = [NSNumber numberWithUnsignedChar:1];
-        params.credentialRule = [NSNumber numberWithUnsignedChar:2];
+        params.userStatus = [NSNumber numberWithUnsignedChar:1U];
+        params.userType = [NSNumber numberWithUnsignedChar:1U];
+        params.credentialRule = [NSNumber numberWithUnsignedChar:2U];
         [cluster setUserWithParams:params
                  completionHandler:^(NSError * _Nullable err) {
                      NSLog(@"Add another user with non-default fields Error: %@", err);
@@ -91495,19 +91495,19 @@ private:
                      {
                          id actualValue = values.userStatus;
                          VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.userType;
                          VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                         VerifyOrReturn(CheckValue("userType", actualValue, 1));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.credentialRule;
                          VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 2));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 2U));
                      }
 
                      {
@@ -91518,13 +91518,13 @@ private:
                      {
                          id actualValue = values.creatorFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.lastModifiedFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                      }
 
                      {
@@ -91545,7 +91545,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NumberOfTotalUsersSupported copy];
         params.userName = @"last_user";
         params.userUniqueId = nil;
@@ -91597,19 +91597,19 @@ private:
                      {
                          id actualValue = values.userStatus;
                          VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.userType;
                          VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
                      }
 
                      {
                          id actualValue = values.credentialRule;
                          VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
                      }
 
                      {
@@ -91620,13 +91620,13 @@ private:
                      {
                          id actualValue = values.creatorFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.lastModifiedFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                      }
 
                      {
@@ -91647,7 +91647,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:0U];
         params.userName = nil;
         params.userUniqueId = nil;
@@ -91672,7 +91672,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
         params.userName = nil;
         params.userUniqueId = nil;
@@ -91788,7 +91788,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = nil;
         params.userUniqueId = nil;
@@ -91840,19 +91840,19 @@ private:
                      {
                          id actualValue = values.userStatus;
                          VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.userType;
                          VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
                      }
 
                      {
                          id actualValue = values.credentialRule;
                          VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
                      }
 
                      {
@@ -91863,13 +91863,13 @@ private:
                      {
                          id actualValue = values.creatorFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.lastModifiedFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                      }
 
                      {
@@ -92117,7 +92117,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster getCredentialStatusWithParams:params
@@ -92166,7 +92166,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         [cluster getCredentialStatusWithParams:params
@@ -92189,7 +92189,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex =
             [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupported unsignedShortValue] + 1U];
 
@@ -92212,9 +92212,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000000" length:6];
@@ -92230,7 +92230,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -92284,19 +92284,19 @@ private:
                      {
                          id actualValue = values.userStatus;
                          VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.userType;
                          VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
                      }
 
                      {
                          id actualValue = values.credentialRule;
                          VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
                      }
 
                      {
@@ -92304,7 +92304,7 @@ private:
                          VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
                          VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(1)));
                          VerifyOrReturn(
-                             CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1));
+                             CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1U));
                          VerifyOrReturn(CheckValue(
                              "CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 1U));
                      }
@@ -92312,13 +92312,13 @@ private:
                      {
                          id actualValue = values.creatorFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.lastModifiedFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                      }
 
                      {
@@ -92340,7 +92340,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster getCredentialStatusWithParams:params
@@ -92364,13 +92364,13 @@ private:
                                  {
                                      id actualValue = values.creatorFabricIndex;
                                      VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                     VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                                     VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                                  }
 
                                  {
                                      id actualValue = values.lastModifiedFabricIndex;
                                      VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                     VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                                     VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                                  }
 
                                  {
@@ -92391,9 +92391,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
@@ -92409,7 +92409,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
                       }
 
                       {
@@ -92436,9 +92436,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex =
             [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupported unsignedShortValue] + 1U];
 
@@ -92455,7 +92455,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
                       }
 
                       {
@@ -92509,7 +92509,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         [cluster getCredentialStatusWithParams:params
@@ -92532,7 +92532,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex =
             [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupported unsignedShortValue] + 1U];
 
@@ -92556,7 +92556,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         [cluster getCredentialStatusWithParams:params
@@ -92604,9 +92604,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_123456" length:16];
@@ -92622,7 +92622,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -92675,19 +92675,19 @@ private:
                      {
                          id actualValue = values.userStatus;
                          VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.userType;
                          VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
                      }
 
                      {
                          id actualValue = values.credentialRule;
                          VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
                      }
 
                      {
@@ -92695,11 +92695,11 @@ private:
                          VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
                          VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(2)));
                          VerifyOrReturn(
-                             CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1));
+                             CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1U));
                          VerifyOrReturn(CheckValue(
                              "CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 1U));
                          VerifyOrReturn(
-                             CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[1]).credentialType, 2));
+                             CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[1]).credentialType, 2U));
                          VerifyOrReturn(CheckValue(
                              "CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[1]).credentialIndex, 2U));
                      }
@@ -92707,13 +92707,13 @@ private:
                      {
                          id actualValue = values.creatorFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.lastModifiedFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                      }
 
                      {
@@ -92735,7 +92735,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         [cluster getCredentialStatusWithParams:params
@@ -92759,13 +92759,13 @@ private:
                                  {
                                      id actualValue = values.creatorFabricIndex;
                                      VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                     VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                                     VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                                  }
 
                                  {
                                      id actualValue = values.lastModifiedFabricIndex;
                                      VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                     VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                                     VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                                  }
 
                                  {
@@ -92786,9 +92786,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"new_rfid_data_field" length:19];
@@ -92804,7 +92804,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
                       }
 
                       {
@@ -92831,9 +92831,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex =
             [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupported unsignedShortValue] + 1U];
 
@@ -92850,7 +92850,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
                       }
 
                       {
@@ -92876,9 +92876,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123465" length:6];
@@ -92894,7 +92894,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
                       }
 
                       {
@@ -92921,9 +92921,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123465" length:6];
@@ -92939,7 +92939,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
                       }
 
                       {
@@ -92966,9 +92966,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"12345" length:5];
@@ -92984,7 +92984,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
                       }
 
                       {
@@ -93011,9 +93011,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456789" length:9];
@@ -93029,7 +93029,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
                       }
 
                       {
@@ -93056,9 +93056,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"rfid_data" length:9];
@@ -93074,7 +93074,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
                       }
 
                       {
@@ -93101,15 +93101,15 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:0U];
         params.userStatus = nil;
-        params.userType = [NSNumber numberWithUnsignedChar:3];
+        params.userType = [NSNumber numberWithUnsignedChar:3U];
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -93119,7 +93119,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
                       }
 
                       {
@@ -93146,9 +93146,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"very_long_rfid_data_to_test_boundaries" length:38];
@@ -93164,7 +93164,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
                       }
 
                       {
@@ -93191,9 +93191,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000000" length:6];
@@ -93209,7 +93209,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 2));
+                          VerifyOrReturn(CheckValue("status", actualValue, 2U));
                       }
 
                       {
@@ -93236,9 +93236,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_123456" length:16];
@@ -93254,7 +93254,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 2));
+                          VerifyOrReturn(CheckValue("status", actualValue, 2U));
                       }
 
                       {
@@ -93281,9 +93281,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:2];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
@@ -93299,7 +93299,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -93326,9 +93326,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000000" length:6];
@@ -93344,7 +93344,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -93372,9 +93372,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
@@ -93390,7 +93390,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 2));
+                          VerifyOrReturn(CheckValue("status", actualValue, 2U));
                       }
 
                       {
@@ -93417,9 +93417,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_7890" length:14];
@@ -93435,7 +93435,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -93489,19 +93489,19 @@ private:
                 {
                     id actualValue = values.userStatus;
                     VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                    VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                    VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
                 }
 
                 {
                     id actualValue = values.userType;
                     VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                    VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                    VerifyOrReturn(CheckValue("userType", actualValue, 0U));
                 }
 
                 {
                     id actualValue = values.credentialRule;
                     VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                    VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                    VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
                 }
 
                 {
@@ -93509,15 +93509,15 @@ private:
                     VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
                     VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(3)));
                     VerifyOrReturn(
-                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1));
+                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1U));
                     VerifyOrReturn(
                         CheckValue("CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 1U));
                     VerifyOrReturn(
-                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[1]).credentialType, 2));
+                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[1]).credentialType, 2U));
                     VerifyOrReturn(
                         CheckValue("CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[1]).credentialIndex, 2U));
                     VerifyOrReturn(
-                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[2]).credentialType, 2));
+                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[2]).credentialType, 2U));
                     VerifyOrReturn(
                         CheckValue("CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[2]).credentialIndex, 4U));
                 }
@@ -93525,13 +93525,13 @@ private:
                 {
                     id actualValue = values.creatorFabricIndex;
                     VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                    VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                    VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                 }
 
                 {
                     id actualValue = values.lastModifiedFabricIndex;
                     VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                    VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                    VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                 }
 
                 {
@@ -93553,9 +93553,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:5U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"789012" length:6];
@@ -93571,7 +93571,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -93625,19 +93625,19 @@ private:
                 {
                     id actualValue = values.userStatus;
                     VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                    VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                    VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
                 }
 
                 {
                     id actualValue = values.userType;
                     VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                    VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                    VerifyOrReturn(CheckValue("userType", actualValue, 0U));
                 }
 
                 {
                     id actualValue = values.credentialRule;
                     VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                    VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                    VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
                 }
 
                 {
@@ -93645,19 +93645,19 @@ private:
                     VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
                     VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(4)));
                     VerifyOrReturn(
-                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1));
+                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1U));
                     VerifyOrReturn(
                         CheckValue("CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 1U));
                     VerifyOrReturn(
-                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[1]).credentialType, 2));
+                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[1]).credentialType, 2U));
                     VerifyOrReturn(
                         CheckValue("CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[1]).credentialIndex, 2U));
                     VerifyOrReturn(
-                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[2]).credentialType, 2));
+                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[2]).credentialType, 2U));
                     VerifyOrReturn(
                         CheckValue("CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[2]).credentialIndex, 4U));
                     VerifyOrReturn(
-                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[3]).credentialType, 1));
+                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[3]).credentialType, 1U));
                     VerifyOrReturn(
                         CheckValue("CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[3]).credentialIndex, 5U));
                 }
@@ -93665,13 +93665,13 @@ private:
                 {
                     id actualValue = values.creatorFabricIndex;
                     VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                    VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                    VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                 }
 
                 {
                     id actualValue = values.lastModifiedFabricIndex;
                     VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                    VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                    VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                 }
 
                 {
@@ -93694,7 +93694,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster clearCredentialWithParams:params
@@ -93717,7 +93717,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster getCredentialStatusWithParams:params
@@ -93793,19 +93793,19 @@ private:
                 {
                     id actualValue = values.userStatus;
                     VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                    VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                    VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
                 }
 
                 {
                     id actualValue = values.userType;
                     VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                    VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                    VerifyOrReturn(CheckValue("userType", actualValue, 0U));
                 }
 
                 {
                     id actualValue = values.credentialRule;
                     VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                    VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                    VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
                 }
 
                 {
@@ -93813,15 +93813,15 @@ private:
                     VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
                     VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(3)));
                     VerifyOrReturn(
-                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialType, 2));
+                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialType, 2U));
                     VerifyOrReturn(
                         CheckValue("CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 2U));
                     VerifyOrReturn(
-                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[1]).credentialType, 2));
+                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[1]).credentialType, 2U));
                     VerifyOrReturn(
                         CheckValue("CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[1]).credentialIndex, 4U));
                     VerifyOrReturn(
-                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[2]).credentialType, 1));
+                        CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[2]).credentialType, 1U));
                     VerifyOrReturn(
                         CheckValue("CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[2]).credentialIndex, 5U));
                 }
@@ -93829,13 +93829,13 @@ private:
                 {
                     id actualValue = values.creatorFabricIndex;
                     VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                    VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                    VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                 }
 
                 {
                     id actualValue = values.lastModifiedFabricIndex;
                     VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                    VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                    VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                 }
 
                 {
@@ -93858,7 +93858,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         [cluster clearCredentialWithParams:params
@@ -93881,7 +93881,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         [cluster getCredentialStatusWithParams:params
@@ -94000,9 +94000,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_12345" length:15];
@@ -94018,7 +94018,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -94047,7 +94047,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:65534U];
 
         [cluster clearCredentialWithParams:params
@@ -94070,7 +94070,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster getCredentialStatusWithParams:params
@@ -94120,7 +94120,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         [cluster getCredentialStatusWithParams:params
@@ -94170,7 +94170,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
 
         [cluster getCredentialStatusWithParams:params
@@ -94245,19 +94245,19 @@ private:
                      {
                          id actualValue = values.userStatus;
                          VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.userType;
                          VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
                      }
 
                      {
                          id actualValue = values.credentialRule;
                          VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
                      }
 
                      {
@@ -94265,7 +94265,7 @@ private:
                          VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
                          VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(1)));
                          VerifyOrReturn(
-                             CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1));
+                             CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1U));
                          VerifyOrReturn(CheckValue(
                              "CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 5U));
                      }
@@ -94273,13 +94273,13 @@ private:
                      {
                          id actualValue = values.creatorFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.lastModifiedFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                      }
 
                      {
@@ -94370,9 +94370,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
@@ -94388,7 +94388,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -94416,9 +94416,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_1234" length:14];
@@ -94434,7 +94434,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -94462,9 +94462,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:6U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_9876" length:14];
@@ -94480,7 +94480,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -94529,7 +94529,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster getCredentialStatusWithParams:params
@@ -94578,7 +94578,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         [cluster getCredentialStatusWithParams:params
@@ -94627,7 +94627,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:6U];
 
         [cluster getCredentialStatusWithParams:params
@@ -94955,9 +94955,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
@@ -94973,7 +94973,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 133));
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
                       }
 
                       {
@@ -94999,9 +94999,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
@@ -95017,7 +95017,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -95070,19 +95070,19 @@ private:
                      {
                          id actualValue = values.userStatus;
                          VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.userType;
                          VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                         VerifyOrReturn(CheckValue("userType", actualValue, 0));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
                      }
 
                      {
                          id actualValue = values.credentialRule;
                          VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
                      }
 
                      {
@@ -95090,7 +95090,7 @@ private:
                          VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
                          VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(1)));
                          VerifyOrReturn(
-                             CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialType, 0));
+                             CheckValue("CredentialType", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialType, 0U));
                          VerifyOrReturn(CheckValue(
                              "CredentialIndex", ((CHIPDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 0U));
                      }
@@ -95098,13 +95098,13 @@ private:
                      {
                          id actualValue = values.creatorFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                      }
 
                      {
                          id actualValue = values.lastModifiedFabricIndex;
                          VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                      }
 
                      {
@@ -95126,7 +95126,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         [cluster getCredentialStatusWithParams:params
@@ -95150,13 +95150,13 @@ private:
                                  {
                                      id actualValue = values.creatorFabricIndex;
                                      VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                     VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1));
+                                     VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
                                  }
 
                                  {
                                      id actualValue = values.lastModifiedFabricIndex;
                                      VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                     VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1));
+                                     VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
                                  }
 
                                  {
@@ -95177,9 +95177,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:2];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"654321" length:6];
@@ -95195,7 +95195,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -95222,7 +95222,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         [cluster clearCredentialWithParams:params
@@ -95244,7 +95244,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster clearCredentialWithParams:params
@@ -95266,7 +95266,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         [cluster clearCredentialWithParams:params
@@ -95288,7 +95288,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex =
             [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupported unsignedShortValue] + 1U];
 
@@ -95311,7 +95311,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         [cluster clearCredentialWithParams:params
@@ -95333,7 +95333,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex =
             [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupported unsignedShortValue] + 1U];
 
@@ -95446,7 +95446,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         [cluster getCredentialStatusWithParams:params
@@ -95494,9 +95494,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000000" length:6];
@@ -95512,7 +95512,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -95540,9 +95540,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000001" length:6];
@@ -95558,7 +95558,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -95585,9 +95585,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000002" length:6];
@@ -95603,7 +95603,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -95630,9 +95630,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000003" length:6];
@@ -95648,7 +95648,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -95675,9 +95675,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:5U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000004" length:6];
@@ -95693,7 +95693,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -95720,9 +95720,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:6U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000005" length:6];
@@ -95738,7 +95738,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 137));
+                          VerifyOrReturn(CheckValue("status", actualValue, 137U));
                       }
 
                       {
@@ -95993,7 +95993,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("LockState", actualValue));
-                VerifyOrReturn(CheckValue("LockState", actualValue, 2));
+                VerifyOrReturn(CheckValue("LockState", actualValue, 2U));
             }
 
             NextTest();
@@ -96035,7 +96035,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("LockState", actualValue));
-                VerifyOrReturn(CheckValue("LockState", actualValue, 1));
+                VerifyOrReturn(CheckValue("LockState", actualValue, 1U));
             }
 
             NextTest();
@@ -96051,9 +96051,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
@@ -96069,7 +96069,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -96123,7 +96123,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("LockState", actualValue));
-                VerifyOrReturn(CheckValue("LockState", actualValue, 1));
+                VerifyOrReturn(CheckValue("LockState", actualValue, 1U));
             }
 
             NextTest();
@@ -96166,7 +96166,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("LockState", actualValue));
-                VerifyOrReturn(CheckValue("LockState", actualValue, 2));
+                VerifyOrReturn(CheckValue("LockState", actualValue, 2U));
             }
 
             NextTest();
@@ -96208,7 +96208,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("LockState", actualValue));
-                VerifyOrReturn(CheckValue("LockState", actualValue, 2));
+                VerifyOrReturn(CheckValue("LockState", actualValue, 2U));
             }
 
             NextTest();
@@ -96251,7 +96251,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("LockState", actualValue));
-                VerifyOrReturn(CheckValue("LockState", actualValue, 1));
+                VerifyOrReturn(CheckValue("LockState", actualValue, 1U));
             }
 
             NextTest();
@@ -96268,7 +96268,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster clearCredentialWithParams:params
@@ -97264,9 +97264,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
@@ -97282,7 +97282,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -97345,7 +97345,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("NumberOfWeekDaySchedulesSupportedPerUser", actualValue, 10));
+                VerifyOrReturn(CheckValue("NumberOfWeekDaySchedulesSupportedPerUser", actualValue, 10U));
             }
             {
                 NumberOfWeekDaySchedulesSupportedPerUser = value;
@@ -97372,7 +97372,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("NumberOfYearDaySchedulesSupportedPerUser", actualValue, 10));
+                VerifyOrReturn(CheckValue("NumberOfYearDaySchedulesSupportedPerUser", actualValue, 10U));
             }
             {
                 NumberOfYearDaySchedulesSupportedPerUser = value;
@@ -97399,7 +97399,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("NumberOfHolidaySchedulesSupported", actualValue, 10));
+                VerifyOrReturn(CheckValue("NumberOfHolidaySchedulesSupported", actualValue, 10U));
             }
             {
                 NumberOfHolidaySchedulesSupported = value;
@@ -97418,13 +97418,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:1];
-        params.startHour = [NSNumber numberWithUnsignedChar:15];
-        params.startMinute = [NSNumber numberWithUnsignedChar:16];
-        params.endHour = [NSNumber numberWithUnsignedChar:18];
-        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1U];
+        params.startHour = [NSNumber numberWithUnsignedChar:15U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16U];
+        params.endHour = [NSNumber numberWithUnsignedChar:18U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Week Day schedule with 0 index Error: %@", err);
@@ -97443,13 +97443,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfWeekDaySchedulesSupportedPerUser unsignedCharValue] + 1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfWeekDaySchedulesSupportedPerUser unsignedCharValue] + 1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:1];
-        params.startHour = [NSNumber numberWithUnsignedChar:15];
-        params.startMinute = [NSNumber numberWithUnsignedChar:16];
-        params.endHour = [NSNumber numberWithUnsignedChar:18];
-        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1U];
+        params.startHour = [NSNumber numberWithUnsignedChar:15U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16U];
+        params.endHour = [NSNumber numberWithUnsignedChar:18U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Week Day schedule with out-of-bounds index Error: %@", err);
@@ -97468,13 +97468,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:0U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:1];
-        params.startHour = [NSNumber numberWithUnsignedChar:15];
-        params.startMinute = [NSNumber numberWithUnsignedChar:16];
-        params.endHour = [NSNumber numberWithUnsignedChar:18];
-        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1U];
+        params.startHour = [NSNumber numberWithUnsignedChar:15U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16U];
+        params.endHour = [NSNumber numberWithUnsignedChar:18U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Week Day schedule with 0 user index Error: %@", err);
@@ -97493,13 +97493,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:1];
-        params.startHour = [NSNumber numberWithUnsignedChar:15];
-        params.startMinute = [NSNumber numberWithUnsignedChar:16];
-        params.endHour = [NSNumber numberWithUnsignedChar:18];
-        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1U];
+        params.startHour = [NSNumber numberWithUnsignedChar:15U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16U];
+        params.endHour = [NSNumber numberWithUnsignedChar:18U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Week Day schedule with out-of-bounds user index Error: %@", err);
@@ -97518,13 +97518,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:1];
-        params.startHour = [NSNumber numberWithUnsignedChar:15];
-        params.startMinute = [NSNumber numberWithUnsignedChar:16];
-        params.endHour = [NSNumber numberWithUnsignedChar:18];
-        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1U];
+        params.startHour = [NSNumber numberWithUnsignedChar:15U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16U];
+        params.endHour = [NSNumber numberWithUnsignedChar:18U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Week Day schedule for non-existing user Error: %@", err);
@@ -97543,13 +97543,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:0];
-        params.startHour = [NSNumber numberWithUnsignedChar:15];
-        params.startMinute = [NSNumber numberWithUnsignedChar:16];
-        params.endHour = [NSNumber numberWithUnsignedChar:18];
-        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        params.daysMask = [NSNumber numberWithUnsignedChar:0U];
+        params.startHour = [NSNumber numberWithUnsignedChar:15U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16U];
+        params.endHour = [NSNumber numberWithUnsignedChar:18U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Week Day schedule with 0 days mask Error: %@", err);
@@ -97568,13 +97568,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:3];
-        params.startHour = [NSNumber numberWithUnsignedChar:15];
-        params.startMinute = [NSNumber numberWithUnsignedChar:16];
-        params.endHour = [NSNumber numberWithUnsignedChar:18];
-        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        params.daysMask = [NSNumber numberWithUnsignedChar:3U];
+        params.startHour = [NSNumber numberWithUnsignedChar:15U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16U];
+        params.endHour = [NSNumber numberWithUnsignedChar:18U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Week Day schedule for Sunday and Monday Error: %@", err);
@@ -97593,13 +97593,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:73];
-        params.startHour = [NSNumber numberWithUnsignedChar:15];
-        params.startMinute = [NSNumber numberWithUnsignedChar:16];
-        params.endHour = [NSNumber numberWithUnsignedChar:18];
-        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        params.daysMask = [NSNumber numberWithUnsignedChar:73U];
+        params.startHour = [NSNumber numberWithUnsignedChar:15U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16U];
+        params.endHour = [NSNumber numberWithUnsignedChar:18U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Week Day schedule for Sunday Wednesday and Saturday Error: %@", err);
@@ -97618,13 +97618,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:1];
-        params.startHour = [NSNumber numberWithUnsignedChar:24];
-        params.startMinute = [NSNumber numberWithUnsignedChar:16];
-        params.endHour = [NSNumber numberWithUnsignedChar:18];
-        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1U];
+        params.startHour = [NSNumber numberWithUnsignedChar:24U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16U];
+        params.endHour = [NSNumber numberWithUnsignedChar:18U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Week Day schedule with invalid start hour Error: %@", err);
@@ -97643,13 +97643,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:1];
-        params.startHour = [NSNumber numberWithUnsignedChar:15];
-        params.startMinute = [NSNumber numberWithUnsignedChar:60];
-        params.endHour = [NSNumber numberWithUnsignedChar:18];
-        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1U];
+        params.startHour = [NSNumber numberWithUnsignedChar:15U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:60U];
+        params.endHour = [NSNumber numberWithUnsignedChar:18U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Week Day schedule with invalid start minute Error: %@", err);
@@ -97668,13 +97668,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:1];
-        params.startHour = [NSNumber numberWithUnsignedChar:15];
-        params.startMinute = [NSNumber numberWithUnsignedChar:16];
-        params.endHour = [NSNumber numberWithUnsignedChar:24];
-        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1U];
+        params.startHour = [NSNumber numberWithUnsignedChar:15U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16U];
+        params.endHour = [NSNumber numberWithUnsignedChar:24U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Week Day schedule with invalid end hour Error: %@", err);
@@ -97693,13 +97693,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:1];
-        params.startHour = [NSNumber numberWithUnsignedChar:15];
-        params.startMinute = [NSNumber numberWithUnsignedChar:16];
-        params.endHour = [NSNumber numberWithUnsignedChar:18];
-        params.endMinute = [NSNumber numberWithUnsignedChar:60];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1U];
+        params.startHour = [NSNumber numberWithUnsignedChar:15U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16U];
+        params.endHour = [NSNumber numberWithUnsignedChar:18U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:60U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Week Day schedule with invalid end minute Error: %@", err);
@@ -97718,13 +97718,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:1];
-        params.startHour = [NSNumber numberWithUnsignedChar:19];
-        params.startMinute = [NSNumber numberWithUnsignedChar:16];
-        params.endHour = [NSNumber numberWithUnsignedChar:18];
-        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1U];
+        params.startHour = [NSNumber numberWithUnsignedChar:19U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16U];
+        params.endHour = [NSNumber numberWithUnsignedChar:18U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Week Day schedule with start hour later that end hour Error: %@", err);
@@ -97743,13 +97743,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:1];
-        params.startHour = [NSNumber numberWithUnsignedChar:15];
-        params.startMinute = [NSNumber numberWithUnsignedChar:50];
-        params.endHour = [NSNumber numberWithUnsignedChar:15];
-        params.endMinute = [NSNumber numberWithUnsignedChar:49];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1U];
+        params.startHour = [NSNumber numberWithUnsignedChar:15U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:50U];
+        params.endHour = [NSNumber numberWithUnsignedChar:15U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:49U];
         [cluster
             setWeekDayScheduleWithParams:params
                        completionHandler:^(NSError * _Nullable err) {
@@ -97770,7 +97770,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -97781,7 +97781,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -97791,7 +97791,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 NextTest();
@@ -97807,7 +97807,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -97818,7 +97818,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 0U));
                                 }
 
                                 {
@@ -97828,7 +97828,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133U));
                                 }
 
                                 NextTest();
@@ -97844,7 +97844,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfWeekDaySchedulesSupportedPerUser unsignedCharValue] + 1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfWeekDaySchedulesSupportedPerUser unsignedCharValue] + 1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -97856,7 +97856,7 @@ private:
                                 {
                                     id actualValue = values.weekDayIndex;
                                     VerifyOrReturn(CheckValue("weekDayIndex", actualValue,
-                                        [NumberOfWeekDaySchedulesSupportedPerUser unsignedCharValue] + 1));
+                                        [NumberOfWeekDaySchedulesSupportedPerUser unsignedCharValue] + 1U));
                                 }
 
                                 {
@@ -97866,7 +97866,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133U));
                                 }
 
                                 NextTest();
@@ -97882,7 +97882,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:0U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -97893,7 +97893,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -97903,7 +97903,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133U));
                                 }
 
                                 NextTest();
@@ -97919,7 +97919,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -97930,7 +97930,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -97941,7 +97941,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133U));
                                 }
 
                                 NextTest();
@@ -97957,7 +97957,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -97968,7 +97968,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -97978,7 +97978,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 NextTest();
@@ -97994,7 +97994,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
@@ -98016,7 +98016,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
@@ -98038,7 +98038,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:0U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
@@ -98060,7 +98060,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
@@ -98082,7 +98082,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
@@ -98104,7 +98104,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345689UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345688UL];
@@ -98126,7 +98126,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -98137,7 +98137,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -98147,7 +98147,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 NextTest();
@@ -98163,7 +98163,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -98174,7 +98174,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 0U));
                                 }
 
                                 {
@@ -98184,7 +98184,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133U));
                                 }
 
                                 NextTest();
@@ -98200,7 +98200,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -98212,7 +98212,7 @@ private:
                                 {
                                     id actualValue = values.yearDayIndex;
                                     VerifyOrReturn(CheckValue("yearDayIndex", actualValue,
-                                        [NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1));
+                                        [NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1U));
                                 }
 
                                 {
@@ -98222,7 +98222,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133U));
                                 }
 
                                 NextTest();
@@ -98238,7 +98238,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:0U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -98249,7 +98249,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -98259,7 +98259,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133U));
                                 }
 
                                 NextTest();
@@ -98275,7 +98275,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -98286,7 +98286,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -98297,7 +98297,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133U));
                                 }
 
                                 NextTest();
@@ -98313,7 +98313,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -98324,7 +98324,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -98334,7 +98334,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 NextTest();
@@ -98350,10 +98350,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:0U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
-        params.operatingMode = [NSNumber numberWithUnsignedChar:0];
+        params.operatingMode = [NSNumber numberWithUnsignedChar:0U];
         [cluster setHolidayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Holiday schedule with 0 index Error: %@", err);
@@ -98372,10 +98372,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:[NumberOfHolidaySchedulesSupported unsignedCharValue] + 1];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:[NumberOfHolidaySchedulesSupported unsignedCharValue] + 1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
-        params.operatingMode = [NSNumber numberWithUnsignedChar:0];
+        params.operatingMode = [NSNumber numberWithUnsignedChar:0U];
         [cluster setHolidayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Holiday schedule with out-of-bounds index Error: %@", err);
@@ -98394,10 +98394,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345689UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345688UL];
-        params.operatingMode = [NSNumber numberWithUnsignedChar:0];
+        params.operatingMode = [NSNumber numberWithUnsignedChar:0U];
         [cluster setHolidayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Holiday schedule with start hour later that end hour Error: %@", err);
@@ -98416,10 +98416,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
-        params.operatingMode = [NSNumber numberWithUnsignedChar:5];
+        params.operatingMode = [NSNumber numberWithUnsignedChar:5U];
         [cluster setHolidayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Holiday schedule with invalid operating mode Error: %@", err);
@@ -98438,7 +98438,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1U];
         [cluster getHolidayScheduleWithParams:params
                             completionHandler:^(
                                 CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -98448,12 +98448,12 @@ private:
 
                                 {
                                     id actualValue = values.holidayIndex;
-                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
                                 }
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 NextTest();
@@ -98469,7 +98469,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:0U];
         [cluster getHolidayScheduleWithParams:params
                             completionHandler:^(
                                 CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -98479,12 +98479,12 @@ private:
 
                                 {
                                     id actualValue = values.holidayIndex;
-                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133U));
                                 }
 
                                 NextTest();
@@ -98500,7 +98500,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:[NumberOfHolidaySchedulesSupported unsignedCharValue] + 1];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:[NumberOfHolidaySchedulesSupported unsignedCharValue] + 1U];
         [cluster getHolidayScheduleWithParams:params
                             completionHandler:^(
                                 CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -98511,12 +98511,12 @@ private:
                                 {
                                     id actualValue = values.holidayIndex;
                                     VerifyOrReturn(CheckValue(
-                                        "holidayIndex", actualValue, [NumberOfHolidaySchedulesSupported unsignedCharValue] + 1));
+                                        "holidayIndex", actualValue, [NumberOfHolidaySchedulesSupported unsignedCharValue] + 1U));
                                 }
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 133));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133U));
                                 }
 
                                 NextTest();
@@ -98532,10 +98532,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
-        params.operatingMode = [NSNumber numberWithUnsignedChar:0];
+        params.operatingMode = [NSNumber numberWithUnsignedChar:0U];
         [cluster setHolidayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Holiday schedule with valid parameters Error: %@", err);
@@ -98555,7 +98555,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1U];
         [cluster getHolidayScheduleWithParams:params
                             completionHandler:^(
                                 CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -98565,12 +98565,12 @@ private:
 
                                 {
                                     id actualValue = values.holidayIndex;
-                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
                                 }
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -98585,7 +98585,7 @@ private:
 
                                 {
                                     id actualValue = values.operatingMode;
-                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0U));
                                 }
 
                                 NextTest();
@@ -98601,13 +98601,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:1];
-        params.startHour = [NSNumber numberWithUnsignedChar:15];
-        params.startMinute = [NSNumber numberWithUnsignedChar:16];
-        params.endHour = [NSNumber numberWithUnsignedChar:18];
-        params.endMinute = [NSNumber numberWithUnsignedChar:0];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1U];
+        params.startHour = [NSNumber numberWithUnsignedChar:15U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:16U];
+        params.endHour = [NSNumber numberWithUnsignedChar:18U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:0U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Week Day schedule with valid parameters Error: %@", err);
@@ -98627,7 +98627,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -98638,7 +98638,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -98648,32 +98648,32 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.daysMask;
-                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1U));
                                 }
 
                                 {
                                     id actualValue = values.startHour;
-                                    VerifyOrReturn(CheckValue("startHour", actualValue, 15));
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 15U));
                                 }
 
                                 {
                                     id actualValue = values.startMinute;
-                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 16));
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 16U));
                                 }
 
                                 {
                                     id actualValue = values.endHour;
-                                    VerifyOrReturn(CheckValue("endHour", actualValue, 18));
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 18U));
                                 }
 
                                 {
                                     id actualValue = values.endMinute;
-                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 0U));
                                 }
 
                                 NextTest();
@@ -98689,7 +98689,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
@@ -98712,7 +98712,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -98723,7 +98723,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -98733,7 +98733,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -98759,7 +98759,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster clearWeekDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
@@ -98779,7 +98779,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfWeekDaySchedulesSupportedPerUser unsignedCharValue] + 1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfWeekDaySchedulesSupportedPerUser unsignedCharValue] + 1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster clearWeekDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
@@ -98799,7 +98799,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:0U];
         [cluster clearWeekDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
@@ -98819,7 +98819,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
         [cluster clearWeekDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
@@ -98839,7 +98839,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         [cluster clearWeekDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
@@ -98859,7 +98859,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -98870,7 +98870,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -98880,32 +98880,32 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.daysMask;
-                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1U));
                                 }
 
                                 {
                                     id actualValue = values.startHour;
-                                    VerifyOrReturn(CheckValue("startHour", actualValue, 15));
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 15U));
                                 }
 
                                 {
                                     id actualValue = values.startMinute;
-                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 16));
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 16U));
                                 }
 
                                 {
                                     id actualValue = values.endHour;
-                                    VerifyOrReturn(CheckValue("endHour", actualValue, 18));
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 18U));
                                 }
 
                                 {
                                     id actualValue = values.endMinute;
-                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 0U));
                                 }
 
                                 NextTest();
@@ -98921,7 +98921,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -98932,7 +98932,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -98942,7 +98942,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -98968,7 +98968,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1U];
         [cluster getHolidayScheduleWithParams:params
                             completionHandler:^(
                                 CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -98978,12 +98978,12 @@ private:
 
                                 {
                                     id actualValue = values.holidayIndex;
-                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
                                 }
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -98998,7 +98998,7 @@ private:
 
                                 {
                                     id actualValue = values.operatingMode;
-                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0U));
                                 }
 
                                 NextTest();
@@ -99014,7 +99014,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster clearYearDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
@@ -99034,7 +99034,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster clearYearDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
@@ -99054,7 +99054,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:0U];
         [cluster clearYearDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
@@ -99074,7 +99074,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
         [cluster clearYearDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
@@ -99094,7 +99094,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         [cluster clearYearDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
@@ -99114,7 +99114,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -99125,7 +99125,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -99135,32 +99135,32 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.daysMask;
-                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1U));
                                 }
 
                                 {
                                     id actualValue = values.startHour;
-                                    VerifyOrReturn(CheckValue("startHour", actualValue, 15));
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 15U));
                                 }
 
                                 {
                                     id actualValue = values.startMinute;
-                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 16));
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 16U));
                                 }
 
                                 {
                                     id actualValue = values.endHour;
-                                    VerifyOrReturn(CheckValue("endHour", actualValue, 18));
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 18U));
                                 }
 
                                 {
                                     id actualValue = values.endMinute;
-                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 0U));
                                 }
 
                                 NextTest();
@@ -99176,7 +99176,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -99187,7 +99187,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -99197,7 +99197,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -99223,7 +99223,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1U];
         [cluster getHolidayScheduleWithParams:params
                             completionHandler:^(
                                 CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -99233,12 +99233,12 @@ private:
 
                                 {
                                     id actualValue = values.holidayIndex;
-                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
                                 }
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -99253,7 +99253,7 @@ private:
 
                                 {
                                     id actualValue = values.operatingMode;
-                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0U));
                                 }
 
                                 NextTest();
@@ -99269,7 +99269,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:0U];
         [cluster clearHolidayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Clear Holiday schedule with 0 index Error: %@", err);
@@ -99288,7 +99288,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1U];
         [cluster clearHolidayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Clear Holiday schedule with out-of-bounds index Error: %@", err);
@@ -99307,7 +99307,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -99318,7 +99318,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -99328,32 +99328,32 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.daysMask;
-                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1U));
                                 }
 
                                 {
                                     id actualValue = values.startHour;
-                                    VerifyOrReturn(CheckValue("startHour", actualValue, 15));
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 15U));
                                 }
 
                                 {
                                     id actualValue = values.startMinute;
-                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 16));
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 16U));
                                 }
 
                                 {
                                     id actualValue = values.endHour;
-                                    VerifyOrReturn(CheckValue("endHour", actualValue, 18));
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 18U));
                                 }
 
                                 {
                                     id actualValue = values.endMinute;
-                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 0U));
                                 }
 
                                 NextTest();
@@ -99369,7 +99369,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -99380,7 +99380,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -99390,7 +99390,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -99416,7 +99416,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1U];
         [cluster getHolidayScheduleWithParams:params
                             completionHandler:^(
                                 CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -99426,12 +99426,12 @@ private:
 
                                 {
                                     id actualValue = values.holidayIndex;
-                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
                                 }
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -99446,7 +99446,7 @@ private:
 
                                 {
                                     id actualValue = values.operatingMode;
-                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0U));
                                 }
 
                                 NextTest();
@@ -99462,13 +99462,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:2];
-        params.startHour = [NSNumber numberWithUnsignedChar:0];
-        params.startMinute = [NSNumber numberWithUnsignedChar:0];
-        params.endHour = [NSNumber numberWithUnsignedChar:23];
-        params.endMinute = [NSNumber numberWithUnsignedChar:59];
+        params.daysMask = [NSNumber numberWithUnsignedChar:2U];
+        params.startHour = [NSNumber numberWithUnsignedChar:0U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:0U];
+        params.endHour = [NSNumber numberWithUnsignedChar:23U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:59U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create another Week Day schedule with valid parameters Error: %@", err);
@@ -99488,7 +99488,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -99499,7 +99499,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 2));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 2U));
                                 }
 
                                 {
@@ -99509,32 +99509,32 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.daysMask;
-                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 2));
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 2U));
                                 }
 
                                 {
                                     id actualValue = values.startHour;
-                                    VerifyOrReturn(CheckValue("startHour", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.startMinute;
-                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.endHour;
-                                    VerifyOrReturn(CheckValue("endHour", actualValue, 23));
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 23U));
                                 }
 
                                 {
                                     id actualValue = values.endMinute;
-                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 59));
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 59U));
                                 }
 
                                 NextTest();
@@ -99550,7 +99550,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:9000UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:888888888UL];
@@ -99573,7 +99573,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -99584,7 +99584,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2U));
                                 }
 
                                 {
@@ -99594,7 +99594,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -99620,10 +99620,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:2U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:123456UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:1234567UL];
-        params.operatingMode = [NSNumber numberWithUnsignedChar:1];
+        params.operatingMode = [NSNumber numberWithUnsignedChar:1U];
         [cluster setHolidayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create another Holiday schedule with valid parameters Error: %@", err);
@@ -99643,7 +99643,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:2U];
         [cluster getHolidayScheduleWithParams:params
                             completionHandler:^(
                                 CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -99653,12 +99653,12 @@ private:
 
                                 {
                                     id actualValue = values.holidayIndex;
-                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2));
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2U));
                                 }
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -99673,7 +99673,7 @@ private:
 
                                 {
                                     id actualValue = values.operatingMode;
-                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 1U));
                                 }
 
                                 NextTest();
@@ -99689,7 +99689,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster clearWeekDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
@@ -99710,7 +99710,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -99721,7 +99721,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -99731,7 +99731,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 NextTest();
@@ -99747,7 +99747,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:254];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:254U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster clearWeekDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
@@ -99768,7 +99768,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -99779,7 +99779,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 2));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 2U));
                                 }
 
                                 {
@@ -99789,7 +99789,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 NextTest();
@@ -99805,7 +99805,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -99816,7 +99816,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -99826,7 +99826,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -99852,7 +99852,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -99863,7 +99863,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2U));
                                 }
 
                                 {
@@ -99873,7 +99873,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -99899,7 +99899,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1U];
         [cluster getHolidayScheduleWithParams:params
                             completionHandler:^(
                                 CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -99909,12 +99909,12 @@ private:
 
                                 {
                                     id actualValue = values.holidayIndex;
-                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
                                 }
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -99929,7 +99929,7 @@ private:
 
                                 {
                                     id actualValue = values.operatingMode;
-                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0U));
                                 }
 
                                 NextTest();
@@ -99945,7 +99945,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:2U];
         [cluster getHolidayScheduleWithParams:params
                             completionHandler:^(
                                 CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -99955,12 +99955,12 @@ private:
 
                                 {
                                     id actualValue = values.holidayIndex;
-                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2));
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2U));
                                 }
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -99975,7 +99975,7 @@ private:
 
                                 {
                                     id actualValue = values.operatingMode;
-                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 1U));
                                 }
 
                                 NextTest();
@@ -99991,13 +99991,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:2];
-        params.startHour = [NSNumber numberWithUnsignedChar:0];
-        params.startMinute = [NSNumber numberWithUnsignedChar:0];
-        params.endHour = [NSNumber numberWithUnsignedChar:23];
-        params.endMinute = [NSNumber numberWithUnsignedChar:59];
+        params.daysMask = [NSNumber numberWithUnsignedChar:2U];
+        params.startHour = [NSNumber numberWithUnsignedChar:0U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:0U];
+        params.endHour = [NSNumber numberWithUnsignedChar:23U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:59U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create another Week Day schedule with valid parameters Error: %@", err);
@@ -100017,7 +100017,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster clearYearDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
@@ -100038,7 +100038,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -100049,7 +100049,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -100059,7 +100059,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 NextTest();
@@ -100075,7 +100075,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:254];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:254U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster clearYearDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
@@ -100096,7 +100096,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -100107,7 +100107,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2U));
                                 }
 
                                 {
@@ -100117,7 +100117,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 NextTest();
@@ -100133,7 +100133,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -100144,7 +100144,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -100154,32 +100154,32 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.daysMask;
-                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 2));
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 2U));
                                 }
 
                                 {
                                     id actualValue = values.startHour;
-                                    VerifyOrReturn(CheckValue("startHour", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.startMinute;
-                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.endHour;
-                                    VerifyOrReturn(CheckValue("endHour", actualValue, 23));
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 23U));
                                 }
 
                                 {
                                     id actualValue = values.endMinute;
-                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 59));
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 59U));
                                 }
 
                                 NextTest();
@@ -100195,7 +100195,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:254];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:254U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster clearWeekDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
@@ -100216,7 +100216,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetUserParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         params.userName = nil;
         params.userUniqueId = nil;
@@ -100242,13 +100242,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:1];
-        params.startHour = [NSNumber numberWithUnsignedChar:0];
-        params.startMinute = [NSNumber numberWithUnsignedChar:0];
-        params.endHour = [NSNumber numberWithUnsignedChar:23];
-        params.endMinute = [NSNumber numberWithUnsignedChar:59];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1U];
+        params.startHour = [NSNumber numberWithUnsignedChar:0U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:0U];
+        params.endHour = [NSNumber numberWithUnsignedChar:23U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:59U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Week Day schedule with valid parameters for first user Error: %@", err);
@@ -100268,7 +100268,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -100279,7 +100279,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -100289,32 +100289,32 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.daysMask;
-                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1U));
                                 }
 
                                 {
                                     id actualValue = values.startHour;
-                                    VerifyOrReturn(CheckValue("startHour", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.startMinute;
-                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.endHour;
-                                    VerifyOrReturn(CheckValue("endHour", actualValue, 23));
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 23U));
                                 }
 
                                 {
                                     id actualValue = values.endMinute;
-                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 59));
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 59U));
                                 }
 
                                 NextTest();
@@ -100330,7 +100330,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:4];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:4U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:9000UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:888888888UL];
@@ -100353,7 +100353,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:4];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:4U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -100364,7 +100364,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 4));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 4U));
                                 }
 
                                 {
@@ -100374,7 +100374,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -100400,13 +100400,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:4];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:4U];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:64];
-        params.startHour = [NSNumber numberWithUnsignedChar:23];
-        params.startMinute = [NSNumber numberWithUnsignedChar:0];
-        params.endHour = [NSNumber numberWithUnsignedChar:23];
-        params.endMinute = [NSNumber numberWithUnsignedChar:59];
+        params.daysMask = [NSNumber numberWithUnsignedChar:64U];
+        params.startHour = [NSNumber numberWithUnsignedChar:23U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:0U];
+        params.endHour = [NSNumber numberWithUnsignedChar:23U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:59U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Week Day schedule with valid parameters for second user Error: %@", err);
@@ -100426,7 +100426,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:4];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:4U];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -100437,7 +100437,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 4));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 4U));
                                 }
 
                                 {
@@ -100447,32 +100447,32 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.daysMask;
-                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 64));
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 64U));
                                 }
 
                                 {
                                     id actualValue = values.startHour;
-                                    VerifyOrReturn(CheckValue("startHour", actualValue, 23));
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 23U));
                                 }
 
                                 {
                                     id actualValue = values.startMinute;
-                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.endHour;
-                                    VerifyOrReturn(CheckValue("endHour", actualValue, 23));
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 23U));
                                 }
 
                                 {
                                     id actualValue = values.endMinute;
-                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 59));
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 59U));
                                 }
 
                                 NextTest();
@@ -100488,7 +100488,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:55555UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:7777777UL];
@@ -100511,7 +100511,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -100522,7 +100522,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -100532,7 +100532,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -100578,7 +100578,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -100589,7 +100589,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -100599,7 +100599,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 NextTest();
@@ -100615,7 +100615,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:4];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:4U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -100626,7 +100626,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 4));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 4U));
                                 }
 
                                 {
@@ -100636,7 +100636,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 NextTest();
@@ -100652,7 +100652,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:4];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:4U];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -100663,7 +100663,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 4));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 4U));
                                 }
 
                                 {
@@ -100673,7 +100673,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 NextTest();
@@ -100689,7 +100689,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -100700,7 +100700,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -100710,7 +100710,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 NextTest();
@@ -100726,7 +100726,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1U];
         [cluster getHolidayScheduleWithParams:params
                             completionHandler:^(
                                 CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -100736,12 +100736,12 @@ private:
 
                                 {
                                     id actualValue = values.holidayIndex;
-                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
                                 }
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -100756,7 +100756,7 @@ private:
 
                                 {
                                     id actualValue = values.operatingMode;
-                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0U));
                                 }
 
                                 NextTest();
@@ -100772,7 +100772,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:2U];
         [cluster getHolidayScheduleWithParams:params
                             completionHandler:^(
                                 CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -100782,12 +100782,12 @@ private:
 
                                 {
                                     id actualValue = values.holidayIndex;
-                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2));
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2U));
                                 }
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -100802,7 +100802,7 @@ private:
 
                                 {
                                     id actualValue = values.operatingMode;
-                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 1U));
                                 }
 
                                 NextTest();
@@ -100821,7 +100821,7 @@ private:
         params.holidayIndex = [NumberOfHolidaySchedulesSupported copy];
         params.localStartTime = [NSNumber numberWithUnsignedInt:1UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:100UL];
-        params.operatingMode = [NSNumber numberWithUnsignedChar:4];
+        params.operatingMode = [NSNumber numberWithUnsignedChar:4U];
         [cluster setHolidayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create another Holiday schedule at the last slot Error: %@", err);
@@ -100856,7 +100856,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -100871,7 +100871,7 @@ private:
 
                                 {
                                     id actualValue = values.operatingMode;
-                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 4));
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 4U));
                                 }
 
                                 NextTest();
@@ -100887,9 +100887,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
@@ -100905,7 +100905,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -100933,13 +100933,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:1];
-        params.startHour = [NSNumber numberWithUnsignedChar:0];
-        params.startMinute = [NSNumber numberWithUnsignedChar:0];
-        params.endHour = [NSNumber numberWithUnsignedChar:23];
-        params.endMinute = [NSNumber numberWithUnsignedChar:59];
+        params.daysMask = [NSNumber numberWithUnsignedChar:1U];
+        params.startHour = [NSNumber numberWithUnsignedChar:0U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:0U];
+        params.endHour = [NSNumber numberWithUnsignedChar:23U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:59U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Week Day schedule for first user Error: %@", err);
@@ -100959,7 +100959,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:9000UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:888888888UL];
@@ -100982,7 +100982,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:2U];
         [cluster clearHolidayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Clear a single holiday schedule Error: %@", err);
@@ -101002,7 +101002,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1U];
         [cluster getHolidayScheduleWithParams:params
                             completionHandler:^(
                                 CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -101012,12 +101012,12 @@ private:
 
                                 {
                                     id actualValue = values.holidayIndex;
-                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
                                 }
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -101032,7 +101032,7 @@ private:
 
                                 {
                                     id actualValue = values.operatingMode;
-                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 0U));
                                 }
 
                                 NextTest();
@@ -101048,7 +101048,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:2U];
         [cluster getHolidayScheduleWithParams:params
                             completionHandler:^(
                                 CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -101058,12 +101058,12 @@ private:
 
                                 {
                                     id actualValue = values.holidayIndex;
-                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2));
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2U));
                                 }
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 NextTest();
@@ -101094,7 +101094,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -101109,7 +101109,7 @@ private:
 
                                 {
                                     id actualValue = values.operatingMode;
-                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 4));
+                                    VerifyOrReturn(CheckValue("operatingMode", actualValue, 4U));
                                 }
 
                                 NextTest();
@@ -101125,7 +101125,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -101136,7 +101136,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -101146,32 +101146,32 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.daysMask;
-                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1U));
                                 }
 
                                 {
                                     id actualValue = values.startHour;
-                                    VerifyOrReturn(CheckValue("startHour", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.startMinute;
-                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.endHour;
-                                    VerifyOrReturn(CheckValue("endHour", actualValue, 23));
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 23U));
                                 }
 
                                 {
                                     id actualValue = values.endMinute;
-                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 59));
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 59U));
                                 }
 
                                 NextTest();
@@ -101187,7 +101187,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -101198,7 +101198,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -101208,7 +101208,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -101234,7 +101234,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:254];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:254U];
         [cluster clearHolidayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Clear all remaining holiday schedules Error: %@", err);
@@ -101254,7 +101254,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1U];
         [cluster getHolidayScheduleWithParams:params
                             completionHandler:^(
                                 CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -101264,12 +101264,12 @@ private:
 
                                 {
                                     id actualValue = values.holidayIndex;
-                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
                                 }
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 NextTest();
@@ -101285,7 +101285,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:2U];
         [cluster getHolidayScheduleWithParams:params
                             completionHandler:^(
                                 CHIPDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -101295,12 +101295,12 @@ private:
 
                                 {
                                     id actualValue = values.holidayIndex;
-                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2));
+                                    VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2U));
                                 }
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 NextTest();
@@ -101331,7 +101331,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 NextTest();
@@ -101347,7 +101347,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -101358,7 +101358,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -101368,32 +101368,32 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.daysMask;
-                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("daysMask", actualValue, 1U));
                                 }
 
                                 {
                                     id actualValue = values.startHour;
-                                    VerifyOrReturn(CheckValue("startHour", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("startHour", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.startMinute;
-                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("startMinute", actualValue, 0U));
                                 }
 
                                 {
                                     id actualValue = values.endHour;
-                                    VerifyOrReturn(CheckValue("endHour", actualValue, 23));
+                                    VerifyOrReturn(CheckValue("endHour", actualValue, 23U));
                                 }
 
                                 {
                                     id actualValue = values.endMinute;
-                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 59));
+                                    VerifyOrReturn(CheckValue("endMinute", actualValue, 59U));
                                 }
 
                                 NextTest();
@@ -101409,7 +101409,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -101420,7 +101420,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -101430,7 +101430,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -101731,9 +101731,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
@@ -101749,7 +101749,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -101816,7 +101816,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id wrongCodeEntryLimitArgument;
-        wrongCodeEntryLimitArgument = [NSNumber numberWithUnsignedChar:3];
+        wrongCodeEntryLimitArgument = [NSNumber numberWithUnsignedChar:3U];
         [cluster
             writeAttributeWrongCodeEntryLimitWithValue:wrongCodeEntryLimitArgument
                                      completionHandler:^(NSError * _Nullable err) {
@@ -101837,7 +101837,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id userCodeTemporaryDisableTimeArgument;
-        userCodeTemporaryDisableTimeArgument = [NSNumber numberWithUnsignedChar:5];
+        userCodeTemporaryDisableTimeArgument = [NSNumber numberWithUnsignedChar:5U];
         [cluster writeAttributeUserCodeTemporaryDisableTimeWithValue:userCodeTemporaryDisableTimeArgument
                                                    completionHandler:^(NSError * _Nullable err) {
                                                        NSLog(@"TH writes UserCodeTemporaryDisableTime attribute value as 5 seconds "
@@ -101942,7 +101942,7 @@ private:
 
                 {
                     id actualValue = value;
-                    VerifyOrReturn(CheckValue("UserCodeTemporaryDisableTime", actualValue, 5));
+                    VerifyOrReturn(CheckValue("UserCodeTemporaryDisableTime", actualValue, 5U));
                 }
 
                 NextTest();
@@ -101979,7 +101979,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster clearCredentialWithParams:params
@@ -102141,9 +102141,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
@@ -102159,7 +102159,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -102283,7 +102283,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("LockState", actualValue));
-                VerifyOrReturn(CheckValue("LockState", actualValue, 1));
+                VerifyOrReturn(CheckValue("LockState", actualValue, 1U));
             }
 
             NextTest();
@@ -102300,7 +102300,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster clearCredentialWithParams:params
@@ -102455,9 +102455,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
@@ -102473,7 +102473,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -102598,7 +102598,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("LockState", actualValue));
-                VerifyOrReturn(CheckValue("LockState", actualValue, 1));
+                VerifyOrReturn(CheckValue("LockState", actualValue, 1U));
             }
 
             NextTest();
@@ -102763,9 +102763,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
@@ -102781,7 +102781,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -102817,7 +102817,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("NumberOfWeekDaySchedulesSupportedPerUser", actualValue, 10));
+                VerifyOrReturn(CheckValue("NumberOfWeekDaySchedulesSupportedPerUser", actualValue, 10U));
             }
             {
                 NumberOfWeekDaySchedulesSupportedPerUser = value;
@@ -102863,13 +102863,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:2];
-        params.startHour = [NSNumber numberWithUnsignedChar:15];
-        params.startMinute = [NSNumber numberWithUnsignedChar:45];
-        params.endHour = [NSNumber numberWithUnsignedChar:16];
-        params.endMinute = [NSNumber numberWithUnsignedChar:55];
+        params.daysMask = [NSNumber numberWithUnsignedChar:2U];
+        params.startHour = [NSNumber numberWithUnsignedChar:15U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:45U];
+        params.endHour = [NSNumber numberWithUnsignedChar:16U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:55U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Send Set Week Day Schedule Command to DUT Error: %@", err);
@@ -102889,7 +102889,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster
             getWeekDayScheduleWithParams:params
@@ -102900,55 +102900,57 @@ private:
                            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                            VerifyOrReturn(
-                               CheckConstraintMinValue<uint8_t>("weekDayIndex", [values.weekDayIndex unsignedCharValue], 1));
+                               CheckConstraintMinValue<uint8_t>("weekDayIndex", [values.weekDayIndex unsignedCharValue], 1U));
 
                            VerifyOrReturn(
                                CheckConstraintMinValue<uint16_t>("userIndex", [values.userIndex unsignedShortValue], 1U));
 
                            {
                                id actualValue = values.status;
-                               VerifyOrReturn(CheckValue("status", actualValue, 0));
+                               VerifyOrReturn(CheckValue("status", actualValue, 0U));
                            }
 
                            VerifyOrReturn(CheckConstraintHasValue("daysMask", values.daysMask, true));
                            if (values.daysMask != nil) {
 
-                               VerifyOrReturn(CheckConstraintMinValue<uint8_t>("daysMask", [values.daysMask unsignedCharValue], 0));
-                               VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("daysMask", [values.daysMask unsignedCharValue], 6));
+                               VerifyOrReturn(
+                                   CheckConstraintMinValue<uint8_t>("daysMask", [values.daysMask unsignedCharValue], 0U));
+                               VerifyOrReturn(
+                                   CheckConstraintMaxValue<uint8_t>("daysMask", [values.daysMask unsignedCharValue], 6U));
                            }
 
                            VerifyOrReturn(CheckConstraintHasValue("startHour", values.startHour, true));
                            if (values.startHour != nil) {
 
                                VerifyOrReturn(
-                                   CheckConstraintMinValue<uint8_t>("startHour", [values.startHour unsignedCharValue], 0));
+                                   CheckConstraintMinValue<uint8_t>("startHour", [values.startHour unsignedCharValue], 0U));
                                VerifyOrReturn(
-                                   CheckConstraintMaxValue<uint8_t>("startHour", [values.startHour unsignedCharValue], 23));
+                                   CheckConstraintMaxValue<uint8_t>("startHour", [values.startHour unsignedCharValue], 23U));
                            }
 
                            VerifyOrReturn(CheckConstraintHasValue("startMinute", values.startMinute, true));
                            if (values.startMinute != nil) {
 
                                VerifyOrReturn(
-                                   CheckConstraintMinValue<uint8_t>("startMinute", [values.startMinute unsignedCharValue], 0));
+                                   CheckConstraintMinValue<uint8_t>("startMinute", [values.startMinute unsignedCharValue], 0U));
                                VerifyOrReturn(
-                                   CheckConstraintMaxValue<uint8_t>("startMinute", [values.startMinute unsignedCharValue], 59));
+                                   CheckConstraintMaxValue<uint8_t>("startMinute", [values.startMinute unsignedCharValue], 59U));
                            }
 
                            VerifyOrReturn(CheckConstraintHasValue("endHour", values.endHour, true));
                            if (values.endHour != nil) {
 
-                               VerifyOrReturn(CheckConstraintMinValue<uint8_t>("endHour", [values.endHour unsignedCharValue], 0));
-                               VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("endHour", [values.endHour unsignedCharValue], 23));
+                               VerifyOrReturn(CheckConstraintMinValue<uint8_t>("endHour", [values.endHour unsignedCharValue], 0U));
+                               VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("endHour", [values.endHour unsignedCharValue], 23U));
                            }
 
                            VerifyOrReturn(CheckConstraintHasValue("endMinute", values.endMinute, true));
                            if (values.endMinute != nil) {
 
                                VerifyOrReturn(
-                                   CheckConstraintMinValue<uint8_t>("endMinute", [values.endMinute unsignedCharValue], 0));
+                                   CheckConstraintMinValue<uint8_t>("endMinute", [values.endMinute unsignedCharValue], 0U));
                                VerifyOrReturn(
-                                   CheckConstraintMaxValue<uint8_t>("endMinute", [values.endMinute unsignedCharValue], 59));
+                                   CheckConstraintMaxValue<uint8_t>("endMinute", [values.endMinute unsignedCharValue], 59U));
                            }
 
                            NextTest();
@@ -102964,13 +102966,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.daysMask = [NSNumber numberWithUnsignedChar:7];
-        params.startHour = [NSNumber numberWithUnsignedChar:15];
-        params.startMinute = [NSNumber numberWithUnsignedChar:45];
-        params.endHour = [NSNumber numberWithUnsignedChar:16];
-        params.endMinute = [NSNumber numberWithUnsignedChar:55];
+        params.daysMask = [NSNumber numberWithUnsignedChar:7U];
+        params.startHour = [NSNumber numberWithUnsignedChar:15U];
+        params.startMinute = [NSNumber numberWithUnsignedChar:45U];
+        params.endHour = [NSNumber numberWithUnsignedChar:16U];
+        params.endMinute = [NSNumber numberWithUnsignedChar:55U];
         [cluster
             setWeekDayScheduleWithParams:params
                        completionHandler:^(NSError * _Nullable err) {
@@ -102990,7 +102992,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster
             getWeekDayScheduleWithParams:params
@@ -103002,7 +103004,7 @@ private:
 
                            {
                                id actualValue = values.weekDayIndex;
-                               VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 0));
+                               VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 0U));
                            }
 
                            {
@@ -103012,7 +103014,7 @@ private:
 
                            {
                                id actualValue = values.status;
-                               VerifyOrReturn(CheckValue("status", actualValue, 133));
+                               VerifyOrReturn(CheckValue("status", actualValue, 133U));
                            }
 
                            VerifyOrReturn(CheckConstraintHasValue("daysMask", values.daysMask, false));
@@ -103048,7 +103050,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterClearWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:254];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:254U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster clearWeekDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
@@ -103069,7 +103071,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
@@ -103080,7 +103082,7 @@ private:
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 2));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 2U));
                                 }
 
                                 {
@@ -103090,7 +103092,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 VerifyOrReturn(CheckConstraintHasValue("daysMask", values.daysMask, false));
@@ -103298,9 +103300,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
@@ -103316,7 +103318,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -103344,9 +103346,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123457" length:6];
@@ -103362,7 +103364,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -103398,7 +103400,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("NumberOfYearDaySchedulesSupportedPerUser", actualValue, 10));
+                VerifyOrReturn(CheckValue("NumberOfYearDaySchedulesSupportedPerUser", actualValue, 10U));
             }
             {
                 NumberOfYearDaySchedulesSupportedPerUser = value;
@@ -103444,7 +103446,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:10UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:20UL];
@@ -103467,7 +103469,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -103477,14 +103479,14 @@ private:
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                                 VerifyOrReturn(
-                                    CheckConstraintMinValue<uint8_t>("yearDayIndex", [values.yearDayIndex unsignedCharValue], 1));
+                                    CheckConstraintMinValue<uint8_t>("yearDayIndex", [values.yearDayIndex unsignedCharValue], 1U));
 
                                 VerifyOrReturn(
                                     CheckConstraintMinValue<uint16_t>("userIndex", [values.userIndex unsignedShortValue], 1U));
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 VerifyOrReturn(CheckConstraintHasValue("localStartTime", values.localStartTime, true));
@@ -103512,7 +103514,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:0];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:10U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:30UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:10UL];
@@ -103535,7 +103537,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:21U];
         [cluster
             getYearDayScheduleWithParams:params
@@ -103547,7 +103549,7 @@ private:
 
                            {
                                id actualValue = values.yearDayIndex;
-                               VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2));
+                               VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2U));
                            }
 
                            {
@@ -103557,7 +103559,7 @@ private:
 
                            {
                                id actualValue = values.status;
-                               VerifyOrReturn(CheckValue("status", actualValue, 133));
+                               VerifyOrReturn(CheckValue("status", actualValue, 133U));
                            }
 
                            VerifyOrReturn(CheckConstraintHasValue("localStartTime", values.localStartTime, false));
@@ -103581,7 +103583,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:10];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:10U];
         params.userIndex = [NSNumber numberWithUnsignedShort:5U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -103592,7 +103594,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 10));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 10U));
                                 }
 
                                 {
@@ -103602,7 +103604,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 VerifyOrReturn(CheckConstraintHasValue("localStartTime", values.localStartTime, false));
@@ -103626,7 +103628,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -103637,7 +103639,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2U));
                                 }
 
                                 {
@@ -103647,7 +103649,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
                                 }
 
                                 VerifyOrReturn(CheckConstraintHasValue("localStartTime", values.localStartTime, false));
@@ -103671,7 +103673,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:10UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:20UL];
@@ -103694,7 +103696,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
@@ -103705,7 +103707,7 @@ private:
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2U));
                                 }
 
                                 {
@@ -103715,7 +103717,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
                                 {
@@ -103965,15 +103967,15 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0];
-        params.userType = [NSNumber numberWithUnsignedChar:0];
+        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -103995,7 +103997,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster getCredentialStatusWithParams:params
@@ -104025,15 +104027,15 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"1234" length:4];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:5];
-        params.userType = [NSNumber numberWithUnsignedChar:10];
+        params.userStatus = [NSNumber numberWithUnsignedChar:5U];
+        params.userType = [NSNumber numberWithUnsignedChar:10U];
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -104054,15 +104056,15 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0];
-        params.userType = [NSNumber numberWithUnsignedChar:0];
+        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -104083,15 +104085,15 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0];
-        params.userType = [NSNumber numberWithUnsignedChar:0];
+        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -104112,15 +104114,15 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:3U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0];
-        params.userType = [NSNumber numberWithUnsignedChar:0];
+        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -104141,15 +104143,15 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:2];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:3U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0];
-        params.userType = [NSNumber numberWithUnsignedChar:0];
+        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -104171,7 +104173,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster clearCredentialWithParams:params
@@ -104193,15 +104195,15 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0];
-        params.userType = [NSNumber numberWithUnsignedChar:0];
+        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -104223,7 +104225,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:65534U];
 
         [cluster clearCredentialWithParams:params
@@ -104245,15 +104247,15 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0];
-        params.userType = [NSNumber numberWithUnsignedChar:0];
+        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -104275,7 +104277,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:65534U];
 
         [cluster clearCredentialWithParams:params
@@ -104298,7 +104300,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster getCredentialStatusWithParams:params
@@ -104326,15 +104328,15 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[CHIPDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0];
-        params.userType = [NSNumber numberWithUnsignedChar:0];
+        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(CHIPDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -104356,7 +104358,7 @@ private:
 
         __auto_type * params = [[CHIPDoorLockClusterClearCredentialParams alloc] init];
         params.credential = [[CHIPDoorLockClusterDlCredential alloc] init];
-        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:8];
+        ((CHIPDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:8U];
         ((CHIPDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         [cluster clearCredentialWithParams:params
@@ -104596,7 +104598,7 @@ private:
 
                        {
                            id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 135));
+                           VerifyOrReturn(CheckValue("status", actualValue, 135U));
                        }
 
                        {
@@ -104626,7 +104628,7 @@ private:
 
                        {
                            id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 139));
+                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
                        }
 
                        {
@@ -104657,7 +104659,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -104687,7 +104689,7 @@ private:
 
                        {
                            id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 0));
+                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
                        }
 
                        {
@@ -104722,7 +104724,7 @@ private:
 
                        {
                            id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 139));
+                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
                        }
 
                        {
@@ -104787,7 +104789,7 @@ private:
 
                        {
                            id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 139));
+                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
                        }
 
                        {
@@ -104817,7 +104819,7 @@ private:
 
                        {
                            id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 0));
+                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
                        }
 
                        {
@@ -104852,7 +104854,7 @@ private:
 
                          {
                              id actualValue = values.status;
-                             VerifyOrReturn(CheckValue("status", actualValue, 135));
+                             VerifyOrReturn(CheckValue("status", actualValue, 135U));
                          }
 
                          {
@@ -104882,7 +104884,7 @@ private:
 
                          {
                              id actualValue = values.status;
-                             VerifyOrReturn(CheckValue("status", actualValue, 139));
+                             VerifyOrReturn(CheckValue("status", actualValue, 139U));
                          }
 
                          {
@@ -104912,7 +104914,7 @@ private:
 
                        {
                            id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 0));
+                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
                        }
 
                        {
@@ -104947,7 +104949,7 @@ private:
 
                        {
                            id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 139));
+                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
                        }
 
                        {
@@ -105033,7 +105035,7 @@ private:
 
                        {
                            id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 139));
+                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
                        }
 
                        {
@@ -105063,7 +105065,7 @@ private:
 
                        {
                            id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 139));
+                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
                        }
 
                        {
@@ -105093,7 +105095,7 @@ private:
 
                        {
                            id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 139));
+                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
                        }
 
                        {
@@ -105432,7 +105434,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -105463,7 +105465,7 @@ private:
 
                       {
                           id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0));
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
                       }
 
                       {
@@ -105490,7 +105492,7 @@ private:
         ((CHIPGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
             [NSNumber numberWithUnsignedShort:417U];
         ((CHIPGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
-            [NSNumber numberWithUnsignedChar:0];
+            [NSNumber numberWithUnsignedChar:0U];
         ((CHIPGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
             [[NSData alloc] initWithBytes:"\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257" length:16];
         ((CHIPGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
@@ -105529,7 +105531,7 @@ private:
         ((CHIPGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
             [NSNumber numberWithUnsignedShort:418U];
         ((CHIPGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
-            [NSNumber numberWithUnsignedChar:1];
+            [NSNumber numberWithUnsignedChar:1U];
         ((CHIPGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
             [[NSData alloc] initWithBytes:"\320\321\322\323\324\325\326\327\330\331\332\333\334\335\336\337" length:16];
         ((CHIPGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
@@ -105578,7 +105580,7 @@ private:
                        VerifyOrReturn(CheckValue(
                            "GroupKeySetID", ((CHIPGroupKeyManagementClusterGroupKeySetStruct *) actualValue).groupKeySetID, 417U));
                        VerifyOrReturn(CheckValue("GroupKeySecurityPolicy",
-                           ((CHIPGroupKeyManagementClusterGroupKeySetStruct *) actualValue).groupKeySecurityPolicy, 0));
+                           ((CHIPGroupKeyManagementClusterGroupKeySetStruct *) actualValue).groupKeySecurityPolicy, 0U));
                        VerifyOrReturn(
                            CheckValueNull("EpochKey0", ((CHIPGroupKeyManagementClusterGroupKeySetStruct *) actualValue).epochKey0));
                        VerifyOrReturn(CheckValueNonNull(
@@ -105619,7 +105621,7 @@ private:
             temp_0[0] = [[CHIPGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
             ((CHIPGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).groupId = [NSNumber numberWithUnsignedShort:258U];
             ((CHIPGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).groupKeySetID = [NSNumber numberWithUnsignedShort:0U];
-            ((CHIPGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1];
+            ((CHIPGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             groupKeyMapArgument = temp_0;
         }
@@ -105648,12 +105650,12 @@ private:
             temp_0[0] = [[CHIPGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
             ((CHIPGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).groupId = [NSNumber numberWithUnsignedShort:257U];
             ((CHIPGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).groupKeySetID = [NSNumber numberWithUnsignedShort:417U];
-            ((CHIPGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1];
+            ((CHIPGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             temp_0[1] = [[CHIPGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
             ((CHIPGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).groupId = [NSNumber numberWithUnsignedShort:258U];
             ((CHIPGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).groupKeySetID = [NSNumber numberWithUnsignedShort:418U];
-            ((CHIPGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1];
+            ((CHIPGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             groupKeyMapArgument = temp_0;
         }
@@ -105694,13 +105696,13 @@ private:
                                      VerifyOrReturn(CheckValue("GroupKeySetID",
                                          ((CHIPGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).groupKeySetID, 417U));
                                      VerifyOrReturn(CheckValue("FabricIndex",
-                                         ((CHIPGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).fabricIndex, 1));
+                                         ((CHIPGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).fabricIndex, 1U));
                                      VerifyOrReturn(CheckValue("GroupId",
                                          ((CHIPGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).groupId, 258U));
                                      VerifyOrReturn(CheckValue("GroupKeySetID",
                                          ((CHIPGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).groupKeySetID, 418U));
                                      VerifyOrReturn(CheckValue("FabricIndex",
-                                         ((CHIPGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).fabricIndex, 1));
+                                         ((CHIPGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).fabricIndex, 1U));
                                  }
 
                                  NextTest();
@@ -105734,14 +105736,14 @@ private:
                                              ((CHIPGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).groupName,
                                              @"Group #1"));
                                          VerifyOrReturn(CheckValue("FabricIndex",
-                                             ((CHIPGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).fabricIndex, 1));
+                                             ((CHIPGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).fabricIndex, 1U));
                                          VerifyOrReturn(CheckValue("GroupId",
                                              ((CHIPGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).groupId, 258U));
                                          VerifyOrReturn(CheckValueAsString("GroupName",
                                              ((CHIPGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).groupName,
                                              @"Group #2"));
                                          VerifyOrReturn(CheckValue("FabricIndex",
-                                             ((CHIPGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).fabricIndex, 1));
+                                             ((CHIPGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).fabricIndex, 1U));
                                      }
 
                                      NextTest();
@@ -105817,7 +105819,7 @@ private:
                        VerifyOrReturn(CheckValue(
                            "GroupKeySetID", ((CHIPGroupKeyManagementClusterGroupKeySetStruct *) actualValue).groupKeySetID, 418U));
                        VerifyOrReturn(CheckValue("GroupKeySecurityPolicy",
-                           ((CHIPGroupKeyManagementClusterGroupKeySetStruct *) actualValue).groupKeySecurityPolicy, 1));
+                           ((CHIPGroupKeyManagementClusterGroupKeySetStruct *) actualValue).groupKeySecurityPolicy, 1U));
                        VerifyOrReturn(
                            CheckValueNull("EpochKey0", ((CHIPGroupKeyManagementClusterGroupKeySetStruct *) actualValue).epochKey0));
                        VerifyOrReturn(CheckValueNonNull(
@@ -105860,7 +105862,7 @@ private:
 
                          {
                              id actualValue = values.status;
-                             VerifyOrReturn(CheckValue("status", actualValue, 0));
+                             VerifyOrReturn(CheckValue("status", actualValue, 0U));
                          }
 
                          {
@@ -105899,7 +105901,7 @@ private:
                                              ((CHIPGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).groupName,
                                              @"Group #2"));
                                          VerifyOrReturn(CheckValue("FabricIndex",
-                                             ((CHIPGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).fabricIndex, 1));
+                                             ((CHIPGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).fabricIndex, 1U));
                                      }
 
                                      NextTest();
