@@ -60021,7 +60021,7 @@ private:
     CHIP_ERROR Test1bThWaitsFor100ms1s_3()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 500UL;
+        value.ms = 5000UL;
         return WaitForMs("alpha", value);
     }
 
@@ -60072,7 +60072,7 @@ private:
     CHIP_ERROR Test2bThWaitsFor100ms1s_7()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 500UL;
+        value.ms = 5000UL;
         return WaitForMs("alpha", value);
     }
 
