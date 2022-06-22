@@ -20015,8 +20015,19 @@ public:
             err = TestTh1ReadsTheLocationCapabilityAttributeFromTheDut_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : TH1 reads BasicCommissioningInfo attribute from DUT\n");
-            err = TestTh1ReadsBasicCommissioningInfoAttributeFromDut_6();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 6 : TH1 reads BasicCommissioningInfo attribute from DUT and Verify that the "
+                "BasicCommissioningInfo attribute has the following field: FailSafeExpiryLengthSeconds field value is within a "
+                "duration range of 0 to 65535\n");
+            err = TestTh1ReadsBasicCommissioningInfoAttributeFromDutAndVerifyThatTheBasicCommissioningInfoAttributeHasTheFollowingFieldFailSafeExpiryLengthSecondsFieldValueIsWithinADurationRangeOf0To65535_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 6 TC-CGEN-2.1\n");
+            err = TestStep6TcCgen21_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH1 reads SupportsConcurrentConnection attribute from the DUT\n");
+            err = TestTh1ReadsSupportsConcurrentConnectionAttributeFromTheDut_8();
             break;
         }
 
@@ -20050,6 +20061,12 @@ public:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -20063,7 +20080,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 7;
+    const uint16_t mTestCount = 9;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -20090,11 +20107,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("Breadcrumb", actualValue, 0ULL));
-            }
-
+            VerifyOrReturn(CheckConstraintType("breadcrumb", "", "uint64"));
             NextTest();
         }];
 
@@ -20191,7 +20204,8 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTh1ReadsBasicCommissioningInfoAttributeFromDut_6()
+    CHIP_ERROR
+    TestTh1ReadsBasicCommissioningInfoAttributeFromDutAndVerifyThatTheBasicCommissioningInfoAttributeHasTheFollowingFieldFailSafeExpiryLengthSecondsFieldValueIsWithinADurationRangeOf0To65535_6()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestGeneralCommissioning * cluster = [[CHIPTestGeneralCommissioning alloc] initWithDevice:device
@@ -20201,20 +20215,46 @@ private:
 
         [cluster readAttributeBasicCommissioningInfoWithCompletionHandler:^(
             CHIPGeneralCommissioningClusterBasicCommissioningInfo * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH1 reads BasicCommissioningInfo attribute from DUT Error: %@", err);
+            NSLog(
+                @"TH1 reads BasicCommissioningInfo attribute from DUT and Verify that the BasicCommissioningInfo attribute has the "
+                @"following field: FailSafeExpiryLengthSeconds field value is within a duration range of 0 to 65535 Error: %@",
+                err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FailSafeExpiryLengthSeconds",
-                    ((CHIPGeneralCommissioningClusterBasicCommissioningInfo *) actualValue).failSafeExpiryLengthSeconds, 60U));
-                VerifyOrReturn(CheckValue("MaxCumulativeFailsafeSeconds",
-                    ((CHIPGeneralCommissioningClusterBasicCommissioningInfo *) actualValue).maxCumulativeFailsafeSeconds, 900U));
-            }
-
             NextTest();
         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStep6TcCgen21_7()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Step 6 is implicitly validating the attribute(BasicCommissioningInfo) constraints, as long "
+                                     "as the payload is being parsed successfullygarbage: not in length on purpose",
+                134);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestTh1ReadsSupportsConcurrentConnectionAttributeFromTheDut_8()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestGeneralCommissioning * cluster = [[CHIPTestGeneralCommissioning alloc] initWithDevice:device
+                                                                                             endpoint:0
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeSupportsConcurrentConnectionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"TH1 reads SupportsConcurrentConnection attribute from the DUT Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                VerifyOrReturn(CheckConstraintType("supportsConcurrentConnection", "", "bool"));
+                NextTest();
+            }];
 
         return CHIP_NO_ERROR;
     }
