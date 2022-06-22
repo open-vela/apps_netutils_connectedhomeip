@@ -4162,332 +4162,336 @@ public:
             err = TestValidateConstraintsOfAttributeColorLoopStoredEnhancedHue_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Reads ColorCapabilities attribute from DUT\n");
-            if (ShouldSkip("CC.S.A400a")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsColorCapabilitiesAttributeFromDut_19();
+            ChipLogProgress(chipTool, " ***** Test Step 19 : read the optional global attribute: FeatureMap\n");
+            err = TestReadTheOptionalGlobalAttributeFeatureMap_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Validate constraints of attribute: ColorCapabilities\n");
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Reads ColorCapabilities attribute from DUT\n");
             if (ShouldSkip("CC.S.A400a")) {
                 NextTest();
                 return;
             }
-            err = TestValidateConstraintsOfAttributeColorCapabilities_20();
+            err = TestReadsColorCapabilitiesAttributeFromDut_20();
             break;
         case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : Reads ColorTempPhysicalMinMireds attribute from DUT\n");
-            if (ShouldSkip("CC.S.A400b")) {
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Validate constraints of attribute: ColorCapabilities\n");
+            if (ShouldSkip("CC.S.A400a")) {
                 NextTest();
                 return;
             }
-            err = TestReadsColorTempPhysicalMinMiredsAttributeFromDut_21();
+            err = TestValidateConstraintsOfAttributeColorCapabilities_21();
             break;
         case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : Validate constraints of attribute: ColorTempPhysicalMinMireds\n");
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Reads ColorTempPhysicalMinMireds attribute from DUT\n");
             if (ShouldSkip("CC.S.A400b")) {
                 NextTest();
                 return;
             }
-            err = TestValidateConstraintsOfAttributeColorTempPhysicalMinMireds_22();
+            err = TestReadsColorTempPhysicalMinMiredsAttributeFromDut_22();
             break;
         case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : Read ColorTempPhysicalMaxMireds attribute from DUT\n");
-            if (ShouldSkip("CC.S.A400c")) {
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Validate constraints of attribute: ColorTempPhysicalMinMireds\n");
+            if (ShouldSkip("CC.S.A400b")) {
                 NextTest();
                 return;
             }
-            err = TestReadColorTempPhysicalMaxMiredsAttributeFromDut_23();
+            err = TestValidateConstraintsOfAttributeColorTempPhysicalMinMireds_23();
             break;
         case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : Validate constraints of attribute: ColorTempPhysicalMaxMireds\n");
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Read ColorTempPhysicalMaxMireds attribute from DUT\n");
             if (ShouldSkip("CC.S.A400c")) {
                 NextTest();
                 return;
             }
-            err = TestValidateConstraintsOfAttributeColorTempPhysicalMaxMireds_24();
+            err = TestReadColorTempPhysicalMaxMiredsAttributeFromDut_24();
             break;
         case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : Read the optional attribute: CoupleColorTempToLevelMinMireds\n");
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Validate constraints of attribute: ColorTempPhysicalMaxMireds\n");
+            if (ShouldSkip("CC.S.A400c")) {
+                NextTest();
+                return;
+            }
+            err = TestValidateConstraintsOfAttributeColorTempPhysicalMaxMireds_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Read the optional attribute: CoupleColorTempToLevelMinMireds\n");
             if (ShouldSkip("CC.S.A400d")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeCoupleColorTempToLevelMinMireds_25();
+            err = TestReadTheOptionalAttributeCoupleColorTempToLevelMinMireds_26();
             break;
-        case 26:
-            ChipLogProgress(chipTool, " ***** Test Step 26 : Read the optional attribute: StartUpColorTemperatureMireds\n");
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Read the optional attribute: StartUpColorTemperatureMireds\n");
             if (ShouldSkip("CC.S.A4010")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeStartUpColorTemperatureMireds_26();
+            err = TestReadTheOptionalAttributeStartUpColorTemperatureMireds_27();
             break;
-        case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : Validate constraints of attribute: RemainingTime\n");
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Validate constraints of attribute: RemainingTime\n");
             if (ShouldSkip("CC.S.A0002")) {
                 NextTest();
                 return;
             }
-            err = TestValidateConstraintsOfAttributeRemainingTime_27();
-            break;
-        case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Read the optional attribute: DriftCompensation\n");
-            if (ShouldSkip("CC.S.A0005")) {
-                NextTest();
-                return;
-            }
-            err = TestReadTheOptionalAttributeDriftCompensation_28();
+            err = TestValidateConstraintsOfAttributeRemainingTime_28();
             break;
         case 29:
-            ChipLogProgress(chipTool, " ***** Test Step 29 : Read the optional attribute: CompensationText\n");
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Read the optional attribute: DriftCompensation\n");
             if (ShouldSkip("CC.S.A0005")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeCompensationText_29();
+            err = TestReadTheOptionalAttributeDriftCompensation_29();
             break;
         case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : Read the mandatory attribute: NumberOfPrimaries\n");
+            ChipLogProgress(chipTool, " ***** Test Step 30 : Read the optional attribute: CompensationText\n");
+            if (ShouldSkip("CC.S.A0005")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeCompensationText_30();
+            break;
+        case 31:
+            ChipLogProgress(chipTool, " ***** Test Step 31 : Read the mandatory attribute: NumberOfPrimaries\n");
             if (ShouldSkip("CC.S.A0010")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributeNumberOfPrimaries_30();
+            err = TestReadTheMandatoryAttributeNumberOfPrimaries_31();
             break;
-        case 31:
-            ChipLogProgress(chipTool, " ***** Test Step 31 : Read the mandatory attribute: Primary1X\n");
+        case 32:
+            ChipLogProgress(chipTool, " ***** Test Step 32 : Read the mandatory attribute: Primary1X\n");
             if (ShouldSkip("CC.S.A0011")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributePrimary1X_31();
+            err = TestReadTheMandatoryAttributePrimary1X_32();
             break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : Read the mandatory attribute: Primary1Y\n");
+        case 33:
+            ChipLogProgress(chipTool, " ***** Test Step 33 : Read the mandatory attribute: Primary1Y\n");
             if (ShouldSkip("CC.S.A0012")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributePrimary1Y_32();
+            err = TestReadTheMandatoryAttributePrimary1Y_33();
             break;
-        case 33:
-            ChipLogProgress(chipTool, " ***** Test Step 33 : Read the mandatory attribute: Primary1Intensity\n");
+        case 34:
+            ChipLogProgress(chipTool, " ***** Test Step 34 : Read the mandatory attribute: Primary1Intensity\n");
             if (ShouldSkip("CC.S.A0013")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributePrimary1Intensity_33();
+            err = TestReadTheMandatoryAttributePrimary1Intensity_34();
             break;
-        case 34:
-            ChipLogProgress(chipTool, " ***** Test Step 34 : Read the mandatory attribute: Primary2X\n");
+        case 35:
+            ChipLogProgress(chipTool, " ***** Test Step 35 : Read the mandatory attribute: Primary2X\n");
             if (ShouldSkip("CC.S.A0015")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributePrimary2X_34();
+            err = TestReadTheMandatoryAttributePrimary2X_35();
             break;
-        case 35:
-            ChipLogProgress(chipTool, " ***** Test Step 35 : Read the mandatory attribute: Primary2Y\n");
+        case 36:
+            ChipLogProgress(chipTool, " ***** Test Step 36 : Read the mandatory attribute: Primary2Y\n");
             if (ShouldSkip("CC.S.A0016")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributePrimary2Y_35();
+            err = TestReadTheMandatoryAttributePrimary2Y_36();
             break;
-        case 36:
-            ChipLogProgress(chipTool, " ***** Test Step 36 : Validate constraints of attribute: Primary2Intensity\n");
+        case 37:
+            ChipLogProgress(chipTool, " ***** Test Step 37 : Validate constraints of attribute: Primary2Intensity\n");
             if (ShouldSkip("CC.S.A0017")) {
                 NextTest();
                 return;
             }
-            err = TestValidateConstraintsOfAttributePrimary2Intensity_36();
+            err = TestValidateConstraintsOfAttributePrimary2Intensity_37();
             break;
-        case 37:
-            ChipLogProgress(chipTool, " ***** Test Step 37 : Read the mandatory attribute: Primary3X\n");
+        case 38:
+            ChipLogProgress(chipTool, " ***** Test Step 38 : Read the mandatory attribute: Primary3X\n");
             if (ShouldSkip("CC.S.A0019")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributePrimary3X_37();
+            err = TestReadTheMandatoryAttributePrimary3X_38();
             break;
-        case 38:
-            ChipLogProgress(chipTool, " ***** Test Step 38 : Read the mandatory attribute: Primary3Y\n");
+        case 39:
+            ChipLogProgress(chipTool, " ***** Test Step 39 : Read the mandatory attribute: Primary3Y\n");
             if (ShouldSkip("CC.S.A001a")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributePrimary3Y_38();
+            err = TestReadTheMandatoryAttributePrimary3Y_39();
             break;
-        case 39:
-            ChipLogProgress(chipTool, " ***** Test Step 39 : Read the mandatory attribute: Primary3Intensity\n");
+        case 40:
+            ChipLogProgress(chipTool, " ***** Test Step 40 : Read the mandatory attribute: Primary3Intensity\n");
             if (ShouldSkip("CC.S.A001b")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributePrimary3Intensity_39();
+            err = TestReadTheMandatoryAttributePrimary3Intensity_40();
             break;
-        case 40:
-            ChipLogProgress(chipTool, " ***** Test Step 40 : Read the mandatory attribute: Primary4X\n");
+        case 41:
+            ChipLogProgress(chipTool, " ***** Test Step 41 : Read the mandatory attribute: Primary4X\n");
             if (ShouldSkip("CC.S.A0020")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributePrimary4X_40();
+            err = TestReadTheMandatoryAttributePrimary4X_41();
             break;
-        case 41:
-            ChipLogProgress(chipTool, " ***** Test Step 41 : Read the mandatory attribute: Primary4Y\n");
+        case 42:
+            ChipLogProgress(chipTool, " ***** Test Step 42 : Read the mandatory attribute: Primary4Y\n");
             if (ShouldSkip("CC.S.A0021")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributePrimary4Y_41();
+            err = TestReadTheMandatoryAttributePrimary4Y_42();
             break;
-        case 42:
-            ChipLogProgress(chipTool, " ***** Test Step 42 : Read the mandatory attribute: Primary4Intensity\n");
+        case 43:
+            ChipLogProgress(chipTool, " ***** Test Step 43 : Read the mandatory attribute: Primary4Intensity\n");
             if (ShouldSkip("CC.S.A0022")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributePrimary4Intensity_42();
+            err = TestReadTheMandatoryAttributePrimary4Intensity_43();
             break;
-        case 43:
-            ChipLogProgress(chipTool, " ***** Test Step 43 : Read the mandatory attribute: Primary5X\n");
+        case 44:
+            ChipLogProgress(chipTool, " ***** Test Step 44 : Read the mandatory attribute: Primary5X\n");
             if (ShouldSkip("CC.S.A0024")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributePrimary5X_43();
+            err = TestReadTheMandatoryAttributePrimary5X_44();
             break;
-        case 44:
-            ChipLogProgress(chipTool, " ***** Test Step 44 : Read the mandatory attribute: Primary5Y\n");
+        case 45:
+            ChipLogProgress(chipTool, " ***** Test Step 45 : Read the mandatory attribute: Primary5Y\n");
             if (ShouldSkip("CC.S.A0025")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributePrimary5Y_44();
+            err = TestReadTheMandatoryAttributePrimary5Y_45();
             break;
-        case 45:
-            ChipLogProgress(chipTool, " ***** Test Step 45 : Read the mandatory attribute: Primary5Intensity\n");
+        case 46:
+            ChipLogProgress(chipTool, " ***** Test Step 46 : Read the mandatory attribute: Primary5Intensity\n");
             if (ShouldSkip("CC.S.A0026")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributePrimary5Intensity_45();
+            err = TestReadTheMandatoryAttributePrimary5Intensity_46();
             break;
-        case 46:
-            ChipLogProgress(chipTool, " ***** Test Step 46 : Read the mandatory attribute: Primary6X\n");
+        case 47:
+            ChipLogProgress(chipTool, " ***** Test Step 47 : Read the mandatory attribute: Primary6X\n");
             if (ShouldSkip("CC.S.A0028")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributePrimary6X_46();
+            err = TestReadTheMandatoryAttributePrimary6X_47();
             break;
-        case 47:
-            ChipLogProgress(chipTool, " ***** Test Step 47 : Read the mandatory attribute: Primary6Y\n");
+        case 48:
+            ChipLogProgress(chipTool, " ***** Test Step 48 : Read the mandatory attribute: Primary6Y\n");
             if (ShouldSkip("CC.S.A0029")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributePrimary6Y_47();
+            err = TestReadTheMandatoryAttributePrimary6Y_48();
             break;
-        case 48:
-            ChipLogProgress(chipTool, " ***** Test Step 48 : Read the mandatory attribute: Primary6Intensity\n");
+        case 49:
+            ChipLogProgress(chipTool, " ***** Test Step 49 : Read the mandatory attribute: Primary6Intensity\n");
             if (ShouldSkip("CC.S.A002a")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributePrimary6Intensity_48();
+            err = TestReadTheMandatoryAttributePrimary6Intensity_49();
             break;
-        case 49:
-            ChipLogProgress(chipTool, " ***** Test Step 49 : Read the optional attribute: WhitePointX\n");
+        case 50:
+            ChipLogProgress(chipTool, " ***** Test Step 50 : Read the optional attribute: WhitePointX\n");
             if (ShouldSkip("CC.S.A0030")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeWhitePointX_49();
+            err = TestReadTheOptionalAttributeWhitePointX_50();
             break;
-        case 50:
-            ChipLogProgress(chipTool, " ***** Test Step 50 : Read the optional attribute: WhitePointY\n");
+        case 51:
+            ChipLogProgress(chipTool, " ***** Test Step 51 : Read the optional attribute: WhitePointY\n");
             if (ShouldSkip("CC.S.A0031")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeWhitePointY_50();
+            err = TestReadTheOptionalAttributeWhitePointY_51();
             break;
-        case 51:
-            ChipLogProgress(chipTool, " ***** Test Step 51 : Read the optional attribute: ColorPointRX\n");
+        case 52:
+            ChipLogProgress(chipTool, " ***** Test Step 52 : Read the optional attribute: ColorPointRX\n");
             if (ShouldSkip("CC.S.A0032")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeColorPointRX_51();
+            err = TestReadTheOptionalAttributeColorPointRX_52();
             break;
-        case 52:
-            ChipLogProgress(chipTool, " ***** Test Step 52 : Read the optional attribute: ColorPointRY\n");
+        case 53:
+            ChipLogProgress(chipTool, " ***** Test Step 53 : Read the optional attribute: ColorPointRY\n");
             if (ShouldSkip("CC.S.A0033")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeColorPointRY_52();
+            err = TestReadTheOptionalAttributeColorPointRY_53();
             break;
-        case 53:
-            ChipLogProgress(chipTool, " ***** Test Step 53 : Read the optional attribute: ColorPointRIntensity\n");
+        case 54:
+            ChipLogProgress(chipTool, " ***** Test Step 54 : Read the optional attribute: ColorPointRIntensity\n");
             if (ShouldSkip("CC.S.A0034")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeColorPointRIntensity_53();
+            err = TestReadTheOptionalAttributeColorPointRIntensity_54();
             break;
-        case 54:
-            ChipLogProgress(chipTool, " ***** Test Step 54 : Read the optional attribute: ColorPointGX\n");
+        case 55:
+            ChipLogProgress(chipTool, " ***** Test Step 55 : Read the optional attribute: ColorPointGX\n");
             if (ShouldSkip("CC.S.A0036")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeColorPointGX_54();
+            err = TestReadTheOptionalAttributeColorPointGX_55();
             break;
-        case 55:
-            ChipLogProgress(chipTool, " ***** Test Step 55 : Read the optional attribute: ColorPointGY\n");
+        case 56:
+            ChipLogProgress(chipTool, " ***** Test Step 56 : Read the optional attribute: ColorPointGY\n");
             if (ShouldSkip("CC.S.A0037")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeColorPointGY_55();
+            err = TestReadTheOptionalAttributeColorPointGY_56();
             break;
-        case 56:
-            ChipLogProgress(chipTool, " ***** Test Step 56 : Read the optional attribute: ColorPointGIntensity\n");
+        case 57:
+            ChipLogProgress(chipTool, " ***** Test Step 57 : Read the optional attribute: ColorPointGIntensity\n");
             if (ShouldSkip("CC.S.A0038")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeColorPointGIntensity_56();
+            err = TestReadTheOptionalAttributeColorPointGIntensity_57();
             break;
-        case 57:
-            ChipLogProgress(chipTool, " ***** Test Step 57 : Read the optional attribute: ColorPointBX\n");
+        case 58:
+            ChipLogProgress(chipTool, " ***** Test Step 58 : Read the optional attribute: ColorPointBX\n");
             if (ShouldSkip("CC.S.A003a")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeColorPointBX_57();
+            err = TestReadTheOptionalAttributeColorPointBX_58();
             break;
-        case 58:
-            ChipLogProgress(chipTool, " ***** Test Step 58 : Read the optional attribute: ColorPointBY\n");
+        case 59:
+            ChipLogProgress(chipTool, " ***** Test Step 59 : Read the optional attribute: ColorPointBY\n");
             if (ShouldSkip("CC.S.A003b")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeColorPointBY_58();
+            err = TestReadTheOptionalAttributeColorPointBY_59();
             break;
-        case 59:
-            ChipLogProgress(chipTool, " ***** Test Step 59 : Read the optional attribute: ColorPointBIntensity\n");
+        case 60:
+            ChipLogProgress(chipTool, " ***** Test Step 60 : Read the optional attribute: ColorPointBIntensity\n");
             if (ShouldSkip("CC.S.A003c")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeColorPointBIntensity_59();
+            err = TestReadTheOptionalAttributeColorPointBIntensity_60();
             break;
         }
 
@@ -4680,6 +4684,9 @@ public:
         case 59:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 60:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -4693,7 +4700,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 60;
+    const uint16_t mTestCount = 61;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -5110,8 +5117,30 @@ private:
 
         return CHIP_NO_ERROR;
     }
+    NSNumber * _Nonnull FeatureMapValue;
 
-    CHIP_ERROR TestReadsColorCapabilitiesAttributeFromDut_19()
+    CHIP_ERROR TestReadTheOptionalGlobalAttributeFeatureMap_19()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"read the optional global attribute: FeatureMap Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                FeatureMapValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsColorCapabilitiesAttributeFromDut_20()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5124,7 +5153,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ColorCapabilities", actualValue, 0U));
+                VerifyOrReturn(CheckValue("ColorCapabilities", actualValue, FeatureMapValue));
             }
 
             NextTest();
@@ -5133,7 +5162,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestValidateConstraintsOfAttributeColorCapabilities_20()
+    CHIP_ERROR TestValidateConstraintsOfAttributeColorCapabilities_21()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5154,7 +5183,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsColorTempPhysicalMinMiredsAttributeFromDut_21()
+    CHIP_ERROR TestReadsColorTempPhysicalMinMiredsAttributeFromDut_22()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5177,7 +5206,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestValidateConstraintsOfAttributeColorTempPhysicalMinMireds_22()
+    CHIP_ERROR TestValidateConstraintsOfAttributeColorTempPhysicalMinMireds_23()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5199,7 +5228,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadColorTempPhysicalMaxMiredsAttributeFromDut_23()
+    CHIP_ERROR TestReadColorTempPhysicalMaxMiredsAttributeFromDut_24()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5222,7 +5251,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestValidateConstraintsOfAttributeColorTempPhysicalMaxMireds_24()
+    CHIP_ERROR TestValidateConstraintsOfAttributeColorTempPhysicalMaxMireds_25()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5244,7 +5273,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeCoupleColorTempToLevelMinMireds_25()
+    CHIP_ERROR TestReadTheOptionalAttributeCoupleColorTempToLevelMinMireds_26()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5272,7 +5301,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeStartUpColorTemperatureMireds_26()
+    CHIP_ERROR TestReadTheOptionalAttributeStartUpColorTemperatureMireds_27()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5299,7 +5328,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestValidateConstraintsOfAttributeRemainingTime_27()
+    CHIP_ERROR TestValidateConstraintsOfAttributeRemainingTime_28()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5327,7 +5356,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeDriftCompensation_28()
+    CHIP_ERROR TestReadTheOptionalAttributeDriftCompensation_29()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5353,7 +5382,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeCompensationText_29()
+    CHIP_ERROR TestReadTheOptionalAttributeCompensationText_30()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5377,7 +5406,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributeNumberOfPrimaries_30()
+    CHIP_ERROR TestReadTheMandatoryAttributeNumberOfPrimaries_31()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5401,7 +5430,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary1X_31()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary1X_32()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5422,7 +5451,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary1Y_32()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary1Y_33()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5443,7 +5472,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary1Intensity_33()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary1Intensity_34()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5465,7 +5494,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary2X_34()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary2X_35()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5486,7 +5515,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary2Y_35()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary2Y_36()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5507,7 +5536,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestValidateConstraintsOfAttributePrimary2Intensity_36()
+    CHIP_ERROR TestValidateConstraintsOfAttributePrimary2Intensity_37()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5529,7 +5558,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary3X_37()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary3X_38()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5550,7 +5579,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary3Y_38()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary3Y_39()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5571,7 +5600,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary3Intensity_39()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary3Intensity_40()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5593,7 +5622,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary4X_40()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary4X_41()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5614,7 +5643,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary4Y_41()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary4Y_42()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5635,7 +5664,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary4Intensity_42()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary4Intensity_43()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5657,7 +5686,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary5X_43()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary5X_44()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5678,7 +5707,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary5Y_44()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary5Y_45()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5699,7 +5728,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary5Intensity_45()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary5Intensity_46()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5721,7 +5750,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary6X_46()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary6X_47()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5742,7 +5771,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary6Y_47()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary6Y_48()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5763,7 +5792,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributePrimary6Intensity_48()
+    CHIP_ERROR TestReadTheMandatoryAttributePrimary6Intensity_49()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5785,7 +5814,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeWhitePointX_49()
+    CHIP_ERROR TestReadTheOptionalAttributeWhitePointX_50()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5811,7 +5840,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeWhitePointY_50()
+    CHIP_ERROR TestReadTheOptionalAttributeWhitePointY_51()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5837,7 +5866,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeColorPointRX_51()
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointRX_52()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5863,7 +5892,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeColorPointRY_52()
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointRY_53()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5889,7 +5918,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeColorPointRIntensity_53()
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointRIntensity_54()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5916,7 +5945,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeColorPointGX_54()
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointGX_55()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5942,7 +5971,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeColorPointGY_55()
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointGY_56()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5968,7 +5997,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeColorPointGIntensity_56()
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointGIntensity_57()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -5995,7 +6024,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeColorPointBX_57()
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointBX_58()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -6021,7 +6050,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeColorPointBY_58()
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointBY_59()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -6047,7 +6076,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeColorPointBIntensity_59()
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointBIntensity_60()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestColorControl * cluster = [[CHIPTestColorControl alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
