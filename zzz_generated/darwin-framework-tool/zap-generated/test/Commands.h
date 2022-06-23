@@ -101,9 +101,6 @@ public:
         printf("Test_TC_MC_3_3\n");
         printf("Test_TC_MC_3_5\n");
         printf("Test_TC_MC_3_6\n");
-        printf("Test_TC_MC_3_7\n");
-        printf("Test_TC_MC_3_8\n");
-        printf("Test_TC_MC_3_9\n");
         printf("Test_TC_MC_3_10\n");
         printf("Test_TC_MC_3_11\n");
         printf("Test_TC_MC_3_12\n");
@@ -111,6 +108,10 @@ public:
         printf("Test_TC_MC_5_1\n");
         printf("Test_TC_MC_5_2\n");
         printf("Test_TC_MC_5_3\n");
+        printf("Test_TC_MC_6_1\n");
+        printf("Test_TC_MC_6_2\n");
+        printf("Test_TC_MC_6_3\n");
+        printf("Test_TC_MC_6_4\n");
         printf("Test_TC_MC_7_1\n");
         printf("Test_TC_MC_7_2\n");
         printf("Test_TC_MC_8_1\n");
@@ -29508,18 +29509,10 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH sends CEC Settings Keys(0x0A) to DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestThSendsCecSettingsKeys0x0AToDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends CEC Home Keys(0x09) to DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestThSendsCecHomeKeys0x09ToDut_2();
             break;
         }
@@ -29654,74 +29647,38 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Send Numbers1\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestSendNumbers1_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Send Numbers2\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestSendNumbers2_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Send Numbers3\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestSendNumbers3_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Send Numbers4\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestSendNumbers4_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Send Numbers5\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestSendNumbers5_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Send Numbers6\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestSendNumbers6_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Send Numbers7\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestSendNumbers7_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Send Numbers8\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestSendNumbers8_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Send Numbers9\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestSendNumbers9_9();
             break;
         }
@@ -30016,8 +29973,14 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Read CatalogList attribute.\n");
-            err = TestReadCatalogListAttribute_1();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 1 : TH reads CatalogList attribute from the DUT and where each entry in the list is a CSA-issued "
+                "Vendor Id of type unsigned 16 bit integer ranging between 0-65536 for the catalog\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsCatalogListAttributeFromTheDutAndWhereEachEntryInTheListIsACsaIssuedVendorIdOfTypeUnsigned16BitIntegerRangingBetween065536ForTheCatalog_1();
             break;
         }
 
@@ -30063,24 +30026,14 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestReadCatalogListAttribute_1()
+    CHIP_ERROR
+    TestThReadsCatalogListAttributeFromTheDutAndWhereEachEntryInTheListIsACsaIssuedVendorIdOfTypeUnsigned16BitIntegerRangingBetween065536ForTheCatalog_1()
     {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestApplicationLauncher * cluster = [[CHIPTestApplicationLauncher alloc] initWithDevice:device
-                                                                                           endpoint:1
-                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCatalogListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read CatalogList attribute. Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("catalogList", "", "list"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -30127,12 +30080,15 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Read Current App ID attribute.\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            ChipLogProgress(chipTool,
+                " ***** Test Step 1 : TH reads CurrentApp attribute from the DUT and Verify the in-focus application attributes, "
+                "which should include the display Application ID(type:uint16) Catalog Vendor ID(type:string) or Null if there is "
+                "no current in-focus application\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
                 NextTest();
                 return;
             }
-            err = TestReadCurrentAppIdAttribute_1();
+            err = TestThReadsCurrentAppAttributeFromTheDutAndVerifyTheInFocusApplicationAttributesWhichShouldIncludeTheDisplayApplicationIDtypeuint16CatalogVendorIDtypestringOrNullIfThereIsNoCurrentInFocusApplication_1();
             break;
         }
 
@@ -30178,592 +30134,14 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestReadCurrentAppIdAttribute_1()
+    CHIP_ERROR
+    TestThReadsCurrentAppAttributeFromTheDutAndVerifyTheInFocusApplicationAttributesWhichShouldIncludeTheDisplayApplicationIDtypeuint16CatalogVendorIDtypestringOrNullIfThereIsNoCurrentInFocusApplication_1()
     {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestApplicationLauncher * cluster = [[CHIPTestApplicationLauncher alloc] initWithDevice:device
-                                                                                           endpoint:1
-                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCurrentAppWithCompletionHandler:^(
-            CHIPApplicationLauncherClusterApplicationEP * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read Current App ID attribute. Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValueNull("CurrentApp", actualValue));
-            }
-            if (value != nil) {
-
-                VerifyOrReturn(CheckConstraintType("currentApp", "", "ApplicationEP"));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_MC_3_7 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_3_7()
-        : TestCommandBridge("Test_TC_MC_3_7")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_MC_3_7() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_3_7\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_3_7\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Launch an app with the provided a application ID\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestLaunchAnAppWithTheProvidedAApplicationId_1();
-            break;
-        case 2:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 2 : TH sends a LaunchApp command to DUT to launch an app which is not available\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsALaunchAppCommandToDutToLaunchAnAppWhichIsNotAvailable_2();
-            break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Launch an app with the provided a application ID\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestLaunchAnAppWithTheProvidedAApplicationId_3();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 4;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
-    CHIP_ERROR TestLaunchAnAppWithTheProvidedAApplicationId_1()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestApplicationLauncher * cluster = [[CHIPTestApplicationLauncher alloc] initWithDevice:device
-                                                                                           endpoint:1
-                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPApplicationLauncherClusterLaunchAppParams alloc] init];
-        params.application = [[CHIPApplicationLauncherClusterApplication alloc] init];
-        ((CHIPApplicationLauncherClusterApplication *) params.application).catalogVendorId =
-            [NSNumber numberWithUnsignedShort:1234U];
-        ((CHIPApplicationLauncherClusterApplication *) params.application).applicationId = @"HelloWorldApp";
-
-        params.data = [[NSData alloc] initWithBytes:"Hello World" length:11];
-        [cluster launchAppWithParams:params
-                   completionHandler:^(
-                       CHIPApplicationLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
-                       NSLog(@"Launch an app with the provided a application ID Error: %@", err);
-
-                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                       {
-                           id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 1U));
-                       }
-
-                       {
-                           id actualValue = values.data;
-                           VerifyOrReturn(
-                               CheckValueAsString("data", actualValue, [[NSData alloc] initWithBytes:"Hello World" length:11]));
-                       }
-
-                       NextTest();
-                   }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThSendsALaunchAppCommandToDutToLaunchAnAppWhichIsNotAvailable_2()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestApplicationLauncher * cluster = [[CHIPTestApplicationLauncher alloc] initWithDevice:device
-                                                                                           endpoint:1
-                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPApplicationLauncherClusterLaunchAppParams alloc] init];
-        params.application = [[CHIPApplicationLauncherClusterApplication alloc] init];
-        ((CHIPApplicationLauncherClusterApplication *) params.application).catalogVendorId =
-            [NSNumber numberWithUnsignedShort:1234U];
-        ((CHIPApplicationLauncherClusterApplication *) params.application).applicationId = @"NonAvailableApp";
-
-        params.data = [[NSData alloc] initWithBytes:"Hello World" length:11];
-        [cluster launchAppWithParams:params
-                   completionHandler:^(
-                       CHIPApplicationLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
-                       NSLog(@"TH sends a LaunchApp command to DUT to launch an app which is not available Error: %@", err);
-
-                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                       {
-                           id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 1U));
-                       }
-
-                       {
-                           id actualValue = values.data;
-                           VerifyOrReturn(
-                               CheckValueAsString("data", actualValue, [[NSData alloc] initWithBytes:"Hello World" length:11]));
-                       }
-
-                       NextTest();
-                   }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestLaunchAnAppWithTheProvidedAApplicationId_3()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestApplicationLauncher * cluster = [[CHIPTestApplicationLauncher alloc] initWithDevice:device
-                                                                                           endpoint:1
-                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPApplicationLauncherClusterLaunchAppParams alloc] init];
-        params.application = [[CHIPApplicationLauncherClusterApplication alloc] init];
-        ((CHIPApplicationLauncherClusterApplication *) params.application).catalogVendorId =
-            [NSNumber numberWithUnsignedShort:1234U];
-        ((CHIPApplicationLauncherClusterApplication *) params.application).applicationId = @"HelloWorldApp2";
-
-        params.data = [[NSData alloc] initWithBytes:"Hello World" length:11];
-        [cluster launchAppWithParams:params
-                   completionHandler:^(
-                       CHIPApplicationLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
-                       NSLog(@"Launch an app with the provided a application ID Error: %@", err);
-
-                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                       {
-                           id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 2U));
-                       }
-
-                       {
-                           id actualValue = values.data;
-                           VerifyOrReturn(
-                               CheckValueAsString("data", actualValue, [[NSData alloc] initWithBytes:"Hello World" length:11]));
-                       }
-
-                       NextTest();
-                   }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_MC_3_8 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_3_8()
-        : TestCommandBridge("Test_TC_MC_3_8")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_MC_3_8() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_3_8\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_3_8\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Stop an app with the provided application ID\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestStopAnAppWithTheProvidedApplicationId_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the Status attribute\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsTheStatusAttribute_2();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 3;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
-    CHIP_ERROR TestStopAnAppWithTheProvidedApplicationId_1()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestApplicationLauncher * cluster = [[CHIPTestApplicationLauncher alloc] initWithDevice:device
-                                                                                           endpoint:1
-                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPApplicationLauncherClusterStopAppParams alloc] init];
-        params.application = [[CHIPApplicationLauncherClusterApplication alloc] init];
-        ((CHIPApplicationLauncherClusterApplication *) params.application).catalogVendorId =
-            [NSNumber numberWithUnsignedShort:1234U];
-        ((CHIPApplicationLauncherClusterApplication *) params.application).applicationId = @"HelloWorldApp";
-
-        [cluster
-            stopAppWithParams:params
-            completionHandler:^(CHIPApplicationLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
-                NSLog(@"Stop an app with the provided application ID Error: %@", err);
-
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                {
-                    id actualValue = values.status;
-                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
-                }
-
-                {
-                    id actualValue = values.data;
-                    VerifyOrReturn(CheckValueAsString("data", actualValue, [[NSData alloc] initWithBytes:"Hello World" length:11]));
-                }
-
-                NextTest();
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsTheStatusAttribute_2()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
-                                                                                     endpoint:1
-                                                                                        queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeStatusWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads the Status attribute Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_MC_3_9 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_3_9()
-        : TestCommandBridge("Test_TC_MC_3_9")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_MC_3_9() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_3_9\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_3_9\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : TH sends HideApp command to DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsHideAppCommandToDut_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the Status attribute\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsTheStatusAttribute_2();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 3;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
-    CHIP_ERROR TestThSendsHideAppCommandToDut_1()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestApplicationLauncher * cluster = [[CHIPTestApplicationLauncher alloc] initWithDevice:device
-                                                                                           endpoint:1
-                                                                                              queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPApplicationLauncherClusterHideAppParams alloc] init];
-        params.application = [[CHIPApplicationLauncherClusterApplication alloc] init];
-        ((CHIPApplicationLauncherClusterApplication *) params.application).catalogVendorId =
-            [NSNumber numberWithUnsignedShort:1234U];
-        ((CHIPApplicationLauncherClusterApplication *) params.application).applicationId = @"HelloWorldApp";
-
-        [cluster
-            hideAppWithParams:params
-            completionHandler:^(CHIPApplicationLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
-                NSLog(@"TH sends HideApp command to DUT Error: %@", err);
-
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                NextTest();
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadsTheStatusAttribute_2()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
-                                                                                     endpoint:1
-                                                                                        queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeStatusWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads the Status attribute Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -30924,18 +30302,10 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Select Input Command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestSelectInputCommand_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read current input list\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestReadCurrentInputList_3();
             break;
         }
@@ -31093,18 +30463,10 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Hide Input Status Command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestHideInputStatusCommand_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Show Input Status Command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestShowInputStatusCommand_2();
             break;
         }
@@ -31237,23 +30599,11 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Rename Input Command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestRenameInputCommand_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Rename Input Command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestRenameInputCommand_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Read attribute media input list\n");
-            err = TestReadAttributeMediaInputList_4();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read attribute media input list\n");
+            err = TestReadAttributeMediaInputList_3();
             break;
         }
 
@@ -31278,9 +30628,6 @@ public:
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -31294,7 +30641,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 5;
+    const uint16_t mTestCount = 4;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -31347,28 +30694,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRenameInputCommand_3()
-    {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestMediaInput * cluster = [[CHIPTestMediaInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[CHIPMediaInputClusterRenameInputParams alloc] init];
-        params.index = [NSNumber numberWithUnsignedChar:1U];
-        params.name = @"A2";
-        [cluster renameInputWithParams:params
-                     completionHandler:^(NSError * _Nullable err) {
-                         NSLog(@"Rename Input Command Error: %@", err);
-
-                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                         NextTest();
-                     }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadAttributeMediaInputList_4()
+    CHIP_ERROR TestReadAttributeMediaInputList_3()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestMediaInput * cluster = [[CHIPTestMediaInput alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -31430,8 +30756,14 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the ChannelList attribute from the DUT\n");
-            err = TestReadsTheChannelListAttributeFromTheDut_1();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 1 : TH reads the ChannelList attribute from the DUT and Verify that the response contains a list "
+                "of the known TV channels\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsTheChannelListAttributeFromTheDutAndVerifyThatTheResponseContainsAListOfTheKnownTvChannels_1();
             break;
         }
 
@@ -31477,22 +30809,13 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestReadsTheChannelListAttributeFromTheDut_1()
+    CHIP_ERROR TestThReadsTheChannelListAttributeFromTheDutAndVerifyThatTheResponseContainsAListOfTheKnownTvChannels_1()
     {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestChannel * cluster = [[CHIPTestChannel alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeChannelListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads the ChannelList attribute from the DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("channelList", "", "list"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -31546,22 +30869,18 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends a ChangeChannelByNumber command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestThSendsAChangeChannelByNumberCommand_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : log a command\n");
-            err = TestLogACommand_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the CurrentChannel attribute\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Verify that the channel has changed on the device\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
                 NextTest();
                 return;
             }
+            err = TestVerifyThatTheChannelHasChangedOnTheDevice_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the CurrentChannel attribute\n");
             err = TestReadsTheCurrentChannelAttribute_4();
             break;
         }
@@ -31645,9 +30964,9 @@ private:
 
         __auto_type * params = [[CHIPChannelClusterChangeChannelByNumberParams alloc] init];
         params.majorNumber = mMajornumber.HasValue() ? [NSNumber numberWithUnsignedShort:mMajornumber.Value()]
-                                                     : [NSNumber numberWithUnsignedShort:1U];
+                                                     : [NSNumber numberWithUnsignedShort:9U];
         params.minorNumber = mMinornumber.HasValue() ? [NSNumber numberWithUnsignedShort:mMinornumber.Value()]
-                                                     : [NSNumber numberWithUnsignedShort:2U];
+                                                     : [NSNumber numberWithUnsignedShort:1U];
         [cluster changeChannelByNumberWithParams:params
                                completionHandler:^(NSError * _Nullable err) {
                                    NSLog(@"TH sends a ChangeChannelByNumber command Error: %@", err);
@@ -31660,11 +30979,13 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestLogACommand_3()
+    CHIP_ERROR TestVerifyThatTheChannelHasChangedOnTheDevice_3()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message
-            = chip::Span<const char>("verify that the channel has changed on the device.garbage: not in length on purpose", 50);
+            = chip::Span<const char>("Please enter 'y' if channel has changed on the devicegarbage: not in length on purpose", 53);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -31742,30 +31063,22 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the CurrentChannel attribute from the DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestReadsTheCurrentChannelAttributeFromTheDut_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Sends a SkipChannel command to the DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestSendsASkipChannelCommandToTheDut_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : log a command\n");
-            err = TestLogACommand_4();
-            break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the CurrentChannel attribute from the DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Verify that the channel has changed on the device\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
                 NextTest();
                 return;
             }
+            err = TestVerifyThatTheChannelHasChangedOnTheDevice_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the CurrentChannel attribute from the DUT\n");
             err = TestReadsTheCurrentChannelAttributeFromTheDut_5();
             break;
         }
@@ -31843,7 +31156,6 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    CHIPChannelClusterChannelInfo * _Nullable currentChannelvalue;
 
     CHIP_ERROR TestReadsTheCurrentChannelAttributeFromTheDut_2()
     {
@@ -31860,9 +31172,6 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
-            }
-            {
-                currentChannelvalue = value;
             }
 
             NextTest();
@@ -31891,11 +31200,13 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestLogACommand_4()
+    CHIP_ERROR TestVerifyThatTheChannelHasChangedOnTheDevice_4()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message
-            = chip::Span<const char>("verify that the channel has changed on the devicegarbage: not in length on purpose", 49);
+            = chip::Span<const char>("Please enter 'y' if channel has changed on the devicegarbage: not in length on purpose", 53);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -31911,6 +31222,10 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+            }
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("currentChannel", "", "list"));
@@ -31920,6 +31235,1795 @@ private:
         }];
 
         return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_MC_6_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_MC_6_1()
+        : TestCommandBridge("Test_TC_MC_6_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_MC_6_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_6_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_6_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 1 : Precondition: Media content in a paused state at the beginning of the content\n");
+            err = TestPreconditionMediaContentInAPausedStateAtTheBeginningOfTheContent_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the CurrentState attribute\n");
+            err = TestReadsTheCurrentStateAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Sends a Play command\n");
+            err = TestSendsAPlayCommand_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Verify that the media state is playing\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatTheMediaStateIsPlaying_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the playback state attribute\n");
+            err = TestReadsThePlaybackStateAttribute_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : sends a Pause command\n");
+            err = TestSendsAPauseCommand_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Verify that the media is paused\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatTheMediaIsPaused_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Reads the playback state attribute\n");
+            err = TestReadsThePlaybackStateAttribute_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Sends a Stop command\n");
+            err = TestSendsAStopCommand_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Verify that the media is stoped\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatTheMediaIsStoped_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Reads the playback state attribute\n");
+            err = TestReadsThePlaybackStateAttribute_11();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 12;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestPreconditionMediaContentInAPausedStateAtTheBeginningOfTheContent_1()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster pauseWithCompletionHandler:^(
+            CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"Precondition: Media content in a paused state at the beginning of the content Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = values.status;
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsTheCurrentStateAttribute_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the CurrentState attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("CurrentState", actualValue, 1U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendsAPlayCommand_3()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster playWithCompletionHandler:^(
+            CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"Sends a Play command Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = values.status;
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatTheMediaStateIsPlaying_4()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' if media state is playinggarbage: not in length on purpose", 42);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadsThePlaybackStateAttribute_5()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the playback state attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("CurrentState", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendsAPauseCommand_6()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster pauseWithCompletionHandler:^(
+            CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"sends a Pause command Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = values.status;
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatTheMediaIsPaused_7()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' if media state is pausedgarbage: not in length on purpose", 41);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadsThePlaybackStateAttribute_8()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the playback state attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("CurrentState", actualValue, 1U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendsAStopCommand_9()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster stopPlaybackWithCompletionHandler:^(
+            CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"Sends a Stop command Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = values.status;
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatTheMediaIsStoped_10()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' if media state is stopedgarbage: not in length on purpose", 41);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadsThePlaybackStateAttribute_11()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the playback state attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("CurrentState", actualValue, 2U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_MC_6_2 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_MC_6_2()
+        : TestCommandBridge("Test_TC_MC_6_2")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_MC_6_2() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_6_2\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_6_2\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 1 : Precondition: Media content in a paused state at the beginning of the content\n");
+            err = TestPreconditionMediaContentInAPausedStateAtTheBeginningOfTheContent_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the CurrentState attribute from the DUT\n");
+            err = TestReadsTheCurrentStateAttributeFromTheDut_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Sends a Play command to the DUT\n");
+            err = TestSendsAPlayCommandToTheDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Verify that the media state is playing\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatTheMediaStateIsPlaying_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the CurrentState attribute\n");
+            err = TestReadsTheCurrentStateAttribute_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Sends a StartOver command to the DUT\n");
+            err = TestSendsAStartOverCommandToTheDut_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Verify that the media is started over\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatTheMediaIsStartedOver_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Sends a Next command to the DUT\n");
+            err = TestSendsANextCommandToTheDut_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Verify that the next media item in the queue has been loaded\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatTheNextMediaItemInTheQueueHasBeenLoaded_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Sends a Previous command to the DUT\n");
+            err = TestSendsAPreviousCommandToTheDut_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Verify that the previous media item in the queue has been loaded\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatThePreviousMediaItemInTheQueueHasBeenLoaded_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Sends a SkipForward command to the DUT \n");
+            err = TestSendsASkipForwardCommandToTheDut_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Verify that the media has skipped forward 10 seconds\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatTheMediaHasSkippedForward10Seconds_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Reads the SampledPosition attribute from the DUT\n");
+            err = TestReadsTheSampledPositionAttributeFromTheDut_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Sends a SkipBackward command to the DUT \n");
+            err = TestSendsASkipBackwardCommandToTheDut_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Verify that the media has skipped backward 10 seconds\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatTheMediaHasSkippedBackward10Seconds_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Reads the SampledPosition attribute from the DUT\n");
+            err = TestReadsTheSampledPositionAttributeFromTheDut_17();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 18;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestPreconditionMediaContentInAPausedStateAtTheBeginningOfTheContent_1()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster pauseWithCompletionHandler:^(
+            CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"Precondition: Media content in a paused state at the beginning of the content Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = values.status;
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsTheCurrentStateAttributeFromTheDut_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the CurrentState attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("CurrentState", actualValue, 1U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendsAPlayCommandToTheDut_3()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster playWithCompletionHandler:^(
+            CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"Sends a Play command to the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = values.status;
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatTheMediaStateIsPlaying_4()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' if media state is playinggarbage: not in length on purpose", 42);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadsTheCurrentStateAttribute_5()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the CurrentState attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("CurrentState", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendsAStartOverCommandToTheDut_6()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster startOverWithCompletionHandler:^(
+            CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"Sends a StartOver command to the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = values.status;
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatTheMediaIsStartedOver_7()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' if media is started overgarbage: not in length on purpose", 41);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestSendsANextCommandToTheDut_8()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster nextWithCompletionHandler:^(
+            CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"Sends a Next command to the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = values.status;
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatTheNextMediaItemInTheQueueHasBeenLoaded_9()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if media item in the queue has been loadedgarbage: not in length on purpose", 59);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestSendsAPreviousCommandToTheDut_10()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster previousWithCompletionHandler:^(
+            CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"Sends a Previous command to the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = values.status;
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatThePreviousMediaItemInTheQueueHasBeenLoaded_11()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if previous media item in the queue has been loadedgarbage: not in length on purpose", 68);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestSendsASkipForwardCommandToTheDut_12()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPMediaPlaybackClusterSkipForwardParams alloc] init];
+        params.deltaPositionMilliseconds = [NSNumber numberWithUnsignedLongLong:10000ULL];
+        [cluster
+            skipForwardWithParams:params
+                completionHandler:^(CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+                    NSLog(@"Sends a SkipForward command to the DUT  Error: %@", err);
+
+                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                    {
+                        id actualValue = values.status;
+                        VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                    }
+
+                    NextTest();
+                }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatTheMediaHasSkippedForward10Seconds_13()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if media has skipped forward 10 secondsgarbage: not in length on purpose", 56);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadsTheSampledPositionAttributeFromTheDut_14()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeSampledPositionWithCompletionHandler:^(
+            CHIPMediaPlaybackClusterPlaybackPosition * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the SampledPosition attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("SampledPosition", actualValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendsASkipBackwardCommandToTheDut_15()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPMediaPlaybackClusterSkipBackwardParams alloc] init];
+        params.deltaPositionMilliseconds = [NSNumber numberWithUnsignedLongLong:10000ULL];
+        [cluster
+            skipBackwardWithParams:params
+                 completionHandler:^(CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Sends a SkipBackward command to the DUT  Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.status;
+                         VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatTheMediaHasSkippedBackward10Seconds_16()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if media has skipped backward 10 secondsgarbage: not in length on purpose", 57);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadsTheSampledPositionAttributeFromTheDut_17()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeSampledPositionWithCompletionHandler:^(
+            CHIPMediaPlaybackClusterPlaybackPosition * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the SampledPosition attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("SampledPosition", actualValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_MC_6_3 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_MC_6_3()
+        : TestCommandBridge("Test_TC_MC_6_3")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("SeekPosition", 0, UINT64_MAX, &mSeekPosition);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_MC_6_3() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_6_3\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_6_3\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 1 : Precondition: Media content in a paused state at the beginning of the content\n");
+            err = TestPreconditionMediaContentInAPausedStateAtTheBeginningOfTheContent_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Sends a Seek command\n");
+            err = TestSendsASeekCommand_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Verify that the media has moved to 10 seconds from the starting point\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatTheMediaHasMovedTo10SecondsFromTheStartingPoint_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the SampledPosition attribute\n");
+            err = TestReadsTheSampledPositionAttribute_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads the StartTime attribute from the DUT\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsTheStartTimeAttributeFromTheDut_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads the SeekRangeEnd attribute from the DUT\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsTheSeekRangeEndAttributeFromTheDut_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads the SeekRangeStart attribute from the DUT\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsTheSeekRangeStartAttributeFromTheDut_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads the Duration attribute from the DUT\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsTheDurationAttributeFromTheDut_8();
+            break;
+        case 9:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 9 : Sends a Seek command Position value beyond the furthest valid position\n");
+            err = TestSendsASeekCommandPositionValueBeyondTheFurthestValidPosition_9();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 10;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint64_t> mSeekPosition;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestPreconditionMediaContentInAPausedStateAtTheBeginningOfTheContent_1()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster pauseWithCompletionHandler:^(
+            CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"Precondition: Media content in a paused state at the beginning of the content Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = values.status;
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendsASeekCommand_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPMediaPlaybackClusterSeekParams alloc] init];
+        params.position = [NSNumber numberWithUnsignedLongLong:10000ULL];
+        [cluster seekWithParams:params
+              completionHandler:^(CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+                  NSLog(@"Sends a Seek command Error: %@", err);
+
+                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                  {
+                      id actualValue = values.status;
+                      VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                  }
+
+                  NextTest();
+              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatTheMediaHasMovedTo10SecondsFromTheStartingPoint_3()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if media has moved to 10 seconds from the starting pointgarbage: not in length on purpose", 73);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadsTheSampledPositionAttribute_4()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeSampledPositionWithCompletionHandler:^(
+            CHIPMediaPlaybackClusterPlaybackPosition * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the SampledPosition attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("SampledPosition", actualValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTheStartTimeAttributeFromTheDut_5()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsTheSeekRangeEndAttributeFromTheDut_6()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsTheSeekRangeStartAttributeFromTheDut_7()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsTheDurationAttributeFromTheDut_8()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestSendsASeekCommandPositionValueBeyondTheFurthestValidPosition_9()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPMediaPlaybackClusterSeekParams alloc] init];
+        params.position = mSeekPosition.HasValue() ? [NSNumber numberWithUnsignedLongLong:mSeekPosition.Value()]
+                                                   : [NSNumber numberWithUnsignedLongLong:100000000ULL];
+        [cluster seekWithParams:params
+              completionHandler:^(CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+                  NSLog(@"Sends a Seek command Position value beyond the furthest valid position Error: %@", err);
+
+                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                  {
+                      id actualValue = values.status;
+                      VerifyOrReturn(CheckValue("status", actualValue, 5U));
+                  }
+
+                  NextTest();
+              }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_MC_6_4 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_MC_6_4()
+        : TestCommandBridge("Test_TC_MC_6_4")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_MC_6_4() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_6_4\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_6_4\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 1 : Precondition: Media content in a paused state at the beginning of the content\n");
+            err = TestPreconditionMediaContentInAPausedStateAtTheBeginningOfTheContent_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the CurrentState attribute from the DUT\n");
+            err = TestReadsTheCurrentStateAttributeFromTheDut_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Reads the PlaybackSpeed attribute from the DUT\n");
+            err = TestReadsThePlaybackSpeedAttributeFromTheDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Sends a FastForward command\n");
+            err = TestSendsAFastForwardCommand_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the CurrentState attribute\n");
+            err = TestReadsTheCurrentStateAttribute_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the PlaybackSpeed attribute from the DUT\n");
+            err = TestReadsThePlaybackSpeedAttributeFromTheDut_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Sends a FastForward command\n");
+            err = TestSendsAFastForwardCommand_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Reads the PlaybackSpeed attribute from the DUT\n");
+            err = TestReadsThePlaybackSpeedAttributeFromTheDut_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Sends a Rewind command to the DUT\n");
+            err = TestSendsARewindCommandToTheDut_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Reads the CurrentState attribute\n");
+            err = TestReadsTheCurrentStateAttribute_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Reads the PlaybackSpeed attribute from the DUT\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsThePlaybackSpeedAttributeFromTheDut_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Sends a Rewind command to the DUT\n");
+            err = TestSendsARewindCommandToTheDut_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Reads the PlaybackSpeed attribute from the DUT\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsThePlaybackSpeedAttributeFromTheDut_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Sends a Play command\n");
+            err = TestSendsAPlayCommand_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Reads the PlaybackSpeed attribute from the DUT\n");
+            err = TestReadsThePlaybackSpeedAttributeFromTheDut_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Sends consecutive FastForward commands\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestSendsConsecutiveFastForwardCommands_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Sends consecutive Rewind commands\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestSendsConsecutiveRewindCommands_17();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 18;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestPreconditionMediaContentInAPausedStateAtTheBeginningOfTheContent_1()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster pauseWithCompletionHandler:^(
+            CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"Precondition: Media content in a paused state at the beginning of the content Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = values.status;
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsTheCurrentStateAttributeFromTheDut_2()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the CurrentState attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("CurrentState", actualValue, 1U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_3()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePlaybackSpeedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the PlaybackSpeed attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("PlaybackSpeed", actualValue, 0.0f));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendsAFastForwardCommand_4()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster fastForwardWithCompletionHandler:^(
+            CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"Sends a FastForward command Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = values.status;
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsTheCurrentStateAttribute_5()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the CurrentState attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("CurrentState", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_6()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePlaybackSpeedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the PlaybackSpeed attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("PlaybackSpeed", actualValue, 1.0f));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendsAFastForwardCommand_7()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster fastForwardWithCompletionHandler:^(
+            CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"Sends a FastForward command Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = values.status;
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_8()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePlaybackSpeedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the PlaybackSpeed attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("PlaybackSpeed", actualValue, 2.0f));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendsARewindCommandToTheDut_9()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster rewindWithCompletionHandler:^(
+            CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"Sends a Rewind command to the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = values.status;
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsTheCurrentStateAttribute_10()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the CurrentState attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("CurrentState", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_11()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Please enter 'y' if PlaybackSpeed value is -2garbage: not in length on purpose", 45);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestSendsARewindCommandToTheDut_12()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster rewindWithCompletionHandler:^(
+            CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"Sends a Rewind command to the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = values.status;
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_13()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Please enter 'y' if PlaybackSpeed value is -2garbage: not in length on purpose", 45);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestSendsAPlayCommand_14()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster playWithCompletionHandler:^(
+            CHIPMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"Sends a Play command Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = values.status;
+                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_15()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestMediaPlayback * cluster = [[CHIPTestMediaPlayback alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePlaybackSpeedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the PlaybackSpeed attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("PlaybackSpeed", actualValue, 1.0f));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendsConsecutiveFastForwardCommands_16()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestSendsConsecutiveRewindCommands_17()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -31971,18 +33075,10 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Sends a SelectAudioOutput command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestSendsASelectAudioOutputCommand_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads the CurrentOutput attribute\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestReadsTheCurrentOutputAttribute_3();
             break;
         }
@@ -32144,10 +33240,6 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Sends a RenameOutput command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestSendsARenameOutputCommand_2();
             break;
         case 3:
@@ -32318,18 +33410,10 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Sends a NavigateTarget command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestSendsANavigateTargetCommand_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the CurrentTarget attribute\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestReadsTheCurrentTargetAttribute_4();
             break;
         case 5:
@@ -32338,18 +33422,10 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Sends a NavigateTarget command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestSendsANavigateTargetCommand_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Reads the CurrentTarget attribute\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestReadsTheCurrentTargetAttribute_7();
             break;
         }
@@ -32473,11 +33549,6 @@ private:
 
                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                            {
-                                id actualValue = values.status;
-                                VerifyOrReturn(CheckValue("status", actualValue, 0U));
-                            }
-
                             NextTest();
                         }];
 
@@ -32539,11 +33610,6 @@ private:
                             NSLog(@"Sends a NavigateTarget command Error: %@", err);
 
                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                            {
-                                id actualValue = values.status;
-                                VerifyOrReturn(CheckValue("status", actualValue, 0U));
-                            }
 
                             NextTest();
                         }];
@@ -32617,40 +33683,36 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Precondition\n");
-            err = TestPrecondition_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the VendorName attribute\n");
+            err = TestReadsTheVendorNameAttribute_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the VendorName attribute\n");
-            err = TestReadsTheVendorNameAttribute_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the VendorID attribute\n");
+            err = TestReadsTheVendorIDAttribute_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Reads the VendorID attribute\n");
-            err = TestReadsTheVendorIDAttribute_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Reads the ApplicationName attribute\n");
+            err = TestReadsTheApplicationNameAttribute_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the ApplicationName attribute\n");
-            err = TestReadsTheApplicationNameAttribute_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the ProductID attribute\n");
+            err = TestReadsTheProductIDAttribute_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the ProductID attribute\n");
-            err = TestReadsTheProductIDAttribute_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the Application attribute\n");
+            err = TestReadsTheApplicationAttribute_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the Application attribute\n");
-            err = TestReadsTheApplicationAttribute_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the Status attribute\n");
+            err = TestReadsTheStatusAttribute_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Reads the Status attribute\n");
-            err = TestReadsTheStatusAttribute_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Reads the ApplicationVersion attribute\n");
+            err = TestReadsTheApplicationVersionAttribute_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Reads the ApplicationVersion attribute\n");
-            err = TestReadsTheApplicationVersionAttribute_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Reads the AllowedVendorList attribute\n");
-            err = TestReadsTheAllowedVendorListAttribute_9();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Reads the AllowedVendorList attribute\n");
+            err = TestReadsTheAllowedVendorListAttribute_8();
             break;
         }
 
@@ -32690,9 +33752,6 @@ public:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -32706,7 +33765,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 10;
+    const uint16_t mTestCount = 9;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -32720,14 +33779,7 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestPrecondition_1()
-    {
-        chip::app::Clusters::LogCommands::Commands::Log::Type value;
-        value.message = chip::Span<const char>("DUT has one or more Content Apps availablegarbage: not in length on purpose", 42);
-        return Log("alpha", value);
-    }
-
-    CHIP_ERROR TestReadsTheVendorNameAttribute_2()
+    CHIP_ERROR TestReadsTheVendorNameAttribute_1()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
@@ -32748,7 +33800,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheVendorIDAttribute_3()
+    CHIP_ERROR TestReadsTheVendorIDAttribute_2()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
@@ -32768,7 +33820,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheApplicationNameAttribute_4()
+    CHIP_ERROR TestReadsTheApplicationNameAttribute_3()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
@@ -32789,7 +33841,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheProductIDAttribute_5()
+    CHIP_ERROR TestReadsTheProductIDAttribute_4()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
@@ -32809,7 +33861,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheApplicationAttribute_6()
+    CHIP_ERROR TestReadsTheApplicationAttribute_5()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
@@ -32830,7 +33882,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheStatusAttribute_7()
+    CHIP_ERROR TestReadsTheStatusAttribute_6()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
@@ -32852,7 +33904,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheApplicationVersionAttribute_8()
+    CHIP_ERROR TestReadsTheApplicationVersionAttribute_7()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
@@ -32873,7 +33925,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheAllowedVendorListAttribute_9()
+    CHIP_ERROR TestReadsTheAllowedVendorListAttribute_8()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestApplicationBasic * cluster = [[CHIPTestApplicationBasic alloc] initWithDevice:device
@@ -40926,38 +41978,74 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Read the mandatory attribute constraints: MeasuredValue\n");
+            if (ShouldSkip("PRS.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributeConstraintsMeasuredValue_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read the mandatory attribute constraints: MinMeasuredValue\n");
+            if (ShouldSkip("PRS.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributeConstraintsMinMeasuredValue_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read the mandatory attribute constraints: MaxMeasuredValue\n");
+            if (ShouldSkip("PRS.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributeConstraintsMaxMeasuredValue_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Read the optional attribute: Tolerance\n");
+            if (ShouldSkip("PRS.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeTolerance_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Read the optional attribute: ScaledValue\n");
+            if (ShouldSkip("PRS.S.A0010")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeScaledValue_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Read the optional attribute: MinScaledValue\n");
+            if (ShouldSkip("PRS.S.A0011")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeMinScaledValue_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Read the optional attribute: MaxScaledValue\n");
+            if (ShouldSkip("PRS.S.A0012")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeMaxScaledValue_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Read the optional attribute: ScaledTolerance\n");
+            if (ShouldSkip("PRS.S.A0013")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeScaledTolerance_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Read the optional attribute: Scale\n");
+            if (ShouldSkip("PRS.S.A0014")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeScale_9();
             break;
         }
@@ -41117,11 +42205,6 @@ private:
         [cluster readAttributeToleranceWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: Tolerance Error: %@", err);
 
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("tolerance", "", "int16"));
@@ -41144,11 +42227,6 @@ private:
 
         [cluster readAttributeScaledValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: ScaledValue Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -41176,11 +42254,6 @@ private:
         [cluster readAttributeMinScaledValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: MinScaledValue Error: %@", err);
 
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             if (value != nil) {
@@ -41206,11 +42279,6 @@ private:
 
         [cluster readAttributeMaxScaledValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: MaxScaledValue Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -41238,11 +42306,6 @@ private:
         [cluster readAttributeScaledToleranceWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: ScaledTolerance Error: %@", err);
 
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("scaledTolerance", "", "int16"));
@@ -41265,11 +42328,6 @@ private:
 
         [cluster readAttributeScaleWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: Scale Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -55092,7 +56150,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads Type attribute from DUT\n");
-            if (ShouldSkip("A_TYPE")) {
+            if (ShouldSkip("PICS_USER_PROMPT")) {
                 NextTest();
                 return;
             }
@@ -55144,23 +56202,11 @@ private:
 
     CHIP_ERROR TestReadsTypeAttributeFromDut_1()
     {
-        CHIPDevice * device = GetDevice("alpha");
-        CHIPTestWindowCovering * cluster = [[CHIPTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeTypeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads Type attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("type", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("type", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("type", [value unsignedCharValue], 9U));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -55207,12 +56253,12 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Reads EndProductType attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads EndProductType attribute from DUT\n");
             if (ShouldSkip("A_ENDPRODUCTTYPE")) {
                 NextTest();
                 return;
             }
-            err = TestReadsEndProductTypeAttributeFromDut_1();
+            err = TestThReadsEndProductTypeAttributeFromDut_1();
             break;
         }
 
@@ -55258,21 +56304,16 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestReadsEndProductTypeAttributeFromDut_1()
+    CHIP_ERROR TestThReadsEndProductTypeAttributeFromDut_1()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestWindowCovering * cluster = [[CHIPTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeEndProductTypeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads EndProductType attribute from DUT Error: %@", err);
+            NSLog(@"TH reads EndProductType attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("EndProductType", actualValue, 0U));
-            }
 
             VerifyOrReturn(CheckConstraintType("endProductType", "", "enum8"));
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("endProductType", [value unsignedCharValue], 0U));
@@ -106054,9 +107095,6 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_MC_3_3>(),
         make_unique<Test_TC_MC_3_5>(),
         make_unique<Test_TC_MC_3_6>(),
-        make_unique<Test_TC_MC_3_7>(),
-        make_unique<Test_TC_MC_3_8>(),
-        make_unique<Test_TC_MC_3_9>(),
         make_unique<Test_TC_MC_3_10>(),
         make_unique<Test_TC_MC_3_11>(),
         make_unique<Test_TC_MC_3_12>(),
@@ -106064,6 +107102,10 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_MC_5_1>(),
         make_unique<Test_TC_MC_5_2>(),
         make_unique<Test_TC_MC_5_3>(),
+        make_unique<Test_TC_MC_6_1>(),
+        make_unique<Test_TC_MC_6_2>(),
+        make_unique<Test_TC_MC_6_3>(),
+        make_unique<Test_TC_MC_6_4>(),
         make_unique<Test_TC_MC_7_1>(),
         make_unique<Test_TC_MC_7_2>(),
         make_unique<Test_TC_MC_8_1>(),
