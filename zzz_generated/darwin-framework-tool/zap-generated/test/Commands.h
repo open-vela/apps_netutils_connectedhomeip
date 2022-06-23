@@ -60,7 +60,7 @@ public:
         printf("Test_TC_CC_7_3\n");
         printf("Test_TC_CC_7_4\n");
         printf("Test_TC_CC_8_1\n");
-        printf("Test_TC_DM_2_1\n");
+        printf("Test_TC_BINFO_2_1\n");
         printf("Test_TC_DESC_1_1\n");
         printf("Test_TC_EMR_1_1\n");
         printf("Test_TC_DGETH_2_1\n");
@@ -213,12 +213,12 @@ public:
         printf("DL_UsersAndCredentials\n");
         printf("DL_LockUnlock\n");
         printf("DL_Schedules\n");
-        printf("Test_TC_DL_2_2\n");
-        printf("Test_TC_DL_2_3\n");
-        printf("Test_TC_DL_2_4\n");
-        printf("Test_TC_DL_2_5\n");
-        printf("Test_TC_DL_2_7\n");
-        printf("Test_TC_DL_2_9\n");
+        printf("Test_TC_DLRK_2_2\n");
+        printf("Test_TC_DLRK_2_3\n");
+        printf("Test_TC_DLRK_2_4\n");
+        printf("Test_TC_DLRK_2_5\n");
+        printf("Test_TC_DLRK_2_7\n");
+        printf("Test_TC_DLRK_2_9\n");
         printf("TestGroupsCluster\n");
         printf("TestGroupKeyManagementCluster\n");
 
@@ -17305,11 +17305,11 @@ private:
     }
 };
 
-class Test_TC_DM_2_1 : public TestCommandBridge {
+class Test_TC_BINFO_2_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_DM_2_1()
-        : TestCommandBridge("Test_TC_DM_2_1")
+    Test_TC_BINFO_2_1()
+        : TestCommandBridge("Test_TC_BINFO_2_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -17319,7 +17319,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_DM_2_1() {}
+    ~Test_TC_BINFO_2_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -17327,11 +17327,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DM_2_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_BINFO_2_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DM_2_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_BINFO_2_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -101447,11 +101447,11 @@ private:
     }
 };
 
-class Test_TC_DL_2_2 : public TestCommandBridge {
+class Test_TC_DLRK_2_2 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_DL_2_2()
-        : TestCommandBridge("Test_TC_DL_2_2")
+    Test_TC_DLRK_2_2()
+        : TestCommandBridge("Test_TC_DLRK_2_2")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -101461,7 +101461,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_DL_2_2() {}
+    ~Test_TC_DLRK_2_2() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -101469,11 +101469,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DL_2_2\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DLRK_2_2\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DL_2_2\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DLRK_2_2\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -101972,11 +101972,11 @@ private:
     }
 };
 
-class Test_TC_DL_2_3 : public TestCommandBridge {
+class Test_TC_DLRK_2_3 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_DL_2_3()
-        : TestCommandBridge("Test_TC_DL_2_3")
+    Test_TC_DLRK_2_3()
+        : TestCommandBridge("Test_TC_DLRK_2_3")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -101986,7 +101986,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_DL_2_3() {}
+    ~Test_TC_DLRK_2_3() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -101994,11 +101994,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DL_2_3\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DLRK_2_3\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DL_2_3\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DLRK_2_3\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -102293,11 +102293,11 @@ private:
     }
 };
 
-class Test_TC_DL_2_4 : public TestCommandBridge {
+class Test_TC_DLRK_2_4 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_DL_2_4()
-        : TestCommandBridge("Test_TC_DL_2_4")
+    Test_TC_DLRK_2_4()
+        : TestCommandBridge("Test_TC_DLRK_2_4")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -102307,7 +102307,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_DL_2_4() {}
+    ~Test_TC_DLRK_2_4() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -102315,11 +102315,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DL_2_4\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DLRK_2_4\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DL_2_4\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DLRK_2_4\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -102585,11 +102585,11 @@ private:
     }
 };
 
-class Test_TC_DL_2_5 : public TestCommandBridge {
+class Test_TC_DLRK_2_5 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_DL_2_5()
-        : TestCommandBridge("Test_TC_DL_2_5")
+    Test_TC_DLRK_2_5()
+        : TestCommandBridge("Test_TC_DLRK_2_5")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -102599,7 +102599,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_DL_2_5() {}
+    ~Test_TC_DLRK_2_5() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -102607,11 +102607,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DL_2_5\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DLRK_2_5\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DL_2_5\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DLRK_2_5\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -103099,11 +103099,11 @@ private:
     }
 };
 
-class Test_TC_DL_2_7 : public TestCommandBridge {
+class Test_TC_DLRK_2_7 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_DL_2_7()
-        : TestCommandBridge("Test_TC_DL_2_7")
+    Test_TC_DLRK_2_7()
+        : TestCommandBridge("Test_TC_DLRK_2_7")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -103113,7 +103113,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_DL_2_7() {}
+    ~Test_TC_DLRK_2_7() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -103121,11 +103121,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DL_2_7\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DLRK_2_7\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DL_2_7\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DLRK_2_7\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -103714,11 +103714,11 @@ private:
     }
 };
 
-class Test_TC_DL_2_9 : public TestCommandBridge {
+class Test_TC_DLRK_2_9 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_DL_2_9()
-        : TestCommandBridge("Test_TC_DL_2_9")
+    Test_TC_DLRK_2_9()
+        : TestCommandBridge("Test_TC_DLRK_2_9")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -103728,7 +103728,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_DL_2_9() {}
+    ~Test_TC_DLRK_2_9() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -103736,11 +103736,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DL_2_9\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DLRK_2_9\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DL_2_9\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DLRK_2_9\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -106013,7 +106013,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_CC_7_3>(),
         make_unique<Test_TC_CC_7_4>(),
         make_unique<Test_TC_CC_8_1>(),
-        make_unique<Test_TC_DM_2_1>(),
+        make_unique<Test_TC_BINFO_2_1>(),
         make_unique<Test_TC_DESC_1_1>(),
         make_unique<Test_TC_EMR_1_1>(),
         make_unique<Test_TC_DGETH_2_1>(),
@@ -106166,12 +106166,12 @@ void registerCommandsTests(Commands & commands)
         make_unique<DL_UsersAndCredentials>(),
         make_unique<DL_LockUnlock>(),
         make_unique<DL_Schedules>(),
-        make_unique<Test_TC_DL_2_2>(),
-        make_unique<Test_TC_DL_2_3>(),
-        make_unique<Test_TC_DL_2_4>(),
-        make_unique<Test_TC_DL_2_5>(),
-        make_unique<Test_TC_DL_2_7>(),
-        make_unique<Test_TC_DL_2_9>(),
+        make_unique<Test_TC_DLRK_2_2>(),
+        make_unique<Test_TC_DLRK_2_3>(),
+        make_unique<Test_TC_DLRK_2_4>(),
+        make_unique<Test_TC_DLRK_2_5>(),
+        make_unique<Test_TC_DLRK_2_7>(),
+        make_unique<Test_TC_DLRK_2_9>(),
         make_unique<TestGroupsCluster>(),
         make_unique<TestGroupKeyManagementCluster>(),
 #endif // CONFIG_ENABLE_YAML_TESTS
