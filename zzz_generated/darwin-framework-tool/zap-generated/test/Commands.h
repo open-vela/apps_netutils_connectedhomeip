@@ -21289,10 +21289,18 @@ public:
         case 1:
             ChipLogProgress(chipTool,
                 " ***** Test Step 1 : TH sends Identify command to DUT, with the identify time field set to 0x003c (60s).\n");
+            if (ShouldSkip("I.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsIdentifyCommandToDutWithTheIdentifyTimeFieldSetTo0x003c60s_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads immediately IdentifyTime attribute from DUT1\n");
+            if (ShouldSkip("I.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsImmediatelyIdentifyTimeAttributeFromDut1_2();
             break;
         case 3:
@@ -21301,6 +21309,10 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : After 10 seconds, the TH reads IdentifyTime attribute from DUT\n");
+            if (ShouldSkip("I.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestAfter10SecondsTheThReadsIdentifyTimeAttributeFromDut_4();
             break;
         case 5:
@@ -21317,10 +21329,18 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 6 : TH sends Identify command to DUT, with the identify time field set to 0x0000 (stop "
                 "identifying).\n");
+            if (ShouldSkip("I.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsIdentifyCommandToDutWithTheIdentifyTimeFieldSetTo0x0000StopIdentifying_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads immediately IdentifyTime attribute from DUT2\n");
+            if (ShouldSkip("I.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsImmediatelyIdentifyTimeAttributeFromDut2_7();
             break;
         case 8:
@@ -21333,6 +21353,10 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : TH writes a value of 0x000f (15s) to IdentifyTime attribute of DUT\n");
+            if (ShouldSkip("I.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThWritesAValueOf0x000f15sToIdentifyTimeAttributeOfDut_9();
             break;
         case 10:
@@ -21341,6 +21365,10 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : After 5 seconds, the TH reads IdentifyTime attribute from DUT\n");
+            if (ShouldSkip("I.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestAfter5SecondsTheThReadsIdentifyTimeAttributeFromDut_11();
             break;
         }
@@ -21642,6 +21670,10 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 1 : TH sends TriggerEffect command to DUT with the effect identifier field set to 0x00 blink and "
                 "the effect variant field set to 0x00 default\n");
+            if (ShouldSkip("I.S.C40.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x00BlinkAndTheEffectVariantFieldSetTo0x00Default_1();
             break;
         case 2:
@@ -21652,6 +21684,10 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 3 : TH sends TriggerEffect command to DUT with the effect identifier field set to 0x01 breathe "
                 "and the effect variant field set to 0x00 default\n");
+            if (ShouldSkip("I.S.C40.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x01BreatheAndTheEffectVariantFieldSetTo0x00Default_3();
             break;
         case 4:
@@ -21662,6 +21698,10 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 5 : TH sends TriggerEffect command to DUT with the effect identifier field set to 0x02 okay and "
                 "the effect variant field set to 0x00 default\n");
+            if (ShouldSkip("I.S.C40.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x02OkayAndTheEffectVariantFieldSetTo0x00Default_5();
             break;
         case 6:
@@ -21672,6 +21712,10 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 7 : TH sends TriggerEffect command to DUT with the effect identifier field set to 0x0b channel "
                 "change and the effect variant field set to 0x00 default\n");
+            if (ShouldSkip("I.S.C40.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x0bChannelChangeAndTheEffectVariantFieldSetTo0x00Default_7();
             break;
         case 8:
@@ -21682,6 +21726,10 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 9 : TH sends TriggerEffect command to DUT with the effect identifier field set to 0x01 breathe "
                 "and the effect variant field set to 0x00 default\n");
+            if (ShouldSkip("I.S.C40.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x01BreatheAndTheEffectVariantFieldSetTo0x00Default_9();
             break;
         case 10:
@@ -21692,17 +21740,29 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 11 : TH sends TriggerEffect command to DUT with the effect identifier field set to 0xfe finish "
                 "effect and the effect variant field set to 0x00 default\n");
+            if (ShouldSkip("I.S.C40.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0xfeFinishEffectAndTheEffectVariantFieldSetTo0x00Default_11();
             break;
         case 12:
             ChipLogProgress(
                 chipTool, " ***** Test Step 12 : Manually check DUT stops the breathe effect after the current effect sequence\n");
+            if (ShouldSkip("I.S.C40.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestManuallyCheckDutStopsTheBreatheEffectAfterTheCurrentEffectSequence_12();
             break;
         case 13:
             ChipLogProgress(chipTool,
                 " ***** Test Step 13 : TH sends TriggerEffect command to DUT with the effect identifier field set to 0x01 breathe "
                 "and the effect variant field set to 0x00 default\n");
+            if (ShouldSkip("I.S.C40.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x01BreatheAndTheEffectVariantFieldSetTo0x00Default_13();
             break;
         case 14:
@@ -21713,6 +21773,10 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 15 : TH sends TriggerEffect command to DUT with the effect identifier field set to 0xff stop "
                 "effect and the effect variant field set to 0x00 default\n");
+            if (ShouldSkip("I.S.C40.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0xffStopEffectAndTheEffectVariantFieldSetTo0x00Default_15();
             break;
         case 16:
@@ -21723,6 +21787,10 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 17 : TH sends TriggerEffect command to DUT with the effect identifier field set to 0x00 blink "
                 "and the effect variant field set to 0x42 unknown\n");
+            if (ShouldSkip("I.S.C40.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x00BlinkAndTheEffectVariantFieldSetTo0x42Unknown_17();
             break;
         case 18:
@@ -21733,6 +21801,10 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 19 : TH sends TriggerEffect command to DUT with the effect identifier field set to 0xff stop "
                 "effect and the effect variant field set to 0x00 default\n");
+            if (ShouldSkip("I.S.C40.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0xffStopEffectAndTheEffectVariantFieldSetTo0x00Default_19();
             break;
         case 20:
@@ -43154,6 +43226,10 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read MultiPressMax attribute\n");
+            if (ShouldSkip("SWTCH.S.F04")) {
+                NextTest();
+                return;
+            }
             err = TestReadMultiPressMaxAttribute_3();
             break;
         }
