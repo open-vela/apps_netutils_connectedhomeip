@@ -4191,11 +4191,6 @@ private:
             NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: CoupleColorTempToLevelMinMireds Error: %@", err);
 
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("coupleColorTempToLevelMinMireds", "", "uint16"));
@@ -4219,11 +4214,6 @@ private:
             NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: StartUpColorTemperatureMireds Error: %@", err);
 
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("startUpColorTemperatureMireds", "", "uint16"));
@@ -4244,11 +4234,6 @@ private:
 
         [cluster readAttributeRemainingTimeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Validate constraints of attribute: RemainingTime Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -4273,11 +4258,6 @@ private:
         [cluster readAttributeDriftCompensationWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: DriftCompensation Error: %@", err);
 
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("driftCompensation", "", "enum8"));
@@ -4298,11 +4278,6 @@ private:
 
         [cluster readAttributeCompensationTextWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: CompensationText Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -4731,11 +4706,6 @@ private:
         [cluster readAttributeWhitePointXWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: WhitePointX Error: %@", err);
 
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("whitePointX", "", "uint16"));
@@ -4756,11 +4726,6 @@ private:
 
         [cluster readAttributeWhitePointYWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: WhitePointY Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -4783,11 +4748,6 @@ private:
         [cluster readAttributeColorPointRXWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: ColorPointRX Error: %@", err);
 
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("colorPointRX", "", "uint16"));
@@ -4809,11 +4769,6 @@ private:
         [cluster readAttributeColorPointRYWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: ColorPointRY Error: %@", err);
 
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("colorPointRY", "", "uint16"));
@@ -4834,11 +4789,6 @@ private:
 
         [cluster readAttributeColorPointRIntensityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: ColorPointRIntensity Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -4862,11 +4812,6 @@ private:
         [cluster readAttributeColorPointGXWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: ColorPointGX Error: %@", err);
 
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("colorPointGX", "", "uint16"));
@@ -4888,11 +4833,6 @@ private:
         [cluster readAttributeColorPointGYWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: ColorPointGY Error: %@", err);
 
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("colorPointGY", "", "uint16"));
@@ -4913,11 +4853,6 @@ private:
 
         [cluster readAttributeColorPointGIntensityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: ColorPointGIntensity Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -4941,11 +4876,6 @@ private:
         [cluster readAttributeColorPointBXWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: ColorPointBX Error: %@", err);
 
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("colorPointBX", "", "uint16"));
@@ -4967,11 +4897,6 @@ private:
         [cluster readAttributeColorPointBYWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: ColorPointBY Error: %@", err);
 
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("colorPointBY", "", "uint16"));
@@ -4992,11 +4917,6 @@ private:
 
         [cluster readAttributeColorPointBIntensityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the optional attribute: ColorPointBIntensity Error: %@", err);
-
-            if (err.code == MatterInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -18720,22 +18640,42 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH1 reads the BreadCrumb Attribute from the DUT\n");
+            if (ShouldSkip("CGEN.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestTh1ReadsTheBreadCrumbAttributeFromTheDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH1 writes the BreadCrumb attribute as 1 to the DUT\n");
+            if (ShouldSkip("CGEN.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestTh1WritesTheBreadCrumbAttributeAs1ToTheDut_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : TH1 reads the BreadCrumb attribute from the DUT\n");
+            if (ShouldSkip("CGEN.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestTh1ReadsTheBreadCrumbAttributeFromTheDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : TH1 reads the RegulatoryConfig attribute from the DUT\n");
+            if (ShouldSkip("CGEN.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestTh1ReadsTheRegulatoryConfigAttributeFromTheDut_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : TH1 reads the LocationCapability attribute from the DUT\n");
+            if (ShouldSkip("CGEN.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestTh1ReadsTheLocationCapabilityAttributeFromTheDut_5();
             break;
         case 6:
@@ -18743,6 +18683,10 @@ public:
                 " ***** Test Step 6 : TH1 reads BasicCommissioningInfo attribute from DUT and Verify that the "
                 "BasicCommissioningInfo attribute has the following field: FailSafeExpiryLengthSeconds field value is within a "
                 "duration range of 0 to 65535\n");
+            if (ShouldSkip("CGEN.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestTh1ReadsBasicCommissioningInfoAttributeFromDutAndVerifyThatTheBasicCommissioningInfoAttributeHasTheFollowingFieldFailSafeExpiryLengthSecondsFieldValueIsWithinADurationRangeOf0To65535_6();
             break;
         case 7:
@@ -18751,6 +18695,10 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : TH1 reads SupportsConcurrentConnection attribute from the DUT\n");
+            if (ShouldSkip("CGEN.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestTh1ReadsSupportsConcurrentConnectionAttributeFromTheDut_8();
             break;
         }
