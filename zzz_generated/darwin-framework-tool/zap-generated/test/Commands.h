@@ -93256,8 +93256,20 @@ public:
             err = TestVerifyThatLockStateAttributeValueIsSetToLocked_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Clean the created credential\n");
-            err = TestCleanTheCreatedCredential_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Set OperatingMode to NoRemoteLockUnlock\n");
+            err = TestSetOperatingModeToNoRemoteLockUnlock_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Try to unlock the door when OperatingMode is NoRemoteLockUnlock\n");
+            err = TestTryToUnlockTheDoorWhenOperatingModeIsNoRemoteLockUnlock_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Set OperatingMode to Normal\n");
+            err = TestSetOperatingModeToNormal_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Clean the created credential\n");
+            err = TestCleanTheCreatedCredential_17();
             break;
         }
 
@@ -93315,6 +93327,15 @@ public:
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -93328,7 +93349,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 15;
+    const uint16_t mTestCount = 18;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -93642,7 +93663,65 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCleanTheCreatedCredential_14()
+    CHIP_ERROR TestSetOperatingModeToNoRemoteLockUnlock_14()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id operatingModeArgument;
+        operatingModeArgument = [NSNumber numberWithUnsignedChar:3U];
+        [cluster writeAttributeOperatingModeWithValue:operatingModeArgument
+                                    completionHandler:^(NSError * _Nullable err) {
+                                        NSLog(@"Set OperatingMode to NoRemoteLockUnlock Error: %@", err);
+
+                                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                        NextTest();
+                                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTryToUnlockTheDoorWhenOperatingModeIsNoRemoteLockUnlock_15()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[CHIPDoorLockClusterLockDoorParams alloc] init];
+        [cluster lockDoorWithParams:params
+                  completionHandler:^(NSError * _Nullable err) {
+                      NSLog(@"Try to unlock the door when OperatingMode is NoRemoteLockUnlock Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSetOperatingModeToNormal_16()
+    {
+        CHIPDevice * device = GetDevice("alpha");
+        CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id operatingModeArgument;
+        operatingModeArgument = [NSNumber numberWithUnsignedChar:0U];
+        [cluster writeAttributeOperatingModeWithValue:operatingModeArgument
+                                    completionHandler:^(NSError * _Nullable err) {
+                                        NSLog(@"Set OperatingMode to Normal Error: %@", err);
+
+                                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                        NextTest();
+                                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCleanTheCreatedCredential_17()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
