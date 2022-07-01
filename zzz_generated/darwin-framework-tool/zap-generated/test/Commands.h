@@ -93248,8 +93248,8 @@ public:
             err = TestVerifyThatLockStateAttributeValueIsSetToUnlocked_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Try to unlock the door with valid PIN\n");
-            err = TestTryToUnlockTheDoorWithValidPin_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Try to lock the door with valid PIN\n");
+            err = TestTryToLockTheDoorWithValidPin_12();
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Verify that lock state attribute value is set to Locked\n");
@@ -93599,7 +93599,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTryToUnlockTheDoorWithValidPin_12()
+    CHIP_ERROR TestTryToLockTheDoorWithValidPin_12()
     {
         CHIPDevice * device = GetDevice("alpha");
         CHIPTestDoorLock * cluster = [[CHIPTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -93609,7 +93609,7 @@ private:
         params.pinCode = [[NSData alloc] initWithBytes:"123456" length:6];
         [cluster lockDoorWithParams:params
                   completionHandler:^(NSError * _Nullable err) {
-                      NSLog(@"Try to unlock the door with valid PIN Error: %@", err);
+                      NSLog(@"Try to lock the door with valid PIN Error: %@", err);
 
                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
