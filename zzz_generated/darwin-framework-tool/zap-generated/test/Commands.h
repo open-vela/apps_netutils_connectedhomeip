@@ -19238,62 +19238,98 @@ public:
             err = TestThReadsARebootCountAttributeValueFromDut_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Reboot DUT (node)\n");
-            err = TestRebootDutNode_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Reboot target device\n");
+            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDevice_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Reboot DUT (node)\n");
-            err = TestRebootDutNode_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Reboot target device(DUT)\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDeviceDUT_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Reboot target device\n");
+            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDevice_5();
             break;
         case 6:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 6 : DUT reboots and TH reads a UpTime attribute value of DUT since some arbitrary start time of "
-                "DUT rebooting.\n");
-            err = TestDutRebootsAndThReadsAUpTimeAttributeValueOfDutSinceSomeArbitraryStartTimeOfDutRebooting_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Reboot target device(DUT)\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDeviceDUT_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads a TotalOperationalHours attribute value from DUT.\n");
-            err = TestThReadsATotalOperationalHoursAttributeValueFromDut_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Reboot DUT (node)\n");
-            err = TestRebootDutNode_8();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 8 : DUT reboots and TH reads a UpTime attribute value of DUT since some arbitrary start time of "
+                "DUT rebooting.\n");
+            err = TestDutRebootsAndThReadsAUpTimeAttributeValueOfDutSinceSomeArbitraryStartTimeOfDutRebooting_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads a TotalOperationalHours attribute value from DUT.\n");
+            err = TestThReadsATotalOperationalHoursAttributeValueFromDut_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads BootReason attribute value from DUT.\n");
-            err = TestThReadsBootReasonAttributeValueFromDut_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Reboot target device\n");
+            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDevice_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads ActiveHardwareFaults attribute value from DUT.\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Reboot target device(DUT)\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsActiveHardwareFaultsAttributeValueFromDut_11();
+            err = TestRebootTargetDeviceDUT_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : TH reads ActiveRadioFaults attribute value from DUT.\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsActiveRadioFaultsAttributeValueFromDut_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : TH reads ActiveNetworkFaults attribute value from DUT.\n");
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH reads BootReason attribute value from DUT.\n");
+            err = TestThReadsBootReasonAttributeValueFromDut_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : TH reads ActiveHardwareFaults attribute value from DUT.\n");
             if (ShouldSkip("PICS_USER_PROMPT")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsActiveNetworkFaultsAttributeValueFromDut_13();
+            err = TestThReadsActiveHardwareFaultsAttributeValueFromDut_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH reads ActiveRadioFaults attribute value from DUT.\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsActiveRadioFaultsAttributeValueFromDut_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : TH reads ActiveNetworkFaults attribute value from DUT.\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsActiveNetworkFaultsAttributeValueFromDut_16();
             break;
         }
 
@@ -19348,6 +19384,15 @@ public:
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -19361,7 +19406,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 14;
+    const uint16_t mTestCount = 17;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -19415,26 +19460,46 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRebootDutNode_3()
+    CHIP_ERROR TestRebootTargetDevice_3()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
         return Reboot("alpha", value);
     }
 
-    CHIP_ERROR TestRebootDutNode_4()
+    CHIP_ERROR TestRebootTargetDeviceDUT_4()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Please reboot the DUT and enter 'y' after DUT startsgarbage: not in length on purpose", 52);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestRebootTargetDevice_5()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
         return Reboot("alpha", value);
     }
 
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_5()
+    CHIP_ERROR TestRebootTargetDeviceDUT_6()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Please reboot the DUT and enter 'y' after DUT startsgarbage: not in length on purpose", 52);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_7()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestDutRebootsAndThReadsAUpTimeAttributeValueOfDutSinceSomeArbitraryStartTimeOfDutRebooting_6()
+    CHIP_ERROR TestDutRebootsAndThReadsAUpTimeAttributeValueOfDutSinceSomeArbitraryStartTimeOfDutRebooting_8()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestGeneralDiagnostics * cluster = [[MTRTestGeneralDiagnostics alloc] initWithDevice:device
@@ -19456,7 +19521,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsATotalOperationalHoursAttributeValueFromDut_7()
+    CHIP_ERROR TestThReadsATotalOperationalHoursAttributeValueFromDut_9()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestGeneralDiagnostics * cluster = [[MTRTestGeneralDiagnostics alloc] initWithDevice:device
@@ -19476,20 +19541,30 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRebootDutNode_8()
+    CHIP_ERROR TestRebootTargetDevice_10()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
         return Reboot("alpha", value);
     }
 
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_9()
+    CHIP_ERROR TestRebootTargetDeviceDUT_11()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Please reboot the DUT and enter 'y' after DUT startsgarbage: not in length on purpose", 52);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_12()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestThReadsBootReasonAttributeValueFromDut_10()
+    CHIP_ERROR TestThReadsBootReasonAttributeValueFromDut_13()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestGeneralDiagnostics * cluster = [[MTRTestGeneralDiagnostics alloc] initWithDevice:device
@@ -19511,7 +19586,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsActiveHardwareFaultsAttributeValueFromDut_11()
+    CHIP_ERROR TestThReadsActiveHardwareFaultsAttributeValueFromDut_14()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
@@ -19520,7 +19595,7 @@ private:
         return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestThReadsActiveRadioFaultsAttributeValueFromDut_12()
+    CHIP_ERROR TestThReadsActiveRadioFaultsAttributeValueFromDut_15()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
@@ -19529,7 +19604,7 @@ private:
         return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestThReadsActiveNetworkFaultsAttributeValueFromDut_13()
+    CHIP_ERROR TestThReadsActiveNetworkFaultsAttributeValueFromDut_16()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
@@ -33217,67 +33292,58 @@ public:
         // incorrect mTestIndex value observed when we get the response.
         switch (mTestIndex++) {
         case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Stop target device\n");
-            err = TestStopTargetDevice_0();
+            ChipLogProgress(chipTool, " ***** Test Step 0 : TH_CR1 starts a commissioning process with DUT_CE\n");
+            err = TestThCr1StartsACommissioningProcessWithDutCe_0();
             break;
         case 1:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 1 : Start target device with the provided discriminator for basic commissioning advertisement\n");
-            err = TestStartTargetDeviceWithTheProvidedDiscriminatorForBasicCommissioningAdvertisement_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH_CR1 opens a commissioning window on DUT_CE\n");
+            err = TestThCr1OpensACommissioningWindowOnDutCe_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : TH_CR1 starts a commissioning process with DUT_CE\n");
-            err = TestThCr1StartsACommissioningProcessWithDutCe_2();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 2 : TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : TH_CR1 opens a commissioning window on DUT_CE\n");
-            err = TestThCr1OpensACommissioningWindowOnDutCe_3();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_3();
             break;
         case 4:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 4 : TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
-            err = TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Commission from beta\n");
+            err = TestCommissionFromBeta_4();
             break;
         case 5:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 5 : TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
-            err = TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH_CR2 starts a commissioning process with DUT_CE\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCe_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Commission from beta\n");
-            err = TestCommissionFromBeta_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Query fabrics list\n");
+            err = TestQueryFabricsList_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : TH_CR2 starts a commissioning process with DUT_CE\n");
-            err = TestThCr2StartsACommissioningProcessWithDutCe_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Query fabrics list\n");
+            err = TestQueryFabricsList_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Query fabrics list\n");
-            err = TestQueryFabricsList_8();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 8 : TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Query fabrics list\n");
-            err = TestQueryFabricsList_9();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_9();
             break;
         case 10:
             ChipLogProgress(chipTool,
-                " ***** Test Step 10 : TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
-            err = TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_10();
+                " ***** Test Step 10 : TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr2WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_10();
             break;
         case 11:
             ChipLogProgress(chipTool,
-                " ***** Test Step 11 : TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
-            err = TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 12 : TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
-            err = TestThCr2WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 13 : TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
-            err = TestThCr2ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_13();
+                " ***** Test Step 11 : TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr2ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_11();
             break;
         }
 
@@ -33326,12 +33392,6 @@ public:
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -33345,7 +33405,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 14;
+    const uint16_t mTestCount = 12;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::NodeId> mNodeId2;
@@ -33354,28 +33414,14 @@ private:
     chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<uint16_t> mTimeout;
 
-    CHIP_ERROR TestStopTargetDevice_0()
-    {
-        chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
-        return Stop("alpha", value);
-    }
-
-    CHIP_ERROR TestStartTargetDeviceWithTheProvidedDiscriminatorForBasicCommissioningAdvertisement_1()
-    {
-        chip::app::Clusters::SystemCommands::Commands::Start::Type value;
-        value.discriminator.Emplace();
-        value.discriminator.Value() = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-        return Start("alpha", value);
-    }
-
-    CHIP_ERROR TestThCr1StartsACommissioningProcessWithDutCe_2()
+    CHIP_ERROR TestThCr1StartsACommissioningProcessWithDutCe_0()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_3()
+    CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_1()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestAdministratorCommissioning * cluster = [[MTRTestAdministratorCommissioning alloc] initWithDevice:device
@@ -33407,7 +33453,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_4()
+    CHIP_ERROR TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_2()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestBasic * cluster = [[MTRTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -33429,7 +33475,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_5()
+    CHIP_ERROR TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_3()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestBasic * cluster = [[MTRTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -33453,7 +33499,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCommissionFromBeta_6()
+    CHIP_ERROR TestCommissionFromBeta_4()
     {
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
@@ -33461,14 +33507,14 @@ private:
         return PairWithCode("beta", value);
     }
 
-    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_7()
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_5()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         return WaitForCommissionee("beta", value);
     }
 
-    CHIP_ERROR TestQueryFabricsList_8()
+    CHIP_ERROR TestQueryFabricsList_6()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestOperationalCredentials * cluster = [[MTRTestOperationalCredentials alloc] initWithDevice:device
@@ -33498,7 +33544,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestQueryFabricsList_9()
+    CHIP_ERROR TestQueryFabricsList_7()
     {
         MTRDevice * device = GetDevice("beta");
         MTRTestOperationalCredentials * cluster = [[MTRTestOperationalCredentials alloc] initWithDevice:device
@@ -33530,7 +33576,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_10()
+    CHIP_ERROR TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_8()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestBasic * cluster = [[MTRTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -33552,7 +33598,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_11()
+    CHIP_ERROR TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_9()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestBasic * cluster = [[MTRTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -33576,7 +33622,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr2WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_12()
+    CHIP_ERROR TestThCr2WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_10()
     {
         MTRDevice * device = GetDevice("beta");
         MTRTestBasic * cluster = [[MTRTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -33598,7 +33644,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr2ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_13()
+    CHIP_ERROR TestThCr2ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_11()
     {
         MTRDevice * device = GetDevice("beta");
         MTRTestBasic * cluster = [[MTRTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -33664,47 +33710,48 @@ public:
         // incorrect mTestIndex value observed when we get the response.
         switch (mTestIndex++) {
         case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Stop target device\n");
-            err = TestStopTargetDevice_0();
+            ChipLogProgress(chipTool, " ***** Test Step 0 : TH_CR1 starts a commissioning process with DUT_CE\n");
+            err = TestThCr1StartsACommissioningProcessWithDutCe_0();
             break;
         case 1:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 1 : Start target device with the provided discriminator for basic commissioning advertisement\n");
-            err = TestStartTargetDeviceWithTheProvidedDiscriminatorForBasicCommissioningAdvertisement_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH_CR1 opens a commissioning window on DUT_CE\n");
+            err = TestThCr1OpensACommissioningWindowOnDutCe_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : TH_CR1 starts a commissioning process with DUT_CE\n");
-            err = TestThCr1StartsACommissioningProcessWithDutCe_2();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 2 : TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : TH_CR1 opens a commissioning window on DUT_CE\n");
-            err = TestThCr1OpensACommissioningWindowOnDutCe_3();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_3();
             break;
         case 4:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 4 : TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
-            err = TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Commission from beta\n");
+            err = TestCommissionFromBeta_4();
             break;
         case 5:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 5 : TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
-            err = TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH_CR2 starts a commissioning process with DUT_CE\n");
+            err = TestThCr2StartsACommissioningProcessWithDutCe_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Commission from beta\n");
-            err = TestCommissionFromBeta_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Query fabrics list\n");
+            err = TestQueryFabricsList_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : TH_CR2 starts a commissioning process with DUT_CE\n");
-            err = TestThCr2StartsACommissioningProcessWithDutCe_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Query fabrics list\n");
+            err = TestQueryFabricsList_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Query fabrics list\n");
-            err = TestQueryFabricsList_8();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 8 : TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Query fabrics list\n");
-            err = TestQueryFabricsList_9();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
+            err = TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_9();
             break;
         case 10:
             ChipLogProgress(chipTool,
@@ -33715,16 +33762,6 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 11 : TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
             err = TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 12 : TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
-            err = TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 13 : TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE\n");
-            err = TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_13();
             break;
         }
 
@@ -33773,12 +33810,6 @@ public:
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -33792,7 +33823,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 14;
+    const uint16_t mTestCount = 12;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::NodeId> mNodeId2;
@@ -33801,28 +33832,14 @@ private:
     chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<uint16_t> mTimeout;
 
-    CHIP_ERROR TestStopTargetDevice_0()
-    {
-        chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
-        return Stop("alpha", value);
-    }
-
-    CHIP_ERROR TestStartTargetDeviceWithTheProvidedDiscriminatorForBasicCommissioningAdvertisement_1()
-    {
-        chip::app::Clusters::SystemCommands::Commands::Start::Type value;
-        value.discriminator.Emplace();
-        value.discriminator.Value() = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-        return Start("alpha", value);
-    }
-
-    CHIP_ERROR TestThCr1StartsACommissioningProcessWithDutCe_2()
+    CHIP_ERROR TestThCr1StartsACommissioningProcessWithDutCe_0()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_3()
+    CHIP_ERROR TestThCr1OpensACommissioningWindowOnDutCe_1()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestAdministratorCommissioning * cluster = [[MTRTestAdministratorCommissioning alloc] initWithDevice:device
@@ -33844,7 +33861,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_4()
+    CHIP_ERROR TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_2()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestBasic * cluster = [[MTRTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -33866,7 +33883,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_5()
+    CHIP_ERROR TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_3()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestBasic * cluster = [[MTRTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -33885,7 +33902,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCommissionFromBeta_6()
+    CHIP_ERROR TestCommissionFromBeta_4()
     {
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
@@ -33893,14 +33910,14 @@ private:
         return PairWithCode("beta", value);
     }
 
-    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_7()
+    CHIP_ERROR TestThCr2StartsACommissioningProcessWithDutCe_5()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
         return WaitForCommissionee("beta", value);
     }
 
-    CHIP_ERROR TestQueryFabricsList_8()
+    CHIP_ERROR TestQueryFabricsList_6()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestOperationalCredentials * cluster = [[MTRTestOperationalCredentials alloc] initWithDevice:device
@@ -33930,7 +33947,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestQueryFabricsList_9()
+    CHIP_ERROR TestQueryFabricsList_7()
     {
         MTRDevice * device = GetDevice("beta");
         MTRTestOperationalCredentials * cluster = [[MTRTestOperationalCredentials alloc] initWithDevice:device
@@ -33960,9 +33977,50 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_10()
+    CHIP_ERROR TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_8()
     {
         MTRDevice * device = GetDevice("alpha");
+        MTRTestBasic * cluster = [[MTRTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id nodeLabelArgument;
+        nodeLabelArgument = @"chiptest";
+        [cluster writeAttributeNodeLabelWithValue:nodeLabelArgument
+                                completionHandler:^(NSError * _Nullable err) {
+                                    NSLog(@"TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE "
+                                          @"Error: %@",
+                                        err);
+
+                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                    NextTest();
+                                }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_9()
+    {
+        MTRDevice * device = GetDevice("alpha");
+        MTRTestBasic * cluster = [[MTRTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeNodeLabelWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("nodeLabel", "", "string"));
+            VerifyOrReturn(CheckConstraintMaxLength("nodeLabel", [value length], 32));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_10()
+    {
+        MTRDevice * device = GetDevice("beta");
         MTRTestBasic * cluster = [[MTRTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -33983,47 +34041,6 @@ private:
     }
 
     CHIP_ERROR TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_11()
-    {
-        MTRDevice * device = GetDevice("alpha");
-        MTRTestBasic * cluster = [[MTRTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeNodeLabelWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("nodeLabel", "", "string"));
-            VerifyOrReturn(CheckConstraintMaxLength("nodeLabel", [value length], 32));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThCr1WritesTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_12()
-    {
-        MTRDevice * device = GetDevice("beta");
-        MTRTestBasic * cluster = [[MTRTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id nodeLabelArgument;
-        nodeLabelArgument = @"chiptest";
-        [cluster writeAttributeNodeLabelWithValue:nodeLabelArgument
-                                completionHandler:^(NSError * _Nullable err) {
-                                    NSLog(@"TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE "
-                                          @"Error: %@",
-                                        err);
-
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                    NextTest();
-                                }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThCr1ReadsTheBasicInformationClustersNodeLabelMandatoryAttributeOfDutCe_13()
     {
         MTRDevice * device = GetDevice("beta");
         MTRTestBasic * cluster = [[MTRTestBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -36345,52 +36362,76 @@ public:
             err = TestThWritesAValueOf0ToStartUpOnOffAttributeOfDut_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Power Off and On DUT\n");
-            err = TestPowerOffAndOnDut_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Reboot target device\n");
+            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDevice_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Reboot target device(DUT)\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDeviceDUT_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads the OnOff attribute from the DUT\n");
-            err = TestThReadsTheOnOffAttributeFromTheDut_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : TH writes a value of 1 to StartUpOnOff attribute of DUT\n");
-            err = TestThWritesAValueOf1ToStartUpOnOffAttributeOfDut_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads the OnOff attribute from the DUT\n");
+            err = TestThReadsTheOnOffAttributeFromTheDut_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Power Off and On DUT\n");
-            err = TestPowerOffAndOnDut_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH writes a value of 1 to StartUpOnOff attribute of DUT\n");
+            err = TestThWritesAValueOf1ToStartUpOnOffAttributeOfDut_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Reboot target device\n");
+            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDevice_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads the OnOff attribute from the DUT\n");
-            err = TestThReadsTheOnOffAttributeFromTheDut_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Reboot target device(DUT)\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDeviceDUT_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : TH writes a value of 2 to StartUpOnOff attribute of DUT\n");
-            err = TestThWritesAValueOf2ToStartUpOnOffAttributeOfDut_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Power Off and On DUT\n");
-            err = TestPowerOffAndOnDut_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads the OnOff attribute from the DUT\n");
+            err = TestThReadsTheOnOffAttributeFromTheDut_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH writes a value of 2 to StartUpOnOff attribute of DUT\n");
+            err = TestThWritesAValueOf2ToStartUpOnOffAttributeOfDut_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : TH reads the OnOff attribute from the DUT\n");
-            err = TestThReadsTheOnOffAttributeFromTheDut_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Reboot target device\n");
+            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDevice_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Power Off and On DUT\n");
-            err = TestPowerOffAndOnDut_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Reboot target device(DUT)\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDeviceDUT_14();
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Wait for the commissioned device to be retrieved\n");
@@ -36401,12 +36442,20 @@ public:
             err = TestThReadsTheOnOffAttributeFromTheDut_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : TH writes NULL to StartUpOnOff attribute of DUT\n");
-            err = TestThWritesNullToStartUpOnOffAttributeOfDut_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Reboot target device\n");
+            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDevice_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Power Off and On DUT\n");
-            err = TestPowerOffAndOnDut_18();
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Reboot target device(DUT)\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDeviceDUT_18();
             break;
         case 19:
             ChipLogProgress(chipTool, " ***** Test Step 19 : Wait for the commissioned device to be retrieved\n");
@@ -36417,20 +36466,60 @@ public:
             err = TestThReadsTheOnOffAttributeFromTheDut_20();
             break;
         case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : TH sends Off command to DUT\n");
-            err = TestThSendsOffCommandToDut_21();
+            ChipLogProgress(chipTool, " ***** Test Step 21 : TH writes NULL to StartUpOnOff attribute of DUT\n");
+            err = TestThWritesNullToStartUpOnOffAttributeOfDut_21();
             break;
         case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : Power Off and On DUT\n");
-            err = TestPowerOffAndOnDut_22();
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Reboot target device\n");
+            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDevice_22();
             break;
         case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_23();
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Reboot target device(DUT)\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDeviceDUT_23();
             break;
         case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : TH reads the OnOff attribute from the DUT\n");
-            err = TestThReadsTheOnOffAttributeFromTheDut_24();
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : TH reads the OnOff attribute from the DUT\n");
+            err = TestThReadsTheOnOffAttributeFromTheDut_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : TH sends Off command to DUT\n");
+            err = TestThSendsOffCommandToDut_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Reboot target device\n");
+            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDevice_27();
+            break;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Reboot target device(DUT)\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDeviceDUT_28();
+            break;
+        case 29:
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_29();
+            break;
+        case 30:
+            ChipLogProgress(chipTool, " ***** Test Step 30 : TH reads the OnOff attribute from the DUT\n");
+            err = TestThReadsTheOnOffAttributeFromTheDut_30();
             break;
         }
 
@@ -36518,6 +36607,24 @@ public:
         case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -36531,7 +36638,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 25;
+    const uint16_t mTestCount = 31;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -36582,20 +36689,30 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestPowerOffAndOnDut_3()
+    CHIP_ERROR TestRebootTargetDevice_3()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
         return Reboot("alpha", value);
     }
 
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_4()
+    CHIP_ERROR TestRebootTargetDeviceDUT_4()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Please reboot the DUT and enter 'y' after DUT startsgarbage: not in length on purpose", 52);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_5()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestThReadsTheOnOffAttributeFromTheDut_5()
+    CHIP_ERROR TestThReadsTheOnOffAttributeFromTheDut_6()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestOnOff * cluster = [[MTRTestOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -36617,7 +36734,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThWritesAValueOf1ToStartUpOnOffAttributeOfDut_6()
+    CHIP_ERROR TestThWritesAValueOf1ToStartUpOnOffAttributeOfDut_7()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestOnOff * cluster = [[MTRTestOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -36637,20 +36754,30 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestPowerOffAndOnDut_7()
+    CHIP_ERROR TestRebootTargetDevice_8()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
         return Reboot("alpha", value);
     }
 
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_8()
+    CHIP_ERROR TestRebootTargetDeviceDUT_9()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Please reboot the DUT and enter 'y' after DUT startsgarbage: not in length on purpose", 52);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_10()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestThReadsTheOnOffAttributeFromTheDut_9()
+    CHIP_ERROR TestThReadsTheOnOffAttributeFromTheDut_11()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestOnOff * cluster = [[MTRTestOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -36672,7 +36799,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThWritesAValueOf2ToStartUpOnOffAttributeOfDut_10()
+    CHIP_ERROR TestThWritesAValueOf2ToStartUpOnOffAttributeOfDut_12()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestOnOff * cluster = [[MTRTestOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -36692,45 +36819,20 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestPowerOffAndOnDut_11()
+    CHIP_ERROR TestRebootTargetDevice_13()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
         return Reboot("alpha", value);
     }
 
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_12()
+    CHIP_ERROR TestRebootTargetDeviceDUT_14()
     {
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
-    CHIP_ERROR TestThReadsTheOnOffAttributeFromTheDut_13()
-    {
-        MTRDevice * device = GetDevice("alpha");
-        MTRTestOnOff * cluster = [[MTRTestOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeOnOffWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads the OnOff attribute from the DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("OnOff", actualValue, 0));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestPowerOffAndOnDut_14()
-    {
-        chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
-        return Reboot("alpha", value);
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Please reboot the DUT and enter 'y' after DUT startsgarbage: not in length on purpose", 52);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_15()
@@ -36753,7 +36855,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("OnOff", actualValue, 1));
+                VerifyOrReturn(CheckValue("OnOff", actualValue, 0));
             }
 
             NextTest();
@@ -36762,30 +36864,20 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThWritesNullToStartUpOnOffAttributeOfDut_17()
-    {
-        MTRDevice * device = GetDevice("alpha");
-        MTRTestOnOff * cluster = [[MTRTestOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id startUpOnOffArgument;
-        startUpOnOffArgument = nil;
-        [cluster writeAttributeStartUpOnOffWithValue:startUpOnOffArgument
-                                   completionHandler:^(NSError * _Nullable err) {
-                                       NSLog(@"TH writes NULL to StartUpOnOff attribute of DUT Error: %@", err);
-
-                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                       NextTest();
-                                   }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestPowerOffAndOnDut_18()
+    CHIP_ERROR TestRebootTargetDevice_17()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
         return Reboot("alpha", value);
+    }
+
+    CHIP_ERROR TestRebootTargetDeviceDUT_18()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Please reboot the DUT and enter 'y' after DUT startsgarbage: not in length on purpose", 52);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_19()
@@ -36817,7 +36909,72 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsOffCommandToDut_21()
+    CHIP_ERROR TestThWritesNullToStartUpOnOffAttributeOfDut_21()
+    {
+        MTRDevice * device = GetDevice("alpha");
+        MTRTestOnOff * cluster = [[MTRTestOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id startUpOnOffArgument;
+        startUpOnOffArgument = nil;
+        [cluster writeAttributeStartUpOnOffWithValue:startUpOnOffArgument
+                                   completionHandler:^(NSError * _Nullable err) {
+                                       NSLog(@"TH writes NULL to StartUpOnOff attribute of DUT Error: %@", err);
+
+                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                       NextTest();
+                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestRebootTargetDevice_22()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
+        return Reboot("alpha", value);
+    }
+
+    CHIP_ERROR TestRebootTargetDeviceDUT_23()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Please reboot the DUT and enter 'y' after DUT startsgarbage: not in length on purpose", 52);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_24()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsTheOnOffAttributeFromTheDut_25()
+    {
+        MTRDevice * device = GetDevice("alpha");
+        MTRTestOnOff * cluster = [[MTRTestOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOnOffWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads the OnOff attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OnOff", actualValue, 1));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsOffCommandToDut_26()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestOnOff * cluster = [[MTRTestOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -36834,20 +36991,30 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestPowerOffAndOnDut_22()
+    CHIP_ERROR TestRebootTargetDevice_27()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
         return Reboot("alpha", value);
     }
 
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_23()
+    CHIP_ERROR TestRebootTargetDeviceDUT_28()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Please reboot the DUT and enter 'y' after DUT startsgarbage: not in length on purpose", 52);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_29()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestThReadsTheOnOffAttributeFromTheDut_24()
+    CHIP_ERROR TestThReadsTheOnOffAttributeFromTheDut_30()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestOnOff * cluster = [[MTRTestOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -57361,28 +57528,40 @@ public:
             err = Test3bThReadsCurrentPositionTiltPercent100thsFromDut_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : 3c: reboot/restart the DUT\n");
-            err = Test3cRebootRestartTheDut_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Reboot target device\n");
+            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDevice_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : 3d: Wait for the commissioned device to be retrieved\n");
-            err = Test3dWaitForTheCommissionedDeviceToBeRetrieved_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Reboot target device(DUT)\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDeviceDUT_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : 3e: TH reads CurrentPositionLiftPercent100ths from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 14 : 3d: Wait for the commissioned device to be retrieved\n");
+            err = Test3dWaitForTheCommissionedDeviceToBeRetrieved_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : 3e: TH reads CurrentPositionLiftPercent100ths from DUT\n");
             if (ShouldSkip("WNCV_LF && WNCV_PA_LF")) {
                 NextTest();
                 return;
             }
-            err = Test3eThReadsCurrentPositionLiftPercent100thsFromDut_14();
+            err = Test3eThReadsCurrentPositionLiftPercent100thsFromDut_15();
             break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : 3f: TH reads CurrentPositionTiltPercent100ths from DUT\n");
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : 3f: TH reads CurrentPositionTiltPercent100ths from DUT\n");
             if (ShouldSkip("WNCV_TL && WNCV_PA_TL")) {
                 NextTest();
                 return;
             }
-            err = Test3fThReadsCurrentPositionTiltPercent100thsFromDut_15();
+            err = Test3fThReadsCurrentPositionTiltPercent100thsFromDut_16();
             break;
         }
 
@@ -57443,6 +57622,9 @@ public:
         case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -57456,7 +57638,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 16;
+    const uint16_t mTestCount = 17;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -57641,20 +57823,30 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3cRebootRestartTheDut_12()
+    CHIP_ERROR TestRebootTargetDevice_12()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
         return Reboot("alpha", value);
     }
 
-    CHIP_ERROR Test3dWaitForTheCommissionedDeviceToBeRetrieved_13()
+    CHIP_ERROR TestRebootTargetDeviceDUT_13()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Please reboot the DUT and enter 'y' after DUT startsgarbage: not in length on purpose", 52);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR Test3dWaitForTheCommissionedDeviceToBeRetrieved_14()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR Test3eThReadsCurrentPositionLiftPercent100thsFromDut_14()
+    CHIP_ERROR Test3eThReadsCurrentPositionLiftPercent100thsFromDut_15()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestWindowCovering * cluster = [[MTRTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -57683,7 +57875,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3fThReadsCurrentPositionTiltPercent100thsFromDut_15()
+    CHIP_ERROR Test3fThReadsCurrentPositionTiltPercent100thsFromDut_16()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestWindowCovering * cluster = [[MTRTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
