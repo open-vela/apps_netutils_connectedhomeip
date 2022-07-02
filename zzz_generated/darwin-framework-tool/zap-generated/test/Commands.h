@@ -18691,8 +18691,14 @@ public:
             err = TestTh1ReadsBasicCommissioningInfoAttributeFromDutAndVerifyThatTheBasicCommissioningInfoAttributeHasTheFollowingFieldFailSafeExpiryLengthSecondsFieldValueIsWithinADurationRangeOf0To65535_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 6 TC-CGEN-2.1\n");
-            err = TestStep6TcCgen21_7();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Step 6 is implicitly validating the attribute(BasicCommissioningInfo) constraints, as long "
+                "as the payload is being parsed successfully\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestStep6IsImplicitlyValidatingTheAttributeBasicCommissioningInfoConstraintsAsLongAsThePayloadIsBeingParsedSuccessfully_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : TH1 reads SupportsConcurrentConnection attribute from the DUT\n");
@@ -18901,13 +18907,13 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6TcCgen21_7()
+    CHIP_ERROR
+    TestStep6IsImplicitlyValidatingTheAttributeBasicCommissioningInfoConstraintsAsLongAsThePayloadIsBeingParsedSuccessfully_7()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message
-            = chip::Span<const char>("Step 6 is implicitly validating the attribute(BasicCommissioningInfo) constraints, as long "
-                                     "as the payload is being parsed successfullygarbage: not in length on purpose",
-                134);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -20368,8 +20374,12 @@ public:
             err = TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x00BlinkAndTheEffectVariantFieldSetTo0x00Default_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Manually check DUT executes a blink effect\n");
-            err = TestManuallyCheckDutExecutesABlinkEffect_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : DUT executes a blink effect\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestDutExecutesABlinkEffect_2();
             break;
         case 3:
             ChipLogProgress(chipTool,
@@ -20382,8 +20392,12 @@ public:
             err = TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x01BreatheAndTheEffectVariantFieldSetTo0x00Default_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : check DUT executes a breathe effect\n");
-            err = TestCheckDutExecutesABreatheEffect_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : DUT executes a breathe effect\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestDutExecutesABreatheEffect_4();
             break;
         case 5:
             ChipLogProgress(chipTool,
@@ -20396,8 +20410,12 @@ public:
             err = TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x02OkayAndTheEffectVariantFieldSetTo0x00Default_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : check DUT executes an okay effect\n");
-            err = TestCheckDutExecutesAnOkayEffect_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : DUT executes an okay effect\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestDutExecutesAnOkayEffect_6();
             break;
         case 7:
             ChipLogProgress(chipTool,
@@ -20410,8 +20428,12 @@ public:
             err = TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x0bChannelChangeAndTheEffectVariantFieldSetTo0x00Default_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : check DUT executes a channel change effect\n");
-            err = TestCheckDutExecutesAChannelChangeEffect_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : DUT executes a channel change effect\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestDutExecutesAChannelChangeEffect_8();
             break;
         case 9:
             ChipLogProgress(chipTool,
@@ -20424,8 +20446,12 @@ public:
             err = TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x01BreatheAndTheEffectVariantFieldSetTo0x00Default_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : check DUT executes a breathe effect\n");
-            err = TestCheckDutExecutesABreatheEffect_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : DUT executes a breathe effect\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestDutExecutesABreatheEffect_10();
             break;
         case 11:
             ChipLogProgress(chipTool,
@@ -20438,13 +20464,12 @@ public:
             err = TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0xfeFinishEffectAndTheEffectVariantFieldSetTo0x00Default_11();
             break;
         case 12:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 12 : Manually check DUT stops the breathe effect after the current effect sequence\n");
-            if (ShouldSkip("I.S.C40.Rsp")) {
+            ChipLogProgress(chipTool, " ***** Test Step 12 : DUT stops the breathe effect after the current effect sequence\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
                 NextTest();
                 return;
             }
-            err = TestManuallyCheckDutStopsTheBreatheEffectAfterTheCurrentEffectSequence_12();
+            err = TestDutStopsTheBreatheEffectAfterTheCurrentEffectSequence_12();
             break;
         case 13:
             ChipLogProgress(chipTool,
@@ -20457,8 +20482,12 @@ public:
             err = TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0x01BreatheAndTheEffectVariantFieldSetTo0x00Default_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Manually check DUT executes a breathe effect\n");
-            err = TestManuallyCheckDutExecutesABreatheEffect_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : DUT executes a breathe effect\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestDutExecutesABreatheEffect_14();
             break;
         case 15:
             ChipLogProgress(chipTool,
@@ -20471,8 +20500,12 @@ public:
             err = TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0xffStopEffectAndTheEffectVariantFieldSetTo0x00Default_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Check DUT stops the breathe effect as soon as possible.\n");
-            err = TestCheckDutStopsTheBreatheEffectAsSoonAsPossible_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : DUT stops the breathe effect as soon as possible.\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestDutStopsTheBreatheEffectAsSoonAsPossible_16();
             break;
         case 17:
             ChipLogProgress(chipTool,
@@ -20486,6 +20519,10 @@ public:
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Check DUT executes a blink effect.\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
             err = TestCheckDutExecutesABlinkEffect_18();
             break;
         case 19:
@@ -20499,9 +20536,12 @@ public:
             err = TestThSendsTriggerEffectCommandToDutWithTheEffectIdentifierFieldSetTo0xffStopEffectAndTheEffectVariantFieldSetTo0x00Default_19();
             break;
         case 20:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 20 : Check DUT stops any effect that may be still running as soon as possible\n");
-            err = TestCheckDutStopsAnyEffectThatMayBeStillRunningAsSoonAsPossible_20();
+            ChipLogProgress(chipTool, " ***** Test Step 20 : DUT stops any effect that may be still running as soon as possible\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestDutStopsAnyEffectThatMayBeStillRunningAsSoonAsPossible_20();
             break;
         }
 
@@ -20628,10 +20668,12 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestManuallyCheckDutExecutesABlinkEffect_2()
+    CHIP_ERROR TestDutExecutesABlinkEffect_2()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("DUT executes a blink effectgarbage: not in length on purpose", 27);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -20659,10 +20701,12 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCheckDutExecutesABreatheEffect_4()
+    CHIP_ERROR TestDutExecutesABreatheEffect_4()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("DUT executes a breathe effectgarbage: not in length on purpose", 29);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -20690,10 +20734,12 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCheckDutExecutesAnOkayEffect_6()
+    CHIP_ERROR TestDutExecutesAnOkayEffect_6()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("DUT executes an okay effectgarbage: not in length on purpose", 27);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -20721,10 +20767,12 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCheckDutExecutesAChannelChangeEffect_8()
+    CHIP_ERROR TestDutExecutesAChannelChangeEffect_8()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("DUT executes a channel change effectgarbage: not in length on purpose", 36);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -20752,10 +20800,12 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCheckDutExecutesABreatheEffect_10()
+    CHIP_ERROR TestDutExecutesABreatheEffect_10()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("DUT executes a breathe effectgarbage: not in length on purpose", 29);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -20783,11 +20833,12 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestManuallyCheckDutStopsTheBreatheEffectAfterTheCurrentEffectSequence_12()
+    CHIP_ERROR TestDutStopsTheBreatheEffectAfterTheCurrentEffectSequence_12()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "DUT stops the breathe effect after the current effect sequencegarbage: not in length on purpose", 62);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -20815,10 +20866,12 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestManuallyCheckDutExecutesABreatheEffect_14()
+    CHIP_ERROR TestDutExecutesABreatheEffect_14()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("DUT executes a breathe effectgarbage: not in length on purpose", 29);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -20846,11 +20899,12 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCheckDutStopsTheBreatheEffectAsSoonAsPossible_16()
+    CHIP_ERROR TestDutStopsTheBreatheEffectAsSoonAsPossible_16()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message
-            = chip::Span<const char>("DUT stops the breathe effect as soon as possiblegarbage: not in length on purpose", 48);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -20881,7 +20935,9 @@ private:
     CHIP_ERROR TestCheckDutExecutesABlinkEffect_18()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("DUT executes a blink effectgarbage: not in length on purpose", 27);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -20909,11 +20965,12 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCheckDutStopsAnyEffectThatMayBeStillRunningAsSoonAsPossible_20()
+    CHIP_ERROR TestDutStopsAnyEffectThatMayBeStillRunningAsSoonAsPossible_20()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "DUT stops any effect that may be still running as soon as possiblegarbage: not in length on purpose", 66);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 };
@@ -23723,8 +23780,14 @@ public:
             err = TestSendsAMoveUpCommand_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : user prompt message\n");
-            err = TestUserPromptMessage_5();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 5 : Physically verify that the DUT moves at a rate of 32 units per second or as close as "
+                "possible to this rate and completes moving to its maximum level\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestPhysicallyVerifyThatTheDutMovesAtARateOf32UnitsPerSecondOrAsCloseAsPossibleToThisRateAndCompletesMovingToItsMaximumLevel_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Wait 9000ms\n");
@@ -23743,8 +23806,14 @@ public:
             err = TestSendsAMoveWithOnOffCommand_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : user prompt message\n");
-            err = TestUserPromptMessage_9();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : Physically verify that the DUT moves at a rate of 64 units per second or as close as "
+                "possible to this rate and complete moving to its minimum level\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestPhysicallyVerifyThatTheDutMovesAtARateOf64UnitsPerSecondOrAsCloseAsPossibleToThisRateAndCompleteMovingToItsMinimumLevel_9();
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Wait 5000ms\n");
@@ -23771,8 +23840,14 @@ public:
             err = TestWait100ms_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : user prompt message\n");
-            err = TestUserPromptMessage_15();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 15 : Physically verify that the device moves at the rate recorded in step 3a and completes "
+                "moving to its maximum level\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestPhysicallyVerifyThatTheDeviceMovesAtTheRateRecordedInStep3aAndCompletesMovingToItsMaximumLevel_15();
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : Reset level to 254\n");
@@ -23966,13 +24041,13 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestUserPromptMessage_5()
+    CHIP_ERROR
+    TestPhysicallyVerifyThatTheDutMovesAtARateOf32UnitsPerSecondOrAsCloseAsPossibleToThisRateAndCompletesMovingToItsMaximumLevel_5()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "Physically verify that the DUT moves at a rate of 32 units per second or as close as possible to this rate and "
-            "completes moving to its maximum levelgarbage: not in length on purpose",
-            148);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -24026,13 +24101,13 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestUserPromptMessage_9()
+    CHIP_ERROR
+    TestPhysicallyVerifyThatTheDutMovesAtARateOf64UnitsPerSecondOrAsCloseAsPossibleToThisRateAndCompleteMovingToItsMinimumLevel_9()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "Physically verify that the DUT moves at a rate of 64 units per second or as close as possible to this rate and "
-            "complete moving to its minimum levelgarbage: not in length on purpose",
-            147);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -24124,12 +24199,12 @@ private:
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestUserPromptMessage_15()
+    CHIP_ERROR TestPhysicallyVerifyThatTheDeviceMovesAtTheRateRecordedInStep3aAndCompletesMovingToItsMaximumLevel_15()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Physically verify that the device moves at the rate recorded in step 3a and "
-                                               "completes moving to its maximum level.garbage: not in length on purpose",
-            114);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -24594,8 +24669,12 @@ public:
             err = TestSendsStopCommandToDut_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : user prompt message\n");
-            err = TestUserPromptMessage_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Physically verify that the device has stopped transitioning\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestPhysicallyVerifyThatTheDeviceHasStoppedTransitioning_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Reads CurrentLevel attribute from DUT\n");
@@ -24614,8 +24693,12 @@ public:
             err = TestSendsStopCommandToDut_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : user prompt message\n");
-            err = TestUserPromptMessage_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Physically verify that the device has stopped transitioning\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestPhysicallyVerifyThatTheDeviceHasStoppedTransitioning_12();
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Reads CurrentLevel attribute from DUT\n");
@@ -24834,11 +24917,12 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestUserPromptMessage_7()
+    CHIP_ERROR TestPhysicallyVerifyThatTheDeviceHasStoppedTransitioning_7()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "Physically verify that the device has stopped transitioning.garbage: not in length on purpose", 60);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -24914,11 +24998,12 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestUserPromptMessage_12()
+    CHIP_ERROR TestPhysicallyVerifyThatTheDeviceHasStoppedTransitioning_12()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "Physically verify that the device has stopped transitioning.garbage: not in length on purpose", 60);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -35674,8 +35759,12 @@ public:
             err = TestCheckOnOffAttributeValueIsFalseAfterToggleCommand_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : User prompt Set OnOff attribute manually to on\n");
-            err = TestUserPromptSetOnOffAttributeManuallyToOn_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Operate on device to set OnOff attribute manually to on\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestOperateOnDeviceToSetOnOffAttributeManuallyToOn_17();
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Check on/off attribute value is true after on command\n");
@@ -35686,8 +35775,12 @@ public:
             err = TestCheckOnOffAttributeValueIsTrueAfterOnCommand_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : User prompt Set OnOff attribute manually to off\n");
-            err = TestUserPromptSetOnOffAttributeManuallyToOff_19();
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Operate on device to set OnOff attribute manually to off\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestOperateOnDeviceToSetOnOffAttributeManuallyToOff_19();
             break;
         case 20:
             ChipLogProgress(chipTool, " ***** Test Step 20 : Check on/off attribute value is false after off command\n");
@@ -36099,11 +36192,12 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestUserPromptSetOnOffAttributeManuallyToOn_17()
+    CHIP_ERROR TestOperateOnDeviceToSetOnOffAttributeManuallyToOn_17()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "Operate on device to set OnOff attribute manually to ongarbage: not in length on purpose", 55);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -36129,11 +36223,12 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestUserPromptSetOnOffAttributeManuallyToOff_19()
+    CHIP_ERROR TestOperateOnDeviceToSetOnOffAttributeManuallyToOff_19()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "Operate on device to set OnOff attribute manually to offgarbage: not in length on purpose", 56);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -47781,6 +47876,10 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Verify device temperature displayed in °C\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
             err = TestVerifyDeviceTemperatureDisplayedInc_2();
             break;
         case 3:
@@ -47801,6 +47900,10 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Verify device temperature displayed in °F\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
             err = TestVerifyDeviceTemperatureDisplayedInf_5();
             break;
         case 6:
@@ -47838,6 +47941,10 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Verify all device functionality available to the user\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
             err = TestVerifyAllDeviceFunctionalityAvailableToTheUser_10();
             break;
         case 11:
@@ -47858,6 +47965,10 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Verify device operates at Level 1 reduced functionality\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
             err = TestVerifyDeviceOperatesAtLevel1ReducedFunctionality_13();
             break;
         case 14:
@@ -47878,6 +47989,10 @@ public:
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : Verify device operates at Level 2 reduced functionality\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
             err = TestVerifyDeviceOperatesAtLevel2ReducedFunctionality_16();
             break;
         case 17:
@@ -47898,6 +48013,10 @@ public:
             break;
         case 19:
             ChipLogProgress(chipTool, " ***** Test Step 19 : Verify device operates at Level 3 reduced functionality\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
             err = TestVerifyDeviceOperatesAtLevel3ReducedFunctionality_19();
             break;
         case 20:
@@ -47918,6 +48037,10 @@ public:
             break;
         case 22:
             ChipLogProgress(chipTool, " ***** Test Step 22 : Verify device operates at Level 4 reduced functionality\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
             err = TestVerifyDeviceOperatesAtLevel4ReducedFunctionality_22();
             break;
         case 23:
@@ -47938,6 +48061,10 @@ public:
             break;
         case 25:
             ChipLogProgress(chipTool, " ***** Test Step 25 : Verify device operates at least functionality level\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
             err = TestVerifyDeviceOperatesAtLeastFunctionalityLevel_25();
             break;
         case 26:
@@ -47976,6 +48103,10 @@ public:
         case 30:
             ChipLogProgress(
                 chipTool, " ***** Test Step 30 : Verify local schedule programming functionality is enabled at the thermostat\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
             err = TestVerifyLocalScheduleProgrammingFunctionalityIsEnabledAtTheThermostat_30();
             break;
         case 31:
@@ -47998,6 +48129,10 @@ public:
         case 33:
             ChipLogProgress(
                 chipTool, " ***** Test Step 33 : Verify local schedule programming functionality is disabled at the thermostat\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
             err = TestVerifyLocalScheduleProgrammingFunctionalityIsDisabledAtTheThermostat_33();
             break;
         case 34:
@@ -48199,7 +48334,9 @@ private:
     CHIP_ERROR TestVerifyDeviceTemperatureDisplayedInc_2()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Verify device temperature displayed in °Cgarbage: not in length on purpose", 42);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -48246,7 +48383,9 @@ private:
     CHIP_ERROR TestVerifyDeviceTemperatureDisplayedInf_5()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Verify device temperature displayed in °Fgarbage: not in length on purpose", 42);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -48343,8 +48482,9 @@ private:
     CHIP_ERROR TestVerifyAllDeviceFunctionalityAvailableToTheUser_10()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message
-            = chip::Span<const char>("Verify all device functionality available to the usergarbage: not in length on purpose", 53);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -48395,8 +48535,9 @@ private:
     CHIP_ERROR TestVerifyDeviceOperatesAtLevel1ReducedFunctionality_13()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "Verify device operates at Level 1 reduced functionalitygarbage: not in length on purpose", 55);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -48447,8 +48588,9 @@ private:
     CHIP_ERROR TestVerifyDeviceOperatesAtLevel2ReducedFunctionality_16()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "Verify device operates at Level 2 reduced functionalitygarbage: not in length on purpose", 55);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -48499,8 +48641,9 @@ private:
     CHIP_ERROR TestVerifyDeviceOperatesAtLevel3ReducedFunctionality_19()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "Verify device operates at Level 3 reduced functionalitygarbage: not in length on purpose", 55);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -48551,8 +48694,9 @@ private:
     CHIP_ERROR TestVerifyDeviceOperatesAtLevel4ReducedFunctionality_22()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "Verify device operates at Level 4 reduced functionalitygarbage: not in length on purpose", 55);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -48603,8 +48747,9 @@ private:
     CHIP_ERROR TestVerifyDeviceOperatesAtLeastFunctionalityLevel_25()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message
-            = chip::Span<const char>("Verify device operates at least functionality levelgarbage: not in length on purpose", 51);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -48700,8 +48845,9 @@ private:
     CHIP_ERROR TestVerifyLocalScheduleProgrammingFunctionalityIsEnabledAtTheThermostat_30()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "Verify local schedule programming functionality is enabled at the thermostatgarbage: not in length on purpose", 76);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
@@ -48755,8 +48901,9 @@ private:
     CHIP_ERROR TestVerifyLocalScheduleProgrammingFunctionalityIsDisabledAtTheThermostat_33()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>(
-            "Verify local schedule programming functionality is disabled at the thermostatgarbage: not in length on purpose", 77);
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
     }
 
