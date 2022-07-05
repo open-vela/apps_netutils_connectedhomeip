@@ -28401,6 +28401,10 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH sends Sleep command to DUT\n");
+            if (ShouldSkip("MC_LOWPOWER.S")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsSleepCommandToDut_1();
             break;
         }
@@ -28509,10 +28513,18 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH sends CEC Settings Keys(0x0A) to DUT\n");
+            if (ShouldSkip("MC_KEYPADINPUT.S.LK")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsCecSettingsKeys0x0AToDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends CEC Home Keys(0x09) to DUT\n");
+            if (ShouldSkip("MC_KEYPADINPUT.S.LK")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsCecHomeKeys0x09ToDut_2();
             break;
         }
@@ -28647,38 +28659,74 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Send Numbers1\n");
+            if (ShouldSkip("MC_KEYPADINPUT.S.NK")) {
+                NextTest();
+                return;
+            }
             err = TestSendNumbers1_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Send Numbers2\n");
+            if (ShouldSkip("MC_KEYPADINPUT.S.NK")) {
+                NextTest();
+                return;
+            }
             err = TestSendNumbers2_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Send Numbers3\n");
+            if (ShouldSkip("MC_KEYPADINPUT.S.NK")) {
+                NextTest();
+                return;
+            }
             err = TestSendNumbers3_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Send Numbers4\n");
+            if (ShouldSkip("MC_KEYPADINPUT.S.NK")) {
+                NextTest();
+                return;
+            }
             err = TestSendNumbers4_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Send Numbers5\n");
+            if (ShouldSkip("MC_KEYPADINPUT.S.NK")) {
+                NextTest();
+                return;
+            }
             err = TestSendNumbers5_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Send Numbers6\n");
+            if (ShouldSkip("MC_KEYPADINPUT.S.NK")) {
+                NextTest();
+                return;
+            }
             err = TestSendNumbers6_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Send Numbers7\n");
+            if (ShouldSkip("MC_KEYPADINPUT.S.NK")) {
+                NextTest();
+                return;
+            }
             err = TestSendNumbers7_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Send Numbers8\n");
+            if (ShouldSkip("MC_KEYPADINPUT.S.NK")) {
+                NextTest();
+                return;
+            }
             err = TestSendNumbers8_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Send Numbers9\n");
+            if (ShouldSkip("MC_KEYPADINPUT.S.NK")) {
+                NextTest();
+                return;
+            }
             err = TestSendNumbers9_9();
             break;
         }
@@ -28976,7 +29024,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 1 : TH reads CatalogList attribute from the DUT and where each entry in the list is a CSA-issued "
                 "Vendor Id of type unsigned 16 bit integer ranging between 0-65536 for the catalog\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MC_APPLAUNCHER.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -29084,7 +29132,7 @@ public:
                 " ***** Test Step 1 : TH reads CurrentApp attribute from the DUT and Verify the in-focus application attributes, "
                 "which should include the display Application ID(type:uint16) Catalog Vendor ID(type:string) or Null if there is "
                 "no current in-focus application\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MC_APPLAUNCHER.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -29190,7 +29238,7 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : TH reads the InputList attribute from the DUT to show list of Inputs available\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAINPUT.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -29295,7 +29343,7 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : TH reads the InputList attribute from the DUT to show list of Inputs available\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAINPUT.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -29303,10 +29351,18 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Select Input Command\n");
+            if (ShouldSkip("MC_MEDIAINPUT.S.C0000")) {
+                NextTest();
+                return;
+            }
             err = TestSelectInputCommand_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read current input list\n");
+            if (ShouldSkip("MC_MEDIAINPUT.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestReadCurrentInputList_3();
             break;
         }
@@ -29455,14 +29511,26 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Read attribute media input list\n");
+            if (ShouldSkip("MC_MEDIAINPUT.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadAttributeMediaInputList_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Hide Input Status Command\n");
+            if (ShouldSkip("MC_MEDIAINPUT.S.C0002")) {
+                NextTest();
+                return;
+            }
             err = TestHideInputStatusCommand_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Show Input Status Command\n");
+            if (ShouldSkip("MC_MEDIAINPUT.S.C0001")) {
+                NextTest();
+                return;
+            }
             err = TestShowInputStatusCommand_3();
             break;
         }
@@ -29613,7 +29681,7 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : TH reads the InputList attribute from the DUT to show list of Inputs available\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAINPUT.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -29621,12 +29689,16 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Rename Input Command\n");
+            if (ShouldSkip("MC_MEDIAINPUT.S.C0003")) {
+                NextTest();
+                return;
+            }
             err = TestRenameInputCommand_2();
             break;
         case 3:
             ChipLogProgress(
                 chipTool, " ***** Test Step 3 : TH reads the InputList attribute from the DUT to show list of Inputs available\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAINPUT.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -29768,7 +29840,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 1 : TH reads the ChannelList attribute from the DUT and Verify that the response contains a list "
                 "of the known TV channels\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MC_CHANNEL.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -29874,10 +29946,18 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the ChannelList attribute\n");
+            if (ShouldSkip("MC_CHANNEL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheChannelListAttribute_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends a ChangeChannelByNumber command\n");
+            if (ShouldSkip("MC_CHANNEL.S.C0002")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsAChangeChannelByNumberCommand_2();
             break;
         case 3:
@@ -29890,6 +29970,10 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the CurrentChannel attribute\n");
+            if (ShouldSkip("MC_CHANNEL.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheCurrentChannelAttribute_4();
             break;
         }
@@ -30068,14 +30152,26 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the ChannelList attribute from the DUT\n");
+            if (ShouldSkip("MC_CHANNEL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheChannelListAttributeFromTheDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the CurrentChannel attribute from the DUT\n");
+            if (ShouldSkip("MC_CHANNEL.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheCurrentChannelAttributeFromTheDut_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Sends a SkipChannel command to the DUT\n");
+            if (ShouldSkip("MC_CHANNEL.S.C0003")) {
+                NextTest();
+                return;
+            }
             err = TestSendsASkipChannelCommandToTheDut_3();
             break;
         case 4:
@@ -30088,6 +30184,10 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the CurrentChannel attribute from the DUT\n");
+            if (ShouldSkip("MC_CHANNEL.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheCurrentChannelAttributeFromTheDut_5();
             break;
         }
@@ -30292,14 +30392,26 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : Precondition: Media content in a paused state at the beginning of the content\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0001")) {
+                NextTest();
+                return;
+            }
             err = TestPreconditionMediaContentInAPausedStateAtTheBeginningOfTheContent_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the CurrentState attribute\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheCurrentStateAttribute_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Sends a Play command\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0000")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAPlayCommand_3();
             break;
         case 4:
@@ -30312,10 +30424,18 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the playback state attribute\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsThePlaybackStateAttribute_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : sends a Pause command\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0001")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAPauseCommand_6();
             break;
         case 7:
@@ -30332,6 +30452,10 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Sends a Stop command\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0002")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAStopCommand_9();
             break;
         case 10:
@@ -30344,6 +30468,10 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Reads the playback state attribute\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsThePlaybackStateAttribute_11();
             break;
         }
@@ -30673,14 +30801,26 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : Precondition: Media content in a paused state at the beginning of the content\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0001")) {
+                NextTest();
+                return;
+            }
             err = TestPreconditionMediaContentInAPausedStateAtTheBeginningOfTheContent_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the CurrentState attribute from the DUT\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheCurrentStateAttributeFromTheDut_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Sends a Play command to the DUT\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0000")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAPlayCommandToTheDut_3();
             break;
         case 4:
@@ -30693,10 +30833,18 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the CurrentState attribute\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheCurrentStateAttribute_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Sends a StartOver command to the DUT\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0003")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAStartOverCommandToTheDut_6();
             break;
         case 7:
@@ -30709,6 +30857,10 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Sends a Next command to the DUT\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0005")) {
+                NextTest();
+                return;
+            }
             err = TestSendsANextCommandToTheDut_8();
             break;
         case 9:
@@ -30721,6 +30873,10 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Sends a Previous command to the DUT\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0004")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAPreviousCommandToTheDut_10();
             break;
         case 11:
@@ -30733,6 +30889,10 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Sends a SkipForward command to the DUT \n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0008")) {
+                NextTest();
+                return;
+            }
             err = TestSendsASkipForwardCommandToTheDut_12();
             break;
         case 13:
@@ -30745,10 +30905,18 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Reads the SampledPosition attribute from the DUT\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheSampledPositionAttributeFromTheDut_14();
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Sends a SkipBackward command to the DUT \n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0009")) {
+                NextTest();
+                return;
+            }
             err = TestSendsASkipBackwardCommandToTheDut_15();
             break;
         case 16:
@@ -30761,6 +30929,10 @@ public:
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Reads the SampledPosition attribute from the DUT\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheSampledPositionAttributeFromTheDut_17();
             break;
         }
@@ -31217,10 +31389,18 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : Precondition: Media content in a paused state at the beginning of the content\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0001")) {
+                NextTest();
+                return;
+            }
             err = TestPreconditionMediaContentInAPausedStateAtTheBeginningOfTheContent_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Sends a Seek command\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C000B")) {
+                NextTest();
+                return;
+            }
             err = TestSendsASeekCommand_2();
             break;
         case 3:
@@ -31234,11 +31414,15 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the SampledPosition attribute\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheSampledPositionAttribute_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads the StartTime attribute from the DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0001 && PICS_USER_PROMPT")) {
                 NextTest();
                 return;
             }
@@ -31246,7 +31430,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads the SeekRangeEnd attribute from the DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAPLAYBACK.S.A0005")) {
                 NextTest();
                 return;
             }
@@ -31254,7 +31438,7 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads the SeekRangeStart attribute from the DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAPLAYBACK.S.A0006")) {
                 NextTest();
                 return;
             }
@@ -31262,7 +31446,7 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads the Duration attribute from the DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAPLAYBACK.S.A0002")) {
                 NextTest();
                 return;
             }
@@ -31271,6 +31455,10 @@ public:
         case 9:
             ChipLogProgress(
                 chipTool, " ***** Test Step 9 : Sends a Seek command Position value beyond the furthest valid position\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C000B")) {
+                NextTest();
+                return;
+            }
             err = TestSendsASeekCommandPositionValueBeyondTheFurthestValidPosition_9();
             break;
         }
@@ -31531,47 +31719,87 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : Precondition: Media content in a paused state at the beginning of the content\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0001")) {
+                NextTest();
+                return;
+            }
             err = TestPreconditionMediaContentInAPausedStateAtTheBeginningOfTheContent_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the CurrentState attribute from the DUT\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheCurrentStateAttributeFromTheDut_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads the PlaybackSpeed attribute from the DUT\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestReadsThePlaybackSpeedAttributeFromTheDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Sends a FastForward command\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0007")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAFastForwardCommand_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the CurrentState attribute\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheCurrentStateAttribute_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the PlaybackSpeed attribute from the DUT\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestReadsThePlaybackSpeedAttributeFromTheDut_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Sends a FastForward command\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0007")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAFastForwardCommand_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Reads the PlaybackSpeed attribute from the DUT\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestReadsThePlaybackSpeedAttributeFromTheDut_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Sends a Rewind command to the DUT\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0006")) {
+                NextTest();
+                return;
+            }
             err = TestSendsARewindCommandToTheDut_9();
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Reads the CurrentState attribute\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheCurrentStateAttribute_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Reads the PlaybackSpeed attribute from the DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAPLAYBACK.S.C0007")) {
                 NextTest();
                 return;
             }
@@ -31579,11 +31807,15 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Sends a Rewind command to the DUT\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0006")) {
+                NextTest();
+                return;
+            }
             err = TestSendsARewindCommandToTheDut_12();
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Reads the PlaybackSpeed attribute from the DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAPLAYBACK.S.A0004")) {
                 NextTest();
                 return;
             }
@@ -31591,15 +31823,23 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Sends a Play command\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0000")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAPlayCommand_14();
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Reads the PlaybackSpeed attribute from the DUT\n");
+            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestReadsThePlaybackSpeedAttributeFromTheDut_15();
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : Sends consecutive FastForward commands\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAPLAYBACK.S.C0007")) {
                 NextTest();
                 return;
             }
@@ -31607,7 +31847,7 @@ public:
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Sends consecutive Rewind commands\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAPLAYBACK.S.C0006")) {
                 NextTest();
                 return;
             }
@@ -32080,14 +32320,26 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the OutputList attribute\n");
+            if (ShouldSkip("MC_AUDIOOUTPUT.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheOutputListAttribute_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Sends a SelectAudioOutput command\n");
+            if (ShouldSkip("MC_AUDIOOUTPUT.S.C0000")) {
+                NextTest();
+                return;
+            }
             err = TestSendsASelectAudioOutputCommand_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads the CurrentOutput attribute\n");
+            if (ShouldSkip("MC_AUDIOOUTPUT.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheCurrentOutputAttribute_3();
             break;
         }
@@ -32245,17 +32497,25 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the OutputList attribute from the DUT\n");
+            if (ShouldSkip("MC_AUDIOOUTPUT.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheOutputListAttributeFromTheDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Sends a RenameOutput command\n");
+            if (ShouldSkip("MC_AUDIOOUTPUT.S.C0001")) {
+                NextTest();
+                return;
+            }
             err = TestSendsARenameOutputCommand_2();
             break;
         case 3:
             ChipLogProgress(chipTool,
                 " ***** Test Step 3 : Reads the OutputList attribute from the DUT Verify that the output at the index provided in "
                 "step 2 has the name CertTest\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MC_AUDIOOUTPUT.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -32375,7 +32635,8 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("targetvalue", 0, UINT8_MAX, &mTargetvalue);
+        AddArgument("targetvalue1", 0, UINT8_MAX, &mTargetvalue1);
+        AddArgument("targetvalue2", 0, UINT8_MAX, &mTargetvalue2);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
@@ -32410,18 +32671,34 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the CurrentTarget attribute\n");
+            if (ShouldSkip("MC_TGTNAV.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheCurrentTargetAttribute_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the TargetList attribute\n");
+            if (ShouldSkip("MC_TGTNAV.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheTargetListAttribute_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Sends a NavigateTarget command\n");
+            if (ShouldSkip("MC_TGTNAV.S.C0000")) {
+                NextTest();
+                return;
+            }
             err = TestSendsANavigateTargetCommand_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the CurrentTarget attribute\n");
+            if (ShouldSkip("MC_TGTNAV.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheCurrentTargetAttribute_4();
             break;
         }
@@ -32468,7 +32745,8 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint8_t> mTargetvalue;
+    chip::Optional<uint8_t> mTargetvalue1;
+    chip::Optional<uint8_t> mTargetvalue2;
     chip::Optional<uint16_t> mTimeout;
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
@@ -32526,8 +32804,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRTargetNavigatorClusterNavigateTargetParams alloc] init];
-        params.target = mTargetvalue.HasValue() ? [NSNumber numberWithUnsignedChar:mTargetvalue.Value()]
-                                                : [NSNumber numberWithUnsignedChar:1U];
+        params.target = mTargetvalue1.HasValue() ? [NSNumber numberWithUnsignedChar:mTargetvalue1.Value()]
+                                                 : [NSNumber numberWithUnsignedChar:1U];
         [cluster navigateTargetWithParams:params
                         completionHandler:^(
                             MTRTargetNavigatorClusterNavigateTargetResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -32554,7 +32832,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentTarget", actualValue, mTargetvalue.HasValue() ? mTargetvalue.Value() : 1U));
+                VerifyOrReturn(CheckValue("CurrentTarget", actualValue, mTargetvalue1.HasValue() ? mTargetvalue1.Value() : 1U));
             }
 
             NextTest();
@@ -32608,34 +32886,66 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the VendorName attribute\n");
+            if (ShouldSkip("MC_APBSC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheVendorNameAttribute_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the VendorID attribute\n");
+            if (ShouldSkip("MC_APBSC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheVendorIDAttribute_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads the ApplicationName attribute\n");
+            if (ShouldSkip("MC_APBSC.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheApplicationNameAttribute_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the ProductID attribute\n");
+            if (ShouldSkip("MC_APBSC.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheProductIDAttribute_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the Application attribute\n");
+            if (ShouldSkip("MC_APBSC.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheApplicationAttribute_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the Status attribute\n");
+            if (ShouldSkip("MC_APBSC.S.A0005")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheStatusAttribute_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Reads the ApplicationVersion attribute\n");
+            if (ShouldSkip("MC_APBSC.S.A0006")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheApplicationVersionAttribute_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Reads the AllowedVendorList attribute\n");
+            if (ShouldSkip("MC_APBSC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheAllowedVendorListAttribute_8();
             break;
         }
@@ -32898,10 +33208,18 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads the AcceptHeader attribute from the DUT\n");
+            if (ShouldSkip("MC_CONTENTLAUNCHER.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsTheAcceptHeaderAttributeFromTheDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads the SupportedStreamingProtocols attribute from the DUT\n");
+            if (ShouldSkip("MC_CONTENTLAUNCHER.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsTheSupportedStreamingProtocolsAttributeFromTheDut_2();
             break;
         }
@@ -49452,10 +49770,18 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH writes LabelList attribute from the DUT\n");
+            if (ShouldSkip("ULABEL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThWritesLabelListAttributeFromTheDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads LabelList attribute from the DUT\n");
+            if (ShouldSkip("ULABEL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsLabelListAttributeFromTheDut_2();
             break;
         }
@@ -49621,10 +49947,18 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH writes LabelList attribute of the DUT\n");
+            if (ShouldSkip("ULABEL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThWritesLabelListAttributeOfTheDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads LabelList attribute of the DUT\n");
+            if (ShouldSkip("ULABEL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsLabelListAttributeOfTheDut_2();
             break;
         }
@@ -49771,18 +50105,34 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH writes LabelList attribute of the DUT\n");
+            if (ShouldSkip("ULABEL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThWritesLabelListAttributeOfTheDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads LabelList attribute of the DUT\n");
+            if (ShouldSkip("ULABEL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsLabelListAttributeOfTheDut_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : TH writes LabelList attribute of the DUT\n");
+            if (ShouldSkip("ULABEL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThWritesLabelListAttributeOfTheDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads LabelList attribute of the DUT\n");
+            if (ShouldSkip("ULABEL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsLabelListAttributeOfTheDut_4();
             break;
         }
@@ -50903,27 +51253,47 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the (0xFFFD) ClusterRevision attribute\n");
+            if (ShouldSkip("WNCV.S.Afffd")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsFromTheDutThe0xFFFDClusterRevisionAttribute_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the (0xFFFC) FeatureMap attribute\n");
+            if (ShouldSkip("WNCV.S.Afffc")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsFromTheDutThe0xFFFCFeatureMapAttribute_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the (0xFFFB) AttributeList attribute\n");
+            if (ShouldSkip("WNCV.S.Afffb")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsFromTheDutThe0xFFFBAttributeListAttribute_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the (0xFFF9) AcceptedCommandList attribute\n");
+            if (ShouldSkip("WNCV.S.Afff9")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsFromTheDutThe0xFFF9AcceptedCommandListAttribute_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads from the DUT the (0xFFF8) GeneratedCommandList attribute\n");
+            if (ShouldSkip("WNCV.S.Afff8")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsFromTheDutThe0xFFF8GeneratedCommandListAttribute_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads from the DUT the (0xFFFA) EventList attribute\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && WNCV.S.Afffa")) {
                 NextTest();
                 return;
             }
@@ -51163,7 +51533,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : 1a: read the RO mandatory attribute default: Type\n");
-            if (ShouldSkip("A_TYPE")) {
+            if (ShouldSkip("WNCV.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -51171,7 +51541,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : 1b: read the RO mandatory attribute default: ConfigStatus\n");
-            if (ShouldSkip("A_CONFIGSTATUS")) {
+            if (ShouldSkip("WNCV.S.A0007")) {
                 NextTest();
                 return;
             }
@@ -51179,7 +51549,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : 1c: read the RO mandatory attribute default: OperationalStatus\n");
-            if (ShouldSkip("A_OPERATIONALSTATUS")) {
+            if (ShouldSkip("WNCV.S.A000a")) {
                 NextTest();
                 return;
             }
@@ -51187,7 +51557,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : 1d: read the RO mandatory attribute default: EndProductType\n");
-            if (ShouldSkip("A_ENDPRODUCTTYPE")) {
+            if (ShouldSkip("WNCV.S.A000d")) {
                 NextTest();
                 return;
             }
@@ -51195,7 +51565,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : 1e: read the RW mandatory attribute default: Mode\n");
-            if (ShouldSkip("A_MODE")) {
+            if (ShouldSkip("WNCV.S.A0017")) {
                 NextTest();
                 return;
             }
@@ -51203,7 +51573,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : 1f: write a value into the RW mandatory attribute:: Mode\n");
-            if (ShouldSkip("A_MODE")) {
+            if (ShouldSkip("WNCV.S.A0017")) {
                 NextTest();
                 return;
             }
@@ -51212,7 +51582,7 @@ public:
         case 7:
             ChipLogProgress(
                 chipTool, " ***** Test Step 7 : 2a: read the RO optional attribute default: TargetPositionLiftPercent100ths\n");
-            if (ShouldSkip("A_TARGETPOSITIONLIFTPERCENT100THS")) {
+            if (ShouldSkip("WNCV.S.A000b")) {
                 NextTest();
                 return;
             }
@@ -51221,7 +51591,7 @@ public:
         case 8:
             ChipLogProgress(
                 chipTool, " ***** Test Step 8 : 2b: read the RO optional attribute default: TargetPositionTiltPercent100ths\n");
-            if (ShouldSkip("A_TARGETPOSITIONTILTPERCENT100THS")) {
+            if (ShouldSkip("WNCV.S.A000c")) {
                 NextTest();
                 return;
             }
@@ -51230,7 +51600,7 @@ public:
         case 9:
             ChipLogProgress(
                 chipTool, " ***** Test Step 9 : 2c: read the RO optional attribute default: CurrentPositionLiftPercent100ths\n");
-            if (ShouldSkip("A_CURRENTPOSITIONLIFTPERCENT100THS")) {
+            if (ShouldSkip("WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
@@ -51239,7 +51609,7 @@ public:
         case 10:
             ChipLogProgress(
                 chipTool, " ***** Test Step 10 : 2d: read the RO optional attribute default: CurrentPositionTiltPercent100ths\n");
-            if (ShouldSkip("A_CURRENTPOSITIONTILTPERCENT100THS")) {
+            if (ShouldSkip("WNCV.S.A000f")) {
                 NextTest();
                 return;
             }
@@ -51247,7 +51617,7 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : 2e: read the RO optional attribute default: InstalledOpenLimitLift\n");
-            if (ShouldSkip("A_INSTALLEDOPENLIMITLIFT")) {
+            if (ShouldSkip("WNCV.S.A0010")) {
                 NextTest();
                 return;
             }
@@ -51256,7 +51626,7 @@ public:
         case 12:
             ChipLogProgress(
                 chipTool, " ***** Test Step 12 : 2f: read the RO optional attribute default: InstalledClosedLimitLift\n");
-            if (ShouldSkip("A_INSTALLEDCLOSEDLIMITLIFT")) {
+            if (ShouldSkip("WNCV.S.A0011")) {
                 NextTest();
                 return;
             }
@@ -51264,7 +51634,7 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : 2g: read the RO optional attribute default: InstalledOpenLimitTilt\n");
-            if (ShouldSkip("A_INSTALLEDOPENLIMITTILT")) {
+            if (ShouldSkip("WNCV.S.A0012")) {
                 NextTest();
                 return;
             }
@@ -51273,7 +51643,7 @@ public:
         case 14:
             ChipLogProgress(
                 chipTool, " ***** Test Step 14 : 2h: read the RO optional attribute default: InstalledClosedLimitTilt\n");
-            if (ShouldSkip("A_INSTALLEDCLOSEDLIMITTILT")) {
+            if (ShouldSkip("WNCV.S.A0013")) {
                 NextTest();
                 return;
             }
@@ -51281,7 +51651,7 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : 3a: read the RO mandatory attribute default: SafetyStatus\n");
-            if (ShouldSkip("A_SAFETYSTATUS")) {
+            if (ShouldSkip("WNCV.S.A001a")) {
                 NextTest();
                 return;
             }
@@ -51290,7 +51660,7 @@ public:
         case 16:
             ChipLogProgress(
                 chipTool, " ***** Test Step 16 : 3b: read the RO optional attribute default: PhysicalClosedLimitLift\n");
-            if (ShouldSkip("A_PHYSICALCLOSEDLIMITLIFT")) {
+            if (ShouldSkip("WNCV.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -51299,7 +51669,7 @@ public:
         case 17:
             ChipLogProgress(
                 chipTool, " ***** Test Step 17 : 3c: read the RO optional attribute default: PhysicalClosedLimitTilt\n");
-            if (ShouldSkip("A_PHYSICALCLOSEDLIMITTILT")) {
+            if (ShouldSkip("WNCV.S.A0002")) {
                 NextTest();
                 return;
             }
@@ -51307,7 +51677,7 @@ public:
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : 3d: read the RO optional attribute default: CurrentPositionLift\n");
-            if (ShouldSkip("A_CURRENTPOSITIONLIFT")) {
+            if (ShouldSkip("WNCV.S.A0003")) {
                 NextTest();
                 return;
             }
@@ -51315,7 +51685,7 @@ public:
             break;
         case 19:
             ChipLogProgress(chipTool, " ***** Test Step 19 : 3e: read the RO optional attribute default: CurrentPositionTilt\n");
-            if (ShouldSkip("A_CURRENTPOSITIONTILT")) {
+            if (ShouldSkip("WNCV.S.A0004")) {
                 NextTest();
                 return;
             }
@@ -51323,7 +51693,7 @@ public:
             break;
         case 20:
             ChipLogProgress(chipTool, " ***** Test Step 20 : 3f: read the RO optional attribute default: NumberOfActuationsLift\n");
-            if (ShouldSkip("A_NUMBEROFACTUATIONSLIFT")) {
+            if (ShouldSkip("WNCV.S.A0005")) {
                 NextTest();
                 return;
             }
@@ -51331,7 +51701,7 @@ public:
             break;
         case 21:
             ChipLogProgress(chipTool, " ***** Test Step 21 : 3g: read the RO optional attribute default: NumberOfActuationsTilt\n");
-            if (ShouldSkip("A_NUMBEROFACTUATIONSTILT")) {
+            if (ShouldSkip("WNCV.S.A0006")) {
                 NextTest();
                 return;
             }
@@ -51340,7 +51710,7 @@ public:
         case 22:
             ChipLogProgress(
                 chipTool, " ***** Test Step 22 : 3h: read the RO optional attribute default: CurrentPositionLiftPercentage\n");
-            if (ShouldSkip("A_CURRENTPOSITIONLIFTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -51349,7 +51719,7 @@ public:
         case 23:
             ChipLogProgress(
                 chipTool, " ***** Test Step 23 : 3i:read the RO optional attribute default: CurrentPositionTiltPercentage\n");
-            if (ShouldSkip("A_CURRENTPOSITIONTILTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.A0009")) {
                 NextTest();
                 return;
             }
@@ -52036,7 +52406,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 1 : Reads ConfigStatus attribute from DUT, if (PA & LF) value of bit 3 must be 1b else 0b & if "
                 "(PA & TL) value of bit 4 must be 1b else 0b\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && WNCV.S.A0007 && WNCV.S.F00 && WNCV.S.F02")) {
                 NextTest();
                 return;
             }
@@ -52045,7 +52415,7 @@ public:
         case 2:
             ChipLogProgress(
                 chipTool, " ***** Test Step 2 : Reads ConfigStatus attribute from DUT, value of bit 0 must be 1b operational\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && WNCV.S.A0007 && WNCV.S.F01 && WNCV.S.F04")) {
                 NextTest();
                 return;
             }
@@ -52161,7 +52531,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : 1a: TH set the Mode Attribute bit0 of the DUT\n");
-            if (ShouldSkip("WNCV_REVERSAL")) {
+            if (ShouldSkip("WNCV.S.M.Reversal && WNCV.S.A0017")) {
                 NextTest();
                 return;
             }
@@ -52169,7 +52539,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : 1b: TH reads ConfigStatus attribute from DUT\n");
-            if (ShouldSkip("WNCV_REVERSAL")) {
+            if (ShouldSkip("WNCV.S.M.Reversal && WNCV.S.A0007")) {
                 NextTest();
                 return;
             }
@@ -52177,7 +52547,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : 1c: TH clear the Mode Attribute bit0 of the DUT\n");
-            if (ShouldSkip("WNCV_REVERSAL")) {
+            if (ShouldSkip("WNCV.S.M.Reversal && WNCV.S.A0017")) {
                 NextTest();
                 return;
             }
@@ -52185,7 +52555,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : 1d: TH reads ConfigStatus attribute from DUT\n");
-            if (ShouldSkip("WNCV_REVERSAL")) {
+            if (ShouldSkip("WNCV.S.M.Reversal && WNCV.S.A0007")) {
                 NextTest();
                 return;
             }
@@ -52193,7 +52563,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : 2a: TH set the Mode Attribute bit1 of the DUT\n");
-            if (ShouldSkip("WNCV_CALIBRATION")) {
+            if (ShouldSkip("WNCV.S.M.Calibration && WNCV.S.A0017")) {
                 NextTest();
                 return;
             }
@@ -52201,7 +52571,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : 2b: TH reads ConfigStatus attribute from DUT\n");
-            if (ShouldSkip("WNCV_CALIBRATION")) {
+            if (ShouldSkip("WNCV.S.M.Calibration && WNCV.S.A0007")) {
                 NextTest();
                 return;
             }
@@ -52210,7 +52580,7 @@ public:
         case 7:
             ChipLogProgress(
                 chipTool, " ***** Test Step 7 : 2c: If (ConfigStatus bit0 == 0) TH send DownOrClose command to the DUT\n");
-            if (ShouldSkip("WNCV_CALIBRATION")) {
+            if (ShouldSkip("WNCV.S.M.Calibration && WNCV.S.C01.Rsp")) {
                 NextTest();
                 return;
             }
@@ -52218,7 +52588,7 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : 2d: TH clear the Mode Attribute bit1 of the DUT\n");
-            if (ShouldSkip("WNCV_CALIBRATION")) {
+            if (ShouldSkip("WNCV.S.M.Calibration && WNCV.S.A0017")) {
                 NextTest();
                 return;
             }
@@ -52226,7 +52596,7 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : 2e: TH reads ConfigStatus attribute from DUT\n");
-            if (ShouldSkip("WNCV_CALIBRATION")) {
+            if (ShouldSkip("WNCV.S.M.Calibration && WNCV.S.A0007")) {
                 NextTest();
                 return;
             }
@@ -52234,7 +52604,7 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : 2f: TH reads the Mode Attribute from the DUT\n");
-            if (ShouldSkip("WNCV_CALIBRATION")) {
+            if (ShouldSkip("WNCV.S.M.Calibration && WNCV.S.A0017")) {
                 NextTest();
                 return;
             }
@@ -52242,7 +52612,7 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : 2g: TH send DownOrClose command to the DUT\n");
-            if (ShouldSkip("WNCV_CALIBRATION")) {
+            if (ShouldSkip("WNCV.S.M.Calibration && WNCV.S.C01.Rsp")) {
                 NextTest();
                 return;
             }
@@ -52250,7 +52620,7 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : 3a: TH set the Mode Attribute bit2 of the DUT\n");
-            if (ShouldSkip("WNCV_MAINTENANCE")) {
+            if (ShouldSkip("WNCV.S.M.Maintenance && WNCV.S.A0017")) {
                 NextTest();
                 return;
             }
@@ -52258,7 +52628,7 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : 3b: TH send DownOrClose command to the DUT\n");
-            if (ShouldSkip("WNCV_MAINTENANCE")) {
+            if (ShouldSkip("WNCV.S.M.Maintenance && WNCV.S.C01.Rsp")) {
                 NextTest();
                 return;
             }
@@ -52266,7 +52636,7 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : 3c: TH reads ConfigStatus attribute from DUT\n");
-            if (ShouldSkip("WNCV_MAINTENANCE")) {
+            if (ShouldSkip("WNCV.S.M.Maintenance && WNCV.S.A0007")) {
                 NextTest();
                 return;
             }
@@ -52274,7 +52644,7 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : 3d: TH clear the Mode Attribute bit2 of the DUT\n");
-            if (ShouldSkip("WNCV_MAINTENANCE")) {
+            if (ShouldSkip("WNCV.S.M.Maintenance && WNCV.S.A0017")) {
                 NextTest();
                 return;
             }
@@ -52282,19 +52652,19 @@ public:
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : 3e: TH send DownOrClose command to the DUT\n");
-            if (ShouldSkip("WNCV_MAINTENANCE")) {
+            if (ShouldSkip("WNCV.S.M.Maintenance && WNCV.S.C01.Rsp")) {
                 NextTest();
                 return;
             }
             err = Test3eThSendDownOrCloseCommandToTheDut_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : 3e: TH reads ConfigStatus attribute from DUT\n");
-            if (ShouldSkip("WNCV_MAINTENANCE")) {
+            ChipLogProgress(chipTool, " ***** Test Step 17 : 3f: TH reads ConfigStatus attribute from DUT\n");
+            if (ShouldSkip("WNCV.S.M.Maintenance && WNCV.S.A0007")) {
                 NextTest();
                 return;
             }
-            err = Test3eThReadsConfigStatusAttributeFromDut_17();
+            err = Test3fThReadsConfigStatusAttributeFromDut_17();
             break;
         }
 
@@ -52702,14 +53072,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3eThReadsConfigStatusAttributeFromDut_17()
+    CHIP_ERROR Test3fThReadsConfigStatusAttributeFromDut_17()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestWindowCovering * cluster = [[MTRTestWindowCovering alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeConfigStatusWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"3e: TH reads ConfigStatus attribute from DUT Error: %@", err);
+            NSLog(@"3f: TH reads ConfigStatus attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -52767,7 +53137,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads Type attribute from DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && WNCV.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -52871,7 +53241,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads EndProductType attribute from DUT\n");
-            if (ShouldSkip("A_ENDPRODUCTTYPE")) {
+            if (ShouldSkip("WNCV.S.A000d")) {
                 NextTest();
                 return;
             }
@@ -52988,6 +53358,10 @@ public:
         case 1:
             ChipLogProgress(chipTool,
                 " ***** Test Step 1 : 1a: TH sends DownOrClose command to preposition the DUT in the opposite direction\n");
+            if (ShouldSkip("WNCV.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
             err = Test1aThSendsDownOrCloseCommandToPrepositionTheDutInTheOppositeDirection_1();
             break;
         case 2:
@@ -52997,7 +53371,7 @@ public:
         case 3:
             ChipLogProgress(
                 chipTool, " ***** Test Step 3 : 1c: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
@@ -53006,7 +53380,7 @@ public:
         case 4:
             ChipLogProgress(chipTool,
                 " ***** Test Step 4 : 1d: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF && A_CURRENTPOSITIONLIFTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -53015,7 +53389,7 @@ public:
         case 5:
             ChipLogProgress(
                 chipTool, " ***** Test Step 5 : 1e: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f")) {
                 NextTest();
                 return;
             }
@@ -53024,7 +53398,7 @@ public:
         case 6:
             ChipLogProgress(chipTool,
                 " ***** Test Step 6 : 1f: If (PA & TL) TH reads CurrentPositionTiltPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL && A_CURRENTPOSITIONTILTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A0009")) {
                 NextTest();
                 return;
             }
@@ -53040,6 +53414,10 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : 2a: TH sends UpOrOpen command to DUT\n");
+            if (ShouldSkip("WNCV.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = Test2aThSendsUpOrOpenCommandToDut_9();
             break;
         case 10:
@@ -53049,7 +53427,7 @@ public:
         case 11:
             ChipLogProgress(
                 chipTool, " ***** Test Step 11 : 2c: If (PA & LF) TH reads TargetPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000b")) {
                 NextTest();
                 return;
             }
@@ -53058,7 +53436,7 @@ public:
         case 12:
             ChipLogProgress(
                 chipTool, " ***** Test Step 12 : 2d: If (PA & TL) TH reads TargetPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000c")) {
                 NextTest();
                 return;
             }
@@ -53071,6 +53449,10 @@ public:
         case 14:
             ChipLogProgress(
                 chipTool, " ***** Test Step 14 : 3a1: Verify DUT reports OperationalStatus attribute to TH after a UpOrOpen\n");
+            if (ShouldSkip("WNCV.S.A000a")) {
+                NextTest();
+                return;
+            }
             err = Test3a1VerifyDutReportsOperationalStatusAttributeToThAfterAUpOrOpen_14();
             break;
         case 15:
@@ -53080,7 +53462,7 @@ public:
         case 16:
             ChipLogProgress(
                 chipTool, " ***** Test Step 16 : 3b: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
@@ -53089,7 +53471,7 @@ public:
         case 17:
             ChipLogProgress(chipTool,
                 " ***** Test Step 17 : 3c: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF && A_CURRENTPOSITIONLIFTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -53098,7 +53480,7 @@ public:
         case 18:
             ChipLogProgress(
                 chipTool, " ***** Test Step 18 : 3d: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f")) {
                 NextTest();
                 return;
             }
@@ -53107,7 +53489,7 @@ public:
         case 19:
             ChipLogProgress(chipTool,
                 " ***** Test Step 19 : 3e: If (PA & LF) TH reads CurrentPositionTiltPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL && A_CURRENTPOSITIONTILTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A0009")) {
                 NextTest();
                 return;
             }
@@ -53115,6 +53497,10 @@ public:
             break;
         case 20:
             ChipLogProgress(chipTool, " ***** Test Step 20 : 4a: TH sends a StopMotion command to DUT\n");
+            if (ShouldSkip("WNCV.S.C02.Rsp")) {
+                NextTest();
+                return;
+            }
             err = Test4aThSendsAStopMotionCommandToDut_20();
             break;
         case 21:
@@ -53125,6 +53511,10 @@ public:
         case 22:
             ChipLogProgress(
                 chipTool, " ***** Test Step 22 : 4c: Verify DUT update OperationalStatus attribute to TH after a StopMotion\n");
+            if (ShouldSkip("WNCV.S.A000a")) {
+                NextTest();
+                return;
+            }
             err = Test4cVerifyDutUpdateOperationalStatusAttributeToThAfterAStopMotion_22();
             break;
         case 23:
@@ -53134,7 +53524,7 @@ public:
         case 24:
             ChipLogProgress(
                 chipTool, " ***** Test Step 24 : 5b: If (PA & LF) TH reads TargetPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000b")) {
                 NextTest();
                 return;
             }
@@ -53143,7 +53533,7 @@ public:
         case 25:
             ChipLogProgress(
                 chipTool, " ***** Test Step 25 : 5c: If (PA & TL) TH reads TargetPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000c")) {
                 NextTest();
                 return;
             }
@@ -53817,6 +54207,10 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : 1a: TH sends UpOrOpen command to preposition the DUT in the opposite direction\n");
+            if (ShouldSkip("WNCV.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = Test1aThSendsUpOrOpenCommandToPrepositionTheDutInTheOppositeDirection_1();
             break;
         case 2:
@@ -53826,7 +54220,7 @@ public:
         case 3:
             ChipLogProgress(
                 chipTool, " ***** Test Step 3 : 1c: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
@@ -53835,7 +54229,7 @@ public:
         case 4:
             ChipLogProgress(chipTool,
                 " ***** Test Step 4 : 1d: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF && A_CURRENTPOSITIONLIFTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -53844,7 +54238,7 @@ public:
         case 5:
             ChipLogProgress(
                 chipTool, " ***** Test Step 5 : 1e: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f")) {
                 NextTest();
                 return;
             }
@@ -53853,7 +54247,7 @@ public:
         case 6:
             ChipLogProgress(chipTool,
                 " ***** Test Step 6 : 1f: If (PA & TL) TH reads CurrentPositionTiltPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL && A_CURRENTPOSITIONTILTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A0009")) {
                 NextTest();
                 return;
             }
@@ -53869,6 +54263,10 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : 2a: TH sends DownOrClose command to DUT\n");
+            if (ShouldSkip("WNCV.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
             err = Test2aThSendsDownOrCloseCommandToDut_9();
             break;
         case 10:
@@ -53878,7 +54276,7 @@ public:
         case 11:
             ChipLogProgress(
                 chipTool, " ***** Test Step 11 : 2c: If (PA & LF) TH reads TargetPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000b")) {
                 NextTest();
                 return;
             }
@@ -53887,7 +54285,7 @@ public:
         case 12:
             ChipLogProgress(
                 chipTool, " ***** Test Step 12 : 2d: If (PA & TL) TH reads TargetPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000c")) {
                 NextTest();
                 return;
             }
@@ -53900,6 +54298,10 @@ public:
         case 14:
             ChipLogProgress(
                 chipTool, " ***** Test Step 14 : 3a: Verify DUT reports OperationalStatus attribute to TH after a DownOrClose\n");
+            if (ShouldSkip("WNCV.S.A000a")) {
+                NextTest();
+                return;
+            }
             err = Test3aVerifyDutReportsOperationalStatusAttributeToThAfterADownOrClose_14();
             break;
         case 15:
@@ -53909,7 +54311,7 @@ public:
         case 16:
             ChipLogProgress(
                 chipTool, " ***** Test Step 16 : 3b: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
@@ -53918,7 +54320,7 @@ public:
         case 17:
             ChipLogProgress(chipTool,
                 " ***** Test Step 17 : 3c: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF && A_CURRENTPOSITIONLIFTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -53927,7 +54329,7 @@ public:
         case 18:
             ChipLogProgress(
                 chipTool, " ***** Test Step 18 : 3d: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f")) {
                 NextTest();
                 return;
             }
@@ -53936,7 +54338,7 @@ public:
         case 19:
             ChipLogProgress(chipTool,
                 " ***** Test Step 19 : 3e: If (PA & LF) TH reads CurrentPositionTiltPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL && A_CURRENTPOSITIONTILTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A0009")) {
                 NextTest();
                 return;
             }
@@ -53944,6 +54346,10 @@ public:
             break;
         case 20:
             ChipLogProgress(chipTool, " ***** Test Step 20 : 4a: TH sends a StopMotion command to DUT\n");
+            if (ShouldSkip("WNCV.S.C02.Rsp")) {
+                NextTest();
+                return;
+            }
             err = Test4aThSendsAStopMotionCommandToDut_20();
             break;
         case 21:
@@ -53954,6 +54360,10 @@ public:
         case 22:
             ChipLogProgress(
                 chipTool, " ***** Test Step 22 : 4c: Verify DUT update OperationalStatus attribute to TH after a StopMotion\n");
+            if (ShouldSkip("WNCV.S.A000a")) {
+                NextTest();
+                return;
+            }
             err = Test4cVerifyDutUpdateOperationalStatusAttributeToThAfterAStopMotion_22();
             break;
         case 23:
@@ -53963,7 +54373,7 @@ public:
         case 24:
             ChipLogProgress(
                 chipTool, " ***** Test Step 24 : 5b: If (PA & LF) TH reads TargetPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000b")) {
                 NextTest();
                 return;
             }
@@ -53972,7 +54382,7 @@ public:
         case 25:
             ChipLogProgress(
                 chipTool, " ***** Test Step 25 : 5c: If (PA & TL) TH reads TargetPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000c")) {
                 NextTest();
                 return;
             }
@@ -54646,6 +55056,10 @@ public:
         case 1:
             ChipLogProgress(chipTool,
                 " ***** Test Step 1 : 1a: TH sends DownOrClose command to preposition the DUT in the opposite direction\n");
+            if (ShouldSkip("WNCV.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
             err = Test1aThSendsDownOrCloseCommandToPrepositionTheDutInTheOppositeDirection_1();
             break;
         case 2:
@@ -54655,6 +55069,10 @@ public:
         case 3:
             ChipLogProgress(
                 chipTool, " ***** Test Step 3 : 1c: TH sends UpOrOpen command to preposition the DUT in the opposite direction\n");
+            if (ShouldSkip("WNCV.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = Test1cThSendsUpOrOpenCommandToPrepositionTheDutInTheOppositeDirection_3();
             break;
         case 4:
@@ -54671,6 +55089,10 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : 2a: TH sends a StopMotion command to DUT\n");
+            if (ShouldSkip("WNCV.S.C02.Rsp")) {
+                NextTest();
+                return;
+            }
             err = Test2aThSendsAStopMotionCommandToDut_7();
             break;
         case 8:
@@ -54681,6 +55103,10 @@ public:
         case 9:
             ChipLogProgress(
                 chipTool, " ***** Test Step 9 : 2c: Verify DUT reports OperationalStatus attribute to TH after a StopMotion\n");
+            if (ShouldSkip("WNCV.S.A000a")) {
+                NextTest();
+                return;
+            }
             err = Test2cVerifyDutReportsOperationalStatusAttributeToThAfterAStopMotion_9();
             break;
         case 10:
@@ -54689,12 +55115,16 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : 2e: TH reads OperationalStatus attribute from DUT\n");
+            if (ShouldSkip("WNCV.S.A000a")) {
+                NextTest();
+                return;
+            }
             err = Test2eThReadsOperationalStatusAttributeFromDut_11();
             break;
         case 12:
             ChipLogProgress(
                 chipTool, " ***** Test Step 12 : 3a: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
@@ -54704,7 +55134,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 13 : 3b: If (PA & LF) TH reads TargetPositionLiftPercent100ths attribute 3c: it Must be equal "
                 "with CurrentPositionLiftPercent100ths from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000b && WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
@@ -54713,7 +55143,7 @@ public:
         case 14:
             ChipLogProgress(
                 chipTool, " ***** Test Step 14 : 4a: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000f")) {
                 NextTest();
                 return;
             }
@@ -54723,7 +55153,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 15 : 4b: If (PA & TL) TH reads TargetPositionTiltPercent100ths attribute 4c: it Must be equal "
                 "with CurrentPositionTiltPercent100ths from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000c && WNCV.S.A000f")) {
                 NextTest();
                 return;
             }
@@ -55160,6 +55590,10 @@ public:
         case 1:
             ChipLogProgress(chipTool,
                 " ***** Test Step 1 : 1a: TH sends DownOrClose command to preposition the DUT in the opposite direction\n");
+            if (ShouldSkip("WNCV.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
             err = Test1aThSendsDownOrCloseCommandToPrepositionTheDutInTheOppositeDirection_1();
             break;
         case 2:
@@ -55169,6 +55603,10 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : 2a: TH sends UpOrOpen command to DUT\n");
+            if (ShouldSkip("WNCV.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = Test2aThSendsUpOrOpenCommandToDut_3();
             break;
         case 4:
@@ -55178,12 +55616,16 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : 2c: TH reads OperationalStatus attribute from DUT\n");
+            if (ShouldSkip("WNCV.S.A000a")) {
+                NextTest();
+                return;
+            }
             err = Test2cThReadsOperationalStatusAttributeFromDut_5();
             break;
         case 6:
             ChipLogProgress(
                 chipTool, " ***** Test Step 6 : 3a: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
@@ -55192,7 +55634,7 @@ public:
         case 7:
             ChipLogProgress(chipTool,
                 " ***** Test Step 7 : 3b: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF && A_CURRENTPOSITIONLIFTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -55201,7 +55643,7 @@ public:
         case 8:
             ChipLogProgress(
                 chipTool, " ***** Test Step 8 : 3c: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f")) {
                 NextTest();
                 return;
             }
@@ -55210,7 +55652,7 @@ public:
         case 9:
             ChipLogProgress(chipTool,
                 " ***** Test Step 9 : 3d: If (PA & TL) TH reads CurrentPositionTiltPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL && A_CURRENTPOSITIONLIFTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A0009")) {
                 NextTest();
                 return;
             }
@@ -55500,6 +55942,10 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : 1a: TH sends UpOrOpen command to preposition the DUT in the opposite direction\n");
+            if (ShouldSkip("WNCV.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = Test1aThSendsUpOrOpenCommandToPrepositionTheDutInTheOppositeDirection_1();
             break;
         case 2:
@@ -55509,6 +55955,10 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : 2a: TH sends DownOrClose command to DUT\n");
+            if (ShouldSkip("WNCV.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
             err = Test2aThSendsDownOrCloseCommandToDut_3();
             break;
         case 4:
@@ -55518,12 +55968,16 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : 2c: TH reads OperationalStatus attribute from DUT\n");
+            if (ShouldSkip("WNCV.S.A000a")) {
+                NextTest();
+                return;
+            }
             err = Test2cThReadsOperationalStatusAttributeFromDut_5();
             break;
         case 6:
             ChipLogProgress(
                 chipTool, " ***** Test Step 6 : 3a: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
@@ -55532,7 +55986,7 @@ public:
         case 7:
             ChipLogProgress(chipTool,
                 " ***** Test Step 7 : 3b: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF && A_CURRENTPOSITIONLIFTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -55541,7 +55995,7 @@ public:
         case 8:
             ChipLogProgress(
                 chipTool, " ***** Test Step 8 : 3c: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f")) {
                 NextTest();
                 return;
             }
@@ -55550,7 +56004,7 @@ public:
         case 9:
             ChipLogProgress(chipTool,
                 " ***** Test Step 9 : 3d: If (PA & TL) TH reads CurrentPositionTiltPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL && A_CURRENTPOSITIONLIFTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A0009")) {
                 NextTest();
                 return;
             }
@@ -55839,6 +56293,10 @@ public:
         case 1:
             ChipLogProgress(chipTool,
                 " ***** Test Step 1 : 1a: TH sends DownOrClose command to preposition the DUT in the opposite direction\n");
+            if (ShouldSkip("WNCV.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
             err = Test1aThSendsDownOrCloseCommandToPrepositionTheDutInTheOppositeDirection_1();
             break;
         case 2:
@@ -55848,7 +56306,7 @@ public:
         case 3:
             ChipLogProgress(
                 chipTool, " ***** Test Step 3 : 1c: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_PA_LF && WNCV_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
@@ -55856,7 +56314,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : 2a: TH sends GoToLiftPercentage command with 25 percent to DUT\n");
-            if (ShouldSkip("WNCV_LF && CR_GOTOLIFTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.C05.Rsp")) {
                 NextTest();
                 return;
             }
@@ -55869,7 +56327,7 @@ public:
         case 6:
             ChipLogProgress(
                 chipTool, " ***** Test Step 6 : 2c: If (PA & LF) TH reads TargetPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_PA_LF && WNCV_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000b")) {
                 NextTest();
                 return;
             }
@@ -55881,12 +56339,16 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : 3b: TH reads OperationalStatus attribute from DUT\n");
+            if (ShouldSkip("WNCV.S.A000a")) {
+                NextTest();
+                return;
+            }
             err = Test3bThReadsOperationalStatusAttributeFromDut_8();
             break;
         case 9:
             ChipLogProgress(
                 chipTool, " ***** Test Step 9 : 3c: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_PA_LF && WNCV_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
@@ -55895,7 +56357,7 @@ public:
         case 10:
             ChipLogProgress(chipTool,
                 " ***** Test Step 10 : 3d: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV_PA_LF && WNCV_LF && A_CURRENTPOSITIONLIFTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -55903,7 +56365,7 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : 4a: TH sends GoToLiftPercentage command with 75.20 percent to DUT\n");
-            if (ShouldSkip("WNCV_LF && CR_GOTOLIFTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.C05.Rsp")) {
                 NextTest();
                 return;
             }
@@ -55916,7 +56378,7 @@ public:
         case 13:
             ChipLogProgress(
                 chipTool, " ***** Test Step 13 : 4c: If (PA & LF) TH reads TargetPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_PA_LF && WNCV_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000b")) {
                 NextTest();
                 return;
             }
@@ -55928,12 +56390,16 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : 5b: TH reads OperationalStatus attribute from DUT\n");
+            if (ShouldSkip("WNCV.S.A000a")) {
+                NextTest();
+                return;
+            }
             err = Test5bThReadsOperationalStatusAttributeFromDut_15();
             break;
         case 16:
             ChipLogProgress(
                 chipTool, " ***** Test Step 16 : 5c: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_PA_LF && WNCV_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
@@ -55942,7 +56408,7 @@ public:
         case 17:
             ChipLogProgress(chipTool,
                 " ***** Test Step 17 : 5d: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV_PA_LF && WNCV_LF && A_CURRENTPOSITIONLIFTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -56390,6 +56856,10 @@ public:
         case 1:
             ChipLogProgress(chipTool,
                 " ***** Test Step 1 : 1a: TH sends DownOrClose command to preposition the DUT in the opposite direction\n");
+            if (ShouldSkip("WNCV.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
             err = Test1aThSendsDownOrCloseCommandToPrepositionTheDutInTheOppositeDirection_1();
             break;
         case 2:
@@ -56399,7 +56869,7 @@ public:
         case 3:
             ChipLogProgress(
                 chipTool, " ***** Test Step 3 : 1c: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_PA_TL && WNCV_TL")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000f")) {
                 NextTest();
                 return;
             }
@@ -56407,7 +56877,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : 2a: TH sends GoToTiltPercentage command with 30 percent to DUT\n");
-            if (ShouldSkip("WNCV_TL && CR_GOTOTILTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.C08.Rsp")) {
                 NextTest();
                 return;
             }
@@ -56420,7 +56890,7 @@ public:
         case 6:
             ChipLogProgress(
                 chipTool, " ***** Test Step 6 : 2c: If (PA & TL) TH reads TargetPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_PA_TL && WNCV_TL")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000c")) {
                 NextTest();
                 return;
             }
@@ -56432,12 +56902,16 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : 3b: TH reads OperationalStatus attribute from DUT\n");
+            if (ShouldSkip("WNCV.S.A000a")) {
+                NextTest();
+                return;
+            }
             err = Test3bThReadsOperationalStatusAttributeFromDut_8();
             break;
         case 9:
             ChipLogProgress(
                 chipTool, " ***** Test Step 9 : 3c: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_PA_TL && WNCV_TL")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f")) {
                 NextTest();
                 return;
             }
@@ -56446,7 +56920,7 @@ public:
         case 10:
             ChipLogProgress(chipTool,
                 " ***** Test Step 10 : 3d: If (PA & TL) TH reads CurrentPositionTiltPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV_PA_TL && WNCV_TL && A_CURRENTPOSITIONTILTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A0009")) {
                 NextTest();
                 return;
             }
@@ -56454,7 +56928,7 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : 4a: TH sends GoToTiltPercentage command with 60.20 percent to DUT\n");
-            if (ShouldSkip("WNCV_TL && CR_GOTOTILTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.C08.Rsp")) {
                 NextTest();
                 return;
             }
@@ -56467,7 +56941,7 @@ public:
         case 13:
             ChipLogProgress(
                 chipTool, " ***** Test Step 13 : 4c: If (PA & TL) TH reads TargetPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_PA_TL && WNCV_TL")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000c")) {
                 NextTest();
                 return;
             }
@@ -56479,12 +56953,16 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : 5b: TH reads OperationalStatus attribute from DUT\n");
+            if (ShouldSkip("WNCV.S.A000a")) {
+                NextTest();
+                return;
+            }
             err = Test5bThReadsOperationalStatusAttributeFromDut_15();
             break;
         case 16:
             ChipLogProgress(
                 chipTool, " ***** Test Step 16 : 5c: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV_PA_TL && WNCV_TL")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f")) {
                 NextTest();
                 return;
             }
@@ -56493,7 +56971,7 @@ public:
         case 17:
             ChipLogProgress(chipTool,
                 " ***** Test Step 17 : 5d: If (PA & TL) TH reads CurrentPositionTiltPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV_PA_TL && WNCV_TL && A_CURRENTPOSITIONTILTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A0009")) {
                 NextTest();
                 return;
             }
@@ -56940,7 +57418,7 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : 1a: If (PA_LF & LF) TH reads CurrentPositionLiftPercent100ths from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
@@ -56950,7 +57428,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 2 : 1b 1c: If (PA_LF & LF) TH reads CurrentPositionLiftPercentage from DUT + assert "
                 "CurrentPositionLiftPercent100ths/100 equals CurrentPositionLiftPercentage\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF && A_CURRENTPOSITIONLIFTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A0008 && WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
@@ -56958,7 +57436,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : 2b: TH sends GoToLiftPercentage command with BadParam to DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF || WNCV_LF && CR_GOTOLIFTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 || WNCV.S.F00 && WNCV.S.C05.Rsp")) {
                 NextTest();
                 return;
             }
@@ -56966,7 +57444,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : 3a: TH sends GoToLiftPercentage command with 10001 to DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF || WNCV_LF && CR_GOTOLIFTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 || WNCV.S.F00 && WNCV.S.C05.Rsp")) {
                 NextTest();
                 return;
             }
@@ -56974,7 +57452,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : 4a: TH sends GoToLiftPercentage command with 0xFFFF to DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF || WNCV_LF && CR_GOTOLIFTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 || WNCV.S.F00 && WNCV.S.C05.Rsp")) {
                 NextTest();
                 return;
             }
@@ -57204,7 +57682,7 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : 1a: If (PA_TL & TL) TH reads CurrentPositionTiltPercent100ths from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f")) {
                 NextTest();
                 return;
             }
@@ -57214,7 +57692,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 2 : 1b 1c: If (PA_LF & LF) TH reads CurrentPositionTiltPercentage from DUT + assert "
                 "CurrentPositionTiltPercent100ths/100 equals CurrentPositionTiltPercentage\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF && A_CURRENTPOSITIONTILTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f && WNCV.S.A0009")) {
                 NextTest();
                 return;
             }
@@ -57222,7 +57700,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : 2b: TH sends GoToTiltPercentage command with BadParam to DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL || WNCV_TL && CR_GOTOTILTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 || WNCV.S.F01 && WNCV.S.C08.Rsp")) {
                 NextTest();
                 return;
             }
@@ -57230,7 +57708,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : 3a: TH sends GoToTiltPercentage command with 10001 to DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL || WNCV_TL && CR_GOTOTILTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 || WNCV.S.F01 && WNCV.S.C08.Rsp")) {
                 NextTest();
                 return;
             }
@@ -57238,7 +57716,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : 4a: TH sends GoToTiltPercentage command with 0xFFFF to DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL || WNCV_TL && CR_GOTOTILTPERCENTAGE")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 || WNCV.S.F01 && WNCV.S.C08.Rsp")) {
                 NextTest();
                 return;
             }
@@ -57472,7 +57950,7 @@ public:
         case 2:
             ChipLogProgress(
                 chipTool, " ***** Test Step 2 : 1a: If (PA_LF & LF) TH sends GoToLiftPercentage command with 90%% to DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.C05.Rsp")) {
                 NextTest();
                 return;
             }
@@ -57484,6 +57962,10 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : 1c: TH sends StopMotion command to DUT\n");
+            if (ShouldSkip("WNCV.S.C02.Rsp")) {
+                NextTest();
+                return;
+            }
             err = Test1cThSendsStopMotionCommandToDut_4();
             break;
         case 5:
@@ -57493,7 +57975,7 @@ public:
         case 6:
             ChipLogProgress(
                 chipTool, " ***** Test Step 6 : 2a: If (PA_TL & TL) TH sends GoToTiltPercentage command with 90%% to DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.C08.Rsp")) {
                 NextTest();
                 return;
             }
@@ -57505,6 +57987,10 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : 2c: TH sends StopMotion command to DUT\n");
+            if (ShouldSkip("WNCV.S.C02.Rsp")) {
+                NextTest();
+                return;
+            }
             err = Test2cThSendsStopMotionCommandToDut_8();
             break;
         case 9:
@@ -57513,7 +57999,7 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : 3a: TH reads CurrentPositionLiftPercent100ths from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
@@ -57521,19 +58007,19 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : 3b: TH reads CurrentPositionTiltPercent100ths from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f")) {
                 NextTest();
                 return;
             }
             err = Test3bThReadsCurrentPositionTiltPercent100thsFromDut_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Reboot target device\n");
+            ChipLogProgress(chipTool, " ***** Test Step 12 : 3c: reboot/restart the DUT\n");
             if (ShouldSkip("PICS_SDK_CI_ONLY")) {
                 NextTest();
                 return;
             }
-            err = TestRebootTargetDevice_12();
+            err = Test3cRebootRestartTheDut_12();
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Reboot target device(DUT)\n");
@@ -57549,7 +58035,7 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : 3e: TH reads CurrentPositionLiftPercent100ths from DUT\n");
-            if (ShouldSkip("WNCV_LF && WNCV_PA_LF")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
@@ -57557,7 +58043,7 @@ public:
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : 3f: TH reads CurrentPositionTiltPercent100ths from DUT\n");
-            if (ShouldSkip("WNCV_TL && WNCV_PA_TL")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f")) {
                 NextTest();
                 return;
             }
@@ -57823,7 +58309,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRebootTargetDevice_12()
+    CHIP_ERROR Test3cRebootRestartTheDut_12()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
         return Reboot("alpha", value);
