@@ -18159,18 +18159,34 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Read the mandatory attribute: MeasuredValue\n");
+            if (ShouldSkip("FLW.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributeMeasuredValue_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read the mandatory attribute: MinMeasuredValue\n");
+            if (ShouldSkip("FLW.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributeMinMeasuredValue_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read the mandatory attribute: MaxMeasuredValue\n");
+            if (ShouldSkip("FLW.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributeMaxMeasuredValue_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : read the optional attribute: Tolerance\n");
+            if (ShouldSkip("FLW.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeTolerance_4();
             break;
         }
@@ -18300,11 +18316,6 @@ private:
 
         [cluster readAttributeToleranceWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"read the optional attribute: Tolerance Error: %@", err);
-
-            if (err.code == MTRInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -19231,10 +19242,18 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads NetworkInterfaces structure attribute from DUT.\n");
+            if (ShouldSkip("DGGEN.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsNetworkInterfacesStructureAttributeFromDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads a RebootCount attribute value from DUT.\n");
+            if (ShouldSkip("DGGEN.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsARebootCountAttributeValueFromDut_2();
             break;
         case 3:
@@ -19277,10 +19296,18 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 8 : DUT reboots and TH reads a UpTime attribute value of DUT since some arbitrary start time of "
                 "DUT rebooting.\n");
+            if (ShouldSkip("DGGEN.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestDutRebootsAndThReadsAUpTimeAttributeValueOfDutSinceSomeArbitraryStartTimeOfDutRebooting_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads a TotalOperationalHours attribute value from DUT.\n");
+            if (ShouldSkip("DGGEN.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsATotalOperationalHoursAttributeValueFromDut_9();
             break;
         case 10:
@@ -19305,11 +19332,15 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : TH reads BootReason attribute value from DUT.\n");
+            if (ShouldSkip("DGGEN.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsBootReasonAttributeValueFromDut_13();
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : TH reads ActiveHardwareFaults attribute value from DUT.\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && DGGEN.S.A0005")) {
                 NextTest();
                 return;
             }
@@ -19317,7 +19348,7 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : TH reads ActiveRadioFaults attribute value from DUT.\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && DGGEN.S.A0006")) {
                 NextTest();
                 return;
             }
@@ -19325,7 +19356,7 @@ public:
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : TH reads ActiveNetworkFaults attribute value from DUT.\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && DGGEN.S.A0007")) {
                 NextTest();
                 return;
             }
@@ -37662,20 +37693,32 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Test Harness Client reads Status attribute from Server DUT\n");
+            if (ShouldSkip("PS.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestTestHarnessClientReadsStatusAttributeFromServerDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Test Harness Client reads Order attribute from Server DUT\n");
+            if (ShouldSkip("PS.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestTestHarnessClientReadsOrderAttributeFromServerDut_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Test Harness Client reads Description attribute from Server DUT\n");
+            if (ShouldSkip("PS.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestTestHarnessClientReadsDescriptionAttributeFromServerDut_3();
             break;
         case 4:
             ChipLogProgress(
                 chipTool, " ***** Test Step 4 : Test Harness Client reads WiredAssessedInputVoltage attribue from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A0003")) {
                 NextTest();
                 return;
             }
@@ -37684,7 +37727,7 @@ public:
         case 5:
             ChipLogProgress(
                 chipTool, " ***** Test Step 5 : Test Harness Client reads WiredAssessedInputFrequency attribute from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A0004")) {
                 NextTest();
                 return;
             }
@@ -37693,7 +37736,7 @@ public:
         case 6:
             ChipLogProgress(
                 chipTool, " ***** Test Step 6 : Test Harness Client reads WiredCurrentType attribute from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A0005")) {
                 NextTest();
                 return;
             }
@@ -37702,7 +37745,7 @@ public:
         case 7:
             ChipLogProgress(
                 chipTool, " ***** Test Step 7 : Test Harness Client reads WiredAssessedCurrent attribute from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A0006")) {
                 NextTest();
                 return;
             }
@@ -37710,7 +37753,7 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Test Harness Client reads WiredNominalVoltage from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A0007")) {
                 NextTest();
                 return;
             }
@@ -37718,7 +37761,7 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Test Harness Client reads WiredMaximumCurrent from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -37726,7 +37769,7 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Test Harness Client reads WiredPresent from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A0009")) {
                 NextTest();
                 return;
             }
@@ -37734,7 +37777,7 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Test Harness Client reads ActiveWiredFaults from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A000a")) {
                 NextTest();
                 return;
             }
@@ -37742,7 +37785,7 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Test Harness Client reads BatVoltage from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A000b")) {
                 NextTest();
                 return;
             }
@@ -37750,7 +37793,7 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Test Harness Client reads BatPercentRemaining from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A000c")) {
                 NextTest();
                 return;
             }
@@ -37758,7 +37801,7 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Test Harness Client reads BatTimeRemaining from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A000d")) {
                 NextTest();
                 return;
             }
@@ -37766,11 +37809,15 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Test Harness Client reads BatChargeLevel from Server DUT\n");
+            if (ShouldSkip("PS.S.A000e")) {
+                NextTest();
+                return;
+            }
             err = TestTestHarnessClientReadsBatChargeLevelFromServerDut_15();
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : Test Harness Client reads BatReplacementNeeded from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A000f")) {
                 NextTest();
                 return;
             }
@@ -37778,7 +37825,7 @@ public:
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Test Harness Client reads BatReplaceability from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A0010")) {
                 NextTest();
                 return;
             }
@@ -37786,7 +37833,7 @@ public:
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Test Harness Client reads BatPresent from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A0011")) {
                 NextTest();
                 return;
             }
@@ -37794,7 +37841,7 @@ public:
             break;
         case 19:
             ChipLogProgress(chipTool, " ***** Test Step 19 : Test Harness Client readsActiveBatFaults from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A0012")) {
                 NextTest();
                 return;
             }
@@ -37803,7 +37850,7 @@ public:
         case 20:
             ChipLogProgress(
                 chipTool, " ***** Test Step 20 : Test Harness Client reads BatReplacementDescription from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A0013")) {
                 NextTest();
                 return;
             }
@@ -37811,7 +37858,7 @@ public:
             break;
         case 21:
             ChipLogProgress(chipTool, " ***** Test Step 21 : Test Harness Client reads BatCommonDesignation from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A0014")) {
                 NextTest();
                 return;
             }
@@ -37819,7 +37866,7 @@ public:
             break;
         case 22:
             ChipLogProgress(chipTool, " ***** Test Step 22 : Test Harness Client reads BatANSIDesignation from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A0015")) {
                 NextTest();
                 return;
             }
@@ -37827,7 +37874,7 @@ public:
             break;
         case 23:
             ChipLogProgress(chipTool, " ***** Test Step 23 : Test Harness Client reads BatIECDesignation from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A0016")) {
                 NextTest();
                 return;
             }
@@ -37835,7 +37882,7 @@ public:
             break;
         case 24:
             ChipLogProgress(chipTool, " ***** Test Step 24 : Test Harness Client reads BatApprovedChemistry from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A0017")) {
                 NextTest();
                 return;
             }
@@ -37843,7 +37890,7 @@ public:
             break;
         case 25:
             ChipLogProgress(chipTool, " ***** Test Step 25 : Test Harness Client reads BatCapacity from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A0018")) {
                 NextTest();
                 return;
             }
@@ -37851,7 +37898,7 @@ public:
             break;
         case 26:
             ChipLogProgress(chipTool, " ***** Test Step 26 : Test Harness Client reads BatQuantity from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A0019")) {
                 NextTest();
                 return;
             }
@@ -37859,7 +37906,7 @@ public:
             break;
         case 27:
             ChipLogProgress(chipTool, " ***** Test Step 27 : Test Harness Client reads BatChargeState from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A001a")) {
                 NextTest();
                 return;
             }
@@ -37867,7 +37914,7 @@ public:
             break;
         case 28:
             ChipLogProgress(chipTool, " ***** Test Step 28 : Test Harness Client reads BatTimeToFullCharge from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A001b")) {
                 NextTest();
                 return;
             }
@@ -37876,7 +37923,7 @@ public:
         case 29:
             ChipLogProgress(
                 chipTool, " ***** Test Step 29 : Test Harness Client reads BatFunctionalWhileCharging from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A001c")) {
                 NextTest();
                 return;
             }
@@ -37884,7 +37931,7 @@ public:
             break;
         case 30:
             ChipLogProgress(chipTool, " ***** Test Step 30 : Test Harness Client reads BatChargingCurrent from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A001d")) {
                 NextTest();
                 return;
             }
@@ -37892,7 +37939,7 @@ public:
             break;
         case 31:
             ChipLogProgress(chipTool, " ***** Test Step 31 : Test Harness Client reads ActiveBatChargeFaults from Server DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && PS.S.A001e")) {
                 NextTest();
                 return;
             }
@@ -39617,94 +39664,186 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Read the mandatory attribute: MaxPressure\n");
+            if (ShouldSkip("PCC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributeMaxPressure_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read the mandatory attribute: MaxSpeed\n");
+            if (ShouldSkip("PCC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributeMaxSpeed_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read the mandatory attribute: MaxFlow\n");
+            if (ShouldSkip("PCC.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributeMaxFlow_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Read the optional attribute: MinConstPressure\n");
+            if (ShouldSkip("PCC.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeMinConstPressure_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Read the optional attribute: MaxConstPressure\n");
+            if (ShouldSkip("PCC.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeMaxConstPressure_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Read the optional attribute: MinCompPressure\n");
+            if (ShouldSkip("PCC.S.A0005")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeMinCompPressure_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Read the optional attribute: MaxCompPressure\n");
+            if (ShouldSkip("PCC.S.A0006")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeMaxCompPressure_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Read the optional attribute: MinConstSpeed\n");
+            if (ShouldSkip("PCC.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeMinConstSpeed_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Read the optional attribute: MaxConstSpeed\n");
+            if (ShouldSkip("PCC.S.A0008")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeMaxConstSpeed_9();
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Read the optional attribute: MinConstFlow\n");
+            if (ShouldSkip("PCC.S.A0009")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeMinConstFlow_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Read the optional attribute: MaxConstFlow\n");
+            if (ShouldSkip("PCC.S.A000a")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeMaxConstFlow_11();
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Read the optional attribute: MinConstTemp\n");
+            if (ShouldSkip("PCC.S.A000b")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeMinConstTemp_12();
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Read the optional attribute: MaxConstTemp\n");
+            if (ShouldSkip("PCC.S.A000c")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeMaxConstTemp_13();
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Read the optional attribute: PumpStatus\n");
+            if (ShouldSkip("PCC.S.A0010")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributePumpStatus_14();
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Read attribute: EffectiveOperationMode\n");
+            if (ShouldSkip("PCC.S.A0011")) {
+                NextTest();
+                return;
+            }
             err = TestReadAttributeEffectiveOperationMode_15();
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : Read attribute: EffectiveControlMode\n");
+            if (ShouldSkip("PCC.S.A0012")) {
+                NextTest();
+                return;
+            }
             err = TestReadAttributeEffectiveControlMode_16();
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Read attribute: Capacity\n");
+            if (ShouldSkip("PCC.S.A0013")) {
+                NextTest();
+                return;
+            }
             err = TestReadAttributeCapacity_17();
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Read the optional attribute: Speed\n");
+            if (ShouldSkip("PCC.S.A0014")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeSpeed_18();
             break;
         case 19:
             ChipLogProgress(chipTool, " ***** Test Step 19 : Read the optional attribute: LifetimeRunningHours\n");
+            if (ShouldSkip("PCC.S.A0015")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeLifetimeRunningHours_19();
             break;
         case 20:
             ChipLogProgress(chipTool, " ***** Test Step 20 : Read the optional attribute: Power\n");
+            if (ShouldSkip("PCC.S.A0016")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributePower_20();
             break;
         case 21:
             ChipLogProgress(chipTool, " ***** Test Step 21 : Read the optional attribute: LifetimeEnergyConsumed\n");
+            if (ShouldSkip("PCC.S.A0017")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeLifetimeEnergyConsumed_21();
             break;
         case 22:
             ChipLogProgress(chipTool, " ***** Test Step 22 : Read optional attribute: OperationMode\n");
+            if (ShouldSkip("PCC.S.A0020")) {
+                NextTest();
+                return;
+            }
             err = TestReadOptionalAttributeOperationMode_22();
             break;
         case 23:
             ChipLogProgress(chipTool, " ***** Test Step 23 : Read optional attribute: ControlMode\n");
+            if (ShouldSkip("PCC.S.A0021")) {
+                NextTest();
+                return;
+            }
             err = TestReadOptionalAttributeControlMode_23();
             break;
         }
@@ -40525,7 +40664,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Write 1 to the OperationMode attribute to DUT: OperationMode\n");
-            if (ShouldSkip("A_OPERATIONMODE")) {
+            if (ShouldSkip("PCC.S.A0020")) {
                 NextTest();
                 return;
             }
@@ -40533,7 +40672,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the attribute: EffectiveOperationMode\n");
-            if (ShouldSkip("A_EFFECTIVEOPERATIONMODE")) {
+            if (ShouldSkip("PCC.S.A0011")) {
                 NextTest();
                 return;
             }
@@ -40541,7 +40680,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Write 2 to the OperationMode attribute to DUT: OperationMode\n");
-            if (ShouldSkip("A_OPERATIONMODE")) {
+            if (ShouldSkip("PCC.S.A0020")) {
                 NextTest();
                 return;
             }
@@ -40549,7 +40688,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the attribute: EffectiveOperationMode\n");
-            if (ShouldSkip("A_EFFECTIVEOPERATIONMODE")) {
+            if (ShouldSkip("PCC.S.A0011")) {
                 NextTest();
                 return;
             }
@@ -40557,7 +40696,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Write 3 to the OperationMode attribute to DUT: OperationMode\n");
-            if (ShouldSkip("A_OPERATIONMODE")) {
+            if (ShouldSkip("PCC.S.A0020")) {
                 NextTest();
                 return;
             }
@@ -40565,7 +40704,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the attribute: EffectiveOperationMode\n");
-            if (ShouldSkip("A_EFFECTIVEOPERATIONMODE")) {
+            if (ShouldSkip("PCC.S.A0011")) {
                 NextTest();
                 return;
             }
@@ -40813,7 +40952,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Write 0 to the OperationMode attribute to DUT\n");
-            if (ShouldSkip("A_OPERATIONMODE")) {
+            if (ShouldSkip("PCC.S.A0020")) {
                 NextTest();
                 return;
             }
@@ -40821,7 +40960,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the attribute: EffectiveOperationMode\n");
-            if (ShouldSkip("A_EFFECTIVEOPERATIONMODE")) {
+            if (ShouldSkip("PCC.S.A0011")) {
                 NextTest();
                 return;
             }
@@ -40829,7 +40968,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Write 0 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("A_CONTROLMODE")) {
+            if (ShouldSkip("PCC.S.A0021")) {
                 NextTest();
                 return;
             }
@@ -40837,7 +40976,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the attribute: EffectiveControlMode\n");
-            if (ShouldSkip("A_EFFECTIVECONTROLMODE")) {
+            if (ShouldSkip("PCC.S.A0012")) {
                 NextTest();
                 return;
             }
@@ -40845,7 +40984,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Write 1 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("A_CONTROLMODE")) {
+            if (ShouldSkip("PCC.S.A0021")) {
                 NextTest();
                 return;
             }
@@ -40853,7 +40992,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the attribute: EffectiveControlMode\n");
-            if (ShouldSkip("A_EFFECTIVECONTROLMODE")) {
+            if (ShouldSkip("PCC.S.A0012")) {
                 NextTest();
                 return;
             }
@@ -40861,7 +41000,7 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Write 2 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("A_CONTROLMODE")) {
+            if (ShouldSkip("PCC.S.A0021")) {
                 NextTest();
                 return;
             }
@@ -40869,7 +41008,7 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Reads the attribute: EffectiveControlMode\n");
-            if (ShouldSkip("A_EFFECTIVECONTROLMODE")) {
+            if (ShouldSkip("PCC.S.A0012")) {
                 NextTest();
                 return;
             }
@@ -40877,7 +41016,7 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Write 3 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("A_CONTROLMODE")) {
+            if (ShouldSkip("PCC.S.A0021")) {
                 NextTest();
                 return;
             }
@@ -40885,7 +41024,7 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Reads the attribute: EffectiveControlMode\n");
-            if (ShouldSkip("A_EFFECTIVECONTROLMODE")) {
+            if (ShouldSkip("PCC.S.A0012")) {
                 NextTest();
                 return;
             }
@@ -40893,7 +41032,7 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Write 5 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("A_CONTROLMODE")) {
+            if (ShouldSkip("PCC.S.A0021")) {
                 NextTest();
                 return;
             }
@@ -40901,7 +41040,7 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Reads the attribute: EffectiveControlMode\n");
-            if (ShouldSkip("A_EFFECTIVECONTROLMODE")) {
+            if (ShouldSkip("PCC.S.A0012")) {
                 NextTest();
                 return;
             }
@@ -40909,7 +41048,7 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Write 7 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("A_CONTROLMODE")) {
+            if (ShouldSkip("PCC.S.A0021")) {
                 NextTest();
                 return;
             }
@@ -40917,7 +41056,7 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Reads the attribute: EffectiveControlMode\n");
-            if (ShouldSkip("A_EFFECTIVECONTROLMODE")) {
+            if (ShouldSkip("PCC.S.A0012")) {
                 NextTest();
                 return;
             }
@@ -41373,50 +41512,98 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Write 1 to the LifetimeRunningHours attribute to DUT\n");
+            if (ShouldSkip("PCC.S.A0015")) {
+                NextTest();
+                return;
+            }
             err = TestWrite1ToTheLifetimeRunningHoursAttributeToDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the attribute: LifetimeRunningHours\n");
+            if (ShouldSkip("PCC.S.A0015")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheAttributeLifetimeRunningHours_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Write 2 to the LifetimeRunningHours attribute to DUT\n");
+            if (ShouldSkip("PCC.S.A0015")) {
+                NextTest();
+                return;
+            }
             err = TestWrite2ToTheLifetimeRunningHoursAttributeToDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the attribute: LifetimeRunningHours\n");
+            if (ShouldSkip("PCC.S.A0015")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheAttributeLifetimeRunningHours_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Write 3 to the LifetimeRunningHours attribute to DUT\n");
+            if (ShouldSkip("PCC.S.A0015")) {
+                NextTest();
+                return;
+            }
             err = TestWrite3ToTheLifetimeRunningHoursAttributeToDut_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the attribute: LifetimeRunningHours\n");
+            if (ShouldSkip("PCC.S.A0015")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheAttributeLifetimeRunningHours_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Write 1 to the LifetimeEnergyConsumed attribute to DUT\n");
+            if (ShouldSkip("PCC.S.A0017")) {
+                NextTest();
+                return;
+            }
             err = TestWrite1ToTheLifetimeEnergyConsumedAttributeToDut_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Reads the attribute: LifetimeEnergyConsumed\n");
+            if (ShouldSkip("PCC.S.A0017")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheAttributeLifetimeEnergyConsumed_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Write 2 to the LifetimeEnergyConsumed attribute to DUT\n");
+            if (ShouldSkip("PCC.S.A0017")) {
+                NextTest();
+                return;
+            }
             err = TestWrite2ToTheLifetimeEnergyConsumedAttributeToDut_9();
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Reads the attribute: LifetimeEnergyConsumed\n");
+            if (ShouldSkip("PCC.S.A0017")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheAttributeLifetimeEnergyConsumed_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Write 3 to the LifetimeEnergyConsumed attribute to DUT\n");
+            if (ShouldSkip("PCC.S.A0017")) {
+                NextTest();
+                return;
+            }
             err = TestWrite3ToTheLifetimeEnergyConsumedAttributeToDut_11();
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Reads the attribute: LifetimeEnergyConsumed\n");
+            if (ShouldSkip("PCC.S.A0017")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheAttributeLifetimeEnergyConsumed_12();
             break;
         }
@@ -48181,14 +48368,26 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Read the mandatory attribute: TemperatureDisplayMode\n");
+            if (ShouldSkip("TSUIC.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributeTemperatureDisplayMode_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read the mandatory attribute: KeypadLockout\n");
+            if (ShouldSkip("TSUIC.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributeKeypadLockout_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read the optional attribute: ScheduleProgrammingVisibility\n");
+            if (ShouldSkip("TSUIC.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeScheduleProgrammingVisibility_3();
             break;
         }
@@ -48353,7 +48552,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Writes a value of 0 to TemperatureDisplayMode attribute of DUT\n");
-            if (ShouldSkip("A_TEMPERATURE_DISPLAY_MODE")) {
+            if (ShouldSkip("TSUIC.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -48369,7 +48568,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads the TemperatureDisplayMode attribute of DUT\n");
-            if (ShouldSkip("A_TEMPERATURE_DISPLAY_MODE")) {
+            if (ShouldSkip("TSUIC.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -48377,7 +48576,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Writes a value of 1 to TemperatureDisplayMode attribute of DUT\n");
-            if (ShouldSkip("A_TEMPERATURE_DISPLAY_MODE")) {
+            if (ShouldSkip("TSUIC.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -48393,7 +48592,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads the TemperatureDisplayMode attribute of DUT\n");
-            if (ShouldSkip("A_TEMPERATURE_DISPLAY_MODE")) {
+            if (ShouldSkip("TSUIC.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -48402,7 +48601,7 @@ public:
         case 7:
             ChipLogProgress(
                 chipTool, " ***** Test Step 7 : Writes a value of greater than 1 to TemperatureDisplayMode attribute of DUT\n");
-            if (ShouldSkip("A_TEMPERATURE_DISPLAY_MODE")) {
+            if (ShouldSkip("TSUIC.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -48410,7 +48609,7 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads the TemperatureDisplayMode attribute of DUT\n");
-            if (ShouldSkip("A_TEMPERATURE_DISPLAY_MODE")) {
+            if (ShouldSkip("TSUIC.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -48418,7 +48617,7 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Writes a value of 0 to KeypadLockout attribute of DUT\n");
-            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
+            if (ShouldSkip("TSUIC.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -48434,7 +48633,7 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads the KeypadLockout attribute of DUT\n");
-            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
+            if (ShouldSkip("TSUIC.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -48442,7 +48641,7 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Writes a value of 1 to KeypadLockout attribute of DUT\n");
-            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
+            if (ShouldSkip("TSUIC.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -48458,7 +48657,7 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : TH reads the KeypadLockout attribute of DUT\n");
-            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
+            if (ShouldSkip("TSUIC.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -48466,7 +48665,7 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Writes a value of 2 to KeypadLockout attribute of DUT\n");
-            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
+            if (ShouldSkip("TSUIC.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -48482,7 +48681,7 @@ public:
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : TH reads the KeypadLockout attribute of DUT\n");
-            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
+            if (ShouldSkip("TSUIC.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -48490,7 +48689,7 @@ public:
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Writes a value of 3 to KeypadLockout attribute of DUT\n");
-            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
+            if (ShouldSkip("TSUIC.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -48506,7 +48705,7 @@ public:
             break;
         case 20:
             ChipLogProgress(chipTool, " ***** Test Step 20 : TH reads the KeypadLockout attribute of DUT\n");
-            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
+            if (ShouldSkip("TSUIC.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -48514,7 +48713,7 @@ public:
             break;
         case 21:
             ChipLogProgress(chipTool, " ***** Test Step 21 : Writes a value of 4 to KeypadLockout attribute of DUT\n");
-            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
+            if (ShouldSkip("TSUIC.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -48530,7 +48729,7 @@ public:
             break;
         case 23:
             ChipLogProgress(chipTool, " ***** Test Step 23 : TH reads the KeypadLockout attribute of DUT\n");
-            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
+            if (ShouldSkip("TSUIC.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -48538,7 +48737,7 @@ public:
             break;
         case 24:
             ChipLogProgress(chipTool, " ***** Test Step 24 : Writes a value of 5 to KeypadLockout attribute of DUT\n");
-            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
+            if (ShouldSkip("TSUIC.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -48554,7 +48753,7 @@ public:
             break;
         case 26:
             ChipLogProgress(chipTool, " ***** Test Step 26 : TH reads the KeypadLockout attribute of DUT\n");
-            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
+            if (ShouldSkip("TSUIC.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -48562,7 +48761,7 @@ public:
             break;
         case 27:
             ChipLogProgress(chipTool, " ***** Test Step 27 : Writes a value of greater than 5 to KeypadLockout attribute of DUT\n");
-            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
+            if (ShouldSkip("TSUIC.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -48570,7 +48769,7 @@ public:
             break;
         case 28:
             ChipLogProgress(chipTool, " ***** Test Step 28 : TH reads the KeypadLockout attribute of DUT\n");
-            if (ShouldSkip("A_KEYPAD_LOCKOUT")) {
+            if (ShouldSkip("TSUIC.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -48579,7 +48778,7 @@ public:
         case 29:
             ChipLogProgress(
                 chipTool, " ***** Test Step 29 : Writes a value of 0 to ScheduleProgrammingVisibility attribute of DUT\n");
-            if (ShouldSkip("A_SCHEDULE_PROGRAMMING_VISIBILITY")) {
+            if (ShouldSkip("TSUIC.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -48596,7 +48795,7 @@ public:
             break;
         case 31:
             ChipLogProgress(chipTool, " ***** Test Step 31 : TH reads the ScheduleProgrammingVisibility attribute of DUT\n");
-            if (ShouldSkip("A_SCHEDULE_PROGRAMMING_VISIBILITY")) {
+            if (ShouldSkip("TSUIC.S.A0002")) {
                 NextTest();
                 return;
             }
@@ -48605,7 +48804,7 @@ public:
         case 32:
             ChipLogProgress(
                 chipTool, " ***** Test Step 32 : Writes a value of 1 to ScheduleProgrammingVisibility attribute of DUT\n");
-            if (ShouldSkip("A_SCHEDULE_PROGRAMMING_VISIBILITY")) {
+            if (ShouldSkip("TSUIC.S.A0002")) {
                 NextTest();
                 return;
             }
@@ -48622,7 +48821,7 @@ public:
             break;
         case 34:
             ChipLogProgress(chipTool, " ***** Test Step 34 : TH reads the ScheduleProgrammingVisibility attribute of DUT\n");
-            if (ShouldSkip("A_SCHEDULE_PROGRAMMING_VISIBILITY")) {
+            if (ShouldSkip("TSUIC.S.A0002")) {
                 NextTest();
                 return;
             }
@@ -48631,7 +48830,7 @@ public:
         case 35:
             ChipLogProgress(chipTool,
                 " ***** Test Step 35 : Writes a value of greater than 1 to ScheduleProgrammingVisibility attribute of DUT\n");
-            if (ShouldSkip("A_SCHEDULE_PROGRAMMING_VISIBILITY")) {
+            if (ShouldSkip("TSUIC.S.A0002")) {
                 NextTest();
                 return;
             }
@@ -48639,7 +48838,7 @@ public:
             break;
         case 36:
             ChipLogProgress(chipTool, " ***** Test Step 36 : TH reads the ScheduleProgrammingVisibility attribute of DUT\n");
-            if (ShouldSkip("A_SCHEDULE_PROGRAMMING_VISIBILITY")) {
+            if (ShouldSkip("TSUIC.S.A0002")) {
                 NextTest();
                 return;
             }
