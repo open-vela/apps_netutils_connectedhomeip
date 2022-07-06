@@ -2201,18 +2201,14 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(6)));
-                VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
-                VerifyOrReturn(CheckValue("", actualValue[1], 65528UL));
-                VerifyOrReturn(CheckValue("", actualValue[2], 65529UL));
-                VerifyOrReturn(CheckValue("", actualValue[3], 65531UL));
-                VerifyOrReturn(CheckValue("", actualValue[4], 65532UL));
-                VerifyOrReturn(CheckValue("", actualValue[5], 65533UL));
-            }
-
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
             NextTest();
         }];
 
@@ -2661,7 +2657,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute constraints : FeatureMap\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && (CC.S.F00 || CC.S.F01 || CC.S.F02 || CC.S.F03)")) {
+            if (ShouldSkip("(CC.S.F00 || CC.S.F01 || CC.S.F02 || CC.S.F03)")) {
                 NextTest();
                 return;
             }
@@ -2782,12 +2778,10 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 1UL));
-            }
-
             VerifyOrReturn(CheckConstraintType("featureMap", "", "map32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("featureMap", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("featureMap", [value unsignedIntValue], 31UL));
+
             NextTest();
         }];
 
@@ -16943,21 +16937,17 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(9)));
-                VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
-                VerifyOrReturn(CheckValue("", actualValue[1], 1UL));
-                VerifyOrReturn(CheckValue("", actualValue[2], 2UL));
-                VerifyOrReturn(CheckValue("", actualValue[3], 3UL));
-                VerifyOrReturn(CheckValue("", actualValue[4], 65528UL));
-                VerifyOrReturn(CheckValue("", actualValue[5], 65529UL));
-                VerifyOrReturn(CheckValue("", actualValue[6], 65531UL));
-                VerifyOrReturn(CheckValue("", actualValue[7], 65532UL));
-                VerifyOrReturn(CheckValue("", actualValue[8], 65533UL));
-            }
-
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
             NextTest();
         }];
 
@@ -19833,19 +19823,15 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(7)));
-                VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
-                VerifyOrReturn(CheckValue("", actualValue[1], 1UL));
-                VerifyOrReturn(CheckValue("", actualValue[2], 65528UL));
-                VerifyOrReturn(CheckValue("", actualValue[3], 65529UL));
-                VerifyOrReturn(CheckValue("", actualValue[4], 65531UL));
-                VerifyOrReturn(CheckValue("", actualValue[5], 65532UL));
-                VerifyOrReturn(CheckValue("", actualValue[6], 65533UL));
-            }
-
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
             NextTest();
         }];
 
@@ -21395,10 +21381,6 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads MeasuredValue attribute from DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
             err = TestThReadsMeasuredValueAttributeFromDut_1();
             break;
         case 2:
@@ -21489,7 +21471,7 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("measuredValue", "", "uint16"));
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("measuredValue", [value unsignedShortValue], 1U));
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("measuredValue", [value unsignedShortValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("measuredValue", [value unsignedShortValue], 65534U));
             }
 
@@ -25596,12 +25578,10 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 1UL));
-            }
-
             VerifyOrReturn(CheckConstraintType("featureMap", "", "map32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("featureMap", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("featureMap", [value unsignedIntValue], 7UL));
+
             NextTest();
         }];
 
@@ -26672,12 +26652,10 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 1UL));
-            }
-
             VerifyOrReturn(CheckConstraintType("featureMap", "", "map32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("featureMap", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("featureMap", [value unsignedIntValue], 3UL));
+
             NextTest();
         }];
 
@@ -26931,12 +26909,10 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 1UL));
-            }
-
             VerifyOrReturn(CheckConstraintType("featureMap", "", "map32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("featureMap", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("featureMap", [value unsignedIntValue], 3UL));
+
             NextTest();
         }];
 
@@ -27212,19 +27188,15 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(7)));
-                VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
-                VerifyOrReturn(CheckValue("", actualValue[1], 1UL));
-                VerifyOrReturn(CheckValue("", actualValue[2], 65528UL));
-                VerifyOrReturn(CheckValue("", actualValue[3], 65529UL));
-                VerifyOrReturn(CheckValue("", actualValue[4], 65531UL));
-                VerifyOrReturn(CheckValue("", actualValue[5], 65532UL));
-                VerifyOrReturn(CheckValue("", actualValue[6], 65533UL));
-            }
-
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
             NextTest();
         }];
 
@@ -28032,12 +28004,10 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 1UL));
-            }
-
             VerifyOrReturn(CheckConstraintType("featureMap", "", "map32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("featureMap", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("featureMap", [value unsignedIntValue], 3UL));
+
             NextTest();
         }];
 
@@ -30182,44 +30152,54 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the ChannelList attribute from the DUT\n");
+            ChipLogProgress(chipTool,
+                " ***** Test Step 1 : Reads the Lineup attribute from the DUT and Verify that the response contains a lineup info "
+                "object\n");
+            if (ShouldSkip("MC_CHANNEL.S.A0001 && PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsTheLineupAttributeFromTheDutAndVerifyThatTheResponseContainsALineupInfoObject_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the ChannelList attribute from the DUT\n");
             if (ShouldSkip("MC_CHANNEL.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestReadsTheChannelListAttributeFromTheDut_1();
+            err = TestReadsTheChannelListAttributeFromTheDut_2();
             break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the CurrentChannel attribute from the DUT\n");
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Reads the CurrentChannel attribute from the DUT\n");
             if (ShouldSkip("MC_CHANNEL.S.A0002")) {
                 NextTest();
                 return;
             }
-            err = TestReadsTheCurrentChannelAttributeFromTheDut_2();
+            err = TestReadsTheCurrentChannelAttributeFromTheDut_3();
             break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Sends a SkipChannel command to the DUT\n");
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Sends a SkipChannel command to the DUT\n");
             if (ShouldSkip("MC_CHANNEL.S.C0003")) {
                 NextTest();
                 return;
             }
-            err = TestSendsASkipChannelCommandToTheDut_3();
+            err = TestSendsASkipChannelCommandToTheDut_4();
             break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Verify that the channel has changed on the device\n");
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Verify that the channel has changed on the device\n");
             if (ShouldSkip("PICS_USER_PROMPT")) {
                 NextTest();
                 return;
             }
-            err = TestVerifyThatTheChannelHasChangedOnTheDevice_4();
+            err = TestVerifyThatTheChannelHasChangedOnTheDevice_5();
             break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the CurrentChannel attribute from the DUT\n");
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the CurrentChannel attribute from the DUT\n");
             if (ShouldSkip("MC_CHANNEL.S.A0002")) {
                 NextTest();
                 return;
             }
-            err = TestReadsTheCurrentChannelAttributeFromTheDut_5();
+            err = TestReadsTheCurrentChannelAttributeFromTheDut_6();
             break;
         }
 
@@ -30250,6 +30230,9 @@ public:
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -30263,7 +30246,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 6;
+    const uint16_t mTestCount = 7;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -30279,7 +30262,16 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestReadsTheChannelListAttributeFromTheDut_1()
+    CHIP_ERROR TestReadsTheLineupAttributeFromTheDutAndVerifyThatTheResponseContainsALineupInfoObject_1()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadsTheChannelListAttributeFromTheDut_2()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestChannel * cluster = [[MTRTestChannel alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -30297,7 +30289,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheCurrentChannelAttributeFromTheDut_2()
+    CHIP_ERROR TestReadsTheCurrentChannelAttributeFromTheDut_3()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestChannel * cluster = [[MTRTestChannel alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -30320,7 +30312,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendsASkipChannelCommandToTheDut_3()
+    CHIP_ERROR TestSendsASkipChannelCommandToTheDut_4()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestChannel * cluster = [[MTRTestChannel alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -30340,7 +30332,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyThatTheChannelHasChangedOnTheDevice_4()
+    CHIP_ERROR TestVerifyThatTheChannelHasChangedOnTheDevice_5()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message
@@ -30350,7 +30342,7 @@ private:
         return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestReadsTheCurrentChannelAttributeFromTheDut_5()
+    CHIP_ERROR TestReadsTheCurrentChannelAttributeFromTheDut_6()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestChannel * cluster = [[MTRTestChannel alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -35701,22 +35693,18 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(10)));
-                VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
-                VerifyOrReturn(CheckValue("", actualValue[1], 16384UL));
-                VerifyOrReturn(CheckValue("", actualValue[2], 16385UL));
-                VerifyOrReturn(CheckValue("", actualValue[3], 16386UL));
-                VerifyOrReturn(CheckValue("", actualValue[4], 16387UL));
-                VerifyOrReturn(CheckValue("", actualValue[5], 65528UL));
-                VerifyOrReturn(CheckValue("", actualValue[6], 65529UL));
-                VerifyOrReturn(CheckValue("", actualValue[7], 65531UL));
-                VerifyOrReturn(CheckValue("", actualValue[8], 65532UL));
-                VerifyOrReturn(CheckValue("", actualValue[9], 65533UL));
-            }
-
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 16384UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 16385UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 16386UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 16387UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
             NextTest();
         }];
 
@@ -43434,8 +43422,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read the optional global attribute constraints: FeatureMap\n");
-            if (ShouldSkip(
-                    "PICS_SKIP_SAMPLE_APP && ( TSTAT_HEAT || TSTAT_COOL || TSTAT_OCC || TSTAT_SCH || TSTAT_SB || TSTAT_AUTO )")) {
+            if (ShouldSkip("( TSTAT_HEAT || TSTAT_COOL || TSTAT_OCC || TSTAT_SCH || TSTAT_SB || TSTAT_AUTO )")) {
                 NextTest();
                 return;
             }
@@ -43554,12 +43541,10 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 1UL));
-            }
-
             VerifyOrReturn(CheckConstraintType("featureMap", "", "map32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("featureMap", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("featureMap", [value unsignedIntValue], 63UL));
+
             NextTest();
         }];
 
@@ -49851,18 +49836,14 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(6)));
-                VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
-                VerifyOrReturn(CheckValue("", actualValue[1], 65528UL));
-                VerifyOrReturn(CheckValue("", actualValue[2], 65529UL));
-                VerifyOrReturn(CheckValue("", actualValue[3], 65531UL));
-                VerifyOrReturn(CheckValue("", actualValue[4], 65532UL));
-                VerifyOrReturn(CheckValue("", actualValue[5], 65533UL));
-            }
-
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
             NextTest();
         }];
 
