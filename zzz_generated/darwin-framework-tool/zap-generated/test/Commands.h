@@ -2315,6 +2315,10 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Read mandatory non-global attribute: StateValue\n");
+            if (ShouldSkip("BOOL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadMandatoryNonGlobalAttributeStateValue_1();
             break;
         }
@@ -36129,22 +36133,42 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : read the mandatory attribute: OnOff\n");
+            if (ShouldSkip("OO.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributeOnOff_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : read LT attribute: GlobalSceneControl\n");
+            if (ShouldSkip("OO.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestReadLtAttributeGlobalSceneControl_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : read LT attribute: OnTime\n");
+            if (ShouldSkip("OO.S.A4001")) {
+                NextTest();
+                return;
+            }
             err = TestReadLtAttributeOnTime_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : read LT attribute: OffWaitTime\n");
+            if (ShouldSkip("OO.S.A4002")) {
+                NextTest();
+                return;
+            }
             err = TestReadLtAttributeOffWaitTime_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : read LT attribute: StartUpOnOff\n");
+            if (ShouldSkip("OO.S.A4003")) {
+                NextTest();
+                return;
+            }
             err = TestReadLtAttributeStartUpOnOff_5();
             break;
         }
@@ -36362,46 +36386,90 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Send Off Command\n");
+            if (ShouldSkip("OO.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendOffCommand_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Check on/off attribute value is false after off command\n");
+            if (ShouldSkip("OO.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckOnOffAttributeValueIsFalseAfterOffCommand_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Send On Command\n");
+            if (ShouldSkip("OO.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendOnCommand_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Check on/off attribute value is true after on command\n");
+            if (ShouldSkip("OO.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckOnOffAttributeValueIsTrueAfterOnCommand_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Send On Command\n");
+            if (ShouldSkip("OO.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendOnCommand_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Check on/off attribute value is true after on command\n");
+            if (ShouldSkip("OO.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckOnOffAttributeValueIsTrueAfterOnCommand_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Send Off Command\n");
+            if (ShouldSkip("OO.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendOffCommand_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Check on/off attribute value is false after off command\n");
+            if (ShouldSkip("OO.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckOnOffAttributeValueIsFalseAfterOffCommand_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Send Off Command\n");
+            if (ShouldSkip("OO.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendOffCommand_9();
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Check on/off attribute value is false after off command\n");
+            if (ShouldSkip("OO.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckOnOffAttributeValueIsFalseAfterOffCommand_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Send Toggle Command\n");
+            if (ShouldSkip("OO.S.C02.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendToggleCommand_11();
             break;
         case 12:
@@ -36410,10 +36478,18 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Check on/off attribute value is true after toggle command\n");
+            if (ShouldSkip("OO.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckOnOffAttributeValueIsTrueAfterToggleCommand_13();
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Send Toggle Command\n");
+            if (ShouldSkip("OO.S.C02.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendToggleCommand_14();
             break;
         case 15:
@@ -36422,11 +36498,15 @@ public:
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : Check on/off attribute value is false after toggle command\n");
+            if (ShouldSkip("OO.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckOnOffAttributeValueIsFalseAfterToggleCommand_16();
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Operate on device to set OnOff attribute manually to on\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && OO.M.ManuallyControlled")) {
                 NextTest();
                 return;
             }
@@ -36442,7 +36522,7 @@ public:
             break;
         case 19:
             ChipLogProgress(chipTool, " ***** Test Step 19 : Operate on device to set OnOff attribute manually to off\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && OO.M.ManuallyControlled")) {
                 NextTest();
                 return;
             }
@@ -36458,10 +36538,18 @@ public:
             break;
         case 21:
             ChipLogProgress(chipTool, " ***** Test Step 21 : Reset Off Command\n");
+            if (ShouldSkip("OO.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestResetOffCommand_21();
             break;
         case 22:
             ChipLogProgress(chipTool, " ***** Test Step 22 : Check on/off attribute value is false after off command\n");
+            if (ShouldSkip("OO.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestCheckOnOffAttributeValueIsFalseAfterOffCommand_22();
             break;
         }
@@ -37004,10 +37092,18 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH sends On command to DUT\n");
+            if (ShouldSkip("OO.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsOnCommandToDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH writes a value of 0 to StartUpOnOff attribute of DUT\n");
+            if (ShouldSkip("OO.S.A4003")) {
+                NextTest();
+                return;
+            }
             err = TestThWritesAValueOf0ToStartUpOnOffAttributeOfDut_2();
             break;
         case 3:
@@ -37032,10 +37128,18 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads the OnOff attribute from the DUT\n");
+            if (ShouldSkip("OO.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsTheOnOffAttributeFromTheDut_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : TH writes a value of 1 to StartUpOnOff attribute of DUT\n");
+            if (ShouldSkip("OO.S.A4003")) {
+                NextTest();
+                return;
+            }
             err = TestThWritesAValueOf1ToStartUpOnOffAttributeOfDut_7();
             break;
         case 8:
@@ -37060,10 +37164,18 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads the OnOff attribute from the DUT\n");
+            if (ShouldSkip("OO.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsTheOnOffAttributeFromTheDut_11();
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : TH writes a value of 2 to StartUpOnOff attribute of DUT\n");
+            if (ShouldSkip("OO.S.A4003")) {
+                NextTest();
+                return;
+            }
             err = TestThWritesAValueOf2ToStartUpOnOffAttributeOfDut_12();
             break;
         case 13:
@@ -37088,6 +37200,10 @@ public:
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : TH reads the OnOff attribute from the DUT\n");
+            if (ShouldSkip("OO.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsTheOnOffAttributeFromTheDut_16();
             break;
         case 17:
@@ -37112,10 +37228,18 @@ public:
             break;
         case 20:
             ChipLogProgress(chipTool, " ***** Test Step 20 : TH reads the OnOff attribute from the DUT\n");
+            if (ShouldSkip("OO.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsTheOnOffAttributeFromTheDut_20();
             break;
         case 21:
             ChipLogProgress(chipTool, " ***** Test Step 21 : TH writes NULL to StartUpOnOff attribute of DUT\n");
+            if (ShouldSkip("OO.S.A4003")) {
+                NextTest();
+                return;
+            }
             err = TestThWritesNullToStartUpOnOffAttributeOfDut_21();
             break;
         case 22:
@@ -37140,10 +37264,18 @@ public:
             break;
         case 25:
             ChipLogProgress(chipTool, " ***** Test Step 25 : TH reads the OnOff attribute from the DUT\n");
+            if (ShouldSkip("OO.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsTheOnOffAttributeFromTheDut_25();
             break;
         case 26:
             ChipLogProgress(chipTool, " ***** Test Step 26 : TH sends Off command to DUT\n");
+            if (ShouldSkip("OO.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsOffCommandToDut_26();
             break;
         case 27:
@@ -37168,6 +37300,10 @@ public:
             break;
         case 30:
             ChipLogProgress(chipTool, " ***** Test Step 30 : TH reads the OnOff attribute from the DUT\n");
+            if (ShouldSkip("OO.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsTheOnOffAttributeFromTheDut_30();
             break;
         }
@@ -42843,10 +42979,18 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads constraints of attribute: MeasuredValue\n");
+            if (ShouldSkip("RH.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsConstraintsOfAttributeMeasuredValue_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads constraints of attribute: MinMeasuredValue\n");
+            if (ShouldSkip("RH.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestReadsConstraintsOfAttributeMinMeasuredValue_2();
             break;
         case 3:
@@ -42855,6 +42999,10 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads constraints of attribute: Tolerance\n");
+            if (ShouldSkip("RH.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestReadsConstraintsOfAttributeTolerance_4();
             break;
         }
@@ -43514,18 +43662,34 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : read the mandatory attribute: MeasuredValue\n");
+            if (ShouldSkip("TM.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributeMeasuredValue_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : read the mandatory attribute: MinMeasuredValue\n");
+            if (ShouldSkip("TM.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributeMinMeasuredValue_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : read the mandatory attribute: MaxMeasuredValue\n");
+            if (ShouldSkip("TM.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheMandatoryAttributeMaxMeasuredValue_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : read the optional attribute: Tolerance\n");
+            if (ShouldSkip("TM.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheOptionalAttributeTolerance_4();
             break;
         }
