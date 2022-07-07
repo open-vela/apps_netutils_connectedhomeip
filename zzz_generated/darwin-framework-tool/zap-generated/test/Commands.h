@@ -94610,8 +94610,8 @@ public:
             err = TestVerifyThatLockStateAttributeValueIsSetToUnlocked_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Try to unlock the door without a PIN\n");
-            err = TestTryToUnlockTheDoorWithoutAPin_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Try to lock the door without a PIN\n");
+            err = TestTryToLockTheDoorWithoutAPin_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Verify that lock state attribute value is set to Locked\n");
@@ -94803,7 +94803,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTryToUnlockTheDoorWithoutAPin_3()
+    CHIP_ERROR TestTryToLockTheDoorWithoutAPin_3()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestDoorLock * cluster = [[MTRTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -94812,7 +94812,7 @@ private:
         __auto_type * params = [[MTRDoorLockClusterLockDoorParams alloc] init];
         [cluster lockDoorWithParams:params
                   completionHandler:^(NSError * _Nullable err) {
-                      NSLog(@"Try to unlock the door without a PIN Error: %@", err);
+                      NSLog(@"Try to lock the door without a PIN Error: %@", err);
 
                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -95739,7 +95739,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
@@ -95799,10 +95799,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 32:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -95874,7 +95874,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 55:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 56:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -95898,7 +95898,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
             break;
         case 63:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 64:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -96388,7 +96388,7 @@ private:
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Week Day schedule for non-existing user Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_NOT_FOUND));
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
                                 NextTest();
                             }];
 
@@ -96837,7 +96837,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 1U));
                                 }
 
                                 NextTest();
@@ -96949,7 +96949,7 @@ private:
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Year Day schedule for non-existing user Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_NOT_FOUND));
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
                                 NextTest();
                             }];
 
@@ -96971,7 +96971,7 @@ private:
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Create Year Day schedule with start hour later that end hour Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
                                 NextTest();
                             }];
 
@@ -97193,7 +97193,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 1U));
                                 }
 
                                 NextTest();
@@ -97704,7 +97704,7 @@ private:
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Clear Week Day schedule with non-existing user Error: %@", err);
 
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_NOT_FOUND));
+                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
                                   NextTest();
                               }];
 
@@ -97959,7 +97959,7 @@ private:
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Clear Year Day schedule with non-existing user Error: %@", err);
 
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_NOT_FOUND));
+                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
                                   NextTest();
                               }];
 
@@ -99458,7 +99458,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 1U));
                                 }
 
                                 NextTest();
@@ -99495,7 +99495,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 1U));
                                 }
 
                                 NextTest();
@@ -99532,7 +99532,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 1U));
                                 }
 
                                 NextTest();
@@ -99569,7 +99569,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 1U));
                                 }
 
                                 NextTest();
@@ -102059,8 +102059,8 @@ public:
             break;
         case 9:
             ChipLogProgress(
-                chipTool, " ***** Test Step 9 : send Get Year Day Schedule Command to DUT and verify NOT_FOUND response\n");
-            err = TestSendGetYearDayScheduleCommandToDutAndVerifyNotFoundResponse_9();
+                chipTool, " ***** Test Step 9 : send Get Year Day Schedule Command to DUT and verify FAILURE response\n");
+            err = TestSendGetYearDayScheduleCommandToDutAndVerifyFailureResponse_9();
             break;
         case 10:
             ChipLogProgress(
@@ -102435,7 +102435,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendGetYearDayScheduleCommandToDutAndVerifyNotFoundResponse_9()
+    CHIP_ERROR TestSendGetYearDayScheduleCommandToDutAndVerifyFailureResponse_9()
     {
         MTRDevice * device = GetDevice("alpha");
         MTRTestDoorLock * cluster = [[MTRTestDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -102447,7 +102447,7 @@ private:
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
                                 MTRDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
-                                NSLog(@"send Get Year Day Schedule Command to DUT and verify NOT_FOUND response Error: %@", err);
+                                NSLog(@"send Get Year Day Schedule Command to DUT and verify FAILURE response Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -102463,7 +102463,7 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 1U));
                                 }
 
                                 VerifyOrReturn(CheckConstraintHasValue("localStartTime", values.localStartTime, false));
