@@ -20,12 +20,12 @@
 #import <Foundation/Foundation.h>
 
 #import "MTRAttributeCacheContainer_Internal.h"
+#import "MTRBaseClusters_internal.h"
+#import "MTRBaseDevice.h"
+#import "MTRBaseDevice_Internal.h"
 #import "MTRCallbackBridge_internal.h"
 #import "MTRCluster_internal.h"
-#import "MTRClustersObjc_internal.h"
 #import "MTRCommandPayloadsObjc.h"
-#import "MTRDevice.h"
-#import "MTRDevice_Internal.h"
 #import "MTRStructsObjc.h"
 
 #include <lib/support/CHIPListUtils.h>
@@ -36,9 +36,9 @@ using chip::Callback::Callback;
 using chip::Callback::Cancelable;
 using namespace chip::app::Clusters;
 // NOLINTBEGIN(clang-analyzer-cplusplus.NewDeleteLeaks): Linter is unable to locate the delete on these objects.
-@implementation MTRIdentify
+@implementation MTRBaseClusterIdentify
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -597,9 +597,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRGroups
+@implementation MTRBaseClusterGroups
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -1180,9 +1180,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRScenes
+@implementation MTRBaseClusterScenes
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -2296,9 +2296,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTROnOff
+@implementation MTRBaseClusterOnOff
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -3221,9 +3221,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTROnOffSwitchConfiguration
+@implementation MTRBaseClusterOnOffSwitchConfiguration
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -3730,9 +3730,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRLevelControl
+@implementation MTRBaseClusterLevelControl
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -5443,9 +5443,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRBinaryInputBasic
+@implementation MTRBaseClusterBinaryInputBasic
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -6536,9 +6536,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRDescriptor
+@implementation MTRBaseClusterDescriptor
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -7133,9 +7133,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRBinding
+@implementation MTRBaseClusterBinding
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -7616,9 +7616,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRAccessControl
+@implementation MTRBaseClusterAccessControl
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -8467,9 +8467,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRBridgedActions
+@implementation MTRBaseClusterBridgedActions
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -9370,9 +9370,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRBasic
+@implementation MTRBaseClusterBasic
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -11071,9 +11071,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTROtaSoftwareUpdateProvider
+@implementation MTRBaseClusterOtaSoftwareUpdateProvider
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -11541,9 +11541,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTROtaSoftwareUpdateRequestor
+@implementation MTRBaseClusterOtaSoftwareUpdateRequestor
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -12245,9 +12245,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRLocalizationConfiguration
+@implementation MTRBaseClusterLocalizationConfiguration
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -12757,9 +12757,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRTimeFormatLocalization
+@implementation MTRBaseClusterTimeFormatLocalization
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -13366,9 +13366,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRUnitLocalization
+@implementation MTRBaseClusterUnitLocalization
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -13815,9 +13815,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRPowerSourceConfiguration
+@implementation MTRBaseClusterPowerSourceConfiguration
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -14231,9 +14231,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRPowerSource
+@implementation MTRBaseClusterPowerSource
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -16523,9 +16523,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRGeneralCommissioning
+@implementation MTRBaseClusterGeneralCommissioning
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -17309,9 +17309,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRNetworkCommissioning
+@implementation MTRBaseClusterNetworkCommissioning
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -18373,9 +18373,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRDiagnosticLogs
+@implementation MTRBaseClusterDiagnosticLogs
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -18752,9 +18752,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRGeneralDiagnostics
+@implementation MTRBaseClusterGeneralDiagnostics
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -19697,9 +19697,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRSoftwareDiagnostics
+@implementation MTRBaseClusterSoftwareDiagnostics
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -20329,9 +20329,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRThreadNetworkDiagnostics
+@implementation MTRBaseClusterThreadNetworkDiagnostics
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -24652,9 +24652,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRWiFiNetworkDiagnostics
+@implementation MTRBaseClusterWiFiNetworkDiagnostics
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -25847,9 +25847,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTREthernetNetworkDiagnostics
+@implementation MTRBaseClusterEthernetNetworkDiagnostics
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -26789,9 +26789,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRBridgedDeviceBasic
+@implementation MTRBaseClusterBridgedDeviceBasic
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -28089,9 +28089,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRSwitch
+@implementation MTRBaseClusterSwitch
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -28627,9 +28627,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRAdministratorCommissioning
+@implementation MTRBaseClusterAdministratorCommissioning
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -29261,9 +29261,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTROperationalCredentials
+@implementation MTRBaseClusterOperationalCredentials
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -30196,9 +30196,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRGroupKeyManagement
+@implementation MTRBaseClusterGroupKeyManagement
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -31013,9 +31013,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRFixedLabel
+@implementation MTRBaseClusterFixedLabel
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -31427,9 +31427,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRUserLabel
+@implementation MTRBaseClusterUserLabel
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -31895,9 +31895,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRBooleanState
+@implementation MTRBaseClusterBooleanState
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -32308,9 +32308,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRModeSelect
+@implementation MTRBaseClusterModeSelect
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -33132,9 +33132,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRDoorLock
+@implementation MTRBaseClusterDoorLock
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -36897,9 +36897,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRWindowCovering
+@implementation MTRBaseClusterWindowCovering
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -38864,9 +38864,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRBarrierControl
+@implementation MTRBaseClusterBarrierControl
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -40094,9 +40094,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRPumpConfigurationAndControl
+@implementation MTRBaseClusterPumpConfigurationAndControl
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -42041,9 +42041,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRThermostat
+@implementation MTRBaseClusterThermostat
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -46517,9 +46517,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRFanControl
+@implementation MTRBaseClusterFanControl
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -47749,9 +47749,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRThermostatUserInterfaceConfiguration
+@implementation MTRBaseClusterThermostatUserInterfaceConfiguration
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -48404,9 +48404,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRColorControl
+@implementation MTRBaseClusterColorControl
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -52955,9 +52955,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRIlluminanceMeasurement
+@implementation MTRBaseClusterIlluminanceMeasurement
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -53620,9 +53620,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRTemperatureMeasurement
+@implementation MTRBaseClusterTemperatureMeasurement
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -54222,9 +54222,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRPressureMeasurement
+@implementation MTRBaseClusterPressureMeasurement
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -55133,9 +55133,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRFlowMeasurement
+@implementation MTRBaseClusterFlowMeasurement
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -55735,9 +55735,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRRelativeHumidityMeasurement
+@implementation MTRBaseClusterRelativeHumidityMeasurement
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -56342,9 +56342,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTROccupancySensing
+@implementation MTRBaseClusterOccupancySensing
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -57766,9 +57766,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRWakeOnLan
+@implementation MTRBaseClusterWakeOnLan
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -58179,9 +58179,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRChannel
+@implementation MTRBaseClusterChannel
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -58794,9 +58794,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRTargetNavigator
+@implementation MTRBaseClusterTargetNavigator
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -59298,9 +59298,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRMediaPlayback
+@implementation MTRBaseClusterMediaPlayback
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -60372,9 +60372,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRMediaInput
+@implementation MTRBaseClusterMediaInput
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -60956,9 +60956,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRLowPower
+@implementation MTRBaseClusterLowPower
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -61337,9 +61337,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRKeypadInput
+@implementation MTRBaseClusterKeypadInput
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -61713,9 +61713,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRContentLauncher
+@implementation MTRBaseClusterContentLauncher
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -62426,9 +62426,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRAudioOutput
+@implementation MTRBaseClusterAudioOutput
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -62956,9 +62956,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRApplicationLauncher
+@implementation MTRBaseClusterApplicationLauncher
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -63556,9 +63556,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRApplicationBasic
+@implementation MTRBaseClusterApplicationBasic
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -64404,9 +64404,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRAccountLogin
+@implementation MTRBaseClusterAccountLogin
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -64844,9 +64844,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRElectricalMeasurement
+@implementation MTRBaseClusterElectricalMeasurement
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {
@@ -73508,9 +73508,9 @@ using namespace chip::app::Clusters;
 
 @end
 
-@implementation MTRTestCluster
+@implementation MTRBaseClusterTestCluster
 
-- (instancetype)initWithDevice:(MTRDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
     if (self = [super initWithQueue:queue]) {
         if (device == nil) {

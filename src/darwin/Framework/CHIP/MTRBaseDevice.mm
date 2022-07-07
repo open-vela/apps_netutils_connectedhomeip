@@ -17,9 +17,9 @@
 
 #import "MTRAttributeCacheContainer_Internal.h"
 #import "MTRAttributeTLVValueDecoder_Internal.h"
+#import "MTRBaseDevice_Internal.h"
 #import "MTRCallbackBridgeBase_internal.h"
 #import "MTRCluster.h"
-#import "MTRDevice_Internal.h"
 #import "MTRError_Internal.h"
 #import "MTREventTLVValueDecoder_Internal.h"
 #import "MTRLogging.h"
@@ -65,7 +65,7 @@ NSString * const MTRArrayValueType = @"Array";
 
 class NSObjectDataValueCallbackBridge;
 
-@interface MTRDevice ()
+@interface MTRBaseDevice ()
 
 @property (nonatomic, readonly, strong, nonnull) NSRecursiveLock * lock;
 @property (readonly) chip::DeviceProxy * cppDevice;
@@ -221,7 +221,7 @@ static void CauseReadClientFailure(uint64_t deviceId, dispatch_queue_t queue, vo
 }
 @end
 
-@implementation MTRDevice
+@implementation MTRBaseDevice
 
 - (instancetype)init
 {
