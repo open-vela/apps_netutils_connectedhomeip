@@ -17054,21 +17054,33 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Read PHYRate attribute constraints\n");
+            if (ShouldSkip("DGETH.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadPHYRateAttributeConstraints_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read FullDuplex attribute constraints\n");
+            if (ShouldSkip("DGETH.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestReadFullDuplexAttributeConstraints_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read PacketRxCount attribute constraints\n");
+            if (ShouldSkip("DGETH.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestReadPacketRxCountAttributeConstraints_3();
             break;
         case 4:
             ChipLogProgress(chipTool,
                 " ***** Test Step 4 : Read PacketRxCount value from DUT and verify the number of packets received on ethernet "
                 "network interface\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && DGETH.S.A0002")) {
                 NextTest();
                 return;
             }
@@ -17076,13 +17088,17 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Read PacketTxCount attribute constraints\n");
+            if (ShouldSkip("DGETH.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestReadPacketTxCountAttributeConstraints_5();
             break;
         case 6:
             ChipLogProgress(chipTool,
                 " ***** Test Step 6 : Read PacketTxCount value from DUT and verify the number of packets received on ethernet "
                 "network interface\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && DGETH.S.A0003")) {
                 NextTest();
                 return;
             }
@@ -17090,13 +17106,17 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Read TxErrCount attribute constraints\n");
+            if (ShouldSkip("DGETH.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestReadTxErrCountAttributeConstraints_7();
             break;
         case 8:
             ChipLogProgress(chipTool,
                 " ***** Test Step 8 : Read TxErrCount value from DUT and verify value indicates the number of failed packet "
                 "transmission on ethernet network interface\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && DGETH.S.A0004")) {
                 NextTest();
                 return;
             }
@@ -17104,13 +17124,17 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Read CollisionCount attribute constraints\n");
+            if (ShouldSkip("DGETH.S.A0005")) {
+                NextTest();
+                return;
+            }
             err = TestReadCollisionCountAttributeConstraints_9();
             break;
         case 10:
             ChipLogProgress(chipTool,
                 " ***** Test Step 10 : Read CollisionCount value from DUT and verify value indicates the number of collision "
                 "occurred while transmitting packets on ethernet network interface\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && DGETH.S.A0005")) {
                 NextTest();
                 return;
             }
@@ -17118,13 +17142,17 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Read OverrunCount attribute constraints\n");
+            if (ShouldSkip("DGETH.S.A0006")) {
+                NextTest();
+                return;
+            }
             err = TestReadOverrunCountAttributeConstraints_11();
             break;
         case 12:
             ChipLogProgress(chipTool,
                 " ***** Test Step 12 : Read OverrunCount value from DUT and verify value indicates the number of packets dropped "
                 "due to lack of buffer memory on ethernet network interface\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && DGETH.S.A0006")) {
                 NextTest();
                 return;
             }
@@ -17132,13 +17160,17 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Read CarrierDetect attribute constraints\n");
+            if (ShouldSkip("DGETH.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestReadCarrierDetectAttributeConstraints_13();
             break;
         case 14:
             ChipLogProgress(chipTool,
                 " ***** Test Step 14 : Read CarrierDetect value from DUT and verify value indicates the presence of carrier detect "
                 "control signal on ethernet network interface\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && DGETH.S.A0007")) {
                 NextTest();
                 return;
             }
@@ -17146,13 +17178,17 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Read TimeSinceReset attribute constraints\n");
+            if (ShouldSkip("DGETH.S.A0008")) {
+                NextTest();
+                return;
+            }
             err = TestReadTimeSinceResetAttributeConstraints_15();
             break;
         case 16:
             ChipLogProgress(chipTool,
                 " ***** Test Step 16 : Read TimeSinceReset value from DUT and verify the value indicates the duration of time, in "
                 "minutes\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && DGETH.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -17553,7 +17589,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Sends ResetCounts command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGETH.S.C00")) {
                 NextTest();
                 return;
             }
@@ -17561,7 +17597,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read the PacketRxCount attribute\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGETH.S.A0002")) {
                 NextTest();
                 return;
             }
@@ -17569,7 +17605,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read the PacketTxCount attribute\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGETH.S.A0003")) {
                 NextTest();
                 return;
             }
@@ -17577,7 +17613,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Read the TxErrCount attribute\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGETH.S.A0004")) {
                 NextTest();
                 return;
             }
@@ -17585,7 +17621,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Read the CollisionCount attribute\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGETH.S.A0005")) {
                 NextTest();
                 return;
             }
@@ -17593,7 +17629,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Read the OverrunCount attribute\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGETH.S.A0006")) {
                 NextTest();
                 return;
             }
@@ -21898,15 +21934,23 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads the CurrentLevel attribute\n");
+            if (ShouldSkip("LVL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheCurrentLevelAttribute_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the RemainingTime attribute\n");
+            if (ShouldSkip("LVL.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheRemainingTimeAttribute_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the MinLevel attribute\n");
-            if (ShouldSkip("LVL.S.F01")) {
+            if (ShouldSkip("LVL.S.A0002")) {
                 NextTest();
                 return;
             }
@@ -21914,7 +21958,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the MinLevel attribute\n");
-            if (ShouldSkip(" !LVL.S.F01 ")) {
+            if (ShouldSkip("LVL.S.A0002")) {
                 NextTest();
                 return;
             }
@@ -21922,7 +21966,7 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Reads the MaxLevel attribute\n");
-            if (ShouldSkip("LVL.S.F01")) {
+            if (ShouldSkip("LVL.S.A0003")) {
                 NextTest();
                 return;
             }
@@ -21930,7 +21974,7 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Reads the MaxLevel attribute\n");
-            if (ShouldSkip(" !LVL.S.F01 ")) {
+            if (ShouldSkip("LVL.S.A0003")) {
                 NextTest();
                 return;
             }
@@ -21954,22 +21998,42 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Reads the CurrentFrequency attribute\n");
+            if (ShouldSkip("LVL.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheCurrentFrequencyAttribute_11();
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Reads the MinFrequency attribute\n");
+            if (ShouldSkip("LVL.S.A0005")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheMinFrequencyAttribute_12();
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Reads the MaxFrequency attribute\n");
+            if (ShouldSkip("LVL.S.A0006")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheMaxFrequencyAttribute_13();
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Step 7b & 7C Reads the CurrentFrequency attribute\n");
+            if (ShouldSkip("LVL.S.A0004 && LVL.S.A0005")) {
+                NextTest();
+                return;
+            }
             err = TestStep7b7cReadsTheCurrentFrequencyAttribute_14();
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Reads the OnOffTransitionTime attribute\n");
+            if (ShouldSkip("LVL.S.A0010")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheOnOffTransitionTimeAttribute_15();
             break;
         case 16:
@@ -21990,22 +22054,42 @@ public:
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Reads the OnTransitionTime attribute \n");
+            if (ShouldSkip("LVL.S.A0012")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheOnTransitionTimeAttribute_18();
             break;
         case 19:
             ChipLogProgress(chipTool, " ***** Test Step 19 : Reads the OffTransitionTime attribute \n");
+            if (ShouldSkip("LVL.S.A0013")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheOffTransitionTimeAttribute_19();
             break;
         case 20:
             ChipLogProgress(chipTool, " ***** Test Step 20 : Reads the DefaultMoveRate attribute \n");
+            if (ShouldSkip("LVL.S.A0014")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheDefaultMoveRateAttribute_20();
             break;
         case 21:
             ChipLogProgress(chipTool, " ***** Test Step 21 : Reads the Options attribute \n");
+            if (ShouldSkip("LVL.S.A000f")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheOptionsAttribute_21();
             break;
         case 22:
             ChipLogProgress(chipTool, " ***** Test Step 22 : Reads the StartUpCurrentLevel attribute \n");
+            if (ShouldSkip("LVL.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheStartUpCurrentLevelAttribute_22();
             break;
         }
@@ -22660,78 +22744,154 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the OnOffTransitionTime attribute from the DUT\n");
+            if (ShouldSkip("LVL.S.A0010")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheOnOffTransitionTimeAttributeFromTheDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : writes the OnOffTransitionTime attribute on the DUT\n");
+            if (ShouldSkip("LVL.S.A0010")) {
+                NextTest();
+                return;
+            }
             err = TestWritesTheOnOffTransitionTimeAttributeOnTheDut_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads the OnOffTransitionTime attribute from the DUT\n");
+            if (ShouldSkip("LVL.S.A0010")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheOnOffTransitionTimeAttributeFromTheDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the OnLevel attribute from the DUT\n");
+            if (ShouldSkip("LVL.S.A0011")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheOnLevelAttributeFromTheDut_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : writes the OnLevel attribute on the DUT\n");
+            if (ShouldSkip("LVL.S.A0011")) {
+                NextTest();
+                return;
+            }
             err = TestWritesTheOnLevelAttributeOnTheDut_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the OnLevel attribute from the DUT\n");
+            if (ShouldSkip("LVL.S.A0011")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheOnLevelAttributeFromTheDut_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Reads the OnTransitionTime attribute from the DUT\n");
+            if (ShouldSkip("LVL.S.A0012")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheOnTransitionTimeAttributeFromTheDut_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Writes the OnTransitionTime attribute on the DUT\n");
+            if (ShouldSkip("LVL.S.A0012")) {
+                NextTest();
+                return;
+            }
             err = TestWritesTheOnTransitionTimeAttributeOnTheDut_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Reads the OnTransitionTime attribute from the DUT\n");
+            if (ShouldSkip("LVL.S.A0012")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheOnTransitionTimeAttributeFromTheDut_9();
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Reads the OffTransitionTime attribute from the DUT\n");
+            if (ShouldSkip("LVL.S.A0013")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheOffTransitionTimeAttributeFromTheDut_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Writes the OffTransitionTime attribute on the DUT\n");
+            if (ShouldSkip("LVL.S.A0013")) {
+                NextTest();
+                return;
+            }
             err = TestWritesTheOffTransitionTimeAttributeOnTheDut_11();
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Reads the OffTransitionTime attribute from the DUT\n");
+            if (ShouldSkip("LVL.S.A0013")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheOffTransitionTimeAttributeFromTheDut_12();
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Reads the DefaultMoveRate attribute from the DUT\n");
+            if (ShouldSkip("LVL.S.A0014")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheDefaultMoveRateAttributeFromTheDut_13();
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Writes the DefaultMoveRate attribute on the DUT\n");
+            if (ShouldSkip("LVL.S.A0014")) {
+                NextTest();
+                return;
+            }
             err = TestWritesTheDefaultMoveRateAttributeOnTheDut_14();
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Reads the DefaultMoveRate attribute from the DUT\n");
+            if (ShouldSkip("LVL.S.A0014")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheDefaultMoveRateAttributeFromTheDut_15();
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : Reads the StartUpCurrentLevel attribute from the DUT\n");
+            if (ShouldSkip("LVL.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheStartUpCurrentLevelAttributeFromTheDut_16();
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : writes the StartUpCurrentLevel attribute on the DUT\n");
+            if (ShouldSkip("LVL.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestWritesTheStartUpCurrentLevelAttributeOnTheDut_17();
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : reads the StartUpCurrentLevel attribute from the DUT\n");
+            if (ShouldSkip("LVL.S.A4000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheStartUpCurrentLevelAttributeFromTheDut_18();
             break;
         case 19:
             ChipLogProgress(chipTool, " ***** Test Step 19 : writes back default value of OnOffTransitionTime attribute\n");
+            if (ShouldSkip("LVL.S.A0010")) {
+                NextTest();
+                return;
+            }
             err = TestWritesBackDefaultValueOfOnOffTransitionTimeAttribute_19();
             break;
         }
@@ -23333,14 +23493,26 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the MinLevel attribute\n");
+            if (ShouldSkip("LVL.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheMinLevelAttribute_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the MaxLevel attribute\n");
+            if (ShouldSkip("LVL.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheMaxLevelAttribute_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : sends a Move to level command\n");
+            if (ShouldSkip("LVL.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAMoveToLevelCommand_3();
             break;
         case 4:
@@ -23349,10 +23521,18 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Reads CurrentLevel attribute from DUT\n");
+            if (ShouldSkip("LVL.S.C04.Rsp && LVL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentLevelAttributeFromDut_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : sends a Move to level command\n");
+            if (ShouldSkip("LVL.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAMoveToLevelCommand_6();
             break;
         case 7:
@@ -23361,14 +23541,26 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Reads CurrentLevel attribute from DUT\n");
+            if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentLevelAttributeFromDut_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Reads On Off Transition Time attribute from DUT\n");
+            if (ShouldSkip("LVL.S.A0010")) {
+                NextTest();
+                return;
+            }
             err = TestReadsOnOffTransitionTimeAttributeFromDut_9();
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : sends a Move to level command\n");
+            if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0010")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAMoveToLevelCommand_10();
             break;
         case 11:
@@ -23377,14 +23569,26 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Reads CurrentLevel attribute from DUT\n");
+            if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000 && LVL.S.M.VarRate")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentLevelAttributeFromDut_12();
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Reads the OnOffTransitionTime attribute from the DUT\n");
+            if (ShouldSkip("LVL.S.A0010")) {
+                NextTest();
+                return;
+            }
             err = TestReadsTheOnOffTransitionTimeAttributeFromTheDut_13();
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : sends a Move to level command\n");
+            if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0010")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAMoveToLevelCommand_14();
             break;
         case 15:
@@ -23393,10 +23597,18 @@ public:
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : Reads CurrentLevel attribute from DUT\n");
+            if (ShouldSkip("LVL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentLevelAttributeFromDut_16();
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Reset level to 254\n");
+            if (ShouldSkip("LVL.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestResetLevelTo254_17();
             break;
         case 18:
@@ -23853,18 +24065,34 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads Minlevel attribute from DUT\n");
+            if (ShouldSkip("LVL.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestReadsMinlevelAttributeFromDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : sends a Move to level command\n");
+            if (ShouldSkip("LVL.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAMoveToLevelCommand_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : reads max level attribute from DUT\n");
+            if (ShouldSkip("LVL.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestReadsMaxLevelAttributeFromDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : sends a Move up command\n");
+            if (ShouldSkip("LVL.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAMoveUpCommand_4();
             break;
         case 5:
@@ -23883,7 +24111,7 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Reads CurrentLevel attribute from DUT\n");
-            if (ShouldSkip("LVL.S.A0003")) {
+            if (ShouldSkip("LVL.S.C01.Rsp && LVL.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -23891,6 +24119,10 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : sends a MoveWithOnOff command\n");
+            if (ShouldSkip("LVL.S.C05.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAMoveWithOnOffCommand_8();
             break;
         case 9:
@@ -23909,7 +24141,7 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : reads CurrentLevel attribute from DUT\n");
-            if (ShouldSkip("LVL.S.A0002")) {
+            if (ShouldSkip("LVL.S.C05.Rsp && LVL.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -23917,10 +24149,18 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : reads default move rate attribute from DUT\n");
+            if (ShouldSkip("LVL.S.A0014")) {
+                NextTest();
+                return;
+            }
             err = TestReadsDefaultMoveRateAttributeFromDut_12();
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : sends a Move up command at default move rate\n");
+            if (ShouldSkip("LVL.S.C05.Rsp && LVL.S.A0014")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAMoveUpCommandAtDefaultMoveRate_13();
             break;
         case 14:
@@ -23939,6 +24179,10 @@ public:
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : Reset level to 254\n");
+            if (ShouldSkip("LVL.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestResetLevelTo254_16();
             break;
         case 17:
@@ -24371,18 +24615,34 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads Minlevel attribute from DUT\n");
+            if (ShouldSkip("LVL.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestReadsMinlevelAttributeFromDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Sends MoveToLevelWithOnOff command to DUT\n");
+            if (ShouldSkip("LVL.S.C04.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendsMoveToLevelWithOnOffCommandToDut_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads current level attribute from DUT\n");
+            if (ShouldSkip("LVL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentLevelAttributeFromDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Sends step up command to DUT\n");
+            if (ShouldSkip("LVL.S.C02.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendsStepUpCommandToDut_4();
             break;
         case 5:
@@ -24391,10 +24651,18 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Reads current level attribute from DUT\n");
+            if (ShouldSkip("LVL.S.A0000 && LVL.S.C02.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentLevelAttributeFromDut_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Sends a StepWithOnOff command\n");
+            if (ShouldSkip("LVL.S.C06.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAStepWithOnOffCommand_7();
             break;
         case 8:
@@ -24403,10 +24671,18 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Reads current level attribute from DUT\n");
+            if (ShouldSkip("LVL.S.C06.Rsp && LVL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentLevelAttributeFromDut_9();
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Reset level to 254\n");
+            if (ShouldSkip("LVL.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestResetLevelTo254_10();
             break;
         case 11:
@@ -24734,18 +25010,34 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads Minlevel attribute from DUT\n");
+            if (ShouldSkip("LVL.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestReadsMinlevelAttributeFromDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Sends MoveToLevelWithOnOff command to DUT\n");
+            if (ShouldSkip("LVL.S.C04.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendsMoveToLevelWithOnOffCommandToDut_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads CurrentLevel attribute from DUT\n");
+            if (ShouldSkip("LVL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentLevelAttributeFromDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Sends a move up command to DUT\n");
+            if (ShouldSkip("LVL.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAMoveUpCommandToDut_4();
             break;
         case 5:
@@ -24754,6 +25046,10 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Sends stop command to DUT\n");
+            if (ShouldSkip("LVL.S.C03.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendsStopCommandToDut_6();
             break;
         case 7:
@@ -24766,10 +25062,18 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Reads CurrentLevel attribute from DUT\n");
+            if (ShouldSkip("LVL.S.C01.Rsp && LVL.S.C03.Rsp && LVL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentLevelAttributeFromDut_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Sends a move up command to DUT\n");
+            if (ShouldSkip("LVL.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendsAMoveUpCommandToDut_9();
             break;
         case 10:
@@ -24790,10 +25094,18 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Reads CurrentLevel attribute from DUT\n");
+            if (ShouldSkip("LVL.S.C01.Rsp && LVL.S.C07.Rsp && LVL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsCurrentLevelAttributeFromDut_13();
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Reset level to 254\n");
+            if (ShouldSkip("LVL.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestResetLevelTo254_14();
             break;
         case 15:
@@ -50626,27 +50938,47 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads NetworkInterface structure attribute from DUT\n");
+            if (ShouldSkip("DGWIFI.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestReadsNetworkInterfaceStructureAttributeFromDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads SecurityType attribute constraints\n");
+            if (ShouldSkip("DGWIFI.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestReadsSecurityTypeAttributeConstraints_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads WiFiVersion attribute constraints\n");
+            if (ShouldSkip("DGWIFI.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestReadsWiFiVersionAttributeConstraints_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads ChannelNumber attribute constraints\n");
+            if (ShouldSkip("DGWIFI.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestReadsChannelNumberAttributeConstraints_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Reads RSSI attribute constraints\n");
+            if (ShouldSkip("DGWIFI.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestReadsRssiAttributeConstraints_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Reads BeaconLostCount attribute constraints\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.A0005")) {
                 NextTest();
                 return;
             }
@@ -50654,11 +50986,15 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Reads BeaconRxCount attribute constraints\n");
+            if (ShouldSkip("DGWIFI.S.A0006")) {
+                NextTest();
+                return;
+            }
             err = TestReadsBeaconRxCountAttributeConstraints_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Reads PacketMulticastRxCount attribute constraints\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.A0007")) {
                 NextTest();
                 return;
             }
@@ -50666,7 +51002,7 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Reads PacketMulticastTxCount attribute constraints\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -50674,7 +51010,7 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Reads PacketUnicastRxCount attribute constraints\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.A0009")) {
                 NextTest();
                 return;
             }
@@ -50682,7 +51018,7 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Reads PacketUnicastTxCount attribute constraints\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.A000a")) {
                 NextTest();
                 return;
             }
@@ -50690,7 +51026,7 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Reads CurrentMaxRate attribute constraints\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.A000b")) {
                 NextTest();
                 return;
             }
@@ -50698,7 +51034,7 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Reads OverrunCount attribute constraints\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.A000c")) {
                 NextTest();
                 return;
             }
@@ -51109,7 +51445,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH sends ResetCounts command to DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00")) {
                 NextTest();
                 return;
             }
@@ -51117,7 +51453,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads BeaconLostCount attribute from DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00")) {
                 NextTest();
                 return;
             }
@@ -51125,7 +51461,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads BeaconRxCount attribute from DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00")) {
                 NextTest();
                 return;
             }
@@ -51133,7 +51469,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads PacketMulticastRxCount attribute from DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00")) {
                 NextTest();
                 return;
             }
@@ -51141,7 +51477,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Reads PacketMulticastTxCount attribute from DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00")) {
                 NextTest();
                 return;
             }
@@ -51149,7 +51485,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Reads PacketUnicastRxCount attribute from DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00")) {
                 NextTest();
                 return;
             }
@@ -51157,7 +51493,7 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Reads PacketUnicastTxCount attribute from DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00")) {
                 NextTest();
                 return;
             }
