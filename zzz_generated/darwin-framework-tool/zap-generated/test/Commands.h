@@ -148,7 +148,7 @@ public:
         printf("Test_TC_ULABEL_2_2\n");
         printf("Test_TC_ULABEL_2_3\n");
         printf("Test_TC_ULABEL_2_4\n");
-        printf("Test_TC_ULABEL_2_5\n");
+        printf("Test_TC_ULABEL_3_1\n");
         printf("Test_TC_DGWIFI_2_1\n");
         printf("Test_TC_DGWIFI_2_3\n");
         printf("Test_TC_WNCV_1_1\n");
@@ -205,12 +205,12 @@ public:
         printf("DL_UsersAndCredentials\n");
         printf("DL_LockUnlock\n");
         printf("DL_Schedules\n");
-        printf("Test_TC_DLRK_2_2\n");
-        printf("Test_TC_DLRK_2_3\n");
-        printf("Test_TC_DLRK_2_4\n");
-        printf("Test_TC_DLRK_2_5\n");
-        printf("Test_TC_DLRK_2_7\n");
-        printf("Test_TC_DLRK_2_9\n");
+        printf("Test_TC_DRLK_2_2\n");
+        printf("Test_TC_DRLK_2_3\n");
+        printf("Test_TC_DRLK_2_4\n");
+        printf("Test_TC_DRLK_2_5\n");
+        printf("Test_TC_DRLK_2_7\n");
+        printf("Test_TC_DRLK_2_9\n");
         printf("TestGroupsCluster\n");
         printf("TestGroupKeyManagementCluster\n");
 
@@ -16229,45 +16229,81 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Query Data Model Revision\n");
+            if (ShouldSkip("BINFO.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestQueryDataModelRevision_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Query Vendor Name\n");
+            if (ShouldSkip("BINFO.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestQueryVendorName_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Query VendorID\n");
+            if (ShouldSkip("BINFO.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestQueryVendorID_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Query Product Name\n");
+            if (ShouldSkip("BINFO.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestQueryProductName_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Query ProductID\n");
+            if (ShouldSkip("BINFO.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestQueryProductID_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Query Node Label\n");
+            if (ShouldSkip("BINFO.S.A0005")) {
+                NextTest();
+                return;
+            }
             err = TestQueryNodeLabel_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Query User Location\n");
+            if (ShouldSkip("BINFO.S.A0006")) {
+                NextTest();
+                return;
+            }
             err = TestQueryUserLocation_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Query HardwareVersion\n");
+            if (ShouldSkip("BINFO.S.A0007")) {
+                NextTest();
+                return;
+            }
             err = TestQueryHardwareVersion_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Query HardwareVersionString\n");
+            if (ShouldSkip("BINFO.S.A0008")) {
+                NextTest();
+                return;
+            }
             err = TestQueryHardwareVersionString_9();
             break;
         case 10:
             ChipLogProgress(chipTool,
                 " ***** Test Step 10 : TH reads SoftwareVersionString from the DUT and Verify it is of type string and verify the "
                 "format\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && BINFO.S.A000a")) {
                 NextTest();
                 return;
             }
@@ -16277,7 +16313,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 11 : TH reads ManufacturingDate from the DUT and Verify it is of type string and verify the "
                 "format\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && BINFO.S.A000b")) {
                 NextTest();
                 return;
             }
@@ -16285,7 +16321,7 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Query PartNumber\n");
-            if (ShouldSkip("PART_NUM")) {
+            if (ShouldSkip("BINFO.S.A000c")) {
                 NextTest();
                 return;
             }
@@ -16294,7 +16330,7 @@ public:
         case 13:
             ChipLogProgress(chipTool,
                 " ***** Test Step 13 : TH reads ProductURL from the DUT and Verify it is of type string and verify the format\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && BINFO.S.A000d")) {
                 NextTest();
                 return;
             }
@@ -16302,22 +16338,42 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Query ProductLabel\n");
+            if (ShouldSkip("BINFO.S.A000e")) {
+                NextTest();
+                return;
+            }
             err = TestQueryProductLabel_14();
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Query SerialNumber\n");
+            if (ShouldSkip("BINFO.S.A000f")) {
+                NextTest();
+                return;
+            }
             err = TestQuerySerialNumber_15();
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : Query LocalConfigDisabled\n");
+            if (ShouldSkip("BINFO.S.A0010")) {
+                NextTest();
+                return;
+            }
             err = TestQueryLocalConfigDisabled_16();
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Query Reachable\n");
+            if (ShouldSkip("BINFO.S.A0011")) {
+                NextTest();
+                return;
+            }
             err = TestQueryReachable_17();
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Query UniqueID\n");
+            if (ShouldSkip("BINFO.S.A0012")) {
+                NextTest();
+                return;
+            }
             err = TestQueryUniqueID_18();
             break;
         }
@@ -16610,11 +16666,6 @@ private:
         [cluster readAttributePartNumberWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Query PartNumber Error: %@", err);
 
-            if (err.code == MTRInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("partNumber", "", "string"));
@@ -16643,11 +16694,6 @@ private:
         [cluster readAttributeProductLabelWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Query ProductLabel Error: %@", err);
 
-            if (err.code == MTRInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("productLabel", "", "string"));
@@ -16666,11 +16712,6 @@ private:
 
         [cluster readAttributeSerialNumberWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Query SerialNumber Error: %@", err);
-
-            if (err.code == MTRInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -16691,11 +16732,6 @@ private:
         [cluster readAttributeLocalConfigDisabledWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Query LocalConfigDisabled Error: %@", err);
 
-            if (err.code == MTRInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("localConfigDisabled", "", "boolean"));
@@ -16714,11 +16750,6 @@ private:
         [cluster readAttributeReachableWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Query Reachable Error: %@", err);
 
-            if (err.code == MTRInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("reachable", "", "boolean"));
@@ -16736,11 +16767,6 @@ private:
 
         [cluster readAttributeUniqueIDWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Query UniqueID Error: %@", err);
-
-            if (err.code == MTRInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -21421,22 +21447,42 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads MeasuredValue attribute from DUT\n");
+            if (ShouldSkip("ILL.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsMeasuredValueAttributeFromDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads MinMeasuredValue attribute from DUT\n");
+            if (ShouldSkip("ILL.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsMinMeasuredValueAttributeFromDut_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads MaxMeasuredValue attribute from DUT\n");
+            if (ShouldSkip("ILL.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsMaxMeasuredValueAttributeFromDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads Tolerance attribute from DUT\n");
+            if (ShouldSkip("ILL.S.A0003")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsToleranceAttributeFromDut_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads LightSensorType attribute from DUT\n");
+            if (ShouldSkip("ILL.S.A0004")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsLightSensorTypeAttributeFromDut_5();
             break;
         }
@@ -36254,11 +36300,6 @@ private:
         [cluster readAttributeGlobalSceneControlWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"read LT attribute: GlobalSceneControl Error: %@", err);
 
-            if (err.code == MTRInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("globalSceneControl", "", "bool"));
@@ -36276,11 +36317,6 @@ private:
 
         [cluster readAttributeOnTimeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"read LT attribute: OnTime Error: %@", err);
-
-            if (err.code == MTRInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -36300,11 +36336,6 @@ private:
         [cluster readAttributeOffWaitTimeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"read LT attribute: OffWaitTime Error: %@", err);
 
-            if (err.code == MTRInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("offWaitTime", "", "uint16"));
@@ -36322,11 +36353,6 @@ private:
 
         [cluster readAttributeStartUpOnOffWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"read LT attribute: StartUpOnOff Error: %@", err);
-
-            if (err.code == MTRInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -43146,11 +43172,6 @@ private:
 
         [cluster readAttributeToleranceWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Reads constraints of attribute: Tolerance Error: %@", err);
-
-            if (err.code == MTRInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -50949,11 +50970,11 @@ private:
     }
 };
 
-class Test_TC_ULABEL_2_5 : public TestCommandBridge {
+class Test_TC_ULABEL_3_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_ULABEL_2_5()
-        : TestCommandBridge("Test_TC_ULABEL_2_5")
+    Test_TC_ULABEL_3_1()
+        : TestCommandBridge("Test_TC_ULABEL_3_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -50963,7 +50984,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_ULABEL_2_5() {}
+    ~Test_TC_ULABEL_3_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -50971,11 +50992,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ULABEL_2_5\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ULABEL_3_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ULABEL_2_5\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ULABEL_3_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -100329,11 +100350,11 @@ private:
     }
 };
 
-class Test_TC_DLRK_2_2 : public TestCommandBridge {
+class Test_TC_DRLK_2_2 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_DLRK_2_2()
-        : TestCommandBridge("Test_TC_DLRK_2_2")
+    Test_TC_DRLK_2_2()
+        : TestCommandBridge("Test_TC_DRLK_2_2")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -100343,7 +100364,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_DLRK_2_2() {}
+    ~Test_TC_DRLK_2_2() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -100351,11 +100372,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DLRK_2_2\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DRLK_2_2\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DLRK_2_2\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DRLK_2_2\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -100374,64 +100395,124 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : TH writes the RequirePINforRemoteOperation attribute value as False on the DUT\n");
+            if (ShouldSkip("DRLK.S.A0033")) {
+                NextTest();
+                return;
+            }
             err = TestThWritesTheRequirePINforRemoteOperationAttributeValueAsFalseOnTheDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends Lock Door Command to the DUT without PINCode\n");
+            if (ShouldSkip("DRLK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsLockDoorCommandToTheDutWithoutPINCode_2();
             break;
         case 3:
             ChipLogProgress(
                 chipTool, " ***** Test Step 3 : TH writes the RequirePINforRemoteOperation attribute value as True on the DUT\n");
+            if (ShouldSkip("DRLK.S.A0033")) {
+                NextTest();
+                return;
+            }
             err = TestThWritesTheRequirePINforRemoteOperationAttributeValueAsTrueOnTheDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Create new PIN credential and lock/unlock user\n");
+            if (ShouldSkip("DRLK.S.C22.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestCreateNewPinCredentialAndLockUnlockUser_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : TH sends Lock Door Command to the DUT with valid PINCode\n");
+            if (ShouldSkip("DRLK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsLockDoorCommandToTheDutWithValidPINCode_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : TH sends Lock Door Command to the DUT without any argument PINCode\n");
+            if (ShouldSkip("DRLK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsLockDoorCommandToTheDutWithoutAnyArgumentPINCode_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : TH writes WrongCodeEntryLimit attribute value as 3 on the DUT\n");
+            if (ShouldSkip("DRLK.S.A0030")) {
+                NextTest();
+                return;
+            }
             err = TestThWritesWrongCodeEntryLimitAttributeValueAs3OnTheDut_7();
             break;
         case 8:
             ChipLogProgress(
                 chipTool, " ***** Test Step 8 : TH writes UserCodeTemporaryDisableTime attribute value as 5 seconds on the DUT\n");
+            if (ShouldSkip("DRLK.S.A0031")) {
+                NextTest();
+                return;
+            }
             err = TestThWritesUserCodeTemporaryDisableTimeAttributeValueAs5SecondsOnTheDut_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
+            if (ShouldSkip("DRLK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_9();
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
+            if (ShouldSkip("DRLK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
+            if (ShouldSkip("DRLK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_11();
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
+            if (ShouldSkip("DRLK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_12();
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : TH reads UserCodeTemporaryDisableTime attribute from DUT\n");
+            if (ShouldSkip("DRLK.S.A0031")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsUserCodeTemporaryDisableTimeAttributeFromDut_13();
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : TH sends Lock Door Command to the DUT with valid PINCode\n");
+            if (ShouldSkip("DRLK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsLockDoorCommandToTheDutWithValidPINCode_14();
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Clean the created credential\n");
+            if (ShouldSkip("DRLK.S.C26.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestCleanTheCreatedCredential_15();
             break;
         }
@@ -100854,11 +100935,11 @@ private:
     }
 };
 
-class Test_TC_DLRK_2_3 : public TestCommandBridge {
+class Test_TC_DRLK_2_3 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_DLRK_2_3()
-        : TestCommandBridge("Test_TC_DLRK_2_3")
+    Test_TC_DRLK_2_3()
+        : TestCommandBridge("Test_TC_DRLK_2_3")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -100868,7 +100949,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_DLRK_2_3() {}
+    ~Test_TC_DRLK_2_3() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -100876,11 +100957,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DLRK_2_3\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DRLK_2_3\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DLRK_2_3\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DRLK_2_3\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -100898,22 +100979,42 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Create new PIN credential and lock/unlock user\n");
+            if (ShouldSkip("DRLK.S.C22.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestCreateNewPinCredentialAndLockUnlockUser_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Precondition: Door is in locked state\n");
+            if (ShouldSkip("DRLK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestPreconditionDoorIsInLockedState_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : TH writes AutoRelockTime attribute value as 10 seconds on the DUT\n");
+            if (ShouldSkip("DRLK.S.A0023")) {
+                NextTest();
+                return;
+            }
             err = TestThWritesAutoRelockTimeAttributeValueAs10SecondsOnTheDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : TH sends the unlock Door command to the DUT with valid PINCode\n");
+            if (ShouldSkip("DRLK.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsTheUnlockDoorCommandToTheDutWithValidPINCode_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads AutoRelockTime attribute from DUT\n");
+            if (ShouldSkip("DRLK.S.A0023")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsAutoRelockTimeAttributeFromDut_5();
             break;
         case 6:
@@ -100922,10 +101023,18 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads LockState attribute\n");
+            if (ShouldSkip("DRLK.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsLockStateAttribute_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Clean the created credential\n");
+            if (ShouldSkip("DRLK.S.C26.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestCleanTheCreatedCredential_8();
             break;
         }
@@ -101175,11 +101284,11 @@ private:
     }
 };
 
-class Test_TC_DLRK_2_4 : public TestCommandBridge {
+class Test_TC_DRLK_2_4 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_DLRK_2_4()
-        : TestCommandBridge("Test_TC_DLRK_2_4")
+    Test_TC_DRLK_2_4()
+        : TestCommandBridge("Test_TC_DRLK_2_4")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -101189,7 +101298,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_DLRK_2_4() {}
+    ~Test_TC_DRLK_2_4() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -101197,11 +101306,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DLRK_2_4\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DRLK_2_4\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DLRK_2_4\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DRLK_2_4\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -101219,22 +101328,42 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Create new PIN credential and lock/unlock user\n");
+            if (ShouldSkip("DRLK.S.C22.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestCreateNewPinCredentialAndLockUnlockUser_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Precondition: Door is in locked state\n");
+            if (ShouldSkip("DRLK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestPreconditionDoorIsInLockedState_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : TH writes AutoRelockTime attribute value as 10 seconds on the DUT\n");
+            if (ShouldSkip("DRLK.S.A0023")) {
+                NextTest();
+                return;
+            }
             err = TestThWritesAutoRelockTimeAttributeValueAs10SecondsOnTheDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : TH sends the unlock with Timeout command to the DUT \n");
+            if (ShouldSkip("DRLK.S.C03.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsTheUnlockWithTimeoutCommandToTheDut_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads AutoRelockTime attribute from DUT\n");
+            if (ShouldSkip("DRLK.S.A0023")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsAutoRelockTimeAttributeFromDut_5();
             break;
         case 6:
@@ -101243,6 +101372,10 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads LockState attribute\n");
+            if (ShouldSkip("DRLK.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsLockStateAttribute_7();
             break;
         }
@@ -101467,11 +101600,11 @@ private:
     }
 };
 
-class Test_TC_DLRK_2_5 : public TestCommandBridge {
+class Test_TC_DRLK_2_5 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_DLRK_2_5()
-        : TestCommandBridge("Test_TC_DLRK_2_5")
+    Test_TC_DRLK_2_5()
+        : TestCommandBridge("Test_TC_DRLK_2_5")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -101481,7 +101614,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_DLRK_2_5() {}
+    ~Test_TC_DRLK_2_5() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -101489,11 +101622,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DLRK_2_5\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DRLK_2_5\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DLRK_2_5\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DRLK_2_5\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -101511,40 +101644,76 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Create new PIN credential and lock/unlock user\n");
+            if (ShouldSkip("DRLK.S.C22.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestCreateNewPinCredentialAndLockUnlockUser_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Get Max number of Week Day schedules for user\n");
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.A0014")) {
+                NextTest();
+                return;
+            }
             err = TestGetMaxNumberOfWeekDaySchedulesForUser_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Get number of supported users\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.A0011")) {
+                NextTest();
+                return;
+            }
             err = TestGetNumberOfSupportedUsers_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Send Set Week Day Schedule Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0B.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendSetWeekDayScheduleCommandToDut_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : send GetWeekDay Schedule Command \n");
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0C.Rsp && DRLK.S.C0C.Tx")) {
+                NextTest();
+                return;
+            }
             err = TestSendGetWeekDayScheduleCommand_5();
             break;
         case 6:
             ChipLogProgress(
                 chipTool, " ***** Test Step 6 : Send Set Week Day Schedule Command to DUT and verify INVALID_COMMAND response\n");
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0B.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendSetWeekDayScheduleCommandToDutAndVerifyInvalidCommandResponse_6();
             break;
         case 7:
             ChipLogProgress(
                 chipTool, " ***** Test Step 7 : send GetWeekDay Schedule Command to DUT and verify INVALID_COMMAND response\n");
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0C.Rsp && DRLK.S.C0C.Tx")) {
+                NextTest();
+                return;
+            }
             err = TestSendGetWeekDayScheduleCommandToDutAndVerifyInvalidCommandResponse_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Clear all week day schedules for the first user\n");
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0D.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestClearAllWeekDaySchedulesForTheFirstUser_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : send GetWeekDay Schedule Command \n");
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0C.Rsp && DRLK.S.C0C.Tx")) {
+                NextTest();
+                return;
+            }
             err = TestSendGetWeekDayScheduleCommand_9();
             break;
         }
@@ -101981,11 +102150,11 @@ private:
     }
 };
 
-class Test_TC_DLRK_2_7 : public TestCommandBridge {
+class Test_TC_DRLK_2_7 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_DLRK_2_7()
-        : TestCommandBridge("Test_TC_DLRK_2_7")
+    Test_TC_DRLK_2_7()
+        : TestCommandBridge("Test_TC_DRLK_2_7")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -101995,7 +102164,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_DLRK_2_7() {}
+    ~Test_TC_DRLK_2_7() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -102003,11 +102172,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DLRK_2_7\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DRLK_2_7\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DLRK_2_7\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DRLK_2_7\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -102033,46 +102202,86 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Get Max number of year Day schedules for user\n");
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.A0015")) {
+                NextTest();
+                return;
+            }
             err = TestGetMaxNumberOfYearDaySchedulesForUser_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Get number of supported users\n");
+            if (ShouldSkip("DRLK.C.F08 && DRLK.S.A0011")) {
+                NextTest();
+                return;
+            }
             err = TestGetNumberOfSupportedUsers_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Send Set Year Day Schedule Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0E.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendSetYearDayScheduleCommandToDut_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : send Get Year Day Schedule Command\n");
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0F.Rsp && DRLK.S.C0F.Tx")) {
+                NextTest();
+                return;
+            }
             err = TestSendGetYearDayScheduleCommand_6();
             break;
         case 7:
             ChipLogProgress(
                 chipTool, " ***** Test Step 7 : Send Set Year Day Schedule Command to DUT and verify INVALID_COMMAND response\n");
+            if (ShouldSkip("DRLK.S.C0E.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendSetYearDayScheduleCommandToDutAndVerifyInvalidCommandResponse_7();
             break;
         case 8:
             ChipLogProgress(
                 chipTool, " ***** Test Step 8 : send Get Year Day Schedule Command to DUT and Verify INVALID_FIELD response\n");
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0F.Rsp && DRLK.S.C0F.Tx")) {
+                NextTest();
+                return;
+            }
             err = TestSendGetYearDayScheduleCommandToDutAndVerifyInvalidFieldResponse_8();
             break;
         case 9:
             ChipLogProgress(
                 chipTool, " ***** Test Step 9 : send Get Year Day Schedule Command to DUT and verify FAILURE response\n");
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0F.Rsp && DRLK.S.C0F.Tx")) {
+                NextTest();
+                return;
+            }
             err = TestSendGetYearDayScheduleCommandToDutAndVerifyFailureResponse_9();
             break;
         case 10:
             ChipLogProgress(
                 chipTool, " ***** Test Step 10 : send Get Year Day Schedule Command  to DUT and verify NOT_FOUND response \n");
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0F.Rsp && DRLK.S.C0F.Tx")) {
+                NextTest();
+                return;
+            }
             err = TestSendGetYearDayScheduleCommandToDutAndVerifyNotFoundResponse_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Send Set Year Day Schedule Command to DUT\n");
+            if (ShouldSkip("DRLK.S.C0E.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestSendSetYearDayScheduleCommandToDut_11();
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : send Get Year Day Schedule Command \n");
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0F.Rsp && DRLK.S.C0F.Tx")) {
+                NextTest();
+                return;
+            }
             err = TestSendGetYearDayScheduleCommand_12();
             break;
         }
@@ -102596,11 +102805,11 @@ private:
     }
 };
 
-class Test_TC_DLRK_2_9 : public TestCommandBridge {
+class Test_TC_DRLK_2_9 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_DLRK_2_9()
-        : TestCommandBridge("Test_TC_DLRK_2_9")
+    Test_TC_DRLK_2_9()
+        : TestCommandBridge("Test_TC_DRLK_2_9")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -102610,7 +102819,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_DLRK_2_9() {}
+    ~Test_TC_DRLK_2_9() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -102618,11 +102827,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DLRK_2_9\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DRLK_2_9\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DLRK_2_9\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DRLK_2_9\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -102641,66 +102850,130 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : TH reads NumberOfTotalUsersSupported attribute and saves for future use.\n");
+            if (ShouldSkip("DRLK.C.F08 && DRLK.S.A0011")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsNumberOfTotalUsersSupportedAttributeAndSavesForFutureUse_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends Set Credential Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsSetCredentialCommandToDut_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : TH sends Get Credential Status Command\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsGetCredentialStatusCommand_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : TH sends Set Credential Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsSetCredentialCommandToDut_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : TH sends Set Credential Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsSetCredentialCommandToDut_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : TH sends Set Credential Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsSetCredentialCommandToDut_6();
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : TH sends Set Credential Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsSetCredentialCommandToDut_7();
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : TH sends Set Credential Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsSetCredentialCommandToDut_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : TH sends Clear Credential Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C26.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsClearCredentialCommandToDut_9();
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : TH sends Set Credential Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsSetCredentialCommandToDut_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : TH sends Clear Credential Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C26.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsClearCredentialCommandToDut_11();
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : TH sends Set Credential Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsSetCredentialCommandToDut_12();
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : TH sends Clear Credential Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C26.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsClearCredentialCommandToDut_13();
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : TH sends Get Credential Status Command\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsGetCredentialStatusCommand_14();
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : TH sends Set Credential Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsSetCredentialCommandToDut_15();
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : TH sends Clear Credential Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C26.Rsp")) {
+                NextTest();
+                return;
+            }
             err = TestThSendsClearCredentialCommandToDut_16();
             break;
         }
@@ -104983,7 +105256,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_ULABEL_2_2>(),
         make_unique<Test_TC_ULABEL_2_3>(),
         make_unique<Test_TC_ULABEL_2_4>(),
-        make_unique<Test_TC_ULABEL_2_5>(),
+        make_unique<Test_TC_ULABEL_3_1>(),
         make_unique<Test_TC_DGWIFI_2_1>(),
         make_unique<Test_TC_DGWIFI_2_3>(),
         make_unique<Test_TC_WNCV_1_1>(),
@@ -105040,12 +105313,12 @@ void registerCommandsTests(Commands & commands)
         make_unique<DL_UsersAndCredentials>(),
         make_unique<DL_LockUnlock>(),
         make_unique<DL_Schedules>(),
-        make_unique<Test_TC_DLRK_2_2>(),
-        make_unique<Test_TC_DLRK_2_3>(),
-        make_unique<Test_TC_DLRK_2_4>(),
-        make_unique<Test_TC_DLRK_2_5>(),
-        make_unique<Test_TC_DLRK_2_7>(),
-        make_unique<Test_TC_DLRK_2_9>(),
+        make_unique<Test_TC_DRLK_2_2>(),
+        make_unique<Test_TC_DRLK_2_3>(),
+        make_unique<Test_TC_DRLK_2_4>(),
+        make_unique<Test_TC_DRLK_2_5>(),
+        make_unique<Test_TC_DRLK_2_7>(),
+        make_unique<Test_TC_DRLK_2_9>(),
         make_unique<TestGroupsCluster>(),
         make_unique<TestGroupKeyManagementCluster>(),
 #endif // CONFIG_ENABLE_YAML_TESTS
