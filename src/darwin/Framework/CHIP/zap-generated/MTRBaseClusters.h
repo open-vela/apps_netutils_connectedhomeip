@@ -34,9 +34,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Identify
  *
  */
-@interface MTRIdentify : MTRCluster
+@interface MTRBaseClusterIdentify : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -184,9 +184,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Groups
  *
  */
-@interface MTRGroups : MTRCluster
+@interface MTRBaseClusterGroups : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -325,9 +325,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Scenes
  *
  */
-@interface MTRScenes : MTRCluster
+@interface MTRBaseClusterScenes : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -565,9 +565,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster On/Off
  *
  */
-@interface MTROnOff : MTRCluster
+@interface MTRBaseClusterOnOff : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -779,9 +779,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster On/off Switch Configuration
  *
  */
-@interface MTROnOffSwitchConfiguration : MTRCluster
+@interface MTRBaseClusterOnOffSwitchConfiguration : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -924,9 +924,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Level Control
  *
  */
-@interface MTRLevelControl : MTRCluster
+@interface MTRBaseClusterLevelControl : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -1322,9 +1322,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Binary Input (Basic)
  *
  */
-@interface MTRBinaryInputBasic : MTRCluster
+@interface MTRBaseClusterBinaryInputBasic : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -1608,9 +1608,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Descriptor
  *
  */
-@interface MTRDescriptor : MTRCluster
+@interface MTRBaseClusterDescriptor : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -1778,9 +1778,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Binding
  *
  */
-@interface MTRBinding : MTRCluster
+@interface MTRBaseClusterBinding : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -1904,9 +1904,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Access Control
  *
  */
-@interface MTRAccessControl : MTRCluster
+@interface MTRBaseClusterAccessControl : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -2107,9 +2107,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Bridged Actions
  *
  */
-@interface MTRBridgedActions : MTRCluster
+@interface MTRBaseClusterBridgedActions : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -2287,9 +2287,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Basic
  *
  */
-@interface MTRBasic : MTRCluster
+@interface MTRBaseClusterBasic : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -2756,9 +2756,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster OTA Software Update Provider
  *
  */
-@interface MTROtaSoftwareUpdateProvider : MTRCluster
+@interface MTRBaseClusterOtaSoftwareUpdateProvider : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -2871,9 +2871,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster OTA Software Update Requestor
  *
  */
-@interface MTROtaSoftwareUpdateRequestor : MTRCluster
+@interface MTRBaseClusterOtaSoftwareUpdateRequestor : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -3058,9 +3058,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Localization Configuration
  *
  */
-@interface MTRLocalizationConfiguration : MTRCluster
+@interface MTRBaseClusterLocalizationConfiguration : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -3204,9 +3204,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Time Format Localization
  *
  */
-@interface MTRTimeFormatLocalization : MTRCluster
+@interface MTRBaseClusterTimeFormatLocalization : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -3372,9 +3372,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Unit Localization
  *
  */
-@interface MTRUnitLocalization : MTRCluster
+@interface MTRBaseClusterUnitLocalization : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -3500,9 +3500,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Power Source Configuration
  *
  */
-@interface MTRPowerSourceConfiguration : MTRCluster
+@interface MTRBaseClusterPowerSourceConfiguration : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -3621,9 +3621,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Power Source
  *
  */
-@interface MTRPowerSource : MTRCluster
+@interface MTRBaseClusterPowerSource : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -4297,9 +4297,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster General Commissioning
  *
  */
-@interface MTRGeneralCommissioning : MTRCluster
+@interface MTRBaseClusterGeneralCommissioning : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -4514,9 +4514,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Network Commissioning
  *
  */
-@interface MTRNetworkCommissioning : MTRCluster
+@interface MTRBaseClusterNetworkCommissioning : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -4786,9 +4786,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Diagnostic Logs
  *
  */
-@interface MTRDiagnosticLogs : MTRCluster
+@interface MTRBaseClusterDiagnosticLogs : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -4896,9 +4896,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster General Diagnostics
  *
  */
-@interface MTRGeneralDiagnostics : MTRCluster
+@interface MTRBaseClusterGeneralDiagnostics : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -5166,9 +5166,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Software Diagnostics
  *
  */
-@interface MTRSoftwareDiagnostics : MTRCluster
+@interface MTRBaseClusterSoftwareDiagnostics : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -5349,9 +5349,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Thread Network Diagnostics
  *
  */
-@interface MTRThreadNetworkDiagnostics : MTRCluster
+@interface MTRBaseClusterThreadNetworkDiagnostics : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -6598,9 +6598,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster WiFi Network Diagnostics
  *
  */
-@interface MTRWiFiNetworkDiagnostics : MTRCluster
+@interface MTRBaseClusterWiFiNetworkDiagnostics : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -6939,9 +6939,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Ethernet Network Diagnostics
  *
  */
-@interface MTREthernetNetworkDiagnostics : MTRCluster
+@interface MTRBaseClusterEthernetNetworkDiagnostics : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -7207,9 +7207,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Bridged Device Basic
  *
  */
-@interface MTRBridgedDeviceBasic : MTRCluster
+@interface MTRBaseClusterBridgedDeviceBasic : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -7577,9 +7577,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Switch
  *
  */
-@interface MTRSwitch : MTRCluster
+@interface MTRBaseClusterSwitch : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -7737,9 +7737,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster AdministratorCommissioning
  *
  */
-@interface MTRAdministratorCommissioning : MTRCluster
+@interface MTRBaseClusterAdministratorCommissioning : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -7905,9 +7905,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Operational Credentials
  *
  */
-@interface MTROperationalCredentials : MTRCluster
+@interface MTRBaseClusterOperationalCredentials : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -8141,9 +8141,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Group Key Management
  *
  */
-@interface MTRGroupKeyManagement : MTRCluster
+@interface MTRBaseClusterGroupKeyManagement : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -8332,9 +8332,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Fixed Label
  *
  */
-@interface MTRFixedLabel : MTRCluster
+@interface MTRBaseClusterFixedLabel : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -8454,9 +8454,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster User Label
  *
  */
-@interface MTRUserLabel : MTRCluster
+@interface MTRBaseClusterUserLabel : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -8580,9 +8580,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Boolean State
  *
  */
-@interface MTRBooleanState : MTRCluster
+@interface MTRBaseClusterBooleanState : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -8703,9 +8703,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Mode Select
  *
  */
-@interface MTRModeSelect : MTRCluster
+@interface MTRBaseClusterModeSelect : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -8922,9 +8922,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Door Lock
  *
  */
-@interface MTRDoorLock : MTRCluster
+@interface MTRBaseClusterDoorLock : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -9806,9 +9806,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Window Covering
  *
  */
-@interface MTRWindowCovering : MTRCluster
+@interface MTRBaseClusterWindowCovering : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -10340,9 +10340,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Barrier Control
  *
  */
-@interface MTRBarrierControl : MTRCluster
+@interface MTRBaseClusterBarrierControl : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -10662,9 +10662,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Pump Configuration and Control
  *
  */
-@interface MTRPumpConfigurationAndControl : MTRCluster
+@interface MTRBaseClusterPumpConfigurationAndControl : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -11189,9 +11189,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Thermostat
  *
  */
-@interface MTRThermostat : MTRCluster
+@interface MTRBaseClusterThermostat : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -12329,9 +12329,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Fan Control
  *
  */
-@interface MTRFanControl : MTRCluster
+@interface MTRBaseClusterFanControl : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -12649,9 +12649,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Thermostat User Interface Configuration
  *
  */
-@interface MTRThermostatUserInterfaceConfiguration : MTRCluster
+@interface MTRBaseClusterThermostatUserInterfaceConfiguration : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -12825,9 +12825,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Color Control
  *
  */
-@interface MTRColorControl : MTRCluster
+@interface MTRBaseClusterColorControl : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -13931,9 +13931,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Illuminance Measurement
  *
  */
-@interface MTRIlluminanceMeasurement : MTRCluster
+@interface MTRBaseClusterIlluminanceMeasurement : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -14125,9 +14125,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Temperature Measurement
  *
  */
-@interface MTRTemperatureMeasurement : MTRCluster
+@interface MTRBaseClusterTemperatureMeasurement : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -14301,9 +14301,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Pressure Measurement
  *
  */
-@interface MTRPressureMeasurement : MTRCluster
+@interface MTRBaseClusterPressureMeasurement : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -14563,9 +14563,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Flow Measurement
  *
  */
-@interface MTRFlowMeasurement : MTRCluster
+@interface MTRBaseClusterFlowMeasurement : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -14739,9 +14739,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Relative Humidity Measurement
  *
  */
-@interface MTRRelativeHumidityMeasurement : MTRCluster
+@interface MTRBaseClusterRelativeHumidityMeasurement : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -14915,9 +14915,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Occupancy Sensing
  *
  */
-@interface MTROccupancySensing : MTRCluster
+@interface MTRBaseClusterOccupancySensing : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -15295,9 +15295,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Wake on LAN
  *
  */
-@interface MTRWakeOnLan : MTRCluster
+@interface MTRBaseClusterWakeOnLan : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -15418,9 +15418,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Channel
  *
  */
-@interface MTRChannel : MTRCluster
+@interface MTRBaseClusterChannel : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -15584,9 +15584,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Target Navigator
  *
  */
-@interface MTRTargetNavigator : MTRCluster
+@interface MTRBaseClusterTargetNavigator : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -15728,9 +15728,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Media Playback
  *
  */
-@interface MTRMediaPlayback : MTRCluster
+@interface MTRBaseClusterMediaPlayback : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -16006,9 +16006,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Media Input
  *
  */
-@interface MTRMediaInput : MTRCluster
+@interface MTRBaseClusterMediaInput : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -16155,9 +16155,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Low Power
  *
  */
-@interface MTRLowPower : MTRCluster
+@interface MTRBaseClusterLowPower : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -16264,9 +16264,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Keypad Input
  *
  */
-@interface MTRKeypadInput : MTRCluster
+@interface MTRBaseClusterKeypadInput : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -16374,9 +16374,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Content Launcher
  *
  */
-@interface MTRContentLauncher : MTRCluster
+@interface MTRBaseClusterContentLauncher : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -16528,9 +16528,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Audio Output
  *
  */
-@interface MTRAudioOutput : MTRCluster
+@interface MTRBaseClusterAudioOutput : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -16673,9 +16673,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Application Launcher
  *
  */
-@interface MTRApplicationLauncher : MTRCluster
+@interface MTRBaseClusterApplicationLauncher : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -16829,9 +16829,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Application Basic
  *
  */
-@interface MTRApplicationBasic : MTRCluster
+@interface MTRBaseClusterApplicationBasic : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -17073,9 +17073,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Account Login
  *
  */
-@interface MTRAccountLogin : MTRCluster
+@interface MTRBaseClusterAccountLogin : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -17187,9 +17187,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Electrical Measurement
  *
  */
-@interface MTRElectricalMeasurement : MTRCluster
+@interface MTRBaseClusterElectricalMeasurement : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
@@ -19700,9 +19700,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Cluster Test Cluster
  *
  */
-@interface MTRTestCluster : MTRCluster
+@interface MTRBaseClusterTestCluster : MTRCluster
 
-- (nullable instancetype)initWithDevice:(MTRDevice *)device
+- (nullable instancetype)initWithDevice:(MTRBaseDevice *)device
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 

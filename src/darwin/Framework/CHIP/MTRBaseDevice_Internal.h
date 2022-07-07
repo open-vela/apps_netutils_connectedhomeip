@@ -15,7 +15,7 @@
  *    limitations under the License.
  */
 
-#import "MTRDevice.h"
+#import "MTRBaseDevice.h"
 #import <Foundation/Foundation.h>
 
 #include <app/ConcreteAttributePath.h>
@@ -24,7 +24,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MTRDevice ()
+@interface MTRBaseDevice ()
 
 - (instancetype)initWithDevice:(chip::DeviceProxy *)device;
 - (chip::DeviceProxy *)internalDevice;
