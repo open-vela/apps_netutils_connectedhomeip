@@ -89307,8 +89307,8 @@ private:
 
     CHIP_ERROR TestAttemptToWriteOverlyLongItemForLabel_1()
     {
-        MTRDevice * device = GetDevice("alpha");
-        MTRTestUserLabel * cluster = [[MTRTestUserLabel alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterUserLabel * cluster = [[MTRBaseClusterUserLabel alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id labelListArgument;
@@ -89333,8 +89333,8 @@ private:
 
     CHIP_ERROR TestAttemptToWriteOverlyLongItemForValue_2()
     {
-        MTRDevice * device = GetDevice("alpha");
-        MTRTestUserLabel * cluster = [[MTRTestUserLabel alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterUserLabel * cluster = [[MTRBaseClusterUserLabel alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id labelListArgument;
