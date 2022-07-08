@@ -80064,91 +80064,120 @@ public:
             err = TestWriteAttributeListBackToDefaultValue_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Write attribute INT32U Value\n");
-            err = TestWriteAttributeInt32uValue_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read attribute BITMAP32 Default Value\n");
+            err = TestReadAttributeBitmap32DefaultValue_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Read attribute INT32U Value MinValue Constraints\n");
-            err = TestReadAttributeInt32uValueMinValueConstraints_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Write attribute BITMAP32 with MaskVal1 and MaskVal3\n");
+            err = TestWriteAttributeBitmap32WithMaskVal1AndMaskVal3_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Read attribute INT32U Value MaxValue Constraints\n");
-            err = TestReadAttributeInt32uValueMaxValueConstraints_7();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Read attribute BITMAP32 with MaskVal1 and MaskVal3 and ensure MaskVal2 is not set\n");
+            err = TestReadAttributeBitmap32WithMaskVal1AndMaskVal3AndEnsureMaskVal2IsNotSet_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Read attribute INT32U Value NotValue Constraints\n");
-            err = TestReadAttributeInt32uValueNotValueConstraints_8();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 8 : Read attribute BITMAP32 with MaskVal1 and MaskVal3 and ensure MaskVal1 is set\n");
+            err = TestReadAttributeBitmap32WithMaskVal1AndMaskVal3AndEnsureMaskVal1IsSet_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Write attribute INT32U Value Back to Default Value\n");
-            err = TestWriteAttributeInt32uValueBackToDefaultValue_9();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 9 : Read attribute BITMAP32 with MaskVal1 and MaskVal3 and ensure MaskVal3 is set\n");
+            err = TestReadAttributeBitmap32WithMaskVal1AndMaskVal3AndEnsureMaskVal3IsSet_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Write attribute CHAR_STRING Value\n");
-            err = TestWriteAttributeCharStringValue_10();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 10 : Read attribute BITMAP32 with MaskVal1 and MaskVal3 and ensure Maskval1 and MaskVal3 are "
+                "set\n");
+            err = TestReadAttributeBitmap32WithMaskVal1AndMaskVal3AndEnsureMaskval1AndMaskVal3AreSet_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Read attribute CHAR_STRING Value MinLength Constraints\n");
-            err = TestReadAttributeCharStringValueMinLengthConstraints_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Write attribute INT32U Value\n");
+            err = TestWriteAttributeInt32uValue_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Read attribute CHAR_STRING Value MaxLength Constraints\n");
-            err = TestReadAttributeCharStringValueMaxLengthConstraints_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Read attribute INT32U Value MinValue Constraints\n");
+            err = TestReadAttributeInt32uValueMinValueConstraints_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Read attribute CHAR_STRING Value StartsWith Constraints\n");
-            err = TestReadAttributeCharStringValueStartsWithConstraints_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Read attribute INT32U Value MaxValue Constraints\n");
+            err = TestReadAttributeInt32uValueMaxValueConstraints_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Read attribute CHAR_STRING Value EndsWith Constraints\n");
-            err = TestReadAttributeCharStringValueEndsWithConstraints_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Read attribute INT32U Value NotValue Constraints\n");
+            err = TestReadAttributeInt32uValueNotValueConstraints_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Write attribute CHAR_STRING Value\n");
-            err = TestWriteAttributeCharStringValue_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Write attribute INT32U Value Back to Default Value\n");
+            err = TestWriteAttributeInt32uValueBackToDefaultValue_15();
             break;
         case 16:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 16 : Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints\n");
-            err = TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Write attribute CHAR_STRING Value\n");
+            err = TestWriteAttributeCharStringValue_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Write attribute CHAR_STRING Value\n");
-            err = TestWriteAttributeCharStringValue_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Read attribute CHAR_STRING Value MinLength Constraints\n");
+            err = TestReadAttributeCharStringValueMinLengthConstraints_17();
             break;
         case 18:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 18 : Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints\n");
-            err = TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_18();
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Read attribute CHAR_STRING Value MaxLength Constraints\n");
+            err = TestReadAttributeCharStringValueMaxLengthConstraints_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Write attribute CHAR_STRING Value\n");
-            err = TestWriteAttributeCharStringValue_19();
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Read attribute CHAR_STRING Value StartsWith Constraints\n");
+            err = TestReadAttributeCharStringValueStartsWithConstraints_19();
             break;
         case 20:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 20 : Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints\n");
-            err = TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_20();
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Read attribute CHAR_STRING Value EndsWith Constraints\n");
+            err = TestReadAttributeCharStringValueEndsWithConstraints_20();
             break;
         case 21:
             ChipLogProgress(chipTool, " ***** Test Step 21 : Write attribute CHAR_STRING Value\n");
             err = TestWriteAttributeCharStringValue_21();
             break;
         case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : Read attribute CHAR_STRING Value isHexString Constraints\n");
-            err = TestReadAttributeCharStringValueIsHexStringConstraints_22();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 22 : Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints\n");
+            err = TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_22();
             break;
         case 23:
             ChipLogProgress(chipTool, " ***** Test Step 23 : Write attribute CHAR_STRING Value\n");
             err = TestWriteAttributeCharStringValue_23();
             break;
         case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : Read attribute CHAR_STRING Value isHexString Constraints\n");
-            err = TestReadAttributeCharStringValueIsHexStringConstraints_24();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 24 : Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints\n");
+            err = TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_24();
             break;
         case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : Write attribute CHAR_STRING Value Back to Default Value\n");
-            err = TestWriteAttributeCharStringValueBackToDefaultValue_25();
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Write attribute CHAR_STRING Value\n");
+            err = TestWriteAttributeCharStringValue_25();
+            break;
+        case 26:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 26 : Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints\n");
+            err = TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Write attribute CHAR_STRING Value\n");
+            err = TestWriteAttributeCharStringValue_27();
+            break;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Read attribute CHAR_STRING Value isHexString Constraints\n");
+            err = TestReadAttributeCharStringValueIsHexStringConstraints_28();
+            break;
+        case 29:
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Write attribute CHAR_STRING Value\n");
+            err = TestWriteAttributeCharStringValue_29();
+            break;
+        case 30:
+            ChipLogProgress(chipTool, " ***** Test Step 30 : Read attribute CHAR_STRING Value isHexString Constraints\n");
+            err = TestReadAttributeCharStringValueIsHexStringConstraints_30();
+            break;
+        case 31:
+            ChipLogProgress(chipTool, " ***** Test Step 31 : Write attribute CHAR_STRING Value Back to Default Value\n");
+            err = TestWriteAttributeCharStringValueBackToDefaultValue_31();
             break;
         }
 
@@ -80239,6 +80268,24 @@ public:
         case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -80252,7 +80299,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 26;
+    const uint16_t mTestCount = 32;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -80365,7 +80412,149 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeInt32uValue_5()
+    CHIP_ERROR TestReadAttributeBitmap32DefaultValue_5()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+                                                                                       endpoint:1
+                                                                                          queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBitmap32WithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute BITMAP32 Default Value Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("bitmap32", actualValue, 0UL));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteAttributeBitmap32WithMaskVal1AndMaskVal3_6()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+                                                                                       endpoint:1
+                                                                                          queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id bitmap32Argument;
+        bitmap32Argument = [NSNumber numberWithUnsignedInt:5UL];
+        [cluster writeAttributeBitmap32WithValue:bitmap32Argument
+                               completionHandler:^(NSError * _Nullable err) {
+                                   NSLog(@"Write attribute BITMAP32 with MaskVal1 and MaskVal3 Error: %@", err);
+
+                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                   NextTest();
+                               }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeBitmap32WithMaskVal1AndMaskVal3AndEnsureMaskVal2IsNotSet_7()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+                                                                                       endpoint:1
+                                                                                          queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBitmap32WithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute BITMAP32 with MaskVal1 and MaskVal3 and ensure MaskVal2 is not set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("bitmap32", actualValue, 5UL));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeBitmap32WithMaskVal1AndMaskVal3AndEnsureMaskVal1IsSet_8()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+                                                                                       endpoint:1
+                                                                                          queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBitmap32WithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute BITMAP32 with MaskVal1 and MaskVal3 and ensure MaskVal1 is set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("bitmap32", actualValue, 5UL));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeBitmap32WithMaskVal1AndMaskVal3AndEnsureMaskVal3IsSet_9()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+                                                                                       endpoint:1
+                                                                                          queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBitmap32WithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute BITMAP32 with MaskVal1 and MaskVal3 and ensure MaskVal3 is set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("bitmap32", actualValue, 5UL));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeBitmap32WithMaskVal1AndMaskVal3AndEnsureMaskval1AndMaskVal3AreSet_10()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+                                                                                       endpoint:1
+                                                                                          queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeBitmap32WithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute BITMAP32 with MaskVal1 and MaskVal3 and ensure Maskval1 and MaskVal3 are set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("bitmap32", actualValue, 5UL));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteAttributeInt32uValue_11()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80387,7 +80576,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeInt32uValueMinValueConstraints_6()
+    CHIP_ERROR TestReadAttributeInt32uValueMinValueConstraints_12()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80408,7 +80597,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeInt32uValueMaxValueConstraints_7()
+    CHIP_ERROR TestReadAttributeInt32uValueMaxValueConstraints_13()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80429,7 +80618,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeInt32uValueNotValueConstraints_8()
+    CHIP_ERROR TestReadAttributeInt32uValueNotValueConstraints_14()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80450,7 +80639,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeInt32uValueBackToDefaultValue_9()
+    CHIP_ERROR TestWriteAttributeInt32uValueBackToDefaultValue_15()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80472,7 +80661,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeCharStringValue_10()
+    CHIP_ERROR TestWriteAttributeCharStringValue_16()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80494,7 +80683,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeCharStringValueMinLengthConstraints_11()
+    CHIP_ERROR TestReadAttributeCharStringValueMinLengthConstraints_17()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80514,7 +80703,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeCharStringValueMaxLengthConstraints_12()
+    CHIP_ERROR TestReadAttributeCharStringValueMaxLengthConstraints_18()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80534,7 +80723,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeCharStringValueStartsWithConstraints_13()
+    CHIP_ERROR TestReadAttributeCharStringValueStartsWithConstraints_19()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80554,7 +80743,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeCharStringValueEndsWithConstraints_14()
+    CHIP_ERROR TestReadAttributeCharStringValueEndsWithConstraints_20()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80574,7 +80763,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeCharStringValue_15()
+    CHIP_ERROR TestWriteAttributeCharStringValue_21()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80596,7 +80785,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_16()
+    CHIP_ERROR TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_22()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80617,7 +80806,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeCharStringValue_17()
+    CHIP_ERROR TestWriteAttributeCharStringValue_23()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80639,7 +80828,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_18()
+    CHIP_ERROR TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_24()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80660,7 +80849,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeCharStringValue_19()
+    CHIP_ERROR TestWriteAttributeCharStringValue_25()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80682,7 +80871,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_20()
+    CHIP_ERROR TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_26()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80703,7 +80892,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeCharStringValue_21()
+    CHIP_ERROR TestWriteAttributeCharStringValue_27()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80725,7 +80914,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeCharStringValueIsHexStringConstraints_22()
+    CHIP_ERROR TestReadAttributeCharStringValueIsHexStringConstraints_28()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80745,7 +80934,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeCharStringValue_23()
+    CHIP_ERROR TestWriteAttributeCharStringValue_29()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80767,7 +80956,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeCharStringValueIsHexStringConstraints_24()
+    CHIP_ERROR TestReadAttributeCharStringValueIsHexStringConstraints_30()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
@@ -80787,7 +80976,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeCharStringValueBackToDefaultValue_25()
+    CHIP_ERROR TestWriteAttributeCharStringValueBackToDefaultValue_31()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
