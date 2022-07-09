@@ -80,42 +80,42 @@ public:
         printf("Test_TC_LVL_4_1\n");
         printf("Test_TC_LVL_5_1\n");
         printf("Test_TC_LVL_6_1\n");
-        printf("Test_TC_MC_1_1\n");
-        printf("Test_TC_MC_1_2\n");
-        printf("Test_TC_MC_1_3\n");
-        printf("Test_TC_MC_1_4\n");
-        printf("Test_TC_MC_1_5\n");
-        printf("Test_TC_MC_1_6\n");
-        printf("Test_TC_MC_1_7\n");
-        printf("Test_TC_MC_1_8\n");
-        printf("Test_TC_MC_1_9\n");
-        printf("Test_TC_MC_1_10\n");
-        printf("Test_TC_MC_1_11\n");
-        printf("Test_TC_MC_1_12\n");
-        printf("Test_TC_MC_2_1\n");
-        printf("Test_TC_MC_3_2\n");
-        printf("Test_TC_MC_3_3\n");
-        printf("Test_TC_MC_3_5\n");
-        printf("Test_TC_MC_3_6\n");
-        printf("Test_TC_MC_3_10\n");
-        printf("Test_TC_MC_3_11\n");
-        printf("Test_TC_MC_3_12\n");
-        printf("Test_TC_MC_3_13\n");
-        printf("Test_TC_MC_5_1\n");
-        printf("Test_TC_MC_5_2\n");
-        printf("Test_TC_MC_5_3\n");
-        printf("Test_TC_MC_6_1\n");
-        printf("Test_TC_MC_6_2\n");
-        printf("Test_TC_MC_6_3\n");
-        printf("Test_TC_MC_6_4\n");
-        printf("Test_TC_MC_7_1\n");
-        printf("Test_TC_MC_7_2\n");
-        printf("Test_TC_MC_8_1\n");
-        printf("Test_TC_MC_9_1\n");
-        printf("Test_TC_MC_10_1\n");
+        printf("Test_TC_LOWPOWER_1_1\n");
+        printf("Test_TC_KEYPADINPUT_1_2\n");
+        printf("Test_TC_APPLAUNCHER_1_3\n");
+        printf("Test_TC_MEDIAINPUT_1_4\n");
+        printf("Test_TC_WAKEONLAN_1_5\n");
+        printf("Test_TC_CHANNEL_1_6\n");
+        printf("Test_TC_MEDIAPLAYBACK_1_7\n");
+        printf("Test_TC_AUDIOOUTPUT_1_8\n");
+        printf("Test_TC_TGTNAV_1_9\n");
+        printf("Test_TC_APBSC_1_10\n");
+        printf("Test_TC_CONTENTLAUNCHER_1_11\n");
+        printf("Test_TC_ALOGIN_1_12\n");
+        printf("Test_TC_LOWPOWER_2_1\n");
+        printf("Test_TC_KEYPADINPUT_3_2\n");
+        printf("Test_TC_KEYPADINPUT_3_3\n");
+        printf("Test_TC_APPLAUNCHER_3_5\n");
+        printf("Test_TC_APPLAUNCHER_3_6\n");
+        printf("Test_TC_MEDIAINPUT_3_10\n");
+        printf("Test_TC_MEDIAINPUT_3_11\n");
+        printf("Test_TC_MEDIAINPUT_3_12\n");
+        printf("Test_TC_MEDIAINPUT_3_13\n");
+        printf("Test_TC_CHANNEL_5_1\n");
+        printf("Test_TC_CHANNEL_5_2\n");
+        printf("Test_TC_CHANNEL_5_3\n");
+        printf("Test_TC_MEDIAPLAYBACK_6_1\n");
+        printf("Test_TC_MEDIAPLAYBACK_6_2\n");
+        printf("Test_TC_MEDIAPLAYBACK_6_3\n");
+        printf("Test_TC_MEDIAPLAYBACK_6_4\n");
+        printf("Test_TC_AUDIOOUTPUT_7_1\n");
+        printf("Test_TC_AUDIOOUTPUT_7_2\n");
+        printf("Test_TC_TGTNAV_8_1\n");
+        printf("Test_TC_APBSC_9_1\n");
+        printf("Test_TC_CONTENTLAUNCHER_10_1\n");
         printf("Test_TC_MOD_1_1\n");
-        printf("Test_TC_MF_1_3\n");
-        printf("Test_TC_MF_1_4\n");
+        printf("Test_TC_CADMIN_1_3\n");
+        printf("Test_TC_CADMIN_1_4\n");
         printf("OTA_SuccessfulTransfer\n");
         printf("Test_TC_OCC_1_1\n");
         printf("Test_TC_OCC_2_1\n");
@@ -136,8 +136,8 @@ public:
         printf("Test_TC_RH_1_1\n");
         printf("Test_TC_RH_2_1\n");
         printf("Test_TC_SWTCH_2_1\n");
-        printf("Test_TC_TM_1_1\n");
-        printf("Test_TC_TM_2_1\n");
+        printf("Test_TC_TMP_1_1\n");
+        printf("Test_TC_TMP_2_1\n");
         printf("Test_TC_TSTAT_1_1\n");
         printf("Test_TC_TSTAT_2_1\n");
         printf("Test_TC_TSTAT_2_2\n");
@@ -26273,11 +26273,11 @@ private:
     }
 };
 
-class Test_TC_MC_1_1 : public TestCommandBridge {
+class Test_TC_LOWPOWER_1_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_1_1()
-        : TestCommandBridge("Test_TC_MC_1_1")
+    Test_TC_LOWPOWER_1_1()
+        : TestCommandBridge("Test_TC_LOWPOWER_1_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -26287,7 +26287,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_1_1() {}
+    ~Test_TC_LOWPOWER_1_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -26295,11 +26295,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_1_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_LOWPOWER_1_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_1_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_LOWPOWER_1_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -26535,11 +26535,11 @@ private:
     }
 };
 
-class Test_TC_MC_1_2 : public TestCommandBridge {
+class Test_TC_KEYPADINPUT_1_2 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_1_2()
-        : TestCommandBridge("Test_TC_MC_1_2")
+    Test_TC_KEYPADINPUT_1_2()
+        : TestCommandBridge("Test_TC_KEYPADINPUT_1_2")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -26549,7 +26549,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_1_2() {}
+    ~Test_TC_KEYPADINPUT_1_2() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -26557,11 +26557,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_1_2\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_KEYPADINPUT_1_2\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_1_2\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_KEYPADINPUT_1_2\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -26810,11 +26810,11 @@ private:
     }
 };
 
-class Test_TC_MC_1_3 : public TestCommandBridge {
+class Test_TC_APPLAUNCHER_1_3 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_1_3()
-        : TestCommandBridge("Test_TC_MC_1_3")
+    Test_TC_APPLAUNCHER_1_3()
+        : TestCommandBridge("Test_TC_APPLAUNCHER_1_3")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -26824,7 +26824,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_1_3() {}
+    ~Test_TC_APPLAUNCHER_1_3() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -26832,11 +26832,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_1_3\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_APPLAUNCHER_1_3\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_1_3\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_APPLAUNCHER_1_3\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -27089,11 +27089,11 @@ private:
     }
 };
 
-class Test_TC_MC_1_4 : public TestCommandBridge {
+class Test_TC_MEDIAINPUT_1_4 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_1_4()
-        : TestCommandBridge("Test_TC_MC_1_4")
+    Test_TC_MEDIAINPUT_1_4()
+        : TestCommandBridge("Test_TC_MEDIAINPUT_1_4")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -27103,7 +27103,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_1_4() {}
+    ~Test_TC_MEDIAINPUT_1_4() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -27111,11 +27111,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_1_4\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MEDIAINPUT_1_4\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_1_4\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MEDIAINPUT_1_4\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -27368,11 +27368,11 @@ private:
     }
 };
 
-class Test_TC_MC_1_5 : public TestCommandBridge {
+class Test_TC_WAKEONLAN_1_5 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_1_5()
-        : TestCommandBridge("Test_TC_MC_1_5")
+    Test_TC_WAKEONLAN_1_5()
+        : TestCommandBridge("Test_TC_WAKEONLAN_1_5")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -27382,7 +27382,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_1_5() {}
+    ~Test_TC_WAKEONLAN_1_5() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -27390,11 +27390,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_1_5\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_WAKEONLAN_1_5\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_1_5\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_WAKEONLAN_1_5\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -27625,11 +27625,11 @@ private:
     }
 };
 
-class Test_TC_MC_1_6 : public TestCommandBridge {
+class Test_TC_CHANNEL_1_6 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_1_6()
-        : TestCommandBridge("Test_TC_MC_1_6")
+    Test_TC_CHANNEL_1_6()
+        : TestCommandBridge("Test_TC_CHANNEL_1_6")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -27639,7 +27639,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_1_6() {}
+    ~Test_TC_CHANNEL_1_6() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -27647,11 +27647,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_1_6\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CHANNEL_1_6\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_1_6\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CHANNEL_1_6\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -27886,11 +27886,11 @@ private:
     }
 };
 
-class Test_TC_MC_1_7 : public TestCommandBridge {
+class Test_TC_MEDIAPLAYBACK_1_7 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_1_7()
-        : TestCommandBridge("Test_TC_MC_1_7")
+    Test_TC_MEDIAPLAYBACK_1_7()
+        : TestCommandBridge("Test_TC_MEDIAPLAYBACK_1_7")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -27900,7 +27900,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_1_7() {}
+    ~Test_TC_MEDIAPLAYBACK_1_7() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -27908,11 +27908,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_1_7\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MEDIAPLAYBACK_1_7\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_1_7\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MEDIAPLAYBACK_1_7\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -28156,11 +28156,11 @@ private:
     }
 };
 
-class Test_TC_MC_1_8 : public TestCommandBridge {
+class Test_TC_AUDIOOUTPUT_1_8 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_1_8()
-        : TestCommandBridge("Test_TC_MC_1_8")
+    Test_TC_AUDIOOUTPUT_1_8()
+        : TestCommandBridge("Test_TC_AUDIOOUTPUT_1_8")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -28170,7 +28170,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_1_8() {}
+    ~Test_TC_AUDIOOUTPUT_1_8() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -28178,11 +28178,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_1_8\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_AUDIOOUTPUT_1_8\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_1_8\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_AUDIOOUTPUT_1_8\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -28422,11 +28422,11 @@ private:
     }
 };
 
-class Test_TC_MC_1_9 : public TestCommandBridge {
+class Test_TC_TGTNAV_1_9 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_1_9()
-        : TestCommandBridge("Test_TC_MC_1_9")
+    Test_TC_TGTNAV_1_9()
+        : TestCommandBridge("Test_TC_TGTNAV_1_9")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -28436,7 +28436,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_1_9() {}
+    ~Test_TC_TGTNAV_1_9() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -28444,11 +28444,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_1_9\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_TGTNAV_1_9\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_1_9\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_TGTNAV_1_9\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -28743,11 +28743,11 @@ private:
     }
 };
 
-class Test_TC_MC_1_10 : public TestCommandBridge {
+class Test_TC_APBSC_1_10 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_1_10()
-        : TestCommandBridge("Test_TC_MC_1_10")
+    Test_TC_APBSC_1_10()
+        : TestCommandBridge("Test_TC_APBSC_1_10")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -28757,7 +28757,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_1_10() {}
+    ~Test_TC_APBSC_1_10() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -28765,11 +28765,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_1_10\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_APBSC_1_10\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_1_10\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_APBSC_1_10\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -29019,11 +29019,11 @@ private:
     }
 };
 
-class Test_TC_MC_1_11 : public TestCommandBridge {
+class Test_TC_CONTENTLAUNCHER_1_11 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_1_11()
-        : TestCommandBridge("Test_TC_MC_1_11")
+    Test_TC_CONTENTLAUNCHER_1_11()
+        : TestCommandBridge("Test_TC_CONTENTLAUNCHER_1_11")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -29033,7 +29033,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_1_11() {}
+    ~Test_TC_CONTENTLAUNCHER_1_11() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -29041,11 +29041,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_1_11\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CONTENTLAUNCHER_1_11\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_1_11\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CONTENTLAUNCHER_1_11\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -29291,11 +29291,11 @@ private:
     }
 };
 
-class Test_TC_MC_1_12 : public TestCommandBridge {
+class Test_TC_ALOGIN_1_12 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_1_12()
-        : TestCommandBridge("Test_TC_MC_1_12")
+    Test_TC_ALOGIN_1_12()
+        : TestCommandBridge("Test_TC_ALOGIN_1_12")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -29305,7 +29305,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_1_12() {}
+    ~Test_TC_ALOGIN_1_12() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -29313,11 +29313,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_1_12\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ALOGIN_1_12\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_1_12\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ALOGIN_1_12\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -29566,11 +29566,11 @@ private:
     }
 };
 
-class Test_TC_MC_2_1 : public TestCommandBridge {
+class Test_TC_LOWPOWER_2_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_2_1()
-        : TestCommandBridge("Test_TC_MC_2_1")
+    Test_TC_LOWPOWER_2_1()
+        : TestCommandBridge("Test_TC_LOWPOWER_2_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -29580,7 +29580,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_2_1() {}
+    ~Test_TC_LOWPOWER_2_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -29588,11 +29588,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_2_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_LOWPOWER_2_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_2_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_LOWPOWER_2_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -29678,11 +29678,11 @@ private:
     }
 };
 
-class Test_TC_MC_3_2 : public TestCommandBridge {
+class Test_TC_KEYPADINPUT_3_2 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_3_2()
-        : TestCommandBridge("Test_TC_MC_3_2")
+    Test_TC_KEYPADINPUT_3_2()
+        : TestCommandBridge("Test_TC_KEYPADINPUT_3_2")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -29692,7 +29692,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_3_2() {}
+    ~Test_TC_KEYPADINPUT_3_2() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -29700,11 +29700,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_3_2\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_KEYPADINPUT_3_2\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_3_2\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_KEYPADINPUT_3_2\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -29828,11 +29828,11 @@ private:
     }
 };
 
-class Test_TC_MC_3_3 : public TestCommandBridge {
+class Test_TC_KEYPADINPUT_3_3 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_3_3()
-        : TestCommandBridge("Test_TC_MC_3_3")
+    Test_TC_KEYPADINPUT_3_3()
+        : TestCommandBridge("Test_TC_KEYPADINPUT_3_3")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -29842,7 +29842,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_3_3() {}
+    ~Test_TC_KEYPADINPUT_3_3() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -29850,11 +29850,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_3_3\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_KEYPADINPUT_3_3\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_3_3\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_KEYPADINPUT_3_3\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -30209,11 +30209,11 @@ private:
     }
 };
 
-class Test_TC_MC_3_5 : public TestCommandBridge {
+class Test_TC_APPLAUNCHER_3_5 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_3_5()
-        : TestCommandBridge("Test_TC_MC_3_5")
+    Test_TC_APPLAUNCHER_3_5()
+        : TestCommandBridge("Test_TC_APPLAUNCHER_3_5")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -30223,7 +30223,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_3_5() {}
+    ~Test_TC_APPLAUNCHER_3_5() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -30231,11 +30231,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_3_5\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_APPLAUNCHER_3_5\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_3_5\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_APPLAUNCHER_3_5\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -30316,11 +30316,11 @@ private:
     }
 };
 
-class Test_TC_MC_3_6 : public TestCommandBridge {
+class Test_TC_APPLAUNCHER_3_6 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_3_6()
-        : TestCommandBridge("Test_TC_MC_3_6")
+    Test_TC_APPLAUNCHER_3_6()
+        : TestCommandBridge("Test_TC_APPLAUNCHER_3_6")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -30330,7 +30330,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_3_6() {}
+    ~Test_TC_APPLAUNCHER_3_6() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -30338,11 +30338,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_3_6\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_APPLAUNCHER_3_6\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_3_6\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_APPLAUNCHER_3_6\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -30424,11 +30424,11 @@ private:
     }
 };
 
-class Test_TC_MC_3_10 : public TestCommandBridge {
+class Test_TC_MEDIAINPUT_3_10 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_3_10()
-        : TestCommandBridge("Test_TC_MC_3_10")
+    Test_TC_MEDIAINPUT_3_10()
+        : TestCommandBridge("Test_TC_MEDIAINPUT_3_10")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -30438,7 +30438,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_3_10() {}
+    ~Test_TC_MEDIAINPUT_3_10() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -30446,11 +30446,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_3_10\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MEDIAINPUT_3_10\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_3_10\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MEDIAINPUT_3_10\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -30529,11 +30529,11 @@ private:
     }
 };
 
-class Test_TC_MC_3_11 : public TestCommandBridge {
+class Test_TC_MEDIAINPUT_3_11 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_3_11()
-        : TestCommandBridge("Test_TC_MC_3_11")
+    Test_TC_MEDIAINPUT_3_11()
+        : TestCommandBridge("Test_TC_MEDIAINPUT_3_11")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -30543,7 +30543,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_3_11() {}
+    ~Test_TC_MEDIAINPUT_3_11() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -30551,11 +30551,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_3_11\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MEDIAINPUT_3_11\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_3_11\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MEDIAINPUT_3_11\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -30702,11 +30702,11 @@ private:
     }
 };
 
-class Test_TC_MC_3_12 : public TestCommandBridge {
+class Test_TC_MEDIAINPUT_3_12 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_3_12()
-        : TestCommandBridge("Test_TC_MC_3_12")
+    Test_TC_MEDIAINPUT_3_12()
+        : TestCommandBridge("Test_TC_MEDIAINPUT_3_12")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -30716,7 +30716,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_3_12() {}
+    ~Test_TC_MEDIAINPUT_3_12() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -30724,11 +30724,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_3_12\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MEDIAINPUT_3_12\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_3_12\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MEDIAINPUT_3_12\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -30877,11 +30877,11 @@ private:
     }
 };
 
-class Test_TC_MC_3_13 : public TestCommandBridge {
+class Test_TC_MEDIAINPUT_3_13 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_3_13()
-        : TestCommandBridge("Test_TC_MC_3_13")
+    Test_TC_MEDIAINPUT_3_13()
+        : TestCommandBridge("Test_TC_MEDIAINPUT_3_13")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -30891,7 +30891,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_3_13() {}
+    ~Test_TC_MEDIAINPUT_3_13() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -30899,11 +30899,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_3_13\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MEDIAINPUT_3_13\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_3_13\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MEDIAINPUT_3_13\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -31037,11 +31037,11 @@ private:
     }
 };
 
-class Test_TC_MC_5_1 : public TestCommandBridge {
+class Test_TC_CHANNEL_5_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_5_1()
-        : TestCommandBridge("Test_TC_MC_5_1")
+    Test_TC_CHANNEL_5_1()
+        : TestCommandBridge("Test_TC_CHANNEL_5_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -31051,7 +31051,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_5_1() {}
+    ~Test_TC_CHANNEL_5_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -31059,11 +31059,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_5_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CHANNEL_5_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_5_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CHANNEL_5_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -31143,11 +31143,11 @@ private:
     }
 };
 
-class Test_TC_MC_5_2 : public TestCommandBridge {
+class Test_TC_CHANNEL_5_2 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_5_2()
-        : TestCommandBridge("Test_TC_MC_5_2")
+    Test_TC_CHANNEL_5_2()
+        : TestCommandBridge("Test_TC_CHANNEL_5_2")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -31159,7 +31159,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_5_2() {}
+    ~Test_TC_CHANNEL_5_2() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -31167,11 +31167,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_5_2\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CHANNEL_5_2\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_5_2\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CHANNEL_5_2\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -31349,11 +31349,11 @@ private:
     }
 };
 
-class Test_TC_MC_5_3 : public TestCommandBridge {
+class Test_TC_CHANNEL_5_3 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_5_3()
-        : TestCommandBridge("Test_TC_MC_5_3")
+    Test_TC_CHANNEL_5_3()
+        : TestCommandBridge("Test_TC_CHANNEL_5_3")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -31365,7 +31365,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_5_3() {}
+    ~Test_TC_CHANNEL_5_3() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -31373,11 +31373,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_5_3\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CHANNEL_5_3\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_5_3\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CHANNEL_5_3\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -31612,11 +31612,11 @@ private:
     }
 };
 
-class Test_TC_MC_6_1 : public TestCommandBridge {
+class Test_TC_MEDIAPLAYBACK_6_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_6_1()
-        : TestCommandBridge("Test_TC_MC_6_1")
+    Test_TC_MEDIAPLAYBACK_6_1()
+        : TestCommandBridge("Test_TC_MEDIAPLAYBACK_6_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -31626,7 +31626,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_6_1() {}
+    ~Test_TC_MEDIAPLAYBACK_6_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -31634,11 +31634,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_6_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MEDIAPLAYBACK_6_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_6_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MEDIAPLAYBACK_6_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -32037,11 +32037,11 @@ private:
     }
 };
 
-class Test_TC_MC_6_2 : public TestCommandBridge {
+class Test_TC_MEDIAPLAYBACK_6_2 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_6_2()
-        : TestCommandBridge("Test_TC_MC_6_2")
+    Test_TC_MEDIAPLAYBACK_6_2()
+        : TestCommandBridge("Test_TC_MEDIAPLAYBACK_6_2")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -32051,7 +32051,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_6_2() {}
+    ~Test_TC_MEDIAPLAYBACK_6_2() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -32059,11 +32059,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_6_2\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MEDIAPLAYBACK_6_2\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_6_2\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MEDIAPLAYBACK_6_2\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -32646,11 +32646,11 @@ private:
     }
 };
 
-class Test_TC_MC_6_3 : public TestCommandBridge {
+class Test_TC_MEDIAPLAYBACK_6_3 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_6_3()
-        : TestCommandBridge("Test_TC_MC_6_3")
+    Test_TC_MEDIAPLAYBACK_6_3()
+        : TestCommandBridge("Test_TC_MEDIAPLAYBACK_6_3")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -32661,7 +32661,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_6_3() {}
+    ~Test_TC_MEDIAPLAYBACK_6_3() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -32669,11 +32669,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_6_3\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MEDIAPLAYBACK_6_3\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_6_3\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MEDIAPLAYBACK_6_3\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -32985,11 +32985,11 @@ private:
     }
 };
 
-class Test_TC_MC_6_4 : public TestCommandBridge {
+class Test_TC_MEDIAPLAYBACK_6_4 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_6_4()
-        : TestCommandBridge("Test_TC_MC_6_4")
+    Test_TC_MEDIAPLAYBACK_6_4()
+        : TestCommandBridge("Test_TC_MEDIAPLAYBACK_6_4")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -32999,7 +32999,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_6_4() {}
+    ~Test_TC_MEDIAPLAYBACK_6_4() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -33007,11 +33007,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_6_4\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MEDIAPLAYBACK_6_4\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_6_4\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MEDIAPLAYBACK_6_4\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -33613,11 +33613,11 @@ private:
     }
 };
 
-class Test_TC_MC_7_1 : public TestCommandBridge {
+class Test_TC_AUDIOOUTPUT_7_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_7_1()
-        : TestCommandBridge("Test_TC_MC_7_1")
+    Test_TC_AUDIOOUTPUT_7_1()
+        : TestCommandBridge("Test_TC_AUDIOOUTPUT_7_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -33627,7 +33627,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_7_1() {}
+    ~Test_TC_AUDIOOUTPUT_7_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -33635,11 +33635,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_7_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_AUDIOOUTPUT_7_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_7_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_AUDIOOUTPUT_7_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -33796,11 +33796,11 @@ private:
     }
 };
 
-class Test_TC_MC_7_2 : public TestCommandBridge {
+class Test_TC_AUDIOOUTPUT_7_2 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_7_2()
-        : TestCommandBridge("Test_TC_MC_7_2")
+    Test_TC_AUDIOOUTPUT_7_2()
+        : TestCommandBridge("Test_TC_AUDIOOUTPUT_7_2")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -33810,7 +33810,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_7_2() {}
+    ~Test_TC_AUDIOOUTPUT_7_2() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -33818,11 +33818,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_7_2\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_AUDIOOUTPUT_7_2\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_7_2\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_AUDIOOUTPUT_7_2\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -33972,11 +33972,11 @@ private:
     }
 };
 
-class Test_TC_MC_8_1 : public TestCommandBridge {
+class Test_TC_TGTNAV_8_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_8_1()
-        : TestCommandBridge("Test_TC_MC_8_1")
+    Test_TC_TGTNAV_8_1()
+        : TestCommandBridge("Test_TC_TGTNAV_8_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -33988,7 +33988,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_8_1() {}
+    ~Test_TC_TGTNAV_8_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -33996,11 +33996,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_8_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_TGTNAV_8_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_8_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_TGTNAV_8_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -34197,11 +34197,11 @@ private:
     }
 };
 
-class Test_TC_MC_9_1 : public TestCommandBridge {
+class Test_TC_APBSC_9_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_9_1()
-        : TestCommandBridge("Test_TC_MC_9_1")
+    Test_TC_APBSC_9_1()
+        : TestCommandBridge("Test_TC_APBSC_9_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -34211,7 +34211,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_9_1() {}
+    ~Test_TC_APBSC_9_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -34219,11 +34219,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_9_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_APBSC_9_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_9_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_APBSC_9_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -34535,11 +34535,11 @@ private:
     }
 };
 
-class Test_TC_MC_10_1 : public TestCommandBridge {
+class Test_TC_CONTENTLAUNCHER_10_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MC_10_1()
-        : TestCommandBridge("Test_TC_MC_10_1")
+    Test_TC_CONTENTLAUNCHER_10_1()
+        : TestCommandBridge("Test_TC_CONTENTLAUNCHER_10_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -34549,7 +34549,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MC_10_1() {}
+    ~Test_TC_CONTENTLAUNCHER_10_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -34557,11 +34557,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MC_10_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CONTENTLAUNCHER_10_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MC_10_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CONTENTLAUNCHER_10_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -34954,11 +34954,11 @@ private:
     }
 };
 
-class Test_TC_MF_1_3 : public TestCommandBridge {
+class Test_TC_CADMIN_1_3 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MF_1_3()
-        : TestCommandBridge("Test_TC_MF_1_3")
+    Test_TC_CADMIN_1_3()
+        : TestCommandBridge("Test_TC_CADMIN_1_3")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -34970,7 +34970,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MF_1_3() {}
+    ~Test_TC_CADMIN_1_3() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -34978,11 +34978,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MF_1_3\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CADMIN_1_3\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MF_1_3\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CADMIN_1_3\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -35369,11 +35369,11 @@ private:
     }
 };
 
-class Test_TC_MF_1_4 : public TestCommandBridge {
+class Test_TC_CADMIN_1_4 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_MF_1_4()
-        : TestCommandBridge("Test_TC_MF_1_4")
+    Test_TC_CADMIN_1_4()
+        : TestCommandBridge("Test_TC_CADMIN_1_4")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -35385,7 +35385,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_MF_1_4() {}
+    ~Test_TC_CADMIN_1_4() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -35393,11 +35393,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_MF_1_4\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CADMIN_1_4\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_MF_1_4\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CADMIN_1_4\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -44397,11 +44397,11 @@ private:
     }
 };
 
-class Test_TC_TM_1_1 : public TestCommandBridge {
+class Test_TC_TMP_1_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_TM_1_1()
-        : TestCommandBridge("Test_TC_TM_1_1")
+    Test_TC_TMP_1_1()
+        : TestCommandBridge("Test_TC_TMP_1_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -44411,7 +44411,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_TM_1_1() {}
+    ~Test_TC_TMP_1_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -44419,11 +44419,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_TM_1_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_TMP_1_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_TM_1_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_TMP_1_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -44661,11 +44661,11 @@ private:
     }
 };
 
-class Test_TC_TM_2_1 : public TestCommandBridge {
+class Test_TC_TMP_2_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_TM_2_1()
-        : TestCommandBridge("Test_TC_TM_2_1")
+    Test_TC_TMP_2_1()
+        : TestCommandBridge("Test_TC_TMP_2_1")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
@@ -44675,7 +44675,7 @@ public:
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_TM_2_1() {}
+    ~Test_TC_TMP_2_1() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -44683,11 +44683,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_TM_2_1\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_TMP_2_1\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_TM_2_1\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_TMP_2_1\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -108461,42 +108461,42 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_LVL_4_1>(),
         make_unique<Test_TC_LVL_5_1>(),
         make_unique<Test_TC_LVL_6_1>(),
-        make_unique<Test_TC_MC_1_1>(),
-        make_unique<Test_TC_MC_1_2>(),
-        make_unique<Test_TC_MC_1_3>(),
-        make_unique<Test_TC_MC_1_4>(),
-        make_unique<Test_TC_MC_1_5>(),
-        make_unique<Test_TC_MC_1_6>(),
-        make_unique<Test_TC_MC_1_7>(),
-        make_unique<Test_TC_MC_1_8>(),
-        make_unique<Test_TC_MC_1_9>(),
-        make_unique<Test_TC_MC_1_10>(),
-        make_unique<Test_TC_MC_1_11>(),
-        make_unique<Test_TC_MC_1_12>(),
-        make_unique<Test_TC_MC_2_1>(),
-        make_unique<Test_TC_MC_3_2>(),
-        make_unique<Test_TC_MC_3_3>(),
-        make_unique<Test_TC_MC_3_5>(),
-        make_unique<Test_TC_MC_3_6>(),
-        make_unique<Test_TC_MC_3_10>(),
-        make_unique<Test_TC_MC_3_11>(),
-        make_unique<Test_TC_MC_3_12>(),
-        make_unique<Test_TC_MC_3_13>(),
-        make_unique<Test_TC_MC_5_1>(),
-        make_unique<Test_TC_MC_5_2>(),
-        make_unique<Test_TC_MC_5_3>(),
-        make_unique<Test_TC_MC_6_1>(),
-        make_unique<Test_TC_MC_6_2>(),
-        make_unique<Test_TC_MC_6_3>(),
-        make_unique<Test_TC_MC_6_4>(),
-        make_unique<Test_TC_MC_7_1>(),
-        make_unique<Test_TC_MC_7_2>(),
-        make_unique<Test_TC_MC_8_1>(),
-        make_unique<Test_TC_MC_9_1>(),
-        make_unique<Test_TC_MC_10_1>(),
+        make_unique<Test_TC_LOWPOWER_1_1>(),
+        make_unique<Test_TC_KEYPADINPUT_1_2>(),
+        make_unique<Test_TC_APPLAUNCHER_1_3>(),
+        make_unique<Test_TC_MEDIAINPUT_1_4>(),
+        make_unique<Test_TC_WAKEONLAN_1_5>(),
+        make_unique<Test_TC_CHANNEL_1_6>(),
+        make_unique<Test_TC_MEDIAPLAYBACK_1_7>(),
+        make_unique<Test_TC_AUDIOOUTPUT_1_8>(),
+        make_unique<Test_TC_TGTNAV_1_9>(),
+        make_unique<Test_TC_APBSC_1_10>(),
+        make_unique<Test_TC_CONTENTLAUNCHER_1_11>(),
+        make_unique<Test_TC_ALOGIN_1_12>(),
+        make_unique<Test_TC_LOWPOWER_2_1>(),
+        make_unique<Test_TC_KEYPADINPUT_3_2>(),
+        make_unique<Test_TC_KEYPADINPUT_3_3>(),
+        make_unique<Test_TC_APPLAUNCHER_3_5>(),
+        make_unique<Test_TC_APPLAUNCHER_3_6>(),
+        make_unique<Test_TC_MEDIAINPUT_3_10>(),
+        make_unique<Test_TC_MEDIAINPUT_3_11>(),
+        make_unique<Test_TC_MEDIAINPUT_3_12>(),
+        make_unique<Test_TC_MEDIAINPUT_3_13>(),
+        make_unique<Test_TC_CHANNEL_5_1>(),
+        make_unique<Test_TC_CHANNEL_5_2>(),
+        make_unique<Test_TC_CHANNEL_5_3>(),
+        make_unique<Test_TC_MEDIAPLAYBACK_6_1>(),
+        make_unique<Test_TC_MEDIAPLAYBACK_6_2>(),
+        make_unique<Test_TC_MEDIAPLAYBACK_6_3>(),
+        make_unique<Test_TC_MEDIAPLAYBACK_6_4>(),
+        make_unique<Test_TC_AUDIOOUTPUT_7_1>(),
+        make_unique<Test_TC_AUDIOOUTPUT_7_2>(),
+        make_unique<Test_TC_TGTNAV_8_1>(),
+        make_unique<Test_TC_APBSC_9_1>(),
+        make_unique<Test_TC_CONTENTLAUNCHER_10_1>(),
         make_unique<Test_TC_MOD_1_1>(),
-        make_unique<Test_TC_MF_1_3>(),
-        make_unique<Test_TC_MF_1_4>(),
+        make_unique<Test_TC_CADMIN_1_3>(),
+        make_unique<Test_TC_CADMIN_1_4>(),
         make_unique<OTA_SuccessfulTransfer>(),
         make_unique<Test_TC_OCC_1_1>(),
         make_unique<Test_TC_OCC_2_1>(),
@@ -108517,8 +108517,8 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_RH_1_1>(),
         make_unique<Test_TC_RH_2_1>(),
         make_unique<Test_TC_SWTCH_2_1>(),
-        make_unique<Test_TC_TM_1_1>(),
-        make_unique<Test_TC_TM_2_1>(),
+        make_unique<Test_TC_TMP_1_1>(),
+        make_unique<Test_TC_TMP_2_1>(),
         make_unique<Test_TC_TSTAT_1_1>(),
         make_unique<Test_TC_TSTAT_2_1>(),
         make_unique<Test_TC_TSTAT_2_2>(),
