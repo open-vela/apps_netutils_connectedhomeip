@@ -39657,7 +39657,11 @@ private:
 
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                VerifyOrReturn(CheckConstraintType("wiredAssessedInputVoltage", "", "uint32"));
+                if (value != nil) {
+
+                    VerifyOrReturn(CheckConstraintType("wiredAssessedInputVoltage", "", "uint32"));
+                }
+
                 NextTest();
             }];
 
@@ -39678,7 +39682,11 @@ private:
 
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                VerifyOrReturn(CheckConstraintType("wiredAssessedInputFrequency", "", "uint16"));
+                if (value != nil) {
+
+                    VerifyOrReturn(CheckConstraintType("wiredAssessedInputFrequency", "", "uint16"));
+                }
+
                 NextTest();
             }];
 
@@ -39721,7 +39729,11 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("wiredAssessedCurrent", "", "uint32"));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("wiredAssessedCurrent", "", "uint32"));
+            }
+
             NextTest();
         }];
 
@@ -39816,12 +39828,16 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeBatteryVoltageWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeBatVoltageWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Test Harness Client reads BatVoltage from Server DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("batteryVoltage", "", "uint32"));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("batVoltage", "", "uint32"));
+            }
+
             NextTest();
         }];
 
@@ -39836,12 +39852,16 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeBatteryPercentRemainingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeBatPercentRemainingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Test Harness Client reads BatPercentRemaining from Server DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("batteryPercentRemaining", "", "uint8"));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("batPercentRemaining", "", "uint8"));
+            }
+
             NextTest();
         }];
 
@@ -39856,12 +39876,16 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeBatteryTimeRemainingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeBatTimeRemainingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Test Harness Client reads BatTimeRemaining from Server DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("batteryTimeRemaining", "", "uint32"));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("batTimeRemaining", "", "uint32"));
+            }
+
             NextTest();
         }];
 
@@ -39876,14 +39900,14 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeBatteryChargeLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeBatChargeLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Test Harness Client reads BatChargeLevel from Server DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("batteryChargeLevel", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("batteryChargeLevel", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batteryChargeLevel", [value unsignedCharValue], 2U));
+            VerifyOrReturn(CheckConstraintType("batChargeLevel", "", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("batChargeLevel", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batChargeLevel", [value unsignedCharValue], 2U));
 
             NextTest();
         }];
@@ -39899,12 +39923,12 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeBatteryReplacementNeededWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeBatReplacementNeededWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Test Harness Client reads BatReplacementNeeded from Server DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("batteryReplacementNeeded", "", "bool"));
+            VerifyOrReturn(CheckConstraintType("batReplacementNeeded", "", "bool"));
             NextTest();
         }];
 
@@ -39919,14 +39943,14 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeBatteryReplaceabilityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeBatReplaceabilityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Test Harness Client reads BatReplaceability from Server DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("batteryReplaceability", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("batteryReplaceability", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batteryReplaceability", [value unsignedCharValue], 3U));
+            VerifyOrReturn(CheckConstraintType("batReplaceability", "", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("batReplaceability", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batReplaceability", [value unsignedCharValue], 3U));
 
             NextTest();
         }];
@@ -39942,12 +39966,12 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeBatteryPresentWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeBatPresentWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Test Harness Client reads BatPresent from Server DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("batteryPresent", "", "bool"));
+            VerifyOrReturn(CheckConstraintType("batPresent", "", "bool"));
             NextTest();
         }];
 
@@ -39962,12 +39986,12 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeActiveBatteryFaultsWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeActiveBatFaultsWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Test Harness Client readsActiveBatFaults from Server DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("activeBatteryFaults", "", "list"));
+            VerifyOrReturn(CheckConstraintType("activeBatFaults", "", "list"));
             NextTest();
         }];
 
@@ -39983,13 +40007,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster
-            readAttributeBatteryReplacementDescriptionWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
+            readAttributeBatReplacementDescriptionWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
                 NSLog(@"Test Harness Client reads BatReplacementDescription from Server DUT Error: %@", err);
 
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                VerifyOrReturn(CheckConstraintType("batteryReplacementDescription", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("batteryReplacementDescription", [value length], 60));
+                VerifyOrReturn(CheckConstraintType("batReplacementDescription", "", "string"));
+                VerifyOrReturn(CheckConstraintMaxLength("batReplacementDescription", [value length], 60));
                 NextTest();
             }];
 
@@ -40004,14 +40028,14 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeBatteryCommonDesignationWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeBatCommonDesignationWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Test Harness Client reads BatCommonDesignation from Server DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("batteryCommonDesignation", "", "uint32"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("batteryCommonDesignation", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("batteryCommonDesignation", [value unsignedIntValue], 80UL));
+            VerifyOrReturn(CheckConstraintType("batCommonDesignation", "", "uint32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("batCommonDesignation", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("batCommonDesignation", [value unsignedIntValue], 80UL));
 
             NextTest();
         }];
@@ -40027,13 +40051,13 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeBatteryANSIDesignationWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeBatANSIDesignationWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Test Harness Client reads BatANSIDesignation from Server DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("batteryANSIDesignation", "", "string"));
-            VerifyOrReturn(CheckConstraintMaxLength("batteryANSIDesignation", [value length], 20));
+            VerifyOrReturn(CheckConstraintType("batANSIDesignation", "", "string"));
+            VerifyOrReturn(CheckConstraintMaxLength("batANSIDesignation", [value length], 20));
             NextTest();
         }];
 
@@ -40048,13 +40072,13 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeBatteryIECDesignationWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeBatIECDesignationWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Test Harness Client reads BatIECDesignation from Server DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("batteryIECDesignation", "", "string"));
-            VerifyOrReturn(CheckConstraintMaxLength("batteryIECDesignation", [value length], 20));
+            VerifyOrReturn(CheckConstraintType("batIECDesignation", "", "string"));
+            VerifyOrReturn(CheckConstraintMaxLength("batIECDesignation", [value length], 20));
             NextTest();
         }];
 
@@ -40069,14 +40093,14 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeBatteryApprovedChemistryWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeBatApprovedChemistryWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Test Harness Client reads BatApprovedChemistry from Server DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("batteryApprovedChemistry", "", "uint32"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("batteryApprovedChemistry", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("batteryApprovedChemistry", [value unsignedIntValue], 32UL));
+            VerifyOrReturn(CheckConstraintType("batApprovedChemistry", "", "uint32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("batApprovedChemistry", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("batApprovedChemistry", [value unsignedIntValue], 32UL));
 
             NextTest();
         }];
@@ -40092,12 +40116,12 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeBatteryCapacityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeBatCapacityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Test Harness Client reads BatCapacity from Server DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("batteryCapacity", "", "uint32"));
+            VerifyOrReturn(CheckConstraintType("batCapacity", "", "uint32"));
             NextTest();
         }];
 
@@ -40112,12 +40136,12 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeBatteryQuantityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeBatQuantityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Test Harness Client reads BatQuantity from Server DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("batteryQuantity", "", "uint8"));
+            VerifyOrReturn(CheckConstraintType("batQuantity", "", "uint8"));
             NextTest();
         }];
 
@@ -40132,14 +40156,14 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeBatteryChargeStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeBatChargeStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Test Harness Client reads BatChargeState from Server DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("batteryChargeState", "", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("batteryChargeState", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batteryChargeState", [value unsignedCharValue], 3U));
+            VerifyOrReturn(CheckConstraintType("batChargeState", "", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("batChargeState", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batChargeState", [value unsignedCharValue], 3U));
 
             NextTest();
         }];
@@ -40155,12 +40179,16 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeBatteryTimeToFullChargeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeBatTimeToFullChargeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Test Harness Client reads BatTimeToFullCharge from Server DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("batteryTimeToFullCharge", "", "uint32"));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("batTimeToFullCharge", "", "uint32"));
+            }
+
             NextTest();
         }];
 
@@ -40175,15 +40203,15 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeBatteryFunctionalWhileChargingWithCompletionHandler:^(
-            NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Test Harness Client reads BatFunctionalWhileCharging from Server DUT Error: %@", err);
+        [cluster
+            readAttributeBatFunctionalWhileChargingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Test Harness Client reads BatFunctionalWhileCharging from Server DUT Error: %@", err);
 
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("batteryFunctionalWhileCharging", "", "bool"));
-            NextTest();
-        }];
+                VerifyOrReturn(CheckConstraintType("batFunctionalWhileCharging", "", "bool"));
+                NextTest();
+            }];
 
         return CHIP_NO_ERROR;
     }
@@ -40196,12 +40224,16 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeBatteryChargingCurrentWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeBatChargingCurrentWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Test Harness Client reads BatChargingCurrent from Server DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("batteryChargingCurrent", "", "uint32"));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("batChargingCurrent", "", "uint32"));
+            }
+
             NextTest();
         }];
 
@@ -40216,12 +40248,12 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeActiveBatteryChargeFaultsWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeActiveBatChargeFaultsWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Test Harness Client reads ActiveBatChargeFaults from Server DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("activeBatteryChargeFaults", "", "list"));
+            VerifyOrReturn(CheckConstraintType("activeBatChargeFaults", "", "list"));
             NextTest();
         }];
 

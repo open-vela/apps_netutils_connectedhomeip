@@ -16015,26 +16015,26 @@ public:
 | * WiredMaximumCurrent                                               | 0x0008 |
 | * WiredPresent                                                      | 0x0009 |
 | * ActiveWiredFaults                                                 | 0x000A |
-| * BatteryVoltage                                                    | 0x000B |
-| * BatteryPercentRemaining                                           | 0x000C |
-| * BatteryTimeRemaining                                              | 0x000D |
-| * BatteryChargeLevel                                                | 0x000E |
-| * BatteryReplacementNeeded                                          | 0x000F |
-| * BatteryReplaceability                                             | 0x0010 |
-| * BatteryPresent                                                    | 0x0011 |
-| * ActiveBatteryFaults                                               | 0x0012 |
-| * BatteryReplacementDescription                                     | 0x0013 |
-| * BatteryCommonDesignation                                          | 0x0014 |
-| * BatteryANSIDesignation                                            | 0x0015 |
-| * BatteryIECDesignation                                             | 0x0016 |
-| * BatteryApprovedChemistry                                          | 0x0017 |
-| * BatteryCapacity                                                   | 0x0018 |
-| * BatteryQuantity                                                   | 0x0019 |
-| * BatteryChargeState                                                | 0x001A |
-| * BatteryTimeToFullCharge                                           | 0x001B |
-| * BatteryFunctionalWhileCharging                                    | 0x001C |
-| * BatteryChargingCurrent                                            | 0x001D |
-| * ActiveBatteryChargeFaults                                         | 0x001E |
+| * BatVoltage                                                        | 0x000B |
+| * BatPercentRemaining                                               | 0x000C |
+| * BatTimeRemaining                                                  | 0x000D |
+| * BatChargeLevel                                                    | 0x000E |
+| * BatReplacementNeeded                                              | 0x000F |
+| * BatReplaceability                                                 | 0x0010 |
+| * BatPresent                                                        | 0x0011 |
+| * ActiveBatFaults                                                   | 0x0012 |
+| * BatReplacementDescription                                         | 0x0013 |
+| * BatCommonDesignation                                              | 0x0014 |
+| * BatANSIDesignation                                                | 0x0015 |
+| * BatIECDesignation                                                 | 0x0016 |
+| * BatApprovedChemistry                                              | 0x0017 |
+| * BatCapacity                                                       | 0x0018 |
+| * BatQuantity                                                       | 0x0019 |
+| * BatChargeState                                                    | 0x001A |
+| * BatTimeToFullCharge                                               | 0x001B |
+| * BatFunctionalWhileCharging                                        | 0x001C |
+| * BatChargingCurrent                                                | 0x001D |
+| * ActiveBatChargeFaults                                             | 0x001E |
 | * GeneratedCommandList                                              | 0xFFF8 |
 | * AcceptedCommandList                                               | 0xFFF9 |
 | * AttributeList                                                     | 0xFFFB |
@@ -16795,16 +16795,16 @@ public:
 };
 
 /*
- * Attribute BatteryVoltage
+ * Attribute BatVoltage
  */
-class ReadPowerSourceBatteryVoltage : public ReadAttribute {
+class ReadPowerSourceBatVoltage : public ReadAttribute {
 public:
-    ReadPowerSourceBatteryVoltage()
-        : ReadAttribute("battery-voltage")
+    ReadPowerSourceBatVoltage()
+        : ReadAttribute("bat-voltage")
     {
     }
 
-    ~ReadPowerSourceBatteryVoltage() {}
+    ~ReadPowerSourceBatVoltage() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -16814,10 +16814,10 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster readAttributeBatteryVoltageWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"PowerSource.BatteryVoltage response %@", [value description]);
+        [cluster readAttributeBatVoltageWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"PowerSource.BatVoltage response %@", [value description]);
             if (error != nil) {
-                LogNSError("PowerSource BatteryVoltage read Error", error);
+                LogNSError("PowerSource BatVoltage read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -16825,14 +16825,14 @@ public:
     }
 };
 
-class SubscribeAttributePowerSourceBatteryVoltage : public SubscribeAttribute {
+class SubscribeAttributePowerSourceBatVoltage : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceBatteryVoltage()
-        : SubscribeAttribute("battery-voltage")
+    SubscribeAttributePowerSourceBatVoltage()
+        : SubscribeAttribute("bat-voltage")
     {
     }
 
-    ~SubscribeAttributePowerSourceBatteryVoltage() {}
+    ~SubscribeAttributePowerSourceBatVoltage() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -16845,14 +16845,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeBatteryVoltageWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeBatVoltageWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryVoltage response %@", [value description]);
+                NSLog(@"PowerSource.BatVoltage response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -16863,16 +16863,16 @@ public:
 };
 
 /*
- * Attribute BatteryPercentRemaining
+ * Attribute BatPercentRemaining
  */
-class ReadPowerSourceBatteryPercentRemaining : public ReadAttribute {
+class ReadPowerSourceBatPercentRemaining : public ReadAttribute {
 public:
-    ReadPowerSourceBatteryPercentRemaining()
-        : ReadAttribute("battery-percent-remaining")
+    ReadPowerSourceBatPercentRemaining()
+        : ReadAttribute("bat-percent-remaining")
     {
     }
 
-    ~ReadPowerSourceBatteryPercentRemaining() {}
+    ~ReadPowerSourceBatPercentRemaining() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -16882,26 +16882,25 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster
-            readAttributeBatteryPercentRemainingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryPercentRemaining response %@", [value description]);
-                if (error != nil) {
-                    LogNSError("PowerSource BatteryPercentRemaining read Error", error);
-                }
-                SetCommandExitStatus(error);
-            }];
+        [cluster readAttributeBatPercentRemainingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"PowerSource.BatPercentRemaining response %@", [value description]);
+            if (error != nil) {
+                LogNSError("PowerSource BatPercentRemaining read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
         return CHIP_NO_ERROR;
     }
 };
 
-class SubscribeAttributePowerSourceBatteryPercentRemaining : public SubscribeAttribute {
+class SubscribeAttributePowerSourceBatPercentRemaining : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceBatteryPercentRemaining()
-        : SubscribeAttribute("battery-percent-remaining")
+    SubscribeAttributePowerSourceBatPercentRemaining()
+        : SubscribeAttribute("bat-percent-remaining")
     {
     }
 
-    ~SubscribeAttributePowerSourceBatteryPercentRemaining() {}
+    ~SubscribeAttributePowerSourceBatPercentRemaining() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -16914,14 +16913,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeBatteryPercentRemainingWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeBatPercentRemainingWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryPercentRemaining response %@", [value description]);
+                NSLog(@"PowerSource.BatPercentRemaining response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -16932,16 +16931,16 @@ public:
 };
 
 /*
- * Attribute BatteryTimeRemaining
+ * Attribute BatTimeRemaining
  */
-class ReadPowerSourceBatteryTimeRemaining : public ReadAttribute {
+class ReadPowerSourceBatTimeRemaining : public ReadAttribute {
 public:
-    ReadPowerSourceBatteryTimeRemaining()
-        : ReadAttribute("battery-time-remaining")
+    ReadPowerSourceBatTimeRemaining()
+        : ReadAttribute("bat-time-remaining")
     {
     }
 
-    ~ReadPowerSourceBatteryTimeRemaining() {}
+    ~ReadPowerSourceBatTimeRemaining() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -16951,10 +16950,10 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster readAttributeBatteryTimeRemainingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"PowerSource.BatteryTimeRemaining response %@", [value description]);
+        [cluster readAttributeBatTimeRemainingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"PowerSource.BatTimeRemaining response %@", [value description]);
             if (error != nil) {
-                LogNSError("PowerSource BatteryTimeRemaining read Error", error);
+                LogNSError("PowerSource BatTimeRemaining read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -16962,14 +16961,14 @@ public:
     }
 };
 
-class SubscribeAttributePowerSourceBatteryTimeRemaining : public SubscribeAttribute {
+class SubscribeAttributePowerSourceBatTimeRemaining : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceBatteryTimeRemaining()
-        : SubscribeAttribute("battery-time-remaining")
+    SubscribeAttributePowerSourceBatTimeRemaining()
+        : SubscribeAttribute("bat-time-remaining")
     {
     }
 
-    ~SubscribeAttributePowerSourceBatteryTimeRemaining() {}
+    ~SubscribeAttributePowerSourceBatTimeRemaining() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -16982,14 +16981,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeBatteryTimeRemainingWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeBatTimeRemainingWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryTimeRemaining response %@", [value description]);
+                NSLog(@"PowerSource.BatTimeRemaining response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -17000,16 +16999,16 @@ public:
 };
 
 /*
- * Attribute BatteryChargeLevel
+ * Attribute BatChargeLevel
  */
-class ReadPowerSourceBatteryChargeLevel : public ReadAttribute {
+class ReadPowerSourceBatChargeLevel : public ReadAttribute {
 public:
-    ReadPowerSourceBatteryChargeLevel()
-        : ReadAttribute("battery-charge-level")
+    ReadPowerSourceBatChargeLevel()
+        : ReadAttribute("bat-charge-level")
     {
     }
 
-    ~ReadPowerSourceBatteryChargeLevel() {}
+    ~ReadPowerSourceBatChargeLevel() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17019,10 +17018,10 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster readAttributeBatteryChargeLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"PowerSource.BatteryChargeLevel response %@", [value description]);
+        [cluster readAttributeBatChargeLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"PowerSource.BatChargeLevel response %@", [value description]);
             if (error != nil) {
-                LogNSError("PowerSource BatteryChargeLevel read Error", error);
+                LogNSError("PowerSource BatChargeLevel read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -17030,14 +17029,14 @@ public:
     }
 };
 
-class SubscribeAttributePowerSourceBatteryChargeLevel : public SubscribeAttribute {
+class SubscribeAttributePowerSourceBatChargeLevel : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceBatteryChargeLevel()
-        : SubscribeAttribute("battery-charge-level")
+    SubscribeAttributePowerSourceBatChargeLevel()
+        : SubscribeAttribute("bat-charge-level")
     {
     }
 
-    ~SubscribeAttributePowerSourceBatteryChargeLevel() {}
+    ~SubscribeAttributePowerSourceBatChargeLevel() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17050,14 +17049,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeBatteryChargeLevelWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeBatChargeLevelWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryChargeLevel response %@", [value description]);
+                NSLog(@"PowerSource.BatChargeLevel response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -17068,16 +17067,16 @@ public:
 };
 
 /*
- * Attribute BatteryReplacementNeeded
+ * Attribute BatReplacementNeeded
  */
-class ReadPowerSourceBatteryReplacementNeeded : public ReadAttribute {
+class ReadPowerSourceBatReplacementNeeded : public ReadAttribute {
 public:
-    ReadPowerSourceBatteryReplacementNeeded()
-        : ReadAttribute("battery-replacement-needed")
+    ReadPowerSourceBatReplacementNeeded()
+        : ReadAttribute("bat-replacement-needed")
     {
     }
 
-    ~ReadPowerSourceBatteryReplacementNeeded() {}
+    ~ReadPowerSourceBatReplacementNeeded() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17087,26 +17086,25 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster
-            readAttributeBatteryReplacementNeededWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryReplacementNeeded response %@", [value description]);
-                if (error != nil) {
-                    LogNSError("PowerSource BatteryReplacementNeeded read Error", error);
-                }
-                SetCommandExitStatus(error);
-            }];
+        [cluster readAttributeBatReplacementNeededWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"PowerSource.BatReplacementNeeded response %@", [value description]);
+            if (error != nil) {
+                LogNSError("PowerSource BatReplacementNeeded read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
         return CHIP_NO_ERROR;
     }
 };
 
-class SubscribeAttributePowerSourceBatteryReplacementNeeded : public SubscribeAttribute {
+class SubscribeAttributePowerSourceBatReplacementNeeded : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceBatteryReplacementNeeded()
-        : SubscribeAttribute("battery-replacement-needed")
+    SubscribeAttributePowerSourceBatReplacementNeeded()
+        : SubscribeAttribute("bat-replacement-needed")
     {
     }
 
-    ~SubscribeAttributePowerSourceBatteryReplacementNeeded() {}
+    ~SubscribeAttributePowerSourceBatReplacementNeeded() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17119,14 +17117,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeBatteryReplacementNeededWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeBatReplacementNeededWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryReplacementNeeded response %@", [value description]);
+                NSLog(@"PowerSource.BatReplacementNeeded response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -17137,16 +17135,16 @@ public:
 };
 
 /*
- * Attribute BatteryReplaceability
+ * Attribute BatReplaceability
  */
-class ReadPowerSourceBatteryReplaceability : public ReadAttribute {
+class ReadPowerSourceBatReplaceability : public ReadAttribute {
 public:
-    ReadPowerSourceBatteryReplaceability()
-        : ReadAttribute("battery-replaceability")
+    ReadPowerSourceBatReplaceability()
+        : ReadAttribute("bat-replaceability")
     {
     }
 
-    ~ReadPowerSourceBatteryReplaceability() {}
+    ~ReadPowerSourceBatReplaceability() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17156,10 +17154,10 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster readAttributeBatteryReplaceabilityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"PowerSource.BatteryReplaceability response %@", [value description]);
+        [cluster readAttributeBatReplaceabilityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"PowerSource.BatReplaceability response %@", [value description]);
             if (error != nil) {
-                LogNSError("PowerSource BatteryReplaceability read Error", error);
+                LogNSError("PowerSource BatReplaceability read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -17167,14 +17165,14 @@ public:
     }
 };
 
-class SubscribeAttributePowerSourceBatteryReplaceability : public SubscribeAttribute {
+class SubscribeAttributePowerSourceBatReplaceability : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceBatteryReplaceability()
-        : SubscribeAttribute("battery-replaceability")
+    SubscribeAttributePowerSourceBatReplaceability()
+        : SubscribeAttribute("bat-replaceability")
     {
     }
 
-    ~SubscribeAttributePowerSourceBatteryReplaceability() {}
+    ~SubscribeAttributePowerSourceBatReplaceability() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17187,14 +17185,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeBatteryReplaceabilityWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeBatReplaceabilityWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryReplaceability response %@", [value description]);
+                NSLog(@"PowerSource.BatReplaceability response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -17205,16 +17203,16 @@ public:
 };
 
 /*
- * Attribute BatteryPresent
+ * Attribute BatPresent
  */
-class ReadPowerSourceBatteryPresent : public ReadAttribute {
+class ReadPowerSourceBatPresent : public ReadAttribute {
 public:
-    ReadPowerSourceBatteryPresent()
-        : ReadAttribute("battery-present")
+    ReadPowerSourceBatPresent()
+        : ReadAttribute("bat-present")
     {
     }
 
-    ~ReadPowerSourceBatteryPresent() {}
+    ~ReadPowerSourceBatPresent() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17224,10 +17222,10 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster readAttributeBatteryPresentWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"PowerSource.BatteryPresent response %@", [value description]);
+        [cluster readAttributeBatPresentWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"PowerSource.BatPresent response %@", [value description]);
             if (error != nil) {
-                LogNSError("PowerSource BatteryPresent read Error", error);
+                LogNSError("PowerSource BatPresent read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -17235,14 +17233,14 @@ public:
     }
 };
 
-class SubscribeAttributePowerSourceBatteryPresent : public SubscribeAttribute {
+class SubscribeAttributePowerSourceBatPresent : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceBatteryPresent()
-        : SubscribeAttribute("battery-present")
+    SubscribeAttributePowerSourceBatPresent()
+        : SubscribeAttribute("bat-present")
     {
     }
 
-    ~SubscribeAttributePowerSourceBatteryPresent() {}
+    ~SubscribeAttributePowerSourceBatPresent() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17255,14 +17253,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeBatteryPresentWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeBatPresentWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryPresent response %@", [value description]);
+                NSLog(@"PowerSource.BatPresent response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -17273,16 +17271,16 @@ public:
 };
 
 /*
- * Attribute ActiveBatteryFaults
+ * Attribute ActiveBatFaults
  */
-class ReadPowerSourceActiveBatteryFaults : public ReadAttribute {
+class ReadPowerSourceActiveBatFaults : public ReadAttribute {
 public:
-    ReadPowerSourceActiveBatteryFaults()
-        : ReadAttribute("active-battery-faults")
+    ReadPowerSourceActiveBatFaults()
+        : ReadAttribute("active-bat-faults")
     {
     }
 
-    ~ReadPowerSourceActiveBatteryFaults() {}
+    ~ReadPowerSourceActiveBatFaults() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17292,10 +17290,10 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster readAttributeActiveBatteryFaultsWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"PowerSource.ActiveBatteryFaults response %@", [value description]);
+        [cluster readAttributeActiveBatFaultsWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"PowerSource.ActiveBatFaults response %@", [value description]);
             if (error != nil) {
-                LogNSError("PowerSource ActiveBatteryFaults read Error", error);
+                LogNSError("PowerSource ActiveBatFaults read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -17303,14 +17301,14 @@ public:
     }
 };
 
-class SubscribeAttributePowerSourceActiveBatteryFaults : public SubscribeAttribute {
+class SubscribeAttributePowerSourceActiveBatFaults : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceActiveBatteryFaults()
-        : SubscribeAttribute("active-battery-faults")
+    SubscribeAttributePowerSourceActiveBatFaults()
+        : SubscribeAttribute("active-bat-faults")
     {
     }
 
-    ~SubscribeAttributePowerSourceActiveBatteryFaults() {}
+    ~SubscribeAttributePowerSourceActiveBatFaults() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17323,14 +17321,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeActiveBatteryFaultsWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeActiveBatFaultsWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.ActiveBatteryFaults response %@", [value description]);
+                NSLog(@"PowerSource.ActiveBatFaults response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -17341,16 +17339,16 @@ public:
 };
 
 /*
- * Attribute BatteryReplacementDescription
+ * Attribute BatReplacementDescription
  */
-class ReadPowerSourceBatteryReplacementDescription : public ReadAttribute {
+class ReadPowerSourceBatReplacementDescription : public ReadAttribute {
 public:
-    ReadPowerSourceBatteryReplacementDescription()
-        : ReadAttribute("battery-replacement-description")
+    ReadPowerSourceBatReplacementDescription()
+        : ReadAttribute("bat-replacement-description")
     {
     }
 
-    ~ReadPowerSourceBatteryReplacementDescription() {}
+    ~ReadPowerSourceBatReplacementDescription() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17360,26 +17358,26 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster readAttributeBatteryReplacementDescriptionWithCompletionHandler:^(
-            NSString * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"PowerSource.BatteryReplacementDescription response %@", [value description]);
-            if (error != nil) {
-                LogNSError("PowerSource BatteryReplacementDescription read Error", error);
-            }
-            SetCommandExitStatus(error);
-        }];
+        [cluster
+            readAttributeBatReplacementDescriptionWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"PowerSource.BatReplacementDescription response %@", [value description]);
+                if (error != nil) {
+                    LogNSError("PowerSource BatReplacementDescription read Error", error);
+                }
+                SetCommandExitStatus(error);
+            }];
         return CHIP_NO_ERROR;
     }
 };
 
-class SubscribeAttributePowerSourceBatteryReplacementDescription : public SubscribeAttribute {
+class SubscribeAttributePowerSourceBatReplacementDescription : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceBatteryReplacementDescription()
-        : SubscribeAttribute("battery-replacement-description")
+    SubscribeAttributePowerSourceBatReplacementDescription()
+        : SubscribeAttribute("bat-replacement-description")
     {
     }
 
-    ~SubscribeAttributePowerSourceBatteryReplacementDescription() {}
+    ~SubscribeAttributePowerSourceBatReplacementDescription() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17392,14 +17390,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeBatteryReplacementDescriptionWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeBatReplacementDescriptionWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryReplacementDescription response %@", [value description]);
+                NSLog(@"PowerSource.BatReplacementDescription response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -17410,16 +17408,16 @@ public:
 };
 
 /*
- * Attribute BatteryCommonDesignation
+ * Attribute BatCommonDesignation
  */
-class ReadPowerSourceBatteryCommonDesignation : public ReadAttribute {
+class ReadPowerSourceBatCommonDesignation : public ReadAttribute {
 public:
-    ReadPowerSourceBatteryCommonDesignation()
-        : ReadAttribute("battery-common-designation")
+    ReadPowerSourceBatCommonDesignation()
+        : ReadAttribute("bat-common-designation")
     {
     }
 
-    ~ReadPowerSourceBatteryCommonDesignation() {}
+    ~ReadPowerSourceBatCommonDesignation() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17429,26 +17427,25 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster
-            readAttributeBatteryCommonDesignationWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryCommonDesignation response %@", [value description]);
-                if (error != nil) {
-                    LogNSError("PowerSource BatteryCommonDesignation read Error", error);
-                }
-                SetCommandExitStatus(error);
-            }];
+        [cluster readAttributeBatCommonDesignationWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"PowerSource.BatCommonDesignation response %@", [value description]);
+            if (error != nil) {
+                LogNSError("PowerSource BatCommonDesignation read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
         return CHIP_NO_ERROR;
     }
 };
 
-class SubscribeAttributePowerSourceBatteryCommonDesignation : public SubscribeAttribute {
+class SubscribeAttributePowerSourceBatCommonDesignation : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceBatteryCommonDesignation()
-        : SubscribeAttribute("battery-common-designation")
+    SubscribeAttributePowerSourceBatCommonDesignation()
+        : SubscribeAttribute("bat-common-designation")
     {
     }
 
-    ~SubscribeAttributePowerSourceBatteryCommonDesignation() {}
+    ~SubscribeAttributePowerSourceBatCommonDesignation() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17461,14 +17458,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeBatteryCommonDesignationWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeBatCommonDesignationWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryCommonDesignation response %@", [value description]);
+                NSLog(@"PowerSource.BatCommonDesignation response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -17479,16 +17476,16 @@ public:
 };
 
 /*
- * Attribute BatteryANSIDesignation
+ * Attribute BatANSIDesignation
  */
-class ReadPowerSourceBatteryANSIDesignation : public ReadAttribute {
+class ReadPowerSourceBatANSIDesignation : public ReadAttribute {
 public:
-    ReadPowerSourceBatteryANSIDesignation()
-        : ReadAttribute("battery-ansidesignation")
+    ReadPowerSourceBatANSIDesignation()
+        : ReadAttribute("bat-ansidesignation")
     {
     }
 
-    ~ReadPowerSourceBatteryANSIDesignation() {}
+    ~ReadPowerSourceBatANSIDesignation() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17498,10 +17495,10 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster readAttributeBatteryANSIDesignationWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"PowerSource.BatteryANSIDesignation response %@", [value description]);
+        [cluster readAttributeBatANSIDesignationWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"PowerSource.BatANSIDesignation response %@", [value description]);
             if (error != nil) {
-                LogNSError("PowerSource BatteryANSIDesignation read Error", error);
+                LogNSError("PowerSource BatANSIDesignation read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -17509,14 +17506,14 @@ public:
     }
 };
 
-class SubscribeAttributePowerSourceBatteryANSIDesignation : public SubscribeAttribute {
+class SubscribeAttributePowerSourceBatANSIDesignation : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceBatteryANSIDesignation()
-        : SubscribeAttribute("battery-ansidesignation")
+    SubscribeAttributePowerSourceBatANSIDesignation()
+        : SubscribeAttribute("bat-ansidesignation")
     {
     }
 
-    ~SubscribeAttributePowerSourceBatteryANSIDesignation() {}
+    ~SubscribeAttributePowerSourceBatANSIDesignation() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17529,14 +17526,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeBatteryANSIDesignationWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeBatANSIDesignationWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryANSIDesignation response %@", [value description]);
+                NSLog(@"PowerSource.BatANSIDesignation response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -17547,16 +17544,16 @@ public:
 };
 
 /*
- * Attribute BatteryIECDesignation
+ * Attribute BatIECDesignation
  */
-class ReadPowerSourceBatteryIECDesignation : public ReadAttribute {
+class ReadPowerSourceBatIECDesignation : public ReadAttribute {
 public:
-    ReadPowerSourceBatteryIECDesignation()
-        : ReadAttribute("battery-iecdesignation")
+    ReadPowerSourceBatIECDesignation()
+        : ReadAttribute("bat-iecdesignation")
     {
     }
 
-    ~ReadPowerSourceBatteryIECDesignation() {}
+    ~ReadPowerSourceBatIECDesignation() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17566,10 +17563,10 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster readAttributeBatteryIECDesignationWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"PowerSource.BatteryIECDesignation response %@", [value description]);
+        [cluster readAttributeBatIECDesignationWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"PowerSource.BatIECDesignation response %@", [value description]);
             if (error != nil) {
-                LogNSError("PowerSource BatteryIECDesignation read Error", error);
+                LogNSError("PowerSource BatIECDesignation read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -17577,14 +17574,14 @@ public:
     }
 };
 
-class SubscribeAttributePowerSourceBatteryIECDesignation : public SubscribeAttribute {
+class SubscribeAttributePowerSourceBatIECDesignation : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceBatteryIECDesignation()
-        : SubscribeAttribute("battery-iecdesignation")
+    SubscribeAttributePowerSourceBatIECDesignation()
+        : SubscribeAttribute("bat-iecdesignation")
     {
     }
 
-    ~SubscribeAttributePowerSourceBatteryIECDesignation() {}
+    ~SubscribeAttributePowerSourceBatIECDesignation() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17597,14 +17594,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeBatteryIECDesignationWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeBatIECDesignationWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryIECDesignation response %@", [value description]);
+                NSLog(@"PowerSource.BatIECDesignation response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -17615,16 +17612,16 @@ public:
 };
 
 /*
- * Attribute BatteryApprovedChemistry
+ * Attribute BatApprovedChemistry
  */
-class ReadPowerSourceBatteryApprovedChemistry : public ReadAttribute {
+class ReadPowerSourceBatApprovedChemistry : public ReadAttribute {
 public:
-    ReadPowerSourceBatteryApprovedChemistry()
-        : ReadAttribute("battery-approved-chemistry")
+    ReadPowerSourceBatApprovedChemistry()
+        : ReadAttribute("bat-approved-chemistry")
     {
     }
 
-    ~ReadPowerSourceBatteryApprovedChemistry() {}
+    ~ReadPowerSourceBatApprovedChemistry() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17634,26 +17631,25 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster
-            readAttributeBatteryApprovedChemistryWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryApprovedChemistry response %@", [value description]);
-                if (error != nil) {
-                    LogNSError("PowerSource BatteryApprovedChemistry read Error", error);
-                }
-                SetCommandExitStatus(error);
-            }];
+        [cluster readAttributeBatApprovedChemistryWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"PowerSource.BatApprovedChemistry response %@", [value description]);
+            if (error != nil) {
+                LogNSError("PowerSource BatApprovedChemistry read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
         return CHIP_NO_ERROR;
     }
 };
 
-class SubscribeAttributePowerSourceBatteryApprovedChemistry : public SubscribeAttribute {
+class SubscribeAttributePowerSourceBatApprovedChemistry : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceBatteryApprovedChemistry()
-        : SubscribeAttribute("battery-approved-chemistry")
+    SubscribeAttributePowerSourceBatApprovedChemistry()
+        : SubscribeAttribute("bat-approved-chemistry")
     {
     }
 
-    ~SubscribeAttributePowerSourceBatteryApprovedChemistry() {}
+    ~SubscribeAttributePowerSourceBatApprovedChemistry() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17666,14 +17662,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeBatteryApprovedChemistryWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeBatApprovedChemistryWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryApprovedChemistry response %@", [value description]);
+                NSLog(@"PowerSource.BatApprovedChemistry response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -17684,16 +17680,16 @@ public:
 };
 
 /*
- * Attribute BatteryCapacity
+ * Attribute BatCapacity
  */
-class ReadPowerSourceBatteryCapacity : public ReadAttribute {
+class ReadPowerSourceBatCapacity : public ReadAttribute {
 public:
-    ReadPowerSourceBatteryCapacity()
-        : ReadAttribute("battery-capacity")
+    ReadPowerSourceBatCapacity()
+        : ReadAttribute("bat-capacity")
     {
     }
 
-    ~ReadPowerSourceBatteryCapacity() {}
+    ~ReadPowerSourceBatCapacity() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17703,10 +17699,10 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster readAttributeBatteryCapacityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"PowerSource.BatteryCapacity response %@", [value description]);
+        [cluster readAttributeBatCapacityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"PowerSource.BatCapacity response %@", [value description]);
             if (error != nil) {
-                LogNSError("PowerSource BatteryCapacity read Error", error);
+                LogNSError("PowerSource BatCapacity read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -17714,14 +17710,14 @@ public:
     }
 };
 
-class SubscribeAttributePowerSourceBatteryCapacity : public SubscribeAttribute {
+class SubscribeAttributePowerSourceBatCapacity : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceBatteryCapacity()
-        : SubscribeAttribute("battery-capacity")
+    SubscribeAttributePowerSourceBatCapacity()
+        : SubscribeAttribute("bat-capacity")
     {
     }
 
-    ~SubscribeAttributePowerSourceBatteryCapacity() {}
+    ~SubscribeAttributePowerSourceBatCapacity() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17734,14 +17730,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeBatteryCapacityWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeBatCapacityWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryCapacity response %@", [value description]);
+                NSLog(@"PowerSource.BatCapacity response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -17752,16 +17748,16 @@ public:
 };
 
 /*
- * Attribute BatteryQuantity
+ * Attribute BatQuantity
  */
-class ReadPowerSourceBatteryQuantity : public ReadAttribute {
+class ReadPowerSourceBatQuantity : public ReadAttribute {
 public:
-    ReadPowerSourceBatteryQuantity()
-        : ReadAttribute("battery-quantity")
+    ReadPowerSourceBatQuantity()
+        : ReadAttribute("bat-quantity")
     {
     }
 
-    ~ReadPowerSourceBatteryQuantity() {}
+    ~ReadPowerSourceBatQuantity() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17771,10 +17767,10 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster readAttributeBatteryQuantityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"PowerSource.BatteryQuantity response %@", [value description]);
+        [cluster readAttributeBatQuantityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"PowerSource.BatQuantity response %@", [value description]);
             if (error != nil) {
-                LogNSError("PowerSource BatteryQuantity read Error", error);
+                LogNSError("PowerSource BatQuantity read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -17782,14 +17778,14 @@ public:
     }
 };
 
-class SubscribeAttributePowerSourceBatteryQuantity : public SubscribeAttribute {
+class SubscribeAttributePowerSourceBatQuantity : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceBatteryQuantity()
-        : SubscribeAttribute("battery-quantity")
+    SubscribeAttributePowerSourceBatQuantity()
+        : SubscribeAttribute("bat-quantity")
     {
     }
 
-    ~SubscribeAttributePowerSourceBatteryQuantity() {}
+    ~SubscribeAttributePowerSourceBatQuantity() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17802,14 +17798,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeBatteryQuantityWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeBatQuantityWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryQuantity response %@", [value description]);
+                NSLog(@"PowerSource.BatQuantity response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -17820,16 +17816,16 @@ public:
 };
 
 /*
- * Attribute BatteryChargeState
+ * Attribute BatChargeState
  */
-class ReadPowerSourceBatteryChargeState : public ReadAttribute {
+class ReadPowerSourceBatChargeState : public ReadAttribute {
 public:
-    ReadPowerSourceBatteryChargeState()
-        : ReadAttribute("battery-charge-state")
+    ReadPowerSourceBatChargeState()
+        : ReadAttribute("bat-charge-state")
     {
     }
 
-    ~ReadPowerSourceBatteryChargeState() {}
+    ~ReadPowerSourceBatChargeState() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17839,10 +17835,10 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster readAttributeBatteryChargeStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"PowerSource.BatteryChargeState response %@", [value description]);
+        [cluster readAttributeBatChargeStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"PowerSource.BatChargeState response %@", [value description]);
             if (error != nil) {
-                LogNSError("PowerSource BatteryChargeState read Error", error);
+                LogNSError("PowerSource BatChargeState read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -17850,14 +17846,14 @@ public:
     }
 };
 
-class SubscribeAttributePowerSourceBatteryChargeState : public SubscribeAttribute {
+class SubscribeAttributePowerSourceBatChargeState : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceBatteryChargeState()
-        : SubscribeAttribute("battery-charge-state")
+    SubscribeAttributePowerSourceBatChargeState()
+        : SubscribeAttribute("bat-charge-state")
     {
     }
 
-    ~SubscribeAttributePowerSourceBatteryChargeState() {}
+    ~SubscribeAttributePowerSourceBatChargeState() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17870,14 +17866,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeBatteryChargeStateWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeBatChargeStateWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryChargeState response %@", [value description]);
+                NSLog(@"PowerSource.BatChargeState response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -17888,16 +17884,16 @@ public:
 };
 
 /*
- * Attribute BatteryTimeToFullCharge
+ * Attribute BatTimeToFullCharge
  */
-class ReadPowerSourceBatteryTimeToFullCharge : public ReadAttribute {
+class ReadPowerSourceBatTimeToFullCharge : public ReadAttribute {
 public:
-    ReadPowerSourceBatteryTimeToFullCharge()
-        : ReadAttribute("battery-time-to-full-charge")
+    ReadPowerSourceBatTimeToFullCharge()
+        : ReadAttribute("bat-time-to-full-charge")
     {
     }
 
-    ~ReadPowerSourceBatteryTimeToFullCharge() {}
+    ~ReadPowerSourceBatTimeToFullCharge() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17907,26 +17903,25 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster
-            readAttributeBatteryTimeToFullChargeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryTimeToFullCharge response %@", [value description]);
-                if (error != nil) {
-                    LogNSError("PowerSource BatteryTimeToFullCharge read Error", error);
-                }
-                SetCommandExitStatus(error);
-            }];
+        [cluster readAttributeBatTimeToFullChargeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"PowerSource.BatTimeToFullCharge response %@", [value description]);
+            if (error != nil) {
+                LogNSError("PowerSource BatTimeToFullCharge read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
         return CHIP_NO_ERROR;
     }
 };
 
-class SubscribeAttributePowerSourceBatteryTimeToFullCharge : public SubscribeAttribute {
+class SubscribeAttributePowerSourceBatTimeToFullCharge : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceBatteryTimeToFullCharge()
-        : SubscribeAttribute("battery-time-to-full-charge")
+    SubscribeAttributePowerSourceBatTimeToFullCharge()
+        : SubscribeAttribute("bat-time-to-full-charge")
     {
     }
 
-    ~SubscribeAttributePowerSourceBatteryTimeToFullCharge() {}
+    ~SubscribeAttributePowerSourceBatTimeToFullCharge() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17939,14 +17934,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeBatteryTimeToFullChargeWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeBatTimeToFullChargeWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryTimeToFullCharge response %@", [value description]);
+                NSLog(@"PowerSource.BatTimeToFullCharge response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -17957,16 +17952,16 @@ public:
 };
 
 /*
- * Attribute BatteryFunctionalWhileCharging
+ * Attribute BatFunctionalWhileCharging
  */
-class ReadPowerSourceBatteryFunctionalWhileCharging : public ReadAttribute {
+class ReadPowerSourceBatFunctionalWhileCharging : public ReadAttribute {
 public:
-    ReadPowerSourceBatteryFunctionalWhileCharging()
-        : ReadAttribute("battery-functional-while-charging")
+    ReadPowerSourceBatFunctionalWhileCharging()
+        : ReadAttribute("bat-functional-while-charging")
     {
     }
 
-    ~ReadPowerSourceBatteryFunctionalWhileCharging() {}
+    ~ReadPowerSourceBatFunctionalWhileCharging() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -17976,26 +17971,26 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster readAttributeBatteryFunctionalWhileChargingWithCompletionHandler:^(
-            NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"PowerSource.BatteryFunctionalWhileCharging response %@", [value description]);
-            if (error != nil) {
-                LogNSError("PowerSource BatteryFunctionalWhileCharging read Error", error);
-            }
-            SetCommandExitStatus(error);
-        }];
+        [cluster
+            readAttributeBatFunctionalWhileChargingWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"PowerSource.BatFunctionalWhileCharging response %@", [value description]);
+                if (error != nil) {
+                    LogNSError("PowerSource BatFunctionalWhileCharging read Error", error);
+                }
+                SetCommandExitStatus(error);
+            }];
         return CHIP_NO_ERROR;
     }
 };
 
-class SubscribeAttributePowerSourceBatteryFunctionalWhileCharging : public SubscribeAttribute {
+class SubscribeAttributePowerSourceBatFunctionalWhileCharging : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceBatteryFunctionalWhileCharging()
-        : SubscribeAttribute("battery-functional-while-charging")
+    SubscribeAttributePowerSourceBatFunctionalWhileCharging()
+        : SubscribeAttribute("bat-functional-while-charging")
     {
     }
 
-    ~SubscribeAttributePowerSourceBatteryFunctionalWhileCharging() {}
+    ~SubscribeAttributePowerSourceBatFunctionalWhileCharging() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -18008,14 +18003,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeBatteryFunctionalWhileChargingWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeBatFunctionalWhileChargingWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryFunctionalWhileCharging response %@", [value description]);
+                NSLog(@"PowerSource.BatFunctionalWhileCharging response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -18026,16 +18021,16 @@ public:
 };
 
 /*
- * Attribute BatteryChargingCurrent
+ * Attribute BatChargingCurrent
  */
-class ReadPowerSourceBatteryChargingCurrent : public ReadAttribute {
+class ReadPowerSourceBatChargingCurrent : public ReadAttribute {
 public:
-    ReadPowerSourceBatteryChargingCurrent()
-        : ReadAttribute("battery-charging-current")
+    ReadPowerSourceBatChargingCurrent()
+        : ReadAttribute("bat-charging-current")
     {
     }
 
-    ~ReadPowerSourceBatteryChargingCurrent() {}
+    ~ReadPowerSourceBatChargingCurrent() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -18045,10 +18040,10 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster readAttributeBatteryChargingCurrentWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"PowerSource.BatteryChargingCurrent response %@", [value description]);
+        [cluster readAttributeBatChargingCurrentWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"PowerSource.BatChargingCurrent response %@", [value description]);
             if (error != nil) {
-                LogNSError("PowerSource BatteryChargingCurrent read Error", error);
+                LogNSError("PowerSource BatChargingCurrent read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -18056,14 +18051,14 @@ public:
     }
 };
 
-class SubscribeAttributePowerSourceBatteryChargingCurrent : public SubscribeAttribute {
+class SubscribeAttributePowerSourceBatChargingCurrent : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceBatteryChargingCurrent()
-        : SubscribeAttribute("battery-charging-current")
+    SubscribeAttributePowerSourceBatChargingCurrent()
+        : SubscribeAttribute("bat-charging-current")
     {
     }
 
-    ~SubscribeAttributePowerSourceBatteryChargingCurrent() {}
+    ~SubscribeAttributePowerSourceBatChargingCurrent() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -18076,14 +18071,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeBatteryChargingCurrentWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeBatChargingCurrentWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.BatteryChargingCurrent response %@", [value description]);
+                NSLog(@"PowerSource.BatChargingCurrent response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -18094,16 +18089,16 @@ public:
 };
 
 /*
- * Attribute ActiveBatteryChargeFaults
+ * Attribute ActiveBatChargeFaults
  */
-class ReadPowerSourceActiveBatteryChargeFaults : public ReadAttribute {
+class ReadPowerSourceActiveBatChargeFaults : public ReadAttribute {
 public:
-    ReadPowerSourceActiveBatteryChargeFaults()
-        : ReadAttribute("active-battery-charge-faults")
+    ReadPowerSourceActiveBatChargeFaults()
+        : ReadAttribute("active-bat-charge-faults")
     {
     }
 
-    ~ReadPowerSourceActiveBatteryChargeFaults() {}
+    ~ReadPowerSourceActiveBatChargeFaults() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -18113,26 +18108,25 @@ public:
         MTRBaseClusterPowerSource * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
                                                                                        endpoint:endpointId
                                                                                           queue:callbackQueue];
-        [cluster
-            readAttributeActiveBatteryChargeFaultsWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.ActiveBatteryChargeFaults response %@", [value description]);
-                if (error != nil) {
-                    LogNSError("PowerSource ActiveBatteryChargeFaults read Error", error);
-                }
-                SetCommandExitStatus(error);
-            }];
+        [cluster readAttributeActiveBatChargeFaultsWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"PowerSource.ActiveBatChargeFaults response %@", [value description]);
+            if (error != nil) {
+                LogNSError("PowerSource ActiveBatChargeFaults read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
         return CHIP_NO_ERROR;
     }
 };
 
-class SubscribeAttributePowerSourceActiveBatteryChargeFaults : public SubscribeAttribute {
+class SubscribeAttributePowerSourceActiveBatChargeFaults : public SubscribeAttribute {
 public:
-    SubscribeAttributePowerSourceActiveBatteryChargeFaults()
-        : SubscribeAttribute("active-battery-charge-faults")
+    SubscribeAttributePowerSourceActiveBatChargeFaults()
+        : SubscribeAttribute("active-bat-charge-faults")
     {
     }
 
-    ~SubscribeAttributePowerSourceActiveBatteryChargeFaults() {}
+    ~SubscribeAttributePowerSourceActiveBatChargeFaults() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -18145,14 +18139,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeActiveBatteryChargeFaultsWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeActiveBatChargeFaultsWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"PowerSource.ActiveBatteryChargeFaults response %@", [value description]);
+                NSLog(@"PowerSource.ActiveBatChargeFaults response %@", [value description]);
                 if (error || !mWait) {
                     SetCommandExitStatus(error);
                 }
@@ -94233,46 +94227,46 @@ void registerClusterPowerSource(Commands & commands)
         make_unique<SubscribeAttributePowerSourceWiredPresent>(), //
         make_unique<ReadPowerSourceActiveWiredFaults>(), //
         make_unique<SubscribeAttributePowerSourceActiveWiredFaults>(), //
-        make_unique<ReadPowerSourceBatteryVoltage>(), //
-        make_unique<SubscribeAttributePowerSourceBatteryVoltage>(), //
-        make_unique<ReadPowerSourceBatteryPercentRemaining>(), //
-        make_unique<SubscribeAttributePowerSourceBatteryPercentRemaining>(), //
-        make_unique<ReadPowerSourceBatteryTimeRemaining>(), //
-        make_unique<SubscribeAttributePowerSourceBatteryTimeRemaining>(), //
-        make_unique<ReadPowerSourceBatteryChargeLevel>(), //
-        make_unique<SubscribeAttributePowerSourceBatteryChargeLevel>(), //
-        make_unique<ReadPowerSourceBatteryReplacementNeeded>(), //
-        make_unique<SubscribeAttributePowerSourceBatteryReplacementNeeded>(), //
-        make_unique<ReadPowerSourceBatteryReplaceability>(), //
-        make_unique<SubscribeAttributePowerSourceBatteryReplaceability>(), //
-        make_unique<ReadPowerSourceBatteryPresent>(), //
-        make_unique<SubscribeAttributePowerSourceBatteryPresent>(), //
-        make_unique<ReadPowerSourceActiveBatteryFaults>(), //
-        make_unique<SubscribeAttributePowerSourceActiveBatteryFaults>(), //
-        make_unique<ReadPowerSourceBatteryReplacementDescription>(), //
-        make_unique<SubscribeAttributePowerSourceBatteryReplacementDescription>(), //
-        make_unique<ReadPowerSourceBatteryCommonDesignation>(), //
-        make_unique<SubscribeAttributePowerSourceBatteryCommonDesignation>(), //
-        make_unique<ReadPowerSourceBatteryANSIDesignation>(), //
-        make_unique<SubscribeAttributePowerSourceBatteryANSIDesignation>(), //
-        make_unique<ReadPowerSourceBatteryIECDesignation>(), //
-        make_unique<SubscribeAttributePowerSourceBatteryIECDesignation>(), //
-        make_unique<ReadPowerSourceBatteryApprovedChemistry>(), //
-        make_unique<SubscribeAttributePowerSourceBatteryApprovedChemistry>(), //
-        make_unique<ReadPowerSourceBatteryCapacity>(), //
-        make_unique<SubscribeAttributePowerSourceBatteryCapacity>(), //
-        make_unique<ReadPowerSourceBatteryQuantity>(), //
-        make_unique<SubscribeAttributePowerSourceBatteryQuantity>(), //
-        make_unique<ReadPowerSourceBatteryChargeState>(), //
-        make_unique<SubscribeAttributePowerSourceBatteryChargeState>(), //
-        make_unique<ReadPowerSourceBatteryTimeToFullCharge>(), //
-        make_unique<SubscribeAttributePowerSourceBatteryTimeToFullCharge>(), //
-        make_unique<ReadPowerSourceBatteryFunctionalWhileCharging>(), //
-        make_unique<SubscribeAttributePowerSourceBatteryFunctionalWhileCharging>(), //
-        make_unique<ReadPowerSourceBatteryChargingCurrent>(), //
-        make_unique<SubscribeAttributePowerSourceBatteryChargingCurrent>(), //
-        make_unique<ReadPowerSourceActiveBatteryChargeFaults>(), //
-        make_unique<SubscribeAttributePowerSourceActiveBatteryChargeFaults>(), //
+        make_unique<ReadPowerSourceBatVoltage>(), //
+        make_unique<SubscribeAttributePowerSourceBatVoltage>(), //
+        make_unique<ReadPowerSourceBatPercentRemaining>(), //
+        make_unique<SubscribeAttributePowerSourceBatPercentRemaining>(), //
+        make_unique<ReadPowerSourceBatTimeRemaining>(), //
+        make_unique<SubscribeAttributePowerSourceBatTimeRemaining>(), //
+        make_unique<ReadPowerSourceBatChargeLevel>(), //
+        make_unique<SubscribeAttributePowerSourceBatChargeLevel>(), //
+        make_unique<ReadPowerSourceBatReplacementNeeded>(), //
+        make_unique<SubscribeAttributePowerSourceBatReplacementNeeded>(), //
+        make_unique<ReadPowerSourceBatReplaceability>(), //
+        make_unique<SubscribeAttributePowerSourceBatReplaceability>(), //
+        make_unique<ReadPowerSourceBatPresent>(), //
+        make_unique<SubscribeAttributePowerSourceBatPresent>(), //
+        make_unique<ReadPowerSourceActiveBatFaults>(), //
+        make_unique<SubscribeAttributePowerSourceActiveBatFaults>(), //
+        make_unique<ReadPowerSourceBatReplacementDescription>(), //
+        make_unique<SubscribeAttributePowerSourceBatReplacementDescription>(), //
+        make_unique<ReadPowerSourceBatCommonDesignation>(), //
+        make_unique<SubscribeAttributePowerSourceBatCommonDesignation>(), //
+        make_unique<ReadPowerSourceBatANSIDesignation>(), //
+        make_unique<SubscribeAttributePowerSourceBatANSIDesignation>(), //
+        make_unique<ReadPowerSourceBatIECDesignation>(), //
+        make_unique<SubscribeAttributePowerSourceBatIECDesignation>(), //
+        make_unique<ReadPowerSourceBatApprovedChemistry>(), //
+        make_unique<SubscribeAttributePowerSourceBatApprovedChemistry>(), //
+        make_unique<ReadPowerSourceBatCapacity>(), //
+        make_unique<SubscribeAttributePowerSourceBatCapacity>(), //
+        make_unique<ReadPowerSourceBatQuantity>(), //
+        make_unique<SubscribeAttributePowerSourceBatQuantity>(), //
+        make_unique<ReadPowerSourceBatChargeState>(), //
+        make_unique<SubscribeAttributePowerSourceBatChargeState>(), //
+        make_unique<ReadPowerSourceBatTimeToFullCharge>(), //
+        make_unique<SubscribeAttributePowerSourceBatTimeToFullCharge>(), //
+        make_unique<ReadPowerSourceBatFunctionalWhileCharging>(), //
+        make_unique<SubscribeAttributePowerSourceBatFunctionalWhileCharging>(), //
+        make_unique<ReadPowerSourceBatChargingCurrent>(), //
+        make_unique<SubscribeAttributePowerSourceBatChargingCurrent>(), //
+        make_unique<ReadPowerSourceActiveBatChargeFaults>(), //
+        make_unique<SubscribeAttributePowerSourceActiveBatChargeFaults>(), //
         make_unique<ReadPowerSourceGeneratedCommandList>(), //
         make_unique<SubscribeAttributePowerSourceGeneratedCommandList>(), //
         make_unique<ReadPowerSourceAcceptedCommandList>(), //
