@@ -18462,22 +18462,12 @@ public:
             err = TestTh1ReadsBasicCommissioningInfoAttributeFromDutAndVerifyThatTheBasicCommissioningInfoAttributeHasTheFollowingFieldFailSafeExpiryLengthSecondsFieldValueIsWithinADurationRangeOf0To65535_6();
             break;
         case 7:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 7 : Step 6 is implicitly validating the attribute(BasicCommissioningInfo) constraints, as long "
-                "as the payload is being parsed successfully\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6IsImplicitlyValidatingTheAttributeBasicCommissioningInfoConstraintsAsLongAsThePayloadIsBeingParsedSuccessfully_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : TH1 reads SupportsConcurrentConnection attribute from the DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH1 reads SupportsConcurrentConnection attribute from the DUT\n");
             if (ShouldSkip("CGEN.S.A0004")) {
                 NextTest();
                 return;
             }
-            err = TestTh1ReadsSupportsConcurrentConnectionAttributeFromTheDut_8();
+            err = TestTh1ReadsSupportsConcurrentConnectionAttributeFromTheDut_7();
             break;
         }
 
@@ -18514,9 +18504,6 @@ public:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -18530,7 +18517,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 9;
+    const uint16_t mTestCount = 8;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -18678,17 +18665,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6IsImplicitlyValidatingTheAttributeBasicCommissioningInfoConstraintsAsLongAsThePayloadIsBeingParsedSuccessfully_7()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestTh1ReadsSupportsConcurrentConnectionAttributeFromTheDut_8()
+    CHIP_ERROR TestTh1ReadsSupportsConcurrentConnectionAttributeFromTheDut_7()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGeneralCommissioning * cluster = [[MTRBaseClusterGeneralCommissioning alloc] initWithDevice:device
@@ -103044,127 +103021,163 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 1 : TH writes the RequirePINforRemoteOperation attribute value as False on the DUT\n");
-            if (ShouldSkip("DRLK.S.A0033")) {
-                NextTest();
-                return;
-            }
-            err = TestThWritesTheRequirePINforRemoteOperationAttributeValueAsFalseOnTheDut_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Create new user\n");
+            err = TestCreateNewUser_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends Lock Door Command to the DUT without PINCode\n");
-            if (ShouldSkip("DRLK.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsLockDoorCommandToTheDutWithoutPINCode_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the user back and verify its fields\n");
+            err = TestReadTheUserBackAndVerifyItsFields_2();
             break;
         case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Create new PIN credential and lock/unlock user\n");
+            err = TestCreateNewPinCredentialAndLockUnlockUser_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Verify created PIN credential\n");
+            err = TestVerifyCreatedPinCredential_4();
+            break;
+        case 5:
             ChipLogProgress(
-                chipTool, " ***** Test Step 3 : TH writes the RequirePINforRemoteOperation attribute value as True on the DUT\n");
+                chipTool, " ***** Test Step 5 : TH writes the RequirePINforRemoteOperation attribute value as False on the DUT\n");
             if (ShouldSkip("DRLK.S.A0033")) {
                 NextTest();
                 return;
             }
-            err = TestThWritesTheRequirePINforRemoteOperationAttributeValueAsTrueOnTheDut_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Create new PIN credential and lock/unlock user\n");
-            if (ShouldSkip("DRLK.S.C22.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestCreateNewPinCredentialAndLockUnlockUser_4();
-            break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : TH sends Lock Door Command to the DUT with valid PINCode\n");
-            if (ShouldSkip("DRLK.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsLockDoorCommandToTheDutWithValidPINCode_5();
+            err = TestThWritesTheRequirePINforRemoteOperationAttributeValueAsFalseOnTheDut_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : TH sends Lock Door Command to the DUT without any argument PINCode\n");
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH sends Lock Door Command to the DUT without PINCode\n");
             if (ShouldSkip("DRLK.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsLockDoorCommandToTheDutWithoutAnyArgumentPINCode_6();
+            err = TestThSendsLockDoorCommandToTheDutWithoutPINCode_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : TH writes WrongCodeEntryLimit attribute value as 3 on the DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH sends Lock Door Command to the DUT with valid PINCode\n");
+            if (ShouldSkip("DRLK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsLockDoorCommandToTheDutWithValidPINCode_7();
+            break;
+        case 8:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 8 : TH writes the RequirePINforRemoteOperation attribute value as True on the DUT\n");
+            if (ShouldSkip("DRLK.S.A0033")) {
+                NextTest();
+                return;
+            }
+            err = TestThWritesTheRequirePINforRemoteOperationAttributeValueAsTrueOnTheDut_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads the RequirePINforRemoteOperation attribute from the DUT\n");
+            if (ShouldSkip("DRLK.S.F07 && DRLK.S.F00 && DRLK.S.A0033")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsTheRequirePINforRemoteOperationAttributeFromTheDut_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH sends Lock Door Command to the DUT with valid PINCode\n");
+            if (ShouldSkip("DRLK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsLockDoorCommandToTheDutWithValidPINCode_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH sends Lock Door Command to the DUT without valid PINCode\n");
+            if (ShouldSkip("DRLK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsLockDoorCommandToTheDutWithoutValidPINCode_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH sends Lock Door Command to the DUT without any argument PINCode\n");
+            if (ShouldSkip("DRLK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsLockDoorCommandToTheDutWithoutAnyArgumentPINCode_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH writes WrongCodeEntryLimit attribute value as 3 on the DUT\n");
             if (ShouldSkip("DRLK.S.A0030")) {
                 NextTest();
                 return;
             }
-            err = TestThWritesWrongCodeEntryLimitAttributeValueAs3OnTheDut_7();
-            break;
-        case 8:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 8 : TH writes UserCodeTemporaryDisableTime attribute value as 5 seconds on the DUT\n");
-            if (ShouldSkip("DRLK.S.A0031")) {
-                NextTest();
-                return;
-            }
-            err = TestThWritesUserCodeTemporaryDisableTimeAttributeValueAs5SecondsOnTheDut_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
-            if (ShouldSkip("DRLK.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
-            if (ShouldSkip("DRLK.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
-            if (ShouldSkip("DRLK.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
-            if (ShouldSkip("DRLK.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : TH reads UserCodeTemporaryDisableTime attribute from DUT\n");
-            if (ShouldSkip("DRLK.S.A0031")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsUserCodeTemporaryDisableTimeAttributeFromDut_13();
+            err = TestThWritesWrongCodeEntryLimitAttributeValueAs3OnTheDut_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : TH sends Lock Door Command to the DUT with valid PINCode\n");
+            ChipLogProgress(
+                chipTool, " ***** Test Step 14 : TH writes UserCodeTemporaryDisableTime attribute value as 5 seconds on the DUT\n");
+            if (ShouldSkip("DRLK.S.A0031")) {
+                NextTest();
+                return;
+            }
+            err = TestThWritesUserCodeTemporaryDisableTimeAttributeValueAs5SecondsOnTheDut_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
             if (ShouldSkip("DRLK.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsLockDoorCommandToTheDutWithValidPINCode_14();
+            err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_15();
             break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Clean the created credential\n");
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
+            if (ShouldSkip("DRLK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
+            if (ShouldSkip("DRLK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
+            if (ShouldSkip("DRLK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : TH reads UserCodeTemporaryDisableTime attribute from DUT\n");
+            if (ShouldSkip("DRLK.S.A0031")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsUserCodeTemporaryDisableTimeAttributeFromDut_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : TH sends Lock Door Command to the DUT with valid PINCode\n");
+            if (ShouldSkip("DRLK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsLockDoorCommandToTheDutWithValidPINCode_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Clean the created user\n");
+            err = TestCleanTheCreatedUser_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Cleanup the created credential\n");
             if (ShouldSkip("DRLK.S.C26.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestCleanTheCreatedCredential_15();
+            err = TestCleanupTheCreatedCredential_22();
             break;
         }
 
@@ -103184,7 +103197,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -103196,7 +103209,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -103205,10 +103218,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
@@ -103223,6 +103236,27 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         }
@@ -103238,7 +103272,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 16;
+    const uint16_t mTestCount = 23;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -103252,7 +103286,207 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestThWritesTheRequirePINforRemoteOperationAttributeValueAsFalseOnTheDut_1()
+    CHIP_ERROR TestCreateNewUser_1()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = @"xxx";
+        params.userUniqueId = [NSNumber numberWithUnsignedInt:6452UL];
+        params.userStatus = [NSNumber numberWithUnsignedChar:1U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        params.credentialRule = [NSNumber numberWithUnsignedChar:0U];
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Create new user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserBackAndVerifyItsFields_2()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"xxx"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
+                         VerifyOrReturn(CheckValue("userUniqueId", actualValue, 6452UL));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialAndLockUnlockUser_3()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential and lock/unlock user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedPinCredential_4()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Verify created PIN credential Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, true));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThWritesTheRequirePINforRemoteOperationAttributeValueAsFalseOnTheDut_5()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -103274,26 +103508,46 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithoutPINCode_2()
+    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithoutPINCode_6()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterLockDoorParams alloc] init];
-        params.pinCode = [[NSData alloc] initWithBytes:"" length:0];
         [cluster lockDoorWithParams:params
                   completionHandler:^(NSError * _Nullable err) {
                       NSLog(@"TH sends Lock Door Command to the DUT without PINCode Error: %@", err);
 
-                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
                       NextTest();
                   }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThWritesTheRequirePINforRemoteOperationAttributeValueAsTrueOnTheDut_3()
+    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithValidPINCode_7()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterLockDoorParams alloc] init];
+        params.pinCode = [[NSData alloc] initWithBytes:"123456" length:6];
+        [cluster lockDoorWithParams:params
+                  completionHandler:^(NSError * _Nullable err) {
+                      NSLog(@"TH sends Lock Door Command to the DUT with valid PINCode Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThWritesTheRequirePINforRemoteOperationAttributeValueAsTrueOnTheDut_8()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -103315,53 +103569,30 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewPinCredentialAndLockUnlockUser_4()
+    CHIP_ERROR TestThReadsTheRequirePINforRemoteOperationAttributeFromTheDut_9()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
-
-        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
-        params.userIndex = nil;
-        params.userStatus = nil;
-        params.userType = nil;
         [cluster
-            setCredentialWithParams:params
-                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
-                      NSLog(@"Create new PIN credential and lock/unlock user Error: %@", err);
+            readAttributeRequirePINforRemoteOperationWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"TH reads the RequirePINforRemoteOperation attribute from the DUT Error: %@", err);
 
-                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                      {
-                          id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
-                      }
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("RequirePINforRemoteOperation", actualValue, true));
+                }
 
-                      {
-                          id actualValue = values.userIndex;
-                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                          VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
-                      }
-
-                      {
-                          id actualValue = values.nextCredentialIndex;
-                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
-                      }
-
-                      NextTest();
-                  }];
+                NextTest();
+            }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithValidPINCode_5()
+    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithValidPINCode_10()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -103381,7 +103612,26 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithoutAnyArgumentPINCode_6()
+    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithoutValidPINCode_11()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterLockDoorParams alloc] init];
+        params.pinCode = [[NSData alloc] initWithBytes:"645321" length:6];
+        [cluster lockDoorWithParams:params
+                  completionHandler:^(NSError * _Nullable err) {
+                      NSLog(@"TH sends Lock Door Command to the DUT without valid PINCode Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithoutAnyArgumentPINCode_12()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -103400,7 +103650,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThWritesWrongCodeEntryLimitAttributeValueAs3OnTheDut_7()
+    CHIP_ERROR TestThWritesWrongCodeEntryLimitAttributeValueAs3OnTheDut_13()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -103421,14 +103671,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThWritesUserCodeTemporaryDisableTimeAttributeValueAs5SecondsOnTheDut_8()
+    CHIP_ERROR TestThWritesUserCodeTemporaryDisableTimeAttributeValueAs5SecondsOnTheDut_14()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id userCodeTemporaryDisableTimeArgument;
-        userCodeTemporaryDisableTimeArgument = [NSNumber numberWithUnsignedChar:5U];
+        userCodeTemporaryDisableTimeArgument = [NSNumber numberWithUnsignedChar:15U];
         [cluster writeAttributeUserCodeTemporaryDisableTimeWithValue:userCodeTemporaryDisableTimeArgument
                                                    completionHandler:^(NSError * _Nullable err) {
                                                        NSLog(@"TH writes UserCodeTemporaryDisableTime attribute value as 5 seconds "
@@ -103443,7 +103693,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_9()
+    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_15()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -103462,7 +103712,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_10()
+    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_16()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -103481,7 +103731,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_11()
+    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_17()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -103500,7 +103750,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_12()
+    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_18()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -103519,7 +103769,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsUserCodeTemporaryDisableTimeAttributeFromDut_13()
+    CHIP_ERROR TestThReadsUserCodeTemporaryDisableTimeAttributeFromDut_19()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -103533,7 +103783,7 @@ private:
 
                 {
                     id actualValue = value;
-                    VerifyOrReturn(CheckValue("UserCodeTemporaryDisableTime", actualValue, 5U));
+                    VerifyOrReturn(CheckValue("UserCodeTemporaryDisableTime", actualValue, 15U));
                 }
 
                 NextTest();
@@ -103542,7 +103792,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithValidPINCode_14()
+    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithValidPINCode_20()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -103562,7 +103812,27 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCleanTheCreatedCredential_15()
+    CHIP_ERROR TestCleanTheCreatedUser_21()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearUserWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"Clean the created user Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                       NextTest();
+                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCleanupTheCreatedCredential_22()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -103575,7 +103845,7 @@ private:
 
         [cluster clearCredentialWithParams:params
                          completionHandler:^(NSError * _Nullable err) {
-                             NSLog(@"Clean the created credential Error: %@", err);
+                             NSLog(@"Cleanup the created credential Error: %@", err);
 
                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -103629,64 +103899,68 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Create new PIN credential and lock/unlock user\n");
-            if (ShouldSkip("DRLK.S.C22.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestCreateNewPinCredentialAndLockUnlockUser_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Create new user\n");
+            err = TestCreateNewUser_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Precondition: Door is in locked state\n");
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the user back and verify its fields\n");
+            err = TestReadTheUserBackAndVerifyItsFields_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Create new PIN credential and lock/unlock user\n");
+            err = TestCreateNewPinCredentialAndLockUnlockUser_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Verify created PIN credential\n");
+            err = TestVerifyCreatedPinCredential_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Precondition: Door is in locked state\n");
             if (ShouldSkip("DRLK.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestPreconditionDoorIsInLockedState_2();
+            err = TestPreconditionDoorIsInLockedState_5();
             break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : TH writes AutoRelockTime attribute value as 10 seconds on the DUT\n");
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH writes AutoRelockTime attribute value as 10 seconds on the DUT\n");
             if (ShouldSkip("DRLK.S.A0023")) {
                 NextTest();
                 return;
             }
-            err = TestThWritesAutoRelockTimeAttributeValueAs10SecondsOnTheDut_3();
+            err = TestThWritesAutoRelockTimeAttributeValueAs10SecondsOnTheDut_6();
             break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : TH sends the unlock Door command to the DUT with valid PINCode\n");
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH sends the unlock Door command to the DUT with valid PINCode\n");
             if (ShouldSkip("DRLK.S.C01.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsTheUnlockDoorCommandToTheDutWithValidPINCode_4();
+            err = TestThSendsTheUnlockDoorCommandToTheDutWithValidPINCode_7();
             break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads AutoRelockTime attribute from DUT\n");
-            if (ShouldSkip("DRLK.S.A0023")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsAutoRelockTimeAttributeFromDut_5();
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Wait 10000ms\n");
+            err = TestWait10000ms_8();
             break;
-        case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Wait 10000ms\n");
-            err = TestWait10000ms_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads LockState attribute\n");
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads LockState attribute\n");
             if (ShouldSkip("DRLK.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsLockStateAttribute_7();
+            err = TestThReadsLockStateAttribute_9();
             break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Clean the created credential\n");
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Cleanup the created user\n");
+            err = TestCleanupTheCreatedUser_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Clean the created credential\n");
             if (ShouldSkip("DRLK.S.C26.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestCleanTheCreatedCredential_8();
+            err = TestCleanTheCreatedCredential_11();
             break;
         }
 
@@ -103726,6 +104000,15 @@ public:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -103739,7 +104022,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 9;
+    const uint16_t mTestCount = 12;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -103753,7 +104036,110 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestCreateNewPinCredentialAndLockUnlockUser_1()
+    CHIP_ERROR TestCreateNewUser_1()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = @"xxx";
+        params.userUniqueId = [NSNumber numberWithUnsignedInt:6452UL];
+        params.userStatus = [NSNumber numberWithUnsignedChar:1U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        params.credentialRule = [NSNumber numberWithUnsignedChar:0U];
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Create new user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserBackAndVerifyItsFields_2()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"xxx"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
+                         VerifyOrReturn(CheckValue("userUniqueId", actualValue, 6452UL));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialAndLockUnlockUser_3()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -103766,9 +104152,9 @@ private:
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
-        params.userIndex = nil;
-        params.userStatus = nil;
-        params.userType = nil;
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -103783,8 +104169,7 @@ private:
 
                       {
                           id actualValue = values.userIndex;
-                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                          VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
                       }
 
                       {
@@ -103799,7 +104184,59 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestPreconditionDoorIsInLockedState_2()
+    CHIP_ERROR TestVerifyCreatedPinCredential_4()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Verify created PIN credential Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, true));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestPreconditionDoorIsInLockedState_5()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -103819,14 +104256,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThWritesAutoRelockTimeAttributeValueAs10SecondsOnTheDut_3()
+    CHIP_ERROR TestThWritesAutoRelockTimeAttributeValueAs10SecondsOnTheDut_6()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id autoRelockTimeArgument;
-        autoRelockTimeArgument = [NSNumber numberWithUnsignedInt:10UL];
+        autoRelockTimeArgument = [NSNumber numberWithUnsignedInt:60UL];
         [cluster writeAttributeAutoRelockTimeWithValue:autoRelockTimeArgument
                                      completionHandler:^(NSError * _Nullable err) {
                                          NSLog(@"TH writes AutoRelockTime attribute value as 10 seconds on the DUT Error: %@", err);
@@ -103839,7 +104276,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsTheUnlockDoorCommandToTheDutWithValidPINCode_4()
+    CHIP_ERROR TestThSendsTheUnlockDoorCommandToTheDutWithValidPINCode_7()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -103859,36 +104296,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsAutoRelockTimeAttributeFromDut_5()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAutoRelockTimeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads AutoRelockTime attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("AutoRelockTime", actualValue, 10UL));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWait10000ms_6()
+    CHIP_ERROR TestWait10000ms_8()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 10000UL;
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestThReadsLockStateAttribute_7()
+    CHIP_ERROR TestThReadsLockStateAttribute_9()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -103902,7 +104317,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("LockState", actualValue));
-                VerifyOrReturn(CheckValue("LockState", actualValue, 1U));
+                VerifyOrReturn(CheckValue("LockState", actualValue, 2U));
             }
 
             NextTest();
@@ -103911,7 +104326,27 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCleanTheCreatedCredential_8()
+    CHIP_ERROR TestCleanupTheCreatedUser_10()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearUserWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"Cleanup the created user Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                       NextTest();
+                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCleanTheCreatedCredential_11()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104294,78 +104729,82 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Create new PIN credential and lock/unlock user\n");
-            if (ShouldSkip("DRLK.S.C22.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestCreateNewPinCredentialAndLockUnlockUser_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Create new user\n");
+            err = TestCreateNewUser_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Get Max number of Week Day schedules for user\n");
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the user back and verify its fields\n");
+            err = TestReadTheUserBackAndVerifyItsFields_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Get Max number of Week Day schedules for user\n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.A0014")) {
                 NextTest();
                 return;
             }
-            err = TestGetMaxNumberOfWeekDaySchedulesForUser_2();
+            err = TestGetMaxNumberOfWeekDaySchedulesForUser_3();
             break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Get number of supported users\n");
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Get number of supported users\n");
             if (ShouldSkip("DRLK.S.F08 && DRLK.S.A0011")) {
                 NextTest();
                 return;
             }
-            err = TestGetNumberOfSupportedUsers_3();
+            err = TestGetNumberOfSupportedUsers_4();
             break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Send Set Week Day Schedule Command to DUT\n");
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Send Set Week Day Schedule Command to DUT\n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0B.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestSendSetWeekDayScheduleCommandToDut_4();
+            err = TestSendSetWeekDayScheduleCommandToDut_5();
             break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : send GetWeekDay Schedule Command \n");
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : send GetWeekDay Schedule Command \n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0C.Rsp && DRLK.S.C0C.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestSendGetWeekDayScheduleCommand_5();
-            break;
-        case 6:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 6 : Send Set Week Day Schedule Command to DUT and verify INVALID_COMMAND response\n");
-            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0B.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestSendSetWeekDayScheduleCommandToDutAndVerifyInvalidCommandResponse_6();
+            err = TestSendGetWeekDayScheduleCommand_6();
             break;
         case 7:
             ChipLogProgress(
-                chipTool, " ***** Test Step 7 : send GetWeekDay Schedule Command to DUT and verify INVALID_COMMAND response\n");
+                chipTool, " ***** Test Step 7 : Send Set Week Day Schedule Command to DUT and verify INVALID_COMMAND response\n");
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0B.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestSendSetWeekDayScheduleCommandToDutAndVerifyInvalidCommandResponse_7();
+            break;
+        case 8:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 8 : send GetWeekDay Schedule Command to DUT and verify INVALID_COMMAND response\n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0C.Rsp && DRLK.S.C0C.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestSendGetWeekDayScheduleCommandToDutAndVerifyInvalidCommandResponse_7();
+            err = TestSendGetWeekDayScheduleCommandToDutAndVerifyInvalidCommandResponse_8();
             break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Clear all week day schedules for the first user\n");
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Clear all week day schedules for the first user\n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0D.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestClearAllWeekDaySchedulesForTheFirstUser_8();
+            err = TestClearAllWeekDaySchedulesForTheFirstUser_9();
             break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : send GetWeekDay Schedule Command \n");
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : send GetWeekDay Schedule Command \n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0C.Rsp && DRLK.S.C0C.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestSendGetWeekDayScheduleCommand_9();
+            err = TestSendGetWeekDayScheduleCommand_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Cleanup the created user\n");
+            err = TestCleanupTheCreatedUser_11();
             break;
         }
 
@@ -104397,15 +104836,21 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         }
@@ -104421,7 +104866,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 10;
+    const uint16_t mTestCount = 12;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -104435,54 +104880,111 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestCreateNewPinCredentialAndLockUnlockUser_1()
+    CHIP_ERROR TestCreateNewUser_1()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = @"xxx";
+        params.userUniqueId = [NSNumber numberWithUnsignedInt:6452UL];
+        params.userStatus = [NSNumber numberWithUnsignedChar:1U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        params.credentialRule = [NSNumber numberWithUnsignedChar:0U];
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Create new user Error: %@", err);
 
-        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
-        params.userIndex = nil;
-        params.userStatus = nil;
-        params.userType = nil;
-        [cluster
-            setCredentialWithParams:params
-                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
-                      NSLog(@"Create new PIN credential and lock/unlock user Error: %@", err);
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                     NextTest();
+                 }];
 
-                      {
-                          id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
-                      }
+        return CHIP_NO_ERROR;
+    }
 
-                      {
-                          id actualValue = values.userIndex;
-                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                          VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
-                      }
+    CHIP_ERROR TestReadTheUserBackAndVerifyItsFields_2()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-                      {
-                          id actualValue = values.nextCredentialIndex;
-                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
-                      }
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user back and verify its fields Error: %@", err);
 
-                      NextTest();
-                  }];
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"xxx"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
+                         VerifyOrReturn(CheckValue("userUniqueId", actualValue, 6452UL));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
 
         return CHIP_NO_ERROR;
     }
     NSNumber * _Nonnull NumberOfWeekDaySchedulesSupportedPerUser;
 
-    CHIP_ERROR TestGetMaxNumberOfWeekDaySchedulesForUser_2()
+    CHIP_ERROR TestGetMaxNumberOfWeekDaySchedulesForUser_3()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104494,10 +104996,10 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("NumberOfWeekDaySchedulesSupportedPerUser", actualValue, 10U));
-            }
+            VerifyOrReturn(
+                CheckConstraintMinValue<uint8_t>("numberOfWeekDaySchedulesSupportedPerUser", [value unsignedCharValue], 0U));
+            VerifyOrReturn(
+                CheckConstraintMaxValue<uint8_t>("numberOfWeekDaySchedulesSupportedPerUser", [value unsignedCharValue], 255U));
             {
                 NumberOfWeekDaySchedulesSupportedPerUser = value;
             }
@@ -104509,33 +105011,31 @@ private:
     }
     NSNumber * _Nonnull NumberOfTotalUsersSupported;
 
-    CHIP_ERROR TestGetNumberOfSupportedUsers_3()
+    CHIP_ERROR TestGetNumberOfSupportedUsers_4()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster
-            readAttributeNumberOfTotalUsersSupportedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"Get number of supported users Error: %@", err);
+        [cluster readAttributeNumberOfTotalUsersSupportedWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Get number of supported users Error: %@", err);
 
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                {
-                    id actualValue = value;
-                    VerifyOrReturn(CheckValue("NumberOfTotalUsersSupported", actualValue, 10U));
-                }
-                {
-                    NumberOfTotalUsersSupported = value;
-                }
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("numberOfTotalUsersSupported", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("numberOfTotalUsersSupported", [value unsignedShortValue], 65534U));
+            {
+                NumberOfTotalUsersSupported = value;
+            }
 
-                NextTest();
-            }];
+            NextTest();
+        }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendSetWeekDayScheduleCommandToDut_4()
+    CHIP_ERROR TestSendSetWeekDayScheduleCommandToDut_5()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104561,7 +105061,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendGetWeekDayScheduleCommand_5()
+    CHIP_ERROR TestSendGetWeekDayScheduleCommand_6()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104580,9 +105080,13 @@ private:
 
                            VerifyOrReturn(
                                CheckConstraintMinValue<uint8_t>("weekDayIndex", [values.weekDayIndex unsignedCharValue], 1U));
+                           VerifyOrReturn(CheckConstraintMaxValue<uint8_t>(
+                               "weekDayIndex", [values.weekDayIndex unsignedCharValue], NumberOfWeekDaySchedulesSupportedPerUser));
 
                            VerifyOrReturn(
                                CheckConstraintMinValue<uint16_t>("userIndex", [values.userIndex unsignedShortValue], 1U));
+                           VerifyOrReturn(CheckConstraintMaxValue<uint16_t>(
+                               "userIndex", [values.userIndex unsignedShortValue], NumberOfTotalUsersSupported));
 
                            {
                                id actualValue = values.status;
@@ -104638,7 +105142,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendSetWeekDayScheduleCommandToDutAndVerifyInvalidCommandResponse_6()
+    CHIP_ERROR TestSendSetWeekDayScheduleCommandToDutAndVerifyInvalidCommandResponse_7()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104664,7 +105168,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendGetWeekDayScheduleCommandToDutAndVerifyInvalidCommandResponse_7()
+    CHIP_ERROR TestSendGetWeekDayScheduleCommandToDutAndVerifyInvalidCommandResponse_8()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104722,14 +105226,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearAllWeekDaySchedulesForTheFirstUser_8()
+    CHIP_ERROR TestClearAllWeekDaySchedulesForTheFirstUser_9()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:254U];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster clearWeekDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
@@ -104743,7 +105247,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendGetWeekDayScheduleCommand_9()
+    CHIP_ERROR TestSendGetWeekDayScheduleCommand_10()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -104799,6 +105303,26 @@ private:
 
         return CHIP_NO_ERROR;
     }
+
+    CHIP_ERROR TestCleanupTheCreatedUser_11()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearUserWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"Cleanup the created user Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                       NextTest();
+                   }];
+
+        return CHIP_NO_ERROR;
+    }
 };
 
 class Test_TC_DRLK_2_7 : public TestCommandBridge {
@@ -104844,12 +105368,12 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Create new PIN credential and lock/unlock user\n");
-            err = TestCreateNewPinCredentialAndLockUnlockUser_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Create new user\n");
+            err = TestCreateNewUser_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Create new PIN credential and lock/unlock for second user\n");
-            err = TestCreateNewPinCredentialAndLockUnlockForSecondUser_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the user back and verify its fields\n");
+            err = TestReadTheUserBackAndVerifyItsFields_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Get Max number of year Day schedules for user\n");
@@ -104911,29 +105435,49 @@ public:
             err = TestSendGetYearDayScheduleCommandToDutAndVerifyFailureResponse_9();
             break;
         case 10:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 10 : send Get Year Day Schedule Command  to DUT and verify NOT_FOUND response \n");
-            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0F.Rsp && DRLK.S.C0F.Tx")) {
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Clear a year day schedule for the first user\n");
+            if (ShouldSkip("DRLK.S.C10.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestSendGetYearDayScheduleCommandToDutAndVerifyNotFoundResponse_10();
+            err = TestClearAYearDayScheduleForTheFirstUser_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Send Set Year Day Schedule Command to DUT\n");
+            ChipLogProgress(
+                chipTool, " ***** Test Step 11 : send Get Year Day Schedule Command to DUT and verify NOT_FOUND response\n");
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0F.Rsp && DRLK.S.C0F.Tx && DRLK.S.C10.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestSendGetYearDayScheduleCommandToDutAndVerifyNotFoundResponse_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Send Set Year Day Schedule Command to DUT \n");
             if (ShouldSkip("DRLK.S.C0E.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestSendSetYearDayScheduleCommandToDut_11();
+            err = TestSendSetYearDayScheduleCommandToDut_12();
             break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : send Get Year Day Schedule Command \n");
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : send Get Year Day Schedule Command\n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0F.Rsp && DRLK.S.C0F.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestSendGetYearDayScheduleCommand_12();
+            err = TestSendGetYearDayScheduleCommand_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Clear a year day schedule for the first user\n");
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C10.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestClearAYearDayScheduleForTheFirstUser_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Cleanup the created user\n");
+            err = TestCleanupTheCreatedUser_15();
             break;
         }
 
@@ -104985,6 +105529,15 @@ public:
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -104998,7 +105551,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 13;
+    const uint16_t mTestCount = 16;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -105012,94 +105565,105 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestCreateNewPinCredentialAndLockUnlockUser_1()
+    CHIP_ERROR TestCreateNewUser_1()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = @"xxx";
+        params.userUniqueId = [NSNumber numberWithUnsignedInt:6452UL];
+        params.userStatus = [NSNumber numberWithUnsignedChar:1U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        params.credentialRule = [NSNumber numberWithUnsignedChar:0U];
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Create new user Error: %@", err);
 
-        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
-        params.userIndex = nil;
-        params.userStatus = nil;
-        params.userType = nil;
-        [cluster
-            setCredentialWithParams:params
-                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
-                      NSLog(@"Create new PIN credential and lock/unlock user Error: %@", err);
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                      {
-                          id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
-                      }
-
-                      {
-                          id actualValue = values.userIndex;
-                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                          VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
-                      }
-
-                      {
-                          id actualValue = values.nextCredentialIndex;
-                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
-                      }
-
-                      NextTest();
-                  }];
+                     NextTest();
+                 }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewPinCredentialAndLockUnlockForSecondUser_2()
+    CHIP_ERROR TestReadTheUserBackAndVerifyItsFields_2()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user back and verify its fields Error: %@", err);
 
-        params.credentialData = [[NSData alloc] initWithBytes:"123457" length:6];
-        params.userIndex = nil;
-        params.userStatus = nil;
-        params.userType = nil;
-        [cluster
-            setCredentialWithParams:params
-                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
-                      NSLog(@"Create new PIN credential and lock/unlock for second user Error: %@", err);
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
 
-                      {
-                          id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
-                      }
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"xxx"));
+                     }
 
-                      {
-                          id actualValue = values.userIndex;
-                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                          VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
-                      }
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
+                         VerifyOrReturn(CheckValue("userUniqueId", actualValue, 6452UL));
+                     }
 
-                      {
-                          id actualValue = values.nextCredentialIndex;
-                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
-                      }
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                     }
 
-                      NextTest();
-                  }];
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
 
         return CHIP_NO_ERROR;
     }
@@ -105117,10 +105681,10 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("NumberOfYearDaySchedulesSupportedPerUser", actualValue, 10U));
-            }
+            VerifyOrReturn(
+                CheckConstraintMinValue<uint8_t>("numberOfYearDaySchedulesSupportedPerUser", [value unsignedCharValue], 0U));
+            VerifyOrReturn(
+                CheckConstraintMaxValue<uint8_t>("numberOfYearDaySchedulesSupportedPerUser", [value unsignedCharValue], 255U));
             {
                 NumberOfYearDaySchedulesSupportedPerUser = value;
             }
@@ -105138,22 +105702,20 @@ private:
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster
-            readAttributeNumberOfTotalUsersSupportedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"Get number of supported users Error: %@", err);
+        [cluster readAttributeNumberOfTotalUsersSupportedWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Get number of supported users Error: %@", err);
 
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                {
-                    id actualValue = value;
-                    VerifyOrReturn(CheckValue("NumberOfTotalUsersSupported", actualValue, 10U));
-                }
-                {
-                    NumberOfTotalUsersSupported = value;
-                }
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("numberOfTotalUsersSupported", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("numberOfTotalUsersSupported", [value unsignedShortValue], 65534U));
+            {
+                NumberOfTotalUsersSupported = value;
+            }
 
-                NextTest();
-            }];
+            NextTest();
+        }];
 
         return CHIP_NO_ERROR;
     }
@@ -105167,8 +105729,8 @@ private:
         __auto_type * params = [[MTRDoorLockClusterSetYearDayScheduleParams alloc] init];
         params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.localStartTime = [NSNumber numberWithUnsignedInt:10UL];
-        params.localEndTime = [NSNumber numberWithUnsignedInt:20UL];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:960UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:1980UL];
         [cluster setYearDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
                                 NSLog(@"Send Set Year Day Schedule Command to DUT Error: %@", err);
@@ -105199,9 +105761,13 @@ private:
 
                                 VerifyOrReturn(
                                     CheckConstraintMinValue<uint8_t>("yearDayIndex", [values.yearDayIndex unsignedCharValue], 1U));
+                                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("yearDayIndex",
+                                    [values.yearDayIndex unsignedCharValue], NumberOfYearDaySchedulesSupportedPerUser));
 
                                 VerifyOrReturn(
                                     CheckConstraintMinValue<uint16_t>("userIndex", [values.userIndex unsignedShortValue], 1U));
+                                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>(
+                                    "userIndex", [values.userIndex unsignedShortValue], NumberOfTotalUsersSupported));
 
                                 {
                                     id actualValue = values.status;
@@ -105234,9 +105800,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetYearDayScheduleParams alloc] init];
         params.yearDayIndex = [NSNumber numberWithUnsignedChar:0U];
-        params.userIndex = [NSNumber numberWithUnsignedShort:10U];
-        params.localStartTime = [NSNumber numberWithUnsignedInt:30UL];
-        params.localEndTime = [NSNumber numberWithUnsignedInt:10UL];
+        params.userIndex = [NSNumber numberWithUnsignedShort:15U];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:1020UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:2040UL];
         [cluster
             setYearDayScheduleWithParams:params
                        completionHandler:^(NSError * _Nullable err) {
@@ -105340,35 +105906,56 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendGetYearDayScheduleCommandToDutAndVerifyNotFoundResponse_10()
+    CHIP_ERROR TestClearAYearDayScheduleForTheFirstUser_10()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearYearDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear a year day schedule for the first user Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendGetYearDayScheduleCommandToDutAndVerifyNotFoundResponse_11()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2U];
-        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
                                 MTRDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
-                                NSLog(@"send Get Year Day Schedule Command  to DUT and verify NOT_FOUND response  Error: %@", err);
+                                NSLog(@"send Get Year Day Schedule Command to DUT and verify NOT_FOUND response Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2U));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
                                 }
 
                                 {
                                     id actualValue = values.userIndex;
-                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
                                 }
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                    VerifyOrReturn(CheckValue("status", actualValue, 1U));
                                 }
 
                                 VerifyOrReturn(CheckConstraintHasValue("localStartTime", values.localStartTime, false));
@@ -105385,20 +105972,20 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendSetYearDayScheduleCommandToDut_11()
+    CHIP_ERROR TestSendSetYearDayScheduleCommandToDut_12()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterSetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2U];
-        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
-        params.localStartTime = [NSNumber numberWithUnsignedInt:10UL];
-        params.localEndTime = [NSNumber numberWithUnsignedInt:20UL];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:1080UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:2100UL];
         [cluster setYearDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Send Set Year Day Schedule Command to DUT Error: %@", err);
+                                NSLog(@"Send Set Year Day Schedule Command to DUT  Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -105408,30 +105995,30 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendGetYearDayScheduleCommand_12()
+    CHIP_ERROR TestSendGetYearDayScheduleCommand_13()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:2U];
-        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
                                 MTRDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
-                                NSLog(@"send Get Year Day Schedule Command  Error: %@", err);
+                                NSLog(@"send Get Year Day Schedule Command Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                                 {
                                     id actualValue = values.yearDayIndex;
-                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2U));
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
                                 }
 
                                 {
                                     id actualValue = values.userIndex;
-                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -105441,16 +106028,57 @@ private:
 
                                 {
                                     id actualValue = values.localStartTime;
-                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 10UL));
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 1080UL));
                                 }
 
                                 {
                                     id actualValue = values.localEndTime;
-                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 20UL));
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 2100UL));
                                 }
 
                                 NextTest();
                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearAYearDayScheduleForTheFirstUser_14()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearYearDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"Clear a year day schedule for the first user Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCleanupTheCreatedUser_15()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearUserWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"Cleanup the created user Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                       NextTest();
+                   }];
 
         return CHIP_NO_ERROR;
     }
@@ -105499,29 +106127,21 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Create new user with default parameters\n");
+            err = TestCreateNewUserWithDefaultParameters_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the user back and verify its fields\n");
+            err = TestReadTheUserBackAndVerifyItsFields_2();
+            break;
+        case 3:
             ChipLogProgress(
-                chipTool, " ***** Test Step 1 : TH reads NumberOfTotalUsersSupported attribute and saves for future use.\n");
+                chipTool, " ***** Test Step 3 : TH reads NumberOfTotalUsersSupported attribute and saves for future use.\n");
             if (ShouldSkip("DRLK.C.F08 && DRLK.S.A0011")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsNumberOfTotalUsersSupportedAttributeAndSavesForFutureUse_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends Set Credential Command to DUT\n");
-            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsSetCredentialCommandToDut_2();
-            break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : TH sends Get Credential Status Command\n");
-            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsGetCredentialStatusCommand_3();
+            err = TestThReadsNumberOfTotalUsersSupportedAttributeAndSavesForFutureUse_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : TH sends Set Credential Command to DUT\n");
@@ -105532,100 +106152,114 @@ public:
             err = TestThSendsSetCredentialCommandToDut_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : TH sends Set Credential Command to DUT\n");
-            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsSetCredentialCommandToDut_5();
-            break;
-        case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : TH sends Set Credential Command to DUT\n");
-            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsSetCredentialCommandToDut_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : TH sends Set Credential Command to DUT\n");
-            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsSetCredentialCommandToDut_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : TH sends Set Credential Command to DUT\n");
-            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsSetCredentialCommandToDut_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : TH sends Clear Credential Command to DUT\n");
-            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C26.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsClearCredentialCommandToDut_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : TH sends Set Credential Command to DUT\n");
-            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsSetCredentialCommandToDut_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : TH sends Clear Credential Command to DUT\n");
-            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C26.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsClearCredentialCommandToDut_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : TH sends Set Credential Command to DUT\n");
-            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsSetCredentialCommandToDut_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : TH sends Clear Credential Command to DUT\n");
-            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C26.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsClearCredentialCommandToDut_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : TH sends Get Credential Status Command\n");
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH sends Get Credential Status Command\n");
             if (ShouldSkip("DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsGetCredentialStatusCommand_14();
+            err = TestThSendsGetCredentialStatusCommand_5();
             break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : TH sends Set Credential Command to DUT\n");
+        case 6:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 6 : TH sends Set Credential Command to DUT and  verify the INVALID_COMMAND if any of the fields "
+                "are invalid\n");
             if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsSetCredentialCommandToDut_15();
+            err = TestThSendsSetCredentialCommandToDutAndVerifyTheInvalidCommandIfAnyOfTheFieldsAreInvalid_6();
             break;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : TH sends Clear Credential Command to DUT\n");
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : TH sends Set Credential Command to DUT and verify response as DUPLICATE if CredentialData is "
+                "repeated\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsSetCredentialCommandToDutAndVerifyResponseAsDuplicateIfCredentialDataIsRepeated_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 8 : TH sends Set Credential Command to DUT and verify response as OCCUPIED if CredentialIndex is "
+                "repeated\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsSetCredentialCommandToDutAndVerifyResponseAsOccupiedIfCredentialIndexIsRepeated_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : TH sends Set Credential Command to DUT and verify the DUT response as OCCUPIED if the "
+                "CredentialIndex is not associated with the UserIndex\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsSetCredentialCommandToDutAndVerifyTheDutResponseAsOccupiedIfTheCredentialIndexIsNotAssociatedWithTheUserIndex_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH sends Clear Credential Command to DUT\n");
             if (ShouldSkip("DRLK.S.F08 && DRLK.S.C26.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsClearCredentialCommandToDut_16();
+            err = TestThSendsClearCredentialCommandToDut_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : TH sends Get Credential Status Command and verify that the CredentialType and  "
+                "CredentialIndex for the provided value is cleared\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsGetCredentialStatusCommandAndVerifyThatTheCredentialTypeAndCredentialIndexForTheProvidedValueIsCleared_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH sends Set User Command to DUT\n");
+            err = TestThSendsSetUserCommandToDut_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH sends Set Credential Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsSetCredentialCommandToDut_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : TH sends Clear Credential Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C26.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsClearCredentialCommandToDut_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH sends Get Credential Status Command\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsGetCredentialStatusCommand_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : TH sends Get Credential Status Command\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsGetCredentialStatusCommand_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : TH sends Clear Credential Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C26.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsClearCredentialCommandToDut_17();
             break;
         }
 
@@ -105684,9 +106318,12 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         }
@@ -105702,7 +106339,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 17;
+    const uint16_t mTestCount = 18;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -105715,9 +106352,112 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
+
+    CHIP_ERROR TestCreateNewUserWithDefaultParameters_1()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = @"xxx";
+        params.userUniqueId = [NSNumber numberWithUnsignedInt:6452UL];
+        params.userStatus = [NSNumber numberWithUnsignedChar:1U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        params.credentialRule = [NSNumber numberWithUnsignedChar:0U];
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Create new user with default parameters Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserBackAndVerifyItsFields_2()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"xxx"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
+                         VerifyOrReturn(CheckValue("userUniqueId", actualValue, 6452UL));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
     NSNumber * _Nonnull NumberOfTotalUsersSupported;
 
-    CHIP_ERROR TestThReadsNumberOfTotalUsersSupportedAttributeAndSavesForFutureUse_1()
+    CHIP_ERROR TestThReadsNumberOfTotalUsersSupportedAttributeAndSavesForFutureUse_3()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105729,10 +106469,8 @@ private:
 
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                {
-                    id actualValue = value;
-                    VerifyOrReturn(CheckValue("NumberOfTotalUsersSupported", actualValue, 10U));
-                }
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("numberOfTotalUsersSupported", [value unsignedShortValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("numberOfTotalUsersSupported", [value unsignedShortValue], 255U));
                 {
                     NumberOfTotalUsersSupported = value;
                 }
@@ -105743,7 +106481,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsSetCredentialCommandToDut_2()
+    CHIP_ERROR TestThSendsSetCredentialCommandToDut_4()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105766,13 +106504,29 @@ private:
 
                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                      }
+
                       NextTest();
                   }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsGetCredentialStatusCommand_3()
+    CHIP_ERROR TestThSendsGetCredentialStatusCommand_5()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105795,6 +106549,25 @@ private:
 
                                      VerifyOrReturn(
                                          CheckConstraintMinValue<uint16_t>("userIndex", [values.userIndex unsignedShortValue], 1U));
+                                     VerifyOrReturn(CheckConstraintMaxValue<uint16_t>(
+                                         "userIndex", [values.userIndex unsignedShortValue], NumberOfTotalUsersSupported));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
                                  }
 
                                  NextTest();
@@ -105803,7 +106576,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsSetCredentialCommandToDut_4()
+    CHIP_ERROR TestThSendsSetCredentialCommandToDutAndVerifyTheInvalidCommandIfAnyOfTheFieldsAreInvalid_6()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105813,7 +106586,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"1234" length:4];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
@@ -105822,9 +106595,27 @@ private:
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
-                      NSLog(@"TH sends Set Credential Command to DUT Error: %@", err);
+                      NSLog(@"TH sends Set Credential Command to DUT and  verify the INVALID_COMMAND if any of the fields are "
+                            @"invalid Error: %@",
+                          err);
 
                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                      }
 
                       NextTest();
                   }];
@@ -105832,65 +106623,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsSetCredentialCommandToDut_5()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
-
-        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
-        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
-        params.userType = [NSNumber numberWithUnsignedChar:0U];
-        [cluster
-            setCredentialWithParams:params
-                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
-                      NSLog(@"TH sends Set Credential Command to DUT Error: %@", err);
-
-                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                      NextTest();
-                  }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThSendsSetCredentialCommandToDut_6()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
-
-        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
-        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
-        params.userType = [NSNumber numberWithUnsignedChar:0U];
-        [cluster
-            setCredentialWithParams:params
-                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
-                      NSLog(@"TH sends Set Credential Command to DUT Error: %@", err);
-
-                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                      NextTest();
-                  }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThSendsSetCredentialCommandToDut_7()
+    CHIP_ERROR TestThSendsSetCredentialCommandToDutAndVerifyResponseAsDuplicateIfCredentialDataIsRepeated_7()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105903,15 +106636,33 @@ private:
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
-        params.userIndex = [NSNumber numberWithUnsignedShort:3U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         params.userStatus = [NSNumber numberWithUnsignedChar:0U];
         params.userType = [NSNumber numberWithUnsignedChar:0U];
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
-                      NSLog(@"TH sends Set Credential Command to DUT Error: %@", err);
+                      NSLog(@"TH sends Set Credential Command to DUT and verify response as DUPLICATE if CredentialData is "
+                            @"repeated Error: %@",
+                          err);
 
                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 2U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                      }
 
                       NextTest();
                   }];
@@ -105919,7 +106670,55 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsSetCredentialCommandToDut_8()
+    CHIP_ERROR TestThSendsSetCredentialCommandToDutAndVerifyResponseAsOccupiedIfCredentialIndexIsRepeated_8()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"TH sends Set Credential Command to DUT and verify response as OCCUPIED if CredentialIndex is "
+                            @"repeated Error: %@",
+                          err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 2U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestThSendsSetCredentialCommandToDutAndVerifyTheDutResponseAsOccupiedIfTheCredentialIndexIsNotAssociatedWithTheUserIndex_9()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105932,15 +106731,33 @@ private:
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
-        params.userIndex = [NSNumber numberWithUnsignedShort:3U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         params.userStatus = [NSNumber numberWithUnsignedChar:0U];
         params.userType = [NSNumber numberWithUnsignedChar:0U];
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
-                      NSLog(@"TH sends Set Credential Command to DUT Error: %@", err);
+                      NSLog(@"TH sends Set Credential Command to DUT and verify the DUT response as OCCUPIED if the "
+                            @"CredentialIndex is not associated with the UserIndex Error: %@",
+                          err);
 
                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 2U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
 
                       NextTest();
                   }];
@@ -105948,7 +106765,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsClearCredentialCommandToDut_9()
+    CHIP_ERROR TestThSendsClearCredentialCommandToDut_10()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105971,7 +106788,85 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsSetCredentialCommandToDut_10()
+    CHIP_ERROR
+    TestThSendsGetCredentialStatusCommandAndVerifyThatTheCredentialTypeAndCredentialIndexForTheProvidedValueIsCleared_11()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"TH sends Get Credential Status Command and verify that the CredentialType and  "
+                                       @"CredentialIndex for the provided value is cleared Error: %@",
+                                     err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsSetUserCommandToDut_12()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.userName = @"xxx";
+        params.userUniqueId = [NSNumber numberWithUnsignedInt:6452UL];
+        params.userStatus = [NSNumber numberWithUnsignedChar:1U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        params.credentialRule = [NSNumber numberWithUnsignedChar:0U];
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"TH sends Set User Command to DUT Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsSetCredentialCommandToDut_13()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -105981,7 +106876,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
@@ -105994,13 +106889,29 @@ private:
 
                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
                       NextTest();
                   }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsClearCredentialCommandToDut_11()
+    CHIP_ERROR TestThSendsClearCredentialCommandToDut_14()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106023,59 +106934,30 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsSetCredentialCommandToDut_12()
+    CHIP_ERROR TestThSendsGetCredentialStatusCommand_15()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
-
-        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
-        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
-        params.userType = [NSNumber numberWithUnsignedChar:0U];
-        [cluster
-            setCredentialWithParams:params
-                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
-                      NSLog(@"TH sends Set Credential Command to DUT Error: %@", err);
-
-                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                      NextTest();
-                  }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThSendsClearCredentialCommandToDut_13()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
         params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:65534U];
 
-        [cluster clearCredentialWithParams:params
-                         completionHandler:^(NSError * _Nullable err) {
-                             NSLog(@"TH sends Clear Credential Command to DUT Error: %@", err);
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"TH sends Get Credential Status Command Error: %@", err);
 
-                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                             NextTest();
-                         }];
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                                 NextTest();
+                             }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsGetCredentialStatusCommand_14()
+    CHIP_ERROR TestThSendsGetCredentialStatusCommand_16()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106094,8 +106976,28 @@ private:
                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                                  {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
                                      id actualValue = values.userIndex;
                                      VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
                                  }
 
                                  NextTest();
@@ -106104,36 +107006,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsSetCredentialCommandToDut_15()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
-
-        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
-        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
-        params.userType = [NSNumber numberWithUnsignedChar:0U];
-        [cluster
-            setCredentialWithParams:params
-                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
-                      NSLog(@"TH sends Set Credential Command to DUT Error: %@", err);
-
-                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                      NextTest();
-                  }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThSendsClearCredentialCommandToDut_16()
+    CHIP_ERROR TestThSendsClearCredentialCommandToDut_17()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
