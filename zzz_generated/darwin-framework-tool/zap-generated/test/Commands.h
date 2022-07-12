@@ -51268,10 +51268,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         }
 
@@ -51319,7 +51319,7 @@ private:
                                 completionHandler:^(NSError * _Nullable err) {
                                     NSLog(@"TH writes LabelList attribute of the DUT Error: %@", err);
 
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                     NextTest();
                                 }];
 
@@ -51345,7 +51345,7 @@ private:
                                 completionHandler:^(NSError * _Nullable err) {
                                     NSLog(@"TH reads LabelList attribute of the DUT Error: %@", err);
 
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                     NextTest();
                                 }];
 
@@ -88651,10 +88651,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         }
 
@@ -88702,7 +88702,7 @@ private:
                                 completionHandler:^(NSError * _Nullable err) {
                                     NSLog(@"Attempt to write overly long item for label Error: %@", err);
 
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                     NextTest();
                                 }];
 
@@ -88728,7 +88728,7 @@ private:
                                 completionHandler:^(NSError * _Nullable err) {
                                     NSLog(@"Attempt to write overly long item for value Error: %@", err);
 
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                     NextTest();
                                 }];
 
