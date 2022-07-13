@@ -142,7 +142,6 @@
 | ApplicationLauncher                                                 | 0x050C |
 | ApplicationBasic                                                    | 0x050D |
 | AccountLogin                                                        | 0x050E |
-| Messaging                                                           | 0x0703 |
 | ApplianceIdentification                                             | 0x0B00 |
 | MeterIdentification                                                 | 0x0B01 |
 | ApplianceEventsAndAlert                                             | 0x0B02 |
