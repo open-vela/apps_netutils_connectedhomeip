@@ -25139,8 +25139,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRLevelControlClusterStopParams alloc] init];
-        params.optionMask = [NSNumber numberWithUnsignedChar:0U];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:0U];
+        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster stopWithParams:params
               completionHandler:^(NSError * _Nullable err) {
                   NSLog(@"Sends stop command to DUT Error: %@", err);
@@ -25226,8 +25226,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRLevelControlClusterStopParams alloc] init];
-        params.optionMask = [NSNumber numberWithUnsignedChar:0U];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:0U];
+        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster stopWithParams:params
               completionHandler:^(NSError * _Nullable err) {
                   NSLog(@"Sends stop command to DUT Error: %@", err);
