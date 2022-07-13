@@ -19434,21 +19434,33 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: AcceptedCommandList\n");
+            if (ShouldSkip(" !I.C.C40.Tx ")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheGlobalAttributeAcceptedCommandList_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: GeneratedCommandList\n");
-            err = TestReadTheGlobalAttributeGeneratedCommandList_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AcceptedCommandList\n");
+            if (ShouldSkip("I.C.C40.Tx")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAcceptedCommandList_5();
             break;
         case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_6();
+            break;
+        case 7:
             ChipLogProgress(chipTool,
-                " ***** Test Step 6 : Read EventList attribute from the DUT and Verify that the DUT response provides a list of "
+                " ***** Test Step 7 : Read EventList attribute from the DUT and Verify that the DUT response provides a list of "
                 "supported events.\n");
             if (ShouldSkip("PICS_USER_PROMPT")) {
                 NextTest();
                 return;
             }
-            err = TestReadEventListAttributeFromTheDutAndVerifyThatTheDutResponseProvidesAListOfSupportedEvents_6();
+            err = TestReadEventListAttributeFromTheDutAndVerifyThatTheDutResponseProvidesAListOfSupportedEvents_7();
             break;
         }
 
@@ -19482,6 +19494,9 @@ public:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -19495,7 +19510,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 7;
+    const uint16_t mTestCount = 8;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -19594,6 +19609,26 @@ private:
 
             VerifyOrReturn(CheckConstraintType("acceptedCommandList", "", "list"));
             VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterIdentify * cluster = [[MTRBaseClusterIdentify alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
             VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 64UL));
 
             NextTest();
@@ -19602,7 +19637,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_5()
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_6()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterIdentify * cluster = [[MTRBaseClusterIdentify alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -19625,7 +19660,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadEventListAttributeFromTheDutAndVerifyThatTheDutResponseProvidesAListOfSupportedEvents_6()
+    CHIP_ERROR TestReadEventListAttributeFromTheDutAndVerifyThatTheDutResponseProvidesAListOfSupportedEvents_7()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
@@ -23298,12 +23333,12 @@ public:
             err = TestReadsTheMaxLevelAttribute_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : sends a Move to level command\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : sends a MoveToLevelWithOnOff command\n");
             if (ShouldSkip("LVL.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestSendsAMoveToLevelCommand_3();
+            err = TestSendsAMoveToLevelWithOnOffCommand_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Wait 100ms\n");
@@ -23529,7 +23564,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendsAMoveToLevelCommand_3()
+    CHIP_ERROR TestSendsAMoveToLevelWithOnOffCommand_3()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -23537,19 +23572,17 @@ private:
                                                                                             queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRLevelControlClusterMoveToLevelParams alloc] init];
+        __auto_type * params = [[MTRLevelControlClusterMoveToLevelWithOnOffParams alloc] init];
         params.level = [NSNumber numberWithUnsignedChar:64U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
-        [cluster moveToLevelWithParams:params
-                     completionHandler:^(NSError * _Nullable err) {
-                         NSLog(@"sends a Move to level command Error: %@", err);
+        [cluster moveToLevelWithOnOffWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"sends a MoveToLevelWithOnOff command Error: %@", err);
 
-                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                         NextTest();
-                     }];
+                                  NextTest();
+                              }];
 
         return CHIP_NO_ERROR;
     }
@@ -23862,12 +23895,12 @@ public:
             err = TestReadsMinlevelAttributeFromDut_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : sends a Move to level command\n");
+            ChipLogProgress(chipTool, " ***** Test Step 2 : sends a MoveToLevelWithOnOff command\n");
             if (ShouldSkip("LVL.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestSendsAMoveToLevelCommand_2();
+            err = TestSendsAMoveToLevelWithOnOffCommand_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : reads max level attribute from DUT\n");
@@ -24096,7 +24129,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendsAMoveToLevelCommand_2()
+    CHIP_ERROR TestSendsAMoveToLevelWithOnOffCommand_2()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -24104,19 +24137,17 @@ private:
                                                                                             queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRLevelControlClusterMoveToLevelParams alloc] init];
+        __auto_type * params = [[MTRLevelControlClusterMoveToLevelWithOnOffParams alloc] init];
         params.level = [NSNumber numberWithUnsignedChar:1U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
-        [cluster moveToLevelWithParams:params
-                     completionHandler:^(NSError * _Nullable err) {
-                         NSLog(@"sends a Move to level command Error: %@", err);
+        [cluster moveToLevelWithOnOffWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"sends a MoveToLevelWithOnOff command Error: %@", err);
 
-                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                         NextTest();
-                     }];
+                                  NextTest();
+                              }];
 
         return CHIP_NO_ERROR;
     }
@@ -25176,7 +25207,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 22U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 32U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 28U));
             VerifyOrReturn(CheckConstraintNotValue("currentLevel", value, CurrentLevelValue));
 
             NextTest();
@@ -35900,7 +35931,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : read the optional global attribute: FeatureMap\n");
-            if (ShouldSkip("OO_LT")) {
+            if (ShouldSkip("OO.S.F00")) {
                 NextTest();
                 return;
             }
@@ -35908,29 +35939,49 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
-            err = TestReadTheGlobalAttributeAttributeList_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: AcceptedCommandList\n");
-            if (ShouldSkip("OO_LT")) {
+            if (ShouldSkip("OO.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheGlobalAttributeAcceptedCommandList_4();
+            err = TestReadTheGlobalAttributeAttributeList_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: AttributeList\n");
+            if (ShouldSkip(" !OO.S.F00 ")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAttributeList_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: GeneratedCommandList\n");
-            err = TestReadTheGlobalAttributeGeneratedCommandList_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AcceptedCommandList\n");
+            if (ShouldSkip("OO.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAcceptedCommandList_5();
             break;
         case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the global attribute: AcceptedCommandList\n");
+            if (ShouldSkip(" !OO.S.F00 ")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAcceptedCommandList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_7();
+            break;
+        case 8:
             ChipLogProgress(chipTool,
-                " ***** Test Step 6 : Read EventList attribute from the DUT and Verify that the DUT response provides a list of "
+                " ***** Test Step 8 : Read EventList attribute from the DUT and Verify that the DUT response provides a list of "
                 "supported events.\n");
             if (ShouldSkip("PICS_USER_PROMPT")) {
                 NextTest();
                 return;
             }
-            err = TestReadEventListAttributeFromTheDutAndVerifyThatTheDutResponseProvidesAListOfSupportedEvents_6();
+            err = TestReadEventListAttributeFromTheDutAndVerifyThatTheDutResponseProvidesAListOfSupportedEvents_8();
             break;
         }
 
@@ -35964,6 +36015,12 @@ public:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -35977,7 +36034,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 7;
+    const uint16_t mTestCount = 9;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -36066,7 +36123,32 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_4()
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_4()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -36091,7 +36173,29 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_5()
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_6()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 2UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_7()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -36114,7 +36218,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadEventListAttributeFromTheDutAndVerifyThatTheDutResponseProvidesAListOfSupportedEvents_6()
+    CHIP_ERROR TestReadEventListAttributeFromTheDutAndVerifyThatTheDutResponseProvidesAListOfSupportedEvents_8()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
