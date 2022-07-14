@@ -110079,68 +110079,100 @@ public:
             err = TestViewFirstGroupNotFound_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Add First Group (new)\n");
-            err = TestAddFirstGroupNew_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Add First Group (no keys)\n");
+            err = TestAddFirstGroupNoKeys_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : View First Group (new)\n");
-            err = TestViewFirstGroupNew_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Add KeySet\n");
+            err = TestAddKeySet_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : View Second Group (not found)\n");
-            err = TestViewSecondGroupNotFound_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Write Group Keys\n");
+            err = TestWriteGroupKeys_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Get Group Membership 1 (all)\n");
-            err = TestGetGroupMembership1All_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Add First Group (new)\n");
+            err = TestAddFirstGroupNew_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : View Group 3 (not found)\n");
-            err = TestViewGroup3NotFound_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : View First Group (new)\n");
+            err = TestViewFirstGroupNew_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : View First Group (existing)\n");
-            err = TestViewFirstGroupExisting_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : View Second Group (not found)\n");
+            err = TestViewSecondGroupNotFound_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Remove Group 0 (invalid)\n");
-            err = TestRemoveGroup0Invalid_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Get Group Membership 1 (all)\n");
+            err = TestGetGroupMembership1All_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Remove Group 4 (not found)\n");
-            err = TestRemoveGroup4NotFound_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Add Second Group (new)\n");
+            err = TestAddSecondGroupNew_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : View First Group (not removed)\n");
-            err = TestViewFirstGroupNotRemoved_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : View Second Group (new)\n");
+            err = TestViewSecondGroupNew_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : View Second Group (removed)\n");
-            err = TestViewSecondGroupRemoved_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : View Group 3 (not found)\n");
+            err = TestViewGroup3NotFound_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Get Group Membership 3\n");
-            err = TestGetGroupMembership3_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : View First Group (existing)\n");
+            err = TestViewFirstGroupExisting_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Remove All\n");
-            err = TestRemoveAll_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : View Second Group (existing)\n");
+            err = TestViewSecondGroupExisting_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : View First Group (removed)\n");
-            err = TestViewFirstGroupRemoved_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Get Group Membership 2\n");
+            err = TestGetGroupMembership2_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : View Second Group (still removed)\n");
-            err = TestViewSecondGroupStillRemoved_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Remove Group 0 (invalid)\n");
+            err = TestRemoveGroup0Invalid_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : View Group 3 (removed)\n");
-            err = TestViewGroup3Removed_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Remove Group 4 (not found)\n");
+            err = TestRemoveGroup4NotFound_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Get Group Membership 4\n");
-            err = TestGetGroupMembership4_18();
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Remove Second Group (existing)\n");
+            err = TestRemoveSecondGroupExisting_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : View First Group (not removed)\n");
+            err = TestViewFirstGroupNotRemoved_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : View Second Group (removed)\n");
+            err = TestViewSecondGroupRemoved_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Get Group Membership 3\n");
+            err = TestGetGroupMembership3_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Remove All\n");
+            err = TestRemoveAll_22();
+            break;
+        case 23:
+            ChipLogProgress(chipTool, " ***** Test Step 23 : View First Group (removed)\n");
+            err = TestViewFirstGroupRemoved_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool, " ***** Test Step 24 : View Second Group (still removed)\n");
+            err = TestViewSecondGroupStillRemoved_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : View Group 3 (removed)\n");
+            err = TestViewGroup3Removed_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Get Group Membership 4\n");
+            err = TestGetGroupMembership4_26();
             break;
         }
 
@@ -110210,6 +110242,30 @@ public:
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -110223,7 +110279,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 19;
+    const uint16_t mTestCount = 27;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -110274,7 +110330,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:1U];
+        params.groupId = [NSNumber numberWithUnsignedShort:257U];
         [cluster viewGroupWithParams:params
                    completionHandler:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                        NSLog(@"View First Group (not found) Error: %@", err);
@@ -110288,7 +110344,7 @@ private:
 
                        {
                            id actualValue = values.groupId;
-                           VerifyOrReturn(CheckValue("groupId", actualValue, 1U));
+                           VerifyOrReturn(CheckValue("groupId", actualValue, 257U));
                        }
 
                        NextTest();
@@ -110297,14 +110353,119 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddFirstGroupNew_3()
+    CHIP_ERROR TestAddFirstGroupNoKeys_3()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:1U];
+        params.groupId = [NSNumber numberWithUnsignedShort:257U];
+        params.groupName = @"Group #1";
+        [cluster addGroupWithParams:params
+                  completionHandler:^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Add First Group (no keys) Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 126U));
+                      }
+
+                      {
+                          id actualValue = values.groupId;
+                          VerifyOrReturn(CheckValue("groupId", actualValue, 257U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestAddKeySet_4()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterGroupKeyManagement * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:417U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
+            [[NSData alloc] initWithBytes:"\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:1110000ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 =
+            [[NSData alloc] initWithBytes:"\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 =
+            [NSNumber numberWithUnsignedLongLong:1110001ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 =
+            [[NSData alloc] initWithBytes:"\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\317" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 =
+            [NSNumber numberWithUnsignedLongLong:1110002ULL];
+
+        [cluster keySetWriteWithParams:params
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Add KeySet Error: %@", err);
+
+                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                         NextTest();
+                     }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteGroupKeys_5()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterGroupKeyManagement * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id groupKeyMapArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).groupId = [NSNumber numberWithUnsignedShort:257U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).groupKeySetID = [NSNumber numberWithUnsignedShort:417U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[1] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).groupId = [NSNumber numberWithUnsignedShort:258U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).groupKeySetID = [NSNumber numberWithUnsignedShort:417U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            groupKeyMapArgument = temp_0;
+        }
+        [cluster writeAttributeGroupKeyMapWithValue:groupKeyMapArgument
+                                  completionHandler:^(NSError * _Nullable err) {
+                                      NSLog(@"Write Group Keys Error: %@", err);
+
+                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestAddFirstGroupNew_6()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
+        params.groupId = [NSNumber numberWithUnsignedShort:257U];
         params.groupName = @"Group #1";
         [cluster addGroupWithParams:params
                   completionHandler:^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -110319,7 +110480,7 @@ private:
 
                       {
                           id actualValue = values.groupId;
-                          VerifyOrReturn(CheckValue("groupId", actualValue, 1U));
+                          VerifyOrReturn(CheckValue("groupId", actualValue, 257U));
                       }
 
                       NextTest();
@@ -110328,14 +110489,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewFirstGroupNew_4()
+    CHIP_ERROR TestViewFirstGroupNew_7()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:1U];
+        params.groupId = [NSNumber numberWithUnsignedShort:257U];
         [cluster viewGroupWithParams:params
                    completionHandler:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                        NSLog(@"View First Group (new) Error: %@", err);
@@ -110349,7 +110510,7 @@ private:
 
                        {
                            id actualValue = values.groupId;
-                           VerifyOrReturn(CheckValue("groupId", actualValue, 1U));
+                           VerifyOrReturn(CheckValue("groupId", actualValue, 257U));
                        }
 
                        {
@@ -110363,14 +110524,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewSecondGroupNotFound_5()
+    CHIP_ERROR TestViewSecondGroupNotFound_8()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:4369U];
+        params.groupId = [NSNumber numberWithUnsignedShort:258U];
         [cluster viewGroupWithParams:params
                    completionHandler:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                        NSLog(@"View Second Group (not found) Error: %@", err);
@@ -110384,7 +110545,7 @@ private:
 
                        {
                            id actualValue = values.groupId;
-                           VerifyOrReturn(CheckValue("groupId", actualValue, 4369U));
+                           VerifyOrReturn(CheckValue("groupId", actualValue, 258U));
                        }
 
                        NextTest();
@@ -110393,7 +110554,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGetGroupMembership1All_6()
+    CHIP_ERROR TestGetGroupMembership1All_9()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -110419,7 +110580,7 @@ private:
                                 {
                                     id actualValue = values.groupList;
                                     VerifyOrReturn(CheckValue("groupList", [actualValue count], static_cast<uint32_t>(1)));
-                                    VerifyOrReturn(CheckValue("", actualValue[0], 1U));
+                                    VerifyOrReturn(CheckValue("", actualValue[0], 257U));
                                 }
 
                                 NextTest();
@@ -110428,7 +110589,73 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewGroup3NotFound_7()
+    CHIP_ERROR TestAddSecondGroupNew_10()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
+        params.groupId = [NSNumber numberWithUnsignedShort:258U];
+        params.groupName = @"Group #2";
+        [cluster addGroupWithParams:params
+                  completionHandler:^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Add Second Group (new) Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.groupId;
+                          VerifyOrReturn(CheckValue("groupId", actualValue, 258U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestViewSecondGroupNew_11()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
+        params.groupId = [NSNumber numberWithUnsignedShort:258U];
+        [cluster viewGroupWithParams:params
+                   completionHandler:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
+                       NSLog(@"View Second Group (new) Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                       {
+                           id actualValue = values.status;
+                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                       }
+
+                       {
+                           id actualValue = values.groupId;
+                           VerifyOrReturn(CheckValue("groupId", actualValue, 258U));
+                       }
+
+                       {
+                           id actualValue = values.groupName;
+                           VerifyOrReturn(CheckValueAsString("groupName", actualValue, @"Group #2"));
+                       }
+
+                       NextTest();
+                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestViewGroup3NotFound_12()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -110458,14 +110685,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewFirstGroupExisting_8()
+    CHIP_ERROR TestViewFirstGroupExisting_13()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:1U];
+        params.groupId = [NSNumber numberWithUnsignedShort:257U];
         [cluster viewGroupWithParams:params
                    completionHandler:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                        NSLog(@"View First Group (existing) Error: %@", err);
@@ -110479,7 +110706,7 @@ private:
 
                        {
                            id actualValue = values.groupId;
-                           VerifyOrReturn(CheckValue("groupId", actualValue, 1U));
+                           VerifyOrReturn(CheckValue("groupId", actualValue, 257U));
                        }
 
                        {
@@ -110493,7 +110720,80 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveGroup0Invalid_9()
+    CHIP_ERROR TestViewSecondGroupExisting_14()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
+        params.groupId = [NSNumber numberWithUnsignedShort:258U];
+        [cluster viewGroupWithParams:params
+                   completionHandler:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
+                       NSLog(@"View Second Group (existing) Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                       {
+                           id actualValue = values.status;
+                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                       }
+
+                       {
+                           id actualValue = values.groupId;
+                           VerifyOrReturn(CheckValue("groupId", actualValue, 258U));
+                       }
+
+                       {
+                           id actualValue = values.groupName;
+                           VerifyOrReturn(CheckValueAsString("groupName", actualValue, @"Group #2"));
+                       }
+
+                       NextTest();
+                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGetGroupMembership2_15()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupsClusterGetGroupMembershipParams alloc] init];
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [NSNumber numberWithUnsignedShort:258U];
+            temp_0[1] = [NSNumber numberWithUnsignedShort:259U];
+            temp_0[2] = [NSNumber numberWithUnsignedShort:32767U];
+            params.groupList = temp_0;
+        }
+        [cluster getGroupMembershipWithParams:params
+                            completionHandler:^(
+                                MTRGroupsClusterGetGroupMembershipResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"Get Group Membership 2 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                {
+                                    id actualValue = values.capacity;
+                                    VerifyOrReturn(CheckValueNull("capacity", actualValue));
+                                }
+
+                                {
+                                    id actualValue = values.groupList;
+                                    VerifyOrReturn(CheckValue("groupList", [actualValue count], static_cast<uint32_t>(1)));
+                                    VerifyOrReturn(CheckValue("", actualValue[0], 258U));
+                                }
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestRemoveGroup0Invalid_16()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -110523,14 +110823,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveGroup4NotFound_10()
+    CHIP_ERROR TestRemoveGroup4NotFound_17()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterRemoveGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:4U];
+        params.groupId = [NSNumber numberWithUnsignedShort:260U];
         [cluster removeGroupWithParams:params
                      completionHandler:^(MTRGroupsClusterRemoveGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                          NSLog(@"Remove Group 4 (not found) Error: %@", err);
@@ -110544,7 +110844,7 @@ private:
 
                          {
                              id actualValue = values.groupId;
-                             VerifyOrReturn(CheckValue("groupId", actualValue, 4U));
+                             VerifyOrReturn(CheckValue("groupId", actualValue, 260U));
                          }
 
                          NextTest();
@@ -110553,14 +110853,44 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewFirstGroupNotRemoved_11()
+    CHIP_ERROR TestRemoveSecondGroupExisting_18()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupsClusterRemoveGroupParams alloc] init];
+        params.groupId = [NSNumber numberWithUnsignedShort:258U];
+        [cluster removeGroupWithParams:params
+                     completionHandler:^(MTRGroupsClusterRemoveGroupResponseParams * _Nullable values, NSError * _Nullable err) {
+                         NSLog(@"Remove Second Group (existing) Error: %@", err);
+
+                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                         {
+                             id actualValue = values.status;
+                             VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                         }
+
+                         {
+                             id actualValue = values.groupId;
+                             VerifyOrReturn(CheckValue("groupId", actualValue, 258U));
+                         }
+
+                         NextTest();
+                     }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestViewFirstGroupNotRemoved_19()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:1U];
+        params.groupId = [NSNumber numberWithUnsignedShort:257U];
         [cluster viewGroupWithParams:params
                    completionHandler:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                        NSLog(@"View First Group (not removed) Error: %@", err);
@@ -110574,7 +110904,7 @@ private:
 
                        {
                            id actualValue = values.groupId;
-                           VerifyOrReturn(CheckValue("groupId", actualValue, 1U));
+                           VerifyOrReturn(CheckValue("groupId", actualValue, 257U));
                        }
 
                        {
@@ -110588,14 +110918,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewSecondGroupRemoved_12()
+    CHIP_ERROR TestViewSecondGroupRemoved_20()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:4369U];
+        params.groupId = [NSNumber numberWithUnsignedShort:258U];
         [cluster viewGroupWithParams:params
                    completionHandler:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                        NSLog(@"View Second Group (removed) Error: %@", err);
@@ -110609,7 +110939,7 @@ private:
 
                        {
                            id actualValue = values.groupId;
-                           VerifyOrReturn(CheckValue("groupId", actualValue, 4369U));
+                           VerifyOrReturn(CheckValue("groupId", actualValue, 258U));
                        }
 
                        NextTest();
@@ -110618,7 +110948,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGetGroupMembership3_13()
+    CHIP_ERROR TestGetGroupMembership3_21()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -110628,8 +110958,8 @@ private:
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [NSNumber numberWithUnsignedShort:1U];
-            temp_0[1] = [NSNumber numberWithUnsignedShort:2U];
-            temp_0[2] = [NSNumber numberWithUnsignedShort:4369U];
+            temp_0[1] = [NSNumber numberWithUnsignedShort:257U];
+            temp_0[2] = [NSNumber numberWithUnsignedShort:258U];
             temp_0[3] = [NSNumber numberWithUnsignedShort:3U];
             params.groupList = temp_0;
         }
@@ -110648,7 +110978,7 @@ private:
                                 {
                                     id actualValue = values.groupList;
                                     VerifyOrReturn(CheckValue("groupList", [actualValue count], static_cast<uint32_t>(1)));
-                                    VerifyOrReturn(CheckValue("", actualValue[0], 1U));
+                                    VerifyOrReturn(CheckValue("", actualValue[0], 257U));
                                 }
 
                                 NextTest();
@@ -110657,7 +110987,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveAll_14()
+    CHIP_ERROR TestRemoveAll_22()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -110674,14 +111004,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewFirstGroupRemoved_15()
+    CHIP_ERROR TestViewFirstGroupRemoved_23()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:1U];
+        params.groupId = [NSNumber numberWithUnsignedShort:257U];
         [cluster viewGroupWithParams:params
                    completionHandler:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                        NSLog(@"View First Group (removed) Error: %@", err);
@@ -110695,7 +111025,7 @@ private:
 
                        {
                            id actualValue = values.groupId;
-                           VerifyOrReturn(CheckValue("groupId", actualValue, 1U));
+                           VerifyOrReturn(CheckValue("groupId", actualValue, 257U));
                        }
 
                        NextTest();
@@ -110704,14 +111034,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewSecondGroupStillRemoved_16()
+    CHIP_ERROR TestViewSecondGroupStillRemoved_24()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:4369U];
+        params.groupId = [NSNumber numberWithUnsignedShort:258U];
         [cluster viewGroupWithParams:params
                    completionHandler:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                        NSLog(@"View Second Group (still removed) Error: %@", err);
@@ -110725,7 +111055,7 @@ private:
 
                        {
                            id actualValue = values.groupId;
-                           VerifyOrReturn(CheckValue("groupId", actualValue, 4369U));
+                           VerifyOrReturn(CheckValue("groupId", actualValue, 258U));
                        }
 
                        NextTest();
@@ -110734,7 +111064,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewGroup3Removed_17()
+    CHIP_ERROR TestViewGroup3Removed_25()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -110764,7 +111094,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGetGroupMembership4_18()
+    CHIP_ERROR TestGetGroupMembership4_26()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -110774,8 +111104,8 @@ private:
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [NSNumber numberWithUnsignedShort:1U];
-            temp_0[1] = [NSNumber numberWithUnsignedShort:2U];
-            temp_0[2] = [NSNumber numberWithUnsignedShort:4369U];
+            temp_0[1] = [NSNumber numberWithUnsignedShort:257U];
+            temp_0[2] = [NSNumber numberWithUnsignedShort:258U];
             temp_0[3] = [NSNumber numberWithUnsignedShort:3U];
             temp_0[4] = [NSNumber numberWithUnsignedShort:32767U];
             params.groupList = temp_0;
@@ -110855,36 +111185,36 @@ public:
             err = TestReadMaxGroupKeysPerFabric_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Add Group 1\n");
-            err = TestAddGroup1_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : KeySet Write 1\n");
+            err = TestKeySetWrite1_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Add Group 2\n");
-            err = TestAddGroup2_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : KeySet Write 2\n");
+            err = TestKeySetWrite2_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : KeySet Write 1\n");
-            err = TestKeySetWrite1_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : KeySet Read\n");
+            err = TestKeySetRead_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : KeySet Write 2\n");
-            err = TestKeySetWrite2_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Write Group Keys (invalid)\n");
+            err = TestWriteGroupKeysInvalid_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : KeySet Read\n");
-            err = TestKeySetRead_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Write Group Keys\n");
+            err = TestWriteGroupKeys_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Write Group Keys (invalid)\n");
-            err = TestWriteGroupKeysInvalid_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read Group Keys\n");
+            err = TestReadGroupKeys_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Write Group Keys\n");
-            err = TestWriteGroupKeys_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Add Group 1\n");
+            err = TestAddGroup1_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Read Group Keys\n");
-            err = TestReadGroupKeys_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Add Group 2\n");
+            err = TestAddGroup2_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Read GroupTable\n");
@@ -110956,13 +111286,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -111072,69 +111402,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddGroup1_3()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:257U];
-        params.groupName = @"Group #1";
-        [cluster addGroupWithParams:params
-                  completionHandler:^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
-                      NSLog(@"Add Group 1 Error: %@", err);
-
-                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                      {
-                          id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
-                      }
-
-                      {
-                          id actualValue = values.groupId;
-                          VerifyOrReturn(CheckValue("groupId", actualValue, 257U));
-                      }
-
-                      NextTest();
-                  }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestAddGroup2_4()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:258U];
-        params.groupName = @"Group #2";
-        [cluster addGroupWithParams:params
-                  completionHandler:^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
-                      NSLog(@"Add Group 2 Error: %@", err);
-
-                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                      {
-                          id actualValue = values.status;
-                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
-                      }
-
-                      {
-                          id actualValue = values.groupId;
-                          VerifyOrReturn(CheckValue("groupId", actualValue, 258U));
-                      }
-
-                      NextTest();
-                  }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestKeySetWrite1_5()
+    CHIP_ERROR TestKeySetWrite1_3()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroupKeyManagement * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
@@ -111173,7 +111441,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetWrite2_6()
+    CHIP_ERROR TestKeySetWrite2_4()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroupKeyManagement * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
@@ -111212,7 +111480,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetRead_7()
+    CHIP_ERROR TestKeySetRead_5()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroupKeyManagement * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
@@ -111262,7 +111530,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteGroupKeysInvalid_8()
+    CHIP_ERROR TestWriteGroupKeysInvalid_6()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroupKeyManagement * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
@@ -111291,7 +111559,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteGroupKeys_9()
+    CHIP_ERROR TestWriteGroupKeys_7()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroupKeyManagement * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
@@ -111326,7 +111594,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupKeys_10()
+    CHIP_ERROR TestReadGroupKeys_8()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroupKeyManagement * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
@@ -111362,6 +111630,68 @@ private:
 
                                  NextTest();
                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestAddGroup1_9()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
+        params.groupId = [NSNumber numberWithUnsignedShort:257U];
+        params.groupName = @"Group #1";
+        [cluster addGroupWithParams:params
+                  completionHandler:^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Add Group 1 Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.groupId;
+                          VerifyOrReturn(CheckValue("groupId", actualValue, 257U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestAddGroup2_10()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
+        params.groupId = [NSNumber numberWithUnsignedShort:258U];
+        params.groupName = @"Group #2";
+        [cluster addGroupWithParams:params
+                  completionHandler:^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Add Group 2 Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.groupId;
+                          VerifyOrReturn(CheckValue("groupId", actualValue, 258U));
+                      }
+
+                      NextTest();
+                  }];
 
         return CHIP_NO_ERROR;
     }
