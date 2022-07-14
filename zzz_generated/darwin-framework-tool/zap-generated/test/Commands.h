@@ -186,6 +186,7 @@ public:
         printf("TestConfigVariables\n");
         printf("TestDescriptorCluster\n");
         printf("TestBasicInformation\n");
+        printf("TestFabricRemovalWhileSubscribed\n");
         printf("TestGeneralCommissioning\n");
         printf("TestIdentifyCluster\n");
         printf("TestOperationalCredentialsCluster\n");
@@ -85078,6 +85079,311 @@ private:
     }
 };
 
+class TestFabricRemovalWhileSubscribed : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    TestFabricRemovalWhileSubscribed()
+        : TestCommandBridge("TestFabricRemovalWhileSubscribed")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
+        AddArgument("payload", &mPayload);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~TestFabricRemovalWhileSubscribed() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: TestFabricRemovalWhileSubscribed\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: TestFabricRemovalWhileSubscribed\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read number of commissioned fabrics\n");
+            err = TestReadNumberOfCommissionedFabrics_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read current fabric index\n");
+            err = TestReadCurrentFabricIndex_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Open commissioning window from alpha\n");
+            err = TestOpenCommissioningWindowFromAlpha_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Commission from beta\n");
+            err = TestCommissionFromBeta_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Wait for the commissioned device to be retrieved for beta\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrievedForBeta_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Report: Subscribe Fabrics Attribute from beta\n");
+            err = TestReportSubscribeFabricsAttributeFromBeta_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Subscribe Fabrics Attribute from beta\n");
+            err = TestSubscribeFabricsAttributeFromBeta_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Remove single own fabric\n");
+            err = TestRemoveSingleOwnFabric_8();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 9;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mDiscriminator;
+    chip::Optional<chip::CharSpan> mPayload;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadNumberOfCommissionedFabrics_1()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterOperationalCredentials * cluster =
+            [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCommissionedFabricsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read number of commissioned fabrics Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("CommissionedFabrics", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("commissionedFabrics", "", "uint8"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nonnull ourFabricIndex;
+
+    CHIP_ERROR TestReadCurrentFabricIndex_2()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterOperationalCredentials * cluster =
+            [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentFabricIndexWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read current fabric index Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("currentFabricIndex", "", "uint8"));
+            VerifyOrReturn(CheckConstraintMinValue<chip::FabricIndex>("currentFabricIndex", [value unsignedCharValue], 1U));
+            {
+                ourFabricIndex = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestOpenCommissioningWindowFromAlpha_3()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAdministratorCommissioning * cluster =
+            [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams alloc] init];
+        params.commissioningTimeout = [NSNumber numberWithUnsignedShort:180U];
+        [cluster openBasicCommissioningWindowWithParams:params
+                                      completionHandler:^(NSError * _Nullable err) {
+                                          NSLog(@"Open commissioning window from alpha Error: %@", err);
+
+                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCommissionFromBeta_4()
+    {
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = 74565ULL;
+        value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForBeta_5()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = 74565ULL;
+        return WaitForCommissionee("beta", value);
+    }
+    bool testSendClusterTestFabricRemovalWhileSubscribed_6_WaitForReport_Fulfilled = false;
+    ResponseHandler _Nullable test_TestFabricRemovalWhileSubscribed_Fabrics_Reported = nil;
+
+    CHIP_ERROR TestReportSubscribeFabricsAttributeFromBeta_6()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterOperationalCredentials * cluster =
+            [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        test_TestFabricRemovalWhileSubscribed_Fabrics_Reported = ^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Report: Subscribe Fabrics Attribute from beta Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("fabrics", "", "list"));
+            testSendClusterTestFabricRemovalWhileSubscribed_6_WaitForReport_Fulfilled = true;
+        };
+
+        NextTest();
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSubscribeFabricsAttributeFromBeta_7()
+    {
+        MTRBaseDevice * device = GetDevice("beta");
+        MTRBaseClusterOperationalCredentials * cluster =
+            [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        uint16_t minIntervalArgument = 2U;
+        uint16_t maxIntervalArgument = 5U;
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        [cluster subscribeAttributeFabricsWithMinInterval:[NSNumber numberWithUnsignedInt:minIntervalArgument]
+            maxInterval:[NSNumber numberWithUnsignedInt:maxIntervalArgument]
+            params:params
+            subscriptionEstablished:^{
+                VerifyOrReturn(testSendClusterTestFabricRemovalWhileSubscribed_6_WaitForReport_Fulfilled,
+                    SetCommandExitStatus(CHIP_ERROR_INCORRECT_STATE));
+                NextTest();
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Subscribe Fabrics Attribute from beta Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                if (test_TestFabricRemovalWhileSubscribed_Fabrics_Reported != nil) {
+                    ResponseHandler callback = test_TestFabricRemovalWhileSubscribed_Fabrics_Reported;
+                    test_TestFabricRemovalWhileSubscribed_Fabrics_Reported = nil;
+                    callback(value, err);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestRemoveSingleOwnFabric_8()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterOperationalCredentials * cluster =
+            [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTROperationalCredentialsClusterRemoveFabricParams alloc] init];
+        params.fabricIndex = [ourFabricIndex copy];
+        [cluster removeFabricWithParams:params
+                      completionHandler:^(
+                          MTROperationalCredentialsClusterNOCResponseParams * _Nullable values, NSError * _Nullable err) {
+                          NSLog(@"Remove single own fabric Error: %@", err);
+
+                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                          NextTest();
+                      }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
 class TestGeneralCommissioning : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -108922,6 +109228,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<TestConfigVariables>(),
         make_unique<TestDescriptorCluster>(),
         make_unique<TestBasicInformation>(),
+        make_unique<TestFabricRemovalWhileSubscribed>(),
         make_unique<TestGeneralCommissioning>(),
         make_unique<TestIdentifyCluster>(),
         make_unique<TestOperationalCredentialsCluster>(),
