@@ -59554,6 +59554,1732 @@ public:
 };
 
 /*----------------------------------------------------------------------------*\
+| Cluster BallastConfiguration                                        | 0x0301 |
+|------------------------------------------------------------------------------|
+| Commands:                                                           |        |
+|------------------------------------------------------------------------------|
+| Attributes:                                                         |        |
+| * PhysicalMinLevel                                                  | 0x0000 |
+| * PhysicalMaxLevel                                                  | 0x0001 |
+| * BallastStatus                                                     | 0x0002 |
+| * MinLevel                                                          | 0x0010 |
+| * MaxLevel                                                          | 0x0011 |
+| * IntrinsicBalanceFactor                                            | 0x0014 |
+| * BallastFactorAdjustment                                           | 0x0015 |
+| * LampQuantity                                                      | 0x0020 |
+| * LampType                                                          | 0x0030 |
+| * LampManufacturer                                                  | 0x0031 |
+| * LampRatedHours                                                    | 0x0032 |
+| * LampBurnHours                                                     | 0x0033 |
+| * LampAlarmMode                                                     | 0x0034 |
+| * LampBurnHoursTripPoint                                            | 0x0035 |
+| * GeneratedCommandList                                              | 0xFFF8 |
+| * AcceptedCommandList                                               | 0xFFF9 |
+| * AttributeList                                                     | 0xFFFB |
+| * FeatureMap                                                        | 0xFFFC |
+| * ClusterRevision                                                   | 0xFFFD |
+|------------------------------------------------------------------------------|
+| Events:                                                             |        |
+\*----------------------------------------------------------------------------*/
+
+/*
+ * Attribute PhysicalMinLevel
+ */
+class ReadBallastConfigurationPhysicalMinLevel : public ReadAttribute {
+public:
+    ReadBallastConfigurationPhysicalMinLevel()
+        : ReadAttribute("physical-min-level")
+    {
+    }
+
+    ~ReadBallastConfigurationPhysicalMinLevel() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReadAttribute (0x00000000) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        [cluster readAttributePhysicalMinLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"BallastConfiguration.PhysicalMinLevel response %@", [value description]);
+            if (error != nil) {
+                LogNSError("BallastConfiguration PhysicalMinLevel read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeBallastConfigurationPhysicalMinLevel : public SubscribeAttribute {
+public:
+    SubscribeAttributeBallastConfigurationPhysicalMinLevel()
+        : SubscribeAttribute("physical-min-level")
+    {
+    }
+
+    ~SubscribeAttributeBallastConfigurationPhysicalMinLevel() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReportAttribute (0x00000000) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributePhysicalMinLevelWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+            params:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.PhysicalMinLevel response %@", [value description]);
+                if (error || !mWait) {
+                    SetCommandExitStatus(error);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute PhysicalMaxLevel
+ */
+class ReadBallastConfigurationPhysicalMaxLevel : public ReadAttribute {
+public:
+    ReadBallastConfigurationPhysicalMaxLevel()
+        : ReadAttribute("physical-max-level")
+    {
+    }
+
+    ~ReadBallastConfigurationPhysicalMaxLevel() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReadAttribute (0x00000001) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        [cluster readAttributePhysicalMaxLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"BallastConfiguration.PhysicalMaxLevel response %@", [value description]);
+            if (error != nil) {
+                LogNSError("BallastConfiguration PhysicalMaxLevel read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeBallastConfigurationPhysicalMaxLevel : public SubscribeAttribute {
+public:
+    SubscribeAttributeBallastConfigurationPhysicalMaxLevel()
+        : SubscribeAttribute("physical-max-level")
+    {
+    }
+
+    ~SubscribeAttributeBallastConfigurationPhysicalMaxLevel() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReportAttribute (0x00000001) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributePhysicalMaxLevelWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+            params:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.PhysicalMaxLevel response %@", [value description]);
+                if (error || !mWait) {
+                    SetCommandExitStatus(error);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute BallastStatus
+ */
+class ReadBallastConfigurationBallastStatus : public ReadAttribute {
+public:
+    ReadBallastConfigurationBallastStatus()
+        : ReadAttribute("ballast-status")
+    {
+    }
+
+    ~ReadBallastConfigurationBallastStatus() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReadAttribute (0x00000002) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        [cluster readAttributeBallastStatusWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"BallastConfiguration.BallastStatus response %@", [value description]);
+            if (error != nil) {
+                LogNSError("BallastConfiguration BallastStatus read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeBallastConfigurationBallastStatus : public SubscribeAttribute {
+public:
+    SubscribeAttributeBallastConfigurationBallastStatus()
+        : SubscribeAttribute("ballast-status")
+    {
+    }
+
+    ~SubscribeAttributeBallastConfigurationBallastStatus() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReportAttribute (0x00000002) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeBallastStatusWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+            params:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.BallastStatus response %@", [value description]);
+                if (error || !mWait) {
+                    SetCommandExitStatus(error);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute MinLevel
+ */
+class ReadBallastConfigurationMinLevel : public ReadAttribute {
+public:
+    ReadBallastConfigurationMinLevel()
+        : ReadAttribute("min-level")
+    {
+    }
+
+    ~ReadBallastConfigurationMinLevel() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReadAttribute (0x00000010) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        [cluster readAttributeMinLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"BallastConfiguration.MinLevel response %@", [value description]);
+            if (error != nil) {
+                LogNSError("BallastConfiguration MinLevel read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class WriteBallastConfigurationMinLevel : public WriteAttribute {
+public:
+    WriteBallastConfigurationMinLevel()
+        : WriteAttribute("min-level")
+    {
+        AddArgument("attr-name", "min-level");
+        AddArgument("attr-value", 0, UINT8_MAX, &mValue);
+        WriteAttribute::AddArguments();
+    }
+
+    ~WriteBallastConfigurationMinLevel() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) WriteAttribute (0x00000010) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRWriteParams * params = [[MTRWriteParams alloc] init];
+        params.timedWriteTimeout
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
+        NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
+
+        [cluster writeAttributeMinLevelWithValue:value
+                                          params:params
+                               completionHandler:^(NSError * _Nullable error) {
+                                   if (error != nil) {
+                                       LogNSError("BallastConfiguration MinLevel write Error", error);
+                                   }
+                                   SetCommandExitStatus(error);
+                               }];
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    uint8_t mValue;
+};
+
+class SubscribeAttributeBallastConfigurationMinLevel : public SubscribeAttribute {
+public:
+    SubscribeAttributeBallastConfigurationMinLevel()
+        : SubscribeAttribute("min-level")
+    {
+    }
+
+    ~SubscribeAttributeBallastConfigurationMinLevel() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReportAttribute (0x00000010) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeMinLevelWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+            params:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.MinLevel response %@", [value description]);
+                if (error || !mWait) {
+                    SetCommandExitStatus(error);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute MaxLevel
+ */
+class ReadBallastConfigurationMaxLevel : public ReadAttribute {
+public:
+    ReadBallastConfigurationMaxLevel()
+        : ReadAttribute("max-level")
+    {
+    }
+
+    ~ReadBallastConfigurationMaxLevel() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReadAttribute (0x00000011) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        [cluster readAttributeMaxLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"BallastConfiguration.MaxLevel response %@", [value description]);
+            if (error != nil) {
+                LogNSError("BallastConfiguration MaxLevel read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class WriteBallastConfigurationMaxLevel : public WriteAttribute {
+public:
+    WriteBallastConfigurationMaxLevel()
+        : WriteAttribute("max-level")
+    {
+        AddArgument("attr-name", "max-level");
+        AddArgument("attr-value", 0, UINT8_MAX, &mValue);
+        WriteAttribute::AddArguments();
+    }
+
+    ~WriteBallastConfigurationMaxLevel() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) WriteAttribute (0x00000011) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRWriteParams * params = [[MTRWriteParams alloc] init];
+        params.timedWriteTimeout
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
+        NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
+
+        [cluster writeAttributeMaxLevelWithValue:value
+                                          params:params
+                               completionHandler:^(NSError * _Nullable error) {
+                                   if (error != nil) {
+                                       LogNSError("BallastConfiguration MaxLevel write Error", error);
+                                   }
+                                   SetCommandExitStatus(error);
+                               }];
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    uint8_t mValue;
+};
+
+class SubscribeAttributeBallastConfigurationMaxLevel : public SubscribeAttribute {
+public:
+    SubscribeAttributeBallastConfigurationMaxLevel()
+        : SubscribeAttribute("max-level")
+    {
+    }
+
+    ~SubscribeAttributeBallastConfigurationMaxLevel() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReportAttribute (0x00000011) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeMaxLevelWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+            params:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.MaxLevel response %@", [value description]);
+                if (error || !mWait) {
+                    SetCommandExitStatus(error);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute IntrinsicBalanceFactor
+ */
+class ReadBallastConfigurationIntrinsicBalanceFactor : public ReadAttribute {
+public:
+    ReadBallastConfigurationIntrinsicBalanceFactor()
+        : ReadAttribute("intrinsic-balance-factor")
+    {
+    }
+
+    ~ReadBallastConfigurationIntrinsicBalanceFactor() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReadAttribute (0x00000014) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        [cluster readAttributeIntrinsicBalanceFactorWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"BallastConfiguration.IntrinsicBalanceFactor response %@", [value description]);
+            if (error != nil) {
+                LogNSError("BallastConfiguration IntrinsicBalanceFactor read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class WriteBallastConfigurationIntrinsicBalanceFactor : public WriteAttribute {
+public:
+    WriteBallastConfigurationIntrinsicBalanceFactor()
+        : WriteAttribute("intrinsic-balance-factor")
+    {
+        AddArgument("attr-name", "intrinsic-balance-factor");
+        AddArgument("attr-value", 0, UINT8_MAX, &mValue);
+        WriteAttribute::AddArguments();
+    }
+
+    ~WriteBallastConfigurationIntrinsicBalanceFactor() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) WriteAttribute (0x00000014) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRWriteParams * params = [[MTRWriteParams alloc] init];
+        params.timedWriteTimeout
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
+        NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
+
+        [cluster writeAttributeIntrinsicBalanceFactorWithValue:value
+                                                        params:params
+                                             completionHandler:^(NSError * _Nullable error) {
+                                                 if (error != nil) {
+                                                     LogNSError("BallastConfiguration IntrinsicBalanceFactor write Error", error);
+                                                 }
+                                                 SetCommandExitStatus(error);
+                                             }];
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    uint8_t mValue;
+};
+
+class SubscribeAttributeBallastConfigurationIntrinsicBalanceFactor : public SubscribeAttribute {
+public:
+    SubscribeAttributeBallastConfigurationIntrinsicBalanceFactor()
+        : SubscribeAttribute("intrinsic-balance-factor")
+    {
+    }
+
+    ~SubscribeAttributeBallastConfigurationIntrinsicBalanceFactor() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReportAttribute (0x00000014) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeIntrinsicBalanceFactorWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+            params:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.IntrinsicBalanceFactor response %@", [value description]);
+                if (error || !mWait) {
+                    SetCommandExitStatus(error);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute BallastFactorAdjustment
+ */
+class ReadBallastConfigurationBallastFactorAdjustment : public ReadAttribute {
+public:
+    ReadBallastConfigurationBallastFactorAdjustment()
+        : ReadAttribute("ballast-factor-adjustment")
+    {
+    }
+
+    ~ReadBallastConfigurationBallastFactorAdjustment() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReadAttribute (0x00000015) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        [cluster
+            readAttributeBallastFactorAdjustmentWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.BallastFactorAdjustment response %@", [value description]);
+                if (error != nil) {
+                    LogNSError("BallastConfiguration BallastFactorAdjustment read Error", error);
+                }
+                SetCommandExitStatus(error);
+            }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class WriteBallastConfigurationBallastFactorAdjustment : public WriteAttribute {
+public:
+    WriteBallastConfigurationBallastFactorAdjustment()
+        : WriteAttribute("ballast-factor-adjustment")
+    {
+        AddArgument("attr-name", "ballast-factor-adjustment");
+        AddArgument("attr-value", 0, UINT8_MAX, &mValue);
+        WriteAttribute::AddArguments();
+    }
+
+    ~WriteBallastConfigurationBallastFactorAdjustment() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) WriteAttribute (0x00000015) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRWriteParams * params = [[MTRWriteParams alloc] init];
+        params.timedWriteTimeout
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
+        NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
+
+        [cluster writeAttributeBallastFactorAdjustmentWithValue:value
+                                                         params:params
+                                              completionHandler:^(NSError * _Nullable error) {
+                                                  if (error != nil) {
+                                                      LogNSError("BallastConfiguration BallastFactorAdjustment write Error", error);
+                                                  }
+                                                  SetCommandExitStatus(error);
+                                              }];
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    uint8_t mValue;
+};
+
+class SubscribeAttributeBallastConfigurationBallastFactorAdjustment : public SubscribeAttribute {
+public:
+    SubscribeAttributeBallastConfigurationBallastFactorAdjustment()
+        : SubscribeAttribute("ballast-factor-adjustment")
+    {
+    }
+
+    ~SubscribeAttributeBallastConfigurationBallastFactorAdjustment() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReportAttribute (0x00000015) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeBallastFactorAdjustmentWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+            params:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.BallastFactorAdjustment response %@", [value description]);
+                if (error || !mWait) {
+                    SetCommandExitStatus(error);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute LampQuantity
+ */
+class ReadBallastConfigurationLampQuantity : public ReadAttribute {
+public:
+    ReadBallastConfigurationLampQuantity()
+        : ReadAttribute("lamp-quantity")
+    {
+    }
+
+    ~ReadBallastConfigurationLampQuantity() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReadAttribute (0x00000020) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        [cluster readAttributeLampQuantityWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"BallastConfiguration.LampQuantity response %@", [value description]);
+            if (error != nil) {
+                LogNSError("BallastConfiguration LampQuantity read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeBallastConfigurationLampQuantity : public SubscribeAttribute {
+public:
+    SubscribeAttributeBallastConfigurationLampQuantity()
+        : SubscribeAttribute("lamp-quantity")
+    {
+    }
+
+    ~SubscribeAttributeBallastConfigurationLampQuantity() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReportAttribute (0x00000020) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeLampQuantityWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+            params:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.LampQuantity response %@", [value description]);
+                if (error || !mWait) {
+                    SetCommandExitStatus(error);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute LampType
+ */
+class ReadBallastConfigurationLampType : public ReadAttribute {
+public:
+    ReadBallastConfigurationLampType()
+        : ReadAttribute("lamp-type")
+    {
+    }
+
+    ~ReadBallastConfigurationLampType() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReadAttribute (0x00000030) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        [cluster readAttributeLampTypeWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"BallastConfiguration.LampType response %@", [value description]);
+            if (error != nil) {
+                LogNSError("BallastConfiguration LampType read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class WriteBallastConfigurationLampType : public WriteAttribute {
+public:
+    WriteBallastConfigurationLampType()
+        : WriteAttribute("lamp-type")
+    {
+        AddArgument("attr-name", "lamp-type");
+        AddArgument("attr-value", &mValue);
+        WriteAttribute::AddArguments();
+    }
+
+    ~WriteBallastConfigurationLampType() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) WriteAttribute (0x00000030) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRWriteParams * params = [[MTRWriteParams alloc] init];
+        params.timedWriteTimeout
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
+        NSString * _Nonnull value = [[NSString alloc] initWithBytes:mValue.data()
+                                                             length:mValue.size()
+                                                           encoding:NSUTF8StringEncoding];
+
+        [cluster writeAttributeLampTypeWithValue:value
+                                          params:params
+                               completionHandler:^(NSError * _Nullable error) {
+                                   if (error != nil) {
+                                       LogNSError("BallastConfiguration LampType write Error", error);
+                                   }
+                                   SetCommandExitStatus(error);
+                               }];
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    chip::ByteSpan mValue;
+};
+
+class SubscribeAttributeBallastConfigurationLampType : public SubscribeAttribute {
+public:
+    SubscribeAttributeBallastConfigurationLampType()
+        : SubscribeAttribute("lamp-type")
+    {
+    }
+
+    ~SubscribeAttributeBallastConfigurationLampType() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReportAttribute (0x00000030) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeLampTypeWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+            params:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.LampType response %@", [value description]);
+                if (error || !mWait) {
+                    SetCommandExitStatus(error);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute LampManufacturer
+ */
+class ReadBallastConfigurationLampManufacturer : public ReadAttribute {
+public:
+    ReadBallastConfigurationLampManufacturer()
+        : ReadAttribute("lamp-manufacturer")
+    {
+    }
+
+    ~ReadBallastConfigurationLampManufacturer() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReadAttribute (0x00000031) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        [cluster readAttributeLampManufacturerWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"BallastConfiguration.LampManufacturer response %@", [value description]);
+            if (error != nil) {
+                LogNSError("BallastConfiguration LampManufacturer read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class WriteBallastConfigurationLampManufacturer : public WriteAttribute {
+public:
+    WriteBallastConfigurationLampManufacturer()
+        : WriteAttribute("lamp-manufacturer")
+    {
+        AddArgument("attr-name", "lamp-manufacturer");
+        AddArgument("attr-value", &mValue);
+        WriteAttribute::AddArguments();
+    }
+
+    ~WriteBallastConfigurationLampManufacturer() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) WriteAttribute (0x00000031) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRWriteParams * params = [[MTRWriteParams alloc] init];
+        params.timedWriteTimeout
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
+        NSString * _Nonnull value = [[NSString alloc] initWithBytes:mValue.data()
+                                                             length:mValue.size()
+                                                           encoding:NSUTF8StringEncoding];
+
+        [cluster writeAttributeLampManufacturerWithValue:value
+                                                  params:params
+                                       completionHandler:^(NSError * _Nullable error) {
+                                           if (error != nil) {
+                                               LogNSError("BallastConfiguration LampManufacturer write Error", error);
+                                           }
+                                           SetCommandExitStatus(error);
+                                       }];
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    chip::ByteSpan mValue;
+};
+
+class SubscribeAttributeBallastConfigurationLampManufacturer : public SubscribeAttribute {
+public:
+    SubscribeAttributeBallastConfigurationLampManufacturer()
+        : SubscribeAttribute("lamp-manufacturer")
+    {
+    }
+
+    ~SubscribeAttributeBallastConfigurationLampManufacturer() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReportAttribute (0x00000031) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeLampManufacturerWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+            params:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.LampManufacturer response %@", [value description]);
+                if (error || !mWait) {
+                    SetCommandExitStatus(error);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute LampRatedHours
+ */
+class ReadBallastConfigurationLampRatedHours : public ReadAttribute {
+public:
+    ReadBallastConfigurationLampRatedHours()
+        : ReadAttribute("lamp-rated-hours")
+    {
+    }
+
+    ~ReadBallastConfigurationLampRatedHours() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReadAttribute (0x00000032) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        [cluster readAttributeLampRatedHoursWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"BallastConfiguration.LampRatedHours response %@", [value description]);
+            if (error != nil) {
+                LogNSError("BallastConfiguration LampRatedHours read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class WriteBallastConfigurationLampRatedHours : public WriteAttribute {
+public:
+    WriteBallastConfigurationLampRatedHours()
+        : WriteAttribute("lamp-rated-hours")
+    {
+        AddArgument("attr-name", "lamp-rated-hours");
+        AddArgument("attr-value", 0, UINT32_MAX, &mValue);
+        WriteAttribute::AddArguments();
+    }
+
+    ~WriteBallastConfigurationLampRatedHours() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) WriteAttribute (0x00000032) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRWriteParams * params = [[MTRWriteParams alloc] init];
+        params.timedWriteTimeout
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
+        NSNumber * _Nullable value = [NSNumber numberWithUnsignedInt:mValue];
+
+        [cluster writeAttributeLampRatedHoursWithValue:value
+                                                params:params
+                                     completionHandler:^(NSError * _Nullable error) {
+                                         if (error != nil) {
+                                             LogNSError("BallastConfiguration LampRatedHours write Error", error);
+                                         }
+                                         SetCommandExitStatus(error);
+                                     }];
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    uint32_t mValue;
+};
+
+class SubscribeAttributeBallastConfigurationLampRatedHours : public SubscribeAttribute {
+public:
+    SubscribeAttributeBallastConfigurationLampRatedHours()
+        : SubscribeAttribute("lamp-rated-hours")
+    {
+    }
+
+    ~SubscribeAttributeBallastConfigurationLampRatedHours() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReportAttribute (0x00000032) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeLampRatedHoursWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+            params:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.LampRatedHours response %@", [value description]);
+                if (error || !mWait) {
+                    SetCommandExitStatus(error);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute LampBurnHours
+ */
+class ReadBallastConfigurationLampBurnHours : public ReadAttribute {
+public:
+    ReadBallastConfigurationLampBurnHours()
+        : ReadAttribute("lamp-burn-hours")
+    {
+    }
+
+    ~ReadBallastConfigurationLampBurnHours() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReadAttribute (0x00000033) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        [cluster readAttributeLampBurnHoursWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"BallastConfiguration.LampBurnHours response %@", [value description]);
+            if (error != nil) {
+                LogNSError("BallastConfiguration LampBurnHours read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class WriteBallastConfigurationLampBurnHours : public WriteAttribute {
+public:
+    WriteBallastConfigurationLampBurnHours()
+        : WriteAttribute("lamp-burn-hours")
+    {
+        AddArgument("attr-name", "lamp-burn-hours");
+        AddArgument("attr-value", 0, UINT32_MAX, &mValue);
+        WriteAttribute::AddArguments();
+    }
+
+    ~WriteBallastConfigurationLampBurnHours() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) WriteAttribute (0x00000033) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRWriteParams * params = [[MTRWriteParams alloc] init];
+        params.timedWriteTimeout
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
+        NSNumber * _Nullable value = [NSNumber numberWithUnsignedInt:mValue];
+
+        [cluster writeAttributeLampBurnHoursWithValue:value
+                                               params:params
+                                    completionHandler:^(NSError * _Nullable error) {
+                                        if (error != nil) {
+                                            LogNSError("BallastConfiguration LampBurnHours write Error", error);
+                                        }
+                                        SetCommandExitStatus(error);
+                                    }];
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    uint32_t mValue;
+};
+
+class SubscribeAttributeBallastConfigurationLampBurnHours : public SubscribeAttribute {
+public:
+    SubscribeAttributeBallastConfigurationLampBurnHours()
+        : SubscribeAttribute("lamp-burn-hours")
+    {
+    }
+
+    ~SubscribeAttributeBallastConfigurationLampBurnHours() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReportAttribute (0x00000033) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeLampBurnHoursWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+            params:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.LampBurnHours response %@", [value description]);
+                if (error || !mWait) {
+                    SetCommandExitStatus(error);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute LampAlarmMode
+ */
+class ReadBallastConfigurationLampAlarmMode : public ReadAttribute {
+public:
+    ReadBallastConfigurationLampAlarmMode()
+        : ReadAttribute("lamp-alarm-mode")
+    {
+    }
+
+    ~ReadBallastConfigurationLampAlarmMode() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReadAttribute (0x00000034) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        [cluster readAttributeLampAlarmModeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"BallastConfiguration.LampAlarmMode response %@", [value description]);
+            if (error != nil) {
+                LogNSError("BallastConfiguration LampAlarmMode read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class WriteBallastConfigurationLampAlarmMode : public WriteAttribute {
+public:
+    WriteBallastConfigurationLampAlarmMode()
+        : WriteAttribute("lamp-alarm-mode")
+    {
+        AddArgument("attr-name", "lamp-alarm-mode");
+        AddArgument("attr-value", 0, UINT8_MAX, &mValue);
+        WriteAttribute::AddArguments();
+    }
+
+    ~WriteBallastConfigurationLampAlarmMode() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) WriteAttribute (0x00000034) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRWriteParams * params = [[MTRWriteParams alloc] init];
+        params.timedWriteTimeout
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
+        NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
+
+        [cluster writeAttributeLampAlarmModeWithValue:value
+                                               params:params
+                                    completionHandler:^(NSError * _Nullable error) {
+                                        if (error != nil) {
+                                            LogNSError("BallastConfiguration LampAlarmMode write Error", error);
+                                        }
+                                        SetCommandExitStatus(error);
+                                    }];
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    uint8_t mValue;
+};
+
+class SubscribeAttributeBallastConfigurationLampAlarmMode : public SubscribeAttribute {
+public:
+    SubscribeAttributeBallastConfigurationLampAlarmMode()
+        : SubscribeAttribute("lamp-alarm-mode")
+    {
+    }
+
+    ~SubscribeAttributeBallastConfigurationLampAlarmMode() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReportAttribute (0x00000034) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeLampAlarmModeWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+            params:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.LampAlarmMode response %@", [value description]);
+                if (error || !mWait) {
+                    SetCommandExitStatus(error);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute LampBurnHoursTripPoint
+ */
+class ReadBallastConfigurationLampBurnHoursTripPoint : public ReadAttribute {
+public:
+    ReadBallastConfigurationLampBurnHoursTripPoint()
+        : ReadAttribute("lamp-burn-hours-trip-point")
+    {
+    }
+
+    ~ReadBallastConfigurationLampBurnHoursTripPoint() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReadAttribute (0x00000035) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        [cluster readAttributeLampBurnHoursTripPointWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"BallastConfiguration.LampBurnHoursTripPoint response %@", [value description]);
+            if (error != nil) {
+                LogNSError("BallastConfiguration LampBurnHoursTripPoint read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class WriteBallastConfigurationLampBurnHoursTripPoint : public WriteAttribute {
+public:
+    WriteBallastConfigurationLampBurnHoursTripPoint()
+        : WriteAttribute("lamp-burn-hours-trip-point")
+    {
+        AddArgument("attr-name", "lamp-burn-hours-trip-point");
+        AddArgument("attr-value", 0, UINT32_MAX, &mValue);
+        WriteAttribute::AddArguments();
+    }
+
+    ~WriteBallastConfigurationLampBurnHoursTripPoint() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) WriteAttribute (0x00000035) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRWriteParams * params = [[MTRWriteParams alloc] init];
+        params.timedWriteTimeout
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
+        NSNumber * _Nullable value = [NSNumber numberWithUnsignedInt:mValue];
+
+        [cluster writeAttributeLampBurnHoursTripPointWithValue:value
+                                                        params:params
+                                             completionHandler:^(NSError * _Nullable error) {
+                                                 if (error != nil) {
+                                                     LogNSError("BallastConfiguration LampBurnHoursTripPoint write Error", error);
+                                                 }
+                                                 SetCommandExitStatus(error);
+                                             }];
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    uint32_t mValue;
+};
+
+class SubscribeAttributeBallastConfigurationLampBurnHoursTripPoint : public SubscribeAttribute {
+public:
+    SubscribeAttributeBallastConfigurationLampBurnHoursTripPoint()
+        : SubscribeAttribute("lamp-burn-hours-trip-point")
+    {
+    }
+
+    ~SubscribeAttributeBallastConfigurationLampBurnHoursTripPoint() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReportAttribute (0x00000035) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeLampBurnHoursTripPointWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+            params:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.LampBurnHoursTripPoint response %@", [value description]);
+                if (error || !mWait) {
+                    SetCommandExitStatus(error);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute GeneratedCommandList
+ */
+class ReadBallastConfigurationGeneratedCommandList : public ReadAttribute {
+public:
+    ReadBallastConfigurationGeneratedCommandList()
+        : ReadAttribute("generated-command-list")
+    {
+    }
+
+    ~ReadBallastConfigurationGeneratedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReadAttribute (0x0000FFF8) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        [cluster readAttributeGeneratedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"BallastConfiguration.GeneratedCommandList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("BallastConfiguration GeneratedCommandList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeBallastConfigurationGeneratedCommandList : public SubscribeAttribute {
+public:
+    SubscribeAttributeBallastConfigurationGeneratedCommandList()
+        : SubscribeAttribute("generated-command-list")
+    {
+    }
+
+    ~SubscribeAttributeBallastConfigurationGeneratedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReportAttribute (0x0000FFF8) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeGeneratedCommandListWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+            params:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.GeneratedCommandList response %@", [value description]);
+                if (error || !mWait) {
+                    SetCommandExitStatus(error);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute AcceptedCommandList
+ */
+class ReadBallastConfigurationAcceptedCommandList : public ReadAttribute {
+public:
+    ReadBallastConfigurationAcceptedCommandList()
+        : ReadAttribute("accepted-command-list")
+    {
+    }
+
+    ~ReadBallastConfigurationAcceptedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReadAttribute (0x0000FFF9) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"BallastConfiguration.AcceptedCommandList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("BallastConfiguration AcceptedCommandList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeBallastConfigurationAcceptedCommandList : public SubscribeAttribute {
+public:
+    SubscribeAttributeBallastConfigurationAcceptedCommandList()
+        : SubscribeAttribute("accepted-command-list")
+    {
+    }
+
+    ~SubscribeAttributeBallastConfigurationAcceptedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReportAttribute (0x0000FFF9) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeAcceptedCommandListWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+            params:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.AcceptedCommandList response %@", [value description]);
+                if (error || !mWait) {
+                    SetCommandExitStatus(error);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute AttributeList
+ */
+class ReadBallastConfigurationAttributeList : public ReadAttribute {
+public:
+    ReadBallastConfigurationAttributeList()
+        : ReadAttribute("attribute-list")
+    {
+    }
+
+    ~ReadBallastConfigurationAttributeList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReadAttribute (0x0000FFFB) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"BallastConfiguration.AttributeList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("BallastConfiguration AttributeList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeBallastConfigurationAttributeList : public SubscribeAttribute {
+public:
+    SubscribeAttributeBallastConfigurationAttributeList()
+        : SubscribeAttribute("attribute-list")
+    {
+    }
+
+    ~SubscribeAttributeBallastConfigurationAttributeList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReportAttribute (0x0000FFFB) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeAttributeListWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+            params:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.AttributeList response %@", [value description]);
+                if (error || !mWait) {
+                    SetCommandExitStatus(error);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute FeatureMap
+ */
+class ReadBallastConfigurationFeatureMap : public ReadAttribute {
+public:
+    ReadBallastConfigurationFeatureMap()
+        : ReadAttribute("feature-map")
+    {
+    }
+
+    ~ReadBallastConfigurationFeatureMap() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReadAttribute (0x0000FFFC) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"BallastConfiguration.FeatureMap response %@", [value description]);
+            if (error != nil) {
+                LogNSError("BallastConfiguration FeatureMap read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeBallastConfigurationFeatureMap : public SubscribeAttribute {
+public:
+    SubscribeAttributeBallastConfigurationFeatureMap()
+        : SubscribeAttribute("feature-map")
+    {
+    }
+
+    ~SubscribeAttributeBallastConfigurationFeatureMap() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReportAttribute (0x0000FFFC) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeFeatureMapWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+            params:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.FeatureMap response %@", [value description]);
+                if (error || !mWait) {
+                    SetCommandExitStatus(error);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute ClusterRevision
+ */
+class ReadBallastConfigurationClusterRevision : public ReadAttribute {
+public:
+    ReadBallastConfigurationClusterRevision()
+        : ReadAttribute("cluster-revision")
+    {
+    }
+
+    ~ReadBallastConfigurationClusterRevision() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReadAttribute (0x0000FFFD) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        [cluster readAttributeClusterRevisionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"BallastConfiguration.ClusterRevision response %@", [value description]);
+            if (error != nil) {
+                LogNSError("BallastConfiguration ClusterRevision read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeBallastConfigurationClusterRevision : public SubscribeAttribute {
+public:
+    SubscribeAttributeBallastConfigurationClusterRevision()
+        : SubscribeAttribute("cluster-revision")
+    {
+    }
+
+    ~SubscribeAttributeBallastConfigurationClusterRevision() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000301) ReportAttribute (0x0000FFFD) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterBallastConfiguration * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
+                                                                                                         endpoint:endpointId
+                                                                                                            queue:callbackQueue];
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
+        params.keepPreviousSubscriptions
+            = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
+        params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
+        [cluster subscribeAttributeClusterRevisionWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+            maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
+            params:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"BallastConfiguration.ClusterRevision response %@", [value description]);
+                if (error || !mWait) {
+                    SetCommandExitStatus(error);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*----------------------------------------------------------------------------*\
 | Cluster IlluminanceMeasurement                                      | 0x0400 |
 |------------------------------------------------------------------------------|
 | Commands:                                                           |        |
@@ -95785,6 +97511,69 @@ void registerClusterColorControl(Commands & commands)
 
     commands.Register(clusterName, clusterCommands);
 }
+void registerClusterBallastConfiguration(Commands & commands)
+{
+    using namespace chip::app::Clusters::BallastConfiguration;
+
+    const char * clusterName = "BallastConfiguration";
+
+    commands_list clusterCommands = {
+        make_unique<ClusterCommand>(Id), //
+        make_unique<ReadAttribute>(Id), //
+        make_unique<ReadBallastConfigurationPhysicalMinLevel>(), //
+        make_unique<WriteAttribute>(Id), //
+        make_unique<SubscribeAttribute>(Id), //
+        make_unique<SubscribeAttributeBallastConfigurationPhysicalMinLevel>(), //
+        make_unique<ReadBallastConfigurationPhysicalMaxLevel>(), //
+        make_unique<SubscribeAttributeBallastConfigurationPhysicalMaxLevel>(), //
+        make_unique<ReadBallastConfigurationBallastStatus>(), //
+        make_unique<SubscribeAttributeBallastConfigurationBallastStatus>(), //
+        make_unique<ReadBallastConfigurationMinLevel>(), //
+        make_unique<WriteBallastConfigurationMinLevel>(), //
+        make_unique<SubscribeAttributeBallastConfigurationMinLevel>(), //
+        make_unique<ReadBallastConfigurationMaxLevel>(), //
+        make_unique<WriteBallastConfigurationMaxLevel>(), //
+        make_unique<SubscribeAttributeBallastConfigurationMaxLevel>(), //
+        make_unique<ReadBallastConfigurationIntrinsicBalanceFactor>(), //
+        make_unique<WriteBallastConfigurationIntrinsicBalanceFactor>(), //
+        make_unique<SubscribeAttributeBallastConfigurationIntrinsicBalanceFactor>(), //
+        make_unique<ReadBallastConfigurationBallastFactorAdjustment>(), //
+        make_unique<WriteBallastConfigurationBallastFactorAdjustment>(), //
+        make_unique<SubscribeAttributeBallastConfigurationBallastFactorAdjustment>(), //
+        make_unique<ReadBallastConfigurationLampQuantity>(), //
+        make_unique<SubscribeAttributeBallastConfigurationLampQuantity>(), //
+        make_unique<ReadBallastConfigurationLampType>(), //
+        make_unique<WriteBallastConfigurationLampType>(), //
+        make_unique<SubscribeAttributeBallastConfigurationLampType>(), //
+        make_unique<ReadBallastConfigurationLampManufacturer>(), //
+        make_unique<WriteBallastConfigurationLampManufacturer>(), //
+        make_unique<SubscribeAttributeBallastConfigurationLampManufacturer>(), //
+        make_unique<ReadBallastConfigurationLampRatedHours>(), //
+        make_unique<WriteBallastConfigurationLampRatedHours>(), //
+        make_unique<SubscribeAttributeBallastConfigurationLampRatedHours>(), //
+        make_unique<ReadBallastConfigurationLampBurnHours>(), //
+        make_unique<WriteBallastConfigurationLampBurnHours>(), //
+        make_unique<SubscribeAttributeBallastConfigurationLampBurnHours>(), //
+        make_unique<ReadBallastConfigurationLampAlarmMode>(), //
+        make_unique<WriteBallastConfigurationLampAlarmMode>(), //
+        make_unique<SubscribeAttributeBallastConfigurationLampAlarmMode>(), //
+        make_unique<ReadBallastConfigurationLampBurnHoursTripPoint>(), //
+        make_unique<WriteBallastConfigurationLampBurnHoursTripPoint>(), //
+        make_unique<SubscribeAttributeBallastConfigurationLampBurnHoursTripPoint>(), //
+        make_unique<ReadBallastConfigurationGeneratedCommandList>(), //
+        make_unique<SubscribeAttributeBallastConfigurationGeneratedCommandList>(), //
+        make_unique<ReadBallastConfigurationAcceptedCommandList>(), //
+        make_unique<SubscribeAttributeBallastConfigurationAcceptedCommandList>(), //
+        make_unique<ReadBallastConfigurationAttributeList>(), //
+        make_unique<SubscribeAttributeBallastConfigurationAttributeList>(), //
+        make_unique<ReadBallastConfigurationFeatureMap>(), //
+        make_unique<SubscribeAttributeBallastConfigurationFeatureMap>(), //
+        make_unique<ReadBallastConfigurationClusterRevision>(), //
+        make_unique<SubscribeAttributeBallastConfigurationClusterRevision>(), //
+    };
+
+    commands.Register(clusterName, clusterCommands);
+}
 void registerClusterIlluminanceMeasurement(Commands & commands)
 {
     using namespace chip::app::Clusters::IlluminanceMeasurement;
@@ -97055,6 +98844,7 @@ void registerClusters(Commands & commands)
     registerClusterFanControl(commands);
     registerClusterThermostatUserInterfaceConfiguration(commands);
     registerClusterColorControl(commands);
+    registerClusterBallastConfiguration(commands);
     registerClusterIlluminanceMeasurement(commands);
     registerClusterTemperatureMeasurement(commands);
     registerClusterPressureMeasurement(commands);
