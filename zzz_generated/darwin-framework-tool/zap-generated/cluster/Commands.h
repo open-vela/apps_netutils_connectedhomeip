@@ -35,24 +35,17 @@
 /*----------------------------------------------------------------------------*\
 | Cluster Name                                                        |   ID   |
 |---------------------------------------------------------------------+--------|
-| PowerConfiguration                                                  | 0x0001 |
-| DeviceTemperatureConfiguration                                      | 0x0002 |
 | Identify                                                            | 0x0003 |
 | Groups                                                              | 0x0004 |
 | Scenes                                                              | 0x0005 |
 | OnOff                                                               | 0x0006 |
 | OnOffSwitchConfiguration                                            | 0x0007 |
 | LevelControl                                                        | 0x0008 |
-| Alarms                                                              | 0x0009 |
-| Time                                                                | 0x000A |
 | BinaryInputBasic                                                    | 0x000F |
-| PowerProfile                                                        | 0x001A |
-| ApplianceControl                                                    | 0x001B |
 | PulseWidthModulation                                                | 0x001C |
 | Descriptor                                                          | 0x001D |
 | Binding                                                             | 0x001E |
 | AccessControl                                                       | 0x001F |
-| PollControl                                                         | 0x0020 |
 | BridgedActions                                                      | 0x0025 |
 | Basic                                                               | 0x0028 |
 | OtaSoftwareUpdateProvider                                           | 0x0029 |
@@ -83,14 +76,12 @@
 | ProxyValid                                                          | 0x0044 |
 | BooleanState                                                        | 0x0045 |
 | ModeSelect                                                          | 0x0050 |
-| ShadeConfiguration                                                  | 0x0100 |
 | DoorLock                                                            | 0x0101 |
 | WindowCovering                                                      | 0x0102 |
 | BarrierControl                                                      | 0x0103 |
 | PumpConfigurationAndControl                                         | 0x0200 |
 | Thermostat                                                          | 0x0201 |
 | FanControl                                                          | 0x0202 |
-| DehumidificationControl                                             | 0x0203 |
 | ThermostatUserInterfaceConfiguration                                | 0x0204 |
 | ColorControl                                                        | 0x0300 |
 | BallastConfiguration                                                | 0x0301 |
@@ -100,36 +91,6 @@
 | FlowMeasurement                                                     | 0x0404 |
 | RelativeHumidityMeasurement                                         | 0x0405 |
 | OccupancySensing                                                    | 0x0406 |
-| CarbonMonoxideConcentrationMeasurement                              | 0x040C |
-| CarbonDioxideConcentrationMeasurement                               | 0x040D |
-| EthyleneConcentrationMeasurement                                    | 0x040E |
-| EthyleneOxideConcentrationMeasurement                               | 0x040F |
-| HydrogenConcentrationMeasurement                                    | 0x0410 |
-| HydrogenSulphideConcentrationMeasurement                            | 0x0411 |
-| NitricOxideConcentrationMeasurement                                 | 0x0412 |
-| NitrogenDioxideConcentrationMeasurement                             | 0x0413 |
-| OxygenConcentrationMeasurement                                      | 0x0414 |
-| OzoneConcentrationMeasurement                                       | 0x0415 |
-| SulfurDioxideConcentrationMeasurement                               | 0x0416 |
-| DissolvedOxygenConcentrationMeasurement                             | 0x0417 |
-| BromateConcentrationMeasurement                                     | 0x0418 |
-| ChloraminesConcentrationMeasurement                                 | 0x0419 |
-| ChlorineConcentrationMeasurement                                    | 0x041A |
-| FecalColiformAndEColiConcentrationMeasurement                       | 0x041B |
-| FluorideConcentrationMeasurement                                    | 0x041C |
-| HaloaceticAcidsConcentrationMeasurement                             | 0x041D |
-| TotalTrihalomethanesConcentrationMeasurement                        | 0x041E |
-| TotalColiformBacteriaConcentrationMeasurement                       | 0x041F |
-| TurbidityConcentrationMeasurement                                   | 0x0420 |
-| CopperConcentrationMeasurement                                      | 0x0421 |
-| LeadConcentrationMeasurement                                        | 0x0422 |
-| ManganeseConcentrationMeasurement                                   | 0x0423 |
-| SulfateConcentrationMeasurement                                     | 0x0424 |
-| BromodichloromethaneConcentrationMeasurement                        | 0x0425 |
-| BromoformConcentrationMeasurement                                   | 0x0426 |
-| ChlorodibromomethaneConcentrationMeasurement                        | 0x0427 |
-| ChloroformConcentrationMeasurement                                  | 0x0428 |
-| SodiumConcentrationMeasurement                                      | 0x0429 |
 | WakeOnLan                                                           | 0x0503 |
 | Channel                                                             | 0x0504 |
 | TargetNavigator                                                     | 0x0505 |
@@ -142,10 +103,6 @@
 | ApplicationLauncher                                                 | 0x050C |
 | ApplicationBasic                                                    | 0x050D |
 | AccountLogin                                                        | 0x050E |
-| ApplianceIdentification                                             | 0x0B00 |
-| MeterIdentification                                                 | 0x0B01 |
-| ApplianceEventsAndAlert                                             | 0x0B02 |
-| ApplianceStatistics                                                 | 0x0B03 |
 | ElectricalMeasurement                                               | 0x0B04 |
 | TestCluster                                                         | 0xFFF1FC05|
 \*----------------------------------------------------------------------------*/
