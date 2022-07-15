@@ -26393,12 +26393,12 @@ public:
             err = TestReadTheGlobalAttributeClusterRevision_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
-            if (ShouldSkip("MC_KEYPADINPUT.S.NV || MC_KEYPADINPUT.S.LK || MC_KEYPADINPUT.S.NK")) {
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the optional global attribute: FeatureMap\n");
+            if (ShouldSkip("KEYPADINPUT.S.NV || KEYPADINPUT.S.LK || KEYPADINPUT.S.NK")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheGlobalAttributeFeatureMap_2();
+            err = TestReadTheOptionalGlobalAttributeFeatureMap_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
@@ -26506,7 +26506,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
+    CHIP_ERROR TestReadTheOptionalGlobalAttributeFeatureMap_2()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterKeypadInput * cluster = [[MTRBaseClusterKeypadInput alloc] initWithDevice:device
@@ -26515,7 +26515,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+            NSLog(@"Read the optional global attribute: FeatureMap Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -26656,16 +26656,16 @@ public:
             err = TestReadTheGlobalAttributeClusterRevision_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
-            if (ShouldSkip("MC_APPLAUNCHER.S.AP")) {
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the optional global attribute: FeatureMap\n");
+            if (ShouldSkip("APPLAUNCHER.S.AP")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheGlobalAttributeFeatureMap_2();
+            err = TestReadTheOptionalGlobalAttributeFeatureMap_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: FeatureMap\n");
-            if (ShouldSkip(" !MC_APPLAUNCHER.S.AP ")) {
+            if (ShouldSkip(" !APPLAUNCHER.S.AP ")) {
                 NextTest();
                 return;
             }
@@ -26673,11 +26673,15 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: AttributeList\n");
+            if (ShouldSkip("APPLAUNCHER.S.A0000 && APPLAUNCHER.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheGlobalAttributeAttributeList_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Read the optional attribute(CatalogList) in AttributeList\n");
-            if (ShouldSkip("MC_APPLAUNCHER.S.A0000")) {
+            if (ShouldSkip("APPLAUNCHER.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -26685,7 +26689,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Read the optional attribute(CurrentApp) in AttributeList\n");
-            if (ShouldSkip("MC_APPLAUNCHER.S.A0001")) {
+            if (ShouldSkip("APPLAUNCHER.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -26802,7 +26806,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
+    CHIP_ERROR TestReadTheOptionalGlobalAttributeFeatureMap_2()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterApplicationLauncher * cluster = [[MTRBaseClusterApplicationLauncher alloc] initWithDevice:device
@@ -26811,7 +26815,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+            NSLog(@"Read the optional global attribute: FeatureMap Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -27025,20 +27029,24 @@ public:
             err = TestReadTheGlobalAttributeClusterRevision_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
-            if (ShouldSkip("MC_MEDIAINPUT.S.NU")) {
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the optional global attribute: FeatureMap\n");
+            if (ShouldSkip("MEDIAINPUT.S.NU")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheGlobalAttributeFeatureMap_2();
+            err = TestReadTheOptionalGlobalAttributeFeatureMap_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
+            if (ShouldSkip("MEDIAINPUT.S.A0000 && MEDIAINPUT.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheGlobalAttributeAttributeList_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Read the optonal attribute(InputList) in AttributeList\n");
-            if (ShouldSkip("MC_MEDIAINPUT.S.A0000")) {
+            if (ShouldSkip("MEDIAINPUT.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -27046,7 +27054,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Read the optonal attribute(CurrentInput) in AttributeList\n");
-            if (ShouldSkip("MC_MEDIAINPUT.S.A0001")) {
+            if (ShouldSkip("MEDIAINPUT.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -27160,7 +27168,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
+    CHIP_ERROR TestReadTheOptionalGlobalAttributeFeatureMap_2()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterMediaInput * cluster = [[MTRBaseClusterMediaInput alloc] initWithDevice:device
@@ -27169,7 +27177,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+            NSLog(@"Read the optional global attribute: FeatureMap Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -27619,20 +27627,24 @@ public:
             err = TestReadTheGlobalAttributeClusterRevision_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
-            if (ShouldSkip("MC_CHANNEL.S.CL || MC_CHANNEL.S.LI")) {
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the optional global attribute: FeatureMap\n");
+            if (ShouldSkip("CHANNEL.S.CL || CHANNEL.S.LI")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheGlobalAttributeFeatureMap_2();
+            err = TestReadTheOptionalGlobalAttributeFeatureMap_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
+            if (ShouldSkip("CHANNEL.S.A0000 && CHANNEL.S.A0001 && CHANNEL.S.A0002")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheGlobalAttributeAttributeList_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Read the optional attribute(ChannelList): AttributeList\n");
-            if (ShouldSkip("MC_CHANNEL.S.A0000")) {
+            if (ShouldSkip("CHANNEL.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -27640,7 +27652,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Reading optional attribute(Lineup) in AttributeList\n");
-            if (ShouldSkip("MC_CHANNEL.S.A0000")) {
+            if (ShouldSkip("CHANNEL.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -27648,7 +27660,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Read the optional attribute(CurrentChannel): AttributeList\n");
-            if (ShouldSkip("MC_CHANNEL.S.A0000")) {
+            if (ShouldSkip("CHANNEL.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -27763,14 +27775,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
+    CHIP_ERROR TestReadTheOptionalGlobalAttributeFeatureMap_2()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterChannel * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+            NSLog(@"Read the optional global attribute: FeatureMap Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -27965,12 +27977,12 @@ public:
             err = TestReadTheGlobalAttributeClusterRevision_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.AS || MC_MEDIAPLAYBACK.S.VS")) {
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the optional global attribute: FeatureMap\n");
+            if (ShouldSkip("MEDIAPLAYBACK.S.AS || MEDIAPLAYBACK.S.VS")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheGlobalAttributeFeatureMap_2();
+            err = TestReadTheOptionalGlobalAttributeFeatureMap_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
@@ -27978,7 +27990,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Read the optional attribute(StartTime) in AttributeList\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0001")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -27986,7 +27998,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Read the optional attribute(Duration) in AttributeList\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0002")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0002")) {
                 NextTest();
                 return;
             }
@@ -27994,7 +28006,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Read the optional attribute(SampledPosition) in AttributeList\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0003")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0003")) {
                 NextTest();
                 return;
             }
@@ -28002,7 +28014,7 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Read the optional attribute(PlaybackSpeed) in AttributeList\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0004")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0004")) {
                 NextTest();
                 return;
             }
@@ -28010,7 +28022,7 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Read the optional attribute(SeekRangeEnd) in AttributeList\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0005")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0005")) {
                 NextTest();
                 return;
             }
@@ -28018,7 +28030,7 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Read the optional attribute(SeekRangeStart) in AttributeList\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0006")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0006")) {
                 NextTest();
                 return;
             }
@@ -28144,7 +28156,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
+    CHIP_ERROR TestReadTheOptionalGlobalAttributeFeatureMap_2()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterMediaPlayback * cluster = [[MTRBaseClusterMediaPlayback alloc] initWithDevice:device
@@ -28153,7 +28165,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+            NSLog(@"Read the optional global attribute: FeatureMap Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -28442,7 +28454,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: GeneratedCommandList\n");
-            if (ShouldSkip("MC_MEDIAINPUT.S.NU")) {
+            if (ShouldSkip("MEDIAINPUT.S.NU")) {
                 NextTest();
                 return;
             }
@@ -28450,7 +28462,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Read the global attribute: GeneratedCommandList\n");
-            if (ShouldSkip(" !MC_MEDIAINPUT.S.NU ")) {
+            if (ShouldSkip(" !MEDIAINPUT.S.NU ")) {
                 NextTest();
                 return;
             }
@@ -28739,7 +28751,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
-            if (ShouldSkip("MC_TGTNAV.S.A0001")) {
+            if (ShouldSkip("TGTNAV.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -28747,7 +28759,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: AttributeList\n");
-            if (ShouldSkip(" !MC_TGTNAV.S.A0001 ")) {
+            if (ShouldSkip(" !TGTNAV.S.A0001 ")) {
                 NextTest();
                 return;
             }
@@ -29044,7 +29056,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
-            if (ShouldSkip("MC_APBSC.S.A0000 && MC_APBSC.S.A0001 && MC_APBSC.S.A0003")) {
+            if (ShouldSkip("APBSC.S.A0000 && APBSC.S.A0001 && APBSC.S.A0003")) {
                 NextTest();
                 return;
             }
@@ -29315,20 +29327,24 @@ public:
             err = TestReadTheGlobalAttributeClusterRevision_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
-            if (ShouldSkip("MC_CONTENTLAUNCHER.S.CS || MC_CONTENTLAUNCHER.S.UP")) {
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the optional global attribute: FeatureMap\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.CS || CONTENTLAUNCHER.S.UP")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheGlobalAttributeFeatureMap_2();
+            err = TestReadTheOptionalGlobalAttributeFeatureMap_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.A0000 && CONTENTLAUNCHER.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheGlobalAttributeAttributeList_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Read the optional attribute(AcceptHeader): AttributeList\n");
-            if (ShouldSkip("MC_CONTENTLAUNCHER.S.A0000")) {
+            if (ShouldSkip("CONTENTLAUNCHER.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -29337,7 +29353,7 @@ public:
         case 5:
             ChipLogProgress(
                 chipTool, " ***** Test Step 5 : Read the optional attribute(SupportedStreamingProtocols): AttributeList\n");
-            if (ShouldSkip("MC_CONTENTLAUNCHER.S.A0001")) {
+            if (ShouldSkip("CONTENTLAUNCHER.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -29346,7 +29362,7 @@ public:
         case 6:
             ChipLogProgress(
                 chipTool, " ***** Test Step 6 : Read the optional command(LaunchContent) in AcceptedCommandList attribute\n");
-            if (ShouldSkip("MC_CONTENTLAUNCHER.C.C0000")) {
+            if (ShouldSkip("CONTENTLAUNCHER.C.C0000")) {
                 NextTest();
                 return;
             }
@@ -29355,7 +29371,7 @@ public:
         case 7:
             ChipLogProgress(
                 chipTool, " ***** Test Step 7 : Read the optional command(LaunchURL) in AcceptedCommandList attribute\n");
-            if (ShouldSkip("MC_CONTENTLAUNCHER.C.C0001")) {
+            if (ShouldSkip("CONTENTLAUNCHER.C.C0001")) {
                 NextTest();
                 return;
             }
@@ -29468,7 +29484,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
+    CHIP_ERROR TestReadTheOptionalGlobalAttributeFeatureMap_2()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterContentLauncher * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device
@@ -29477,7 +29493,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+            NSLog(@"Read the optional global attribute: FeatureMap Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -29944,7 +29960,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH sends Sleep command to DUT\n");
-            if (ShouldSkip("MC_LOWPOWER.S")) {
+            if (ShouldSkip("LOWPOWER.S")) {
                 NextTest();
                 return;
             }
@@ -30056,7 +30072,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH sends CEC Settings Keys(0x0A) to DUT\n");
-            if (ShouldSkip("MC_KEYPADINPUT.S.LK")) {
+            if (ShouldSkip("KEYPADINPUT.S.LK")) {
                 NextTest();
                 return;
             }
@@ -30064,7 +30080,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends CEC Home Keys(0x09) to DUT\n");
-            if (ShouldSkip("MC_KEYPADINPUT.S.LK")) {
+            if (ShouldSkip("KEYPADINPUT.S.LK")) {
                 NextTest();
                 return;
             }
@@ -30206,7 +30222,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Send Numbers1\n");
-            if (ShouldSkip("MC_KEYPADINPUT.S.NK")) {
+            if (ShouldSkip("KEYPADINPUT.S.NK")) {
                 NextTest();
                 return;
             }
@@ -30214,7 +30230,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Send Numbers2\n");
-            if (ShouldSkip("MC_KEYPADINPUT.S.NK")) {
+            if (ShouldSkip("KEYPADINPUT.S.NK")) {
                 NextTest();
                 return;
             }
@@ -30222,7 +30238,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Send Numbers3\n");
-            if (ShouldSkip("MC_KEYPADINPUT.S.NK")) {
+            if (ShouldSkip("KEYPADINPUT.S.NK")) {
                 NextTest();
                 return;
             }
@@ -30230,7 +30246,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Send Numbers4\n");
-            if (ShouldSkip("MC_KEYPADINPUT.S.NK")) {
+            if (ShouldSkip("KEYPADINPUT.S.NK")) {
                 NextTest();
                 return;
             }
@@ -30238,7 +30254,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Send Numbers5\n");
-            if (ShouldSkip("MC_KEYPADINPUT.S.NK")) {
+            if (ShouldSkip("KEYPADINPUT.S.NK")) {
                 NextTest();
                 return;
             }
@@ -30246,7 +30262,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Send Numbers6\n");
-            if (ShouldSkip("MC_KEYPADINPUT.S.NK")) {
+            if (ShouldSkip("KEYPADINPUT.S.NK")) {
                 NextTest();
                 return;
             }
@@ -30254,7 +30270,7 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Send Numbers7\n");
-            if (ShouldSkip("MC_KEYPADINPUT.S.NK")) {
+            if (ShouldSkip("KEYPADINPUT.S.NK")) {
                 NextTest();
                 return;
             }
@@ -30262,7 +30278,7 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Send Numbers8\n");
-            if (ShouldSkip("MC_KEYPADINPUT.S.NK")) {
+            if (ShouldSkip("KEYPADINPUT.S.NK")) {
                 NextTest();
                 return;
             }
@@ -30270,7 +30286,7 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Send Numbers9\n");
-            if (ShouldSkip("MC_KEYPADINPUT.S.NK")) {
+            if (ShouldSkip("KEYPADINPUT.S.NK")) {
                 NextTest();
                 return;
             }
@@ -30589,7 +30605,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 1 : TH reads CatalogList attribute from the DUT and where each entry in the list is a CSA-issued "
                 "Vendor Id of type unsigned 16 bit integer ranging between 0-65536 for the catalog\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MC_APPLAUNCHER.S.A0000")) {
+            if (ShouldSkip("PICS_USER_PROMPT && APPLAUNCHER.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -30697,7 +30713,7 @@ public:
                 " ***** Test Step 1 : TH reads CurrentApp attribute from the DUT and Verify the in-focus application attributes, "
                 "which should include the display Application ID(type:uint16) Catalog Vendor ID(type:string) or Null if there is "
                 "no current in-focus application\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MC_APPLAUNCHER.S.A0001")) {
+            if (ShouldSkip("PICS_USER_PROMPT && APPLAUNCHER.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -30803,7 +30819,7 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : TH reads the InputList attribute from the DUT to show list of Inputs available\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAINPUT.S.A0000")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAINPUT.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -30908,7 +30924,7 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : TH reads the InputList attribute from the DUT to show list of Inputs available\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAINPUT.S.A0000")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAINPUT.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -30916,7 +30932,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Select Input Command\n");
-            if (ShouldSkip("MC_MEDIAINPUT.S.C0000")) {
+            if (ShouldSkip("MEDIAINPUT.S.C0000")) {
                 NextTest();
                 return;
             }
@@ -30924,7 +30940,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read current input list\n");
-            if (ShouldSkip("MC_MEDIAINPUT.S.A0001")) {
+            if (ShouldSkip("MEDIAINPUT.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -31080,7 +31096,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Read attribute media input list\n");
-            if (ShouldSkip("MC_MEDIAINPUT.S.A0000")) {
+            if (ShouldSkip("MEDIAINPUT.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -31088,7 +31104,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Hide Input Status Command\n");
-            if (ShouldSkip("MC_MEDIAINPUT.S.C0002")) {
+            if (ShouldSkip("MEDIAINPUT.S.C0002")) {
                 NextTest();
                 return;
             }
@@ -31096,7 +31112,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Show Input Status Command\n");
-            if (ShouldSkip("MC_MEDIAINPUT.S.C0001")) {
+            if (ShouldSkip("MEDIAINPUT.S.C0001")) {
                 NextTest();
                 return;
             }
@@ -31256,7 +31272,7 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : TH reads the InputList attribute from the DUT to show list of Inputs available\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAINPUT.S.A0000")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAINPUT.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -31264,7 +31280,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Rename Input Command\n");
-            if (ShouldSkip("MC_MEDIAINPUT.S.C0003")) {
+            if (ShouldSkip("MEDIAINPUT.S.C0003")) {
                 NextTest();
                 return;
             }
@@ -31273,7 +31289,7 @@ public:
         case 3:
             ChipLogProgress(
                 chipTool, " ***** Test Step 3 : TH reads the InputList attribute from the DUT to show list of Inputs available\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAINPUT.S.A0000")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAINPUT.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -31417,7 +31433,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 1 : TH reads the ChannelList attribute from the DUT and Verify that the response contains a list "
                 "of the known TV channels\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MC_CHANNEL.S.A0000")) {
+            if (ShouldSkip("PICS_USER_PROMPT && CHANNEL.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -31523,7 +31539,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the ChannelList attribute\n");
-            if (ShouldSkip("MC_CHANNEL.S.A0000")) {
+            if (ShouldSkip("CHANNEL.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -31531,7 +31547,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends a ChangeChannelByNumber command\n");
-            if (ShouldSkip("MC_CHANNEL.S.C0002")) {
+            if (ShouldSkip("CHANNEL.S.C0002")) {
                 NextTest();
                 return;
             }
@@ -31547,7 +31563,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the CurrentChannel attribute\n");
-            if (ShouldSkip("MC_CHANNEL.S.A0002")) {
+            if (ShouldSkip("CHANNEL.S.A0002")) {
                 NextTest();
                 return;
             }
@@ -31731,7 +31747,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 1 : Reads the Lineup attribute from the DUT and Verify that the response contains a lineup info "
                 "object\n");
-            if (ShouldSkip("MC_CHANNEL.S.A0001 && PICS_USER_PROMPT")) {
+            if (ShouldSkip("CHANNEL.S.A0001 && PICS_USER_PROMPT")) {
                 NextTest();
                 return;
             }
@@ -31739,7 +31755,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the ChannelList attribute from the DUT\n");
-            if (ShouldSkip("MC_CHANNEL.S.A0000")) {
+            if (ShouldSkip("CHANNEL.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -31747,7 +31763,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads the CurrentChannel attribute from the DUT\n");
-            if (ShouldSkip("MC_CHANNEL.S.A0002")) {
+            if (ShouldSkip("CHANNEL.S.A0002")) {
                 NextTest();
                 return;
             }
@@ -31755,7 +31771,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Sends a SkipChannel command to the DUT\n");
-            if (ShouldSkip("MC_CHANNEL.S.C0003")) {
+            if (ShouldSkip("CHANNEL.S.C0003")) {
                 NextTest();
                 return;
             }
@@ -31771,7 +31787,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the CurrentChannel attribute from the DUT\n");
-            if (ShouldSkip("MC_CHANNEL.S.A0002")) {
+            if (ShouldSkip("CHANNEL.S.A0002")) {
                 NextTest();
                 return;
             }
@@ -31991,7 +32007,7 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : Precondition: Media content in a paused state at the beginning of the content\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0001")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0001")) {
                 NextTest();
                 return;
             }
@@ -31999,7 +32015,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the CurrentState attribute\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0000")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -32007,7 +32023,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Sends a Play command\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0000")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0000")) {
                 NextTest();
                 return;
             }
@@ -32023,7 +32039,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the playback state attribute\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0000")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -32031,7 +32047,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : sends a Pause command\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0001")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0001")) {
                 NextTest();
                 return;
             }
@@ -32051,7 +32067,7 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Sends a Stop command\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0002")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0002")) {
                 NextTest();
                 return;
             }
@@ -32067,7 +32083,7 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Reads the playback state attribute\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0000")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -32416,7 +32432,7 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : Precondition: Media content in a paused state at the beginning of the content\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0001")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0001")) {
                 NextTest();
                 return;
             }
@@ -32424,7 +32440,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the CurrentState attribute from the DUT\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0000")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -32432,7 +32448,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Sends a Play command to the DUT\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0000")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0000")) {
                 NextTest();
                 return;
             }
@@ -32448,7 +32464,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the CurrentState attribute\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0000")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -32456,7 +32472,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Sends a StartOver command to the DUT\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0003")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0003")) {
                 NextTest();
                 return;
             }
@@ -32472,7 +32488,7 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Sends a Next command to the DUT\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0005")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0005")) {
                 NextTest();
                 return;
             }
@@ -32488,7 +32504,7 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Sends a Previous command to the DUT\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0004")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0004")) {
                 NextTest();
                 return;
             }
@@ -32504,7 +32520,7 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Sends a SkipForward command to the DUT \n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0008")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0008")) {
                 NextTest();
                 return;
             }
@@ -32520,7 +32536,7 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Reads the SampledPosition attribute from the DUT\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0003")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0003")) {
                 NextTest();
                 return;
             }
@@ -32528,7 +32544,7 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Sends a SkipBackward command to the DUT \n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0009")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0009")) {
                 NextTest();
                 return;
             }
@@ -32544,7 +32560,7 @@ public:
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Reads the SampledPosition attribute from the DUT\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0003")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0003")) {
                 NextTest();
                 return;
             }
@@ -33026,7 +33042,7 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : Precondition: Media content in a paused state at the beginning of the content\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0001")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0001")) {
                 NextTest();
                 return;
             }
@@ -33034,7 +33050,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Sends a Seek command\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C000B")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C000B")) {
                 NextTest();
                 return;
             }
@@ -33051,7 +33067,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the SampledPosition attribute\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0003")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0003")) {
                 NextTest();
                 return;
             }
@@ -33059,7 +33075,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads the StartTime attribute from the DUT\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0001 && PICS_USER_PROMPT")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0001 && PICS_USER_PROMPT")) {
                 NextTest();
                 return;
             }
@@ -33067,7 +33083,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads the SeekRangeEnd attribute from the DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAPLAYBACK.S.A0005")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.A0005")) {
                 NextTest();
                 return;
             }
@@ -33075,7 +33091,7 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads the SeekRangeStart attribute from the DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAPLAYBACK.S.A0006")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.A0006")) {
                 NextTest();
                 return;
             }
@@ -33083,7 +33099,7 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads the Duration attribute from the DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAPLAYBACK.S.A0002")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.A0002")) {
                 NextTest();
                 return;
             }
@@ -33092,7 +33108,7 @@ public:
         case 9:
             ChipLogProgress(
                 chipTool, " ***** Test Step 9 : Sends a Seek command Position value beyond the furthest valid position\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C000B")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C000B")) {
                 NextTest();
                 return;
             }
@@ -33364,7 +33380,7 @@ public:
         case 1:
             ChipLogProgress(
                 chipTool, " ***** Test Step 1 : Precondition: Media content in a paused state at the beginning of the content\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0001")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0001")) {
                 NextTest();
                 return;
             }
@@ -33372,7 +33388,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the CurrentState attribute from the DUT\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0000")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -33380,7 +33396,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads the PlaybackSpeed attribute from the DUT\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0004")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0004")) {
                 NextTest();
                 return;
             }
@@ -33388,7 +33404,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Sends a FastForward command\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0007")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0007")) {
                 NextTest();
                 return;
             }
@@ -33396,7 +33412,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the CurrentState attribute\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0000")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -33404,7 +33420,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the PlaybackSpeed attribute from the DUT\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0004")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0004")) {
                 NextTest();
                 return;
             }
@@ -33412,7 +33428,7 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Sends a FastForward command\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0007")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0007")) {
                 NextTest();
                 return;
             }
@@ -33420,7 +33436,7 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Reads the PlaybackSpeed attribute from the DUT\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0004")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0004")) {
                 NextTest();
                 return;
             }
@@ -33428,7 +33444,7 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Sends a Rewind command to the DUT\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0006")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0006")) {
                 NextTest();
                 return;
             }
@@ -33436,7 +33452,7 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Reads the CurrentState attribute\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0000")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -33444,7 +33460,7 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Reads the PlaybackSpeed attribute from the DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAPLAYBACK.S.C0007")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.C0007")) {
                 NextTest();
                 return;
             }
@@ -33452,7 +33468,7 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Sends a Rewind command to the DUT\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0006")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0006")) {
                 NextTest();
                 return;
             }
@@ -33460,7 +33476,7 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Reads the PlaybackSpeed attribute from the DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAPLAYBACK.S.A0004")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.A0004")) {
                 NextTest();
                 return;
             }
@@ -33468,7 +33484,7 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Sends a Play command\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.C0000")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0000")) {
                 NextTest();
                 return;
             }
@@ -33476,7 +33492,7 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Reads the PlaybackSpeed attribute from the DUT\n");
-            if (ShouldSkip("MC_MEDIAPLAYBACK.S.A0004")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0004")) {
                 NextTest();
                 return;
             }
@@ -33484,7 +33500,7 @@ public:
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : Sends consecutive FastForward commands\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAPLAYBACK.S.C0007")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.C0007")) {
                 NextTest();
                 return;
             }
@@ -33492,7 +33508,7 @@ public:
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Sends consecutive Rewind commands\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MC_MEDIAPLAYBACK.S.C0006")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.C0006")) {
                 NextTest();
                 return;
             }
@@ -33991,7 +34007,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the OutputList attribute\n");
-            if (ShouldSkip("MC_AUDIOOUTPUT.S.A0000")) {
+            if (ShouldSkip("AUDIOOUTPUT.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -33999,7 +34015,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Sends a SelectAudioOutput command\n");
-            if (ShouldSkip("MC_AUDIOOUTPUT.S.C0000")) {
+            if (ShouldSkip("AUDIOOUTPUT.S.C0000")) {
                 NextTest();
                 return;
             }
@@ -34007,7 +34023,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads the CurrentOutput attribute\n");
-            if (ShouldSkip("MC_AUDIOOUTPUT.S.A0001")) {
+            if (ShouldSkip("AUDIOOUTPUT.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -34174,7 +34190,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the OutputList attribute from the DUT\n");
-            if (ShouldSkip("MC_AUDIOOUTPUT.S.A0000")) {
+            if (ShouldSkip("AUDIOOUTPUT.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -34182,7 +34198,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Sends a RenameOutput command\n");
-            if (ShouldSkip("MC_AUDIOOUTPUT.S.C0001")) {
+            if (ShouldSkip("AUDIOOUTPUT.S.C0001")) {
                 NextTest();
                 return;
             }
@@ -34192,7 +34208,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 3 : Reads the OutputList attribute from the DUT Verify that the output at the index provided in "
                 "step 2 has the name CertTest\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MC_AUDIOOUTPUT.S.A0001")) {
+            if (ShouldSkip("PICS_USER_PROMPT && AUDIOOUTPUT.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -34352,7 +34368,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the CurrentTarget attribute\n");
-            if (ShouldSkip("MC_TGTNAV.S.A0001")) {
+            if (ShouldSkip("TGTNAV.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -34360,7 +34376,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the TargetList attribute\n");
-            if (ShouldSkip("MC_TGTNAV.S.A0000")) {
+            if (ShouldSkip("TGTNAV.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -34368,7 +34384,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Sends a NavigateTarget command\n");
-            if (ShouldSkip("MC_TGTNAV.S.C0000")) {
+            if (ShouldSkip("TGTNAV.S.C0000")) {
                 NextTest();
                 return;
             }
@@ -34376,7 +34392,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the CurrentTarget attribute\n");
-            if (ShouldSkip("MC_TGTNAV.S.A0001")) {
+            if (ShouldSkip("TGTNAV.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -34575,7 +34591,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads the VendorName attribute\n");
-            if (ShouldSkip("MC_APBSC.S.A0000")) {
+            if (ShouldSkip("APBSC.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -34583,7 +34599,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads the VendorID attribute\n");
-            if (ShouldSkip("MC_APBSC.S.A0001")) {
+            if (ShouldSkip("APBSC.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -34591,7 +34607,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads the ApplicationName attribute\n");
-            if (ShouldSkip("MC_APBSC.S.A0002")) {
+            if (ShouldSkip("APBSC.S.A0002")) {
                 NextTest();
                 return;
             }
@@ -34599,7 +34615,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the ProductID attribute\n");
-            if (ShouldSkip("MC_APBSC.S.A0003")) {
+            if (ShouldSkip("APBSC.S.A0003")) {
                 NextTest();
                 return;
             }
@@ -34607,7 +34623,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the Application attribute\n");
-            if (ShouldSkip("MC_APBSC.S.A0004")) {
+            if (ShouldSkip("APBSC.S.A0004")) {
                 NextTest();
                 return;
             }
@@ -34615,7 +34631,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the Status attribute\n");
-            if (ShouldSkip("MC_APBSC.S.A0005")) {
+            if (ShouldSkip("APBSC.S.A0005")) {
                 NextTest();
                 return;
             }
@@ -34623,7 +34639,7 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Reads the ApplicationVersion attribute\n");
-            if (ShouldSkip("MC_APBSC.S.A0006")) {
+            if (ShouldSkip("APBSC.S.A0006")) {
                 NextTest();
                 return;
             }
@@ -34631,7 +34647,7 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Reads the AllowedVendorList attribute\n");
-            if (ShouldSkip("MC_APBSC.S.A0007")) {
+            if (ShouldSkip("APBSC.S.A0007")) {
                 NextTest();
                 return;
             }
@@ -34913,7 +34929,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads the AcceptHeader attribute from the DUT\n");
-            if (ShouldSkip("MC_CONTENTLAUNCHER.S.A0000")) {
+            if (ShouldSkip("CONTENTLAUNCHER.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -34921,7 +34937,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads the SupportedStreamingProtocols attribute from the DUT\n");
-            if (ShouldSkip("MC_CONTENTLAUNCHER.S.A0001")) {
+            if (ShouldSkip("CONTENTLAUNCHER.S.A0001")) {
                 NextTest();
                 return;
             }
