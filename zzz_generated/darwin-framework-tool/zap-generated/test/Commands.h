@@ -17652,7 +17652,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Sends ResetCounts command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGETH.S.C00")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGETH.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
@@ -24960,7 +24960,7 @@ private:
     CHIP_ERROR TestWait9000ms_6()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 9000UL;
+        value.ms = 10000UL;
         return WaitForMs("alpha", value);
     }
 
@@ -45728,7 +45728,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : read the mandatory attribute: MeasuredValue\n");
-            if (ShouldSkip("TM.S.A0000")) {
+            if (ShouldSkip("TMP.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -45736,7 +45736,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : read the mandatory attribute: MinMeasuredValue\n");
-            if (ShouldSkip("TM.S.A0001")) {
+            if (ShouldSkip("TMP.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -45744,7 +45744,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : read the mandatory attribute: MaxMeasuredValue\n");
-            if (ShouldSkip("TM.S.A0002")) {
+            if (ShouldSkip("TMP.S.A0002")) {
                 NextTest();
                 return;
             }
@@ -45752,7 +45752,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : read the optional attribute: Tolerance\n");
-            if (ShouldSkip("TM.S.A0003")) {
+            if (ShouldSkip("TMP.S.A0003")) {
                 NextTest();
                 return;
             }
@@ -54887,7 +54887,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH sends ResetCounts command to DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
@@ -54895,7 +54895,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads BeaconLostCount attribute from DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
@@ -54903,7 +54903,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads BeaconRxCount attribute from DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
@@ -54911,7 +54911,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads PacketMulticastRxCount attribute from DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
@@ -54919,7 +54919,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Reads PacketMulticastTxCount attribute from DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
@@ -54927,7 +54927,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Reads PacketUnicastRxCount attribute from DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
@@ -54935,7 +54935,7 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Reads PacketUnicastTxCount attribute from DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
@@ -93670,7 +93670,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Sends ResetWatermarks to DUT\n");
-            if (ShouldSkip("DGSW.S.C00")) {
+            if (ShouldSkip("DGSW.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
