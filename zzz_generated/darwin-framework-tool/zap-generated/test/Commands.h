@@ -195,6 +195,7 @@ public:
         printf("TestUserLabelClusterConstraints\n");
         printf("TestArmFailSafe\n");
         printf("TestFanControl\n");
+        printf("TestAccessControlConstraints\n");
         printf("TestMultiAdmin\n");
         printf("Test_TC_DGSW_2_1\n");
         printf("Test_TC_DGSW_2_2\n");
@@ -384,37 +385,37 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 1));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 1));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 1));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 1));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 1));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 1));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -962,7 +963,7 @@ private:
                           completionHandler:^(NSError * _Nullable err) {
                               NSLog(@"Write entry invalid privilege Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 1));
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                               NextTest();
                           }];
 
@@ -1037,7 +1038,7 @@ private:
                           completionHandler:^(NSError * _Nullable err) {
                               NSLog(@"Write entry invalid auth mode Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 1));
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                               NextTest();
                           }];
 
@@ -1116,7 +1117,7 @@ private:
                           completionHandler:^(NSError * _Nullable err) {
                               NSLog(@"Write entry invalid subject Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 1));
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                               NextTest();
                           }];
 
@@ -1199,7 +1200,7 @@ private:
                           completionHandler:^(NSError * _Nullable err) {
                               NSLog(@"Write entry invalid target Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 1));
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                               NextTest();
                           }];
 
@@ -1297,7 +1298,7 @@ private:
                           completionHandler:^(NSError * _Nullable err) {
                               NSLog(@"Write entry too many subjects Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 1));
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
                               NextTest();
                           }];
 
@@ -1475,7 +1476,7 @@ private:
                           completionHandler:^(NSError * _Nullable err) {
                               NSLog(@"Write entry too many targets Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 1));
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
                               NextTest();
                           }];
 
@@ -92716,6 +92717,628 @@ private:
     }
 };
 
+class TestAccessControlConstraints : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    TestAccessControlConstraints()
+        : TestCommandBridge("TestAccessControlConstraints")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~TestAccessControlConstraints() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: TestAccessControlConstraints\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: TestAccessControlConstraints\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Constraint error: PASE reserved for future (TC-ACL-2.4 step 29)\n");
+            err = TestConstraintErrorPaseReservedForFutureTcAcl24Step29_1();
+            break;
+        case 2:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 2 : Constraint error: Invalid combination administer + group (TC-ACL-2.4 step 31)\n");
+            err = TestConstraintErrorInvalidCombinationAdministerGroupTcAcl24Step31_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Constraint error:  Invalid auth mode (TC-ACL-2.4 step 33)\n");
+            err = TestConstraintErrorInvalidAuthModeTcAcl24Step33_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Constraint error:  Invalid subject (TC-ACL-2.4 step 34)\n");
+            err = TestConstraintErrorInvalidSubjectTcAcl24Step34_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Constraint error:  Invalid target (TC-ACL-2.4 step 38)\n");
+            err = TestConstraintErrorInvalidTargetTcAcl24Step38_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 6 : Constraint error:  target has both endpoint and device type (TC-ACL-2.4 step 42)\n");
+            err = TestConstraintErrorTargetHasBothEndpointAndDeviceTypeTcAcl24Step42_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Constraint error: Invalid privilege value step 32)\n");
+            err = TestConstraintErrorInvalidPrivilegeValueStep32_7();
+            break;
+        case 8:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 8 : Constraint error: invalid subject 0xFFFF_FFFF_FFFF_FFFF (TC-ACL-2.4 step 35)\n");
+            err = TestConstraintErrorInvalidSubject0xFFFFFfffFfffFfffTcAcl24Step35_8();
+            break;
+        case 9:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 9 : Constraint error: invalid subject 0xFFFF_FFFD_0000_0000 (TC-ACL-2.4 step 36)\n");
+            err = TestConstraintErrorInvalidSubject0xFFFFFffd00000000TcAcl24Step36_9();
+            break;
+        case 10:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 10 : Constraint error: invalid subject 0xFFFF_FFFF_FFFF_0000 (TC-ACL-2.4 step 37)\n");
+            err = TestConstraintErrorInvalidSubject0xFFFFFfffFfff0000TcAcl24Step37_10();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 11;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestConstraintErrorPaseReservedForFutureTcAcl24Step29_1()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
+                                                                                           endpoint:0
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
+                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:1U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeAclWithValue:aclArgument
+                          completionHandler:^(NSError * _Nullable err) {
+                              NSLog(@"Constraint error: PASE reserved for future (TC-ACL-2.4 step 29) Error: %@", err);
+
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                              NextTest();
+                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestConstraintErrorInvalidCombinationAdministerGroupTcAcl24Step31_2()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
+                                                                                           endpoint:0
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
+                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:3U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster
+            writeAttributeAclWithValue:aclArgument
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Constraint error: Invalid combination administer + group (TC-ACL-2.4 step 31) Error: %@", err);
+
+                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                         NextTest();
+                     }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestConstraintErrorInvalidAuthModeTcAcl24Step33_3()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
+                                                                                           endpoint:0
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
+                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:4U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeAclWithValue:aclArgument
+                          completionHandler:^(NSError * _Nullable err) {
+                              NSLog(@"Constraint error:  Invalid auth mode (TC-ACL-2.4 step 33) Error: %@", err);
+
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                              NextTest();
+                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestConstraintErrorInvalidSubjectTcAcl24Step34_4()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
+                                                                                           endpoint:0
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
+                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:0ULL];
+                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeAclWithValue:aclArgument
+                          completionHandler:^(NSError * _Nullable err) {
+                              NSLog(@"Constraint error:  Invalid subject (TC-ACL-2.4 step 34) Error: %@", err);
+
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                              NextTest();
+                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestConstraintErrorInvalidTargetTcAcl24Step38_5()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
+                                                                                           endpoint:0
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
+                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = nil;
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).cluster = nil;
+                ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = nil;
+                ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = nil;
+
+                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeAclWithValue:aclArgument
+                          completionHandler:^(NSError * _Nullable err) {
+                              NSLog(@"Constraint error:  Invalid target (TC-ACL-2.4 step 38) Error: %@", err);
+
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                              NextTest();
+                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestConstraintErrorTargetHasBothEndpointAndDeviceTypeTcAcl24Step42_6()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
+                                                                                           endpoint:0
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
+                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = nil;
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).cluster = nil;
+                ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = [NSNumber numberWithUnsignedShort:22U];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = [NSNumber numberWithUnsignedInt:33UL];
+
+                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster
+            writeAttributeAclWithValue:aclArgument
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Constraint error:  target has both endpoint and device type (TC-ACL-2.4 step 42) Error: %@", err);
+
+                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                         NextTest();
+                     }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestConstraintErrorInvalidPrivilegeValueStep32_7()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
+                                                                                           endpoint:0
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
+                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:6U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = nil;
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeAclWithValue:aclArgument
+                          completionHandler:^(NSError * _Nullable err) {
+                              NSLog(@"Constraint error: Invalid privilege value step 32) Error: %@", err);
+
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                              NextTest();
+                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestConstraintErrorInvalidSubject0xFFFFFfffFfffFfffTcAcl24Step35_8()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
+                                                                                           endpoint:0
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
+                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:18446744073709551615ULL];
+                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeAclWithValue:aclArgument
+                          completionHandler:^(NSError * _Nullable err) {
+                              NSLog(@"Constraint error: invalid subject 0xFFFF_FFFF_FFFF_FFFF (TC-ACL-2.4 step 35) Error: %@", err);
+
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                              NextTest();
+                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestConstraintErrorInvalidSubject0xFFFFFffd00000000TcAcl24Step36_9()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
+                                                                                           endpoint:0
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
+                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:18446744060824649728ULL];
+                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeAclWithValue:aclArgument
+                          completionHandler:^(NSError * _Nullable err) {
+                              NSLog(@"Constraint error: invalid subject 0xFFFF_FFFD_0000_0000 (TC-ACL-2.4 step 36) Error: %@", err);
+
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                              NextTest();
+                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestConstraintErrorInvalidSubject0xFFFFFfffFfff0000TcAcl24Step37_10()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
+                                                                                           endpoint:0
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
+                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:18446744073709486080ULL];
+                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeAclWithValue:aclArgument
+                          completionHandler:^(NSError * _Nullable err) {
+                              NSLog(@"Constraint error: invalid subject 0xFFFF_FFFF_FFFF_0000 (TC-ACL-2.4 step 37) Error: %@", err);
+
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                              NextTest();
+                          }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
 class TestMultiAdmin : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -112028,6 +112651,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<TestUserLabelClusterConstraints>(),
         make_unique<TestArmFailSafe>(),
         make_unique<TestFanControl>(),
+        make_unique<TestAccessControlConstraints>(),
         make_unique<TestMultiAdmin>(),
         make_unique<Test_TC_DGSW_2_1>(),
         make_unique<Test_TC_DGSW_2_2>(),
