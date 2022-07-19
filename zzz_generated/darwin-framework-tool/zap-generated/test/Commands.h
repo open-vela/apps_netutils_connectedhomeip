@@ -43400,7 +43400,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Write 0 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("PCC.S.A0021")) {
+            if (ShouldSkip("PCC.S.A0021 && PCC.M.ControlModeConstSpeed")) {
                 NextTest();
                 return;
             }
@@ -43408,7 +43408,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the attribute: EffectiveControlMode\n");
-            if (ShouldSkip("PCC.S.A0012")) {
+            if (ShouldSkip("PCC.S.A0012 && PCC.M.ControlModeConstSpeed")) {
                 NextTest();
                 return;
             }
@@ -43416,7 +43416,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Write 1 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("PCC.S.A0021")) {
+            if (ShouldSkip("PCC.S.A0021 && PCC.M.ControlModeConstPressure")) {
                 NextTest();
                 return;
             }
@@ -43424,7 +43424,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the attribute: EffectiveControlMode\n");
-            if (ShouldSkip("PCC.S.A0012")) {
+            if (ShouldSkip("PCC.S.A0012 && PCC.M.ControlModeConstPressure")) {
                 NextTest();
                 return;
             }
@@ -43432,7 +43432,7 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Write 2 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("PCC.S.A0021")) {
+            if (ShouldSkip("PCC.S.A0021 && PCC.M.ControlModeCompPressure")) {
                 NextTest();
                 return;
             }
@@ -43440,7 +43440,7 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Reads the attribute: EffectiveControlMode\n");
-            if (ShouldSkip("PCC.S.A0012")) {
+            if (ShouldSkip("PCC.S.A0012 && PCC.M.ControlModeCompPressure")) {
                 NextTest();
                 return;
             }
@@ -43448,7 +43448,7 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Write 3 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("PCC.S.A0021")) {
+            if (ShouldSkip("PCC.S.A0021 && PCC.M.ControlModeConstFlow")) {
                 NextTest();
                 return;
             }
@@ -43456,7 +43456,7 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Reads the attribute: EffectiveControlMode\n");
-            if (ShouldSkip("PCC.S.A0012")) {
+            if (ShouldSkip("PCC.S.A0012 && PCC.M.ControlModeConstFlow")) {
                 NextTest();
                 return;
             }
@@ -43464,7 +43464,7 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Write 5 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("PCC.S.A0021")) {
+            if (ShouldSkip("PCC.S.A0021 && PCC.M.ControlModeConstTemp")) {
                 NextTest();
                 return;
             }
@@ -43472,7 +43472,7 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Reads the attribute: EffectiveControlMode\n");
-            if (ShouldSkip("PCC.S.A0012")) {
+            if (ShouldSkip("PCC.S.A0012 && PCC.M.ControlModeConstTemp")) {
                 NextTest();
                 return;
             }
@@ -43480,7 +43480,7 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Write 7 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("PCC.S.A0021")) {
+            if (ShouldSkip("PCC.S.A0021 && PCC.M.ControlModeAuto")) {
                 NextTest();
                 return;
             }
@@ -43488,7 +43488,7 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Reads the attribute: EffectiveControlMode\n");
-            if (ShouldSkip("PCC.S.A0012")) {
+            if (ShouldSkip("PCC.S.A0012 && PCC.M.ControlModeAuto")) {
                 NextTest();
                 return;
             }
@@ -108248,7 +108248,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Send Set Week Day Schedule Command to DUT\n");
-            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0B.Rsp")) {
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0b.Rsp")) {
                 NextTest();
                 return;
             }
@@ -108256,7 +108256,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : send GetWeekDay Schedule Command \n");
-            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0C.Rsp && DRLK.S.C0C.Tx")) {
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0c.Rsp && DRLK.S.C0c.Tx")) {
                 NextTest();
                 return;
             }
@@ -108265,7 +108265,7 @@ public:
         case 7:
             ChipLogProgress(
                 chipTool, " ***** Test Step 7 : Send Set Week Day Schedule Command to DUT and verify INVALID_COMMAND response\n");
-            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0B.Rsp")) {
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0b.Rsp")) {
                 NextTest();
                 return;
             }
@@ -108274,7 +108274,7 @@ public:
         case 8:
             ChipLogProgress(
                 chipTool, " ***** Test Step 8 : send GetWeekDay Schedule Command to DUT and verify INVALID_COMMAND response\n");
-            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0C.Rsp && DRLK.S.C0C.Tx")) {
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0c.Rsp && DRLK.S.C0c.Tx")) {
                 NextTest();
                 return;
             }
@@ -108282,7 +108282,7 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Clear all week day schedules for the first user\n");
-            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0D.Rsp")) {
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0d.Rsp")) {
                 NextTest();
                 return;
             }
@@ -108290,7 +108290,7 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : send GetWeekDay Schedule Command \n");
-            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0C.Rsp && DRLK.S.C0C.Tx")) {
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0c.Rsp && DRLK.S.C0c.Tx")) {
                 NextTest();
                 return;
             }
@@ -108887,7 +108887,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Send Set Year Day Schedule Command to DUT\n");
-            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0E.Rsp")) {
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0e.Rsp")) {
                 NextTest();
                 return;
             }
@@ -108895,7 +108895,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : send Get Year Day Schedule Command\n");
-            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0F.Rsp && DRLK.S.C0F.Tx")) {
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx")) {
                 NextTest();
                 return;
             }
@@ -108904,7 +108904,7 @@ public:
         case 7:
             ChipLogProgress(
                 chipTool, " ***** Test Step 7 : Send Set Year Day Schedule Command to DUT and verify INVALID_COMMAND response\n");
-            if (ShouldSkip("DRLK.S.C0E.Rsp")) {
+            if (ShouldSkip("DRLK.S.C0e.Rsp")) {
                 NextTest();
                 return;
             }
@@ -108913,7 +108913,7 @@ public:
         case 8:
             ChipLogProgress(
                 chipTool, " ***** Test Step 8 : send Get Year Day Schedule Command to DUT and Verify INVALID_FIELD response\n");
-            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0F.Rsp && DRLK.S.C0F.Tx")) {
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx")) {
                 NextTest();
                 return;
             }
@@ -108922,7 +108922,7 @@ public:
         case 9:
             ChipLogProgress(
                 chipTool, " ***** Test Step 9 : send Get Year Day Schedule Command to DUT and verify FAILURE response\n");
-            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0F.Rsp && DRLK.S.C0F.Tx")) {
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx")) {
                 NextTest();
                 return;
             }
@@ -108939,7 +108939,7 @@ public:
         case 11:
             ChipLogProgress(
                 chipTool, " ***** Test Step 11 : send Get Year Day Schedule Command to DUT and verify NOT_FOUND response\n");
-            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0F.Rsp && DRLK.S.C0F.Tx && DRLK.S.C10.Rsp")) {
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx && DRLK.S.C10.Rsp")) {
                 NextTest();
                 return;
             }
@@ -108947,7 +108947,7 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Send Set Year Day Schedule Command to DUT \n");
-            if (ShouldSkip("DRLK.S.C0E.Rsp")) {
+            if (ShouldSkip("DRLK.S.C0e.Rsp")) {
                 NextTest();
                 return;
             }
@@ -108955,7 +108955,7 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : send Get Year Day Schedule Command\n");
-            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0F.Rsp && DRLK.S.C0F.Tx")) {
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx")) {
                 NextTest();
                 return;
             }
