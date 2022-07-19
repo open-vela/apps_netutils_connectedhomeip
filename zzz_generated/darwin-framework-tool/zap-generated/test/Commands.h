@@ -175,6 +175,7 @@ public:
         printf("TV_LowPowerCluster\n");
         printf("TV_ContentLauncherCluster\n");
         printf("TV_MediaInputCluster\n");
+        printf("TestCASERecovery\n");
         printf("TestCluster\n");
         printf("TestConstraints\n");
         printf("TestDelayCommands\n");
@@ -959,13 +960,17 @@ private:
 
             aclArgument = temp_0;
         }
-        [cluster writeAttributeAclWithValue:aclArgument
-                          completionHandler:^(NSError * _Nullable err) {
-                              NSLog(@"Write entry invalid privilege Error: %@", err);
+        [cluster
+            writeAttributeAclWithValue:aclArgument
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Write entry invalid privilege Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                              NextTest();
-                          }];
+                         VerifyOrReturn(CheckValue("status",
+                             err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                 : 0,
+                             EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                         NextTest();
+                     }];
 
         return CHIP_NO_ERROR;
     }
@@ -1034,13 +1039,17 @@ private:
 
             aclArgument = temp_0;
         }
-        [cluster writeAttributeAclWithValue:aclArgument
-                          completionHandler:^(NSError * _Nullable err) {
-                              NSLog(@"Write entry invalid auth mode Error: %@", err);
+        [cluster
+            writeAttributeAclWithValue:aclArgument
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Write entry invalid auth mode Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                              NextTest();
-                          }];
+                         VerifyOrReturn(CheckValue("status",
+                             err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                 : 0,
+                             EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                         NextTest();
+                     }];
 
         return CHIP_NO_ERROR;
     }
@@ -1113,13 +1122,17 @@ private:
 
             aclArgument = temp_0;
         }
-        [cluster writeAttributeAclWithValue:aclArgument
-                          completionHandler:^(NSError * _Nullable err) {
-                              NSLog(@"Write entry invalid subject Error: %@", err);
+        [cluster
+            writeAttributeAclWithValue:aclArgument
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Write entry invalid subject Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                              NextTest();
-                          }];
+                         VerifyOrReturn(CheckValue("status",
+                             err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                 : 0,
+                             EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                         NextTest();
+                     }];
 
         return CHIP_NO_ERROR;
     }
@@ -1196,13 +1209,17 @@ private:
 
             aclArgument = temp_0;
         }
-        [cluster writeAttributeAclWithValue:aclArgument
-                          completionHandler:^(NSError * _Nullable err) {
-                              NSLog(@"Write entry invalid target Error: %@", err);
+        [cluster
+            writeAttributeAclWithValue:aclArgument
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Write entry invalid target Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                              NextTest();
-                          }];
+                         VerifyOrReturn(CheckValue("status",
+                             err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                 : 0,
+                             EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                         NextTest();
+                     }];
 
         return CHIP_NO_ERROR;
     }
@@ -1294,13 +1311,17 @@ private:
 
             aclArgument = temp_0;
         }
-        [cluster writeAttributeAclWithValue:aclArgument
-                          completionHandler:^(NSError * _Nullable err) {
-                              NSLog(@"Write entry too many subjects Error: %@", err);
+        [cluster
+            writeAttributeAclWithValue:aclArgument
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Write entry too many subjects Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
-                              NextTest();
-                          }];
+                         VerifyOrReturn(CheckValue("status",
+                             err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                 : 0,
+                             EMBER_ZCL_STATUS_FAILURE));
+                         NextTest();
+                     }];
 
         return CHIP_NO_ERROR;
     }
@@ -1472,13 +1493,17 @@ private:
 
             aclArgument = temp_0;
         }
-        [cluster writeAttributeAclWithValue:aclArgument
-                          completionHandler:^(NSError * _Nullable err) {
-                              NSLog(@"Write entry too many targets Error: %@", err);
+        [cluster
+            writeAttributeAclWithValue:aclArgument
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Write entry too many targets Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
-                              NextTest();
-                          }];
+                         VerifyOrReturn(CheckValue("status",
+                             err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                 : 0,
+                             EMBER_ZCL_STATUS_FAILURE));
+                         NextTest();
+                     }];
 
         return CHIP_NO_ERROR;
     }
@@ -1654,13 +1679,17 @@ private:
 
             aclArgument = temp_0;
         }
-        [cluster writeAttributeAclWithValue:aclArgument
-                          completionHandler:^(NSError * _Nullable err) {
-                              NSLog(@"Write too many entries Error: %@", err);
+        [cluster
+            writeAttributeAclWithValue:aclArgument
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Write too many entries Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_RESOURCE_EXHAUSTED));
-                              NextTest();
-                          }];
+                         VerifyOrReturn(CheckValue("status",
+                             err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                 : 0,
+                             EMBER_ZCL_STATUS_RESOURCE_EXHAUSTED));
+                         NextTest();
+                     }];
 
         return CHIP_NO_ERROR;
     }
@@ -49887,8 +49916,12 @@ private:
                                                         @"Error: %@",
                                                       err);
 
-                                                  VerifyOrReturn(
-                                                      CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                  VerifyOrReturn(CheckValue("status",
+                                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                              ? err.code
+                                                              : EMBER_ZCL_STATUS_FAILURE)
+                                                          : 0,
+                                                      EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                   NextTest();
                                               }];
 
@@ -49911,8 +49944,12 @@ private:
                                                         @"Error: %@",
                                                       err);
 
-                                                  VerifyOrReturn(
-                                                      CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                  VerifyOrReturn(CheckValue("status",
+                                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                              ? err.code
+                                                              : EMBER_ZCL_STATUS_FAILURE)
+                                                          : 0,
+                                                      EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                   NextTest();
                                               }];
 
@@ -49944,8 +49981,12 @@ private:
                                                         @"enabled Error: %@",
                                                       err);
 
-                                                  VerifyOrReturn(
-                                                      CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                  VerifyOrReturn(CheckValue("status",
+                                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                              ? err.code
+                                                              : EMBER_ZCL_STATUS_FAILURE)
+                                                          : 0,
+                                                      EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                   NextTest();
                                               }];
 
@@ -50064,8 +50105,12 @@ private:
                                                         @"Error: %@",
                                                       err);
 
-                                                  VerifyOrReturn(
-                                                      CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                  VerifyOrReturn(CheckValue("status",
+                                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                              ? err.code
+                                                              : EMBER_ZCL_STATUS_FAILURE)
+                                                          : 0,
+                                                      EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                   NextTest();
                                               }];
 
@@ -50088,8 +50133,12 @@ private:
                                                         @"Error: %@",
                                                       err);
 
-                                                  VerifyOrReturn(
-                                                      CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                  VerifyOrReturn(CheckValue("status",
+                                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                              ? err.code
+                                                              : EMBER_ZCL_STATUS_FAILURE)
+                                                          : 0,
+                                                      EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                   NextTest();
                                               }];
 
@@ -50273,8 +50322,12 @@ private:
                                                           @"MinHeatSetpointLimit Error: %@",
                                                         err);
 
-                                                    VerifyOrReturn(CheckValue(
-                                                        "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                    VerifyOrReturn(CheckValue("status",
+                                                        err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                ? err.code
+                                                                : EMBER_ZCL_STATUS_FAILURE)
+                                                            : 0,
+                                                        EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                     NextTest();
                                                 }];
 
@@ -50297,8 +50350,12 @@ private:
                                                           @"MaxHeatSetpointLimit Error: %@",
                                                         err);
 
-                                                    VerifyOrReturn(CheckValue(
-                                                        "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                    VerifyOrReturn(CheckValue("status",
+                                                        err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                ? err.code
+                                                                : EMBER_ZCL_STATUS_FAILURE)
+                                                            : 0,
+                                                        EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                     NextTest();
                                                 }];
 
@@ -50449,8 +50506,12 @@ private:
                                                           @"MinHeatSetpointLimit Error: %@",
                                                         err);
 
-                                                    VerifyOrReturn(CheckValue(
-                                                        "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                    VerifyOrReturn(CheckValue("status",
+                                                        err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                ? err.code
+                                                                : EMBER_ZCL_STATUS_FAILURE)
+                                                            : 0,
+                                                        EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                     NextTest();
                                                 }];
 
@@ -50473,8 +50534,12 @@ private:
                                                           @"MaxHeatSetpointLimit Error: %@",
                                                         err);
 
-                                                    VerifyOrReturn(CheckValue(
-                                                        "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                    VerifyOrReturn(CheckValue("status",
+                                                        err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                ? err.code
+                                                                : EMBER_ZCL_STATUS_FAILURE)
+                                                            : 0,
+                                                        EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                     NextTest();
                                                 }];
 
@@ -50593,8 +50658,12 @@ private:
                                               @"Writes MinHeatSetpointLimit to value below the AbsMinHeatSetpointLimit  Error: %@",
                                               err);
 
-                                          VerifyOrReturn(
-                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          VerifyOrReturn(CheckValue("status",
+                                              err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                      ? err.code
+                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                                  : 0,
+                                              EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                           NextTest();
                                       }];
 
@@ -50618,8 +50687,12 @@ private:
                                               @"Writes MinHeatSetpointLimit to value above the AbsMaxHeatSetpointLimit  Error: %@",
                                               err);
 
-                                          VerifyOrReturn(
-                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          VerifyOrReturn(CheckValue("status",
+                                              err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                      ? err.code
+                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                                  : 0,
+                                              EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                           NextTest();
                                       }];
 
@@ -50708,8 +50781,12 @@ private:
                                                      @"attribute Error: %@",
                                                    err);
 
-                                               VerifyOrReturn(
-                                                   CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                               VerifyOrReturn(CheckValue("status",
+                                                   err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                           ? err.code
+                                                           : EMBER_ZCL_STATUS_FAILURE)
+                                                       : 0,
+                                                   EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                NextTest();
                                            }];
 
@@ -50781,8 +50858,12 @@ private:
                                               @"Writes MaxHeatSetpointLimit to value below the AbsMinHeatSetpointLimit  Error: %@",
                                               err);
 
-                                          VerifyOrReturn(
-                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          VerifyOrReturn(CheckValue("status",
+                                              err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                      ? err.code
+                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                                  : 0,
+                                              EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                           NextTest();
                                       }];
 
@@ -50806,8 +50887,12 @@ private:
                                               @"Writes MaxHeatSetpointLimit to value above the AbsMaxHeatSetpointLimit  Error: %@",
                                               err);
 
-                                          VerifyOrReturn(
-                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          VerifyOrReturn(CheckValue("status",
+                                              err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                      ? err.code
+                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                                  : 0,
+                                              EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                           NextTest();
                                       }];
 
@@ -50941,8 +51026,12 @@ private:
                                               @"Writes MinCoolSetpointLimit to value below the AbsMinCoolSetpointLimit  Error: %@",
                                               err);
 
-                                          VerifyOrReturn(
-                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          VerifyOrReturn(CheckValue("status",
+                                              err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                      ? err.code
+                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                                  : 0,
+                                              EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                           NextTest();
                                       }];
 
@@ -50965,8 +51054,12 @@ private:
                                           NSLog(@"Writes MinCoolSetpointLimit to value above the MaxCoolSetpointLimit  Error: %@",
                                               err);
 
-                                          VerifyOrReturn(
-                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          VerifyOrReturn(CheckValue("status",
+                                              err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                      ? err.code
+                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                                  : 0,
+                                              EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                           NextTest();
                                       }];
 
@@ -51109,8 +51202,12 @@ private:
                                               @"Writes MaxCoolSetpointLimit to value below the AbsMinCoolSetpointLimit  Error: %@",
                                               err);
 
-                                          VerifyOrReturn(
-                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          VerifyOrReturn(CheckValue("status",
+                                              err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                      ? err.code
+                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                                  : 0,
+                                              EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                           NextTest();
                                       }];
 
@@ -51133,8 +51230,12 @@ private:
                                           NSLog(@"Writes MaxCoolSetpointLimit to value above the MaxCoolSetpointLimit  Error: %@",
                                               err);
 
-                                          VerifyOrReturn(
-                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          VerifyOrReturn(CheckValue("status",
+                                              err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                      ? err.code
+                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                                  : 0,
+                                              EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                           NextTest();
                                       }];
 
@@ -51362,8 +51463,12 @@ private:
                                           completionHandler:^(NSError * _Nullable err) {
                                               NSLog(@"Writes the value below MinSetpointDeadBand Error: %@", err);
 
-                                              VerifyOrReturn(
-                                                  CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                              VerifyOrReturn(CheckValue("status",
+                                                  err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                          ? err.code
+                                                          : EMBER_ZCL_STATUS_FAILURE)
+                                                      : 0,
+                                                  EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                               NextTest();
                                           }];
 
@@ -51384,8 +51489,12 @@ private:
                                           completionHandler:^(NSError * _Nullable err) {
                                               NSLog(@"Writes the value above MinSetpointDeadBand  Error: %@", err);
 
-                                              VerifyOrReturn(
-                                                  CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                              VerifyOrReturn(CheckValue("status",
+                                                  err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                          ? err.code
+                                                          : EMBER_ZCL_STATUS_FAILURE)
+                                                      : 0,
+                                                  EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                               NextTest();
                                           }];
 
@@ -53067,8 +53176,12 @@ private:
                                                        @"DUT Error: %@",
                                                      err);
 
-                                                 VerifyOrReturn(
-                                                     CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                 VerifyOrReturn(CheckValue("status",
+                                                     err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                             ? err.code
+                                                             : EMBER_ZCL_STATUS_FAILURE)
+                                                         : 0,
+                                                     EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                  NextTest();
                                              }];
 
@@ -53425,13 +53538,18 @@ private:
 
         id keypadLockoutArgument;
         keypadLockoutArgument = [NSNumber numberWithUnsignedChar:6U];
-        [cluster writeAttributeKeypadLockoutWithValue:keypadLockoutArgument
-                                    completionHandler:^(NSError * _Nullable err) {
-                                        NSLog(@"Writes a value of greater than 5 to KeypadLockout attribute of DUT Error: %@", err);
+        [cluster
+            writeAttributeKeypadLockoutWithValue:keypadLockoutArgument
+                               completionHandler:^(NSError * _Nullable err) {
+                                   NSLog(@"Writes a value of greater than 5 to KeypadLockout attribute of DUT Error: %@", err);
 
-                                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                                        NextTest();
-                                    }];
+                                   VerifyOrReturn(CheckValue("status",
+                                       err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                     : EMBER_ZCL_STATUS_FAILURE)
+                                           : 0,
+                                       EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                   NextTest();
+                               }];
 
         return CHIP_NO_ERROR;
     }
@@ -53586,8 +53704,12 @@ private:
                                                               @"attribute of DUT Error: %@",
                                                             err);
 
-                                                        VerifyOrReturn(CheckValue(
-                                                            "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                        VerifyOrReturn(CheckValue("status",
+                                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                    ? err.code
+                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                                                : 0,
+                                                            EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                         NextTest();
                                                     }];
 
@@ -54178,7 +54300,11 @@ private:
                                 completionHandler:^(NSError * _Nullable err) {
                                     NSLog(@"TH writes LabelList attribute of the DUT Error: %@", err);
 
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                    VerifyOrReturn(CheckValue("status",
+                                        err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                            : 0,
+                                        EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                     NextTest();
                                 }];
 
@@ -54204,7 +54330,11 @@ private:
                                 completionHandler:^(NSError * _Nullable err) {
                                     NSLog(@"TH reads LabelList attribute of the DUT Error: %@", err);
 
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                    VerifyOrReturn(CheckValue("status",
+                                        err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                            : 0,
+                                        EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                     NextTest();
                                 }];
 
@@ -57040,7 +57170,9 @@ private:
         [cluster downOrCloseWithCompletionHandler:^(NSError * _Nullable err) {
             NSLog(@"2c: If (ConfigStatus bit0 == 0) TH send DownOrClose command to the DUT Error: %@", err);
 
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status",
+                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                EMBER_ZCL_STATUS_FAILURE));
             NextTest();
         }];
 
@@ -57165,7 +57297,9 @@ private:
         [cluster downOrCloseWithCompletionHandler:^(NSError * _Nullable err) {
             NSLog(@"3b: TH send DownOrClose command to the DUT Error: %@", err);
 
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_BUSY));
+            VerifyOrReturn(CheckValue("status",
+                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                EMBER_ZCL_STATUS_BUSY));
             NextTest();
         }];
 
@@ -61938,13 +62072,17 @@ private:
 
         __auto_type * params = [[MTRWindowCoveringClusterGoToLiftPercentageParams alloc] init];
         params.liftPercent100thsValue = [NSNumber numberWithUnsignedShort:12288U];
-        [cluster goToLiftPercentageWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"2b: TH sends GoToLiftPercentage command with BadParam to DUT Error: %@", err);
+        [cluster
+            goToLiftPercentageWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"2b: TH sends GoToLiftPercentage command with BadParam to DUT Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -61959,13 +62097,17 @@ private:
 
         __auto_type * params = [[MTRWindowCoveringClusterGoToLiftPercentageParams alloc] init];
         params.liftPercent100thsValue = [NSNumber numberWithUnsignedShort:10001U];
-        [cluster goToLiftPercentageWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"3a: TH sends GoToLiftPercentage command with 10001 to DUT Error: %@", err);
+        [cluster
+            goToLiftPercentageWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"3a: TH sends GoToLiftPercentage command with 10001 to DUT Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -61980,13 +62122,17 @@ private:
 
         __auto_type * params = [[MTRWindowCoveringClusterGoToLiftPercentageParams alloc] init];
         params.liftPercent100thsValue = [NSNumber numberWithUnsignedShort:65535U];
-        [cluster goToLiftPercentageWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"4a: TH sends GoToLiftPercentage command with 0xFFFF to DUT Error: %@", err);
+        [cluster
+            goToLiftPercentageWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"4a: TH sends GoToLiftPercentage command with 0xFFFF to DUT Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -62212,13 +62358,17 @@ private:
 
         __auto_type * params = [[MTRWindowCoveringClusterGoToTiltPercentageParams alloc] init];
         params.tiltPercent100thsValue = [NSNumber numberWithUnsignedShort:12288U];
-        [cluster goToTiltPercentageWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"2b: TH sends GoToTiltPercentage command with BadParam to DUT Error: %@", err);
+        [cluster
+            goToTiltPercentageWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"2b: TH sends GoToTiltPercentage command with BadParam to DUT Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -62233,13 +62383,17 @@ private:
 
         __auto_type * params = [[MTRWindowCoveringClusterGoToTiltPercentageParams alloc] init];
         params.tiltPercent100thsValue = [NSNumber numberWithUnsignedShort:10001U];
-        [cluster goToTiltPercentageWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"3a: TH sends GoToTiltPercentage command with 10001 to DUT Error: %@", err);
+        [cluster
+            goToTiltPercentageWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"3a: TH sends GoToTiltPercentage command with 10001 to DUT Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -62254,13 +62408,17 @@ private:
 
         __auto_type * params = [[MTRWindowCoveringClusterGoToTiltPercentageParams alloc] init];
         params.tiltPercent100thsValue = [NSNumber numberWithUnsignedShort:65535U];
-        [cluster goToTiltPercentageWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"4a: TH sends GoToTiltPercentage command with 0xFFFF to DUT Error: %@", err);
+        [cluster
+            goToTiltPercentageWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"4a: TH sends GoToTiltPercentage command with 0xFFFF to DUT Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -66212,6 +66370,218 @@ private:
     }
 };
 
+class TestCASERecovery : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    TestCASERecovery()
+        : TestCommandBridge("TestCASERecovery")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~TestCASERecovery() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: TestCASERecovery\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: TestCASERecovery\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read an attribute\n");
+            err = TestReadAnAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Reboot the server\n");
+            err = TestRebootTheServer_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Re-get our session, but without expiring sesssions\n");
+            err = TestReGetOurSessionButWithoutExpiringSesssions_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read an attribute again\n");
+            err = TestReadAnAttributeAgain_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Re-get our session, but without expiring sesssions\n");
+            err = TestReGetOurSessionButWithoutExpiringSesssions_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read an attribute a third time\n");
+            err = TestReadAnAttributeAThirdTime_6();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 7;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadAnAttribute_1()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeDataModelRevisionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read an attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("DataModelRevision", actualValue, 1U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestRebootTheServer_2()
+    {
+        chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
+        return Reboot("alpha", value);
+    }
+
+    CHIP_ERROR TestReGetOurSessionButWithoutExpiringSesssions_3()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        value.expireExistingSession.Emplace();
+        value.expireExistingSession.Value() = false;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadAnAttributeAgain_4()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeDataModelRevisionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read an attribute again Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status",
+                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                EMBER_ZCL_STATUS_FAILURE));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReGetOurSessionButWithoutExpiringSesssions_5()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        value.expireExistingSession.Emplace();
+        value.expireExistingSession.Value() = false;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadAnAttributeAThirdTime_6()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeDataModelRevisionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read an attribute a third time Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("DataModelRevision", actualValue, 1U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
 class TestCluster : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -69854,7 +70224,9 @@ private:
         [cluster testNotHandledWithCompletionHandler:^(NSError * _Nullable err) {
             NSLog(@"Send Test Not Handled Command Error: %@", err);
 
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
+            VerifyOrReturn(CheckValue("status",
+                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                EMBER_ZCL_STATUS_INVALID_COMMAND));
             NextTest();
         }];
 
@@ -69926,14 +70298,18 @@ private:
         __auto_type * params = [[MTRTestClusterClusterTestAddArgumentsParams alloc] init];
         params.arg1 = [NSNumber numberWithUnsignedChar:250U];
         params.arg2 = [NSNumber numberWithUnsignedChar:6U];
-        [cluster testAddArgumentsWithParams:params
-                          completionHandler:^(
-                              MTRTestClusterClusterTestAddArgumentsResponseParams * _Nullable values, NSError * _Nullable err) {
-                              NSLog(@"Send failing Test Add Arguments Command Error: %@", err);
+        [cluster
+            testAddArgumentsWithParams:params
+                     completionHandler:^(
+                         MTRTestClusterClusterTestAddArgumentsResponseParams * _Nullable values, NSError * _Nullable err) {
+                         NSLog(@"Send failing Test Add Arguments Command Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
-                              NextTest();
-                          }];
+                         VerifyOrReturn(CheckValue("status",
+                             err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                 : 0,
+                             EMBER_ZCL_STATUS_INVALID_COMMAND));
+                         NextTest();
+                     }];
 
         return CHIP_NO_ERROR;
     }
@@ -72504,7 +72880,11 @@ private:
                                   completionHandler:^(NSError * _Nullable err) {
                                       NSLog(@"Write attribute OCTET_STRING Error: %@", err);
 
-                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                       NextTest();
                                   }];
 
@@ -72744,7 +73124,11 @@ private:
                                  completionHandler:^(NSError * _Nullable err) {
                                      NSLog(@"Write attribute CHAR_STRING - Value too long Error: %@", err);
 
-                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                     VerifyOrReturn(CheckValue("status",
+                                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                       : EMBER_ZCL_STATUS_FAILURE)
+                                             : 0,
+                                         EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                      NextTest();
                                  }];
 
@@ -73388,7 +73772,9 @@ private:
         [cluster testWithCompletionHandler:^(NSError * _Nullable err) {
             NSLog(@"Send Test Command to unsupported endpoint Error: %@", err);
 
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_ENDPOINT));
+            VerifyOrReturn(CheckValue("status",
+                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                EMBER_ZCL_STATUS_UNSUPPORTED_ENDPOINT));
             NextTest();
         }];
 
@@ -73406,7 +73792,9 @@ private:
         [cluster testWithCompletionHandler:^(NSError * _Nullable err) {
             NSLog(@"Send Test Command to unsupported cluster Error: %@", err);
 
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_CLUSTER));
+            VerifyOrReturn(CheckValue("status",
+                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                EMBER_ZCL_STATUS_UNSUPPORTED_CLUSTER));
             NextTest();
         }];
 
@@ -75002,7 +75390,11 @@ private:
                                  completionHandler:^(NSError * _Nullable err) {
                                      NSLog(@"Write attribute NULLABLE_BITMAP8 Invalid Value Error: %@", err);
 
-                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                     VerifyOrReturn(CheckValue("status",
+                                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                       : EMBER_ZCL_STATUS_FAILURE)
+                                             : 0,
+                                         EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                      NextTest();
                                  }];
 
@@ -75169,7 +75561,11 @@ private:
                                   completionHandler:^(NSError * _Nullable err) {
                                       NSLog(@"Write attribute NULLABLE_BITMAP16 Invalid Value Error: %@", err);
 
-                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                       NextTest();
                                   }];
 
@@ -75309,7 +75705,11 @@ private:
                                   completionHandler:^(NSError * _Nullable err) {
                                       NSLog(@"Write attribute NULLABLE_BITMAP32 Invalid Value Error: %@", err);
 
-                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                       NextTest();
                                   }];
 
@@ -75449,7 +75849,11 @@ private:
                                   completionHandler:^(NSError * _Nullable err) {
                                       NSLog(@"Write attribute NULLABLE_BITMAP64 Invalid Value Error: %@", err);
 
-                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                       NextTest();
                                   }];
 
@@ -75631,13 +76035,18 @@ private:
 
         id nullableInt8uArgument;
         nullableInt8uArgument = [NSNumber numberWithUnsignedChar:255U];
-        [cluster writeAttributeNullableInt8uWithValue:nullableInt8uArgument
-                                    completionHandler:^(NSError * _Nullable err) {
-                                        NSLog(@"Write attribute NULLABLE_INT8U Invalid Value Error: %@", err);
+        [cluster
+            writeAttributeNullableInt8uWithValue:nullableInt8uArgument
+                               completionHandler:^(NSError * _Nullable err) {
+                                   NSLog(@"Write attribute NULLABLE_INT8U Invalid Value Error: %@", err);
 
-                                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                                        NextTest();
-                                    }];
+                                   VerifyOrReturn(CheckValue("status",
+                                       err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                     : EMBER_ZCL_STATUS_FAILURE)
+                                           : 0,
+                                       EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                   NextTest();
+                               }];
 
         return CHIP_NO_ERROR;
     }
@@ -75963,7 +76372,11 @@ private:
                                 completionHandler:^(NSError * _Nullable err) {
                                     NSLog(@"Write attribute NULLABLE_INT16U Invalid Value Error: %@", err);
 
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                    VerifyOrReturn(CheckValue("status",
+                                        err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                            : 0,
+                                        EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                     NextTest();
                                 }];
 
@@ -76268,7 +76681,11 @@ private:
                                 completionHandler:^(NSError * _Nullable err) {
                                     NSLog(@"Write attribute NULLABLE_INT32U Invalid Value Error: %@", err);
 
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                    VerifyOrReturn(CheckValue("status",
+                                        err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                            : 0,
+                                        EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                     NextTest();
                                 }];
 
@@ -76573,7 +76990,11 @@ private:
                                 completionHandler:^(NSError * _Nullable err) {
                                     NSLog(@"Write attribute NULLABLE_INT64U Invalid Value Error: %@", err);
 
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                    VerifyOrReturn(CheckValue("status",
+                                        err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                            : 0,
+                                        EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                     NextTest();
                                 }];
 
@@ -76828,13 +77249,18 @@ private:
 
         id nullableInt8sArgument;
         nullableInt8sArgument = [NSNumber numberWithChar:-128];
-        [cluster writeAttributeNullableInt8sWithValue:nullableInt8sArgument
-                                    completionHandler:^(NSError * _Nullable err) {
-                                        NSLog(@"Write attribute NULLABLE_INT8S Invalid Value Error: %@", err);
+        [cluster
+            writeAttributeNullableInt8sWithValue:nullableInt8sArgument
+                               completionHandler:^(NSError * _Nullable err) {
+                                   NSLog(@"Write attribute NULLABLE_INT8S Invalid Value Error: %@", err);
 
-                                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                                        NextTest();
-                                    }];
+                                   VerifyOrReturn(CheckValue("status",
+                                       err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                     : EMBER_ZCL_STATUS_FAILURE)
+                                           : 0,
+                                       EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                   NextTest();
+                               }];
 
         return CHIP_NO_ERROR;
     }
@@ -77090,7 +77516,11 @@ private:
                                 completionHandler:^(NSError * _Nullable err) {
                                     NSLog(@"Write attribute NULLABLE_INT16S Invalid Value Error: %@", err);
 
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                    VerifyOrReturn(CheckValue("status",
+                                        err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                            : 0,
+                                        EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                     NextTest();
                                 }];
 
@@ -77348,7 +77778,11 @@ private:
                                 completionHandler:^(NSError * _Nullable err) {
                                     NSLog(@"Write attribute NULLABLE_INT32S Invalid Value Error: %@", err);
 
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                    VerifyOrReturn(CheckValue("status",
+                                        err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                            : 0,
+                                        EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                     NextTest();
                                 }];
 
@@ -77606,7 +78040,11 @@ private:
                                 completionHandler:^(NSError * _Nullable err) {
                                     NSLog(@"Write attribute NULLABLE_INT64S Invalid Value Error: %@", err);
 
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                    VerifyOrReturn(CheckValue("status",
+                                        err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                            : 0,
+                                        EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                     NextTest();
                                 }];
 
@@ -78374,13 +78812,18 @@ private:
 
         id nullableEnum8Argument;
         nullableEnum8Argument = [NSNumber numberWithUnsignedChar:255U];
-        [cluster writeAttributeNullableEnum8WithValue:nullableEnum8Argument
-                                    completionHandler:^(NSError * _Nullable err) {
-                                        NSLog(@"Write attribute NULLABLE_ENUM8 Invalid Value Error: %@", err);
+        [cluster
+            writeAttributeNullableEnum8WithValue:nullableEnum8Argument
+                               completionHandler:^(NSError * _Nullable err) {
+                                   NSLog(@"Write attribute NULLABLE_ENUM8 Invalid Value Error: %@", err);
 
-                                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                                        NextTest();
-                                    }];
+                                   VerifyOrReturn(CheckValue("status",
+                                       err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                     : EMBER_ZCL_STATUS_FAILURE)
+                                           : 0,
+                                       EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                   NextTest();
+                               }];
 
         return CHIP_NO_ERROR;
     }
@@ -78565,7 +79008,11 @@ private:
                                 completionHandler:^(NSError * _Nullable err) {
                                     NSLog(@"Write attribute NULLABLE_ENUM16 Invalid Value Error: %@", err);
 
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                    VerifyOrReturn(CheckValue("status",
+                                        err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                            : 0,
+                                        EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                     NextTest();
                                 }];
 
@@ -78752,7 +79199,11 @@ private:
                                   completionHandler:^(NSError * _Nullable err) {
                                       NSLog(@"Write attribute NULLABLE_SIMPLE_ENUM Invalid Value Error: %@", err);
 
-                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                       NextTest();
                                   }];
 
@@ -79284,7 +79735,9 @@ private:
         [cluster readAttributeListInt8uWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read attribute from nonexistent endpoint. Error: %@", err);
 
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_ENDPOINT));
+            VerifyOrReturn(CheckValue("status",
+                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                EMBER_ZCL_STATUS_UNSUPPORTED_ENDPOINT));
             NextTest();
         }];
 
@@ -79302,7 +79755,9 @@ private:
         [cluster readAttributeListInt8uWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read attribute from nonexistent cluster. Error: %@", err);
 
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_UNSUPPORTED_CLUSTER));
+            VerifyOrReturn(CheckValue("status",
+                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                EMBER_ZCL_STATUS_UNSUPPORTED_CLUSTER));
             NextTest();
         }];
 
@@ -79324,7 +79779,12 @@ private:
                                           NSLog(
                                               @"Send a command that takes an optional parameter but do not set it. Error: %@", err);
 
-                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_VALUE));
+                                          VerifyOrReturn(CheckValue("status",
+                                              err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                      ? err.code
+                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                                  : 0,
+                                              EMBER_ZCL_STATUS_INVALID_VALUE));
                                           NextTest();
                                       }];
 
@@ -79515,8 +79975,12 @@ private:
                                       completionHandler:^(NSError * _Nullable err) {
                                           NSLog(@"Write min value to a range-restricted unsigned 8-bit integer Error: %@", err);
 
-                                          VerifyOrReturn(
-                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          VerifyOrReturn(CheckValue("status",
+                                              err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                      ? err.code
+                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                                  : 0,
+                                              EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                           NextTest();
                                       }];
 
@@ -79539,8 +80003,12 @@ private:
                                                      @"Error: %@",
                                                    err);
 
-                                               VerifyOrReturn(
-                                                   CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                               VerifyOrReturn(CheckValue("status",
+                                                   err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                           ? err.code
+                                                           : EMBER_ZCL_STATUS_FAILURE)
+                                                       : 0,
+                                                   EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                NextTest();
                                            }];
 
@@ -79563,8 +80031,12 @@ private:
                                                      @"Error: %@",
                                                    err);
 
-                                               VerifyOrReturn(
-                                                   CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                               VerifyOrReturn(CheckValue("status",
+                                                   err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                           ? err.code
+                                                           : EMBER_ZCL_STATUS_FAILURE)
+                                                       : 0,
+                                                   EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                NextTest();
                                            }];
 
@@ -79586,8 +80058,12 @@ private:
                                       completionHandler:^(NSError * _Nullable err) {
                                           NSLog(@"Write max value to a range-restricted unsigned 8-bit integer Error: %@", err);
 
-                                          VerifyOrReturn(
-                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          VerifyOrReturn(CheckValue("status",
+                                              err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                      ? err.code
+                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                                  : 0,
+                                              EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                           NextTest();
                                       }];
 
@@ -79801,8 +80277,12 @@ private:
                                        completionHandler:^(NSError * _Nullable err) {
                                            NSLog(@"Write min value to a range-restricted unsigned 16-bit integer Error: %@", err);
 
-                                           VerifyOrReturn(
-                                               CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                           VerifyOrReturn(CheckValue("status",
+                                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                       ? err.code
+                                                       : EMBER_ZCL_STATUS_FAILURE)
+                                                   : 0,
+                                               EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                            NextTest();
                                        }];
 
@@ -79825,8 +80305,12 @@ private:
                                                       @"Error: %@",
                                                     err);
 
-                                                VerifyOrReturn(
-                                                    CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                VerifyOrReturn(CheckValue("status",
+                                                    err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                            ? err.code
+                                                            : EMBER_ZCL_STATUS_FAILURE)
+                                                        : 0,
+                                                    EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                 NextTest();
                                             }];
 
@@ -79849,8 +80333,12 @@ private:
                                                       @"Error: %@",
                                                     err);
 
-                                                VerifyOrReturn(
-                                                    CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                VerifyOrReturn(CheckValue("status",
+                                                    err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                            ? err.code
+                                                            : EMBER_ZCL_STATUS_FAILURE)
+                                                        : 0,
+                                                    EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                 NextTest();
                                             }];
 
@@ -79872,8 +80360,12 @@ private:
                                        completionHandler:^(NSError * _Nullable err) {
                                            NSLog(@"Write max value to a range-restricted unsigned 16-bit integer Error: %@", err);
 
-                                           VerifyOrReturn(
-                                               CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                           VerifyOrReturn(CheckValue("status",
+                                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                       ? err.code
+                                                       : EMBER_ZCL_STATUS_FAILURE)
+                                                   : 0,
+                                               EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                            NextTest();
                                        }];
 
@@ -80087,8 +80579,12 @@ private:
                                            completionHandler:^(NSError * _Nullable err) {
                                                NSLog(@"Write min value to a range-restricted signed 8-bit integer Error: %@", err);
 
-                                               VerifyOrReturn(
-                                                   CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                               VerifyOrReturn(CheckValue("status",
+                                                   err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                           ? err.code
+                                                           : EMBER_ZCL_STATUS_FAILURE)
+                                                       : 0,
+                                                   EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                NextTest();
                                            }];
 
@@ -80112,8 +80608,12 @@ private:
                                               @"Write just-below-range value to a range-restricted signed 8-bit integer Error: %@",
                                               err);
 
-                                          VerifyOrReturn(
-                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          VerifyOrReturn(CheckValue("status",
+                                              err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                      ? err.code
+                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                                  : 0,
+                                              EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                           NextTest();
                                       }];
 
@@ -80137,8 +80637,12 @@ private:
                                               @"Write just-above-range value to a range-restricted signed 8-bit integer Error: %@",
                                               err);
 
-                                          VerifyOrReturn(
-                                              CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          VerifyOrReturn(CheckValue("status",
+                                              err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                      ? err.code
+                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                                  : 0,
+                                              EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                           NextTest();
                                       }];
 
@@ -80159,8 +80663,12 @@ private:
                                            completionHandler:^(NSError * _Nullable err) {
                                                NSLog(@"Write max value to a range-restricted signed 8-bit integer Error: %@", err);
 
-                                               VerifyOrReturn(
-                                                   CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                               VerifyOrReturn(CheckValue("status",
+                                                   err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                           ? err.code
+                                                           : EMBER_ZCL_STATUS_FAILURE)
+                                                       : 0,
+                                                   EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                NextTest();
                                            }];
 
@@ -80372,8 +80880,12 @@ private:
                                        completionHandler:^(NSError * _Nullable err) {
                                            NSLog(@"Write min value to a range-restricted signed 16-bit integer Error: %@", err);
 
-                                           VerifyOrReturn(
-                                               CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                           VerifyOrReturn(CheckValue("status",
+                                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                       ? err.code
+                                                       : EMBER_ZCL_STATUS_FAILURE)
+                                                   : 0,
+                                               EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                            NextTest();
                                        }];
 
@@ -80396,8 +80908,12 @@ private:
                                                       @"Error: %@",
                                                     err);
 
-                                                VerifyOrReturn(
-                                                    CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                VerifyOrReturn(CheckValue("status",
+                                                    err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                            ? err.code
+                                                            : EMBER_ZCL_STATUS_FAILURE)
+                                                        : 0,
+                                                    EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                 NextTest();
                                             }];
 
@@ -80420,8 +80936,12 @@ private:
                                                       @"Error: %@",
                                                     err);
 
-                                                VerifyOrReturn(
-                                                    CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                VerifyOrReturn(CheckValue("status",
+                                                    err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                            ? err.code
+                                                            : EMBER_ZCL_STATUS_FAILURE)
+                                                        : 0,
+                                                    EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                 NextTest();
                                             }];
 
@@ -80443,8 +80963,12 @@ private:
                                        completionHandler:^(NSError * _Nullable err) {
                                            NSLog(@"Write max value to a range-restricted signed 16-bit integer Error: %@", err);
 
-                                           VerifyOrReturn(
-                                               CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                           VerifyOrReturn(CheckValue("status",
+                                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                       ? err.code
+                                                       : EMBER_ZCL_STATUS_FAILURE)
+                                                   : 0,
+                                               EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                            NextTest();
                                        }];
 
@@ -80661,8 +81185,12 @@ private:
                                                              @"integer Error: %@",
                                                            err);
 
-                                                       VerifyOrReturn(CheckValue(
-                                                           "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                       VerifyOrReturn(CheckValue("status",
+                                                           err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                   ? err.code
+                                                                   : EMBER_ZCL_STATUS_FAILURE)
+                                                               : 0,
+                                                           EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                        NextTest();
                                                    }];
 
@@ -80685,8 +81213,12 @@ private:
                                                              @"unsigned 8-bit integer Error: %@",
                                                            err);
 
-                                                       VerifyOrReturn(CheckValue(
-                                                           "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                       VerifyOrReturn(CheckValue("status",
+                                                           err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                   ? err.code
+                                                                   : EMBER_ZCL_STATUS_FAILURE)
+                                                               : 0,
+                                                           EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                        NextTest();
                                                    }];
 
@@ -80709,8 +81241,12 @@ private:
                                                              @"unsigned 8-bit integer Error: %@",
                                                            err);
 
-                                                       VerifyOrReturn(CheckValue(
-                                                           "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                       VerifyOrReturn(CheckValue("status",
+                                                           err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                   ? err.code
+                                                                   : EMBER_ZCL_STATUS_FAILURE)
+                                                               : 0,
+                                                           EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                        NextTest();
                                                    }];
 
@@ -80733,8 +81269,12 @@ private:
                                                              @"integer Error: %@",
                                                            err);
 
-                                                       VerifyOrReturn(CheckValue(
-                                                           "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                       VerifyOrReturn(CheckValue("status",
+                                                           err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                   ? err.code
+                                                                   : EMBER_ZCL_STATUS_FAILURE)
+                                                               : 0,
+                                                           EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                        NextTest();
                                                    }];
 
@@ -81008,8 +81548,12 @@ private:
                                                               @"integer Error: %@",
                                                             err);
 
-                                                        VerifyOrReturn(CheckValue(
-                                                            "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                        VerifyOrReturn(CheckValue("status",
+                                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                    ? err.code
+                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                                                : 0,
+                                                            EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                         NextTest();
                                                     }];
 
@@ -81032,8 +81576,12 @@ private:
                                                               @"unsigned 16-bit integer Error: %@",
                                                             err);
 
-                                                        VerifyOrReturn(CheckValue(
-                                                            "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                        VerifyOrReturn(CheckValue("status",
+                                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                    ? err.code
+                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                                                : 0,
+                                                            EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                         NextTest();
                                                     }];
 
@@ -81056,8 +81604,12 @@ private:
                                                               @"unsigned 16-bit integer Error: %@",
                                                             err);
 
-                                                        VerifyOrReturn(CheckValue(
-                                                            "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                        VerifyOrReturn(CheckValue("status",
+                                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                    ? err.code
+                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                                                : 0,
+                                                            EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                         NextTest();
                                                     }];
 
@@ -81080,8 +81632,12 @@ private:
                                                               @"integer Error: %@",
                                                             err);
 
-                                                        VerifyOrReturn(CheckValue(
-                                                            "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                        VerifyOrReturn(CheckValue("status",
+                                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                    ? err.code
+                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                                                : 0,
+                                                            EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                         NextTest();
                                                     }];
 
@@ -81355,8 +81911,12 @@ private:
                                                              @"Error: %@",
                                                            err);
 
-                                                       VerifyOrReturn(CheckValue(
-                                                           "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                       VerifyOrReturn(CheckValue("status",
+                                                           err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                   ? err.code
+                                                                   : EMBER_ZCL_STATUS_FAILURE)
+                                                               : 0,
+                                                           EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                        NextTest();
                                                    }];
 
@@ -81379,8 +81939,12 @@ private:
                                                              @"8-bit integer Error: %@",
                                                            err);
 
-                                                       VerifyOrReturn(CheckValue(
-                                                           "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                       VerifyOrReturn(CheckValue("status",
+                                                           err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                   ? err.code
+                                                                   : EMBER_ZCL_STATUS_FAILURE)
+                                                               : 0,
+                                                           EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                        NextTest();
                                                    }];
 
@@ -81403,8 +81967,12 @@ private:
                                                              @"8-bit integer Error: %@",
                                                            err);
 
-                                                       VerifyOrReturn(CheckValue(
-                                                           "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                       VerifyOrReturn(CheckValue("status",
+                                                           err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                   ? err.code
+                                                                   : EMBER_ZCL_STATUS_FAILURE)
+                                                               : 0,
+                                                           EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                        NextTest();
                                                    }];
 
@@ -81427,8 +81995,12 @@ private:
                                                              @"Error: %@",
                                                            err);
 
-                                                       VerifyOrReturn(CheckValue(
-                                                           "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                       VerifyOrReturn(CheckValue("status",
+                                                           err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                   ? err.code
+                                                                   : EMBER_ZCL_STATUS_FAILURE)
+                                                               : 0,
+                                                           EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                        NextTest();
                                                    }];
 
@@ -81702,8 +82274,12 @@ private:
                                                               @"integer Error: %@",
                                                             err);
 
-                                                        VerifyOrReturn(CheckValue(
-                                                            "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                        VerifyOrReturn(CheckValue("status",
+                                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                    ? err.code
+                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                                                : 0,
+                                                            EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                         NextTest();
                                                     }];
 
@@ -81726,8 +82302,12 @@ private:
                                                               @"16-bit integer Error: %@",
                                                             err);
 
-                                                        VerifyOrReturn(CheckValue(
-                                                            "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                        VerifyOrReturn(CheckValue("status",
+                                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                    ? err.code
+                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                                                : 0,
+                                                            EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                         NextTest();
                                                     }];
 
@@ -81750,8 +82330,12 @@ private:
                                                               @"16-bit integer Error: %@",
                                                             err);
 
-                                                        VerifyOrReturn(CheckValue(
-                                                            "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                        VerifyOrReturn(CheckValue("status",
+                                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                    ? err.code
+                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                                                : 0,
+                                                            EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                         NextTest();
                                                     }];
 
@@ -81774,8 +82358,12 @@ private:
                                                               @"integer Error: %@",
                                                             err);
 
-                                                        VerifyOrReturn(CheckValue(
-                                                            "status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                        VerifyOrReturn(CheckValue("status",
+                                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                                    ? err.code
+                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                                                : 0,
+                                                            EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                         NextTest();
                                                     }];
 
@@ -82021,8 +82609,12 @@ private:
                                           completionHandler:^(NSError * _Nullable err) {
                                               NSLog(@"Write attribute that returns general status on write Error: %@", err);
 
-                                              VerifyOrReturn(
-                                                  CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_DATA_TYPE));
+                                              VerifyOrReturn(CheckValue("status",
+                                                  err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                          ? err.code
+                                                          : EMBER_ZCL_STATUS_FAILURE)
+                                                      : 0,
+                                                  EMBER_ZCL_STATUS_INVALID_DATA_TYPE));
                                               NextTest();
                                           }];
 
@@ -82044,7 +82636,12 @@ private:
                                      completionHandler:^(NSError * _Nullable err) {
                                          NSLog(@"Write attribute that returns cluster-specific status on write Error: %@", err);
 
-                                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                                         VerifyOrReturn(CheckValue("status",
+                                             err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                     ? err.code
+                                                     : EMBER_ZCL_STATUS_FAILURE)
+                                                 : 0,
+                                             EMBER_ZCL_STATUS_FAILURE));
                                          NextTest();
                                      }];
 
@@ -82062,7 +82659,9 @@ private:
         [cluster readAttributeGeneralErrorBooleanWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read attribute that returns general status on read Error: %@", err);
 
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_DATA_TYPE));
+            VerifyOrReturn(CheckValue("status",
+                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                EMBER_ZCL_STATUS_INVALID_DATA_TYPE));
             NextTest();
         }];
 
@@ -82080,7 +82679,9 @@ private:
         [cluster readAttributeClusterErrorBooleanWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"read attribute that returns cluster-specific status on read Error: %@", err);
 
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status",
+                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                EMBER_ZCL_STATUS_FAILURE));
             NextTest();
         }];
 
@@ -90067,13 +90668,16 @@ private:
 
         __auto_type * params = [[MTRModeSelectClusterChangeToModeParams alloc] init];
         params.newMode = [NSNumber numberWithUnsignedChar:2U];
-        [cluster changeToModeWithParams:params
-                      completionHandler:^(NSError * _Nullable err) {
-                          NSLog(@"Change to Unsupported Mode Error: %@", err);
+        [cluster
+            changeToModeWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Change to Unsupported Mode Error: %@", err);
 
-                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
-                          NextTest();
-                      }];
+                     VerifyOrReturn(CheckValue("status",
+                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                         EMBER_ZCL_STATUS_INVALID_COMMAND));
+                     NextTest();
+                 }];
 
         return CHIP_NO_ERROR;
     }
@@ -90146,13 +90750,17 @@ private:
 
         id onModeArgument;
         onModeArgument = [NSNumber numberWithUnsignedChar:2U];
-        [cluster writeAttributeOnModeWithValue:onModeArgument
-                             completionHandler:^(NSError * _Nullable err) {
-                                 NSLog(@"Change to Unsupported OnMode Error: %@", err);
+        [cluster
+            writeAttributeOnModeWithValue:onModeArgument
+                        completionHandler:^(NSError * _Nullable err) {
+                            NSLog(@"Change to Unsupported OnMode Error: %@", err);
 
-                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
-                                 NextTest();
-                             }];
+                            VerifyOrReturn(CheckValue("status",
+                                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                    : 0,
+                                EMBER_ZCL_STATUS_INVALID_COMMAND));
+                            NextTest();
+                        }];
 
         return CHIP_NO_ERROR;
     }
@@ -90280,7 +90888,11 @@ private:
                                   completionHandler:^(NSError * _Nullable err) {
                                       NSLog(@"Change to Unsupported StartUp Mode Error: %@", err);
 
-                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_INVALID_COMMAND));
                                       NextTest();
                                   }];
 
@@ -91292,7 +91904,11 @@ private:
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Write invalid binding table Error: %@", err);
 
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                  VerifyOrReturn(CheckValue("status",
+                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                          : 0,
+                                      EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                   NextTest();
                               }];
 
@@ -91851,7 +92467,11 @@ private:
                                 completionHandler:^(NSError * _Nullable err) {
                                     NSLog(@"Attempt to write overly long item for label Error: %@", err);
 
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                    VerifyOrReturn(CheckValue("status",
+                                        err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                            : 0,
+                                        EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                     NextTest();
                                 }];
 
@@ -91877,7 +92497,11 @@ private:
                                 completionHandler:^(NSError * _Nullable err) {
                                     NSLog(@"Attempt to write overly long item for value Error: %@", err);
 
-                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                    VerifyOrReturn(CheckValue("status",
+                                        err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                            : 0,
+                                        EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                     NextTest();
                                 }];
 
@@ -92121,7 +92745,11 @@ private:
                                    completionHandler:^(NSError * _Nullable err) {
                                        NSLog(@"Invoke AddTrustedRootCertificate without fail-safe Error: %@", err);
 
-                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILSAFE_REQUIRED));
+                                       VerifyOrReturn(CheckValue("status",
+                                           err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                         : EMBER_ZCL_STATUS_FAILURE)
+                                               : 0,
+                                           EMBER_ZCL_STATUS_FAILSAFE_REQUIRED));
                                        NextTest();
                                    }];
 
@@ -92145,7 +92773,9 @@ private:
                 completionHandler:^(MTROperationalCredentialsClusterNOCResponseParams * _Nullable values, NSError * _Nullable err) {
                     NSLog(@"Invoke AddNOC without fail-safe Error: %@", err);
 
-                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILSAFE_REQUIRED));
+                    VerifyOrReturn(CheckValue("status",
+                        err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                        EMBER_ZCL_STATUS_FAILSAFE_REQUIRED));
                     NextTest();
                 }];
 
@@ -92166,7 +92796,9 @@ private:
               completionHandler:^(MTROperationalCredentialsClusterNOCResponseParams * _Nullable values, NSError * _Nullable err) {
                   NSLog(@"Invoke UpdateNOC without fail-safe Error: %@", err);
 
-                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILSAFE_REQUIRED));
+                  VerifyOrReturn(CheckValue("status",
+                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                      EMBER_ZCL_STATUS_FAILSAFE_REQUIRED));
                   NextTest();
               }];
 
@@ -92189,7 +92821,9 @@ private:
                completionHandler:^(MTROperationalCredentialsClusterCSRResponseParams * _Nullable values, NSError * _Nullable err) {
                    NSLog(@"Invoke CSRRequest without fail-safe Error: %@", err);
 
-                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILSAFE_REQUIRED));
+                   VerifyOrReturn(CheckValue("status",
+                       err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                       EMBER_ZCL_STATUS_FAILSAFE_REQUIRED));
                    NextTest();
                }];
 
@@ -93209,13 +93843,17 @@ private:
 
             aclArgument = temp_0;
         }
-        [cluster writeAttributeAclWithValue:aclArgument
-                          completionHandler:^(NSError * _Nullable err) {
-                              NSLog(@"Constraint error: PASE reserved for future (TC-ACL-2.4 step 29) Error: %@", err);
+        [cluster
+            writeAttributeAclWithValue:aclArgument
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Constraint error: PASE reserved for future (TC-ACL-2.4 step 29) Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                              NextTest();
-                          }];
+                         VerifyOrReturn(CheckValue("status",
+                             err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                 : 0,
+                             EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                         NextTest();
+                     }];
 
         return CHIP_NO_ERROR;
     }
@@ -93259,7 +93897,10 @@ private:
                      completionHandler:^(NSError * _Nullable err) {
                          NSLog(@"Constraint error: Invalid combination administer + group (TC-ACL-2.4 step 31) Error: %@", err);
 
-                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                         VerifyOrReturn(CheckValue("status",
+                             err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                 : 0,
+                             EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                          NextTest();
                      }];
 
@@ -93300,13 +93941,17 @@ private:
 
             aclArgument = temp_0;
         }
-        [cluster writeAttributeAclWithValue:aclArgument
-                          completionHandler:^(NSError * _Nullable err) {
-                              NSLog(@"Constraint error:  Invalid auth mode (TC-ACL-2.4 step 33) Error: %@", err);
+        [cluster
+            writeAttributeAclWithValue:aclArgument
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Constraint error:  Invalid auth mode (TC-ACL-2.4 step 33) Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                              NextTest();
-                          }];
+                         VerifyOrReturn(CheckValue("status",
+                             err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                 : 0,
+                             EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                         NextTest();
+                     }];
 
         return CHIP_NO_ERROR;
     }
@@ -93346,13 +93991,17 @@ private:
 
             aclArgument = temp_0;
         }
-        [cluster writeAttributeAclWithValue:aclArgument
-                          completionHandler:^(NSError * _Nullable err) {
-                              NSLog(@"Constraint error:  Invalid subject (TC-ACL-2.4 step 34) Error: %@", err);
+        [cluster
+            writeAttributeAclWithValue:aclArgument
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Constraint error:  Invalid subject (TC-ACL-2.4 step 34) Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                              NextTest();
-                          }];
+                         VerifyOrReturn(CheckValue("status",
+                             err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                 : 0,
+                             EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                         NextTest();
+                     }];
 
         return CHIP_NO_ERROR;
     }
@@ -93396,13 +94045,17 @@ private:
 
             aclArgument = temp_0;
         }
-        [cluster writeAttributeAclWithValue:aclArgument
-                          completionHandler:^(NSError * _Nullable err) {
-                              NSLog(@"Constraint error:  Invalid target (TC-ACL-2.4 step 38) Error: %@", err);
+        [cluster
+            writeAttributeAclWithValue:aclArgument
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Constraint error:  Invalid target (TC-ACL-2.4 step 38) Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                              NextTest();
-                          }];
+                         VerifyOrReturn(CheckValue("status",
+                             err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                 : 0,
+                             EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                         NextTest();
+                     }];
 
         return CHIP_NO_ERROR;
     }
@@ -93451,7 +94104,10 @@ private:
                      completionHandler:^(NSError * _Nullable err) {
                          NSLog(@"Constraint error:  target has both endpoint and device type (TC-ACL-2.4 step 42) Error: %@", err);
 
-                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                         VerifyOrReturn(CheckValue("status",
+                             err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                 : 0,
+                             EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                          NextTest();
                      }];
 
@@ -93489,13 +94145,17 @@ private:
 
             aclArgument = temp_0;
         }
-        [cluster writeAttributeAclWithValue:aclArgument
-                          completionHandler:^(NSError * _Nullable err) {
-                              NSLog(@"Constraint error: Invalid privilege value step 32) Error: %@", err);
+        [cluster
+            writeAttributeAclWithValue:aclArgument
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Constraint error: Invalid privilege value step 32) Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                              NextTest();
-                          }];
+                         VerifyOrReturn(CheckValue("status",
+                             err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                 : 0,
+                             EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                         NextTest();
+                     }];
 
         return CHIP_NO_ERROR;
     }
@@ -93535,13 +94195,17 @@ private:
 
             aclArgument = temp_0;
         }
-        [cluster writeAttributeAclWithValue:aclArgument
-                          completionHandler:^(NSError * _Nullable err) {
-                              NSLog(@"Constraint error: invalid subject 0xFFFF_FFFF_FFFF_FFFF (TC-ACL-2.4 step 35) Error: %@", err);
+        [cluster
+            writeAttributeAclWithValue:aclArgument
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Constraint error: invalid subject 0xFFFF_FFFF_FFFF_FFFF (TC-ACL-2.4 step 35) Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                              NextTest();
-                          }];
+                         VerifyOrReturn(CheckValue("status",
+                             err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                 : 0,
+                             EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                         NextTest();
+                     }];
 
         return CHIP_NO_ERROR;
     }
@@ -93581,13 +94245,17 @@ private:
 
             aclArgument = temp_0;
         }
-        [cluster writeAttributeAclWithValue:aclArgument
-                          completionHandler:^(NSError * _Nullable err) {
-                              NSLog(@"Constraint error: invalid subject 0xFFFF_FFFD_0000_0000 (TC-ACL-2.4 step 36) Error: %@", err);
+        [cluster
+            writeAttributeAclWithValue:aclArgument
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Constraint error: invalid subject 0xFFFF_FFFD_0000_0000 (TC-ACL-2.4 step 36) Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                              NextTest();
-                          }];
+                         VerifyOrReturn(CheckValue("status",
+                             err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                 : 0,
+                             EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                         NextTest();
+                     }];
 
         return CHIP_NO_ERROR;
     }
@@ -93627,13 +94295,17 @@ private:
 
             aclArgument = temp_0;
         }
-        [cluster writeAttributeAclWithValue:aclArgument
-                          completionHandler:^(NSError * _Nullable err) {
-                              NSLog(@"Constraint error: invalid subject 0xFFFF_FFFF_FFFF_0000 (TC-ACL-2.4 step 37) Error: %@", err);
+        [cluster
+            writeAttributeAclWithValue:aclArgument
+                     completionHandler:^(NSError * _Nullable err) {
+                         NSLog(@"Constraint error: invalid subject 0xFFFF_FFFF_FFFF_0000 (TC-ACL-2.4 step 37) Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-                              NextTest();
-                          }];
+                         VerifyOrReturn(CheckValue("status",
+                             err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                 : 0,
+                             EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                         NextTest();
+                     }];
 
         return CHIP_NO_ERROR;
     }
@@ -95902,7 +96574,9 @@ private:
                  completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"Read fails for user with index 0 Error: %@", err);
 
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                     VerifyOrReturn(CheckValue("status",
+                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                         EMBER_ZCL_STATUS_INVALID_COMMAND));
                      NextTest();
                  }];
 
@@ -95921,7 +96595,9 @@ private:
                  completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
                      NSLog(@"Read fails for user with index greater than Number Of Users Supported Error: %@", err);
 
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                     VerifyOrReturn(CheckValue("status",
+                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                         EMBER_ZCL_STATUS_INVALID_COMMAND));
                      NextTest();
                  }];
 
@@ -96044,13 +96720,15 @@ private:
         params.userStatus = nil;
         params.userType = nil;
         params.credentialRule = nil;
-        [cluster setUserWithParams:params
-                 completionHandler:^(NSError * _Nullable err) {
-                     NSLog(@"Set user at the occupied index fails with appropriate response Error: %@", err);
+        [cluster
+            setUserWithParams:params
+            completionHandler:^(NSError * _Nullable err) {
+                NSLog(@"Set user at the occupied index fails with appropriate response Error: %@", err);
 
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 1));
-                     NextTest();
-                 }];
+                VerifyOrReturn(CheckValue("status",
+                    err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0, 1));
+                NextTest();
+            }];
 
         return CHIP_NO_ERROR;
     }
@@ -96895,7 +97573,9 @@ private:
                  completionHandler:^(NSError * _Nullable err) {
                      NSLog(@"User creation in the 0 slot fails Error: %@", err);
 
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                     VerifyOrReturn(CheckValue("status",
+                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                         EMBER_ZCL_STATUS_INVALID_COMMAND));
                      NextTest();
                  }];
 
@@ -96920,7 +97600,9 @@ private:
                  completionHandler:^(NSError * _Nullable err) {
                      NSLog(@"User creation in the out-of-bounds slot fails Error: %@", err);
 
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                     VerifyOrReturn(CheckValue("status",
+                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                         EMBER_ZCL_STATUS_INVALID_COMMAND));
                      NextTest();
                  }];
 
@@ -97133,7 +97815,9 @@ private:
                    completionHandler:^(NSError * _Nullable err) {
                        NSLog(@"Clear user with index 0 fails Error: %@", err);
 
-                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                       VerifyOrReturn(CheckValue("status",
+                           err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                        NextTest();
                    }];
 
@@ -97152,7 +97836,9 @@ private:
                    completionHandler:^(NSError * _Nullable err) {
                        NSLog(@"Clear user with out-of-bounds index fails Error: %@", err);
 
-                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                       VerifyOrReturn(CheckValue("status",
+                           err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                        NextTest();
                    }];
 
@@ -97406,14 +98092,18 @@ private:
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
-        [cluster getCredentialStatusWithParams:params
-                             completionHandler:^(
-                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
-                                 NSLog(@"Reading PIN credential with index 0 fails Error: %@", err);
+        [cluster
+            getCredentialStatusWithParams:params
+                        completionHandler:^(
+                            MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                            NSLog(@"Reading PIN credential with index 0 fails Error: %@", err);
 
-                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
-                                 NextTest();
-                             }];
+                            VerifyOrReturn(CheckValue("status",
+                                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                    : 0,
+                                EMBER_ZCL_STATUS_INVALID_COMMAND));
+                            NextTest();
+                        }];
 
         return CHIP_NO_ERROR;
     }
@@ -97430,14 +98120,18 @@ private:
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex =
             [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupported unsignedShortValue] + 1U];
 
-        [cluster getCredentialStatusWithParams:params
-                             completionHandler:^(
-                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
-                                 NSLog(@"Reading PIN credential with out-of-bounds index fails Error: %@", err);
+        [cluster
+            getCredentialStatusWithParams:params
+                        completionHandler:^(
+                            MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                            NSLog(@"Reading PIN credential with out-of-bounds index fails Error: %@", err);
 
-                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
-                                 NextTest();
-                             }];
+                            VerifyOrReturn(CheckValue("status",
+                                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                    : 0,
+                                EMBER_ZCL_STATUS_INVALID_COMMAND));
+                            NextTest();
+                        }];
 
         return CHIP_NO_ERROR;
     }
@@ -97749,14 +98443,18 @@ private:
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
-        [cluster getCredentialStatusWithParams:params
-                             completionHandler:^(
-                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
-                                 NSLog(@"Reading RFID credential with index 0 fails Error: %@", err);
+        [cluster
+            getCredentialStatusWithParams:params
+                        completionHandler:^(
+                            MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                            NSLog(@"Reading RFID credential with index 0 fails Error: %@", err);
 
-                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
-                                 NextTest();
-                             }];
+                            VerifyOrReturn(CheckValue("status",
+                                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                    : 0,
+                                EMBER_ZCL_STATUS_INVALID_COMMAND));
+                            NextTest();
+                        }];
 
         return CHIP_NO_ERROR;
     }
@@ -97773,14 +98471,18 @@ private:
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex =
             [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupported unsignedShortValue] + 1U];
 
-        [cluster getCredentialStatusWithParams:params
-                             completionHandler:^(
-                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
-                                 NSLog(@"Reading RFID credential with out-of-bounds index fails Error: %@", err);
+        [cluster
+            getCredentialStatusWithParams:params
+                        completionHandler:^(
+                            MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                            NSLog(@"Reading RFID credential with out-of-bounds index fails Error: %@", err);
 
-                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
-                                 NextTest();
-                             }];
+                            VerifyOrReturn(CheckValue("status",
+                                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                    : 0,
+                                EMBER_ZCL_STATUS_INVALID_COMMAND));
+                            NextTest();
+                        }];
 
         return CHIP_NO_ERROR;
     }
@@ -100462,13 +101164,17 @@ private:
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
-        [cluster clearCredentialWithParams:params
-                         completionHandler:^(NSError * _Nullable err) {
-                             NSLog(@"Clearing Programming PIN fails Error: %@", err);
+        [cluster
+            clearCredentialWithParams:params
+                    completionHandler:^(NSError * _Nullable err) {
+                        NSLog(@"Clearing Programming PIN fails Error: %@", err);
 
-                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
-                             NextTest();
-                         }];
+                        VerifyOrReturn(CheckValue("status",
+                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                : 0,
+                            EMBER_ZCL_STATUS_INVALID_COMMAND));
+                        NextTest();
+                    }];
 
         return CHIP_NO_ERROR;
     }
@@ -100484,13 +101190,17 @@ private:
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
-        [cluster clearCredentialWithParams:params
-                         completionHandler:^(NSError * _Nullable err) {
-                             NSLog(@"Clearing Programming PIN with invalid index fails Error: %@", err);
+        [cluster
+            clearCredentialWithParams:params
+                    completionHandler:^(NSError * _Nullable err) {
+                        NSLog(@"Clearing Programming PIN with invalid index fails Error: %@", err);
 
-                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
-                             NextTest();
-                         }];
+                        VerifyOrReturn(CheckValue("status",
+                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                : 0,
+                            EMBER_ZCL_STATUS_INVALID_COMMAND));
+                        NextTest();
+                    }];
 
         return CHIP_NO_ERROR;
     }
@@ -100506,13 +101216,17 @@ private:
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
-        [cluster clearCredentialWithParams:params
-                         completionHandler:^(NSError * _Nullable err) {
-                             NSLog(@"Clearing PIN credential with zero index fails Error: %@", err);
+        [cluster
+            clearCredentialWithParams:params
+                    completionHandler:^(NSError * _Nullable err) {
+                        NSLog(@"Clearing PIN credential with zero index fails Error: %@", err);
 
-                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
-                             NextTest();
-                         }];
+                        VerifyOrReturn(CheckValue("status",
+                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                : 0,
+                            EMBER_ZCL_STATUS_INVALID_COMMAND));
+                        NextTest();
+                    }];
 
         return CHIP_NO_ERROR;
     }
@@ -100529,13 +101243,17 @@ private:
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex =
             [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupported unsignedShortValue] + 1U];
 
-        [cluster clearCredentialWithParams:params
-                         completionHandler:^(NSError * _Nullable err) {
-                             NSLog(@"Clearing PIN credential with out-of-bound index fails Error: %@", err);
+        [cluster
+            clearCredentialWithParams:params
+                    completionHandler:^(NSError * _Nullable err) {
+                        NSLog(@"Clearing PIN credential with out-of-bound index fails Error: %@", err);
 
-                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
-                             NextTest();
-                         }];
+                        VerifyOrReturn(CheckValue("status",
+                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                : 0,
+                            EMBER_ZCL_STATUS_INVALID_COMMAND));
+                        NextTest();
+                    }];
 
         return CHIP_NO_ERROR;
     }
@@ -100551,13 +101269,17 @@ private:
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
-        [cluster clearCredentialWithParams:params
-                         completionHandler:^(NSError * _Nullable err) {
-                             NSLog(@"Clearing RFID credential with zero index fails Error: %@", err);
+        [cluster
+            clearCredentialWithParams:params
+                    completionHandler:^(NSError * _Nullable err) {
+                        NSLog(@"Clearing RFID credential with zero index fails Error: %@", err);
 
-                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
-                             NextTest();
-                         }];
+                        VerifyOrReturn(CheckValue("status",
+                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                : 0,
+                            EMBER_ZCL_STATUS_INVALID_COMMAND));
+                        NextTest();
+                    }];
 
         return CHIP_NO_ERROR;
     }
@@ -100574,13 +101296,17 @@ private:
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex =
             [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupported unsignedShortValue] + 1U];
 
-        [cluster clearCredentialWithParams:params
-                         completionHandler:^(NSError * _Nullable err) {
-                             NSLog(@"Clearing RFID credential with out-of-bound index fails Error: %@", err);
+        [cluster
+            clearCredentialWithParams:params
+                    completionHandler:^(NSError * _Nullable err) {
+                        NSLog(@"Clearing RFID credential with out-of-bound index fails Error: %@", err);
 
-                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
-                             NextTest();
-                         }];
+                        VerifyOrReturn(CheckValue("status",
+                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                : 0,
+                            EMBER_ZCL_STATUS_INVALID_COMMAND));
+                        NextTest();
+                    }];
 
         return CHIP_NO_ERROR;
     }
@@ -101356,13 +102082,16 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterUnlockDoorParams alloc] init];
         params.pinCode = [[NSData alloc] initWithBytes:"000000" length:6];
-        [cluster unlockDoorWithParams:params
-                    completionHandler:^(NSError * _Nullable err) {
-                        NSLog(@"Try to unlock the door with invalid PIN Error: %@", err);
+        [cluster
+            unlockDoorWithParams:params
+               completionHandler:^(NSError * _Nullable err) {
+                   NSLog(@"Try to unlock the door with invalid PIN Error: %@", err);
 
-                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
-                        NextTest();
-                    }];
+                   VerifyOrReturn(CheckValue("status",
+                       err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                       EMBER_ZCL_STATUS_FAILURE));
+                   NextTest();
+               }];
 
         return CHIP_NO_ERROR;
     }
@@ -101445,7 +102174,9 @@ private:
                   completionHandler:^(NSError * _Nullable err) {
                       NSLog(@"Try to lock the door with invalid PIN Error: %@", err);
 
-                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                      VerifyOrReturn(CheckValue("status",
+                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                          EMBER_ZCL_STATUS_FAILURE));
                       NextTest();
                   }];
 
@@ -101549,7 +102280,9 @@ private:
                   completionHandler:^(NSError * _Nullable err) {
                       NSLog(@"Try to unlock the door when OperatingMode is NoRemoteLockUnlock Error: %@", err);
 
-                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                      VerifyOrReturn(CheckValue("status",
+                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                          EMBER_ZCL_STATUS_FAILURE));
                       NextTest();
                   }];
 
@@ -102741,13 +103474,17 @@ private:
         params.startMinute = [NSNumber numberWithUnsignedChar:16U];
         params.endHour = [NSNumber numberWithUnsignedChar:18U];
         params.endMinute = [NSNumber numberWithUnsignedChar:0U];
-        [cluster setWeekDayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Week Day schedule with 0 index Error: %@", err);
+        [cluster
+            setWeekDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Week Day schedule with 0 index Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -102766,13 +103503,17 @@ private:
         params.startMinute = [NSNumber numberWithUnsignedChar:16U];
         params.endHour = [NSNumber numberWithUnsignedChar:18U];
         params.endMinute = [NSNumber numberWithUnsignedChar:0U];
-        [cluster setWeekDayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Week Day schedule with out-of-bounds index Error: %@", err);
+        [cluster
+            setWeekDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Week Day schedule with out-of-bounds index Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -102791,13 +103532,17 @@ private:
         params.startMinute = [NSNumber numberWithUnsignedChar:16U];
         params.endHour = [NSNumber numberWithUnsignedChar:18U];
         params.endMinute = [NSNumber numberWithUnsignedChar:0U];
-        [cluster setWeekDayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Week Day schedule with 0 user index Error: %@", err);
+        [cluster
+            setWeekDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Week Day schedule with 0 user index Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -102816,13 +103561,17 @@ private:
         params.startMinute = [NSNumber numberWithUnsignedChar:16U];
         params.endHour = [NSNumber numberWithUnsignedChar:18U];
         params.endMinute = [NSNumber numberWithUnsignedChar:0U];
-        [cluster setWeekDayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Week Day schedule with out-of-bounds user index Error: %@", err);
+        [cluster
+            setWeekDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Week Day schedule with out-of-bounds user index Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -102841,13 +103590,17 @@ private:
         params.startMinute = [NSNumber numberWithUnsignedChar:16U];
         params.endHour = [NSNumber numberWithUnsignedChar:18U];
         params.endMinute = [NSNumber numberWithUnsignedChar:0U];
-        [cluster setWeekDayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Week Day schedule for non-existing user Error: %@", err);
+        [cluster
+            setWeekDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Week Day schedule for non-existing user Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_FAILURE));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -102866,13 +103619,17 @@ private:
         params.startMinute = [NSNumber numberWithUnsignedChar:16U];
         params.endHour = [NSNumber numberWithUnsignedChar:18U];
         params.endMinute = [NSNumber numberWithUnsignedChar:0U];
-        [cluster setWeekDayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Week Day schedule with 0 days mask Error: %@", err);
+        [cluster
+            setWeekDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Week Day schedule with 0 days mask Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -102891,13 +103648,17 @@ private:
         params.startMinute = [NSNumber numberWithUnsignedChar:16U];
         params.endHour = [NSNumber numberWithUnsignedChar:18U];
         params.endMinute = [NSNumber numberWithUnsignedChar:0U];
-        [cluster setWeekDayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Week Day schedule for Sunday and Monday Error: %@", err);
+        [cluster
+            setWeekDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Week Day schedule for Sunday and Monday Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -102916,13 +103677,17 @@ private:
         params.startMinute = [NSNumber numberWithUnsignedChar:16U];
         params.endHour = [NSNumber numberWithUnsignedChar:18U];
         params.endMinute = [NSNumber numberWithUnsignedChar:0U];
-        [cluster setWeekDayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Week Day schedule for Sunday Wednesday and Saturday Error: %@", err);
+        [cluster
+            setWeekDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Week Day schedule for Sunday Wednesday and Saturday Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -102941,13 +103706,17 @@ private:
         params.startMinute = [NSNumber numberWithUnsignedChar:16U];
         params.endHour = [NSNumber numberWithUnsignedChar:18U];
         params.endMinute = [NSNumber numberWithUnsignedChar:0U];
-        [cluster setWeekDayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Week Day schedule with invalid start hour Error: %@", err);
+        [cluster
+            setWeekDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Week Day schedule with invalid start hour Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -102966,13 +103735,17 @@ private:
         params.startMinute = [NSNumber numberWithUnsignedChar:60U];
         params.endHour = [NSNumber numberWithUnsignedChar:18U];
         params.endMinute = [NSNumber numberWithUnsignedChar:0U];
-        [cluster setWeekDayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Week Day schedule with invalid start minute Error: %@", err);
+        [cluster
+            setWeekDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Week Day schedule with invalid start minute Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -102991,13 +103764,17 @@ private:
         params.startMinute = [NSNumber numberWithUnsignedChar:16U];
         params.endHour = [NSNumber numberWithUnsignedChar:24U];
         params.endMinute = [NSNumber numberWithUnsignedChar:0U];
-        [cluster setWeekDayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Week Day schedule with invalid end hour Error: %@", err);
+        [cluster
+            setWeekDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Week Day schedule with invalid end hour Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -103016,13 +103793,17 @@ private:
         params.startMinute = [NSNumber numberWithUnsignedChar:16U];
         params.endHour = [NSNumber numberWithUnsignedChar:18U];
         params.endMinute = [NSNumber numberWithUnsignedChar:60U];
-        [cluster setWeekDayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Week Day schedule with invalid end minute Error: %@", err);
+        [cluster
+            setWeekDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Week Day schedule with invalid end minute Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -103041,13 +103822,17 @@ private:
         params.startMinute = [NSNumber numberWithUnsignedChar:16U];
         params.endHour = [NSNumber numberWithUnsignedChar:18U];
         params.endMinute = [NSNumber numberWithUnsignedChar:0U];
-        [cluster setWeekDayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Week Day schedule with start hour later that end hour Error: %@", err);
+        [cluster
+            setWeekDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Week Day schedule with start hour later that end hour Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -103072,7 +103857,10 @@ private:
                            NSLog(@"Create Week Day schedule with start minute later that end minute when hours are equal Error: %@",
                                err);
 
-                           VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
                            NextTest();
                        }];
 
@@ -103314,13 +104102,17 @@ private:
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
-        [cluster setYearDayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Year Day schedule with 0 index Error: %@", err);
+        [cluster
+            setYearDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Year Day schedule with 0 index Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -103336,13 +104128,17 @@ private:
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
-        [cluster setYearDayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Year Day schedule with out-of-bounds index Error: %@", err);
+        [cluster
+            setYearDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Year Day schedule with out-of-bounds index Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -103358,13 +104154,17 @@ private:
         params.userIndex = [NSNumber numberWithUnsignedShort:0U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
-        [cluster setYearDayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Year Day schedule with 0 user index Error: %@", err);
+        [cluster
+            setYearDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Year Day schedule with 0 user index Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -103380,13 +104180,17 @@ private:
         params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
-        [cluster setYearDayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Year Day schedule with out-of-bounds user index Error: %@", err);
+        [cluster
+            setYearDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Year Day schedule with out-of-bounds user index Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -103402,13 +104206,17 @@ private:
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
-        [cluster setYearDayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Year Day schedule for non-existing user Error: %@", err);
+        [cluster
+            setYearDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Year Day schedule for non-existing user Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_FAILURE));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -103424,13 +104232,17 @@ private:
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345689UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345688UL];
-        [cluster setYearDayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Year Day schedule with start hour later that end hour Error: %@", err);
+        [cluster
+            setYearDayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Year Day schedule with start hour later that end hour Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_COMMAND));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -103670,13 +104482,17 @@ private:
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
         params.operatingMode = [NSNumber numberWithUnsignedChar:0U];
-        [cluster setHolidayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Holiday schedule with 0 index Error: %@", err);
+        [cluster
+            setHolidayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Holiday schedule with 0 index Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -103692,13 +104508,17 @@ private:
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
         params.operatingMode = [NSNumber numberWithUnsignedChar:0U];
-        [cluster setHolidayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Holiday schedule with out-of-bounds index Error: %@", err);
+        [cluster
+            setHolidayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Holiday schedule with out-of-bounds index Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -103714,13 +104534,17 @@ private:
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345689UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345688UL];
         params.operatingMode = [NSNumber numberWithUnsignedChar:0U];
-        [cluster setHolidayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Holiday schedule with start hour later that end hour Error: %@", err);
+        [cluster
+            setHolidayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Holiday schedule with start hour later that end hour Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -103736,13 +104560,17 @@ private:
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
         params.operatingMode = [NSNumber numberWithUnsignedChar:5U];
-        [cluster setHolidayScheduleWithParams:params
-                            completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Create Holiday schedule with invalid operating mode Error: %@", err);
+        [cluster
+            setHolidayScheduleWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Create Holiday schedule with invalid operating mode Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
-                                NextTest();
-                            }];
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_FIELD));
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -104081,7 +104909,11 @@ private:
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Clear Week Day schedule with 0 index Error: %@", err);
 
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  VerifyOrReturn(CheckValue("status",
+                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                          : 0,
+                                      EMBER_ZCL_STATUS_INVALID_FIELD));
                                   NextTest();
                               }];
 
@@ -104101,7 +104933,11 @@ private:
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Clear Week Day schedule with out-of-bounds index Error: %@", err);
 
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  VerifyOrReturn(CheckValue("status",
+                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                          : 0,
+                                      EMBER_ZCL_STATUS_INVALID_FIELD));
                                   NextTest();
                               }];
 
@@ -104121,7 +104957,11 @@ private:
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Clear Week Day schedule with 0 user index Error: %@", err);
 
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  VerifyOrReturn(CheckValue("status",
+                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                          : 0,
+                                      EMBER_ZCL_STATUS_INVALID_FIELD));
                                   NextTest();
                               }];
 
@@ -104141,7 +104981,11 @@ private:
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Clear Week Day schedule with out-of-bounds user index Error: %@", err);
 
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  VerifyOrReturn(CheckValue("status",
+                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                          : 0,
+                                      EMBER_ZCL_STATUS_INVALID_FIELD));
                                   NextTest();
                               }];
 
@@ -104161,7 +105005,11 @@ private:
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Clear Week Day schedule with non-existing user Error: %@", err);
 
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                                  VerifyOrReturn(CheckValue("status",
+                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                          : 0,
+                                      EMBER_ZCL_STATUS_FAILURE));
                                   NextTest();
                               }];
 
@@ -104336,7 +105184,11 @@ private:
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Clear Year Day schedule with 0 index Error: %@", err);
 
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  VerifyOrReturn(CheckValue("status",
+                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                          : 0,
+                                      EMBER_ZCL_STATUS_INVALID_FIELD));
                                   NextTest();
                               }];
 
@@ -104356,7 +105208,11 @@ private:
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Clear Year Day schedule with out-of-bounds index Error: %@", err);
 
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  VerifyOrReturn(CheckValue("status",
+                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                          : 0,
+                                      EMBER_ZCL_STATUS_INVALID_FIELD));
                                   NextTest();
                               }];
 
@@ -104376,7 +105232,11 @@ private:
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Clear Year Day schedule with 0 user index Error: %@", err);
 
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  VerifyOrReturn(CheckValue("status",
+                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                          : 0,
+                                      EMBER_ZCL_STATUS_INVALID_FIELD));
                                   NextTest();
                               }];
 
@@ -104396,7 +105256,11 @@ private:
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Clear Year Day schedule with out-of-bounds user index Error: %@", err);
 
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  VerifyOrReturn(CheckValue("status",
+                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                          : 0,
+                                      EMBER_ZCL_STATUS_INVALID_FIELD));
                                   NextTest();
                               }];
 
@@ -104416,7 +105280,11 @@ private:
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Clear Year Day schedule with non-existing user Error: %@", err);
 
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                                  VerifyOrReturn(CheckValue("status",
+                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                          : 0,
+                                      EMBER_ZCL_STATUS_FAILURE));
                                   NextTest();
                               }];
 
@@ -104590,7 +105458,11 @@ private:
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Clear Holiday schedule with 0 index Error: %@", err);
 
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  VerifyOrReturn(CheckValue("status",
+                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                          : 0,
+                                      EMBER_ZCL_STATUS_INVALID_FIELD));
                                   NextTest();
                               }];
 
@@ -104609,7 +105481,11 @@ private:
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Clear Holiday schedule with out-of-bounds index Error: %@", err);
 
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_FIELD));
+                                  VerifyOrReturn(CheckValue("status",
+                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                          : 0,
+                                      EMBER_ZCL_STATUS_INVALID_FIELD));
                                   NextTest();
                               }];
 
@@ -107432,7 +108308,9 @@ private:
                   completionHandler:^(NSError * _Nullable err) {
                       NSLog(@"TH sends Lock Door Command to the DUT without valid PINCode Error: %@", err);
 
-                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                      VerifyOrReturn(CheckValue("status",
+                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                          EMBER_ZCL_STATUS_FAILURE));
                       NextTest();
                   }];
 
@@ -107451,7 +108329,9 @@ private:
                   completionHandler:^(NSError * _Nullable err) {
                       NSLog(@"TH sends Lock Door Command to the DUT without any argument PINCode Error: %@", err);
 
-                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                      VerifyOrReturn(CheckValue("status",
+                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                          EMBER_ZCL_STATUS_FAILURE));
                       NextTest();
                   }];
 
@@ -107513,7 +108393,9 @@ private:
                   completionHandler:^(NSError * _Nullable err) {
                       NSLog(@"TH sends Lock Door Command to the DUT with invalid PINCode Error: %@", err);
 
-                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                      VerifyOrReturn(CheckValue("status",
+                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                          EMBER_ZCL_STATUS_FAILURE));
                       NextTest();
                   }];
 
@@ -107532,7 +108414,9 @@ private:
                   completionHandler:^(NSError * _Nullable err) {
                       NSLog(@"TH sends Lock Door Command to the DUT with invalid PINCode Error: %@", err);
 
-                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                      VerifyOrReturn(CheckValue("status",
+                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                          EMBER_ZCL_STATUS_FAILURE));
                       NextTest();
                   }];
 
@@ -107551,7 +108435,9 @@ private:
                   completionHandler:^(NSError * _Nullable err) {
                       NSLog(@"TH sends Lock Door Command to the DUT with invalid PINCode Error: %@", err);
 
-                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                      VerifyOrReturn(CheckValue("status",
+                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                          EMBER_ZCL_STATUS_FAILURE));
                       NextTest();
                   }];
 
@@ -107570,7 +108456,9 @@ private:
                   completionHandler:^(NSError * _Nullable err) {
                       NSLog(@"TH sends Lock Door Command to the DUT with invalid PINCode Error: %@", err);
 
-                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_FAILURE));
+                      VerifyOrReturn(CheckValue("status",
+                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                          EMBER_ZCL_STATUS_FAILURE));
                       NextTest();
                   }];
 
@@ -108969,7 +109857,10 @@ private:
                        completionHandler:^(NSError * _Nullable err) {
                            NSLog(@"Send Set Week Day Schedule Command to DUT and verify INVALID_COMMAND response Error: %@", err);
 
-                           VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_COMMAND));
                            NextTest();
                        }];
 
@@ -109616,7 +110507,10 @@ private:
                        completionHandler:^(NSError * _Nullable err) {
                            NSLog(@"Send Set Year Day Schedule Command to DUT and verify INVALID_COMMAND response Error: %@", err);
 
-                           VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_COMMAND));
                            NextTest();
                        }];
 
@@ -110753,14 +111647,18 @@ private:
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:65534U];
 
-        [cluster getCredentialStatusWithParams:params
-                             completionHandler:^(
-                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
-                                 NSLog(@"TH sends Get Credential Status Command Error: %@", err);
+        [cluster
+            getCredentialStatusWithParams:params
+                        completionHandler:^(
+                            MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                            NSLog(@"TH sends Get Credential Status Command Error: %@", err);
 
-                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
-                                 NextTest();
-                             }];
+                            VerifyOrReturn(CheckValue("status",
+                                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                    : 0,
+                                EMBER_ZCL_STATUS_INVALID_COMMAND));
+                            NextTest();
+                        }];
 
         return CHIP_NO_ERROR;
     }
@@ -110825,13 +111723,17 @@ private:
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:8U];
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
-        [cluster clearCredentialWithParams:params
-                         completionHandler:^(NSError * _Nullable err) {
-                             NSLog(@"TH sends Clear Credential Command to DUT Error: %@", err);
+        [cluster
+            clearCredentialWithParams:params
+                    completionHandler:^(NSError * _Nullable err) {
+                        NSLog(@"TH sends Clear Credential Command to DUT Error: %@", err);
 
-                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_INVALID_COMMAND));
-                             NextTest();
-                         }];
+                        VerifyOrReturn(CheckValue("status",
+                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                : 0,
+                            EMBER_ZCL_STATUS_INVALID_COMMAND));
+                        NextTest();
+                    }];
 
         return CHIP_NO_ERROR;
     }
@@ -112361,7 +113263,11 @@ private:
                                   completionHandler:^(NSError * _Nullable err) {
                                       NSLog(@"Write Group Keys (invalid) Error: %@", err);
 
-                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                       NextTest();
                                   }];
 
@@ -112578,14 +113484,17 @@ private:
 
         __auto_type * params = [[MTRGroupKeyManagementClusterKeySetReadParams alloc] init];
         params.groupKeySetID = [NSNumber numberWithUnsignedShort:417U];
-        [cluster keySetReadWithParams:params
-                    completionHandler:^(
-                        MTRGroupKeyManagementClusterKeySetReadResponseParams * _Nullable values, NSError * _Nullable err) {
-                        NSLog(@"KeySet Read (removed) Error: %@", err);
+        [cluster
+            keySetReadWithParams:params
+               completionHandler:^(
+                   MTRGroupKeyManagementClusterKeySetReadResponseParams * _Nullable values, NSError * _Nullable err) {
+                   NSLog(@"KeySet Read (removed) Error: %@", err);
 
-                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_NOT_FOUND));
-                        NextTest();
-                    }];
+                   VerifyOrReturn(CheckValue("status",
+                       err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                       EMBER_ZCL_STATUS_NOT_FOUND));
+                   NextTest();
+               }];
 
         return CHIP_NO_ERROR;
     }
@@ -112780,14 +113689,17 @@ private:
 
         __auto_type * params = [[MTRGroupKeyManagementClusterKeySetReadParams alloc] init];
         params.groupKeySetID = [NSNumber numberWithUnsignedShort:418U];
-        [cluster keySetReadWithParams:params
-                    completionHandler:^(
-                        MTRGroupKeyManagementClusterKeySetReadResponseParams * _Nullable values, NSError * _Nullable err) {
-                        NSLog(@"KeySet Read (also removed) Error: %@", err);
+        [cluster
+            keySetReadWithParams:params
+               completionHandler:^(
+                   MTRGroupKeyManagementClusterKeySetReadResponseParams * _Nullable values, NSError * _Nullable err) {
+                   NSLog(@"KeySet Read (also removed) Error: %@", err);
 
-                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, EMBER_ZCL_STATUS_NOT_FOUND));
-                        NextTest();
-                    }];
+                   VerifyOrReturn(CheckValue("status",
+                       err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                       EMBER_ZCL_STATUS_NOT_FOUND));
+                   NextTest();
+               }];
 
         return CHIP_NO_ERROR;
     }
@@ -112945,6 +113857,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<TV_LowPowerCluster>(),
         make_unique<TV_ContentLauncherCluster>(),
         make_unique<TV_MediaInputCluster>(),
+        make_unique<TestCASERecovery>(),
         make_unique<TestCluster>(),
         make_unique<TestConstraints>(),
         make_unique<TestDelayCommands>(),
