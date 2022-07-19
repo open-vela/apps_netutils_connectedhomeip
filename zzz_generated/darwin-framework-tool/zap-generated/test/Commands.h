@@ -3958,6 +3958,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentHue", "", "uint8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 255U));
+
             NextTest();
         }];
 
@@ -3978,6 +3981,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "", "uint8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 255U));
+
             NextTest();
         }];
 
@@ -3998,6 +4004,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("remainingTime", "", "uint16"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("remainingTime", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("remainingTime", [value unsignedShortValue], 65535U));
+
             NextTest();
         }];
 
@@ -4177,6 +4186,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("enhancedCurrentHue", "", "uint16"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 65535U));
+
             NextTest();
         }];
 
@@ -4220,6 +4232,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("colorLoopActive", "", "uint8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("colorLoopActive", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("colorLoopActive", [value unsignedCharValue], 255U));
+
             NextTest();
         }];
 
@@ -4240,6 +4255,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("colorLoopDirection", "", "uint8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("colorLoopDirection", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("colorLoopDirection", [value unsignedCharValue], 255U));
+
             NextTest();
         }];
 
@@ -4260,6 +4278,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("colorLoopTime", "", "uint16"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorLoopTime", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorLoopTime", [value unsignedShortValue], 65535U));
+
             NextTest();
         }];
 
@@ -4281,6 +4302,9 @@ private:
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                 VerifyOrReturn(CheckConstraintType("colorLoopStartEnhancedHue", "", "uint16"));
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorLoopStartEnhancedHue", [value unsignedShortValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorLoopStartEnhancedHue", [value unsignedShortValue], 65535U));
+
                 NextTest();
             }];
 
@@ -4302,6 +4326,9 @@ private:
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                 VerifyOrReturn(CheckConstraintType("colorLoopStoredEnhancedHue", "", "uint16"));
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorLoopStoredEnhancedHue", [value unsignedShortValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorLoopStoredEnhancedHue", [value unsignedShortValue], 65535U));
+
                 NextTest();
             }];
 
@@ -4545,6 +4572,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("primary1Intensity", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("primary1Intensity", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("primary1Intensity", [value unsignedCharValue], 255U));
             }
 
             NextTest();
@@ -4615,6 +4644,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("primary2Intensity", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("primary2Intensity", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("primary2Intensity", [value unsignedCharValue], 255U));
             }
 
             NextTest();
@@ -4685,6 +4716,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("primary3Intensity", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("primary3Intensity", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("primary3Intensity", [value unsignedCharValue], 255U));
             }
 
             NextTest();
@@ -4755,6 +4788,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("primary4Intensity", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("primary4Intensity", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("primary4Intensity", [value unsignedCharValue], 255U));
             }
 
             NextTest();
@@ -4825,6 +4860,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("primary5Intensity", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("primary5Intensity", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("primary5Intensity", [value unsignedCharValue], 255U));
             }
 
             NextTest();
@@ -4895,6 +4932,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("primary6Intensity", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("primary6Intensity", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("primary6Intensity", [value unsignedCharValue], 255U));
             }
 
             NextTest();
@@ -5011,6 +5050,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("colorPointRIntensity", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("colorPointRIntensity", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("colorPointRIntensity", [value unsignedCharValue], 255U));
             }
 
             NextTest();
@@ -5081,6 +5122,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("colorPointGIntensity", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("colorPointGIntensity", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("colorPointGIntensity", [value unsignedCharValue], 255U));
             }
 
             NextTest();
@@ -5151,6 +5194,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("colorPointBIntensity", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("colorPointBIntensity", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("colorPointBIntensity", [value unsignedCharValue], 255U));
             }
 
             NextTest();
@@ -18347,6 +18392,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("measuredValue", "", "uint16"));
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("measuredValue", [value unsignedShortValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("measuredValue", [value unsignedShortValue], 65535U));
             }
 
             NextTest();
@@ -18371,6 +18418,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("minMeasuredValue", "", "uint16"));
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("minMeasuredValue", [value unsignedShortValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("minMeasuredValue", [value unsignedShortValue], 65535U));
             }
 
             NextTest();
@@ -18395,6 +18444,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "", "uint16"));
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("maxMeasuredValue", [value unsignedShortValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("maxMeasuredValue", [value unsignedShortValue], 65535U));
             }
 
             NextTest();
@@ -19547,6 +19598,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("rebootCount", "", "uint16"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("rebootCount", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("rebootCount", [value unsignedShortValue], 65535U));
+
             NextTest();
         }];
 
@@ -19628,6 +19682,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("totalOperationalHours", "", "uint32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("totalOperationalHours", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("totalOperationalHours", [value unsignedIntValue], 4294967294UL));
+
             NextTest();
         }];
 
@@ -20216,6 +20273,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("identifyTime", "", "uint16"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("identifyTime", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("identifyTime", [value unsignedShortValue], 65535U));
+
             NextTest();
         }];
 
@@ -20678,7 +20738,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : DUT executes a blink effect\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && I.S.C40.Rsp")) {
                 NextTest();
                 return;
             }
@@ -20696,7 +20756,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : DUT executes a breathe effect\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && I.S.C40.Rsp")) {
                 NextTest();
                 return;
             }
@@ -20714,7 +20774,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : DUT executes an okay effect\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && I.S.C40.Rsp")) {
                 NextTest();
                 return;
             }
@@ -20732,7 +20792,7 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : DUT executes a channel change effect\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && I.S.C40.Rsp")) {
                 NextTest();
                 return;
             }
@@ -20750,7 +20810,7 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : DUT executes a breathe effect\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && I.S.C40.Rsp")) {
                 NextTest();
                 return;
             }
@@ -20768,7 +20828,7 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : DUT stops the breathe effect after the current effect sequence\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && I.S.C40.Rsp")) {
                 NextTest();
                 return;
             }
@@ -20786,7 +20846,7 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : DUT executes a breathe effect\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && I.S.C40.Rsp")) {
                 NextTest();
                 return;
             }
@@ -20804,7 +20864,7 @@ public:
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : DUT stops the breathe effect as soon as possible.\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && I.S.C40.Rsp")) {
                 NextTest();
                 return;
             }
@@ -20822,7 +20882,7 @@ public:
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Check DUT executes a blink effect.\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && I.S.C40.Rsp")) {
                 NextTest();
                 return;
             }
@@ -20840,7 +20900,7 @@ public:
             break;
         case 20:
             ChipLogProgress(chipTool, " ***** Test Step 20 : DUT stops any effect that may be still running as soon as possible\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            if (ShouldSkip("PICS_USER_PROMPT && I.S.C40.Rsp")) {
                 NextTest();
                 return;
             }
@@ -22861,6 +22921,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentLevel", "", "uint8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 255U));
             {
                 CurrentLevelValue = value;
             }
@@ -22885,6 +22947,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("remainingTime", "", "uint16"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("remainingTime", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("remainingTime", [value unsignedShortValue], 65535U));
+
             NextTest();
         }];
 
@@ -22937,7 +23002,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("minLevel", "", "uint8"));
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("minLevel", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("minLevel", [value unsignedCharValue], 1U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("minLevel", [value unsignedCharValue], 255U));
             {
                 MinLevelValue1 = value;
             }
@@ -23066,6 +23131,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentFrequency", "", "uint16"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentFrequency", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentFrequency", [value unsignedShortValue], 65535U));
+
             NextTest();
         }];
 
@@ -23087,6 +23155,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("minFrequency", "", "uint16"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("minFrequency", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("minFrequency", [value unsignedShortValue], 65535U));
             {
                 MinFrequencyValue = value;
             }
@@ -23112,6 +23182,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("maxFrequency", "", "uint16"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("maxFrequency", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("maxFrequency", [value unsignedShortValue], 65535U));
             {
                 MaxFrequencyValue = value;
             }
@@ -23159,6 +23231,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("onOffTransitionTime", "", "uint16"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("onOffTransitionTime", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("onOffTransitionTime", [value unsignedShortValue], 65535U));
+
             NextTest();
         }];
 
@@ -23233,6 +23308,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("onTransitionTime", "", "uint16"));
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("onTransitionTime", [value unsignedShortValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("onTransitionTime", [value unsignedShortValue], 65535U));
             }
 
             NextTest();
@@ -23257,6 +23334,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("offTransitionTime", "", "uint16"));
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("offTransitionTime", [value unsignedShortValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("offTransitionTime", [value unsignedShortValue], 65535U));
             }
 
             NextTest();
@@ -23281,6 +23360,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("defaultMoveRate", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("defaultMoveRate", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("defaultMoveRate", [value unsignedCharValue], 255U));
             }
 
             NextTest();
@@ -23330,6 +23411,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("startUpCurrentLevel", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("startUpCurrentLevel", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("startUpCurrentLevel", [value unsignedCharValue], 255U));
             }
 
             NextTest();
@@ -23658,6 +23741,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("onOffTransitionTime", "", "uint16"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("onOffTransitionTime", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("onOffTransitionTime", [value unsignedShortValue], 65535U));
             {
                 OnOffTransitionTimeValue = value;
             }
@@ -23737,6 +23822,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("onLevel", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("onLevel", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("onLevel", [value unsignedCharValue], 255U));
             }
             {
                 OnLevelValue = value;
@@ -23819,6 +23906,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("onTransitionTime", "", "uint16"));
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("onTransitionTime", [value unsignedShortValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("onTransitionTime", [value unsignedShortValue], 65535U));
             }
             {
                 OnTransitionTimeValue = value;
@@ -23902,6 +23991,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("offTransitionTime", "", "uint16"));
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("offTransitionTime", [value unsignedShortValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("offTransitionTime", [value unsignedShortValue], 65535U));
             }
             {
                 OffTransitionTimeValue = value;
@@ -23985,6 +24076,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("defaultMoveRate", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("defaultMoveRate", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("defaultMoveRate", [value unsignedCharValue], 255U));
             }
             {
                 DefaultMoveRatevalue = value;
@@ -24068,6 +24161,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("startUpCurrentLevel", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("startUpCurrentLevel", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("startUpCurrentLevel", [value unsignedCharValue], 255U));
             }
             {
                 StartUpCurrentLevelValue = value;
@@ -24504,6 +24599,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("minLevel", "", "uint8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("minLevel", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("minLevel", [value unsignedCharValue], 255U));
+
             NextTest();
         }];
 
@@ -24524,6 +24622,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("maxLevel", "", "uint8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("maxLevel", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("maxLevel", [value unsignedCharValue], 255U));
+
             NextTest();
         }];
 
@@ -24710,6 +24811,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("onOffTransitionTime", "", "uint16"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("onOffTransitionTime", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("onOffTransitionTime", [value unsignedShortValue], 65535U));
+
             NextTest();
         }];
 
@@ -25202,6 +25306,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("minLevel", "", "uint8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("minLevel", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("minLevel", [value unsignedCharValue], 255U));
             {
                 MinlevelValue = value;
             }
@@ -25250,6 +25356,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("maxLevel", "", "uint8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("maxLevel", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("maxLevel", [value unsignedCharValue], 255U));
             {
                 MaxlevelValue = value;
             }
@@ -25385,7 +25493,7 @@ private:
             }
 
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 1U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 255U));
 
             NextTest();
         }];
@@ -25410,6 +25518,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("defaultMoveRate", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("defaultMoveRate", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("defaultMoveRate", [value unsignedCharValue], 255U));
             }
             {
                 DefaultMoveRateValue = value;
@@ -25824,6 +25934,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("minLevel", "", "uint8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("minLevel", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("minLevel", [value unsignedCharValue], 255U));
             {
                 MinlevelValue = value;
             }
@@ -25877,6 +25989,8 @@ private:
             }
 
             VerifyOrReturn(CheckConstraintType("currentLevel", "", "uint8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 255U));
             {
                 CurrentlevelValue = value;
             }
@@ -26400,6 +26514,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("minLevel", "", "uint8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("minLevel", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("minLevel", [value unsignedCharValue], 255U));
             {
                 MinlevelValue = value;
             }
@@ -26448,7 +26564,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 1U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 255U));
             {
                 CurrentLevelValue = value;
             }
@@ -30770,6 +30886,11 @@ private:
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
+                     {
+                         id actualValue = values.status;
+                         VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                     }
+
                      NextTest();
                  }];
 
@@ -30791,6 +30912,11 @@ private:
                      NSLog(@"TH sends CEC Home Keys(0x09) to DUT Error: %@", err);
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.status;
+                         VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                     }
 
                      NextTest();
                  }];
@@ -30997,6 +31123,11 @@ private:
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
+                     {
+                         id actualValue = values.status;
+                         VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                     }
+
                      NextTest();
                  }];
 
@@ -31018,6 +31149,11 @@ private:
                      NSLog(@"Send Numbers2 Error: %@", err);
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.status;
+                         VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                     }
 
                      NextTest();
                  }];
@@ -31041,6 +31177,11 @@ private:
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
+                     {
+                         id actualValue = values.status;
+                         VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                     }
+
                      NextTest();
                  }];
 
@@ -31062,6 +31203,11 @@ private:
                      NSLog(@"Send Numbers4 Error: %@", err);
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.status;
+                         VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                     }
 
                      NextTest();
                  }];
@@ -31085,6 +31231,11 @@ private:
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
+                     {
+                         id actualValue = values.status;
+                         VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                     }
+
                      NextTest();
                  }];
 
@@ -31106,6 +31257,11 @@ private:
                      NSLog(@"Send Numbers6 Error: %@", err);
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.status;
+                         VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                     }
 
                      NextTest();
                  }];
@@ -31129,6 +31285,11 @@ private:
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
+                     {
+                         id actualValue = values.status;
+                         VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                     }
+
                      NextTest();
                  }];
 
@@ -31151,6 +31312,11 @@ private:
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
+                     {
+                         id actualValue = values.status;
+                         VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                     }
+
                      NextTest();
                  }];
 
@@ -31172,6 +31338,11 @@ private:
                      NSLog(@"Send Numbers9 Error: %@", err);
 
                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.status;
+                         VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                     }
 
                      NextTest();
                  }];
@@ -35195,6 +35366,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentTarget", "", "uint8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentTarget", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentTarget", [value unsignedCharValue], 255U));
+
             NextTest();
         }];
 
@@ -35522,6 +35696,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("productID", "", "uint16"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("productID", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("productID", [value unsignedShortValue], 65535U));
+
             NextTest();
         }];
 
@@ -37028,20 +37205,23 @@ private:
                                                                                                     queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster
-            readAttributePirOccupiedToUnoccupiedDelayWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"Reads optional attribute: PIROccupiedToUnoccupiedDelay Error: %@", err);
+        [cluster readAttributePirOccupiedToUnoccupiedDelayWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads optional attribute: PIROccupiedToUnoccupiedDelay Error: %@", err);
 
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                {
-                    id actualValue = value;
-                    VerifyOrReturn(CheckValue("PIR occupied to unoccupied delay", actualValue, 0U));
-                }
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("PIR occupied to unoccupied delay", actualValue, 0U));
+            }
 
-                VerifyOrReturn(CheckConstraintType("pirOccupiedToUnoccupiedDelay", "", "uint16"));
-                NextTest();
-            }];
+            VerifyOrReturn(CheckConstraintType("pirOccupiedToUnoccupiedDelay", "", "uint16"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("pirOccupiedToUnoccupiedDelay", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("pirOccupiedToUnoccupiedDelay", [value unsignedShortValue], 65535U));
+
+            NextTest();
+        }];
 
         return CHIP_NO_ERROR;
     }
@@ -37054,20 +37234,23 @@ private:
                                                                                                     queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster
-            readAttributePirUnoccupiedToOccupiedDelayWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"Reads optional attribute constrains: PIRUnoccupiedToOccupiedDelay Error: %@", err);
+        [cluster readAttributePirUnoccupiedToOccupiedDelayWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads optional attribute constrains: PIRUnoccupiedToOccupiedDelay Error: %@", err);
 
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                {
-                    id actualValue = value;
-                    VerifyOrReturn(CheckValue("PIR unoccupied to occupied delay", actualValue, 0U));
-                }
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("PIR unoccupied to occupied delay", actualValue, 0U));
+            }
 
-                VerifyOrReturn(CheckConstraintType("pirUnoccupiedToOccupiedDelay", "", "uint16"));
-                NextTest();
-            }];
+            VerifyOrReturn(CheckConstraintType("pirUnoccupiedToOccupiedDelay", "", "uint16"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("pirUnoccupiedToOccupiedDelay", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("pirUnoccupiedToOccupiedDelay", [value unsignedShortValue], 65535U));
+
+            NextTest();
+        }];
 
         return CHIP_NO_ERROR;
     }
@@ -37121,6 +37304,11 @@ private:
             }
 
             VerifyOrReturn(CheckConstraintType("ultrasonicOccupiedToUnoccupiedDelay", "", "uint16"));
+            VerifyOrReturn(
+                CheckConstraintMinValue<uint16_t>("ultrasonicOccupiedToUnoccupiedDelay", [value unsignedShortValue], 0U));
+            VerifyOrReturn(
+                CheckConstraintMaxValue<uint16_t>("ultrasonicOccupiedToUnoccupiedDelay", [value unsignedShortValue], 65535U));
+
             NextTest();
         }];
 
@@ -37147,6 +37335,11 @@ private:
             }
 
             VerifyOrReturn(CheckConstraintType("ultrasonicUnoccupiedToOccupiedDelay", "", "uint16"));
+            VerifyOrReturn(
+                CheckConstraintMinValue<uint16_t>("ultrasonicUnoccupiedToOccupiedDelay", [value unsignedShortValue], 0U));
+            VerifyOrReturn(
+                CheckConstraintMaxValue<uint16_t>("ultrasonicUnoccupiedToOccupiedDelay", [value unsignedShortValue], 65535U));
+
             NextTest();
         }];
 
@@ -37204,6 +37397,11 @@ private:
             }
 
             VerifyOrReturn(CheckConstraintType("physicalContactOccupiedToUnoccupiedDelay", "", "uint16"));
+            VerifyOrReturn(
+                CheckConstraintMinValue<uint16_t>("physicalContactOccupiedToUnoccupiedDelay", [value unsignedShortValue], 0U));
+            VerifyOrReturn(
+                CheckConstraintMaxValue<uint16_t>("physicalContactOccupiedToUnoccupiedDelay", [value unsignedShortValue], 65535U));
+
             NextTest();
         }];
 
@@ -37230,6 +37428,11 @@ private:
             }
 
             VerifyOrReturn(CheckConstraintType("physicalContactUnoccupiedToOccupiedDelay", "", "uint16"));
+            VerifyOrReturn(
+                CheckConstraintMinValue<uint16_t>("physicalContactUnoccupiedToOccupiedDelay", [value unsignedShortValue], 0U));
+            VerifyOrReturn(
+                CheckConstraintMaxValue<uint16_t>("physicalContactUnoccupiedToOccupiedDelay", [value unsignedShortValue], 65535U));
+
             NextTest();
         }];
 
@@ -37833,6 +38036,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("onTime", "", "uint16"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("onTime", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("onTime", [value unsignedShortValue], 65535U));
+
             NextTest();
         }];
 
@@ -37851,6 +38057,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("offWaitTime", "", "uint16"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("offWaitTime", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("offWaitTime", [value unsignedShortValue], 65535U));
+
             NextTest();
         }];
 
@@ -38052,7 +38261,7 @@ public:
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Check on/off attribute value is true after on command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && OO.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -38068,7 +38277,7 @@ public:
             break;
         case 20:
             ChipLogProgress(chipTool, " ***** Test Step 20 : Check on/off attribute value is false after off command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && OO.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -40254,6 +40463,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("order", "", "uint8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("order", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("order", [value unsignedCharValue], 255U));
+
             NextTest();
         }];
 
@@ -40297,6 +40509,9 @@ private:
                 if (value != nil) {
 
                     VerifyOrReturn(CheckConstraintType("wiredAssessedInputVoltage", "", "uint32"));
+                    VerifyOrReturn(CheckConstraintMinValue<uint32_t>("wiredAssessedInputVoltage", [value unsignedIntValue], 0UL));
+                    VerifyOrReturn(
+                        CheckConstraintMaxValue<uint32_t>("wiredAssessedInputVoltage", [value unsignedIntValue], 4294967295UL));
                 }
 
                 NextTest();
@@ -40313,19 +40528,22 @@ private:
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster
-            readAttributeWiredAssessedInputFrequencyWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"Test Harness Client reads WiredAssessedInputFrequency attribute from Server DUT Error: %@", err);
+        [cluster readAttributeWiredAssessedInputFrequencyWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads WiredAssessedInputFrequency attribute from Server DUT Error: %@", err);
 
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                if (value != nil) {
+            if (value != nil) {
 
-                    VerifyOrReturn(CheckConstraintType("wiredAssessedInputFrequency", "", "uint16"));
-                }
+                VerifyOrReturn(CheckConstraintType("wiredAssessedInputFrequency", "", "uint16"));
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("wiredAssessedInputFrequency", [value unsignedShortValue], 0U));
+                VerifyOrReturn(
+                    CheckConstraintMaxValue<uint16_t>("wiredAssessedInputFrequency", [value unsignedShortValue], 65535U));
+            }
 
-                NextTest();
-            }];
+            NextTest();
+        }];
 
         return CHIP_NO_ERROR;
     }
@@ -40369,6 +40587,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("wiredAssessedCurrent", "", "uint32"));
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("wiredAssessedCurrent", [value unsignedIntValue], 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("wiredAssessedCurrent", [value unsignedIntValue], 4294967295UL));
             }
 
             NextTest();
@@ -40391,6 +40611,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("wiredNominalVoltage", "", "uint32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("wiredNominalVoltage", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("wiredNominalVoltage", [value unsignedIntValue], 4294967295UL));
+
             NextTest();
         }];
 
@@ -40411,6 +40634,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("wiredMaximumCurrent", "", "uint32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("wiredMaximumCurrent", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("wiredMaximumCurrent", [value unsignedIntValue], 4294967295UL));
+
             NextTest();
         }];
 
@@ -40473,6 +40699,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("batVoltage", "", "uint32"));
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("batVoltage", [value unsignedIntValue], 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("batVoltage", [value unsignedIntValue], 4294967295UL));
             }
 
             NextTest();
@@ -40521,6 +40749,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("batTimeRemaining", "", "uint32"));
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("batTimeRemaining", [value unsignedIntValue], 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("batTimeRemaining", [value unsignedIntValue], 4294967295UL));
             }
 
             NextTest();
@@ -40759,6 +40989,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("batCapacity", "", "uint32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("batCapacity", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("batCapacity", [value unsignedIntValue], 4294967295UL));
+
             NextTest();
         }];
 
@@ -40779,6 +41012,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("batQuantity", "", "uint8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("batQuantity", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batQuantity", [value unsignedCharValue], 255U));
+
             NextTest();
         }];
 
@@ -40824,6 +41060,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("batTimeToFullCharge", "", "uint32"));
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("batTimeToFullCharge", [value unsignedIntValue], 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("batTimeToFullCharge", [value unsignedIntValue], 4294967295UL));
             }
 
             NextTest();
@@ -40869,6 +41107,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("batChargingCurrent", "", "uint32"));
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("batChargingCurrent", [value unsignedIntValue], 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("batChargingCurrent", [value unsignedIntValue], 4294967295UL));
             }
 
             NextTest();
@@ -45272,6 +45512,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("currentPosition", "", "uint8"));
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentPosition", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentPosition", [value unsignedCharValue], 255U));
 
             NextTest();
         }];
@@ -45297,6 +45538,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("multiPressMax", "", "uint8"));
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("multiPressMax", [value unsignedCharValue], 2U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("multiPressMax", [value unsignedCharValue], 255U));
 
             NextTest();
         }];
@@ -45751,6 +45993,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("measuredValue", "", "int16"));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("measuredValue", [value shortValue], -27315));
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("measuredValue", [value shortValue], 32767));
             }
 
             NextTest();
@@ -45775,7 +46019,7 @@ private:
 
                 VerifyOrReturn(CheckConstraintType("minMeasuredValue", "", "int16"));
                 VerifyOrReturn(CheckConstraintMinValue<int16_t>("minMeasuredValue", [value shortValue], -27315));
-                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minMeasuredValue", [value shortValue], 32766));
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minMeasuredValue", [value shortValue], 32767));
             }
 
             NextTest();
@@ -45818,11 +46062,6 @@ private:
 
         [cluster readAttributeToleranceWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"read the optional attribute: Tolerance Error: %@", err);
-
-            if (err.code == MTRInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -47116,6 +47355,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("localTemperature", "", "int16"));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("localTemperature", [value shortValue], -27315));
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("localTemperature", [value shortValue], 32767));
             }
 
             NextTest();
@@ -47140,6 +47381,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("outdoorTemperature", "", "int16"));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("outdoorTemperature", [value shortValue], -27315));
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("outdoorTemperature", [value shortValue], 32767));
             }
 
             NextTest();
@@ -47185,8 +47428,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("absMinHeatSetpointLimit", "", "int16"));
-            VerifyOrReturn(CheckConstraintMinValue<int16_t>("absMinHeatSetpointLimit", [value shortValue], 700));
-            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("absMinHeatSetpointLimit", [value shortValue], 3000));
+            VerifyOrReturn(CheckConstraintMinValue<int16_t>("absMinHeatSetpointLimit", [value shortValue], -27315));
+            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("absMinHeatSetpointLimit", [value shortValue], 32767));
 
             NextTest();
         }];
@@ -47208,8 +47451,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("absMaxHeatSetpointLimit", "", "int16"));
-            VerifyOrReturn(CheckConstraintMinValue<int16_t>("absMaxHeatSetpointLimit", [value shortValue], 700));
-            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("absMaxHeatSetpointLimit", [value shortValue], 3000));
+            VerifyOrReturn(CheckConstraintMinValue<int16_t>("absMaxHeatSetpointLimit", [value shortValue], -27315));
+            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("absMaxHeatSetpointLimit", [value shortValue], 32767));
 
             NextTest();
         }];
@@ -47231,8 +47474,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("absMinCoolSetpointLimit", "", "int16"));
-            VerifyOrReturn(CheckConstraintMinValue<int16_t>("absMinCoolSetpointLimit", [value shortValue], 1600));
-            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("absMinCoolSetpointLimit", [value shortValue], 3200));
+            VerifyOrReturn(CheckConstraintMinValue<int16_t>("absMinCoolSetpointLimit", [value shortValue], -27315));
+            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("absMinCoolSetpointLimit", [value shortValue], 32767));
 
             NextTest();
         }];
@@ -47254,8 +47497,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("absMaxCoolSetpointLimit", "", "int16"));
-            VerifyOrReturn(CheckConstraintMinValue<int16_t>("absMaxCoolSetpointLimit", [value shortValue], 1600));
-            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("absMaxCoolSetpointLimit", [value shortValue], 3200));
+            VerifyOrReturn(CheckConstraintMinValue<int16_t>("absMaxCoolSetpointLimit", [value shortValue], -27315));
+            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("absMaxCoolSetpointLimit", [value shortValue], 32767));
 
             NextTest();
         }];
@@ -47371,8 +47614,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("occupiedCoolingSetpoint", "", "int16"));
-            VerifyOrReturn(CheckConstraintMinValue<int16_t>("occupiedCoolingSetpoint", [value shortValue], 1600));
-            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("occupiedCoolingSetpoint", [value shortValue], 2600));
+            VerifyOrReturn(CheckConstraintMinValue<int16_t>("occupiedCoolingSetpoint", [value shortValue], -27315));
+            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("occupiedCoolingSetpoint", [value shortValue], 32767));
 
             NextTest();
         }];
@@ -47394,8 +47637,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("occupiedHeatingSetpoint", "", "int16"));
-            VerifyOrReturn(CheckConstraintMinValue<int16_t>("occupiedHeatingSetpoint", [value shortValue], 700));
-            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("occupiedHeatingSetpoint", [value shortValue], 2600));
+            VerifyOrReturn(CheckConstraintMinValue<int16_t>("occupiedHeatingSetpoint", [value shortValue], -27315));
+            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("occupiedHeatingSetpoint", [value shortValue], 32767));
 
             NextTest();
         }];
@@ -47418,6 +47661,9 @@ private:
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                 VerifyOrReturn(CheckConstraintType("unoccupiedCoolingSetpoint", "", "int16"));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("unoccupiedCoolingSetpoint", [value shortValue], -27315));
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("unoccupiedCoolingSetpoint", [value shortValue], 32767));
+
                 NextTest();
             }];
 
@@ -47439,6 +47685,9 @@ private:
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                 VerifyOrReturn(CheckConstraintType("unoccupiedHeatingSetpoint", "", "int16"));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("unoccupiedHeatingSetpoint", [value shortValue], -27315));
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("unoccupiedHeatingSetpoint", [value shortValue], 32767));
+
                 NextTest();
             }];
 
@@ -47459,6 +47708,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("minHeatSetpointLimit", "", "int16"));
+            VerifyOrReturn(CheckConstraintMinValue<int16_t>("minHeatSetpointLimit", [value shortValue], -27315));
+            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minHeatSetpointLimit", [value shortValue], 32767));
+
             NextTest();
         }];
 
@@ -47479,8 +47731,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("maxHeatSetpointLimit", "", "int16"));
-            VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxHeatSetpointLimit", [value shortValue], 700));
-            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("maxHeatSetpointLimit", [value shortValue], 3000));
+            VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxHeatSetpointLimit", [value shortValue], -27315));
+            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("maxHeatSetpointLimit", [value shortValue], 32767));
 
             NextTest();
         }];
@@ -47502,8 +47754,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("minCoolSetpointLimit", "", "int16"));
-            VerifyOrReturn(CheckConstraintMinValue<int16_t>("minCoolSetpointLimit", [value shortValue], 1600));
-            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minCoolSetpointLimit", [value shortValue], 3200));
+            VerifyOrReturn(CheckConstraintMinValue<int16_t>("minCoolSetpointLimit", [value shortValue], -27315));
+            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minCoolSetpointLimit", [value shortValue], 32767));
 
             NextTest();
         }];
@@ -47525,8 +47777,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("maxCoolSetpointLimit", "", "int16"));
-            VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxCoolSetpointLimit", [value shortValue], 1600));
-            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("maxCoolSetpointLimit", [value shortValue], 3200));
+            VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxCoolSetpointLimit", [value shortValue], -27315));
+            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("maxCoolSetpointLimit", [value shortValue], 32767));
 
             NextTest();
         }];
@@ -47698,6 +47950,9 @@ private:
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                 VerifyOrReturn(CheckConstraintType("numberOfWeeklyTransitions", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("numberOfWeeklyTransitions", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("numberOfWeeklyTransitions", [value unsignedCharValue], 255U));
+
                 NextTest();
             }];
 
@@ -47718,6 +47973,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("numberOfDailyTransitions", "", "uint8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("numberOfDailyTransitions", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("numberOfDailyTransitions", [value unsignedCharValue], 255U));
+
             NextTest();
         }];
 
@@ -47862,6 +48120,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("setpointChangeAmount", "", "int16"));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("setpointChangeAmount", [value shortValue], -27315));
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("setpointChangeAmount", [value shortValue], 32767));
             }
 
             NextTest();
@@ -47907,6 +48167,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("occupiedSetback", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("occupiedSetback", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("occupiedSetback", [value unsignedCharValue], 255U));
             }
 
             NextTest();
@@ -47931,6 +48193,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("occupiedSetbackMin", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("occupiedSetbackMin", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("occupiedSetbackMin", [value unsignedCharValue], 255U));
             }
 
             NextTest();
@@ -47955,6 +48219,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("occupiedSetbackMax", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("occupiedSetbackMax", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("occupiedSetbackMax", [value unsignedCharValue], 255U));
             }
 
             NextTest();
@@ -47979,6 +48245,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("unoccupiedSetback", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("unoccupiedSetback", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("unoccupiedSetback", [value unsignedCharValue], 255U));
             }
 
             NextTest();
@@ -48003,6 +48271,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("unoccupiedSetbackMin", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("unoccupiedSetbackMin", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("unoccupiedSetbackMin", [value unsignedCharValue], 255U));
             }
 
             NextTest();
@@ -48027,6 +48297,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("unoccupiedSetbackMax", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("unoccupiedSetbackMax", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("unoccupiedSetbackMax", [value unsignedCharValue], 255U));
             }
 
             NextTest();
@@ -48049,6 +48321,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("emergencyHeatDelta", "", "uint8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("emergencyHeatDelta", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("emergencyHeatDelta", [value unsignedCharValue], 255U));
+
             NextTest();
         }];
 
@@ -48092,6 +48367,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("ACCapacity", "", "uint16"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("ACCapacity", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("ACCapacity", [value unsignedShortValue], 65535U));
+
             NextTest();
         }];
 
@@ -48203,6 +48481,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("ACCoilTemperature", "", "int16"));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("ACCoilTemperature", [value shortValue], -27315));
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("ACCoilTemperature", [value shortValue], 32767));
             }
 
             NextTest();
@@ -54473,6 +54753,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("channelNumber", "", "uint16"));
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("channelNumber", [value unsignedShortValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("channelNumber", [value unsignedShortValue], 65535U));
             }
 
             NextTest();
@@ -54519,6 +54801,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("beaconLostCount", "", "uint32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("beaconLostCount", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("beaconLostCount", [value unsignedIntValue], 4294967295UL));
+
             NextTest();
         }];
 
@@ -54538,6 +54823,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("beaconRxCount", "", "uint32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("beaconRxCount", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("beaconRxCount", [value unsignedIntValue], 4294967295UL));
+
             NextTest();
         }];
 
@@ -54557,6 +54845,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("packetMulticastRxCount", "", "uint32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetMulticastRxCount", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetMulticastRxCount", [value unsignedIntValue], 4294967295UL));
+
             NextTest();
         }];
 
@@ -54576,6 +54867,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("packetMulticastTxCount", "", "uint32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetMulticastTxCount", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetMulticastTxCount", [value unsignedIntValue], 4294967295UL));
+
             NextTest();
         }];
 
@@ -54595,6 +54889,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("packetUnicastRxCount", "", "uint32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetUnicastRxCount", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetUnicastRxCount", [value unsignedIntValue], 4294967295UL));
+
             NextTest();
         }];
 
@@ -54614,6 +54911,9 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("packetUnicastTxCount", "", "uint32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetUnicastTxCount", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetUnicastTxCount", [value unsignedIntValue], 4294967295UL));
+
             NextTest();
         }];
 
@@ -94052,14 +94352,18 @@ public:
         // incorrect mTestIndex value observed when we get the response.
         switch (mTestIndex++) {
         case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
             ChipLogProgress(chipTool,
-                " ***** Test Step 0 : Reads a list of SoftwareFault struct from DUT and data type in each field of the struct must "
+                " ***** Test Step 1 : Reads a list of SoftwareFault struct from DUT and data type in each field of the struct must "
                 "match the value listed in spec\n");
             if (ShouldSkip("PICS_USER_PROMPT")) {
                 NextTest();
                 return;
             }
-            err = TestReadsAListOfSoftwareFaultStructFromDutAndDataTypeInEachFieldOfTheStructMustMatchTheValueListedInSpec_0();
+            err = TestReadsAListOfSoftwareFaultStructFromDutAndDataTypeInEachFieldOfTheStructMustMatchTheValueListedInSpec_1();
             break;
         }
 
@@ -94075,6 +94379,9 @@ public:
         case 0:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -94088,14 +94395,21 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 1;
+    const uint16_t mTestCount = 2;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    CHIP_ERROR TestReadsAListOfSoftwareFaultStructFromDutAndDataTypeInEachFieldOfTheStructMustMatchTheValueListedInSpec_0()
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadsAListOfSoftwareFaultStructFromDutAndDataTypeInEachFieldOfTheStructMustMatchTheValueListedInSpec_1()
     {
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Please enter '0' for successgarbage: not in length on purpose", 28);
